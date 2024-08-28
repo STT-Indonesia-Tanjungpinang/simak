@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application id="Portal E-Kampus v2.0" Mode="Debug">
+  <paths>
+    <using namespace="System.Security.*"/>		
+    <using namespace="System.Web.UI.ActiveControls.*"/>        				
+    <using namespace="Application.MainPage"/>			            
+    <using namespace="Application.logic.LogicFactory"/> 
+    <using namespace="Application.lib.CustomControls.*" />        
+    <using namespace="Application.lib.NModalPanel.NModalPanel" />
+  </paths>
+  <services>
+    <service id="page" class="TPageService" DefaultPage="Home">
+      <modules>
+        <module id="db" class="Application.lib.Database.DBFactory"/>
+        <module id="logic" class="LogicFactory"/> 
+        <module id="cache" class="System.Caching.TDbCache" />                               
+        <module id="error" class="Application.lib.Exception.TErrorHandler" ErrorTemplatePath="Application.lib.Exception.templates" />
+      </modules>            
+      <pages StatePersisterClass="System.Web.UI.TCachePageStatePersister" StatePersister.CacheModuleID="cache" StatePersister.CacheTimeout="7200" />
+    </service>
+    <service id="json" class="System.Web.Services.TJsonService">
+      <json id="check_login_mhs" class="Application.api.auth.checkLoginMahasiswa"/>
+      <json id="check_login_dosen" class="Application.api.auth.checkLoginDosen"/>
+      <json id="get_data_mhs" class="Application.api.mahasiswa.getDataMHS"/>          
+      <json id="get_transaction" class="Application.api.finance.getTransaction"/> 
+      <json id="get_list_transaction" class="Application.api.finance.getListTransaction"/>        
+      <json id="commit_transaction" class="Application.api.finance.commitTransaction"/>
+      <json id="rollback_transaction" class="Application.api.finance.rollbackTransaction"/>			
+    </service>             
+  </services>        
+  <parameters>
+    <parameter id="db_host" value="localhost"/>
+    <parameter id="db_username" value=""/>
+    <parameter id="db_userpassword" value=""/>
+    <parameter id="db_name" value="portalekampus"/>
+    <parameter id="db_type" value="mysql"/>		
+    <parameter id="address_lokal" value="http://localhost:8000"/>
+    <parameter id="address_lan" value=""/>        
+    <parameter id="address_internet" value="https://simak.sttindonesia.ac.id"/>                        
+  </parameters>      
+</application>
