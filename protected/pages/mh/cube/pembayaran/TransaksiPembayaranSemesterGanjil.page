@@ -1,0 +1,208 @@
+<%@ Title="Pembayaran - Semester Ganjil"%>
+<com:TContent ID="moduleheader">
+    <i class="fa fa-usd"></i> Pembayaran Semester Ganjil<small><com:TActiveLabel ID="labelModuleHeader" /></small>
+</com:TContent>
+<com:TContent ID="modulebreadcrumb">    
+    <li><a href="#">PEMBAYARAN</a></li>
+    <li class="active">SEMESTER GANJIL</li>     
+</com:TContent>
+<com:TContent ID="maincontent">
+<com:TPanel Visible="<%= $this->getViewProcess(false) %>" CssClass="row">        
+    <div class="col-md-12">
+        <div class="main-box clearfix">               
+            <header class="main-box-header clearfix">
+            </header>
+            <div class="main-box-body">
+                <div class="alert alert-warning">
+                    <i class="fa fa-info-circle fa-fw fa-lg"></i>
+                    <strong>
+                        Info!
+                    </strong>
+                    <com:TLiteral ID="errorMessage" />
+                </div>
+            </div>            
+        </div>
+    </div>
+</com:TPanel>
+<com:TPanel Visible="<%= $this->getDefaultProcess() %>" CssClass="row">     
+    <com:THiddenField ID="hiddennofaktur" />
+    <div class="col-md-12">
+        <div class="main-box clearfix">
+            <header class="main-box-header clearfix">               
+                <h2 class="pull-left"><i class="fa fa-usd"></i> TAMBAH TRANSAKSI #<%=$_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi']%></h2>   
+                <div class="filter-block pull-right">                       
+                    <com:TActiveLinkButton ID="btnCloseTransaction" ClientSide.PostState="false" OnClick="closeTransaction" Attributes.title="Tutup Transaksi" CssClass="btn btn-danger pull-right">                            
+                        <prop:Text>
+                            <i class="fa fa-close"></i>
+                        </prop:Text>
+                        <prop:ClientSide.OnPreDispatch>         
+                            Pace.stop();
+                            Pace.start();
+                            $('<%=$this->btnCloseTransaction->ClientId%>').disabled='disabled';         
+                        </prop:ClientSide.OnPreDispatch>
+                        <prop:ClientSide.OnLoading>
+                            $('<%=$this->btnCloseTransaction->ClientId%>').disabled='disabled';                     
+                        </prop:ClientSide.OnLoading>
+                        <prop:ClientSide.OnComplete>                                                                    
+                            $('<%=$this->btnCloseTransaction->ClientId%>').disabled='';                                                                                                                 
+                        </prop:ClientSide.OnComplete>
+                    </com:TActiveLinkButton>
+                </div>
+            </header>             
+            <div class="main-box-body clearfix">
+                <div class="form-horizontal">
+                    <div class="form-group" id="divAddNomorFaktur">
+                        <label class="col-md-2 control-label">Nomor Faktur Bank :</label>
+                        <div class="col-md-10">                            
+                            <com:TTextBox ID="txtAddNomorFaktur" CssClass="form-control" Enabled="false" />  
+                            <com:TRequiredFieldValidator ID="FieldAddNomorFaktur" ControlToValidate="txtAddNomorFaktur" Display="Dynamic" ErrorMessage="Isi dengan Nomor Faktur dari Bank" ValidationGroup="addtransaksi" FocusOnError="true" CssClass="has-error help-block">			
+                                <prop:ClientSide.OnValidationError>
+                                    $('divAddNomorFaktur').addClassName('has-error');
+                                    jQuery('#<%=$this->FieldAddNomorFaktur->ClientID%>').removeAttr('style');
+                                </prop:ClientSide.OnValidationError>
+                                <prop:ClientSide.OnValidationSuccess>
+                                    $('divAddNomorFaktur').removeClassName('has-error');
+                                </prop:ClientSide.OnValidationSuccess>
+                            </com:TRequiredFieldValidator>      
+                            <com:TActiveCustomValidator ID="addNomorFaktur" ControlToValidate="txtAddNomorFaktur" Display="Dynamic" OnServerValidate="checkNomorFaktur" ValidationGroup="addtransaksi" ErrorMessage="Nomor Faktur sudah ada silahkan ganti dengan yang lain" CssClass="has-error help-block">
+                                <prop:ClientSide.OnValidationError>
+                                    $('divAddNomorFaktur').addClassName('has-error');
+                                    jQuery('#<%=$this->addNomorFaktur->ClientID%>').removeAttr('style');
+                                </prop:ClientSide.OnValidationError>
+                                <prop:ClientSide.OnValidationSuccess>
+                                    $('divAddNomorFaktur').removeClassName('has-error');
+                                </prop:ClientSide.OnValidationSuccess>
+                            </com:TActiveCustomValidator>
+                        </div>
+                    </div>    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Tanggal Faktur :</label>
+                        <div class="col-md-10">                            
+                            <com:TCustomDatePicker ID="cmbAddTanggalFaktur" DateFormat="dd-MMMM-yyyy" Culture="id" InputMode="DropDownList" ShowCalendar="false" />
+                        </div>
+                    </div>   
+                    <div class="form-group">
+                        <label class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <com:TActiveCustomButton ID="btnSave" CssClass="btn btn-primary" OnClick="saveData" ValidationGroup="addtransaksi">
+                                <prop:Text><i class="fa fa-save"></i> Simpan</prop:Text>
+                                <prop:ClientSide.OnPreDispatch>                                                                   
+                                    Pace.stop();
+                                    Pace.start(); 
+                                    $('<%=$this->btnSave->ClientId%>').disabled='disabled';						
+                                </prop:ClientSide.OnPreDispatch>
+                                <prop:ClientSide.OnLoading>
+                                    $('<%=$this->btnSave->ClientId%>').disabled='disabled';						
+                                </prop:ClientSide.OnLoading>
+                                <prop:ClientSide.OnComplete>																	                                    						                                                                            
+                                    $('<%=$this->btnSave->ClientId%>').disabled='';
+                                </prop:ClientSide.OnComplete>
+                            </com:TActiveCustomButton>                            
+                            <com:TActiveCustomButton ID="btnCancel" OnClick="cancelTrx" CssClass="btn btn-danger">
+                                <prop:Text>                                        
+                                    <b><i class="fa fa-close"></i></b> Batal
+                                </prop:Text>
+                                <prop:ClientSide.OnPreDispatch>         
+                                    Pace.stop();
+                                    Pace.start();
+                                    $('<%=$this->btnCancel->ClientId%>').disabled='disabled';         
+                                </prop:ClientSide.OnPreDispatch>
+                                <prop:ClientSide.OnLoading>
+                                    $('<%=$this->btnCancel->ClientId%>').disabled='disabled';                     
+                                </prop:ClientSide.OnLoading>
+                                <prop:ClientSide.OnComplete>                                                                    
+                                    $('<%=$this->btnCancel->ClientId%>').disabled='';                                                                                                                 
+                                </prop:ClientSide.OnComplete>
+                            </com:TActiveCustomButton>
+                        </div>
+                    </div>                                     
+                </div>
+                <div class="table-responsive">                
+                    <com:TActiveDataGrid
+                        CssClass="table table-striped table-hover"        
+                        ID="GridS"
+                        DataKeyField="idkombi"
+                        AutoGenerateColumns="false"        
+                        ShowFOoter="true" 
+                        OnItemCreated="itemCreated"
+                        OnEditCommand="editItem"
+                        OnUpdateCommand="saveItem"
+                        OnCancelCommand="cancelItem"
+                        OnDeleteCommand="deleteItem"
+                        HeaderStyle.CssClass="bg-teal-700"                    
+                        FooterStyle.CssClass="bg-orange-300"
+                        >                          
+                        <com:TActiveLiteralColumn                
+                            HeaderText="NO"            
+                            HeaderStyle.Width="30px"
+                            HeaderStyle.CssClass="text-left"
+                            ItemStyle.CssClass="text-left"
+                            DataField="no"                                    
+                            />  
+                        <com:TActiveLiteralColumn                
+                            HeaderText="KODE"            
+                            HeaderStyle.Width="30px"
+                            HeaderStyle.CssClass="text-left"
+                            ItemStyle.CssClass="left"
+                            DataField="idkombi"                                    
+                            />                                                 
+                        <com:TActiveLiteralColumn                
+                            HeaderText="REKENING"            
+                            HeaderStyle.Width="250px"
+                            HeaderStyle.CssClass="text-left"
+                            ItemStyle.CssClass="text-left"
+                            DataField="nama_kombi"   
+                            FooterText="<strong>TOTAL</strong>"
+                            />   
+                        <com:TActiveLiteralColumn
+                            ID="ColumnBiaya"
+                            HeaderText="BIAYA"            
+                            HeaderStyle.CssClass="text-right"
+                            ItemStyle.CssClass="text-right"
+                            DataField="biaya_alias"  
+                            FooterStyle.CssClass="text-right"
+                            FooterRenderer="TotalPrice"
+                            /> 
+                        <com:TActiveLiteralColumn
+                            ID="ColumnSudahBayar"
+                            HeaderText="SUDAH <br/>DIBAYAR (COMMITED)"            
+                            HeaderStyle.CssClass="text-right"
+                            ItemStyle.CssClass="text-right"
+                            DataField="sudah_dibayar_alias"  
+                            FooterStyle.CssClass="text-right"
+                            FooterRenderer="TotalSudahDibayarkan"
+                            /> 
+                        <com:TActiveBoundColumn
+                            ID="ColumnJumlahBayar"                                                           
+                            HeaderText="JUMLAH <br/>BAYAR (BELUM COMMITED)"            
+                            HeaderStyle.CssClass="text-right"
+                            ItemStyle.CssClass="text-right"
+                            DataField="jumlah_bayar_alias"  
+                            FooterStyle.CssClass="text-right"
+                            FooterRenderer="TotalJumlahBayar"
+                            />
+                        <com:TActiveEditCommandColumn
+                            ID="EditColumn"
+                            HeaderText=""            
+                            ItemStyle.CssClass="text-left"
+                            UpdateText="Save"                                                                                                                     
+                            EditText="<i class='fa fa-pencil'></i>"
+                            CancelText="Batal"
+                            HeaderStyle.Width="80px"                                    
+                            />
+                        <com:TActiveButtonColumn
+                            ID="DeleteColumn"
+                            HeaderText=""                                               
+                            Text="<i class='fa fa-undo'></i>"
+                            CommandName="delete"                                    
+                            HeaderStyle.CssClass="text-left"
+                            ItemStyle.CssClass="text-left"
+                            HeaderStyle.Width="30px"
+                            />       
+                    </com:TActiveDataGrid>   
+                </div>
+            </div>   
+        </div>        
+    </div>     
+</com:TPanel>
+</com:TContent>

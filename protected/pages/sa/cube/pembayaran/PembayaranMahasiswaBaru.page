@@ -1,0 +1,161 @@
+<%@ Title="Pembayaran - Mahasiswa Baru"%>
+<com:TContent ID="moduleheader">    
+    Pembayaran Mahasiswa Baru <small><com:TActiveLabel ID="lblModulHeader" /></small>
+</com:TContent>
+<com:TContent ID="modulebreadcrumb">    
+    <li><a href="#">KEUANGAN</a></li>
+    <li><a href="#">PEMBAYARAN</a></li>
+    <li class="active">MAHASISWA BARU</li>
+</com:TContent>
+<com:TContent ID="configtools">    
+    <%include Application.layouts.cube.FilterMode13%>
+</com:TContent>
+<com:TContent ID="csscontent">
+<link rel="stylesheet" type="text/css" href="<%=$this->Theme->baseUrl%>/css/libs/nifty-component.css"/>
+</com:TContent>
+<com:TContent ID="maincontent">	
+<com:TPanel Visible="<%= $this->getDefaultProcess() %>">	
+	<div class="row">
+        <div class="col-md-12">
+            <div class="main-box">
+                <header class="main-box-header clearfix">
+                    <h2><i class="fa fa-search"></i> Pencarian Data</h2>
+                </header>
+                <div class="main-box-body clearfix">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Kriteria :</label>
+                            <div class="col-md-10">
+                                <com:TDropDownList ID="cmbKriteria" CssClass="form-control">
+			                        <com:TListItem Text="NO. FAKTUR" Value="no_faktur" />
+			                        <com:TListItem Text="NO. FORMULIR" Value="no_formulir" />
+			                        <com:TListItem Text="NAMA MAHASISWA" Value="nama" />                                    
+			                    </com:TDropDownList>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divtxtKriteria">
+                            <label class="col-md-2 control-label">Isi Kriteria :</label>
+                            <div class="col-md-10">
+                                <com:TActiveTextBox ID="txtKriteria" CssClass="form-control" />                                                                            
+                                <com:TRequiredFieldValidator ID="spanKriteriaValidator2" ValidationGroup="filterForm" Display="Dynamic" ControlToValidate="txtKriteria" ErrorMessage="Input apa yang Anda cari, sesuai dengan kriteria yang Anda tentukan." FocusOnError="true" CssClass="has-error help-block">	
+                                    <prop:ClientSide.OnValidationError>
+                                        $('divtxtKriteria').addClassName('has-error');
+                                        jQuery('#<%=$this->spanKriteriaValidator2->ClientID%>').removeAttr('style');                                
+                                    </prop:ClientSide.OnValidationError>
+                                    <prop:ClientSide.OnValidationSuccess>
+                                        $('divtxtKriteria').removeClassName('has-error');
+                                    </prop:ClientSide.OnValidationSuccess>
+                                </com:TRequiredFieldValidator>                                         
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <com:TActiveCustomButton ID="btnSearch" CssClass="btn btn-info"  OnClick="Page.searchRecord" ValidationGroup="filterForm" Attributes.Title="Cari">
+                                    <prop:Text>                                        
+                                        <i class="fa fa-search"></i> Cari                                        
+                                    </prop:Text>
+                                    <prop:ClientSide.OnPreDispatch>         
+                                        $('loading').show();
+                                    </prop:ClientSide.OnPreDispatch>
+                                    <prop:ClientSide.OnLoading>
+                                        $('<%=$this->btnSearch->ClientId%>').disabled='disabled';						
+                                    </prop:ClientSide.OnLoading>
+                                    <prop:ClientSide.OnComplete>																	
+                                        $('<%=$this->btnSearch->ClientId%>').disabled='';						                               						                                        
+                                        $('loading').hide();
+                                    </prop:ClientSide.OnComplete>
+                                </com:TActiveCustomButton>  
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-box clearfix">
+                <header class="main-box-header clearfix">
+                    <h2 class="pull-left"><i class="fa fa-columns"></i> DAFTAR TRANSAKSI </h2>                     
+                </header>
+                <div class="main-box-body clearfix">                           
+                    <div class="table-responsive">
+                        <com:TActiveRepeater ID="RepeaterS" DataKeyField="no_transaksi" AllowPaging="true" PageSize="10" AllowCustomPaging="true" OnItemDataBound="setDataBound">
+                            <prop:HeaderTemplate>			
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col" width="30">NO</th>                          
+                                    <th scope="col" width="130">NO.TRANS</th>
+                                    <th scope="col" width="120">TANGGAL</i></th>
+                                    <th scope="col" width="130">FORMULIR</i></th>                                    
+                                    <th scope="col" width="250">NAMA MAHASISWA</th>                                                                                                             
+                                    <th scope="col" width="140">JUMLAH BAYAR</th>
+                                    <th scope="col" width="70">TA/SMT</th>
+                                    <th scope="col" width="70">STATUS</th>
+                                    <th width="80">AKSI</th>
+                                </tr>			
+                                </thead>
+                                <tbody>
+                            </prop:HeaderTemplate>
+                            <prop:ItemTemplate>	
+                                <tr>
+                                    <td><%#$this->DataItem['no']%></td>                 
+                                    <td><%#$this->DataItem['no_transaksi']%></td>
+                                    <td><%#$this->DataItem['tanggal']%></td>
+                                    <td><%# $this->Data['no_formulir']%></td>                                                                                                                                               
+                                    <td><%#$this->DataItem['nama_mhs']%></td>
+                                    <td><%#$this->DataItem['dibayarkan']%></td> 
+                                    <td><%#$this->DataItem['tasmt']%></td>
+                                    <td>
+                                        <span class="<%#$this->DataItem['commited']==true?'label label-success':'label label-danger'%>"><%#$this->DataItem['commited']==true?'Done':'in progress'%></span>                               
+                                    </td>
+                                    <td>   
+                                        <com:TActiveLinkButton ID="btnCancel" CssClass="table-link danger" OnClick="Page.batalkanTransaksi" Attributes.Title="Batalkan Transaksi" ClientSide.PostState="false" Enabled="<%#$this->DataItem['commited']==1%>">
+                                            <prop:Text>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-window-close fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </prop:Text>
+                                            <prop:ClientSide.OnPreDispatch>                                                                   
+                                                $('loading').show(); 
+                                                $('<%=$this->btnCancel->ClientId%>').disabled='disabled';                        
+                                            </prop:ClientSide.OnPreDispatch>
+                                            <prop:ClientSide.OnLoading>
+                                                $('<%=$this->btnCancel->ClientId%>').disabled='disabled';                        
+                                            </prop:ClientSide.OnLoading>
+                                            <prop:ClientSide.OnComplete>                                                                                                                                                                                                            
+                                                $('<%=$this->btnCancel->ClientId%>').disabled='';
+                                                $('loading').hide(); 
+                                            </prop:ClientSide.OnComplete>
+                                        </com:TActiveLinkButton>                
+                                    </td>
+                                </tr>                                
+                            </prop:ItemTemplate>				
+                            <prop:FooterTemplate>				
+                                </tbody>
+                                </table>
+                            </prop:FooterTemplate>
+                            <prop:EmptyTemplate>                                                       
+                                <div class="row">
+                                    <div class="main-box-body">
+                                        <div class="alert alert-info">
+                                            <i class="fa fa-info-circle fa-fw fa-lg"></i>
+                                            <strong>
+                                                Info!
+                                            </strong>
+                                             Tidak ada data yang bisa ditampilkan.
+                                        </div>
+                                    </div>
+                                </div>
+                            </prop:EmptyTemplate>
+                        </com:TActiveRepeater>
+                        <%include Application.layouts.cube.CustomPaging%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</com:TPanel>
+</com:TContent>

@@ -1,0 +1,210 @@
+<%@ Title="Nilai Final" %>
+<com:TContent ID="moduleheader">    
+    <i class="icon-blog position-left"></i> <span class="text-semibold">Nilai Final <com:TActiveLabel ID="lblModulHeader" /></span>
+</com:TContent>
+<com:TContent ID="modulebreadcrumb">    
+    <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
+    <li class="active">NILAI FINAL</li>
+</com:TContent>
+<com:TContent ID="sidebarcontent">
+<div class="sidebar sidebar-main sidebar-default sidebar-separate" style="width:330px">
+    <div class="sidebar-content" style="margin-right:5px">                    
+        <%include Application.layouts.limitless.FilterMode6%>
+        <%include Application.layouts.limitless.OutputReportMode1%>
+    </div>
+</div>
+</com:TContent>
+<com:TContent ID="csscontent">
+<link rel="stylesheet" type="text/css" href="<%=$this->Theme->baseUrl%>/assets/css/libs/nifty-component.css"/>
+</com:TContent>
+<com:TContent ID="moduleheaderelement">    
+<div class="heading-elements">
+    <div class="heading-form">
+        <div class="form-group">
+            <div class="input-group">                    
+                <com:TTextBox CssClass="form-control" ID="txtNIM" MaxLength="8" Attributes.PlaceHolder="NIM" />                    
+                <div class="input-group-btn">                        
+                    <com:TActiveCustomButton ID="btnGo" CssClass="btn bg-slate btn-icon" OnClick="Go" Attributes.Title="Go" ValidationGroup="addnewtranskrip" >
+                        <prop:Text>                                        
+                            <i class="icon-play"></i>
+                        </prop:Text>
+                        <prop:ClientSide.OnPreDispatch>         
+                            $('<%=$this->btnGo->ClientId%>').disabled='disabled';						
+                            Pace.stop();
+                            Pace.start();			                               
+                        </prop:ClientSide.OnPreDispatch>
+                        <prop:ClientSide.OnLoading>
+                            $('<%=$this->btnGo->ClientId%>').disabled='disabled';						
+                        </prop:ClientSide.OnLoading>
+                        <prop:ClientSide.OnComplete>																	
+                            $('<%=$this->btnGo->ClientId%>').disabled='';						                                                        
+                        </prop:ClientSide.OnComplete>
+                    </com:TActiveCustomButton>                        
+                </div>                    
+            </div>                
+        </div>
+        <com:TRequiredFieldValidator ValidationGroup="addnewtranskrip" Display="Dynamic" ControlToValidate="txtNIM" FocusOnError="true" CssClass="has-error help-block" />
+        <com:TActiveCustomValidator ControlToValidate="txtNIM" Display="Dynamic" OnServerValidate="cekNIM" ValidationGroup="addnewtranskrip" CssClass="has-error help-block" />
+    </div>
+</div>      
+</com:TContent>
+<com:TContent ID="maincontent">	
+<com:TPanel Visible="<%= $this->getDefaultProcess() %>" CssClass="row">	
+    <div class="col-md-12">
+        <div class="panel panel-flat border-top-lg border-top-info border-bottom-info">
+            <div class="panel-heading">
+                <h5 class="panel-title"><i class="icon-search4 position-left"></i> Pencarian Data</h5>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Kriteria :</label>
+                        <div class="col-md-10">
+                            <com:TDropDownList ID="cmbKriteria" CssClass="form-control">
+                                <com:TListItem Text="NIM" Value="nim" />
+                                <com:TListItem Text="NIRM" Value="nirm" />
+                                <com:TListItem Text="Nama Mahasiswa" Value="nama" />
+                            </com:TDropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divtxtKriteria">
+                        <label class="col-md-2 control-label">Isi Kriteria :</label>
+                        <div class="col-md-10">
+                            <com:TActiveTextBox ID="txtKriteria" CssClass="form-control" />                                                                            
+                            <com:TRequiredFieldValidator ID="spanKriteriaValidator" ValidationGroup="filterForm" Display="Dynamic" ControlToValidate="txtKriteria" ErrorMessage="Input apa yang Anda cari, sesuai dengan kriteria yang Anda tentukan." FocusOnError="true" CssClass="has-error help-block">	
+                                <prop:ClientSide.OnValidationError>
+                                    $('divtxtKriteria').addClassName('has-error');
+                                    jQuery('#<%=$this->spanKriteriaValidator->ClientID%>').removeAttr('style');                                
+                                </prop:ClientSide.OnValidationError>
+                                <prop:ClientSide.OnValidationSuccess>
+                                    $('divtxtKriteria').removeClassName('has-error');
+                                </prop:ClientSide.OnValidationSuccess>
+                            </com:TRequiredFieldValidator>                                         
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-9">
+                            <com:TActiveCustomButton ID="btnSearch" CssClass="btn btn-info btn-labeled btn-xs"  OnClick="Page.searchRecord" ValidationGroup="filterForm" Attributes.Title="Cari">
+                                <prop:Text>                                        
+                                    <b><i class="icon-search4"></i></b> Cari                                        
+                                </prop:Text>
+                                <prop:ClientSide.OnPreDispatch>         
+                                    Pace.stop();
+                                    Pace.start(); 
+                                    $('<%=$this->btnSearch->ClientId%>').disabled='disabled';
+                                </prop:ClientSide.OnPreDispatch>
+                                <prop:ClientSide.OnLoading>
+                                    $('<%=$this->btnSearch->ClientId%>').disabled='disabled';						
+                                </prop:ClientSide.OnLoading>
+                                <prop:ClientSide.OnComplete>																	
+                                    $('<%=$this->btnSearch->ClientId%>').disabled='';
+                                </prop:ClientSide.OnComplete>
+                            </com:TActiveCustomButton>  
+                        </div>
+                    </div> 
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h5 class="panel-title"><i class="icon-blog position-left"></i>  DAFTAR TRANSKRIP FINAL</h5>                
+                <div class="heading-elements">
+                                  
+                </div>
+            </div> 
+            <div class="table-responsive">
+                <com:TActiveRepeater ID="RepeaterS" OnItemDataBound="setDataBound" AllowPaging="true" PageSize="10" AllowCustomPaging="true" DataKeyField="nim">
+                    <prop:HeaderTemplate>			
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr class="bg-teal-700">
+                            <th scope="col" width="70">NO</th>					
+                            <th scope="col">NIM</th>
+                            <th scope="col" width="250">NAMA</th>
+                            <th scope="col">NOMOR <br />IJAZAH</th>
+                            <th scope="col">NOMOR <br />TRANSKRIP</th>
+                            <th scope="col">PREDIKAT<br/>KELULUSAN</th>					
+                            <th scope="col">TANGGAL<br />LULUS</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">T.A/SMT<br/>LULUS</th>
+                            <th scope="col" width="100">AKSI</th>					
+                        </tr>			
+                        </thead>
+                        <tbody>
+                    </prop:HeaderTemplate>
+                    <prop:ItemTemplate>	
+                        <tr>
+                            <td><%# $this->Data['no']%></td>					
+                            <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>                            
+                            <td><%# $this->Data['nama_mhs']%></td>
+                            <td><%# $this->Data['nomor_ijazah']%></td>
+                            <td><%# $this->Data['nomor_transkrip']%></td>
+                            <td><%# $this->Data['predikat_kelulusan']%></td>					
+                            <td><%# $this->page->TGL->tanggal('d/m/Y',$this->Data['tanggal_lulus'])%></td>					
+                            <td><%#$this->Page->DMaster->getNamaStatusMHSByID($this->DataItem['k_status'])%> <strong>IPK:</strong> <com:TLiteral ID="lblIpk" /></td>
+                            <td><%# $this->Data['tasmt']%></td>
+                            <td>
+                                <ul class="icons-list">        
+                                    <li class="text-primary-600">                                        
+                                        <com:TActiveLinkButton ID="btnView" OnClick="Page.viewRecord" Attributes.Title="Detail Nilai Final" ClientSide.PostState="false">
+                                            <prop:Text>
+                                                    <i class="icon-eye"></i>
+                                            </prop:Text>
+                                            <prop:ClientSide.OnPreDispatch>                                                                   
+                                                Pace.stop();
+                                                Pace.start();
+                                                $('<%=$this->btnView->ClientId%>').disabled='disabled';						
+                                            </prop:ClientSide.OnPreDispatch>
+                                            <prop:ClientSide.OnLoading>
+                                                $('<%=$this->btnView->ClientId%>').disabled='disabled';						
+                                            </prop:ClientSide.OnLoading>
+                                            <prop:ClientSide.OnComplete>																	                                    						                                                                            
+                                                $('<%=$this->btnView->ClientId%>').disabled='';                                             
+                                            </prop:ClientSide.OnComplete>
+                                        </com:TActiveLinkButton>
+                                    </li>                          
+                                    <li class="text-primary-600">
+                                        <com:TActiveLinkButton ID="btnPrintOutR" OnClick="Page.printOut" Attributes.Title="Print Transkrip Final" ClientSide.PostState="false">
+                                            <prop:Text>
+                                                <i class="icon-printer"></i>
+                                            </prop:Text>
+                                            <prop:ClientSide.OnPreDispatch>                                                                   
+                                                Pace.stop();
+                                                Pace.start();
+                                                $('<%=$this->btnPrintOutR->ClientId%>').disabled='disabled';						
+                                            </prop:ClientSide.OnPreDispatch>
+                                            <prop:ClientSide.OnLoading>
+                                                $('<%=$this->btnPrintOutR->ClientId%>').disabled='disabled';						
+                                            </prop:ClientSide.OnLoading>
+                                            <prop:ClientSide.OnComplete>																	                                    						                                                                            
+                                                $('<%=$this->btnPrintOutR->ClientId%>').disabled='';                                             
+                                            </prop:ClientSide.OnComplete>
+                                        </com:TActiveLinkButton>
+                                    </li>
+                                </ul>					                                    
+                            </td>					
+                        </tr>	
+                    </prop:ItemTemplate>				
+                    <prop:FooterTemplate>	                            
+                        </tbody>
+                        </table>
+                    </prop:FooterTemplate>
+                    <prop:EmptyTemplate>                                                       
+                        <div class="panel-body">
+                            <div class="alert alert-info alert-styled-left alert-bordered">
+                                <span class="text-semibold">Info!</span>
+                                Belum ada data yang bisa ditampilkan.
+                            </div>                
+                        </div>    
+                    </prop:EmptyTemplate>
+                </com:TActiveRepeater>
+                <%include Application.layouts.limitless.CustomPaging%>
+            </div>
+        </div>
+    </div>
+</com:TPanel>
+<%include Application.layouts.limitless.ModalPrintOut%>
+<%include Application.layouts.limitless.ModalMessageError%>
+</com:TContent>

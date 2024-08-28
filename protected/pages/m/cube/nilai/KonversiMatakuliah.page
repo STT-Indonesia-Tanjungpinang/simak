@@ -1,0 +1,157 @@
+<%@ Title="Nilai - Konversi Matakuliah"%>
+<com:TContent ID="moduleheader">
+    <i class="fa fa-share-alt"></i> Konversi Matakuliah<br/><small><com:TActiveLabel ID="lblModulHeader" /></small>
+</com:TContent>
+<com:TContent ID="configtools">    
+    <%include Application.layouts.cube.FilterMode7%>
+</com:TContent>
+<com:TContent ID="modulebreadcrumb">    
+    <li><a href="#">SPMB</a></li>    
+    <li class="active">KONVERSI MATAKULIAH</li>
+</com:TContent>
+<com:TContent ID="maincontent">
+<com:TPanel Visible="<%= $this->getDefaultProcess() %>">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box clearfix">
+                <header class="main-box-header clearfix">
+                    <h2><i class="fa fa-search"></i> Pencarian Data</h2>                    
+                </header>
+                <div class="main-box-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Kriteria :</label>
+                            <div class="col-lg-10">
+                                <com:TDropDownList ID="cmbKriteria" CssClass="form-control">                                                                                               
+                                    <com:TListItem Value="nama" Text="Nama Mahasiswa" />
+                                </com:TDropDownList>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divtxtKriteria">
+                            <label class="col-lg-2 control-label">Isi Kriteria :</label>
+                            <div class="col-lg-10">
+                                <com:TActiveTextBox ID="txtKriteria" CssClass="form-control" />                                                                            
+                                <com:TRequiredFieldValidator ID="spanKriteriaValidator2" ValidationGroup="filterForm" Display="Dynamic" ControlToValidate="txtKriteria" ErrorMessage="Input apa yang Anda cari, sesuai dengan kriteria yang Anda tentukan." FocusOnError="true" CssClass="has-error help-block">	
+                                    <prop:ClientSide.OnValidationError>
+                                        $('divtxtKriteria').addClassName('has-error');
+                                        jQuery('#<%=$this->spanKriteriaValidator2->ClientID%>').removeAttr('style');                                
+                                    </prop:ClientSide.OnValidationError>
+                                    <prop:ClientSide.OnValidationSuccess>
+                                        $('divtxtKriteria').removeClassName('has-error');
+                                    </prop:ClientSide.OnValidationSuccess>
+                                </com:TRequiredFieldValidator>                                         
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-9">
+                                <com:TActiveCustomButton ID="btnSearch" CssClass="btn btn-info"  OnClick="Page.searchRecord" ValidationGroup="filterForm" Attributes.Title="Cari">
+                                    <prop:Text>                                        
+                                        <i class="fa fa-search"></i> Cari                                        
+                                    </prop:Text>
+                                    <prop:ClientSide.OnPreDispatch>         
+                                        $('loading').show();
+                                    </prop:ClientSide.OnPreDispatch>
+                                    <prop:ClientSide.OnLoading>
+                                        $('<%=$this->btnSearch->ClientId%>').disabled='disabled';						
+                                    </prop:ClientSide.OnLoading>
+                                    <prop:ClientSide.OnComplete>																	
+                                        $('<%=$this->btnSearch->ClientId%>').disabled='';						                               						                                        
+                                        $('loading').hide();
+                                    </prop:ClientSide.OnComplete>
+                                </com:TActiveCustomButton>  
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box clearfix">
+                <header class="main-box-header clearfix">
+                    <h2 class="pull-left"><i class="fa fa-share-alt"></i> Daftar Mahasiswa Konversi</h2> 
+                    <div class="filter-block pull-right">                       
+                        <com:TActiveLinkButton ID="btnPrintOutKonversi" CssClass="btn btn-primary pull-left" OnClick="printOut" ClientSide.PostState="false" Attributes.Title="Print Out Konversi">
+                            <prop:Text><i class="fa fa-print fa-lg"></i></prop:Text>
+                            <prop:ClientSide.OnPreDispatch>                                                                   
+                                $('loading').show(); 
+                                $('<%=$this->btnPrintOutKonversi->ClientId%>').disabled='disabled';						
+                            </prop:ClientSide.OnPreDispatch>
+                            <prop:ClientSide.OnLoading>
+                                $('<%=$this->btnPrintOutKonversi->ClientId%>').disabled='disabled';						
+                            </prop:ClientSide.OnLoading>
+                            <prop:ClientSide.OnComplete>																	                                    						                                                                            
+                                $('<%=$this->btnPrintOutKonversi->ClientId%>').disabled='';
+                                $('loading').hide(); 
+                            </prop:ClientSide.OnComplete>
+                        </com:TActiveLinkButton> 
+                    </div>
+                </header>
+                <div class="main-box-body clearfix">                    
+                    <div class="table-responsive">
+                        <com:TActiveRepeater ID="RepeaterS" DataKeyField="iddata_konversi" AllowPaging="true" PageSize="10" AllowCustomPaging="true">
+                            <prop:HeaderTemplate>
+                                <table class="table table-striped table-hover">
+                                <thead>			
+                                <tr>
+                                    <th width="15">NO</th>
+                                    <th>TGL. KONVERSI</th>
+                                    <th width="250">NAMA</th>
+                                    <th width="300">ALAMAT</th>
+                                    <th>NO. TELP</th>
+                                    <th>JUMLAH <br />MATAKULIAH </th>
+                                    <th>JUMLAH <br />SKS</th>	
+                                    <th>NIM</th>
+                                    <th width="70">AKSI</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            </prop:HeaderTemplate>
+                            <prop:ItemTemplate>
+                                <tr>
+                                    <td><%# $this->DataItem['no']%></td>
+                                    <td><%# $this->DataItem['date_added']%></td>
+                                    <td><%# $this->DataItem['nama']%></td>
+                                    <td><%# $this->DataItem['alamat']%></td>						
+                                    <td><%# $this->DataItem['no_telp']%></td>
+                                    <td><%# $this->DataItem['jumlahmatkul']%></td>
+                                    <td><%# $this->DataItem['jumlahsks']%></td>
+                                    <td><%# $this->DataItem['nim_alias']%></td>
+                                    <td>
+                                        <a href="<%#$this->Page->constructUrl('nilai.DetailKonversiMatakuliah',true,array('id'=>$this->DataItem['iddata_konversi']))%>" class="table-link" title="Detail Konversi Matakuliah">                                        
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>                                        
+                                    </td>
+                                </tr>				
+                            </prop:ItemTemplate>        							
+                            <prop:FooterTemplate>
+                                </tbody>	
+                                </table>
+                            </prop:FooterTemplate>		
+                            <prop:EmptyTemplate>                                                       
+                                <div class="row">
+                                    <div class="main-box-body">
+                                        <div class="alert alert-info">
+                                            <i class="fa fa-info-circle fa-fw fa-lg"></i>
+                                            <strong>
+                                                Info!
+                                            </strong>
+                                             Tidak ada data yang bisa ditampilkan.
+                                        </div>
+                                    </div>
+                                </div>
+                            </prop:EmptyTemplate>
+                        </com:TActiveRepeater>	    
+                        <%include Application.layouts.cube.CustomPaging%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</com:TPanel>	
+<%include Application.layouts.cube.ModalPrintOut%>
+</com:TContent>

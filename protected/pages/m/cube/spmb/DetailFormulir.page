@@ -1,0 +1,201 @@
+<%@ Title="Kemahasiswaan - Profil Mahasiswa Baru"%>
+<com:TContent ID="moduleheader">
+    <i class="fa fa-user"></i> Profil Mahasiswa Baru
+</com:TContent>
+<com:TContent ID="modulebreadcrumb">    
+    <li><a href="#">SPMB</a></li>
+    <li><a href="#">FORMULIR PENDAFTARAN</a></li>
+    <li class="active">PROFIL MAHASISWA BARU</li>
+</com:TContent>
+<com:TContent ID="csscontent">
+<link rel="stylesheet" type="text/css" href="<%=$this->Theme->baseUrl%>/css/libs/nifty-component.css"/>
+</com:TContent>
+<com:TContent ID="maincontent">
+<com:TPanel Visible="<%= $this->getViewProcess(false) %>" CssClass="row">                    
+    <div class="col-lg-12">
+        <div class="main-box clearfix">               
+            <header class="main-box-header clearfix">
+            </header>
+            <div class="main-box-body">
+                <div class="alert alert-warning">
+                    <i class="fa fa-info-circle fa-fw fa-lg"></i>
+                    <strong>
+                        Info!
+                    </strong>
+                     <com:TLiteral ID="errorMessage" />
+                </div>
+            </div>            
+        </div>
+    </div>
+</com:TPanel>
+<com:TPanel Visible="<%= $this->getDefaultProcess() %>">   
+    <%include Application.layouts.cube.DataMHSBaru%>
+    <div class="row" id="user-profile">
+        <div class="col-lg-3 col-md-4 col-sm-4">
+            <div class="main-box clearfix">                
+                <div class="main-box-body clearfix">  
+                    <div class="profile-details">
+                        <ul class="fa-ul">
+                            <li><i class="fa-li fa fa-th-list"></i>Theme :
+                                <com:TActiveDropDownList ID="cmbTheme" CssClass="form-control" OnCallback="changeTheme">
+                                    <prop:ClientSide.OnPreDispatch>                                                                   
+                                        $('loading').show(); 
+                                        $('<%=$this->cmbTheme->ClientId%>').disabled='disabled';						
+                                    </prop:ClientSide.OnPreDispatch>
+                                    <prop:ClientSide.OnLoading>
+                                        $('<%=$this->cmbTheme->ClientId%>').disabled='disabled';						
+                                    </prop:ClientSide.OnLoading>
+                                    <prop:ClientSide.OnComplete>																	                                    						                                                                            
+                                        $('<%=$this->cmbTheme->ClientId%>').disabled='';
+                                        $('loading').hide(); 
+                                    </prop:ClientSide.OnComplete>
+                                </com:TActiveDropDownList>
+                            </li>                            
+                        </ul>
+                    </div>
+                    <div class="profile-message-btn center-block text-center">                        
+                        <com:TActiveCustomButton ID="btnResetPassword" CssClass="btn btn-warning" OnCallback="resetPassword" ClientSide.PostState="false">
+                            <prop:Text><i class="fa fa-undo"></i> Reset Password</prop:Text>
+                            <prop:ClientSide.OnPreDispatch>                                                                   
+                                $('loading').show(); 
+                                $('<%=$this->btnResetPassword->ClientId%>').disabled='disabled';						
+                            </prop:ClientSide.OnPreDispatch>
+                            <prop:ClientSide.OnLoading>
+                                $('<%=$this->btnResetPassword->ClientId%>').disabled='disabled';						
+                            </prop:ClientSide.OnLoading>
+                            <prop:ClientSide.OnComplete>																	                                    						                                                                            
+                                $('<%=$this->btnResetPassword->ClientId%>').disabled='';
+                                $('loading').hide(); 
+                            </prop:ClientSide.OnComplete>
+                        </com:TActiveCustomButton>                                         
+                    </div>
+                    <div class="profile-details">
+                        <ul class="fa-ul">
+                            <li><i class="fa-li fa fa-th-list"></i>Reset Profil MHS :
+                                <com:TActiveCustomButton ID="btnResetProfiles" CssClass="btn btn-warning" OnCallback="resetProfiles" ClientSide.PostState="false">
+		                            <prop:Text><i class="fa fa-undo"></i> Reset Profile MHS</prop:Text>
+		                            <prop:ClientSide.OnPreDispatch>                                                                   
+		                                $('loading').show(); 
+		                                $('<%=$this->btnResetProfiles->ClientId%>').disabled='disabled';						
+		                            </prop:ClientSide.OnPreDispatch>
+		                            <prop:ClientSide.OnLoading>
+		                                $('<%=$this->btnResetProfiles->ClientId%>').disabled='disabled';						
+		                            </prop:ClientSide.OnLoading>
+		                            <prop:ClientSide.OnComplete>																	                                    						                                                                            
+		                                $('<%=$this->btnResetProfiles->ClientId%>').disabled='';
+		                                $('loading').hide(); 
+		                            </prop:ClientSide.OnComplete>
+		                        </com:TActiveCustomButton>       
+                            </li>                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-8">
+            <div class="main-box clearfix">
+                <div class="tabs-wrapper profile-tabs">
+                    <com:TActiveMultiView  ID="MVDetailFormulir" OnActiveViewChanged="changeView">
+                        <com:TView ID="ipsdanipk">
+                            <ul class="nav nav-tabs">
+                                <li class="active">                                
+                                    <a href="#tab-ipsdanipk" data-toggle="tab">COPY DATA FORMULIR</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tab-ipsdanipk">
+                                    <p>Melalui halaman ini Portal EKampus akan menyalin data formulir pendaftaran, nilai ujian masuk, dan lain-lainnya. Perlu diperhatikan, bahwa untuk Tahun Masuk, Semester Masuk dan Kelas melekat pada No. Formulir yang ada di PIN.</p>
+                                    <div class="form-horizontal">                                     
+                                        <div class="form-group" id="divNoFormulir">
+                                            <label class="col-lg-3 control-label">Nomor Formulir Baru:</label>
+                                            <div class="col-lg-9">
+                                                <div class="row">
+                                                    <div class="col-lg-6">                   
+                                                        <com:THiddenField ID="hiddennoformulir" />
+                                                        <com:TTextBox ID="txtNoFormulir" CssClass="form-control" />
+                                                    </div>
+                                                    <div class="col-lg-10">                                
+                                                        <com:TRequiredFieldValidator ID="FieldNoFormulirValidator" ControlToValidate="txtNoFormulir" Display="Dynamic" ErrorMessage="Nomor Formulir tidak boleh kosong!" ValidationGroup="editformulir" CssClass="has-error help-block">
+                                                            <prop:ClientSide.OnValidationError>
+                                                                $('divNoFormulir').addClassName('has-error');
+                                                                jQuery('#<%=$this->FieldNoFormulirValidator->ClientID%>').removeAttr('style');
+                                                            </prop:ClientSide.OnValidationError>
+                                                            <prop:ClientSide.OnValidationSuccess>
+                                                                $('divNoFormulir').removeClassName('has-error');
+                                                            </prop:ClientSide.OnValidationSuccess>
+                                                        </com:TRequiredFieldValidator>
+                                                        <com:TActiveCustomValidator ID="editformulir" ControlToValidate="txtNoFormulir" Display="Dynamic" OnServerValidate="checkNoFormulir" ValidationGroup="editformulir" CssClass="has-error help-block">
+                                                            <prop:ClientSide.OnValidationError>
+                                                                $('divNoFormulir').addClassName('has-error');
+                                                                jQuery('#<%=$this->editformulir->ClientID%>').removeAttr('style');
+                                                            </prop:ClientSide.OnValidationError>
+                                                            <prop:ClientSide.OnValidationSuccess>
+                                                                $('divNoFormulir').removeClassName('has-error');
+                                                            </prop:ClientSide.OnValidationSuccess>
+                                                        </com:TActiveCustomValidator>              
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="divKjur1">
+                                            <label class="col-lg-3 control-label">Program Studi (Pilihan 1) :</label>
+                                            <div class="col-lg-9">
+                                                <com:TActiveDropDownList ID="cmbKjur1" CssClass="form-control" OnCallBack="changePs">                                                    
+                                                    <prop:ClientSide.OnPreDispatch>         
+                                                        $('loading').show();
+                                                    </prop:ClientSide.OnPreDispatch>
+                                                    <prop:ClientSide.OnLoading>
+                                                        $('<%=$this->cmbKjur1->ClientId%>').disabled='disabled';						
+                                                    </prop:ClientSide.OnLoading>
+                                                    <prop:ClientSide.OnComplete>																	
+                                                        $('<%=$this->cmbKjur1->ClientId%>').disabled='';						                               						                                        
+                                                        $('loading').hide();
+                                                    </prop:ClientSide.OnComplete>
+                                                </com:TActiveDropDownList>
+                                                <com:TRequiredFieldValidator ID="FieldKjur1Validator" InitialValue="none" ControlToValidate="cmbKjur1" Display="Dynamic" ErrorMessage="Pilih Program Studi" ValidationGroup="editformulir" FocusOnError="true" CssClass="has-error help-block">			
+                                                    <prop:ClientSide.OnValidationError>
+                                                        $('divKjur1').addClassName('has-error');
+                                                        jQuery('#<%=$this->FieldKjur1Validator->ClientID%>').removeAttr('style');
+                                                    </prop:ClientSide.OnValidationError>
+                                                    <prop:ClientSide.OnValidationSuccess>
+                                                        $('divKjur1').removeClassName('has-error');
+                                                    </prop:ClientSide.OnValidationSuccess>
+                                                </com:TRequiredFieldValidator>                  
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Program Studi (Pilihan 2) :</label>
+                                            <div class="col-lg-9">
+                                                <com:TActiveDropDownList ID="cmbKjur2" AutoPostBack="false" CssClass="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10">
+                                                <com:TActiveCustomButton ID="btnCopy" CssClass="btn btn-primary" OnClick="copyFormulir" ValidationGroup="editformulir"  >
+                                                    <prop:Text><i class="fa fa-copy"></i> Copy</prop:Text>
+                                                    <prop:ClientSide.OnPreDispatch>                                                                   
+                                                        $('loading').show(); 
+                                                        $('<%=$this->btnCopy->ClientId%>').disabled='disabled';						
+                                                    </prop:ClientSide.OnPreDispatch>
+                                                    <prop:ClientSide.OnLoading>
+                                                        $('<%=$this->btnCopy->ClientId%>').disabled='disabled';						
+                                                    </prop:ClientSide.OnLoading>
+                                                    <prop:ClientSide.OnComplete>																	                                    						                                                                            
+                                                        $('<%=$this->btnCopy->ClientId%>').disabled='';
+                                                        $('loading').hide(); 
+                                                    </prop:ClientSide.OnComplete>
+                                                </com:TActiveCustomButton>
+                                            </div>
+                                        </div>     
+                                    </div>
+                                </div>
+                            </div>
+                        </com:TView>                        
+                    </com:TActiveMultiView>                                        
+                </div>
+            </div>
+        </div>
+    </div>    
+</com:TPanel>	
+<%include Application.layouts.cube.ModalMessage%>
+</com:TContent>
