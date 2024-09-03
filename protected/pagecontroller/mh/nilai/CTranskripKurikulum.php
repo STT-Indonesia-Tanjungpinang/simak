@@ -7,7 +7,7 @@ class CTranskripKurikulum extends MainPageMHS {
         $this->showTranskripKurikulum=true;    
         $this->createObj('Nilai');
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageTranskripKurikulum'])||$_SESSION['currentPageTranskripKurikulum']['page_name']!='mh.nilai.TranskripKurikulum') {
 				$_SESSION['currentPageTranskripKurikulum']=array('page_name'=>'mh.nilai.TranskripKurikulum','page_num'=>0,'search'=>false);												                                               
 			}  

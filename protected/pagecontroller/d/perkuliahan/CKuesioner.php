@@ -6,7 +6,7 @@ class CKuesioner extends MainPageD {
 		$this->showSubMenuAkademikPerkuliahan=true;
         $this->showKuesioner=true;        
         $this->createObj('Kuesioner');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKuesioner'])||$_SESSION['currentPageKuesioner']['page_name']!='d.perkuliahan.Kuesioner') {
 				$_SESSION['currentPageKuesioner']=array('page_name'=>'d.perkuliahan.Kuesioner','page_num'=>0,'search'=>false);
 			}  

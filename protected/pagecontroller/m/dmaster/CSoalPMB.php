@@ -101,7 +101,7 @@ class CSoalPMB extends MainPageM {
 		}
 	}
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';
+        $this->idProcess = 'edit';
         $id=$this->getDataKeyField($sender,$this->RepeaterS);
         $this->hiddenidsoal->Value=$id;        
         $str = "SELECT nama_soal FROM soal s WHERE idsoal=$id";

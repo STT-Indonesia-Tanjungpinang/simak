@@ -6,7 +6,7 @@ class CCalonWisuda Extends MainPageM {
         $this->showSubMenuAkademikDulang=true;
         $this->showCalonWisuda=true;                
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageCalonWisuda'])||$_SESSION['currentPageCalonWisuda']['page_name']!='m.kemahasiswaan.CalonWisuda') {
 				$_SESSION['currentPageCalonWisuda']=array('page_name'=>'m.kemahasiswaan.CalonWisuda','page_num'=>0,'search'=>false);												
 			}
@@ -120,7 +120,7 @@ class CCalonWisuda Extends MainPageM {
         }
 	}
     public function viewRecord($sender,$param) {	
-		$this->idProcess='view';		
+		$this->idProcess = 'view';		
 		$iddulang=$this->getDataKeyField($sender,$this->RepeaterS);
         $this->hiddeniddulang->Value=$iddulang;
         

@@ -7,7 +7,7 @@ public function onLoad($param) {
         $this->showPembagianKelas=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembagianKelas'])||$_SESSION['currentPagePembagianKelas']['page_name']!='d.perkuliahan.PembagianKelas') {                
 				$_SESSION['currentPagePembagianKelas']=array('page_name'=>'d.perkuliahan.PembagianKelas','page_num'=>0,'search'=>false,'nama_hari'=>'none');												
 			}

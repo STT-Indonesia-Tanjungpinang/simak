@@ -9,7 +9,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
         $this->showMenuPembayaran=true;
         $this->showPembayaranPiutangSemesterGenap=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGenap'])||$_SESSION['currentPagePembayaranPiutangSemesterGenap']['page_name']!='k.pembayaran.PembayaranPiutangSemesterGenap') {
 				$_SESSION['currentPagePembayaranPiutangSemesterGenap']=array('page_name'=>'k.pembayaran.PembayaranPiutangSemesterGenap','page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta')-1,'semester'=>2,'tahun_masuk'=>$this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
 			}        
@@ -45,7 +45,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
                 CDetailPembayaranPiutangSemesterGenap::$KewajibanMahasiswa=$this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
                 $this->populateTransaksi();
             }catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }      
 		}	

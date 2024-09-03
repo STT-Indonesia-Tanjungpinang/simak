@@ -7,7 +7,7 @@ class CTranskripFinal extends MainPageM {
     $this->showTranskripFinal=true;    
     $this->createObj('Nilai');
     
-    if (!$this->IsPostBack&&!$this->IsCallBack) {			
+    if (!$this->IsPostBack && !$this->IsCallback) {			
 
       if (!isset($_SESSION['currentPageTranskripFinal'])||$_SESSION['currentPageTranskripFinal']['page_name']!='m.nilai.TranskripFinal') {					
         $_SESSION['currentPageTranskripFinal']=array('page_name'=>'m.nilai.TranskripFinal','page_num'=>0,'search'=>false,'tanggal_terbit'=>'none');												

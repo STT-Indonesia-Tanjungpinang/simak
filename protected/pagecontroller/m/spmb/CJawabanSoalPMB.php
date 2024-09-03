@@ -7,7 +7,7 @@ class CJawabanSoalPMB extends MainPageM {
         $this->showSubMenuSPMBUjianPMB=true;
         $this->showNilaiUjianPMB = true;	    
         $this->createObj('Akademik');
-        if (!$this->IsPostBack&&!$this->IsCallBack) {	            
+        if (!$this->IsPostBack && !$this->IsCallback) {	            
             try {          
                 $no_formulir=addslashes($this->request['id']);
                 $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.alamat_rumah,fp.telp_hp,k.nkelas,fp.kjur1,fp.kjur2,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,fp.waktu_mendaftar FROM formulir_pendaftaran fp,profiles_mahasiswa pm,kelas k WHERE fp.no_formulir=pm.no_formulir AND fp.idkelas=k.idkelas AND fp.no_formulir='$no_formulir'";
@@ -60,7 +60,7 @@ class CJawabanSoalPMB extends MainPageM {
                     throw new Exception ("Calon Mahasiswa dengan No. Formulir ($no_formulir) belum mengikuti ujian.");
                 }                                        
             }catch (Exception $e) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $this->errorMessage->Text=$e->getMessage();
             }
         }

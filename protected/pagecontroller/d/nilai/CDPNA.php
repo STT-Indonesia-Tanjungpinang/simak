@@ -6,7 +6,7 @@ class CDPNA extends MainPageD {
 		$this->showSubMenuAkademikNilai=true;
         $this->showDPNA=true;        
         $this->createObj('Nilai');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {     
+		if (!$this->IsPostBack && !$this->IsCallback) {     
 			if (!isset($_SESSION['currentPageDPNA'])||$_SESSION['currentPageDPNA']['page_name']!='d.nilai.DPNA') {
                 $_SESSION['currentPageDPNA']=array('page_name'=>'d.nilai.DPNA','page_num'=>0,'search'=>false,'DataDPNA'=>array());
 			}      

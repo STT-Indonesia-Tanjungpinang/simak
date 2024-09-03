@@ -6,7 +6,7 @@ class CRincianPembayaranSemesterGenap Extends MainPageK {
         $this->showReport=true;
         $this->showReportRincianPembayaranGenap=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRincianPembayaranSemesterGenap'])||$_SESSION['currentPageRincianPembayaranSemesterGenap']['page_name']!='k.report.RincianPembayaranSemesterGenap') {
 				$_SESSION['currentPageRincianPembayaranSemesterGenap']=array('page_name'=>'k.report.RincianPembayaranSemesterGenap','page_num'=>0,'search'=>false,'semester'=>2,'kelas'=>'none');												
 			}

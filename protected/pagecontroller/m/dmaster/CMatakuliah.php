@@ -6,7 +6,7 @@ class CMatakuliah extends MainPageM {
     $this->showMatakuliah=true;    
     
     $this->createObj('Akademik');
-    if (!$this->IsPostBack&&!$this->IsCallback) {
+    if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPageMatakuliah'])||$_SESSION['currentPageMatakuliah']['page_name']!='m.dmaster.Matakuliah') {
         $_SESSION['currentPageMatakuliah']=array('page_name'=>'m.dmaster.Matakuliah','page_num'=>0,'search'=>false,'idkonsentrasi'=>'none','semester'=>'none');
       }
@@ -155,7 +155,7 @@ class CMatakuliah extends MainPageM {
     $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
   }		    
   public function addProcess ($sender,$param) {
-    $this->idProcess='add';
+    $this->idProcess = 'add';
     
     $this->hiddenaddidkur->Value=$this->Demik->getIDKurikulum($_SESSION['kjur']);
     $sks=Logic_Akademik::$sks;        
@@ -232,7 +232,7 @@ class CMatakuliah extends MainPageM {
     }
   }
   public function editRecord ($sender,$param) {
-    $this->idProcess='edit';        
+    $this->idProcess = 'edit';        
     $id=$this->getDataKeyField($sender,$this->RepeaterS);        
     $this->hiddenid->Value=$id;        
     

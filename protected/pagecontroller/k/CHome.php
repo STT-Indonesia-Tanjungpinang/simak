@@ -6,7 +6,7 @@ class CHome extends MainPageK {
 		parent::onLoad($param);		            
         $this->showDashboard=true;  
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             
             $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
 			$this->tbCmbTA->Text=$_SESSION['ta'];

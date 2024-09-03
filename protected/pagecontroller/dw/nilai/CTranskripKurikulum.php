@@ -7,7 +7,7 @@ class CTranskripKurikulum extends MainPageDW {
         $this->showTranskripKurikulum=true;    
 		$this->createObj('Nilai');
                 
-		if (!$this->IsPostBack&&!$this->IsCallBack) {			
+		if (!$this->IsPostBack && !$this->IsCallback) {			
             if (!isset($_SESSION['currentPageTranskripKurikulum'])||$_SESSION['currentPageTranskripKurikulum']['page_name']!='m.nilai.TranskripKurikulum') {
 				$_SESSION['currentPageTranskripKurikulum']=array('page_name'=>'m.nilai.TranskripKurikulum','page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['ta']);
 			}          

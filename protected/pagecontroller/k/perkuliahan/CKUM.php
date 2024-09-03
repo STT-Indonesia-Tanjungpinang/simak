@@ -7,7 +7,7 @@ class CKUM extends MainPageK {
         $this->showKUM=true; 
         $this->createObj('Finance');
         $this->createObj('KRS');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {   
+		if (!$this->IsPostBack && !$this->IsCallback) {   
             if (!isset($_SESSION['currentPageKUM'])||$_SESSION['currentPageKUM']['page_name']!='k.perkuliahan.KUM') {
 				$_SESSION['currentPageKUM']=array('page_name'=>'k.perkuliahan.KUM','page_num'=>0,'search'=>false,'jenisujian'=>'uts');												
 			}            

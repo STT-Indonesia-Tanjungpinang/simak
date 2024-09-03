@@ -10,7 +10,7 @@ class CKonversiMatakuliah extends MainPageMHS {
 		$this->showSubMenuAkademikNilai=true;
         $this->showKonversiMatakuliah=true;    
         $this->createObj('Nilai');
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKonversiMatakuliah'])||$_SESSION['currentPageKonversiMatakuliah']['page_name']!='mh.spmb.KonversiMatakuliah') {
 				$_SESSION['currentPageKonversiMatakuliah']=array('page_name'=>'mh.spmb.KonversiMatakuliah','page_num'=>0,'search'=>false,'DataKonversi'=>array());												                                               
 			}  
@@ -47,7 +47,7 @@ class CKonversiMatakuliah extends MainPageMHS {
             }
                         	            
         } catch (Exception $ex) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$ex->getMessage();
         }        
 	}

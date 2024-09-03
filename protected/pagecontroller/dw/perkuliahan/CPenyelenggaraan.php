@@ -7,7 +7,7 @@ class CPenyelenggaraan extends MainPageDW {
         $this->showPenyelenggaraan=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePenyelenggaraan'])||$_SESSION['currentPagePenyelenggaraan']['page_name']!='dw.perkuliahan.Penyelenggaraan') {                
 				$_SESSION['currentPagePenyelenggaraan']=array('page_name'=>'dw.perkuliahan.Penyelenggaraan','page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
 			}

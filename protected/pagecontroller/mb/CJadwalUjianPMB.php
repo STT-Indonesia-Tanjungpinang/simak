@@ -5,7 +5,7 @@ class CJadwalUjianPMB extends MainPageMB {
 		parent::onLoad($param);		
         $this->showJadwalUjianPMB=true;
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageJadwalUjianPMB'])||$_SESSION['currentPageJadwalUjianPMB']['page_name']!='mb.spmb.JadwalUjianPMB') {                
 				$_SESSION['currentPageJadwalUjianPMB']=array('page_name'=>'mb.spmb.JadwalUjianPMB','page_num'=>0,'search'=>false);												
 			}
@@ -18,7 +18,7 @@ class CJadwalUjianPMB extends MainPageMB {
                 }
                 $this->populateData();	
             } catch (Exception $e) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $this->errorMessage->Text=$e->getMessage();
             }
 		}			

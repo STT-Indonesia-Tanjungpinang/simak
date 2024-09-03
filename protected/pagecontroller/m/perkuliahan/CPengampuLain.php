@@ -7,7 +7,7 @@ class CPengampuLain extends MainPageM {
         $this->showPenyelenggaraan=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {				
+		if (!$this->IsPostBack && !$this->IsCallback) {				
             if (!isset($_SESSION['currentPagePengampuLain'])||$_SESSION['currentPagePengampuLain']['page_name']!='m.perkuliahan.PengampuLain') {
 				$_SESSION['currentPagePengampuLain']=array('page_name'=>'m.perkuliahan.PengampuLain','page_num'=>0,'search'=>false);
 			}
@@ -35,7 +35,7 @@ class CPengampuLain extends MainPageM {
             $this->RepeaterS->DataSource=$result;
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$e->getMessage();			
         }	
 	}
@@ -51,7 +51,7 @@ class CPengampuLain extends MainPageM {
 		}
 	}
     public function addProcess ($sender,$param) {			
-		$this->idProcess='add';		
+		$this->idProcess = 'add';		
         $id=$this->hiddenid->Value;
         $this->hiddenid->Value=$id;
         $this->Demik->getInfoMatkul($id,'penyelenggaraan');  		
@@ -78,7 +78,7 @@ class CPengampuLain extends MainPageM {
 	}	
 	public function editRecord ($sender,$param) {		
         $idpp=$this->getDataKeyField($sender,$this->RepeaterS);
-		$this->idProcess='edit';
+		$this->idProcess = 'edit';
 		$id=$this->hiddenid->Value;
         $this->hiddenid->Value=$id;
         $this->Demik->getInfoMatkul($id,'penyelenggaraan');  			

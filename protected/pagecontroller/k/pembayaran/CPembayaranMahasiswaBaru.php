@@ -6,7 +6,7 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
         $this->showMenuPembayaran=true;
         $this->showPembayaranMahasiswaBaru=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru'])||$_SESSION['currentPagePembayaranMahasiswaBaru']['page_name']!='k.pembayaran.PembayaranMahasiswaBaru') {
 				$_SESSION['currentPagePembayaranMahasiswaBaru']=array('page_name'=>'k.pembayaran.PembayaranMahasiswaBaru','page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}

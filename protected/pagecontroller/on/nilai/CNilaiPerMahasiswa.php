@@ -8,7 +8,7 @@ class CNilaiPerMahasiswa extends MainPageON {
 		$this->createObj('Nilai');
         $this->showSubMenuAkademikNilai=true;
         $this->showNilaiPerMahasiswa=true;
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageNilaiPerMahasiswa'])||$_SESSION['currentPageNilaiPerMahasiswa']['page_name']!='on.nilai.NilaiPerMahasiswa') {
 				$_SESSION['currentPageNilaiPerMahasiswa']=array('page_name'=>'on.nilai.NilaiPerMahasiswa','DataMHS'=>array(),'semester'=>$_SESSION['semester'],'ta'=>$_SESSION['ta']);												
 			}
@@ -54,7 +54,7 @@ class CNilaiPerMahasiswa extends MainPageON {
                 $this->populateData ();
                 
             }catch (Exception $ex) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $this->errormessage->Text=  empty($nim) ? '':$ex->getMessage();
             }
 			

@@ -195,7 +195,7 @@ class CNilaiUjianPMB extends MainPageM {
 		}
 	}  
     public function setKelulusan ($sender,$param) {		
-		$this->idProcess='add';
+		$this->idProcess = 'add';
 		$no_formulir=$this->getDataKeyField($sender,$this->RepeaterS);
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.alamat_rumah,fp.telp_hp,fp.jk,k.nkelas,fp.kjur1,fp.kjur2,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,fp.waktu_mendaftar FROM formulir_pendaftaran fp,profiles_mahasiswa pm,kelas k WHERE fp.no_formulir=pm.no_formulir AND fp.idkelas=k.idkelas AND fp.no_formulir='$no_formulir'";
         $this->DB->setFieldTable(array('no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','alamat_rumah','telp_hp','jk','nkelas','kjur1','kjur2','tahun_masuk','semester_masuk','waktu_mendaftar'));
@@ -221,7 +221,7 @@ class CNilaiUjianPMB extends MainPageM {
         $this->cmbAddKjur->dataBind();
 	}	
     public function checkPassingGradeExist ($sender,$param) {
-		$this->idProcess='add';
+		$this->idProcess = 'add';
         $kjur=$param->Value;		
         if ($kjur != '') {
             try {

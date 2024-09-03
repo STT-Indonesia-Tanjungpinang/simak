@@ -7,7 +7,7 @@ class CPesertaMatakuliah extends MainPageM {
         $this->showPenyelenggaraan=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePesertaMatakuliah'])||$_SESSION['currentPagePesertaMatakuliah']['page_name']!='m.perkuliahan.PesertaMatakuliah') {
 				$_SESSION['currentPagePesertaMatakuliah']=array('page_name'=>'m.perkuliahan.PesertaMatakuliah','page_num'=>0,'search'=>false,'InfoMatkul'=>array());
 			}  
@@ -38,7 +38,7 @@ class CPesertaMatakuliah extends MainPageM {
                 $this->tbCmbSemester->Enabled=false;
                 $this->populateData();		
             } catch (Exception $ex) {
-                $this->idProcess='view';        
+                $this->idProcess = 'view';        
                 
                 $this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
                 $this->tbCmbPs->Text=$_SESSION['kjur'];			
@@ -67,17 +67,17 @@ class CPesertaMatakuliah extends MainPageM {
 		return $text;
 	}
     public function changeTbTA ($sender,$param) {
-        $this->idProcess='view';
+        $this->idProcess = 'view';
 		$_SESSION['ta']=$this->tbCmbTA->Text;		
         $this->lblModulHeader->Text=$this->getInfoToolbar();
 	}	
 	public function changeTbSemester ($sender,$param) {
-        $this->idProcess='view';
+        $this->idProcess = 'view';
 		$_SESSION['semester']=$this->tbCmbSemester->Text;		
         $this->lblModulHeader->Text=$this->getInfoToolbar();		
 	}
     public function changeTbPs ($sender,$param) {		
-        $this->idProcess='view';
+        $this->idProcess = 'view';
         $_SESSION['kjur']=$this->tbCmbPs->Text;
         $this->lblModulHeader->Text=$this->getInfoToolbar();        
 	}

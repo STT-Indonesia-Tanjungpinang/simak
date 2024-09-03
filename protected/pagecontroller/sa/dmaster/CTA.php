@@ -5,7 +5,7 @@ class CTA extends MainPageSA {
 		parent::onLoad ($param);
         $this->showSubMenuDMasterPerkuliahan=true;
         $this->showTA=true;
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageTA'])||$_SESSION['currentPageTA']['page_name']!='sa.dmaster.TA') {
 				$_SESSION['currentPageTA']=array('page_name'=>'sa.dmaster.TA','page_num'=>0,'search'=>false);
 			}
@@ -73,7 +73,7 @@ class CTA extends MainPageSA {
 	}
     public function editRecord ($sender,$param) {
 		$tahun=$this->getDataKeyField($sender,$this->RepeaterS);
-		$this->idProcess='edit';
+		$this->idProcess = 'edit';
 		$result = $this->DMaster->getList("ta WHERE tahun=$tahun",array('tahun','tahun_akademik'));		
 		$this->hiddentahun->Value=$result[1]['tahun'];
 		$this->txtEditTahun->Text=$result[1]['tahun'];		

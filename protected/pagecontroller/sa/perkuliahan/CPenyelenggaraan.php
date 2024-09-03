@@ -7,7 +7,7 @@ class CPenyelenggaraan extends MainPageSA {
         $this->showPenyelenggaraan=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePenyelenggaraan'])||$_SESSION['currentPagePenyelenggaraan']['page_name']!='sa.perkuliahan.Penyelenggaraan') {                
 				$_SESSION['currentPagePenyelenggaraan']=array('page_name'=>'sa.perkuliahan.Penyelenggaraan','page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
 			}
@@ -86,7 +86,7 @@ class CPenyelenggaraan extends MainPageSA {
 		}
 	}	
 	public function addProcess ($sender,$param) {		
-		$this->idProcess='add';	
+		$this->idProcess = 'add';	
         $ta=$_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        

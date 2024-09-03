@@ -6,7 +6,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageK {
         $this->showMenuPembayaran=true;
         $this->showPembayaranSemesterPendek=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {            
+		if (!$this->IsPostBack && !$this->IsCallback) {            
             try {                
                 $datamhs=$_SESSION['currentPagePembayaranSemesterPendek']['DataMHS'];                                
                 if (!isset($datamhs['no_transaksi']) || $datamhs['no_transaksi'] == 'none') {              
@@ -22,7 +22,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageK {
                 $this->cmbAddTanggalFaktur->Text=$this->TGL->tanggal('d-m-Y',$d[1]['tanggal']);
                 $this->populateData();
             }catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }      
 		}	

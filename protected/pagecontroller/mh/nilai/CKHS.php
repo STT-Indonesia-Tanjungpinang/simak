@@ -11,7 +11,7 @@ class CKHS extends MainPageMHS {
         $this->showKHS=true;    
         $this->createObj('Nilai');
         
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKHS'])||$_SESSION['currentPageKHS']['page_name']!='mh.nilai.KHS') {
 				$_SESSION['currentPageKHS']=array('page_name'=>'mh.nilai.KHS','page_num'=>0,'search'=>false);												                                               
 			}            		
@@ -78,7 +78,7 @@ class CKHS extends MainPageMHS {
 				throw new Exception ('Anda belum mengisi KRS atau KRS-nya belum disahkan oleh dosen wali.');
 			}		
 		}catch (Exception $e) {			
-			$this->idProcess='view';	
+			$this->idProcess = 'view';	
 			$this->errorMessage->Text=$e->getMessage();			
 		}						
 	}	

@@ -4,7 +4,7 @@ class CLogAktivitasUser extends MainPageAPI {
     public function onLoad($param) {        
         parent::onLoad($param);                 
         $this->showLogAktivitasUser=true;               
-        if (!$this->IsPostBack&&!$this->IsCallBack) {   
+        if (!$this->IsPostBack && !$this->IsCallback) {   
              $this->populateData();                   
         }                
     }

@@ -5,7 +5,7 @@ class CHome extends MainPageMHS {
 		parent::onLoad($param);		            
         $this->showDashboard=true;       
         $this->createObj('Nilai');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {   
+		if (!$this->IsPostBack && !$this->IsCallback) {   
             if (!isset($_SESSION['currentPageHome'])||$_SESSION['currentPageHome']['page_name']!='mh.Home') {                                                                                
                 $this->Nilai->setDataMHS($this->Pengguna->getDataUser());
                 $this->Nilai->getTranskripFromKRS();

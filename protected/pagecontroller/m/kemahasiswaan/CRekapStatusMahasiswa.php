@@ -9,7 +9,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
         $this->showRekapStatusMahasiswa=true;                
         $this->createObj('Finance');
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRekapStatusMahasiswa'])||$_SESSION['currentPageRekapStatusMahasiswa']['page_name']!='m.kemahasiswaan.RekapStatusMahasiswa') {
 				$_SESSION['currentPageRekapStatusMahasiswa']=array('page_name'=>'m.kemahasiswaan.RekapStatusMahasiswa','page_num'=>0,'search'=>false,'ta1'=>$_SESSION['ta'],'ta2'=>$_SESSION['ta'],'k_status'=>'none','tahun_masuk'=>'none','idsmt'=>'none','idkelas'=>'none');												
 			}

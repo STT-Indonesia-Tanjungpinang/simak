@@ -7,7 +7,7 @@ class CPengampuLain extends MainPageDW {
         $this->showPenyelenggaraan=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {				
+		if (!$this->IsPostBack && !$this->IsCallback) {				
             if (!isset($_SESSION['currentPagePengampuLain'])||$_SESSION['currentPagePengampuLain']['page_name']!='m.perkuliahan.PengampuLain') {
 				$_SESSION['currentPagePengampuLain']=array('page_name'=>'m.perkuliahan.PengampuLain','page_num'=>0,'search'=>false);
 			}
@@ -30,7 +30,7 @@ class CPengampuLain extends MainPageDW {
             $this->RepeaterS->DataSource=$r;
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$e->getMessage();			
         }	
 	}    

@@ -6,7 +6,7 @@ class CDetailFormulir extends MainPageM {
 		parent::onLoad($param);					
         $this->showFormulirPendaftaran=true;
         $this->createObj('Akademik');
-        if (!$this->IsPostBack&&!$this->IsCallBack) {	
+        if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailFormulir'])||$_SESSION['currentPageDetailFormulir']['page_name']!='m.spmb.DetailFormulir') {
 				$_SESSION['currentPageDetailFormulir']=array('page_name'=>'m.spmb.DetailFormulir','page_num'=>0,'DataMHS'=>array(),'activeviewindex'=>0);												
 			}
@@ -55,7 +55,7 @@ class CDetailFormulir extends MainPageM {
             }       
             
         }catch (Exception $ex) {
-            $this->idProcess='view';	                
+            $this->idProcess = 'view';	                
             $this->errorMessage->Text=$ex->getMessage();
         }          
     }

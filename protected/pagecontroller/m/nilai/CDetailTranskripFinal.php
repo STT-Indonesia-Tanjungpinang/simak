@@ -7,7 +7,7 @@ class CDetailTranskripFinal extends MainPageM {
         $this->showTranskripFinal=true;    
         $this->createObj('Nilai');
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailTranskripFinal'])||$_SESSION['currentPageDetailTranskripFinal']['page_name']!='m.nilai.DetailTranskripFinal') {
 				$_SESSION['currentPageDetailTranskripFinal']=array('page_name'=>'m.nilai.DetailTranskripFinal','page_num'=>0,'search'=>false,'DataMHS'=>array(),'DataTranskrip');
 			}  
@@ -74,7 +74,7 @@ class CDetailTranskripFinal extends MainPageM {
             $this->RepeaterS->dataBind();		
             
         } catch (Exception $ex) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$ex->getMessage();
         }        
 	}

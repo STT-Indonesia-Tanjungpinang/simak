@@ -7,7 +7,7 @@ class CEvaluasiHasilBelajar extends MainPageD {
         $this->showEvaluasiHasilBelajar=true;
         
         $this->createObj('Nilai');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageEvaluasiHasilBelajar'])||$_SESSION['currentPageEvaluasiHasilBelajar']['page_name']!='d.nilai.EvaluasiHasilBelajar') {
 				$_SESSION['currentPageEvaluasiHasilBelajar']=array('page_name'=>'d.nilai.EvaluasiHasilBelajar','page_num'=>0,'search'=>false);
 			}  

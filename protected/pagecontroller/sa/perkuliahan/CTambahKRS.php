@@ -27,7 +27,7 @@ class CTambahKRS extends MainPageSA {
         $this->createObj('KRS');
         $this->createObj('Nilai');
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallback) {	            
+		if (!$this->IsPostBack && !$this->IsCallback) {	            
             $this->lblModulHeader->Text=$this->getInfoToolbar();            
             try {	
                 $datakrs=$_SESSION['currentPageKRS']['DataKRS'];
@@ -59,7 +59,7 @@ class CTambahKRS extends MainPageSA {
                     throw new Exception('ID KRS belum ada di session.');
                 }                
             }catch (Exception $e) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$e->getMessage();	
             }
 		}				

@@ -6,7 +6,7 @@ class CDetailPengumuman extends MainPageMHS {
 		parent::onLoad($param);		            
         $this->showPengumuman=true;                     
         $this->createObj('forum');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {              
+		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDetailPengumuman'])||$_SESSION['currentPageDetailPengumuman']['page_name']!='mh.forum.DetailPengumuman') {                                                                                
                 $_SESSION['currentPageDetailPengumuman']=array('page_name'=>'mh.forum.DetailPengumuman','page_num'=>0,'search'=>false,'DataDiskusi'=>array());
             }            
@@ -30,7 +30,7 @@ class CDetailPengumuman extends MainPageMHS {
                     $this->populateData();
                 }
             } catch (Exception $ex) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $_SESSION['currentPageDetailPengumuman']['DataDiskusi']=array();
             }            
 		}                

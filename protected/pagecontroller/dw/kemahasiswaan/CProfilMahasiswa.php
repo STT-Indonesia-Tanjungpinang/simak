@@ -22,7 +22,7 @@ class CProfilMahasiswa extends MainPageDW {
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showProfilMahasiswa=true;
         $this->createObj('Nilai');
-        if (!$this->IsPostBack&&!$this->IsCallBack) {   
+        if (!$this->IsPostBack && !$this->IsCallback) {   
             if (!isset($_SESSION['currentPageProfilMahasiswa'])||$_SESSION['currentPageProfilMahasiswa']['page_name']!='m.kemahasiswaan.ProfilMahasiswa') {
                 $_SESSION['currentPageProfilMahasiswa']=array('page_name'=>'m.kemahasiswaan.ProfilMahasiswa','page_num'=>0,'DataMHS'=>array(),'activeviewindex'=>0);                                                
             }
@@ -83,7 +83,7 @@ class CProfilMahasiswa extends MainPageDW {
             }       
             
         }catch (Exception $ex) {
-            $this->idProcess='view';                    
+            $this->idProcess = 'view';                    
             $this->errorMessage->Text=$ex->getMessage();
         }          
     }

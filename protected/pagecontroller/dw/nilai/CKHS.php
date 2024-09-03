@@ -10,7 +10,7 @@ class CKHS extends MainPageDW {
         
         $this->createObj('Nilai');
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKHS'])||$_SESSION['currentPageKHS']['page_name']!='m.nilai.KHS') {
 				$_SESSION['currentPageKHS']=array('page_name'=>'m.nilai.KHS','page_num'=>0,'search'=>false,'iddosen_wali'=>'none','tahun_masuk'=>'none');
 			}   

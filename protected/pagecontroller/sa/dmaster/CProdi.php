@@ -5,7 +5,7 @@ class CProdi extends MainPageSA {
 		parent::onLoad ($param);
         $this->showSubMenuLembaga=true;
         $this->showProdi=true;
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageProdi'])||$_SESSION['currentPageProdi']['page_name']!='sa.dmaster.Prodi') {
 				$_SESSION['currentPageProdi']=array('page_name'=>'sa.dmaster.Prodi','page_num'=>0,'search'=>false);
 			}            
@@ -22,7 +22,7 @@ class CProdi extends MainPageSA {
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
 	}
 	public function addProcess ($sender,$param) {
-        $this->idProcess='add';	 
+        $this->idProcess = 'add';	 
         $this->cmbAddJenjang->dataSource=$this->DMaster->getListJenjang ();
         $this->cmbAddJenjang->dataBind();                   
 
@@ -84,7 +84,7 @@ class CProdi extends MainPageSA {
         }
     }
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';  
+        $this->idProcess = 'edit';  
         $kjur=$this->getDataKeyField($sender,$this->RepeaterS);  
         $this->hiddenid->Value=$kjur;
         $str = "SELECT kjur,kode_epsbed,nama_ps,nama_ps_alias,kjenjang,konsentrasi,iddosen FROM program_studi WHERE kjur=$kjur";

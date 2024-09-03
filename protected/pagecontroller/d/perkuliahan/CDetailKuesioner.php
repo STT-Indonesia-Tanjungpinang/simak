@@ -12,7 +12,7 @@ class CDetailKuesioner extends MainPageD {
         $this->showSubMenuAkademikPerkuliahan=true;
         $this->showKuesioner = true;           
         $this->createObj('Kuesioner');
-		if (!$this->IsPostBack&&!$this->IsCallback) {	
+		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailKuesioner'])||$_SESSION['currentPageDetailKuesioner']['page_name']!='d.perkuliahan.DetailKuesioner') {
 				$_SESSION['currentPageDetailKuesioner']=array('page_name'=>'d.perkuliahan.DetailKuesioner','page_num'=>0,'DataKuesioner'=>array());
 			}             
@@ -38,7 +38,7 @@ class CDetailKuesioner extends MainPageD {
                 $this->populateData();	
                 $this->setInfoToolbar();    
             }catch (Exception $e) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$e->getMessage();	
             }
 		}				

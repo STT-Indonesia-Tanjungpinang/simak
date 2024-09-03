@@ -7,7 +7,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
         $this->showTranskripKurikulum=true;    
         $this->createObj('Nilai');
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailTranskripKurikulum'])||$_SESSION['currentPageDetailTranskripKurikulum']['page_name']!='dw.nilai.DetailTranskripKurikulum') {
 				$_SESSION['currentPageDetailTranskripKurikulum']=array('page_name'=>'dw.nilai.DetailTranskripKurikulum','page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
@@ -48,7 +48,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
             $this->RepeaterS->DataSource=$transkrip;
             $this->RepeaterS->dataBind();		
         } catch (Exception $ex) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$ex->getMessage();
         }        
 	}

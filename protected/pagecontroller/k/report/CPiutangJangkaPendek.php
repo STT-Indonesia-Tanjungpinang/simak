@@ -6,7 +6,7 @@ class CPiutangJangkaPendek extends MainPageK {
         $this->showReport=true;
         $this->showReportPiutangJangkaPendek=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {	
+		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePiutangJangkaPendek'])||$_SESSION['currentPagePiutangJangkaPendek']['page_name']!='k.report.PiutangJangkaPendek') {
 				$_SESSION['currentPagePiutangJangkaPendek']=array('page_name'=>'k.report.PiutangJangkaPendek','page_num'=>0,'search'=>false,'kelas'=>'none','tahun_masuk'=>$_SESSION['tahun_masuk']);												
 			}

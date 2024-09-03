@@ -11,7 +11,7 @@ class CHome extends MainPageSA {
 		parent::onLoad($param);		            
         $this->showDashboard=true;       
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {              
+		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageHome'])||$_SESSION['currentPageHome']['page_name']!='sa.Home') {                                                                                
                 $tahun_pendaftaran=$_SESSION['tahun_pendaftaran'];
 

@@ -7,7 +7,7 @@ class CPesertaUjianPMB extends MainPageM {
         $this->showSubMenuSPMBUjianPMB=true;
         $this->showJadwalUjianPMB=true;
         
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePesertaUjianPMB'])||$_SESSION['currentPagePesertaUjianPMB']['page_name']!='m.spmb.PesertaUjianPMB') {
 				$_SESSION['currentPagePesertaUjianPMB']=array('page_name'=>'m.spmb.PesertaUjianPMB','page_num'=>0,'search'=>false,'DataUjianPMB');
 			}  
@@ -27,7 +27,7 @@ class CPesertaUjianPMB extends MainPageM {
                 $_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']=$this->DataUjianPMB;
                 $this->populateData();		
             } catch (Exception $ex) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $this->errorMessage->Text=$ex->getMessage();
             }
 		}		
@@ -61,7 +61,7 @@ class CPesertaUjianPMB extends MainPageM {
         
 	}
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         

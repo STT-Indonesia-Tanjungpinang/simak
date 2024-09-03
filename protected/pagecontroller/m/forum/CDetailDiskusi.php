@@ -6,7 +6,7 @@ class CDetailDiskusi extends MainPageM {
 		parent::onLoad($param);		            
         $this->showForumDiskusi=true;                     
         $this->createObj('forum');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {              
+		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDetailDiskusi'])||$_SESSION['currentPageDetailDiskusi']['page_name']!='m.forum.DetailDiskusi') {                                                                                
                 $_SESSION['currentPageDetailDiskusi']=array('page_name'=>'m.forum.DetailDiskusi','page_num'=>0,'search'=>false,'DataDiskusi'=>array());
             }            
@@ -24,7 +24,7 @@ class CDetailDiskusi extends MainPageM {
                     $this->populateData();
                 }
             } catch (Exception $ex) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $_SESSION['currentPageDetailDiskusi']['DataDiskusi']=array();
             }            
 		}                

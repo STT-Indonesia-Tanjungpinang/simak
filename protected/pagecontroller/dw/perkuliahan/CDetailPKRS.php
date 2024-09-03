@@ -23,7 +23,7 @@ class CDetailPKRS extends MainPageDW {
         $this->showPKRS = true;
 		$this->createObj('KRS');
 			
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             $this->setInfoToolbar();
             $this->populateData();	
 		}	
@@ -55,7 +55,7 @@ class CDetailPKRS extends MainPageDW {
             $this->RepeaterS->DataSource=$detailkrs;
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$e->getMessage();	
         }
 	}

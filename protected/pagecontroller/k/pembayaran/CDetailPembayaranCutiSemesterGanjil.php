@@ -8,7 +8,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
         $this->createObj('Finance');
         $this->showMenuPembayaran=true;
         $this->showPembayaranCutiSemesterGanjil=true;
-		if (!$this->IsPostBack&&!$this->IsCallBack) {	
+		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGanjil'])||$_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_name']!='k.pembayaran.PembayaranCutiSemesterGanjil') {
 				$_SESSION['currentPagePembayaranCutiSemesterGanjil']=array('page_name'=>'k.pembayaran.PembayaranCutiSemesterGanjil','page_num'=>0,'search'=>false,'DataMHS'=>array(),'ta'=>$_SESSION['ta']);												
 			}
@@ -58,7 +58,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
                    
                 }
             }catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }
             

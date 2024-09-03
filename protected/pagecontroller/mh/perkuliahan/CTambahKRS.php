@@ -29,7 +29,7 @@ class CTambahKRS extends MainPageMHS {
     $this->createObj('KRS');
     $this->createObj('Nilai');
     $this->createObj('Finance');
-    if (!$this->IsPostBack&&!$this->IsCallback) 
+    if (!$this->IsPostBack && !$this->IsCallback) 
     {	            
       $this->lblModulHeader->Text=$this->getInfoToolbar();            
       try 
@@ -111,7 +111,7 @@ class CTambahKRS extends MainPageMHS {
         $this->RepeaterPenyelenggaraan->DataSource=$daftar_matkul_diselenggarakan;
         $this->RepeaterPenyelenggaraan->dataBind();
       }catch (Exception $e) {
-        $this->idProcess='view';	
+        $this->idProcess = 'view';	
         $this->errorMessage->Text=$e->getMessage();	
       }
     }				
@@ -140,7 +140,8 @@ class CTambahKRS extends MainPageMHS {
       $idpenyelenggaraan=$this->getDataKeyField($sender,$this->RepeaterPenyelenggaraan);
       //check kmatkul syarat apakah lulus		
       $this->KRS->checkMatkulSyaratIDPenyelenggaraan($idpenyelenggaraan);
-      if (!$this->DB->checkRecordIsExist('idpenyelenggaraan','krsmatkul',$idpenyelenggaraan,' AND idkrs='.$idkrs)) { 
+      if (!$this->DB->checkRecordIsExist('idpenyelenggaraan','krsmatkul',$idpenyelenggaraan,' AND idkrs='.$idkrs))
+      { 
         $str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs',$idpenyelenggaraan,0)";
         $this->DB->insertRecord($str);			
         $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs=$idkrs";

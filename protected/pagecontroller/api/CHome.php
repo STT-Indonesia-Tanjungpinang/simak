@@ -4,7 +4,7 @@ class CHome extends MainPageAPI {
     public function onLoad($param) {        
         parent::onLoad($param);                 
         $this->showDashboard=true;               
-        if (!$this->IsPostBack&&!$this->IsCallBack) {   
+        if (!$this->IsPostBack && !$this->IsCallback) {   
              $this->populateData();                   
         }                
     }
@@ -22,7 +22,7 @@ class CHome extends MainPageAPI {
         $this->RepeaterS->dataBind();        
     }  
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
         $this->hiddenid->Value=$id;     
         

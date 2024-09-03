@@ -7,7 +7,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
 		parent::onLoad($param);			
         $this->showPembayaranSemesterGenap=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGenap'])||$_SESSION['currentPagePembayaranSemesterGenap']['page_name']!='mh.pembayaran.PembayaranSemesterGenap') {
 				$_SESSION['currentPagePembayaranSemesterGenap']=array('page_name'=>'mh.pembayaran.PembayaranSemesterGenap','page_num'=>0,'ta'=>$_SESSION['ta'],'no_transaksi'=>'none');												
 			}
@@ -41,7 +41,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
                 $this->ListTransactionRepeater->dataBind(); 
                 
 			}catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }  
             

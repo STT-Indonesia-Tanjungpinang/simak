@@ -9,7 +9,7 @@ class CKombiPerTA Extends MainPageK {
 		$this->createObj('Finance');
         $this->showDMaster=true;
         $this->showKombiPerTA=true;
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKombiPerTA'])||$_SESSION['currentPageKombiPerTA']['page_name']!='k.dmaster.KombiPerTA') {
 				$_SESSION['currentPageKombiPerTA']=array('page_name'=>'k.dmaster.KombiPerTA','kelas'=>'A','semester_masuk'=>1,'periode_pembayaran'=>'none');												
 			}

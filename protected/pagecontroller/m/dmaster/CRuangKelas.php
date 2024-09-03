@@ -5,7 +5,7 @@ class CRuangKelas Extends MainPageM {
 		parent::onLoad($param);
 		$this->showSubMenuDMasterPerkuliahan=true;
 		$this->showRuangKelas=true;
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRuangKelas'])||$_SESSION['currentPageRuangKelas']['page_name']!='sa.dmaster.RuangKelas') {
 				$_SESSION['currentPageRuangKelas']=array('page_name'=>'sa.dmaster.RuangKelas','page_num'=>0,'search'=>false);
 			}
@@ -73,7 +73,7 @@ class CRuangKelas Extends MainPageM {
 	}
 	public function editRecord ($sender,$param) {
 		$idruangkelas=$this->getDataKeyField($sender,$this->RepeaterS);
-		$this->idProcess='edit';
+		$this->idProcess = 'edit';
 		$result = $this->DMaster->getList("ruangkelas WHERE idruangkelas=$idruangkelas",array('namaruang','kapasitas'));
 		$this->hiddenid->Value=$idruangkelas;
 		$this->hiddennamaruang->Value=$result[1]['namaruang'];

@@ -7,7 +7,7 @@ class CDetailPembayaranSemesterPendek Extends MainPageK {
         $this->showMenuPembayaran=true;
         $this->showPembayaranSemesterPendek=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterPendek'])||$_SESSION['currentPagePembayaranSemesterPendek']['page_name']!='k.pembayaran.PembayaranSemesterPendek') {
 				$_SESSION['currentPagePembayaranSemesterPendek']=array('page_name'=>'k.pembayaran.PembayaranSemesterPendek','page_num'=>0,'search'=>false,'kelas'=>'none','tahun_masuk'=>$_SESSION['tahun_masuk'],'semester'=>3,'DataMHS'=>array());												
 			}        
@@ -44,7 +44,7 @@ class CDetailPembayaranSemesterPendek Extends MainPageK {
 				$this->lblPanelHeader->Text=$this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['ta']).' SEMESTER '.$this->setup->getSemester($_SESSION['currentPagePembayaranSemesterPendek']['semester']);
                 $this->populateTransaksi();
             }catch (Exception $ex) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $this->errorMessage->Text=$ex->getMessage();
             }      
 		}	

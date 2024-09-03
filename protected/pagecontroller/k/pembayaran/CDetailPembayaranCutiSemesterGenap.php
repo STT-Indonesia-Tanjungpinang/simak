@@ -8,7 +8,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
         $this->createObj('Finance');
         $this->showMenuPembayaran=true;
         $this->showPembayaranCutiSemesterGenap=true;
-		if (!$this->IsPostBack&&!$this->IsCallBack) {	
+		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGenap'])||$_SESSION['currentPagePembayaranCutiSemesterGenap']['page_name']!='k.pembayaran.PembayaranCutiSemesterGenap') {
 				$_SESSION['currentPagePembayaranCutiSemesterGenap']=array('page_name'=>'k.pembayaran.PembayaranCutiSemesterGenap','page_num'=>0,'search'=>false,'DataMHS'=>array(),'ta'=>$_SESSION['ta']);												
 			}
@@ -60,7 +60,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                    
                 }
             }catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }
             

@@ -6,7 +6,7 @@ class CDetailDulangMHSLama Extends MainPageM {
         $this->showSubMenuAkademikDulang=true;
         $this->showDulangMHSLama=true;                
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             try {
                 if (isset($_SESSION['currentPageDulangMHSLama']['DataMHS']['no_formulir'])) {
                     $datamhs=$_SESSION['currentPageDulangMHSLama']['DataMHS'];
@@ -24,7 +24,7 @@ class CDetailDulangMHSLama Extends MainPageM {
                     throw new Exception("Data Mahasiswa belum ada di session.");
                 }
             } catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }
 		}	

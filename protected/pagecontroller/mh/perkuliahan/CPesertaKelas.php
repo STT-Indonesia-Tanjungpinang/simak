@@ -7,7 +7,7 @@ class CPesertaKelas extends MainPageMHS {
         $this->showJadwalPerkuliahan=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePesertaKelas'])||$_SESSION['currentPagePesertaKelas']['page_name']!='m.perkuliahan.PesertaKelas') {
 				$_SESSION['currentPagePesertaKelas']=array('page_name'=>'m.perkuliahan.PesertaKelas','page_num'=>0,'search'=>false,'InfoKelas'=>array());
 			}  
@@ -28,7 +28,7 @@ class CPesertaKelas extends MainPageMHS {
                 $_SESSION['currentPagePesertaKelas']['InfoKelas']=$infokelas;          
                 $this->populateData();		
             } catch (Exception $ex) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $this->errorMessage->Text=$ex->getMessage();
             }
 		}		

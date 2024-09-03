@@ -7,7 +7,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
 		parent::onLoad($param);		
         $this->createObj('Finance');
         $this->showPembayaranCutiSemesterGanjil=true;
-		if (!$this->IsPostBack&&!$this->IsCallBack) {	
+		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGanjil'])||$_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_name']!='mh.pembayaran.PembayaranCutiSemesterGanjil') {
 				$_SESSION['currentPagePembayaranCutiSemesterGanjil']=array('page_name'=>'mh.pembayaran.PembayaranCutiSemesterGanjil','page_num'=>0,'search'=>false,'DataMHS'=>array(),'ta'=>$_SESSION['ta']);												
             }
@@ -44,7 +44,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
                     $this->txtAddNomorFaktur->Text='11'.$datamhs['ta'].mt_rand(900,9999);
                 }
             }catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }
             

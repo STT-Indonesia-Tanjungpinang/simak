@@ -6,7 +6,7 @@ class CPembayaranSemesterGenap Extends MainPageSA {
         $this->showSubMenuPembayaran=true;  
         $this->showPembayaranSemesterGenap=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGenap'])||$_SESSION['currentPagePembayaranSemesterGenap']['page_name']!='sa.pembayaran.PembayaranSemesterGenap') {
 				$_SESSION['currentPagePembayaranSemesterGenap']=array('page_name'=>'sa.pembayaran.PembayaranSemesterGenap','page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'),'semester'=>2,'kelas'=>'none','DataMHS'=>array());												
 			}

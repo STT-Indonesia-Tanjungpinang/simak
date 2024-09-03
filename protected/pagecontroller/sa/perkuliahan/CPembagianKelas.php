@@ -7,7 +7,7 @@ class CPembagianKelas extends MainPageSA {
         $this->showPembagianKelas=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembagianKelas'])||$_SESSION['currentPagePembagianKelas']['page_name']!='sa.perkuliahan.PembagianKelas') {                
 				$_SESSION['currentPagePembagianKelas']=array('page_name'=>'sa.perkuliahan.PembagianKelas','page_num'=>0,'search'=>false,'iddosen'=>'none','nama_hari'=>'none');												
 			}

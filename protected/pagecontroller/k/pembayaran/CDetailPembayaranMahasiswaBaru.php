@@ -8,7 +8,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
         $this->showMenuPembayaran=true;
         $this->showPembayaranMahasiswaBaru=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru'])||$_SESSION['currentPagePembayaranMahasiswaBaru']['page_name']!='k.pembayaran.PembayaranMahasiswaBaru') {
 				$_SESSION['currentPagePembayaranMahasiswaBaru']=array('page_name'=>'k.pembayaran.PembayaranMahasiswaBaru','page_num'=>0,'search'=>false,'kelas'=>'none','tahun_masuk'=>1,'semester_masuk'=>1,'DataMHS'=>array());												
 			}        
@@ -47,7 +47,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                 CDetailPembayaranMahasiswaBaru::$KewajibanMahasiswa=$this->Finance->getTotalBiayaMhsPeriodePembayaran ();
                 $this->populateTransaksi();
             }catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }      
 		}	

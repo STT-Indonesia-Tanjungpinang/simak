@@ -213,7 +213,7 @@ class CPembayaranFormulir extends MainPageM {
 	
 	public function editRecord ($sender,$param) {
 		$this->Pengguna->updateActivity();	
-		$this->idProcess='edit';
+		$this->idProcess = 'edit';
 		$this->disableToolbars();
 		$no_formulir=$this->getDataKeyField($sender,$this->RepeaterS);
 		$str = 'SELECT bp.no_formulir,fp.nama_mhs,fp.alamat_rumah,fp.telp_rumah,fp.telp_hp,pm.email,bp.no_faktur,bp.tgl_bayar,bp.dibayarkan,bp.ket FROM formulir_pendaftaran fp,bipend bp,profiles_mahasiswa pm WHERE fp.no_formulir=bp.no_formulir AND pm.no_formulir=fp.no_formulir AND bp.no_formulir='.$no_formulir;

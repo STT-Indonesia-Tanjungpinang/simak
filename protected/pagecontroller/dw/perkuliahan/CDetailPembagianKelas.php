@@ -7,7 +7,7 @@ public function onLoad($param) {
         $this->showPembagianKelas=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembagianKelas'])||$_SESSION['currentPagePembagianKelas']['page_name']!='m.perkuliahan.PembagianKelas') {                
 				$_SESSION['currentPagePembagianKelas']=array('page_name'=>'m.perkuliahan.PembagianKelas','page_num'=>0,'search'=>false,'iddosen'=>'none','nama_hari'=>'none');												
 			}
@@ -129,7 +129,7 @@ public function onLoad($param) {
         }
     }
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';
+        $this->idProcess = 'edit';
         $idkelas_mhs=$this->getDataKeyField($sender, $this->RepeaterS);
         $this->hiddenid->Value=$idkelas_mhs;
         $str = "SELECT km.hari,km.jam_masuk,km.jam_keluar,idruangkelas FROM kelas_mhs km WHERE idkelas_mhs=$idkelas_mhs";

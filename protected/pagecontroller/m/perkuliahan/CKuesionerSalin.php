@@ -7,7 +7,7 @@ class CKuesionerSalin extends MainPageM {
         $this->showKuesioner=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKuesioner'])||$_SESSION['currentPageKuesioner']['page_name']!='m.perkuliahan.Kuesioner') {                
 				$_SESSION['currentPageKuesioner']=array('page_name'=>'m.perkuliahan.Kuesioner','page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
 			}

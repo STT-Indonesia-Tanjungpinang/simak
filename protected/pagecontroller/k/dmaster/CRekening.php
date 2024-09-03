@@ -5,7 +5,7 @@ class CRekening Extends MainPageK {
 		parent::onLoad($param);		
         $this->showDMaster=true;
         $this->showRekening=true;
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
 			$this->populateData();
 		}
 	}	

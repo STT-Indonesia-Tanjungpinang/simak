@@ -5,7 +5,7 @@ class CUserDosen extends MainPageSA {
 		parent::onLoad($param);		     
         $this->showSubMenuSettingSistem=true;
         $this->showUserDosen=true;   
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageUserDosen'])||$_SESSION['currentPageUserDosen']['page_name']!='sa.settings.UserDosen') {
 				$_SESSION['currentPageUserDosen']=array('page_name'=>'sa.settings.UserDosen','page_num'=>0,'search'=>false);
 			}
@@ -105,7 +105,7 @@ class CUserDosen extends MainPageSA {
         }	
     }    
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
 		$this->hiddenid->Value=$id;     
         

@@ -5,7 +5,7 @@ class CFormulirPendaftaran extends MainPageMB {
 		parent::onLoad ($param);
 		$this->showFormulirPendaftaran = true;		        		
         $this->createObj('Finance');        
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             $this->lblModulHeader->Text='T.A '.$this->DMaster->getNamaTA($this->Pengguna->getDataUser('tahun_masuk'));
             try {                
                 if (!isset($_SESSION['currentPageFormulirPendaftaran'])||$_SESSION['currentPageFormulirPendaftaran']['page_name']!='mb.FormulirPendaftaran') {
@@ -30,13 +30,13 @@ class CFormulirPendaftaran extends MainPageMB {
                     $this->addProcess();                
                 } 
             }catch (Exception $e) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $this->errorMessage->Text=$e->getMessage();
             }                        
 		}
 	}
     private function editProcess() {
-        $this->idProcess='edit';                         
+        $this->idProcess = 'edit';                         
         $no_formulir=$this->Pengguna->getDataUser('no_formulir');
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,kelurahan,kecamatan,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt,pm.photo_profile FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
         $this->DB->setFieldTable(array('no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','jk','idagama','nama_agama','nama_ibu_kandung','idwarga','nik','idstatus','alamat_kantor','alamat_rumah','kelurahan','kecamatan','telp_rumah','telp_kantor','telp_hp','email','idjp','pendidikan_terakhir','jurusan','kota','provinsi','tahun_pa','nama_pekerjaan','jenis_slta','asal_slta','status_slta','nomor_ijazah','kjur1','kjur2','idkelas','waktu_mendaftar','ta','idsmt','photo_profile'));
@@ -131,7 +131,7 @@ class CFormulirPendaftaran extends MainPageMB {
         $this->hiddenEditFoto->Value=$dataMhs['photo_profile']; 
     }
     private function addProcess() {     
-        $this->idProcess='add';        
+        $this->idProcess = 'add';        
 		$no_formulir= $this->Pengguna->getDataUser('no_formulir');
 		$str ="SELECT nama_mhs,tempat_lahir,tanggal_lahir,jk,email,telp_hp,kjur1,kjur2,idkelas FROM formulir_pendaftaran_temp WHERE no_formulir=$no_formulir";
 		$this->DB->setFieldTable(array('nama_mhs','tempat_lahir','tanggal_lahir','jk','email','telp_hp','kjur1','kjur2','idkelas'));
@@ -177,7 +177,7 @@ class CFormulirPendaftaran extends MainPageMB {
     }
 	public function changePs($sender,$param) {
         if ($sender->getId()=='cmbAddKjur1') {
-            $this->idProcess='add';
+            $this->idProcess = 'add';
             if ($sender->Text == 'none') {
                 $this->cmbAddKjur2->Enabled=false;	
                 $this->cmbAddKjur2->Text='none';
@@ -189,7 +189,7 @@ class CFormulirPendaftaran extends MainPageMB {
                 $this->cmbAddKjur2->dataBind();
             }
         }else {
-            $this->idProcess='edit';
+            $this->idProcess = 'edit';
             $this->cmbEditKjur2->Enabled=true;	
             $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'],$sender->Text);									            
             $this->cmbEditKjur2->DataSource=$jurusan;
@@ -216,7 +216,7 @@ class CFormulirPendaftaran extends MainPageMB {
 		}	
 	}
     public function saveData ($sender,$param) {
-        $this->idProcess='add';
+        $this->idProcess = 'add';
 		if ($this->IsValid) {
 			$no_formulir=$this->txtAddNoFormulir->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtAddNamaMhs->Text)));			
@@ -289,7 +289,7 @@ class CFormulirPendaftaran extends MainPageMB {
 		}
     }
 	public function updateData ($sender,$param) {
-        $this->idProcess='edit';
+        $this->idProcess = 'edit';
 		if ($this->IsValid) {
 			$no_formulir=$this->txtEditNoFormulir->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			

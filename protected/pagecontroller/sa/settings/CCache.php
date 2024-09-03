@@ -5,7 +5,7 @@ class CCache extends MainPageSA {
 		parent::onLoad($param);				
         $this->showSubMenuSettingSistem=true;
 		$this->showCache=true;                
-		if (!$this->IsPostBack&&!$this->IsCallBack) {	
+		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageCache'])||$_SESSION['currentPageCache']['page_name']!='sa.settings.Cache') {
 				$_SESSION['currentPageCache']=array('page_name'=>'sa.settings.Cache','page_num'=>0);												
 			}            

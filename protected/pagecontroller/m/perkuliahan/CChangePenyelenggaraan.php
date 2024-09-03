@@ -7,7 +7,7 @@ class CChangePenyelenggaraan extends MainPageM {
         $this->showPenyelenggaraan=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageChangePenyelenggaraan'])||$_SESSION['currentPageChangePenyelenggaraan']['page_name']!='m.perkuliahan.ChangePenyelenggaraan') {                
 				$_SESSION['currentPageChangePenyelenggaraan']=array('page_name'=>'m.perkuliahan.ChangePenyelenggaraan','page_num'=>0,'search'=>false,'idkur'=>$this->Demik->getIDKurikulum($_SESSION['kjur']));												
 			}

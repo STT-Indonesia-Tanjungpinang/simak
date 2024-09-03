@@ -7,7 +7,7 @@ class CTranskripKRS extends MainPageMHS {
         $this->showTranskripKRS=true;    
         $this->createObj('Nilai');
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageTranskripKRS'])||$_SESSION['currentPageTranskripKRS']['page_name']!='mh.nilai.TranskripKRS') {
 				$_SESSION['currentPageTranskripKRS']=array('page_name'=>'mh.nilai.TranskripKRS','page_num'=>0,'search'=>false);												                                               
 			}  

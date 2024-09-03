@@ -6,7 +6,7 @@ class CDetailNilaiFinal extends MainPageON {
     $this->showSubMenuAkademikNilai=true;
     $this->showNilaiFinal=true;    
     $this->createObj('Nilai');
-    if (!$this->IsPostback&&!$this->IsCallback) {
+    if (!$this->IsPostBack && !$this->IsCallback) {
       $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
       $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
       $this->tbCmbOutputReport->DataBind();
@@ -71,7 +71,7 @@ class CDetailNilaiFinal extends MainPageON {
       }
 
     } catch (Exception $ex) {
-      $this->idProcess='view';	
+      $this->idProcess = 'view';	
       $this->errorMessage->Text=$ex->getMessage();
     }        
   }

@@ -5,7 +5,7 @@ class CUserPMB extends MainPageSA {
 		parent::onLoad($param);		     
         $this->showSubMenuSettingSistem=true;
         $this->showUserPMB=true;   
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageUserPMB'])||$_SESSION['currentPageUserPMB']['page_name']!='sa.settings.UserPMB') {
 				$_SESSION['currentPageUserPMB']=array('page_name'=>'sa.settings.UserPMB','page_num'=>0,'search'=>false);
 			}
@@ -74,7 +74,7 @@ class CUserPMB extends MainPageSA {
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
 	}		    
     public function addProcess ($sender,$param) {
-        $this->idProcess='add';
+        $this->idProcess = 'add';
         $this->cmbAddGroup->DataSource=$this->Pengguna->removeIdFromArray($this->Pengguna->getListGroup(),'none');
         $this->cmbAddGroup->DataBind();
         $daftar_jurusan=$_SESSION['daftar_jurusan'];
@@ -132,7 +132,7 @@ class CUserPMB extends MainPageSA {
         }
     }
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
 		$this->hiddenid->Value=$id;     
         

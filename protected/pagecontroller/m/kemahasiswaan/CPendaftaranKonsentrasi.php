@@ -6,7 +6,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showPendaftaranKonsentrasi=true;
                         
-		if (!$this->IsPostBack&&!$this->IsCallBack) {	
+		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePendaftaranKonsentrasi'])||$_SESSION['currentPagePendaftaranKonsentrasi']['page_name']!='m.kemahasiswaan.PendaftaranKonsentrasi') {
 				$_SESSION['currentPagePendaftaranKonsentrasi']=array('page_name'=>'m.kemahasiswaan.PendaftaranKonsentrasi','page_num'=>0,'search'=>false,'idkonsentrasi'=>'none','DataMHS'=>array());												
 			}

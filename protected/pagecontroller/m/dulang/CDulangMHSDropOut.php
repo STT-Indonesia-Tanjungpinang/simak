@@ -6,7 +6,7 @@ class CDulangMHSDropOut Extends MainPageM {
         $this->showSubMenuAkademikDulang=true;
         $this->showDulangMHSDropOut=true;     
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSDropOut'])||$_SESSION['currentPageDulangMHSDropOut']['page_name']!='m.dulang.DulangMHSDropOut') {
 				$_SESSION['currentPageDulangMHSDropOut']=array('page_name'=>'m.dulang.DulangMHSDropOut','page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none','DataMHS'=>array());												
 			}
@@ -185,7 +185,7 @@ class CDulangMHSDropOut Extends MainPageM {
         }
 	}
     public function viewRecord($sender,$param) {	
-		$this->idProcess='view';		
+		$this->idProcess = 'view';		
 		$iddulang=$this->getDataKeyField($sender,$this->RepeaterS);
         $this->hiddeniddulang->Value=$iddulang;
         $this->hiddenstatussebelumnya->Value=

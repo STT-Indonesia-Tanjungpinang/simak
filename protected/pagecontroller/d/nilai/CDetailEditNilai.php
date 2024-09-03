@@ -8,7 +8,7 @@ class CDetailEditNilai extends MainPageD {
         $this->createObj('Akademik');        
         $this->createObj('Nilai');        
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailEditNilai'])||$_SESSION['currentPageDetailEditNilai']['page_name']!='d.nilai.DetailEditNilai') {
 				$_SESSION['currentPageDetailEditNilai']=array('page_name'=>'d.nilai.DetailEditNilai','page_num'=>0,'search'=>false,'DataNilai'=>array(),'jumlahrecord'=>50);
 			}  
@@ -39,7 +39,7 @@ class CDetailEditNilai extends MainPageD {
                 $_SESSION['currentPageDetailEditNilai']['DataNilai']=$this->Demik->InfoKelas;
                 $this->populateData();	             
             } catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }
 		}

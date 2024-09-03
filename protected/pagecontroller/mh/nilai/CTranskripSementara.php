@@ -7,7 +7,7 @@ class CTranskripSementara extends MainPageMHS {
         $this->showTranskripSementara=true;    
         $this->createObj('Nilai');
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageTranskripSementara'])||$_SESSION['currentPageTranskripSementara']['page_name']!='mh.nilai.TranskripSementara') {
 				$_SESSION['currentPageTranskripSementara']=array('page_name'=>'mh.nilai.TranskripSementara','page_num'=>0,'search'=>false);												                                               
 			}  

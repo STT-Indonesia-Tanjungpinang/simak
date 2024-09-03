@@ -6,7 +6,7 @@ class CSoalPMB extends MainPageMB {
         parent::onLoad ($param);        
         $this->showSoalPMB = true;	    
         $this->createObj('Akademik');
-        if (!$this->IsPostBack&&!$this->IsCallBack) {	            
+        if (!$this->IsPostBack && !$this->IsCallback) {	            
             try {          
                 $no_formulir=$this->Pengguna->getDataUser('no_formulir');
                 $this->Demik->setDataMHS(array('no_formulir'=>$no_formulir));
@@ -29,7 +29,7 @@ class CSoalPMB extends MainPageMB {
                 if (isset($r[1]) ) {
                     $dataujian=$r[1];
                     if ($dataujian['isfinish']) {
-                        $this->idProcess='edit';
+                        $this->idProcess = 'edit';
                         if ($dataujian['nilai'] == '') {     
                             $jawaban_benar=$this->DB->getCountRowsOfTable("jawaban_ujian ju LEFT JOIN jawaban j ON (j.idjawaban=ju.idjawaban) WHERE no_formulir='$no_formulir' AND ju.idjawaban!=0 AND status=1",'ju.idjawaban');
                             $dataujian['jawaban_benar']=$jawaban_benar;
@@ -67,7 +67,7 @@ class CSoalPMB extends MainPageMB {
                         $this->populateSoal();
                     }
                 }else{
-                    $this->idProcess='add';
+                    $this->idProcess = 'add';
                     $str = "SELECT no_pin FROM pin WHERE no_formulir='$no_formulir'";
                     $this->DB->setFieldTable(array('no_pin')); 
                     $r=$this->DB->getRecord($str); 
@@ -75,7 +75,7 @@ class CSoalPMB extends MainPageMB {
                     $this->txtAddPIN->Text=$r[1]['no_pin'];
                 }                                                   
             }catch (Exception $e) {
-                $this->idProcess='view';
+                $this->idProcess = 'view';
                 $this->errorMessage->Text=$e->getMessage();
             }
         }

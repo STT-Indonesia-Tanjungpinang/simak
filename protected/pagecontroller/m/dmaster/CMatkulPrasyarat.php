@@ -6,7 +6,7 @@ class CMatkulPrasyarat extends MainPageM {
         $this->showMatakuliah=true;        
         $this->createObj('Akademik');
         
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageMatkulPrasyarat'])||$_SESSION['currentPageMatkulPrasyarat']['page_name']!='m.dmaster.MatkulPrasyarat') {
 				$_SESSION['currentPageMatkulPrasyarat']=array('page_name'=>'m.dmaster.MatkulPrasyarat','page_num'=>0,'search'=>false,'dataMatkul'=>array());
 			}
@@ -44,7 +44,7 @@ class CMatkulPrasyarat extends MainPageM {
             $this->RepeaterS->DataSource=$result;		
             $this->RepeaterS->dataBind();	
         } catch (Exception $e) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$e->getMessage();			
         }		
 	}

@@ -22,7 +22,7 @@ class CDetailKRS extends MainPageM {
         $this->showSubMenuAkademikPerkuliahan=true;
         $this->showKRS = true;           
         $this->createObj('KRS');
-		if (!$this->IsPostBack&&!$this->IsCallback) {	            
+		if (!$this->IsPostBack && !$this->IsCallback) {	            
             $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
@@ -117,7 +117,7 @@ class CDetailKRS extends MainPageM {
             $this->RepeaterS->DataSource=$this->KRS->DataKRS['matakuliah'];
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$e->getMessage();	
         }
 

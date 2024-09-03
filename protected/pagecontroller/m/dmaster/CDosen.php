@@ -4,7 +4,7 @@ class CDosen extends MainPageM {
 	public function onLoad($param) {
 		parent::onLoad($param);		     
         $this->showDosen=true;   
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDosen'])||$_SESSION['currentPageDosen']['page_name']!='m.dmaster.Dosen') {
 				$_SESSION['currentPageDosen']=array('page_name'=>'m.dmaster.Dosen','page_num'=>0,'search'=>false);
 			}
@@ -68,7 +68,7 @@ class CDosen extends MainPageM {
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
 	}		    
     public function addProcess ($sender,$param) {
-        $this->idProcess='add';
+        $this->idProcess = 'add';
         $this->cmbAddJabatanAkademik->dataSource=$this->DMaster->getListJabfung ();
         $this->cmbAddJabatanAkademik->dataBind();	             
     }
@@ -168,7 +168,7 @@ class CDosen extends MainPageM {
         }
     }
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $iddosen=$this->getDataKeyField($sender,$this->RepeaterS);        
 		$this->hiddenid->Value=$iddosen;     
         

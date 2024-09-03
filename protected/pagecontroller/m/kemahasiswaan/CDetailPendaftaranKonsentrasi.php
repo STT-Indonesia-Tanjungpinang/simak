@@ -6,7 +6,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showPendaftaranKonsentrasi=true;                
         $this->createObj('Nilai');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             $this->lblProdi->Text=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];
             try {
                 $nim=$this->request['id'];                
@@ -45,7 +45,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
                 $this->Nilai->getTranskripFromKonversidanKRS();
                 $this->hiddenJumlahSKS->Value=$this->Nilai->getTotalSKSAdaNilai();
             } catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }
 		}	

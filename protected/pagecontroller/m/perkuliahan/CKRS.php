@@ -22,7 +22,7 @@ class CKRS Extends MainPageM {
         $this->createObj('Nilai');
         $this->createObj('Finance');
         
-		if (!$this->IsPostBack&&!$this->IsCallBack) {						
+		if (!$this->IsPostBack && !$this->IsCallback) {						
             if (!isset($_SESSION['currentPageKRS'])||$_SESSION['currentPageKRS']['page_name']!='m.perkuliahan.KRS') {					
                 $_SESSION['currentPageKRS']=array('page_name'=>'m.perkuliahan.KRS','page_num'=>0,'mode_krs'=>'sudah','iddosen_wali'=>'none','tahun_masuk'=>'none','DataKRS'=>array(),'DataMHS'=>array());												
             }

@@ -7,7 +7,7 @@ class CDetailTranskripKRS extends MainPageDW {
         $this->showTranskripKRS=true;    
         $this->createObj('Nilai');
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailTranskripKRS'])||$_SESSION['currentPageDetailTranskripKRS']['page_name']!='dw.nilai.DetailTranskripKRS') {
 				$_SESSION['currentPageDetailTranskripKRS']=array('page_name'=>'dw.nilai.DetailTranskripKRS','page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
@@ -48,7 +48,7 @@ class CDetailTranskripKRS extends MainPageDW {
             $this->RepeaterS->DataSource=$transkrip;
             $this->RepeaterS->dataBind();		
         } catch (Exception $ex) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$ex->getMessage();
         }        
 	}

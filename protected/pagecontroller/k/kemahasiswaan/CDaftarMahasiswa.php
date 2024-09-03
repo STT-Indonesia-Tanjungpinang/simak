@@ -6,7 +6,7 @@ class CDaftarMahasiswa extends MainPageK {
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showDaftarMahasiswa=true;
         $this->createObj('Nilai');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {	
+		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDaftarMahasiswa'])||$_SESSION['currentPageDaftarMahasiswa']['page_name']!='k.kemahasiswaan.DaftarMahasiswa') {
 				$_SESSION['currentPageDaftarMahasiswa']=array('page_name'=>'k.kemahasiswaan.DaftarMahasiswa','page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'idkonsentrasi'=>'none','k_status'=>'none');												
 			}

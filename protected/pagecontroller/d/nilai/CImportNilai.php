@@ -8,7 +8,7 @@ class CImportNilai extends MainPageD {
         $this->createObj('Akademik');        
         $this->createObj('Nilai');        
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageImportNilai'])||$_SESSION['currentPageImportNilai']['page_name']!='d.nilai.ImportNilai') {
 				$_SESSION['currentPageImportNilai']=array('page_name'=>'d.nilai.ImportNilai','page_num'=>0,'search'=>false,'DataNilai'=>array());
 			}  
@@ -28,7 +28,7 @@ class CImportNilai extends MainPageD {
                 $_SESSION['currentPageImportNilai']['DataNilai']=$this->Demik->InfoKelas;
                 $this->populateData();	             
             } catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }
 		}

@@ -6,7 +6,7 @@ class CPindahKelas Extends MainPageM {
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showPindahKelas=true;
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePindahKelas'])||$_SESSION['currentPagePindahKelas']['page_name']!='m.kemahasiswaan.PindahKelas') {
 				$_SESSION['currentPagePindahKelas']=array('page_name'=>'m.kemahasiswaan.PindahKelas','page_num'=>0,'search'=>false);
 			}   
@@ -113,7 +113,7 @@ class CPindahKelas Extends MainPageM {
 	}
 	public function Go($sender,$param) {
 		if ($this->Page->IsValid) {
-			$this->idProcess='add';		
+			$this->idProcess = 'add';		
             $nim=addslashes($this->txtNIM->Text);
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
             $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','k_status','status','idkelas','nkelas'));
@@ -175,7 +175,7 @@ class CPindahKelas Extends MainPageM {
 		}		
 	}
     public function editRecord ($sender,$param) {
-		$this->idProcess='edit';
+		$this->idProcess = 'edit';
 		$idpindahkelas = $this->getDataKeyField($sender,$this->RepeaterS);
 		$nim=$sender->CommandParameter;
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";

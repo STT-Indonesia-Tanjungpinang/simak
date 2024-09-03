@@ -7,7 +7,7 @@ class CCalonMHS Extends MainPageM {
         $this->showCalonMHS=true;                
         $this->createObj('Finance');
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageCalonMHS'])||$_SESSION['currentPageCalonMHS']['page_name']!='m.dulang.CalonMHS') {
 				$_SESSION['currentPageCalonMHS']=array('page_name'=>'m.dulang.CalonMHS','page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}

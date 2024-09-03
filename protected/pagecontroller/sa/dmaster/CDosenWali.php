@@ -5,7 +5,7 @@ class CDosenWali extends MainPageSA {
         parent::onLoad($param);
         $this->showSubMenuLembaga=true;          
         $this->showDosenWali=true;   
-        if (!$this->IsPostBack&&!$this->IsCallback) {
+        if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDosenWali'])||$_SESSION['currentPageDosenWali']['page_name']!='sa.dmaster.DosenWali') {
                 $_SESSION['currentPageDosenWali']=array('page_name'=>'sa.dmaster.DosenWali','page_num'=>0,'search'=>false);
             }
@@ -79,7 +79,7 @@ class CDosenWali extends MainPageSA {
         return $dataitem;
     }           
     public function addProcess ($sender,$param) {
-        $this->idProcess='add';        
+        $this->idProcess = 'add';        
         $this->cmbAddDosen->dataSource=$this->populateDosen ();
         $this->cmbAddDosen->dataBind();                
     }  

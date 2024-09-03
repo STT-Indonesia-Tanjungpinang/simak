@@ -6,7 +6,7 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
         $this->showSubMenuPembayaran=true;  
         $this->showPembayaranSemesterGanjil=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGanjil'])||$_SESSION['currentPagePembayaranSemesterGanjil']['page_name']!='sa.pembayaran.PembayaranSemesterGanjil') {
 				$_SESSION['currentPagePembayaranSemesterGanjil']=array('page_name'=>'sa.pembayaran.PembayaranSemesterGanjil','page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'),'semester'=>1,'kelas'=>'none','DataMHS'=>array());												
 			}

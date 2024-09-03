@@ -5,7 +5,7 @@ class CUserSA extends MainPageSA {
 		parent::onLoad($param);		     
         $this->showSubMenuSettingSistem=true;
         $this->showUserSA=true;   
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageUserSA'])||$_SESSION['currentPageUserSA']['page_name']!='sa.settings.UserSA') {
 				$_SESSION['currentPageUserSA']=array('page_name'=>'sa.settings.UserSA','page_num'=>0,'search'=>false);
 			}
@@ -74,7 +74,7 @@ class CUserSA extends MainPageSA {
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
 	}		    
     public function addProcess ($sender,$param) {
-        $this->idProcess='add';
+        $this->idProcess = 'add';
         $this->cmbAddGroup->DataSource=$this->Pengguna->removeIdFromArray($this->Pengguna->getListGroup(),'none');
         $this->cmbAddGroup->DataBind();
         $daftar_jurusan=$_SESSION['daftar_jurusan'];
@@ -132,7 +132,7 @@ class CUserSA extends MainPageSA {
         }
     }
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
 		$this->hiddenid->Value=$id;     
         

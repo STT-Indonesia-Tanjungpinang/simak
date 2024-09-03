@@ -23,7 +23,7 @@ class CKRS extends MainPageMHS {
     $this->showKRS = true;   
   
     $this->createObj('KRS');
-    if (!$this->IsPostBack&&!$this->IsCallback)
+    if (!$this->IsPostBack && !$this->IsCallback)
     {	
       if (!isset($_SESSION['currentPageKRS'])||$_SESSION['currentPageKRS']['page_name']!='mh.perkuliahan.KRS')
       {
@@ -138,7 +138,7 @@ class CKRS extends MainPageMHS {
       $this->RepeaterS->DataSource=$this->KRS->DataKRS['matakuliah'];
       $this->RepeaterS->dataBind();
     }catch (Exception $e) {
-      $this->idProcess='view';	
+      $this->idProcess = 'view';	
       $this->errorMessage->Text=$e->getMessage();	
     }
 

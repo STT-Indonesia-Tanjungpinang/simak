@@ -7,7 +7,7 @@ class CKelompokPertanyaan extends MainPageM {
         $this->showKelompokPertanyaan=true;    
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKelompokPertanyaan'])||$_SESSION['currentPageKelompokPertanyaan']['page_name']!='m.dmaster.KelompokPertanyaan') {
 				$_SESSION['currentPageKelompokPertanyaan']=array('page_name'=>'m.dmaster.KelompokPertanyaan','page_num'=>0,'search'=>false,'idkonsentrasi'=>'none','semester'=>'none');
 			}
@@ -49,7 +49,7 @@ class CKelompokPertanyaan extends MainPageM {
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
 	}		    
     public function addProcess ($sender,$param) {
-        $this->idProcess='add';       
+        $this->idProcess = 'add';       
     }    
     public function saveData ($sender,$param) {
 		if ($this->Page->isValid) {	            
@@ -61,7 +61,7 @@ class CKelompokPertanyaan extends MainPageM {
         }
     }
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         

@@ -12,7 +12,7 @@ class CDetailKHS extends MainPageDW {
         $this->createObj('Nilai');
         $this->createObj('Finance');
         
-		if (!$this->IsPostback&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailKHS'])||$_SESSION['currentPageDetailKHS']['page_name']!='dw.nilai.DetailKHS') {
 				$_SESSION['currentPageDetailKHS']=array('page_name'=>'dw.nilai.DetailKHS','page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
@@ -66,7 +66,7 @@ class CDetailKHS extends MainPageDW {
 				throw new Exception ('KRS dengan ID tidak ada matakuliahnya.');
 			}		            
         } catch (Exception $ex) {
-            $this->idProcess='view';	
+            $this->idProcess = 'view';	
 			$this->errorMessage->Text=$ex->getMessage();
         }        
 	}

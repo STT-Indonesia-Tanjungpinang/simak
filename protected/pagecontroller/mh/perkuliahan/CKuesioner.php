@@ -7,7 +7,7 @@ class CKuesioner extends MainPageMHS {
         $this->showKuesioner=true;        
         $this->createObj('Akademik');
         $this->createObj('Kuesioner');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKuesioner'])||$_SESSION['currentPageKuesioner']['page_name']!='d.perkuliahan.Kuesioner') {                
 				$_SESSION['currentPageKuesioner']=array('page_name'=>'d.perkuliahan.Kuesioner','DataMatakuliah'=>array(),'ta'=>$_SESSION['ta'],'semester'=>$_SESSION['semester'],'idpengampu_penyelenggaraan'=>'none');												
 			}
@@ -56,7 +56,7 @@ class CKuesioner extends MainPageMHS {
                     throw new Exception ("Nilai Untuk matakuliah ini belum tersedia, sehingga kuesionernya tidak perlu di isi.");
                 }
             }catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }  
             $this->lblModulHeader->Text=$this->getInfoToolbar();

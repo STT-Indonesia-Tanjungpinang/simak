@@ -6,7 +6,7 @@ class CRekapitulasiDPA extends MainPageM {
 		parent::onLoad($param);
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showPerwalian=true;
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRekapitulasiDPA'])||$_SESSION['currentPageRekapitulasiDPA']['page_name']!='m.kemahasiswaan.RekapitulasiDPA') {
 				$_SESSION['currentPageRekapitulasiDPA']=array('page_name'=>'m.kemahasiswaan.RekapitulasiDPA','page_num'=>0,'kjur'=>'none','tahun_masuk'=>'none','kelas'=>'none','status'=>'none');												
 			}

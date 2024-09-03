@@ -6,7 +6,7 @@ class CDulangMHSCuti Extends MainPageM {
         $this->showSubMenuAkademikDulang=true;
         $this->showDulangMHSCuti=true;                
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSCuti'])||$_SESSION['currentPageDulangMHSCuti']['page_name']!='m.dulang.DulangMHSCuti') {
 				$_SESSION['currentPageDulangMHSCuti']=array('page_name'=>'m.dulang.DulangMHSCuti','page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none','DataMHS'=>array());												
 			}

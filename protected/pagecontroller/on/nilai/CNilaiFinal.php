@@ -6,7 +6,7 @@ class CNilaiFinal extends MainPageON {
     $this->showSubMenuAkademikNilai=true;
     $this->showNilaiFinal=true;    
     $this->createObj('Nilai');
-    if (!$this->IsPostBack&&!$this->IsCallBack) {	
+    if (!$this->IsPostBack && !$this->IsCallback) {	
       if (!isset($_SESSION['currentPageNilaiFinal'])||$_SESSION['currentPageNilaiFinal']['page_name']!='on.nilai.NilaiFinal') {					
         $_SESSION['currentPageNilaiFinal']=array('page_name'=>'on.nilai.NilaiFinal','page_num'=>0,'search'=>false,'tanggal_terbit'=>'none','DataMHS'=>array(),'DataNilai'=>array());												
       }

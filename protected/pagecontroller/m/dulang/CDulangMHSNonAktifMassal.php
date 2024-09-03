@@ -6,7 +6,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
         $this->showSubMenuAkademikDulang=true;
         $this->showDulangMHSNonAktif=true;     
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSNonAktifMassal'])||$_SESSION['currentPageDulangMHSNonAktifMassal']['page_name']!='m.dulang.DulangMHSNonAktif') {
 				$_SESSION['currentPageDulangMHSNonAktifMassal']=array('page_name'=>'m.dulang.DulangMHSNonAktif','page_num'=>0,'search'=>false,'tahun_masuk'=>$this->setup->getSettingValue('default_ta'),'ta'=>$_SESSION['ta'],'semester'=>$_SESSION['semester']);												
 			}

@@ -6,7 +6,7 @@ class CDetailPendaftaranOnline extends MainPageM {
 		parent::onLoad($param);					
         $this->showPendaftaranOnline=true;
         $this->createObj('Akademik');
-        if (!$this->IsPostBack&&!$this->IsCallBack) {	
+        if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailPendaftaranOnline'])||$_SESSION['currentPageDetailPendaftaranOnline']['page_name']!='m.spmb.DetailPendaftaranOnline') {
 				$_SESSION['currentPageDetailPendaftaranOnline']=array('page_name'=>'m.spmb.DetailPendaftaranOnline','page_num'=>0,'DataMHS'=>array(),'activeviewindex'=>0);												
 			}
@@ -45,7 +45,7 @@ class CDetailPendaftaranOnline extends MainPageM {
             }       
             
         }catch (Exception $ex) {
-            $this->idProcess='view';	                
+            $this->idProcess = 'view';	                
             $this->errorMessage->Text=$ex->getMessage();
         }          
     }

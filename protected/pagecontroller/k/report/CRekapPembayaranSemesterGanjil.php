@@ -6,7 +6,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageK {
         $this->showReport=true;
         $this->showReportRekapPembayaranGanjil=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRekapPembayaranSemesterGanjil'])||$_SESSION['currentPageRekapPembayaranSemesterGanjil']['page_name']!='k.report.RekapPembayaranSemesterGanjil') {
 				$_SESSION['currentPageRekapPembayaranSemesterGanjil']=array('page_name'=>'k.report.RekapPembayaranSemesterGanjil','page_num'=>0,'search'=>false,'semester'=>1,'kelas'=>'none');												
 			}

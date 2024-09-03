@@ -6,7 +6,7 @@ class CDaftarPertanyaan extends MainPageM {
         $this->showSubMenuKuesioner=true;
         $this->showDaftarPertanyaan=true;
                 
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentDaftarPertanyaan'])||$_SESSION['currentDaftarPertanyaan']['page_name']!='m.dmaster.DaftarPertanyaan') {                
 				$_SESSION['currentDaftarPertanyaan']=array('page_name'=>'m.dmaster.DaftarPertanyaan','page_num'=>0,'search'=>false,'idkelompok_pertanyaan'=>'none');												
 			}
@@ -116,7 +116,7 @@ class CDaftarPertanyaan extends MainPageM {
 		$this->RepeaterS->dataBind();
 	}	
     public function addProcess ($sender,$param) {		
-        $this->idProcess='add';
+        $this->idProcess = 'add';
         $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();
         $this->cmbAddKelompokPertanyaan->DataSource=$kelompok_pertanyaan;
         $this->cmbAddKelompokPertanyaan->DataBind();
@@ -148,7 +148,7 @@ class CDaftarPertanyaan extends MainPageM {
         }
 	}
     public function editRecord ($sender,$param) {		
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
 		$this->hiddenid->Value=$id;    
         

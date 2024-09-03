@@ -7,7 +7,7 @@ class CDulangMHSLama Extends MainPageMHS {
         $this->showDulangMHSLama=true;                
         $this->createObj('Finance');
         $this->createObj('KRS');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSLama'])||$_SESSION['currentPageDulangMHSLama']['page_name']!='mh.riwayat.DulangMHSLama') {
 				$_SESSION['currentPageDulangMHSLama']=array('page_name'=>'mh.riwayat.DulangMHSLama','page_num'=>0,'search'=>false);												
 			}

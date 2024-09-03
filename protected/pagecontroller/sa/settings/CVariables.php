@@ -4,7 +4,7 @@ class CVariables extends MainPageSA {
 	public function onLoad($param) {		
 		parent::onLoad($param);				        
 		$this->showVariable=true;       
-		if (!$this->IsPostBack&&!$this->IsCallBack) {	           
+		if (!$this->IsPostBack && !$this->IsCallback) {	           
             if (!isset($_SESSION['currentPageVariables'])||$_SESSION['currentPageVariables']['page_name']!='sa.settings.Variables') {
 				$_SESSION['currentPageVariables']=array('page_name'=>'sa.settings.Variables','page_num'=>0);												
 			}            

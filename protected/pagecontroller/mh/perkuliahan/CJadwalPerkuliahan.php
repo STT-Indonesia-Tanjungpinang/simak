@@ -7,7 +7,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
         $this->showJadwalPerkuliahan=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageJadwalPerkuliahan'])||$_SESSION['currentPageJadwalPerkuliahan']['page_name']!='m.perkuliahan.JadwalPerkuliahan') {                
 				$_SESSION['currentPageJadwalPerkuliahan']=array('page_name'=>'m.perkuliahan.JadwalPerkuliahan','page_num'=>0,'search'=>false,'iddosen'=>'none');												
 			}

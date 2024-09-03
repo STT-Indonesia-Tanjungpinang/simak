@@ -7,7 +7,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 		parent::onLoad($param);			
         $this->showPembayaranSemesterGanjil=true;                
         $this->createObj('Finance');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGanjil'])||$_SESSION['currentPagePembayaranSemesterGanjil']['page_name']!='mh.pembayaran.PembayaranSemesterGanjil') {
 				$_SESSION['currentPagePembayaranSemesterGanjil']=array('page_name'=>'mh.pembayaran.PembayaranSemesterGanjil','page_num'=>0,'ta'=>$_SESSION['ta'],'no_transaksi'=>'none');												
 			}
@@ -29,7 +29,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 				CPembayaranSemesterGanjil::$KewajibanMahasiswa=$this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
 				$this->populateTransaksi();
 			}catch (Exception $ex) {
-                $this->idProcess='view';	
+                $this->idProcess = 'view';	
                 $this->errorMessage->Text=$ex->getMessage();
             }  
             

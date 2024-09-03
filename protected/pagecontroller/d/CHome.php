@@ -5,7 +5,7 @@ class CHome extends MainPageD {
 		parent::onLoad($param);		            
 		$this->showDashboard=true;      
 		$this->createObj('Nilai');         
-		if (!$this->IsPostBack&&!$this->IsCallBack) {   
+		if (!$this->IsPostBack && !$this->IsCallback) {   
 			$this->populateData();
 		}                
 	}

@@ -20,7 +20,7 @@ class CPKRS extends MainPageDW {
         $this->showPKRS = true;
 		$this->createObj('KRS');
 			
-		if (!$this->IsPostBack&&!$this->IsCallback) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePKRS'])||$_SESSION['currentPagePKRS']['page_name']!='dw.perkuliahan.PKRS') {					
                 $_SESSION['currentPagePKRS']=array('page_name'=>'dw.perkuliahan.PKRS','search'=>false,'page_num'=>0,'DataKRS'=>array(),'DataMHS'=>array());												
             }

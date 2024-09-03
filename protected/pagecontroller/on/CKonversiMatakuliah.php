@@ -125,7 +125,7 @@ class CKonversiMatakuliah extends MainPageON {
 	}	
 	public function saveData ($sender,$param) {
 		if ($this->page->isValid) {		
-            $this->idProcess='add';
+            $this->idProcess = 'add';
             $nim_asal=strtoupper($this->txtAddNimAsal->Text);					
             $nama=addslashes(strtoupper($this->txtAddNama->Text));
             $alamat=strtoupper($this->txtAddAlamat->Text);
@@ -172,7 +172,7 @@ class CKonversiMatakuliah extends MainPageON {
 	}	
 	
 	public function editRecord ($sender,$param) {		
-		$this->idProcess='edit';        
+		$this->idProcess = 'edit';        
 		$iddata_konversi=$sender->getId()=='btnDelete' ?$this->hiddenid->Value :$this->getDataKeyField($sender,$this->RepeaterS);		
 		$this->hiddenid->Value=$iddata_konversi;		
 		//load view
@@ -213,7 +213,7 @@ class CKonversiMatakuliah extends MainPageON {
 	}
     public function updateData ($sender,$param) {
 		if ($this->page->isValid) {						
-            $this->idProcess='edit';
+            $this->idProcess = 'edit';
             $i=1;         
             try {
                 $idkur=$this->hiddenidkur->Value;
@@ -264,7 +264,7 @@ class CKonversiMatakuliah extends MainPageON {
 		}
 	}
     public function deleteNilai ($sender,$param) {			
-		$this->idProcess='edit';
+		$this->idProcess = 'edit';
 		$idnilai_konversi=$sender->CommandParameter;		
 		$this->DB->deleteRecord("nilai_konversi2 WHERE idnilai_konversi='$idnilai_konversi'");			
 		$this->editRecord($sender, $param);

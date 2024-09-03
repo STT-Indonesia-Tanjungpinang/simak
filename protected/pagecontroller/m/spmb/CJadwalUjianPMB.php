@@ -7,7 +7,7 @@ class CJadwalUjianPMB extends MainPageM {
         $this->showJadwalUjianPMB=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageJadwalUjianPMB'])||$_SESSION['currentPageJadwalUjianPMB']['page_name']!='m.perkuliahan.JadwalUjianPMB') {                
 				$_SESSION['currentPageJadwalUjianPMB']=array('page_name'=>'m.perkuliahan.JadwalUjianPMB','page_num'=>0,'search'=>false);												
 			}
@@ -79,7 +79,7 @@ class CJadwalUjianPMB extends MainPageM {
 		$this->RepeaterS->dataBind();     
 	}
     public function addProcess ($sender,$param) {
-        $this->idProcess='add';
+        $this->idProcess = 'add';
         $this->hiddentahunmasuk->Value=$_SESSION['tahun_pendaftaran'];
          //load kelas 				
         $this->cmbAddRuang->DataSource=$this->DMaster->getRuangKelas();
@@ -102,7 +102,7 @@ class CJadwalUjianPMB extends MainPageM {
         }
     }
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         

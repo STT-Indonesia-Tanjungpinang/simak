@@ -7,7 +7,7 @@ class CNilaiPerMatakuliah extends MainPageON {
         $this->showNilaiPerMatakuliah=true;
         
         $this->createObj('Akademik');
-		if (!$this->IsPostBack&&!$this->IsCallBack) {
+		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageNilaiPerMatakuliah'])||$_SESSION['currentPageNilaiPerMatakuliah']['page_name']!='on.nilai.NilaiPerMatakuliah') {
 				$_SESSION['currentPageNilaiPerMatakuliah']=array('page_name'=>'on.nilai.NilaiPerMatakuliah','page_num'=>0,'search'=>false,'InfoMatkul'=>array());
 			}  
@@ -30,7 +30,7 @@ class CNilaiPerMatakuliah extends MainPageON {
                 $this->RepeaterP->PageSize=$this->setup->getSettingValue('default_pagesize');
                 $this->populateDataPeserta();		
             } catch (Exception $ex) {
-                $this->idProcess='view';        
+                $this->idProcess = 'view';        
                 
                 $this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
                 $this->tbCmbPs->Text=$_SESSION['kjur'];			
@@ -67,24 +67,24 @@ class CNilaiPerMatakuliah extends MainPageON {
 		return $text;
 	}
     public function changeTbTA ($sender,$param) {
-        $this->idProcess='view';
+        $this->idProcess = 'view';
 		$_SESSION['ta']=$this->tbCmbTA->Text;		
         $this->lblModulHeader->Text=$this->getInfoToolbar();
         $this->populateData();
 	}	
 	public function changeTbSemester ($sender,$param) {
-        $this->idProcess='view';
+        $this->idProcess = 'view';
 		$_SESSION['semester']=$this->tbCmbSemester->Text;		
         $this->lblModulHeader->Text=$this->getInfoToolbar();		
 	}
     public function changeTbPs ($sender,$param) {		
-        $this->idProcess='view';
+        $this->idProcess = 'view';
         $_SESSION['kjur']=$this->tbCmbPs->Text;
         $this->lblModulHeader->Text=$this->getInfoToolbar();  
         $this->populateData();
 	} 
     public function searchRecord ($sender,$param) {
-        $this->idProcess='view';
+        $this->idProcess = 'view';
 		$_SESSION['currentPageNilaiPerMatakuliah']['search']=true;
 		$this->populateData($_SESSION['currentPageNilaiPerMatakuliah']['search']);
 	}       

@@ -5,7 +5,7 @@ class CAPI extends MainPageSA {
         parent::onLoad($param);          
         $this->showSubMenuSettingSistem=true;
         $this->showAPI=true;   
-        if (!$this->IsPostBack&&!$this->IsCallback) {
+        if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageAPI'])||$_SESSION['currentPageAPI']['page_name']!='sa.settings.API') {
                 $_SESSION['currentPageAPI']=array('page_name'=>'sa.settings.API','page_num'=>0,'search'=>false);
             }
@@ -73,7 +73,7 @@ class CAPI extends MainPageSA {
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
     }           
     public function addProcess ($sender,$param) {
-        $this->idProcess='add';       
+        $this->idProcess = 'add';       
     }
     public function checkUsername ($sender,$param) {
         $this->idProcess=$sender->getId()=='addUsername'?'add':'edit';
@@ -124,7 +124,7 @@ class CAPI extends MainPageSA {
         }
     }
     public function editRecord ($sender,$param) {
-        $this->idProcess='edit';        
+        $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
         $this->hiddenid->Value=$id;     
         
