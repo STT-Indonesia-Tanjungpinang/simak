@@ -44,7 +44,9 @@ public function onLoad($param) {
         $this->btnSave->Enabled=false;
         $this->RepeaterS->DataSource=array();
         $this->RepeaterS->dataBind();  
-      }else{
+      }
+      else
+      {
         $str = "SELECT idpengampu_penyelenggaraan,kmatkul,nmatkul FROM v_pengampu_penyelenggaraan WHERE kjur=$kjur AND tahun=$ta AND idsmt=$idsmt AND iddosen=$iddosen";
         $this->DB->setFieldTable(array('idpengampu_penyelenggaraan','kmatkul','nmatkul'));
         $r = $this->DB->getRecord($str);	

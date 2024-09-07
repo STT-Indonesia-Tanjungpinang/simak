@@ -148,27 +148,40 @@ class CKRS extends MainPageMHS {
     $idkelas_mhs=$sender->Text;
     $idkrsmatkul=$this->getDataKeyField($sender, $this->RepeaterS);
     $this->DB->query('BEGIN');
-    if ($idkelas_mhs=='none') {
+    if ($idkelas_mhs=='none') 
+    {
       $this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul=$idkrsmatkul");
       $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
       $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
-    
+      
+      $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
+      $this->DB->updateRecord($str);
+
       $this->DB->query('COMMIT');
       $this->redirect('perkuliahan.KRS', true); 
-    }else {
+    }
+    else
+    {
       $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs",'idkelas_mhs');
       $str = "SELECT kapasitas FROM kelas_mhs km,ruangkelas rk WHERE rk.idruangkelas=km.idruangkelas AND idkelas_mhs=$idkelas_mhs";
       $this->DB->setFieldTable(array('kapasitas'));
       $result=$this->DB->getRecord($str);
       $kapasitas=$result[1]['kapasitas'];
       //if ($jumlah_peserta_kelas <= $kapasitas) {
-        if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail',$idkrsmatkul)) {
+        if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail',$idkrsmatkul)) 
+        {
           $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul=$idkrsmatkul");
           $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
           $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
-        }else{
-           $this->DB->insertRecord("INSERT INTO kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs,idkrsmatkul=$idkrsmatkul");
         }
+        else //masukan peserta ke kelas
+        {
+          $this->DB->insertRecord("INSERT INTO kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs,idkrsmatkul=$idkrsmatkul");
+        }
+
+        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
+        $this->DB->updateRecord($str);
+
         $this->DB->query('COMMIT');
         $this->redirect('perkuliahan.KRS', true);
       //}else{
