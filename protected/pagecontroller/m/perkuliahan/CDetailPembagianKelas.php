@@ -226,16 +226,23 @@ public function onLoad($param) {
       
       $str = "UPDATE kelas_mhs SET idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan,hari='$hari',jam_masuk='$jam_masuk',jam_keluar='$jam_keluar',idruangkelas='$ruangkelas' WHERE idkelas_mhs=$idkelas_mhs";		
       $this->DB->updateRecord($str);
+
+      $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
+      $this->DB->updateRecord($str);
+
       $this->redirect('perkuliahan.DetailPembagianKelas', true);
     }
   }
   public function deleteRecord ($sender,$param) {
     $idkelas_mhs=$this->getDataKeyField($sender, $this->RepeaterS);
     $jumlah_mhs=$this->DB->getCountRowsOfTable("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs",'idkrsmatkul');
-    if ($jumlah_mhs > 0) {
+    if ($jumlah_mhs > 0) 
+    {
       $this->lblContentMessageError->Text="Tidak bisa menghapus kelas karena masih ada $jumlah_mhs peserta. solusinya pindahkan dulu ke kelas lain";
       $this->modalMessageError->show();
-    }else {
+    }
+    else 
+    {
       $this->DB->deleteRecord("kelas_mhs WHERE idkelas_mhs=$idkelas_mhs");
       $this->redirect('perkuliahan.DetailPembagianKelas', true);
     }
