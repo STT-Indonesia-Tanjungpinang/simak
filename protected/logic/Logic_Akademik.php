@@ -15,7 +15,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
      * daftar sks matakuliah
      * @var type 
      */
-    public static $sks = array (0=>'0',1=>'1',2=>'2',3=>'3',4=>'4',5=>'5',6=>'6');   
+    public static $sks = array (0=>'0',1=>'1',2=>'2', 3=>'3', 4=>'4', 5=>'5', 6=>'6', 20=>'20');   
     /**
      * informasi matakuliah
      * @var type array

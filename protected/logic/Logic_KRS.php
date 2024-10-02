@@ -164,7 +164,7 @@ class Logic_KRS extends Logic_Akademik {
     $this->db->updateRecord ($str);
 
     $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs=$idkrs";
-    $this->DB->updateRecord($str);
+    $this->db->updateRecord($str);
   }
   /**
    * method untuk membatalkan krs mahasiswa
