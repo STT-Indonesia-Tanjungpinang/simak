@@ -32,7 +32,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
 		}	
     }
     public function setInfoToolbar() {        
-        $ta=$this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['ta']);        		
 		$this->labelModuleHeader->Text="T.A $ta";        
     } 
     public function changeTbTA ($sender,$param) {				
@@ -84,7 +84,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
             if ( $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] == 'none') {
                 $no_formulir=$datamhs['no_formulir'];
                 $nim=$datamhs['nim'];
-                $ta=$_SESSION['currentPagePembayaranSemesterPendek']['ta'];    
+                $ta = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];    
                 $idsmt=3;
                 if($this->DB->checkRecordIsExist('nim','transaksi',$nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
                     $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
@@ -94,7 +94,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
                     $no_faktur=$ta.$no_transaksi;
                     $ps=$datamhs['kjur'];                
                     $idkelas=$datamhs['idkelas'];
-                    $userid=$this->Pengguna->getDataUser('userid');
+                    $userid = $this->Pengguna->getDataUser('userid');
 
                     $this->DB->query ('BEGIN');
                     $str = "INSERT INTO transaksi SET no_transaksi=$no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',jumlah_sks=0,disc=0,tanggal=NOW(),userid='$userid',date_added=NOW(),date_modified=NOW()";					

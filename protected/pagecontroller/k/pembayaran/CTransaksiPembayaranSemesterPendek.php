@@ -52,7 +52,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageK {
         $r=$this->DB->getRecord($str);
         
         while (list($k,$v)=each($r)) {
-            $biaya=$v['biaya'];
+            $biaya = $v['biaya'];
             $idkombi=$v['idkombi'];            
             $v['nama_kombi']=  strtoupper($v['nama_kombi']); 
             $v['biaya_alias']=$this->Finance->toRupiah($biaya);
@@ -94,7 +94,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageK {
         $str = "SELECT biaya FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND tahun=$tahun_masuk AND idsmt=1 AND kpt.idkelas='$kelas' AND kpt.idkombi=$id";
         $this->DB->setFieldTable(array('biaya'));
         $r=$this->DB->getRecord($str);
-        $biaya=$r[1]['biaya'];
+        $biaya = $r[1]['biaya'];
         
         $jumlah_sks=$this->Finance->toInteger(addslashes($item->ColumnJumlahSKS->TextBox->Text));                         
         $jumlah_bayar=$jumlah_sks*$biaya;
@@ -129,7 +129,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageK {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {	
             $datamhs=$_SESSION['currentPagePembayaranSemesterPendek']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];
@@ -149,7 +149,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageK {
             $datamhs=$_SESSION['currentPagePembayaranSemesterPendek']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];
             $nim=$datamhs['nim'];
-            $ta=$datamhs['ta'];
+            $ta = $datamhs['ta'];
             $idsmt=$_SESSION['currentPagePembayaranSemesterPendek']['semester'];
             $kelas=$datamhs['idkelas'];
             $k_status=$datamhs['k_status'];
@@ -163,7 +163,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageK {
             $this->Finance->setDataMHS($datamhs);            
             $datadulang=$this->Finance->getDataDulang($idsmt,$ta);  
             if (!isset($datadulang['iddulang'])) {
-                $bool=$this->Finance->getTresholdPembayaran($ta,$idsmt);						                                
+                $bool = $this->Finance->getTresholdPembayaran($ta,$idsmt);						                                
                 if ($bool) {
                     $tasmt=$ta.$idsmt;
                     $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$idsmt','$tasmt','$tanggal','$kelas','$k_status','A')";

@@ -93,7 +93,7 @@ class CAPI extends MainPageSA {
     }
     public function checkEmail ($sender,$param) {
         $this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
-        $email=$param->Value;       
+        $email = $param->Value;       
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
@@ -107,13 +107,13 @@ class CAPI extends MainPageSA {
             }   
         }   
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->Page->isValid) {
             $nama = addslashes($this->txtAddNama->Text);
             $email = addslashes($this->txtAddEmail->Text);
             $username=addslashes($this->txtAddUsername->Text);
             $ipaddress=addslashes($this->txtAddIPAddress->Text);
-            $data=$this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
+            $data = $this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
             $salt=$data['salt'];
             $password=$data['password'];      
             $page='api';            
@@ -154,7 +154,7 @@ class CAPI extends MainPageSA {
             if ($this->txtEditPassword1->Text == '') {
                 $str = "UPDATE user SET username='$username',email='$email',nama='$nama',ipaddress='$ipaddress',active='$status' WHERE userid=$id";
             }else {
-                $data=$this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
+                $data = $this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];                              
                 $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',ipaddress='$ipaddress',nama='$nama',email='$email',active='$status' WHERE userid=$id";
@@ -165,7 +165,7 @@ class CAPI extends MainPageSA {
     }
     public function resetToken ($sender,$param) { 
         $id=$this->getDataKeyField($sender,$this->RepeaterS);
-        $data=$this->Pengguna->createHashPassword(mt_rand(1,1000));        
+        $data = $this->Pengguna->createHashPassword(mt_rand(1,1000));        
         $password=$data['password'];
         $str = "UPDATE user SET token='$password' WHERE userid=$id";
         $this->DB->updateRecord($str); 

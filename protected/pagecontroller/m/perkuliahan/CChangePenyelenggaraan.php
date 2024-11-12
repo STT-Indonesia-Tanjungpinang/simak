@@ -17,7 +17,7 @@ class CChangePenyelenggaraan extends MainPageM {
 			$this->tbCmbPs->Text=$_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource=$ta;					
 			$this->tbCmbTA->Text=$_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
@@ -74,7 +74,7 @@ class CChangePenyelenggaraan extends MainPageM {
     public function getInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
@@ -84,7 +84,7 @@ class CChangePenyelenggaraan extends MainPageM {
         $this->populateData();
 	}
 	public function populateData($search=false) {	
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        
         $idkur=$_SESSION['currentPageChangePenyelenggaraan']['idkur'];
@@ -101,7 +101,7 @@ class CChangePenyelenggaraan extends MainPageM {
 		$this->RepeaterS->dataBind();
 	}	
     public function changeKurMatkul($sender,$param) {
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        
         $idkur=$_SESSION['currentPageChangePenyelenggaraan']['idkur'];
@@ -114,8 +114,8 @@ class CChangePenyelenggaraan extends MainPageM {
             $this->DB->query('BEGIN');
             while (list($k,$v)=each($r)) {
                 $idpenyelenggaraan=$v['idpenyelenggaraan'];
-                $old_kmatkul=$v['kmatkul'];
-                $nmatkul=$v['nmatkul'];
+                $old_kmatkul = $v['kmatkul'];
+                $nmatkul = $v['nmatkul'];
                 $new_kmatkul="{$newidkur}_".$this->Demik->getKMatkul($old_kmatkul);
                 $str = "UPDATE penyelenggaraan SET kmatkul='$new_kmatkul' WHERE idpenyelenggaraan=$idpenyelenggaraan";
                 $this->DB->updateRecord($str);                

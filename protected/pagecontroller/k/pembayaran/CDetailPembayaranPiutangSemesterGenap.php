@@ -42,7 +42,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
                 
                 $datamhs['no_transaksi']=isset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']['no_transaksi']) ? $_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']['no_transaksi'] : 'none';
                 $_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']=$datamhs;   
-                CDetailPembayaranPiutangSemesterGenap::$KewajibanMahasiswa=$this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
+                CDetailPembayaranPiutangSemesterGenap::$KewajibanMahasiswa = $this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
                 $this->populateTransaksi();
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
@@ -93,7 +93,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
         if ($datamhs['no_transaksi'] == 'none') {
             $no_formulir=$datamhs['no_formulir'];
             $nim=$datamhs['nim'];
-            $ta=$datamhs['ta'];    
+            $ta = $datamhs['ta'];    
             $tahun_masuk=$datamhs['tahun_masuk'];
             $idsmt=$_SESSION['currentPagePembayaranPiutangSemesterGenap']['semester'];
             if ($this->Finance->getLunasPembayaran($ta,$idsmt)) {
@@ -107,7 +107,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
                 $no_faktur=$ta.$no_transaksi;
                 $ps=$datamhs['kjur'];                
                 $idkelas=$datamhs['idkelas'];
-                $userid=$this->Pengguna->getDataUser('userid');
+                $userid = $this->Pengguna->getDataUser('userid');
 
                 $this->DB->query ('BEGIN');
                 $str = "INSERT INTO transaksi SET no_transaksi=$no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',tanggal=NOW(),jumlah_sks=0,userid='$userid',disc=0,date_added=NOW(),date_modified=NOW()";                
@@ -126,7 +126,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
                     $r=$this->DB->getRecord($str);
 
                     while (list($k,$v)=each($r)) {
-                        $biaya=$v['biaya'];
+                        $biaya = $v['biaya'];
                         $idkombi=$v['idkombi'];
                         $sisa_bayar=isset($sudah_dibayarkan[$idkombi]) ? $biaya-$sudah_dibayarkan[$idkombi]:$biaya;
                         $str = "INSERT INTO transaksi_detail (idtransaksi_detail,no_transaksi,idkombi,dibayarkan,jumlah_sks) VALUES(NULL,$no_transaksi,$idkombi,$sisa_bayar,0)";

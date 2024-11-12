@@ -21,7 +21,7 @@ class CDetailKuesioner extends MainPageD {
             $this->tbCmbOutputReport->DataBind();
             
             try {			
-                $idpengampu_penyelenggaraan=addslashes($this->request['id']);   
+                $idpengampu_penyelenggaraan = addslashes($this->request['id']);   
                 $iddosen=$this->Pengguna->getDataUser('iddosen');
                 $str = "SELECT vpp.idpengampu_penyelenggaraan,vpp.nidn,vpp.nama_dosen,vpp.kmatkul,vpp.nmatkul,vpp.sks,vpp.semester,kh.jumlah_mhs,kh.jumlah_soal,kh.total_nilai,kh.skor_terendah,kh.skor_tertinggi,kh.intervals,kh.n_kual,vpp.tahun,vpp.idsmt,vpp.kjur FROM v_pengampu_penyelenggaraan vpp,kuesioner_hasil kh WHERE kh.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND vpp.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND iddosen=$iddosen";
                 $this->DB->setFieldTable(array('idpengampu_penyelenggaraan','nidn','nama_dosen','kmatkul','nmatkul','sks','semester','jumlah_mhs','jumlah_soal','total_nilai','skor_terendah','skor_tertinggi','intervals','n_kual','tahun','idsmt','kjur'));
@@ -46,7 +46,7 @@ class CDetailKuesioner extends MainPageD {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['currentPageDetailKuesioner']['DataKuesioner']['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$_SESSION['currentPageDetailKuesioner']['DataKuesioner']['tahun'];		
+        $ta = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['tahun'];		
         $semester = $this->setup->getSemester($_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idsmt']);
 		$ta='T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
 		$this->lblModulHeader->Text="Program Studi $ps $ta Semester $semester";        
@@ -72,7 +72,7 @@ class CDetailKuesioner extends MainPageD {
     }
 	public function populateData() {
         $idpengampu_penyelenggaraan = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idpengampu_penyelenggaraan'];         
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
         $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();                
         $kelompok_pertanyaan[0]='UNDEFINED';

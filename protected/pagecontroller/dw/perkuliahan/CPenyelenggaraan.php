@@ -18,7 +18,7 @@ class CPenyelenggaraan extends MainPageDW {
 			$this->tbCmbPs->Text=$_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource=$ta;					
 			$this->tbCmbTA->Text=$_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
@@ -55,14 +55,14 @@ class CPenyelenggaraan extends MainPageDW {
     public function getInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
 	public function populateData($search=false) {
         $iddosen_wali=$this->iddosen_wali;
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        
         $idkur=$this->Demik->getIDKurikulum($kjur);
@@ -73,7 +73,7 @@ class CPenyelenggaraan extends MainPageDW {
         $result=array();
         while (list($k,$v)=each($r)) {
             $idpenyelenggaraan=$v['idpenyelenggaraan'];            
-            $jumlah_peserta=$this->Demik->getJumlahMhsInPenyelenggaraan($idpenyelenggaraan," AND iddosen_wali=$iddosen_wali");	
+            $jumlah_peserta = $this->Demik->getJumlahMhsInPenyelenggaraan($idpenyelenggaraan," AND iddosen_wali=$iddosen_wali");	
             $v['jumlah_peserta']=$jumlah_peserta;
             $result[$k]=$v;
         }

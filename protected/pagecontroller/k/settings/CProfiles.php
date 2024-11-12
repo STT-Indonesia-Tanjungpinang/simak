@@ -10,13 +10,13 @@ class CProfiles extends MainPageK {
 			}
 		}
 	}
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             $id=$this->Pengguna->getDataUser('userid');                   
             if ($this->txtPassword->Text == '') {
                 $str = "UPDATE user SET theme='limitless' WHERE userid=$id";
             }else{
-                $data=$this->Pengguna->createHashPassword($this->txtPassword->Text);
+                $data = $this->Pengguna->createHashPassword($this->txtPassword->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];
                 $str = "UPDATE user SET userpassword='$password',salt='$salt',theme='limitless' WHERE userid=$id";

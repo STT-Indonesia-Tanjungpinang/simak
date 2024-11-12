@@ -90,7 +90,7 @@ class CUserDosen extends MainPageSA {
     }
     public function checkEmail ($sender,$param) {
 		$this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
-        $email=$param->Value;		
+        $email = $param->Value;		
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
@@ -133,7 +133,7 @@ class CUserDosen extends MainPageSA {
                 $str = "UPDATE user SET username='$username',nama='$nama',email='$email',active='$status' WHERE userid=$id";               
                 $str_dosen = "UPDATE dosen SET username='$username' WHERE username='$username_old'";
             }else {
-                $data=$this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
+                $data = $this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];
                 $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',active='$status' WHERE userid=$id";

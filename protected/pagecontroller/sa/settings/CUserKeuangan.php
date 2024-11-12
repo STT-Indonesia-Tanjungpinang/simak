@@ -100,7 +100,7 @@ class CUserKeuangan extends MainPageSA {
     }
     public function checkEmail ($sender,$param) {
 		$this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
-        $email=$param->Value;		
+        $email = $param->Value;		
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
@@ -114,12 +114,12 @@ class CUserKeuangan extends MainPageSA {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {
             $nama = addslashes($this->txtAddNama->Text);
             $email = addslashes($this->txtAddEmail->Text);
             $username=addslashes($this->txtAddUsername->Text);    
-            $data=$this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
+            $data = $this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
             $salt=$data['salt'];
             $password=$data['password'];           
             $page='k';
@@ -173,7 +173,7 @@ class CUserKeuangan extends MainPageSA {
             if ($this->txtEditPassword1->Text == '') {
                 $str = "UPDATE user SET username='$username',nama='$nama',email='$email',group_id='$group_id',kjur='$kjur',active='$status' WHERE userid=$id";               
             }else {
-                $data=$this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
+                $data = $this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];
                 $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',group_id='$group_id',kjur='$kjur',active='$status' WHERE userid=$id";               

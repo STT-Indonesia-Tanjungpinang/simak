@@ -123,7 +123,7 @@ class CDosen extends MainPageM {
     }
     public function checkEmail ($sender,$param) {
 		$this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
-        $email=$param->Value;		
+        $email = $param->Value;		
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
@@ -137,16 +137,16 @@ class CDosen extends MainPageM {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {
-            $nidn=addslashes($this->txtAddNIDN->Text);
+            $nidn = addslashes($this->txtAddNIDN->Text);
             $nipy=addslashes($this->txtAddNIPY->Text);
             $nama=strtoupper(addslashes($this->txtAddNama->Text));
-			$gelar_depan=addslashes($this->txtAddGelarDepan->Text);
+			$gelar_depan = addslashes($this->txtAddGelarDepan->Text);
 			$gelar_belakang=addslashes($this->txtAddGelarBelakang->Text);
-            $idjabatanfungsional=$this->cmbAddJabatanAkademik->Text;
+            $idjabatanfungsional = $this->cmbAddJabatanAkademik->Text;
 			$alamat_dosen=strtoupper(addslashes($this->txtAddAlamat->Text));
-            $no_telepon=addslashes($this->txtAddTelepon->Text);
+            $no_telepon = addslashes($this->txtAddTelepon->Text);
             $email=addslashes($this->txtAddEmail->Text);
             $username=addslashes($this->txtAddUsername->Text);
 			$password=md5(txtAddPassword1);
@@ -154,7 +154,7 @@ class CDosen extends MainPageM {
 			$str = "INSERT INTO dosen SET nidn='$nidn',nipy='$nipy',nama_dosen='$nama',gelar_depan='$gelar_depan',gelar_belakang='$gelar_belakang',idjabatan='$idjabatanfungsional',alamat_dosen='$alamat_dosen',telp_hp='$no_telepon',email='$email',website='',username='$username',userpassword='$password',theme='cube',status=1";
 			$this->DB->query('BEGIN');
             if ($this->DB->insertRecord($str)) {
-                $data=$this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
+                $data = $this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];           
                 $page='d';
@@ -201,14 +201,14 @@ class CDosen extends MainPageM {
 		if ($this->Page->isValid) {
             $iddosen=$this->hiddenid->Value;
             $username=$this->hiddenusername->Value;
-            $nidn=addslashes($this->txtEditNIDN->Text);
+            $nidn = addslashes($this->txtEditNIDN->Text);
             $nipy=addslashes($this->txtEditNIPY->Text);
             $nama=strtoupper(addslashes($this->txtEditNama->Text));
-			$gelar_depan=addslashes($this->txtEditGelarDepan->Text);
+			$gelar_depan = addslashes($this->txtEditGelarDepan->Text);
 			$gelar_belakang=addslashes($this->txtEditGelarBelakang->Text);
-            $idjabatanfungsional=$this->cmbEditJabatanAkademik->Text;
+            $idjabatanfungsional = $this->cmbEditJabatanAkademik->Text;
 			$alamat_dosen=strtoupper(addslashes($this->txtEditAlamat->Text));
-            $no_telepon=addslashes($this->txtEditTelepon->Text);
+            $no_telepon = addslashes($this->txtEditTelepon->Text);
             $email=addslashes($this->txtEditEmail->Text);
             $status=$this->cmbEditStatus->Text;
 			$str = "UPDATE dosen SET nidn='$nidn',nipy='$nipy',nama_dosen='$nama',gelar_depan='$gelar_depan',gelar_belakang='$gelar_belakang',idjabatan='$idjabatanfungsional',alamat_dosen='$alamat_dosen',telp_hp='$no_telepon',email='$email',status=$status WHERE iddosen=$iddosen";
@@ -218,7 +218,7 @@ class CDosen extends MainPageM {
                     $str = "UPDATE user SET nama='$nama',email='$email',active=$status WHERE username='$username'";
                     $this->DB->updateRecord($str);
                 }else{
-                    $data=$this->Pengguna->createHashPassword(1234);
+                    $data = $this->Pengguna->createHashPassword(1234);
                     $salt=$data['salt'];
                     $password=$data['password'];           
                     $page='d';

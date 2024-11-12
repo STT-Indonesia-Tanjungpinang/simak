@@ -123,7 +123,7 @@ class CKonversiMatakuliah extends MainPageON {
 		$this->RepeaterAddS->dataSource=$listMatkul;
 		$this->RepeaterAddS->dataBind();
 	}	
-	public function saveData ($sender,$param) {
+	public function saveData($sender, $param) {
 		if ($this->page->isValid) {		
             $this->idProcess = 'add';
             $nim_asal=strtoupper($this->txtAddNimAsal->Text);					
@@ -148,10 +148,10 @@ class CKonversiMatakuliah extends MainPageON {
                     foreach ($this->RepeaterAddS->Items As $inputan) {
                         if ($inputan->txtMatkulAsal->Text !== ''&& $inputan->txtSksAsal->Text !=='' && $inputan->cmbNilaiAsal->Text !=='') {
                             $str = 'INSERT INTO nilai_konversi2 (idnilai_konversi,iddata_konversi,kmatkul,kmatkul_asal,matkul_asal,sks_asal,n_kual) VALUES ';					
-                            $kmatkul=$_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['kmatkul'];
+                            $kmatkul = $_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['kmatkul'];
                             $kmatkul_asal=strtoupper(trim($inputan->txtKMatkulAsal->Text));
                             $matkul_asal=addslashes(strtoupper(trim($inputan->txtMatkulAsal->Text)));
-                            $nilai_asal=$inputan->cmbNilaiAsal->Text;
+                            $nilai_asal = $inputan->cmbNilaiAsal->Text;
                             $sks_asal=addslashes($inputan->txtSksAsal->Text);  
                             $str = $str . " (NULL,'$iddata_konversi','$kmatkul','$kmatkul_asal','$matkul_asal','$sks_asal','$nilai_asal')";
                             $this->DB->insertRecord($str);					
@@ -164,7 +164,7 @@ class CKonversiMatakuliah extends MainPageON {
                     $this->DB->query('ROLLBACK');                
                 }       
             } catch (Exception $ex) {
-                $nmatkul=$_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['nmatkul'];
+                $nmatkul = $_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['nmatkul'];
                 $this->lblContentMessageError->Text="Matakuliah $nmatkul dengan kode $kmatkul_before belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah <em>".$ex->getMessage().'</em>';
                 $this->modalMessageError->show(); 
             }			
@@ -227,7 +227,7 @@ class CKonversiMatakuliah extends MainPageON {
                 $kode_ps_asal=addslashes($this->txtEditKodePsAsal->Text);
                 $ps_asal=addslashes(strtoupper($this->txtEditNamaPsAsal->Text));	
                 $kjenjang=$this->cmbEditJenjang->Text;
-                $ta=$this->cmbEditTahunAkademik->Text;            
+                $ta = $this->cmbEditTahunAkademik->Text;            
                 $this->DB->query('BEGIN');
                 $str = "UPDATE data_konversi2 SET nim_asal='$nim_asal',nama='$nama',alamat='$alamat',no_telp='$notelp',kode_pt_asal='$kode_pt_asal',nama_pt_asal='$pt_asal',kjenjang='$kjenjang',kode_ps_asal='$kode_ps_asal',nama_ps_asal='$ps_asal',tahun='$ta',date_modified=NOW() WHERE iddata_konversi='$iddata_konversi'";                
                 if ($this->DB->updateRecord($str)) {                           
@@ -235,10 +235,10 @@ class CKonversiMatakuliah extends MainPageON {
                         if ($inputan->txtMatkulAsal->Text !== ''&& $inputan->txtSksAsal->Text !=='' && $inputan->cmbNilaiAsal->Text !=='') {					
                             $idnilaikonversi=$inputan->hiddenidnilaikonversi->Value;
                             $kmatkul_before=$this->Nilai->getKMatkul($_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['kmatkul']);
-                            $kmatkul=$idkur.'_'.$kmatkul_before;
+                            $kmatkul = $idkur.'_'.$kmatkul_before;
                             $kmatkul_asal=strtoupper(trim($inputan->txtKMatkulAsal->Text));						
                             $matkul_asal=strtoupper(trim($inputan->txtMatkulAsal->Text));						
-                            $nilai_asal=$inputan->cmbNilaiAsal->Text;
+                            $nilai_asal = $inputan->cmbNilaiAsal->Text;
                             $sks_asal=addslashes($inputan->txtSksAsal->Text);                        
                             if ($idnilaikonversi == '') {
                                 $str = 'INSERT INTO nilai_konversi2 (idnilai_konversi,iddata_konversi,kmatkul_asal,kmatkul,matkul_asal,sks_asal,n_kual) VALUES ';											
@@ -257,7 +257,7 @@ class CKonversiMatakuliah extends MainPageON {
                 }
     			$this->redirect('KonversiMatakuliah',true);
             } catch (Exception $ex) {
-                $nmatkul=$_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['nmatkul'];
+                $nmatkul = $_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['nmatkul'];
                 $this->lblContentMessageError->Text="Matakuliah $nmatkul dengan kode $kmatkul_before belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah";
                 $this->modalMessageError->show();                
             }				

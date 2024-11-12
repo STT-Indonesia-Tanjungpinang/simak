@@ -57,7 +57,7 @@ class CTA extends MainPageSA {
 		}	
 	}	
 	
-	public function saveData ($sender,$param) {
+	public function saveData($sender, $param) {
 		if ($this->Page->IsValid) {
 			$ta1=$this->txtAddTahun->Text;
 			$ta2=$this->txtAddTahun->Text+1;

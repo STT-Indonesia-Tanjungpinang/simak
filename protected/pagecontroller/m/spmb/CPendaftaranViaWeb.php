@@ -174,13 +174,13 @@ class CPendaftaranViaWeb extends MainPageM {
 			$tempat_lahir=strtoupper(trim($this->txtEditTempatLahir->Text));						
 			$tgl_lahir=date ('Y-m-d',$this->txtEditTanggalLahir->TimeStamp);
 			$jk=$this->rdEditPria->Checked===true?'L':'P';
-            $idagama=$this->cmbEditAgama->Text;
+            $idagama = $this->cmbEditAgama->Text;
             $nama_ibu_kandung=addslashes($this->txtEditNamaIbuKandung->Text);
-			$idwarga=$this->rdEditWNI->Checked===true?'WNI':'WNA';
+			$idwarga = $this->rdEditWNI->Checked===true?'WNI':'WNA';
             $no_ktp=strtoupper(trim(addslashes($this->txtEditNIK->Text)));
             $alamat_rumah=strtoupper(trim(addslashes($this->txtEditAlamatKTP->Text)));
-            $kelurahan=addslashes($this->txtEditKelurahan->Text);
-            $kecamatan=addslashes($this->txtEditKecamatan->Text);
+            $kelurahan = addslashes($this->txtEditKelurahan->Text);
+            $kecamatan = addslashes($this->txtEditKecamatan->Text);
             $telp_rumah=addslashes($this->txtEditNoTelpRumah->Text);		
             $telp_hp=addslashes($this->txtEditNoTelpHP->Text);
             $email=addslashes($this->txtEditEmail->Text);            
@@ -193,21 +193,21 @@ class CPendaftaranViaWeb extends MainPageM {
 			$kota=strtoupper(addslashes($this->txtEditKotaPendidikanTerakhir->Text));	
 			$provinsi=strtoupper(addslashes($this->txtEditProvinsiPendidikanTerakhir->Text));	
 			$tahun_pa=strtoupper(trim($this->txtEditTahunPendidikanTerakhir->Text));		
-            $jenisslta=$this->cmbEditJenisSLTA->Text;
+            $jenisslta = $this->cmbEditJenisSLTA->Text;
 			$asal_slta=strtoupper(addslashes($this->txtEditAsalSLTA->Text));			
-            $statusslta=$this->cmbEditStatusSLTA->Text;
+            $statusslta = $this->cmbEditStatusSLTA->Text;
 			$nomor_ijazah=trim($this->txtEditNomorIjazah->Text);	
             
             $idkelas=$this->cmbEditKelas->Text; 
             $kjur1=$this->cmbEditKjur1->Text;
             $kjur2=$this->cmbEditKjur2->Text;                       
-            $ta=$this->cmbEditTahunMasuk->Text;
+            $ta = $this->cmbEditTahunMasuk->Text;
             $idsmt=$this->cmbEditSemester->Text;           
             	
-            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama=$idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota='$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta='$jenisslta',asal_slta='$asal_slta',status_slta='$statusslta',nomor_ijazah='$nomor_ijazah',idkelas='$idkelas',kjur1='$kjur1',kjur2='$kjur2',ta=$ta,idsmt=$idsmt,daftar_via='WEB' WHERE no_formulir='$no_formulir'";
+            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota='$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta='$jenisslta',asal_slta='$asal_slta',status_slta='$statusslta',nomor_ijazah='$nomor_ijazah',idkelas='$idkelas',kjur1='$kjur1',kjur2='$kjur2',ta = $ta,idsmt=$idsmt,daftar_via='WEB' WHERE no_formulir='$no_formulir'";
             $this->DB->query('BEGIN');
 			if ($this->DB->updateRecord($str)) {
-                $email=$this->txtEditEmail->Text;                
+                $email = $this->txtEditEmail->Text;                
                 $str = "UPDATE profiles_mahasiswa SET email='$email' WHERE no_formulir=$no_formulir";
                 $this->DB->updateRecord($str);
                 $this->DB->query('COMMIT');

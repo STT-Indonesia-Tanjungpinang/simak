@@ -44,7 +44,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
     public function setInfoToolbar() {                
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs ($sender,$param) {		
@@ -75,7 +75,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
 		$this->populateData($_SESSION['currentPageRekapPembayaranSemesterGenap']['search']);
 	}		
 	public function populateData($search=false) {		
-		$ta=$_SESSION['ta'];
+		$ta = $_SESSION['ta'];
         $tahun_masuk=$_SESSION['tahun_masuk'];     
 		$semester=$_SESSION['currentPageRekapPembayaranSemesterGenap']['semester'];
 		$kjur=$_SESSION['kjur'];	
@@ -114,7 +114,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
 	}
     public function generateData ($sender,$param) {
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $tahun_masuk=$_SESSION['tahun_masuk'];     
 		$semester=$_SESSION['currentPageRekapPembayaranSemesterGenap']['semester'];
 		$kjur=$_SESSION['kjur'];	
@@ -123,7 +123,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";       
         
         $this->DB->deleteRecord("rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun=$ta AND idsmt='$semester' AND tahun_masuk='$tahun_masuk'$str_kelas");
-        $str = "SELECT fp.no_formulir,rm.nim,rm.nirm,fp.nama_mhs,fp.jk,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t2.idkelas FROM formulir_pendaftaran fp JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir) JOIN (SELECT DISTINCT(nim) AS nim,idkelas FROM transaksi WHERE kjur='$kjur' AND tahun=$ta AND idsmt='$semester'$str_kelas) AS t2 ON (t2.nim=rm.nim) WHERE fp.ta=$tahun_masuk ORDER BY nim ASC,nama_mhs ASC";			
+        $str = "SELECT fp.no_formulir,rm.nim,rm.nirm,fp.nama_mhs,fp.jk,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t2.idkelas FROM formulir_pendaftaran fp JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir) JOIN (SELECT DISTINCT(nim) AS nim,idkelas FROM transaksi WHERE kjur='$kjur' AND tahun=$ta AND idsmt='$semester'$str_kelas) AS t2 ON (t2.nim=rm.nim) WHERE fp.ta = $tahun_masuk ORDER BY nim ASC,nama_mhs ASC";			
    		$this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tahun_masuk','semester_masuk','idkelas'));
         $r = $this->DB->getRecord($str);    
         
@@ -156,7 +156,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
 			$r2=$this->DB->getRecord($str2);				
 			$dibayarkan=$r2[1]['dibayarkan']>0?$r2[1]['dibayarkan']:0;
             $kewajiban=($ta==$v['tahun_masuk'] && $v['semester_masuk'] == $semester) ? $komponen_biaya[$idkelas]['baru']:$komponen_biaya[$idkelas]['lama'];
-            $sisa=$kewajiban-$dibayarkan;
+            $sisa = $kewajiban-$dibayarkan;
             
             $str = "INSERT INTO rekap_laporan_pembayaran_per_semester SET no_formulir='$no_formulir', nim='$nim', nirm='$nirm', nama_mhs='$nama_mhs', jk='$jk', tahun_masuk=$tahun_masuk, semester_masuk=$semester_masuk, idkelas='$idkelas', n_kelas='$n_kelas', dibayarkan='$dibayarkan', kewajiban='$kewajiban', sisa='$sisa', tahun='$ta', idsmt='$semester', kjur='$kjur'";
 			$this->DB->insertRecord($str);
@@ -171,14 +171,14 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $r = $this->DB->getRecord($str);   
         $nim=$r[1]['nim'];
         $semester=$r[1]['idsmt'];
-        $ta=$r[1]['tahun'];
+        $ta = $r[1]['tahun'];
         $this->Finance->setDataMHS(array('tahun_masuk'=>$r[1]['tahun_masuk'],'idsmt'=>$r[1]['semester_masuk'],'idkelas'=>$r[1]['idkelas']));
         $kewajiban=($r[1]['tahun']==$r[1]['tahun_masuk'] && $r[1]['semester_masuk'] == $r[1]['idsmt']) ?$this->Finance->getTotalBiayaMhsPeriodePembayaran('baru'):$this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
         $str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM transaksi t,transaksi_detail td WHERE td.no_transaksi=t.no_transaksi AND t.nim=$nim AND t.idsmt=$semester AND t.tahun=$ta AND t.commited=1";			
         $this->DB->setFieldTable(array('dibayarkan'));
         $r2=$this->DB->getRecord($str2);
         $dibayarkan=$r2[1]['dibayarkan']>0?$r2[1]['dibayarkan']:0;
-        $sisa=$kewajiban-$dibayarkan;
+        $sisa = $kewajiban-$dibayarkan;
         $str = "UPDATE rekap_laporan_pembayaran_per_semester SET dibayarkan='$dibayarkan', kewajiban='$kewajiban', sisa='$sisa' WHERE idrekap=$idrekap";
         $this->DB->updateRecord($str);
         

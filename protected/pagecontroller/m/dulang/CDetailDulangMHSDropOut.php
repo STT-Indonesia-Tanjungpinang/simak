@@ -52,7 +52,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester";        
 	}
@@ -79,10 +79,10 @@ class CDetailDulangMHSDropOut Extends MainPageM {
             $sender->ErrorMessage=$e->getMessage();
         }	    
     }  
-    public function saveData ($sender,$param) {		
+    public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSDropOut']['DataMHS'];						
-			$ta=$this->cmbAddTADropOut->Text;							
+			$ta = $this->cmbAddTADropOut->Text;							
 			$semester=$this->cmbAddSMTDropOut->Text;
             $_SESSION['semester']=$semester;
             $_SESSION['ta']=$ta;
@@ -93,7 +93,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
 			$str = "UPDATE register_mahasiswa SET k_status='D' WHERE nim='$nim'";			
 			$this->DB->query ('BEGIN');
 			if ($this->DB->updateRecord($str)) {
-                $status_sebelumnnya=$datamhs['k_status'];
+                $status_sebelumnnya = $datamhs['k_status'];
                 $tasmt=$ta.$semester;        
                 $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$semester','$tasmt',NOW(),'$kelas','$status_sebelumnnya','D')";
                 $this->DB->insertRecord($str);               

@@ -120,10 +120,10 @@ class CDaftarMahasiswa extends MainPageM {
         foreach ($jumlah_jk as $v) {
             switch ($v['jk']) {
                 case 'L' :
-                    $jumlah_pria=$v['jumlah'];
+                    $jumlah_pria = $v['jumlah'];
                 break;
                 case 'P' :
-                    $jumlah_wanita=$v['jumlah'];
+                    $jumlah_wanita = $v['jumlah'];
                 break;
             }
         }

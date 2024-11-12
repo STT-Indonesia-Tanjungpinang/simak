@@ -49,7 +49,7 @@ class CDulangMHSLama Extends MainPageM {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSLama']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
@@ -90,7 +90,7 @@ class CDulangMHSLama Extends MainPageM {
         $this->populateData($_SESSION['currentPageDulangMHSLama']['search']);
     }
     public function populateData($search=false) {
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
 		$kjur=$_SESSION['kjur'];
 		$tahun_masuk=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'];
@@ -165,7 +165,7 @@ class CDulangMHSLama Extends MainPageM {
                     if (isset($datadulang['iddulang'])) {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
                     }
-                    $data=$this->Finance->getTresholdPembayaran($_SESSION['ta'],$_SESSION['semester'],true);						                                
+                    $data = $this->Finance->getTresholdPembayaran($_SESSION['ta'],$_SESSION['semester'],true);						                                
                     if (!$data['bool']) {
                         throw new Exception ("Mahasiswa a.n ".$this->Finance->getDataMHS('nama_mhs')."($nim) tidak bisa daftar ulang karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
                     }                    
@@ -207,7 +207,7 @@ class CDulangMHSLama Extends MainPageM {
     public function deleteRecord ($sender,$param) {			
 		$nim=$sender->CommandParameter;		
 		$idsmt=$this->hiddenidsmt->Value;
-		$ta=$this->hiddenta->Value;
+		$ta = $this->hiddenta->Value;
 		$this->DB->query ('BEGIN');
         $this->Demik->setDataMHS(array('nim'=>$nim));
         $datadulang=$this->Demik->getDataDulang($idsmt,$ta);

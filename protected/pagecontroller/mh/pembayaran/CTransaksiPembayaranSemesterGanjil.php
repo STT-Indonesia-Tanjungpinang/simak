@@ -31,14 +31,14 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
 		}	
     }
     public function setInfoToolbar() {        
-        $ta=$this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGanjil']['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGanjil']['ta']);        		
 		$this->labelModuleHeader->Text="T.A $ta";        
 	}    
     public function populateData () {
         $datamhs = $this->Pengguna->getDataUser();
         $no_transaksi=$_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'];
         $no_formulir=$datamhs['no_formulir'];
-        $ta=$_SESSION['currentPagePembayaranSemesterGanjil']['ta'];             
+        $ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];             
         $tahun_masuk=$datamhs['tahun_masuk'];
         $idsmt=1;     
         $kelas=$datamhs['idkelas'];                
@@ -66,7 +66,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
         $r=$this->DB->getRecord($str);
         
         while (list($k,$v)=each($r)) {
-            $biaya=$v['biaya'];
+            $biaya = $v['biaya'];
             $idkombi=$v['idkombi'];
             $sudah_dibayar=isset($sudah_dibayarkan[$idkombi])?$sudah_dibayarkan[$idkombi]:0;
             if ($sudah_dibayar <=$biaya) {
@@ -107,7 +107,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
         $datamhs = $this->Pengguna->getDataUser();
         $no_transaksi=$_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'];
         $no_formulir=$datamhs['no_formulir'];
-        $ta=$_SESSION['currentPagePembayaranSemesterGanjil']['ta'];        
+        $ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];        
         $tahun_masuk=$datamhs['tahun_masuk'];
         $idsmt=1;     
         $kelas=$datamhs['idkelas'];       
@@ -122,7 +122,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
         $str = "SELECT biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$tahun_masuk AND idsmt=$idsmt AND kpt.idkelas='$kelas' AND kpt.idkombi=$id";
         $this->DB->setFieldTable(array('biaya'));
         $r=$this->DB->getRecord($str);
-        $biaya=$r[1]['biaya'];
+        $biaya = $r[1]['biaya'];
         
         $jumlah_bayar=$this->Finance->toInteger(addslashes($item->ColumnJumlahBayar->TextBox->Text));                         
         
@@ -149,7 +149,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {	
             $datamhs = $this->Pengguna->getDataUser();
             $no_transaksi=$_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'];

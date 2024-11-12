@@ -115,14 +115,14 @@ class CDetailEditNilai extends MainPageD {
       $this->redirect("nilai.DetailEditNilai", true,array('id'=>$idkelas_mhs));
     }
    }
-  public function saveData ($sender,$param) {
+  public function saveData($sender, $param) {
     if ($this->IsValid) {
       $idkelas_mhs=$_SESSION['currentPageDetailEditNilai']['DataNilai']['idkelas_mhs'];
-      $userid=$this->Pengguna->getDataUser('iddosen');
+      $userid = $this->Pengguna->getDataUser('iddosen');
       foreach ($this->RepeaterS->Items As $inputan) {
         if ($inputan->chkProcess->Checked) {
           $item=$inputan->txtNilaiQuiz->getNamingContainer();
-          $idkrsmatkul=$this->RepeaterS->DataKeys[$item->getItemIndex()];
+          $idkrsmatkul = $this->RepeaterS->DataKeys[$item->getItemIndex()];
           $persentase_quiz=$inputan->hiddenpersenquiz->Value;
           $persentase_tugas=$inputan->hiddenpersentugas->Value;
           $persentase_uts=$inputan->hiddenpersenuts->Value;
@@ -142,17 +142,17 @@ class CDetailEditNilai extends MainPageD {
           $nilai_uas=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUAS->Text)));
           $nilai_uas=($nilai_uas >0)?$nilai_uas:0;
 
-          $nilai_absen=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiAbsen->Text)));  
+          $nilai_absen = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiAbsen->Text)));  
           $nilai_absen=($nilai_absen >0)?$nilai_absen:0;  
           
           $nilai_hasil_proyek=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiHasilProyek->Text)));  
           $nilai_hasil_proyek=($nilai_hasil_proyek >0)?$nilai_hasil_proyek:0;  
 
           $n_kuan=($persentase_quiz*$nilai_quiz)+($persentase_tugas*$nilai_tugas)+($persentase_uts*$nilai_uts)+($persentase_uas*$nilai_uas)+($persentase_absen*$nilai_absen)+($persentase_hasil_proyek*$nilai_hasil_proyek);
-          $n_kual=$this->Nilai->getRentangNilaiNKuan($n_kuan);
+          $n_kual = $this->Nilai->getRentangNilaiNKuan($n_kuan);
           
           $str = "REPLACE INTO nilai_matakuliah SET 
-            idkrsmatkul=$idkrsmatkul,
+            idkrsmatkul = $idkrsmatkul,
             persentase_quiz='$persentase_quiz',
             persentase_tugas='$persentase_tugas',
             persentase_uts='$persentase_uts',

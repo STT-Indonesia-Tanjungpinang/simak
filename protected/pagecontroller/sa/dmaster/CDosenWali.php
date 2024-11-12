@@ -84,7 +84,7 @@ class CDosenWali extends MainPageSA {
         $this->cmbAddDosen->dataBind();                
     }  
    
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->Page->isValid) {
             $iddosen=$this->cmbAddDosen->Text;            
             $str = "INSERT INTO dosen_wali SET iddosen_wali=NULL,iddosen=$iddosen";

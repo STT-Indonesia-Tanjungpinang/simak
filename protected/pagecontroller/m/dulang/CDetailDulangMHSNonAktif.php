@@ -49,14 +49,14 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester";        
 	}
-    public function saveData ($sender,$param) {		
+    public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSNonAktif']['DataMHS'];						
-			$ta=$this->cmbAddTANonAktif->Text;							
+			$ta = $this->cmbAddTANonAktif->Text;							
 			$semester=$this->cmbAddSMTNonAktif->Text;
 
             $_SESSION['currentPageDulangMHSNonAktif']['tahun_masuk']=$datamhs['tahun_masuk'];
@@ -65,7 +65,7 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
             $iddosen_wali=$this->cmbAddDosenWali->Text;
             
 			$this->DB->query ('BEGIN');
-            $status_sebelumnnya=$datamhs['k_status'];
+            $status_sebelumnnya = $datamhs['k_status'];
             $tasmt=$ta.$semester;
 			$str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$semester','$tasmt',NOW(),'$kelas','$status_sebelumnnya','N')";
 			if ($this->DB->insertRecord($str)) {

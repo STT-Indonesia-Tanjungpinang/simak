@@ -73,10 +73,10 @@ class CDetailDulangMHSBaru Extends MainPageM {
             }	
         }
 	}
-    public function saveData ($sender,$param) {		
+    public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSBaru']['DataMHS'];						
-			$ta=$datamhs['tahun_masuk'];							
+			$ta = $datamhs['tahun_masuk'];							
 			$semester=$datamhs['semester_masuk'];
 			$tanggal=date ('Y-m-d H:m:s');
 			$no_formulir=$datamhs['no_formulir'];

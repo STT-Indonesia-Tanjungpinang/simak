@@ -26,12 +26,12 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
                     if ($datadulang['k_status']!='C') {
                         $nim=$datamhs['nim'];
                         $status=$this->DMaster->getNamaStatusMHSByID ($datadulang['k_status']);
-                        $ta=$datadulang['tahun'];
+                        $ta = $datadulang['tahun'];
                         throw new Exception ("NIM ($nim) sudah daftar ulang di semester Genap T.A $ta dengan status $status.");		
                     }
                 }
                 $this->checkPembayaranSemesterLalu ();
-                CPembayaranCutiSemesterGenap::$KewajibanMahasiswa=$this->Finance->getBiayaCuti($datamhs['tahun_masuk'],$datamhs['semester_masuk'],$datamhs['idkelas']);
+                CPembayaranCutiSemesterGenap::$KewajibanMahasiswa = $this->Finance->getBiayaCuti($datamhs['tahun_masuk'],$datamhs['semester_masuk'],$datamhs['idkelas']);
                 $_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS']=$datamhs;                    
                 $this->populateTransaksi();
                 
@@ -51,7 +51,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
 		}	
     }
     public function setInfoToolbar() {        
-        $ta=$this->DMaster->getNamaTA($_SESSION['currentPagePembayaranCutiSemesterGenap']['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranCutiSemesterGenap']['ta']);        		
 		$this->labelModuleHeader->Text="T.A $ta";        
     }
     public function changeTbTA ($sender,$param) {				
@@ -102,9 +102,9 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {	
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             $datamhs=$_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS'];
             $tahun=$datamhs['ta'];
             $nim=$datamhs['nim'];

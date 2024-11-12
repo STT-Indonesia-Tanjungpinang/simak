@@ -64,7 +64,7 @@ class CKHS extends MainPageMHS {
                 $datamhs['idkelas']=$idkelas;
                 $datamhs['idsmt']=$_SESSION['semester'];
                 $this->Finance->setDataMHS($datamhs);
-				$data=$this->Finance->getLunasPembayaran($_SESSION['ta'],$_SESSION['semester'],true);	
+				$data = $this->Finance->getLunasPembayaran($_SESSION['ta'],$_SESSION['semester'],true);	
                 
 				if (!$data['bool'])throw new Exception ("Anda tidak bisa melihat KHS karena Anda baru membayar (".$this->Finance->toRupiah($data['total_bayar'],false)."), dari total kewajiban sebesar (".$this->Finance->toRupiah($data['total_biaya'],false).").");		
 			}			

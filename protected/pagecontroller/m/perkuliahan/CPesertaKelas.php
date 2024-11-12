@@ -57,7 +57,7 @@ class CPesertaKelas extends MainPageM {
       $old_idkelas_mhs=$this->hiddenidkelasmhs->Value;
       $idkelas_mhs = $this->cmbKelasTujuan->Text;
       
-      $jumlah_peserta=$this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs OR idkelas_mhs=$old_idkelas_mhs",'idkrsmatkul');
+      $jumlah_peserta = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs OR idkelas_mhs=$old_idkelas_mhs",'idkrsmatkul');
       $str = "SELECT rk.kapasitas FROM kelas_mhs km JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idkelas_mhs=$idkelas_mhs";
       $this->DB->setFieldTable(array('kapasitas'));
       $r = $this->DB->getRecord($str);
@@ -94,17 +94,17 @@ class CPesertaKelas extends MainPageM {
     }
   }
   public function pindahkanAnggotaKelasMHS ($sender,$param) {
-    $idkrsmatkul=$this->getDataKeyField($sender,$this->RepeaterS);	
+    $idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);	
     $old_idkelas_mhs=$this->hiddenidkelasmhs->Value;
     $idkelas_mhs=$sender->Text;
     if ($idkelas_mhs != 'none')
     {
-      $jumlah_peserta=$this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs",'idkrsmatkul')+1;
+      $jumlah_peserta = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs",'idkrsmatkul')+1;
       $str = "SELECT rk.kapasitas FROM kelas_mhs km JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idkelas_mhs=$idkelas_mhs";
       $this->DB->setFieldTable(array('kapasitas'));
       $r = $this->DB->getRecord($str);
       if ($jumlah_peserta <= $r[1]['kapasitas']) {
-        $str = "UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul=$idkrsmatkul";
+        $str = "UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul = $idkrsmatkul";
         $this->DB->updateRecord($str);
 
         $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";

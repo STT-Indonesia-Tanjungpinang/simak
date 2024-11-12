@@ -134,7 +134,7 @@ class CPengumuman extends MainPageM {
             $idkategori = addslashes($this->cmbAddKategori->Text);
             $judul = strip_tags(addslashes($this->txtAddTitle->Text));
             $content = strip_tags(addslashes($this->txtAddContent->Text));
-            $userid=$this->Pengguna->getDataUser('userid');                        
+            $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user=$this->Pengguna->getDataUser('username'); 
             
 			$file_name=$this->hiddenfile_name->Value;
@@ -142,7 +142,7 @@ class CPengumuman extends MainPageM {
 			$file_size=$this->hiddenfile_size->Value;
 			$file_path=$this->hiddenfile_path->Value;
 			$file_path_temp=$this->hiddenfile_path_temp->Value;
-			$file_url=$this->hiddenfile_url->Value;
+			$file_url = $this->hiddenfile_url->Value;
 			if (file_exists($file_path_temp)) {
 				rename ($file_path_temp,$file_path);
 			}

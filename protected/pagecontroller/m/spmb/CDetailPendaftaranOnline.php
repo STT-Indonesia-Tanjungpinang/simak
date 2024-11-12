@@ -16,7 +16,7 @@ class CDetailPendaftaranOnline extends MainPageM {
 	}  
     public function changeView ($sender,$param) {                
         try {
-            $no_pendaftaran=addslashes($this->request['id']);
+            $no_pendaftaran = addslashes($this->request['id']);
             $str  = "SELECT no_pendaftaran, no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,email,telp_hp,kjur1,kjur2,idkelas,ta,idsmt,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp WHERE no_pendaftaran='$no_pendaftaran'";
             $this->DB->setFieldTable(array('no_pendaftaran','no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','jk','email','telp_hp','kjur1','kjur2','idkelas','ta','idsmt','waktu_mendaftar','file_bukti_bayar'));
             $r=$this->DB->getRecord($str);	           
@@ -54,7 +54,7 @@ class CDetailPendaftaranOnline extends MainPageM {
         return $datamhs[$idx];
     }
     public function resetPassword ($sender,$param) {        
-        $data=$this->Pengguna->createHashPassword(1234);
+        $data = $this->Pengguna->createHashPassword(1234);
         $salt=$data['salt'];
         $password=$data['password'];         
         $no_pendaftaran=$_SESSION['currentPageDetailPendaftaranOnline']['DataMHS']['no_pendaftaran'];
@@ -147,7 +147,7 @@ class CDetailPendaftaranOnline extends MainPageM {
 
                 $waktu_mendaftar="$tahun_masuk-08-05 ".date("H:m:s");          
                 $no_pendaftaran=$tahun_masuk.mt_rand(1000,9999).$semester_masuk;
-                $data=$this->Pengguna->createHashPassword($no_pendaftaran);
+                $data = $this->Pengguna->createHashPassword($no_pendaftaran);
                 $salt=$data['salt'];
                 $password=$data['password'];       
                 $str  = "INSERT INTO formulir_pendaftaran_temp (no_pendaftaran,no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,email,telp_hp,kjur1,kjur2,idkelas,ta,idsmt,salt,userpassword,waktu_mendaftar,file_bukti_bayar) SELECT $no_pendaftaran,0,nama_mhs,tempat_lahir,tanggal_lahir,jk,email,telp_hp,kjur1,kjur2,'$idkelas','$tahun_masuk','$semester_masuk','$salt','$password','$waktu_mendaftar','' FROM formulir_pendaftaran fp,profiles_mahasiswa pm WHERE fp.no_formulir=pm.no_formulir AND fp.no_formulir=$old_no_formulir";

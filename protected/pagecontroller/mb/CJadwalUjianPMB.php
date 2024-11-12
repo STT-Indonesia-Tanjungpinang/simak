@@ -24,7 +24,7 @@ class CJadwalUjianPMB extends MainPageMB {
 		}			
 	}
     public function getInfoToolbar() {        
-		$ta=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
 		$semester=$this->setup->getSemester($this->Pengguna->getDataUser('semester_masuk'));
 		$text="Tahun Masuk $ta Semester $semester";
 		return $text;
@@ -80,7 +80,7 @@ class CJadwalUjianPMB extends MainPageMB {
             if ($date_now > $tanggal_akhir_daftar) {
                 throw new Exception ("Tidak bisa mendaftar pada {$dataujian['nama_kegiatan']} T.A {$dataujian['tahun_masuk']}{$dataujian['idsmt']} karena tanggal pendaftaran telah berakhir");
             }
-            $jumlah_peserta=$this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$id",'idjadwal_ujian');            
+            $jumlah_peserta = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$id",'idjadwal_ujian');            
             if ($jumlah_peserta >= $dataujian['kapasitas']){
                 throw new Exception ("Tidak bisa mendaftar pada {$dataujian['nama_kegiatan']} T.A {$dataujian['tahun_masuk']}{$dataujian['idsmt']} karena kapasitas ruangan telah penuh");
             }

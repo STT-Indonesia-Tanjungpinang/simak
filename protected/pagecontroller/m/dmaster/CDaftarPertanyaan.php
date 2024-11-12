@@ -14,7 +14,7 @@ class CDaftarPertanyaan extends MainPageM {
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             $this->lblModulHeader->Text=$this->getInfoToolbar();
             
-            $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource=$ta;					
 			$this->tbCmbTA->Text=$_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
@@ -49,7 +49,7 @@ class CDaftarPertanyaan extends MainPageM {
 		$this->populateData();
 	}
     public function getInfoToolbar() {                
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="TA $ta Semester $semester";
 		return $text;
@@ -68,7 +68,7 @@ class CDaftarPertanyaan extends MainPageM {
         }
     }
 	public function populateData($search=false) {
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
         $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();        
         if ($_SESSION['currentDaftarPertanyaan']['idkelompok_pertanyaan']=='none'){            
@@ -121,9 +121,9 @@ class CDaftarPertanyaan extends MainPageM {
         $this->cmbAddKelompokPertanyaan->DataSource=$kelompok_pertanyaan;
         $this->cmbAddKelompokPertanyaan->DataBind();
     }
-    public function saveData ($sender,$param) {		
+    public function saveData($sender, $param) {		
 		if ($this->IsValid) {
-            $ta=$_SESSION['ta'];
+            $ta = $_SESSION['ta'];
             $idsmt=$_SESSION['semester'];
             $idkelompok_pertanyaan=$this->cmbAddKelompokPertanyaan->Text;
             $pertanyaan=  addslashes($this->txtAddPertanyaan->Text);

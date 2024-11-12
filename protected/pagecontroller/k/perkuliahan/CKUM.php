@@ -42,7 +42,7 @@ class CKUM extends MainPageK {
         $jenisujian=strtoupper($_SESSION['currentPageKUM']['jenisujian']);
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);        		
 		$this->lblModulHeader->Text="$jenisujian Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs ($sender,$param) {		
@@ -83,7 +83,7 @@ class CKUM extends MainPageK {
 		$this->populateData($_SESSION['currentPageKUM']['search']);
 	}
     public function populateData($search=false) {
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
 		$semester=$_SESSION['semester'];
 		$kjur=$_SESSION['kjur'];
 		$tahun_masuk=$_SESSION['tahun_masuk'];
@@ -177,7 +177,7 @@ class CKUM extends MainPageK {
                 $r3=$this->DB->getRecord($str2);				
                 $dibayarkan=$r3[1]['dibayarkan'];
                 $kewajiban=($ta==$tahun_masuk && $v['semester_masuk'] == $semester) ? $komponen_biaya[$idkelas]['baru']:$komponen_biaya[$idkelas]['lama'];
-                $sisa=$kewajiban-$dibayarkan;
+                $sisa = $kewajiban-$dibayarkan;
             }
             $v['kewajiban']=$kewajiban;
             $v['dibayarkan']=$dibayarkan;

@@ -34,7 +34,7 @@ class CDetailPKRS extends MainPageDW {
         }
     }
 	public function setInfoToolbar() {   
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);		
 		$this->lblModulHeader->Text="T.A $ta Semester $semester";        
 	}	
@@ -90,7 +90,7 @@ class CDetailPKRS extends MainPageDW {
 		$datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
         $idkrs=$datakrs['idkrs'];
         $nim=$datakrs['nim'];
-		$idkrsmatkul=$this->getDataKeyField($sender,$this->RepeaterS);		
+		$idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);		
 		$id=explode('_',$sender->CommandParameter);
 		$idpenyelenggaraan=$id[1];	
 		if ($id[0]==1) {			
@@ -103,7 +103,7 @@ class CDetailPKRS extends MainPageDW {
 				if ($jumlah > $maks_sks) {
                     throw new Exception ('Matakuliah, tidak bisa disahkan. Karena telah melebihi batas anda');
                 }
-                $str = "UPDATE krsmatkul SET batal=0 WHERE idkrsmatkul=$idkrsmatkul";
+                $str = "UPDATE krsmatkul SET batal=0 WHERE idkrsmatkul = $idkrsmatkul";
 				$this->DB->updateRecord($str);                
                 $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs=$idkrs";
 				$this->DB->updateRecord($str);
@@ -114,7 +114,7 @@ class CDetailPKRS extends MainPageDW {
                 $this->lblContentMessageError->Text=$e->getMessage();						
 			}
 		}elseif ($id[0]==0) {		
-			$str = "UPDATE krsmatkul SET batal=1 WHERE idkrsmatkul=$idkrsmatkul";			
+			$str = "UPDATE krsmatkul SET batal=1 WHERE idkrsmatkul = $idkrsmatkul";			
 			$this->DB->updateRecord($str);
             $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan=$idpenyelenggaraan,tambah=0,hapus=0,batal=1,sah=0,tanggal=NOW()");										
 			$this->redirect('perkuliahan.DetailPKRS',true,array('id'=>$idkrs));	
@@ -122,7 +122,7 @@ class CDetailPKRS extends MainPageDW {
 		
 	}    
 	public function hapusMatkul ($sender,$param) {		
-		$idkrsmatkul=$this->getDataKeyField($sender,$this->RepeaterS);
+		$idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);
         $id=explode('_',$sender->CommandParameter);				
 		$idpenyelenggaraan=$id[1];		
         $datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];

@@ -52,7 +52,7 @@ class CKHS extends MainPageDW {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk=$_SESSION['currentPageKHS']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageKHS']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
@@ -98,7 +98,7 @@ class CKHS extends MainPageDW {
 	}
 	public function populateData($search=false) {			
         $iddosen_wali=$this->iddosen_wali;
-		$ta=$_SESSION['ta'];
+		$ta = $_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
         if ($search) {
             $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan,0 AS boolpembayaran FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali=$iddosen_wali AND tahun='$ta' AND idsmt='$idsmt'";
@@ -244,7 +244,7 @@ class CKHS extends MainPageDW {
                 }                
 			break;			
             case 'btnPrintKHSAll' :                
-                $repeater=$this->RepeaterS;
+                $repeater = $this->RepeaterS;
                 if ($repeater->Items->Count() > 0) {
                     switch ($_SESSION['outputreport']) {
                         case  'summarypdf' :
@@ -309,7 +309,7 @@ class CKHS extends MainPageDW {
                             
                             $currentPage=$repeater->CurrentPageIndex;
                             $offset=$currentPage*$repeater->PageSize;
-                            $awal=$offset+1;        
+                            $awal = $offset+1;        
                             $akhir=$repeater->Items->Count()+$offset;
                             
                             $dataReport['awal']=$awal;

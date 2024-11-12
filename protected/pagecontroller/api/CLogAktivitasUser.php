@@ -9,7 +9,7 @@ class CLogAktivitasUser extends MainPageAPI {
         }                
     }
     protected function populateData () {
-    	$userid=$this->Pengguna->getDataUser('userid');
+    	$userid = $this->Pengguna->getDataUser('userid');
         $str = "SELECT idlog,halaman,aktivitas,date_activity FROM log_aktivitas_user WHERE userid='$userid' ORDER BY date_activity DESC";                         
         $this->DB->setFieldTable(array('idlog','halaman','aktivitas','date_activity'));
         $r = $this->DB->getRecord($str);  

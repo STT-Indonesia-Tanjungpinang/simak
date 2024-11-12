@@ -52,10 +52,10 @@ class CDetailPengumuman extends MainPageMHS {
 		if ($this->IsValid) {	
             $idpost=$_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idpost'];            
             $idkategori=$_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idkategori'];
-            $judul=$_SESSION['currentPageDetailPengumuman']['DataDiskusi']['title'];
+            $judul = $_SESSION['currentPageDetailPengumuman']['DataDiskusi']['title'];
             $content = strip_tags(addslashes($this->txtAddContent->Text));
             $this->txtAddContent->Text='';
-            $userid=$this->Pengguna->getDataUser('userid');                        
+            $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user=$this->Pengguna->getDataUser('username');                        
             $str = "INSERT INTO pengumuman (idpost,idkategori,parentpost,title,content,userid,tipe,nama_user,date_added) VALUES (NULL,$idkategori,$idpost,'$judul','$content',$userid,'m','$nama_user',NOW())";                   
             $this->DB->insertRecord($str);

@@ -120,7 +120,7 @@ class CMatakuliah extends MainPageM {
     $r = $this->DB->getRecord($str,$offset+1);	
     $result = array();
     while (list($k,$v)=each($r)) {  
-      $kmatkul=$v['kmatkul'];
+      $kmatkul = $v['kmatkul'];
       $v['kode_matkul']=$this->Demik->getKMatkul($kmatkul);
       if ($v['idkonsentrasi'] == 0) {
         if($v['islintas_prodi'] == 1){
@@ -185,7 +185,7 @@ class CMatakuliah extends MainPageM {
     $kmatkul=addslashes($param->Value);		
     if ($kmatkul != '') {
       try {   
-        $kmatkul=$idkur.'_'.$kmatkul;
+        $kmatkul = $idkur.'_'.$kmatkul;
         if ($this->hiddenid->Value!=$kmatkul) {                                                            
           if ($this->DB->checkRecordIsExist('kmatkul','matakuliah',$kmatkul)) {                                
             throw new Exception ("Kode matakuliah ($kmatkul) sudah tidak tersedia silahkan ganti dengan yang lain.");		
@@ -197,13 +197,13 @@ class CMatakuliah extends MainPageM {
       }	
     }	
   }
-  public function saveData ($sender,$param) {
+  public function saveData($sender, $param) {
     if ($this->Page->isValid) {	
       $idkur=$this->hiddenaddidkur->Value;
-      $kmatkul=$this->txtAddKodeMatkul->Text;
-      $kode_matkul=$idkur."_$kmatkul";
+      $kmatkul = $this->txtAddKodeMatkul->Text;
+      $kode_matkul = $idkur."_$kmatkul";
       $nama_matkul=addslashes(strtoupper($this->txtAddNamaMatkul->Text));	
-      $nama_matkul_en=addslashes(strtoupper($this->txtAddNamaMatkulEn->Text));	
+      $nama_matkul_en = addslashes(strtoupper($this->txtAddNamaMatkulEn->Text));	
       $sks=$this->cmbAddSks->Text;
       $idkonsentrasi=$this->cmbAddKonsentrasi->Text;            
       if ($idkonsentrasi == 'none') {
@@ -216,7 +216,7 @@ class CMatakuliah extends MainPageM {
         $islindas_prodi=0;
         $ispilihan=0;
       }
-      $sks_tatap_muka=$this->cmbAddSksTatapMuka->Text;
+      $sks_tatap_muka = $this->cmbAddSksTatapMuka->Text;
       $sks_praktikum=$this->cmbAddSksPraktikum->Text;
       $semester=$this->cmbAddSemester->Text;
       $sks_praktik_lapangan=$this->cmbAddSksPraktikLapangan->Text;
@@ -283,10 +283,10 @@ class CMatakuliah extends MainPageM {
     if ($this->Page->isValid) {			
       $id=$this->hiddenid->Value;
       $idkur=$this->hiddeneditidkur->Value;
-      $kmatkul=$this->txtEditKodeMatkul->Text;
-      $kode_matkul=$idkur."_$kmatkul";
+      $kmatkul = $this->txtEditKodeMatkul->Text;
+      $kode_matkul = $idkur."_$kmatkul";
       $nama_matkul=addslashes(strtoupper($this->txtEditNamaMatkul->Text));	
-      $nama_matkul_en=addslashes(strtoupper($this->txtEditNamaMatkulEn->Text));	
+      $nama_matkul_en = addslashes(strtoupper($this->txtEditNamaMatkulEn->Text));	
       $sks=$this->cmbEditSks->Text;
       $idkonsentrasi=$this->cmbEditKonsentrasi->Text;            
       if ($idkonsentrasi == 'none') {
@@ -298,14 +298,14 @@ class CMatakuliah extends MainPageM {
         $islindas_prodi=0;
         $ispilihan=0;
       }
-      $sks_tatap_muka=$this->cmbEditSksTatapMuka->Text;
+      $sks_tatap_muka = $this->cmbEditSksTatapMuka->Text;
       $sks_praktikum=$this->cmbEditSksPraktikum->Text;
       $semester=$this->cmbEditSemester->Text;
       $sks_praktik_lapangan=$this->cmbEditSksPraktikLapangan->Text;
       $minimal_nilai=$this->cmbEditNilai->Text;		
       $syarat_ta=($this->chkEditSyaratTa->Checked)?1:0;
       $aktif=($this->chkEditAktif->Checked)?1:0;
-      $str = "UPDATE matakuliah SET kmatkul='$kode_matkul',nmatkul='$nama_matkul',nmatkul_en='$nama_matkul_en',sks='$sks',idkonsentrasi='$idkonsentrasi',ispilihan=$ispilihan,islintas_prodi=$islindas_prodi,sks_tatap_muka='$sks_tatap_muka',sks_praktikum='$sks_praktikum',semester='$semester',sks_praktik_lapangan='$sks_praktik_lapangan',minimal_nilai='$minimal_nilai',syarat_ta=$syarat_ta,aktif=$aktif WHERE kmatkul='$id'";
+      $str = "UPDATE matakuliah SET kmatkul='$kode_matkul',nmatkul='$nama_matkul',nmatkul_en='$nama_matkul_en',sks='$sks',idkonsentrasi='$idkonsentrasi',ispilihan=$ispilihan,islintas_prodi=$islindas_prodi,sks_tatap_muka='$sks_tatap_muka',sks_praktikum='$sks_praktikum',semester='$semester',sks_praktik_lapangan='$sks_praktik_lapangan',minimal_nilai='$minimal_nilai',syarat_ta = $syarat_ta,aktif=$aktif WHERE kmatkul='$id'";
       $this->DB->updateRecord($str);			
       $this->redirect('dmaster.Matakuliah',true);
     }
@@ -313,7 +313,7 @@ class CMatakuliah extends MainPageM {
   public function deleteRecord ($sender,$param) {        
     $id=$this->getDataKeyField($sender,$this->RepeaterS);
     if ($this->DB->checkRecordIsExist ('kmatkul','penyelenggaraan',$id)) {	
-      $kmatkul=$this->Demik->getKMatkul($id);
+      $kmatkul = $this->Demik->getKMatkul($id);
       $this->lblHeaderMessageError->Text='Menghapus Matakuliah';
       $this->lblContentMessageError->Text="Anda tidak bisa menghapus matakuliah dengan kode ($kmatkul) karena sedang digunakan di penyelenggaraan.";
       $this->modalMessageError->Show();

@@ -151,7 +151,7 @@ class CDulangMHSBaru Extends MainPageM {
                     if ($this->Finance->isMhsRegistered()){
                         throw new Exception ("Calon Mahasiswa a.n ".$datamhs['nama_mhs']." dengan no formulir $no_formulir sudah terdaftar di P.S ".$_SESSION['daftar_jurusan'][$datamhs['kjur']]);
                     }
-                    $data=$this->Finance->getTresholdPembayaran($datamhs['tahun_masuk'],$datamhs['semester_masuk'],true);						                                
+                    $data = $this->Finance->getTresholdPembayaran($datamhs['tahun_masuk'],$datamhs['semester_masuk'],true);						                                
                     if (!$data['bool']) {
                         throw new Exception ("Calon Mahasiswa a.n ".$this->Finance->dataMhs['nama_mhs']."($no_formulir) tidak bisa daftar ulang karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
                     }
@@ -187,7 +187,7 @@ class CDulangMHSBaru Extends MainPageM {
     public function deleteRecord ($sender,$param) {			
 		$nim=$sender->CommandParameter;		
 		$idsmt=$this->hiddensemestermasuk->Value;
-		$ta=$this->hiddentahunmasuk->Value;
+		$ta = $this->hiddentahunmasuk->Value;
 		$this->DB->query ('BEGIN');
 		if ($this->DB->deleteRecord("dulang WHERE nim='$nim' AND tahun='$ta' AND idsmt='$idsmt'")) {			
 			$this->DB->deleteRecord("krs WHERE nim='$nim' AND tahun='$ta' AND idsmt='$idsmt'");		

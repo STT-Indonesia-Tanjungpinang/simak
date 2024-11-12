@@ -50,7 +50,7 @@ class CKRS extends MainPageMHS {
   }
   public function getInfoToolbar()
   {                
-    $ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+    $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester=$this->setup->getSemester($_SESSION['semester']);
     $text="TA $ta Semester $semester";
     return $text;
@@ -71,14 +71,14 @@ class CKRS extends MainPageMHS {
         CKRS::$totalSKSBatal+=$item->DataItem['sks'];
         CKRS::$jumlahMatkulBatal+=1;
       }else{
-        $idkrsmatkul=$item->DataItem['idkrsmatkul'];
+        $idkrsmatkul = $item->DataItem['idkrsmatkul'];
         $idpenyelenggaraan=$item->DataItem['idpenyelenggaraan'];
         $idkelas=$_SESSION['currentPageKRS']['DataKRS']['krs']['kelas_dulang'];
         $str = "SELECT km.idkelas_mhs,km.nama_kelas,vpp.nama_dosen,vpp.nidn,km.idruangkelas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) WHERE vpp.idpenyelenggaraan=$idpenyelenggaraan AND km.idkelas='$idkelas'  ORDER BY hari ASC,idkelas ASC,nama_dosen ASC";            
         $this->DB->setFieldTable(array('idkelas_mhs','nama_kelas','nama_dosen','nidn','idruangkelas'));
         $r = $this->DB->getRecord($str);
         
-        $str = "SELECT idkelas_mhs FROM kelas_mhs_detail WHERE idkrsmatkul=$idkrsmatkul";            
+        $str = "SELECT idkelas_mhs FROM kelas_mhs_detail WHERE idkrsmatkul = $idkrsmatkul";            
         $this->DB->setFieldTable(array('idkelas_mhs'));
         $r_selected = $this->DB->getRecord($str);
         
@@ -146,13 +146,13 @@ class CKRS extends MainPageMHS {
    
   public function prosesKelas ($sender,$param) {
     $idkelas_mhs=$sender->Text;
-    $idkrsmatkul=$this->getDataKeyField($sender, $this->RepeaterS);
+    $idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);
     $this->DB->query('BEGIN');
     if ($idkelas_mhs=='none') 
     {
-      $this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul=$idkrsmatkul");
-      $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
-      $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
+      $this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul = $idkrsmatkul");
+      $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul = $idkrsmatkul");
+      $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul = $idkrsmatkul");
       
       $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
       $this->DB->updateRecord($str);
@@ -170,13 +170,13 @@ class CKRS extends MainPageMHS {
       //if ($jumlah_peserta_kelas <= $kapasitas) {
         if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail',$idkrsmatkul)) 
         {
-          $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul=$idkrsmatkul");
-          $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
-          $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
+          $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul = $idkrsmatkul");
+          $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul = $idkrsmatkul");
+          $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul = $idkrsmatkul");
         }
         else //masukan peserta ke kelas
         {
-          $this->DB->insertRecord("INSERT INTO kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs,idkrsmatkul=$idkrsmatkul");
+          $this->DB->insertRecord("INSERT INTO kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs,idkrsmatkul = $idkrsmatkul");
         }
 
         $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
@@ -206,7 +206,7 @@ class CKRS extends MainPageMHS {
     $idkrs=$_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs'];
     $str = "kelas_mhs_detail kmd JOIN krsmatkul km ON (kmd.idkrsmatkul=km.idkrsmatkul) WHERE idkrs='$idkrs'";
     $jumlah_kelas=$this->DB->getCountRowsOfTable($str,'kmd.idkrsmatkul');
-    $jumlah_matkul=$_SESSION['currentPageKRS']['DataKRS']['krs']['jumlah_sah'];	        
+    $jumlah_matkul = $_SESSION['currentPageKRS']['DataKRS']['krs']['jumlah_sah'];	        
     if ($jumlah_kelas >= $jumlah_matkul) {
       switch ($_SESSION['outputreport']) {
         case  'summarypdf' :
@@ -409,7 +409,7 @@ class CKRS extends MainPageMHS {
           $rpt->Cell(15, 5, 'TGL', 1, 0, 'C');
           $rpt->Cell(15, 5, 'TTD', 1, 0, 'C');
 
-          $daftar_matkul=$objKRS->getDetailKRS($idkrs);
+          $daftar_matkul = $objKRS->getDetailKRS($idkrs);
           $totalSks=0;
           $row+=5;				
           $rpt->SetFont ('helvetica','',8);
@@ -419,7 +419,7 @@ class CKRS extends MainPageMHS {
             $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
             $flag='';
             if ($jenisujian=='uas') {
-              $idkrsmatkul=$v['idkrsmatkul'];
+              $idkrsmatkul = $v['idkrsmatkul'];
               $str = "kbm_detail WHERE idkrsmatkul='$idkrsmatkul' AND kehadiran='hadir'";										
               $flag=' *';
               if ($totalpertemuan=$this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
@@ -453,7 +453,7 @@ class CKRS extends MainPageMHS {
 
           $row+=5;
           $rpt->setXY(120,$row);			
-          $tanggal=$this->TGL->tanggal('j F Y');				
+          $tanggal = $this->TGL->tanggal('j F Y');				
           $rpt->Cell(80, 5, "Tanjungpinang, $tanggal",0,0,'L');
 
           $row+=5;				
@@ -545,7 +545,7 @@ class CKRS extends MainPageMHS {
         $rpt->Cell(30, 5, 'UTS', 1, 0, 'C');				
         $rpt->Cell(30, 5, 'UAS', 1, 0, 'C');
         
-        $daftar_matkul=$objKRS->getDetailKRS($this->report->dataReport['idkrs']);
+        $daftar_matkul = $objKRS->getDetailKRS($this->report->dataReport['idkrs']);
         $totalSks=0;
         $row+=5;				
         $rpt->SetFont ('helvetica','',8);
@@ -555,7 +555,7 @@ class CKRS extends MainPageMHS {
           $rpt->Cell(15, 8, $v['kmatkul'], 1, 0, 'C');		
           $flag='';
           if ($jenisujian=='uas') {
-            $idkrsmatkul=$v['idkrsmatkul'];
+            $idkrsmatkul = $v['idkrsmatkul'];
             $str = "kbm_detail WHERE idkrsmatkul='$idkrsmatkul' AND kehadiran='hadir'";										
             $flag=' *';
             if ($totalpertemuan=$this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
@@ -596,7 +596,7 @@ class CKRS extends MainPageMHS {
         $row+=10;
         $rpt->setXY(15,$row);
         $rpt->Cell(70, 5, "Mahasiswa",0,0,'C');				
-        $tanggal=$this->TGL->tanggal('j F Y');				
+        $tanggal = $this->TGL->tanggal('j F Y');				
         $rpt->Cell(80, 5, "Tanjungpinang, $tanggal",0,0,'C');
         
         $row+=5;				

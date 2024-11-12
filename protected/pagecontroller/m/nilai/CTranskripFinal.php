@@ -19,7 +19,7 @@ class CTranskripFinal extends MainPageM {
       $this->tbCmbPs->Text=$_SESSION['kjur'];			
       $this->tbCmbPs->dataBind();	
 
-      $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
       $this->tbCmbTA->DataSource=$ta;					
       $this->tbCmbTA->Text=$_SESSION['ta'];						
       $this->tbCmbTA->dataBind();
@@ -58,7 +58,7 @@ class CTranskripFinal extends MainPageM {
   public function getInfoToolbar() {        
     $kjur=$_SESSION['kjur'];        
     $ps=$_SESSION['daftar_jurusan'][$kjur];
-    $ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+    $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester=$this->setup->getSemester($_SESSION['semester']);
     $text="Program Studi $ps TA $ta Semester $semester";
     return $text;
@@ -76,7 +76,7 @@ class CTranskripFinal extends MainPageM {
   }
   public function populateData($search=false) {							
     $kjur=$_SESSION['kjur'];
-    $ta=$_SESSION['ta'];
+    $ta = $_SESSION['ta'];
     $idsmt=$_SESSION['semester'];                
     if ($search) {
       $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim";
@@ -137,7 +137,7 @@ class CTranskripFinal extends MainPageM {
         if (!$this->Nilai->isNimExist()) throw new AkademikException ($nim,2);	
         if ($this->Application->getModule ('environment')->checkRequirementTranskripFinal) {
           if ($this->Nilai->dataMhs['k_status']!='L')throw new Exception ("Status ($nim) belum lulus.");
-          $awal=$r[1]['tahun'].$r[1]['semester'];
+          $awal = $r[1]['tahun'].$r[1]['semester'];
           $akhir=$_SESSION['ta'].$_SESSION['semester'];
           $totalsks=$this->DB->getSumRowsOfTable('sks',"v_nilai WHERE (tasmt BETWEEN $awal AND $akhir) AND nim='$nim' AND n_kual !='E'");
           if ($totalsks <144)throw new Exception ("Pada T.A dan semester ini total SKS ($nim) baru $totalsks harus lebih dari atau sama dengan 144");				

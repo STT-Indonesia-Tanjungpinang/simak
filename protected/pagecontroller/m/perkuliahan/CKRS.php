@@ -68,7 +68,7 @@ class CKRS Extends MainPageM {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk=$_SESSION['currentPageKRS']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageKRS']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
@@ -119,7 +119,7 @@ class CKRS Extends MainPageM {
 		$this->populateData($_SESSION['currentPageKRS']['search']);
 	}
 	public function populateData($search=false) {					
-		$ta=$_SESSION['ta'];
+		$ta = $_SESSION['ta'];
 		$semester=$_SESSION['semester'];
 		$kjur=$_SESSION['kjur'];
 		$tahun_masuk=$_SESSION['currentPageKRS']['tahun_masuk'];
@@ -245,7 +245,7 @@ class CKRS Extends MainPageM {
                         if ($idsmt==3) {                        
                             if (!$this->Finance->getSKSFromSP ($tahun,$idsmt))throw new Exception ("Anda tidak bisa mengisi KRS karena belum melakukan pembayaran untuk Semester Pendek");																			
                         }else {
-                            $data=$this->Finance->getTresholdPembayaran($tahun,$idsmt,true);				                        
+                            $data = $this->Finance->getTresholdPembayaran($tahun,$idsmt,true);				                        
                             if (!$data['bool'])throw new Exception ("Anda tidak bisa mengisi KRS karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
                         }
                     } 
@@ -366,7 +366,7 @@ class CKRS Extends MainPageM {
                 }
             break;
             case 'btnPrintKRSAll' :
-                $repeater=$this->RepeaterS;
+                $repeater = $this->RepeaterS;
                 if ($repeater->Items->Count() > 0) {
                     switch ($_SESSION['outputreport']) {
                         case  'summarypdf' :
@@ -391,7 +391,7 @@ class CKRS Extends MainPageM {
 
                             $currentPage=$repeater->CurrentPageIndex;
                             $offset=$currentPage*$repeater->PageSize;
-                            $awal=$offset+1;        
+                            $awal = $offset+1;        
                             $akhir=$repeater->Items->Count()+$offset;                            
                             $dataReport['awal']=$awal;
                             $dataReport['akhir']=$akhir;

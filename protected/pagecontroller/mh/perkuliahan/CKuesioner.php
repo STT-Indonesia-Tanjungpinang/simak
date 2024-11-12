@@ -13,7 +13,7 @@ class CKuesioner extends MainPageMHS {
 			}
             try {
                 $idkrsmatkul=addslashes($this->request['id']);   
-                $str = "SELECT idpengampu_penyelenggaraan,iddosen,nidn,nama_dosen FROM v_kelas_mhs WHERE idkrsmatkul=$idkrsmatkul";
+                $str = "SELECT idpengampu_penyelenggaraan,iddosen,nidn,nama_dosen FROM v_kelas_mhs WHERE idkrsmatkul = $idkrsmatkul";
                 $this->DB->setFieldTable(array('idpengampu_penyelenggaraan','iddosen','nidn','nama_dosen'));
                 $dk=$this->DB->getRecord($str);
                 
@@ -23,13 +23,13 @@ class CKuesioner extends MainPageMHS {
                 }
                 $datakelas=$dk[1];
                 //check nilainya udah di isi atau belum ?
-                $str = "SELECT km.idkrsmatkul AS idkrsmatkul,km.idpenyelenggaraan AS idpenyelenggaraan,k.idsmt AS idsmt,k.tahun AS tahun,p.kmatkul AS kmatkul,m.nmatkul AS nmatkul,m.sks AS sks,m.semester AS semester,nm.telah_isi_kuesioner AS telah_isi_kuesioner,nm.tanggal_isi_kuesioner AS tanggal_isi_kuesioner,d.iddosen AS iddosen,d.nidn AS nidn,concat(d.gelar_depan,_latin1' ',d.nama_dosen,_latin1' ',d.gelar_belakang) AS nama_dosen FROM (((((krs k JOIN krsmatkul km ON((k.idkrs = km.idkrs))) JOIN penyelenggaraan p ON((km.idpenyelenggaraan = p.idpenyelenggaraan))) JOIN matakuliah m ON((p.kmatkul = m.kmatkul))) JOIN dosen d ON((d.iddosen = p.iddosen))) JOIN nilai_matakuliah nm ON((nm.idkrsmatkul = km.idkrsmatkul))) where ((k.sah = 1) and (km.batal = 0) AND (km.idkrsmatkul=$idkrsmatkul))";                
+                $str = "SELECT km.idkrsmatkul AS idkrsmatkul,km.idpenyelenggaraan AS idpenyelenggaraan,k.idsmt AS idsmt,k.tahun AS tahun,p.kmatkul AS kmatkul,m.nmatkul AS nmatkul,m.sks AS sks,m.semester AS semester,nm.telah_isi_kuesioner AS telah_isi_kuesioner,nm.tanggal_isi_kuesioner AS tanggal_isi_kuesioner,d.iddosen AS iddosen,d.nidn AS nidn,concat(d.gelar_depan,_latin1' ',d.nama_dosen,_latin1' ',d.gelar_belakang) AS nama_dosen FROM (((((krs k JOIN krsmatkul km ON((k.idkrs = km.idkrs))) JOIN penyelenggaraan p ON((km.idpenyelenggaraan = p.idpenyelenggaraan))) JOIN matakuliah m ON((p.kmatkul = m.kmatkul))) JOIN dosen d ON((d.iddosen = p.iddosen))) JOIN nilai_matakuliah nm ON((nm.idkrsmatkul = km.idkrsmatkul))) where ((k.sah = 1) and (km.batal = 0) AND (km.idkrsmatkul = $idkrsmatkul))";                
                 $this->DB->setFieldTable(array('idkrsmatkul','idpenyelenggaraan','idsmt','tahun','kmatkul','nmatkul','sks','semester','telah_isi_kuesioner','iddosen','nidn','nama_dosen'));
                 $r=$this->DB->getRecord($str);				
                 if (isset($r[1])) {
-                    $datamatkul=$r[1];                    
+                    $datamatkul = $r[1];                    
                     if ($datamatkul['telah_isi_kuesioner']) {
-                        $tanggal=$this->TGL->tanggal('d F Y',$datamatkul['tanggal_isi_kuesioner']);
+                        $tanggal = $this->TGL->tanggal('d F Y',$datamatkul['tanggal_isi_kuesioner']);
                         throw new Exception ("Untuk matakuliah ini, Anda telah mengisi Kuesioner pada tanggal $tanggal.");
                     }else{
                         $datamatkul['iddosen2']=$datakelas['iddosen'];
@@ -38,7 +38,7 @@ class CKuesioner extends MainPageMHS {
                         $datamatkul['iddosen_kuesioner']=$datakelas['iddosen'];
                         
                         $datamatkul['kmatkul']=$this->Demik->getKMatkul($datamatkul['kmatkul']);                    
-                        $this->Demik->InfoMatkul=$datamatkul;
+                        $this->Demik->InfoMatkul = $datamatkul;
                         $_SESSION['currentPageKuesioner']['DataMatakuliah']=$datamatkul;                    
                         $idsmt=$datamatkul['idsmt'];
                         $tahun=$datamatkul['tahun'];
@@ -64,7 +64,7 @@ class CKuesioner extends MainPageMHS {
 		}			
 	}    
     public function getInfoToolbar() {                
-		$ta=$_SESSION['currentPageKuesioner']['ta'];
+		$ta = $_SESSION['currentPageKuesioner']['ta'];
 		$semester=$this->setup->getSemester($_SESSION['currentPageKuesioner']['semester']);
 		$text="TA $ta Semester $semester";
 		return $text;
@@ -84,12 +84,12 @@ class CKuesioner extends MainPageMHS {
     }
     public function changeDosenPengampu ($sender,$param) {
         $_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan']=$this->cmbPengampuMatakuliah->Text;
-        $idkrsmatkul=$_SESSION['currentPageKuesioner']['DataMatakuliah']['idkrsmatkul'];  
+        $idkrsmatkul = $_SESSION['currentPageKuesioner']['DataMatakuliah']['idkrsmatkul'];  
         $this->redirect('perkuliahan.Kuesioner',true,array('id'=>$idkrsmatkul));
     }
 	public function populateData() {	        
         if ($_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan'] != 'none') {
-            $ta=$_SESSION['currentPageKuesioner']['ta'];
+            $ta = $_SESSION['currentPageKuesioner']['ta'];
             $idsmt=$_SESSION['currentPageKuesioner']['semester']; 
             $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();                
             $kelompok_pertanyaan[0]='UNDEFINED';
@@ -116,13 +116,13 @@ class CKuesioner extends MainPageMHS {
         }
 	}	
     
-    public function saveData ($sender,$param) {		
+    public function saveData($sender, $param) {		
 		if ($this->IsValid) {
-            $idkrsmatkul=$_SESSION['currentPageKuesioner']['DataMatakuliah']['idkrsmatkul'];       
+            $idkrsmatkul = $_SESSION['currentPageKuesioner']['DataMatakuliah']['idkrsmatkul'];       
             if ($idkrsmatkul > 0) {
                 $idpengampu_penyelenggaraan=$_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan'];                        
                 $this->DB->beginTransaction();
-                $str="UPDATE nilai_matakuliah SET telah_isi_kuesioner=1,tanggal_isi_kuesioner=NOW() WHERE idkrsmatkul=$idkrsmatkul";
+                $str="UPDATE nilai_matakuliah SET telah_isi_kuesioner=1,tanggal_isi_kuesioner=NOW() WHERE idkrsmatkul = $idkrsmatkul";
                 if ($this->DB->updateRecord($str)) {
                     $jumlahpertanyaan=$this->RepeaterS->Items->getCount();
                     $i=0;

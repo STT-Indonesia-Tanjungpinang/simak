@@ -43,7 +43,7 @@ class CEditNilai extends MainPageD {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$_SESSION['ta'];		
+        $ta = $_SESSION['ta'];		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$ta='T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
 		$this->lblModulHeader->Text="Program Studi $ps $ta Semester $semester";
@@ -66,7 +66,7 @@ class CEditNilai extends MainPageD {
 	}		
 	public function populateData() {
         $iddosen=$this->Pengguna->getDataUser('iddosen');
-		$ta=$_SESSION['ta'];
+		$ta = $_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
 		$kjur=$_SESSION['kjur'];		
 

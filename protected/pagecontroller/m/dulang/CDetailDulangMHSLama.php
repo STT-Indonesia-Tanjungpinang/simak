@@ -16,7 +16,7 @@ class CDetailDulangMHSLama Extends MainPageM {
                     $this->cmbAddDosenWali->Text=$datamhs['iddosen_wali'];
                     $this->cmbAddDosenWali->dataBind();	           
                     
-                    $ta=$this->DMaster->getNamaTA($datamhs['ta']);		
+                    $ta = $this->DMaster->getNamaTA($datamhs['ta']);		
                     $semester = $this->setup->getSemester($datamhs['idsmt']);
                     
                     $this->lblModulHeader->Text="T.A $ta Semester $semester";
@@ -32,10 +32,10 @@ class CDetailDulangMHSLama Extends MainPageM {
     public function getDataMHS($idx) {		        
         return $this->Demik->getDataMHS($idx);
     }    
-    public function saveData ($sender,$param) {		
+    public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSLama']['DataMHS'];						
-			$ta=$datamhs['ta'];							
+			$ta = $datamhs['ta'];							
 			$semester=$datamhs['idsmt'];
 			$tanggal=date ('Y-m-d H:m:s');			
             $nim=  $datamhs['nim'];           
@@ -44,7 +44,7 @@ class CDetailDulangMHSLama Extends MainPageM {
 			$str = "UPDATE register_mahasiswa SET iddosen_wali='$iddosen_wali',k_status='A' WHERE nim='$nim'";			
 			$this->DB->query ('BEGIN');
 			if ($this->DB->updateRecord($str)) {
-                $status_sebelumnnya=$datamhs['k_status'];
+                $status_sebelumnnya = $datamhs['k_status'];
                 $tasmt=$ta.$semester;
 				$str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$semester','$tasmt','$tanggal','$kelas','$status_sebelumnnya','A')";
 				$this->DB->insertRecord($str);				

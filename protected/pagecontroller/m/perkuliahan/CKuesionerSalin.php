@@ -14,7 +14,7 @@ class CKuesionerSalin extends MainPageM {
             $_SESSION['currentPageKuesioner']['search']=false; 
             $this->lblModulHeader->Text=$this->getInfoToolbar();
             
-            $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->cmbTA->DataSource=$ta;					
 			$this->cmbTA->Text=$_SESSION['ta'];						
 			$this->cmbTA->dataBind();
@@ -26,13 +26,13 @@ class CKuesionerSalin extends MainPageM {
 		}			
 	}    
     public function getInfoToolbar() {                
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="TA $ta Semester $semester";
 		return $text;
 	} 
     public function checkTaSemester ($sender,$param) {                
-        $ta=$param->Value;        
+        $ta = $param->Value;        
         if ($_SESSION['ta'] == $ta && $_SESSION['semester'] == $this->cmbSemester->Text) {
             $sender->ErrorMessage="Tidak bisa menyalin dari T.A dan Semester KE T.A dan Semester yang sama.";
             $param->IsValid=false;
@@ -43,7 +43,7 @@ class CKuesionerSalin extends MainPageM {
             $ta_sekarang=$_SESSION['ta'];
             $semester_sekarang=$_SESSION['semester'];
                 
-            $ta=$this->cmbTA->Text;
+            $ta = $this->cmbTA->Text;
             $semester=$this->cmbSemester->Text;
             
             $this->DB->query('BEGIN');  

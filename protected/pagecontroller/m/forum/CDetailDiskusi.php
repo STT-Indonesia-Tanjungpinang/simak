@@ -46,10 +46,10 @@ class CDetailDiskusi extends MainPageM {
 		if ($this->IsValid) {	
             $idpost=$_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idpost'];            
             $idkategori=$_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idkategori'];
-            $judul=$_SESSION['currentPageDetailDiskusi']['DataDiskusi']['title'];
+            $judul = $_SESSION['currentPageDetailDiskusi']['DataDiskusi']['title'];
             $content = strip_tags(addslashes($this->txtAddContent->Text));
             $this->txtAddContent->Text='';
-            $userid=$this->Pengguna->getDataUser('userid');                        
+            $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user=$this->Pengguna->getDataUser('username');                        
             $str = "INSERT INTO forumposts (idpost,idkategori,parentpost,title,content,userid,tipe,nama_user,date_added) VALUES (NULL,$idkategori,$idpost,'$judul','$content',$userid,'m','$nama_user',NOW())";                   
             $this->DB->insertRecord($str);

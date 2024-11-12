@@ -19,7 +19,7 @@ class CPesertaMatakuliah extends MainPageM {
                 $id=addslashes($this->request['id']);
                 $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');                
                 $this->hiddenid->Value=$id;
-                $infomatkul=$this->Demik->getInfoMatkul($id,'penyelenggaraan'); 
+                $infomatkul = $this->Demik->getInfoMatkul($id,'penyelenggaraan'); 
                 if (!isset($infomatkul['idpenyelenggaraan'])) {                                                
                     throw new Exception ("Kode penyelenggaraan dengan id ($id) tidak terdaftar.");		
                 }
@@ -41,7 +41,7 @@ class CPesertaMatakuliah extends MainPageM {
                 $this->tbCmbPs->dataBind();	
 
                 $tahun=$_SESSION['ta'];
-                $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
                 $this->tbCmbTA->DataSource=$ta;					
                 $this->tbCmbTA->Text=$tahun;						
                 $this->tbCmbTA->dataBind();
@@ -65,7 +65,7 @@ class CPesertaMatakuliah extends MainPageM {
                 $this->tbCmbPs->Text=$_SESSION['kjur'];			
                 $this->tbCmbPs->dataBind();	
                 
-                $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
                 $this->tbCmbTA->DataSource=$ta;					
                 $this->tbCmbTA->Text=$_SESSION['ta'];						
                 $this->tbCmbTA->dataBind();
@@ -83,7 +83,7 @@ class CPesertaMatakuliah extends MainPageM {
     public function getInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
@@ -105,11 +105,11 @@ class CPesertaMatakuliah extends MainPageM {
 	}
     public function checkKodeMatkul ($sender,$param) {
 		$this->idProcess=$sender->getId()=='viewpeserta'?'add':'edit';
-        $kmatkul=$param->Value;		
+        $kmatkul = $param->Value;		
         if ($kmatkul != '') {
             try {   
-                $kmatkul=$this->Demik->getIDKurikulum($_SESSION['kjur']).'_'.$kmatkul;                
-                $ta=$_SESSION['ta'];
+                $kmatkul = $this->Demik->getIDKurikulum($_SESSION['kjur']).'_'.$kmatkul;                
+                $ta = $_SESSION['ta'];
                 $idsmt=$_SESSION['semester'];
                 $str = "SELECT idpenyelenggaraan FROM penyelenggaraan WHERE kmatkul='$kmatkul' AND  idsmt='$idsmt' AND tahun='$ta'";
                 $this->DB->setFieldTable (array('idpenyelenggaraan'));			

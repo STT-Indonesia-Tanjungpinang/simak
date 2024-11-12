@@ -9,7 +9,7 @@ class CProfiles extends MainPageAPI {
         }                
     }
     protected function populateData () {
-    	$userid=$this->Pengguna->getDataUser('userid');
+    	$userid = $this->Pengguna->getDataUser('userid');
         $str = "SELECT u.userid,u.username,u.nama,u.email,u.active,u.foto,u.ipaddress,u.token,u.logintime,u.active FROM user u WHERE page='api' AND userid='$userid'";                         
         $this->DB->setFieldTable(array('userid','username','nama','email','email','ipaddress','token','foto','logintime','active'));
         $r = $this->DB->getRecord($str);  
@@ -38,7 +38,7 @@ class CProfiles extends MainPageAPI {
     }  
     public function checkEmail ($sender,$param) {
         $this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
-        $email=$param->Value;       
+        $email = $param->Value;       
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
@@ -62,7 +62,7 @@ class CProfiles extends MainPageAPI {
             if ($this->txtEditPassword1->Text == '') {
                 $str = "UPDATE user SET email='$email',nama='$nama',ipaddress='$ipaddress' WHERE userid=$id";
             }else {
-                $data=$this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
+                $data = $this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];                              
                 $str = "UPDATE user SET userpassword='$password',salt='$salt',ipaddress='$ipaddress',nama='$nama',email='$email' WHERE userid=$id";
@@ -72,8 +72,8 @@ class CProfiles extends MainPageAPI {
         }
     }  
     public function resetToken ($sender,$param) {
-    	$userid=$this->Pengguna->getDataUser('userid');
-    	$data=$this->Pengguna->createHashPassword(mt_rand(1,1000));        
+    	$userid = $this->Pengguna->getDataUser('userid');
+    	$data = $this->Pengguna->createHashPassword(mt_rand(1,1000));        
         $password=$data['password'];
         $str = "UPDATE user SET token='$password' WHERE userid=$userid";
         $this->DB->updateRecord($str); 

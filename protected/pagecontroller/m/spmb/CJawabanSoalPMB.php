@@ -37,7 +37,7 @@ class CJawabanSoalPMB extends MainPageM {
                             $dataujian['jawaban_salah']=$jawaban_salah;
                             $soal_tidak_terjawab=$this->DB->getCountRowsOfTable("jawaban_ujian WHERE idjawaban=0 AND no_formulir='$no_formulir'",'idjawaban');
                             $dataujian['soal_tidak_terjawab']=$soal_tidak_terjawab;
-                            $jumlah_soal=$jawaban_benar+$jawaban_salah+$soal_tidak_terjawab;
+                            $jumlah_soal = $jawaban_benar+$jawaban_salah+$soal_tidak_terjawab;
                             $dataujian['jumlah_soal']=$jumlah_soal;
                             $nilai=($jawaban_benar/$jumlah_soal)*100;
                             $dataujian['nilai']=$nilai;
@@ -79,9 +79,9 @@ class CJawabanSoalPMB extends MainPageM {
     public function dataBindRepeaterJawaban ($sender,$param) {
         $item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
-            $idsoal=$item->DataItem['idsoal'];
+            $idsoal = $item->DataItem['idsoal'];
             $idjawaban_tersimpan=$item->DataItem['idjawaban'];
-            $str = "SELECT idjawaban,idsoal,j.jawaban,$idjawaban_tersimpan AS jawaban_tersimpan FROM jawaban j WHERE idsoal=$idsoal";
+            $str = "SELECT idjawaban,idsoal,j.jawaban,$idjawaban_tersimpan AS jawaban_tersimpan FROM jawaban j WHERE idsoal = $idsoal";
             $this->DB->setFieldTable(array('idjawaban','idsoal','jawaban','jawaban_tersimpan')); 
             $r=$this->DB->getRecord($str);                   
             $item->RepeaterJawaban->DataSource=$r;
@@ -91,7 +91,7 @@ class CJawabanSoalPMB extends MainPageM {
     public function setDataBound ($sender,$param) {
 		$item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {	
-            $idsoal=$item->DataItem['idsoal'];
+            $idsoal = $item->DataItem['idsoal'];
 			$item->rdJawaban->setUniqueGroupName("jawaban$idsoal");
             if ($item->DataItem['jawaban_tersimpan'] > 0){                                
                 $item->rdJawaban->Checked=$item->DataItem['jawaban_tersimpan']==$item->DataItem['idjawaban'];

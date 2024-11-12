@@ -17,7 +17,7 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
 			$this->tbCmbPs->Text=$_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $ta=$_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
+            $ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
             $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA (),'none');
             $this->tbCmbTA->Enabled=$bool;
             $this->tbCmbTA->Text=$ta;
@@ -36,7 +36,7 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
     public function setInfoToolbar() {                
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGanjil']['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGanjil']['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs ($sender,$param) {		
@@ -66,7 +66,7 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
 		$this->populateData($_SESSION['currentPagePembayaranSemesterGanjil']['search']);
 	}
 	public function populateData($search=false) {		
-		$ta=$_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
+		$ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
 		$semester=$_SESSION['currentPagePembayaranSemesterGanjil']['semester'];
 		$kjur=$_SESSION['kjur'];	
         

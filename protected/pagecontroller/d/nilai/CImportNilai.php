@@ -62,7 +62,7 @@ class CImportNilai extends MainPageD {
                 if (!$bool) {
                     throw new Exception ("Tipe file tidak kenal. Untuk saat ini, hanya mendukung file excel versi 2007 ke atas.");
                 }
-                $userid=$this->Pengguna->getDataUser('iddosen');
+                $userid = $this->Pengguna->getDataUser('iddosen');
                 $datanilai=$_SESSION['currentPageImportNilai']['DataNilai'];
                 $idkelas_mhs=$datanilai['idkelas_mhs'];
                 $persentase_quiz=$datanilai['persen_quiz'] > 0 ?number_format($datanilai['persen_quiz']/100,2):0;
@@ -82,14 +82,14 @@ class CImportNilai extends MainPageD {
                 for ($row = 2; $row <= $highestRow; $row++){ 
                     //  Read a row of data into an array
                     $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,NULL,TRUE,FALSE);
-                    $idkrsmatkul=$rowData[0][0];
+                    $idkrsmatkul = $rowData[0][0];
                     $nilai_quiz=$rowData[0][3]>0?$rowData[0][3]:0;
                     $nilai_tugas=$rowData[0][4]>0?$rowData[0][4]:0;
                     $nilai_uts=$rowData[0][5]>0?$rowData[0][5]:0;
                     $nilai_uas=$rowData[0][6]>0?$rowData[0][6]:0;
                     $nilai_absen=$rowData[0][7]>0?$rowData[0][7]:0;
                     $n_kuan=($persentase_quiz*$nilai_quiz)+($persentase_tugas*$nilai_tugas)+($persentase_uts*$nilai_uts)+($persentase_uas*$nilai_uas)+($persentase_absen*$nilai_absen);
-                    $n_kual=$this->Nilai->getRentangNilaiNKuan($n_kuan);
+                    $n_kual = $this->Nilai->getRentangNilaiNKuan($n_kuan);
                     
                     $str = "REPLACE INTO nilai_imported (idkrsmatkul,idkelas_mhs,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, n_kuan,n_kual) VALUES ($idkrsmatkul,$idkelas_mhs,'$persentase_quiz','$persentase_tugas','$persentase_uts','$persentase_uas','$persentase_absen','$nilai_quiz','$nilai_tugas','$nilai_uts','$nilai_uas','$nilai_absen','$n_kuan','$n_kual')";																				
                     $this->DB->insertRecord($str);
@@ -104,19 +104,19 @@ class CImportNilai extends MainPageD {
         }
     }
     
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             $idkelas_mhs=$_SESSION['currentPageImportNilai']['DataNilai']['idkelas_mhs'];
-            $userid=$this->Pengguna->getDataUser('iddosen');
+            $userid = $this->Pengguna->getDataUser('iddosen');
             foreach ($this->RepeaterS->Items As $inputan) {
                 if ($inputan->chkProcess->Checked) {
                     $item=$inputan->chkProcess->getNamingContainer();
-                    $idkrsmatkul=$this->RepeaterS->DataKeys[$item->getItemIndex()];
+                    $idkrsmatkul = $this->RepeaterS->DataKeys[$item->getItemIndex()];
                     
-                    $str = "REPLACE INTO nilai_matakuliah (idkrsmatkul,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, n_kuan,n_kual,userid_input,tanggal_input,userid_modif,tanggal_modif,bydosen,ket,telah_isi_kuesioner,tanggal_isi_kuesioner) SELECT idkrsmatkul,persentase_quiz,persentase_tugas,persentase_uts,persentase_uas,persentase_absen,nilai_quiz,nilai_tugas,nilai_uts,nilai_uas,nilai_absen,n_kuan,n_kual,$userid,NOW(),$userid,NOW(),1,'imported by dosen',1,NOW() FROM nilai_imported WHERE idkrsmatkul=$idkrsmatkul";																				
+                    $str = "REPLACE INTO nilai_matakuliah (idkrsmatkul,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, n_kuan,n_kual,userid_input,tanggal_input,userid_modif,tanggal_modif,bydosen,ket,telah_isi_kuesioner,tanggal_isi_kuesioner) SELECT idkrsmatkul,persentase_quiz,persentase_tugas,persentase_uts,persentase_uas,persentase_absen,nilai_quiz,nilai_tugas,nilai_uts,nilai_uas,nilai_absen,n_kuan,n_kual,$userid,NOW(),$userid,NOW(),1,'imported by dosen',1,NOW() FROM nilai_imported WHERE idkrsmatkul = $idkrsmatkul";																				
                     $this->DB->insertRecord($str);
                     
-                    $this->DB->deleteRecord("nilai_imported WHERE idkrsmatkul=$idkrsmatkul");
+                    $this->DB->deleteRecord("nilai_imported WHERE idkrsmatkul = $idkrsmatkul");
                 }
             }
             $this->redirect("nilai.ImportNilai", true,array('id'=>$idkelas_mhs));

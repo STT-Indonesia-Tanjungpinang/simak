@@ -13,7 +13,7 @@ class CDetailDPNA extends MainPageM {
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();            
             try {
-                $idpenyelenggaraan=addslashes($this->request['id']);                                
+                $idpenyelenggaraan = addslashes($this->request['id']);                                
                 $this->Demik->getInfoMatkul($idpenyelenggaraan,'penyelenggaraan');
                 if (!isset($this->Demik->InfoMatkul['idpenyelenggaraan'])) {                                                
                     throw new Exception ("Kode penyelenggaraan dengan id ($idpenyelenggaraan) tidak terdaftar.");		
@@ -50,14 +50,14 @@ class CDetailDPNA extends MainPageM {
 		}
 	}    
     public function filterRecord ($sender,$param) {
-        $this->Demik->InfoMatkul=$_SESSION['currentPageDPNA']['DataDPNA'];
+        $this->Demik->InfoMatkul = $_SESSION['currentPageDPNA']['DataDPNA'];
 		$_SESSION['currentPageDPNA']['idkelas_mhs']=$this->cmbDaftarKelas->Text;
 		$this->populateData($_SESSION['currentPageDPNA']['search']);        
         $this->populateInfoKelas($_SESSION['currentPageDPNA']['idkelas_mhs']);
         $this->InfoKelasPanel->render($param->NewWriter);
 	}
 	protected function populateData() {		        
-        $idpenyelenggaraan=addslashes($this->request['id']);
+        $idpenyelenggaraan = addslashes($this->request['id']);
         $idkelas=$_SESSION['currentPageDPNA']['idkelas_mhs'];
         $str = $idkelas == 'none' ?"SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan=$idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC":"SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs=$idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
         $this->DB->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kuan','n_kual'));
@@ -71,7 +71,7 @@ class CDetailDPNA extends MainPageM {
             $hm='-';
             if ($v['n_kual']!= '') {
                 $n_kuan=$v['n_kuan'];
-                $n_kual=$v['n_kual'];
+                $n_kual = $v['n_kual'];
                 $am=$this->Nilai->getAngkaMutu($v['n_kual']);
                 $hm=$am*$sks;
             }
@@ -86,7 +86,7 @@ class CDetailDPNA extends MainPageM {
 	}    
     protected function populateInfoKelas ($idkelas_mhs) {        
         $infokelas='';
-        $dataDPNA=$_SESSION['currentPageDPNA']['DataDPNA'];
+        $dataDPNa = $_SESSION['currentPageDPNA']['DataDPNA'];
         $dataDPNA['idkelas_mhs']=$idkelas_mhs;
         if ($idkelas_mhs == 'none') {
             $dataDPNA['idjabatan_dosen_pengajar']=0;
@@ -142,7 +142,7 @@ class CDetailDPNA extends MainPageM {
         $this->literalInfoKelas->Text=$infokelas;
     }
 	public function printOut ($sender,$param) {	
-        $this->Demik->InfoMatkul=$_SESSION['currentPageDPNA']['DataDPNA'];
+        $this->Demik->InfoMatkul = $_SESSION['currentPageDPNA']['DataDPNA'];
         $this->createObj('reportnilai');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';

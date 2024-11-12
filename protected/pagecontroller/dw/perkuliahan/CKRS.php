@@ -65,7 +65,7 @@ class CKRS Extends MainPageDW {
   public function setInfoToolbar() {        
     $kjur=$_SESSION['kjur'];        
     $ps=$_SESSION['daftar_jurusan'][$kjur];
-    $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+    $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
     $semester = $this->setup->getSemester($_SESSION['semester']);
     $tahunmasuk=$_SESSION['currentPageKRS']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageKRS']['tahun_masuk']);		        
     $this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
@@ -112,7 +112,7 @@ class CKRS Extends MainPageDW {
   }
   public function populateData($search=false) {
     $iddosen_wali=$this->iddosen_wali;
-    $ta=$_SESSION['ta'];
+    $ta = $_SESSION['ta'];
     $semester=$_SESSION['semester'];
     $kjur=$_SESSION['kjur'];
     $tahun_masuk=$_SESSION['currentPageKRS']['tahun_masuk'];         
@@ -249,7 +249,7 @@ class CKRS Extends MainPageDW {
             if ($idsmt==3) {                        
               if (!$this->Finance->getSKSFromSP ($tahun,$idsmt))throw new Exception ("Anda tidak bisa mengisi KRS karena belum melakukan pembayaran untuk Semester Pendek");																			
             }else {
-              $data=$this->Finance->getTresholdPembayaran($tahun,$idsmt,true);				                        
+              $data = $this->Finance->getTresholdPembayaran($tahun,$idsmt,true);				                        
               if (!$data['bool'])throw new Exception ("Anda tidak bisa mengisi KRS karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
             }
           } 

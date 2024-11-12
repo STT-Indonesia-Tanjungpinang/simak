@@ -60,7 +60,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
     
 	public function getAngkatan ($tanpanone=true) {
 		$dt =$this->DMaster->getListTA();		        
-		$ta=$_SESSION['currentPageRekapStatusMahasiswa']['ta1'];		
+		$ta = $_SESSION['currentPageRekapStatusMahasiswa']['ta1'];		
 		$tahun_akademik=$tanpanone==true?array('none'=>'All'):array();
 		while (list($k,$v)=each ($dt)) {
 			if ($k != 'none') {
@@ -116,7 +116,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
         
         $k_status=$_SESSION['currentPageRekapStatusMahasiswa']['k_status'];
         $tahun_masuk=$_SESSION['currentPageRekapStatusMahasiswa']['tahun_masuk'];
-        $sql=$tahun_masuk == 'none'?'':"AND tahun_masuk='$tahun_masuk'";        
+        $sql = $tahun_masuk == 'none'?'':"AND tahun_masuk='$tahun_masuk'";        
         
         $idsmt=$_SESSION['currentPageRekapStatusMahasiswa']['idsmt'];        
         $sql.=$idsmt == 'none'?'':"AND idsmt='$idsmt'";

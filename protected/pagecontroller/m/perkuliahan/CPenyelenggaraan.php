@@ -18,7 +18,7 @@ class CPenyelenggaraan extends MainPageM {
 			$this->tbCmbPs->Text=$_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource=$ta;					
 			$this->tbCmbTA->Text=$_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
@@ -55,13 +55,13 @@ class CPenyelenggaraan extends MainPageM {
     public function getInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
 	public function populateData($search=false) {	
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        
         $idkur=$this->Demik->getIDKurikulum($kjur);
@@ -87,7 +87,7 @@ class CPenyelenggaraan extends MainPageM {
 	}	
 	public function addProcess ($sender,$param) {		
 		$this->idProcess = 'add';	
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        
         $idkur=$this->Demik->getIDKurikulum($kjur);
@@ -106,9 +106,9 @@ class CPenyelenggaraan extends MainPageM {
 			$item->cmbAddDaftarDosen->dataBind();			
 		}
 	}
-	public function saveData ($sender,$param) {
+	public function saveData($sender, $param) {
 		if ($this->page->isValid) {				
-			$ta=$_SESSION['ta'];
+			$ta = $_SESSION['ta'];
             $idsmt=$_SESSION['semester'];
             $kjur=$_SESSION['kjur'];
             
@@ -117,7 +117,7 @@ class CPenyelenggaraan extends MainPageM {
 			foreach ($this->RepeaterAdd->Items As $inputan) {
                 $iddosen=$inputan->cmbAddDaftarDosen->Text;
 				if ($iddosen != 'none'&& $iddosen !='') {					
-					$kmatkul=$inputan->txtKmatkul->Value;					
+					$kmatkul = $inputan->txtKmatkul->Value;					
 					$str2 = $str . "$kmatkul','$kjur',$iddosen)";					
 					$this->DB->query('BEGIN');
 					if ($this->DB->insertRecord($str2)) {

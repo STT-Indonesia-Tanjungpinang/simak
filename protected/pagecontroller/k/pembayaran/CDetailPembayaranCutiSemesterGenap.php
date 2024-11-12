@@ -33,7 +33,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                 if (isset($datadulang['iddulang'])) {
                     if ($datadulang['k_status']!='C') {
                         $status=$this->DMaster->getNamaStatusMHSByID ($datadulang['k_status']);
-                        $ta=$datadulang['tahun'];
+                        $ta = $datadulang['tahun'];
                         throw new Exception ("NIM ($nim) sudah daftar ulang di semester Genap T.A $ta dengan status $status.");		
                     }
                 }
@@ -48,7 +48,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                 $datamhs['nama_dosen']=$nama_dosen;
                 
                 $this->Finance->setDataMHS($datamhs);
-                CDetailPembayaranCutiSemesterGenap::$KewajibanMahasiswa=$this->Finance->getBiayaCuti($datamhs['tahun_masuk'],$datamhs['semester_masuk'],$datamhs['idkelas']);
+                CDetailPembayaranCutiSemesterGenap::$KewajibanMahasiswa = $this->Finance->getBiayaCuti($datamhs['tahun_masuk'],$datamhs['semester_masuk'],$datamhs['idkelas']);
                 $_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS']=$datamhs;    
                 
                 $this->populateTransaksi();
@@ -110,9 +110,9 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {	
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             $datamhs=$_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS'];
             $tahun=$datamhs['ta'];
             $nim=$datamhs['nim'];
@@ -144,14 +144,14 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
             if (!isset($datadulang['iddulang'])) {                	
                 $kelas=$datamhs['idkelas'];
                 $k_status=$datamhs['k_status'];
-                $ta=$datamhs['ta'];
+                $ta = $datamhs['ta'];
                 $idsmt=$datamhs['idsmt'];
                 $tasmt=$ta.$idsmt;
                 
                 $str = "SELECT tanggal FROM transaksi_cuti WHERE no_transaksi=$no_transaksi";
                 $this->DB->setFieldTable(array('tanggal'));
                 $result=$this->DB->getRecord($str);	
-                $tanggal=$result[1]['tanggal'];
+                $tanggal = $result[1]['tanggal'];
                 
                 $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$idsmt','$tasmt','$tanggal','$kelas','$k_status','C')";
                 $this->DB->insertRecord($str);

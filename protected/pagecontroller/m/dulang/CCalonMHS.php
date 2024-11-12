@@ -72,23 +72,23 @@ class CCalonMHS Extends MainPageM {
         $tahun_masuk=$_SESSION['tahun_masuk'];
         $semester_masuk=$_SESSION['currentPageCalonMHS']['semester_masuk'];
         if ($search) {
-            $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta=$tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
+            $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
                 case 'no_formulir' :
                     $clausa=" AND fp.no_formulir='$txtsearch'";                    
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta=$tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
+                    $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
                     $str = "$str $clausa";
                 break;                
                 case 'nama' :
                     $clausa=" AND fp.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta=$tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
+                    $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
                     $str = "$str $clausa";
                 break;
             }
         }else{            
-            $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta=$tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta=$tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL",'DISTINCT(fp.no_formulir)');
+            $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
+            $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur=$kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL",'DISTINCT(fp.no_formulir)');
         }
 		
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageCalonMHS']['page_num'];
@@ -107,7 +107,7 @@ class CCalonMHS Extends MainPageM {
             $v['nkelas']=$this->DMaster->getNamaKelasByID($v['idkelas']);
             $v['idsmt']=$semester_masuk;
             $this->Finance->setDataMHS($v);
-            $data=$this->Finance->getTresholdPembayaran($tahun_masuk,$semester_masuk,true);
+            $data = $this->Finance->getTresholdPembayaran($tahun_masuk,$semester_masuk,true);
             $v['total_bayar']='('.$this->Finance->toRupiah($data['total_biaya']).')'.$this->Finance->toRupiah($data['total_bayar']);
             $v['bool']=$data['bool'];
             $result[$k]=$v;
@@ -151,7 +151,7 @@ class CCalonMHS Extends MainPageM {
                 if ($this->Finance->isMhsRegistered()){
                     throw new Exception ("Calon Mahasiswa a.n ".$datamhs['nama_mhs']." dengan no formulir $no_formulir sudah terdaftar di P.S ".$_SESSION['daftar_jurusan'][$datamhs['kjur']]);
                 }
-                $data=$this->Finance->getTresholdPembayaran($datamhs['tahun_masuk'],$datamhs['semester_masuk'],true);                                                       
+                $data = $this->Finance->getTresholdPembayaran($datamhs['tahun_masuk'],$datamhs['semester_masuk'],true);                                                       
                 if (!$data['bool']) {
                     throw new Exception ("Calon Mahasiswa a.n ".$this->Finance->dataMhs['nama_mhs']."($no_formulir) tidak bisa daftar ulang karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
                 }

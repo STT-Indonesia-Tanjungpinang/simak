@@ -52,7 +52,7 @@ class CTambahKRS extends MainPageDW {
           $idkrs=$this->KRS->DataKRS['krs']['idkrs'];
           $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs=$idkrs ORDER BY semester ASC,kmatkul ASC";
           $this->DB->setFieldTable(array('idpenyelenggaraan','idkrsmatkul','kmatkul','nmatkul','sks','semester','batal','nidn','nama_dosen'));
-          $matkul=$this->DB->getRecord($str);                
+          $matkul = $this->DB->getRecord($str);                
           $this->RepeaterS->DataSource=$matkul;
           $this->RepeaterS->dataBind();
 
@@ -73,7 +73,7 @@ class CTambahKRS extends MainPageDW {
   }
   public function getInfoToolbar() 
   {                
-    $ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+    $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester=$this->setup->getSemester($_SESSION['semester']);
     $text="TA $ta Semester $semester";
     return $text;
@@ -117,7 +117,7 @@ class CTambahKRS extends MainPageDW {
     }		
   }
   public function hapusMatkul ($sender,$param) {		
-    $idkrsmatkul=$this->getDataKeyField($sender,$this->RepeaterS);			
+    $idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);			
     
     $datakrs=$_SESSION['currentPageKRS']['DataKRS']['krs'];
     $idkrs=$datakrs['idkrs'];
@@ -143,7 +143,7 @@ class CTambahKRS extends MainPageDW {
     $item=$param->Item;		
     if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') 
     {					
-      $matkul=$item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									
+      $matkul = $item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									
       if ($_SESSION['currentPageKRS']['DataKRS']['krs']['sah']&&!$item->DataItem['batal']) 
       {
         $onclick="alert('Tidak bisa menghapus Matakuliah $matkul, karena sudah disahkan oleh Dosen Wali.')";

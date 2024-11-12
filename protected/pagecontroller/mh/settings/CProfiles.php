@@ -79,15 +79,15 @@ class CProfiles extends MainPageMHS {
 		$this->literalTahunMasuk->Text=$this->DMaster->getNamaTA($dataMhs['ta']);
         $this->literalSemesterMasuk->Text=$this->setup->getSemester($dataMhs['idsmt']);
         
-        $this->imgPhotoUser->ImageUrl=$dataMhs['photo_profile'];
+        $this->imgPhotoUser->ImageUrl = $dataMhs['photo_profile'];
 			
     }
     
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             $theme=$this->cmbTheme->Text;
             $_SESSION['theme']=$theme;
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE nim='$userid'";            
             $this->DB->updateRecord($str);            
            
@@ -96,7 +96,7 @@ class CProfiles extends MainPageMHS {
     }
     public function saveDataPassword ($sender,$param) {
         if ($this->IsValid) {
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             if ($this->txtPassword->Text != '') {  
                 $password=md5($this->txtPassword->Text);
                 $str = "UPDATE profiles_mahasiswa SET userpassword='$password' WHERE nim='$userid'";
@@ -113,13 +113,13 @@ class CProfiles extends MainPageMHS {
 			$tempat_lahir=addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
 			$tgl_lahir=date ('Y-m-d',$this->txtEditTanggalLahir->TimeStamp);
 			$jk=$this->rdEditPria->Checked===true?'L':'P';
-            $idagama=$this->cmbEditAgama->Text;
+            $idagama = $this->cmbEditAgama->Text;
             $nama_ibu_kandung=addslashes($this->txtEditNamaIbuKandung->Text);
-			$idwarga=$this->rdEditWNI->Checked===true?'WNI':'WNA';
+			$idwarga = $this->rdEditWNI->Checked===true?'WNI':'WNA';
             $no_ktp=strtoupper(trim(addslashes($this->txtEditNIK->Text)));
             $alamat_rumah=strtoupper(trim(addslashes($this->txtEditAlamatKTP->Text)));
-            $kelurahan=addslashes($this->txtEditKelurahan->Text);
-            $kecamatan=addslashes($this->txtEditKecamatan->Text);
+            $kelurahan = addslashes($this->txtEditKelurahan->Text);
+            $kecamatan = addslashes($this->txtEditKecamatan->Text);
             $telp_rumah=addslashes($this->txtEditNoTelpRumah->Text);		
             $telp_hp=addslashes($this->txtEditNoTelpHP->Text);
             $email=addslashes($this->txtEditEmail->Text);            
@@ -132,15 +132,15 @@ class CProfiles extends MainPageMHS {
 			$kota=strtoupper(addslashes($this->txtEditKotaPendidikanTerakhir->Text));	
 			$provinsi=strtoupper(addslashes($this->txtEditProvinsiPendidikanTerakhir->Text));	
 			$tahun_pa=strtoupper(trim($this->txtEditTahunPendidikanTerakhir->Text));		
-            $jenisslta=$this->cmbEditJenisSLTA->Text;
+            $jenisslta = $this->cmbEditJenisSLTA->Text;
 			$asal_slta=strtoupper(addslashes($this->txtEditAsalSLTA->Text));			
-            $statusslta=$this->cmbEditStatusSLTA->Text;
+            $statusslta = $this->cmbEditStatusSLTA->Text;
 			$nomor_ijazah=trim($this->txtEditNomorIjazah->Text);                  
             	
-            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama=$idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota='$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta='$jenisslta',asal_slta='$asal_slta',status_slta='$statusslta',nomor_ijazah='$nomor_ijazah' WHERE no_formulir='$no_formulir'";
+            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota='$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta='$jenisslta',asal_slta='$asal_slta',status_slta='$statusslta',nomor_ijazah='$nomor_ijazah' WHERE no_formulir='$no_formulir'";
             $this->DB->query('BEGIN');
 			if ($this->DB->updateRecord($str)) {
-                $email=$this->txtEditEmail->Text;                
+                $email = $this->txtEditEmail->Text;                
                 $str = "UPDATE profiles_mahasiswa SET email='$email' WHERE no_formulir=$no_formulir";
                 $this->DB->updateRecord($str);
                 $this->DB->query('COMMIT');
@@ -186,7 +186,7 @@ class CProfiles extends MainPageMHS {
             $path="resources/photomhs/$filename-$part";
             $sender->saveAs($path);            
             chmod(BASEPATH."/$path",0644); 
-            $this->imgPhotoUser->ImageUrl=$path; 
+            $this->imgPhotoUser->ImageUrl = $path; 
             $no_formulir=$this->Pengguna->getDataUser('no_formulir');
             $this->DB->updateRecord("UPDATE profiles_mahasiswa SET photo_profile='$path' WHERE no_formulir='$no_formulir'");
             $_SESSION['foto']=$path;

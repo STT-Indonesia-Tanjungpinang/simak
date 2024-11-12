@@ -46,7 +46,7 @@ class CPKRS extends MainPageDW {
     }	
   }
   public function setInfoToolbar() {   
-    $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+    $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
     $semester = $this->setup->getSemester($_SESSION['semester']);		
     $this->lblModulHeader->Text="T.A $ta Semester $semester";        
   }
@@ -73,7 +73,7 @@ class CPKRS extends MainPageDW {
   }
   private function populateData ($search=false) {
     $iddosen_wali=$this->iddosen_wali;
-    $ta=$_SESSION['ta'];
+    $ta = $_SESSION['ta'];
     $idsmt=$_SESSION['semester'];
     $str = "SELECT p.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,vp.nmatkul,vp.sks,p.tambah,p.hapus,p.batal,p.sah,p.tanggal FROM pkrs p,v_datamhs vdm,v_penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali=$iddosen_wali";
       
@@ -129,7 +129,7 @@ class CPKRS extends MainPageDW {
   }
   
   public function checkNIM ($sender,$param) {		
-    $ta=$_SESSION['ta'];
+    $ta = $_SESSION['ta'];
     $idsmt=$_SESSION['semester'];
     $nim=addslashes($param->Value);
     try {
@@ -148,7 +148,7 @@ class CPKRS extends MainPageDW {
         $this->KRS->getKRS($ta,$idsmt);
         $datakrs=$this->KRS->DataKRS['krs'];
         if (!isset($datakrs['idkrs'])) {                    
-          $ta=$this->DMaster->getNamaTA($ta);		
+          $ta = $this->DMaster->getNamaTA($ta);		
           $semester = $this->setup->getSemester($idsmt);
           throw new Exception ("Mahasiswa Dengan NIM ($nim) belum melakukan KRS di T.A ($ta) Semester $semester !!!");
         }

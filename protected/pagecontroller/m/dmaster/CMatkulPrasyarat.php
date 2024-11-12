@@ -16,7 +16,7 @@ class CMatkulPrasyarat extends MainPageM {
 	protected function populateData () {						
         try {
             $id=addslashes($this->request['id']);
-            $kmatkul=$this->Demik->getKMatkul($id);
+            $kmatkul = $this->Demik->getKMatkul($id);
             $str = "SELECT kmatkul,nmatkul,semester FROM matakuliah WHERE kmatkul='$id'";                        
             $this->DB->setFieldTable(array('kmatkul','nmatkul','semester'));
             $r = $this->DB->getRecord($str);	
@@ -24,7 +24,7 @@ class CMatkulPrasyarat extends MainPageM {
                 $_SESSION['currentPageMatkulPrasyarat']['dataMatkul']=array();
                 throw new Exception("Matakuliah dengan kode ($kmatkul) tidak terdaftar.");
             }
-            $data=$r[1];
+            $data = $r[1];
             $this->lblMatkul->Text=$data['nmatkul'];                 
             if ($data['semester']==1) {
                 throw new Exception("Matakuliah yang berada di semester 1 tidak ada prasyaratnya.");
@@ -52,7 +52,7 @@ class CMatkulPrasyarat extends MainPageM {
         $value=$param->Value;		
         if ($value != '') {
             try {   
-                $kmatkul=$this->Demik->getIDKurikulum($_SESSION['kjur']).'_'.$value;                
+                $kmatkul = $this->Demik->getIDKurikulum($_SESSION['kjur']).'_'.$value;                
                 $str = "SELECT kmatkul,nmatkul,semester FROM matakuliah WHERE kmatkul='$kmatkul'";                        
                 $this->DB->setFieldTable(array('kmatkul','nmatkul','semester'));
                 $r = $this->DB->getRecord($str);
@@ -60,7 +60,7 @@ class CMatkulPrasyarat extends MainPageM {
                 if (!isset($r[1])) {                                
                     throw new Exception ("Kode matakuliah ($value) tidak terdaftar.");		
                 }
-                $datamatkul=$_SESSION['currentPageMatkulPrasyarat']['dataMatkul'];                
+                $datamatkul = $_SESSION['currentPageMatkulPrasyarat']['dataMatkul'];                
                 if ($datamatkul['semester'] <= $r[1]['semester']) {
                     throw new Exception ("Semester matakuliah yang di inputkan tidak boleh lebih besar atau lebih besar sama dengan dari matakuliah ini.");		
                 }      
@@ -74,9 +74,9 @@ class CMatkulPrasyarat extends MainPageM {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {            
-			$kmatkul=$_SESSION['currentPageMatkulPrasyarat']['dataMatkul']['kmatkul'];		
+			$kmatkul = $_SESSION['currentPageMatkulPrasyarat']['dataMatkul']['kmatkul'];		
 			$kmatkul_syarat=$this->Demik->getIDKurikulum($_SESSION['kjur']).'_'.$this->txtAddKodeMatkul->Text;				
 			$str = "INSERT INTO matakuliah_syarat (kmatkul,kmatkul_syarat) VALUES ('$kmatkul','$kmatkul_syarat')";
 			$this->DB->insertRecord($str);            
@@ -86,7 +86,7 @@ class CMatkulPrasyarat extends MainPageM {
     public function deleteRecord($sender,$param) { 		
 		$id=$this->getDataKeyField($sender,$this->RepeaterS);		
 		$this->DB->deleteRecord("matakuliah_syarat WHERE idsyarat_kmatkul='$id'");
-        $kmatkul=$_SESSION['currentPageMatkulPrasyarat']['dataMatkul']['kmatkul'];	
+        $kmatkul = $_SESSION['currentPageMatkulPrasyarat']['dataMatkul']['kmatkul'];	
 		$this->redirect('dmaster.MatkulPrasyarat',true,array('id'=>$kmatkul));
 	}
 }

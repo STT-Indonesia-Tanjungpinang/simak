@@ -21,7 +21,7 @@ class CHome extends MainPageK {
 		}                
 	}
     public function changeTbTA ($sender,$param) {				
-        $ta=$this->tbCmbTA->Text;
+        $ta = $this->tbCmbTA->Text;
 		$_SESSION['ta']=$ta;    
 		$this->redirect('Home',true);
 	} 
@@ -31,7 +31,7 @@ class CHome extends MainPageK {
 		$this->populateData();
 	}
     public function populateData () {
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $totalpembayaranmahasiswa = $this->DB->getSumRowsOfTable('dibayarkan',"transaksi t,transaksi_detail td WHERE t.no_transaksi=td.no_transaksi AND t.tahun=$ta AND idsmt=$idsmt");
         CHome::$TotalPembayaranMahasiswa = $totalpembayaranmahasiswa;

@@ -143,7 +143,7 @@ class CDiskusi extends MainPageM {
             $idkategori = addslashes($this->cmbAddKategori->Text);
             $judul = strip_tags(addslashes($this->txtAddTitle->Text));
             $content = strip_tags(addslashes($this->txtAddContent->Text));
-            $userid=$this->Pengguna->getDataUser('userid');                        
+            $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user=$this->Pengguna->getDataUser('username');                        
             $str = "INSERT INTO forumposts (idpost,idkategori,title,content,userid,tipe,nama_user,date_added) VALUES (NULL,$idkategori,'$judul','$content',$userid,'m','$nama_user',NOW())";
             $this->DB->insertRecord($str);

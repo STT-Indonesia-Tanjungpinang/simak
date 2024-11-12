@@ -46,7 +46,7 @@ class CJadwalUjianPMB extends MainPageM {
 		$this->populateData($_SESSION['currentPageJadwalUjianPMB']['search']);
 	}
     public function getInfoToolbar() {        
-		$ta=$this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="Tahun Masuk $ta Semester $semester";
 		return $text;
@@ -85,11 +85,11 @@ class CJadwalUjianPMB extends MainPageM {
         $this->cmbAddRuang->DataSource=$this->DMaster->getRuangKelas();
         $this->cmbAddRuang->dataBind();
     }
-	public function saveData ($sender,$param) {
+	public function saveData($sender, $param) {
         if ($this->IsValid) {
             $tahun_masuk=$this->hiddentahunmasuk->Value;
             $semester=1;
-            $nama_kegiatan=addslashes($this->txtAddNamaKegiatan->Text);
+            $nama_kegiatan = addslashes($this->txtAddNamaKegiatan->Text);
             $tgl_ujian=date ('Y-m-d',$this->txtAddTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtAddJamMasuk->Text);
             $jam_keluar=addslashes($this->txtAddJamKeluar->Text);
@@ -123,7 +123,7 @@ class CJadwalUjianPMB extends MainPageM {
     public function updateData ($sender,$param) {
         if ($this->IsValid) {
             $id=$this->hiddenid->Value;
-            $nama_kegiatan=addslashes($this->txtEditNamaKegiatan->Text);
+            $nama_kegiatan = addslashes($this->txtEditNamaKegiatan->Text);
             $tgl_ujian=date ('Y-m-d',$this->txtEditTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtEditJamMasuk->Text);
             $jam_keluar=addslashes($this->txtEditJamKeluar->Text);
@@ -167,7 +167,7 @@ class CJadwalUjianPMB extends MainPageM {
                 $this->DB->setFieldTable(array('idjadwal_ujian','tahun_masuk','idsmt','nama_kegiatan','tanggal_ujian','jam_mulai','jam_akhir','tanggal_akhir_daftar','namaruang','kapasitas','status'));
                 $r = $this->DB->getRecord($str);
                 $dataReport=$r[1];        
-                $jumlah_peserta=$this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian=$idjadwal_ujian",'pum.no_formulir');
+                $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian=$idjadwal_ujian",'pum.no_formulir');
 
                 $dataReport['nama_tahun']=$this->DMaster->getNamaTA($dataReport['tahun_pendaftaran']);
                 $dataReport['jumlah_peserta']=$jumlah_peserta;

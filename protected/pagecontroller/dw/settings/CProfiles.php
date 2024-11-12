@@ -18,11 +18,11 @@ class CProfiles extends MainPageDW {
         $this->cmbTheme->DataBind();
     }
     
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             $theme=$this->cmbTheme->Text;
             $_SESSION['theme']=$theme;
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             $str = "UPDATE user SET theme='$theme' WHERE userid=$userid";            
             $this->DB->updateRecord($str);
             $this->redirect('settings.Profiles',true);

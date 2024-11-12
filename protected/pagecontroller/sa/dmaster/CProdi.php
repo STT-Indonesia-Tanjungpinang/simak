@@ -62,7 +62,7 @@ class CProdi extends MainPageSA {
             }   
         }
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             $kjur=addslashes($this->txtAddKodePS->Text);
             $kjur_forlap=addslashes($this->txtAddKodePSForlap->Text);

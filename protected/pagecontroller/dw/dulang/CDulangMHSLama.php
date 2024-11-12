@@ -49,7 +49,7 @@ class CDulangMHSLama Extends MainPageDW {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSLama']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
@@ -87,7 +87,7 @@ class CDulangMHSLama Extends MainPageDW {
 	}
     public function populateData($search=false) {
         $iddosen_wali=$this->iddosen_wali;
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
 		$kjur=$_SESSION['kjur'];
 		$tahun_masuk=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'];        

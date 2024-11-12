@@ -17,7 +17,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 			$this->tbCmbPs->Text=$_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $ta=$_SESSION['currentPagePembayaranSemesterPendek']['ta'];
+            $ta = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];
             $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA (),'none');            
             $this->tbCmbTA->Text=$ta;
             $this->tbCmbTA->dataBind();
@@ -30,7 +30,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
             
 			if (isset($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim'])) {
 				$this->linkDetailPembayaran->Visible=true;
-				$this->linkDetailPembayaran->NavigateUrl=$this->constructUrl('pembayaran.DetailPembayaranSemesterPendek',true,array('id'=>$_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim']));
+				$this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterPendek',true,array('id'=>$_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim']));
 				$this->txtNIM->Enabled=false;
 				$this->btnGo->Enabled=false;
 				$this->tbCmbTA->Enabled=false;
@@ -45,7 +45,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
     public function setInfoToolbar() {                
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs ($sender,$param) {		
@@ -75,7 +75,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 		$this->populateData($_SESSION['currentPagePembayaranSemesterPendek']['search']);
 	}
 	public function populateData($search=false) {		
-		$ta=$_SESSION['currentPagePembayaranSemesterPendek']['ta'];
+		$ta = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];
 		$semester=$_SESSION['currentPagePembayaranSemesterPendek']['semester'];
 		$kjur=$_SESSION['kjur'];	
         

@@ -90,7 +90,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
             $datamhs=$r[1];
             
             $pindahan=$this->Nilai->isMhsPindahan($nim,true);
-            $ulr_profil=$this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$datamhs['nim']));
+            $ulr_profil = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$datamhs['nim']));
             $url='<a href="'.$ulr_profil.'" style="color:#fff">'.$nim.'</a> ';
             $str_pindahan = $pindahan == 0? '' :'<span class="label label-warning">Pindahan</span>';
             $this->labelNIM->Text=$url.$str_pindahan;

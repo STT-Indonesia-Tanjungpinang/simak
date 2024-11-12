@@ -85,8 +85,8 @@ class CPendaftaranOnline extends MainPageK {
             }elseif ($_SESSION['currentPagePendaftaranOnline']['display_record']=='belum_terdaftar'){
                 $str_display='AND no_formulir=0';
             }
-            $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp WHERE ta=$tahun_masuk $str_display";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("formulir_pendaftaran_temp WHERE ta=$tahun_masuk $str_display",'no_pendaftaran');		
+            $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp WHERE ta = $tahun_masuk $str_display";
+            $jumlah_baris=$this->DB->getCountRowsOfTable ("formulir_pendaftaran_temp WHERE ta = $tahun_masuk $str_display",'no_pendaftaran');		
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePendaftaranOnline']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;

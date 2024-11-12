@@ -38,7 +38,7 @@ class CDetailKRS extends MainPageDW {
         }
     }
     public function getInfoToolbar() {                
-		$ta=$this->DMaster->getNamaTA($this->Page->KRS->DataKRS['krs']['tahun']);
+		$ta = $this->DMaster->getNamaTA($this->Page->KRS->DataKRS['krs']['tahun']);
 		$semester=$this->setup->getSemester($this->Page->KRS->DataKRS['krs']['idsmt']);
 		$text="TA $ta Semester $semester";
 		return $text;

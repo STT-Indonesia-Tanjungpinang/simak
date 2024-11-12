@@ -26,7 +26,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
                 }
                 $this->checkPembayaranSemesterLalu ();
 				$this->Finance->setDataMHS($datamhs);
-				CPembayaranSemesterGanjil::$KewajibanMahasiswa=$this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
+				CPembayaranSemesterGanjil::$KewajibanMahasiswa = $this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
 				$this->populateTransaksi();
 			}catch (Exception $ex) {
                 $this->idProcess = 'view';	
@@ -36,7 +36,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 		}	
 	}	
     public function setInfoToolbar() {        
-        $ta=$this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGanjil']['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGanjil']['ta']);        		
 		$this->labelModuleHeader->Text="T.A $ta";        
 	}
     public function changeTbTA ($sender,$param) {				
@@ -84,7 +84,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
         if ($_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] == 'none') {
             $no_formulir=$datamhs['no_formulir'];
             $nim=$datamhs['nim'];
-            $ta=$_SESSION['currentPagePembayaranSemesterGanjil']['ta'];    
+            $ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];    
             $tahun_masuk=$datamhs['tahun_masuk'];
             $idsmt=1;
             if ($this->Finance->getLunasPembayaran($ta,$idsmt)) {
@@ -98,7 +98,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
                 $no_faktur=$ta.$no_transaksi;
                 $ps=$datamhs['kjur'];                
                 $idkelas=$datamhs['idkelas'];
-                $userid=$this->Pengguna->getDataUser('userid');
+                $userid = $this->Pengguna->getDataUser('userid');
 
                 $this->DB->query ('BEGIN');
                 $str = "INSERT INTO transaksi SET no_transaksi=$no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',jumlah_sks=0,disc=0,tanggal=NOW(),userid='$userid',date_added=NOW(),date_modified=NOW()";
@@ -116,7 +116,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
                     $r=$this->DB->getRecord($str);
 
                     while (list($k,$v)=each($r)) {
-                        $biaya=$v['biaya'];
+                        $biaya = $v['biaya'];
                         $idkombi=$v['idkombi'];
                         $sisa_bayar=isset($sudah_dibayarkan[$idkombi]) ? $biaya-$sudah_dibayarkan[$idkombi]:$biaya;
                         $str = "INSERT INTO transaksi_detail SET idtransaksi_detail=NULL,no_transaksi=$no_transaksi,idkombi=$idkombi,dibayarkan=$sisa_bayar,jumlah_sks=0";

@@ -17,7 +17,7 @@ class CNilaiFinal extends MainPageON {
       $this->tbCmbPs->Text=$_SESSION['kjur'];			
       $this->tbCmbPs->dataBind();	
 
-      $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
       $this->tbCmbTA->DataSource=$ta;					
       $this->tbCmbTA->Text=$_SESSION['ta'];						
       $this->tbCmbTA->dataBind();
@@ -55,7 +55,7 @@ class CNilaiFinal extends MainPageON {
   public function getInfoToolbar() {        
     $kjur=$_SESSION['kjur'];        
     $ps=$_SESSION['daftar_jurusan'][$kjur];
-    $ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+    $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester=$this->setup->getSemester($_SESSION['semester']);
     $text="Program Studi $ps TA $ta Semester $semester";
     return $text;
@@ -73,7 +73,7 @@ class CNilaiFinal extends MainPageON {
   }
   public function populateData($search=false) {							
     $kjur=$_SESSION['kjur'];
-    $ta=$_SESSION['ta'];
+    $ta = $_SESSION['ta'];
     $idsmt=$_SESSION['semester'];                
     if ($search) {
       $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status,CONCAT(ta.tahun,'',ta.idsmt) AS tasmt FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim";

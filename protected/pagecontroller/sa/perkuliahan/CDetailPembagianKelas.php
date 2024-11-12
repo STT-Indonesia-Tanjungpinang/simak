@@ -13,7 +13,7 @@ public function onLoad($param) {
 			}
             $_SESSION['currentPagePembagianKelas']['search']=false;
             
-            $ta=$_SESSION['ta'];
+            $ta = $_SESSION['ta'];
             $idsmt=$_SESSION['semester'];
             $kjur=$_SESSION['kjur'];
             
@@ -83,13 +83,13 @@ public function onLoad($param) {
     public function getInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}    
 	public function populateData($search=false) {	
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        
         $iddosen=$_SESSION['currentPagePembagianKelas']['iddosen'];
@@ -98,7 +98,7 @@ public function onLoad($param) {
 		$r = $this->DB->getRecord($str);	
         $result = array();
         while (list($k,$v)=each($r)) {  
-            $kmatkul=$v['kmatkul'];
+            $kmatkul = $v['kmatkul'];
             $v['kode_matkul']=$this->Demik->getKMatkul($kmatkul);     
             $v['namakelas']=$this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']';
             $v['jumlah_peserta_kelas']=$this->DB->getCountRowsOfTable('kelas_mhs_detail WHERE idkelas_mhs='.$v['idkelas_mhs'],'idkelas_mhs');
@@ -108,7 +108,7 @@ public function onLoad($param) {
 		$this->RepeaterS->dataBind();           
 	}
 	
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             $iddosen=$_SESSION['currentPagePembagianKelas']['iddosen'];
             if ($iddosen == 'none' || $iddosen=='') {

@@ -13,7 +13,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
 			}
             $_SESSION['currentPageJadwalPerkuliahan']['search']=false;            
             
-            $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource=$ta;					
 			$this->tbCmbTA->Text=$_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
@@ -45,14 +45,14 @@ class CJadwalPerkuliahan extends MainPageMHS {
 	}	
     
     public function getInfoToolbar() { 
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="TA $ta Semester $semester";
 		return $text;
 	}
 	public function populateData($search=false) {
         $datamhs=$this->Pengguna->getDataUser();  
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$datamhs['kjur'];        
         $idkelas=$datamhs['idkelas'];
@@ -63,7 +63,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
 		$r = $this->DB->getRecord($str);	
         $result = array();
         while (list($k,$v)=each($r)) {  
-            $kmatkul=$v['kmatkul'];          
+            $kmatkul = $v['kmatkul'];          
             $v['kode_matkul']=$this->Demik->getKMatkul($kmatkul); 
             $v['namakelas']=$this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']';
             $v['jumlah_peserta_kelas']=$this->DB->getCountRowsOfTable('kelas_mhs_detail WHERE idkelas_mhs='.$v['idkelas_mhs'],'idkelas_mhs');
@@ -78,7 +78,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
 		$r = $this->DB->getRecord($str);	
         $result=array();
         while (list($k,$v)=each($r)) {  
-            $kmatkul=$v['kmatkul'];          
+            $kmatkul = $v['kmatkul'];          
             $v['kode_matkul']=$this->Demik->getKMatkul($kmatkul); 
             $v['namakelas']=$this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']';            
             $result[$k]=$v;

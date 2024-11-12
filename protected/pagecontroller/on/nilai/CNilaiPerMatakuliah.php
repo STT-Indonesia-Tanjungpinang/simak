@@ -15,13 +15,13 @@ class CNilaiPerMatakuliah extends MainPageON {
             try {                     
                 $id=addslashes($this->request['id']);                               
                 $this->hiddenid->Value=$id;
-                $infomatkul=$this->Demik->getInfoMatkul($id,'penyelenggaraan'); 
+                $infomatkul = $this->Demik->getInfoMatkul($id,'penyelenggaraan'); 
                 if (!isset($infomatkul['idpenyelenggaraan'])) {                                                
                     throw new Exception ("Sebelum input nilai mohon pilih Kode penyelenggaraan.");		
                 }
                 $kjur=$infomatkul['kjur'];        
                 $ps=$_SESSION['daftar_jurusan'][$kjur];
-                $ta=$this->DMaster->getNamaTA($infomatkul['tahun']);
+                $ta = $this->DMaster->getNamaTA($infomatkul['tahun']);
                 $semester=$this->setup->getSemester($infomatkul['idsmt']);
                 $text="Program Studi $ps TA $ta Semester $semester";
                 
@@ -36,7 +36,7 @@ class CNilaiPerMatakuliah extends MainPageON {
                 $this->tbCmbPs->Text=$_SESSION['kjur'];			
                 $this->tbCmbPs->dataBind();	
                 
-                $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
                 $this->tbCmbTA->DataSource=$ta;					
                 $this->tbCmbTA->Text=$_SESSION['ta'];						
                 $this->tbCmbTA->dataBind();
@@ -61,7 +61,7 @@ class CNilaiPerMatakuliah extends MainPageON {
     public function getInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
@@ -89,7 +89,7 @@ class CNilaiPerMatakuliah extends MainPageON {
 		$this->populateData($_SESSION['currentPageNilaiPerMatakuliah']['search']);
 	}       
     public function populateData($search=false) {	
-        $ta=$_SESSION['ta'];
+        $ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        
         $idkur=$this->Demik->getIDKurikulum($kjur);
@@ -144,7 +144,7 @@ class CNilaiPerMatakuliah extends MainPageON {
                 $item->txtNilaiAngka->Text=$item->DataItem['n_kuan'];
 				$item->cmbNilai->Text=$item->DataItem['n_kual'];
 				$item->nilai_sebelumnya->Value=$item->DataItem['n_kual'];
-                $bool=$item->DataItem['bydosen']==true?false:true;
+                $bool = $item->DataItem['bydosen']==true?false:true;
                 $item->txtNilaiAngka->Enabled=$bool;
 				$item->cmbNilai->Enabled=$bool;
 			}	
@@ -194,7 +194,7 @@ class CNilaiPerMatakuliah extends MainPageON {
         $result=array();
         ECHO $str;
         while (list($k,$v)=each($r)) {
-            $idkrsmatkul=$v['idkrsmatkul'];
+            $idkrsmatkul = $v['idkrsmatkul'];
             if ($v['userid_input']==0) {
                 $v['tanggal_input']='-';
                 $v['tanggal_modif']='-';
@@ -202,7 +202,7 @@ class CNilaiPerMatakuliah extends MainPageON {
                 $v['tanggal_input']=$this->TGL->tanggal ('j F Y',$v['tanggal_input']);
                 $v['tanggal_modif']=$this->TGL->tanggal ('j F Y',$v['tanggal_modif']);
             }
-            $str = "SELECT km.idkelas,km.nama_kelas FROM kelas_mhs km,kelas_mhs_detail kmd WHERE km.idkelas_mhs=kmd.idkelas_mhs AND kmd.idkrsmatkul=$idkrsmatkul LIMIT 1";
+            $str = "SELECT km.idkelas,km.nama_kelas FROM kelas_mhs km,kelas_mhs_detail kmd WHERE km.idkelas_mhs=kmd.idkelas_mhs AND kmd.idkrsmatkul = $idkrsmatkul LIMIT 1";
             $this->DB->setFieldTable(array('idkelas','nama_kelas'));				
             $datakelas=$this->DB->getRecord($str,$offset+1);
             $v['namakelas']='N.A';
@@ -216,19 +216,19 @@ class CNilaiPerMatakuliah extends MainPageON {
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterP);
         
 	}
-    public function saveData ($sender,$param){
+    public function saveData($sender, $param) {
         if ($this->IsValid){
             $repeater=$this->RepeaterP;            	
-            $userid=$this->Pengguna->getDataUser('userid');		
+            $userid = $this->Pengguna->getDataUser('userid');		
             foreach ($repeater->Items as $inputan) {	
                 if ($inputan->cmbNilai->Enabled) {												
-                    $idkrsmatkul=$inputan->idkrsmatkul->Value;		
-                    $n_kuan=addslashes($inputan->txtNilaiAngka->Text)>0?$inputan->txtNilaiAngka->Text:0;
-                    $n_kual=$inputan->cmbNilai->Text;				
-                    $nilai_sebelumnya=$inputan->nilai_sebelumnya->Value;				
-                    if ($nilai_sebelumnya==''&&$n_kual!='none') {//insert					
+                    $idkrsmatkul = $inputan->idkrsmatkul->Value;		
+                    $n_kuan = addslashes($inputan->txtNilaiAngka->Text)>0?$inputan->txtNilaiAngka->Text:0;
+                    $n_kual = $inputan->cmbNilai->Text;				
+                    $nilai_sebelumnya = $inputan->nilai_sebelumnya->Value;				
+                    if ($nilai_sebelumnya == '' && $n_kual != 'none') {//insert					
                         if (!$this->DB->checkRecordIsExist('idkrsmatkul','nilai_matakuliah',$idkrsmatkul)) {
-                            $str = "INSERT INTO nilai_matakuliah SET idnilai=NULL,idkrsmatkul=$idkrsmatkul,persentase_quiz=0,persentase_tugas=0,persentase_uts=0,persentase_uas=0,persentase_absen=0,nilai_quiz=0,nilai_tugas=0,nilai_uts=0,nilai_uas=0,nilai_absen=0,n_kuan='$n_kuan',n_kual='$n_kual',userid_input=$userid,userid_modif=$userid,tanggal_input=NOW(),tanggal_modif=NOW(),bydosen=0,ket='',telah_isi_kuesioner=0,tanggal_isi_kuesioner=CURDATE()";				
+                            $str = "INSERT INTO nilai_matakuliah SET idnilai=NULL,idkrsmatkul = $idkrsmatkul,persentase_quiz=0,persentase_tugas=0,persentase_uts=0,persentase_uas=0,persentase_absen=0,nilai_quiz=0,nilai_tugas=0,nilai_uts=0,nilai_uas=0,nilai_absen=0,n_kuan='$n_kuan',n_kual='$n_kual',userid_input=$userid,userid_modif=$userid,tanggal_input=NOW(),tanggal_modif=NOW(),bydosen=0,ket='',telah_isi_kuesioner=0,tanggal_isi_kuesioner=CURDATE()";				
                             $this->DB->insertRecord($str);
                         }
                     }elseif($n_kual!='none'&&$n_kual!=$nilai_sebelumnya){//update										

@@ -36,7 +36,7 @@ class CDetailKRS extends MainPageM {
     return $this->KRS->getDataMHS($idx);
   }
   public function getInfoToolbar() {                
-    $ta=$this->DMaster->getNamaTA($this->Page->KRS->DataKRS['krs']['tahun']);
+    $ta = $this->DMaster->getNamaTA($this->Page->KRS->DataKRS['krs']['tahun']);
     $semester=$this->setup->getSemester($this->Page->KRS->DataKRS['krs']['idsmt']);
     $text="TA $ta Semester $semester";
     return $text;
@@ -49,14 +49,14 @@ class CDetailKRS extends MainPageM {
         CDetailKRS::$totalSKSBatal+=$item->DataItem['sks'];
         CDetailKRS::$jumlahMatkulBatal+=1;
       }else{
-        $idkrsmatkul=$item->DataItem['idkrsmatkul'];
+        $idkrsmatkul = $item->DataItem['idkrsmatkul'];
         $idpenyelenggaraan=$item->DataItem['idpenyelenggaraan'];
         $idkelas=$_SESSION['currentPageKRS']['DataMHS']['kelas_dulang'];
         $str = "SELECT km.idkelas_mhs,km.nama_kelas,vpp.nama_dosen,vpp.nidn,km.idruangkelas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) WHERE vpp.idpenyelenggaraan=$idpenyelenggaraan AND km.idkelas='$idkelas'  ORDER BY hari ASC,idkelas ASC,nama_dosen ASC";            
         $this->DB->setFieldTable(array('idkelas_mhs','nama_kelas','nama_dosen','nidn','idruangkelas'));
         $r = $this->DB->getRecord($str);	
         
-        $str = "SELECT idkelas_mhs  FROM kelas_mhs_detail WHERE idkrsmatkul=$idkrsmatkul";            
+        $str = "SELECT idkelas_mhs  FROM kelas_mhs_detail WHERE idkrsmatkul = $idkrsmatkul";            
         $this->DB->setFieldTable(array('idkelas_mhs'));
         $r_selected = $this->DB->getRecord($str);
         
@@ -124,13 +124,13 @@ class CDetailKRS extends MainPageM {
   }		
   public function prosesKelas ($sender,$param) {
     $idkelas_mhs=$sender->Text;
-    $idkrsmatkul=$this->getDataKeyField($sender, $this->RepeaterS);
+    $idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);
     $this->DB->query('BEGIN');
     if ($idkelas_mhs=='none')
     {
-      $this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul=$idkrsmatkul");
-      $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
-      $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
+      $this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul = $idkrsmatkul");
+      $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul = $idkrsmatkul");
+      $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul = $idkrsmatkul");
       
       $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
       $this->DB->updateRecord($str);
@@ -149,13 +149,13 @@ class CDetailKRS extends MainPageM {
       // {
         if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail',$idkrsmatkul))
         {
-          $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul=$idkrsmatkul");
-          $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
-          $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
+          $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul = $idkrsmatkul");
+          $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul = $idkrsmatkul");
+          $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul = $idkrsmatkul");
         }
         else
         {
-          $this->DB->insertRecord("INSERT INTO kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs,idkrsmatkul=$idkrsmatkul");
+          $this->DB->insertRecord("INSERT INTO kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs,idkrsmatkul = $idkrsmatkul");
         }
         
         $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
@@ -214,8 +214,8 @@ class CDetailKRS extends MainPageM {
           $this->DB->setFieldTable(array('idkrsmatkul'));
           $r2 = $this->DB->getRecord($str2);                     
           if (isset($r2[1])) { 
-            $idkrsmatkul=$r2[1]['idkrsmatkul'];
-            $this->DB->insertRecord("REPLACE INTO kelas_mhs_detail SET idkelas_mhs=1241,idkrsmatkul=$idkrsmatkul");
+            $idkrsmatkul = $r2[1]['idkrsmatkul'];
+            $this->DB->insertRecord("REPLACE INTO kelas_mhs_detail SET idkelas_mhs=1241,idkrsmatkul = $idkrsmatkul");
           }
         }
         

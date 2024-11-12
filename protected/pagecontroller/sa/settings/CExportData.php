@@ -138,12 +138,12 @@ class CExportData extends MainPageSA {
                     $sql =$sql."--\n";
                     $sql =$sql. "-- Table: profiles_mahasiswa\n";
                     $sql =$sql. "--\n";
-                    $sql=$sql.$this->buildSqlInsert('profiles_mahasiswa'," WHERE no_formulir='$no_formulir'");  
+                    $sql = $sql.$this->buildSqlInsert('profiles_mahasiswa'," WHERE no_formulir='$no_formulir'");  
 
                     $sql =$sql."--\n";
                     $sql =$sql. "-- Table: data_konversi\n";
                     $sql =$sql. "--\n";
-                    $sql=$sql.$this->buildSqlInsert('data_konversi'," WHERE nim='$nim'");  
+                    $sql = $sql.$this->buildSqlInsert('data_konversi'," WHERE nim='$nim'");  
 
                     $sql =$sql."--\n";
                     $sql =$sql. "-- Table: nilai_konversi\n";
@@ -158,7 +158,7 @@ class CExportData extends MainPageSA {
                     $sql =$sql."--\n";
                     $sql =$sql. "-- Table: dulang\n";
                     $sql =$sql. "--\n";
-                    $sql=$sql.$this->buildSqlInsert('dulang'," WHERE nim='$nim'"); 
+                    $sql = $sql.$this->buildSqlInsert('dulang'," WHERE nim='$nim'"); 
 
                     $sql = $sql."--\n";
                     $sql =$sql. "-- Table: krs\n";
@@ -181,7 +181,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,kbm_detail kbm WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=kbm.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('kbm_detail'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }
 
@@ -191,7 +191,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,kelas_mhs_detail kmd WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=kmd.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('kelas_mhs_detail'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }
 
@@ -201,24 +201,24 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,kuesioner_jawaban kj WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=kj.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('kuesioner_jawaban'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }   
 
                     $sql =$sql."--\n";
                     $sql =$sql. "-- Table: gantinim\n";
                     $sql =$sql. "--\n";
-                    $sql=$sql.$this->buildSqlInsert('gantinim'," WHERE nim_lama='$nim'"); 
+                    $sql = $sql.$this->buildSqlInsert('gantinim'," WHERE nim_lama='$nim'"); 
 
                     $sql =$sql."--\n";
                     $sql =$sql. "-- Table: gantinirm\n";
                     $sql =$sql. "--\n";
-                    $sql=$sql.$this->buildSqlInsert('gantinirm'," WHERE nirm_lama='$nirm'"); 
+                    $sql = $sql.$this->buildSqlInsert('gantinirm'," WHERE nirm_lama='$nirm'"); 
 
                     $sql =$sql."--\n";
                     $sql =$sql. "-- Table: jadwalsidang\n";
                     $sql =$sql. "--\n";
-                    $sql=$sql.$this->buildSqlInsert('jadwalsidang'," WHERE nim='$nim'"); 
+                    $sql = $sql.$this->buildSqlInsert('jadwalsidang'," WHERE nim='$nim'"); 
                     
                     $sql = $sql."--\n";
                     $sql =$sql. "-- Table: nilai_absensi\n";
@@ -226,7 +226,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,nilai_absensi na WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=na.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('nilai_absensi'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }
 
@@ -236,7 +236,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,nilai_imported ni WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=ni.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('nilai_imported'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }
 
@@ -246,7 +246,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,nilai_matakuliah nm WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=nm.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('nilai_matakuliah'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }
 
@@ -256,7 +256,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,nilai_quiz nq WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=nq.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('nilai_quiz'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }
 
@@ -266,7 +266,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,nilai_uas nu WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=nu.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('nilai_uas'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }
 
@@ -276,7 +276,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT km.idkrsmatkul FROM krs k, krsmatkul km,nilai_uts nu WHERE k.idkrs=km.idkrs AND km.idkrsmatkul=nu.idkrsmatkul AND k.nim='$nim'";
                     $r=$this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrsmatkul=$row['idkrsmatkul'];
+                        $idkrsmatkul = $row['idkrsmatkul'];
                         $sql =$sql.$this->buildSqlInsert('nilai_uts'," WHERE idkrsmatkul='$idkrsmatkul'");
                     }
 

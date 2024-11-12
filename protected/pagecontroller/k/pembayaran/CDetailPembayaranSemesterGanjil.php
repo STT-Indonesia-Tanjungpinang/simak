@@ -41,7 +41,7 @@ class CDetailPembayaranSemesterGanjil Extends MainPageK {
                 $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']=$datamhs;         
                 $this->checkPembayaranSemesterLalu ();
                 $this->Finance->setDataMHS($datamhs);
-                CDetailPembayaranSemesterGanjil::$KewajibanMahasiswa=$this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
+                CDetailPembayaranSemesterGanjil::$KewajibanMahasiswa = $this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
                 $this->populateTransaksi();
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
@@ -90,7 +90,7 @@ class CDetailPembayaranSemesterGanjil Extends MainPageK {
         if ($datamhs['no_transaksi'] == 'none') {
             $no_formulir=$datamhs['no_formulir'];
             $nim=$datamhs['nim'];
-            $ta=$datamhs['ta'];    
+            $ta = $datamhs['ta'];    
             $tahun_masuk=$datamhs['tahun_masuk'];
             $idsmt=$_SESSION['currentPagePembayaranSemesterGanjil']['semester'];
             if ($this->Finance->getLunasPembayaran($ta,$idsmt)) {
@@ -104,7 +104,7 @@ class CDetailPembayaranSemesterGanjil Extends MainPageK {
                 $no_faktur=$ta.$no_transaksi;
                 $ps=$datamhs['kjur'];                
                 $idkelas=$datamhs['idkelas'];
-                $userid=$this->Pengguna->getDataUser('userid');
+                $userid = $this->Pengguna->getDataUser('userid');
 
                 $this->DB->query ('BEGIN');
                 $str = "INSERT INTO transaksi SET no_transaksi=$no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";               
@@ -122,7 +122,7 @@ class CDetailPembayaranSemesterGanjil Extends MainPageK {
                     $r=$this->DB->getRecord($str);
 
                     while (list($k,$v)=each($r)) {
-                        $biaya=$v['biaya'];
+                        $biaya = $v['biaya'];
                         $idkombi=$v['idkombi'];
                         $sisa_bayar=isset($sudah_dibayarkan[$idkombi]) ? $biaya-$sudah_dibayarkan[$idkombi]:$biaya;
                         $str = "INSERT INTO transaksi_detail SET idtransaksi_detail=NULL,no_transaksi=$no_transaksi,idkombi=$idkombi,dibayarkan=$sisa_bayar,jumlah_sks=0";

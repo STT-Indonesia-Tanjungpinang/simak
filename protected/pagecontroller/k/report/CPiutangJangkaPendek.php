@@ -43,7 +43,7 @@ class CPiutangJangkaPendek extends MainPageK {
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
         $tahun_masuk=$this->DMaster->getNamaTA($_SESSION['currentPagePiutangJangkaPendek']['tahun_masuk']);	
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		        
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		        
 		$this->lblModulHeader->Text="Program Studi $ps Tahun Masuk $tahun_masuk T.A $ta ";        
 	}
     public function changeTbPs ($sender,$param) {		
@@ -87,7 +87,7 @@ class CPiutangJangkaPendek extends MainPageK {
 	}    
 	public function populateData ($search=false) {			
         $kjur=$_SESSION['kjur'];  
-        $ta=$_SESSION['ta'];                    
+        $ta = $_SESSION['ta'];                    
         $tahun_masuk=$_SESSION['currentPagePiutangJangkaPendek']['tahun_masuk'];                    
              
         $kelas=$_SESSION['currentPagePiutangJangkaPendek']['kelas'];
@@ -139,7 +139,7 @@ class CPiutangJangkaPendek extends MainPageK {
             //status tiap semester ganjil dan genap
             $str = "SELECT k_status FROM dulang WHERE idsmt=1 AND tahun=$ta AND nim='$nim'";
             $this->DB->setFieldTable(array('k_status'));
-            $dulang_ganjil=$this->DB->getRecord($str);            
+            $dulang_ganjil = $this->DB->getRecord($str);            
             $v['n_status_ganjil']=isset($dulang_ganjil[1])?$this->DMaster->getNamaStatusMHSByID ($dulang_ganjil[1]['k_status']):'N.A';                                    
             $str = "SELECT k_status FROM dulang WHERE idsmt=2 AND tahun=$ta AND nim='$nim'";
             $this->DB->setFieldTable(array('k_status'));
@@ -147,7 +147,7 @@ class CPiutangJangkaPendek extends MainPageK {
             $v['n_status_genap']=isset($dulang_genap[1])?$this->DMaster->getNamaStatusMHSByID ($dulang_genap[1]['k_status']):'N.A';                                    
             
             //perhitungan
-            $biaya=$this->getTotalBayarMHS($no_formulir,$ta,$tahun_masuk,$v['semester_masuk'],$komponen_biaya,$idkelas);
+            $biaya = $this->getTotalBayarMHS($no_formulir,$ta,$tahun_masuk,$v['semester_masuk'],$komponen_biaya,$idkelas);
                    
             $v['sudah_bayar_ganjil']=$this->Finance->toRupiah($biaya[1]['sudahbayar']);
             $v['belum_bayar_ganjil']=$this->Finance->toRupiah($biaya[1]['belumbayar']);                        
@@ -163,8 +163,8 @@ class CPiutangJangkaPendek extends MainPageK {
     public function getTotalBayarMHS ($no_formulir,$ta,$tahun_masuk,$semester_masuk,$komponen_biaya,$idkelas) {                        
         $sudahbayar=array(1=>array('sudahbayar'=>0,'belumbayar'=>0),2=>array('sudahbayar'=>0,'belumbayar'=>0));
         if ($ta==$tahun_masuk && $semester_masuk == 1) {
-            $kewajiban_ganjil=$komponen_biaya[$idkelas]['baru'][1];
-            $pembayaran_ganjil=$this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun=$ta AND idsmt=1 AND idkombi!=1");
+            $kewajiban_ganjil = $komponen_biaya[$idkelas]['baru'][1];
+            $pembayaran_ganjil = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun=$ta AND idsmt=1 AND idkombi!=1");
             $sudahbayar[1]['sudahbayar']=$pembayaran_ganjil;
             $sudahbayar[1]['belumbayar']=$kewajiban_ganjil-$pembayaran_ganjil;
             
@@ -179,8 +179,8 @@ class CPiutangJangkaPendek extends MainPageK {
             $sudahbayar[2]['sudahbayar']=$pembayaran;
             $sudahbayar[2]['belumbayar']=$kewajiban-$pembayaran;
         }else{
-            $kewajiban_ganjil=$komponen_biaya[$idkelas]['lama'][1];
-            $pembayaran_ganjil=$this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun=$ta AND idsmt=1 AND idkombi!=1");
+            $kewajiban_ganjil = $komponen_biaya[$idkelas]['lama'][1];
+            $pembayaran_ganjil = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun=$ta AND idsmt=1 AND idkombi!=1");
             $sudahbayar[1]['sudahbayar']=$pembayaran_ganjil;
             $sudahbayar[1]['belumbayar']=$kewajiban_ganjil-$pembayaran_ganjil;
             

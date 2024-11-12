@@ -74,7 +74,7 @@ class CPesertaUjianPMB extends MainPageM {
         $result = array('none'=>' ');
         while (list($k,$v)=each($r)) {  
             $idjadwal_ujian=$v['idjadwal_ujian'];
-            $jumlah_peserta=$this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$idjadwal_ujian",'idjadwal_ujian');
+            $jumlah_peserta = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$idjadwal_ujian",'idjadwal_ujian');
             if ($jumlah_peserta < $v['kapasitas']) {
                 $str = $v['nama_kegiatan'] . ' # '.$this->Page->TGL->tanggal ('l, d F Y',$v['tanggal_ujian']).' # '. $v['jam_mulai'].'-'.$v['jam_akhir'] . ' # '.$this->Page->TGL->tanggal ('l, d F Y',$v['tanggal_akhir_daftar']) .' # '.$v['namaruang'].' ['.$v['kapasitas'].'] sisa '.($v['kapasitas']-$jumlah_peserta);                                                
                 $result[$idjadwal_ujian]=$str;
@@ -117,7 +117,7 @@ class CPesertaUjianPMB extends MainPageM {
         $this->linkOutput->NavigateUrl='#';        
         $dataReport=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
         $idjadwal_ujian=$dataReport['idjadwal_ujian'];
-        $jumlah_peserta=$this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian=$idjadwal_ujian",'pum.no_formulir');
+        $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian=$idjadwal_ujian",'pum.no_formulir');
 		switch ($_SESSION['outputreport']) {
             case  'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                

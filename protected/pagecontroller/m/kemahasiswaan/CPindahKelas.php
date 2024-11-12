@@ -30,7 +30,7 @@ class CPindahKelas Extends MainPageM {
         return $this->Demik->getDataMHS($idx);
     }
     public function setInfoToolbar() {         
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$this->lblModulHeader->Text="T.A $ta Semester $semester";        
 	}
@@ -52,7 +52,7 @@ class CPindahKelas Extends MainPageM {
 		$this->populateData();
 	}
 	public function populateData() {
-		$ta=$_SESSION['ta'];
+		$ta = $_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePindahKelas']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$this->DB->getCountRowsOfTable("v_datamhs vdm,pindahkelas pk WHERE vdm.nim=pk.nim AND pk.tahun='$ta' AND pk.idsmt='$idsmt'");	
@@ -86,7 +86,7 @@ class CPindahKelas Extends MainPageM {
 	public function checkNIM ($sender,$param) {
         $nim=addslashes($param->Value);
 		try {
-			$ta=$_SESSION['ta'];
+			$ta = $_SESSION['ta'];
 			$idsmt=$_SESSION['semester'];					
 			if ($this->DB->checkRecordIsExist('nim','pindahkelas',$nim," AND idsmt='$idsmt' AND tahun='$ta'")){
                 throw new Exception ("NIM ($nim) pada T.A dan Semester ini, telah melakukan pindah kelas !!!");
@@ -152,11 +152,11 @@ class CPindahKelas Extends MainPageM {
             $sender->ErrorMessage=$e->getMessage();
 		}	
 	}
-	public function saveData ($sender,$param) {
+	public function saveData($sender, $param) {
 		if ($this->Page->IsValid) {
 			$nim=$this->hiddennim->Value;
-			$kelas_lama=$this->hiddenkelaslama->Value;
-			$ta=$_SESSION['ta'];
+			$kelas_lama = $this->hiddenkelaslama->Value;
+			$ta = $_SESSION['ta'];
 			$idsmt=$_SESSION['semester'];
             $tanggal=date ('Y-m-d',$this->cmbAddTanggal->TimeStamp);
 			$kelas_baru=$this->cmbAddKelasBaru->Text;
@@ -233,7 +233,7 @@ class CPindahKelas Extends MainPageM {
 		if ($this->DB->deleteRecord("pindahkelas WHERE idpindahkelas='$idpindahkelas'")) {
 			$id=explode('_',$id);
 			$nim=$id[0];
-			$kelas_lama=$id[1];
+			$kelas_lama = $id[1];
 			$this->DB->query ('BEGIN');			
 			$str = "UPDATE register_mahasiswa SET idkelas='$kelas_lama' WHERE nim='$nim'";
             $this->DB->updateRecord($str);

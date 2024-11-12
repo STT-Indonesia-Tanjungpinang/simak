@@ -19,7 +19,7 @@ class CStopInputNilai extends MainPageON{
             $this->tbCmbPs->Text=$_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
-            $ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
             $this->tbCmbTA->DataSource=$ta;					
             $this->tbCmbTA->Text=$_SESSION['ta'];						
             $this->tbCmbTA->dataBind();
@@ -38,7 +38,7 @@ class CStopInputNilai extends MainPageON{
     public function getInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
+		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
@@ -71,7 +71,7 @@ class CStopInputNilai extends MainPageON{
 		$this->populateData($_SESSION['currentPageStopInputNilai']['search']);
 	}
 	protected function populateData ($search=false){
-		$ta=$_SESSION['ta'];
+		$ta = $_SESSION['ta'];
         $idsmt=$_SESSION['semester'];
         $kjur=$_SESSION['kjur'];        
         
@@ -123,7 +123,7 @@ class CStopInputNilai extends MainPageON{
 		$r = $this->DB->getRecord($str,$offset+1);	
         $result = array();
         while (list($k,$v)=each($r)) {  
-            $kmatkul=$v['kmatkul'];
+            $kmatkul = $v['kmatkul'];
             $v['kode_matkul']=$this->Nilai->getKMatkul($kmatkul); 
             $v['namakelas']=$this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']';
             $v['jumlah_peserta_kelas']=$this->DB->getCountRowsOfTable('kelas_mhs_detail WHERE idkelas_mhs='.$v['idkelas_mhs'],'idkelas_mhs');

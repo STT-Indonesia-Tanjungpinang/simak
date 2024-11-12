@@ -13,17 +13,17 @@ class CProfiles extends MainPageM {
         
 	}   
     public function populateData () {        
-        $this->imgPhotoUser->ImageUrl=$_SESSION['foto']; 
+        $this->imgPhotoUser->ImageUrl = $_SESSION['foto']; 
         $this->cmbTheme->DataSource=$this->setup->getListThemes();
         $this->cmbTheme->Text=$_SESSION['theme'];
         $this->cmbTheme->DataBind();
     }
     
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             $theme=$this->cmbTheme->Text;
             $_SESSION['theme']=$theme;
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             $str = "UPDATE user SET theme='$theme' WHERE userid=$userid";            
             $this->DB->updateRecord($str);
             $this->redirect('settings.Profiles',true);
@@ -66,7 +66,7 @@ class CProfiles extends MainPageM {
             $path="resources/userimages/$filename-$part";
             $sender->saveAs($path);            
             chmod(BASEPATH."/$path",0644); 
-            $this->imgPhotoUser->ImageUrl=$path; 
+            $this->imgPhotoUser->ImageUrl = $path; 
             $username=$this->Pengguna->getDataUser('username');
             $this->DB->updateRecord("UPDATE user SET foto='$path' WHERE username='$username'");
             $this->DB->updateRecord("UPDATE user SET foto='$path' WHERE username='$username'");
@@ -106,9 +106,9 @@ class CProfiles extends MainPageM {
 
     public function saveDataPassword ($sender,$param) {
         if ($this->IsValid) {
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             if ($this->txtPassword->Text != '') {                
-                $data=$this->Pengguna->createHashPassword($this->txtPassword->Text);
+                $data = $this->Pengguna->createHashPassword($this->txtPassword->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];
                 $str = "UPDATE user SET userpassword='$password',salt='$salt' WHERE userid=$userid";               

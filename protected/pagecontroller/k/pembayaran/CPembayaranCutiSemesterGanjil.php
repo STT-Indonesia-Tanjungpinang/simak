@@ -28,11 +28,11 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
     public function setInfoToolbar() {                
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
 	public function changeTbTA ($sender,$param) {				
-        $ta=$this->tbCmbTA->Text;
+        $ta = $this->tbCmbTA->Text;
 		$_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta']=$ta;    
         $this->setInfoToolbar();
 		$this->populateData();
@@ -50,7 +50,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
 		$this->populateData();
 	}		
 	public function populateData() {	
-		$ta=$_SESSION['ta'];
+		$ta = $_SESSION['ta'];
 		$kjur=$_SESSION['kjur'];	
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_num'];
 		$jumlah_baris=$this->DB->getCountRowsOfTable("v_datamhs vdm,transaksi_cuti tc WHERE vdm.nim=tc.nim AND vdm.kjur='$kjur' AND tc.tahun='$ta' AND tc.idsmt='1'");
@@ -84,7 +84,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
                 if (isset($datadulang['iddulang'])) {
                     if ($datadulang['k_status']!='C') {
                         $status=$this->DMaster->getNamaStatusMHSByID ($datadulang['k_status']);
-                        $ta=$datadulang['tahun'];
+                        $ta = $datadulang['tahun'];
                         throw new Exception ("<br /><br />NIM ($nim) sudah daftar ulang di semester Ganjil T.A $ta dengan status $status.");		
                     }
                 }

@@ -56,7 +56,7 @@ class CDetailDPNA extends MainPageD {
             $hm='-';
             if ($v['n_kual']!= '') {
                 $n_kuan=$v['n_kuan'];
-                $n_kual=$v['n_kual'];
+                $n_kual = $v['n_kual'];
                 $am=$this->Nilai->getAngkaMutu($v['n_kual']);
                 $hm=$am*$sks;
             }

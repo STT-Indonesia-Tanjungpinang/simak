@@ -45,7 +45,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
         $datamhs=$_SESSION['currentPagePembayaranFormulir']['DataMHS'];        
         $no_transaksi=$datamhs['no_transaksi'];
         $no_formulir=$datamhs['no_formulir'];
-        $ta=$datamhs['tahun_masuk'];                
+        $ta = $datamhs['tahun_masuk'];                
         $idsmt=$datamhs['semester_masuk'];     
         $kelas=$datamhs['idkelas'];                
         
@@ -72,7 +72,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
         $r=$this->DB->getRecord($str);
         
         while (list($k,$v)=each($r)) {
-            $biaya=$v['biaya'];
+            $biaya = $v['biaya'];
             $idkombi=$v['idkombi'];
             $sudah_dibayar=isset($sudah_dibayarkan[$idkombi])?$sudah_dibayarkan[$idkombi]:0;
             if ($sudah_dibayar <=$biaya) {
@@ -112,7 +112,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
         $datamhs=$_SESSION['currentPagePembayaranFormulir']['DataMHS'];
         $no_transaksi=$datamhs['no_transaksi'];
         $no_formulir=$datamhs['no_formulir'];
-        $ta=$datamhs['tahun_masuk'];                
+        $ta = $datamhs['tahun_masuk'];                
         $idsmt=$datamhs['semester_masuk'];     
         $kelas=$datamhs['idkelas'];       
         
@@ -126,7 +126,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
         $str = "SELECT biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$ta AND kpt.idkelas='$kelas' AND kpt.idkombi=$id";
         $this->DB->setFieldTable(array('biaya'));
         $r=$this->DB->getRecord($str);
-        $biaya=$r[1]['biaya'];
+        $biaya = $r[1]['biaya'];
         
         $jumlah_bayar=$this->Finance->toInteger(addslashes($item->ColumnJumlahBayar->TextBox->Text));                         
         
@@ -180,7 +180,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {	
             $datamhs=$_SESSION['currentPagePembayaranFormulir']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];

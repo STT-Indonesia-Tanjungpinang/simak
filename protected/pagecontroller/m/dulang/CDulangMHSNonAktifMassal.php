@@ -49,7 +49,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
+        $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk=$_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
@@ -97,7 +97,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
         $this->populateData($_SESSION['currentPageDulangMHSNonAktifMassal']['search']);
     }
     public function populateData($search=false) {
-        $ta=$_SESSION['currentPageDulangMHSNonAktifMassal']['ta'];
+        $ta = $_SESSION['currentPageDulangMHSNonAktifMassal']['ta'];
 		$idsmt=$_SESSION['currentPageDulangMHSNonAktifMassal']['semester'];
 		$kjur=$_SESSION['kjur'];
 		$tahun_masuk=$_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'];
@@ -142,7 +142,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
                 if (!isset($datadulang['iddulang'])) {					
                     $this->DB->query ('BEGIN');						
                     $idkelas=$inputan->hiddenidkelas->Value;;
-                    $status_sebelumnya=$inputan->hiddenstatus->Value;
+                    $status_sebelumnya = $inputan->hiddenstatus->Value;
                     $tasmt=$ta.$idsmt;
                     $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$idsmt','$tasmt',NOW(),'$idkelas','$status_sebelumnya','N')";														
                     if ($this->DB->insertRecord($str)) {

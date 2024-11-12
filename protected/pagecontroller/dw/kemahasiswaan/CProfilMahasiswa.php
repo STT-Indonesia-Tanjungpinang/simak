@@ -259,7 +259,7 @@ class CProfilMahasiswa extends MainPageDW {
     }
     public function updateDataNIMNIRM ($sender,$param) {
         if ($this->Page->isValid) { 
-            $nimasal=$_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];
+            $nimasal = $_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];
             $nim=addslashes($this->txtEditNIM->Text);
             $nirm=addslashes($this->txtEditNIRM->Text);     
             $str = "UPDATE register_mahasiswa SET nim='$nim',nirm='$nirm' WHERE nim='$nimasal'";

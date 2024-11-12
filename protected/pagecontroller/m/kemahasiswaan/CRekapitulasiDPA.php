@@ -16,7 +16,7 @@ class CRekapitulasiDPA extends MainPageM {
 			$this->tbCmbPs->Text=$_SESSION['currentPageRekapitulasiDPA']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
-            $daftar_ta=$this->DMaster->getListTA();	
+            $daftar_ta = $this->DMaster->getListTA();	
             $daftar_ta['none']='KESELURUHAN';
 			$this->tbCmbTahunMasuk->DataSource=$daftar_ta;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'];						
@@ -95,10 +95,10 @@ class CRekapitulasiDPA extends MainPageM {
             foreach ($r as $v) {
                 switch ($v['jk']) {
                     case 'L' :
-                        $pria=$v['jumlah_jk'];
+                        $pria = $v['jumlah_jk'];
                     break;
                     case 'P' :
-                        $wanita=$v['jumlah_jk'];
+                        $wanita = $v['jumlah_jk'];
                     break;
                 }
             }

@@ -18,7 +18,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
 			$this->tbCmbPs->Text=$_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $ta=$_SESSION['currentPagePembayaranSemesterGenap']['ta'];
+            $ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];
             $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA (),'none');
             $this->tbCmbTA->Enabled=$bool;
             $this->tbCmbTA->Text=$ta;
@@ -36,7 +36,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
                 $this->txtNIM->Visible=false;
                 $this->btnGo->Visible=false;
                 $this->linkDetailPembayaran->Visible=true;
-                $this->linkDetailPembayaran->NavigateUrl=$this->constructUrl('pembayaran.DetailPembayaranSemesterGenap',true,array('id'=>$_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']));
+                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGenap',true,array('id'=>$_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']));
             }                
             $this->populateData();
             $this->setInfoToolbar();
@@ -45,7 +45,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
     public function setInfoToolbar() {                
         $kjur=$_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $ta=$this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGenap']['ta']);        		
+        $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGenap']['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs ($sender,$param) {		
@@ -75,7 +75,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
 		$this->populateData($_SESSION['currentPagePembayaranSemesterGenap']['search']);
 	}
 	public function populateData($search=false) {		
-		$ta=$_SESSION['currentPagePembayaranSemesterGenap']['ta'];
+		$ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];
 		$semester=$_SESSION['currentPagePembayaranSemesterGenap']['semester'];
 		$kjur=$_SESSION['kjur'];	
         
@@ -157,14 +157,14 @@ class CPembayaranSemesterGenap Extends MainPageK {
                     throw new Exception ("NIM ($nim) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");		
                 }
                 $datamhs=$r[1];
-                $ta=$_SESSION['currentPagePembayaranSemesterGenap']['ta'];                
+                $ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];                
                 if ($datamhs['tahun_masuk'] == $ta && $datamhs['semester_masuk']==2) {						
                     $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']=array();
                     throw new Exception ("NIM ($nim) adalah seorang Mahasiswa baru, mohon diproses di Pembayaran->Mahasiswa Baru.");
                 }
 
                 //cek status bila DO dan NON-AKTIF jangan di inputkan disini tetapi pembayaran piutang
-                $ta=$_SESSION['currentPagePembayaranSemesterGenap']['ta'];
+                $ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];
 		        $semester=$_SESSION['currentPagePembayaranSemesterGenap']['semester'];
                 $this->Finance->setDataMHS($datamhs);                              
                 $datadulang=$this->Finance->getDataDulang($semester,$ta);

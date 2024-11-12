@@ -51,7 +51,7 @@ class CKelompokPertanyaan extends MainPageM {
     public function addProcess ($sender,$param) {
         $this->idProcess = 'add';       
     }    
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {	            
             $nama_kelompok=addslashes(strtoupper($this->txtAddNamaKelompok->Text));	            
             $urutan = addslashes($this->txtAddUrutan->Text);

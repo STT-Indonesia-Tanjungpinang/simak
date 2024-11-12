@@ -37,7 +37,7 @@ class CDaftarKonsentrasi extends MainPageMHS {
             $kjur=$this->Pengguna->getDataUser('kjur');
             $jumlah_sks=$this->hiddenJumlahSKS->Value;
             $idkonsentrasi=$this->cmbKonsentrasiProdi->Text;
-            $ta=$this->setup->getSettingValue('default_ta');
+            $ta = $this->setup->getSettingValue('default_ta');
             $semester=$this->setup->getSettingValue('default_semester');
             try {
                 $str = "INSERT INTO pendaftaran_konsentrasi (nim,kjur,idkonsentrasi,jumlah_sks,tahun,idsmt,tanggal_daftar,status_daftar) VALUES ('$nim',$kjur,$idkonsentrasi,$jumlah_sks,$ta,$semester,NOW(),0)";

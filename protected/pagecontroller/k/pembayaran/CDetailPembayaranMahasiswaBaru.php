@@ -44,7 +44,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                 $_SESSION['currentPagePembayaranMahasiswaBaru']['tahun_masuk']=$datamhs['tahun_masuk'];
                 $_SESSION['currentPagePembayaranMahasiswaBaru']['semester_masuk']=$datamhs['semester_masuk'];
                 $_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']=$datamhs;                
-                CDetailPembayaranMahasiswaBaru::$KewajibanMahasiswa=$this->Finance->getTotalBiayaMhsPeriodePembayaran ();
+                CDetailPembayaranMahasiswaBaru::$KewajibanMahasiswa = $this->Finance->getTotalBiayaMhsPeriodePembayaran ();
                 $this->populateTransaksi();
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
@@ -91,7 +91,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
         $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];        
         if ($datamhs['no_transaksi'] == 'none') {
             $no_formulir=$datamhs['no_formulir'];
-            $ta=$datamhs['tahun_masuk'];                        
+            $ta = $datamhs['tahun_masuk'];                        
             $idsmt=$datamhs['semester_masuk'];
             $this->Finance->setDataMHS($datamhs);
             if ($this->Finance->getTotalBiayaMhsPeriodePembayaran()<=0) {
@@ -109,7 +109,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                 $no_faktur=$ta.$no_transaksi;
                 $ps=$datamhs['kjur'];                
                 $idkelas=$datamhs['idkelas'];
-                $userid=$this->Pengguna->getDataUser('userid');
+                $userid = $this->Pengguna->getDataUser('userid');
 
                 $this->DB->query ('BEGIN');
                 $str = "INSERT INTO transaksi SET no_transaksi=$no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim=0,tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                
@@ -127,7 +127,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                     $r=$this->DB->getRecord($str);
 
                     while (list($k,$v)=each($r)) {
-                        $biaya=$v['biaya'];
+                        $biaya = $v['biaya'];
                         $idkombi=$v['idkombi'];
                         $sudah_dibayar=isset($sudah_dibayarkan[$idkombi])?$sudah_dibayarkan[$idkombi]:0;
                         $sisa_bayar=$biaya-$sudah_dibayar;

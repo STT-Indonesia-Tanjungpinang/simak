@@ -23,7 +23,7 @@ class CNilaiUjianPMB extends MainPageM {
 			$this->tbCmbPs->Text=$_SESSION['currentPageNilaiUjianPMB']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
-            $daftar_ta=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $daftar_ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource=$daftar_ta;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -94,7 +94,7 @@ class CNilaiUjianPMB extends MainPageM {
 	public function populateData ($search=false) {	
         $tahun_masuk=$_SESSION['tahun_pendaftaran'];
         $kjur=$_SESSION['currentPageNilaiUjianPMB']['kjur'];
-        $tgl_awal=$_SESSION['currentPageNilaiUjianPMB']['tgl_ujian_awal'];
+        $tgl_awal = $_SESSION['currentPageNilaiUjianPMB']['tgl_ujian_awal'];
         $tgl_akhir=$_SESSION['currentPageNilaiUjianPMB']['tgl_ujian_akhir'];
         if ($search) {                        
             $str_kjur=$kjur=='none'?' AND (num.kjur=0 OR num.kjur IS NULL)':" AND num.kjur=$kjur";	                
@@ -245,7 +245,7 @@ class CNilaiUjianPMB extends MainPageM {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->IsValid) {		            
             $id=$this->hiddenid->Value;
             $prodi=$this->cmbAddKjur->Text;

@@ -18,11 +18,11 @@ class CProfiles extends MainPageSA {
         $this->cmbTheme->DataBind();
     }
     
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             $theme=$this->cmbTheme->Text;
             $_SESSION['theme']=$theme;
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             $str = "UPDATE simak_user SET theme='$theme' WHERE userid=$userid";            
             $this->DB->updateRecord($str);            
            
@@ -31,10 +31,10 @@ class CProfiles extends MainPageSA {
     }
     public function saveDataPassword ($sender,$param) {
         if ($this->IsValid) {
-            $userid=$this->Pengguna->getDataUser('userid');
+            $userid = $this->Pengguna->getDataUser('userid');
             if ($this->txtPassword->Text != '') { 
                 
-                $data=$this->Pengguna->createHashPassword($this->txtPassword->Text);
+                $data = $this->Pengguna->createHashPassword($this->txtPassword->Text);
                 $salt=$data['salt'];
                 $password=$data['password']; 
                 $str = "UPDATE user SET userpassword='$password',salt='$salt' WHERE userid='$userid'";

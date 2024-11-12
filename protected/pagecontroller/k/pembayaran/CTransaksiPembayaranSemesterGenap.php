@@ -40,7 +40,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
         $datamhs=$_SESSION['currentPagePembayaranSemesterGenap']['DataMHS'];        
         $no_transaksi=$datamhs['no_transaksi'];
         $no_formulir=$datamhs['no_formulir'];
-        $ta=$datamhs['ta'];             
+        $ta = $datamhs['ta'];             
         $tahun_masuk=$datamhs['tahun_masuk'];
         $idsmt=$_SESSION['currentPagePembayaranSemesterGenap']['semester'];     
         $kelas=$datamhs['idkelas'];                
@@ -68,7 +68,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
         $r=$this->DB->getRecord($str);
         
         while (list($k,$v)=each($r)) {
-            $biaya=$v['biaya'];
+            $biaya = $v['biaya'];
             $idkombi=$v['idkombi'];
             $sudah_dibayar=isset($sudah_dibayarkan[$idkombi])?$sudah_dibayarkan[$idkombi]:0;
             if ($sudah_dibayar <=$biaya) {
@@ -109,7 +109,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
         $datamhs=$_SESSION['currentPagePembayaranSemesterGenap']['DataMHS'];
         $no_transaksi=$datamhs['no_transaksi'];
         $no_formulir=$datamhs['no_formulir'];
-        $ta=$datamhs['ta'];        
+        $ta = $datamhs['ta'];        
         $tahun_masuk=$datamhs['tahun_masuk'];
         $idsmt=$_SESSION['currentPagePembayaranSemesterGenap']['semester'];     
         $kelas=$datamhs['idkelas'];       
@@ -124,7 +124,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
         $str = "SELECT biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$tahun_masuk AND idsmt=$idsmt AND kpt.idkelas='$kelas' AND kpt.idkombi=$id";
         $this->DB->setFieldTable(array('biaya'));
         $r=$this->DB->getRecord($str);
-        $biaya=$r[1]['biaya'];
+        $biaya = $r[1]['biaya'];
         
         $jumlah_bayar=$this->Finance->toInteger(addslashes($item->ColumnJumlahBayar->TextBox->Text));                         
         
@@ -151,7 +151,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
             }	
         }	
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
 		if ($this->Page->isValid) {	
             $datamhs=$_SESSION['currentPagePembayaranSemesterGenap']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];
@@ -171,7 +171,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
             $datamhs=$_SESSION['currentPagePembayaranSemesterGenap']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];
             $nim=$datamhs['nim'];
-            $ta=$datamhs['ta'];
+            $ta = $datamhs['ta'];
             $idsmt=$_SESSION['currentPagePembayaranSemesterGenap']['semester'];
             $kelas=$datamhs['idkelas'];
             $k_status=$datamhs['k_status'];
@@ -185,7 +185,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
             $this->Finance->setDataMHS($datamhs);
             $datadulang=$this->Finance->getDataDulang($idsmt,$ta);  
             if (!isset($datadulang['iddulang'])) {                
-                $bool=$this->Finance->getTresholdPembayaran($ta,$idsmt);						                                
+                $bool = $this->Finance->getTresholdPembayaran($ta,$idsmt);						                                
                 if ($bool) {
                     $tasmt=$ta.$idsmt;
                     $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$idsmt','$tasmt','$tanggal','$kelas','$k_status','A')";

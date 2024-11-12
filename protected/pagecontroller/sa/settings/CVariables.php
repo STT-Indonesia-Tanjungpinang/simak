@@ -19,7 +19,7 @@ class CVariables extends MainPageSA {
         $this->txtKotaPT->Text=$this->setup->getSettingValue('kota_pt');
         $this->txtProvinsiPT->Text=$this->setup->getSettingValue('provinsi_pt');
         //Setting Umum
-        $ta=$this->DMaster->getListTA();  
+        $ta = $this->DMaster->getListTA();  
         $this->cmbDefaultTahunPendaftaran->DataSource=$ta;        
         $this->cmbDefaultTahunPendaftaran->Text=$this->setup->getSettingValue('default_tahun_pendaftaran');
         $this->cmbDefaultTahunPendaftaran->dataBind();
@@ -68,7 +68,7 @@ class CVariables extends MainPageSA {
         
         
     }
-    public function saveData ($sender,$param) {
+    public function saveData($sender, $param) {
         if ($this->IsValid) {
             switch ($sender->getId()) {
                 case 'btnSaveDataPT' :
