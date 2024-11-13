@@ -8,16 +8,16 @@ class CPindahKelas Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePindahKelas'])||$_SESSION['currentPagePindahKelas']['page_name']!='m.kemahasiswaan.PindahKelas') {
-				$_SESSION['currentPagePindahKelas']=array('page_name'=>'m.kemahasiswaan.PindahKelas','page_num'=>0,'search'=>false);
+				$_SESSION['currentPagePindahKelas']=array('page_name'=>'m.kemahasiswaan.PindahKelas', 'page_num'=>0,'search'=>false);
 			}   
 			$_SESSION['currentPagePindahKelas']['search']=false;
             
-            $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
 			$this->tbCmbTA->Text=$_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
-            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
-			$this->tbCmbSemester->DataSource=$semester;
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text=$_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
@@ -34,26 +34,26 @@ class CPindahKelas Extends MainPageM {
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$this->lblModulHeader->Text="T.A $ta Semester $semester";        
 	}
-	public function changeTbTA ($sender,$param) {				
-		$_SESSION['ta']=$this->tbCmbTA->Text;	
+	public function changeTbTA($sender, $param) {				
+		$_SESSION['ta'] = $this->tbCmbTA->Text;	
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-	public function changeTbSemester ($sender,$param) {		
-		$_SESSION['semester']=$this->tbCmbSemester->Text;        
+	public function changeTbSemester($sender, $param) {		
+		$_SESSION['semester'] = $this->tbCmbSemester->Text;        
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPagePindahKelas']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPagePindahKelas']['page_num'] = $param->NewPageIndex;
 		$this->populateData();
 	}
 	public function populateData() {
 		$ta = $_SESSION['ta'];
-		$idsmt=$_SESSION['semester'];
+		$idsmt = $_SESSION['semester'];
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePindahKelas']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$this->DB->getCountRowsOfTable("v_datamhs vdm,pindahkelas pk WHERE vdm.nim=pk.nim AND pk.tahun='$ta' AND pk.idsmt='$idsmt'");	
 		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
@@ -63,14 +63,14 @@ class CPindahKelas Extends MainPageM {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePindahKelas']['page_num']=0;}
 		$str = "SELECT pk.idpindahkelas,pk.no_surat,pk.tanggal,pk.nim,vdm.nama_mhs,vdm.tahun_masuk,pk.idkelas_lama,pk.idkelas_baru FROM v_datamhs vdm,pindahkelas pk WHERE vdm.nim=pk.nim AND pk.tahun='$ta' AND pk.idsmt='$idsmt' ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";
-		$this->DB->setFieldTable(array('idpindahkelas','no_surat','tanggal','nim','nama_mhs','tahun_masuk','idkelas_lama','idkelas_baru'));
-		$r=$this->DB->getRecord($str,$offset+1);
-		$this->RepeaterS->DataSource=$r;
+		$this->DB->setFieldTable(array('idpindahkelas', 'no_surat', 'tanggal', 'nim', 'nama_mhs', 'tahun_masuk', 'idkelas_lama', 'idkelas_baru'));
+		$r = $this->DB->getRecord($str,$offset+1);
+		$this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();
         
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
 	}
-	public function processDataBound ($sender,$param) {			
+	public function processDataBound($sender, $param) {			
 		$item=$param->Item;
 		if ($item->ItemType == 'Item' || $item->ItemType=='AlternatingItem') {
             $this->Demik->setDataMHS(array('nim'=>$item->DataItem['nim']));
@@ -83,12 +83,12 @@ class CPindahKelas Extends MainPageM {
             }
 		}	
 	}
-	public function checkNIM ($sender,$param) {
+	public function checkNIM($sender, $param) {
         $nim=addslashes($param->Value);
 		try {
 			$ta = $_SESSION['ta'];
-			$idsmt=$_SESSION['semester'];					
-			if ($this->DB->checkRecordIsExist('nim','pindahkelas',$nim," AND idsmt='$idsmt' AND tahun='$ta'")){
+			$idsmt = $_SESSION['semester'];					
+			if ($this->DB->checkRecordIsExist('nim', 'pindahkelas',$nim," AND idsmt='$idsmt' AND tahun='$ta'")){
                 throw new Exception ("NIM ($nim) pada T.A dan Semester ini, telah melakukan pindah kelas !!!");
             }
             $this->Demik->setDataMHS(array('nim'=>$nim));
@@ -97,11 +97,11 @@ class CPindahKelas Extends MainPageM {
                 throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
             }
             if ($idsmt == 3) {
-                if ($this->DB->checkRecordIsExist('nim','transaksi_sp',$nim," AND idsmt='$idsmt' AND tahun='$ta' LIMIT 1")){
+                if ($this->DB->checkRecordIsExist('nim', 'transaksi_sp',$nim," AND idsmt='$idsmt' AND tahun='$ta' LIMIT 1")){
                     throw new Exception ("NIM ($nim) pada T.A dan Semester ini, telah melakukan transaksi keuangan");
                 }
             }else{
-                if ($this->DB->checkRecordIsExist('nim','transaksi',$nim," AND idsmt='$idsmt' AND tahun='$ta' LIMIT 1")){
+                if ($this->DB->checkRecordIsExist('nim', 'transaksi',$nim," AND idsmt='$idsmt' AND tahun='$ta' LIMIT 1")){
                     throw new Exception ("NIM ($nim) pada T.A dan Semester ini, telah melakukan transaksi keuangan");
                 }
             }
@@ -111,20 +111,20 @@ class CPindahKelas Extends MainPageM {
             $this->populateData();
 		}	
 	}
-	public function Go($sender,$param) {
+	public function Go($sender, $param) {
 		if ($this->Page->IsValid) {
 			$this->idProcess = 'add';		
             $nim=addslashes($this->txtNIM->Text);
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
-            $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','k_status','status','idkelas','nkelas'));
-            $r=$this->DB->getRecord($str);	
+            $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas'));
+            $r = $this->DB->getRecord($str);	
             
             $datamhs=$r[1];  
-            $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-            $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
-            $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
+            $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
+            $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
+            $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
-            $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
+            $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
             
             $this->Demik->setDataMHS($datamhs);
             
@@ -132,17 +132,17 @@ class CPindahKelas Extends MainPageM {
             $idkelas=$datamhs['idkelas'];
             $this->hiddenkelaslama->Value=$idkelas;
             $daftar_kelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas (),$datamhs['idkelas']);
-            $this->cmbAddKelasBaru->DataSource=$daftar_kelas;
+            $this->cmbAddKelasBaru->DataSource = $daftar_kelas;
             $this->cmbAddKelasBaru->dataBind();	
 		}
 	}
-    public function checkNoSurat ($sender,$param) {
+    public function checkNoSurat($sender, $param) {
         $this->idProcess=$sender->getId()=='addPindah'?'add':'edit';
         $no_surat=addslashes($param->Value);
 		try {
 			if ($no_surat != '') {
                 if ($this->hiddennosurat->Value!=$no_surat) {                                                            
-                    if ($this->DB->checkRecordIsExist('no_surat','pindahkelas',$no_surat)){                                 
+                    if ($this->DB->checkRecordIsExist('no_surat', 'pindahkelas',$no_surat)){                                 
                         throw new Exception ("No. Surat ($no_surat) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }                               
                 } 
@@ -157,7 +157,7 @@ class CPindahKelas Extends MainPageM {
 			$nim=$this->hiddennim->Value;
 			$kelas_lama = $this->hiddenkelaslama->Value;
 			$ta = $_SESSION['ta'];
-			$idsmt=$_SESSION['semester'];
+			$idsmt = $_SESSION['semester'];
             $tanggal=date ('Y-m-d',$this->cmbAddTanggal->TimeStamp);
 			$kelas_baru=$this->cmbAddKelasBaru->Text;
 			$no_surat=$this->txtAddNoSurat->getSafeText();
@@ -165,7 +165,7 @@ class CPindahKelas Extends MainPageM {
 			$this->DB->query ('BEGIN');			
 			$str = "UPDATE register_mahasiswa SET idkelas='$kelas_baru' WHERE nim='$nim'";
 			if ($this->DB->updateRecord($str)) {
-				$str = "INSERT INTO pindahkelas (idpindahkelas,nim,idkelas_lama,idkelas_baru,tahun,idsmt,tanggal,no_surat,keterangan) VALUES (NULL,'$nim','$kelas_lama','$kelas_baru','$ta','$idsmt','$tanggal','$no_surat','$ket')";
+				$str = "INSERT INTO pindahkelas (idpindahkelas,nim,idkelas_lama,idkelas_baru,tahun,idsmt,tanggal,no_surat,keterangan) VALUES (NULL,'$nim', '$kelas_lama', '$kelas_baru', '$ta', '$idsmt', '$tanggal', '$no_surat', '$ket')";
 				$this->DB->insertRecord ($str);										
 				$this->DB->query ('COMMIT');
 			}else {
@@ -174,30 +174,30 @@ class CPindahKelas Extends MainPageM {
 			$this->redirect('kemahasiswaan.PindahKelas',true);
 		}		
 	}
-    public function editRecord ($sender,$param) {
+    public function editRecord($sender, $param) {
 		$this->idProcess = 'edit';
 		$idpindahkelas = $this->getDataKeyField($sender,$this->RepeaterS);
 		$nim=$sender->CommandParameter;
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
-        $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','k_status','status','idkelas','nkelas'));
-        $r=$this->DB->getRecord($str);	
+        $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas'));
+        $r = $this->DB->getRecord($str);	
 
         $datamhs=$r[1];  
-        $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
-        $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
+        $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
+        $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
+        $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
-        $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
+        $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
 
         $this->Demik->setDataMHS($datamhs);
         
-		$r = $this->Demik->getList("pindahkelas WHERE idpindahkelas='$idpindahkelas'",array('idkelas_lama','idkelas_baru','tanggal','no_surat','keterangan'));
-		$r=$r[1];				
+		$r = $this->Demik->getList("pindahkelas WHERE idpindahkelas='$idpindahkelas'",array('idkelas_lama', 'idkelas_baru', 'tanggal', 'no_surat', 'keterangan'));
+		$r = $r[1];				
 		$this->hiddennim->Value=$nim;
 		$this->hiddenid->Value=$idpindahkelas;		
         
         $daftar_kelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas (),$r['idkelas_lama']);
-        $this->cmbEditKelasBaru->DataSource=$daftar_kelas;
+        $this->cmbEditKelasBaru->DataSource = $daftar_kelas;
         $this->cmbEditKelasBaru->dataBind();	
 		$this->cmbEditKelasBaru->Text=$r['idkelas_baru'];
         
@@ -207,7 +207,7 @@ class CPindahKelas Extends MainPageM {
 		$this->txtEditKeterangan->Text=$r['keterangan'];
 		
 	}
-	public function updateData ($sender,$param) {
+	public function updateData($sender, $param) {
 		if ($this->Page->IsValid) {
             $id=$this->hiddenid->Value;
 			$tanggal=date ('Y-m-d',$this->cmbEditTanggal->TimeStamp);
@@ -226,7 +226,7 @@ class CPindahKelas Extends MainPageM {
 			$this->redirect('kemahasiswaan.PindahKelas',true);
 		}
 	}	
-	public function deleteRecord ($sender,$param) {
+	public function deleteRecord($sender, $param) {
 		$idpindahkelas= $this->getDataKeyField($sender,$this->RepeaterS);
 		$id=$sender->CommandParameter;			
 		$this->DB->query ('BEGIN');

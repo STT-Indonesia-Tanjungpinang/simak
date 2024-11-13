@@ -43,7 +43,7 @@ class CDetailPKRS extends MainPageDW {
             $idkrs=addslashes($this->request['id']);
             $datamhs=$_SESSION['currentPagePKRS']['DataMHS'];
             $datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
-            $this->Page->KRS->DataKRS['krs']=$datakrs;
+            $this->Page->KRS->DataKRS['krs'] = $datakrs;
             if (!isset($datakrs['idkrs'])) {
                 throw new Exception ('Mohon kembali ke halaman <a href="'.$this->constructUrl('perkuliahan.PKRS',true).'">ini</a>');
             }
@@ -52,14 +52,14 @@ class CDetailPKRS extends MainPageDW {
             }
             $this->KRS->setDataMHS($datamhs);
             $detailkrs=$this->KRS->getDetailKRS($idkrs);
-            $this->RepeaterS->DataSource=$detailkrs;
+            $this->RepeaterS->DataSource = $detailkrs;
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
             $this->idProcess = 'view';	
 			$this->errorMessage->Text=$e->getMessage();	
         }
 	}
-    public function itemCreated ($sender,$param) {
+    public function itemCreated($sender, $param) {
         $item=$param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') { 
             if ($item->DataItem['batal']) {
@@ -86,7 +86,7 @@ class CDetailPKRS extends MainPageDW {
 			}
         }
     }	
-    public function toggleStatusMatkul ($sender,$param){
+    public function toggleStatusMatkul($sender, $param){
 		$datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
         $idkrs=$datakrs['idkrs'];
         $nim=$datakrs['nim'];
@@ -97,7 +97,7 @@ class CDetailPKRS extends MainPageDW {
 			try {
 				$str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs' AND batal=0";
 				$this->DB->setFieldTable(array('jumlah'));
-				$r=$this->DB->getRecord($str);	
+				$r = $this->DB->getRecord($str);	
 				$jumlah=$r[1]['jumlah']+$id[2];				
 				$maks_sks=$datakrs['maxSKS'];
 				if ($jumlah > $maks_sks) {
@@ -121,7 +121,7 @@ class CDetailPKRS extends MainPageDW {
 		}
 		
 	}    
-	public function hapusMatkul ($sender,$param) {		
+	public function hapusMatkul($sender, $param) {		
 		$idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);
         $id=explode('_',$sender->CommandParameter);				
 		$idpenyelenggaraan=$id[1];		
@@ -137,15 +137,15 @@ class CDetailPKRS extends MainPageDW {
 		}		
 		$this->redirect('perkuliahan.DetailPKRS',true,array('id'=>$datakrs['idkrs']));
 	}
-    public function tambahKRS ($sender,$param) {        
+    public function tambahKRS($sender, $param) {        
         $this->redirect ('perkuliahan.TambahPKRS',true);
     }
     
-	public function closeDetailKRS ($sender,$param) { 
+	public function closeDetailKRS($sender, $param) { 
         unset($_SESSION['currentPagePKRS']);
         $this->redirect ('perkuliahan.PKRS',true);
     }
-	public function printKRS ($sender,$param) {
+	public function printKRS($sender, $param) {
         $this->createObj('reportkrs');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -162,22 +162,22 @@ class CDetailPKRS extends MainPageDW {
             case  'pdf' :                
                 $messageprintout='';                
                 $tahun=$_SESSION['ta'];
-                $semester=$_SESSION['semester'];
+                $semester = $_SESSION['semester'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);
 
                 $dataReport=$_SESSION['currentPagePKRS']['DataMHS'];
-                $dataReport['krs']=$_SESSION['currentPagePKRS']['DataKRS']['krs'];        
-                $dataReport['matakuliah']=$_SESSION['currentPagePKRS']['DataKRS']['matakuliah'];        
-                $dataReport['nama_tahun']=$nama_tahun;
-                $dataReport['nama_semester']=$nama_semester;        
+                $dataReport['krs'] = $_SESSION['currentPagePKRS']['DataKRS']['krs'];        
+                $dataReport['matakuliah'] = $_SESSION['currentPagePKRS']['DataKRS']['matakuliah'];        
+                $dataReport['nama_tahun'] = $nama_tahun;
+                $dataReport['nama_semester'] = $nama_semester;        
                 
                 $kaprodi=$this->KRS->getKetuaPRODI($dataReport['kjur']);                  
-                $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-                $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-                $dataReport['nipy_kaprodi']=$kaprodi['nipy'];
+                $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+                $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+                $dataReport['nipy_kaprodi'] = $kaprodi['nipy'];
                 
-                $dataReport['linkoutput']=$this->linkOutput;                 
+                $dataReport['linkoutput'] = $this->linkOutput;                 
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 $this->report->printKRS();				

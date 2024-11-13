@@ -20,7 +20,7 @@ class Logic_DMaster extends Logic_Global {
      */
 	public function getListAgama () {                             
         $dataitem=$this->getList ("agama WHERE idagama!=0",array('idagama','nama_agama'),'idagama',null,1);			
-        $dataitem['none']='Daftar Agama';        
+        $dataitem['none'] = 'Daftar Agama';        
         return $dataitem;     		
 	}
     /**
@@ -28,7 +28,7 @@ class Logic_DMaster extends Logic_Global {
      */
 	public function getListJenisPekerjaan () {                             
         $dataitem=$this->getList ("jenis_pekerjaan WHERE idjp!=0",array('idjp','nama_pekerjaan'),'idjp',null,1);			
-        $dataitem['none']='Daftar Jenis Pekerjaan';        
+        $dataitem['none'] = 'Daftar Jenis Pekerjaan';        
         return $dataitem;     		
 	}
     /**
@@ -50,12 +50,12 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->Application->Cache->get('listta');            
             if (!isset($dataitem['none'])) {
                 $dataitem=$this->getList('ta',array('tahun','tahun_akademik'),'tahun',null,1);
-                $dataitem['none']='Daftar Tahun Akademik';    
+                $dataitem['none'] = 'Daftar Tahun Akademik';    
                 $this->Application->Cache->set('listta',$dataitem);
             }
         }else {                        
             $dataitem=$this->getList('ta',array('tahun','tahun_akademik'),'tahun',null,1);
-            $dataitem['none']='Daftar Tahun Akademik';
+            $dataitem['none'] = 'Daftar Tahun Akademik';
         }
         if ($start_tahun !== null) {
             $a=$dataitem;
@@ -90,12 +90,12 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->Application->Cache->get('listkelas');            
             if (!isset($dataitem['none'])) {                
                 $dataitem=$this->getList ('kelas',array('idkelas','nkelas'),'idkelas',null,1);			
-                $dataitem['none']='Daftar Kelas';    
+                $dataitem['none'] = 'Daftar Kelas';    
                 $this->Application->Cache->set('listkelas',$dataitem);
             }
         }else {                        
             $dataitem=$this->getList ('kelas',array('idkelas','nkelas'),'nkelas',null,1);			
-            $dataitem['none']='Daftar Kelas';
+            $dataitem['none'] = 'Daftar Kelas';
         }
         return $dataitem;     		
 	}
@@ -122,12 +122,12 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->Application->Cache->get('listruangkelas');            
             if (!isset($dataitem['none'])) {                
                 $dataitem=$this->getList ('ruangkelas',array('idruangkelas','namaruang','kapasitas'),'namaruang',null,2);			
-                $dataitem['none']='Daftar Ruang Kelas';    
+                $dataitem['none'] = 'Daftar Ruang Kelas';    
                 $this->Application->Cache->set('listruangkelas',$dataitem);
             }
         }else {                        
             $dataitem=$this->getList ('ruangkelas',array('idruangkelas','namaruang','kapasitas'),'namaruang',null,2);			
-            $dataitem['none']='Daftar Ruang Kelas';
+            $dataitem['none'] = 'Daftar Ruang Kelas';
         }
         return $dataitem;     		
 	}
@@ -215,7 +215,7 @@ class Logic_DMaster extends Logic_Global {
 				$dataprodi=$dataitem;
 			break;
 			case 1 :
-				$dataprodi['none']='Daftar Program Studi';				
+				$dataprodi['none'] = 'Daftar Program Studi';				
 				while (list($k,$v)=each($dataitem)) {	
                     if ($v['konsentrasi'] == '') {
                         $dataprodi[$v['kjur']]=$v['nama_ps'];
@@ -225,7 +225,7 @@ class Logic_DMaster extends Logic_Global {
 				}				
 			break;
 			case 2 :
-                $dataprodi['none']='Daftar Program Studi';				
+                $dataprodi['none'] = 'Daftar Program Studi';				
 				while (list($k,$v)=each($dataitem)) {			
                     if ($v['konsentrasi'] == '') {
                         $dataprodi[$v['kjur']]=$v['nama_ps'] . ' ('.$v['njenjang'].')';
@@ -241,7 +241,7 @@ class Logic_DMaster extends Logic_Global {
 	* digunakan untuk menghapus kjur, ini berlaku hanya key-nya adalah kjur	
 	*/
 	public function removeKjur ($listJur,$kjur) {
-		foreach ($listJur as $k=>$v) {
+		foreach ($listJur as $k => $v) {
 			if ($k != $kjur) {
 				$result[$k]=$v;
 			}
@@ -260,7 +260,7 @@ class Logic_DMaster extends Logic_Global {
                 $str = "SELECT dw.iddosen_wali,d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen ORDER BY idjabatan DESC,nama_dosen ASC";
                 $this->db->setFieldTable(array('iddosen_wali','nidn','nama_dosen'));			        
                 $r = $this->db->getRecord($str);                
-                $dataitem['none']='Daftar Dosen Wali';				
+                $dataitem['none'] = 'Daftar Dosen Wali';				
 				while (list($k,$v)=each($r)) {			
 					$dataitem[$v['iddosen_wali']]=$v['nama_dosen'] . ' ['.$v['nidn'].']';	;					
 				}	
@@ -270,7 +270,7 @@ class Logic_DMaster extends Logic_Global {
             $str = "SELECT dw.iddosen_wali,d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen";
             $this->db->setFieldTable(array('iddosen_wali','nidn','nama_dosen'));			        
             $r = $this->db->getRecord($str);                
-            $dataitem['none']='Daftar Dosen Wali';				
+            $dataitem['none'] = 'Daftar Dosen Wali';				
             while (list($k,$v)=each($r)) {			
                 $dataitem[$v['iddosen_wali']]=$v['nama_dosen'] . ' ['.$v['nidn'].']';				
             }	
@@ -309,7 +309,7 @@ class Logic_DMaster extends Logic_Global {
             if ($kjur === null) {                
                 $dataitem=$r;
             }else{
-                $dataitem['none']='Daftar Konsentrasi Program Studi';
+                $dataitem['none'] = 'Daftar Konsentrasi Program Studi';
                 while (list($k,$v)=each($r)) {
                     if ($kjur == $v['kjur']) {
                         $dataitem[$v['idkonsentrasi']]=$v['nama_konsentrasi'];
@@ -319,7 +319,7 @@ class Logic_DMaster extends Logic_Global {
         }else {                      
             $str_kjur=$kjur === null ?'':" WHERE kjur='$kjur'";
             $dataitem=$this->getList("konsentrasi$str_kjur",array('idkonsentrasi','nama_konsentrasi'),'nama_konsentrasi',null,1);
-            $dataitem['none']='Daftar Konsentrasi Program Studi';
+            $dataitem['none'] = 'Daftar Konsentrasi Program Studi';
         }
         return $dataitem;        
     }
@@ -345,12 +345,12 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->Application->Cache->get('liststatusmhs');            
             if (!isset($dataitem['none'])) {                
                 $dataitem=$this->getList ('status_mhs',array('k_status','n_status'),'n_status',null,1);			
-                $dataitem['none']='Daftar Status Mahasiswa';    
+                $dataitem['none'] = 'Daftar Status Mahasiswa';    
                 $this->Application->Cache->set('liststatusmhs',$dataitem);
             }
         }else {                        
             $dataitem=$this->getList ('status_mhs',array('k_status','n_status'),'n_status',null,1);			
-            $dataitem['none']='Daftar Status Mahasiswa';
+            $dataitem['none'] = 'Daftar Status Mahasiswa';
         }
         return $dataitem;     		
     }
@@ -380,7 +380,7 @@ class Logic_DMaster extends Logic_Global {
                 $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen ORDER BY nama_dosen ASC";
                 $this->db->setFieldTable (array('iddosen','nama_dosen','nidn'));			
                 $r= $this->db->getRecord($str);
-                $dataitem['none']='Daftar Dosen';   
+                $dataitem['none'] = 'Daftar Dosen';   
                 while (list($k,$v)=each($r)) {
                     $dataitem[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
                 }
@@ -389,7 +389,7 @@ class Logic_DMaster extends Logic_Global {
                 $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen ORDER BY nama_dosen ASC";
                 $this->db->setFieldTable (array('iddosen','nama_dosen','nidn'));			
                 $r= $this->db->getRecord($str);
-                $dataitem['none']='Daftar Dosen';   
+                $dataitem['none'] = 'Daftar Dosen';   
                 while (list($k,$v)=each($r)) {
                     $dataitem[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
                 }
@@ -438,12 +438,12 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->Application->Cache->get('listkelompokpertanyaan');            
             if (!isset($dataitem['none'])) {                
                 $dataitem=$this->getList ("kelompok_pertanyaan WHERE idkategori=1",array('idkelompok_pertanyaan','nama_kelompok'),'(orders+0)',null,1);            
-                $dataitem['none']='Daftar Kelompok Pertanyaan';
+                $dataitem['none'] = 'Daftar Kelompok Pertanyaan';
                 $this->Application->Cache->set('listkelompokpertanyaan',$dataitem);
             }
         }else {                        
             $dataitem=$this->getList ("kelompok_pertanyaan WHERE idkategori=1",array('idkelompok_pertanyaan','nama_kelompok'),'nama_kelompok',null,1);            
-            $dataitem['none']='Daftar Kelompok Pertanyaan';
+            $dataitem['none'] = 'Daftar Kelompok Pertanyaan';
         }
         return $dataitem;     		
     }
@@ -473,12 +473,12 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->Application->Cache->get('listjenjangstudi');            
             if (!isset($dataitem['none'])) {                
                 $dataitem=$this->getList ("jenjang_studi",array('kjenjang','njenjang'),'kjenjang',null,1);            
-                $dataitem['none']='Daftar Jenjang Studi';
+                $dataitem['none'] = 'Daftar Jenjang Studi';
                 $this->Application->Cache->set('listjenjangstudi',$dataitem);
             }
         }else {                        
             $dataitem=$this->getList ("jenjang_studi",array('kjenjang','njenjang'),'kjenjang',null,1);            
-            $dataitem['none']='Daftar Jenjang Studi';
+            $dataitem['none'] = 'Daftar Jenjang Studi';
         }
         return $dataitem;         
 	}
@@ -491,12 +491,12 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->Application->Cache->get('listjabfung');            
             if (!isset($dataitem['none'])) {                  
                 $dataitem=$this->getList('jabatan_akademik',array('idjabatan','nama_jabatan','idjabatan'),'idjabatan',null,1);
-                $dataitem['none']='Daftar Jabatan Fungsional';
+                $dataitem['none'] = 'Daftar Jabatan Fungsional';
                 $this->Application->Cache->set('listjabfung',$dataitem);
             }
         }else {                        
             $this->getList('jabatan_akademik',array('idjabatan','nama_jabatan','idjabatan'),'idjabatan',null,1);
-            $dataitem['none']='Daftar Jabatan Fungsional';
+            $dataitem['none'] = 'Daftar Jabatan Fungsional';
         }
         return $dataitem;  
     }

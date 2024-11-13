@@ -21,16 +21,16 @@ class CHome extends MainPageM {
                 }
 
                 $str = "SELECT ta,COUNT(no_formulir) AS jumlah FROM formulir_pendaftaran WHERE ($tahun_pendaftaran-10) <= ta GROUP BY ta ORDER BY ta ASC";
-                $this->DB->setFieldTable(array('ta','jumlah'));
+                $this->DB->setFieldTable(array('ta', 'jumlah'));
                 $r = $this->DB->getRecord($str);	                                
-                while (list($k,$v)=each($r)) {
-                    $data_mendaftar[$v['ta']]=$v['jumlah'];
+                while (list($k, $v) = each($r)) {
+                    $data_mendaftar[$v['ta']] = $v['jumlah'];
                 }
 
                 $str = "SELECT tahun AS ta,COUNT(no_formulir) AS jumlah FROM register_mahasiswa WHERE ($tahun_pendaftaran-10) <= tahun GROUP BY tahun ORDER BY tahun ASC";                
                 $r = $this->DB->getRecord($str);                
-                while (list($k,$v)=each($r)) {
-                    $data_dulang[$v['ta']]=$v['jumlah'];
+                while (list($k, $v) = each($r)) {
+                    $data_dulang[$v['ta']] = $v['jumlah'];
                 }
                 $_SESSION['currentPageHome']=array('page_name'=>'m.Home',
                                                    'jumlahmhsaktif'=>$this->Demik->getJumlahSeluruhMHS('A'),                                                   
@@ -47,7 +47,7 @@ class CHome extends MainPageM {
     public function populateData () {
         $totalpendaftaran=0;
         $totaldulang=0;
-        $datamendaftar=$_SESSION['currentPageHome']['datamendaftar'];
+        $datamendaftar = $_SESSION['currentPageHome']['datamendaftar'];
         $data1='';
         foreach ($datamendaftar as $tahun=>$jumlah) {
             $ta = $tahun-1;
@@ -95,7 +95,7 @@ class CHome extends MainPageM {
             $this->TooltipDulang = $updulang.'% Up';
         }
     }
-    public function refreshPage ($sender,$param) {
+    public function refreshPage($sender, $param) {
         $tahun_pendaftaran=$_SESSION['tahun_pendaftaran'];
                                 
         for ($i=$tahun_pendaftaran-10;$i <=$tahun_pendaftaran;$i+=1) {
@@ -104,16 +104,16 @@ class CHome extends MainPageM {
         }
 
         $str = "SELECT ta,COUNT(no_formulir) AS jumlah FROM formulir_pendaftaran WHERE ($tahun_pendaftaran-10) <= ta GROUP BY ta ORDER BY ta ASC";
-        $this->DB->setFieldTable(array('ta','jumlah'));
+        $this->DB->setFieldTable(array('ta', 'jumlah'));
         $r = $this->DB->getRecord($str);                                    
-        while (list($k,$v)=each($r)) {
-            $data_mendaftar[$v['ta']]=$v['jumlah'];
+        while (list($k, $v) = each($r)) {
+            $data_mendaftar[$v['ta']] = $v['jumlah'];
         }
 
         $str = "SELECT tahun AS ta,COUNT(no_formulir) AS jumlah FROM register_mahasiswa WHERE ($tahun_pendaftaran-10) <= tahun GROUP BY tahun ORDER BY tahun ASC";                
         $r = $this->DB->getRecord($str);                
-        while (list($k,$v)=each($r)) {
-            $data_dulang[$v['ta']]=$v['jumlah'];
+        while (list($k, $v) = each($r)) {
+            $data_dulang[$v['ta']] = $v['jumlah'];
         }
         $_SESSION['currentPageHome']=array('page_name'=>'m.Home',
                                            'jumlahmhsaktif'=>$this->Demik->getJumlahSeluruhMHS('A'),                                                   

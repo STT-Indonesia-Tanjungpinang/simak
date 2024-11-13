@@ -6,11 +6,11 @@ class CheckLoginMahasiswa extends BaseWS {
 			$this->validate ();
 			$data=$_POST;
 			if (!isset($data['nim'])) {
-				$this->payload['status']='30';
+				$this->payload['status'] = '30';
 				throw new Exception ("Proses Login telah berhasil, namun ada error yaitu data POST nim tidak ada !!!");
 			}
 			if (empty($data['password'])) {
-				$this->payload['status']='30';
+				$this->payload['status'] = '30';
 				throw new Exception ("Proses Login telah berhasil, namun ada error yaitu data password kosong !!!");
 			}
 			$nim=addslashes($data['nim']);

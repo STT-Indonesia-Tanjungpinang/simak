@@ -8,22 +8,22 @@ class CPIN extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePIN'])||$_SESSION['currentPagePIN']['page_name']!='m.spmb.PIN') {
-				$_SESSION['currentPagePIN']=array('page_name'=>'m.spmb.PIN','page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'display_record'=>'all','kelas'=>'A');												
+				$_SESSION['currentPagePIN']=array('page_name'=>'m.spmb.PIN', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'display_record'=>'all', 'kelas'=>'A');												
 			}
             $_SESSION['currentPagePIN']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
-			$this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
+			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $kelas=$this->DMaster->getListKelas();
-			$this->tbCmbKelas->DataSource=$this->DMaster->removeIdFromArray($kelas,'none');
+			$this->tbCmbKelas->DataSource = $this->DMaster->removeIdFromArray($kelas,'none');
 			$this->tbCmbKelas->Text=$_SESSION['currentPagePIN']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
@@ -38,28 +38,28 @@ class CPIN extends MainPageM {
 		$text="Kelas $nama_kelas Tahun Masuk $tahunmasuk";
 		return $text;
 	}
-	public function changeTbTahunMasuk($sender,$param) {					
-		$_SESSION['tahun_pendaftaran']=$this->tbCmbTahunMasuk->Text;
+	public function changeTbTahunMasuk($sender, $param) {					
+		$_SESSION['tahun_pendaftaran'] = $this->tbCmbTahunMasuk->Text;
         $this->lblModulHeader->Text=$this->getInfoToolbar();
 		$this->populateData();
 	}	
-    public function changeTbKelas ($sender,$param) {				
-		$_SESSION['currentPagePIN']['kelas']=$this->tbCmbKelas->Text;		
+    public function changeTbKelas($sender, $param) {				
+		$_SESSION['currentPagePIN']['kelas'] = $this->tbCmbKelas->Text;		
         $this->lblModulHeader->Text=$this->getInfoToolbar();
 		$this->populateData();
-	}public function searchRecord ($sender,$param) {
+	}public function searchRecord($sender, $param) {
 		$_SESSION['currentPagePIN']['search']=true;
 		$this->populateData($_SESSION['currentPagePIN']['search']);
 	}	
-    public function changeDisplay($sender,$param) {        
-        $_SESSION['currentPagePIN']['display_record']=$this->cmbDisplayRecord->Text;
+    public function changeDisplay($sender, $param) {        
+        $_SESSION['currentPagePIN']['display_record'] = $this->cmbDisplayRecord->Text;
         $this->populateData();
     }
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPagePIN']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPagePIN']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPagePIN']['search']);
 	}		
 	public function populateData ($search=false) {
@@ -98,19 +98,19 @@ class CPIN extends MainPageM {
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePIN']['page_num']=0;}
 		
 		$str = "$str  $str_display ORDER BY pin.no_formulir ASC LIMIT $offset,$limit";
-		$this->DB->setFieldTable(array('no_pin','no_formulir','idkelas','nama_mhs','ket'));
+		$this->DB->setFieldTable(array('no_pin', 'no_formulir', 'idkelas', 'nama_mhs', 'ket'));
         $r = $this->DB->getRecord($str,$offset+1);
-        $this->RepeaterS->DataSource=$r;
+        $this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();	
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS); 
 	} 
-    public function checkRequirements ($sender,$param) {       
-        if (!($this->DB->getCountRowsOfTable ('kelas','idkelas') > 0 && $this->DB->getCountRowsOfTable ('ta','tahun') > 0)){
+    public function checkRequirements($sender, $param) {       
+        if (!($this->DB->getCountRowsOfTable ('kelas', 'idkelas') > 0 && $this->DB->getCountRowsOfTable ('ta', 'tahun') > 0)){
             $param->IsValid=false;
             $sender->ErrorMessage="Jenis Kelas atau Tahun Akademik belum di inputkan";
         }
     }
-    public function generatePIN ($sender,$param) {
+    public function generatePIN($sender, $param) {
         if ($this->IsValid) {
             $idkelas=$_SESSION['currentPagePIN']['kelas'];
             $tahun_masuk=$_SESSION['tahun_pendaftaran'];
@@ -119,7 +119,7 @@ class CPIN extends MainPageM {
 			$no_urut=($urut=='')?'0001':$urut;
 			$no_urut=$tahun_masuk.$no_urut;                        
             $jumlah=addslashes($this->txtJumlahFormulir->Text);
-            $jumlah_formulir=$no_urut+$jumlah;
+            $jumlah_formulir = $no_urut+$jumlah;
             if ($jumlah <= 1) {                        
                 $no_pin=$no_urut.mt_rand(100000,999999);
                 $values="('$no_pin',$no_urut,$tahun_masuk,'$idkelas')";
@@ -138,7 +138,7 @@ class CPIN extends MainPageM {
             $this->redirect('spmb.PIN',true);
         }
     }
-    public function printOut($sender,$param) {
+    public function printOut($sender, $param) {
         $this->createObj('reportspmb');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -151,9 +151,9 @@ class CPIN extends MainPageM {
             break;
             case  'excel2007' :
                 $messageprintout="";
-                $dataReport['tahun_masuk']=$_SESSION['tahun_pendaftaran'];
-                $dataReport['pilihan']=$_SESSION['currentPagePIN']['display_record'];
-                $dataReport['linkoutput']=$this->linkOutput;
+                $dataReport['tahun_masuk'] = $_SESSION['tahun_pendaftaran'];
+                $dataReport['pilihan'] = $_SESSION['currentPagePIN']['display_record'];
+                $dataReport['linkoutput'] = $this->linkOutput;
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 $this->report->printPIN(); 

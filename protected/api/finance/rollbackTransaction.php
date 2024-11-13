@@ -6,11 +6,11 @@ class rollbackTransaction extends BaseWS {
 			$this->validate ();
 			$data=$_POST;
 			if (!isset($data['no_transaksi'])) {
-				$this->payload['status']='30';
+				$this->payload['status'] = '30';
 				throw new Exception ("Proses Login telah berhasil, namun ada error yaitu data POST no_transaksi tidak ada !!!");
 			}
 			if (empty($data['no_transaksi'])) {
-				$this->payload['status']='30';
+				$this->payload['status'] = '30';
 				throw new Exception ("Proses Login telah berhasil, namun ada error yaitu data no_transaksi kosong !!!");
 			}
 			$no_transaksi=addslashes($data['no_transaksi']);
@@ -22,7 +22,7 @@ class rollbackTransaction extends BaseWS {
 					$this->DB->setFieldTable(array('no_transaksi','kjur','no_formulir','nama_mhs','nim','tahun','idsmt','idkelas','k_status','perpanjang','commited','tahun_masuk','semester_masuk'));		
 					$r=$this->DB->getRecord($str);
 					if (!isset($r[1])) {
-						$this->payload['status']='04';
+						$this->payload['status'] = '04';
 						throw new Exception ("Proses Login telah berhasil, namun transaksi dengan nomor ($no_transaksi) tidak ada di database !!!");				
 					}
 
@@ -42,7 +42,7 @@ class rollbackTransaction extends BaseWS {
 						$this->DB->updateRecord($str);
 			            $this->DB->query('COMMIT'); 
 					}
-					$this->payload['status']='88';
+					$this->payload['status'] = '88';
 					$this->payload['message']="Proses Login telah berhasil, data transaksi dengan nomor ($no_transaksi) berhasil di di Rollback !!!. ";		
 				break;
 				case 11: //bayar cuti
@@ -50,7 +50,7 @@ class rollbackTransaction extends BaseWS {
 					$this->DB->setFieldTable(array('no_transaksi','kjur','no_formulir','nama_mhs','nim','tahun','idsmt','idkelas','k_status','perpanjang','commited','tahun_masuk','semester_masuk'));		
 					$r=$this->DB->getRecord($str);
 					if (!isset($r[1])) {
-						$this->payload['status']='04';
+						$this->payload['status'] = '04';
 						throw new Exception ("Proses Login telah berhasil, namun transaksi dengan nomor ($no_transaksi) tidak ada di database !!!");				
 					}
 					$result=$r[1];
@@ -63,12 +63,12 @@ class rollbackTransaction extends BaseWS {
 
 		            $this->DB->query('COMMIT');
 
-					$this->payload['status']='88';
+					$this->payload['status'] = '88';
 					$this->payload['message']="Proses Login telah berhasil, data transaksi CUTI dengan nomor ($no_transaksi) berhasil di di Rollback !!!. ";		
 
 				break;
 				default :
-					$this->payload['status']='30';
+					$this->payload['status'] = '30';
 					throw new Exception ("Proses Login telah berhasil, namun ada error yaitu tipe_transaksi tidak dikenal. !!!");
 			}
 		}catch (Exception $e) {

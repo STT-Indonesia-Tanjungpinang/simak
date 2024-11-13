@@ -350,15 +350,15 @@ class Logic_ReportSPMB extends Logic_Report {
                 while (list($k,$v)=each($r)) {
                     $datamhs=$v;								
                     if ($datamhs['waktu_mendaftar']=='0000-00-00 00:00:00') {							
-                        $datamhs['tanggal_lahir']='-';
-                        $datamhs['jk']='-';
-                        $datamhs['nama_agama']='-';
-                        $datamhs['idwarga']='-';														
-                        $datamhs['idstatus']='-';		
-                        $datamhs['nama_pekerjaan']='-';
-                        $datamhs['tahun_pa']='-';
-                        $datamhs['jenis_slta']='-';
-                        $datamhs['status_slta']='-';
+                        $datamhs['tanggal_lahir'] = '-';
+                        $datamhs['jk'] = '-';
+                        $datamhs['nama_agama'] = '-';
+                        $datamhs['idwarga'] = '-';														
+                        $datamhs['idstatus'] = '-';		
+                        $datamhs['nama_pekerjaan'] = '-';
+                        $datamhs['tahun_pa'] = '-';
+                        $datamhs['jenis_slta'] = '-';
+                        $datamhs['status_slta'] = '-';
                     }
                     $this->setMode('pdf');
                     $rpt=$this->rpt;

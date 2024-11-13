@@ -28,7 +28,7 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
                     }
                     $this->literalJumlahSKS->Text=$jumlah_sks;
                     
-                    $this->cmbAddDosenWali->DataSource=$this->DMaster->getListDosenWali();
+                    $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
                     $this->cmbAddDosenWali->Text=$datamhs['iddosen_wali'];
                     $this->cmbAddDosenWali->dataBind();	           
                     
@@ -47,7 +47,7 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
         return $this->Nilai->getDataMHS($idx);
     }  
     public function setInfoToolbar() {        
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
@@ -57,9 +57,9 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSNonAktif']['DataMHS'];						
 			$ta = $this->cmbAddTANonAktif->Text;							
-			$semester=$this->cmbAddSMTNonAktif->Text;
+			$semester = $this->cmbAddSMTNonAktif->Text;
 
-            $_SESSION['currentPageDulangMHSNonAktif']['tahun_masuk']=$datamhs['tahun_masuk'];
+            $_SESSION['currentPageDulangMHSNonAktif']['tahun_masuk'] = $datamhs['tahun_masuk'];
             $nim=  $datamhs['nim'];           
 			$kelas=$datamhs['idkelas'];
             $iddosen_wali=$this->cmbAddDosenWali->Text;
@@ -67,7 +67,7 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
 			$this->DB->query ('BEGIN');
             $status_sebelumnnya = $datamhs['k_status'];
             $tasmt=$ta.$semester;
-			$str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$semester','$tasmt',NOW(),'$kelas','$status_sebelumnnya','N')";
+			$str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(),'$kelas', '$status_sebelumnnya', 'N')";
 			if ($this->DB->insertRecord($str)) {
                 if ($this->cmbAddStatus->Text == 1){
                     $str = "UPDATE register_mahasiswa SET iddosen_wali='$iddosen_wali',k_status='N' WHERE nim='$nim'";			
@@ -81,7 +81,7 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
 			}
 		}
 	}
-    public function closeDetailDulang ($sender,$param) {
+    public function closeDetailDulang($sender, $param) {
         unset($_SESSION['currentPageDulangMHSNonAktif']['DataMHS']);
         $this->redirect('dulang.DulangMHSNonAktif',true);
     }

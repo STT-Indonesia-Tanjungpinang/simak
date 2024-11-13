@@ -22,7 +22,7 @@ class CHome extends MainPageMHS {
     public function getDataMHS($idx) {		        
         return $this->Pengguna->getDataUser($idx);
     }
-    public function refreshPage ($sender,$param) {
+    public function refreshPage($sender, $param) {
         unset($_SESSION['currentPageHome']);
         $this->redirect('Home',true);
     }

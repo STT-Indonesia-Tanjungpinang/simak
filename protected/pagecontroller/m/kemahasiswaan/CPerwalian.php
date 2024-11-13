@@ -9,22 +9,22 @@ class CPerwalian extends MainPageM {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePerwalian'])||$_SESSION['currentPagePerwalian']['page_name']!='m.kemahasiswaan.perwalian') {
-				$_SESSION['currentPagePerwalian']=array('page_name'=>'m.kemahasiswaan.perwalian','page_num'=>0,'search'=>false,'iddosen_wali'=>'none','status'=>'none');												
+				$_SESSION['currentPagePerwalian']=array('page_name'=>'m.kemahasiswaan.perwalian', 'page_num'=>0,'search'=>false,'iddosen_wali'=>'none', 'status'=>'none');												
 			}
             $_SESSION['currentPagePerwalian']['search']=false;
             $daftar_dw=$this->DMaster->getListDosenWali();
-            $daftar_dw['none']='BELUM PUNYA DOSEN WALI';
-            $this->cmbDosenWali->DataSource=$daftar_dw;
+            $daftar_dw['none'] = 'BELUM PUNYA DOSEN WALI';
+            $this->cmbDosenWali->DataSource = $daftar_dw;
             $this->cmbDosenWali->Text=$_SESSION['currentPagePerwalian']['iddosen_wali'];
             $this->cmbDosenWali->dataBind();	  
             
             $daftar_status=$this->DMaster->getListStatusMHS ();
-            $daftar_status['none']='SELURUH';
-            $this->tbCmbStatus->DataSource=$daftar_status;
+            $daftar_status['none'] = 'SELURUH';
+            $this->tbCmbStatus->DataSource = $daftar_status;
             $this->tbCmbStatus->Text=$_SESSION['currentPagePerwalian']['status'];
             $this->tbCmbStatus->dataBind();
             
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
@@ -32,23 +32,23 @@ class CPerwalian extends MainPageM {
 		
 		}
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-    public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPagePerwalian']['page_num']=$param->NewPageIndex;
+    public function Page_Changed($sender, $param) {
+		$_SESSION['currentPagePerwalian']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPagePerwalian']['search']);
 	}
-    public function changeDosenWali($sender,$param) {
-        $_SESSION['currentPagePerwalian']['iddosen_wali']=$this->cmbDosenWali->Text;
+    public function changeDosenWali($sender, $param) {
+        $_SESSION['currentPagePerwalian']['iddosen_wali'] = $this->cmbDosenWali->Text;
         $this->populateData();
     }
-    public function searchRecord ($sender,$param) {
+    public function searchRecord($sender, $param) {
 		$_SESSION['currentPagePerwalian']['search']=true;
 		$this->populateData($_SESSION['currentPagePerwalian']['search']);
 	}
-    public function changeStatus ($sender,$param) {
-		$_SESSION['currentPagePerwalian']['status']=$this->tbCmbStatus->Text;
+    public function changeStatus($sender, $param) {
+		$_SESSION['currentPagePerwalian']['status'] = $this->tbCmbStatus->Text;
 		$this->populateData();
 	}
 	protected function populateData ($search=false) {
@@ -89,31 +89,31 @@ class CPerwalian extends MainPageM {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePerwalian']['page_num']=0;}
 		$str = "$str ORDER BY vdm.k_status ASC,vdm.tahun_masuk DESC,vdm.nama_mhs ASC LIMIT $offset,$limit";
-		$this->DB->setFieldTable (array('nim','nirm','nama_mhs','tahun_masuk','idkelas','k_status'));
-		$r=$this->DB->getRecord($str,$offset+1);		
-		$this->RepeaterS->DataSource=$r;
+		$this->DB->setFieldTable (array('nim', 'nirm', 'nama_mhs', 'tahun_masuk', 'idkelas', 'k_status'));
+		$r = $this->DB->getRecord($str,$offset+1);		
+		$this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();
         
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
 	}
-    public function gantiPA($sender,$param) {	
+    public function gantiPA($sender, $param) {	
         $nim=$this->getDataKeyField($sender,$this->RepeaterS);
         $this->idProcess = 'add';
         
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,idkelas,k_status,dk.iddata_konversi,photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi)  LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE vdm.nim='$nim'";
-        $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','iddata_konversi','photo_profile'));
-        $r=$this->DB->getRecord($str);	           
+        $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'iddata_konversi', 'photo_profile'));
+        $r = $this->DB->getRecord($str);	           
         $datamhs=$r[1];
         
-        $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
-        $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
+        $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
+        $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
-        $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
+        $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
         $this->DataMHS=$datamhs;
         
         $this->hiddennim->Value=$nim;
         $daftar_dw=$this->DMaster->getListDosenWali();
-        $this->cmbAddDW->DataSource=$daftar_dw;
+        $this->cmbAddDW->DataSource = $daftar_dw;
         $this->cmbAddDW->Text=$datamhs['iddosen_wali'];
         $this->cmbAddDW->dataBind();
 	}
@@ -121,7 +121,7 @@ class CPerwalian extends MainPageM {
         return $this->DataMHS[$idx];
     }
 	
-	public function saveData($sender,$param) {		
+	public function saveData($sender, $param) {		
 		if ($this->IsValid) {
 			$iddosen_wali=$this->cmbAddDW->Text;
 			$nim=$this->hiddennim->Value;
@@ -130,7 +130,7 @@ class CPerwalian extends MainPageM {
 			$this->redirect('kemahasiswaan.Perwalian',true);
 		}
 	}
-    public function printOut ($sender,$param) {
+    public function printOut($sender, $param) {
         $iddosen_wali=$_SESSION['currentPagePerwalian']['iddosen_wali'];
         if ($iddosen_wali > 0) {
             $k_status=$_SESSION['currentPagePerwalian']['status'];
@@ -145,10 +145,10 @@ class CPerwalian extends MainPageM {
                     $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                 break;
                 case  'excel2007' :
-                    $dataReport['iddosen_wali']=$iddosen_wali;
-                    $dataReport['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($iddosen_wali);
-                    $dataReport['k_status']=$k_status;
-                    $dataReport['linkoutput']=$this->linkOutput; 
+                    $dataReport['iddosen_wali'] = $iddosen_wali;
+                    $dataReport['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($iddosen_wali);
+                    $dataReport['k_status'] = $k_status;
+                    $dataReport['linkoutput'] = $this->linkOutput; 
                     $this->report->setDataReport($dataReport); 
                     $this->report->setMode('excel2007');
 

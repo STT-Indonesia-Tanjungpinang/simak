@@ -88,10 +88,10 @@ class Logic_Akademik extends Logic_Mahasiswa {
 	public function getNextSemesterAndTa ($tahun_sekarang,$semester_sekarang) {
 		$data=array();
 		if ($semester_sekarang == 1) {
-			$data['semester']='Genap';
+			$data['semester'] = 'Genap';
 			$data['ta']=$tahun_sekarang . '-'.($tahun_sekarang+1);
 		}elseif($semester_sekarang == 2) {
-			$data['semester']='Ganjil';
+			$data['semester'] = 'Ganjil';
 			$data['ta']=($tahun_sekarang+1) . '-'.($tahun_sekarang+2);
 		}
 		return $data;
@@ -340,8 +340,8 @@ class Logic_Akademik extends Logic_Mahasiswa {
             $i=1;
             while (list($m,$n)=each ($temp_data1)) {            
                 reset($r);                
-                $temp_data2[$m]['p']='';
-                $temp_data2[$m]['w']='';
+                $temp_data2[$m]['p'] = '';
+                $temp_data2[$m]['w'] = '';
                 while (list($a,$b)=each ($r)) {            
                     $index=$b['ta'].$b['idsmt'].$b['idkelas'];
                     if ($b['jk']=='L') {

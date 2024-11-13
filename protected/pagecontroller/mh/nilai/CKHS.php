@@ -13,21 +13,21 @@ class CKHS extends MainPageMHS {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKHS'])||$_SESSION['currentPageKHS']['page_name']!='mh.nilai.KHS') {
-				$_SESSION['currentPageKHS']=array('page_name'=>'mh.nilai.KHS','page_num'=>0,'search'=>false);												                                               
+				$_SESSION['currentPageKHS']=array('page_name'=>'mh.nilai.KHS', 'page_num'=>0,'search'=>false);												                                               
 			}            		
             $nama_tahun=$this->DMaster->getNamaTA ($_SESSION['ta']);
             $nama_semester = $this->setup->getSemester($_SESSION['semester']);
             $this->labelModuleHeader->Text = "T.A $nama_tahun Semester $nama_semester";
-			$this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
 			$this->tbCmbTA->Text=$_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
-            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
-			$this->tbCmbSemester->DataSource=$semester;
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text=$_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
@@ -35,16 +35,16 @@ class CKHS extends MainPageMHS {
 		}
 	}
 	
-	public function changeTbTA ($sender,$param) {
-		$_SESSION['ta']=$this->tbCmbTA->Text;		
+	public function changeTbTA($sender, $param) {
+		$_SESSION['ta'] = $this->tbCmbTA->Text;		
 		$this->redirect('nilai.KHS',true);
         
 	}	
-	public function changeTbSemester ($sender,$param) {
-		$_SESSION['semester']=$this->tbCmbSemester->Text;		
+	public function changeTbSemester($sender, $param) {
+		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
 		$this->redirect('nilai.KHS',true);
 	}	
-    public function itemBound ($sender,$param) {
+    public function itemBound($sender, $param) {
         $item=$param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {                
             $sks=$item->DataItem['sks'];
@@ -61,8 +61,8 @@ class CKHS extends MainPageMHS {
                 $this->createObj('Finance');
                 $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'],$_SESSION['ta']);
                 $idkelas=$datadulang['idkelas'];
-                $datamhs['idkelas']=$idkelas;
-                $datamhs['idsmt']=$_SESSION['semester'];
+                $datamhs['idkelas'] = $idkelas;
+                $datamhs['idsmt'] = $_SESSION['semester'];
                 $this->Finance->setDataMHS($datamhs);
 				$data = $this->Finance->getLunasPembayaran($_SESSION['ta'],$_SESSION['semester'],true);	
                 
@@ -72,7 +72,7 @@ class CKHS extends MainPageMHS {
 			if(isset($khs[1])){
 				$this->NilaiSemesterLalu=$this->Nilai->getKumulatifSksDanNmSemesterLalu($_SESSION['ta'],$_SESSION['semester']);				
                 $this->NilaiSemesterSekarang=$this->Page->Nilai->getIPKSampaiTASemester($_SESSION['ta'],$_SESSION['semester'],'ipksksnm');
-                $this->RepeaterS->DataSource=$khs ;
+                $this->RepeaterS->DataSource = $khs ;
                 $this->RepeaterS->dataBind();							
 			}else{				
 				throw new Exception ('Anda belum mengisi KRS atau KRS-nya belum disahkan oleh dosen wali.');
@@ -82,19 +82,19 @@ class CKHS extends MainPageMHS {
 			$this->errorMessage->Text=$e->getMessage();			
 		}						
 	}	
-	public function printKHS ($sender,$param) {
+	public function printKHS($sender, $param) {
 		$this->createObj('reportnilai');             
 		$tahun=$_SESSION['ta'];
-        $semester=$_SESSION['semester'];
+        $semester = $_SESSION['semester'];
         $nama_tahun = $this->DMaster->getNamaTA($tahun);
         $nama_semester = $this->setup->getSemester($semester);
         
         $dataReport=$this->Pengguna->getDataUser();
-        $dataReport['ta']=$tahun;
-        $dataReport['semester']=$semester;
-        $dataReport['nama_tahun']=$nama_tahun;
-        $dataReport['nama_semester']=$nama_semester;        
-        $dataReport['linkoutput']=$this->linkOutput; 
+        $dataReport['ta'] = $tahun;
+        $dataReport['semester'] = $semester;
+        $dataReport['nama_tahun'] = $nama_tahun;
+        $dataReport['nama_semester'] = $nama_semester;        
+        $dataReport['linkoutput'] = $this->linkOutput; 
         $this->report->setDataReport($dataReport); 
         $this->report->setMode($_SESSION['outputreport']);
 		$this->report->printKHS($this->Nilai);				

@@ -9,33 +9,33 @@ class CDulangMHSLama Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSLama'])||$_SESSION['currentPageDulangMHSLama']['page_name']!='m.dulang.DulangMHSLama') {
-				$_SESSION['currentPageDulangMHSLama']=array('page_name'=>'m.dulang.DulangMHSLama','page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none','DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSLama']=array('page_name'=>'m.dulang.DulangMHSLama', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSLama']['search']=false;
             
-            $this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
+            $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text=$_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
             $tahun_masuk=$this->getAngkatan ();			            
-            $this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
+            $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
             $this->tbCmbTahunMasuk->Text=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
 
-            $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
             $this->tbCmbTA->Text=$_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
 
-            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
-            $this->tbCmbSemester->DataSource=$semester;
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $this->tbCmbSemester->DataSource = $semester;
             $this->tbCmbSemester->Text=$_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
 
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
 
-            $this->tbCmbOutputCompress->DataSource=$this->setup->getOutputCompressType();
+            $this->tbCmbOutputCompress->DataSource = $this->setup->getOutputCompressType();
             $this->tbCmbOutputCompress->Text= $_SESSION['outputcompress'];
             $this->tbCmbOutputCompress->DataBind();
 
@@ -47,52 +47,52 @@ class CDulangMHSLama Extends MainPageM {
         return $this->Demik->getDataMHS($idx);
     }
     public function setInfoToolbar() {        
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSLama']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
-    public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPageDulangMHSLama']['page_num']=$param->NewPageIndex;
+    public function Page_Changed($sender, $param) {
+		$_SESSION['currentPageDulangMHSLama']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageDulangMHSLama']['search']);
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-	public function changeTbTA ($sender,$param) {				
-		$_SESSION['ta']=$this->tbCmbTA->Text;		        
-		$_SESSION['currentPageDulangMHSLama']['tahun_masuk']=$_SESSION['ta'];
-		$this->tbCmbTahunMasuk->DataSource=$this->getAngkatan();
+	public function changeTbTA($sender, $param) {				
+		$_SESSION['ta'] = $this->tbCmbTA->Text;		        
+		$_SESSION['currentPageDulangMHSLama']['tahun_masuk'] = $_SESSION['ta'];
+		$this->tbCmbTahunMasuk->DataSource = $this->getAngkatan();
 		$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-	public function changeTbTahunMasuk($sender,$param) {				
-		$_SESSION['currentPageDulangMHSLama']['tahun_masuk']=$this->tbCmbTahunMasuk->Text;
+	public function changeTbTahunMasuk($sender, $param) {				
+		$_SESSION['currentPageDulangMHSLama']['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-	public function changeTbPs ($sender,$param) {		
-		$_SESSION['kjur']=$this->tbCmbPs->Text;
+	public function changeTbPs($sender, $param) {		
+		$_SESSION['kjur'] = $this->tbCmbPs->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}	
-	public function changeTbSemester ($sender,$param) {		
-		$_SESSION['semester']=$this->tbCmbSemester->Text;        
+	public function changeTbSemester($sender, $param) {		
+		$_SESSION['semester'] = $this->tbCmbSemester->Text;        
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-    public function searchRecord ($sender,$param){
+    public function searchRecord($sender, $param){
         $_SESSION['currentPageDulangMHSLama']['search']=true;
         $this->populateData($_SESSION['currentPageDulangMHSLama']['search']);
     }
     public function populateData($search=false) {
         $ta = $_SESSION['ta'];
-		$idsmt=$_SESSION['semester'];
-		$kjur=$_SESSION['kjur'];
+		$idsmt = $_SESSION['semester'];
+		$kjur = $_SESSION['kjur'];
 		$tahun_masuk=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'];
         $iddosen_wali=$_SESSION['currentPageDulangMHSLama']['iddosen_wali'];
         $str_dw = $iddosen_wali=='none'?'':" AND vdm.iddosen_wali=$iddosen_wali";
@@ -136,28 +136,28 @@ class CDulangMHSLama Extends MainPageM {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSLama']['page_num']=0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";				        
-		$this->DB->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','iddosen_wali','tanggal','tahun','idsmt','idkelas'));
+		$this->DB->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt', 'idkelas'));
 		$result=$this->DB->getRecord($str,$offset+1);
-		$this->RepeaterS->DataSource=$result;
+		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
                 
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
 	}
-	public function cekNIM ($sender,$param) {		
+	public function cekNIM($sender, $param) {		
         $nim=addslashes($param->Value);		
         if ($nim != '') {
             try {
                 if (!isset($_SESSION['currentPageDulangMHSLama']['DataMHS']['no_formulir'])) {
                     
                     $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas,vdm.photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
-                    $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','k_status','status','idkelas','nkelas','photo_profile'));
-                    $r=$this->DB->getRecord($str);	           
+                    $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas', 'photo_profile'));
+                    $r = $this->DB->getRecord($str);	           
                     if (!isset($r[1])) {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
                     }
                     $datamhs=$r[1];  
-                    $datamhs['idsmt']=$_SESSION['semester'];
-                    $datamhs['ta']=$_SESSION['ta'];
+                    $datamhs['idsmt'] = $_SESSION['semester'];
+                    $datamhs['ta'] = $_SESSION['ta'];
                     
                     $this->Finance->setDataMHS($datamhs);                              
                     $datadulang=$this->Finance->getDataDulang($_SESSION['semester'],$_SESSION['ta']);
@@ -169,12 +169,12 @@ class CDulangMHSLama Extends MainPageM {
                     if (!$data['bool']) {
                         throw new Exception ("Mahasiswa a.n ".$this->Finance->getDataMHS('nama_mhs')."($nim) tidak bisa daftar ulang karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
                     }                    
-                    $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-                    $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
-                    $datamhs['iddata_konversi']=$this->Demik->isMhsPindahan($datamhs['nim'],true);
+                    $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
+                    $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
+                    $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($datamhs['nim'],true);
                     $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
-                    $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-                    $_SESSION['currentPageDulangMHSLama']['DataMHS']=$datamhs;
+                    $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
+                    $_SESSION['currentPageDulangMHSLama']['DataMHS'] = $datamhs;
                 }
             }catch (Exception $e) {
                 $param->IsValid=false;
@@ -188,25 +188,25 @@ class CDulangMHSLama Extends MainPageM {
             $this->redirect('dulang.DetailDulangMHSLama',true,array('id'=>$nim));
         }
 	}
-    public function viewRecord($sender,$param) {	
+    public function viewRecord($sender, $param) {	
 		$this->idProcess = 'view';		
 		$iddulang=$this->getDataKeyField($sender,$this->RepeaterS);	
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,semester_masuk,iddosen_wali,d.idkelas,d.k_status,d.idsmt,d.tahun,vdm.photo_profile FROM v_datamhs vdm JOIN dulang d ON (d.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE d.iddulang='$iddulang'";
-        $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','photo_profile'));
-        $r=$this->DB->getRecord($str);	           
+        $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'photo_profile'));
+        $r = $this->DB->getRecord($str);	           
         $datamhs=$r[1];
-        $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
-        $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['iddata_konversi']=$this->Demik->isMhsPindahan($datamhs['nim'],true);
+        $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
+        $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
+        $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($datamhs['nim'],true);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
-        $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
+        $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
         $this->hiddenidsmt->Value=$datamhs['idsmt'];
         $this->hiddenta->Value=$datamhs['tahun'];
         $this->Demik->setDataMHS($datamhs);
 	}
-    public function deleteRecord ($sender,$param) {			
+    public function deleteRecord($sender, $param) {			
 		$nim=$sender->CommandParameter;		
-		$idsmt=$this->hiddenidsmt->Value;
+		$idsmt = $this->hiddenidsmt->Value;
 		$ta = $this->hiddenta->Value;
 		$this->DB->query ('BEGIN');
         $this->Demik->setDataMHS(array('nim'=>$nim));
@@ -224,7 +224,7 @@ class CDulangMHSLama Extends MainPageM {
 			$this->DB->query ('ROLLBACK');
 		}		
 	}
-    public function printOut ($sender,$param) {		
+    public function printOut($sender, $param) {		
         $this->createObj('reportakademik');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -238,13 +238,13 @@ class CDulangMHSLama Extends MainPageM {
             break;
             case  'excel2007' :
                 $messageprintout="Daftar Mahasiswa Daftar Ulang Status AKTIF: <br/>";
-                $dataReport['ta']=$_SESSION['ta'];
-                $dataReport['nama_tahun']=$this->DMaster->getNamaTA($dataReport['ta']);
-                $dataReport['idsmt']=$_SESSION['semester'];
-                $dataReport['nama_semester']=$this->setup->getSemester($_SESSION['semester']);
-                $dataReport['kjur']=$_SESSION['kjur'];
-                $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];
-                $dataReport['linkoutput']=$this->linkOutput;                
+                $dataReport['ta'] = $_SESSION['ta'];
+                $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['ta']);
+                $dataReport['idsmt'] = $_SESSION['semester'];
+                $dataReport['nama_semester'] = $this->setup->getSemester($_SESSION['semester']);
+                $dataReport['kjur'] = $_SESSION['kjur'];
+                $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
+                $dataReport['linkoutput'] = $this->linkOutput;                
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 

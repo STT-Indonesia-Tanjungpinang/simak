@@ -7,21 +7,21 @@ class CDosenWali extends MainPageSA {
         $this->showDosenWali=true;   
         if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDosenWali'])||$_SESSION['currentPageDosenWali']['page_name']!='sa.dmaster.DosenWali') {
-                $_SESSION['currentPageDosenWali']=array('page_name'=>'sa.dmaster.DosenWali','page_num'=>0,'search'=>false);
+                $_SESSION['currentPageDosenWali']=array('page_name'=>'sa.dmaster.DosenWali', 'page_num'=>0,'search'=>false);
             }
             $_SESSION['currentPageDosenWali']['search']=false;
             $this->populateData();            
         }
     }       
-    public function renderCallback ($sender,$param) {
+    public function renderCallback($sender, $param) {
         $this->RepeaterS->render($param->NewWriter);    
     }
-    public function Page_Changed ($sender,$param) {
-        $_SESSION['currentPageDosenWali']['page_num']=$param->NewPageIndex;
+    public function Page_Changed($sender, $param) {
+        $_SESSION['currentPageDosenWali']['page_num'] = $param->NewPageIndex;
         $this->populateData($_SESSION['currentPageDosenWali']['search']);
     }
     
-    public function searchRecord ($sender,$param) {
+    public function searchRecord($sender, $param) {
         $_SESSION['currentPageDosenWali']['search']=true;
         $this->populateData($_SESSION['currentPageDosenWali']['search']);
     }    
@@ -61,26 +61,26 @@ class CDosenWali extends MainPageSA {
         }
         if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDosenWali']['page_num']=0;}
         $str = "$str ORDER BY nama_dosen ASC LIMIT $offset,$limit";             
-        $this->DB->setFieldTable(array('iddosen_wali','nidn','nipy','gelar_depan','nama_dosen','gelar_belakang','telp_hp','username','status'));
+        $this->DB->setFieldTable(array('iddosen_wali', 'nidn', 'nipy', 'gelar_depan', 'nama_dosen', 'gelar_belakang', 'telp_hp', 'username', 'status'));
         $r = $this->DB->getRecord($str,$offset+1);  
         
-        $this->RepeaterS->DataSource=$r;
+        $this->RepeaterS->DataSource = $r;
         $this->RepeaterS->dataBind();     
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
     }
     private function populateDosen () {
         $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM dosen_wali) ORDER BY nama_dosen ASC";
-        $this->DB->setFieldTable (array('iddosen','nama_dosen','nidn'));            
+        $this->DB->setFieldTable (array('iddosen', 'nama_dosen', 'nidn'));            
         $r= $this->DB->getRecord($str);
-        $dataitem['none']='Daftar Dosen';   
-        while (list($k,$v)=each($r)) {
-            $dataitem[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
+        $dataitem['none'] = 'Daftar Dosen';   
+        while (list($k, $v) = each($r)) {
+            $dataitem[$v['iddosen']] = $v['nama_dosen']. ' ['.$v['nidn'].']';
         }
         return $dataitem;
     }           
-    public function addProcess ($sender,$param) {
+    public function addProcess($sender, $param) {
         $this->idProcess = 'add';        
-        $this->cmbAddDosen->dataSource=$this->populateDosen ();
+        $this->cmbAddDosen->dataSource = $this->populateDosen ();
         $this->cmbAddDosen->dataBind();                
     }  
    
@@ -91,20 +91,20 @@ class CDosenWali extends MainPageSA {
             $this->DB->insertRecord($str);
             if ($this->Application->Cache) {  
                 $str = "SELECT dw.iddosen_wali,d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen ORDER BY idjabatan DESC,nama_dosen ASC";
-                $this->DB->setFieldTable(array('iddosen_wali','nidn','nama_dosen'));                    
+                $this->DB->setFieldTable(array('iddosen_wali', 'nidn', 'nama_dosen'));                    
                 $r = $this->DB->getRecord($str);                
-                $dataitem['none']='Daftar Dosen Wali';              
-                while (list($k,$v)=each($r)) {          
-                    $dataitem[$v['iddosen_wali']]=$v['nama_dosen'] . ' ['.$v['nidn'].']';   ;                   
+                $dataitem['none'] = 'Daftar Dosen Wali';              
+                while (list($k, $v) = each($r)) {          
+                    $dataitem[$v['iddosen_wali']] = $v['nama_dosen'] . ' ['.$v['nidn'].']';   ;                   
                 }   
                 $this->Application->Cache->set('listdw',$dataitem);                
             }
             $this->Redirect('dmaster.DosenWali',true);            
         }
     }
-    public function deleteRecord ($sender,$param) {        
+    public function deleteRecord($sender, $param) {        
         $iddosen_wali=$this->getDataKeyField($sender,$this->RepeaterS);          
-        if ($this->DB->checkRecordIsExist('iddosen_wali','register_mahasiswa',$iddosen_wali)) {
+        if ($this->DB->checkRecordIsExist('iddosen_wali', 'register_mahasiswa',$iddosen_wali)) {
             $this->lblHeaderMessageError->Text='Menghapus Dosen Wali';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen wali dengan ID ($iddosen_wali) karena sedang digunakan di register mahasiswa.";
             $this->modalMessageError->Show();        
@@ -112,11 +112,11 @@ class CDosenWali extends MainPageSA {
             $this->DB->deleteRecord("dosen_wali WHERE iddosen_wali=$iddosen_wali");            
             if ($this->Application->Cache) {  
                 $str = "SELECT dw.iddosen_wali,d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen ORDER BY idjabatan DESC,nama_dosen ASC";
-                $this->DB->setFieldTable(array('iddosen_wali','nidn','nama_dosen'));                    
+                $this->DB->setFieldTable(array('iddosen_wali', 'nidn', 'nama_dosen'));                    
                 $r = $this->DB->getRecord($str);                
-                $dataitem['none']='Daftar Dosen Wali';              
-                while (list($k,$v)=each($r)) {          
-                    $dataitem[$v['iddosen_wali']]=$v['nama_dosen'] . ' ['.$v['nidn'].']';   ;                   
+                $dataitem['none'] = 'Daftar Dosen Wali';              
+                while (list($k, $v) = each($r)) {          
+                    $dataitem[$v['iddosen_wali']] = $v['nama_dosen'] . ' ['.$v['nidn'].']';   ;                   
                 }   
                 $this->Application->Cache->set('listdw',$dataitem);                
             }

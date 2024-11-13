@@ -11,20 +11,20 @@ class CKombiPerTA Extends MainPageK {
         $this->showKombiPerTA=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKombiPerTA'])||$_SESSION['currentPageKombiPerTA']['page_name']!='k.dmaster.KombiPerTA') {
-				$_SESSION['currentPageKombiPerTA']=array('page_name'=>'k.dmaster.KombiPerTA','kelas'=>'A','semester_masuk'=>1,'periode_pembayaran'=>'none');												
+				$_SESSION['currentPageKombiPerTA']=array('page_name'=>'k.dmaster.KombiPerTA', 'kelas'=>'A', 'semester_masuk'=>1,'periode_pembayaran'=>'none');												
 			}
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
-			$this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
+			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester=array('1'=>'GANJIL','2'=>'GENAP');  				
-			$this->tbCmbSemesterMasuk->DataSource=$semester;
+            $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
+			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text=$_SESSION['currentPageKombiPerTA']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind(); 
             
             $kelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas(),'none');            
-			$this->tbCmbKelas->DataSource=$kelas;
+			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text=$_SESSION['currentPageKombiPerTA']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
@@ -40,31 +40,31 @@ class CKombiPerTA Extends MainPageK {
         $nama_kelas=$this->DMaster->getNamaKelasByID($_SESSION['currentPageKombiPerTA']['kelas']);                    
 		$this->lblModulHeader->Text="Tahun Masuk $tahun_masuk Kelas $nama_kelas";        
 	}
-    public function changeTbKelas ($sender,$param) {				
-		$_SESSION['currentPageKombiPerTA']['kelas']=$this->tbCmbKelas->Text;		        
+    public function changeTbKelas($sender, $param) {				
+		$_SESSION['currentPageKombiPerTA']['kelas'] = $this->tbCmbKelas->Text;		        
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-    public function changeTbTahunMasuk($sender,$param) {    				
-		$_SESSION['tahun_masuk']=$this->tbCmbTahunMasuk->Text;		        
+    public function changeTbTahunMasuk($sender, $param) {    				
+		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;		        
         $this->setInfoToolbar();
 		$this->populateData();
 	}    
-    public function changeTbSemesterMasuk ($sender,$param) {		
-		$_SESSION['currentPageKombiPerTA']['semester_masuk']=$this->tbCmbSemesterMasuk->Text;        
+    public function changeTbSemesterMasuk($sender, $param) {		
+		$_SESSION['currentPageKombiPerTA']['semester_masuk'] = $this->tbCmbSemesterMasuk->Text;        
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-    public function changePeriodePembayaran($sender,$param) {    				
-		$_SESSION['currentPageKombiPerTA']['periode_pembayaran']=$this->cmbPeriodePembayaran->Text;		        
+    public function changePeriodePembayaran($sender, $param) {    				
+		$_SESSION['currentPageKombiPerTA']['periode_pembayaran'] = $this->cmbPeriodePembayaran->Text;		        
 		$this->populateData();
 	}
 	protected function populateData () {		
 		$ta = $_SESSION['tahun_masuk'];	
-        $idsmt=$_SESSION['currentPageKombiPerTA']['semester_masuk'];	
+        $idsmt = $_SESSION['currentPageKombiPerTA']['semester_masuk'];	
 		$kelas=$_SESSION['currentPageKombiPerTA']['kelas'];	        
-		if ($ta == 'none' || $ta == '' || $kelas=='none' || $ta=='' || $this->DB->checkRecordIsExist('tahun','ta',$ta)==false) {									
-			$result=array();			
+		if ($ta == 'none' || $ta == '' || $kelas=='none' || $ta=='' || $this->DB->checkRecordIsExist('tahun', 'ta',$ta)==false) {									
+			$result = array();			
 		}else {							
 			$total_kombi1=$this->DB->getCountRowsOfTable("kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas'");
 			$total_kombi2=$this->DB->getCountRowsOfTable('kombi');
@@ -95,34 +95,34 @@ class CKombiPerTA Extends MainPageK {
                 $str_periode_pembayaran=$periode_pembayaran=='none' ?'':" AND k.periode_pembayaran='$periode_pembayaran'";
             }
             $str = "SELECT kpt.idkombi_per_ta,k.idkombi,k.nama_kombi,kpt.biaya,k.periode_pembayaran FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND idsmt=$idsmt AND tahun=$ta AND kpt.idkelas='$kelas'$str_periode_pembayaran ORDER BY periode_pembayaran,nama_kombi ASC";
-            $this->DB->setFieldTable(array('idkombi_per_ta','idkombi','nama_kombi','biaya','periode_pembayaran'));
-            $r=$this->DB->getRecord($str); 
-            $result=array();
-			while (list($k,$v)=each($r)) {
-                $v['biaya_alias']=$this->Finance->toRupiah($v['biaya']);
+            $this->DB->setFieldTable(array('idkombi_per_ta', 'idkombi', 'nama_kombi', 'biaya', 'periode_pembayaran'));
+            $r = $this->DB->getRecord($str); 
+            $result = array();
+			while (list($k, $v) = each($r)) {
+                $v['biaya_alias'] = $this->Finance->toRupiah($v['biaya']);
                 $v['nama_kombi']=  strtoupper($v['nama_kombi']);
                 $v['periode_pembayaran']=  strtoupper($v['periode_pembayaran']);
-				$result[$k]=$v;
+				$result[$k] = $v;
 			}		
 		}		
-		$this->GridS->DataSource=$result;
+		$this->GridS->DataSource = $result;
 		$this->GridS->dataBind();
 	}
-	public function editItem($sender,$param) {                   
+	public function editItem($sender, $param) {                   
         $this->GridS->EditItemIndex=$param->Item->ItemIndex;
         $this->populateData ();        
     }
-    public function cancelItem($sender,$param) {                
+    public function cancelItem($sender, $param) {                
         $this->GridS->EditItemIndex=-1;
         $this->populateData ();        
     }		
-    public function deleteItem($sender,$param) {                
+    public function deleteItem($sender, $param) {                
         $id=$this->GridS->DataKeys[$param->Item->ItemIndex];        
         $this->DB->updateRecord("UPDATE kombi_per_ta SET biaya=0 WHERE idkombi_per_ta = $id");
         $this->GridS->EditItemIndex=-1;
         $this->populateData ();
     }  
-    public function saveItem($sender,$param) {                        
+    public function saveItem($sender, $param) {                        
         $item=$param->Item;
         $id=$this->GridS->DataKeys[$item->ItemIndex];   
         $biaya = $this->Finance->toInteger(addslashes($item->ColumnBiaya->TextBox->Text));                         

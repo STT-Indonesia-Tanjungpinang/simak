@@ -9,34 +9,34 @@ class CDaftarMahasiswa extends MainPageDW {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDaftarMahasiswa'])||$_SESSION['currentPageDaftarMahasiswa']['page_name']!='dw.kemahasiswaan.DaftarMahasiswa') {
-				$_SESSION['currentPageDaftarMahasiswa']=array('page_name'=>'dw.kemahasiswaan.DaftarMahasiswa','page_num'=>0,'search'=>false,'idkonsentrasi'=>'none','k_status'=>'none');												
+				$_SESSION['currentPageDaftarMahasiswa']=array('page_name'=>'dw.kemahasiswaan.DaftarMahasiswa', 'page_num'=>0,'search'=>false,'idkonsentrasi'=>'none', 'k_status'=>'none');												
 			}
             $_SESSION['currentPageDaftarMahasiswa']['search']=false;
             
             $this->lblProdi->Text=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];
-			$this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
+			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
 			$this->tbCmbPs->Text=$_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();				
                 
 			$tahun_masuk=$this->DMaster->getListTA();
-			$tahun_masuk['none']='All';
-			$this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
+			$tahun_masuk['none'] = 'All';
+			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $kelas=$this->DMaster->getListKelas();
-            $kelas['none']='All';
-			$this->tbCmbKelas->DataSource=$kelas;
+            $kelas['none'] = 'All';
+			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text=$_SESSION['kelas'];			
 			$this->tbCmbKelas->dataBind();		
             
             $status=$this->DMaster->getListStatusMHS();
-            $status['none']='All';
-			$this->tbCmbStatus->DataSource=$status;
+            $status['none'] = 'All';
+			$this->tbCmbStatus->DataSource = $status;
 			$this->tbCmbStatus->Text=$_SESSION['currentPageDaftarMahasiswa']['k_status'];			
 			$this->tbCmbStatus->dataBind();
             
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
@@ -44,42 +44,42 @@ class CDaftarMahasiswa extends MainPageDW {
 			$this->populateData();
 		}		
 	}
-    public function changeTbPs ($sender,$param) {		
-		$_SESSION['kjur']=$this->tbCmbPs->Text;
+    public function changeTbPs($sender, $param) {		
+		$_SESSION['kjur'] = $this->tbCmbPs->Text;
         $this->lblProdi->Text=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];        
-        $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi']='none';
+        $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = 'none';
         $this->populateKonsentrasi();
 		$this->populateData();
 	}
-	public function changeTbTahunMasuk($sender,$param) {    				
-		$_SESSION['tahun_masuk']=$this->tbCmbTahunMasuk->Text;		
+	public function changeTbTahunMasuk($sender, $param) {    				
+		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;		
         $this->populateKonsentrasi();
 		$this->populateData();
 	}
-	public function changeTbKelas ($sender,$param) {				
-		$_SESSION['kelas']=$this->tbCmbKelas->Text;		
+	public function changeTbKelas($sender, $param) {				
+		$_SESSION['kelas'] = $this->tbCmbKelas->Text;		
         $this->populateKonsentrasi();
 		$this->populateData();
 	}
-    public function changeTbStatus ($sender,$param) {				
-		$_SESSION['currentPageDaftarMahasiswa']['k_status']=$this->tbCmbStatus->Text;		
+    public function changeTbStatus($sender, $param) {				
+		$_SESSION['currentPageDaftarMahasiswa']['k_status'] = $this->tbCmbStatus->Text;		
         $this->populateKonsentrasi();
 		$this->populateData();
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPageDaftarMahasiswa']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPageDaftarMahasiswa']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageDaftarMahasiswa']['search']);
 	}
-    public function filterKonsentrasi ($sender,$param) {
+    public function filterKonsentrasi($sender, $param) {
         $id=$this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
-        $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi']=$id;
+        $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = $id;
         $this->populateKonsentrasi();
         $this->populateData();
     }
-    public function searchRecord ($sender,$param) {
+    public function searchRecord($sender, $param) {
 		$_SESSION['currentPageDaftarMahasiswa']['search']=true;
         $this->populateData($_SESSION['currentPageDaftarMahasiswa']['search']);
 	} 
@@ -97,21 +97,21 @@ class CDaftarMahasiswa extends MainPageDW {
             if ($v['kjur']==$_SESSION['kjur']){
                 $idkonsentrasi=$v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("register_mahasiswa WHERE idkonsentrasi=$idkonsentrasi $str_tahun_masuk $str_kelas $str_status",'nim');
-                $v['jumlah_mhs']=$jumlah > 10000 ? 'lebih dari 10.000' : $jumlah;
-                $r[$i]=$v;
+                $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000' : $jumlah;
+                $r[$i] = $v;
                 $i+=1;
             }
         }        
-        $this->RepeaterKonsentrasi->DataSource=$r;
+        $this->RepeaterKonsentrasi->DataSource = $r;
         $this->RepeaterKonsentrasi->DataBind();
     }
-    public function resetKonsentrasi ($sender,$param) {
-		$_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi']='none';
+    public function resetKonsentrasi($sender, $param) {
+		$_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = 'none';
         $this->redirect('kemahasiswaan.DaftarMahasiswa',true);
 	} 
 	public function populateData ($search=false) {
         $iddosen_wali=$this->iddosen_wali;
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
         if ($search) {
             $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,tempat_lahir,tanggal_lahir,alamat_rumah,kjur,idkonsentrasi,iddosen_wali,tahun_masuk,k_status,idkelas,photo_profile FROM v_datamhs";			
             $txtsearch=addslashes($this->txtKriteria->Text);
@@ -141,7 +141,7 @@ class CDaftarMahasiswa extends MainPageDW {
             $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
             $status=$_SESSION['currentPageDaftarMahasiswa']['k_status'];
             $str_status = $status == 'none'?'':" AND k_status='$status'";
-            $jumlah_baris=$this->DB->getCountRowsOfTable("v_datamhs  WHERE iddosen_wali=$iddosen_wali AND kjur=$kjur $str_tahun_masuk $str_konsentrasi $str_kelas $str_status",'nim');		
+            $jumlah_baris=$this->DB->getCountRowsOfTable("v_datamhs  WHERE iddosen_wali=$iddosen_wali AND kjur = $kjur $str_tahun_masuk $str_konsentrasi $str_kelas $str_status",'nim');		
             $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,tempat_lahir,tanggal_lahir,alamat_rumah,kjur,idkonsentrasi,iddosen_wali,tahun_masuk,k_status,idkelas,photo_profile FROM v_datamhs WHERE iddosen_wali=$iddosen_wali AND kjur='$kjur' $str_tahun_masuk $str_konsentrasi $str_kelas $str_status";			
         }		
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDaftarMahasiswa']['page_num'];
@@ -155,27 +155,27 @@ class CDaftarMahasiswa extends MainPageDW {
 		}
 		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPageDaftarMahasiswa']['page_num']=0;}
         $str = "$str ORDER BY nim DESC,nama_mhs ASC LIMIT $offset,$limit";				
-        $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','alamat_rumah','kjur','idkonsentrasi','iddosen_wali','tahun_masuk','k_status','idkelas','photo_profile'));
+        $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'alamat_rumah', 'kjur', 'idkonsentrasi', 'iddosen_wali', 'tahun_masuk', 'k_status', 'idkelas', 'photo_profile'));
 		$r = $this->DB->getRecord($str,$offset+1);	
         $result = array();
-        while (list($k,$v)=each($r)) {
+        while (list($k, $v) = each($r)) {
             $nim=$v['nim'];
-            $dataMHS['nim']=$nim;
-            $dataMHS['tahun_masuk']=$v['tahun_masuk'];            
-            $dataMHS['kjur']=$v['kjur'];   
+            $dataMHS['nim'] = $nim;
+            $dataMHS['tahun_masuk'] = $v['tahun_masuk'];            
+            $dataMHS['kjur'] = $v['kjur'];   
             $iddata_konversi=$this->Nilai->isMhsPindahan($nim,true);
-            $dataMHS['iddata_konversi']=$iddata_konversi; 
-            $dataMHS['idkonsentrasi']=$v['idkonsentrasi']; 
-            $v['iddata_konversi']=$iddata_konversi;
+            $dataMHS['iddata_konversi'] = $iddata_konversi; 
+            $dataMHS['idkonsentrasi'] = $v['idkonsentrasi']; 
+            $v['iddata_konversi'] = $iddata_konversi;
             $this->Nilai->setDataMHS($dataMHS);
-            $v['konsentrasi']=$this->DMaster->getNamaKonsentrasiByID($v['idkonsentrasi'],$v['kjur']);
-            $v['njur']=$_SESSION['daftar_jurusan'][$v['kjur']];
+            $v['konsentrasi'] = $this->DMaster->getNamaKonsentrasiByID($v['idkonsentrasi'],$v['kjur']);
+            $v['njur'] = $_SESSION['daftar_jurusan'][$v['kjur']];
             $this->Nilai->getTranskrip();
-            $v['ips']=$this->Nilai->getIPSAdaNilai();
-            $v['sks']=$this->Nilai->getTotalSKSAdaNilai();
-            $result[$k]=$v;
+            $v['ips'] = $this->Nilai->getIPSAdaNilai();
+            $v['sks'] = $this->Nilai->getTotalSKSAdaNilai();
+            $result[$k] = $v;
         }        
-        $this->RepeaterS->DataSource=$result;
+        $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
     }

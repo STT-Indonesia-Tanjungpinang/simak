@@ -18,7 +18,7 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
                 $this->Finance->setDataMHS($datamhs);
                 $no_transaksi=$datamhs['no_transaksi'];
                 $str = "SELECT no_faktur,tanggal FROM transaksi WHERE no_transaksi=$no_transaksi";
-                $this->DB->setFieldTable(array('no_faktur','tanggal'));
+                $this->DB->setFieldTable(array('no_faktur', 'tanggal'));
                 $d=$this->DB->getRecord($str);
                 $this->hiddennofaktur->Value=$d[1]['no_faktur'];
                 $this->txtAddNomorFaktur->Text=$d[1]['no_faktur'];
@@ -38,60 +38,60 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
     public function populateData () {
         $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];        
         $no_transaksi=$datamhs['no_transaksi'];
-        $no_formulir=$datamhs['no_formulir'];
+        $no_formulir = $datamhs['no_formulir'];
         $ta = $datamhs['tahun_masuk'];                
-        $idsmt=$datamhs['semester_masuk'];     
+        $idsmt = $datamhs['semester_masuk'];     
         $kelas=$datamhs['idkelas'];                
         
-        $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE no_formulir=$no_formulir AND tahun=$ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
-        $this->DB->setFieldTable(array('idkombi','sudah_dibayar'));
+        $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE no_formulir = $no_formulir AND tahun=$ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
+        $this->DB->setFieldTable(array('idkombi', 'sudah_dibayar'));
         $d=$this->DB->getRecord($str);
         
         $sudah_dibayarkan=array();
         while (list($o,$p)=each($d)) {            
-            $sudah_dibayarkan[$p['idkombi']]=$p['sudah_dibayar'];
+            $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
         }
         
         $str = "SELECT idkombi,dibayarkan FROM transaksi_detail WHERE no_transaksi=$no_transaksi ORDER BY idkombi+1 ASC";
-        $this->DB->setFieldTable(array('idkombi','dibayarkan'));
+        $this->DB->setFieldTable(array('idkombi', 'dibayarkan'));
         $k=$this->DB->getRecord($str);
         
         $belum_komit=array();
         while (list($m,$n)=each($k)) {              
-            $belum_komit[$n['idkombi']]=$n['dibayarkan'];
+            $belum_komit[$n['idkombi']] = $n['dibayarkan'];
         }
         
         $str = "SELECT k.idkombi,k.nama_kombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$ta AND kpt.idkelas='$kelas' AND idsmt=$idsmt AND (periode_pembayaran='sekali' OR periode_pembayaran='semesteran') ORDER BY periode_pembayaran,nama_kombi ASC";
-        $this->DB->setFieldTable(array('idkombi','nama_kombi','biaya'));
-        $r=$this->DB->getRecord($str);
+        $this->DB->setFieldTable(array('idkombi', 'nama_kombi', 'biaya'));
+        $r = $this->DB->getRecord($str);
         
-        while (list($k,$v)=each($r)) {
+        while (list($k, $v) = each($r)) {
             $biaya = $v['biaya'];
             $idkombi=$v['idkombi'];
             $sudah_dibayar=isset($sudah_dibayarkan[$idkombi])?$sudah_dibayarkan[$idkombi]:0;            
             if ($sudah_dibayar <=$biaya) {
-                $v['biaya_alias']=$this->Finance->toRupiah($biaya);
+                $v['biaya_alias'] = $this->Finance->toRupiah($biaya);
                 $v['nama_kombi']=  strtoupper($v['nama_kombi']);            
-                $v['sudah_dibayar']=$sudah_dibayar;
-                $v['sudah_dibayar_alias']=$this->Finance->toRupiah($sudah_dibayar);  
-                $jumlah_bayar=$belum_komit[$idkombi];                
-                $v['jumlah_bayar']=$jumlah_bayar;
-                $v['jumlah_bayar_alias']=$this->Finance->toRupiah($jumlah_bayar);
-                $result[$k]=$v;
+                $v['sudah_dibayar'] = $sudah_dibayar;
+                $v['sudah_dibayar_alias'] = $this->Finance->toRupiah($sudah_dibayar);  
+                $jumlah_bayar = $belum_komit[$idkombi];                
+                $v['jumlah_bayar'] = $jumlah_bayar;
+                $v['jumlah_bayar_alias'] = $this->Finance->toRupiah($jumlah_bayar);
+                $result[$k] = $v;
             }            
         }		
-        $this->GridS->DataSource=$result;
+        $this->GridS->DataSource = $result;
 		$this->GridS->dataBind();
     }
-	public function editItem($sender,$param) {                   
+	public function editItem($sender, $param) {                   
         $this->GridS->EditItemIndex=$param->Item->ItemIndex;
         $this->populateData ();        
     }
-    public function cancelItem($sender,$param) {                
+    public function cancelItem($sender, $param) {                
         $this->GridS->EditItemIndex=-1;
         $this->populateData ();        
     }		
-    public function deleteItem($sender,$param) {                
+    public function deleteItem($sender, $param) {                
         $id=$this->GridS->DataKeys[$param->Item->ItemIndex]; 
         $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];
         $no_transaksi=$datamhs['no_transaksi'];
@@ -99,30 +99,30 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
         $this->GridS->EditItemIndex=-1;
         $this->populateData ();
     }  
-    public function saveItem($sender,$param) {                        
+    public function saveItem($sender, $param) {                        
         $item=$param->Item;
         $id=$this->GridS->DataKeys[$item->ItemIndex];   
         
         $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];
         $no_transaksi=$datamhs['no_transaksi'];
-        $no_formulir=$datamhs['no_formulir'];
+        $no_formulir = $datamhs['no_formulir'];
         $ta = $datamhs['tahun_masuk'];                
-        $idsmt=$datamhs['semester_masuk'];     
+        $idsmt = $datamhs['semester_masuk'];     
         $kelas=$datamhs['idkelas'];       
         
         
-        $str = "SELECT SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE no_formulir=$no_formulir AND tahun=$ta AND idsmt=$idsmt AND idkombi=$id AND commited=1";
+        $str = "SELECT SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE no_formulir = $no_formulir AND tahun=$ta AND idsmt=$idsmt AND idkombi=$id AND commited=1";
         $this->DB->setFieldTable(array('sudah_dibayar'));
         $d=$this->DB->getRecord($str);        
-        $sudah_dibayar=$d[1]['sudah_dibayar'];
+        $sudah_dibayar = $d[1]['sudah_dibayar'];
         
         
         $str = "SELECT biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$ta AND kpt.idkelas='$kelas' AND kpt.idkombi=$id AND kpt.idsmt=$idsmt";
         $this->DB->setFieldTable(array('biaya'));
-        $r=$this->DB->getRecord($str);
+        $r = $this->DB->getRecord($str);
         $biaya = $r[1]['biaya'];
         
-        $jumlah_bayar=$this->Finance->toInteger(addslashes($item->ColumnJumlahBayar->TextBox->Text));                         
+        $jumlah_bayar = $this->Finance->toInteger(addslashes($item->ColumnJumlahBayar->TextBox->Text));                         
         
         if (($jumlah_bayar+$sudah_dibayar) <= $biaya) {
             $str = "UPDATE transaksi_detail SET dibayarkan='$jumlah_bayar' WHERE no_transaksi=$no_transaksi AND idkombi=$id";
@@ -131,13 +131,13 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
         $this->GridS->EditItemIndex=-1;
         $this->populateData ();
     }
-	public function checkNomorFaktur ($sender,$param) {
+	public function checkNomorFaktur($sender, $param) {
 		$this->idProcess=$sender->getId()=='addNomorFaktur'?'add':'edit';
-        $no_faktur=$param->Value;		
+        $no_faktur = $param->Value;		
         if ($no_faktur != '') {
             try {
                 if ($this->hiddennofaktur->Value != $no_faktur) {
-                    if ($this->DB->checkRecordIsExist('no_faktur','transaksi',$no_faktur)) {                                
+                    if ($this->DB->checkRecordIsExist('no_faktur', 'transaksi',$no_faktur)) {                                
                         throw new Exception ("Nomor Faktur dari ($no_faktur) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }
                 }
@@ -151,7 +151,7 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
 		if ($this->Page->isValid) {	
             $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];
-            $no_formulir=$datamhs['no_formulir'];
+            $no_formulir = $datamhs['no_formulir'];
             
             $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d',$this->cmbAddTanggalFaktur->TimeStamp);
@@ -162,11 +162,11 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
             $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id'=>$no_formulir));
         }
     }
-    public function commitData ($sender,$param) {
+    public function commitData($sender, $param) {
 		if ($this->Page->isValid) {	
             $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];
-            $no_formulir=$datamhs['no_formulir'];
+            $no_formulir = $datamhs['no_formulir'];
             
             $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d',$this->cmbAddTanggalFaktur->TimeStamp);
@@ -177,13 +177,13 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
             $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id'=>$no_formulir));
         }
     }
-    public function closeTransaction ($sender,$param) {
+    public function closeTransaction($sender, $param) {
         $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];            
-        $no_formulir=$datamhs['no_formulir'];
+        $no_formulir = $datamhs['no_formulir'];
         unset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']);
         $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id'=>$no_formulir));
     }
-    public function closeDetail ($sender,$param) {
+    public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']);
         $this->redirect('pembayaran.PembayaranMahasiswaBaru',true);
     }

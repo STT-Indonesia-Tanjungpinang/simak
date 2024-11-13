@@ -189,7 +189,7 @@ class Logic_ReportAkademik extends Logic_Report {
             $row_smt_awal=$row_genap;												
             $ada_matkul=true;						
             $genap_total_sks=0;								
-            foreach ($data as $k=>$v) {														
+            foreach ($data as $k => $v) {														
               if ($v['semester']==$i) {								
                 if ($v['kmatkul'] == '') {
                   $ada_matkul=false;

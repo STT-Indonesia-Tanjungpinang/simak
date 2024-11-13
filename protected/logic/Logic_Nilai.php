@@ -192,17 +192,17 @@ class Logic_Nilai extends Logic_Akademik {
         $v['m']=$m;	                               
         if ($v['idkonsentrasi'] == 0) {
           if($v['islintas_prodi'] == 1){
-            $v['keterangan']='Matkul Lintas Prodi '.$keterangan;
+            $v['keterangan'] = 'Matkul Lintas Prodi '.$keterangan;
             $result[$k]=$v;					
           }elseif($v['ispilihan'] == 1) {
-            $v['keterangan']='Matkul Pilihan '.$keterangan;
+            $v['keterangan'] = 'Matkul Pilihan '.$keterangan;
             $result[$k]=$v;					
           }else {
-            $v['keterangan']='- '.$keterangan;
+            $v['keterangan'] = '- '.$keterangan;
             $result[$k]=$v;					
           }
         }elseif($v['idkonsentrasi'] == $idkonsentrasi){
-          $v['keterangan']='Matkul Konsentrasi '.$keterangan;
+          $v['keterangan'] = 'Matkul Konsentrasi '.$keterangan;
           $result[$k]=$v;					
         }
       }			
@@ -245,7 +245,7 @@ class Logic_Nilai extends Logic_Akademik {
         if (($cek_isikuesioner==true) && ($r_nilai[1]['telah_isi_kuesioner']==0) && ($r_nilai[1]['tahun'] >= 2015)) {
           $hm_biasa='';  									
           $hm=$hm_biasa;		                    
-          $v['keterangan']='BELUM ISI KUESIONER';
+          $v['keterangan'] = 'BELUM ISI KUESIONER';
         }
         if ($iddata_konversi > 0) {		
           $this->db->setFieldTable (array('n_kual'));			
@@ -278,20 +278,20 @@ class Logic_Nilai extends Logic_Akademik {
       if ($v['idkonsentrasi'] == 0) {               
         if($v['islintas_prodi'] == 1){
           if ($v['n_kual']!='-') {
-            $v['keterangan']='Matkul Lintas Prodi '.$v['keterangan'];
+            $v['keterangan'] = 'Matkul Lintas Prodi '.$v['keterangan'];
             $result[$k]=$v;					
           }
         }elseif(($v['ispilihan'] == 1)) {
           if ($v['n_kual']!='-') {
-            $v['keterangan']='Matkul Pilihan '.$v['keterangan'];
+            $v['keterangan'] = 'Matkul Pilihan '.$v['keterangan'];
             $result[$k]=$v;					
           }
         }elseif ($v['islintas_prodi'] == 0) {
-          $v['keterangan']='- '.$v['keterangan'];
+          $v['keterangan'] = '- '.$v['keterangan'];
           $result[$k]=$v;					
         }
       }elseif(($v['idkonsentrasi'] == $idkonsentrasi) && $v['n_kual']!='-'){
-        $v['keterangan']='Matkul Konsentrasi '.$v['keterangan'];
+        $v['keterangan'] = 'Matkul Konsentrasi '.$v['keterangan'];
         $result[$k]=$v;					
       }
     }		
@@ -317,30 +317,30 @@ class Logic_Nilai extends Logic_Akademik {
         if ($cek_isikuesioner) {
           if ($v['telah_isi_kuesioner']==0) {                    
             $v['sks']=0;           
-            $v['n_kual']='-';
+            $v['n_kual'] = '-';
             $v['am']=0;
             $v['m']=0;  
-            $v['keterangan']='ISI KUESIONER DI KHS';                                    
+            $v['keterangan'] = 'ISI KUESIONER DI KHS';                                    
           }else{
             $am=$this->AngkaMutu[$v['n_kual']];
             $m=$am*$v['sks'];
             $v['am']=$am;
             $v['m']=$m;	                
-            $v['keterangan']='-';                
+            $v['keterangan'] = '-';                
           }
         }else{
           $am=$this->AngkaMutu[$v['n_kual']];
           $m=$am*$v['sks'];
           $v['am']=$am;
           $v['m']=$m;	                
-          $v['keterangan']='-';                
+          $v['keterangan'] = '-';                
         }
       }else{
         $am=$this->AngkaMutu[$v['n_kual']];
         $m=$am*$v['sks'];
         $v['am']=$am;
         $v['m']=$m;	                
-        $v['keterangan']='-'; 
+        $v['keterangan'] = '-'; 
       }            
       $result[$k]=$v;
     }
@@ -366,30 +366,30 @@ class Logic_Nilai extends Logic_Akademik {
         if ($cek_isikuesioner) {
           if ($v['telah_isi_kuesioner']==0) {                    
             $v['sks']=0;           
-            $v['n_kual']='-';
+            $v['n_kual'] = '-';
             $v['am']=0;
             $v['m']=0;  
-            $v['keterangan']='ISI KUESIONER DI KHS';                                    
+            $v['keterangan'] = 'ISI KUESIONER DI KHS';                                    
           }else{
             $am=$this->AngkaMutu[$v['n_kual']];
             $m=$am*$v['sks'];
             $v['am']=$am;
             $v['m']=$m;	                
-            $v['keterangan']='-';                
+            $v['keterangan'] = '-';                
           }
         }else{
           $am=$this->AngkaMutu[$v['n_kual']];
           $m=$am*$v['sks'];
           $v['am']=$am;
           $v['m']=$m;	                
-          $v['keterangan']='-';                
+          $v['keterangan'] = '-';                
         }
       }else{
         $am=$this->AngkaMutu[$v['n_kual']];
         $m=$am*$v['sks'];
         $v['am']=$am;
         $v['m']=$m;	                
-        $v['keterangan']='-'; 
+        $v['keterangan'] = '-'; 
       }            
       $result[$v['kmatkul']]=$v;
     }
@@ -407,7 +407,7 @@ class Logic_Nilai extends Logic_Akademik {
             $m=$am*$v['sks'];
             $v['am']=$am;
             $v['m']=$m;	  
-            $v['keterangan']='NILAI KONVERSI';
+            $v['keterangan'] = 'NILAI KONVERSI';
             $result[$v['kmatkul']]=$v;
           }
         }else{
@@ -415,7 +415,7 @@ class Logic_Nilai extends Logic_Akademik {
           $m=$am*$v['sks'];
           $v['am']=$am;
           $v['m']=$m;	  
-          $v['keterangan']='NILAI KONVERSI';
+          $v['keterangan'] = 'NILAI KONVERSI';
           $result[$v['kmatkul']]=$v;
         }
       }
@@ -457,7 +457,7 @@ class Logic_Nilai extends Logic_Akademik {
           }else{                    
             $b['keterangan']=$hm == ''?'BELUM ISI NILAI':'BELUM ISI KUESIONER';
             $b['bool_isi_kuesioner']=$hm == ''?false:true;
-            $b['n_kual']='';
+            $b['n_kual'] = '';
             $b['am']=0;
             $b['m']=0;                
           }
@@ -472,7 +472,7 @@ class Logic_Nilai extends Logic_Akademik {
             $m=$am*$b['sks'];
           }	                   
           if ($b['telah_isi_kuesioner']) {
-            $b['keterangan']='-';
+            $b['keterangan'] = '-';
           }else{
             $b['keterangan']=$hm == '-'?'BELUM ISI NILAI':'BELUM ISI KUESIONER';
           }
@@ -497,7 +497,7 @@ class Logic_Nilai extends Logic_Akademik {
         $b['am']=$am;
         $b['m']=$m;
         if ($b['telah_isi_kuesioner']) {
-          $b['keterangan']='-';
+          $b['keterangan'] = '-';
         }else{
           $b['keterangan']=$hm == '-'?'BELUM ISI NILAI':'BELUM ISI KUESIONER';
         }

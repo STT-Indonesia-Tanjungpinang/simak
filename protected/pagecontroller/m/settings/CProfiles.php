@@ -6,7 +6,7 @@ class CProfiles extends MainPageM {
         $this->showProfiles=true;        
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageCache'])||$_SESSION['currentPageCache']['page_name']!='m.settings.Profiles') {
-				$_SESSION['currentPageCache']=array('page_name'=>'m.settings.Profiles','page_num'=>0);												
+				$_SESSION['currentPageCache']=array('page_name'=>'m.settings.Profiles', 'page_num'=>0);												
 			}            
             $this->populateData ();
 		}
@@ -14,7 +14,7 @@ class CProfiles extends MainPageM {
 	}   
     public function populateData () {        
         $this->imgPhotoUser->ImageUrl = $_SESSION['foto']; 
-        $this->cmbTheme->DataSource=$this->setup->getListThemes();
+        $this->cmbTheme->DataSource = $this->setup->getListThemes();
         $this->cmbTheme->Text=$_SESSION['theme'];
         $this->cmbTheme->DataBind();
     }
@@ -22,7 +22,7 @@ class CProfiles extends MainPageM {
     public function saveData($sender, $param) {
         if ($this->IsValid) {
             $theme=$this->cmbTheme->Text;
-            $_SESSION['theme']=$theme;
+            $_SESSION['theme'] = $theme;
             $userid = $this->Pengguna->getDataUser('userid');
             $str = "UPDATE user SET theme='$theme' WHERE userid=$userid";            
             $this->DB->updateRecord($str);
@@ -30,7 +30,7 @@ class CProfiles extends MainPageM {
         }
     }
 
-    public function uploadPhotoProfile ($sender,$param) {
+    public function uploadPhotoProfile($sender, $param) {
 		if ($sender->getHasFile()) {
             $this->lblTipeFileError->Text='';
             $mime=$sender->getFileType();
@@ -70,7 +70,7 @@ class CProfiles extends MainPageM {
             $username=$this->Pengguna->getDataUser('username');
             $this->DB->updateRecord("UPDATE user SET foto='$path' WHERE username='$username'");
             $this->DB->updateRecord("UPDATE user SET foto='$path' WHERE username='$username'");
-            $_SESSION['foto']=$path;
+            $_SESSION['foto'] = $path;
         }else {                    
             //error handling
             switch ($sender->ErrorCode){
@@ -104,7 +104,7 @@ class CProfiles extends MainPageM {
         }
     }
 
-    public function saveDataPassword ($sender,$param) {
+    public function saveDataPassword($sender, $param) {
         if ($this->IsValid) {
             $userid = $this->Pengguna->getDataUser('userid');
             if ($this->txtPassword->Text != '') {                

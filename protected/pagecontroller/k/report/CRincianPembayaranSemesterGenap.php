@@ -8,32 +8,32 @@ class CRincianPembayaranSemesterGenap Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRincianPembayaranSemesterGenap'])||$_SESSION['currentPageRincianPembayaranSemesterGenap']['page_name']!='k.report.RincianPembayaranSemesterGenap') {
-				$_SESSION['currentPageRincianPembayaranSemesterGenap']=array('page_name'=>'k.report.RincianPembayaranSemesterGenap','page_num'=>0,'search'=>false,'semester'=>2,'kelas'=>'none');												
+				$_SESSION['currentPageRincianPembayaranSemesterGenap']=array('page_name'=>'k.report.RincianPembayaranSemesterGenap', 'page_num'=>0,'search'=>false,'semester'=>2,'kelas'=>'none');												
 			}
             $_SESSION['currentPageRincianPembayaranSemesterGenap']['search']=false; 
             
             $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
-			$this->tbCmbPs->DataSource=$daftar_ps;
+			$this->tbCmbPs->DataSource = $daftar_ps;
 			$this->tbCmbPs->Text=$_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	            
             
-            $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');;
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');;
             $this->tbCmbTA->Text=$_SESSION['ta'];
             $this->tbCmbTA->dataBind();
             
             $tahun_masuk=$this->getAngkatan (false);	
-			$this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
+			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             
             $kelas=$this->DMaster->getListKelas();
-            $kelas['none']='All';
-			$this->tbCmbKelas->DataSource=$kelas;
+            $kelas['none'] = 'All';
+			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text=$_SESSION['currentPageRincianPembayaranSemesterGenap']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
@@ -42,43 +42,43 @@ class CRincianPembayaranSemesterGenap Extends MainPageK {
 		}	
 	}	
     public function setInfoToolbar() {                
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
-    public function changeTbPs ($sender,$param) {		
-		$_SESSION['kjur']=$this->tbCmbPs->Text;
+    public function changeTbPs($sender, $param) {		
+		$_SESSION['kjur'] = $this->tbCmbPs->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}	
-    public function changeTbTA ($sender,$param) {				
-		$_SESSION['ta']=$this->tbCmbTA->Text;
+    public function changeTbTA($sender, $param) {				
+		$_SESSION['ta'] = $this->tbCmbTA->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}   
-    public function changeTbTahunMasuk($sender,$param) {    				
-		$_SESSION['tahun_masuk']=$this->tbCmbTahunMasuk->Text;		        
+    public function changeTbTahunMasuk($sender, $param) {    				
+		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;		        
 		$this->setInfoToolbar(); 
         $this->populateData();
 	}
-    public function changeTbKelas ($sender,$param) {				
-		$_SESSION['currentPageRincianPembayaranSemesterGenap']['kelas']=$this->tbCmbKelas->Text;
+    public function changeTbKelas($sender, $param) {				
+		$_SESSION['currentPageRincianPembayaranSemesterGenap']['kelas'] = $this->tbCmbKelas->Text;
         $this->setInfoToolbar(); 
 		$this->populateData();
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}	
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPageRincianPembayaranSemesterGenap']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPageRincianPembayaranSemesterGenap']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageRincianPembayaranSemesterGenap']['search']);
 	}		
 	public function populateData($search=false) {		
 		$ta = $_SESSION['ta'];
         $tahun_masuk=$_SESSION['tahun_masuk'];     
-		$semester=$_SESSION['currentPageRincianPembayaranSemesterGenap']['semester'];
-		$kjur=$_SESSION['kjur'];	
+		$semester = $_SESSION['currentPageRincianPembayaranSemesterGenap']['semester'];
+		$kjur = $_SESSION['kjur'];	
         
         $kelas=$_SESSION['currentPageRincianPembayaranSemesterGenap']['kelas'];
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
@@ -99,49 +99,49 @@ class CRincianPembayaranSemesterGenap Extends MainPageK {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageRincianPembayaranSemesterGenap']['page_num']=0;}
         $str = "$str ORDER BY idkelas ASC,nama_mhs ASC LIMIT $offset,$limit";				
-        $this->DB->setFieldTable(array('idrekap','no_formulir','nim','nirm','nama_mhs','jk','n_kelas','dibayarkan','kewajiban','sisa'));
+        $this->DB->setFieldTable(array('idrekap', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'n_kelas', 'dibayarkan', 'kewajiban', 'sisa'));
         $r = $this->DB->getRecord($str,$offset+1);	        
-        $result=array();	
+        $result = array();	
         
-		while (list($k,$v)=each($r)) {
-            $v['kewajiban']=$this->Finance->toRupiah($v['kewajiban']);
-			$v['dibayarkan']=$this->Finance->toRupiah($v['dibayarkan']);													
-			$v['sisa']=$this->Finance->toRupiah($v['sisa']);
-			$result[$k]=$v;
+		while (list($k, $v) = each($r)) {
+            $v['kewajiban'] = $this->Finance->toRupiah($v['kewajiban']);
+			$v['dibayarkan'] = $this->Finance->toRupiah($v['dibayarkan']);													
+			$v['sisa'] = $this->Finance->toRupiah($v['sisa']);
+			$result[$k] = $v;
 		}
-        $this->RepeaterS->DataSource=$result;
+        $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
 	}
-    public function generateData ($sender,$param) {
+    public function generateData($sender, $param) {
         $ta = $_SESSION['ta'];
         $tahun_masuk=$_SESSION['tahun_masuk'];     
-		$semester=$_SESSION['currentPageRincianPembayaranSemesterGenap']['semester'];
-		$kjur=$_SESSION['kjur'];	
+		$semester = $_SESSION['currentPageRincianPembayaranSemesterGenap']['semester'];
+		$kjur = $_SESSION['kjur'];	
         
         $kelas=$_SESSION['currentPageRincianPembayaranSemesterGenap']['kelas'];
         $str_kelas = $kelas == 'none'?'':" AND t2.idkelas='$kelas'";       
         
         $this->DB->deleteRecord("rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun=$ta AND idsmt='$semester' AND tahun_masuk='$tahun_masuk'$str_kelas");
         $str = "SELECT fp.no_formulir,rm.nim,rm.nirm,fp.nama_mhs,fp.jk,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t2.idkelas FROM formulir_pendaftaran fp JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir) JOIN (SELECT DISTINCT(nim) AS nim,idkelas FROM transaksi WHERE kjur='$kjur' AND tahun=$ta AND idsmt='$semester'$str_kelas) AS t2 ON (t2.nim=rm.nim) WHERE fp.ta = $tahun_masuk ORDER BY nim ASC,nama_mhs ASC";			
-   		$this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tahun_masuk','semester_masuk','idkelas'));
+   		$this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tahun_masuk', 'semester_masuk', 'idkelas'));
         $r = $this->DB->getRecord($str);    
         
         $komponen_biaya=array();
         $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'A'));
-        $komponen_biaya['A']['baru']=$this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');
-        $komponen_biaya['A']['lama']=$this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');         
+        $komponen_biaya['A']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');
+        $komponen_biaya['A']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');         
         
         $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'B'));
-        $komponen_biaya['B']['baru']=$this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
-        $komponen_biaya['B']['lama']=$this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');       
+        $komponen_biaya['B']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
+        $komponen_biaya['B']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');       
         
         $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'C'));
-        $komponen_biaya['C']['baru']=$this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
-        $komponen_biaya['C']['lama']=$this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');        
+        $komponen_biaya['C']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
+        $komponen_biaya['C']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');        
         
-		while (list($k,$v)=each($r)) {
-            $no_formulir=$v['no_formulir'];
+		while (list($k, $v) = each($r)) {
+            $no_formulir = $v['no_formulir'];
 			$nim=$v['nim'];
             $nirm=$v['nirm'];
             $nama_mhs=addslashes($v['nama_mhs']);
@@ -164,13 +164,13 @@ class CRincianPembayaranSemesterGenap Extends MainPageK {
 		}
         $this->redirect('report.RincianPembayaranSemesterGenap', true);
     }
-    public function refreshRecord($sender,$param) {
+    public function refreshRecord($sender, $param) {
         $idrekap = $this->getDataKeyField($sender, $this->RepeaterS);
         $str = "SELECT nim,tahun_masuk,semester_masuk,idsmt,tahun,idkelas FROM rekap_laporan_pembayaran_per_semester WHERE idrekap=$idrekap";
-        $this->DB->setFieldTable(array('nim','tahun_masuk','semester_masuk','idsmt','tahun','idkelas'));
+        $this->DB->setFieldTable(array('nim', 'tahun_masuk', 'semester_masuk', 'idsmt', 'tahun', 'idkelas'));
         $r = $this->DB->getRecord($str);   
         $nim=$r[1]['nim'];
-        $semester=$r[1]['idsmt'];
+        $semester = $r[1]['idsmt'];
         $ta = $r[1]['tahun'];
         $this->Finance->setDataMHS(array('tahun_masuk'=>$r[1]['tahun_masuk'],'idsmt'=>$r[1]['semester_masuk'],'idkelas'=>$r[1]['idkelas']));
         $kewajiban=($r[1]['tahun']==$r[1]['tahun_masuk'] && $r[1]['semester_masuk'] == $r[1]['idsmt']) ?$this->Finance->getTotalBiayaMhsPeriodePembayaran('baru'):$this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
@@ -184,7 +184,7 @@ class CRincianPembayaranSemesterGenap Extends MainPageK {
         
         $this->redirect('report.RincianPembayaranSemesterGenap', true);
     }
-	public function printOut ($sender,$param) {	
+	public function printOut($sender, $param) {	
         $this->createObj('reportfinance');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -197,21 +197,21 @@ class CRincianPembayaranSemesterGenap Extends MainPageK {
             break;
             case  'excel2007' :
                 $messageprintout="";
-                $dataReport['kjur']=$_SESSION['kjur'];
-                $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];
+                $dataReport['kjur'] = $_SESSION['kjur'];
+                $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
                 $tahun=$_SESSION['ta'];                
                 $tahun_masuk=$_SESSION['tahun_masuk'];                
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 
-                $dataReport['ta']=$tahun;                
-                $dataReport['nama_tahun']=$nama_tahun;                
-                $dataReport['tahun_masuk']=$tahun_masuk;                
-                $dataReport['nama_tahun_masuk']=$this->DMaster->getNamaTA($tahun_masuk);
-                $dataReport['semester']=$_SESSION['currentPageRincianPembayaranSemesterGenap']['semester'];
-                $dataReport['nama_semester']=$this->setup->getSemester($_SESSION['currentPageRincianPembayaranSemesterGenap']['semester']);
+                $dataReport['ta'] = $tahun;                
+                $dataReport['nama_tahun'] = $nama_tahun;                
+                $dataReport['tahun_masuk'] = $tahun_masuk;                
+                $dataReport['nama_tahun_masuk'] = $this->DMaster->getNamaTA($tahun_masuk);
+                $dataReport['semester'] = $_SESSION['currentPageRincianPembayaranSemesterGenap']['semester'];
+                $dataReport['nama_semester'] = $this->setup->getSemester($_SESSION['currentPageRincianPembayaranSemesterGenap']['semester']);
                 
-                $dataReport['kelas']=$_SESSION['currentPageRincianPembayaranSemesterGenap']['kelas'];
-                $dataReport['linkoutput']=$this->linkOutput;
+                $dataReport['kelas'] = $_SESSION['currentPageRincianPembayaranSemesterGenap']['kelas'];
+                $dataReport['linkoutput'] = $this->linkOutput;
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 

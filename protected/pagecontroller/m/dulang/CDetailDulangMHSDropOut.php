@@ -14,10 +14,10 @@ class CDetailDulangMHSDropOut Extends MainPageM {
                     $this->Nilai->setDataMHS($datamhs);
                     
                     $str = "SELECT MAX(tahun) AS tahun,MAX(idsmt) AS idsmt FROM dulang WHERE nim='$nim' GROUP BY tahun,idsmt ORDER BY tahun DESC,idsmt DESC LIMIT 1";
-                    $this->DB->setFieldTable(array('tahun','idsmt'));
+                    $this->DB->setFieldTable(array('tahun', 'idsmt'));
                     $datadulang=$this->DB->getRecord($str);	    
                     
-                    $this->cmbAddTADropOut->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($datamhs['tahun_masuk']),'none');
+                    $this->cmbAddTADropOut->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($datamhs['tahun_masuk']),'none');
                     $this->cmbAddTADropOut->Text=$datadulang[1]['tahun'];
                     $this->cmbAddTADropOut->dataBind();
                      				
@@ -35,8 +35,8 @@ class CDetailDulangMHSDropOut Extends MainPageM {
                     $this->literalBebasKeuangan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
                     $this->literalBebasPerpustakaan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
                     
-                    $_SESSION['semester']=$datadulang[1]['idsmt'];
-                    $_SESSION['ta']=$datadulang[1]['tahun'];
+                    $_SESSION['semester'] = $datadulang[1]['idsmt'];
+                    $_SESSION['ta'] = $datadulang[1]['tahun'];
                     $_SESSION['kjur']= $datamhs['kjur'];
 
                     $this->setInfoToolbar();
@@ -50,7 +50,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
 		}	
 	}
     public function setInfoToolbar() {        
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
@@ -62,10 +62,10 @@ class CDetailDulangMHSDropOut Extends MainPageM {
             return $_SESSION['currentPageDulangMHSDropOut']['DataMHS'][$idx];
         }
     }    
-    public function checkDulang ($sender,$param) {
+    public function checkDulang($sender, $param) {
         $datamhs=$_SESSION['currentPageDulangMHSDropOut']['DataMHS'];
         $ta=addslashes($param->Value);		       
-        $semester=$this->cmbAddSMTDropOut->Text;            
+        $semester = $this->cmbAddSMTDropOut->Text;            
         try {            
             $nim=$datamhs['nim'];
             $this->Nilai->setDataMHS(array('nim'=>$nim));
@@ -83,11 +83,11 @@ class CDetailDulangMHSDropOut Extends MainPageM {
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSDropOut']['DataMHS'];						
 			$ta = $this->cmbAddTADropOut->Text;							
-			$semester=$this->cmbAddSMTDropOut->Text;
-            $_SESSION['semester']=$semester;
-            $_SESSION['ta']=$ta;
+			$semester = $this->cmbAddSMTDropOut->Text;
+            $_SESSION['semester'] = $semester;
+            $_SESSION['ta'] = $ta;
             $_SESSION['kjur']= $datamhs['kjur'];
-            $_SESSION['currentPageDulangMHSDropOut']['tahun_masuk']=$datamhs['tahun_masuk'];
+            $_SESSION['currentPageDulangMHSDropOut']['tahun_masuk'] = $datamhs['tahun_masuk'];
             $nim=  $datamhs['nim'];           
 			$kelas=$datamhs['idkelas'];
 			$str = "UPDATE register_mahasiswa SET k_status='D' WHERE nim='$nim'";			
@@ -95,7 +95,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
 			if ($this->DB->updateRecord($str)) {
                 $status_sebelumnnya = $datamhs['k_status'];
                 $tasmt=$ta.$semester;        
-                $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$semester','$tasmt',NOW(),'$kelas','$status_sebelumnnya','D')";
+                $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(),'$kelas', '$status_sebelumnnya', 'D')";
                 $this->DB->insertRecord($str);               
 				$this->DB->query('COMMIT');
                 unset($_SESSION['currentPageDulangMHSDropOut']['DataMHS']);
@@ -105,7 +105,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
 			}
 		}
 	}
-    public function closeDetailDulang ($sender,$param) {
+    public function closeDetailDulang($sender, $param) {
         unset($_SESSION['currentPageDulangMHSDropOut']['DataMHS']);
         $this->redirect('dulang.DulangMHSDropOut',true);
     }

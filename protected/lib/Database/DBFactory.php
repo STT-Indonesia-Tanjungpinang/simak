@@ -56,19 +56,19 @@ class DBFactory extends TModule {
 			case 'postgres' :
 				prado::using ('Application.lib.Database.PostgreSQL');
 				$this->Link = new PostgreSQL ();
-				$config=array("host"=>$this->Host,
-							"port"=>$this->DbPort,
-							"user"=>$this->UserName,
-			 				"password"=>$this->UserPassword,
-							"dbname"=>$this->DbName);
+				$config=array("host" => $this->Host,
+							"port" => $this->DbPort,
+							"user" => $this->UserName,
+			 				"password" => $this->UserPassword,
+							"dbname" => $this->DbName);
 			break;
 			case 'mysql' :
 				prado::using ('Application.lib.Database.MySQL');
 				$this->Link = new MySQL ();
-				$config=array("host"=>$this->Host,
-							"user"=>$this->UserName,
-			 				"password"=>$this->UserPassword,
-							"dbname"=>$this->DbName);
+				$config=array("host" => $this->Host,
+							"user" => $this->UserName,
+			 				"password" => $this->UserPassword,
+							"dbname" => $this->DbName);
 								
 			break;
 			default :

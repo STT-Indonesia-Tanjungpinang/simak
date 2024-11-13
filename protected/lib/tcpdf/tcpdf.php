@@ -19105,7 +19105,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					break;
 				}
 				$w *= 2;
-				if (isset($tag['attribute']['multiple']) AND ($tag['attribute']['multiple']='multiple')) {
+				if (isset($tag['attribute']['multiple']) AND ($tag['attribute']['multiple'] = 'multiple')) {
 					$prop['multipleSelection'] = 'true';
 					$this->ListBox($name, $w, $h, $values, $prop, $opt, '', '', false);
 				} else {

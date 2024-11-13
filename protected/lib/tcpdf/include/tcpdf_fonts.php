@@ -1953,7 +1953,7 @@ class TCPDF_FONTS {
 	 * @since 4.9.000 (2010-03-27)
 	 * @public static
 	 */
-	public static function utf8StrArrRev($arr, $str='', $setbom=false, $forcertl=false, $isunicode=true, &$currentfont) {
+	public static function utf8StrArrRev($arr, $str = '', $setbom=false, $forcertl=false, $isunicode=true, &$currentfont) {
 		return self::arrUTF8ToUTF16BE(self::utf8Bidi($arr, $str, $forcertl, $isunicode, $currentfont), $setbom);
 	}
 
@@ -1969,7 +1969,7 @@ class TCPDF_FONTS {
 	 * @since 2.4.000 (2008-03-06)
 	 * @public static
 	 */
-	public static function utf8Bidi($ta, $str='', $forcertl=false, $isunicode=true, &$currentfont) {
+	public static function utf8Bidi($ta, $str = '', $forcertl=false, $isunicode=true, &$currentfont) {
 		// paragraph embedding level
 		$pel = 0;
 		// max level

@@ -8,16 +8,16 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterPendek'])||$_SESSION['currentPagePembayaranSemesterPendek']['page_name']!='mh.pembayaran.PembayaranSemesterPendek') {
-				$_SESSION['currentPagePembayaranSemesterPendek']=array('page_name'=>'mh.pembayaran.PembayaranSemesterPendek','page_num'=>0,'ta'=>$_SESSION['ta'],'no_transaksi'=>'none');
+				$_SESSION['currentPagePembayaranSemesterPendek']=array('page_name'=>'mh.pembayaran.PembayaranSemesterPendek', 'page_num'=>0,'ta'=>$_SESSION['ta'],'no_transaksi'=>'none');
             }        
             $this->setInfoToolbar();
-			$this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');;
+			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');;
             $this->tbCmbTA->Text=$_SESSION['currentPagePembayaranSemesterPendek']['ta'];
             $this->tbCmbTA->dataBind();
             try {                
                 $datamhs = $this->Pengguna->getDataUser();
                 $datamhs['idsmt']=3;
-                $datamhs['ta']=$_SESSION['currentPagePembayaranSemesterPendek']['ta'];                
+                $datamhs['ta'] = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];                
                
                 if ($datamhs['tahun_masuk'] == $datamhs['ta'] && $datamhs['semester_masuk']==2) {				
                     $nim=$datamhs['nim'];		
@@ -35,8 +35,8 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['ta']);        		
 		$this->labelModuleHeader->Text="T.A $ta";        
     } 
-    public function changeTbTA ($sender,$param) {				
-		$_SESSION['currentPagePembayaranSemesterPendek']['ta']=$this->tbCmbTA->Text;
+    public function changeTbTA($sender, $param) {				
+		$_SESSION['currentPagePembayaranSemesterPendek']['ta'] = $this->tbCmbTA->Text;
 		$this->redirect('pembayaran.PembayaranSemesterPendek',true); 
 	}	
     public function populateTransaksi() {
@@ -44,25 +44,25 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
         $nim=$datamhs['nim'];
         $tahun= $_SESSION['currentPagePembayaranSemesterPendek']['ta'];
         $idsmt=3;
-        $kjur=$datamhs['kjur'];
+        $kjur = $datamhs['kjur'];
 		$tahun_masuk=$datamhs['tahun_masuk'];
 		$idkelas=$datamhs['idkelas'];
         $str = "SELECT no_transaksi,no_faktur,tanggal,jumlah_sks,commited,date_added FROM transaksi WHERE tahun='$tahun' AND idsmt='$idsmt' AND nim='$nim' AND kjur='$kjur'";
-        $this->DB->setFieldTable(array('no_transaksi','no_faktur','tanggal','jumlah_sks','commited','date_added'));
-        $r=$this->DB->getRecord($str);
-        $result=array();
+        $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'jumlah_sks', 'commited', 'date_added'));
+        $r = $this->DB->getRecord($str);
+        $result = array();
 		
 		$biaya_sks=$this->Finance->getBiayaSKS ($tahun_masuk,$idkelas);
-        while (list($k,$v)=each($r)) {
+        while (list($k, $v) = each($r)) {
             $no_transaksi=$v['no_transaksi'];
-			$v['biaya_sks']=$biaya_sks;
-            $v['total']=$this->DB->getSumRowsOfTable('dibayarkan',"transaksi_detail WHERE no_transaksi=$no_transaksi");
-            $result[$k]=$v;
+			$v['biaya_sks'] = $biaya_sks;
+            $v['total'] = $this->DB->getSumRowsOfTable('dibayarkan',"transaksi_detail WHERE no_transaksi=$no_transaksi");
+            $result[$k] = $v;
         }
-        $this->ListTransactionRepeater->DataSource=$result;
+        $this->ListTransactionRepeater->DataSource = $result;
         $this->ListTransactionRepeater->dataBind();        
     }
-	public function dataBoundListTransactionRepeater ($sender,$param) {
+	public function dataBoundListTransactionRepeater($sender, $param) {
 		$item=$param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
@@ -74,7 +74,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
             CPembayaranSemesterPendek::$TotalSudahBayar+=$item->DataItem['total'];
 		}
 	}	
-	public function addTransaction ($sender,$param) {
+	public function addTransaction($sender, $param) {
         if ($this->ListTransactionRepeater->Items->Count() > 0 ) {
             $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena sudah ada transaksi (Khusus Semester Pendek Transaksi hanya sekali).';
             $this->modalMessageError->show();
@@ -82,16 +82,16 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
             $datamhs = $this->Pengguna->getDataUser();
             $this->Finance->setDataMHS($datamhs);
             if ( $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] == 'none') {
-                $no_formulir=$datamhs['no_formulir'];
+                $no_formulir = $datamhs['no_formulir'];
                 $nim=$datamhs['nim'];
                 $ta = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];    
                 $idsmt=3;
-                if($this->DB->checkRecordIsExist('nim','transaksi',$nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
+                if($this->DB->checkRecordIsExist('nim', 'transaksi',$nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
                     $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
                     $this->modalMessageError->show();
                 }else{
                     $no_transaksi='10'.$ta.$idsmt.mt_rand(10000,99999);
-                    $no_faktur=$ta.$no_transaksi;
+                    $no_faktur = $ta.$no_transaksi;
                     $ps=$datamhs['kjur'];                
                     $idkelas=$datamhs['idkelas'];
                     $userid = $this->Pengguna->getDataUser('userid');
@@ -103,7 +103,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
                         $this->DB->insertRecord($str);
 
                         $this->DB->query('COMMIT');                    
-                        $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi']=$no_transaksi;            
+                        $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = $no_transaksi;            
                         $this->redirect('pembayaran.TransaksiPembayaranSemesterPendek',true);        
                     }else{
                         $this->DB->query('ROLLBACK');
@@ -114,23 +114,23 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
             }
         }
 	}
-    public function editRecord ($sender,$param) {	        
+    public function editRecord($sender, $param) {	        
         $datamhs = $this->Pengguna->getDataUser();
         if ($_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] == 'none') {
             $no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
-            $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi']=$no_transaksi;
+            $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = $no_transaksi;
         }	
 		$this->redirect('pembayaran.TransaksiPembayaranSemesterPendek',true);
 	}	
-	public function deleteRecord ($sender,$param) {	
+	public function deleteRecord($sender, $param) {	
         $datamhs = $this->Pengguna->getDataUser();
         $nim=$datamhs['nim'];
 		$no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
 		$this->redirect('pembayaran.PembayaranSemesterPendek',true);
 	}		
-    public function closeDetail ($sender,$param) {
-        $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi']='none';
+    public function closeDetail($sender, $param) {
+        $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = 'none';
         $this->redirect('pembayaran.PembayaranSemesterPendek',true);
     }
 }

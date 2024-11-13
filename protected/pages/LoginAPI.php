@@ -49,10 +49,10 @@ class LoginAPI extends MainPage {
     public function doLogin ($sender,$param) {
         if ($this->IsValid) {                        
             $pengguna=$this->getLogic('Users');    
-            $_SESSION['foto']='resources/userimages/no_photo.png';
+            $_SESSION['foto'] = 'resources/userimages/no_photo.png';
             $_SESSION['theme']=$pengguna->getDataUser('theme');            
-            $_SESSION['outputreport']='pdf';
-            $_SESSION['outputcompress']='none';            
+            $_SESSION['outputreport'] = 'pdf';
+            $_SESSION['outputcompress'] = 'none';            
             $this->redirect('Home',true);
         }
     }    

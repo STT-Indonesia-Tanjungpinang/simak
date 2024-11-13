@@ -12,10 +12,10 @@ class CDetailDulangMHSBaru Extends MainPageM {
                     $datamhs=$_SESSION['currentPageDulangMHSBaru']['DataMHS'];
                     
                     $this->Demik->setDataMHS($datamhs);
-                    $this->cmbAddDosenWali->DataSource=$this->DMaster->getListDosenWali();
+                    $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
                     $this->cmbAddDosenWali->dataBind();			
             
-                    $kjur=$datamhs['kjur'];                    
+                    $kjur = $datamhs['kjur'];                    
                     $nim_nirm=$this->getMaxNimAndNirm ($kjur,$datamhs['tahun_masuk']);
                     $this->txtAddNIM->Text=$nim_nirm['nim'];
                     $this->txtAddNIRM->Text=$nim_nirm['nirm'];
@@ -34,12 +34,12 @@ class CDetailDulangMHSBaru Extends MainPageM {
             return $datamhs[$idx];
         }        
     }
-    public function checkNIM ($sender,$param) {					
+    public function checkNIM($sender, $param) {					
 		$nim=$param->Value;		
         if ($nim != '') {
             try {   
                 $str = "SELECT nama_mhs,tahun_masuk,nama_ps FROM v_datamhs WHERE nim='$nim'";
-                $this->DB->setFieldTable(array('nama_mhs','tahun_masuk','nama_ps'));
+                $this->DB->setFieldTable(array('nama_mhs', 'tahun_masuk', 'nama_ps'));
                 $r = $this->DB->getRecord($str);
                 if (isset($r[1])) {  
                     $nama_mhs=$r[1]['nama_mhs'];
@@ -54,12 +54,12 @@ class CDetailDulangMHSBaru Extends MainPageM {
         }	
 	}
 	
-	public function checkNIRM ($sender,$param) {
+	public function checkNIRM($sender, $param) {
         $nirm=$param->Value;		
         if ($nirm != '') {
             try {   
                 $str = "SELECT nama_mhs,tahun_masuk,nama_ps FROM v_datamhs WHERE nirm='$nirm'";
-                $this->DB->setFieldTable(array('nama_mhs','tahun_masuk','nama_ps'));
+                $this->DB->setFieldTable(array('nama_mhs', 'tahun_masuk', 'nama_ps'));
                 $r = $this->DB->getRecord($str);
                 if (isset($r[1])) {  
                     $nama_mhs=$r[1]['nama_mhs'];
@@ -77,19 +77,19 @@ class CDetailDulangMHSBaru Extends MainPageM {
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSBaru']['DataMHS'];						
 			$ta = $datamhs['tahun_masuk'];							
-			$semester=$datamhs['semester_masuk'];
+			$semester = $datamhs['semester_masuk'];
 			$tanggal=date ('Y-m-d H:m:s');
-			$no_formulir=$datamhs['no_formulir'];
+			$no_formulir = $datamhs['no_formulir'];
             $nim=  addslashes($this->txtAddNIM->Text);
             $nirm=addslashes($this->txtAddNIRM->Text);
-            $kjur=$datamhs['kjur'];
+            $kjur = $datamhs['kjur'];
 			$kelas=$datamhs['idkelas'];
             $iddosen_wali=$this->cmbAddDosenWali->Text;
-			$str = "INSERT INTO register_mahasiswa (nim,nirm,no_formulir,tahun,idsmt,tanggal,kjur,idkonsentrasi,iddosen_wali,k_status,idkelas,perpanjang) VALUES ('$nim','$nirm','$no_formulir','$ta','$semester','$tanggal','$kjur',0,'$iddosen_wali','A','$kelas',0)";			
+			$str = "INSERT INTO register_mahasiswa (nim,nirm,no_formulir,tahun,idsmt,tanggal,kjur,idkonsentrasi,iddosen_wali,k_status,idkelas,perpanjang) VALUES ('$nim', '$nirm', '$no_formulir', '$ta', '$semester', '$tanggal', '$kjur',0,'$iddosen_wali', 'A', '$kelas',0)";			
 			$this->DB->query ('BEGIN');
 			if ($this->DB->insertRecord($str)) {
                 $tasmt=$ta.$semester;
-				$str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$semester','$tasmt','$tanggal','$kelas','A','A')";
+				$str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt', '$tanggal', '$kelas', 'A', 'A')";
 				$this->DB->insertRecord($str);
 				$password=md5(1234);
 				$str="UPDATE profiles_mahasiswa SET nim='$nim',userpassword='$password' WHERE no_formulir='$no_formulir'";
@@ -104,7 +104,7 @@ class CDetailDulangMHSBaru Extends MainPageM {
 			}
 		}
 	}
-    public function closeDetailDulang ($sender,$param) {
+    public function closeDetailDulang($sender, $param) {
         unset($_SESSION['currentPageDulangMHSBaru']['DataMHS']);
         $this->redirect('dulang.DulangMHSBaru',true);
     }

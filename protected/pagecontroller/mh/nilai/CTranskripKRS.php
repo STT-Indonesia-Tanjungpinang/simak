@@ -9,9 +9,9 @@ class CTranskripKRS extends MainPageMHS {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageTranskripKRS'])||$_SESSION['currentPageTranskripKRS']['page_name']!='mh.nilai.TranskripKRS') {
-				$_SESSION['currentPageTranskripKRS']=array('page_name'=>'mh.nilai.TranskripKRS','page_num'=>0,'search'=>false);												                                               
+				$_SESSION['currentPageTranskripKRS']=array('page_name'=>'mh.nilai.TranskripKRS', 'page_num'=>0,'search'=>false);												                                               
 			}  
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
 			$this->populateData();	
@@ -22,14 +22,14 @@ class CTranskripKRS extends MainPageMHS {
         $this->Nilai->setDataMHS($datamhs);
 		$transkrip = $this->Nilai->getTranskripFromKRS(true);		
         
-		$this->RepeaterS->DataSource=$transkrip;
+		$this->RepeaterS->DataSource = $transkrip;
 		$this->RepeaterS->dataBind();		
 	}
-	public function printOut ($sender,$param) {	
+	public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             		
         $dataReport=$this->Pengguna->getDataUser();  
         $dataReport['cek_isikuesioner']=true;
-        $dataReport['linkoutput']=$this->linkOutput; 
+        $dataReport['linkoutput'] = $this->linkOutput; 
         $this->report->setDataReport($dataReport); 
         $this->report->setMode($_SESSION['outputreport']);
 		$this->report->printTranskripKRS($this->Nilai);				

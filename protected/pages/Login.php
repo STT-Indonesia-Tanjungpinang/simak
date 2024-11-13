@@ -180,12 +180,12 @@ class Login extends MainPage {
                     $foto=$pengguna->getDataUser('photo_profile');
                 break; 
             }
-            $_SESSION['kelas']='none';
+            $_SESSION['kelas'] = 'none';
             $_SESSION['foto']=$foto;
             $_SESSION['theme']=$pengguna->getDataUser('theme');
             
-            $_SESSION['outputreport']='pdf';
-            $_SESSION['outputcompress']='none';
+            $_SESSION['outputreport'] = 'pdf';
+            $_SESSION['outputcompress'] = 'none';
             
             $this->redirect('Home',true);
         }

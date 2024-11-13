@@ -8,13 +8,13 @@ class Pendaftaran extends MainPageF {
 		    
 		    $this->lblModulHeader->Text=$this->setup->getSettingValue('default_tahun_pendaftaran');
 		    $daftar_prodi=$this->DMaster->getListProgramStudi(2);
-		    $daftar_prodi['none']='PILIH PROGRAM STUDI 1';
+		    $daftar_prodi['none'] = 'PILIH PROGRAM STUDI 1';
 		    $this->cmbAddKjur1->DataSource=$daftar_prodi;
 		    $this->cmbAddKjur1->dataBind();
 		    $this->cmbAddKjur2->Enabled=false;
 		    
 		    $daftar_kelas=$this->DMaster->getListKelas();
-		    $daftar_kelas['none']='PILIH KELAS';
+		    $daftar_kelas['none'] = 'PILIH KELAS';
 		    $this->cmbAddKelas->DataSource=$daftar_kelas;
 		    $this->cmbAddKelas->DataBind();
 		}
@@ -25,7 +25,7 @@ class Pendaftaran extends MainPageF {
             $this->cmbAddKjur2->Text='none';
         }else{
             $daftar_prodi=$this->DMaster->getListProgramStudi(2);
-            $daftar_prodi['none']='PILIH PROGRAM STUDI 2';
+            $daftar_prodi['none'] = 'PILIH PROGRAM STUDI 2';
             $jurusan=$this->DMaster->removeKjur($daftar_prodi,$sender->Text);
             $this->cmbAddKjur2->Enabled=true;       
             $this->cmbAddKjur2->DataSource=$jurusan;

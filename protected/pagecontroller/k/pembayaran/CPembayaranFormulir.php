@@ -8,17 +8,17 @@ class CPembayaranFormulir Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranFormulir'])||$_SESSION['currentPagePembayaranFormulir']['page_name']!='k.pembayaran.PembayaranFormulir') {
-				$_SESSION['currentPagePembayaranFormulir']=array('page_name'=>'k.pembayaran.PembayaranFormulir','page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranFormulir']=array('page_name'=>'k.pembayaran.PembayaranFormulir', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranFormulir']['search']=false; 
           
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
-			$this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
+			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester=array('1'=>'GANJIL','2'=>'GENAP');  				
-			$this->tbCmbSemesterMasuk->DataSource=$semester;
+            $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
+			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text=$_SESSION['currentPagePembayaranFormulir']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();            
 
@@ -27,34 +27,34 @@ class CPembayaranFormulir Extends MainPageK {
 		}	
 	}	
     public function setInfoToolbar() {                
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
         $tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
         $semester = $this->setup->getSemester($_SESSION['currentPagePembayaranFormulir']['semester_masuk']);		
 		$this->lblModulHeader->Text="T.A $tahunmasuk Semester $semester ";        
 	}
-    public function changeTbPs ($sender,$param) {		
-		$_SESSION['kjur']=$this->tbCmbPs->Text;
+    public function changeTbPs($sender, $param) {		
+		$_SESSION['kjur'] = $this->tbCmbPs->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}	
-    public function changeTbTahunMasuk($sender,$param) {				
-		$_SESSION['tahun_masuk']=$this->tbCmbTahunMasuk->Text;
+    public function changeTbTahunMasuk($sender, $param) {				
+		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-    public function changeTbSemesterMasuk ($sender,$param) {		
-		$_SESSION['currentPagePembayaranFormulir']['semester_masuk']=$this->tbCmbSemesterMasuk->Text;        
+    public function changeTbSemesterMasuk($sender, $param) {		
+		$_SESSION['currentPagePembayaranFormulir']['semester_masuk'] = $this->tbCmbSemesterMasuk->Text;        
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}	
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPagePembayaranFormulir']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPagePembayaranFormulir']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPagePembayaranFormulir']['search']);
 	}		
-    public function searchRecord ($sender,$param) {
+    public function searchRecord($sender, $param) {
 		$_SESSION['currentPagePembayaranFormulir']['search']=true;
 		$this->populateData($_SESSION['currentPagePembayaranFormulir']['search']);
 	}
@@ -100,40 +100,40 @@ class CPembayaranFormulir Extends MainPageK {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num']=0;}
-        $this->DB->setFieldTable(array('no_transaksi','no_faktur','tanggal','no_formulir','commited','tasmt','no_pendaftaran','idkelas'));
+        $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'no_formulir', 'commited', 'tasmt', 'no_pendaftaran', 'idkelas'));
         $str = "$str ORDER BY t.date_added DESC LIMIT $offset,$limit";	
         $r = $this->DB->getRecord($str,$offset+1);
-        $result=array();		
-		while (list($k,$v)=each($r)) {
+        $result = array();		
+		while (list($k, $v) = each($r)) {
 			$no_transaksi=$v['no_transaksi'];				
 			$str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM v_transaksi t WHERE no_transaksi=$no_transaksi";			
 			$this->DB->setFieldTable(array('dibayarkan'));
 			$r2=$this->DB->getRecord($str2);				
 			$dibayarkan=$r2[1]['dibayarkan'];						
-			$v['dibayarkan']=$this->Finance->toRupiah($dibayarkan);	
-			$v['no_pendaftaran']=$v['no_pendaftaran']>0?$v['no_pendaftaran']:'N.A';
-			$v['tanggal']=$this->TGL->tanggal('d/m/Y',$v['tanggal']);
-			$v['nama_kelas']=$this->DMaster->getNamaKelasByID($v['idkelas']);
-			$result[$k]=$v;
+			$v['dibayarkan'] = $this->Finance->toRupiah($dibayarkan);	
+			$v['no_pendaftaran'] = $v['no_pendaftaran']>0?$v['no_pendaftaran']:'N.A';
+			$v['tanggal'] = $this->TGL->tanggal('d/m/Y',$v['tanggal']);
+			$v['nama_kelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']);
+			$result[$k] = $v;
 		}
-        $this->RepeaterS->DataSource=$result;
+        $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
 	}
-	public function setDataBound($sender,$param) {				
+	public function setDataBound($sender, $param) {				
 		$item=$param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 
 		}		
 	}	
 	
-    public function cekNomorFormulir ($sender,$param) {		
+    public function cekNomorFormulir($sender, $param) {		
         $noformulir=addslashes($param->Value);		
         if ($noformulir != '') {
             try {               
                 $str = "SELECT no_formulir FROM pin WHERE no_formulir='$noformulir'";
                 $this->DB->setFieldTable(array('no_formulir'));
-                $r=$this->DB->getRecord($str);
+                $r = $this->DB->getRecord($str);
                 if (!isset($r[1])) {                                
                     throw new Exception ("Nomor Formulir ($noformulir) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");		
                 }

@@ -10,7 +10,7 @@ class CImportNilai extends MainPageD {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageImportNilai'])||$_SESSION['currentPageImportNilai']['page_name']!='d.nilai.ImportNilai') {
-				$_SESSION['currentPageImportNilai']=array('page_name'=>'d.nilai.ImportNilai','page_num'=>0,'search'=>false,'DataNilai'=>array());
+				$_SESSION['currentPageImportNilai']=array('page_name'=>'d.nilai.ImportNilai', 'page_num'=>0,'search'=>false,'DataNilai'=>array());
 			}  
             try {
                 $idkelas_mhs=addslashes($this->request['id']);
@@ -22,10 +22,10 @@ class CImportNilai extends MainPageD {
                     throw new Exception ("Masa pengisian nilai dari sisi Dosen telah berakhir, silahkan hubungi Operator Nilai di Prodi.");
                 }
                 $infokelas=$this->Demik->InfoKelas;
-                $this->Demik->InfoKelas['namakelas']=$this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
-                $this->Demik->InfoKelas['hari']=$this->TGL->getNamaHari($infokelas['hari']);
+                $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
+                $this->Demik->InfoKelas['hari'] = $this->TGL->getNamaHari($infokelas['hari']);
                
-                $_SESSION['currentPageImportNilai']['DataNilai']=$this->Demik->InfoKelas;
+                $_SESSION['currentPageImportNilai']['DataNilai'] = $this->Demik->InfoKelas;
                 $this->populateData();	             
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
@@ -37,13 +37,13 @@ class CImportNilai extends MainPageD {
         $datanilai=$_SESSION['currentPageImportNilai']['DataNilai'];
         $idkelas_mhs=$datanilai['idkelas_mhs'];
         $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nama_mhs,ni.persentase_quiz, ni.persentase_tugas, ni.persentase_uts, ni.persentase_uas, ni.persentase_absen, ni.nilai_quiz, ni.nilai_tugas, ni.nilai_uts, ni.nilai_uas, ni.nilai_absen, ni.n_kuan,ni.n_kual FROM nilai_imported ni JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=ni.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE ni.idkelas_mhs=$idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
-        $this->DB->setFieldTable(array('idkrsmatkul','nim','nama_mhs','persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen','n_kuan','n_kual'));
-        $r=$this->DB->getRecord($str);	           
+        $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'n_kuan', 'n_kual'));
+        $r = $this->DB->getRecord($str);	           
 
-        $this->RepeaterS->DataSource=$r;
+        $this->RepeaterS->DataSource = $r;
         $this->RepeaterS->dataBind();	                
 	}
-    public function fileUploaded($sender,$param) {
+    public function fileUploaded($sender, $param) {
         if($sender->HasFile) {
             $phpexcel=BASEPATH.'protected/lib/excel/';
             define ('PHPEXCEL_ROOT',$phpexcel);
@@ -91,7 +91,7 @@ class CImportNilai extends MainPageD {
                     $n_kuan=($persentase_quiz*$nilai_quiz)+($persentase_tugas*$nilai_tugas)+($persentase_uts*$nilai_uts)+($persentase_uas*$nilai_uas)+($persentase_absen*$nilai_absen);
                     $n_kual = $this->Nilai->getRentangNilaiNKuan($n_kuan);
                     
-                    $str = "REPLACE INTO nilai_imported (idkrsmatkul,idkelas_mhs,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, n_kuan,n_kual) VALUES ($idkrsmatkul,$idkelas_mhs,'$persentase_quiz','$persentase_tugas','$persentase_uts','$persentase_uas','$persentase_absen','$nilai_quiz','$nilai_tugas','$nilai_uts','$nilai_uas','$nilai_absen','$n_kuan','$n_kual')";																				
+                    $str = "REPLACE INTO nilai_imported (idkrsmatkul,idkelas_mhs,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, n_kuan,n_kual) VALUES ($idkrsmatkul,$idkelas_mhs,'$persentase_quiz', '$persentase_tugas', '$persentase_uts', '$persentase_uas', '$persentase_absen', '$nilai_quiz', '$nilai_tugas', '$nilai_uts', '$nilai_uas', '$nilai_absen', '$n_kuan', '$n_kual')";																				
                     $this->DB->insertRecord($str);
                 }
                 
@@ -123,21 +123,21 @@ class CImportNilai extends MainPageD {
         }
         
     }
-    public function resetData ($sender,$param) {
+    public function resetData($sender, $param) {
         if ($this->IsValid) {
             $idkelas_mhs=$_SESSION['currentPageImportNilai']['DataNilai']['idkelas_mhs'];
             $this->DB->deleteREcord("nilai_imported WHERE idkelas_mhs=$idkelas_mhs");
             $this->redirect("nilai.ImportNilai", true,array('id'=>$idkelas_mhs));
         }
     }
-    public function printOut ($sender,$param) {	
+    public function printOut($sender, $param) {	
         $this->createObj('reportnilai');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         
         $dataReport=$_SESSION['currentPageImportNilai']['DataNilai'];
         $this->lblMessagePrintout->Text='Kelas ' . $dataReport['namakelas'];
-        $dataReport['linkoutput']=$this->linkOutput; 
+        $dataReport['linkoutput'] = $this->linkOutput; 
         $this->report->setDataReport($dataReport); 
         $this->report->setMode('excel2007');
         $this->report->printPesertaImportNilai();

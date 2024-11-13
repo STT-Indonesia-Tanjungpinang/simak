@@ -27,20 +27,20 @@ class CKRS extends MainPageMHS {
     {	
       if (!isset($_SESSION['currentPageKRS'])||$_SESSION['currentPageKRS']['page_name']!='mh.perkuliahan.KRS')
       {
-        $_SESSION['currentPageKRS']=array('page_name'=>'mh.perkuliahan.KRS','page_num'=>0,'DataKRS'=>array());
+        $_SESSION['currentPageKRS']=array('page_name'=>'mh.perkuliahan.KRS', 'page_num'=>0,'DataKRS'=>array());
       } 
       $this->lblModulHeader->Text=$this->getInfoToolbar();
       
-      $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+      $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
       $this->tbCmbTA->Text=$_SESSION['ta'];
       $this->tbCmbTA->dataBind();			
       
-      $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
-      $this->tbCmbSemester->DataSource=$semester;
+      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+      $this->tbCmbSemester->DataSource = $semester;
       $this->tbCmbSemester->Text=$_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
       
-      $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+      $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
       $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
       $this->tbCmbOutputReport->DataBind();
       
@@ -51,19 +51,19 @@ class CKRS extends MainPageMHS {
   public function getInfoToolbar()
   {                
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
-    $semester=$this->setup->getSemester($_SESSION['semester']);
+    $semester = $this->setup->getSemester($_SESSION['semester']);
     $text="TA $ta Semester $semester";
     return $text;
   }
-  public function changeTbTA ($sender,$param) {
-    $_SESSION['ta']=$this->tbCmbTA->Text;		
+  public function changeTbTA($sender, $param) {
+    $_SESSION['ta'] = $this->tbCmbTA->Text;		
     $this->redirect('perkuliahan.KRS',true);        
   }	
-  public function changeTbSemester ($sender,$param) {
-    $_SESSION['semester']=$this->tbCmbSemester->Text;		
+  public function changeTbSemester($sender, $param) {
+    $_SESSION['semester'] = $this->tbCmbSemester->Text;		
     $this->redirect('perkuliahan.KRS',true);
   }	
-  public function itemBound ($sender,$param) {
+  public function itemBound($sender, $param) {
     $item=$param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {    
       if ($item->DataItem['batal']) {
@@ -75,7 +75,7 @@ class CKRS extends MainPageMHS {
         $idpenyelenggaraan=$item->DataItem['idpenyelenggaraan'];
         $idkelas=$_SESSION['currentPageKRS']['DataKRS']['krs']['kelas_dulang'];
         $str = "SELECT km.idkelas_mhs,km.nama_kelas,vpp.nama_dosen,vpp.nidn,km.idruangkelas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) WHERE vpp.idpenyelenggaraan=$idpenyelenggaraan AND km.idkelas='$idkelas'  ORDER BY hari ASC,idkelas ASC,nama_dosen ASC";            
-        $this->DB->setFieldTable(array('idkelas_mhs','nama_kelas','nama_dosen','nidn','idruangkelas'));
+        $this->DB->setFieldTable(array('idkelas_mhs', 'nama_kelas', 'nama_dosen', 'nidn', 'idruangkelas'));
         $r = $this->DB->getRecord($str);
         
         $str = "SELECT idkelas_mhs FROM kelas_mhs_detail WHERE idkrsmatkul = $idkrsmatkul";            
@@ -89,16 +89,16 @@ class CKRS extends MainPageMHS {
           $idkelas_mhs_selected='none';
           $result = array('none'=>' ');
         }                
-        while (list($k,$v)=each($r)) { 
+        while (list($k, $v) = each($r)) { 
           $idkelas_mhs=$v['idkelas_mhs'];
           $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs",'idkelas_mhs');
           $kapasitas=(int)$this->DMaster->getKapasitasRuangKelas($v['idruangkelas']);
           $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '' : ' [PENUH]';
-          $result[$idkelas_mhs]=$this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
+          $result[$idkelas_mhs] = $this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
         }                
-        $item->cmbKelas->DataSOurce=$result;            
+        $item->cmbKelas->DataSource = $result;            
         $item->cmbKelas->DataBind();        
-        $item->cmbKelas->Enabled=!$this->DB->checkRecordIsExist('idkrsmatkul','nilai_matakuliah',$idkrsmatkul);
+        $item->cmbKelas->Enabled=!$this->DB->checkRecordIsExist('idkrsmatkul', 'nilai_matakuliah',$idkrsmatkul);
         $item->cmbKelas->Text=$idkelas_mhs_selected;
 
         $datamhs=$this->Pengguna->getDataUser(); 
@@ -132,10 +132,10 @@ class CKRS extends MainPageMHS {
       $datakrs=$this->KRS->getKRS($_SESSION['ta'],$_SESSION['semester']);           
       if (isset($datakrs['krs']['idkrs'])) {
         $datadulang=$this->KRS->getDataDulang($datakrs['krs']['idsmt'],$datakrs['krs']['tahun']);
-        $datakrs['krs']['kelas_dulang']=$datadulang['idkelas'];               
+        $datakrs['krs']['kelas_dulang'] = $datadulang['idkelas'];               
       }                        
-      $_SESSION['currentPageKRS']['DataKRS']=$datakrs;
-      $this->RepeaterS->DataSource=$this->KRS->DataKRS['matakuliah'];
+      $_SESSION['currentPageKRS']['DataKRS'] = $datakrs;
+      $this->RepeaterS->DataSource = $this->KRS->DataKRS['matakuliah'];
       $this->RepeaterS->dataBind();
     }catch (Exception $e) {
       $this->idProcess = 'view';	
@@ -144,7 +144,7 @@ class CKRS extends MainPageMHS {
 
   }	
    
-  public function prosesKelas ($sender,$param) {
+  public function prosesKelas($sender, $param) {
     $idkelas_mhs=$sender->Text;
     $idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);
     $this->DB->query('BEGIN');
@@ -168,7 +168,7 @@ class CKRS extends MainPageMHS {
       $result=$this->DB->getRecord($str);
       $kapasitas=$result[1]['kapasitas'];
       //if ($jumlah_peserta_kelas <= $kapasitas) {
-        if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail',$idkrsmatkul)) 
+        if ($this->DB->checkRecordIsExist('idkrsmatkul', 'kelas_mhs_detail',$idkrsmatkul)) 
         {
           $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul = $idkrsmatkul");
           $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul = $idkrsmatkul");
@@ -190,7 +190,7 @@ class CKRS extends MainPageMHS {
       //}
     }
   }
-  public function printKRS ($sender,$param) {
+  public function printKRS($sender, $param) {
     $this->createObj('reportkrs');        
     $messageprintout='';   
 
@@ -199,7 +199,7 @@ class CKRS extends MainPageMHS {
 
     $dataReport=$this->Pengguna->getDataUser();
     $tahun=$_SESSION['ta'];
-    $semester=$_SESSION['semester'];
+    $semester = $_SESSION['semester'];
     $nama_tahun = $this->DMaster->getNamaTA($tahun);
     $nama_semester = $this->setup->getSemester($semester);
 
@@ -219,17 +219,17 @@ class CKRS extends MainPageMHS {
           $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
         break;
         case  'pdf' :                                
-          $dataReport['krs']=$_SESSION['currentPageKRS']['DataKRS']['krs'];        
-          $dataReport['matakuliah']=$_SESSION['currentPageKRS']['DataKRS']['matakuliah'];        
-          $dataReport['nama_tahun']=$nama_tahun;
-          $dataReport['nama_semester']=$nama_semester;        
+          $dataReport['krs'] = $_SESSION['currentPageKRS']['DataKRS']['krs'];        
+          $dataReport['matakuliah'] = $_SESSION['currentPageKRS']['DataKRS']['matakuliah'];        
+          $dataReport['nama_tahun'] = $nama_tahun;
+          $dataReport['nama_semester'] = $nama_semester;        
           
           $kaprodi=$this->KRS->getKetuaPRODI($dataReport['kjur']);                  
-          $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-          $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-          $dataReport['nipy_kaprodi']=$kaprodi['nipy'];
+          $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+          $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+          $dataReport['nipy_kaprodi'] = $kaprodi['nipy'];
           
-          $dataReport['linkoutput']=$this->linkOutput;                 
+          $dataReport['linkoutput'] = $this->linkOutput;                 
           $this->report->setDataReport($dataReport); 
           $this->report->setMode($_SESSION['outputreport']);
           $this->report->printKRS();				
@@ -246,7 +246,7 @@ class CKRS extends MainPageMHS {
      
   }
   
-  public function printKSM ($sender,$param) {
+  public function printKSM($sender, $param) {
     $this->createObj('reportkrs');        
     $messageprintout='';   
 
@@ -255,14 +255,14 @@ class CKRS extends MainPageMHS {
 
     $dataReport=$this->Pengguna->getDataUser();
     $tahun=$_SESSION['ta'];
-    $semester=$_SESSION['semester'];
+    $semester = $_SESSION['semester'];
     $nama_tahun = $this->DMaster->getNamaTA($tahun);
     $nama_semester = $this->setup->getSemester($semester);
 
     $idkrs=$_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs'];
-    $dataidkrs[$idkrs]=$idkrs;
+    $dataidkrs[$idkrs] = $idkrs;
 
-    if ($this->DB->checkRecordIsExist('idkrs','siuas_pembayaran_belum_lunas',$idkrs)==false) {
+    if ($this->DB->checkRecordIsExist('idkrs', 'siuas_pembayaran_belum_lunas',$idkrs)==false) {
       $messageprintout="Mohon maaf, anda tidak bisa mencetak KSM karena administrasi, Silahkan hubungi bagian keuangan.";
     }else{
       switch ($_SESSION['outputreport']) {
@@ -279,22 +279,22 @@ class CKRS extends MainPageMHS {
               
           $messageprintout="";
           $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
-          $this->DB->setFieldTable(array('idkrs','no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','tasmt','sah'));
-          $r=$this->DB->getRecord($str);	           
+          $this->DB->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
+          $r = $this->DB->getRecord($str);	           
           $dataReport=$r[1];
           
-          $dataReport['nama_tahun']=$nama_tahun; 
-          $dataReport['nama_semester']=$nama_semester;
+          $dataReport['nama_tahun'] = $nama_tahun; 
+          $dataReport['nama_semester'] = $nama_semester;
           
           $nama_dosen=$this->DMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
-          $dataReport['nama_dosen']=$nama_dosen;
+          $dataReport['nama_dosen'] = $nama_dosen;
           
           $kaprodi=$this->KRS->getKetuaPRODI($dataReport['kjur']);
-          $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-          $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-          $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
+          $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+          $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+          $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
           
-          $dataReport['linkoutput']=$this->linkOutput;
+          $dataReport['linkoutput'] = $this->linkOutput;
           $this->report->setDataReport($dataReport); 
           $this->report->setMode($_SESSION['outputreport']);
           
@@ -334,71 +334,71 @@ class CKRS extends MainPageMHS {
           
           $row=$this->currentRow;
           $row+=6;
-          $rpt->SetFont ('helvetica','B',12);	
+          $rpt->SetFont ('helvetica', 'B',12);	
           $rpt->setXY(3,$row);			
           $kartu=($jenisujian=='uts')?'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
           $rpt->Cell(0,$row,$kartu,0,0,'C');
           
           $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
-          $this->db->setFieldTable(array('idkrs','no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','tasmt','sah'));
-          $r=$this->db->getRecord($str);	           
+          $this->db->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
+          $r = $this->db->getRecord($str);	           
           $dataReport=$r[1];
 
-          $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$dataReport['kjur']];                
+          $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];                
           $nama_tahun = $objDMaster->getNamaTA($dataReport['tahun']);   
           $nama_semester = $this->setup->getSemester($dataReport['idsmt']);
-          $dataReport['nama_tahun']=$nama_tahun; 
-          $dataReport['nama_semester']=$nama_semester;
+          $dataReport['nama_tahun'] = $nama_tahun; 
+          $dataReport['nama_semester'] = $nama_semester;
 
           $nama_dosen=$objDMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
-          $dataReport['nama_dosen']=$nama_dosen;
+          $dataReport['nama_dosen'] = $nama_dosen;
 
           $kaprodi=$objKRS->getKetuaPRODI($dataReport['kjur']);
-          $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-          $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-          $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
+          $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+          $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+          $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
           $row+=6;
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(3,$row);			
           $rpt->Cell(0,$row,'NIM');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38,$row);			
           $rpt->Cell(0,$row,': '.$dataReport['nama_mhs'].' ('.$dataReport['jk'].')');
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(105,$row);			
           $rpt->Cell(0,$row,'Semester');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(130,$row);			
           $rpt->Cell(0,$row,': '.$dataReport['nama_ps'].' / S-1');
           $row+=3;
           $rpt->setXY(3,$row);			
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->Cell(0,$row,'Nama');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38,$row);			
           $rpt->Cell(0,$row,': '.$dataReport['nama_dosen']);				
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(105,$row);			
           $rpt->Cell(0,$row,'T.A');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(130,$row);			
           $rpt->Cell(0,$row,': '.$dataReport['nim']);
           $row+=3;
           $rpt->setXY(3,$row);			
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->Cell(0,$row,'Program Studi');				
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38,$row);			
           $rpt->Cell(0,$row,": $nama_semester / $nama_tahun");				
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(105,$row);			
           $rpt->Cell(0,$row,'NIRM');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(130,$row);			
           $rpt->Cell(0,$row,': '.$dataReport['nirm']);			
 
           $row+=20;
-          $rpt->SetFont ('helvetica','B',8);
+          $rpt->SetFont ('helvetica', 'B',8);
           $rpt->setXY(3,$row);			
           $rpt->Cell(8, 5, 'NO', 1, 0, 'C');				
           $rpt->Cell(15, 5, 'KODE', 1, 0, 'C');								
@@ -412,7 +412,7 @@ class CKRS extends MainPageMHS {
           $daftar_matkul = $objKRS->getDetailKRS($idkrs);
           $totalSks=0;
           $row+=5;				
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           while (list($k,$v)=each($daftar_matkul)) {
             $rpt->setXY(3,$row);	
             $rpt->Cell(8, 5, $v['no'], 1, 0, 'C');				
@@ -443,11 +443,11 @@ class CKRS extends MainPageMHS {
           
           $row+=3;
           $rpt->setXY(3,$row);	
-          $rpt->SetFont ('helvetica','',6);
+          $rpt->SetFont ('helvetica', '',6);
           $rpt->Cell(70, 5, 'Catatan : Tanda "*" memiliki arti absensi Mahasiswa kurang dari 75%.' , 0, 0, 'L');	
 
           $row+=5;
-          $rpt->SetFont ('helvetica','B',8);
+          $rpt->SetFont ('helvetica', 'B',8);
           $rpt->setXY(120,$row);			
           $rpt->Cell(80, 5, 'Mengetahui,',0,0,'L');				
 
@@ -480,7 +480,7 @@ class CKRS extends MainPageMHS {
          
         $nim=$this->report->dataReport['nim'];
         $nama_tahun=$this->report->dataReport['nama_tahun'];
-        $nama_semester=$this->report->dataReport['nama_semester'];
+        $nama_semester = $this->report->dataReport['nama_semester'];
     
         $rpt->setTitle('Kartu Ujian Mahasiswa');
         $rpt->setSubject('Kartu Ujian Mahasiswa');
@@ -488,7 +488,7 @@ class CKRS extends MainPageMHS {
         
         $row=$this->report->currentRow;
         $row+=6;
-        $rpt->SetFont ('helvetica','B',12);	
+        $rpt->SetFont ('helvetica', 'B',12);	
         $rpt->setXY(3,$row);			
         $kartu=' KARTU STUDI MAHASISWA (KSM)';
         $rpt->Cell(0,$row,$kartu,0,0,'C');
@@ -498,41 +498,41 @@ class CKRS extends MainPageMHS {
         $rpt->Cell(0,$row,'UJIAN TENGAH  SEMESTER DAN UJIAN AKHIR SEMESTER',0,0,'C');
         
         $row+=6;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(6,$row);			
         $rpt->Cell(0,$row,'Nim');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38,$row);			
         $rpt->Cell(0,$row,': '.$this->report->dataReport['nim']);
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105,$row);			
         $rpt->Cell(0,$row,'Semester');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130,$row);			
         $rpt->Cell(0,$row,': '."$nama_semester");
         $row+=3;
         $rpt->setXY(6,$row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0,$row,'Nama');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38,$row);			
         $rpt->Cell(0,$row,': '.$this->report->dataReport['nama_mhs']);				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105,$row);			
         $rpt->Cell(0,$row,'T.A');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130,$row);			
         $rpt->Cell(0,$row,': '."$nama_tahun");
         $row+=3;
         $rpt->setXY(6,$row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0,$row,'Program Studi');				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38,$row);			
         $rpt->Cell(0,$row,': '.$this->report->dataReport['nama_ps']);						
         
         $row+=20;
-        $rpt->SetFont ('helvetica','B',8);
+        $rpt->SetFont ('helvetica', 'B',8);
         $rpt->setXY(6,$row);			
         $rpt->Cell(8, 10, 'NO', 1, 0, 'C');				
         $rpt->Cell(15, 10, 'KODE', 1, 0, 'C');								
@@ -540,7 +540,7 @@ class CKRS extends MainPageMHS {
         $rpt->Cell(8, 10, 'SKS', 1, 0, 'C');							
         $rpt->Cell(60, 5, 'PARAF PENGAWAS', 1, 0, 'C');
         $row+=5;
-        $rpt->SetFont ('helvetica','B',8);
+        $rpt->SetFont ('helvetica', 'B',8);
         $rpt->setXY(107,$row);															
         $rpt->Cell(30, 5, 'UTS', 1, 0, 'C');				
         $rpt->Cell(30, 5, 'UAS', 1, 0, 'C');
@@ -548,7 +548,7 @@ class CKRS extends MainPageMHS {
         $daftar_matkul = $objKRS->getDetailKRS($this->report->dataReport['idkrs']);
         $totalSks=0;
         $row+=5;				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         while (list($k,$v)=each($daftar_matkul)) {
           $rpt->setXY(6,$row);	
           $rpt->Cell(8, 8, $v['no'], 1, 0, 'C');				
@@ -577,19 +577,19 @@ class CKRS extends MainPageMHS {
         
         $row+=6;
         $rpt->setXY(3,$row);	
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->Cell(70, 5, 'Catatan : - KSM ini sah apabila telah ditandatangani oleh Mahasiswa dan Bagian Akademik serta telah dibubuhi stempel ' , 0, 0, 'L');	
         $row+=3;
         $rpt->setXY(17,$row);	
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->Cell(70, 5, 'dan sudah di verifikasi oleh bagian keuangan.' , 0, 0, 'L');
         $row+=3;
         $rpt->setXY(15,$row);	
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->Cell(70, 5, '- KSM merupakan bukti sah pengambilan mata kuliah & syarat untuk mengikuti Ujian Tengah Semester (UTS)' , 0, 0, 'L');
         $row+=3;
         $rpt->setXY(15,$row);	
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->Cell(70, 5, '  dan Ujian Akhir Semester (UAS) serta menjadi syarat pedaftaran semester berikutnya.' , 0, 0, 'L');
 
                         
@@ -610,13 +610,13 @@ class CKRS extends MainPageMHS {
 
         $row+=10;				
         $rpt->setXY(30,$row);	
-        $rpt->Cell(50, 5, 'VERIFIKASI UTS','T,L,R',0,'C');
+        $rpt->Cell(50, 5, 'VERIFIKASI UTS', 'T,L,R',0,'C');
         $rpt->setXY(100,$row);
-        $rpt->Cell(50, 5, 'VERIFIKASI UAS','T,L,R',0,'C');			
+        $rpt->Cell(50, 5, 'VERIFIKASI UAS', 'T,L,R',0,'C');			
         $rpt->setXY(30,$row);	
-        $rpt->Cell(50, 20, '','B,L,R',0,'C');
+        $rpt->Cell(50, 20, '', 'B,L,R',0,'C');
         $rpt->setXY(100,$row);
-        $rpt->Cell(50, 20, '','B,L,R',0,'C');
+        $rpt->Cell(50, 20, '', 'B,L,R',0,'C');
         
         $this->report->printOut("kum_$nim");
       break;

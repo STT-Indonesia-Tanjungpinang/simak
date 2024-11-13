@@ -25,7 +25,7 @@ class Logic_Log extends Logic_Users
 		$r = $this->db->getRecord("SELECT idlog_master FROM log_master WHERE userid=$userid");
 		if (isset($r[1]))
 		{
-			$this->idlogmaster=$r[1]['idlog_master'];
+			$this->idlogmaster = $r[1]['idlog_master'];
 		}
 		else
 		{

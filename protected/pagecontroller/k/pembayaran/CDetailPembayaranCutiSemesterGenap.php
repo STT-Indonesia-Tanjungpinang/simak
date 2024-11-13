@@ -10,14 +10,14 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
         $this->showPembayaranCutiSemesterGenap=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGenap'])||$_SESSION['currentPagePembayaranCutiSemesterGenap']['page_name']!='k.pembayaran.PembayaranCutiSemesterGenap') {
-				$_SESSION['currentPagePembayaranCutiSemesterGenap']=array('page_name'=>'k.pembayaran.PembayaranCutiSemesterGenap','page_num'=>0,'search'=>false,'DataMHS'=>array(),'ta'=>$_SESSION['ta']);												
+				$_SESSION['currentPagePembayaranCutiSemesterGenap']=array('page_name'=>'k.pembayaran.PembayaranCutiSemesterGenap', 'page_num'=>0,'search'=>false,'DataMHS'=>array(),'ta'=>$_SESSION['ta']);												
 			}
              try {
                 $nim=addslashes($this->request['id']);
                 
                 $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,vdm.iddosen_wali,vdm.idkelas,vdm.k_status,sm.n_status AS status,vdm.photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE vdm.nim='$nim'";
-                $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','status','photo_profile'));
-                $r=$this->DB->getRecord($str);	           
+                $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'status', 'photo_profile'));
+                $r = $this->DB->getRecord($str);	           
                 $datamhs=$r[1];
                 
                 if (!isset($r[1])) {
@@ -25,7 +25,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                 } 
                 
                 $datamhs['idsmt']=2;
-                $datamhs['ta']=$_SESSION['currentPagePembayaranCutiSemesterGenap']['ta'];
+                $datamhs['ta'] = $_SESSION['currentPagePembayaranCutiSemesterGenap']['ta'];
                 
                 $this->Finance->setDataMHS($datamhs);
                 $datadulang=$this->Finance->getDataDulang(2,$datamhs['ta']);
@@ -38,18 +38,18 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                     }
                 }
                 
-                $datamhs['iddata_konversi']=$this->Finance->isMhsPindahan($datamhs['nim'],true);            
+                $datamhs['iddata_konversi'] = $this->Finance->isMhsPindahan($datamhs['nim'],true);            
                 
                 $kelas=$this->Finance->getKelasMhs();                
                 $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
                 $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
                 $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
-                $datamhs['nama_dosen']=$nama_dosen;
+                $datamhs['nama_dosen'] = $nama_dosen;
                 
                 $this->Finance->setDataMHS($datamhs);
                 CDetailPembayaranCutiSemesterGenap::$KewajibanMahasiswa = $this->Finance->getBiayaCuti($datamhs['tahun_masuk'],$datamhs['semester_masuk'],$datamhs['idkelas']);
-                $_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS']=$datamhs;    
+                $_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS'] = $datamhs;    
                 
                 $this->populateTransaksi();
                 
@@ -78,13 +78,13 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
         $idsmt=2;
         
         $str = "SELECT no_transaksi,no_faktur,tanggal,date_added,dibayarkan,commited FROM transaksi_cuti WHERE tahun=$tahun AND idsmt=$idsmt AND nim='$nim'";
-        $this->DB->setFieldTable(array('no_transaksi','no_faktur','tanggal','date_added','dibayarkan','commited'));
+        $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'date_added', 'dibayarkan', 'commited'));
         $result=$this->DB->getRecord($str);	
         
-        $this->ListTransactionRepeater->DataSource=$result;
+        $this->ListTransactionRepeater->DataSource = $result;
         $this->ListTransactionRepeater->dataBind();     
     }
-    public function dataBoundListTransactionRepeater ($sender,$param) {
+    public function dataBoundListTransactionRepeater($sender, $param) {
 		$item=$param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
@@ -96,12 +96,12 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
             CDetailPembayaranCutiSemesterGenap::$TotalSudahBayar+=$item->DataItem['dibayarkan'];
 		}
 	}
-    public function checkNomorFaktur ($sender,$param) {
+    public function checkNomorFaktur($sender, $param) {
 		$this->idProcess=$sender->getId()=='addNomorFaktur'?'add':'edit';
-        $no_faktur=$param->Value;		
+        $no_faktur = $param->Value;		
         if ($no_faktur != '') {
             try {
-                if ($this->DB->checkRecordIsExist('no_faktur','transaksi',$no_faktur)) {                                
+                if ($this->DB->checkRecordIsExist('no_faktur', 'transaksi',$no_faktur)) {                                
                     throw new Exception ("Nomor Faktur dari ($no_faktur) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                 }
             }catch (Exception $e) {
@@ -130,7 +130,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
             $this->redirect('pembayaran.DetailPembayaranCutiSemesterGenap',true,array('id'=>$nim));
         }
     }
-    public function commitData ($sender,$param) {
+    public function commitData($sender, $param) {
 		if ($this->Page->isValid) {	
             $no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);
             $datamhs=$_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS'];
@@ -145,7 +145,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                 $kelas=$datamhs['idkelas'];
                 $k_status=$datamhs['k_status'];
                 $ta = $datamhs['ta'];
-                $idsmt=$datamhs['idsmt'];
+                $idsmt = $datamhs['idsmt'];
                 $tasmt=$ta.$idsmt;
                 
                 $str = "SELECT tanggal FROM transaksi_cuti WHERE no_transaksi=$no_transaksi";
@@ -153,7 +153,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                 $result=$this->DB->getRecord($str);	
                 $tanggal = $result[1]['tanggal'];
                 
-                $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$idsmt','$tasmt','$tanggal','$kelas','$k_status','C')";
+                $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$idsmt', '$tasmt', '$tanggal', '$kelas', '$k_status', 'C')";
                 $this->DB->insertRecord($str);
 
                 $str = "UPDATE register_mahasiswa SET k_status='C' WHERE nim='$nim'";
@@ -163,18 +163,18 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
             $this->redirect('pembayaran.DetailPembayaranCutiSemesterGenap',true,array('id'=>$nim));
         }
     }
-    public function deleteRecord ($sender,$param) {	
+    public function deleteRecord($sender, $param) {	
         $datamhs=$_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS']; 
         $nim=$datamhs['nim'];
 		$no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi_cuti WHERE no_transaksi='$no_transaksi'");		
 		$this->redirect('pembayaran.DetailPembayaranCutiSemesterGenap',true,array('id'=>$nim));
 	}	
-    public function closeTransaction ($sender,$param) {
+    public function closeTransaction($sender, $param) {
         unset($_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS']);
         $this->redirect('pembayaran.PembayaranCutiSemesterGenap',true);
     }
-    public function closeDetail ($sender,$param) {
+    public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranCutiSemesterGenap']['DataMHS']);
         $this->redirect('pembayaran.PembayaranCutiSemesterGenap',true);
     }

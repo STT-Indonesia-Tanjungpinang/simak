@@ -14,9 +14,9 @@ class CDetailKuesioner extends MainPageD {
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailKuesioner'])||$_SESSION['currentPageDetailKuesioner']['page_name']!='d.perkuliahan.DetailKuesioner') {
-				$_SESSION['currentPageDetailKuesioner']=array('page_name'=>'d.perkuliahan.DetailKuesioner','page_num'=>0,'DataKuesioner'=>array());
+				$_SESSION['currentPageDetailKuesioner']=array('page_name'=>'d.perkuliahan.DetailKuesioner', 'page_num'=>0,'DataKuesioner'=>array());
 			}             
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
@@ -24,16 +24,16 @@ class CDetailKuesioner extends MainPageD {
                 $idpengampu_penyelenggaraan = addslashes($this->request['id']);   
                 $iddosen=$this->Pengguna->getDataUser('iddosen');
                 $str = "SELECT vpp.idpengampu_penyelenggaraan,vpp.nidn,vpp.nama_dosen,vpp.kmatkul,vpp.nmatkul,vpp.sks,vpp.semester,kh.jumlah_mhs,kh.jumlah_soal,kh.total_nilai,kh.skor_terendah,kh.skor_tertinggi,kh.intervals,kh.n_kual,vpp.tahun,vpp.idsmt,vpp.kjur FROM v_pengampu_penyelenggaraan vpp,kuesioner_hasil kh WHERE kh.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND vpp.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND iddosen=$iddosen";
-                $this->DB->setFieldTable(array('idpengampu_penyelenggaraan','nidn','nama_dosen','kmatkul','nmatkul','sks','semester','jumlah_mhs','jumlah_soal','total_nilai','skor_terendah','skor_tertinggi','intervals','n_kual','tahun','idsmt','kjur'));
-                $r=$this->DB->getRecord($str);	           
-                $datakuesioner=$r[1];
+                $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'nidn', 'nama_dosen', 'kmatkul', 'nmatkul', 'sks', 'semester', 'jumlah_mhs', 'jumlah_soal', 'total_nilai', 'skor_terendah', 'skor_tertinggi', 'intervals', 'n_kual', 'tahun', 'idsmt', 'kjur'));
+                $r = $this->DB->getRecord($str);	           
+                $datakuesioner = $r[1];
                 if (!isset($r[1])) {
                     $_SESSION['currentPageDetailKuesioner']['DataKuesioner']=array();
                     throw new Exception("Data Kuesioner dengan ID ($idpengampu_penyelenggaraan) tidak terdaftar.");
                 }  
-                $datakuesioner['kmatkul']=$this->Kuesioner->getKMatkul($datakuesioner['kmatkul']);
-                $_SESSION['currentPageDetailKuesioner']['DataKuesioner']=$datakuesioner;                        
-                $this->DataKuesioner=$datakuesioner;            
+                $datakuesioner['kmatkul'] = $this->Kuesioner->getKMatkul($datakuesioner['kmatkul']);
+                $_SESSION['currentPageDetailKuesioner']['DataKuesioner'] = $datakuesioner;                        
+                $this->DataKuesioner = $datakuesioner;            
                 
                 $this->populateData();	
                 $this->setInfoToolbar();    
@@ -44,19 +44,19 @@ class CDetailKuesioner extends MainPageD {
 		}				
 	}    
     public function setInfoToolbar() {        
-        $kjur=$_SESSION['currentPageDetailKuesioner']['DataKuesioner']['kjur'];        
+        $kjur = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
         $ta = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['tahun'];		
         $semester = $this->setup->getSemester($_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idsmt']);
-		$ta='T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
+		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
 		$this->lblModulHeader->Text="Program Studi $ps $ta Semester $semester";        
 	}	
-    public function hitungKuesioner ($sender,$param) {
+    public function hitungKuesioner($sender, $param) {
         $idpengampu_penyelenggaraan = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idpengampu_penyelenggaraan']; 
         $this->Kuesioner->hitungKuesioner($idpengampu_penyelenggaraan,'update');
         $this->redirect('perkuliahan.DetailKuesioner', true, array('id'=>$idpengampu_penyelenggaraan));
     }
-	public function itemCreated ($sender,$param) {
+	public function itemCreated($sender, $param) {
         $item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {		
             if ($item->DataItem['ada']) {
@@ -73,23 +73,23 @@ class CDetailKuesioner extends MainPageD {
 	public function populateData() {
         $idpengampu_penyelenggaraan = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idpengampu_penyelenggaraan'];         
         $ta = $_SESSION['ta'];
-		$idsmt=$_SESSION['semester'];
+		$idsmt = $_SESSION['semester'];
         $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();                
-        $kelompok_pertanyaan[0]='UNDEFINED';
+        $kelompok_pertanyaan[0] = 'UNDEFINED';
         unset($kelompok_pertanyaan['none']);        
-        $result=array();
+        $result = array();
         while (list($idkelompok_pertanyaan,$nama_kelompok)=each($kelompok_pertanyaan)) {
             $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan=$idkelompok_pertanyaan ORDER BY (orders+0) ASC";
-            $this->DB->setFieldTable(array('idkuesioner','idkelompok_pertanyaan','pertanyaan','orders','date_added'));
-            $r=$this->DB->getRecord($str);
+            $this->DB->setFieldTable(array('idkuesioner', 'idkelompok_pertanyaan', 'pertanyaan', 'orders', 'date_added'));
+            $r = $this->DB->getRecord($str);
             $jumlah_r=count($r);
             if ($jumlah_r > 0) {
                 $r[1]['ada']=true;
-                $r[1]['nama_kelompok']=$nama_kelompok;
-                $idkuesioner=$r[1]['idkuesioner'];                
-                $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
-                $this->DB->setFieldTable(array('nilai_indikator','jumlah'));
-                $hasil_indikator=$this->DB->getRecord($str);
+                $r[1]['nama_kelompok'] = $nama_kelompok;
+                $idkuesioner = $r[1]['idkuesioner'];                
+                $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND kj.idkuesioner = $idkuesioner GROUP BY nilai_indikator";
+                $this->DB->setFieldTable(array('nilai_indikator', 'jumlah'));
+                $hasil_indikator = $this->DB->getRecord($str);
                 $indikator1=0;
                 $indikator2=0;
                 $indikator3=0;
@@ -114,20 +114,20 @@ class CDetailKuesioner extends MainPageD {
                         break;
                     }
                 }
-                $r[1]['indikator1']=$indikator1;
-                $r[1]['indikator2']=$indikator2;
-                $r[1]['indikator3']=$indikator3;
-                $r[1]['indikator4']=$indikator4;
-                $r[1]['indikator5']=$indikator5;  
+                $r[1]['indikator1'] = $indikator1;
+                $r[1]['indikator2'] = $indikator2;
+                $r[1]['indikator3'] = $indikator3;
+                $r[1]['indikator4'] = $indikator4;
+                $r[1]['indikator5'] = $indikator5;  
                 $jumlah=$indikator1+$indikator2+$indikator3+$indikator4+$indikator5;
-                $r[1]['jumlah']=$jumlah;  
-                $result[]=$r[1];
+                $r[1]['jumlah'] = $jumlah;  
+                $result[] = $r[1];
                 next($r);                
-                while (list($k,$v)=each($r)) {
-                    $idkuesioner=$v['idkuesioner'];
-                    $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
-                    $this->DB->setFieldTable(array('nilai_indikator','jumlah'));
-                    $hasil_indikator=$this->DB->getRecord($str);
+                while (list($k, $v) = each($r)) {
+                    $idkuesioner = $v['idkuesioner'];
+                    $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND kj.idkuesioner = $idkuesioner GROUP BY nilai_indikator";
+                    $this->DB->setFieldTable(array('nilai_indikator', 'jumlah'));
+                    $hasil_indikator = $this->DB->getRecord($str);
                     $indikator1=0;
                     $indikator2=0;
                     $indikator3=0;
@@ -152,21 +152,21 @@ class CDetailKuesioner extends MainPageD {
                             break;
                         }
                     }
-                    $v['indikator1']=$indikator1;
-                    $v['indikator2']=$indikator2;
-                    $v['indikator3']=$indikator3;
-                    $v['indikator4']=$indikator4;
-                    $v['indikator5']=$indikator5; 
+                    $v['indikator1'] = $indikator1;
+                    $v['indikator2'] = $indikator2;
+                    $v['indikator3'] = $indikator3;
+                    $v['indikator4'] = $indikator4;
+                    $v['indikator5'] = $indikator5; 
                     $jumlah=$indikator1+$indikator2+$indikator3+$indikator4+$indikator5;
-                    $v['jumlah']=$jumlah; 
-                    $result[]=$v;
+                    $v['jumlah'] = $jumlah; 
+                    $result[] = $v;
                 }                
             }            
         }                
-		$this->RepeaterS->DataSource=$result;
+		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
 	}	    
-	public function printKuesioner ($sender,$param) {        
+	public function printKuesioner($sender, $param) {        
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
@@ -183,15 +183,15 @@ class CDetailKuesioner extends MainPageD {
                 $nama_tahun = $this->DMaster->getNamaTA($dataReport['tahun']);
                 $nama_semester = $this->setup->getSemester($dataReport['idsmt']);
                 
-                $dataReport['nama_tahun']=$nama_tahun;
-                $dataReport['nama_semester']=$nama_semester;        
-                $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$dataReport['kjur']];
+                $dataReport['nama_tahun'] = $nama_tahun;
+                $dataReport['nama_semester'] = $nama_semester;        
+                $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];
                 $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();                
-                $kelompok_pertanyaan[0]='UNDEFINED';
+                $kelompok_pertanyaan[0] = 'UNDEFINED';
                 unset($kelompok_pertanyaan['none']);        
-                $dataReport['kelompok_pertanyaan']=$kelompok_pertanyaan;                    
-                $dataReport['linkoutput']=$this->linkOutput;    
-                $objKuesioner=$this->getLogic('ReportKuesioner');
+                $dataReport['kelompok_pertanyaan'] = $kelompok_pertanyaan;                    
+                $dataReport['linkoutput'] = $this->linkOutput;    
+                $objKuesioner = $this->getLogic('ReportKuesioner');
                 $objKuesioner->setDataReport($dataReport); 
                 $objKuesioner->setMode('excel2007');               
                 $objKuesioner->printKuesionerDosen($this->Kuesioner);

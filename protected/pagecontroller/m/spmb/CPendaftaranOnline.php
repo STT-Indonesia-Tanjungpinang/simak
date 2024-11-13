@@ -7,7 +7,7 @@ class CPendaftaranOnline extends MainPageM {
         $this->createObj('Akademik');        
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePendaftaranOnline'])||$_SESSION['currentPagePendaftaranOnline']['page_name']!='m.spmb.PendaftaranOnline') {
-				$_SESSION['currentPagePendaftaranOnline']=array('page_name'=>'m.spmb.PendaftaranOnline','page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_konfirmasi'=>'none','kelas'=>'A');												
+				$_SESSION['currentPagePendaftaranOnline']=array('page_name'=>'m.spmb.PendaftaranOnline', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_konfirmasi'=>'none', 'kelas'=>'A');												
 			}
             $_SESSION['currentPagePendaftaranOnline']['search']=false;
             $this->cmbKonfirmasi->Text=$_SESSION['currentPagePendaftaranOnline']['status_konfirmasi'];
@@ -15,16 +15,16 @@ class CPendaftaranOnline extends MainPageM {
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
-			$this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
+			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $kelas=$this->DMaster->getListKelas();
-            $this->tbCmbKelas->DataSource=$this->DMaster->removeIdFromArray($kelas,'none');
+            $this->tbCmbKelas->DataSource = $this->DMaster->removeIdFromArray($kelas,'none');
             $this->tbCmbKelas->Text=$_SESSION['currentPagePendaftaranOnline']['kelas'];         
             $this->tbCmbKelas->dataBind();  
 
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();           
             
@@ -34,8 +34,8 @@ class CPendaftaranOnline extends MainPageM {
 		}	
 	}
 	
-	public function changeTbTahunMasuk($sender,$param) {					
-		$_SESSION['tahun_pendaftaran']=$this->tbCmbTahunMasuk->Text;
+	public function changeTbTahunMasuk($sender, $param) {					
+		$_SESSION['tahun_pendaftaran'] = $this->tbCmbTahunMasuk->Text;
         $this->lblModulHeader->Text=$this->getInfoToolbar();
 		$this->populateData();
 	}	
@@ -45,24 +45,24 @@ class CPendaftaranOnline extends MainPageM {
 		$text="Kelas $nama_kelas Tahun Masuk $tahunmasuk";
 		return $text;
 	}
-	public function searchRecord ($sender,$param) {
+	public function searchRecord($sender, $param) {
 		$_SESSION['currentPagePendaftaranOnline']['search']=true;
 		$this->populateData($_SESSION['currentPagePendaftaranOnline']['search']);
 	}
-    public function changeStatusDulang ($sender,$param) {
-        $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi']=$this->cmbKonfirmasi->Text;
+    public function changeStatusDulang($sender, $param) {
+        $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi'] = $this->cmbKonfirmasi->Text;
         $this->populateData($_SESSION['currentPagePendaftaranOnline']['search']);
     }
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPagePendaftaranOnline']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPagePendaftaranOnline']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPagePendaftaranOnline']['search']);
     }		
-    public function changeStatusKonfirmasi ($sender,$param)
+    public function changeStatusKonfirmasi($sender, $param)
     {
-        $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi']=$this->cmbKonfirmasi->Text;
+        $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi'] = $this->cmbKonfirmasi->Text;
         $this->populateData($_SESSION['currentPagePendaftaranOnline']['search']);
     }
 	public function populateData ($search=false) {
@@ -115,16 +115,16 @@ class CPendaftaranOnline extends MainPageM {
         if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranOnline']['page_num']=0;}
         
         $str = "$str ORDER BY waktu_mendaftar DESC LIMIT $offset,$limit";
-        $this->DB->setFieldTable(array('no_pendaftaran','no_formulir','nama_mhs','telp_hp','email','kjur1','kjur2','idkelas','waktu_mendaftar','file_bukti_bayar'));
+        $this->DB->setFieldTable(array('no_pendaftaran', 'no_formulir', 'nama_mhs', 'telp_hp', 'email', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'file_bukti_bayar'));
         $r = $this->DB->getRecord($str,$offset+1);
-        $this->RepeaterS->DataSource=$r;
+        $this->RepeaterS->DataSource = $r;
         $this->RepeaterS->dataBind();   
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS); 
     } 	
 	
-	public function updateData ($sender,$param) {
+	public function updateData($sender, $param) {
 		if ($this->IsValid) {
-			$no_formulir=$this->txtEditNoFormulir->Text;
+			$no_formulir = $this->txtEditNoFormulir->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
 			$tempat_lahir=addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
 			$tgl_lahir=date ('Y-m-d',$this->txtEditTanggalLahir->TimeStamp);
@@ -157,13 +157,13 @@ class CPendaftaranOnline extends MainPageM {
             $kjur1=$this->cmbEditKjur1->Text;
             $kjur2=$this->cmbEditKjur2->Text;                       
             $ta = $this->cmbEditTahunMasuk->Text;
-            $idsmt=$this->cmbEditSemester->Text;           
+            $idsmt = $this->cmbEditSemester->Text;           
             	
-            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota='$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta='$jenisslta',asal_slta='$asal_slta',status_slta='$statusslta',nomor_ijazah='$nomor_ijazah',idkelas='$idkelas',kjur1='$kjur1',kjur2='$kjur2',ta = $ta,idsmt=$idsmt,daftar_via='WEB' WHERE no_formulir='$no_formulir'";
+            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota = '$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta = '$jenisslta',asal_slta = '$asal_slta',status_slta = '$statusslta',nomor_ijazah='$nomor_ijazah',idkelas='$idkelas',kjur1='$kjur1',kjur2='$kjur2',ta = $ta,idsmt=$idsmt,daftar_via='WEB' WHERE no_formulir='$no_formulir'";
             $this->DB->query('BEGIN');
 			if ($this->DB->updateRecord($str)) {
                 $email = $this->txtEditEmail->Text;                
-                $str = "UPDATE profiles_mahasiswa SET email='$email' WHERE no_formulir=$no_formulir";
+                $str = "UPDATE profiles_mahasiswa SET email='$email' WHERE no_formulir = $no_formulir";
                 $this->DB->updateRecord($str);
                 $this->DB->query('COMMIT');
             }else {
@@ -173,24 +173,24 @@ class CPendaftaranOnline extends MainPageM {
         }
 	}
 	
-	public function editRecord($sender,$param) {
+	public function editRecord($sender, $param) {
 		$this->idProcess = 'edit';
-		$no_formulir=$this->getDataKeyField($sender,$this->RepeaterS);
+		$no_formulir = $this->getDataKeyField($sender,$this->RepeaterS);
         
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,kelurahan,kecamatan,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
-        $this->DB->setFieldTable(array('no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','jk','idagama','nama_agama','nama_ibu_kandung','idwarga','nik','idstatus','alamat_kantor','alamat_rumah','kelurahan','kecamatan','telp_rumah','telp_kantor','telp_hp','email','idjp','pendidikan_terakhir','jurusan','kota','provinsi','tahun_pa','nama_pekerjaan','jenis_slta','asal_slta','status_slta','nomor_ijazah','kjur1','kjur2','idkelas','waktu_mendaftar','ta','idsmt'));
-        $r=$this->DB->getRecord($str);
+        $this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_agama', 'nama_ibu_kandung', 'idwarga', 'nik', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'kelurahan', 'kecamatan', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
+        $r = $this->DB->getRecord($str);
         $dataMhs=$r[1];								
         if ($dataMhs['waktu_mendaftar']=='0000-00-00 00:00:00') {							
-            $dataMhs['tanggal_lahir']='';
-            $dataMhs['jk']='';
-            $dataMhs['nama_agama']='';
-            $dataMhs['idwarga']='';														
-            $dataMhs['idstatus']='';		
-            $dataMhs['nama_pekerjaan']='';
-            $dataMhs['tahun_pa']='';
-            $dataMhs['jenis_slta']='';
-            $dataMhs['status_slta']='';
+            $dataMhs['tanggal_lahir'] = '';
+            $dataMhs['jk'] = '';
+            $dataMhs['nama_agama'] = '';
+            $dataMhs['idwarga'] = '';														
+            $dataMhs['idstatus'] = '';		
+            $dataMhs['nama_pekerjaan'] = '';
+            $dataMhs['tahun_pa'] = '';
+            $dataMhs['jenis_slta'] = '';
+            $dataMhs['status_slta'] = '';
         }
         $this->txtEditNoFormulir->Text = $no_formulir;				        
         $this->txtEditNamaMhs->Text = $dataMhs['nama_mhs'];
@@ -200,7 +200,7 @@ class CPendaftaranOnline extends MainPageM {
             $this->rdEditPria->Checked=true;
         else
             $this->rdEditWanita->Checked=true;
-        $this->cmbEditAgama->DataSource=$this->DMaster->getListAgama();
+        $this->cmbEditAgama->DataSource = $this->DMaster->getListAgama();
         $this->cmbEditAgama->Text=$dataMhs['idagama'];
         $this->cmbEditAgama->dataBind();		
         $this->txtEditNamaIbuKandung->Text=$dataMhs['nama_ibu_kandung'];
@@ -226,7 +226,7 @@ class CPendaftaranOnline extends MainPageM {
         $this->txtEditAlamatKantor->Text=$dataMhs['alamat_kantor'];
         $this->txtEditNoTelpKantor->Text=$dataMhs['telp_kantor'];
         
-        $this->cmbEditPekerjaanOrtu->DataSource=$this->DMaster->getListJenisPekerjaan ();
+        $this->cmbEditPekerjaanOrtu->DataSource = $this->DMaster->getListJenisPekerjaan ();
         $this->cmbEditPekerjaanOrtu->Text=$dataMhs['idjp'];
         $this->cmbEditPekerjaanOrtu->dataBind();		
         
@@ -241,7 +241,7 @@ class CPendaftaranOnline extends MainPageM {
         $this->txtEditNomorIjazah->Text=$dataMhs['nomor_ijazah'];
         
         $daftarkelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas(),'none');        
-        $this->cmbEditKelas->DataSource=$daftarkelas;
+        $this->cmbEditKelas->DataSource = $daftarkelas;
         $this->cmbEditKelas->Text=$dataMhs['idkelas'];
         $this->cmbEditKelas->dataBind();
 		
@@ -249,31 +249,31 @@ class CPendaftaranOnline extends MainPageM {
         $bool=!$this->DB->checkRecordIsExist ('no_formulir',"nilai_ujian_masuk",$no_formulir,' AND kjur > 0');
         $daftar_jurusan=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
         if ($dataMhs['kjur1'] =='') {
-            $this->cmbEditKjur1->DataSource=$daftar_jurusan;
+            $this->cmbEditKjur1->DataSource = $daftar_jurusan;
             $this->cmbEditKjur1->Text=$dataMhs['kjur1'];
             $this->cmbEditKjur1->Enabled=$bool;
             $this->cmbEditKjur1->dataBind();
             $this->cmbEditKjur2->Enabled=true;	            
         }else {					
-            $this->cmbEditKjur1->DataSource=$daftar_jurusan;
+            $this->cmbEditKjur1->DataSource = $daftar_jurusan;
             $this->cmbEditKjur1->Text=$dataMhs['kjur1'];
             $this->cmbEditKjur1->Enabled=$bool;
             $this->cmbEditKjur1->dataBind();
 
             $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'],$dataMhs['kjur1']);									            
-            $this->cmbEditKjur2->DataSource=$jurusan;
+            $this->cmbEditKjur2->DataSource = $jurusan;
             $this->cmbEditKjur2->Text=$dataMhs['kjur2'];
             $this->cmbEditKjur2->dataBind();
             $this->cmbEditKjur2->Enabled=true;
         }
         
         $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
-        $this->cmbEditTahunMasuk->DataSource=$tahun_masuk	;					
+        $this->cmbEditTahunMasuk->DataSource = $tahun_masuk	;					
         $this->cmbEditTahunMasuk->Text=$dataMhs['ta'];						
         $this->cmbEditTahunMasuk->dataBind();
 
-        $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none'); 
-        $this->cmbEditSemester->DataSOurce=$semester;
+        $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none'); 
+        $this->cmbEditSemester->DataSource = $semester;
         $this->cmbEditSemester->Text=$dataMhs['idsmt'];
         $this->cmbEditSemester->DataBind();
         $this->Demik->setDataMHS(array('no_formulir'=>$no_formulir,'kjur'=>'none'));
@@ -287,10 +287,10 @@ class CPendaftaranOnline extends MainPageM {
 		
 	}
 	
-	public function deleteRecord($sender,$param) {
-		$no_formulir=$this->getDataKeyField($sender,$this->RepeaterS);
+	public function deleteRecord($sender, $param) {
+		$no_formulir = $this->getDataKeyField($sender,$this->RepeaterS);
         try {
-            if ($this->DB->checkRecordIsExist('no_formulir','register_mahasiswa',$no_formulir)) {
+            if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa',$no_formulir)) {
                 throw new Exception ("Tidak menghapus mahasiswa ini karena telah memiliki NIM.");
             }
             $str = "formulir_pendaftaran WHERE no_formulir='$no_formulir'";
@@ -309,11 +309,11 @@ class CPendaftaranOnline extends MainPageM {
         }    	
 	}
     
-	public function closeAddProcess ($sender,$param) {
+	public function closeAddProcess($sender, $param) {
 		unset($_SESSION['addProcess']);
 		$this->spmb->redirect('a.m.SPMB.PendaftaranViaFO');
 	}
-	public function printOut ($sender,$param) {	
+	public function printOut($sender, $param) {	
         $this->createObj('reportspmb');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -327,49 +327,49 @@ class CPendaftaranOnline extends MainPageM {
                         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
                     case  'excel2007' :
-                        $kjur=$_SESSION['kjur'];
+                        $kjur = $_SESSION['kjur'];
                         $nama_prodi=$_SESSION['daftar_jurusan'][$kjur];
                         $tahun=$_SESSION['tahun_pendaftaran'];
-                        $semester=$_SESSION['semester'];
+                        $semester = $_SESSION['semester'];
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
                         $nama_semester = $this->setup->getSemester($semester);
 
-                        $dataReport['kjur']=$_SESSION['kjur'];                
-                        $dataReport['tahun_masuk']=$tahun;
-                        $dataReport['semester']=$semester;
-                        $dataReport['nama_tahun']=$nama_tahun;
-                        $dataReport['nama_semester']=$nama_semester;        
-                        $dataReport['daftar_via']='WEB';         
-                        $dataReport['offset']=$_SESSION['currentPagePendaftaranOnline']['offset'];         
-                        $dataReport['limit']=$_SESSION['currentPagePendaftaranOnline']['limit'];         
+                        $dataReport['kjur'] = $_SESSION['kjur'];                
+                        $dataReport['tahun_masuk'] = $tahun;
+                        $dataReport['semester'] = $semester;
+                        $dataReport['nama_tahun'] = $nama_tahun;
+                        $dataReport['nama_semester'] = $nama_semester;        
+                        $dataReport['daftar_via'] = 'WEB';         
+                        $dataReport['offset'] = $_SESSION['currentPagePendaftaranOnline']['offset'];         
+                        $dataReport['limit'] = $_SESSION['currentPagePendaftaranOnline']['limit'];         
 
                         $messageprintout="Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
-                        $dataReport['linkoutput']=$this->linkOutput;         
+                        $dataReport['linkoutput'] = $this->linkOutput;         
                         $this->report->setDataReport($dataReport); 
                         $this->report->setMode($_SESSION['outputreport']);
                         $this->report->printPendaftaranOnlineAll($_SESSION['outputcompress'],$_SESSION['daftar_jurusan'],$this->DMaster);                
                     break;
                     case  'pdf' :
-                        $kjur=$_SESSION['kjur'];
+                        $kjur = $_SESSION['kjur'];
                         $nama_prodi=$_SESSION['daftar_jurusan'][$kjur];
                         $tahun=$_SESSION['tahun_pendaftaran'];
-                        $semester=$_SESSION['semester'];
+                        $semester = $_SESSION['semester'];
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
                         $nama_semester = $this->setup->getSemester($semester);
 
-                        $dataReport['kjur']=$_SESSION['kjur'];                
-                        $dataReport['tahun_masuk']=$tahun;
-                        $dataReport['semester']=$semester;
-                        $dataReport['nama_tahun']=$nama_tahun;
-                        $dataReport['nama_semester']=$nama_semester;        
-                        $dataReport['daftar_via']='WEB';         
-                        $dataReport['offset']=$_SESSION['currentPagePendaftaranOnline']['offset'];         
-                        $dataReport['limit']=$_SESSION['currentPagePendaftaranOnline']['limit'];         
+                        $dataReport['kjur'] = $_SESSION['kjur'];                
+                        $dataReport['tahun_masuk'] = $tahun;
+                        $dataReport['semester'] = $semester;
+                        $dataReport['nama_tahun'] = $nama_tahun;
+                        $dataReport['nama_semester'] = $nama_semester;        
+                        $dataReport['daftar_via'] = 'WEB';         
+                        $dataReport['offset'] = $_SESSION['currentPagePendaftaranOnline']['offset'];         
+                        $dataReport['limit'] = $_SESSION['currentPagePendaftaranOnline']['limit'];         
 
                         $messageprintout="Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
-                        $dataReport['linkoutput']=$this->linkOutput;         
+                        $dataReport['linkoutput'] = $this->linkOutput;         
                         $this->report->setDataReport($dataReport);   
-                        $_SESSION['outputcompress']=$_SESSION['outputcompress']=='none'?'zip':$_SESSION['outputcompress'];
+                        $_SESSION['outputcompress'] = $_SESSION['outputcompress']=='none'?'zip':$_SESSION['outputcompress'];
                         $this->report->setMode($_SESSION['outputreport']);
                         $this->report->printPendaftaranOnlineAll($_SESSION['outputcompress'],$_SESSION['daftar_jurusan'],$this->DMaster);								
                     break;
@@ -387,9 +387,9 @@ class CPendaftaranOnline extends MainPageM {
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
                     case  'pdf' :
-                        $no_formulir=$this->getDataKeyField($sender,$this->RepeaterS);
-                        $dataReport['no_formulir']=$no_formulir; 
-                        $dataReport['linkoutput']=$this->linkOutput; 
+                        $no_formulir = $this->getDataKeyField($sender,$this->RepeaterS);
+                        $dataReport['no_formulir'] = $no_formulir; 
+                        $dataReport['linkoutput'] = $this->linkOutput; 
                         $this->report->setDataReport($dataReport);      
                         $this->report->setMode($_SESSION['outputreport']);
                         $messageprintout="Formulir Pendaftaran $no_formulir : <br/>";

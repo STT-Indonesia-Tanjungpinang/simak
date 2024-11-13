@@ -35,10 +35,10 @@ class CTambahKRS extends MainPageMHS {
       try 
       {			                
         $this->KRS->DataKRS=$_SESSION['currentPageKRS']['DataKRS'];							
-        $idsmt=$_SESSION['semester'];
+        $idsmt = $_SESSION['semester'];
         $tahun=$_SESSION['ta'];
         $datamhs=$this->Pengguna->getDataUser();    
-        $datamhs['idsmt']=$idsmt;
+        $datamhs['idsmt'] = $idsmt;
         $nim=$datamhs['nim'];
         
         $this->KRS->setDataMHS($datamhs);
@@ -87,28 +87,28 @@ class CTambahKRS extends MainPageMHS {
         $this->Nilai->setDataMHS($datamhs);
         $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt,$tahun);
         if ($datadulangbefore['k_status']=='C') {
-          $this->KRS->DataKRS['krs']['maxSKS']=$idsmt==3?$jumlah_sks_sp:$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');                
-          $this->KRS->DataKRS['krs']['ipstasmtbefore']='N.A (Status Cuti)';
+          $this->KRS->DataKRS['krs']['maxSKS'] = $idsmt==3?$jumlah_sks_sp:$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');                
+          $this->KRS->DataKRS['krs']['ipstasmtbefore'] = 'N.A (Status Cuti)';
         }else{
-          $this->KRS->DataKRS['krs']['maxSKS']=$idsmt==3?$jumlah_sks_sp:$this->Nilai->getMaxSKS($tahun,$idsmt);                
-          $this->KRS->DataKRS['krs']['ipstasmtbefore']=$this->Nilai->getIPS();
+          $this->KRS->DataKRS['krs']['maxSKS'] = $idsmt==3?$jumlah_sks_sp:$this->Nilai->getMaxSKS($tahun,$idsmt);                
+          $this->KRS->DataKRS['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
         }                                                
         
-        $_SESSION['currentPageKRS']['DataKRS']=$this->KRS->DataKRS;
-        $kjur=$datamhs['kjur'];
-        $idkur=$this->KRS->getIDKurikulum($kjur);
-        $str = "SELECT vp.idpenyelenggaraan,vp.kmatkul,vp.nmatkul,vp.sks,vp.semester,vp.iddosen,vp.nidn,vp.nama_dosen FROM v_penyelenggaraan vp WHERE vp.idpenyelenggaraan NOT IN (SELECT km.idpenyelenggaraan FROM krsmatkul km,krs k WHERE km.idkrs=k.idkrs AND k.nim='$nim') AND vp.idsmt='$idsmt' AND vp.tahun='$tahun' AND vp.kjur='$kjur' AND vp.idkur=$idkur ORDER BY vp.semester ASC,vp.nmatkul ASC";
-        $this->DB->setFieldTable (array('idpenyelenggaraan','kmatkul','nmatkul','sks','semester','iddosen','nidn','nama_dosen'));			
+        $_SESSION['currentPageKRS']['DataKRS'] = $this->KRS->DataKRS;
+        $kjur = $datamhs['kjur'];
+        $idkur = $this->KRS->getIDKurikulum($kjur);
+        $str = "SELECT vp.idpenyelenggaraan,vp.kmatkul,vp.nmatkul,vp.sks,vp.semester,vp.iddosen,vp.nidn,vp.nama_dosen FROM v_penyelenggaraan vp WHERE vp.idpenyelenggaraan NOT IN (SELECT km.idpenyelenggaraan FROM krsmatkul km,krs k WHERE km.idkrs=k.idkrs AND k.nim='$nim') AND vp.idsmt='$idsmt' AND vp.tahun='$tahun' AND vp.kjur='$kjur' AND vp.idkur = $idkur ORDER BY vp.semester ASC,vp.nmatkul ASC";
+        $this->DB->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen'));			
         $daftar_matkul_diselenggarakan=$this->DB->getRecord($str);
 
         $idkrs=$this->KRS->DataKRS['krs']['idkrs'];
         $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs=$idkrs ORDER BY semester ASC,kmatkul ASC";
-        $this->DB->setFieldTable(array('idpenyelenggaraan','idkrsmatkul','kmatkul','nmatkul','sks','semester','batal','nidn','nama_dosen'));
+        $this->DB->setFieldTable(array('idpenyelenggaraan', 'idkrsmatkul', 'kmatkul', 'nmatkul', 'sks', 'semester', 'batal', 'nidn', 'nama_dosen'));
         $matkul = $this->DB->getRecord($str);                
-        $this->RepeaterS->DataSource=$matkul;
+        $this->RepeaterS->DataSource = $matkul;
         $this->RepeaterS->dataBind();
         
-        $this->RepeaterPenyelenggaraan->DataSource=$daftar_matkul_diselenggarakan;
+        $this->RepeaterPenyelenggaraan->DataSource = $daftar_matkul_diselenggarakan;
         $this->RepeaterPenyelenggaraan->dataBind();
       }catch (Exception $e) {
         $this->idProcess = 'view';	
@@ -118,29 +118,29 @@ class CTambahKRS extends MainPageMHS {
   }
   public function getInfoToolbar() {                
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
-    $semester=$this->setup->getSemester($_SESSION['semester']);
+    $semester = $this->setup->getSemester($_SESSION['semester']);
     $text="TA $ta Semester $semester";
     return $text;
   }		
   
-  public function tambahMatkul($sender,$param) {
+  public function tambahMatkul($sender, $param) {
     try 
     {		
       $datakrs=$_SESSION['currentPageKRS']['DataKRS']['krs'];
-      $datakrs['iddata_konversi']=$this->Pengguna->getDataUser('iddata_konversi');
-      $datakrs['idkelas']=$this->Pengguna->getDataUser('idkelas');
+      $datakrs['iddata_konversi'] = $this->Pengguna->getDataUser('iddata_konversi');
+      $datakrs['idkelas'] = $this->Pengguna->getDataUser('idkelas');
       $this->KRS->setDataMHS($datakrs);
       $idkrs=$datakrs['idkrs'];
       $str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs'";
       $this->DB->setFieldTable(array('jumlah'));
-      $r=$this->DB->getRecord($str);
+      $r = $this->DB->getRecord($str);
       $jumlah=$r[1]['jumlah']+$sender->CommandParameter;
       $maxSKS=$datakrs['maxSKS'];
       //if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
       $idpenyelenggaraan=$this->getDataKeyField($sender,$this->RepeaterPenyelenggaraan);
       //check kmatkul syarat apakah lulus		
       $this->KRS->checkMatkulSyaratIDPenyelenggaraan($idpenyelenggaraan);
-      if (!$this->DB->checkRecordIsExist('idpenyelenggaraan','krsmatkul',$idpenyelenggaraan,' AND idkrs='.$idkrs))
+      if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul',$idpenyelenggaraan,' AND idkrs='.$idkrs))
       { 
         $str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs',$idpenyelenggaraan,0)";
         $this->DB->insertRecord($str);			
@@ -153,7 +153,7 @@ class CTambahKRS extends MainPageMHS {
       $this->lblContentMessageError->Text=$e->getMessage();					
     }		
   }
-  public function hapusMatkul ($sender,$param) {		
+  public function hapusMatkul($sender, $param) {		
     $idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);	
     $datakrs=$_SESSION['currentPageKRS']['DataKRS']['krs'];
     $idkrs=$datakrs['idkrs'];
@@ -174,7 +174,7 @@ class CTambahKRS extends MainPageMHS {
     $this->redirect ('perkuliahan.TambahKRS',true);
   }	
   
-  public function hitung ($sender,$param) {
+  public function hitung($sender, $param) {
     $item=$param->Item;		
     if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {					
       $matkul = $item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									

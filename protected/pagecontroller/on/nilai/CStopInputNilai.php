@@ -10,22 +10,22 @@ class CStopInputNilai extends MainPageON{
 		$this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageStopInputNilai'])||$_SESSION['currentPageStopInputNilai']['page_name']!='on.nilai.StopInputNilai') {					
-                $_SESSION['currentPageStopInputNilai']=array('page_name'=>'on.nilai.StopInputNilai','page_num'=>0,'search'=>false,'iddosen'=>'none','nama_hari'=>'none');												
+                $_SESSION['currentPageStopInputNilai']=array('page_name'=>'on.nilai.StopInputNilai', 'page_num'=>0,'search'=>false,'iddosen'=>'none', 'nama_hari'=>'none');												
             }
             $_SESSION['currentPageNilaiFinal']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
-            $this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
+            $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text=$_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
-            $this->tbCmbTA->DataSource=$ta;					
+            $this->tbCmbTA->DataSource = $ta;					
             $this->tbCmbTA->Text=$_SESSION['ta'];						
             $this->tbCmbTA->dataBind();
 
-            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
-            $this->tbCmbSemester->DataSource=$semester;
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $this->tbCmbSemester->DataSource = $semester;
             $this->tbCmbSemester->Text=$_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
             
@@ -36,44 +36,44 @@ class CStopInputNilai extends MainPageON{
 		
 	}	
     public function getInfoToolbar() {        
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
-		$semester=$this->setup->getSemester($_SESSION['semester']);
+		$semester = $this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
-    public function changeTbTA ($sender,$param) {
-		$_SESSION['ta']=$this->tbCmbTA->Text;		
+    public function changeTbTA($sender, $param) {
+		$_SESSION['ta'] = $this->tbCmbTA->Text;		
         $this->lblModulHeader->Text=$this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageStopInputNilai']['search']);
         
 	}	
-	public function changeTbSemester ($sender,$param) {
-		$_SESSION['semester']=$this->tbCmbSemester->Text;		
+	public function changeTbSemester($sender, $param) {
+		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
         $this->lblModulHeader->Text=$this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageStopInputNilai']['search']);
 	}	
-    public function changeTbPs ($sender,$param) {		
-        $_SESSION['kjur']=$this->tbCmbPs->Text;
+    public function changeTbPs($sender, $param) {		
+        $_SESSION['kjur'] = $this->tbCmbPs->Text;
         $this->lblModulHeader->Text=$this->getInfoToolbar();
         $this->populateData();
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}	
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPageStopInputNilai']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPageStopInputNilai']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageStopInputNilai']['search']);
 	}
-    public function searchRecord ($sender,$param) {
+    public function searchRecord($sender, $param) {
 		$_SESSION['currentPageStopInputNilai']['search']=true;
 		$this->populateData($_SESSION['currentPageStopInputNilai']['search']);
 	}
 	protected function populateData ($search=false){
 		$ta = $_SESSION['ta'];
-        $idsmt=$_SESSION['semester'];
-        $kjur=$_SESSION['kjur'];        
+        $idsmt = $_SESSION['semester'];
+        $kjur = $_SESSION['kjur'];        
         
         if ($search) {
             $txtsearch=addslashes($this->txtKriteria->Text);
@@ -119,21 +119,21 @@ class CStopInputNilai extends MainPageON{
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageStopInputNilai']['page_num']=0;}
         $str = "$str ORDER BY hari ASC,idkelas ASC,nama_dosen ASC LIMIT $offset,$limit";				
-        $this->DB->setFieldTable(array('idkelas_mhs','kmatkul','nmatkul','nama_dosen','idkelas','nidn','nama_kelas','hari','jam_masuk','jam_keluar','namaruang','kapasitas','isi_nilai'));
+        $this->DB->setFieldTable(array('idkelas_mhs', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas', 'isi_nilai'));
 		$r = $this->DB->getRecord($str,$offset+1);	
         $result = array();
-        while (list($k,$v)=each($r)) {  
+        while (list($k, $v) = each($r)) {  
             $kmatkul = $v['kmatkul'];
-            $v['kode_matkul']=$this->Nilai->getKMatkul($kmatkul); 
-            $v['namakelas']=$this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']';
-            $v['jumlah_peserta_kelas']=$this->DB->getCountRowsOfTable('kelas_mhs_detail WHERE idkelas_mhs='.$v['idkelas_mhs'],'idkelas_mhs');
-            $result[$k]=$v;
+            $v['kode_matkul'] = $this->Nilai->getKMatkul($kmatkul); 
+            $v['namakelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']';
+            $v['jumlah_peserta_kelas'] = $this->DB->getCountRowsOfTable('kelas_mhs_detail WHERE idkelas_mhs='.$v['idkelas_mhs'],'idkelas_mhs');
+            $result[$k] = $v;
         }
-        $this->RepeaterS->DataSource=$result;
+        $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
 	}
-	public function doVerified($sender,$param) {
+	public function doVerified($sender, $param) {
 		$id=$this->getDataKeyField($sender,$this->RepeaterS);
 		$verified=$sender->CommandParameter;
 		$str = "UPDATE kelas_mhs SET isi_nilai=$verified WHERE idkelas_mhs=$id";	

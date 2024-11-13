@@ -7,12 +7,12 @@ class CDiskusi extends MainPageMHS {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDiskusi'])||$_SESSION['currentPageDiskusi']['page_name']!='mh.forum.Diskusi') {                                                                                
-                $_SESSION['currentPageDiskusi']=array('page_name'=>'mh.forum.Diskusi','page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
+                $_SESSION['currentPageDiskusi']=array('page_name'=>'mh.forum.Diskusi', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPageDiskusi']['activeviewindex'];
 		}                
 	}  
-    public function changeView ($sender,$param) {                
+    public function changeView($sender, $param) {                
         $activeview = $_SESSION['currentPageDiskusi']['activeviewindex'];                
         if ($activeview == $this->MVMenuForum->ActiveViewIndex) {
             switch ($activeview) {
@@ -21,7 +21,7 @@ class CDiskusi extends MainPageMHS {
                     $this->populateNewsFeed();
                 break;
                 case 1 :
-                    $this->cmbAddKategori->DataSource=$this->Forum->getListForumKategori();
+                    $this->cmbAddKategori->DataSource = $this->Forum->getListForumKategori();
                     $this->cmbAddKategori->DataBind(); 
                 break;
                 case 2 : //diskusi unread
@@ -30,15 +30,15 @@ class CDiskusi extends MainPageMHS {
                 break;
             }
         }else{
-            $_SESSION['currentPageDiskusi']['activeviewindex']=$this->MVMenuForum->ActiveViewIndex;
+            $_SESSION['currentPageDiskusi']['activeviewindex'] = $this->MVMenuForum->ActiveViewIndex;
             $this->redirect('forum.Diskusi',true);
         }        
     }
-    public function renderCallback ($sender,$param) {
+    public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}	
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPageDiskusi']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPageDiskusi']['page_num'] = $param->NewPageIndex;
 		$this->populateNewsFeed($_SESSION['currentPageDiskusi']['search']);
 	}
     public function populateNewsFeed ($search=false) {
@@ -57,10 +57,10 @@ class CDiskusi extends MainPageMHS {
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num']=0;}
         $str="$str ORDER BY date_added DESC LIMIT $offset,$limit";				
-		$this->DB->setFieldTable (array('idpost','userid','nama_kategori','title','content','nama_user','tipe','date_added'));			
-		$r=$this->DB->getRecord($str);	
-        $result=array();
-        while (list($k,$v)=each($r)) {
+		$this->DB->setFieldTable (array('idpost', 'userid', 'nama_kategori', 'title', 'content', 'nama_user', 'tipe', 'date_added'));			
+		$r = $this->DB->getRecord($str);	
+        $result = array();
+        while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
             $userid=$v['userid'];
             $photo='resources/userimages/no_photo.png';
@@ -70,7 +70,7 @@ class CDiskusi extends MainPageMHS {
                     $this->DB->setFieldTable (array('photo_profile'));			
                     $profile=$this->DB->getRecord($str);	
                     $photo=$profile[1]['photo_profile'];
-                    $urlprofiluser=$this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$v['userid']));
+                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$v['userid']));
                 break;
                 case 'm' :
                     $str = "SELECT foto AS photo_profile FROM user WHERE userid='$userid'";
@@ -82,13 +82,13 @@ class CDiskusi extends MainPageMHS {
                 default :
                     $urlprofiluser='#';
             }
-            $v['urlprofiluser']=$urlprofiluser;
-            $v['photo_profile']=$photo;
-            $v['jumlahcomment']=$this->DB->getCountRowsOfTable("forumposts WHERE parentpost=$idpost",'idpost');
-            $v['tanggal_post']=$this->page->TGL->relativeTime(date('Y-m-d H:i:s'),$v['date_added'],'lasttweet');
-            $result[$k]=$v;
+            $v['urlprofiluser'] = $urlprofiluser;
+            $v['photo_profile'] = $photo;
+            $v['jumlahcomment'] = $this->DB->getCountRowsOfTable("forumposts WHERE parentpost=$idpost",'idpost');
+            $v['tanggal_post'] = $this->page->TGL->relativeTime(date('Y-m-d H:i:s'),$v['date_added'],'lasttweet');
+            $result[$k] = $v;
         }
-		$this->RepeaterS->DataSource=$result;
+		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
         
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
@@ -109,10 +109,10 @@ class CDiskusi extends MainPageMHS {
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num_unread']=0;}
         $str="$str ORDER BY date_added DESC LIMIT $offset,$limit";				
-		$this->DB->setFieldTable (array('idpost','nama_kategori','title','content','nama_user','date_added'));			
-		$r=$this->DB->getRecord($str);	
-        $result=array();
-        while (list($k,$v)=each($r)) {
+		$this->DB->setFieldTable (array('idpost', 'nama_kategori', 'title', 'content', 'nama_user', 'date_added'));			
+		$r = $this->DB->getRecord($str);	
+        $result = array();
+        while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
             $photo='resources/userimages/no_photo.png';
             switch ($v['tipe']) {
@@ -123,31 +123,31 @@ class CDiskusi extends MainPageMHS {
                     $photo=$profile[1]['photo_profile'];
                 break;
             }
-            $v['photo_profile']=$photo;
-            $v['jumlahcomment']=$this->DB->getCountRowsOfTable("forumposts WHERE parentpost=$idpost",'idpost');
-            $v['tanggal_post']=$this->page->TGL->relativeTime(date('Y-m-d H:i:s'),$v['date_added'],'lasttweet');
-            $result[$k]=$v;
+            $v['photo_profile'] = $photo;
+            $v['jumlahcomment'] = $this->DB->getCountRowsOfTable("forumposts WHERE parentpost=$idpost",'idpost');
+            $v['tanggal_post'] = $this->page->TGL->relativeTime(date('Y-m-d H:i:s'),$v['date_added'],'lasttweet');
+            $result[$k] = $v;
         }
-		$this->RepeaterUnread->DataSource=$result;
+		$this->RepeaterUnread->DataSource = $result;
 		$this->RepeaterUnread->dataBind();
         
         $this->paginationInfo2->Text=$this->getInfoPaging($this->RepeaterS);
     }
-    public function kirimKonten ($sender,$param) {
+    public function kirimKonten($sender, $param) {
 		if ($this->IsValid) {	
             $idkategori = addslashes($this->cmbAddKategori->Text);
             $judul = strip_tags(addslashes($this->txtAddTitle->Text));
             $content = strip_tags(addslashes($this->txtAddContent->Text));
             $userid = $this->Pengguna->getDataUser('nim');                        
-            $nama_user=$this->Pengguna->getDataUser('nama_mhs'). ' ['.$this->Pengguna->getDataUser('nim').']';                        
-            $str = "INSERT INTO forumposts (idpost,idkategori,title,content,userid,tipe,nama_user,date_added) VALUES (NULL,$idkategori,'$judul','$content',$userid,'mh','$nama_user',NOW())";
+            $nama_user = $this->Pengguna->getDataUser('nama_mhs'). ' ['.$this->Pengguna->getDataUser('nim').']';                        
+            $str = "INSERT INTO forumposts (idpost,idkategori,title,content,userid,tipe,nama_user,date_added) VALUES (NULL,$idkategori,'$judul', '$content',$userid,'mh', '$nama_user',NOW())";
             $this->DB->insertRecord($str);
             $_SESSION['currentPageDiskusi']['activeviewindex']=0;
             $this->redirect('forum.Diskusi', true);
             
         }
     }
-    public function setUnreadFalse ($sender,$param) {
+    public function setUnreadFalse($sender, $param) {
         $id=$this->getDataKeyField($sender,$this->RepeaterUnread);        
         $str="UPDATE forumposts SET unread=0 WHERE idpost=$id";
         $this->DB->updateRecord($str);

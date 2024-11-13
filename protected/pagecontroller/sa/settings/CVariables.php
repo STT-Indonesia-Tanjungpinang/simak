@@ -6,7 +6,7 @@ class CVariables extends MainPageSA {
 		$this->showVariable=true;       
 		if (!$this->IsPostBack && !$this->IsCallback) {	           
             if (!isset($_SESSION['currentPageVariables'])||$_SESSION['currentPageVariables']['page_name']!='sa.settings.Variables') {
-				$_SESSION['currentPageVariables']=array('page_name'=>'sa.settings.Variables','page_num'=>0);												
+				$_SESSION['currentPageVariables']=array('page_name'=>'sa.settings.Variables', 'page_num'=>0);												
 			}            
             $this->populateData (); 
 		}
@@ -20,21 +20,21 @@ class CVariables extends MainPageSA {
         $this->txtProvinsiPT->Text=$this->setup->getSettingValue('provinsi_pt');
         //Setting Umum
         $ta = $this->DMaster->getListTA();  
-        $this->cmbDefaultTahunPendaftaran->DataSource=$ta;        
+        $this->cmbDefaultTahunPendaftaran->DataSource = $ta;        
         $this->cmbDefaultTahunPendaftaran->Text=$this->setup->getSettingValue('default_tahun_pendaftaran');
         $this->cmbDefaultTahunPendaftaran->dataBind();
         
-        $this->cmbDefaultTahunAkademik->DataSource=$ta;        
+        $this->cmbDefaultTahunAkademik->DataSource = $ta;        
         $this->cmbDefaultTahunAkademik->Text=$this->setup->getSettingValue('default_ta');
         $this->cmbDefaultTahunAkademik->dataBind();
         
-        $semester=$this->setup->getSemester();        
-        $this->cmbDefaultSemester->DataSource=$semester;        
+        $semester = $this->setup->getSemester();        
+        $this->cmbDefaultSemester->DataSource = $semester;        
         $this->cmbDefaultSemester->Text=$this->setup->getSettingValue('default_semester');
         $this->cmbDefaultSemester->dataBind();
                 
         $daftar_prodi=$this->DMaster->getListProgramStudi(2);        
-        $this->cmbDefaultProdi->DataSource=$daftar_prodi;        
+        $this->cmbDefaultProdi->DataSource = $daftar_prodi;        
         $this->cmbDefaultProdi->Text=$this->setup->getSettingValue('default_kjur');
         $this->cmbDefaultProdi->dataBind();
 
@@ -51,19 +51,19 @@ class CVariables extends MainPageSA {
         $this->txtTranskripNilaiNamaJabatan->Text=$this->setup->getSettingValue('nama_jabatan_transkrip');
         $daftardosen=$this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
         $this->cmbNamaPenandatangan->Text=$this->setup->getSettingValue('id_penandatangan_transkrip');
-        $this->cmbNamaPenandatangan->DataSource=$daftardosen;
+        $this->cmbNamaPenandatangan->DataSource = $daftardosen;
         $this->cmbNamaPenandatangan->DataBind();
         
         //Kartu Hasil Studi
         $this->txtKHSNamaJabatan->Text=$this->setup->getSettingValue('nama_jabatan_khs');        
         $this->cmbNamaPenandatanganKHS->Text=$this->setup->getSettingValue('id_penandatangan_khs');
-        $this->cmbNamaPenandatanganKHS->DataSource=$daftardosen;
+        $this->cmbNamaPenandatanganKHS->DataSource = $daftardosen;
         $this->cmbNamaPenandatanganKHS->DataBind();
         
         //DPNA
         $this->txtDPNANamaJabatan->Text=$this->setup->getSettingValue('nama_jabatan_dpna');        
         $this->cmbNamaPenandatanganDPNA->Text=$this->setup->getSettingValue('id_penandatangan_dpna');
-        $this->cmbNamaPenandatanganDPNA->DataSource=$daftardosen;
+        $this->cmbNamaPenandatanganDPNA->DataSource = $daftardosen;
         $this->cmbNamaPenandatanganDPNA->DataBind();
         
         
@@ -143,7 +143,7 @@ class CVariables extends MainPageSA {
                     
                     
                     $str = "SELECT CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen,d.nipy,d.nidn,ja.nama_jabatan FROM dosen d LEFT JOIN jabatan_akademik ja ON (d.idjabatan=ja.idjabatan) WHERE d.iddosen='$iddosen'";
-                    $this->DB->setFieldTable(array('nama_dosen','nipy','nidn','nama_jabatan'));			        
+                    $this->DB->setFieldTable(array('nama_dosen', 'nipy', 'nidn', 'nama_jabatan'));			        
                     $r = $this->DB->getRecord($str);                
                     
                     $str = "UPDATE setting SET value='{$r[1]['nama_dosen']}' WHERE setting_id=22";                                
@@ -170,7 +170,7 @@ class CVariables extends MainPageSA {
                     
                     
                     $str = "SELECT CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen,d.nipy,d.nidn,ja.nama_jabatan FROM dosen d LEFT JOIN jabatan_akademik ja ON (d.idjabatan=ja.idjabatan) WHERE d.iddosen='$iddosen'";
-                    $this->DB->setFieldTable(array('nama_dosen','nipy','nidn','nama_jabatan'));			        
+                    $this->DB->setFieldTable(array('nama_dosen', 'nipy', 'nidn', 'nama_jabatan'));			        
                     $r = $this->DB->getRecord($str);                
                     
                     $str = "UPDATE setting SET value='{$r[1]['nama_dosen']}' WHERE setting_id=32";                                
@@ -196,7 +196,7 @@ class CVariables extends MainPageSA {
                     $this->DB->updateRecord($str);
                                         
                     $str = "SELECT CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen,d.nipy,d.nidn,ja.nama_jabatan FROM dosen d LEFT JOIN jabatan_akademik ja ON (d.idjabatan=ja.idjabatan) WHERE d.iddosen='$iddosen'";
-                    $this->DB->setFieldTable(array('nama_dosen','nipy','nidn','nama_jabatan'));			        
+                    $this->DB->setFieldTable(array('nama_dosen', 'nipy', 'nidn', 'nama_jabatan'));			        
                     $r = $this->DB->getRecord($str);                
                     
                     $str = "UPDATE setting SET value='{$r[1]['nama_dosen']}' WHERE setting_id=42";                                

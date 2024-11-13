@@ -6,11 +6,11 @@ class getTransaction extends BaseWS {
 			$this->validate ();
 			$data=$_POST;
 			if (!isset($data['no_transaksi'])) {
-				$this->payload['status']='30';
+				$this->payload['status'] = '30';
 				throw new Exception ("Proses Login telah berhasil, namun ada error yaitu data POST no_transaksi tidak ada !!!");
 			}
 			if (empty($data['no_transaksi'])) {
-				$this->payload['status']='30';
+				$this->payload['status'] = '30';
 				throw new Exception ("Proses Login telah berhasil, namun ada error yaitu data no_transaksi kosong !!!");
 			}
 			$no_transaksi=addslashes($data['no_transaksi']);
@@ -52,17 +52,17 @@ class getTransaction extends BaseWS {
 						$payload['commited']=$result['commited'];
                         $payload['keterangan']=$keterangan;
                         if ($result['commited']==1) {
-                            $this->payload['status']='88';
+                            $this->payload['status'] = '88';
                             $message="Login=1, transaksi ($no_transaksi) sudah pernah dilakukan";
                         }else{
-                            $this->payload['status']='00';
+                            $this->payload['status'] = '00';
                             $message="Login=1, data transaksi dengan nomor ($no_transaksi) berhasil diperoleh !!!";
                         }
                         
 						$this->payload['payload']=$payload;							
 						$this->payload['message']=$message;
 					}else{
-						$this->payload['status']='04';
+						$this->payload['status'] = '04';
 						throw new Exception ("Proses Login telah berhasil, namun data transaksi dengan nomor ($no_transaksi) tidak ada di database !!!");
 					}			
 				break;
@@ -73,25 +73,25 @@ class getTransaction extends BaseWS {
 					if (isset($r[1])) {
 						$payload=$r[1];
                         if ($payload['commited']==1) {
-                            $this->payload['status']='88';
+                            $this->payload['status'] = '88';
                             $message="Login=1, transaksi ($no_transaksi) sudah pernah dilakukan";
                         }else{
-                            $this->payload['status']='00';
+                            $this->payload['status'] = '00';
                             $message="Login=1, data transaksi dengan nomor ($no_transaksi) berhasil diperoleh !!!";
 						}			
 						$this->createObj('dmaster');
 						$payload['nama_prodi']=$payload['nama_ps'];		
 						$payload['semester']=$this->semester[$payload['idsmt']];		
-						$payload['keterangan']='CUTI';		
+						$payload['keterangan'] = 'CUTI';		
 						$this->payload['payload']=$payload;							
 						$this->payload['message']=$message;
 					}else{
-						$this->payload['status']='04';
+						$this->payload['status'] = '04';
 						throw new Exception ("Proses Login telah berhasil, namun data transaksi cuti dengan nomor ($no_transaksi) tidak ada di database !!!");
 					}		
 				break;
 				default :
-					$this->payload['status']='30';
+					$this->payload['status'] = '30';
 					throw new Exception ("Proses Login telah berhasil, namun ada error yaitu tipe_transaksi tidak dikenal.");
 			}
 		}catch (Exception $e) {

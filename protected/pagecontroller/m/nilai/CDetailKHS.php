@@ -14,9 +14,9 @@ class CDetailKHS extends MainPageM {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailKHS'])||$_SESSION['currentPageDetailKHS']['page_name']!='m.nilai.DetailKHS') {
-				$_SESSION['currentPageDetailKHS']=array('page_name'=>'m.nilai.DetailKHS','page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+				$_SESSION['currentPageDetailKHS']=array('page_name'=>'m.nilai.DetailKHS', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
-            $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
+            $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
 			$this->populateData();	
@@ -29,15 +29,15 @@ class CDetailKHS extends MainPageM {
         try {
             $idkrs=addslashes($this->request['id']);            				
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
-            $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','tasmt','sah'));
-            $r=$this->DB->getRecord($str);	           
+            $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
+            $r = $this->DB->getRecord($str);	           
             $datamhs=$r[1];
             if (!isset($r[1])) {
                 $_SESSION['currentPageDetailKHS']['DataMHS']=array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
             }            
             $tahun=$datamhs['tahun'];
-            $idsmt=$datamhs['idsmt'];
+            $idsmt = $datamhs['idsmt'];
             if ($datamhs['sah']==0) {
                 throw new Exception("KRS dengan ID ($idkrs) belum disahkan.");
             }
@@ -46,17 +46,17 @@ class CDetailKHS extends MainPageM {
             if (($lunaspembayaran==false)&&$_SESSION['ta']>=2010) {                    					                    
                 throw new Exception ("Pembayaran uang kuliah pada {$tahun}{$idsmt} belum lunas.");
             }
-            $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
-            $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
+            $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
+            $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
-            $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-            $_SESSION['currentPageDetailKHS']['DataMHS']=$datamhs;
+            $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
+            $_SESSION['currentPageDetailKHS']['DataMHS'] = $datamhs;
             $this->Nilai->setDataMHS($datamhs);
             $khs = $this->Nilai->getKHS($tahun,$idsmt);
             if(isset($khs[1])){
 				$this->NilaiSemesterLalu=$this->Nilai->getKumulatifSksDanNmSemesterLalu($tahun,$idsmt);
                 $this->NilaiSemesterSekarang=$this->Page->Nilai->getIPKSampaiTASemester($tahun,$idsmt,'ipksksnm');
-                $this->RepeaterS->DataSource=$khs ;
+                $this->RepeaterS->DataSource = $khs ;
                 $this->RepeaterS->dataBind();							
 			}else{				
 				throw new Exception ('KRS dengan ID tidak ada matakuliahnya.');
@@ -66,7 +66,7 @@ class CDetailKHS extends MainPageM {
 			$this->errorMessage->Text=$ex->getMessage();
         }        
 	}
-    public function itemBound ($sender,$param) {
+    public function itemBound($sender, $param) {
         $item=$param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') { 
             $sks=$item->DataItem['sks'];
@@ -75,7 +75,7 @@ class CDetailKHS extends MainPageM {
             DetailKHS::$TotalM += $m;            
         }
     }
-	public function printOut ($sender,$param) {	
+	public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -92,27 +92,27 @@ class CDetailKHS extends MainPageM {
             case  'pdf' :                
                 $messageprintout='';
                 $tahun=$_SESSION['currentPageDetailKHS']['DataMHS']['tahun'];
-                $semester=$_SESSION['currentPageDetailKHS']['DataMHS']['idsmt'];
+                $semester = $_SESSION['currentPageDetailKHS']['DataMHS']['idsmt'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);        
                 $dataReport=$_SESSION['currentPageDetailKHS']['DataMHS'];
 
-                $dataReport['ta']=$tahun;
-                $dataReport['semester']=$semester;
-                $dataReport['nama_tahun']=$nama_tahun;
-                $dataReport['nama_semester']=$nama_semester;        
-                $dataReport['nama_pt_alias']=$this->setup->getSettingValue('nama_pt_alias');
-                $dataReport['nama_jabatan_khs']=$this->setup->getSettingValue('nama_jabatan_khs');
-                $dataReport['nama_penandatangan_khs']=$this->setup->getSettingValue('nama_penandatangan_khs');
-                $dataReport['jabfung_penandatangan_khs']=$this->setup->getSettingValue('jabfung_penandatangan_khs');
-                $dataReport['nidn_penandatangan_khs']=$this->setup->getSettingValue('nidn_penandatangan_khs');
+                $dataReport['ta'] = $tahun;
+                $dataReport['semester'] = $semester;
+                $dataReport['nama_tahun'] = $nama_tahun;
+                $dataReport['nama_semester'] = $nama_semester;        
+                $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
+                $dataReport['nama_jabatan_khs'] = $this->setup->getSettingValue('nama_jabatan_khs');
+                $dataReport['nama_penandatangan_khs'] = $this->setup->getSettingValue('nama_penandatangan_khs');
+                $dataReport['jabfung_penandatangan_khs'] = $this->setup->getSettingValue('jabfung_penandatangan_khs');
+                $dataReport['nidn_penandatangan_khs'] = $this->setup->getSettingValue('nidn_penandatangan_khs');
 
                 $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
-                $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-                $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-                $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
+                $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+                $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+                $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
 
-                $dataReport['linkoutput']=$this->linkOutput; 
+                $dataReport['linkoutput'] = $this->linkOutput; 
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 $this->report->printKHS($this->Nilai,true);		

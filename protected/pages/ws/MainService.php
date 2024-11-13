@@ -46,8 +46,8 @@ class MainService extends TModule  {
      * @param array $field
      */
 	public function setFieldTable ($field=array()) {	 
-		foreach ($field as $k=>$v) {
-			$ft[]=array("field"=>$v);			 
+		foreach ($field as $k => $v) {
+			$ft[]=array("field" => $v);			 
 		}
 		$this->FieldTable = $ft;
 	}

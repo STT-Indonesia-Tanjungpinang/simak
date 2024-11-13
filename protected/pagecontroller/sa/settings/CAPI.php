@@ -7,21 +7,21 @@ class CAPI extends MainPageSA {
         $this->showAPI=true;   
         if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageAPI'])||$_SESSION['currentPageAPI']['page_name']!='sa.settings.API') {
-                $_SESSION['currentPageAPI']=array('page_name'=>'sa.settings.API','page_num'=>0,'search'=>false);
+                $_SESSION['currentPageAPI']=array('page_name'=>'sa.settings.API', 'page_num'=>0,'search'=>false);
             }
             $_SESSION['currentPageAPI']['search']=false;
             $this->populateData();            
         }
     }       
-    public function renderCallback ($sender,$param) {
+    public function renderCallback($sender, $param) {
         $this->RepeaterS->render($param->NewWriter);    
     }
-    public function Page_Changed ($sender,$param) {
-        $_SESSION['currentPageAPI']['page_num']=$param->NewPageIndex;
+    public function Page_Changed($sender, $param) {
+        $_SESSION['currentPageAPI']['page_num'] = $param->NewPageIndex;
         $this->populateData($_SESSION['currentPageAPI']['search']);
     }
     
-    public function searchRecord ($sender,$param) {
+    public function searchRecord($sender, $param) {
         $_SESSION['currentPageAPI']['search']=true;
         $this->populateData($_SESSION['currentPageAPI']['search']);
     }    
@@ -61,27 +61,27 @@ class CAPI extends MainPageSA {
         }
         if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageAPI']['page_num']=0;}
         $str = "$str ORDER BY username ASC LIMIT $offset,$limit";               
-        $this->DB->setFieldTable(array('userid','username','nama','email','email','ipaddress','token','foto','logintime','active'));
+        $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'email', 'ipaddress', 'token', 'foto', 'logintime', 'active'));
         $r = $this->DB->getRecord($str,$offset+1);  
-        $result=array();
-        while (list($k,$v)=each($r)) {
-            $v['logintime']=$v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y',$v['logintime']);       
-            $result[$k]=$v;
+        $result = array();
+        while (list($k, $v) = each($r)) {
+            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y',$v['logintime']);       
+            $result[$k] = $v;
         }
-        $this->RepeaterS->DataSource=$result;
+        $this->RepeaterS->DataSource = $result;
         $this->RepeaterS->dataBind();     
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
     }           
-    public function addProcess ($sender,$param) {
+    public function addProcess($sender, $param) {
         $this->idProcess = 'add';       
     }
-    public function checkUsername ($sender,$param) {
+    public function checkUsername($sender, $param) {
         $this->idProcess=$sender->getId()=='addUsername'?'add':'edit';
         $username=$param->Value;        
         if ($username != '') {
             try {   
                 if ($this->hiddenusername->Value!=$username) {                                                            
-                    if ($this->DB->checkRecordIsExist('username','user',$username)) {                                
+                    if ($this->DB->checkRecordIsExist('username', 'user',$username)) {                                
                         throw new Exception ("Username ($username) sudah tidak tersedia silahkan ganti dengan yang lain.");     
                     }                               
                 }                
@@ -91,13 +91,13 @@ class CAPI extends MainPageSA {
             }   
         }   
     }
-    public function checkEmail ($sender,$param) {
+    public function checkEmail($sender, $param) {
         $this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
         $email = $param->Value;       
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
-                    if ($this->DB->checkRecordIsExist('email','user',$email)) {                                
+                    if ($this->DB->checkRecordIsExist('email', 'user',$email)) {                                
                         throw new Exception ("Email ($email) sudah tidak tersedia silahkan ganti dengan yang lain.");       
                     }                               
                 }                
@@ -123,14 +123,14 @@ class CAPI extends MainPageSA {
             $this->redirect('settings.API',true);
         }
     }
-    public function editRecord ($sender,$param) {
+    public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
         $this->hiddenid->Value=$id;     
         
         $str = "SELECT userid,username,nama,email,ipaddress,active FROM user WHERE userid='$id'";
-        $this->DB->setFieldTable(array('userid','username','nama','email','ipaddress','active'));
-        $r=$this->DB->getRecord($str);
+        $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'ipaddress', 'active'));
+        $r = $this->DB->getRecord($str);
         
         $result=$r[1];          
         $this->txtEditNama->Text=$result['nama'];
@@ -142,7 +142,7 @@ class CAPI extends MainPageSA {
         
         $this->cmbEditStatus->Text=$result['active'];
     }
-    public function updateData ($sender,$param) {
+    public function updateData($sender, $param) {
         if ($this->Page->isValid) {         
             $id=$this->hiddenid->Value;
             $nama = addslashes($this->txtEditNama->Text);
@@ -163,7 +163,7 @@ class CAPI extends MainPageSA {
             $this->redirect('settings.API',true);
         }
     }
-    public function resetToken ($sender,$param) { 
+    public function resetToken($sender, $param) { 
         $id=$this->getDataKeyField($sender,$this->RepeaterS);
         $data = $this->Pengguna->createHashPassword(mt_rand(1,1000));        
         $password=$data['password'];
@@ -171,7 +171,7 @@ class CAPI extends MainPageSA {
         $this->DB->updateRecord($str); 
         $this->redirect('settings.API',true);
     }
-    public function deleteRecord ($sender,$param) {        
+    public function deleteRecord($sender, $param) {        
         $id=$this->getDataKeyField($sender,$this->RepeaterS);        
         $this->DB->deleteRecord("user WHERE userid=$id");
         $this->redirect('settings.API',true);

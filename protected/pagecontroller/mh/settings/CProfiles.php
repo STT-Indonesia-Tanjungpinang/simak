@@ -6,22 +6,22 @@ class CProfiles extends MainPageMHS {
         $this->showProfiles=true;        
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageCache'])||$_SESSION['currentPageCache']['page_name']!='mh.settings.Profiles') {
-				$_SESSION['currentPageCache']=array('page_name'=>'mh.settings.Profiles','page_num'=>0);												
+				$_SESSION['currentPageCache']=array('page_name'=>'mh.settings.Profiles', 'page_num'=>0);												
 			}            
             $this->populateData ();
 		}
         
 	}   
     public function populateData () {
-        $this->cmbTheme->DataSource=$this->setup->getListThemes();
+        $this->cmbTheme->DataSource = $this->setup->getListThemes();
         $this->cmbTheme->Text=$_SESSION['theme'];
         $this->cmbTheme->DataBind();
         
-        $no_formulir=$this->Pengguna->getDataUser('no_formulir');
+        $no_formulir = $this->Pengguna->getDataUser('no_formulir');
         
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,kelurahan,kecamatan,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt,pm.photo_profile FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
-        $this->DB->setFieldTable(array('no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','jk','idagama','nama_agama','nama_ibu_kandung','idwarga','nik','idstatus','alamat_kantor','alamat_rumah','kelurahan','kecamatan','telp_rumah','telp_kantor','telp_hp','email','idjp','pendidikan_terakhir','jurusan','kota','provinsi','tahun_pa','nama_pekerjaan','jenis_slta','asal_slta','status_slta','nomor_ijazah','kjur1','kjur2','idkelas','waktu_mendaftar','ta','idsmt','photo_profile'));
-        $r=$this->DB->getRecord($str);
+        $this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_agama', 'nama_ibu_kandung', 'idwarga', 'nik', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'kelurahan', 'kecamatan', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt', 'photo_profile'));
+        $r = $this->DB->getRecord($str);
         $dataMhs=$r[1];								
         
         $this->txtEditNoFormulir->Text = $no_formulir;				        
@@ -32,7 +32,7 @@ class CProfiles extends MainPageMHS {
             $this->rdEditPria->Checked=true;
         else
             $this->rdEditWanita->Checked=true;
-        $this->cmbEditAgama->DataSource=$this->DMaster->getListAgama();
+        $this->cmbEditAgama->DataSource = $this->DMaster->getListAgama();
         $this->cmbEditAgama->Text=$dataMhs['idagama'];
         $this->cmbEditAgama->dataBind();		
         $this->txtEditNamaIbuKandung->Text=$dataMhs['nama_ibu_kandung'];
@@ -58,7 +58,7 @@ class CProfiles extends MainPageMHS {
         $this->txtEditAlamatKantor->Text=$dataMhs['alamat_kantor'];
         $this->txtEditNoTelpKantor->Text=$dataMhs['telp_kantor'];
         
-        $this->cmbEditPekerjaanOrtu->DataSource=$this->DMaster->getListJenisPekerjaan ();
+        $this->cmbEditPekerjaanOrtu->DataSource = $this->DMaster->getListJenisPekerjaan ();
         $this->cmbEditPekerjaanOrtu->Text=$dataMhs['idjp'];
         $this->cmbEditPekerjaanOrtu->dataBind();		
         
@@ -86,7 +86,7 @@ class CProfiles extends MainPageMHS {
     public function saveData($sender, $param) {
         if ($this->IsValid) {
             $theme=$this->cmbTheme->Text;
-            $_SESSION['theme']=$theme;
+            $_SESSION['theme'] = $theme;
             $userid = $this->Pengguna->getDataUser('userid');
             $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE nim='$userid'";            
             $this->DB->updateRecord($str);            
@@ -94,7 +94,7 @@ class CProfiles extends MainPageMHS {
             $this->redirect('settings.Profiles',true);
         }
     }
-    public function saveDataPassword ($sender,$param) {
+    public function saveDataPassword($sender, $param) {
         if ($this->IsValid) {
             $userid = $this->Pengguna->getDataUser('userid');
             if ($this->txtPassword->Text != '') {  
@@ -106,9 +106,9 @@ class CProfiles extends MainPageMHS {
         }
     }
     
-    public function saveDataFP ($sender,$param) {
+    public function saveDataFP($sender, $param) {
 		if ($this->IsValid) {
-			$no_formulir=$this->txtEditNoFormulir->Text;
+			$no_formulir = $this->txtEditNoFormulir->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
 			$tempat_lahir=addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
 			$tgl_lahir=date ('Y-m-d',$this->txtEditTanggalLahir->TimeStamp);
@@ -137,11 +137,11 @@ class CProfiles extends MainPageMHS {
             $statusslta = $this->cmbEditStatusSLTA->Text;
 			$nomor_ijazah=trim($this->txtEditNomorIjazah->Text);                  
             	
-            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota='$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta='$jenisslta',asal_slta='$asal_slta',status_slta='$statusslta',nomor_ijazah='$nomor_ijazah' WHERE no_formulir='$no_formulir'";
+            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota = '$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta = '$jenisslta',asal_slta = '$asal_slta',status_slta = '$statusslta',nomor_ijazah='$nomor_ijazah' WHERE no_formulir='$no_formulir'";
             $this->DB->query('BEGIN');
 			if ($this->DB->updateRecord($str)) {
                 $email = $this->txtEditEmail->Text;                
-                $str = "UPDATE profiles_mahasiswa SET email='$email' WHERE no_formulir=$no_formulir";
+                $str = "UPDATE profiles_mahasiswa SET email='$email' WHERE no_formulir = $no_formulir";
                 $this->DB->updateRecord($str);
                 $this->DB->query('COMMIT');
             }else {
@@ -150,7 +150,7 @@ class CProfiles extends MainPageMHS {
             $this->redirect('settings.Profiles',true);
         }
 	}
-    public function uploadPhotoProfile ($sender,$param) {
+    public function uploadPhotoProfile($sender, $param) {
 		if ($sender->getHasFile()) {
             $this->lblTipeFileError->Text='';
             $mime=$sender->getFileType();
@@ -187,9 +187,9 @@ class CProfiles extends MainPageMHS {
             $sender->saveAs($path);            
             chmod(BASEPATH."/$path",0644); 
             $this->imgPhotoUser->ImageUrl = $path; 
-            $no_formulir=$this->Pengguna->getDataUser('no_formulir');
+            $no_formulir = $this->Pengguna->getDataUser('no_formulir');
             $this->DB->updateRecord("UPDATE profiles_mahasiswa SET photo_profile='$path' WHERE no_formulir='$no_formulir'");
-            $_SESSION['foto']=$path;
+            $_SESSION['foto'] = $path;
         }else {                    
             //error handling
             switch ($sender->ErrorCode){

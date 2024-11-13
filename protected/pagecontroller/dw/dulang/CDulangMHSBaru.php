@@ -9,21 +9,21 @@ class CDulangMHSBaru Extends MainPageDW {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSBaru'])||$_SESSION['currentPageDulangMHSBaru']['page_name']!='dw.dulang.DulangMHSBaru') {
-				$_SESSION['currentPageDulangMHSBaru']=array('page_name'=>'dw.dulang.DulangMHSBaru','page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSBaru']=array('page_name'=>'dw.dulang.DulangMHSBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSBaru']['search']=false;
             
-            $this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
+            $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text=$_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
-			$this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
+			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester=array('1'=>'GANJIL','2'=>'GENAP');  				
-			$this->tbCmbSemesterMasuk->DataSource=$semester;
+            $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
+			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text=$_SESSION['currentPageDulangMHSBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();  
             
@@ -35,31 +35,31 @@ class CDulangMHSBaru Extends MainPageDW {
         return $this->Demik->getDataMHS($idx);
     }
     public function setInfoToolbar() {                
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
 		$ps=$_SESSION['daftar_jurusan'][$kjur];
         $tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
         $semester = $this->setup->getSemester($_SESSION['currentPageDulangMHSBaru']['semester_masuk']);		
 		$this->lblModulHeader->Text="Program Studi $ps Tahun Masuk $tahunmasuk Semester $semester ";        
 	}
-    public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPageDulangMHSBaru']['page_num']=$param->NewPageIndex;
+    public function Page_Changed($sender, $param) {
+		$_SESSION['currentPageDulangMHSBaru']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageDulangMHSBaru']['search']);
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-    public function changeTbPs ($sender,$param) {		
-		$_SESSION['kjur']=$this->tbCmbPs->Text;
+    public function changeTbPs($sender, $param) {		
+		$_SESSION['kjur'] = $this->tbCmbPs->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}	
-    public function changeTbTahunMasuk($sender,$param) {				
-		$_SESSION['tahun_masuk']=$this->tbCmbTahunMasuk->Text;
+    public function changeTbTahunMasuk($sender, $param) {				
+		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-    public function changeTbSemesterMasuk ($sender,$param) {		
-		$_SESSION['currentPageDulangMHSBaru']['semester_masuk']=$this->tbCmbSemesterMasuk->Text;        
+    public function changeTbSemesterMasuk($sender, $param) {		
+		$_SESSION['currentPageDulangMHSBaru']['semester_masuk'] = $this->tbCmbSemesterMasuk->Text;        
         $this->setInfoToolbar();
 		$this->populateData();
 	}
@@ -86,7 +86,7 @@ class CDulangMHSBaru Extends MainPageDW {
                 break;
             }
         }else{
-            $kjur=$_SESSION['kjur']; 
+            $kjur = $_SESSION['kjur']; 
             $tahun_masuk=$_SESSION['tahun_masuk'];
             $semester_masuk=$_SESSION['currentPageDulangMHSBaru']['semester_masuk'];                        
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND iddosen_wali=$iddosen_wali AND vdm.tahun_masuk='$tahun_masuk' AND vdm.semester_masuk='$semester_masuk' AND d.tahun=$tahun_masuk AND d.idsmt=$semester_masuk AND vdm.kjur='$kjur'";
@@ -102,9 +102,9 @@ class CDulangMHSBaru Extends MainPageDW {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSBaru']['page_num']=0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";				        
-		$this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','iddosen_wali','tanggal'));
+		$this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal'));
 		$result=$this->DB->getRecord($str);
-		$this->RepeaterS->DataSource=$result;
+		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
                 
         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);

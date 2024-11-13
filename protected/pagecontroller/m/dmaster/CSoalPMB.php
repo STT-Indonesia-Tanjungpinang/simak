@@ -7,26 +7,26 @@ class CSoalPMB extends MainPageM {
 		$this->showSoalPMB = true;
 		if (!$this->IsPostBack && !$this->IsCallBack) {					
 			if (!isset($_SESSION['currentPageSoalPMB'])||$_SESSION['currentPageSoalPMB']['page_name']!='m.dmaster.SoalPMB') {
-                $_SESSION['currentPageSoalPMB']=array('page_name'=>'m.dmaster.SoalPMB','page_num'=>0,'search'=>false);
+                $_SESSION['currentPageSoalPMB']=array('page_name'=>'m.dmaster.SoalPMB', 'page_num'=>0,'search'=>false);
 			}
             $result = array();
 			for ($i=1;$i<=4;$i++) {
 				$data = array('no'=>$i);
-				$result[]=$data;
+				$result[] = $data;
 			}
-			$this->RepeaterJawaban->DataSource=$result;
+			$this->RepeaterJawaban->DataSource = $result;
 			$this->RepeaterJawaban->dataBind();            
 			$this->populateData();						
 		}		
 	}		
-	public function btnSearch_Click ($sender,$param) {		
+	public function btnSearch_Click($sender, $param) {		
 		$this->populateData ($this->getStrSearch());
 	}	
-	public function renderCallback ($sender,$param) {
+	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-	public function Page_Changed ($sender,$param) {
-		$_SESSION['currentPageSoalPMB']['page_num']=$param->NewPageIndex;
+	public function Page_Changed($sender, $param) {
+		$_SESSION['currentPageSoalPMB']['page_num'] = $param->NewPageIndex;
 		$this->populateData();
 	}
 	public function populateData () {	
@@ -39,35 +39,35 @@ class CSoalPMB extends MainPageM {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageSoalPMB']['page_num']=0;}
 		$str = "SELECT s.idsoal,nama_soal,date_added,date_modified FROM soal s ORDER BY date_modified DESC LIMIT $offset,$limit";
-		$this->DB->setFieldTable(array('idsoal','nama_soal','date_added','date_modified')); 
-		$r=$this->DB->getRecord($str,$offset+1);			
-        $result=array();       
+		$this->DB->setFieldTable(array('idsoal', 'nama_soal', 'date_added', 'date_modified')); 
+		$r = $this->DB->getRecord($str,$offset+1);			
+        $result = array();       
 		$this->DB->setFieldTable(array('jawaban')); 		
-        while (list($k,$v)=each($r)){           
+        while (list($k, $v) = each($r)){           
             $idsoal = $v['idsoal'];
             $str = "SELECT j.jawaban FROM jawaban j WHERE status=1 AND idsoal = $idsoal";
             $re=$this->DB->getRecord($str);
             $v['jawaban']=isset($re[1])?$re[1]['jawaban']:'-';
-            $result[$k]=$v;
+            $result[$k] = $v;
         }
-		$this->RepeaterS->DataSource=$result;
+		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
 	}	
-	public function setDataBound ($sender,$param) {
+	public function setDataBound($sender, $param) {
 		$item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
 			$item->rdJawaban->setUniqueGroupName('jawaban');
 		}
 	}
-    public function setJawaban	($sender,$param) {
+    public function setJawaban	($sender, $param) {
 		if ($this->IsValid) {
 			$jumlah_jawaban=$this->txtAddJumlahJawaban->Text;
 			$result = array();
 			for ($i=1;$i<=$jumlah_jawaban;$i++) {
 				$data = array('no'=>$i);
-				$result[]=$data;
+				$result[] = $data;
 			}
-			$this->RepeaterJawaban->DataSource=$result;
+			$this->RepeaterJawaban->DataSource = $result;
 			$this->RepeaterJawaban->dataBind();
 		}
 	}
@@ -100,19 +100,19 @@ class CSoalPMB extends MainPageM {
             } 
 		}
 	}
-    public function editRecord ($sender,$param) {
+    public function editRecord($sender, $param) {
         $this->idProcess = 'edit';
         $id=$this->getDataKeyField($sender,$this->RepeaterS);
         $this->hiddenidsoal->Value=$id;        
         $str = "SELECT nama_soal FROM soal s WHERE idsoal = $id";
         $this->DB->setFieldTable(array('nama_soal'));
-        $r=$this->DB->getRecord($str);
+        $r = $this->DB->getRecord($str);
         $this->txtEditNamaSoal->Text=$r[1]['nama_soal'];
         
         $str = "SELECT jawaban,status FROM jawaban WHERE idsoal = $id";
-        $this->DB->setFieldTable(array('jawaban','status'));
+        $this->DB->setFieldTable(array('jawaban', 'status'));
         $re=$this->DB->getRecord($str);
-        $this->RepeaterEditJawaban->DataSource=$re;
+        $this->RepeaterEditJawaban->DataSource = $re;
         $this->RepeaterEditJawaban->dataBind();        
         
     } 
@@ -146,9 +146,9 @@ class CSoalPMB extends MainPageM {
             } 
 		}
 	}
-	public function deleteRecord ($sender,$param) {
+	public function deleteRecord($sender, $param) {
         $id=$this->getDataKeyField($sender,$this->RepeaterS);
-        if ($this->DB->checkRecordIsExist('idsoal','jawaban_ujian',$id)) {
+        if ($this->DB->checkRecordIsExist('idsoal', 'jawaban_ujian',$id)) {
             $this->lblHeaderMessageError->Text='Menghapus Soal PMB';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus soal dengan ID ($id) karena sedang digunakan di jawaban ujian.";
             $this->modalMessageError->Show();

@@ -12,7 +12,7 @@ class CDetailDulangMHSLama Extends MainPageM {
                     $datamhs=$_SESSION['currentPageDulangMHSLama']['DataMHS'];
                     
                     $this->Demik->setDataMHS($datamhs);
-                    $this->cmbAddDosenWali->DataSource=$this->DMaster->getListDosenWali();
+                    $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
                     $this->cmbAddDosenWali->Text=$datamhs['iddosen_wali'];
                     $this->cmbAddDosenWali->dataBind();	           
                     
@@ -36,7 +36,7 @@ class CDetailDulangMHSLama Extends MainPageM {
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSLama']['DataMHS'];						
 			$ta = $datamhs['ta'];							
-			$semester=$datamhs['idsmt'];
+			$semester = $datamhs['idsmt'];
 			$tanggal=date ('Y-m-d H:m:s');			
             $nim=  $datamhs['nim'];           
 			$kelas=$datamhs['idkelas'];
@@ -46,7 +46,7 @@ class CDetailDulangMHSLama Extends MainPageM {
 			if ($this->DB->updateRecord($str)) {
                 $status_sebelumnnya = $datamhs['k_status'];
                 $tasmt=$ta.$semester;
-				$str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$semester','$tasmt','$tanggal','$kelas','$status_sebelumnnya','A')";
+				$str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt', '$tanggal', '$kelas', '$status_sebelumnnya', 'A')";
 				$this->DB->insertRecord($str);				
 				$this->DB->query('COMMIT');
                 unset($_SESSION['currentPageDulangMHSLama']);
@@ -56,7 +56,7 @@ class CDetailDulangMHSLama Extends MainPageM {
 			}
 		}
 	}
-    public function closeDetailDulang ($sender,$param) {
+    public function closeDetailDulang($sender, $param) {
         unset($_SESSION['currentPageDulangMHSLama']['DataMHS']);
         $this->redirect('dulang.DulangMHSLama',true);
     }
