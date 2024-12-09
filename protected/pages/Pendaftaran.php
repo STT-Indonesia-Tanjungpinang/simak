@@ -6,7 +6,7 @@ class Pendaftaran extends MainPageF {
 		$this->createObj('Dmaster');
 		if (!$this->IsPostBack&&!$this->IsCallBack) { 
 		    
-		    $this->lblModulHeader->Text=$this->setup->getSettingValue('default_tahun_pendaftaran');
+		    $this->lblModulHeader->Text = $this->setup->getSettingValue('default_tahun_pendaftaran');
 		    $daftar_prodi=$this->DMaster->getListProgramStudi(2);
 		    $daftar_prodi['none'] = 'PILIH PROGRAM STUDI 1';
 		    $this->cmbAddKjur1->DataSource=$daftar_prodi;
@@ -19,29 +19,29 @@ class Pendaftaran extends MainPageF {
 		    $this->cmbAddKelas->DataBind();
 		}
 	}    
-	public function changePs($sender,$param) {
+	public function changePs($sender, $param) {
         if ($sender->Text == 'none') {
             $this->cmbAddKjur2->Enabled=false;
             $this->cmbAddKjur2->Text='none';
         }else{
             $daftar_prodi=$this->DMaster->getListProgramStudi(2);
             $daftar_prodi['none'] = 'PILIH PROGRAM STUDI 2';
-            $jurusan=$this->DMaster->removeKjur($daftar_prodi,$sender->Text);
+            $jurusan=$this->DMaster->removeKjur($daftar_prodi, $sender->Text);
             $this->cmbAddKjur2->Enabled=true;       
             $this->cmbAddKjur2->DataSource=$jurusan;
             $this->cmbAddKjur2->dataBind();
         }	    
 	}
-	public function checkEmail ($sender,$param) {
+	public function checkEmail ($sender, $param) {
 	    $id=$sender->getId ();
 	    $this->idProcess = ($id=='editEmail')?'edit':'add';
 	    $email_mhs=addslashes($param->Value);
 	    try {
 	        if ($email_mhs != '') {
-                if ($this->DB->checkRecordIsExist('email','profiles_mahasiswa',$email_mhs)) {
+                if ($this->DB->checkRecordIsExist('email','profiles_mahasiswa', $email_mhs)) {
                     throw new Exception ("Email ($email_mhs) sudah tidak tersedia. Silahkan ganti dengan yang lain.");
                 }
-                if ($this->DB->checkRecordIsExist('email','formulir_pendaftaran_temp',$email_mhs)) {
+                if ($this->DB->checkRecordIsExist('email','formulir_pendaftaran_temp', $email_mhs)) {
                     throw new Exception ("Email ($email_mhs) sudah tidak tersedia. Silahkan ganti dengan yang lain.");
                 }
 	        }
@@ -50,16 +50,16 @@ class Pendaftaran extends MainPageF {
 	        $sender->ErrorMessage=$e->getMessage();
 	    }
 	}
-	public function saveData ($sender,$param) {
+	public function saveData ($sender, $param) {
 	    if ($this->IsValid) {
 	        $nama_mhs=addslashes(strtoupper(trim($this->txtAddNamaMhs->Text)));
 	        $tempat_lahir=addslashes(strtoupper(trim($this->txtAddTempatLahir->Text)));
-	        $tgl_lahir=date ('Y-m-d',$this->txtAddTanggalLahir->TimeStamp);
+	        $tgl_lahir=date ('Y-m-d', $this->txtAddTanggalLahir->TimeStamp);
 	        $jk=$this->rdAddPria->Checked===true?'L':'P';
 	        $telp_hp=addslashes($this->txtAddNoTelpHP->Text);
 	        $email=addslashes($this->txtAddEmail->Text);
 	        $kjur1=$this->cmbAddKjur1->Text;
-			$kjur2=($this->cmbAddKjur2->Text)>0?$this->cmbAddKjur1->Text:0;	        
+			$kjur2=($this->cmbAddKjur2->Text)> 0 ? $this->cmbAddKjur1->Text : 0;	        
 	        $idkelas=$this->cmbAddKelas->Text;
 	        $data=$this->Pengguna->createHashPassword($this->txtPassword1->Text);
 	        $salt=$data['salt'];
@@ -85,18 +85,18 @@ class Pendaftaran extends MainPageF {
 				$d=$this->DB->getRecord($str);
 
 				$sudah_dibayarkan=array();
-				while (list($o,$p)=each($d)) {            
+				while (list($o, $p)=each($d)) {            
 					$sudah_dibayarkan[$p['idkombi']]=$p['sudah_dibayar'];
 				}
 				$str = "SELECT k.idkombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND tahun=$ta AND idsmt=$idsmt AND kpt.idkelas='$idkelas' AND k.idkombi=1 ORDER BY periode_pembayaran,nama_kombi ASC";
 				$this->DB->setFieldTable(array('idkombi','biaya'));
 				$r=$this->DB->getRecord($str);
 
-				while (list($k,$v)=each($r)) {
+				while (list($k, $v)=each($r)) {
 					$biaya=$v['biaya'];
 					$idkombi=$v['idkombi'];
 					$sisa_bayar=isset($sudah_dibayarkan[$idkombi])?$biaya-$sudah_dibayarkan[$idkombi]:$biaya;
-					$str = "INSERT INTO transaksi_detail (idtransaksi_detail,no_transaksi,idkombi,dibayarkan,jumlah_sks) VALUES(NULL,$no_transaksi,$idkombi,$sisa_bayar,0)";
+					$str = "INSERT INTO transaksi_detail (idtransaksi_detail,no_transaksi,idkombi,dibayarkan,jumlah_sks) VALUES(NULL, $no_transaksi, $idkombi, $sisa_bayar,0)";
 					$this->DB->insertRecord($str);
 				}
 				// input ke formulir pendaftaran 
@@ -139,12 +139,12 @@ class Pendaftaran extends MainPageF {
 				
 				$photo_profile='resources/photomhs/no_photo.png';
                 $userpassword=md5($this->txtPassword1->Text);
-                $str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,nim,email,userpassword,theme,photo_profile) VALUES (NULL,$no_formulir,0,'$email','$userpassword','cube','$photo_profile')";
+                $str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,nim,email,userpassword,theme,photo_profile) VALUES (NULL, $no_formulir,0,'$email','$userpassword','cube','$photo_profile')";
                 $this->DB->insertRecord($str);
                 $ket="Input Via WEB";
                 $userid=$no_formulir;
                 $str = 'INSERT INTO bipend (idbipend,tahun,no_faktur,tgl_bayar,no_formulir,gelombang,dibayarkan,ket,userid) VALUES ';
-                echo $str .= "(NULL,$ta,'$no_formulir',NOW(),'$no_formulir','1','$sisa_bayar','$ket','$userid')";				
+                echo $str .= "(NULL, $ta,'$no_formulir',NOW(),'$no_formulir','1','$sisa_bayar','$ket','$userid')";				
 				$this->DB->insertRecord($str);
 				
 

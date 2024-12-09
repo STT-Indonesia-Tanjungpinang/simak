@@ -15,32 +15,32 @@ class CJadwalPerkuliahan extends MainPageMHS {
             
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
-			$this->tbCmbTA->Text=$_SESSION['ta'];						
+			$this->tbCmbTA->Text = $_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
 			$this->populateData();
             
 		}			
 	}
     public function changeTbTA($sender, $param) {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageJadwalPerkuliahan']['search']);
         
 	}	
 	public function changeTbSemester($sender, $param) {
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageJadwalPerkuliahan']['search']);
 	}	
     
@@ -72,7 +72,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
         
-        $nim=$datamhs['nim'];
+        $nim = $datamhs['nim'];
         $str = "SELECT vkm.idkelas,vkm.nama_kelas,vkm.hari,vkm.jam_masuk,vkm.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM krsmatkul km, krs k,kelas_mhs_detail kmd,kelas_mhs vkm,v_pengampu_penyelenggaraan vpp, ruangkelas rk  WHERE km.idkrs=k.idkrs AND kmd.idkrsmatkul=km.idkrsmatkul AND vkm.idkelas_mhs=kmd.idkelas_mhs AND vkm.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND rk.idruangkelas=vkm.idruangkelas AND k.nim=$nim AND k.idsmt=$idsmt AND k.tahun=$ta";
         $this->DB->setFieldTable(array('idkelas', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas'));
 		$r = $this->DB->getRecord($str);	

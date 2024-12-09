@@ -22,7 +22,7 @@ class PembayaranSemesterGenap Extends CPembayaranSemesterGenap {
 				$this->Finance->setDataMHS($datamhs);
 				$totalbayar=$this->Finance->getTotalBayarMhs($ta,1);				
                 $sisa=$totalbiaya-$totalbayar;                
-                $datadulang=$this->Finance->getDataDulang(1,$ta);
+                $datadulang=$this->Finance->getDataDulang(1, $ta);
                 if ($sisa>0 && $datadulang['k_status'] != 'C') {
 					$sisa=$this->Finance->toRupiah($sisa);
 					$tasmt="T.A ".$this->DMaster->getNamaTA($ta).' semester '.$this->setup->getSemester(1);

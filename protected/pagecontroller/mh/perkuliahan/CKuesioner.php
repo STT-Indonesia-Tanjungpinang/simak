@@ -29,7 +29,7 @@ class CKuesioner extends MainPageMHS {
                 if (isset($r[1])) {
                     $datamatkul = $r[1];                    
                     if ($datamatkul['telah_isi_kuesioner']) {
-                        $tanggal = $this->TGL->tanggal('d F Y',$datamatkul['tanggal_isi_kuesioner']);
+                        $tanggal = $this->TGL->tanggal('d F Y', $datamatkul['tanggal_isi_kuesioner']);
                         throw new Exception ("Untuk matakuliah ini, Anda telah mengisi Kuesioner pada tanggal $tanggal.");
                     }else{
                         $datamatkul['iddosen2'] = $datakelas['iddosen'];
@@ -49,7 +49,7 @@ class CKuesioner extends MainPageMHS {
 
                         $daftar_dosen_pengampu=array($datakelas['idpengampu_penyelenggaraan']=>$datakelas['nama_dosen'].' ['.$datakelas['nidn'].']');			
                         $this->cmbPengampuMatakuliah->DataSource = $daftar_dosen_pengampu;
-                        $this->cmbPengampuMatakuliah->Text=$_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan'];
+                        $this->cmbPengampuMatakuliah->Text = $_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan'];
                         $this->cmbPengampuMatakuliah->DataBind();                        
                     }
                 }else{
@@ -57,9 +57,9 @@ class CKuesioner extends MainPageMHS {
                 }
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }  
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
             $this->populateData();
 		}			
 	}    
@@ -96,7 +96,7 @@ class CKuesioner extends MainPageMHS {
             unset($kelompok_pertanyaan['none']);
 
             $result = array();
-            while (list($idkelompok_pertanyaan,$nama_kelompok)=each($kelompok_pertanyaan)) {
+            while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
                 $str = "SELECT idkuesioner,pertanyaan FROM kuesioner WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan=$idkelompok_pertanyaan ORDER BY idkelompok_pertanyaan ASC,(orders+0)";             		
                 $this->DB->setFieldTable(array('idkuesioner', 'pertanyaan'));
                 $r = $this->DB->getRecord($str);
@@ -131,15 +131,15 @@ class CKuesioner extends MainPageMHS {
                         $idkuesioner = $this->RepeaterS->DataKeys[$item->getItemIndex()];                        
                         $idindikator = $inputan->cmbJawaban->Text;
                         if ($jumlahpertanyaan > $i+1) {
-                            $values = "$values (NULL,$idpengampu_penyelenggaraan,$idkrsmatkul,$idkuesioner,$idindikator),";
+                            $values = "$values (NULL, $idpengampu_penyelenggaraan, $idkrsmatkul, $idkuesioner, $idindikator),";
                         }else{
-                            $values = "$values (NULL,$idpengampu_penyelenggaraan,$idkrsmatkul,$idkuesioner,$idindikator)";
+                            $values = "$values (NULL, $idpengampu_penyelenggaraan, $idkrsmatkul, $idkuesioner, $idindikator)";
                         }
                         $i=$i+1;
                     }
                     $str = "INSERT INTO kuesioner_jawaban (idkuesioner_jawaban,idpengampu_penyelenggaraan,idkrsmatkul,idkuesioner,idindikator) VALUES $values";
                     $this->DB->insertRecord($str);  
-                    if ($this->DB->checkRecordIsExist('idpengampu_penyelenggaraan', 'kuesioner_hasil',$idpengampu_penyelenggaraan)) {
+                    if ($this->DB->checkRecordIsExist('idpengampu_penyelenggaraan', 'kuesioner_hasil', $idpengampu_penyelenggaraan)) {
                         $this->Kuesioner->hitungKuesioner($idpengampu_penyelenggaraan,'update');
                     }else{
                         $this->Kuesioner->hitungKuesioner($idpengampu_penyelenggaraan,'insert');

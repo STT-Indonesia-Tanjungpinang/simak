@@ -21,12 +21,12 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
                 $this->DB->setFieldTable(array('no_faktur', 'tanggal'));
                 $d=$this->DB->getRecord($str);
                 $this->hiddennofaktur->Value=$d[1]['no_faktur'];
-                $this->txtAddNomorFaktur->Text=$d[1]['no_faktur'];
-                $this->cmbAddTanggalFaktur->Text=$this->TGL->tanggal('d-m-Y',$d[1]['tanggal']);
+                $this->txtAddNomorFaktur->Text = $d[1]['no_faktur'];
+                $this->cmbAddTanggalFaktur->Text = $this->TGL->tanggal('d-m-Y', $d[1]['tanggal']);
                 $this->populateData();
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }      
 		}	
 	}
@@ -49,7 +49,7 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
         $d=$this->DB->getRecord($str);
         
         $sudah_dibayarkan=array();
-        while (list($o,$p)=each($d)) {            
+        while (list($o, $p)=each($d)) {            
             $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
         }
         
@@ -58,7 +58,7 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
         $k=$this->DB->getRecord($str);
         
         $belum_komit=array();
-        while (list($m,$n)=each($k)) {              
+        while (list($m, $n)=each($k)) {              
             $belum_komit[$n['idkombi']] = $n['dibayarkan'];
         }
         
@@ -140,7 +140,7 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
         if ($no_faktur != '') {
             try {
                 if ($this->hiddennofaktur->Value != $no_faktur) {
-                    if ($this->DB->checkRecordIsExist('no_faktur', 'transaksi',$no_faktur)) {                                
+                    if ($this->DB->checkRecordIsExist('no_faktur', 'transaksi', $no_faktur)) {                                
                         throw new Exception ("Nomor Faktur dari ($no_faktur) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }
                 }
@@ -154,11 +154,11 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
 		if ($this->Page->isValid) {	
             $datamhs=$_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];
-            $nim=$datamhs['nim'];
+            $nim = $datamhs['nim'];
             
             $no_faktur=addslashes($this->txtAddNomorFaktur->Text);       
             $disc=addslashes($this->txtAddDisc->Text);         
-            $tanggal=date('Y-m-d',$this->cmbAddTanggalFaktur->TimeStamp);
+            $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',disc='$disc',date_modified=NOW() WHERE no_transaksi=$no_transaksi";
             $this->DB->updateRecord($str);
@@ -170,11 +170,11 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
 		if ($this->Page->isValid) {	
             $datamhs=$_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS'];
             $no_transaksi=$datamhs['no_transaksi'];
-            $nim=$datamhs['nim'];
+            $nim = $datamhs['nim'];
        
             $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
             $disc=addslashes($this->txtAddDisc->Text);        
-            $tanggal=date('Y-m-d',$this->cmbAddTanggalFaktur->TimeStamp);
+            $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
             $this->DB->query('BEGIN');
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',disc='$disc',commited=1,date_modified=NOW() WHERE no_transaksi=$no_transaksi";
@@ -187,7 +187,7 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
     }
     public function closeTransaction($sender, $param) {
         $datamhs=$_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS'];            
-        $nim=$datamhs['nim'];
+        $nim = $datamhs['nim'];
         unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);
         $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id'=>$nim));
     }
@@ -197,7 +197,7 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
     }
     public function cancelTrx($sender, $param) {	
         $datamhs=$_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']; 
-        $nim=$datamhs['nim'];
+        $nim = $datamhs['nim'];
 		$no_transaksi=$datamhs['no_transaksi'];		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");
         unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);

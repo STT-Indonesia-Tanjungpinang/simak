@@ -14,15 +14,15 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
             
             $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	            
            		
 			$this->tbCmbTahunMasuk->DataSource = $this->DMaster->getListTA();					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();            
             
             $this->tbCmbTA->DataSource = $this->getTA ();
-            $this->tbCmbTA->Text=$_SESSION['currentPagePembayaranPiutangSemesterGenap']['ta'];
+            $this->tbCmbTA->Text = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['ta'];
             $this->tbCmbTA->dataBind();         
             
             $this->populateData();
@@ -32,7 +32,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
     public function getTA () {
         $dt =$this->DMaster->getListTA();
         $ta = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'];        
-        while (list($k,$v)=each ($dt)) {
+        while (list($k, $v)=each ($dt)) {
 			if ($k != 'none') {
 				if ($k >= $ta) {
 					$tahun_akademik[$k] = $v;
@@ -90,7 +90,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
         $r = $this->DB->getRecord($str);
         $result = array();
         while (list($k, $v) = each($r)) {
-            $nim=$v['nim'];
+            $nim = $v['nim'];
             $k_status=$v['k_status_dulang'];
             $idkelas=$v['idkelas_dulang'];
             if ($k_status=='') {
@@ -101,7 +101,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
                 $k_status=$dulang[1]['k_status'];
             }
             $this->Finance->setDataMHS(array('no_formulir'=>$v['no_formulir'],'nim'=>$v['nim'],'kjur'=>$v['kjur'],'tahun_masuk'=>$v['tahun_masuk'],'semester_masuk'=>$v['semester_masuk'],'idsmt'=>$semester,'idkelas'=>$idkelas));
-            $data = $this->Finance->getLunasPembayaran($ta,$semester,true);            
+            $data = $this->Finance->getLunasPembayaran($ta, $semester,true);            
             if (!$data['bool']) {
                 $v['nkelas'] = $this->DMaster->getNamaKelasByID($idkelas);
                 $v['status'] = $this->DMaster->getNamaStatusMHSByID($k_status);
@@ -149,7 +149,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
     }
 	public function Go($sender, $param) {	
         if ($this->IsValid) {            
-            $nim=$sender->getId()=='btnGoRepeater'?$this->getDataKeyField($sender, $this->RepeaterS):addslashes($this->txtNIM->Text);
+            $nim = $sender->getId()=='btnGoRepeater'?$this->getDataKeyField($sender, $this->RepeaterS):addslashes($this->txtNIM->Text);
             $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id'=>$nim));
         }
 	}

@@ -12,9 +12,9 @@ class CFormulirPendaftaran extends MainPageMB {
                     $_SESSION['currentPageFormulirPendaftaran']=array('page_name'=>'mb.FormulirPendaftaran', 'page_num'=>0,'reguler'=>0,'karyawan'=>0,'ekstensi'=>0,'temp_file'=>'');												
                 }
                 $semester_default=$this->Pengguna->getDataUser('semester_masuk');
-                $reguler = $this->Finance->getBiayaPendaftaran($_SESSION['tahun_masuk'],$semester_default,'A');							
-                $karyawan=$this->Finance->getBiayaPendaftaran($_SESSION['tahun_masuk'],$semester_default,'B');							
-                $ekstensi=$this->Finance->getBiayaPendaftaran($_SESSION['tahun_masuk'],$semester_default,'C');
+                $reguler = $this->Finance->getBiayaPendaftaran($_SESSION['tahun_masuk'], $semester_default,'A');							
+                $karyawan=$this->Finance->getBiayaPendaftaran($_SESSION['tahun_masuk'], $semester_default,'B');							
+                $ekstensi=$this->Finance->getBiayaPendaftaran($_SESSION['tahun_masuk'], $semester_default,'C');
                 $_SESSION['currentPageFormulirPendaftaran']['reguler'] = $reguler;
                 $_SESSION['currentPageFormulirPendaftaran']['karyawan'] = $karyawan;
                 $_SESSION['currentPageFormulirPendaftaran']['ekstensi'] = $ekstensi;
@@ -31,7 +31,7 @@ class CFormulirPendaftaran extends MainPageMB {
                 } 
             }catch (Exception $e) {
                 $this->idProcess = 'view';
-                $this->errorMessage->Text=$e->getMessage();
+                $this->errorMessage->Text = $e->getMessage();
             }                        
 		}
 	}
@@ -56,27 +56,27 @@ class CFormulirPendaftaran extends MainPageMB {
         $this->txtEditNoFormulir->Text = $no_formulir;				        
         $this->txtEditNamaMhs->Text = $dataMhs['nama_mhs'];
         $this->txtEditTempatLahir->Text = $dataMhs['tempat_lahir'];
-        $this->txtEditTanggalLahir->Text=$this->TGL->tanggal('d-m-Y',$dataMhs['tanggal_lahir'],'entoid');
+        $this->txtEditTanggalLahir->Text = $this->TGL->tanggal('d-m-Y', $dataMhs['tanggal_lahir'],'entoid');
         if ($dataMhs['jk']=='L')
             $this->rdEditPria->Checked=true;
         else
             $this->rdEditWanita->Checked=true;
         $this->cmbEditAgama->DataSource = $this->DMaster->getListAgama();
-        $this->cmbEditAgama->Text=$dataMhs['idagama'];
+        $this->cmbEditAgama->Text = $dataMhs['idagama'];
         $this->cmbEditAgama->dataBind();		
-        $this->txtEditNamaIbuKandung->Text=$dataMhs['nama_ibu_kandung'];
+        $this->txtEditNamaIbuKandung->Text = $dataMhs['nama_ibu_kandung'];
         if ($dataMhs['idwarga']=='WNI'){
             $this->rdEditWNI->Checked=true;
         }else{
             $this->rdEditWNA->Checked=true;
         }
-        $this->txtEditNIK->Text=$dataMhs['nik'];
-        $this->txtEditAlamatKTP->Text=$dataMhs['alamat_rumah'];	
-        $this->txtEditKelurahan->Text=$dataMhs['kelurahan'];
-        $this->txtEditKecamatan->Text=$dataMhs['kecamatan'];
-        $this->txtEditNoTelpRumah->Text=$dataMhs['telp_rumah'];		
-        $this->txtEditNoTelpHP->Text=$dataMhs['telp_hp'];
-        $this->txtEditEmail->Text=$dataMhs['email'];  
+        $this->txtEditNIK->Text = $dataMhs['nik'];
+        $this->txtEditAlamatKTP->Text = $dataMhs['alamat_rumah'];	
+        $this->txtEditKelurahan->Text = $dataMhs['kelurahan'];
+        $this->txtEditKecamatan->Text = $dataMhs['kecamatan'];
+        $this->txtEditNoTelpRumah->Text = $dataMhs['telp_rumah'];		
+        $this->txtEditNoTelpHP->Text = $dataMhs['telp_hp'];
+        $this->txtEditEmail->Text = $dataMhs['email'];  
         $this->hiddenemail->Value=$dataMhs['email'];
         
         if ($dataMhs['idstatus']=='PEKERJA') {
@@ -84,46 +84,46 @@ class CFormulirPendaftaran extends MainPageMB {
         }else {
             $this->rdEditTidakBekerja->Checked=true;
         }
-        $this->txtEditAlamatKantor->Text=$dataMhs['alamat_kantor'];
-        $this->txtEditNoTelpKantor->Text=$dataMhs['telp_kantor'];
+        $this->txtEditAlamatKantor->Text = $dataMhs['alamat_kantor'];
+        $this->txtEditNoTelpKantor->Text = $dataMhs['telp_kantor'];
         
         $this->cmbEditPekerjaanOrtu->DataSource = $this->DMaster->getListJenisPekerjaan ();
-        $this->cmbEditPekerjaanOrtu->Text=$dataMhs['idjp'];
+        $this->cmbEditPekerjaanOrtu->Text = $dataMhs['idjp'];
         $this->cmbEditPekerjaanOrtu->dataBind();		
         
-        $this->txtEditPendidikanTerakhir->Text=$dataMhs['pendidikan_terakhir'];
-        $this->txtEditJurusan->Text=$dataMhs['jurusan'];
-        $this->txtEditKotaPendidikanTerakhir->Text=$dataMhs['kota'];
-        $this->txtEditProvinsiPendidikanTerakhir->Text=$dataMhs['provinsi'];
-        $this->txtEditTahunPendidikanTerakhir->Text=$dataMhs['tahun_pa'];        
-        $this->cmbEditJenisSLTA->Text=$dataMhs['jenis_slta'];
-        $this->txtEditAsalSLTA->Text=$dataMhs['asal_slta'];
-        $this->cmbEditStatusSLTA->Text=$dataMhs['status_slta'];
-        $this->txtEditNomorIjazah->Text=$dataMhs['nomor_ijazah'];
+        $this->txtEditPendidikanTerakhir->Text = $dataMhs['pendidikan_terakhir'];
+        $this->txtEditJurusan->Text = $dataMhs['jurusan'];
+        $this->txtEditKotaPendidikanTerakhir->Text = $dataMhs['kota'];
+        $this->txtEditProvinsiPendidikanTerakhir->Text = $dataMhs['provinsi'];
+        $this->txtEditTahunPendidikanTerakhir->Text = $dataMhs['tahun_pa'];        
+        $this->cmbEditJenisSLTA->Text = $dataMhs['jenis_slta'];
+        $this->txtEditAsalSLTA->Text = $dataMhs['asal_slta'];
+        $this->cmbEditStatusSLTA->Text = $dataMhs['status_slta'];
+        $this->txtEditNomorIjazah->Text = $dataMhs['nomor_ijazah'];
         
         $daftarkelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas(),'none');        
         $this->cmbEditKelas->DataSource = $daftarkelas;
-        $this->cmbEditKelas->Text=$dataMhs['idkelas'];
+        $this->cmbEditKelas->Text = $dataMhs['idkelas'];
         $this->cmbEditKelas->dataBind();
         $this->cmbEditKelas->Enabled=false;
 		
-        $bool=!$this->DB->checkRecordIsExist ('no_formulir', 'nilai_ujian_masuk',$no_formulir);
+        $bool=!$this->DB->checkRecordIsExist ('no_formulir', 'nilai_ujian_masuk', $no_formulir);
         $daftar_jurusan=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
         if ($dataMhs['kjur1'] =='') {
             $this->cmbEditKjur1->DataSource = $daftar_jurusan;
-            $this->cmbEditKjur1->Text=$dataMhs['kjur1'];
+            $this->cmbEditKjur1->Text = $dataMhs['kjur1'];
             $this->cmbEditKjur1->Enabled=$bool;
             $this->cmbEditKjur1->dataBind();
             $this->cmbEditKjur2->Enabled=true;	            
         }else {					
             $this->cmbEditKjur1->DataSource = $daftar_jurusan;
-            $this->cmbEditKjur1->Text=$dataMhs['kjur1'];
+            $this->cmbEditKjur1->Text = $dataMhs['kjur1'];
             $this->cmbEditKjur1->Enabled=$bool;
             $this->cmbEditKjur1->dataBind();
 
-            $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'],$dataMhs['kjur1']);									            
+            $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $dataMhs['kjur1']);									            
             $this->cmbEditKjur2->DataSource = $jurusan;
-            $this->cmbEditKjur2->Text=$dataMhs['kjur2'];
+            $this->cmbEditKjur2->Text = $dataMhs['kjur2'];
             $this->cmbEditKjur2->dataBind();
             $this->cmbEditKjur2->Enabled=true;
         }	         
@@ -137,18 +137,18 @@ class CFormulirPendaftaran extends MainPageMB {
 		$this->DB->setFieldTable(array('nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'email', 'telp_hp', 'kjur1', 'kjur2', 'idkelas'));
         $r = $this->DB->getRecord($str);
 		
-		$this->txtAddNoFormulir->Text=$no_formulir;		
+		$this->txtAddNoFormulir->Text = $no_formulir;		
 		
-		$this->txtAddNamaMhs->Text=$r[1]['nama_mhs'];			
-		$this->txtAddTempatLahir->Text=$r[1]['tempat_lahir'];						
-		$this->txtAddTanggalLahir->Text=$this->TGL->tanggal('d-m-Y',$r[1]['tanggal_lahir'],'entoid');
+		$this->txtAddNamaMhs->Text = $r[1]['nama_mhs'];			
+		$this->txtAddTempatLahir->Text = $r[1]['tempat_lahir'];						
+		$this->txtAddTanggalLahir->Text = $this->TGL->tanggal('d-m-Y', $r[1]['tanggal_lahir'],'entoid');
 		 if ($r[1]['jk']=='L')
             $this->rdAddPria->Checked=true;
         else
             $this->rdAddWanita->Checked=true;
 		
-		$this->txtAddNoTelpHP->Text=$r[1]['telp_hp'];
-		$this->txtAddEmail->Text=$r[1]['email'];  
+		$this->txtAddNoTelpHP->Text = $r[1]['telp_hp'];
+		$this->txtAddEmail->Text = $r[1]['email'];  
         $this->hiddenemail->Value=$r[1]['email'];
 		
         $this->cmbAddAgama->DataSource = $this->DMaster->getListAgama();        
@@ -158,17 +158,17 @@ class CFormulirPendaftaran extends MainPageMB {
         $this->cmbAddPekerjaanOrtu->dataBind();		
         
         $this->cmbAddKelas->DataSource = $this->DMaster->getListKelas();
-        $this->cmbAddKelas->Text=$r[1]['idkelas'];
+        $this->cmbAddKelas->Text = $r[1]['idkelas'];
         $this->cmbAddKelas->Enabled=false;
         $this->cmbAddKelas->dataBind();
         
         $this->cmbAddKjur1->DataSource = $_SESSION['daftar_jurusan'];    
-		$this->cmbAddKjur1->Text=$r[1]['kjur1'];
+		$this->cmbAddKjur1->Text = $r[1]['kjur1'];
         $this->cmbAddKjur1->dataBind();
 		if ($r[1]['kjur2'] >0) {
-			$jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'],$r[1]['kjur2']);			
+			$jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $r[1]['kjur2']);			
 			$this->cmbAddKjur2->DataSource = $jurusan;    
-			$this->cmbAddKjur2->Text=$r[1]['kjur2'];
+			$this->cmbAddKjur2->Text = $r[1]['kjur2'];
 			$this->cmbAddKjur2->dataBind();
 		}else{
 			$this->cmbAddKjur2->Enabled=false;
@@ -184,14 +184,14 @@ class CFormulirPendaftaran extends MainPageMB {
             }else{			            
                 $this->cmbAddKjur2->Enabled=true;
                 
-                $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'],$sender->Text);									            
+                $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $sender->Text);									            
                 $this->cmbAddKjur2->DataSource = $jurusan;
                 $this->cmbAddKjur2->dataBind();
             }
         }else {
             $this->idProcess = 'edit';
             $this->cmbEditKjur2->Enabled=true;	
-            $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'],$sender->Text);									            
+            $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $sender->Text);									            
             $this->cmbEditKjur2->DataSource = $jurusan;
             $this->cmbEditKjur2->dataBind();
         }
@@ -205,7 +205,7 @@ class CFormulirPendaftaran extends MainPageMB {
 		try {			
 			if ($email_mhs != '') {
 				if ($this->hiddenemail->Value != $email_mhs) {
-                    if ($this->DB->checkRecordIsExist('email', 'profiles_mahasiswa',$email_mhs)) {
+                    if ($this->DB->checkRecordIsExist('email', 'profiles_mahasiswa', $email_mhs)) {
                         throw new Exception ("Email ($email_mhs) sudah tidak tersedia. Silahkan ganti dengan yang lain.");
                     }					
 				}
@@ -221,7 +221,7 @@ class CFormulirPendaftaran extends MainPageMB {
 			$no_formulir = $this->txtAddNoFormulir->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtAddNamaMhs->Text)));			
 			$tempat_lahir=addslashes(strtoupper(trim($this->txtAddTempatLahir->Text)));						
-			$tgl_lahir=date ('Y-m-d',$this->txtAddTanggalLahir->TimeStamp);
+			$tgl_lahir=date ('Y-m-d', $this->txtAddTanggalLahir->TimeStamp);
 			$jk=$this->rdAddPria->Checked===true?'L':'P';
             $idagama = $this->cmbAddAgama->Text;
             $nama_ibu_kandung=addslashes($this->txtAddNamaIbuKandung->Text);
@@ -247,7 +247,7 @@ class CFormulirPendaftaran extends MainPageMB {
             $statusslta = $this->cmbAddStatusSLTA->Text;
 			$nomor_ijazah=trim($this->txtAddNomorIjazah->Text);			            
             $kjur1=$this->cmbAddKjur1->Text;
-            $kjur2=($this->cmbAddKjur2->Text)>0?$this->cmbAddKjur2->Text:0;
+            $kjur2=($this->cmbAddKjur2->Text)> 0 ? $this->cmbAddKjur2->Text : 0;
             $waktu_mendaftar=date('Y-m-d H:m:s');   
             $idsmt = $this->Pengguna->getDataUser('semester_masuk');
             $ta = $this->Pengguna->getDataUser('tahun_masuk');
@@ -264,7 +264,7 @@ class CFormulirPendaftaran extends MainPageMB {
                     $dibayarkan=$_SESSION['currentPageFormulirPendaftaran']['ekstensi'];
                 break;
             }
-			$str ="INSERT INTO formulir_pendaftaran (no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,idagama,nama_ibu_kandung,idwarga,nik,idstatus,alamat_kantor,alamat_rumah,kelurahan,kecamatan,telp_kantor,telp_rumah,telp_hp,idjp,pendidikan_terakhir,jurusan,kota,provinsi,tahun_pa,jenis_slta,asal_slta,status_slta,nomor_ijazah,kjur1,kjur2,waktu_mendaftar,ta,idsmt,idkelas,daftar_via) VALUES ('$no_formulir', '$nama_mhs', '$tempat_lahir', '$tgl_lahir', '$jk',$idagama,'$nama_ibu_kandung', '$idwarga', '$no_ktp', '$idstatus', '$alamat_kantor', '$alamat_rumah', '$kelurahan', '$kecamatan', '$telp_kantor', '$telp_rumah', '$telp_hp',$idjp,'$pendidikan_terakhir', '$jurusan', '$kota', '$provinsi', '$tahun_pa', '$jenisslta', '$asal_slta', '$statusslta', '$nomor_ijazah', '$kjur1', '$kjur2', '$waktu_mendaftar',$ta,$idsmt,'$idkelas', 'WEB')";		
+			$str ="INSERT INTO formulir_pendaftaran (no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,idagama,nama_ibu_kandung,idwarga,nik,idstatus,alamat_kantor,alamat_rumah,kelurahan,kecamatan,telp_kantor,telp_rumah,telp_hp,idjp,pendidikan_terakhir,jurusan,kota,provinsi,tahun_pa,jenis_slta,asal_slta,status_slta,nomor_ijazah,kjur1,kjur2,waktu_mendaftar,ta,idsmt,idkelas,daftar_via) VALUES ('$no_formulir', '$nama_mhs', '$tempat_lahir', '$tgl_lahir', '$jk', $idagama,'$nama_ibu_kandung', '$idwarga', '$no_ktp', '$idstatus', '$alamat_kantor', '$alamat_rumah', '$kelurahan', '$kecamatan', '$telp_kantor', '$telp_rumah', '$telp_hp', $idjp,'$pendidikan_terakhir', '$jurusan', '$kota', '$provinsi', '$tahun_pa', '$jenisslta', '$asal_slta', '$statusslta', '$nomor_ijazah', '$kjur1', '$kjur2', '$waktu_mendaftar', $ta, $idsmt,'$idkelas', 'WEB')";		
             $this->DB->query('BEGIN');
 			if ($this->DB->insertRecord($str)) {
 				
@@ -273,7 +273,7 @@ class CFormulirPendaftaran extends MainPageMB {
 				
                 $photo_profile=$this->hiddenAddFoto->Value;
                 $userpassword=md5($_SESSION['userpassword_mb']);
-                $str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,nim,email,userpassword,theme,photo_profile) VALUES (NULL,$no_formulir,0,'$email', '$userpassword', 'cube', '$photo_profile')";
+                $str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,nim,email,userpassword,theme,photo_profile) VALUES (NULL, $no_formulir,0,'$email', '$userpassword', 'cube', '$photo_profile')";
                 $this->DB->insertRecord($str);
                 $ket="Input Via WEB";
                 $userid=1;
@@ -294,7 +294,7 @@ class CFormulirPendaftaran extends MainPageMB {
 			$no_formulir = $this->txtEditNoFormulir->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
 			$tempat_lahir=addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
-			$tgl_lahir=date ('Y-m-d',$this->txtEditTanggalLahir->TimeStamp);
+			$tgl_lahir=date ('Y-m-d', $this->txtEditTanggalLahir->TimeStamp);
 			$jk=$this->rdEditPria->Checked===true?'L':'P';
             $idagama = $this->cmbEditAgama->Text;
             $nama_ibu_kandung=addslashes($this->txtEditNamaIbuKandung->Text);
@@ -320,7 +320,7 @@ class CFormulirPendaftaran extends MainPageMB {
             $statusslta = $this->cmbEditStatusSLTA->Text;
 			$nomor_ijazah=trim($this->txtEditNomorIjazah->Text);			            
             $kjur1=$this->cmbEditKjur1->Text;
-            $kjur2=($this->cmbEditKjur2->Text)>0?$this->cmbEditKjur2->Text:0;
+            $kjur2=($this->cmbEditKjur2->Text)> 0 ? $this->cmbEditKjur2->Text : 0;
             $waktu_mendaftar=date('Y-m-d H:m:s');            
             $ta = $this->Pengguna->getDataUser('tahun_masuk');
             $idsmt = $this->Pengguna->getDataUser('semester_masuk');
@@ -354,7 +354,7 @@ class CFormulirPendaftaran extends MainPageMB {
                 $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>File ini bukan tipe gambar</p>
                         </div>'; 
-                $this->lblAddTipeFileError->Text=$error;
+                $this->lblAddTipeFileError->Text = $error;
                 return;
             }         
 
@@ -363,7 +363,7 @@ class CFormulirPendaftaran extends MainPageMB {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing png support in gd library.</p>
                         </div>'; 
-                    $this->lblAddTipeFileError->Text=$error;                    
+                    $this->lblAddTipeFileError->Text = $error;                    
                     return;
                 }
             }
@@ -372,7 +372,7 @@ class CFormulirPendaftaran extends MainPageMB {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing jpeg support in gd library.</p>
                         </div>'; 
-                    $this->lblAddTipeFileError->Text=$error;
+                    $this->lblAddTipeFileError->Text = $error;
                     return;
                 }
             }
@@ -413,7 +413,7 @@ class CFormulirPendaftaran extends MainPageMB {
             $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>'.$err.'</p>
                         </div>';   
-            $this->lblAddTipeFileError->Text=$error;
+            $this->lblAddTipeFileError->Text = $error;
             return;   
         }
     }
@@ -426,7 +426,7 @@ class CFormulirPendaftaran extends MainPageMB {
                 $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>File ini bukan tipe gambar</p>
                         </div>'; 
-                $this->lblEditTipeFileError->Text=$error;
+                $this->lblEditTipeFileError->Text = $error;
                 return;
             }         
 
@@ -435,7 +435,7 @@ class CFormulirPendaftaran extends MainPageMB {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing png support in gd library.</p>
                         </div>'; 
-                    $this->lblEditTipeFileError->Text=$error;                    
+                    $this->lblEditTipeFileError->Text = $error;                    
                     return;
                 }
             }
@@ -444,7 +444,7 @@ class CFormulirPendaftaran extends MainPageMB {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing jpeg support in gd library.</p>
                         </div>'; 
-                    $this->lblEditTipeFileError->Text=$error;
+                    $this->lblEditTipeFileError->Text = $error;
                     return;
                 }
             }
@@ -485,7 +485,7 @@ class CFormulirPendaftaran extends MainPageMB {
             $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>'.$err.'</p>
                         </div>';   
-            $this->lblEditTipeFileError->Text=$error;
+            $this->lblEditTipeFileError->Text = $error;
             return;   
         }
     }

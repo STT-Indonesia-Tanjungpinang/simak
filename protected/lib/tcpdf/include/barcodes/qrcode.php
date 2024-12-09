@@ -2270,7 +2270,7 @@ class QRcode {
 	 * @return array srctab
 	 */
 	 protected function qrstrset($srctab, $x, $y, $repl, $replLen=false) {
-		$srctab[$y] = substr_replace($srctab[$y], ($replLen !== false)?substr($repl,0,$replLen):$repl, $x, ($replLen !== false)?$replLen:strlen($repl));
+		$srctab[$y] = substr_replace($srctab[$y], ($replLen !== false)?substr($repl,0, $replLen):$repl, $x, ($replLen !== false)?$replLen:strlen($repl));
 		return $srctab;
 	}
 
@@ -2797,7 +2797,7 @@ class QRcode {
 		}
 		$rs['iprim'] = (int)($iprim / $prim);
 		$rs['genpoly'][0] = 1;
-		for ($i = 0,$root=$fcr*$prim; $i < $nroots; $i++, $root += $prim) {
+		for ($i = 0, $root=$fcr*$prim; $i < $nroots; $i++, $root += $prim) {
 			$rs['genpoly'][$i+1] = 1;
 			// Multiply rs->genpoly[] by  @**(root + x)
 			for ($j = $i; $j > 0; --$j) {

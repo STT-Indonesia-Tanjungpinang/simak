@@ -151,7 +151,7 @@
                                     <td><%# $this->DataItem['nmatkul']%></td>
                                     <td><%# $this->DataItem['sks']%></td>
                                     <td><%# $this->DataItem['ket']%></td>
-                                    <td><%# $this->Page->TGL->tanggal('d/m/Y H:i',$this->DataItem['tanggal'])%></td>
+                                    <td><%# $this->Page->TGL->tanggal('d/m/Y H:i', $this->DataItem['tanggal'])%></td>
                                 </tr>
                             </prop:ItemTemplate>
                             <prop:FooterTemplate>				

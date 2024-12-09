@@ -36,17 +36,17 @@ class commitTransaction extends BaseWS {
 					$this->DB->query('BEGIN');
 					$this->DB->updateRecord("UPDATE transaksi SET commited=1,date_modified=NOW() WHERE no_transaksi='$no_transaksi'");
 					if ($result['nama_mhs'] == '' && $result['nim'] == '' && $result['kjur'] == 0) {
-						$str = "INSERT INTO transaksi_api (no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,userid,total,date_added,date_modified) SELECT no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,$userid,$total_tagihan,NOW(),NOW() FROM transaksi WHERE no_transaksi='$no_transaksi'";
+						$str = "INSERT INTO transaksi_api (no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,userid,total,date_added,date_modified) SELECT no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal, $userid, $total_tagihan,NOW(),NOW() FROM transaksi WHERE no_transaksi='$no_transaksi'";
 						$this->DB->insertRecord($str);
 						$this->DB->query('COMMIT'); //biaya pendaftaran
 					}elseif ($result['nim'] == '') { 
-						$str = "INSERT INTO transaksi_api (no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,userid,total,date_added,date_modified) SELECT no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,$userid,$total_tagihan,NOW(),NOW() FROM transaksi WHERE no_transaksi='$no_transaksi'";
+						$str = "INSERT INTO transaksi_api (no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,userid,total,date_added,date_modified) SELECT no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal, $userid, $total_tagihan,NOW(),NOW() FROM transaksi WHERE no_transaksi='$no_transaksi'";
 						$this->DB->insertRecord($str);
 						$this->DB->query('COMMIT'); //pembayaran mahasiswa baru
 					}else{
 						$this->createObj('Finance');
 						$no_formulir=$result['no_formulir'];
-						$nim=$result['nim'];
+						$nim = $result['nim'];
 						$kjur=$result['kjur'];
 						$ta=$result['tahun'];
 						$idsmt=$result['idsmt'];
@@ -56,9 +56,9 @@ class commitTransaction extends BaseWS {
 						$k_status=$result['k_status'];
 						$datamhs=array('no_formulir'=>$no_formulir,'nim'=>$nim,'kjur'=>$kjur,'tahun_masuk'=>$result['tahun_masuk'],'semester_masuk'=>$semester_masuk,'idkelas'=>$idkelas,'ta'=>$ta,'idsmt'=>$idsmt,'k_status'=>$k_status,'perpanjang'=>$result['perpanjang']);
 						$this->Finance->setDataMHS($datamhs);
-						$datadulang=$this->Finance->getDataDulang($idsmt,$ta);  
+						$datadulang=$this->Finance->getDataDulang($idsmt, $ta);  
 			            if (!isset($datadulang['iddulang'])) {	                
-			                $bool=$this->Finance->getTresholdPembayaran($ta,$idsmt);						                                
+			                $bool=$this->Finance->getTresholdPembayaran($ta, $idsmt);						                                
 			                if ($bool) {
 			                    $tasmt=$ta.$idsmt;	                    
 			                    $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$idsmt','$tasmt',NOW(),'$idkelas','$k_status','A')";
@@ -69,7 +69,7 @@ class commitTransaction extends BaseWS {
 			                }
 			                               
 			            }
-			            $str = "INSERT INTO transaksi_api (no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,userid,total,date_added,date_modified) SELECT no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,$userid,$total_tagihan,NOW(),NOW() FROM transaksi WHERE no_transaksi='$no_transaksi'";
+			            $str = "INSERT INTO transaksi_api (no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal,userid,total,date_added,date_modified) SELECT no_transaksi,no_faktur,kjur,tahun,idsmt,idkelas,no_formulir,nim,commited,tanggal, $userid, $total_tagihan,NOW(),NOW() FROM transaksi WHERE no_transaksi='$no_transaksi'";
 						$this->DB->insertRecord($str);
 
 			            $this->DB->query('COMMIT'); 
@@ -98,7 +98,7 @@ class commitTransaction extends BaseWS {
 
 		            $this->createObj('Finance');
 		            $no_formulir=$result['no_formulir'];
-					$nim=$result['nim'];
+					$nim = $result['nim'];
 					$kjur=$result['kjur'];
 					$ta=$result['tahun'];
 					$idsmt=$result['idsmt'];
@@ -108,7 +108,7 @@ class commitTransaction extends BaseWS {
 					$k_status=$result['k_status'];
 					$datamhs=array('no_formulir'=>$no_formulir,'nim'=>$nim,'kjur'=>$kjur,'tahun_masuk'=>$result['tahun_masuk'],'semester_masuk'=>$semester_masuk,'idkelas'=>$idkelas,'ta'=>$ta,'idsmt'=>$idsmt,'k_status'=>$k_status,'perpanjang'=>$result['perpanjang']);
 					$this->Finance->setDataMHS($datamhs);
-		            $datadulang=$this->Finance->getDataDulang($datamhs['ta'],$datamhs['idsmt']);		            
+		            $datadulang=$this->Finance->getDataDulang($datamhs['ta'], $datamhs['idsmt']);		            
 		            if (!isset($datadulang['iddulang'])) {		                
 		                $tasmt=$ta.$idsmt;		                
 		                $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim','$ta','$idsmt','$tasmt',NOW(),'$idkelas','$k_status','C')";
@@ -117,7 +117,7 @@ class commitTransaction extends BaseWS {
 		                $str = "UPDATE register_mahasiswa SET k_status='C' WHERE nim='$nim'";
 		                $this->DB->updateRecord($str);
 		            }
-		            $str = "INSERT INTO transaksi_api (no_transaksi,no_faktur,tahun,idsmt,nim,commited,tanggal,userid,total,date_added,date_modified) SELECT no_transaksi,no_faktur,tahun,idsmt,nim,commited,tanggal,$userid,dibayarkan,date_added,date_modified FROM transaksi_cuti WHERE no_transaksi='$no_transaksi'";
+		            $str = "INSERT INTO transaksi_api (no_transaksi,no_faktur,tahun,idsmt,nim,commited,tanggal,userid,total,date_added,date_modified) SELECT no_transaksi,no_faktur,tahun,idsmt,nim,commited,tanggal, $userid,dibayarkan,date_added,date_modified FROM transaksi_cuti WHERE no_transaksi='$no_transaksi'";
 					$this->DB->insertRecord($str);	
 		            $this->DB->query('COMMIT');
 

@@ -76,7 +76,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
      * @return kode matakuliah
      */
     public function getKMatkul ($kode) {
-		$kmatkul=explode('_',$kode);
+		$kmatkul=explode('_', $kode);
 		return $kmatkul[1];
 	}
     /**
@@ -85,7 +85,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
      * @param type $semester_sekarang
      * @return array
      */
-	public function getNextSemesterAndTa ($tahun_sekarang,$semester_sekarang) {
+	public function getNextSemesterAndTa ($tahun_sekarang, $semester_sekarang) {
 		$data=array();
 		if ($semester_sekarang == 1) {
 			$data['semester'] = 'Genap';
@@ -102,7 +102,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
 	 * @param type $mode_info
 	 * @return array
 	 */
-	public function getJumlahKelas ($id,$mode_info) {
+	public function getJumlahKelas ($id, $mode_info) {
 	    $jumlah=0;
 	    switch ($mode_info) {
 	        case 'penyelenggaraan' :
@@ -117,7 +117,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
      * @param type $mode_info
      * @return array
      */
-	public function getInfoMatkul($id,$mode_info) {        
+	public function getInfoMatkul($id, $mode_info) {        
 		switch ($mode_info) {
 			case 'penyelenggaraan' :
 				$this->db->setFieldTable (array('idpenyelenggaraan','kmatkul','nmatkul','sks','semester','iddosen_pengampu','nama_dosen_pengampu','nidn_dosen_pengampu','idjabatan_dosen_pengampu','nama_jabatan_dosen_pengampu','kjur','tahun','idsmt'));
@@ -252,7 +252,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
      * @param type int $options 
      * @return type int
      */
-	public function getJumlahMhsInPenyelenggaraan ($idpenyelenggaraan,$options=null) {        
+	public function getJumlahMhsInPenyelenggaraan ($idpenyelenggaraan, $options=null) {        
 		$jumlah_peserta = $jumlah_peserta=$this->db->getCountRowsOfTable(" krsmatkul km,krs k,register_mahasiswa rm WHERE k.idkrs=km.idkrs AND rm.nim=k.nim AND km.idpenyelenggaraan=$idpenyelenggaraan $options",'km.idkrsmatkul');	
         return $jumlah_peserta;	
 	}	
@@ -272,8 +272,8 @@ class Logic_Akademik extends Logic_Mahasiswa {
      * @return boolean
      * @throws Exception
      */
-    public function isKrsSah ($tahun,$idsmt) {		
-        $nim=$this->DataMHS['nim'];
+    public function isKrsSah ($tahun, $idsmt) {		
+        $nim = $this->DataMHS['nim'];
         $str = "SELECT sah FROM krs WHERE idsmt=$idsmt AND tahun=$tahun AND nim='$nim'";			
         $this->db->setFieldTable(array('sah'));
         $r=$this->db->getRecord($str);
@@ -305,13 +305,13 @@ class Logic_Akademik extends Logic_Mahasiswa {
      * @param type $tahun
      * @return daftar dosen
      */
-    public function getListDosenFromPenyelenggaraan ($idsmt,$tahun) {
+    public function getListDosenFromPenyelenggaraan ($idsmt, $tahun) {
         $str = "SELECT DISTINCT(pp.iddosen) AS iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM penyelenggaraan p,pengampu_penyelenggaraan pp,dosen d WHERE p.idpenyelenggaraan=pp.idpenyelenggaraan AND d.iddosen=pp.iddosen AND p.idsmt=$idsmt AND p.tahun=$tahun ORDER BY d.nama_dosen ASC";
 		$this->db->setFieldTable(array('iddosen','nidn','nama_dosen'));
 		$r=$this->db->getRecord($str);
         $result=array('none'=>' ');	
 		if (isset($r[1])) {			
-            while (list($k,$v)=each($r)) {
+            while (list($k, $v)=each($r)) {
                 $result[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
             }			
 		}
@@ -324,7 +324,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
      * @param type $status
      * @return rekap status mahasiswa
      */
-    public function getRekapStatusMHS ($kjur,$periode_awal,$periode_akhir,$k_status,$custom_sql='') {
+    public function getRekapStatusMHS ($kjur, $periode_awal, $periode_akhir, $k_status, $custom_sql='') {
         $str = "SELECT ta,idsmt,idkelas,jk,COUNT(nim) AS jumlah FROM rekap_status_mahasiswa WHERE (ta >= $periode_awal AND ta <= $periode_akhir) AND k_status='$k_status' AND kjur=$kjur $custom_sql GROUP BY ta,idsmt,idkelas,jk";
         $this->db->setFieldTable(array('ta','idsmt','idkelas','jk','jumlah'));			
         $r = $this->db->getRecord($str);  
@@ -332,17 +332,17 @@ class Logic_Akademik extends Logic_Mahasiswa {
         $result=array();
         if (isset($r[1])) {
             $temp_data1 =array();
-            while (list($k,$v)=each ($r)) {            
+            while (list($k, $v)=each ($r)) {            
                 $index=$v['ta'].$v['idsmt'].$v['idkelas'];
                 $data=array('index'=>$index,'ta'=>$v['ta'],'idsmt'=>$v['idsmt'],'idkelas'=>$v['idkelas'],'jumlah_pria'=>0,'jumlah_wanita'=>0,'jumlah'=>0);
                 $temp_data1[$index]=$data;
             }     
             $i=1;
-            while (list($m,$n)=each ($temp_data1)) {            
+            while (list($m, $n)=each ($temp_data1)) {            
                 reset($r);                
                 $temp_data2[$m]['p'] = '';
                 $temp_data2[$m]['w'] = '';
-                while (list($a,$b)=each ($r)) {            
+                while (list($a, $b)=each ($r)) {            
                     $index=$b['ta'].$b['idsmt'].$b['idkelas'];
                     if ($b['jk']=='L') {
                         $temp_data2[$index]['p']=$b['jumlah'];

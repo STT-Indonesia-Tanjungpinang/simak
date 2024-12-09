@@ -249,8 +249,8 @@
                                 <tr<%# $this->Data['status']==0?' class="danger"':''%>>
                                     <td><%# $this->Data['no']%></td>                                    
                                     <td><%# $this->Data['nama_kegiatan']%></td>   
-                                    <td><%# $this->Page->TGL->tanggal ('l, d F Y',$this->Data['tanggal_ujian'])%> <%#$this->DataItem['jam_mulai'].'-'.$this->DataItem['jam_akhir']%></td>
-                                    <td><%# $this->Page->TGL->tanggal ('l, d F Y',$this->Data['tanggal_akhir_daftar'])%></td>
+                                    <td><%# $this->Page->TGL->tanggal ('l, d F Y', $this->Data['tanggal_ujian'])%> <%#$this->DataItem['jam_mulai'].'-'.$this->DataItem['jam_akhir']%></td>
+                                    <td><%# $this->Page->TGL->tanggal ('l, d F Y', $this->Data['tanggal_akhir_daftar'])%></td>
                                     <td><%#$this->DataItem['namaruang'].' ['.$this->DataItem['kapasitas'].']'%></td>                                    
                                     <td><span class="label<%# $this->Data['status']==1?' label-success':' label-default'%>"><%# $this->Data['status']==1?'BUKA':'TUTUP'%></span></td>
                                     <td>

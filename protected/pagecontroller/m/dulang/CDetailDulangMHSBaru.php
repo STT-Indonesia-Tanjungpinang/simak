@@ -16,15 +16,15 @@ class CDetailDulangMHSBaru Extends MainPageM {
                     $this->cmbAddDosenWali->dataBind();			
             
                     $kjur = $datamhs['kjur'];                    
-                    $nim_nirm=$this->getMaxNimAndNirm ($kjur,$datamhs['tahun_masuk']);
-                    $this->txtAddNIM->Text=$nim_nirm['nim'];
-                    $this->txtAddNIRM->Text=$nim_nirm['nirm'];
+                    $nim_nirm=$this->getMaxNimAndNirm ($kjur, $datamhs['tahun_masuk']);
+                    $this->txtAddNIM->Text = $nim_nirm['nim'];
+                    $this->txtAddNIRM->Text = $nim_nirm['nirm'];
                 }else{
                     throw new Exception("Data Mahasiswa belum ada di session.");
                 }
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}	
 	}
@@ -35,7 +35,7 @@ class CDetailDulangMHSBaru Extends MainPageM {
         }        
     }
     public function checkNIM($sender, $param) {					
-		$nim=$param->Value;		
+		$nim = $param->Value;		
         if ($nim != '') {
             try {   
                 $str = "SELECT nama_mhs,tahun_masuk,nama_ps FROM v_datamhs WHERE nim='$nim'";

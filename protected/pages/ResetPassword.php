@@ -12,7 +12,7 @@ class ResetPassword extends MainPage {
             
 		}
 	}        
-    public function doResetPassword ($sender,$param) {
+    public function doResetPassword ($sender, $param) {
         if ($this->IsValid) { 
             $mail=$this->getLogic('Mail');
             $mail->send();

@@ -107,7 +107,7 @@ class LevenbergMarquardt {
 				for( $i = 0; $i < $npts; ++$i) {
 					if ($i == 0) $g[$r] = 0.;
 					$xi = $x[$i];
-					$g[$r] += ($oos2[$i] * ($y[$i]-$f->val($xi,$a)) * $f->grad($xi, $a, $r));
+					$g[$r] += ($oos2[$i] * ($y[$i]-$f->val($xi, $a)) * $f->grad($xi, $a, $r));
 				}
 			} //npts
 

@@ -60,17 +60,17 @@ class CUserDosen extends MainPageSA {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageUserDosen']['page_num']=0;}
-        $str = "$str ORDER BY username ASC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY username ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'email', 'active', 'foto', 'logintime'));
-		$r = $this->DB->getRecord($str,$offset+1);	
+		$r = $this->DB->getRecord($str, $offset+1);	
         $result = array();
         while (list($k, $v) = each($r)) {
-            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y',$v['logintime']);            
+            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);            
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);        
 	}
     public function checkUsername($sender, $param) {
 		$this->idProcess=$sender->getId()=='addUsername'?'add':'edit';
@@ -78,7 +78,7 @@ class CUserDosen extends MainPageSA {
         if ($username != '') {
             try {   
                 if ($this->hiddenusername->Value!=$username) {                                                            
-                    if ($this->DB->checkRecordIsExist('username', 'user',$username)) {                                
+                    if ($this->DB->checkRecordIsExist('username', 'user', $username)) {                                
                         throw new Exception ("Username ($username) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }                               
                 }                
@@ -94,7 +94,7 @@ class CUserDosen extends MainPageSA {
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
-                    if ($this->DB->checkRecordIsExist('email', 'user',$email)) {                                
+                    if ($this->DB->checkRecordIsExist('email', 'user', $email)) {                                
                         throw new Exception ("Email ($email) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }                               
                 }                
@@ -106,7 +106,7 @@ class CUserDosen extends MainPageSA {
     }    
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender,$this->RepeaterS);        
+        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;     
         
         $str = "SELECT userid,username,nama,email,group_id,kjur,active FROM user WHERE userid='$id'";
@@ -114,12 +114,12 @@ class CUserDosen extends MainPageSA {
         $r = $this->DB->getRecord($str);
         
         $result=$r[1];        	
-        $this->txtEditNama->Text=$result['nama'];
-        $this->txtEditEmail->Text=$result['email'];
+        $this->txtEditNama->Text = $result['nama'];
+        $this->txtEditEmail->Text = $result['email'];
         $this->hiddenemail->Value=$result['email'];     
-        $this->txtEditUsername->Text=$result['username'];
+        $this->txtEditUsername->Text = $result['username'];
         $this->hiddenusername->Value=$result['username'];
-        $this->cmbEditStatus->Text=$result['active'];
+        $this->cmbEditStatus->Text = $result['active'];
     }
     public function updateData($sender, $param) {
 		if ($this->Page->isValid) {			
@@ -145,7 +145,7 @@ class CUserDosen extends MainPageSA {
 		}
 	}
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);        
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);        
         $this->DB->deleteRecord("user WHERE userid=$id");
         $this->redirect('settings.UserDosen',true);
     }   

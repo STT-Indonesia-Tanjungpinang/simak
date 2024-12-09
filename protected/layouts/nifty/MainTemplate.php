@@ -6,7 +6,7 @@ class MainTemplate extends TTemplateControl {
 		if (!$this->Page->IsPostBack&&!$this->Page->IsCallback) {		
             $tipeuser=$this->Page->Pengguna->getTipeUser();
             $this->linkTopTASemester->NavigateUrl=$tipeuser=='sa'?$this->Page->constructUrl('settings.Variables',true):'#';
-            $this->lblStatusUser->Text=$this->getStatusUser();
+            $this->lblStatusUser->Text = $this->getStatusUser();
             
             $this->populateThemes();
 		}        
@@ -20,7 +20,7 @@ class MainTemplate extends TTemplateControl {
         $this->RepeaterTheme->DataSource=$daftarthemes;
         $this->RepeaterTheme->DataBind();
     }
-    public function changeTheme ($sender,$param) {
+    public function changeTheme ($sender, $param) {
         $theme=$sender->CommandParameter;        
         $_SESSION['theme']=$theme;
         $userid=$this->Page->Pengguna->getDataUser('userid');
@@ -48,7 +48,7 @@ class MainTemplate extends TTemplateControl {
         }
         return $status;
     }
-    public function logoutUser ($sender,$param) {
+    public function logoutUser ($sender, $param) {
         if (!$this->User->isGuest) {
             $this->Application->getModule ('auth')->logout();
             $this->Page->redirect('Login');

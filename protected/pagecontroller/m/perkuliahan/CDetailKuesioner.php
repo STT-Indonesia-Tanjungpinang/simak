@@ -38,7 +38,7 @@ class CDetailKuesioner extends MainPageM {
                 $this->setInfoToolbar();    
             }catch (Exception $e) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$e->getMessage();	
+                $this->errorMessage->Text = $e->getMessage();	
             }
 		}				
 	}    
@@ -77,7 +77,7 @@ class CDetailKuesioner extends MainPageM {
         $kelompok_pertanyaan[0] = 'UNDEFINED';
         unset($kelompok_pertanyaan['none']);        
         $result = array();
-        while (list($idkelompok_pertanyaan,$nama_kelompok)=each($kelompok_pertanyaan)) {
+        while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
             $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan=$idkelompok_pertanyaan ORDER BY (orders+0) ASC";
             $this->DB->setFieldTable(array('idkuesioner', 'idkelompok_pertanyaan', 'pertanyaan', 'orders', 'date_added'));
             $r = $this->DB->getRecord($str);
@@ -199,7 +199,7 @@ class CDetailKuesioner extends MainPageM {
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Data Kuesioner Dosen';
         $this->modalPrintOut->show();
 	}

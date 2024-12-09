@@ -28,7 +28,7 @@ class CDetailKRS extends MainPageSA {
       $this->tbCmbOutputReport->DataBind();
         
       $this->populateData();				
-      $this->lblModulHeader->Text=$this->getInfoToolbar();          
+      $this->lblModulHeader->Text = $this->getInfoToolbar();          
         
     }				
     $this->KRS->setDataMHS($_SESSION['currentPageKRS']['DataMHS']);
@@ -71,7 +71,7 @@ class CDetailKRS extends MainPageSA {
         $idkelas_mhs=isset($r[1]) ? $r[1]['idkelas_mhs'] : 'none';
         $item->cmbKelas->DataSource = $result;            
         $item->cmbKelas->DataBind();                        
-        $item->cmbKelas->Text=$idkelas_mhs;
+        $item->cmbKelas->Text = $idkelas_mhs;
         CDetailKRS::$totalSKS+=$item->DataItem['sks'];
         CDetailKRS::$jumlahMatkul+=1;
       }
@@ -97,13 +97,13 @@ class CDetailKRS extends MainPageSA {
       $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
       $datamhs['nama_dosen'] = $nama_dosen;
       
-      $datadulang=$this->KRS->getDataDulang($datamhs['idsmt'],$datamhs['tahun']);
+      $datadulang=$this->KRS->getDataDulang($datamhs['idsmt'], $datamhs['tahun']);
       $datamhs['kelas_dulang'] = $datadulang['idkelas'];
        
       $_SESSION['currentPageKRS']['DataMHS'] = $datamhs;
       $this->KRS->setDataMHS($datamhs);
       
-      $this->KRS->getKRS($_SESSION['ta'],$_SESSION['semester']);                                                                        
+      $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);                                                                        
       $_SESSION['currentPageKRS']['DataKRS'] = $this->KRS->DataKRS;
       $this->btnTambah->Enabled=!$this->KRS->DataKRS['krs']['sah'];
       
@@ -111,7 +111,7 @@ class CDetailKRS extends MainPageSA {
       $this->RepeaterS->dataBind();
     }catch (Exception $e) {
       $this->idProcess = 'view';	
-      $this->errorMessage->Text=$e->getMessage();	
+      $this->errorMessage->Text = $e->getMessage();	
     }
 
   }		
@@ -140,7 +140,7 @@ class CDetailKRS extends MainPageSA {
       $kapasitas=$result[1]['kapasitas'];
       // if ($jumlah_peserta_kelas <= $kapasitas)
       // {
-        if ($this->DB->checkRecordIsExist('idkrsmatkul', 'kelas_mhs_detail',$idkrsmatkul)) {
+        if ($this->DB->checkRecordIsExist('idkrsmatkul', 'kelas_mhs_detail', $idkrsmatkul)) {
           $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul = $idkrsmatkul");
           $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul = $idkrsmatkul");
           $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul = $idkrsmatkul");
@@ -170,16 +170,16 @@ class CDetailKRS extends MainPageSA {
     if ($idsmt==3) {
       $this->createObj('Finance');
       $this->Finance->setDataMHS($_SESSION['currentPageKRS']['DataMHS']);
-      $maxSKS=$this->Finance->getSKSFromSP($tahun,$idsmt);
-      $this->Nilai->getKHSBeforeCurrentSemester($tahun,$idsmt);
+      $maxSKS=$this->Finance->getSKSFromSP($tahun, $idsmt);
+      $this->Nilai->getKHSBeforeCurrentSemester($tahun, $idsmt);
       $datakrs['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
     }else{
-      $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt,$tahun);
+      $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt, $tahun);
       if ($datadulangbefore['k_status']=='C') {
         $maxSKS=$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');                
         $datakrs['krs']['ipstasmtbefore'] = 'N.A (Status Cuti)';
       }else{
-        $maxSKS=$this->Nilai->getMaxSKS($tahun,$idsmt);
+        $maxSKS=$this->Nilai->getMaxSKS($tahun, $idsmt);
         $datakrs['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
       }
     }
@@ -243,7 +243,7 @@ class CDetailKRS extends MainPageSA {
         
       break;
     }
-    $this->lblMessagePrintout->Text=$messageprintout;
+    $this->lblMessagePrintout->Text = $messageprintout;
     $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
     $this->modalPrintOut->show();
   }

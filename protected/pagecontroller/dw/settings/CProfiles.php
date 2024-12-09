@@ -14,7 +14,7 @@ class CProfiles extends MainPageDW {
 	}   
     public function populateData () {
         $this->cmbTheme->DataSource = $this->setup->getListThemes();
-        $this->cmbTheme->Text=$_SESSION['theme'];
+        $this->cmbTheme->Text = $_SESSION['theme'];
         $this->cmbTheme->DataBind();
     }
     

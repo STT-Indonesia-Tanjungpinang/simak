@@ -13,7 +13,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 			}
 			$this->setInfoToolbar();
 			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');;
-            $this->tbCmbTA->Text=$_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
+            $this->tbCmbTA->Text = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
             $this->tbCmbTA->dataBind();
 			try {
 				$datamhs = $this->Pengguna->getDataUser();
@@ -21,7 +21,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 				$datamhs['ta'] = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];  
 				
 				if ($datamhs['tahun_masuk'] == $datamhs['ta'] && $datamhs['semester_masuk']==1) {	
-					$nim=$datamhs['nim'];
+					$nim = $datamhs['nim'];
                     throw new Exception ("NIM ($nim) adalah seorang Mahasiswa baru, mohon diproses di Pembayaran->Mahasiswa Baru.");
                 }
                 $this->checkPembayaranSemesterLalu ();
@@ -30,7 +30,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 				$this->populateTransaksi();
 			}catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }  
             
 		}	
@@ -61,7 +61,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 		$datamhs['ta'] = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
 
 		$idsmt = $datamhs['idsmt'];
-        $nim=$datamhs['nim'];
+        $nim = $datamhs['nim'];
         $tahun=$datamhs['ta'];
         
         $kjur = $datamhs['kjur'];
@@ -83,14 +83,14 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
         $this->Finance->setDataMHS($datamhs);
         if ($_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] == 'none') {
             $no_formulir = $datamhs['no_formulir'];
-            $nim=$datamhs['nim'];
+            $nim = $datamhs['nim'];
             $ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];    
             $tahun_masuk=$datamhs['tahun_masuk'];
             $idsmt=1;
-            if ($this->Finance->getLunasPembayaran($ta,$idsmt)) {
+            if ($this->Finance->getLunasPembayaran($ta, $idsmt)) {
                 $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena sudah lunas.';
                 $this->modalMessageError->show();
-            }elseif($this->DB->checkRecordIsExist('nim', 'transaksi',$nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
+            }elseif($this->DB->checkRecordIsExist('nim', 'transaksi', $nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
                 $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
                 $this->modalMessageError->show();
             }else{
@@ -108,7 +108,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
                     $d=$this->DB->getRecord($str);
 
                     $sudah_dibayarkan=array();
-                    while (list($o,$p)=each($d)) {            
+                    while (list($o, $p)=each($d)) {            
                         $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
                     }
                     $str = "SELECT k.idkombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$tahun_masuk AND kpt.idkelas='$idkelas' AND idsmt=$idsmt AND periode_pembayaran='semesteran' ORDER BY periode_pembayaran,nama_kombi ASC";
@@ -136,15 +136,15 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
     public function editRecord($sender, $param) {	        
         $datamhs=$this->Pengguna->getDataUser();    
         if ($_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] == 'none') {
-            $no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
+            $no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
             $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] = $no_transaksi;
         }	
 		$this->redirect('pembayaran.TransaksiPembayaranSemesterGanjil',true);
 	}	
     public function deleteRecord($sender, $param) {	
         $datamhs=$this->Pengguna->getDataUser();  
-        $nim=$datamhs['nim'];
-		$no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
+        $nim = $datamhs['nim'];
+		$no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
 		$this->redirect('pembayaran.PembayaranSemesterGanjil',true);
 	}	

@@ -13,19 +13,19 @@ public function onLoad($param) {
 			}
             $kjur = $_SESSION['kjur'];	
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$kjur;			
+			$this->tbCmbPs->Text = $kjur;			
 			$this->tbCmbPs->dataBind();	
             
             $tahun=$_SESSION['ta'];
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
-			$this->tbCmbTA->Text=$tahun;						
+			$this->tbCmbTA->Text = $tahun;						
 			$this->tbCmbTA->dataBind();
             
             $idsmt = $_SESSION['semester'];
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$idsmt;
+			$this->tbCmbSemester->Text = $idsmt;
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -33,19 +33,19 @@ public function onLoad($param) {
             $this->tbCmbOutputReport->DataBind();
             $kjur = $_SESSION['kjur'];	
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$kjur;			
+			$this->tbCmbPs->Text = $kjur;			
 			$this->tbCmbPs->dataBind();	
             
             $tahun=$_SESSION['ta'];
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
-			$this->tbCmbTA->Text=$tahun;						
+			$this->tbCmbTA->Text = $tahun;						
 			$this->tbCmbTA->dataBind();
             
             $idsmt = $_SESSION['semester'];
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$idsmt;
+			$this->tbCmbSemester->Text = $idsmt;
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -54,7 +54,7 @@ public function onLoad($param) {
 
             $this->populateData();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();					
+            $this->lblModulHeader->Text = $this->getInfoToolbar();					
 		}			
 	}
     public function changeDosenPengampu($sender, $param) {
@@ -72,18 +72,18 @@ public function onLoad($param) {
 	}    
     public function changeTbTA($sender, $param) {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPagePembagianKelas']['search']);
         
 	}	
 	public function changeTbSemester($sender, $param) {
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPagePembagianKelas']['search']);
 	}	
     public function changeTbPs($sender, $param) {		
         $_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateData();
 	}
 	public function populateData($search=false) {	
@@ -109,7 +109,7 @@ public function onLoad($param) {
         $this->createObj('reportakademik');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
-        $idkelas_mhs = $this->getDataKeyField($sender,$this->RepeaterS);
+        $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataReport=$this->Demik->getInfoKelas($idkelas_mhs);
 		switch ($_SESSION['outputreport']) {
             case  'summarypdf' :
@@ -137,7 +137,7 @@ public function onLoad($param) {
                 $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
         }                
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar Hadir Mahasiswa';
         $this->modalPrintOut->show();
 	}

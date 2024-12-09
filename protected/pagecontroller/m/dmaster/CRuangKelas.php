@@ -32,13 +32,13 @@ class CRuangKelas Extends MainPageM {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageRuangKelas']['page_num']=0;}
-        $str = "$str LIMIT $offset,$limit";
+        $str = "$str LIMIT $offset, $limit";
         $this->DB->setFieldTable (array('idruangkelas', 'namaruang', 'kapasitas'));
-		$r = $this->DB->getRecord($str,$offset+1);
+		$r = $this->DB->getRecord($str, $offset+1);
 
         $this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function checkRuangKelas($sender, $param) {
         $this->idProcess=$sender->getId()=='addRuangkelas'?'add':'edit';
@@ -46,7 +46,7 @@ class CRuangKelas Extends MainPageM {
         if ($ruangkelas != '') {
             try {   
                 if ($this->hiddennamaruang->Value!=$ruangkelas) {                                                            
-                    if ($this->DB->checkRecordIsExist('namaruang', 'ruangkelas',$ruangkelas)) {                                
+                    if ($this->DB->checkRecordIsExist('namaruang', 'ruangkelas', $ruangkelas)) {                                
                         throw new Exception ("Nama Ruang ($ruangkelas) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }                               
                 }                
@@ -66,19 +66,19 @@ class CRuangKelas Extends MainPageM {
             if ($this->Application->Cache) {
                 $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'),'namaruang',null,2);			
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
-                $this->Application->Cache->set('listruangkelas',$dataitem);                
+                $this->Application->Cache->set('listruangkelas', $dataitem);                
             }
 			$this->redirect('dmaster.RuangKelas',true);
 		}
 	}
 	public function editRecord($sender, $param) {
-		$idruangkelas=$this->getDataKeyField($sender,$this->RepeaterS);
+		$idruangkelas=$this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
 		$result = $this->DMaster->getList("ruangkelas WHERE idruangkelas=$idruangkelas",array('namaruang', 'kapasitas'));
 		$this->hiddenid->Value=$idruangkelas;
 		$this->hiddennamaruang->Value=$result[1]['namaruang'];
-		$this->txtEditNamaRuang->Text=$result[1]['namaruang'];
-		$this->txtEditKapasitas->Text=$result[1]['kapasitas'];
+		$this->txtEditNamaRuang->Text = $result[1]['namaruang'];
+		$this->txtEditKapasitas->Text = $result[1]['kapasitas'];
 	}
 	public function updateData($sender, $param) {
 		if ($this->Page->IsValid) {
@@ -90,14 +90,14 @@ class CRuangKelas Extends MainPageM {
             if ($this->Application->Cache) {
                 $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'),'namaruang',null,2);			
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
-                $this->Application->Cache->set('listruangkelas',$dataitem);                
+                $this->Application->Cache->set('listruangkelas', $dataitem);                
             }
 			$this->redirect('dmaster.RuangKelas',true);
 		}
 	}
     public function deleteRecord($sender, $param) {
-		$idruangkelas=$this->getDataKeyField($sender,$this->RepeaterS);
-        if ($this->DB->checkRecordIsExist ('idruangkelas', 'kelas_mhs',$idruangkelas)) {
+		$idruangkelas=$this->getDataKeyField($sender, $this->RepeaterS);
+        if ($this->DB->checkRecordIsExist ('idruangkelas', 'kelas_mhs', $idruangkelas)) {
             $this->lblHeaderMessageError->Text='Menghapus Ruang Kelas';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus ruang kelas dengan ID ($idruangkelas) karena sedang digunakan di kelas mahasiswa.";
             $this->modalMessageError->Show();
@@ -106,7 +106,7 @@ class CRuangKelas Extends MainPageM {
             if ($this->Application->Cache) {
                 $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'),'namaruang',null,2);			
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
-                $this->Application->Cache->set('listruangkelas',$dataitem);                
+                $this->Application->Cache->set('listruangkelas', $dataitem);                
             }
             $this->redirect('dmaster.RuangKelas',true);
         }

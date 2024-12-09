@@ -16,12 +16,12 @@ class CKonversiMatakuliah extends MainPageM {
 
             $daftar_prodi=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');                                    
 			$this->tbCmbPs->DataSource = $daftar_prodi;
-			$this->tbCmbPs->Text=$_SESSION['currentPageKonversiMatakuliah']['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['currentPageKonversiMatakuliah']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -32,7 +32,7 @@ class CKonversiMatakuliah extends MainPageM {
             $this->tbCmbOutputCompress->Text= $_SESSION['outputcompress'];
             $this->tbCmbOutputCompress->DataBind();
 
-			$this->lblModulHeader->Text=$this->getInfoToolbar();
+			$this->lblModulHeader->Text = $this->getInfoToolbar();
 			$this->populateData();
 		}					
 	}
@@ -45,12 +45,12 @@ class CKonversiMatakuliah extends MainPageM {
 	}
 	public function changeTbTahunMasuk($sender, $param) {					
 		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}
 	public function changeTbPs($sender, $param) {		
         $_SESSION['currentPageKonversiMatakuliah']['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateData();
 	}
     public function searchRecord($sender, $param) {
@@ -89,21 +89,21 @@ class CKonversiMatakuliah extends MainPageM {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKonversiMatakuliah']['page_num']=0;}
-		$str = $str . " ORDER BY date_added DESC,nama ASC LIMIT $offset,$limit";		
+		$str = $str . " ORDER BY date_added DESC,nama ASC LIMIT $offset, $limit";		
 		$this->DB->setFieldTable(array('iddata_konversi', 'nama', 'alamat', 'no_telp', 'nim', 'date_added'));
-		$r = $this->DB->getRecord($str,$offset+1);
+		$r = $this->DB->getRecord($str, $offset+1);
 		$result = array();        
         while (list($k, $v) = each($r)) {
             $iddata_konversi=$v['iddata_konversi'];
             $v['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi=$iddata_konversi");
             $v['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
             $v['nim_alias'] = $v['nim']=='' ? 'N.A' : $v['nim'];
-            $v['date_added'] = $this->TGL->tanggal('d/m/Y',$v['date_added']);
+            $v['date_added'] = $this->TGL->tanggal('d/m/Y', $v['date_added']);
             $result[$k] = $v;
         }
 		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS); 
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS); 
 	}	
     public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             

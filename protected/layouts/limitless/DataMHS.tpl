@@ -76,7 +76,7 @@
                              <div class="form-group">
                                 <label class="col-md-4 control-label"><strong>TANGGAL LAHIR: </strong></label>
                                 <div class="col-md-8">
-                                    <p class="form-control-static"><%= $this->TGL->tanggal('l, j F Y',$this->getDataMHS('tanggal_lahir'))%></p>
+                                    <p class="form-control-static"><%= $this->TGL->tanggal('l, j F Y', $this->getDataMHS('tanggal_lahir'))%></p>
                                 </div>                            
                             </div>
                             <div class="form-group">

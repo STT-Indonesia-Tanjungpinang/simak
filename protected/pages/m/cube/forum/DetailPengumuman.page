@@ -39,7 +39,7 @@
                                         </div>														
                                         <div class="tools">
                                             <div class="date">
-                                                <%=$this->TGL->tanggal('l, d F Y',$this->DataDiskusi['date_added'])%> 
+                                                <%=$this->TGL->tanggal('l, d F Y', $this->DataDiskusi['date_added'])%> 
                                             </div>															
                                         </div>														
                                     </div>													
@@ -100,7 +100,7 @@
                                                                                             <%#$this->DataItem['nama_user']%>                                                                                            
                                                                                         </div>
                                                                                         <div class="story-time">
-                                                                                            <i class="fa fa-clock-o"></i> <%#$this->page->TGL->relativeTime(date('Y-m-d H:i:s'),$this->DataItem['date_added'],'lasttweet')%>
+                                                                                            <i class="fa fa-clock-o"></i> <%#$this->page->TGL->relativeTime(date('Y-m-d H:i:s'), $this->DataItem['date_added'],'lasttweet')%>
                                                                                         </div>
                                                                                     </header>
                                                                                     <div class="story-inner-content">

@@ -237,7 +237,7 @@
                                         <strong>Tempat Lahir: </strong> <%#$this->DataItem['tempat_lahir']%>
                                     </li>
                                     <li>
-                                        <strong>Tanggal Lahir: </strong><%#$this->Page->TGL->tanggal('d F Y',$this->DataItem['tanggal_lahir'])%>
+                                        <strong>Tanggal Lahir: </strong><%#$this->Page->TGL->tanggal('d F Y', $this->DataItem['tanggal_lahir'])%>
                                     </li>
                                     <li>
                                         <strong>Jenis Kelamin: </strong><%#$this->DataItem['jk']%>

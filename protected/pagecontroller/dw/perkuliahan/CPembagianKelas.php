@@ -16,19 +16,19 @@ class CPembagianKelas extends MainPageDW {
             
             $kjur = $_SESSION['kjur'];	
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$kjur;			
+			$this->tbCmbPs->Text = $kjur;			
 			$this->tbCmbPs->dataBind();	
             
             $tahun=$_SESSION['ta'];
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
-			$this->tbCmbTA->Text=$tahun;						
+			$this->tbCmbTA->Text = $tahun;						
 			$this->tbCmbTA->dataBind();
             
             $idsmt = $_SESSION['semester'];
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$idsmt;
+			$this->tbCmbSemester->Text = $idsmt;
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -38,7 +38,7 @@ class CPembagianKelas extends MainPageDW {
             $nama_hari=$this->TGL->getNamaHari();
             $nama_hari['none'] = 'Keseluruhan';
             $this->cmbNamaHari->DataSource = $nama_hari;
-            $this->cmbNamaHari->Text=$_SESSION['currentPagePembagianKelas']['nama_hari'];
+            $this->cmbNamaHari->Text = $_SESSION['currentPagePembagianKelas']['nama_hari'];
             $this->cmbNamaHari->dataBind();
             
             $str = "SELECT DISTINCT(vpp.iddosen) AS iddosen,vpp.nama_dosen,vpp.nidn FROM kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE vpp.idpengampu_penyelenggaraan=km.idpengampu_penyelenggaraan AND vpp.tahun=$tahun AND vpp.idsmt=$idsmt AND vpp.kjur = $kjur";
@@ -50,28 +50,28 @@ class CPembagianKelas extends MainPageDW {
                 $daftar_dosen[$iddosen] = $v['nama_dosen'] . '['.$v['nidn'].']';
             }
             $this->cmbDosen->DataSource = $daftar_dosen;
-            $this->cmbDosen->Text=$_SESSION['currentPagePembagianKelas']['iddosen'];
+            $this->cmbDosen->Text = $_SESSION['currentPagePembagianKelas']['iddosen'];
             $this->cmbDosen->DataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
 			$this->populateData();		
             
 		}			
 	}
     public function changeTbTA($sender, $param) {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPagePembagianKelas']['search']);
         
 	}	
 	public function changeTbSemester($sender, $param) {
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPagePembagianKelas']['search']);
 	}	
     public function changeTbPs($sender, $param) {		
         $_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateData();
 	}
     public function changeDosen($sender, $param) {		
@@ -144,9 +144,9 @@ class CPembagianKelas extends MainPageDW {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePembagianKelas']['page_num']=0;}
-        $str = "$str ORDER BY hari ASC,idkelas ASC,nama_dosen ASC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY hari ASC,idkelas ASC,nama_dosen ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idkelas_mhs', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas'));
-		$r = $this->DB->getRecord($str,$offset+1);	
+		$r = $this->DB->getRecord($str, $offset+1);	
         $result = array();
         while (list($k, $v) = each($r)) {  
             $kmatkul = $v['kmatkul'];
@@ -157,7 +157,7 @@ class CPembagianKelas extends MainPageDW {
         }
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function viewRecord($sender, $param) {
         $idkelas_mhs=$this->getDataKeyField($sender, $this->RepeaterS);
@@ -171,7 +171,7 @@ class CPembagianKelas extends MainPageDW {
         $this->createObj('reportakademik');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
-        $idkelas_mhs = $this->getDataKeyField($sender,$this->RepeaterS);
+        $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataReport=$this->Demik->getInfoKelas($idkelas_mhs);
 		switch ($_SESSION['outputreport']) {
             case  'summarypdf' :
@@ -199,7 +199,7 @@ class CPembagianKelas extends MainPageDW {
                 $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
         }                
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar Hadir Mahasiswa';
         $this->modalPrintOut->show();
 	}

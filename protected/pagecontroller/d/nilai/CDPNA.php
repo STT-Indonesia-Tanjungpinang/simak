@@ -11,16 +11,16 @@ class CDPNA extends MainPageD {
                 $_SESSION['currentPageDPNA']=array('page_name'=>'d.nilai.DPNA', 'page_num'=>0,'search'=>false,'DataDPNA'=>array());
 			}      
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-			$this->tbCmbTA->Text=$_SESSION['ta'];
+			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();

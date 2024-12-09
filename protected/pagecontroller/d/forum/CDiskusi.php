@@ -56,7 +56,7 @@ class CDiskusi extends MainPageD {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num']=0;}
-        $str="$str ORDER BY date_added DESC LIMIT $offset,$limit";				
+        $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'userid', 'nama_kategori', 'title', 'content', 'nama_user', 'tipe', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
         $result = array();
@@ -85,13 +85,13 @@ class CDiskusi extends MainPageD {
             $v['urlprofiluser'] = $urlprofiluser;
             $v['photo_profile'] = $photo;
             $v['jumlahcomment'] = $this->DB->getCountRowsOfTable("forumposts WHERE parentpost=$idpost",'idpost');
-            $v['tanggal_post'] = $this->page->TGL->relativeTime(date('Y-m-d H:i:s'),$v['date_added'],'lasttweet');
+            $v['tanggal_post'] = $this->page->TGL->relativeTime(date('Y-m-d H:i:s'), $v['date_added'],'lasttweet');
             $result[$k] = $v;
         }
 		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
         
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
     }    
     public function populateUnread ($search=false) {
         if ($search) {  
@@ -108,20 +108,20 @@ class CDiskusi extends MainPageD {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num_unread']=0;}
-        $str="$str ORDER BY date_added DESC LIMIT $offset,$limit";				
+        $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'nama_kategori', 'title', 'content', 'nama_user', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
         $result = array();
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
             $v['jumlahcomment'] = $this->DB->getCountRowsOfTable("forumposts WHERE parentpost=$idpost",'idpost');
-            $v['tanggal_post'] = $this->page->TGL->relativeTime(date('Y-m-d H:i:s'),$v['date_added'],'lasttweet');
+            $v['tanggal_post'] = $this->page->TGL->relativeTime(date('Y-m-d H:i:s'), $v['date_added'],'lasttweet');
             $result[$k] = $v;
         }
 		$this->RepeaterUnread->DataSource = $result;
 		$this->RepeaterUnread->dataBind();
         
-        $this->paginationInfo2->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo2->Text = $this->getInfoPaging($this->RepeaterS);
     }
     public function kirimKonten($sender, $param) {
 		if ($this->IsValid) {	
@@ -130,7 +130,7 @@ class CDiskusi extends MainPageD {
             $content = strip_tags(addslashes($this->txtAddContent->Text));
             $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user = $this->Pengguna->getDataUser('username');                        
-            $str = "INSERT INTO forumposts (idpost,idkategori,title,content,userid,tipe,nama_user,date_added) VALUES (NULL,$idkategori,'$judul', '$content',$userid,'d', '$nama_user',NOW())";
+            $str = "INSERT INTO forumposts (idpost,idkategori,title,content,userid,tipe,nama_user,date_added) VALUES (NULL, $idkategori,'$judul', '$content', $userid,'d', '$nama_user',NOW())";
             $this->DB->insertRecord($str);
             $_SESSION['currentPageDiskusi']['activeviewindex']=0;
             $this->redirect('forum.Diskusi', true);
@@ -138,7 +138,7 @@ class CDiskusi extends MainPageD {
         }
     }
     public function setUnreadFalse($sender, $param) {
-        $id=$this->getDataKeyField($sender,$this->RepeaterUnread);        
+        $id=$this->getDataKeyField($sender, $this->RepeaterUnread);        
         $str="UPDATE forumposts SET unread=0 WHERE idpost=$id";
         $this->DB->updateRecord($str);
         $this->redirect('forum.DetailDiskusi', true, array('id'=>$id));

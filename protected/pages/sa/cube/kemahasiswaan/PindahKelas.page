@@ -236,7 +236,7 @@
                                     <td><%# $this->DataItem['nim']%></td>
                                     <td><%# $this->DataItem['nama_mhs']%></td>					
                                     <td><%# $this->DataItem['tahun_masuk']%></td>
-                                    <td><%# $this->Page->TGL->tanggal('j F Y',$this->DataItem['tanggal'])%></td>					
+                                    <td><%# $this->Page->TGL->tanggal('j F Y', $this->DataItem['tanggal'])%></td>					
                                     <td><%# $this->Page->DMaster->getNamaKelasByID($this->DataItem['idkelas_lama'])%></td>
                                     <td><%# $this->Page->DMaster->getNamaKelasByID($this->DataItem['idkelas_baru'])%></td>
                                     <td>

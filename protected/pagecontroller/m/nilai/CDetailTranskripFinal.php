@@ -54,19 +54,19 @@ class CDetailTranskripFinal extends MainPageM {
             $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip'] = $datatranskrip[1];
             
             $this->hiddennomortranskrip->Value=$datatranskrip[1]['nomor_transkrip'];			
-			$this->txtEditNomorTranskrip->Text=$datatranskrip[1]['nomor_transkrip'];			
-			$this->cmbEditPredikatKelulusan->Text=$datatranskrip[1]['predikat_kelulusan'];			
-			$this->txtEditTanggalLulus->Text=$this->TGL->tanggal('d-m-Y',$datatranskrip[1]['tanggal_lulus']);
+			$this->txtEditNomorTranskrip->Text = $datatranskrip[1]['nomor_transkrip'];			
+			$this->cmbEditPredikatKelulusan->Text = $datatranskrip[1]['predikat_kelulusan'];			
+			$this->txtEditTanggalLulus->Text = $this->TGL->tanggal('d-m-Y', $datatranskrip[1]['tanggal_lulus']);
             $daftar_dosen=$this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
             $this->cmbEditDosenPembimbing->DataSource = $daftar_dosen;
             $this->cmbEditDosenPembimbing->dataBind();            
-			$this->cmbEditDosenPembimbing->Text=$datatranskrip[1]['iddosen_pembimbing'];
+			$this->cmbEditDosenPembimbing->Text = $datatranskrip[1]['iddosen_pembimbing'];
             
             $this->cmbEditDosenPembimbing2->DataSource = $daftar_dosen;
             $this->cmbEditDosenPembimbing2->dataBind();
-			$this->cmbEditDosenPembimbing2->Text=$datatranskrip[1]['iddosen_pembimbing2'];												
+			$this->cmbEditDosenPembimbing2->Text = $datatranskrip[1]['iddosen_pembimbing2'];												
             
-			$this->txtEditJuduluSkripsi->Text=$datatranskrip[1]['judul_skripsi'];						            
+			$this->txtEditJuduluSkripsi->Text = $datatranskrip[1]['judul_skripsi'];						            
             
             $transkrip = $this->Nilai->getTranskrip(false);            
             
@@ -75,7 +75,7 @@ class CDetailTranskripFinal extends MainPageM {
             
         } catch (Exception $ex) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$ex->getMessage();
+			$this->errorMessage->Text = $ex->getMessage();
         }        
 	}
 	public function printOut($sender, $param) {	
@@ -84,7 +84,7 @@ class CDetailTranskripFinal extends MainPageM {
         $this->linkOutput->NavigateUrl='#';   
         
         $dataReport=$_SESSION['currentPageDetailTranskripFinal']['DataMHS']; 
-        $nim=$dataReport['nim'];
+        $nim = $dataReport['nim'];
         if ($dataReport['k_status'] == 'L') {
             switch ($_SESSION['outputreport']) {
                 case  'summarypdf' :
@@ -109,7 +109,7 @@ class CDetailTranskripFinal extends MainPageM {
                     $dataReport['nama_penandatangan_khs'] = $this->setup->getSettingValue('nama_penandatangan_khs');
                     $dataReport['jabfung_penandatangan_khs'] = $this->setup->getSettingValue('jabfung_penandatangan_khs');
                     $dataReport['nidn_penandatangan_khs'] = $this->setup->getSettingValue('nidn_penandatangan_khs');
-                    $dataReport['tanggalterbit']=date ('Y-m-d',$this->txtViewTanggalTerbit->TimeStamp);
+                    $dataReport['tanggalterbit']=date ('Y-m-d', $this->txtViewTanggalTerbit->TimeStamp);
                     $dataReport['dataTranskrip'] = $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip'];  
                     $dataReport['linkoutput'] = $this->linkOutput; 
                     $this->report->setDataReport($dataReport); 
@@ -117,7 +117,7 @@ class CDetailTranskripFinal extends MainPageM {
                     $this->report->printTranskripFinal($this->Nilai,true);				
                 break;
             }
-            $this->lblMessagePrintout->Text=$messageprintout;
+            $this->lblMessagePrintout->Text = $messageprintout;
             $this->lblPrintout->Text='Transkrip Final';
             $this->modalPrintOut->show();
         }else{

@@ -50,7 +50,7 @@ class CProfilMahasiswa extends MainPageM {
       
       //theme
       $this->cmbTheme->DataSource = $this->setup->getListThemes();
-      $this->cmbTheme->Text=$datamhs['theme'];
+      $this->cmbTheme->Text = $datamhs['theme'];
       $this->cmbTheme->DataBind();
       
       //nilai
@@ -87,7 +87,7 @@ class CProfilMahasiswa extends MainPageM {
       
     }catch (Exception $ex) {
       $this->idProcess = 'view';	                
-      $this->errorMessage->Text=$ex->getMessage();
+      $this->errorMessage->Text = $ex->getMessage();
     }          
   }
   public function getDataMHS($idx) {		
@@ -99,18 +99,18 @@ class CProfilMahasiswa extends MainPageM {
       CProfilMahasiswa::$totalM += $item->DataItem['jumlah_m'];
       CProfilMahasiswa::$totalSKS += $item->DataItem['jumlah_sks_ada_nilai'];
       $ipk=@ bcdiv(CProfilMahasiswa::$totalM,CProfilMahasiswa::$totalSKS,2);
-      $item->literalIPK->Text=$ipk;
+      $item->literalIPK->Text = $ipk;
     }
   }   
   public function populateIPSdanIPK() {
-    $nim=$_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];        
+    $nim = $_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];        
     $str = "SELECT idkrs,tahun,idsmt FROM krs WHERE nim='$nim' AND sah=1 ORDER BY idkrs ASC";
     $this->DB->setFieldTable(array('idkrs', 'tahun', 'idsmt'));        
     $r = $this->DB->getRecord($str);                
     
     $result = array();
     while(list($k, $v) = each($r)) {
-      $this->Nilai->getKHS($v['tahun'],$v['idsmt']);
+      $this->Nilai->getKHS($v['tahun'], $v['idsmt']);
       $v['ta'] = $this->DMaster->getNamaTA($v['tahun']);		
       $v['semester'] = $this->setup->getSemester($v['idsmt']); 
       
@@ -131,16 +131,16 @@ class CProfilMahasiswa extends MainPageM {
   }
   public function populateDulang() {
     $this->KRS->setDataMHS($_SESSION['currentPageProfilMahasiswa']['DataMHS']);
-    $nim=$_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];
+    $nim = $_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];
     $str = "SELECT d.iddulang,d.tahun,d.idsmt,d.tanggal,d.idkelas,k.nkelas,d.k_status,sm.n_status FROM dulang d LEFT JOIN kelas k ON (d.idkelas=k.idkelas) LEFT JOIN status_mhs sm ON (d.k_status=sm.k_status) WHERE nim='$nim' ORDER BY d.tahun DESC,d.idsmt DESC";				        
     $this->DB->setFieldTable(array('iddulang', 'tahun', 'idsmt', 'tanggal', 'idkelas', 'nkelas', 'k_status', 'n_status'));
     $r = $this->DB->getRecord($str);                
     $result = array();
     while(list($k, $v) = each($r)) {
-      $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-' :$this->TGL->tanggal('l, d F Y',$v['tanggal']);
+      $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-' :$this->TGL->tanggal('l, d F Y', $v['tanggal']);
       $isikrs='tidak isi';
       if ($v['k_status']=='A') {
-        $this->KRS->getDataKRS($v['tahun'],$v['idsmt']);  
+        $this->KRS->getDataKRS($v['tahun'], $v['idsmt']);  
         $datakrs=$this->KRS->DataKRS;
         $isikrs='belum isi';
         if (isset($datakrs['idkrs'])) {
@@ -159,7 +159,7 @@ class CProfilMahasiswa extends MainPageM {
     $this->RepeaterDulang->dataBind();
   }
   public function populateKRS() {        
-    $nim=$_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];        
+    $nim = $_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];        
     $str = "SELECT idkrs,tahun,idsmt FROM krs WHERE nim='$nim' ORDER BY idkrs DESC";
     $this->DB->setFieldTable(array('idkrs', 'tahun', 'idsmt'));        
     $r = $this->DB->getRecord($str);                
@@ -184,7 +184,7 @@ class CProfilMahasiswa extends MainPageM {
       
       CProfilMahasiswa::$totalSKS=0;
       CProfilMahasiswa::$jumlahMatkul=0;
-      while (list($k,$v)=each ($r)) {
+      while (list($k, $v)=each ($r)) {
         $v['kmatkul'] = $this->Nilai->getKMatkul($v['kmatkul']);
         CProfilMahasiswa::$totalSKS+=$v['sks'];
         CProfilMahasiswa::$jumlahMatkul+=1;
@@ -210,7 +210,7 @@ class CProfilMahasiswa extends MainPageM {
   public function changeTheme($sender, $param) {
     if ($this->IsValid) {
       $theme=  addslashes($sender->Text);
-      $nim=$_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];
+      $nim = $_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];
       $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE nim='$nim'";            
       $this->DB->updateRecord($str);            
        
@@ -218,7 +218,7 @@ class CProfilMahasiswa extends MainPageM {
     }
   }
   public function checkNIM($sender, $param) {					
-    $nim=$param->Value;		
+    $nim = $param->Value;		
     if ($nim != '') {
       try {   
         if ($nim != $_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim']) {

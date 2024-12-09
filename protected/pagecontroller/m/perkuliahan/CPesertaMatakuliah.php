@@ -32,24 +32,24 @@ class CPesertaMatakuliah extends MainPageM {
                 $kelas=$this->DMaster->getListKelas();
                 $kelas['none'] = 'All';
                 $this->cmbKelas->DataSource = $kelas;
-                $this->cmbKelas->Text=$_SESSION['currentPagePesertaMatakuliah']['idkelas'];			
+                $this->cmbKelas->Text = $_SESSION['currentPagePesertaMatakuliah']['idkelas'];			
                 $this->cmbKelas->dataBind();	
                 
                 $kjur = $_SESSION['kjur'];	
                 $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-                $this->tbCmbPs->Text=$kjur;			
+                $this->tbCmbPs->Text = $kjur;			
                 $this->tbCmbPs->dataBind();	
 
                 $tahun=$_SESSION['ta'];
                 $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
                 $this->tbCmbTA->DataSource = $ta;					
-                $this->tbCmbTA->Text=$tahun;						
+                $this->tbCmbTA->Text = $tahun;						
                 $this->tbCmbTA->dataBind();
 
                 $idsmt = $_SESSION['semester'];
                 $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
                 $this->tbCmbSemester->DataSource = $semester;
-                $this->tbCmbSemester->Text=$idsmt;
+                $this->tbCmbSemester->Text = $idsmt;
                 $this->tbCmbSemester->dataBind();
 
                 $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -57,24 +57,24 @@ class CPesertaMatakuliah extends MainPageM {
                 $this->tbCmbOutputReport->DataBind();
                 
                 $this->populateData();
-                $this->lblModulHeader->Text=$this->getInfoToolbar();
+                $this->lblModulHeader->Text = $this->getInfoToolbar();
             } catch (Exception $ex) {
                 $this->idProcess = 'view';        
                 
                 $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-                $this->tbCmbPs->Text=$_SESSION['kjur'];			
+                $this->tbCmbPs->Text = $_SESSION['kjur'];			
                 $this->tbCmbPs->dataBind();	
                 
                 $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
                 $this->tbCmbTA->DataSource = $ta;					
-                $this->tbCmbTA->Text=$_SESSION['ta'];						
+                $this->tbCmbTA->Text = $_SESSION['ta'];						
                 $this->tbCmbTA->dataBind();
 
                 $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
                 $this->tbCmbSemester->DataSource = $semester;
-                $this->tbCmbSemester->Text=$_SESSION['semester'];
+                $this->tbCmbSemester->Text = $_SESSION['semester'];
                 $this->tbCmbSemester->dataBind();
-                $this->lblModulHeader->Text=$this->getInfoToolbar();
+                $this->lblModulHeader->Text = $this->getInfoToolbar();
                 $ex->getMessage();
             }
 		}	
@@ -91,17 +91,17 @@ class CPesertaMatakuliah extends MainPageM {
     public function changeTbTA($sender, $param) {
         $this->idProcess = 'view';
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 	}	
 	public function changeTbSemester($sender, $param) {
         $this->idProcess = 'view';
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();		
+        $this->lblModulHeader->Text = $this->getInfoToolbar();		
 	}
     public function changeTbPs($sender, $param) {		
         $this->idProcess = 'view';
         $_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();        
+        $this->lblModulHeader->Text = $this->getInfoToolbar();        
 	}
     public function checkKodeMatkul($sender, $param) {
 		$this->idProcess=$sender->getId()=='viewpeserta'?'add':'edit';
@@ -184,9 +184,9 @@ class CPesertaMatakuliah extends MainPageM {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePesertaMatakuliah']['page_num']=0;}		
-        $str = "$str ORDER BY vdm.idkelas ASC,vdm.nama_mhs ASC LIMIT $offset,$limit";
+        $str = "$str ORDER BY vdm.idkelas ASC,vdm.nama_mhs ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'idkelas', 'jk', 'tahun_masuk', 'batal', 'sah', 'idkelas_mhs', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar'));	
-		$r = $this->DB->getRecord($str,$offset+1);
+		$r = $this->DB->getRecord($str, $offset+1);
         $result = array();
         while (list($k, $v) = each($r)) {
             $kelas=$this->Page->DMaster->getNamaKelasByID($v['idkelas']);
@@ -210,7 +210,7 @@ class CPesertaMatakuliah extends MainPageM {
 		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
         
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
     public function printOut($sender, $param) {
          
@@ -242,7 +242,7 @@ class CPesertaMatakuliah extends MainPageM {
         }
         $idkelas=$_SESSION['currentPagePesertaMatakuliah']['idkelas'];
         $str_kelas=($idkelas=='' || $idkelas=='none') ? '' : " AND vdm.idkelas='$idkelas'";
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar Peserta '. $label=($idkelas=="none") ? 'Semua Kelas' : $this->DMaster->getNamaKelasByID($idkelas) ;
         $this->modalPrintOut->show();
      }

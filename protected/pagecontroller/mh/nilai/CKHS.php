@@ -19,12 +19,12 @@ class CKHS extends MainPageMHS {
             $nama_semester = $this->setup->getSemester($_SESSION['semester']);
             $this->labelModuleHeader->Text = "T.A $nama_tahun Semester $nama_semester";
 			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-			$this->tbCmbTA->Text=$_SESSION['ta'];
+			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -59,19 +59,19 @@ class CKHS extends MainPageMHS {
             $this->Nilai->setDataMHS($datamhs);
 			if ($_SESSION['ta']>= 2010 && $datamhs['idkelas']!='C') {
                 $this->createObj('Finance');
-                $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'],$_SESSION['ta']);
+                $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
                 $idkelas=$datadulang['idkelas'];
                 $datamhs['idkelas'] = $idkelas;
                 $datamhs['idsmt'] = $_SESSION['semester'];
                 $this->Finance->setDataMHS($datamhs);
-				$data = $this->Finance->getLunasPembayaran($_SESSION['ta'],$_SESSION['semester'],true);	
+				$data = $this->Finance->getLunasPembayaran($_SESSION['ta'], $_SESSION['semester'],true);	
                 
 				if (!$data['bool'])throw new Exception ("Anda tidak bisa melihat KHS karena Anda baru membayar (".$this->Finance->toRupiah($data['total_bayar'],false)."), dari total kewajiban sebesar (".$this->Finance->toRupiah($data['total_biaya'],false).").");		
 			}			
-			$khs = $this->Nilai->getKHS($_SESSION['ta'],$_SESSION['semester'],true);            
+			$khs = $this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester'],true);            
 			if(isset($khs[1])){
-				$this->NilaiSemesterLalu=$this->Nilai->getKumulatifSksDanNmSemesterLalu($_SESSION['ta'],$_SESSION['semester']);				
-                $this->NilaiSemesterSekarang=$this->Page->Nilai->getIPKSampaiTASemester($_SESSION['ta'],$_SESSION['semester'],'ipksksnm');
+				$this->NilaiSemesterLalu=$this->Nilai->getKumulatifSksDanNmSemesterLalu($_SESSION['ta'], $_SESSION['semester']);				
+                $this->NilaiSemesterSekarang=$this->Page->Nilai->getIPKSampaiTASemester($_SESSION['ta'], $_SESSION['semester'],'ipksksnm');
                 $this->RepeaterS->DataSource = $khs ;
                 $this->RepeaterS->dataBind();							
 			}else{				
@@ -79,7 +79,7 @@ class CKHS extends MainPageMHS {
 			}		
 		}catch (Exception $e) {			
 			$this->idProcess = 'view';	
-			$this->errorMessage->Text=$e->getMessage();			
+			$this->errorMessage->Text = $e->getMessage();			
 		}						
 	}	
 	public function printKHS($sender, $param) {

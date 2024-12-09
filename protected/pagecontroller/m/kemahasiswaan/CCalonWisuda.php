@@ -65,13 +65,13 @@ class CCalonWisuda Extends MainPageM {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageCalonWisuda']['page_num']=0;}
-		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";				        
+		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt', 'idkelas'));
-		$result=$this->DB->getRecord($str,$offset+1);
+		$result=$this->DB->getRecord($str, $offset+1);
 		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
                 
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function cekNIM($sender, $param) {		
         $nim=addslashes($param->Value);		
@@ -94,7 +94,7 @@ class CCalonWisuda Extends MainPageM {
                         throw new Exception ("Untuk dinyatakan lulus Mahasiswa Dengan NIM ($nim) status akhirnya harus AKTIF.");
                     }
                     $this->Demik->setDataMHS($datamhs);
-                    $datadulang=$this->Demik->getDataDulang($_SESSION['semester'],$_SESSION['ta']);
+                    $datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
                     if (isset($datadulang['iddulang'])) {         
                         if ($datadulang['k_status']!='A') {
                             throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
@@ -113,7 +113,7 @@ class CCalonWisuda Extends MainPageM {
             }	
         }	
     }
-    public function Go($param,$sender) {	
+    public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
             $this->redirect('dulang.DetailCalonWisuda',true,array('id'=>$nim));
@@ -121,7 +121,7 @@ class CCalonWisuda Extends MainPageM {
 	}
     public function viewRecord($sender, $param) {	
 		$this->idProcess = 'view';		
-		$iddulang=$this->getDataKeyField($sender,$this->RepeaterS);
+		$iddulang=$this->getDataKeyField($sender, $this->RepeaterS);
         $this->hiddeniddulang->Value=$iddulang;
         
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,semester_masuk,iddosen_wali,d.idkelas,d.k_status,d.idsmt,d.tahun FROM v_datamhs vdm JOIN dulang d ON (d.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE d.iddulang='$iddulang'";
@@ -136,7 +136,7 @@ class CCalonWisuda Extends MainPageM {
         $this->Demik->setDataMHS($datamhs);
 	}
     public function deleteRecord($sender, $param) {	
-        $nim=$sender->CommandParameter;;
+        $nim = $sender->CommandParameter;;
 		$iddulang=$this->hiddeniddulang->Value;
 		
 		$this->DB->query ('BEGIN');
@@ -187,7 +187,7 @@ class CCalonWisuda Extends MainPageM {
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         } 
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar Ulang Mahasiswa LULUS';
         $this->modalPrintOut->show();
     }

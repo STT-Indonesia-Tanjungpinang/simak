@@ -24,7 +24,7 @@ class CDetailNilaiFinal extends MainPageON {
         throw new Exception('Mohon kembali ke halaman Nilai Final.');
       }
       $datamhs=$_SESSION['currentPageNilaiFinal']['DataMHS'];
-      $nim=$datamhs['nim'];
+      $nim = $datamhs['nim'];
       $this->Nilai->setDataMHS($datamhs);
       $str = "SELECT nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,judul_skripsi,iddosen_pembimbing,iddosen_pembimbing2,iddosen_ketua,iddosen_pemket,tahun,idsmt FROM transkrip_asli WHERE nim='$nim'";
       $this->DB->setFieldTable(array('nomor_ijazah', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
@@ -41,19 +41,19 @@ class CDetailNilaiFinal extends MainPageON {
       if (isset($r[1])) {
         $datatranskrip=$r[1];             
              
-        $this->cmbEditDosenPembimbing->Text=$datatranskrip['iddosen_pembimbing'];
-        $this->cmbEditDosenPembimbing2->Text=$datatranskrip['iddosen_pembimbing2'];	
+        $this->cmbEditDosenPembimbing->Text = $datatranskrip['iddosen_pembimbing'];
+        $this->cmbEditDosenPembimbing2->Text = $datatranskrip['iddosen_pembimbing2'];	
       
         $this->hiddennomorijazah->Value=$datatranskrip['nomor_ijazah'];
-        $this->txtEditNomorIjazah->Text=$datatranskrip['nomor_ijazah'];
+        $this->txtEditNomorIjazah->Text = $datatranskrip['nomor_ijazah'];
 
         $this->hiddennomortranskrip->Value=$datatranskrip['nomor_transkrip'];
-        $this->txtEditNomorTranskrip->Text=$datatranskrip['nomor_transkrip'];
+        $this->txtEditNomorTranskrip->Text = $datatranskrip['nomor_transkrip'];
         
-        $this->cmbEditPredikatKelulusan->Text=$datatranskrip['predikat_kelulusan'];
-        $this->txtEditTanggalLulus->Text=$this->TGL->tanggal('d-m-Y',$datatranskrip['tanggal_lulus']);
+        $this->cmbEditPredikatKelulusan->Text = $datatranskrip['predikat_kelulusan'];
+        $this->txtEditTanggalLulus->Text = $this->TGL->tanggal('d-m-Y', $datatranskrip['tanggal_lulus']);
         
-        $this->txtEditJuduluSkripsi->Text=$datatranskrip['judul_skripsi'];
+        $this->txtEditJuduluSkripsi->Text = $datatranskrip['judul_skripsi'];
         
         $datatranskrip['nama_pembimbing1'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip['iddosen_pembimbing']);
         $datatranskrip['nama_pembimbing2'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip['iddosen_pembimbing2']);            
@@ -72,14 +72,14 @@ class CDetailNilaiFinal extends MainPageON {
 
     } catch (Exception $ex) {
       $this->idProcess = 'view';	
-      $this->errorMessage->Text=$ex->getMessage();
+      $this->errorMessage->Text = $ex->getMessage();
     }        
   }
   public function checkNoIjazah($sender, $param) {
     $no_ijazah=addslashes($param->Value);
     try {			
       if ($this->hiddennomorijazah->Value!=$no_ijazah) {
-        if ($this->DB->checkRecordIsExist('nomor_ijazah', 'transkrip_asli',$no_ijazah)) {
+        if ($this->DB->checkRecordIsExist('nomor_ijazah', 'transkrip_asli', $no_ijazah)) {
           throw new Exception ("Nomor Ijazah ($no_ijazah) telah ada, silahkan ganti dengan yang lain");
         }
       }
@@ -92,7 +92,7 @@ class CDetailNilaiFinal extends MainPageON {
     $no_transkrip=addslashes($param->Value);
     try {			
       if ($this->hiddennomortranskrip->Value!=$no_transkrip) {
-        if ($this->DB->checkRecordIsExist('nomor_transkrip', 'transkrip_asli',$no_transkrip)) {
+        if ($this->DB->checkRecordIsExist('nomor_transkrip', 'transkrip_asli', $no_transkrip)) {
           throw new Exception ("Nomor Transkrip ($no_transkrip) telah ada, silahkan ganti dengan yang lain");
         }
       }
@@ -104,21 +104,21 @@ class CDetailNilaiFinal extends MainPageON {
   public function saveData($sender, $param) {
     if ($this->IsValid) {						
       $datamhs=$_SESSION['currentPageNilaiFinal']['DataMHS'];
-      $nim=$datamhs['nim'];
+      $nim = $datamhs['nim'];
       $ta = $datamhs['ta'];
       $idsmt = $datamhs['idsmt'];
       
       $no_ijazah=$this->txtEditNomorIjazah->Text;
       $no_transkrip=$this->txtEditNomorTranskrip->Text;			
       $predikat=$this->cmbEditPredikatKelulusan->Text;
-      $tanggal_lulus=date('Y-m-d',$this->txtEditTanggalLulus->TimeStamp);						
+      $tanggal_lulus=date('Y-m-d', $this->txtEditTanggalLulus->TimeStamp);						
       $pembimbing=$this->cmbEditDosenPembimbing->Text;						
       $pembimbing2=$this->cmbEditDosenPembimbing2->Text;						
       $judul_skripsi=strtoupper(addslashes($this->txtEditJuduluSkripsi->Text));						
       $ketua = $this->setup->getSettingValue('id_penandatangan_transkrip');						
       $pemket=$this->setup->getSettingValue('id_penandatangan_khs');	
       
-      if ($this->DB->checkRecordIsExist('nim', 'transkrip_asli',$nim)){
+      if ($this->DB->checkRecordIsExist('nim', 'transkrip_asli', $nim)){
         $str = "UPDATE transkrip_asli SET nomor_ijazah='$no_ijazah',nomor_transkrip='$no_transkrip',predikat_kelulusan='$predikat',tanggal_lulus='$tanggal_lulus',judul_skripsi='$judul_skripsi',iddosen_pembimbing='$pembimbing',iddosen_pembimbing2='$pembimbing2',iddosen_ketua='$ketua',iddosen_pemket='$pemket',tahun='$ta',idsmt='$idsmt' WHERE nim='$nim'";
         $this->DB->updateRecord($str);
         
@@ -145,7 +145,7 @@ class CDetailNilaiFinal extends MainPageON {
     if ($this->IsValid) {	
       $this->createObj('Log');
       $datamhs=$_SESSION['currentPageNilaiFinal']['DataMHS'];
-      $nim=$datamhs['nim'];
+      $nim = $datamhs['nim'];
       $dataSource = $this->cmbDataSource->Text;
       switch ($datasource) {
         case 'transkrip_krs' :
@@ -216,7 +216,7 @@ class CDetailNilaiFinal extends MainPageON {
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
               $this->DB->insertRecord($str);
             } 
-            while (list($k,$v)=each($r2)) {
+            while (list($k, $v)=each($r2)) {
               $kmatkul = $v['kmatkul'];    
               $nmatkul = $v['nmatkul']; 
               $nmatkul_en=$v['nmatkul_en']; 
@@ -238,13 +238,13 @@ class CDetailNilaiFinal extends MainPageON {
     }
   }
   public function deleteRecord($sender, $param) {	
-    $idtranskrip_detail = $this->getDataKeyField($sender,$this->RepeaterS);
+    $idtranskrip_detail = $this->getDataKeyField($sender, $this->RepeaterS);
     $this->DB->deleteRecord("transkrip_asli_detail WHERE idtranskrip_detail = $idtranskrip_detail");
     $this->redirect('nilai.DetailNilaiFinal',true,array('id'=>$nim));
   }
   public function resetTranskrip($sender, $param) {
     $datamhs=$_SESSION['currentPageNilaiFinal']['DataMHS'];
-    $nim=$datamhs['nim']; 
+    $nim = $datamhs['nim']; 
     $this->DB->deleteRecord("transkrip_asli_detail WHERE nim='$nim'");
     $this->redirect('nilai.DetailNilaiFinal',true);
   }
@@ -254,7 +254,7 @@ class CDetailNilaiFinal extends MainPageON {
     $this->linkOutput->NavigateUrl='#';   
     
     $dataReport=$_SESSION['currentPageNilaiFinal']['DataMHS']; 
-    $nim=$dataReport['nim'];
+    $nim = $dataReport['nim'];
     if ($dataReport['k_status'] == 'L') {
       switch ($_SESSION['outputreport']) {
         case  'summarypdf' :
@@ -277,7 +277,7 @@ class CDetailNilaiFinal extends MainPageON {
           $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
           $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
           
-          $dataReport['tanggalterbit']=date ('Y-m-d',$this->txtViewTanggalTerbit->TimeStamp);
+          $dataReport['tanggalterbit']=date ('Y-m-d', $this->txtViewTanggalTerbit->TimeStamp);
           $dataReport['dataTranskrip'] = $_SESSION['currentPageNilaiFinal']['DataNilai'];
           $dataReport['linkoutput'] = $this->linkOutput; 
           $this->report->setDataReport($dataReport); 
@@ -298,7 +298,7 @@ class CDetailNilaiFinal extends MainPageON {
           $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
           $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
           
-          $dataReport['tanggalterbit']=date ('Y-m-d',$this->txtViewTanggalTerbit->TimeStamp);
+          $dataReport['tanggalterbit']=date ('Y-m-d', $this->txtViewTanggalTerbit->TimeStamp);
           $dataReport['dataTranskrip'] = $_SESSION['currentPageNilaiFinal']['DataNilai'];
           $dataReport['linkoutput'] = $this->linkOutput; 
           $this->report->setDataReport($dataReport); 
@@ -306,7 +306,7 @@ class CDetailNilaiFinal extends MainPageON {
           $this->report->printTranskripFinal($this->Nilai,true);				
         break;
       }
-      $this->lblMessagePrintout->Text=$messageprintout;
+      $this->lblMessagePrintout->Text = $messageprintout;
       $this->lblPrintout->Text='Nilai Final';
       $this->modalPrintOut->show();
     }else{

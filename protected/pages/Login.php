@@ -46,14 +46,14 @@ class Login extends MainPage {
 		}		
 		return $page;
 	}
-	public function checkUsernameAndPassword($sender,$param) {		
+	public function checkUsernameAndPassword($sender, $param) {		
         $username=addslashes($param->Value);
         if ($username != '') {
             try {  
                 $auth = $this->Application->getModule ('auth');	
                 $page=$this->getGoingToPage ();		
                 $password = trim(addslashes($this->txtPassword->Text));
-                $auth->login ($username.'/'.$page,$password);	
+                $auth->login ($username.'/'.$page, $password);	
             }catch (Exception $e) {		
                 $message='<br /><div class="alert alert-danger">
                     <strong>Error!</strong>
@@ -64,7 +64,7 @@ class Login extends MainPage {
         }							
 		
 	}    
-    public function checkUsernameFormat($sender,$param) {		
+    public function checkUsernameFormat($sender, $param) {		
         $username=addslashes($param->Value);
         if ($username != '') {
             try {  
@@ -81,7 +81,7 @@ class Login extends MainPage {
         }							
 		
 	}
-    public function doLogin ($sender,$param) {
+    public function doLogin ($sender, $param) {
         if ($this->IsValid) {                        
             $pengguna=$this->getLogic('Users');      
             $setup=$this->getLogic('Setup');

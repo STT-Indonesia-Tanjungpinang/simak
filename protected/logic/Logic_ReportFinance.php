@@ -9,7 +9,7 @@ class Logic_ReportFinance extends Logic_Report {
      * @param type $objFinance object
      * @param type $objDMaster object
      */
-    public function printPiutangJangkaPendek($objFinance,$objDMaster)  {
+    public function printPiutangJangkaPendek($objFinance, $objDMaster)  {
         $kjur=$this->dataReport['kjur'];
         $nama_ps=$this->dataReport['nama_ps'];
         $tahun_masuk=$this->dataReport['tahun_masuk'];
@@ -98,14 +98,14 @@ class Logic_ReportFinance extends Logic_Report {
                 $this->db->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tahun_masuk','semester_masuk'));
                 $r = $this->db->getRecord($str);	
                 $row=11; 
-                while (list($k,$v)=each($r)) {
+                while (list($k, $v)=each($r)) {
                     $no_formulir=$v['no_formulir'];                                          
-                    $nim=$v['nim'];                                                      
-                    $sheet->setCellValue("A$row",$v['no']);
-                    $sheet->setCellValueExplicit("B$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-                    $sheet->setCellValueExplicit("C$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-                    $sheet->setCellValue("D$row",$v['nama_mhs']);
-                    $sheet->setCellValue("E$row",$v['jk']);
+                    $nim = $v['nim'];                                                      
+                    $sheet->setCellValue("A$row", $v['no']);
+                    $sheet->setCellValueExplicit("B$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+                    $sheet->setCellValueExplicit("C$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+                    $sheet->setCellValue("D$row", $v['nama_mhs']);
+                    $sheet->setCellValue("E$row", $v['jk']);
                     $str = "SELECT tahun,idsmt,idkelas,k_status FROM dulang WHERE nim='$nim'";
                     $this->db->setFieldTable(array('tahun','idsmt','idkelas','k_status'));
                     $data_dulang = $this->db->getRecord($str);
@@ -119,32 +119,32 @@ class Logic_ReportFinance extends Logic_Report {
                     }        
                     $totalpembayaran=0;
                     $totalkewajiban=0;
-                    while (list($m,$n)=each($data_dulang)) {
+                    while (list($m, $n)=each($data_dulang)) {
                         $idkelas=$n['idkelas'];
-                        $sheet->setCellValue("F$row",$objDMaster->getNamaKelasByID($idkelas));
-                        $sheet->setCellValue("G$row",$n['tahun']);
-                        $sheet->setCellValue("H$row",$n['idsmt']);
-                        $sheet->setCellValue("I$row",$objDMaster->getNamaStatusMHSByID ($n['k_status']));
+                        $sheet->setCellValue("F$row", $objDMaster->getNamaKelasByID($idkelas));
+                        $sheet->setCellValue("G$row", $n['tahun']);
+                        $sheet->setCellValue("H$row", $n['idsmt']);
+                        $sheet->setCellValue("I$row", $objDMaster->getNamaStatusMHSByID ($n['k_status']));
                         if ($n['tahun']==$v['tahun_masuk'] && $v['semester_masuk'] == $n['idsmt']) {
                             $kewajiban=$komponen_biaya[$idkelas]['baru'][$n['idsmt']];
                         }else{
                             $kewajiban=$komponen_biaya[$idkelas]['lama'][$n['idsmt']];
                         }
                         $totalkewajiban+=$kewajiban;
-                        $sheet->setCellValueExplicit("J$row",$objFinance->toRupiah($kewajiban),PHPExcel_Cell_DataType::TYPE_STRING);
+                        $sheet->setCellValueExplicit("J$row", $objFinance->toRupiah($kewajiban),PHPExcel_Cell_DataType::TYPE_STRING);
                         $pembayaran_semester=$daftar_dibayarkan[$n['tahun']][$n['idsmt']];
                         $totalpembayaran+=$pembayaran_semester;
-                        $sheet->setCellValueExplicit("K$row",$objFinance->toRupiah($pembayaran_semester),PHPExcel_Cell_DataType::TYPE_STRING);
+                        $sheet->setCellValueExplicit("K$row", $objFinance->toRupiah($pembayaran_semester),PHPExcel_Cell_DataType::TYPE_STRING);
                         $belumbayar=$kewajiban-$pembayaran_semester;
-                        $sheet->setCellValueExplicit("L$row",$objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
+                        $sheet->setCellValueExplicit("L$row", $objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
                         $row+=1;
                     }    
                     $sheet->mergeCells ("A$row:H$row");
                     $sheet->setCellValue("I$row",'TOTAL');
-                    $sheet->setCellValueExplicit("J$row",$objFinance->toRupiah($totalkewajiban),PHPExcel_Cell_DataType::TYPE_STRING);
-                    $sheet->setCellValueExplicit("K$row",$objFinance->toRupiah($totalpembayaran),PHPExcel_Cell_DataType::TYPE_STRING);
+                    $sheet->setCellValueExplicit("J$row", $objFinance->toRupiah($totalkewajiban),PHPExcel_Cell_DataType::TYPE_STRING);
+                    $sheet->setCellValueExplicit("K$row", $objFinance->toRupiah($totalpembayaran),PHPExcel_Cell_DataType::TYPE_STRING);
                     $belumbayar=$totalkewajiban-$totalpembayaran;
-                    $sheet->setCellValueExplicit("L$row",$objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
+                    $sheet->setCellValueExplicit("L$row", $objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
                     $styleArray=array(								
                                     'font' => array('bold' => true)                                    
                                 );																					 
@@ -174,10 +174,10 @@ class Logic_ReportFinance extends Logic_Report {
                 $row+=2;
                 $sheet->mergeCells ("A$row:I$row");
                 $sheet->setCellValue("A$row",'TOTAL KESELURUAN');
-                $sheet->setCellValueExplicit("J$row",$objFinance->toRupiah($totalkewajiban_all),PHPExcel_Cell_DataType::TYPE_STRING);
-                $sheet->setCellValueExplicit("K$row",$objFinance->toRupiah($totalpembayaran_all),PHPExcel_Cell_DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit("J$row", $objFinance->toRupiah($totalkewajiban_all),PHPExcel_Cell_DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit("K$row", $objFinance->toRupiah($totalpembayaran_all),PHPExcel_Cell_DataType::TYPE_STRING);
                 $belumbayar=$totalkewajiban_all-$totalpembayaran_all;
-                $sheet->setCellValueExplicit("L$row",$objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
+                $sheet->setCellValueExplicit("L$row", $objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
                 $styleArray=array(								
                                 'font' => array('bold' => true),
                                 'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_RIGHT)
@@ -270,21 +270,21 @@ class Logic_ReportFinance extends Logic_Report {
                 $row=11;
                 $totalkewajiban_all=0;
                 $totalpembayaran_all=0;
-                while (list($k,$v)=each($r)) {
+                while (list($k, $v)=each($r)) {
                     $kewajiban=$v['kewajiban'];
                     $totalkewajiban_all+=$kewajiban;
                     $dibayarkan=$v['dibayarkan'];
                     $totalpembayaran_all+=$dibayarkan;
                     $sisa=$objFinance->toRupiah($v['sisa']);
-                    $sheet->setCellValue("A$row",$v['no']);				
-                    $sheet->setCellValueExplicit("B$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-                    $sheet->setCellValueExplicit("C$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);				                        
-                    $sheet->setCellValue("D$row",$v['nama_mhs']);				
-                    $sheet->setCellValue("E$row",$v['jk']);	
-                    $sheet->setCellValue("F$row",$v['n_kelas']);	                
-                    $sheet->setCellValueExplicit("G$row",$objFinance->toRupiah($kewajiban),PHPExcel_Cell_DataType::TYPE_STRING);                    
-                    $sheet->setCellValueExplicit("H$row",$objFinance->toRupiah($dibayarkan),PHPExcel_Cell_DataType::TYPE_STRING);		
-                    $sheet->setCellValueExplicit("I$row",$sisa,PHPExcel_Cell_DataType::TYPE_STRING);
+                    $sheet->setCellValue("A$row", $v['no']);				
+                    $sheet->setCellValueExplicit("B$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+                    $sheet->setCellValueExplicit("C$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);				                        
+                    $sheet->setCellValue("D$row", $v['nama_mhs']);				
+                    $sheet->setCellValue("E$row", $v['jk']);	
+                    $sheet->setCellValue("F$row", $v['n_kelas']);	                
+                    $sheet->setCellValueExplicit("G$row", $objFinance->toRupiah($kewajiban),PHPExcel_Cell_DataType::TYPE_STRING);                    
+                    $sheet->setCellValueExplicit("H$row", $objFinance->toRupiah($dibayarkan),PHPExcel_Cell_DataType::TYPE_STRING);		
+                    $sheet->setCellValueExplicit("I$row", $sisa,PHPExcel_Cell_DataType::TYPE_STRING);
                     
                     $row+=1;
                 }
@@ -299,10 +299,10 @@ class Logic_ReportFinance extends Logic_Report {
                 $row+=2;
                 $sheet->mergeCells ("A$row:F$row");
                 $sheet->setCellValue("A$row",'TOTAL KESELURUAN');
-                $sheet->setCellValueExplicit("G$row",$objFinance->toRupiah($totalkewajiban_all),PHPExcel_Cell_DataType::TYPE_STRING);
-                $sheet->setCellValueExplicit("H$row",$objFinance->toRupiah($totalpembayaran_all),PHPExcel_Cell_DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit("G$row", $objFinance->toRupiah($totalkewajiban_all),PHPExcel_Cell_DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit("H$row", $objFinance->toRupiah($totalpembayaran_all),PHPExcel_Cell_DataType::TYPE_STRING);
                 $belumbayar=$totalkewajiban_all-$totalpembayaran_all;
-                $sheet->setCellValueExplicit("I$row",$objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit("I$row", $objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);
                 
                 $styleArray=array(								
                                     'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
@@ -338,52 +338,52 @@ class Logic_ReportFinance extends Logic_Report {
                 $row=$this->currentRow;
 				$row+=12;
                 $rpt->SetFont ('helvetica','B',12);	
-				$rpt->setXY(30,$row);			
+				$rpt->setXY(30, $row);			
                 $rpt->Cell(150,5,"BUKTI PEMBAYARAN BIAYA KULIAH T.A $nama_tahun SEMESTER $nama_semester",'B',0,'C');
                 $row+=5;
                 $rpt->SetFont ('helvetica','',8);
-                $rpt->setXY(30,$row);			
+                $rpt->setXY(30, $row);			
                 $rpt->Cell(150,5,"No. Transaksi: $no_transaksi No. Faktur ".$dataReport['no_faktur'],0,0,'C');
 
                 $row+=0;
                 $rpt->SetFont ('helvetica','B',8);	
-				$rpt->setXY(3,$row);			
-				$rpt->Cell(0,$row,'Nama Mahasiswa');
+				$rpt->setXY(3, $row);			
+				$rpt->Cell(0, $row,'Nama Mahasiswa');
 				$rpt->SetFont ('helvetica','',8);
-				$rpt->setXY(38,$row);			
-				$rpt->Cell(0,$row,': '.$dataReport['nama_mhs']);
+				$rpt->setXY(38, $row);			
+				$rpt->Cell(0, $row,': '.$dataReport['nama_mhs']);
 				$rpt->SetFont ('helvetica','B',8);	
-				$rpt->setXY(105,$row);			
-				$rpt->Cell(0,$row,'Program Studi');
+				$rpt->setXY(105, $row);			
+				$rpt->Cell(0, $row,'Program Studi');
 				$rpt->SetFont ('helvetica','',8);
-				$rpt->setXY(130,$row);			
-                $rpt->Cell(0,$row,': '.$dataReport['nama_ps']);
+				$rpt->setXY(130, $row);			
+                $rpt->Cell(0, $row,': '.$dataReport['nama_ps']);
                 $row+=3;
-				$rpt->setXY(3,$row);			
+				$rpt->setXY(3, $row);			
 				$rpt->SetFont ('helvetica','B',8);	
-				$rpt->Cell(0,$row,'NIM');
+				$rpt->Cell(0, $row,'NIM');
 				$rpt->SetFont ('helvetica','',8);
-				$rpt->setXY(38,$row);			
-				$rpt->Cell(0,$row,': '.$dataReport['nim']);				
+				$rpt->setXY(38, $row);			
+				$rpt->Cell(0, $row,': '.$dataReport['nim']);				
 				$rpt->SetFont ('helvetica','B',8);	
-				$rpt->setXY(105,$row);			
-				$rpt->Cell(0,$row,'No. Formulir');
+				$rpt->setXY(105, $row);			
+				$rpt->Cell(0, $row,'No. Formulir');
 				$rpt->SetFont ('helvetica','',8);
-				$rpt->setXY(130,$row);			
-                $rpt->Cell(0,$row,': '.$dataReport['no_formulir']);
+				$rpt->setXY(130, $row);			
+                $rpt->Cell(0, $row,': '.$dataReport['no_formulir']);
                 $row+=3;
-				$rpt->setXY(3,$row);			
+				$rpt->setXY(3, $row);			
 				$rpt->SetFont ('helvetica','B',8);	
-				$rpt->Cell(0,$row,'Tahun Masuk');
+				$rpt->Cell(0, $row,'Tahun Masuk');
 				$rpt->SetFont ('helvetica','',8);
-				$rpt->setXY(38,$row);			
-				$rpt->Cell(0,$row,': '.$dataReport['tahun_masuk']);				
+				$rpt->setXY(38, $row);			
+				$rpt->Cell(0, $row,': '.$dataReport['tahun_masuk']);				
 				$rpt->SetFont ('helvetica','B',8);	
-				$rpt->setXY(105,$row);			
-				$rpt->Cell(0,$row,'Kelas');
+				$rpt->setXY(105, $row);			
+				$rpt->Cell(0, $row,'Kelas');
 				$rpt->SetFont ('helvetica','',8);
-				$rpt->setXY(130,$row);			
-				$rpt->Cell(0,$row,': '.$dataReport['namakelas']);
+				$rpt->setXY(130, $row);			
+				$rpt->Cell(0, $row,': '.$dataReport['namakelas']);
                 
                 $this->printOut("fakturpembayaran_$no_transaksi");
             break;

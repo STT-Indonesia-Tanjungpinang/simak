@@ -28,7 +28,7 @@ class CTambahKRS extends MainPageSA {
         $this->createObj('Nilai');
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {	            
-            $this->lblModulHeader->Text=$this->getInfoToolbar();            
+            $this->lblModulHeader->Text = $this->getInfoToolbar();            
             try {	
                 $datakrs=$_SESSION['currentPageKRS']['DataKRS'];
                 if (isset($datakrs['krs']['idkrs'])){
@@ -37,7 +37,7 @@ class CTambahKRS extends MainPageSA {
                     $idsmt = $datakrs['krs']['idsmt'];
                     $tahun=$datakrs['krs']['tahun'];
                     $datamhs=$_SESSION['currentPageKRS']['DataMHS'];                                            
-                    $nim=$datamhs['nim'];                
+                    $nim = $datamhs['nim'];                
                     $this->KRS->setDataMHS($datamhs);   
 
                     $kjur = $datamhs['kjur'];
@@ -60,7 +60,7 @@ class CTambahKRS extends MainPageSA {
                 }                
             }catch (Exception $e) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$e->getMessage();	
+                $this->errorMessage->Text = $e->getMessage();	
             }
 		}				
 	}
@@ -85,20 +85,20 @@ class CTambahKRS extends MainPageSA {
 			$jumlah=$r[1]['jumlah']+$sender->CommandParameter;
 			$maxSKS=$datakrs['maxSKS'];
 			if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
-			$idpenyelenggaraan=$this->getDataKeyField($sender,$this->RepeaterPenyelenggaraan);
+			$idpenyelenggaraan=$this->getDataKeyField($sender, $this->RepeaterPenyelenggaraan);
 			//check kmatkul syarat apakah lulus					
-			if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul',$idpenyelenggaraan,' AND idkrs='.$idkrs)) { 
-				$str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs',$idpenyelenggaraan,0)";
+			if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul', $idpenyelenggaraan,' AND idkrs='.$idkrs)) { 
+				$str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs', $idpenyelenggaraan,0)";
 				$this->DB->insertRecord($str);			
 				$this->redirect ('perkuliahan.TambahKRS',true);
 			}
 		}catch (Exception $e) {
             $this->modalMessageError->show();
-			$this->lblContentMessageError->Text=$e->getMessage();					
+			$this->lblContentMessageError->Text = $e->getMessage();					
 		}		
 	}
 	public function hapusMatkul($sender, $param) {		
-		$idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);			
+		$idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);			
 		$this->DB->query ('BEGIN');			
 		if ($this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul='$idkrsmatkul'")) {
 			$this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul='$idkrsmatkul'");							

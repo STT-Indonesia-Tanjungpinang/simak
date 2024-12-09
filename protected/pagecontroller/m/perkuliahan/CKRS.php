@@ -28,21 +28,21 @@ class CKRS Extends MainPageM {
             }
             $_SESSION['currentPageKRS']['search']=false;
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
             $tahun_masuk=$this->getAngkatan ();			            
             $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-            $this->tbCmbTahunMasuk->Text=$_SESSION['currentPageKRS']['tahun_masuk'];						
+            $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKRS']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
 
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-            $this->tbCmbTA->Text=$_SESSION['ta'];
+            $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
 
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
             $this->tbCmbSemester->DataSource = $semester;
-            $this->tbCmbSemester->Text=$_SESSION['semester'];
+            $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
 
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -55,10 +55,10 @@ class CKRS Extends MainPageM {
 
             $dosen_wali=$this->DMaster->getListDosenWali();				            
             $this->cmbDosenWali->DataSource = $dosen_wali;
-            $this->cmbDosenWali->Text=$_SESSION['currentPageKRS']['iddosen_wali'];
+            $this->cmbDosenWali->Text = $_SESSION['currentPageKRS']['iddosen_wali'];
             $this->cmbDosenWali->dataBind();
 
-            $this->cmbModeKRS->Text=$_SESSION['currentPageKRS']['mode_krs'];
+            $this->cmbModeKRS->Text = $_SESSION['currentPageKRS']['mode_krs'];
 
             $this->setInfoToolbar();
             $this->populateData();			
@@ -77,7 +77,7 @@ class CKRS Extends MainPageM {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		        
 		$_SESSION['currentPageKRS']['tahun_masuk'] = $_SESSION['ta'];
 		$this->tbCmbTahunMasuk->DataSource = $this->getAngkatan();
-		$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageKRS']['tahun_masuk'];
+		$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKRS']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
         $this->setInfoToolbar();
 		$this->populateData();
@@ -169,12 +169,12 @@ class CKRS Extends MainPageM {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKRS']['page_num']=0;}
-        $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";	
-        $r = $this->DB->getRecord($str,$offset+1);	        
+        $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";	
+        $r = $this->DB->getRecord($str, $offset+1);	        
 
         $this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function setDataBound($sender, $param) {
 		$item=$param->Item;
@@ -183,8 +183,8 @@ class CKRS Extends MainPageM {
             $str = "SELECT COUNT(idkrsmatkul) AS jumlah_matkul,SUM(sks) AS jumlah_sks FROM v_krsmhs WHERE idkrs='$idkrs' AND batal=0";						
             $this->DB->setFieldTable (array('jumlah_matkul', 'jumlah_sks'));
 			$r = $this->DB->getRecord($str);
-            $item->literalMatkul->Text=$r[1]['jumlah_matkul'] > 0 ?$r[1]['jumlah_matkul']:0;
-            $item->literalSKS->Text=$r[1]['jumlah_sks'] > 0 ?$r[1]['jumlah_sks']:0;
+            $item->literalMatkul->Text = $r[1]['jumlah_matkul'] > 0 ?$r[1]['jumlah_matkul']:0;
+            $item->literalSKS->Text = $r[1]['jumlah_sks'] > 0 ?$r[1]['jumlah_sks']:0;
             $trstyle='';
             if ($item->DataItem['sah']) {                 
                 $status='<span class="label label-success">sah</span>';	
@@ -194,8 +194,8 @@ class CKRS Extends MainPageM {
                 $trstyle=' class="danger"';
                 $status='<span class="label label-info">Belum disahkan</span>';	
             }
-            $item->literalTRStyle->Text=$trstyle;
-            $item->literalStatus->Text=$status;                        
+            $item->literalTRStyle->Text = $trstyle;
+            $item->literalStatus->Text = $status;                        
 		}
 	}
 	public function checkNIM($sender, $param) {
@@ -204,7 +204,7 @@ class CKRS Extends MainPageM {
             if ($nim != '') {			            
                 $datamhs=array('nim'=>$nim);
                 $this->KRS->setDataMHS($datamhs);
-                $this->KRS->getKRS($_SESSION['ta'],$_SESSION['semester']);                
+                $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);                
                 if (isset($this->KRS->DataKRS['krs']['idkrs'])) {           
                     $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
                     $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas'));
@@ -243,13 +243,13 @@ class CKRS Extends MainPageM {
                     $this->Finance->setDataMHS($datamhs);
                     if ($tahun >= 2010) {                    
                         if ($idsmt==3) {                        
-                            if (!$this->Finance->getSKSFromSP ($tahun,$idsmt))throw new Exception ("Anda tidak bisa mengisi KRS karena belum melakukan pembayaran untuk Semester Pendek");																			
+                            if (!$this->Finance->getSKSFromSP ($tahun, $idsmt))throw new Exception ("Anda tidak bisa mengisi KRS karena belum melakukan pembayaran untuk Semester Pendek");																			
                         }else {
-                            $data = $this->Finance->getTresholdPembayaran($tahun,$idsmt,true);				                        
+                            $data = $this->Finance->getTresholdPembayaran($tahun, $idsmt,true);				                        
                             if (!$data['bool'])throw new Exception ("Anda tidak bisa mengisi KRS karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
                         }
                     } 
-                    $datadulang=$this->KRS->getDataDulang($idsmt,$tahun);
+                    $datadulang=$this->KRS->getDataDulang($idsmt, $tahun);
                     $nama_tahun = $this->DMaster->getNamaTA($tahun);
                     $nama_semester = $this->setup->getSemester($idsmt);
                     if (!isset($datadulang['iddulang']))throw new Exception ("Anda belum melakukan daftar ulang pada T.A $nama_tahun Semester $nama_semester. Silahkan hubungi Prodi (Bukan Keuangan).");
@@ -269,14 +269,14 @@ class CKRS Extends MainPageM {
         if ($this->IsValid){                        
             $krs=$_SESSION['currentPageKRS']['DataKRS']['krs'];  
             $datamhs= $_SESSION['currentPageKRS']['DataMHS'];
-            $nim=$datamhs['nim'];
+            $nim = $datamhs['nim'];
             $this->Nilai->setDataMHS($datamhs);
             $this->Finance->setDataMHS($datamhs);
             if (isset($krs['idkrs']) && $krs['sah']==0) {       
                 $idsmt = $krs['idsmt'];
                 $tahun=$krs['tahun'];                
                 
-                $krs['maxSKS'] = $idsmt==3?$this->Finance->getSKSFromSP($tahun,$idsmt):$this->Nilai->getMaxSKS($tahun,$idsmt);                
+                $krs['maxSKS'] = $idsmt==3?$this->Finance->getSKSFromSP($tahun, $idsmt):$this->Nilai->getMaxSKS($tahun, $idsmt);                
                 $krs['ipstasmtbefore'] = $this->Nilai->getIPS();                                                   
                                 
                 $_SESSION['currentPageKRS']['DataKRS']['krs'] = $krs;
@@ -303,7 +303,7 @@ class CKRS Extends MainPageM {
                                                     'tahun'=>$tahun,
                                                     'tasmt'=>$tasmt);		   
                 
-                $this->KRS->DataKRS['krs']['maxSKS'] = $idsmt==3?$this->Finance->getSKSFromSP($tahun,$idsmt):$this->Nilai->getMaxSKS($tahun,$idsmt);                
+                $this->KRS->DataKRS['krs']['maxSKS'] = $idsmt==3?$this->Finance->getSKSFromSP($tahun, $idsmt):$this->Nilai->getMaxSKS($tahun, $idsmt);                
                 $this->KRS->DataKRS['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();                                                   
                 
                 $_SESSION['currentPageKRS']['DataKRS'] = $this->KRS->DataKRS;
@@ -319,7 +319,7 @@ class CKRS Extends MainPageM {
         
         switch ($sender->getId()) {
 			case 'btnPrintOutR' :
-                $nim = $this->getDataKeyField($sender,$this->RepeaterS);
+                $nim = $this->getDataKeyField($sender, $this->RepeaterS);
                 $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE vdm.nim='$nim'";
                 $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
                 $r = $this->DB->getRecord($str);	           
@@ -327,7 +327,7 @@ class CKRS Extends MainPageM {
                 $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                 $datamhs['nama_dosen'] = $nama_dosen;
                 $this->KRS->setDataMHS($datamhs);
-                $this->KRS->getKRS($_SESSION['ta'],$_SESSION['semester']);
+                $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);
 
                 switch ($_SESSION['outputreport']) {
                     case  'summarypdf' :
@@ -402,7 +402,7 @@ class CKRS Extends MainPageM {
                             $this->report->setMode($_SESSION['outputreport']);
                             
                             $messageprintout="Data Kartu Rencana Studi dari $awal s.d $akhir: <br/>";                            
-                            $this->report->printKRSAll($this->DMaster,$repeater);
+                            $this->report->printKRSAll($this->DMaster, $repeater);
                         break;
                     }
                 }else{
@@ -410,7 +410,7 @@ class CKRS Extends MainPageM {
                 }
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
         $this->modalPrintOut->show(); 
         

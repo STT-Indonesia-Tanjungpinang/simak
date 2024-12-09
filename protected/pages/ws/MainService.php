@@ -24,7 +24,7 @@ class MainService extends TModule  {
 		$password=$this->Parameters['db_userpassword'];
 		$dbname=$this->Parameters['db_name'];
 		
-        $this->Conn = new mysqli ($host,$username,$password,$dbname);
+        $this->Conn = new mysqli ($host, $username, $password, $dbname);
         if($this->Conn->connect_errno > 0){
             throw new Exception('Unable to connect to database [' . $this->Conn->connect_error . ']');
         }
@@ -83,7 +83,7 @@ class MainService extends TModule  {
 	* @param offset 
 	*
 	*/	
-	public function getRecord ($sqlString,$offset=1) {				
+	public function getRecord ($sqlString, $offset=1) {				
         $result=$this->query($sqlString);
         $data=array();
 		if ($result->num_rows >= 1) {            

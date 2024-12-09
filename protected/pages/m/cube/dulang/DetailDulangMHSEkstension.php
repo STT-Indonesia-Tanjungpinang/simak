@@ -13,7 +13,7 @@ class DetailDulangMHSEkstension Extends MainPageM {
                     
                     $this->Demik->setDataMHS($datamhs);
                     $this->cmbAddDosenWali->DataSource=$this->DMaster->getListDosenWali();
-                    $this->cmbAddDosenWali->Text=$datamhs['iddosen_wali'];
+                    $this->cmbAddDosenWali->Text = $datamhs['iddosen_wali'];
                     $this->cmbAddDosenWali->dataBind();	           
                     
                 }else{
@@ -21,14 +21,14 @@ class DetailDulangMHSEkstension Extends MainPageM {
                 }
             } catch (Exception $ex) {
                 $this->idProcess='view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}	
 	}
     public function getDataMHS($idx) {		        
         return $this->Demik->getDataMHS($idx);
     }    
-    public function saveData ($sender,$param) {		
+    public function saveData ($sender, $param) {		
 		if ($this->IsValid) {	
             $datamhs=$_SESSION['currentPageDulangMHSEkstension']['DataMHS'];						
 			$ta=$datamhs['ta'];							
@@ -51,7 +51,7 @@ class DetailDulangMHSEkstension Extends MainPageM {
 			}
 		}
 	}
-    public function closeDetailDulang ($sender,$param) {
+    public function closeDetailDulang ($sender, $param) {
         unset($_SESSION['currentPageDulangMHSEkstension']);
         $this->redirect('dulang.DulangMHSEkstension',true);
     }

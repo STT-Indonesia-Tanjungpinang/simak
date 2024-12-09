@@ -44,7 +44,7 @@ class Logic_Penanggalan extends Logic_Global {
     /**
      * digunakan untuk mendapatkan tanggal pada tahun depan
      */
-    public function getDateNextYear ($currentdate,$sumyear,$format) {
+    public function getDateNextYear ($currentdate, $sumyear, $format) {
         $date = new DateTime($currentdate,new DateTimeZone('Asia/Jakarta'));
         $date->add(new DateInterval("P{$sumyear}Y"));        
         $result = str_replace($this->dayName, $this->namaHari, $date->format ($format));
@@ -56,7 +56,7 @@ class Logic_Penanggalan extends Logic_Global {
     /**
 	* digunakan untuk mengetahui perbedaan waktu
 	*/
-	public function relativeTime($date1,$date2,$mode='all')	{		              
+	public function relativeTime($date1, $date2, $mode='all')	{		              
         $datetime1 = new DateTime($date1, new DateTimeZone('Asia/Jakarta'));
         $datetime2 = new DateTime($date2, new DateTimeZone('Asia/Jakarta'));
         $interval = $datetime1->diff($datetime2);   
@@ -121,7 +121,7 @@ class Logic_Penanggalan extends Logic_Global {
     /**
 	* digunakan untuk mengetahui perbedaan waktu ke waktu
 	*/
-	public function relativeTimeBasic($date1,$date2,$mode='all')	{		      
+	public function relativeTimeBasic($date1, $date2, $mode='all')	{		      
         $datetime1 = new DateTime($date1, new DateTimeZone('Asia/Jakarta'));
         $datetime2 = new DateTime($date2, new DateTimeZone('Asia/Jakarta'));
         $interval = $datetime1->diff($datetime2);   
@@ -144,8 +144,8 @@ class Logic_Penanggalan extends Logic_Global {
      * @return type date
      */
     public function getMonthAndYearBefore ($tanggal_saat_ini) {
-          $month = $this->tanggal('m',$tanggal_saat_ini);
-          $year = $this->tanggal('Y',$tanggal_saat_ini);
+          $month = $this->tanggal('m', $tanggal_saat_ini);
+          $year = $this->tanggal('Y', $tanggal_saat_ini);
           $last_month = $month-1%12;
           if ($last_month==0) {
               $lastmonthyear=($year-1).'-12';

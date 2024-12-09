@@ -13,30 +13,30 @@ class CDaftarMahasiswa extends MainPageM {
 			}
             $_SESSION['currentPageDaftarMahasiswa']['search']=false;
             
-            $this->lblProdi->Text=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];
+            $this->lblProdi->Text = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();				
                 
 			$tahun_masuk=$this->DMaster->getListTA();
 			$tahun_masuk['none'] = 'All';
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $kelas=$this->DMaster->getListKelas();
             $kelas['none'] = 'All';
 			$this->tbCmbKelas->DataSource = $kelas;
-			$this->tbCmbKelas->Text=$_SESSION['kelas'];			
+			$this->tbCmbKelas->Text = $_SESSION['kelas'];			
 			$this->tbCmbKelas->dataBind();		
             
             $status=$this->DMaster->getListStatusMHS();
             $status['none'] = 'All';
 			$this->tbCmbStatus->DataSource = $status;
-			$this->tbCmbStatus->Text=$_SESSION['currentPageDaftarMahasiswa']['k_status'];			
+			$this->tbCmbStatus->Text = $_SESSION['currentPageDaftarMahasiswa']['k_status'];			
 			$this->tbCmbStatus->dataBind();
             
-            $this->tbCmbJenisMHS->Text=$_SESSION['currentPageDaftarMahasiswa']['jenismhs'];
+            $this->tbCmbJenisMHS->Text = $_SESSION['currentPageDaftarMahasiswa']['jenismhs'];
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -49,7 +49,7 @@ class CDaftarMahasiswa extends MainPageM {
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblProdi->Text=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];        
+        $this->lblProdi->Text = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];        
         $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = 'none';
         
         $this->populateSummary();
@@ -127,8 +127,8 @@ class CDaftarMahasiswa extends MainPageM {
                 break;
             }
         }
-        $this->labelJumlahMHSPria->Text=$jumlah_pria;
-        $this->labelJumlahMHSWanita->Text=$jumlah_wanita;
+        $this->labelJumlahMHSPria->Text = $jumlah_pria;
+        $this->labelJumlahMHSWanita->Text = $jumlah_wanita;
     }
     public function populateKonsentrasi () {			
         $datakonsentrasi=$this->DMaster->getListKonsentrasiProgramStudi();        
@@ -149,7 +149,7 @@ class CDaftarMahasiswa extends MainPageM {
         }
             
 
-        while (list($k,$v)=each($datakonsentrasi)) {                        
+        while (list($k, $v)=each($datakonsentrasi)) {                        
             if ($v['kjur']==$_SESSION['kjur']){
                 $idkonsentrasi=$v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("register_mahasiswa rm LEFT JOIN data_konversi dk ON (dk.nim=rm.nim) WHERE rm.idkonsentrasi=$idkonsentrasi $str_tahun_masuk $str_kelas $str_status",'rm.nim');
@@ -221,12 +221,12 @@ class CDaftarMahasiswa extends MainPageM {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPageDaftarMahasiswa']['page_num']=0;}
-        $str = "$str ORDER BY nim DESC,nama_mhs ASC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY nim DESC,nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'alamat_rumah', 'kjur', 'idkonsentrasi', 'iddosen_wali', 'tahun_masuk', 'k_status', 'idkelas', 'iddata_konversi', 'photo_profile'));
-		$r = $this->DB->getRecord($str,$offset+1);	
+		$r = $this->DB->getRecord($str, $offset+1);	
         $result = array();
         while (list($k, $v) = each($r)) {
-            $nim=$v['nim'];
+            $nim = $v['nim'];
             $dataMHS['nim'] = $nim;
             $dataMHS['tahun_masuk'] = $v['tahun_masuk'];
             $dataMHS['kjur'] = $v['kjur'];
@@ -234,7 +234,7 @@ class CDaftarMahasiswa extends MainPageM {
             $dataMHS['iddata_konversi'] = $iddata_konversi; 
             $dataMHS['idkonsentrasi'] = $v['idkonsentrasi'];                  
             $this->Nilai->setDataMHS($dataMHS);
-            $v['konsentrasi'] = $this->DMaster->getNamaKonsentrasiByID($v['idkonsentrasi'],$v['kjur']);
+            $v['konsentrasi'] = $this->DMaster->getNamaKonsentrasiByID($v['idkonsentrasi'], $v['kjur']);
             $v['njur'] = $_SESSION['daftar_jurusan'][$v['kjur']];
             $this->Nilai->getTranskrip();
             $v['ips'] = $this->Nilai->getIPSAdaNilai();
@@ -243,7 +243,7 @@ class CDaftarMahasiswa extends MainPageM {
         }
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
     }
     public function printOut($sender, $param) {	
         $this->createObj('reportakademik');
@@ -268,13 +268,13 @@ class CDaftarMahasiswa extends MainPageM {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 
-                $this->report->printDaftarMahasiswa($this->Demik,$this->DMaster); 
+                $this->report->printDaftarMahasiswa($this->Demik, $this->DMaster); 
             break;
             case  'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar Mahasiswa';
         $this->modalPrintOut->show();
     }

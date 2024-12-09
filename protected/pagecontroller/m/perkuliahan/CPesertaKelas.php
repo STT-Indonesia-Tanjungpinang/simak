@@ -46,7 +46,7 @@ class CPesertaKelas extends MainPageM {
         $this->populateData();		
       } catch (Exception $ex) {
         $this->idProcess = 'view';
-        $this->errorMessage->Text=$ex->getMessage();
+        $this->errorMessage->Text = $ex->getMessage();
       }
     }	
     $this->Demik->setInfoKelas($_SESSION['currentPagePesertaKelas']['InfoKelas']);	
@@ -94,7 +94,7 @@ class CPesertaKelas extends MainPageM {
     }
   }
   public function pindahkanAnggotaKelasMHS($sender, $param) {
-    $idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);	
+    $idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);	
     $old_idkelas_mhs=$this->hiddenidkelasmhs->Value;
     $idkelas_mhs=$sender->Text;
     if ($idkelas_mhs != 'none')
@@ -194,7 +194,7 @@ class CPesertaKelas extends MainPageM {
         $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
       break;
     }                
-    $this->lblMessagePrintout->Text=$messageprintout;
+    $this->lblMessagePrintout->Text = $messageprintout;
     $this->lblPrintout->Text='Daftar Hadir Mahasiswa';
     $this->modalPrintOut->show();
   }

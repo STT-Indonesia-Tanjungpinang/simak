@@ -56,7 +56,7 @@ class CDetailPKRS extends MainPageDW {
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$e->getMessage();	
+			$this->errorMessage->Text = $e->getMessage();	
         }
 	}
     public function itemCreated($sender, $param) {
@@ -89,9 +89,9 @@ class CDetailPKRS extends MainPageDW {
     public function toggleStatusMatkul($sender, $param){
 		$datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
         $idkrs=$datakrs['idkrs'];
-        $nim=$datakrs['nim'];
-		$idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);		
-		$id=explode('_',$sender->CommandParameter);
+        $nim = $datakrs['nim'];
+		$idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);		
+		$id=explode('_', $sender->CommandParameter);
 		$idpenyelenggaraan=$id[1];	
 		if ($id[0]==1) {			
 			try {
@@ -111,7 +111,7 @@ class CDetailPKRS extends MainPageDW {
 				$this->redirect('perkuliahan.DetailPKRS',true,array('id'=>$idkrs));	
 			} catch (Exception $e) {
 				$this->modalMessageError->show();
-                $this->lblContentMessageError->Text=$e->getMessage();						
+                $this->lblContentMessageError->Text = $e->getMessage();						
 			}
 		}elseif ($id[0]==0) {		
 			$str = "UPDATE krsmatkul SET batal=1 WHERE idkrsmatkul = $idkrsmatkul";			
@@ -122,11 +122,11 @@ class CDetailPKRS extends MainPageDW {
 		
 	}    
 	public function hapusMatkul($sender, $param) {		
-		$idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);
-        $id=explode('_',$sender->CommandParameter);				
+		$idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);
+        $id=explode('_', $sender->CommandParameter);				
 		$idpenyelenggaraan=$id[1];		
         $datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
-        $nim=$datakrs['nim'];
+        $nim = $datakrs['nim'];
 		$this->DB->query ('BEGIN');		
 		if ($this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul='$idkrsmatkul'")) {
 			$this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul='$idkrsmatkul'");
@@ -185,7 +185,7 @@ class CDetailPKRS extends MainPageDW {
                 
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
         $this->modalPrintOut->show();
 	}

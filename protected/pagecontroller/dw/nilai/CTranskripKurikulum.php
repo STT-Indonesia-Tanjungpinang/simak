@@ -15,12 +15,12 @@ class CTranskripKurikulum extends MainPageDW {
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();				
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			            
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageTranskripKurikulum']['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageTranskripKurikulum']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -31,18 +31,18 @@ class CTranskripKurikulum extends MainPageDW {
             $this->tbCmbOutputCompress->Text= $_SESSION['outputcompress'];
             $this->tbCmbOutputCompress->DataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
             $this->populateData();			
 		}		
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;        
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}
 	public function changeTbTahunMasuk($sender, $param) {    				
 		$_SESSION['currentPageTranskripKurikulum']['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;		        
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}
     public function getInfoToolbar() {        
@@ -101,19 +101,19 @@ class CTranskripKurikulum extends MainPageDW {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTranskripKurikulum']['page_num']=0;}
-        $str = "$str ORDER BY nama_mhs ASC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('nim', 'nama_mhs', 'jk', 'kjur', 'idkonsentrasi', 'tahun_masuk'));
-		$r = $this->DB->getRecord($str,$offset+1);	
+		$r = $this->DB->getRecord($str, $offset+1);	
         $result = array();
         while (list($k, $v) = each($r)) {
-            $nim=$v['nim'];
+            $nim = $v['nim'];
             $dataMHS['nim'] = $nim;
             $dataMHS['tahun_masuk'] = $v['tahun_masuk'];
             $dataMHS['kjur'] = $v['kjur'];
             $dataMHS['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true); 
             $dataMHS['idkonsentrasi'] = $v['idkonsentrasi'];
             $this->Nilai->setDataMHS($dataMHS);
-            $v['konsentrasi']=strtoupper($this->DMaster->getNamaKonsentrasiByID($v['idkonsentrasi'],$v['kjur']));
+            $v['konsentrasi']=strtoupper($this->DMaster->getNamaKonsentrasiByID($v['idkonsentrasi'], $v['kjur']));
             $this->Nilai->getTranskripNilaiKurikulum();
             $v['matkul'] = $this->Nilai->getTotalMatkulAdaNilai();
             $v['sks'] = $this->Nilai->getTotalSKSAdaNilai();
@@ -122,7 +122,7 @@ class CTranskripKurikulum extends MainPageDW {
         }
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 
 	}		
 	public function printOut($sender, $param) {		
@@ -131,7 +131,7 @@ class CTranskripKurikulum extends MainPageDW {
         $this->linkOutput->NavigateUrl='#';
 		switch ($sender->getId()) {
 			case 'btnPrintOutR' :
-                $nim = $this->getDataKeyField($sender,$this->RepeaterS);				
+                $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
                 switch ($_SESSION['outputreport']) {
                     case  'summarypdf' :
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
@@ -183,7 +183,7 @@ class CTranskripKurikulum extends MainPageDW {
                 }
             break;
 		}		
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Transkrip Kurikulum';
         $this->modalPrintOut->show();
 	}

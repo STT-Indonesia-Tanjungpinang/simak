@@ -49,7 +49,7 @@ class Logic_Nilai extends Logic_Akademik {
    * @param type $field nama field dari array
    * @return type array atau string
    */
-  public function getDataNilai($idx=null,$field=null) {
+  public function getDataNilai($idx=null, $field=null) {
     if ($idx == null)
       return $this->DataNilai;
     else
@@ -86,7 +86,7 @@ class Logic_Nilai extends Logic_Akademik {
    * @param type $idkur id kurikulum yang berlaku
    * @return type
    */
-  public function getNilaiKonversi($iddata_konversi,$idkur) {							
+  public function getNilaiKonversi($iddata_konversi, $idkur) {							
     $str = "SELECT idnilai_konversi,kmatkul,kmatkul_asal,matkul_asal,sks_asal,n_kual FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi'";
     $this->db->setFieldTable(array('idnilai_konversi','kmatkul_asal','kmatkul','matkul_asal','sks_asal','n_kual'));
     $result=$this->db->getRecord($str);
@@ -96,7 +96,7 @@ class Logic_Nilai extends Logic_Akademik {
     $listMatkul = $this->db->getRecord($str);		
     $i=1;
     $matkul_nilai=array();
-    while (list($k,$v)=each($listMatkul)) {			
+    while (list($k, $v)=each($listMatkul)) {			
       $kmatkul=$v['kmatkul'];
       $matkul_nilai[$i]['no']=$i;
       $matkul_nilai[$i]['kmatkul']=$v['kmatkul'];
@@ -133,8 +133,8 @@ class Logic_Nilai extends Logic_Akademik {
   * @param $cek_isi_kuesioner boolean
   * @version 1.0
   */
-  public function getTranskrip ($temp=true,$cek_isikuesioner=false) {				
-    $nim=$this->DataMHS['nim'];        
+  public function getTranskrip ($temp=true, $cek_isikuesioner=false) {				
+    $nim = $this->DataMHS['nim'];        
     $result=array();
     if ($temp) {			
       $idkonsentrasi=$this->DataMHS['idkonsentrasi'];
@@ -145,7 +145,7 @@ class Logic_Nilai extends Logic_Akademik {
       $r=$this->db->getRecord($str);			            
       $str = "SELECT n_kual,telah_isi_kuesioner,tahun FROM v_nilai WHERE nim='$nim' AND kmatkul=";
       $str_konversi = "SELECT n_kual FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi' AND kmatkul=";			            
-      while (list($k,$v)=each($r)) {	
+      while (list($k, $v)=each($r)) {	
         $kmatkul=$v['kmatkul'];
         $str2 = $str . "'$kmatkul' ORDER BY n_kual ASC LIMIT 1";                     
         $this->db->setFieldTable (array('n_kual','telah_isi_kuesioner','tahun'));
@@ -220,7 +220,7 @@ class Logic_Nilai extends Logic_Akademik {
   * @version 1.0
   */
   public function getTranskripNilaiKurikulum ($cek_isikuesioner=false) {
-    $nim=$this->DataMHS['nim'];
+    $nim = $this->DataMHS['nim'];
     $idkonsentrasi=$this->DataMHS['idkonsentrasi'];        
     
     $iddata_konversi=$this->DataMHS['iddata_konversi'];				
@@ -231,7 +231,7 @@ class Logic_Nilai extends Logic_Akademik {
     $str = "SELECT n_kual,telah_isi_kuesioner,tahun FROM v_nilai WHERE nim='$nim' AND kmatkul=";
     $str_konversi = "SELECT n_kual,tahun FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi' AND kmatkul=";        
     $result=array();
-    while (list($k,$v)=each($r)) {	
+    while (list($k, $v)=each($r)) {	
       $kmatkul=$v['kmatkul'];
       $str2 = $str . "'$kmatkul' ORDER BY n_kual ASC LIMIT 1";
       $this->db->setFieldTable (array('n_kual','telah_isi_kuesioner','tahun'));
@@ -305,14 +305,14 @@ class Logic_Nilai extends Logic_Akademik {
    * @param cek_isikuesioner bool
    */
   public function getTranskripFromKRS($cek_isikuesioner=false) {        
-    $nim=$this->DataMHS['nim'];		
+    $nim = $this->DataMHS['nim'];		
     $str = "SELECT vnk.kmatkul,vnk.nmatkul,vnk.sks,semester,IF(char_length(COALESCE(vnk2.n_kual,''))>0,vnk2.n_kual,'-') AS n_kual,telah_isi_kuesioner,vnk.tahun FROM v_nilai_khs vnk,(SELECT idkrsmatkul,MIN(n_kual) AS n_kual FROM `v_nilai_khs` WHERE nim='$nim' AND n_kual IS NOT NULL GROUP BY kmatkul ORDER BY (semester+0), kmatkul ASC) AS vnk2 WHERE vnk.idkrsmatkul=vnk2.idkrsmatkul";        
     $this->db->setFieldTable(array('kmatkul','nmatkul','sks','semester','n_kual','telah_isi_kuesioner','tahun'));
     
     $r=$this->db->getRecord($str);        
 
     $result=array();
-    while (list($k,$v)=each($r)) {	
+    while (list($k, $v)=each($r)) {	
       if ($v['tahun']>=2015){                
         if ($cek_isikuesioner) {
           if ($v['telah_isi_kuesioner']==0) {                    
@@ -353,7 +353,7 @@ class Logic_Nilai extends Logic_Akademik {
    * @param cek_isikuesioner bool
    */
   public function getTranskripFromKonversidanKRS($cek_isikuesioner=false) {        
-    $nim=$this->DataMHS['nim'];	
+    $nim = $this->DataMHS['nim'];	
     $iddata_konversi=$this->DataMHS['iddata_konversi'];
     $str = "SELECT vnk.kmatkul,vnk.nmatkul,vnk.sks,semester,IF(char_length(COALESCE(vnk2.n_kual,''))>0,vnk2.n_kual,'-') AS n_kual,telah_isi_kuesioner,vnk.tahun FROM v_nilai_khs vnk,(SELECT idkrsmatkul,MIN(n_kual) AS n_kual FROM `v_nilai_khs` WHERE nim='$nim' AND n_kual IS NOT NULL GROUP BY kmatkul ORDER BY (semester+0), kmatkul ASC) AS vnk2 WHERE vnk.idkrsmatkul=vnk2.idkrsmatkul";        
     $this->db->setFieldTable(array('kmatkul','nmatkul','sks','semester','n_kual','telah_isi_kuesioner','tahun'));
@@ -361,7 +361,7 @@ class Logic_Nilai extends Logic_Akademik {
     $r=$this->db->getRecord($str);        
 
     $result=array();
-    while (list($k,$v)=each($r)) {	
+    while (list($k, $v)=each($r)) {	
       if ($v['tahun']>=2015){                
         if ($cek_isikuesioner) {
           if ($v['telah_isi_kuesioner']==0) {                    
@@ -397,7 +397,7 @@ class Logic_Nilai extends Logic_Akademik {
       $str_konversi = "SELECT kmatkul,nmatkul,sks,semester,n_kual,tahun FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi'";
       $this->db->setFieldTable(array('kmatkul','nmatkul','sks','semester','n_kual','tahun'));
       $r_nilai=$this->db->getRecord($str_konversi);
-      while (list($k,$v)=each($r_nilai)) {
+      while (list($k, $v)=each($r_nilai)) {
         if (isset($result[$v['kmatkul']])) {
           $hm_konversi=ord(strtoupper($v['n_kual']));						
           $hm_biasa=ord($result[$v['kmatkul']]['n_kual']);						
@@ -431,14 +431,14 @@ class Logic_Nilai extends Logic_Akademik {
    * @param type $cek_isikuesioner
    * @return array daftar nilai KHS
    */
-  public function getKHS ($ta,$idsmt,$cek_isikuesioner=false) {
-    $nim=$this->DataMHS['nim'];
+  public function getKHS ($ta, $idsmt, $cek_isikuesioner=false) {
+    $nim = $this->DataMHS['nim'];
     $str = "SELECT idkrsmatkul,idsmt,tahun,kmatkul,nmatkul,sks,n_kual,nidn,nama_dosen,telah_isi_kuesioner FROM v_nilai_khs WHERE nim='$nim' AND idsmt=$idsmt AND tahun=$ta AND aktif=1";
     $this->db->setFieldTable(array('idkrsmatkul','idsmt','tahun','kmatkul','nmatkul','sks','n_kual','nidn','nama_dosen','telah_isi_kuesioner'));
     $r=$this->db->getRecord($str);		
     $result=array();
     if ($cek_isikuesioner) {
-      while (list($a,$b)=each($r)) {
+      while (list($a, $b)=each($r)) {
         $b['kmatkul']=$this->getKMatkul($b['kmatkul']);
         $hm=$b['n_kual'];
         if ($b['tahun']>=2015){
@@ -483,7 +483,7 @@ class Logic_Nilai extends Logic_Akademik {
         }			
       }
     }else{
-      while (list($a,$b)=each($r)) {
+      while (list($a, $b)=each($r)) {
         $b['kmatkul']=$this->getKMatkul($b['kmatkul']);
         $hm=$b['n_kual'];                
         if ($hm == '') {
@@ -514,8 +514,8 @@ class Logic_Nilai extends Logic_Akademik {
    * @param type $cek_isikuesioner
    * @return array daftar nilai KHS
   */
-  public function getKHSBeforeCurrentSemester ($ta,$idsmt,$cek_isikuesioner=false) {
-    $nim=$this->DataMHS['nim'];
+  public function getKHSBeforeCurrentSemester ($ta, $idsmt, $cek_isikuesioner=false) {
+    $nim = $this->DataMHS['nim'];
     $current_tasmt=$ta.$idsmt;
     $str = ($this->getDataMHS('tahun_masuk')==$ta&&$this->getDataMHS('semester_masuk')==$idsmt)?"SELECT MAX(tasmt) AS tasmt FROM krs WHERE nim='$nim' AND tasmt <= $current_tasmt AND idsmt!=3":"SELECT MAX(tasmt) AS tasmt FROM krs WHERE nim='$nim' AND tasmt < $current_tasmt AND idsmt!=3";
     $this->db->setFieldTable(array('tasmt'));        
@@ -525,7 +525,7 @@ class Logic_Nilai extends Logic_Akademik {
       $str = "SELECT idkrs,tahun,idsmt FROM krs WHERE nim='$nim' AND tasmt=$tasmt AND idsmt!=3";
       $this->db->setFieldTable(array('idkrs','tahun','idsmt'));
       $r=$this->db->getRecord($str);			            
-      $this->getKHS($r[1]['tahun'],$r[1]['idsmt']);                        
+      $this->getKHS($r[1]['tahun'], $r[1]['idsmt']);                        
     }
     return $this->DataNilai;
   }
@@ -535,9 +535,9 @@ class Logic_Nilai extends Logic_Akademik {
    * @param type $semester_sekarang
    * @return type array
    */
-  public function getKumulatifSksDanNmSemesterLalu($tahun_sekarang,$semester_sekarang) {
+  public function getKumulatifSksDanNmSemesterLalu($tahun_sekarang, $semester_sekarang) {
     $ta_smt=$tahun_sekarang.$semester_sekarang;
-    $nim=$this->DataMHS['nim'];
+    $nim = $this->DataMHS['nim'];
     
     $str = "SELECT n_kual,sks FROM v_nilai_khs vnk,(SELECT idkrsmatkul,MIN(n_kual) FROM `v_nilai_khs` WHERE nim='$nim' AND tasmt < $ta_smt GROUP BY kmatkul ORDER BY kmatkul ASC) AS vnk2 WHERE vnk.idkrsmatkul=vnk2.idkrsmatkul";
     $this->db->setFieldTable(array('sks','n_kual'));
@@ -545,7 +545,7 @@ class Logic_Nilai extends Logic_Akademik {
     
     $nilai=array('total_sks'=>0,'total_nm'=>0);
     if (isset($result[1])) {
-      while (list($k,$v)=each($result ) ) {                
+      while (list($k, $v)=each($result ) ) {                
         $total_sks=$total_sks+$v['sks'];
         $angka_m=$this->AngkaMutu[$v['n_kual']];
         $total_m=$total_m+($angka_m*$v['sks']);                
@@ -561,9 +561,9 @@ class Logic_Nilai extends Logic_Akademik {
    * @param int $semester_sekarang
    * @return float ipk
    */
-  public function getIPKSampaiTASemester($tahun_sekarang,$semester_sekarang,$mode=null) {
+  public function getIPKSampaiTASemester($tahun_sekarang, $semester_sekarang, $mode=null) {
     $ta_smt=$tahun_sekarang.$semester_sekarang;
-    $nim=$this->DataMHS['nim'];
+    $nim = $this->DataMHS['nim'];
     
     $str = "SELECT n_kual,sks FROM v_nilai_khs vnk,(SELECT idkrsmatkul,MIN(n_kual),telah_isi_kuesioner FROM `v_nilai_khs` WHERE nim='$nim' AND tasmt <= $ta_smt GROUP BY kmatkul ORDER BY kmatkul ASC) AS vnk2 WHERE vnk.idkrsmatkul=vnk2.idkrsmatkul";        
     $this->db->setFieldTable(array('sks','n_kual'));
@@ -595,7 +595,7 @@ class Logic_Nilai extends Logic_Akademik {
     $totalMatkul=0;
     $dn=$this->DataNilai;
     if (count($dn) > 0) {								
-      while (list($a,$b)=each($dn)) {											
+      while (list($a, $b)=each($dn)) {											
         $totalMatkul+=1;					
       }			
     }	
@@ -608,7 +608,7 @@ class Logic_Nilai extends Logic_Akademik {
     $totalMatkul=0;
     $dn=$this->DataNilai;
     if (count($dn) > 0) {								
-      while (list($a,$b)=each($dn)) {							
+      while (list($a, $b)=each($dn)) {							
         if ($b['n_kual']!='-' && $b['n_kual']!='') {					
           $totalMatkul+=1;					
         }			
@@ -624,7 +624,7 @@ class Logic_Nilai extends Logic_Akademik {
     $totalSks=0;		
     $dn=$this->DataNilai;
     if (count($dn) > 0) {													
-      while (list($a,$b)=each($dn)) {						
+      while (list($a, $b)=each($dn)) {						
         $totalSks+=$b['sks'];												
       }			
     }
@@ -638,7 +638,7 @@ class Logic_Nilai extends Logic_Akademik {
     $totalSks=0;		
     $dn=$this->DataNilai;
     if (count($dn) > 0) {													
-      while (list($a,$b)=each($dn)) {		
+      while (list($a, $b)=each($dn)) {		
         if ($b['n_kual']!='-' && $b['n_kual']!='') {					
           $totalSks+=$b['sks'];
         }							
@@ -655,7 +655,7 @@ class Logic_Nilai extends Logic_Akademik {
     $countM=0;
     $dn=$this->DataNilai;
     if (count($dn) > 0) {
-      while (list($a,$b)=each($dn)) {						
+      while (list($a, $b)=each($dn)) {						
         if ($b['n_kual'] != "" &&$b['n_kual'] != "-") {				             				
           $m = (intval($b['sks'])) * $this->AngkaMutu[$b['n_kual']]; 
           $countM = $countM+$m;
@@ -672,14 +672,14 @@ class Logic_Nilai extends Logic_Akademik {
     $totalSks=0;
     $dn=$this->DataNilai;
     $countM=0;
-    while (list($k,$v)=each($dn)) {
+    while (list($k, $v)=each($dn)) {
       $sks=$v['sks'];				        				            
       $totalSks += $sks;      
       $n_kual = isset($this->AngkaMutu[$v['n_kual']])?$this->AngkaMutu[$v['n_kual']]:0;
       $m = (intval($sks)) * $n_kual; 
       $countM = $countM+$m;            
     }			
-    if ($ips=@ bcdiv($countM,$totalSks,2) ) {							
+    if ($ips=@ bcdiv($countM, $totalSks,2) ) {							
       return $ips;
     }else {
       return '0.00';
@@ -693,7 +693,7 @@ class Logic_Nilai extends Logic_Akademik {
     $totalSks=0;
     $dn=$this->DataNilai;
     $countM=0;
-    while (list($k,$v)=each($dn)) {
+    while (list($k, $v)=each($dn)) {
       $sks=$v['sks'];				        				
       if ($v['n_kual'] != '' && $v['n_kual'] != '-') {                            					
         $totalSks += $sks;      
@@ -701,7 +701,7 @@ class Logic_Nilai extends Logic_Akademik {
         $countM = $countM+$m;
       }        
     }			
-    if ($ips=@ bcdiv($countM,$totalSks,2) ) {							
+    if ($ips=@ bcdiv($countM, $totalSks,2) ) {							
       return $ips;
     }else {
       return '0.00';
@@ -715,7 +715,7 @@ class Logic_Nilai extends Logic_Akademik {
     $totalSks=0;
     $dn=$this->DataNilai;
     $countM=0;
-    while (list($k,$v)=each($dn)) {
+    while (list($k, $v)=each($dn)) {
       $sks=$v['sks'];				        				
       if ($v['n_kual'] != '' && $v['n_kual'] != '-') {                            					
         $totalSks += $sks;      
@@ -723,7 +723,7 @@ class Logic_Nilai extends Logic_Akademik {
         $countM = $countM+$m;
       }        
     }			
-    if ($ipk=@ bcdiv($countM,$totalSks,2) ) {							
+    if ($ipk=@ bcdiv($countM, $totalSks,2) ) {							
       return $ipk;
     }else {
       return '0.00';
@@ -736,14 +736,14 @@ class Logic_Nilai extends Logic_Akademik {
    * @param type $idsmt
    * @return type
    */
-  public function getMaxSKS ($ta,$idsmt) {		
+  public function getMaxSKS ($ta, $idsmt) {		
     $ta_masuk=$this->DataMHS['tahun_masuk'];
     $semester_masuk=$this->DataMHS['semester_masuk'];		        
     if ($ta==$ta_masuk && $idsmt==$semester_masuk) {
       $setup=$this->getLogic('Setup');
       $jumlahsks=$setup->getSettingValue('jumlah_sks_krs_mhs_baru');
     }else {				
-      $this->getKHSBeforeCurrentSemester($ta,$idsmt);			
+      $this->getKHSBeforeCurrentSemester($ta, $idsmt);			
       $jumlahsks=$this->getSKSNextSemester($this->getIPS());				
     }
     return $jumlahsks;

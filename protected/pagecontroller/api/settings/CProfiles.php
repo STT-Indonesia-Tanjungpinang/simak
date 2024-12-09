@@ -15,7 +15,7 @@ class CProfiles extends MainPageAPI {
         $r = $this->DB->getRecord($str);  
         $result = array();
         while (list($k, $v) = each($r)) {
-            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y',$v['logintime']);       
+            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);       
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;
@@ -23,7 +23,7 @@ class CProfiles extends MainPageAPI {
     }  
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender,$this->RepeaterS);        
+        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
         $this->hiddenid->Value=$id;     
         
         $str = "SELECT userid,username,nama,email,ipaddress,active FROM user WHERE userid='$id'";
@@ -31,10 +31,10 @@ class CProfiles extends MainPageAPI {
         $r = $this->DB->getRecord($str);
         
         $result=$r[1];          
-        $this->txtEditNama->Text=$result['nama'];
-        $this->txtEditEmail->Text=$result['email'];
+        $this->txtEditNama->Text = $result['nama'];
+        $this->txtEditEmail->Text = $result['email'];
         $this->hiddenemail->Value=$result['email'];     
-        $this->txtEditIPAddress->Text=$result['ipaddress']; 
+        $this->txtEditIPAddress->Text = $result['ipaddress']; 
     }  
     public function checkEmail($sender, $param) {
         $this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
@@ -42,7 +42,7 @@ class CProfiles extends MainPageAPI {
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
-                    if ($this->DB->checkRecordIsExist('email', 'user',$email)) {                                
+                    if ($this->DB->checkRecordIsExist('email', 'user', $email)) {                                
                         throw new Exception ("Email ($email) sudah tidak tersedia silahkan ganti dengan yang lain.");       
                     }                               
                 }                

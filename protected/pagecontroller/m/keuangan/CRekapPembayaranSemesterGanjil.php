@@ -18,23 +18,23 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
             
             $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	            
             
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');;
-            $this->tbCmbTA->Text=$_SESSION['ta'];
+            $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();
             
             $tahun_masuk=$this->getAngkatan (false);	
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             
             $kelas=$this->DMaster->getListKelas();
             $kelas['none'] = 'All';
 			$this->tbCmbKelas->DataSource = $kelas;
-			$this->tbCmbKelas->Text=$_SESSION['currentPageRekapPembayaranSemesterGanjil']['kelas'];			
+			$this->tbCmbKelas->Text = $_SESSION['currentPageRekapPembayaranSemesterGanjil']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -125,9 +125,9 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageRekapPembayaranSemesterGanjil']['page_num']=0;}
-        $str = "$str ORDER BY idkelas ASC,nama_mhs ASC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY idkelas ASC,nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idrekap', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'n_kelas', 'dibayarkan', 'kewajiban', 'sisa'));
-        $r = $this->DB->getRecord($str,$offset+1);	        
+        $r = $this->DB->getRecord($str, $offset+1);	        
         $result = array();	
         
 		while (list($k, $v) = each($r)) {
@@ -138,7 +138,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
 		}
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
     public function itemCreated($sender, $param) {
         $item=$param->Item;
@@ -188,7 +188,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
         
 		while (list($k, $v) = each($r)) {
             $no_formulir = $v['no_formulir'];
-			$nim=$v['nim'];
+			$nim = $v['nim'];
             $nirm=$v['nirm'];
             $nama_mhs=addslashes($v['nama_mhs']);
             $jk=$v['jk'];
@@ -215,7 +215,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
         $str = "SELECT nim,tahun_masuk,semester_masuk,idsmt,tahun,idkelas FROM rekap_laporan_pembayaran_per_semester WHERE idrekap=$idrekap";
         $this->DB->setFieldTable(array('nim', 'tahun_masuk', 'semester_masuk', 'idsmt', 'tahun', 'idkelas'));
         $r = $this->DB->getRecord($str);   
-        $nim=$r[1]['nim'];
+        $nim = $r[1]['nim'];
         $semester = $r[1]['idsmt'];
         $ta = $r[1]['tahun'];
         $this->Finance->setDataMHS(array('tahun_masuk'=>$r[1]['tahun_masuk'],'idsmt'=>$r[1]['semester_masuk'],'idkelas'=>$r[1]['idkelas']));
@@ -261,13 +261,13 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 
-                $this->report->printRekapPembayaranSemester($this->Finance,$this->DMaster); 
+                $this->report->printRekapPembayaranSemester($this->Finance, $this->DMaster); 
             break;
             case  'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Rekapitulasi Pembayaran Semester Ganjil';
         $this->modalPrintOut->show();
     }

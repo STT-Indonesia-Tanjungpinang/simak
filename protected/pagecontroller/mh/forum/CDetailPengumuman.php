@@ -57,7 +57,7 @@ class CDetailPengumuman extends MainPageMHS {
             $this->txtAddContent->Text='';
             $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user = $this->Pengguna->getDataUser('username');                        
-            $str = "INSERT INTO pengumuman (idpost,idkategori,parentpost,title,content,userid,tipe,nama_user,date_added) VALUES (NULL,$idkategori,$idpost,'$judul', '$content',$userid,'m', '$nama_user',NOW())";                   
+            $str = "INSERT INTO pengumuman (idpost,idkategori,parentpost,title,content,userid,tipe,nama_user,date_added) VALUES (NULL, $idkategori, $idpost,'$judul', '$content', $userid,'m', '$nama_user',NOW())";                   
             $this->DB->insertRecord($str);
             $this->populateData();
         }

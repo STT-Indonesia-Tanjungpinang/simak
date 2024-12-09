@@ -50,10 +50,10 @@ class DetailKHSEkstension extends MainPageDW {
             $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
             $_SESSION['currentPageDetailKHSEkstension']['DataMHS']=$datamhs;
             $this->Nilai->setDataMHS($datamhs);
-            $khs = $this->Nilai->getKHS($tahun,$idsmt);
+            $khs = $this->Nilai->getKHS($tahun, $idsmt);
             if(isset($khs[1])){
-				$this->NilaiSemesterLalu=$this->Nilai->getKumulatifSksDanNmSemesterLalu($tahun,$idsmt);
-                $this->NilaiSemesterSekarang=$this->Page->Nilai->getIPKSampaiTASemester($tahun,$idsmt,'ipksksnm');
+				$this->NilaiSemesterLalu=$this->Nilai->getKumulatifSksDanNmSemesterLalu($tahun, $idsmt);
+                $this->NilaiSemesterSekarang=$this->Page->Nilai->getIPKSampaiTASemester($tahun, $idsmt,'ipksksnm');
                 $this->RepeaterS->DataSource=$khs ;
                 $this->RepeaterS->dataBind();							
 			}else{				
@@ -61,10 +61,10 @@ class DetailKHSEkstension extends MainPageDW {
 			}		            
         } catch (Exception $ex) {
             $this->idProcess='view';	
-			$this->errorMessage->Text=$ex->getMessage();
+			$this->errorMessage->Text = $ex->getMessage();
         }        
 	}
-    public function itemBound ($sender,$param) {
+    public function itemBound ($sender, $param) {
         $item=$param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') { 
             $sks=$item->DataItem['sks'];
@@ -73,7 +73,7 @@ class DetailKHSEkstension extends MainPageDW {
             DetailKHSEkstension::$TotalM += $m;            
         }
     }
-	public function printOut ($sender,$param) {	
+	public function printOut ($sender, $param) {	
         $this->createObj('reportnilai');             
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -117,7 +117,7 @@ class DetailKHSEkstension extends MainPageDW {
                 
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text="Kartu Hasil Studi T.A $nama_tahun Semester $nama_semester";
         $this->modalPrintOut->show();
 	}

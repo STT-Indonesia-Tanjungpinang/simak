@@ -23,16 +23,16 @@ class CDulangMHSLama Extends MainPageMHS {
 	}
     public function populateData() {
         $this->KRS->setDataMHS($this->Pengguna->getDataUser());
-        $nim=$this->Pengguna->getDataUser('nim');
+        $nim = $this->Pengguna->getDataUser('nim');
         $str = "SELECT d.iddulang,d.tahun,d.idsmt,d.tanggal,d.idkelas,k.nkelas,d.k_status,sm.n_status FROM dulang d LEFT JOIN kelas k ON (d.idkelas=k.idkelas) LEFT JOIN status_mhs sm ON (d.k_status=sm.k_status) WHERE nim='$nim' ORDER BY d.iddulang DESC";				        
 		$this->DB->setFieldTable(array('iddulang', 'tahun', 'idsmt', 'tanggal', 'idkelas', 'nkelas', 'k_status', 'n_status'));
 		$r = $this->DB->getRecord($str);                
         $result = array();
         while(list($k, $v) = each($r)) {
-            $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-' :$this->TGL->tanggal('l, d F Y',$v['tanggal']);
+            $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-' :$this->TGL->tanggal('l, d F Y', $v['tanggal']);
             $isikrs='tidak isi';
             if ($v['k_status']=='A') {
-                $this->KRS->getDataKRS($v['tahun'],$v['idsmt']);  
+                $this->KRS->getDataKRS($v['tahun'], $v['idsmt']);  
                 $datakrs=$this->KRS->DataKRS;
                 $isikrs='belum isi';
                 if (isset($datakrs['idkrs'])) {

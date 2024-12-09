@@ -15,41 +15,41 @@ class CPenyelenggaraan extends MainPageDW {
             $_SESSION['currentPagePenyelenggaraan']['DaftarDosen'] = $this->DMaster->getDaftarDosen();
                         
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
-			$this->tbCmbTA->Text=$_SESSION['ta'];						
+			$this->tbCmbTA->Text = $_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
 			$this->populateData();		
 		}			
 	}
     public function changeTbTA($sender, $param) {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPagePenyelenggaraan']['search']);
         
 	}	
 	public function changeTbSemester($sender, $param) {
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPagePenyelenggaraan']['search']);
 	}	
     public function changeTbPs($sender, $param) {		
         $_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateData();
 	}
     public function getInfoToolbar() {        

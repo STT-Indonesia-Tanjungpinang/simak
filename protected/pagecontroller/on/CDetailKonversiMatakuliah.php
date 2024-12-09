@@ -44,16 +44,16 @@ class CDetailKonversiMatakuliah extends MainPageON {
             }
             $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'] = $dataView;
             $this->Nilai->setDataMHS($dataView);
-            $nilai=$this->Nilai->getNilaiKonversi($iddata_konversi,$dataView['idkur']);		
+            $nilai=$this->Nilai->getNilaiKonversi($iddata_konversi, $dataView['idkur']);		
             $this->RepeaterS->dataSource = $nilai;
             $this->RepeaterS->dataBind();            	            
         } catch (Exception $ex) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$ex->getMessage();
+			$this->errorMessage->Text = $ex->getMessage();
         }        
 	}  
     public function checkNIM($sender, $param) {					
-		$nim=$param->Value;		
+		$nim = $param->Value;		
         if ($nim != '') {
             try {   
                 $str = "SELECT nama_mhs,k_status,kjur FROM v_datamhs WHERE nim='$nim'";
@@ -72,7 +72,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
                         throw new Exception ("Anda tidak berhak mengakses data mahasiswa dengan NIM ($nim).");		
                     } 
                 }
-				if ($this->DB->checkRecordIsExist('nim', 'data_konversi',$nim)) {
+				if ($this->DB->checkRecordIsExist('nim', 'data_konversi', $nim)) {
                     throw new Exception ("Data Konversi ini tidak bisa dihubungkan dengan NIM ($nim) karena NIM ini sudah terhubung dengan yang lain.");
                 }
             }catch (Exception $e) {
@@ -83,7 +83,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
 	}
     public function getInfoMHS($sender, $param) {		
 		if ($this->IsValid) {
-			$nim=$this->txtAddNIM->Text;
+			$nim = $this->txtAddNIM->Text;
             $str = "SELECT vdm.nim,vdm.nama_mhs,sm.n_status AS status FROM v_datamhs vdm LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE vdm.nim='$nim'";
             $this->DB->setFieldTable(array('nim', 'nama_mhs', 'status'));
             $r = $this->DB->getRecord($str);
@@ -93,17 +93,17 @@ class CDetailKonversiMatakuliah extends MainPageON {
             $ulr_profil = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$datamhs['nim']));
             $url='<a href="'.$ulr_profil.'" style="color:#fff">'.$nim.'</a> ';
             $str_pindahan = $pindahan == 0? '' :'<span class="label label-warning">Pindahan</span>';
-            $this->labelNIM->Text=$url.$str_pindahan;
-            $this->labelNamaMHS->Text=$datamhs['nama_mhs'];
-            $this->labelStatusMSH->Text=$datamhs['status'];            
+            $this->labelNIM->Text = $url.$str_pindahan;
+            $this->labelNamaMHS->Text = $datamhs['nama_mhs'];
+            $this->labelStatusMSH->Text = $datamhs['status'];            
 			$this->modalInfoMHS->show();
         }
     }
     public function linkingData($sender, $param) {		
 		if ($this->IsValid) {		
 			$iddata_konversi=$_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']['iddata_konversi'];
-			$nim=$this->txtAddNIM->Text;
-			$str = "INSERT INTO data_konversi (idkonversi,iddata_konversi,nim) VALUES (NULL,$iddata_konversi,'$nim')";
+			$nim = $this->txtAddNIM->Text;
+			$str = "INSERT INTO data_konversi (idkonversi,iddata_konversi,nim) VALUES (NULL, $iddata_konversi,'$nim')";
 			$this->DB->insertRecord($str);
 			$this->redirect('DetailKonversiMatakuliah',true,array('id'=>$iddata_konversi));
         }
@@ -155,7 +155,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
                 $this->report->printKonversiMatakuliah($this->Nilai);
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text="Konversi Matakuliah";
         $this->modalPrintOut->show();
 	}

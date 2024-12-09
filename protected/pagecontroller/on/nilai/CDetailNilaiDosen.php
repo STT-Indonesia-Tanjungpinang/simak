@@ -33,7 +33,7 @@ class CDetailNilaiDosen extends MainPageON
       catch (Exception $ex)
       {
         $this->idProcess = 'view';	
-        $this->errorMessage->Text=$ex->getMessage();
+        $this->errorMessage->Text = $ex->getMessage();
       }
     }
   }    

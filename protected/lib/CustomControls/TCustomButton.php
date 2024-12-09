@@ -36,7 +36,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 		$page=$this->getPage();
 		$page->ensureRenderInForm($this);		
 		if(($uniqueID=$this->getUniqueID())!=='')
-			$writer->addAttribute('name',$uniqueID);		
+			$writer->addAttribute('name', $uniqueID);		
 		if($this->getEnabled(true))
 		{
 			if($this->getEnableClientScript() && $this->needPostBackScript())
@@ -53,8 +53,8 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	protected function renderClientControlScript($writer)
 	{
-		$writer->addAttribute('id',$this->getClientID());
-		$this->getPage()->getClientScript()->registerPostBackControl($this->getClientClassName(),$this->getPostBackOptions());
+		$writer->addAttribute('id', $this->getClientID());
+		$this->getPage()->getClientScript()->registerPostBackControl($this->getClientClassName(), $this->getPostBackOptions());
 	}
 
 	/**
@@ -139,7 +139,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function onClick($param)
 	{
-		$this->raiseEvent('OnClick',$this,$param);
+		$this->raiseEvent('OnClick', $this, $param);
 	}
 
 	/**
@@ -151,8 +151,8 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function onCommand($param)
 	{
-		$this->raiseEvent('OnCommand',$this,$param);
-		$this->raiseBubbleEvent($this,$param);
+		$this->raiseEvent('OnCommand', $this, $param);
+		$this->raiseBubbleEvent($this, $param);
 	}
 
 	/**
@@ -169,7 +169,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 		if($this->getCausesValidation())
 			$this->getPage()->validate($this->getValidationGroup());
 		$this->onClick(null);
-		$this->onCommand(new TCommandEventParameter($this->getCommandName(),$this->getCommandParameter()));
+		$this->onCommand(new TCommandEventParameter($this->getCommandName(), $this->getCommandParameter()));
 	}
 
 	/**
@@ -185,7 +185,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function setText($value)
 	{
-		$this->setViewState('Text',$value,'');
+		$this->setViewState('Text', $value,'');
 	}
 
 	/**
@@ -243,7 +243,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function setCommandName($value)
 	{
-		$this->setViewState('CommandName',$value,'');
+		$this->setViewState('CommandName', $value,'');
 	}
 
 	/**
@@ -259,7 +259,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function setCommandParameter($value)
 	{
-		$this->setViewState('CommandParameter',$value,'');
+		$this->setViewState('CommandParameter', $value,'');
 	}
 
 	/**
@@ -275,7 +275,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function setValidationGroup($value)
 	{
-		$this->setViewState('ValidationGroup',$value,'');
+		$this->setViewState('ValidationGroup', $value,'');
 	}
 
 }

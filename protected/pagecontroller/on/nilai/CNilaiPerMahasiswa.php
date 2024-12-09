@@ -44,13 +44,13 @@ class CNilaiPerMahasiswa extends MainPageON {
         
         $ta = $_SESSION['currentPageNilaiPerMahasiswa']['ta'];
         $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-        $this->tbCmbTA->Text=$ta;
+        $this->tbCmbTA->Text = $ta;
         $this->tbCmbTA->dataBind();			
         
         $idsmt = $_SESSION['currentPageNilaiPerMahasiswa']['semester'];
         $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
         $this->tbCmbSemester->DataSource = $semester;
-        $this->tbCmbSemester->Text=$idsmt;
+        $this->tbCmbSemester->Text = $idsmt;
         $this->tbCmbSemester->dataBind();
         
         $this->setInfoToolbar();
@@ -72,8 +72,10 @@ class CNilaiPerMahasiswa extends MainPageON {
   }
   public function cekNIM($sender, $param) {		
     $nim=addslashes($param->Value);		
-    if ($nim != '') {
-      try {
+    if ($nim != '') 
+    {
+      try 
+      {
         $str = "SELECT nim,kjur FROM register_mahasiswa WHERE nim='$nim'";
         $this->DB->setFieldTable(array('nim', 'kjur'));
         $r = $this->DB->getRecord($str);
@@ -104,19 +106,19 @@ class CNilaiPerMahasiswa extends MainPageON {
   }
   public function changeTbTA($sender, $param) {
     $_SESSION['currentPageNilaiPerMahasiswa']['ta'] = $this->tbCmbTA->Text;	
-    $nim=$_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
+    $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
     $this->redirect('nilai.NilaiPerMahasiswa', true,array('id'=>$nim));        
   }	
   public function changeTbSemester($sender, $param) {
     $_SESSION['currentPageNilaiPerMahasiswa']['semester'] = $this->tbCmbSemester->Text;		
-    $nim=$_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
+    $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
     $this->redirect('nilai.NilaiPerMahasiswa', true,array('id'=>$nim));
   }
   
   public function populateData () {
     $ta = $_SESSION['currentPageNilaiPerMahasiswa']['ta'];
     $idsmt = $_SESSION['currentPageNilaiPerMahasiswa']['semester'];
-    $nim=$_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
+    $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
     
     $str = "SELECT vkm.idkrsmatkul,nm.idnilai,vkm.kmatkul,vkm.nmatkul,vkm.sks,vkm.nidn,vkm.nama_dosen,nm.n_kuan,nm.n_kual,nm.userid_input,nm.tanggal_input,nm.tanggal_modif,nm.bydosen,nm.ket,vkm.batal,vkm.sah FROM v_krsmhs vkm LEFT JOIN nilai_matakuliah nm ON vkm.idkrsmatkul=nm.idkrsmatkul WHERE nim='$nim' AND tahun='$ta' AND idsmt='$idsmt' AND sah=1";
     $this->DB->setFieldTable(array('idkrsmatkul', 'idnilai', 'kmatkul', 'nmatkul', 'sks', 'nidn', 'nama_dosen', 'n_kuan', 'n_kual', 'userid_input', 'tanggal_input', 'tanggal_modif', 'bydosen', 'ket', 'batal', 'sah'));	
@@ -129,8 +131,8 @@ class CNilaiPerMahasiswa extends MainPageON {
         $v['tanggal_input'] = '-';
         $v['tanggal_modif'] = '-';
       }else{
-        $v['tanggal_input'] = $this->TGL->tanggal ('j F Y',$v['tanggal_input']);
-        $v['tanggal_modif'] = $this->TGL->tanggal ('j F Y',$v['tanggal_modif']);
+        $v['tanggal_input'] = $this->TGL->tanggal ('j F Y', $v['tanggal_input']);
+        $v['tanggal_modif'] = $this->TGL->tanggal ('j F Y', $v['tanggal_modif']);
       }
       $result[$k] = $v;
     }
@@ -146,8 +148,8 @@ class CNilaiPerMahasiswa extends MainPageON {
         $item->cmbNilai->Enabled=false;		
       }else {
         $item->literalKet->Text='-';
-        $item->txtNilaiAngka->Text=$item->DataItem['n_kuan'];
-        $item->cmbNilai->Text=$item->DataItem['n_kual'];
+        $item->txtNilaiAngka->Text = $item->DataItem['n_kuan'];
+        $item->cmbNilai->Text = $item->DataItem['n_kual'];
         $item->nilai_sebelumnya->Value=$item->DataItem['n_kual'];
         $bool = $item->DataItem['bydosen']==true?false:true;
         $item->txtNilaiAngka->Enabled=$bool;
@@ -155,16 +157,22 @@ class CNilaiPerMahasiswa extends MainPageON {
       }				
     }
   }
-  public function saveData($sender, $param) {
+  public function saveData($sender, $param) 
+  {
     if ($this->IsValid)
     {
+      $this->createObj('log');
       $repeater = $this->RepeaterS;            	
-      $userid = $this->Pengguna->getDataUser('userid');		
+      $userid = $this->Pengguna->getDataUser('userid');	
+      $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];	
       foreach ($repeater->Items as $inputan)
       {	
         if ($inputan->cmbNilai->Enabled) 
         {
           $idkrsmatkul = $inputan->idkrsmatkul->Value;		
+          $infomatkul = $this->Nilai->getInfoMatkul($idkrsmatkul, 'krsmatkul');
+          $kmatkul = $infomatkul['kmatkul'];
+          $nmatkul = $infomatkul['nmatkul'];
           $n_kuan = addslashes($inputan->txtNilaiAngka->Text) > 0 ? $inputan->txtNilaiAngka->Text : 0;
           $n_kual = $inputan->cmbNilai->Text;				
           $nilai_sebelumnya = $inputan->nilai_sebelumnya->Value;				
@@ -174,21 +182,30 @@ class CNilaiPerMahasiswa extends MainPageON {
             {
               $str = "INSERT INTO nilai_matakuliah SET idnilai=NULL,idkrsmatkul = $idkrsmatkul,persentase_quiz=0,persentase_tugas=0,persentase_uts=0,persentase_uas=0,persentase_absen=0,nilai_quiz=0,nilai_tugas=0,nilai_uts=0,nilai_uas=0,nilai_absen=0,n_kuan=$n_kuan,n_kual='$n_kual',userid_input=$userid,userid_modif=$userid,tanggal_input=NOW(),tanggal_modif=NOW(),bydosen=0,ket='',telah_isi_kuesioner=0,tanggal_isi_kuesioner=CURDATE()";				
               $this->DB->insertRecord($str);
+
+              $extra = "idkrsmatkul=$idkrsmatkul";
+              $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'input', $n_kual, $nilai_sebelumnya, $extra);
             }
           }
-          elseif($n_kual!='none'&&$n_kual!=$nilai_sebelumnya)
+          elseif($n_kual != 'none' && $n_kual != $nilai_sebelumnya)
           {//update										
             $str = "UPDATE nilai_matakuliah SET n_kuan='$n_kuan',n_kual='$n_kual',userid_modif='$userid',tanggal_modif=NOW(),ket='dari $nilai_sebelumnya menjadi $n_kual' WHERE idkrsmatkul='$idkrsmatkul'";				
             $this->DB->updateRecord($str);
+            
+            $extra = "idkrsmatkul=$idkrsmatkul";
+            $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'update', $n_kual, $nilai_sebelumnya, $extra);
           }
-          elseif($nilai_sebelumnya != ''&&$n_kual=='none')
+          elseif($nilai_sebelumnya != '' && $n_kual == 'none')
           {//delete
             $str = "nilai_matakuliah WHERE idkrsmatkul='$idkrsmatkul'";	
             $this->DB->deleteRecord($str);
+
+            $extra = "idkrsmatkul=$idkrsmatkul";
+            $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'delete', $n_kual, $nilai_sebelumnya, $extra);
           }				
         }
       }
-      $nim=$_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
+      $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
       $this->redirect('nilai.NilaiPerMahasiswa', true,array('id'=>$nim));
     }		
   }	

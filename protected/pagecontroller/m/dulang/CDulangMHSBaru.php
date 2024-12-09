@@ -14,17 +14,17 @@ class CDulangMHSBaru Extends MainPageM {
             $_SESSION['currentPageDulangMHSBaru']['search']=false;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
-			$this->tbCmbSemesterMasuk->Text=$_SESSION['currentPageDulangMHSBaru']['semester_masuk'];
+			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageDulangMHSBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();  
             
             $this->populateData();
@@ -109,13 +109,13 @@ class CDulangMHSBaru Extends MainPageM {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSBaru']['page_num']=0;}
-		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";				        
+		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal', 'idkelas'));
-		$result=$this->DB->getRecord($str,$offset+1);
+		$result=$this->DB->getRecord($str, $offset+1);
 		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
                 
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function cekNomorFormulir($sender, $param) {		
         $no_formulir=addslashes($param->Value);		
@@ -146,12 +146,12 @@ class CDulangMHSBaru Extends MainPageM {
                     $datamhs['kjur'] = $spmb['kjur'];
                     $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
                     $datamhs['perpanjang']=false;
-                    $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s',$datamhs['waktu_mendaftar']);
+                    $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $datamhs['waktu_mendaftar']);
                     $this->Finance->setDataMHS($datamhs);                               
                     if ($this->Finance->isMhsRegistered()){
                         throw new Exception ("Calon Mahasiswa a.n ".$datamhs['nama_mhs']." dengan no formulir $no_formulir sudah terdaftar di P.S ".$_SESSION['daftar_jurusan'][$datamhs['kjur']]);
                     }
-                    $data = $this->Finance->getTresholdPembayaran($datamhs['tahun_masuk'],$datamhs['semester_masuk'],true);						                                
+                    $data = $this->Finance->getTresholdPembayaran($datamhs['tahun_masuk'], $datamhs['semester_masuk'],true);						                                
                     if (!$data['bool']) {
                         throw new Exception ("Calon Mahasiswa a.n ".$this->Finance->dataMhs['nama_mhs']."($no_formulir) tidak bisa daftar ulang karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
                     }
@@ -171,7 +171,7 @@ class CDulangMHSBaru Extends MainPageM {
 	}
     public function viewRecord($sender, $param) {	
 		$this->idProcess = 'view';		
-		$nim=$this->getDataKeyField($sender,$this->RepeaterS);	
+		$nim = $this->getDataKeyField($sender, $this->RepeaterS);	
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,semester_masuk,iddosen_wali,d.idkelas,d.k_status FROM v_datamhs vdm JOIN dulang d ON (d.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE vdm.nim='$nim'";
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status'));
         $r = $this->DB->getRecord($str);	           
@@ -185,7 +185,7 @@ class CDulangMHSBaru Extends MainPageM {
         $this->Demik->setDataMHS($datamhs);
 	}
     public function deleteRecord($sender, $param) {			
-		$nim=$sender->CommandParameter;		
+		$nim = $sender->CommandParameter;		
 		$idsmt = $this->hiddensemestermasuk->Value;
 		$ta = $this->hiddentahunmasuk->Value;
 		$this->DB->query ('BEGIN');

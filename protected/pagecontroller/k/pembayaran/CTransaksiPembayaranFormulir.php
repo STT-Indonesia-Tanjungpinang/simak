@@ -22,8 +22,8 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
                 $this->DB->setFieldTable(array('no_faktur', 'tanggal'));
                 $d=$this->DB->getRecord($str);
                 $this->hiddennofaktur->Value=$d[1]['no_faktur'];
-                $this->txtAddNomorFaktur->Text=$d[1]['no_faktur'];
-                $this->cmbAddTanggalFaktur->Text=$this->TGL->tanggal('d-m-Y',$d[1]['tanggal']);
+                $this->txtAddNomorFaktur->Text = $d[1]['no_faktur'];
+                $this->cmbAddTanggalFaktur->Text = $this->TGL->tanggal('d-m-Y', $d[1]['tanggal']);
 				$str = "SELECT no_pendaftaran FROM formulir_pendaftaran_temp WHERE no_formulir = $no_formulir";
                 $this->DB->setFieldTable(array('no_pendaftaran'));
                 $d=$this->DB->getRecord($str);
@@ -32,7 +32,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
 				$this->populateData();
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }      
 		}	
 	}
@@ -54,7 +54,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
         $d=$this->DB->getRecord($str);
         
         $sudah_dibayarkan=array();
-        while (list($o,$p)=each($d)) {            
+        while (list($o, $p)=each($d)) {            
             $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
         }
         
@@ -63,7 +63,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
         $k=$this->DB->getRecord($str);
         
         $belum_komit=array();
-        while (list($m,$n)=each($k)) {              
+        while (list($m, $n)=each($k)) {              
             $belum_komit[$n['idkombi']] = $n['dibayarkan'];
         }
         
@@ -143,7 +143,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
         if ($no_faktur != '') {
             try {
                 if ($this->hiddennofaktur->Value != $no_faktur) {
-                    if ($this->DB->checkRecordIsExist('no_faktur', 'transaksi',$no_faktur)) {                                
+                    if ($this->DB->checkRecordIsExist('no_faktur', 'transaksi', $no_faktur)) {                                
                         throw new Exception ("Nomor Faktur dari ($no_faktur) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }
                 }
@@ -187,7 +187,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
             $no_formulir = $datamhs['no_formulir'];
 			
             $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
-            $tanggal=date('Y-m-d',$this->cmbAddTanggalFaktur->TimeStamp);
+            $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             $no_pendaftaran=$this->txtAddNomorPendaftaran->Text;
             
             $this->DB->query("BEGIN");
@@ -210,7 +210,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
             $no_formulir = $datamhs['no_formulir'];
             
             $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
-            $tanggal=date('Y-m-d',$this->cmbAddTanggalFaktur->TimeStamp);
+            $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             $no_pendaftaran=$this->txtAddNomorPendaftaran->Text;
 
             $this->DB->query("BEGIN");

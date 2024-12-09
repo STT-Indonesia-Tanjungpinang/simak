@@ -36,7 +36,7 @@ class CPengampuLain extends MainPageSA {
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$e->getMessage();			
+			$this->errorMessage->Text = $e->getMessage();			
         }	
 	}
     public function itemBound($sender, $param) {
@@ -70,14 +70,14 @@ class CPengampuLain extends MainPageSA {
 		if ($this->IsValid) {			
 			$iddosen=$this->cmbAddDaftarDosen->Text;
 			$idpenyelenggaraan=$this->hiddenid->Value;		
-			$str = "INSERT INTO pengampu_penyelenggaraan (idpengampu_penyelenggaraan,idpenyelenggaraan,iddosen,verified) VALUES (NULL,$idpenyelenggaraan,$iddosen,0)";
+			$str = "INSERT INTO pengampu_penyelenggaraan (idpengampu_penyelenggaraan,idpenyelenggaraan,iddosen,verified) VALUES (NULL, $idpenyelenggaraan, $iddosen,0)";
 			$this->DB->insertRecord($str);
             $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
 			$this->redirect('perkuliahan.PengampuLain',true,array('id'=>$idpenyelenggaraan));
 		}
 	}	
 	public function editRecord($sender, $param) {		
-        $idpp=$this->getDataKeyField($sender,$this->RepeaterS);
+        $idpp=$this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
 		$id=$this->hiddenid->Value;
         $this->hiddenid->Value=$id;
@@ -91,12 +91,12 @@ class CPengampuLain extends MainPageSA {
         $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM pengampu_penyelenggaraan WHERE idpenyelenggaraan=$id)";
         $dd=$this->DB->getRecord($str);        
         $DataDosen=array($r[1]['iddosen']=>$r[1]['nama_dosen']. ' ['.$r[1]['nidn'].']');	                
-        while (list($k,$v)=each($dd)) {           
+        while (list($k, $v)=each($dd)) {           
             $DataDosen[$v['iddosen']] = $v['nama_dosen']. ' ['.$v['nidn'].']';           			
         }
         
         $this->cmbEditDaftarDosen->DataSource = $DataDosen;
-        $this->cmbEditDaftarDosen->Text=$iddosen;
+        $this->cmbEditDaftarDosen->Text = $iddosen;
 		$this->cmbEditDaftarDosen->dataBind();		
 	}
     public function updateData($sender, $param) {							
@@ -109,7 +109,7 @@ class CPengampuLain extends MainPageSA {
 		$this->redirect('perkuliahan.PengampuLain',true,array('id'=>$idpenyelenggaraan));
 	}
     public function deleteRecord($sender, $param) {		
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);
         $idpenyelenggaraan=$this->hiddenid->Value;		
 		$this->DB->deleteRecord("pengampu_penyelenggaraan WHERE idpengampu_penyelenggaraan=$id");
         $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';

@@ -14,26 +14,26 @@ class CChangePenyelenggaraan extends MainPageM {
             $_SESSION['currentPageChangePenyelenggaraan']['search']=false;            
                         
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
-			$this->tbCmbTA->Text=$_SESSION['ta'];						
+			$this->tbCmbTA->Text = $_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
            
             $kjur = $_SESSION['kjur'];        
             $listkurikulum=$this->getListKurikulum ($kjur);   
             $this->cmbFilterKurikulum->DataSource = $this->Demik->removeIdFromArray($listkurikulum,'none');
-            $this->cmbFilterKurikulum->Text=$_SESSION['currentPageChangePenyelenggaraan']['idkur'];
+            $this->cmbFilterKurikulum->Text = $_SESSION['currentPageChangePenyelenggaraan']['idkur'];
             $this->cmbFilterKurikulum->dataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
             
 			$this->populateData();		
 		}			
@@ -45,29 +45,29 @@ class CChangePenyelenggaraan extends MainPageM {
 		$r = $this->DB->getRecord($str);
 		$result = array();
 		$result['none'] = ' ';
-		while (list($k,$v) =each ($r)) {
+		while (list($k, $v) =each ($r)) {
             $result[$v['idkur']] = $_SESSION['daftar_jurusan'][$v['kjur']]." Kurikulum Tahun ".$v['ta'];
 		}	
 		return $result;
 	}
     public function changeTbTA($sender, $param) {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageChangePenyelenggaraan']['search']);
         
 	}	
 	public function changeTbSemester($sender, $param) {
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageChangePenyelenggaraan']['search']);
 	}	
     public function changeTbPs($sender, $param) {		
         $_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $listkurikulum=$this->Demik->removeIdFromArray($this->getListKurikulum($_SESSION['kjur']));     
         $_SESSION['currentPageChangePenyelenggaraan']['idkur'] = $this->Demik->getIDKurikulum($_SESSION['kjur']);
         $this->cmbFilterKurikulum->DataSource = $listkurikulum;
-        $this->cmbFilterKurikulum->Text=$_SESSION['currentPageChangePenyelenggaraan']['idkur'];
+        $this->cmbFilterKurikulum->Text = $_SESSION['currentPageChangePenyelenggaraan']['idkur'];
         $this->cmbFilterKurikulum->DataBind();
         $this->populateData();
 	}

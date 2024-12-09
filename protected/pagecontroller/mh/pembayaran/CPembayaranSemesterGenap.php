@@ -13,7 +13,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
 			}
 			$this->setInfoToolbar();
 			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');;
-            $this->tbCmbTA->Text=$_SESSION['currentPagePembayaranSemesterGenap']['ta'];
+            $this->tbCmbTA->Text = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];
             $this->tbCmbTA->dataBind();
 
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -26,7 +26,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
 				$datamhs['ta'] = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];  
 				
 				if ($datamhs['tahun_masuk'] == $datamhs['ta'] && $datamhs['semester_masuk']==2) {	
-					$nim=$datamhs['nim'];
+					$nim = $datamhs['nim'];
                     throw new Exception ("NIM ($nim) adalah seorang Mahasiswa baru, mohon diproses di Pembayaran->Mahasiswa Baru.");
                 }
                 $this->checkPembayaranSemesterLalu ();
@@ -42,7 +42,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
                 
 			}catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }  
             
 		}	
@@ -73,7 +73,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
 		$datamhs['ta'] = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];
 
 		$idsmt = $datamhs['idsmt'];
-        $nim=$datamhs['nim'];
+        $nim = $datamhs['nim'];
         $tahun=$datamhs['ta'];
         
         $kjur = $datamhs['kjur'];
@@ -94,14 +94,14 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
         $this->Finance->setDataMHS($datamhs);
         if ($_SESSION['currentPagePembayaranSemesterGenap']['no_transaksi'] == 'none') {
             $no_formulir = $datamhs['no_formulir'];
-            $nim=$datamhs['nim'];
+            $nim = $datamhs['nim'];
             $ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];    
             $tahun_masuk=$datamhs['tahun_masuk'];
             $idsmt=2;
-            if ($this->Finance->getLunasPembayaran($ta,$idsmt)) {
+            if ($this->Finance->getLunasPembayaran($ta, $idsmt)) {
                 $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena sudah lunas.';
                 $this->modalMessageError->show();
-            }elseif($this->DB->checkRecordIsExist('nim', 'transaksi',$nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
+            }elseif($this->DB->checkRecordIsExist('nim', 'transaksi', $nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
                 $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
                 $this->modalMessageError->show();
             }else{
@@ -119,7 +119,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
                     $d=$this->DB->getRecord($str);
 
                     $sudah_dibayarkan=array();
-                    while (list($o,$p)=each($d)) {            
+                    while (list($o, $p)=each($d)) {            
                         $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
                     }
                     $str = "SELECT k.idkombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$tahun_masuk AND kpt.idkelas='$idkelas' AND idsmt=$idsmt AND periode_pembayaran='semesteran' ORDER BY periode_pembayaran,nama_kombi ASC";
@@ -147,15 +147,15 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
     public function editRecord($sender, $param) {	        
         $datamhs=$this->Pengguna->getDataUser();    
         if ($_SESSION['currentPagePembayaranSemesterGenap']['no_transaksi'] == 'none') {
-            $no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
+            $no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
             $_SESSION['currentPagePembayaranSemesterGenap']['no_transaksi'] = $no_transaksi;
         }	
 		$this->redirect('pembayaran.TransaksiPembayaranSemesterGenap',true);
 	}	
     public function deleteRecord($sender, $param) {	
         $datamhs=$this->Pengguna->getDataUser();  
-        $nim=$datamhs['nim'];
-		$no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
+        $nim = $datamhs['nim'];
+		$no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
 		$this->redirect('pembayaran.PembayaranSemesterGenap',true);
 	}	
@@ -163,7 +163,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
         $this->createObj('reportfinance');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
-        $no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);
+        $no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);
         switch ($_SESSION['outputreport']) {
             case  'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
@@ -195,7 +195,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
                 $this->report->printFakturPembayaranMHSLama();	
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Faktur Pembayaran Semester Genap';
         $this->modalPrintOut->show();
     }

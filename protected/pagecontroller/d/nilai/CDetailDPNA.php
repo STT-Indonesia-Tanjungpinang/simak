@@ -38,7 +38,7 @@ class CDetailDPNA extends MainPageD {
                 $this->populateData();	             
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}
 	}    
@@ -118,7 +118,7 @@ class CDetailDPNA extends MainPageD {
                 $this->report->printDPNA($this->Nilai,true);
             break;
         }        
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar Peserta dan Nilai Akhir';
         $this->modalPrintOut->show();
 	}

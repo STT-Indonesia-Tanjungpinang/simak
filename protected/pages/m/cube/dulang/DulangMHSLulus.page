@@ -189,7 +189,7 @@
                                     <td><%#$this->DataItem['nirm']%></td>												
                                     <td><%#$this->DataItem['nama_mhs']%></td>											
                                     <td><%#$this->Page->DMaster->getNamaDosenWaliByID($this->DataItem['iddosen_wali'])%></td>                                    
-                                    <td><%#$this->Page->TGL->tanggal('d/m/Y',$this->DataItem['tanggal'])%></td>
+                                    <td><%#$this->Page->TGL->tanggal('d/m/Y', $this->DataItem['tanggal'])%></td>
                                     <td><%#$this->DataItem['tahun'].$this->DataItem['idsmt']%></td>
                                     <td>
                                         <com:TLinkButton ID="btnDelete" CssClass="table-link danger" OnClick="Page.viewRecord" Attributes.Title="Hapus Daftar Ulang" Attributes.OnClick="if(!confirm('Anda ingin menghapus daftar ulang mahasiswa ini ?')) return false;">

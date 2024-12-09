@@ -12,11 +12,11 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
 			}
             $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
            
             $this->tbCmbTA->DataSource = $this->DMaster->getListTA ();
-            $this->tbCmbTA->Text=$_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta'];
+            $this->tbCmbTA->Text = $_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta'];
             $this->tbCmbTA->dataBind();  
             
             $this->setInfoToolbar();
@@ -61,7 +61,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_num']=0;}
-		$str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.telp_hp FROM v_datamhs vdm,transaksi_cuti tc WHERE vdm.nim=tc.nim AND vdm.kjur='$kjur' AND tc.tahun='$ta' AND tc.idsmt='1' ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";
+		$str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.telp_hp FROM v_datamhs vdm,transaksi_cuti tc WHERE vdm.nim=tc.nim AND vdm.kjur='$kjur' AND tc.tahun='$ta' AND tc.idsmt='1' ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'idkelas', 'telp_hp'));
 		$r = $this->DB->getRecord($str);
 		$this->RepeaterS->DataSource = $r;
@@ -79,7 +79,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
                     throw new Exception ("<br /><br />NIM ($nim) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");		
                 }
                 $this->Finance->setDataMHS(array('nim'=>$nim));
-                $datadulang=$this->Finance->getDataDulang(1,$_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta']);
+                $datadulang=$this->Finance->getDataDulang(1, $_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta']);
                 
                 if (isset($datadulang['iddulang'])) {
                     if ($datadulang['k_status']!='C') {
@@ -94,7 +94,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
             }	
         }	
     }
-	public function Go($param,$sender) {
+	public function Go($param, $sender) {
         if ($this->IsValid) {				
             $nim=addslashes($this->txtNIM->Text);
             $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil',true,array('id'=>$nim));

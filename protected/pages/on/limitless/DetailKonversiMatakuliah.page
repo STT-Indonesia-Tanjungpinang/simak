@@ -114,7 +114,7 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label"><strong>TANGGAL KONVERSI: </strong></label>
                                     <div class="col-md-8">
-                                        <p class="form-control-static"><%= $this->TGL->tanggal ('d F Y',$this->getDataMHS('date_added'))%></p>
+                                        <p class="form-control-static"><%= $this->TGL->tanggal ('d F Y', $this->getDataMHS('date_added'))%></p>
                                     </div>
                                 </div>
                                 <div class="form-group">

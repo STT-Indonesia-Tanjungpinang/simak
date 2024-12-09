@@ -14,7 +14,7 @@ class CProfiles extends MainPageMHS {
 	}   
     public function populateData () {
         $this->cmbTheme->DataSource = $this->setup->getListThemes();
-        $this->cmbTheme->Text=$_SESSION['theme'];
+        $this->cmbTheme->Text = $_SESSION['theme'];
         $this->cmbTheme->DataBind();
         
         $no_formulir = $this->Pengguna->getDataUser('no_formulir');
@@ -27,27 +27,27 @@ class CProfiles extends MainPageMHS {
         $this->txtEditNoFormulir->Text = $no_formulir;				        
         $this->txtEditNamaMhs->Text = $dataMhs['nama_mhs'];
         $this->txtEditTempatLahir->Text = $dataMhs['tempat_lahir'];
-        $this->txtEditTanggalLahir->Text=$this->TGL->tanggal('d-m-Y',$dataMhs['tanggal_lahir'],'entoid');
+        $this->txtEditTanggalLahir->Text = $this->TGL->tanggal('d-m-Y', $dataMhs['tanggal_lahir'],'entoid');
         if ($dataMhs['jk']=='L')
             $this->rdEditPria->Checked=true;
         else
             $this->rdEditWanita->Checked=true;
         $this->cmbEditAgama->DataSource = $this->DMaster->getListAgama();
-        $this->cmbEditAgama->Text=$dataMhs['idagama'];
+        $this->cmbEditAgama->Text = $dataMhs['idagama'];
         $this->cmbEditAgama->dataBind();		
-        $this->txtEditNamaIbuKandung->Text=$dataMhs['nama_ibu_kandung'];
+        $this->txtEditNamaIbuKandung->Text = $dataMhs['nama_ibu_kandung'];
         if ($dataMhs['idwarga']=='WNI') {
             $this->rdEditWNI->Checked=true;
         }else{
             $this->rdEditWNA->Checked=true;
         }
-        $this->txtEditNIK->Text=$dataMhs['nik'];
-        $this->txtEditAlamatKTP->Text=$dataMhs['alamat_rumah'];
-		$this->txtEditKelurahan->Text=$dataMhs['kelurahan'];
-        $this->txtEditKecamatan->Text=$dataMhs['kecamatan'];
-        $this->txtEditNoTelpRumah->Text=$dataMhs['telp_rumah'];		
-        $this->txtEditNoTelpHP->Text=$dataMhs['telp_hp'];
-        $this->txtEditEmail->Text=$dataMhs['email'];  
+        $this->txtEditNIK->Text = $dataMhs['nik'];
+        $this->txtEditAlamatKTP->Text = $dataMhs['alamat_rumah'];
+		$this->txtEditKelurahan->Text = $dataMhs['kelurahan'];
+        $this->txtEditKecamatan->Text = $dataMhs['kecamatan'];
+        $this->txtEditNoTelpRumah->Text = $dataMhs['telp_rumah'];		
+        $this->txtEditNoTelpHP->Text = $dataMhs['telp_hp'];
+        $this->txtEditEmail->Text = $dataMhs['email'];  
         $this->hiddenemail->Value=$dataMhs['email'];
         
         if ($dataMhs['idstatus']=='PEKERJA') {
@@ -55,29 +55,29 @@ class CProfiles extends MainPageMHS {
         }else {
             $this->rdEditTidakBekerja->Checked=true;
         }
-        $this->txtEditAlamatKantor->Text=$dataMhs['alamat_kantor'];
-        $this->txtEditNoTelpKantor->Text=$dataMhs['telp_kantor'];
+        $this->txtEditAlamatKantor->Text = $dataMhs['alamat_kantor'];
+        $this->txtEditNoTelpKantor->Text = $dataMhs['telp_kantor'];
         
         $this->cmbEditPekerjaanOrtu->DataSource = $this->DMaster->getListJenisPekerjaan ();
-        $this->cmbEditPekerjaanOrtu->Text=$dataMhs['idjp'];
+        $this->cmbEditPekerjaanOrtu->Text = $dataMhs['idjp'];
         $this->cmbEditPekerjaanOrtu->dataBind();		
         
-        $this->txtEditPendidikanTerakhir->Text=$dataMhs['pendidikan_terakhir'];
-        $this->txtEditJurusan->Text=$dataMhs['jurusan'];
-        $this->txtEditKotaPendidikanTerakhir->Text=$dataMhs['kota'];
-        $this->txtEditProvinsiPendidikanTerakhir->Text=$dataMhs['provinsi'];
-        $this->txtEditTahunPendidikanTerakhir->Text=$dataMhs['tahun_pa'];        
-        $this->cmbEditJenisSLTA->Text=$dataMhs['jenis_slta'];
-        $this->txtEditAsalSLTA->Text=$dataMhs['asal_slta'];
-        $this->cmbEditStatusSLTA->Text=$dataMhs['status_slta'];
-        $this->txtEditNomorIjazah->Text=$dataMhs['nomor_ijazah'];
+        $this->txtEditPendidikanTerakhir->Text = $dataMhs['pendidikan_terakhir'];
+        $this->txtEditJurusan->Text = $dataMhs['jurusan'];
+        $this->txtEditKotaPendidikanTerakhir->Text = $dataMhs['kota'];
+        $this->txtEditProvinsiPendidikanTerakhir->Text = $dataMhs['provinsi'];
+        $this->txtEditTahunPendidikanTerakhir->Text = $dataMhs['tahun_pa'];        
+        $this->cmbEditJenisSLTA->Text = $dataMhs['jenis_slta'];
+        $this->txtEditAsalSLTA->Text = $dataMhs['asal_slta'];
+        $this->cmbEditStatusSLTA->Text = $dataMhs['status_slta'];
+        $this->txtEditNomorIjazah->Text = $dataMhs['nomor_ijazah'];
         
-        $this->literalKelasMHS->Text=$this->DMaster->getNamaKelasByID($dataMhs['idkelas']);
+        $this->literalKelasMHS->Text = $this->DMaster->getNamaKelasByID($dataMhs['idkelas']);
         $daftar_jurusan=$this->DMaster->getListProgramStudi(2);
-        $this->literalKjur1->Text=$daftar_jurusan[$dataMhs['kjur1']];
-        $this->literalKjur2->Text=$dataMhs['kjur2'] > 0 ?$daftar_jurusan[$dataMhs['kjur2']]:'N.A';
-		$this->literalTahunMasuk->Text=$this->DMaster->getNamaTA($dataMhs['ta']);
-        $this->literalSemesterMasuk->Text=$this->setup->getSemester($dataMhs['idsmt']);
+        $this->literalKjur1->Text = $daftar_jurusan[$dataMhs['kjur1']];
+        $this->literalKjur2->Text = $dataMhs['kjur2'] > 0 ?$daftar_jurusan[$dataMhs['kjur2']]:'N.A';
+		$this->literalTahunMasuk->Text = $this->DMaster->getNamaTA($dataMhs['ta']);
+        $this->literalSemesterMasuk->Text = $this->setup->getSemester($dataMhs['idsmt']);
         
         $this->imgPhotoUser->ImageUrl = $dataMhs['photo_profile'];
 			
@@ -111,7 +111,7 @@ class CProfiles extends MainPageMHS {
 			$no_formulir = $this->txtEditNoFormulir->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
 			$tempat_lahir=addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
-			$tgl_lahir=date ('Y-m-d',$this->txtEditTanggalLahir->TimeStamp);
+			$tgl_lahir=date ('Y-m-d', $this->txtEditTanggalLahir->TimeStamp);
 			$jk=$this->rdEditPria->Checked===true?'L':'P';
             $idagama = $this->cmbEditAgama->Text;
             $nama_ibu_kandung=addslashes($this->txtEditNamaIbuKandung->Text);
@@ -158,7 +158,7 @@ class CProfiles extends MainPageMHS {
                 $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>File ini bukan tipe gambar</p>
                         </div>'; 
-                $this->lblTipeFileError->Text=$error;
+                $this->lblTipeFileError->Text = $error;
                 return;
             }         
 
@@ -167,7 +167,7 @@ class CProfiles extends MainPageMHS {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing png support in gd library.</p>
                         </div>'; 
-                    $this->lblTipeFileError->Text=$error;                    
+                    $this->lblTipeFileError->Text = $error;                    
                     return;
                 }
             }
@@ -176,7 +176,7 @@ class CProfiles extends MainPageMHS {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing jpeg support in gd library.</p>
                         </div>'; 
-                    $this->lblTipeFileError->Text=$error;
+                    $this->lblTipeFileError->Text = $error;
                     return;
                 }
             }
@@ -218,7 +218,7 @@ class CProfiles extends MainPageMHS {
             $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>'.$err.'</p>
                         </div>';   
-            $this->lblTipeFileError->Text=$error;
+            $this->lblTipeFileError->Text = $error;
             return;   
         }
     }

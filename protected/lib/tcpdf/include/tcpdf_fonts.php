@@ -2318,7 +2318,7 @@ class TCPDF_FONTS {
 					$chardata[$i]['level'] += 2;
 				}
 			}
-			$maxlevel = max($chardata[$i]['level'],$maxlevel);
+			$maxlevel = max($chardata[$i]['level'], $maxlevel);
 		}
 
 		// L1. On each line, reset the embedding level of the following characters to the paragraph embedding level:

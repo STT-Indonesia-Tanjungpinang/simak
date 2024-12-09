@@ -15,7 +15,7 @@ class CProfiles extends MainPageM {
     public function populateData () {        
         $this->imgPhotoUser->ImageUrl = $_SESSION['foto']; 
         $this->cmbTheme->DataSource = $this->setup->getListThemes();
-        $this->cmbTheme->Text=$_SESSION['theme'];
+        $this->cmbTheme->Text = $_SESSION['theme'];
         $this->cmbTheme->DataBind();
     }
     
@@ -38,7 +38,7 @@ class CProfiles extends MainPageM {
                 $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>File ini bukan tipe gambar</p>
                         </div>'; 
-                $this->lblTipeFileError->Text=$error;
+                $this->lblTipeFileError->Text = $error;
                 return;
             }         
 
@@ -47,7 +47,7 @@ class CProfiles extends MainPageM {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing png support in gd library.</p>
                         </div>'; 
-                    $this->lblTipeFileError->Text=$error;                    
+                    $this->lblTipeFileError->Text = $error;                    
                     return;
                 }
             }
@@ -56,7 +56,7 @@ class CProfiles extends MainPageM {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing jpeg support in gd library.</p>
                         </div>'; 
-                    $this->lblTipeFileError->Text=$error;
+                    $this->lblTipeFileError->Text = $error;
                     return;
                 }
             }
@@ -99,7 +99,7 @@ class CProfiles extends MainPageM {
             $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>'.$err.'</p>
                         </div>';   
-            $this->lblTipeFileError->Text=$error;
+            $this->lblTipeFileError->Text = $error;
             return;   
         }
     }

@@ -28,13 +28,13 @@ class TambahKRSEkstension extends MainPageSA {
         $this->createObj('Nilai');
         $this->createObj('Finance');
 		if (!$this->IsPostBack&&!$this->IsCallback) {	            
-            $this->lblModulHeader->Text=$this->getInfoToolbar();            
+            $this->lblModulHeader->Text = $this->getInfoToolbar();            
             try {			                
                 $this->KRS->DataKRS=$_SESSION['currentPageKRSEkstension']['DataKRS'];
                 $idsmt=$this->KRS->DataKRS['krs']['idsmt'];
                 $tahun=$this->KRS->DataKRS['krs']['tahun'];
                 $datamhs=$_SESSION['currentPageKRSEkstension']['DataMHS'];                                            
-                $nim=$datamhs['nim'];                
+                $nim = $datamhs['nim'];                
                 $this->KRS->setDataMHS($datamhs);   
                 
                 $kjur=$datamhs['kjur'];
@@ -54,7 +54,7 @@ class TambahKRSEkstension extends MainPageSA {
                 $this->RepeaterPenyelenggaraan->dataBind();
             }catch (Exception $e) {
                 $this->idProcess='view';	
-                $this->errorMessage->Text=$e->getMessage();	
+                $this->errorMessage->Text = $e->getMessage();	
             }
 		}				
 	}
@@ -67,7 +67,7 @@ class TambahKRSEkstension extends MainPageSA {
 	public function getDataMHS($idx) {		        
         return $this->KRS->getDataMHS($idx);
     }
-	public function tambahMatkul($sender,$param) {
+	public function tambahMatkul($sender, $param) {
 		try {		
             $datakrs=$_SESSION['currentPageKRSEkstension']['DataKRS']['krs'];
             $datakrs['iddata_konversi']=$this->Pengguna->getDataUser('iddata_konversi');
@@ -79,19 +79,19 @@ class TambahKRSEkstension extends MainPageSA {
 			$jumlah=$r[1]['jumlah']+$sender->CommandParameter;
 			$maxSKS=$datakrs['maxSKS'];
 			if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
-			$idpenyelenggaraan=$this->getDataKeyField($sender,$this->RepeaterPenyelenggaraan);			
-			if (!$this->DB->checkRecordIsExist('idpenyelenggaraan','krsmatkul',$idpenyelenggaraan,' AND idkrs='.$idkrs)) { 
-				$str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs',$idpenyelenggaraan,0)";
+			$idpenyelenggaraan=$this->getDataKeyField($sender, $this->RepeaterPenyelenggaraan);			
+			if (!$this->DB->checkRecordIsExist('idpenyelenggaraan','krsmatkul', $idpenyelenggaraan,' AND idkrs='.$idkrs)) { 
+				$str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs', $idpenyelenggaraan,0)";
 				$this->DB->insertRecord($str);			
 				$this->redirect ('perkuliahan.TambahKRSEkstension',true);
 			}
 		}catch (Exception $e) {
             $this->modalMessageError->show();
-			$this->lblContentMessageError->Text=$e->getMessage();					
+			$this->lblContentMessageError->Text = $e->getMessage();					
 		}		
 	}
-	public function hapusMatkul ($sender,$param) {		
-		$idkrsmatkul=$this->getDataKeyField($sender,$this->RepeaterS);			
+	public function hapusMatkul ($sender, $param) {		
+		$idkrsmatkul=$this->getDataKeyField($sender, $this->RepeaterS);			
 		$this->DB->query ('BEGIN');			
 		if ($this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul='$idkrsmatkul'")) {
 			$this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul='$idkrsmatkul'");							
@@ -102,7 +102,7 @@ class TambahKRSEkstension extends MainPageSA {
 		$this->redirect ('perkuliahan.TambahKRSEkstension',true);
 	}	
 	
-	public function hitung ($sender,$param) {
+	public function hitung ($sender, $param) {
 		$item=$param->Item;		
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {					
 			$matkul=$item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									

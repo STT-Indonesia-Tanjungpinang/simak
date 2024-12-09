@@ -20,7 +20,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	*/
 	public function connectDB ($param) { 
 		$this->paramConn = $param;
-		$this->conn = new mysqli ($param['host'],$param['user'],$param['password'],$param['dbname']);		
+		$this->conn = new mysqli ($param['host'], $param['user'], $param['password'], $param['dbname']);		
 		if($this->conn->connect_errno > 0){
             throw new Exception('Unable to connect to database [' . $this->conn->connect_error . ']');
         }
@@ -77,7 +77,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	* @param offset 
 	*
 	*/	
-	public function getRecord ($sqlString,$offset=1) {				
+	public function getRecord ($sqlString, $offset=1) {				
         $result=$this->query($sqlString);
 		if ($result->num_rows >= 1) {            
 			$ft = $this->getFieldTable('field');			
@@ -105,7 +105,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	* @param tableName
 	* @return count of rows 
 	*/
-	public function getCountRowsOfTable ($tableName,$fieldname='*') {
+	public function getCountRowsOfTable ($tableName, $fieldname='*') {
 		$str="SELECT COUNT($fieldname) AS jumlah_baris FROM $tableName";				
 		$this->sqlString=$str;		
 		$this->setFieldTable(array('jumlah_baris'));
@@ -120,7 +120,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	* @param idrecord nilai id record
 	* @param $opt diperlakukan seperti apa
 	*/
-	public function checkRecordIsExist ($field,$table,$idrecord,$opt=null,$returnvalue=false) {
+	public function checkRecordIsExist ($field, $table, $idrecord, $opt=null, $returnvalue=false) {
 		$bool = false;			
 		$this->setFieldTable(array($field) );			
 		$str = "SELECT $field FROM $table WHERE $field='$idrecord' $opt";					
@@ -138,7 +138,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	* @param table nama tabel
 	* @return Integer
 	*/
-	public function getMaxOfRecord ($field,$table) {
+	public function getMaxOfRecord ($field, $table) {
 		$str = "SELECT MAX($field) AS max_record FROM $table";
 		$this->sqlString=$str;		
 		$this->setFieldTable(array('max_record'));
@@ -155,7 +155,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	* @param table nama tabel
 	* @return Integer
 	*/
-	public function getSumRowsOfTable($field,$table) {
+	public function getSumRowsOfTable($field, $table) {
 		$str = "SELECT SUM($field) AS sum_record FROM $table";        
 		$this->sqlString=$str;		
 		$this->setFieldTable(array('sum_record'));

@@ -14,18 +14,18 @@ class CPembayaranSemesterPendek Extends MainPageK {
             
             $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
             $ta = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA (),'none');            
-            $this->tbCmbTA->Text=$ta;
+            $this->tbCmbTA->Text = $ta;
             $this->tbCmbTA->dataBind();
             
             $kelas=$this->DMaster->getListKelas();
             $kelas['none'] = 'All';
 			$this->tbCmbKelas->DataSource = $kelas;
-			$this->tbCmbKelas->Text=$_SESSION['currentPagePembayaranSemesterPendek']['kelas'];			
+			$this->tbCmbKelas->Text = $_SESSION['currentPagePembayaranSemesterPendek']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
 			if (isset($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim'])) {
@@ -122,8 +122,8 @@ class CPembayaranSemesterPendek Extends MainPageK {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranSemesterPendek']['page_num']=0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'nim', 'nama_mhs', 'jumlah_sks', 'commited'));
-        $str = "$str ORDER BY t.date_added DESC LIMIT $offset,$limit";	
-        $r = $this->DB->getRecord($str,$offset+1);
+        $str = "$str ORDER BY t.date_added DESC LIMIT $offset, $limit";	
+        $r = $this->DB->getRecord($str, $offset+1);
         
         $result = array();		
 		while (list($k, $v) = each($r)) {
@@ -133,12 +133,12 @@ class CPembayaranSemesterPendek Extends MainPageK {
 			$r2=$this->DB->getRecord($str2);				
 			$dibayarkan=$r2[1]['dibayarkan'];						
 			$v['dibayarkan'] = $this->Finance->toRupiah($dibayarkan);													
-			$v['tanggal'] = $this->TGL->tanggal('d/m/Y',$v['tanggal']);
+			$v['tanggal'] = $this->TGL->tanggal('d/m/Y', $v['tanggal']);
 			$result[$k] = $v;
 		}
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function setDataBound($sender, $param) {				
 		$item=$param->Item;
@@ -163,7 +163,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
             }	
         }	
     }
-	public function Go($param,$sender) {	
+	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $nim=addslashes($this->txtNIM->Text);
             $this->redirect('pembayaran.DetailPembayaranSemesterPendek',true,array('id'=>$nim));

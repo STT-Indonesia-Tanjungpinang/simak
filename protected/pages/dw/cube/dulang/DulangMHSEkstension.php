@@ -14,21 +14,21 @@ class DulangMHSEkstension Extends MainPageDW {
             $_SESSION['currentPageDulangMHSEkstension']['search']=false;
             
             $this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
             $tahun_masuk=$this->getAngkatan ();			            
             $this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
-            $this->tbCmbTahunMasuk->Text=$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'];						
+            $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
 
             $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-            $this->tbCmbTA->Text=$_SESSION['ta'];
+            $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
 
             $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
             $this->tbCmbSemester->DataSource=$semester;
-            $this->tbCmbSemester->Text=$_SESSION['semester'];
+            $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
 
             $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
@@ -54,33 +54,33 @@ class DulangMHSEkstension Extends MainPageDW {
 		$tahunmasuk=$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSEkstension']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
-    public function Page_Changed ($sender,$param) {
+    public function Page_Changed ($sender, $param) {
 		$_SESSION['currentPageDulangMHSEkstension']['page_num']=$param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageDulangMHSEkstension']['search']);
 	}
-	public function renderCallback ($sender,$param) {
+	public function renderCallback ($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-	public function changeTbTA ($sender,$param) {				
+	public function changeTbTA ($sender, $param) {				
 		$_SESSION['ta']=$this->tbCmbTA->Text;		        
 		$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk']=$_SESSION['ta'];
 		$this->tbCmbTahunMasuk->DataSource=$this->getAngkatan();
-		$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'];
+		$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-	public function changeTbTahunMasuk($sender,$param) {				
+	public function changeTbTahunMasuk($sender, $param) {				
 		$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk']=$this->tbCmbTahunMasuk->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-	public function changeTbPs ($sender,$param) {		
+	public function changeTbPs ($sender, $param) {		
 		$_SESSION['kjur']=$this->tbCmbPs->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}	
-	public function changeTbSemester ($sender,$param) {		
+	public function changeTbSemester ($sender, $param) {		
 		$_SESSION['semester']=$this->tbCmbSemester->Text;        
         $this->setInfoToolbar();
 		$this->populateData();
@@ -125,12 +125,12 @@ class DulangMHSEkstension Extends MainPageDW {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSEkstension']['page_num']=0;}
-		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";				        
+		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','iddosen_wali','tanggal'));
 		$result=$this->DB->getRecord($str);
 		$this->RepeaterS->DataSource=$result;
 		$this->RepeaterS->dataBind();
                 
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 }

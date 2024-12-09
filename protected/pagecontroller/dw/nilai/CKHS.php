@@ -18,21 +18,21 @@ class CKHS extends MainPageDW {
             $this->RepeaterS->PageSize=10;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
             $tahun_masuk=$this->getAngkatan ();			            
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageKHS']['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKHS']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-			$this->tbCmbTA->Text=$_SESSION['ta'];
+			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -68,7 +68,7 @@ class CKHS extends MainPageDW {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		        
 		$_SESSION['currentPageKHS']['tahun_masuk'] = $_SESSION['ta'];
 		$this->tbCmbTahunMasuk->DataSource = $this->getAngkatan();
-		$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageKHS']['tahun_masuk'];
+		$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKHS']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
         $this->setInfoToolbar();
 		$this->populateData();
@@ -137,19 +137,19 @@ class CKHS extends MainPageDW {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKHS']['page_num']=0;}
-		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";				        
+		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('idkrs', 'tgl_krs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'tahun_masuk', 'semester_masuk', 'idkelas', 'sah', 'tgl_disahkan', 'boolpembayaran'));
 		$result=$this->DB->getRecord($str);
 		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
                 
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	
 	public function itemBound($sender, $param) {
 		$item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
-			$nim=$item->DataItem['nim'];						
+			$nim = $item->DataItem['nim'];						
 			$this->Nilai->setDataMHS(array('nim'=>$nim));
             $bool=true;
             $ip='0.00';            
@@ -157,16 +157,16 @@ class CKHS extends MainPageDW {
             $status='-';
             $trstyle='';
             $dataipk=array('ipk'=>'0.00', 'sks'=>0);
-			if ($this->Nilai->isKrsSah($_SESSION['ta'],$_SESSION['semester'])) { 
-                $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'],$_SESSION['ta']);                
+			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) { 
+                $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);                
                 $idkelas=$datadulang['idkelas'];
                 $datamhs=array('no_formulir'=>$item->DataItem['no_formulir'],'nim'=>$nim,'kjur'=>$item->DataItem['kjur'],'tahun_masuk'=>$item->DataItem['tahun_masuk'],'semester_masuk'=>$item->DataItem['semester_masuk'],'idsmt'=>$_SESSION['semester'],'idkelas'=>$idkelas);
                 $this->Finance->setDataMHS($datamhs);                                				
-				$this->Nilai->getKHS($_SESSION['ta'],$_SESSION['semester']);
+				$this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
 				$ip=$this->Nilai->getIPS ();
 				$sks=$this->Nilai->getTotalSKS ();                
-                $dataipk=$this->Nilai->getIPKSampaiTASemester($_SESSION['ta'],$_SESSION['semester'],'ipksks');	                
-                $lunaspembayaran=$this->Finance->getLunasPembayaran($_SESSION['ta'],$_SESSION['semester']);
+                $dataipk=$this->Nilai->getIPKSampaiTASemester($_SESSION['ta'], $_SESSION['semester'],'ipksks');	                
+                $lunaspembayaran=$this->Finance->getLunasPembayaran($_SESSION['ta'], $_SESSION['semester']);
 				if (($lunaspembayaran==false)&&($_SESSION['ta']>=2010)) {                    					                    
                     $status='<span class="label label-info">Belum lunas</span>';
                     $trstyle=' class="danger"';
@@ -178,12 +178,12 @@ class CKHS extends MainPageDW {
                 $status='<span class="label label-info">Belum disahkan</span>';				
 			}           
             $item->DataItem['boolpembayaran'] = $bool;
-            $item->literalTRStyle->Text=$trstyle;
-            $item->literalStatus->Text=$status;
-            $item->literalIP->Text=$ip;
-            $item->literalIPK->Text=$dataipk['ipk'];
-            $item->literalSKS->Text=$sks;
-            $item->literalSKSTotal->Text=$dataipk['sks'];
+            $item->literalTRStyle->Text = $trstyle;
+            $item->literalStatus->Text = $status;
+            $item->literalIP->Text = $ip;
+            $item->literalIPK->Text = $dataipk['ipk'];
+            $item->literalSKS->Text = $sks;
+            $item->literalSKSTotal->Text = $dataipk['sks'];
             $item->btnPrintOutR->Enabled=$bool;
             $item->anchorDetailKHS->Enabled=$bool;
 		}
@@ -206,7 +206,7 @@ class CKHS extends MainPageDW {
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
                     case  'pdf' :
-                        $idkrs = $this->getDataKeyField($sender,$this->RepeaterS);	
+                        $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);	
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                         $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
                         $r = $this->DB->getRecord($str);	           
@@ -279,7 +279,7 @@ class CKHS extends MainPageDW {
                             $this->report->setMode('excel2007');
 
                             $messageprintout="Summary Kartu Hasil Studi: <br/>";
-                            $this->report->printSummaryKHS($this->Nilai,$this->DMaster,true);
+                            $this->report->printSummaryKHS($this->Nilai, $this->DMaster,true);
 
                         break;
                         case  'excel2007' :
@@ -320,7 +320,7 @@ class CKHS extends MainPageDW {
                             $this->report->setMode($_SESSION['outputreport']);
                             
                             $messageprintout="Data Kartu Hasil Studi dari $awal s.d $akhir: <br/>";                            
-                            $this->report->printKHSAll($this->Nilai,$this->DMaster,$repeater,true);	
+                            $this->report->printKHSAll($this->Nilai, $this->DMaster, $repeater,true);	
                         break;                    
                     }
                 }else{
@@ -328,7 +328,7 @@ class CKHS extends MainPageDW {
                 }
             break;
 		}		
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Kartu Hasil Studi';
         $this->modalPrintOut->show();
 	}

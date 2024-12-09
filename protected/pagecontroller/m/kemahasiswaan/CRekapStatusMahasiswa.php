@@ -17,7 +17,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
             
             $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	            
             
             $tahun=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');
@@ -29,24 +29,24 @@ class CRekapStatusMahasiswa Extends MainPageM {
             $this->tbCmbTA2->Text= $_SESSION['currentPageRekapStatusMahasiswa']['ta2'];
             $this->tbCmbTA2->dataBind();            
             
-            $this->cmbFilterStatus->Text=$_SESSION['currentPageRekapStatusMahasiswa']['k_status'];
+            $this->cmbFilterStatus->Text = $_SESSION['currentPageRekapStatusMahasiswa']['k_status'];
 
             $tahun_masuk = $this->DMaster->getListTA();
             $tahun_masuk['none'] = 'KESELURUHAN';
             $this->cmbFilterTahunMasuk->DataSource = $tahun_masuk;
-            $this->cmbFilterTahunMasuk->Text=$_SESSION['currentPageRekapStatusMahasiswa']['tahun_masuk'];
+            $this->cmbFilterTahunMasuk->Text = $_SESSION['currentPageRekapStatusMahasiswa']['tahun_masuk'];
             $this->cmbFilterTahunMasuk->DataBind();
             
             $semester = $this->setup->getSemester();  				
             $semester['none'] = 'KESELURUHAN';
             $this->cmbFilterSemester->DataSource = $semester;
-            $this->cmbFilterSemester->Text=$_SESSION['currentPageRekapStatusMahasiswa']['idsmt'];
+            $this->cmbFilterSemester->Text = $_SESSION['currentPageRekapStatusMahasiswa']['idsmt'];
             $this->cmbFilterSemester->DataBind();
             
             $kelas=$this->DMaster->getListKelas();			
             $kelas['none'] = 'KESELURUHAN';
             $this->cmbFilterKelas->DataSource = $kelas;
-            $this->cmbFilterKelas->Text=$_SESSION['currentPageRekapStatusMahasiswa']['idkelas'];
+            $this->cmbFilterKelas->Text = $_SESSION['currentPageRekapStatusMahasiswa']['idkelas'];
             $this->cmbFilterKelas->DataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -62,7 +62,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
 		$dt =$this->DMaster->getListTA();		        
 		$ta = $_SESSION['currentPageRekapStatusMahasiswa']['ta1'];		
 		$tahun_akademik=$tanpanone==true?array('none'=>'All'):array();
-		while (list($k,$v)=each ($dt)) {
+		while (list($k, $v)=each ($dt)) {
 			if ($k != 'none') {
 				if ($k >= $ta) {
 					$tahun_akademik[$k] = $v;
@@ -125,67 +125,67 @@ class CRekapStatusMahasiswa Extends MainPageM {
         $sql.=$idkelas == 'none'?'':"AND idkelas='$idkelas'";
         switch ($k_status) {
             case 'A' :                
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'A',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'A', $sql);
                 $this->RepeaterAktifS->DataSource = $r;
                 $this->RepeaterAktifS->dataBind();  
             break;
             case 'N' :                
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'N',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'N', $sql);
                 $this->RepeaterNonAktifS->DataSource = $r;
                 $this->RepeaterNonAktifS->dataBind();  
             break;
             case 'C' :                
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'C',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'C', $sql);
                 $this->RepeaterCutiS->DataSource = $r;
                 $this->RepeaterCutiS->dataBind();  
             break;
             case 'D' :
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'D',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'D', $sql);
                 $this->RepeaterDOS->DataSource = $r;
                 $this->RepeaterDOS->dataBind();
             break;
             case 'K' :
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'K',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'K', $sql);
                 $this->RepeaterKS->DataSource = $r;
                 $this->RepeaterKS->dataBind();
             break;
             case 'L' :
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'L',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'L', $sql);
                 $this->RepeaterLulusS->DataSource = $r;
                 $this->RepeaterLulusS->dataBind();
             break;
             default :
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'A',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'A', $sql);
                 $this->RepeaterAktifS->DataSource = $r;
                 $this->RepeaterAktifS->dataBind();     
 
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaP=0;
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaW=0;
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'N',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'N', $sql);
                 $this->RepeaterNonAktifS->DataSource = $r;
                 $this->RepeaterNonAktifS->dataBind();  
 
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaP=0;
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaW=0;
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'C',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'C', $sql);
                 $this->RepeaterCutiS->DataSource = $r;
                 $this->RepeaterCutiS->dataBind();  
                 
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaP=0;
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaW=0;
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'D',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'D', $sql);
                 $this->RepeaterDOS->DataSource = $r;
                 $this->RepeaterDOS->dataBind();
                 
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaP=0;
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaW=0;
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'K',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'K', $sql);
                 $this->RepeaterKS->DataSource = $r;
                 $this->RepeaterKS->dataBind();
                 
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaP=0;
                 CRekapStatusMahasiswa::$TotalJumlahMahasiswaW=0;
-                $r = $this->Demik->getRekapStatusMHS($kjur,$ta1,$ta2,'L',$sql);
+                $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'L', $sql);
                 $this->RepeaterLulusS->DataSource = $r;
                 $this->RepeaterLulusS->dataBind();
         }        
@@ -243,13 +243,13 @@ class CRekapStatusMahasiswa Extends MainPageM {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 
-                $this->report->printRekapStatusMahasiswa($this->Demik,$this->DMaster); 
+                $this->report->printRekapStatusMahasiswa($this->Demik, $this->DMaster); 
             break;
             case  'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Rekapitulasi Status Mahasiswa Periode ';
         $this->modalPrintOut->show();
     }

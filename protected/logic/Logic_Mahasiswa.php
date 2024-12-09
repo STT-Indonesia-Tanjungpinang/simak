@@ -63,7 +63,7 @@ class Logic_Mahasiswa extends Logic_Global {
 	public function isMhsRegistered ($tanpaprodi=false) {
         $no_formulir=$this->DataMHS['no_formulir'];
         $kjur=isset($this->DataMHS['kjur'])?$this->DataMHS['kjur']:'';
-		$bool=$tanpaprodi==true?$this->db->checkRecordIsExist('no_formulir','register_mahasiswa',$no_formulir):$this->db->checkRecordIsExist('no_formulir','register_mahasiswa',$no_formulir," AND kjur=$kjur");
+		$bool=$tanpaprodi==true?$this->db->checkRecordIsExist('no_formulir','register_mahasiswa', $no_formulir):$this->db->checkRecordIsExist('no_formulir','register_mahasiswa', $no_formulir," AND kjur=$kjur");
         
         return $bool;
 
@@ -74,7 +74,7 @@ class Logic_Mahasiswa extends Logic_Global {
 	*/
 	public function isNoFormulirExist() {		
         $no_formulir=$this->DataMHS['no_formulir'];        
-		$bool=$this->db->checkRecordIsExist('no_formulir','formulir_pendaftaran',$no_formulir);			
+		$bool=$this->db->checkRecordIsExist('no_formulir','formulir_pendaftaran', $no_formulir);			
         return $bool;			
 		
 	}
@@ -82,7 +82,7 @@ class Logic_Mahasiswa extends Logic_Global {
 	* digunakan untuk mendapatkan apakah mahasiswa ini pindahan atau bukan
 	* @return bool
 	*/
-	public function isMhsPindahan ($nim,$getid=false) {		        
+	public function isMhsPindahan ($nim, $getid=false) {		        
         $str = "SELECT iddata_konversi FROM data_konversi WHERE nim='$nim'";
         $this->db->setFieldTable(array('iddata_konversi'));
         $result = $this->db->getRecord($str);                
@@ -103,7 +103,7 @@ class Logic_Mahasiswa extends Logic_Global {
      * @return array
      */
     public function getKelasMhs () {
-        $nim=$this->DataMHS['nim'];
+        $nim = $this->DataMHS['nim'];
         $str = "SELECT d.tahun,d.idsmt,k.idkelas,k.nkelas FROM kelas k,dulang d WHERE k.idkelas=d.idkelas AND d.iddulang=(SELECT MAX(iddulang) FROM dulang WHERE nim='$nim')";
         $this->db->setFieldTable(array('tahun','idsmt','idkelas','nkelas'));					
         $r=$this->db->getRecord($str);					
@@ -135,7 +135,7 @@ class Logic_Mahasiswa extends Logic_Global {
 	* digunakan untuk mengecek mahasiswa baru atau bukan
 	* @return boolean
 	*/
-	public function isMhsBaru ($tahun_sekarang,$semester_sekarang) {						
+	public function isMhsBaru ($tahun_sekarang, $semester_sekarang) {						
 		if ($this->DataMHS['tahun_masuk']==$tahun_sekarang&&$this->DataMHS['semester_masuk']==$semester_sekarang) {
 			return true;
         }else{
@@ -171,8 +171,8 @@ class Logic_Mahasiswa extends Logic_Global {
      * @param type $kelas
      * @return type booleans
      */
-	public function updateRegisterMHS ($mode,$status=null,$kelas=null) {		
-		$nim=$this->DataMHS['nim'];
+	public function updateRegisterMHS ($mode, $status=null, $kelas=null) {		
+		$nim = $this->DataMHS['nim'];
 		switch ($mode) {
 			case 'status' :
 				$str = "UPDATE register_mahasiswa SET k_status='$status' WHERE nim='$nim'";
@@ -192,8 +192,8 @@ class Logic_Mahasiswa extends Logic_Global {
      * @param type $tahun
      * @return boolean atau id dulang
      */
-	public function getDataDulang ($idsmt,$tahun) {				
-        $nim=$this->DataMHS['nim'];
+	public function getDataDulang ($idsmt, $tahun) {				
+        $nim = $this->DataMHS['nim'];
         $str = "SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND idsmt='$idsmt' AND tahun='$tahun'";			
         $this->db->setFieldTable(array('iddulang','nim','tahun','idsmt','tanggal','idkelas','status_sebelumnya','k_status'));
         $r=$this->db->getRecord($str);						        
@@ -209,8 +209,8 @@ class Logic_Mahasiswa extends Logic_Global {
      * @param type $tahun
      * @return boolean atau id dulang
      */
-	public function getDataDulangBeforeCurrentSemester ($idsmt,$tahun) {				
-        $nim=$this->DataMHS['nim'];
+	public function getDataDulangBeforeCurrentSemester ($idsmt, $tahun) {				
+        $nim = $this->DataMHS['nim'];
         $current_tasmt=$tahun.$idsmt;
         $str = ($this->getDataMHS('tahun_masuk')==$tahun&&$this->getDataMHS('semester_masuk')==$idsmt)?"SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND tasmt <= $current_tasmt ORDER BY iddulang DESC LIMIT 1":"SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND tasmt < $current_tasmt ORDER BY iddulang DESC LIMIT 1";
         $this->db->setFieldTable(array('iddulang','nim','tahun','idsmt','tanggal','idkelas','status_sebelumnya','k_status'));

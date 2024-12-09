@@ -28,12 +28,12 @@ class CPKRS extends MainPageDW {
       $_SESSION['currentPagePKRS']['search']=false;
 
       $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-      $this->tbCmbTA->Text=$_SESSION['ta'];
+      $this->tbCmbTA->Text = $_SESSION['ta'];
       $this->tbCmbTA->dataBind();			
 
       $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
       $this->tbCmbSemester->DataSource = $semester;
-      $this->tbCmbSemester->Text=$_SESSION['semester'];
+      $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
 
       $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -104,9 +104,9 @@ class CPKRS extends MainPageDW {
       $limit=$itemcount-$offset;
     }
     if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPagePKRS']['page_num']=0;}
-    $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";	
+    $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";	
     $this->DB->setFieldTable(array('nim', 'nama_mhs', 'jk', 'tahun_masuk', 'nmatkul', 'sks', 'tambah', 'hapus', 'batal', 'sah', 'tanggal'));
-    $r = $this->DB->getRecord($str,$offset+1);
+    $r = $this->DB->getRecord($str, $offset+1);
     $result = array();
     while (list($k, $v) = each($r)) {
       $ket = 'N.A';
@@ -124,7 +124,7 @@ class CPKRS extends MainPageDW {
     }
     $this->RepeaterS->DataSource = $result;
     $this->RepeaterS->dataBind();     
-    $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+    $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
     
   }
   
@@ -145,7 +145,7 @@ class CPKRS extends MainPageDW {
           throw new Exception("Mahasiswa Dengan NIM ($nim) diluar perwalian Anda.");
         }
         $this->KRS->setDataMHS($datamhs);
-        $this->KRS->getKRS($ta,$idsmt);
+        $this->KRS->getKRS($ta, $idsmt);
         $datakrs=$this->KRS->DataKRS['krs'];
         if (!isset($datakrs['idkrs'])) {                    
           $ta = $this->DMaster->getNamaTA($ta);		
@@ -189,16 +189,16 @@ class CPKRS extends MainPageDW {
       $idsmt = $krs['idsmt'];            
       if ($idsmt==3) {  
         $this->Finance->setDataMHS($krs);
-        $maxSKS=$this->Finance->getSKSFromSP($tahun,$idsmt);
-        $this->Nilai->getKHSBeforeCurrentSemester($tahun,$idsmt);
+        $maxSKS=$this->Finance->getSKSFromSP($tahun, $idsmt);
+        $this->Nilai->getKHSBeforeCurrentSemester($tahun, $idsmt);
         $krs['ipstasmtbefore'] = $this->Nilai->getIPS();
       }else{
-         $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt,$tahun);
+         $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt, $tahun);
          if ($datadulangbefore['k_status']=='C') {
            $maxSKS=$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti'); 
            $krs['ipstasmtbefore'] = 'N.A (Status Cuti)';
          }else{
-           $maxSKS=$this->Nilai->getMaxSKS($tahun,$idsmt);
+           $maxSKS=$this->Nilai->getMaxSKS($tahun, $idsmt);
            $krs['ipstasmtbefore'] = $this->Nilai->getIPS();
          }               
       }            

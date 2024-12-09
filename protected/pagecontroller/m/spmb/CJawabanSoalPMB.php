@@ -21,7 +21,7 @@ class CJawabanSoalPMB extends MainPageM {
                 $datamhs['nama_ps2'] = $datamhs['kjur2']==0 ?'N.A' :$_SESSION['daftar_jurusan'][$datamhs['kjur2']];
                 $datamhs['diterima_ps1'] = '';
                 $datamhs['diterima_ps2'] = '';
-                $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s',$datamhs['waktu_mendaftar']);
+                $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $datamhs['waktu_mendaftar']);
                 $this->Demik->setDataMHS($datamhs);
                 
                 $str = "SELECT ku.no_formulir,ku.tgl_ujian,ku.tgl_selesai_ujian,ku.isfinish,num.jumlah_soal,num.jawaban_benar,num.jawaban_salah,num.soal_tidak_terjawab,num.nilai,num.kjur FROM kartu_ujian ku LEFT JOIN nilai_ujian_masuk num ON ku.no_formulir=num.no_formulir WHERE ku.no_formulir = $no_formulir";
@@ -41,7 +41,7 @@ class CJawabanSoalPMB extends MainPageM {
                             $dataujian['jumlah_soal'] = $jumlah_soal;
                             $nilai=($jawaban_benar/$jumlah_soal)*100;
                             $dataujian['nilai'] = $nilai;
-                            $str= "INSERT INTO nilai_ujian_masuk (idnilai_ujian_masuk,no_formulir,jumlah_soal,jawaban_benar,jawaban_salah,soal_tidak_terjawab,nilai,ket_lulus) VALUES (NULL,$no_formulir,$jumlah_soal,$jawaban_benar,$jawaban_salah,$soal_tidak_terjawab,$nilai,0)";
+                            $str= "INSERT INTO nilai_ujian_masuk (idnilai_ujian_masuk,no_formulir,jumlah_soal,jawaban_benar,jawaban_salah,soal_tidak_terjawab,nilai,ket_lulus) VALUES (NULL, $no_formulir, $jumlah_soal, $jawaban_benar, $jawaban_salah, $soal_tidak_terjawab, $nilai,0)";
                             $this->DB->insertRecord($str);                                        
                         }
                         $kjur1=$this->Demik->getDataMHS('kjur1');
@@ -61,7 +61,7 @@ class CJawabanSoalPMB extends MainPageM {
                 }                                        
             }catch (Exception $e) {
                 $this->idProcess = 'view';
-                $this->errorMessage->Text=$e->getMessage();
+                $this->errorMessage->Text = $e->getMessage();
             }
         }
     }    
@@ -81,7 +81,7 @@ class CJawabanSoalPMB extends MainPageM {
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
             $idsoal = $item->DataItem['idsoal'];
             $idjawaban_tersimpan=$item->DataItem['idjawaban'];
-            $str = "SELECT idjawaban,idsoal,j.jawaban,$idjawaban_tersimpan AS jawaban_tersimpan FROM jawaban j WHERE idsoal = $idsoal";
+            $str = "SELECT idjawaban,idsoal,j.jawaban, $idjawaban_tersimpan AS jawaban_tersimpan FROM jawaban j WHERE idsoal = $idsoal";
             $this->DB->setFieldTable(array('idjawaban', 'idsoal', 'jawaban', 'jawaban_tersimpan')); 
             $r = $this->DB->getRecord($str);                   
             $item->RepeaterJawaban->DataSource = $r;

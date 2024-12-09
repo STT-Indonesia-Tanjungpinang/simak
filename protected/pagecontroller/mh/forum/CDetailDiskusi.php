@@ -51,7 +51,7 @@ class CDetailDiskusi extends MainPageMHS {
             $this->txtAddContent->Text='';
             $userid = $this->Pengguna->getDataUser('nim');                        
             $nama_user = $this->Pengguna->getDataUser('nama_mhs'). ' ['.$this->Pengguna->getDataUser('nim').']';                        
-            $str = "INSERT INTO forumposts (idpost,idkategori,parentpost,title,content,userid,tipe,nama_user,date_added) VALUES (NULL,$idkategori,$idpost,'$judul', '$content',$userid,'mh', '$nama_user',NOW())";                   
+            $str = "INSERT INTO forumposts (idpost,idkategori,parentpost,title,content,userid,tipe,nama_user,date_added) VALUES (NULL, $idkategori, $idpost,'$judul', '$content', $userid,'mh', '$nama_user',NOW())";                   
             $this->DB->insertRecord($str);
             $this->populateData();
         }

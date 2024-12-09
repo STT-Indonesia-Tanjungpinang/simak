@@ -19,7 +19,7 @@ class DetailPembayaranSemesterPendek Extends CDetailPembayaranSemesterPendek {
             $this->Finance->setDataMHS($datamhs);
             $totalbayar=$this->Finance->getTotalBayarMhs($ta,2);                
             $sisa=$totalbiaya-$totalbayar;                
-            $datadulang=$this->Finance->getDataDulang(2,$ta);
+            $datadulang=$this->Finance->getDataDulang(2, $ta);
             if ($sisa>0 && $datadulang['k_status'] != 'C') {
                 $sisa=$this->Finance->toRupiah($sisa);
                 $tasmt="T.A ".$this->DMaster->getNamaTA($ta).' semester '.$this->setup->getSemester(2);

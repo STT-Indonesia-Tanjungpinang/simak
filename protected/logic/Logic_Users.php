@@ -40,7 +40,7 @@ class Logic_Users extends Logic_Global {
 	* digunakan untuk membuat hash password
 	* @return array
 	*/
-	public function createHashPassword($password,$salt='',$new=true) {
+	public function createHashPassword($password, $salt='', $new=true) {
 		if ($new) {
 			$salt = substr(md5(uniqid(rand(), true)), 0, 6);	
 			$password = hash('sha256', $salt . hash('sha256', $password));
@@ -98,7 +98,7 @@ class Logic_Users extends Logic_Global {
     /**
 	* dapatkan hak akses untuk module	
 	*/
-	public function getModuleAccess ($sectionname,$modulename) {		
+	public function getModuleAccess ($sectionname, $modulename) {		
 		$modul=$this->UserAcl[$sectionname];	        
 		if ($modul =='') {
 			throw new Exception ("section ($sectionname) tidak di kenal");			
@@ -115,8 +115,8 @@ class Logic_Users extends Logic_Global {
 	/**
 	* jika user tidak memiliki hak pada suatu modul maka akan forbiden	
 	*/
-	public function moduleForbiden ($section,$modulename) {
-		if (!$this->getModuleAccess($section,$modulename)) {
+	public function moduleForbiden ($section, $modulename) {
+		if (!$this->getModuleAccess($section, $modulename)) {
 			$section=ucfirst($section);
 			$modulename=ucfirst($modulename);						
 			echo 'Anda tidak boleh mengakses ', $section,'::'.$modulename;
@@ -128,7 +128,7 @@ class Logic_Users extends Logic_Global {
      * @param type $page
      * @param type $activity
      */
-    public function insertNewActivity ($page,$activity) {
+    public function insertNewActivity ($page, $activity) {
     	$userid=$this->getUserid ();
     	if ($userid > 0) {    		
 		    $username=$this->getUsername ();

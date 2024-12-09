@@ -10,7 +10,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
             try {
                 if (isset($_SESSION['currentPageDulangMHSKeluar']['DataMHS']['no_formulir'])) {
                     $datamhs=$_SESSION['currentPageDulangMHSKeluar']['DataMHS'];
-                    $nim=$datamhs['nim'];
+                    $nim = $datamhs['nim'];
                     $this->Nilai->setDataMHS($datamhs);
                     
                     $str = "SELECT MAX(tahun) AS tahun,MAX(idsmt) AS idsmt FROM dulang WHERE nim='$nim' GROUP BY tahun,idsmt ORDER BY tahun DESC,idsmt DESC LIMIT 1";
@@ -18,11 +18,11 @@ class CDetailDulangMHSKeluar Extends MainPageM {
                     $datadulang=$this->DB->getRecord($str);	                      
 
                     $this->cmbAddTAKeluar->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($datamhs['tahun_masuk']),'none');
-                    $this->cmbAddTAKeluar->Text=$datadulang[1]['tahun'];
+                    $this->cmbAddTAKeluar->Text = $datadulang[1]['tahun'];
                     $this->cmbAddTAKeluar->dataBind();
                      				
                     $this->cmbAddSMTKeluar->DataSource=array(1=>'GANJIL',2=>'GENAP');
-                    $this->cmbAddSMTKeluar->Text=$datadulang[1]['idsmt'];
+                    $this->cmbAddSMTKeluar->Text = $datadulang[1]['idsmt'];
                     $this->cmbAddSMTKeluar->dataBind();
                     
                     $this->Nilai->getTranskripFromKRS ();
@@ -32,13 +32,13 @@ class CDetailDulangMHSKeluar Extends MainPageM {
                         $jumlah_sks+=$this->DB->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
                     }
                     $ket_jumlah_sks="(saat ini baru $jumlah_sks SKS)";                    
-                    $this->literalJumlahSKS->Text=$ket_jumlah_sks;
+                    $this->literalJumlahSKS->Text = $ket_jumlah_sks;
                     
                     $this->literalBebasKeuangan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
                     $this->literalBebasPerpustakaan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
                     
                     $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
-                    $this->cmbAddDosenWali->Text=$datamhs['iddosen_wali'];
+                    $this->cmbAddDosenWali->Text = $datamhs['iddosen_wali'];
                     $this->cmbAddDosenWali->dataBind();	           
                     
                     $_SESSION['semester'] = $datadulang[1]['idsmt'];
@@ -51,7 +51,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
                 }
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}	
 	}
@@ -73,9 +73,9 @@ class CDetailDulangMHSKeluar Extends MainPageM {
         $ta=addslashes($param->Value);		       
         $semester = $this->cmbAddSMTKeluar->Text;            
         try {            
-            $nim=$datamhs['nim'];
+            $nim = $datamhs['nim'];
             $this->Nilai->setDataMHS(array('nim'=>$nim));
-            $datadulang=$this->Nilai->getDataDulang($semester,$ta);
+            $datadulang=$this->Nilai->getDataDulang($semester, $ta);
             
             if (isset($datadulang['iddulang'])) {
                 throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");

@@ -15,41 +15,41 @@ class CPenyelenggaraan extends MainPageSA {
             $_SESSION['currentPagePenyelenggaraan']['DaftarDosen'] = $this->DMaster->getDaftarDosen();
                         
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
-			$this->tbCmbTA->Text=$_SESSION['ta'];						
+			$this->tbCmbTA->Text = $_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
 			$this->populateData();		
 		}			
 	}
     public function changeTbTA($sender, $param) {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPagePenyelenggaraan']['search']);
         
 	}	
 	public function changeTbSemester($sender, $param) {
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPagePenyelenggaraan']['search']);
 	}	
     public function changeTbPs($sender, $param) {		
         $_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateData();
 	}
     public function getInfoToolbar() {        
@@ -81,7 +81,7 @@ class CPenyelenggaraan extends MainPageSA {
 		$item=$param->item;
 		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
 			$item->cmbFrontDosen->DataSource = $this->DMaster->removeIdFromArray($_SESSION['currentPagePenyelenggaraan']['DaftarDosen'],'none');			
-            $item->cmbFrontDosen->Text=$item->DataItem['iddosen'];
+            $item->cmbFrontDosen->Text = $item->DataItem['iddosen'];
 			$item->cmbFrontDosen->dataBind();									
 		}
 	}	
@@ -118,11 +118,11 @@ class CPenyelenggaraan extends MainPageSA {
                 $iddosen=$inputan->cmbAddDaftarDosen->Text;
 				if ($iddosen != 'none'&& $iddosen !='') {					
 					$kmatkul = $inputan->txtKmatkul->Value;					
-					$str2 = $str . "$kmatkul', '$kjur',$iddosen)";					
+					$str2 = $str . "$kmatkul', '$kjur', $iddosen)";					
 					$this->DB->query('BEGIN');
 					if ($this->DB->insertRecord($str2)) {
 						$idpenyelenggaraan=$this->DB->getLastInsertID();
-						$str_pengampu2=$str_pengampu."$idpenyelenggaraan,$iddosen,0)";
+						$str_pengampu2=$str_pengampu."$idpenyelenggaraan, $iddosen,0)";
 						$this->DB->insertRecord($str_pengampu2);
 						$this->DB->query('COMMIT');
 					}else {
@@ -135,7 +135,7 @@ class CPenyelenggaraan extends MainPageSA {
 	}
 	
 	public function ubahPengampuMatkul($sender, $param) {		
-		$idpenyelenggaraan=$this->getDataKeyField($sender,$this->RepeaterS);
+		$idpenyelenggaraan=$this->getDataKeyField($sender, $this->RepeaterS);
 		$iddosen=$sender->Text;				
 		$str = "UPDATE penyelenggaraan SET iddosen='$iddosen' WHERE idpenyelenggaraan='$idpenyelenggaraan'";
 		$this->DB->query('BEGIN');
@@ -150,8 +150,8 @@ class CPenyelenggaraan extends MainPageSA {
 	}
 	
 	public function deleteRecord($sender, $param) {		
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);
-        if ($this->DB->checkRecordIsExist ('idpenyelenggaraan', 'krsmatkul',$id)) {	            
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+        if ($this->DB->checkRecordIsExist ('idpenyelenggaraan', 'krsmatkul', $id)) {	            
             $this->lblHeaderMessageError->Text='Menghapus Penyelenggaraan Matakuliah';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";
             $this->modalMessageError->Show();

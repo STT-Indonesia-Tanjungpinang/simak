@@ -56,7 +56,7 @@ class CPengumuman extends MainPageM {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePengumuman']['page_num']=0;}
-        $str="$str ORDER BY date_added DESC LIMIT $offset,$limit";				
+        $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'userid', 'nama_kategori', 'title', 'content', 'nama_user', 'tipe', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
         $result = array();
@@ -71,13 +71,13 @@ class CPengumuman extends MainPageM {
             }
             $v['urlprofiluser'] = $urlprofiluser;
             $v['jumlahcomment'] = $this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=$idpost",'idpost');
-            $v['tanggal_post'] = $this->page->TGL->tanggal('l, d F Y H:i',$v['date_added']);
+            $v['tanggal_post'] = $this->page->TGL->tanggal('l, d F Y H:i', $v['date_added']);
             $result[$k] = $v;
         }
 		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
         
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
     }    
     public function populateUnread ($search=false) {
         if ($search) {  
@@ -94,20 +94,20 @@ class CPengumuman extends MainPageM {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePengumuman']['page_num_unread']=0;}
-        $str="$str ORDER BY date_added DESC LIMIT $offset,$limit";				
+        $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'nama_kategori', 'title', 'content', 'nama_user', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
         $result = array();
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
             $v['jumlahcomment'] = $this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=$idpost",'idpost');
-            $v['tanggal_post'] = $this->page->TGL->relativeTime(date('Y-m-d H:i:s'),$v['date_added'],'lasttweet');
+            $v['tanggal_post'] = $this->page->TGL->relativeTime(date('Y-m-d H:i:s'), $v['date_added'],'lasttweet');
             $result[$k] = $v;
         }
 		$this->RepeaterUnread->DataSource = $result;
 		$this->RepeaterUnread->dataBind();
         
-        $this->paginationInfo2->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo2->Text = $this->getInfoPaging($this->RepeaterS);
     }    
     public function filepengumumanUploaded($sender, $param) {
         if($sender->HasFile) {
@@ -144,7 +144,7 @@ class CPengumuman extends MainPageM {
 			$file_path_temp=$this->hiddenfile_path_temp->Value;
 			$file_url = $this->hiddenfile_url->Value;
 			if (file_exists($file_path_temp)) {
-				rename ($file_path_temp,$file_path);
+				rename ($file_path_temp, $file_path);
 			}
             $str = "INSERT INTO pengumuman SET idpost=NULL,idkategori=$idkategori,title='$judul',content='$content',userid=$userid,tipe='m',nama_user='$nama_user',file_name='$file_name',file_type='$file_type',file_size='$file_size',file_path='$file_path',file_url='$file_url',date_added=NOW()";
             $this->DB->insertRecord($str);
@@ -154,7 +154,7 @@ class CPengumuman extends MainPageM {
         }
     }
     public function setUnreadFalse($sender, $param) {
-        $id=$this->getDataKeyField($sender,$this->RepeaterUnread);        
+        $id=$this->getDataKeyField($sender, $this->RepeaterUnread);        
         $str="UPDATE pengumuman SET unread=0 WHERE idpost=$id";
         $this->DB->updateRecord($str);
         $this->redirect('forum.DetailPengumuman', true, array('id'=>$id));

@@ -16,20 +16,20 @@ class CStopInputNilai extends MainPageON{
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
             $this->tbCmbTA->DataSource = $ta;					
-            $this->tbCmbTA->Text=$_SESSION['ta'];						
+            $this->tbCmbTA->Text = $_SESSION['ta'];						
             $this->tbCmbTA->dataBind();
 
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
             $this->tbCmbSemester->DataSource = $semester;
-            $this->tbCmbSemester->Text=$_SESSION['semester'];
+            $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
             $this->populateData();
 
 		}
@@ -45,18 +45,18 @@ class CStopInputNilai extends MainPageON{
 	}
     public function changeTbTA($sender, $param) {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageStopInputNilai']['search']);
         
 	}	
 	public function changeTbSemester($sender, $param) {
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageStopInputNilai']['search']);
 	}	
     public function changeTbPs($sender, $param) {		
         $_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateData();
 	}
 	public function renderCallback($sender, $param) {
@@ -118,9 +118,9 @@ class CStopInputNilai extends MainPageON{
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageStopInputNilai']['page_num']=0;}
-        $str = "$str ORDER BY hari ASC,idkelas ASC,nama_dosen ASC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY hari ASC,idkelas ASC,nama_dosen ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idkelas_mhs', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas', 'isi_nilai'));
-		$r = $this->DB->getRecord($str,$offset+1);	
+		$r = $this->DB->getRecord($str, $offset+1);	
         $result = array();
         while (list($k, $v) = each($r)) {  
             $kmatkul = $v['kmatkul'];
@@ -131,10 +131,10 @@ class CStopInputNilai extends MainPageON{
         }
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function doVerified($sender, $param) {
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);
 		$verified=$sender->CommandParameter;
 		$str = "UPDATE kelas_mhs SET isi_nilai=$verified WHERE idkelas_mhs=$id";	
 		$this->DB->updateRecord($str);

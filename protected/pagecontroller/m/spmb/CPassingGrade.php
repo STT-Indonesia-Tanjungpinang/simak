@@ -13,11 +13,11 @@ class CPassingGrade extends MainPageM {
 			}            
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_pendaftaran'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $this->populateJadwalUjian();
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
             $this->populateData ();	
 
 		}	
@@ -27,7 +27,7 @@ class CPassingGrade extends MainPageM {
     }
 	public function changeTbTahunMasuk($sender, $param) {					
 		$_SESSION['tahun_pendaftaran'] = $this->tbCmbTahunMasuk->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateJadwalUjian();
 		$this->populateData();
 	}	
@@ -47,10 +47,10 @@ class CPassingGrade extends MainPageM {
         $r = $this->DB->getRecord($str);	
         $result = array('none'=>' ');
         while (list($k, $v) = each($r)) {  
-            $result[$v['idjadwal_ujian']] = $v['nama_kegiatan'] . ' # '.$this->TGL->tanggal('l, d F Y',$v['tanggal_ujian']) .' # '.$v['jam_mulai'].'-'.$v['jam_akhir'].'';            
+            $result[$v['idjadwal_ujian']] = $v['nama_kegiatan'] . ' # '.$this->TGL->tanggal('l, d F Y', $v['tanggal_ujian']) .' # '.$v['jam_mulai'].'-'.$v['jam_akhir'].'';            
         }
         $this->cmbJadwalUjian->DataSource = $result;					
-        $this->cmbJadwalUjian->Text=$_SESSION['currentPagePassingGrade']['idjadwal_ujian'];						
+        $this->cmbJadwalUjian->Text = $_SESSION['currentPagePassingGrade']['idjadwal_ujian'];						
         $this->cmbJadwalUjian->dataBind();
     }
 	public function populateData () {	
@@ -73,7 +73,7 @@ class CPassingGrade extends MainPageM {
         $idjadwal_ujian=$_SESSION['currentPagePassingGrade']['idjadwal_ujian'];
         $this->DB->query('BEGIN');
         if ($this->DB->deleteRecord("passinggrade WHERE idjadwal_ujian='$idjadwal_ujian'")){
-            $str = "INSERT INTO passinggrade (idpassing_grade,idjadwal_ujian,kjur,tahun_masuk,nilai) SELECT NULL,$idjadwal_ujian,kjur,$tahun_masuk,0 FROM program_studi WHERE kjur!=0";
+            $str = "INSERT INTO passinggrade (idpassing_grade,idjadwal_ujian,kjur,tahun_masuk,nilai) SELECT NULL, $idjadwal_ujian,kjur, $tahun_masuk,0 FROM program_studi WHERE kjur!=0";
             $this->DB->insertRecord($str);
             $this->DB->query('COMMIT');
             $this->redirect('spmb.PassingGrade',true);

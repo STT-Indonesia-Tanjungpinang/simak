@@ -35,7 +35,7 @@ class CDetailDPNA extends MainPageM {
                     }                
                     $this->cmbDaftarKelas->Enabled=true;
                     $this->cmbDaftarKelas->DataSource = $daftar_kelas;                
-                    $this->cmbDaftarKelas->Text=$_SESSION['currentPageDPNA']['idkelas_mhs'];
+                    $this->cmbDaftarKelas->Text = $_SESSION['currentPageDPNA']['idkelas_mhs'];
                     $this->cmbDaftarKelas->DataBind();
                     $this->btnFilter->Enabled=true;                
                 }else{
@@ -45,7 +45,7 @@ class CDetailDPNA extends MainPageM {
                 $this->populateInfoKelas($_SESSION['currentPageDPNA']['idkelas_mhs']);
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}
 	}    
@@ -139,7 +139,7 @@ class CDetailDPNA extends MainPageM {
             $infokelas .= '</div>';
         }
         $_SESSION['currentPageDPNA']['DataDPNA'] = $dataDPNA;
-        $this->literalInfoKelas->Text=$infokelas;
+        $this->literalInfoKelas->Text = $infokelas;
     }
 	public function printOut($sender, $param) {	
         $this->Demik->InfoMatkul = $_SESSION['currentPageDPNA']['DataDPNA'];
@@ -190,7 +190,7 @@ class CDetailDPNA extends MainPageM {
                 $this->report->printDPNA($this->Nilai,true);
             break;
         }        
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar Peserta dan Nilai Akhir';
         $this->modalPrintOut->show();
 	}

@@ -192,7 +192,7 @@ class BaseWS extends TJsonResponse {
     {
       $username = addslashes($headers['Username']);
       $token = addslashes($headers['Token']);			
-      $ip = explode('.',$_SERVER['REMOTE_ADDR']);		        
+      $ip = explode('.', $_SERVER['REMOTE_ADDR']);		        
       $ipaddress = $ip[0];	       	
       if ($ipaddress == '127' || $ipaddress == '::1')
       {
@@ -208,7 +208,7 @@ class BaseWS extends TJsonResponse {
       if (isset($r[1]))
       {	
         $data=$r[1];
-        $_ip = explode(',',$data['ipaddress']);
+        $_ip = explode(',', $data['ipaddress']);
         $jumlah_ip=count($_ip);
         $bool=-1;
         for ($i=0;$i<$jumlah_ip;$i+=1)

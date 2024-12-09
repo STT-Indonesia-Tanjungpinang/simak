@@ -5,7 +5,7 @@ class TActiveCustomPager extends TActivePager
 	{
 		return 'div';
 	}    
-	protected function createPagerButton($buttonType,$enabled,$text,$commandName,$commandParameter)
+	protected function createPagerButton($buttonType, $enabled, $text, $commandName, $commandParameter)
 	{
 		if($buttonType===TPagerButtonType::LinkButton)
 		{

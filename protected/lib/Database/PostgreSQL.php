@@ -23,7 +23,7 @@ class PostgreSQL extends DBGlobal implements DBInterface {
 	* @return void
 	*/
 	public function query ($sqlString) {
-		if ($result=@ pg_query($this->conn,$sqlString)) {
+		if ($result=@ pg_query($this->conn, $sqlString)) {
 			$this->ResultQuery=$result;
 			return $result;
 		}else {
@@ -38,7 +38,7 @@ class PostgreSQL extends DBGlobal implements DBInterface {
 	* @param offset 
 	*
 	*/	
-	public function getRecord ($sqlString,$offset=1) {		
+	public function getRecord ($sqlString, $offset=1) {		
 // 		echo $sqlString;		
 		if (pg_num_rows($result=$this->query($sqlString)) >= 1) {
 			$ft = $this->getFieldTable("field");
@@ -83,7 +83,7 @@ class PostgreSQL extends DBGlobal implements DBInterface {
 	* @param idrecord nilai id record
 	* @param $opt diperlakukan seperti apa
 	*/
-	public function checkRecordIsExist ($field,$table,$idrecord,$opt="integer") {
+	public function checkRecordIsExist ($field, $table, $idrecord, $opt="integer") {
 		$bool = false;
 		if ($idrecord != "") {
 			$this->setFieldTable(array($field) );

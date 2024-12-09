@@ -15,20 +15,20 @@ class CKombiPerTA Extends MainPageK {
 			}
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
-			$this->tbCmbSemesterMasuk->Text=$_SESSION['currentPageKombiPerTA']['semester_masuk'];
+			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageKombiPerTA']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind(); 
             
             $kelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas(),'none');            
 			$this->tbCmbKelas->DataSource = $kelas;
-			$this->tbCmbKelas->Text=$_SESSION['currentPageKombiPerTA']['kelas'];			
+			$this->tbCmbKelas->Text = $_SESSION['currentPageKombiPerTA']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
-            $this->cmbPeriodePembayaran->Text=$_SESSION['currentPageKombiPerTA']['periode_pembayaran'];			
+            $this->cmbPeriodePembayaran->Text = $_SESSION['currentPageKombiPerTA']['periode_pembayaran'];			
 			$this->populateData ();	
             $this->setInfoToolbar();
 		
@@ -63,7 +63,7 @@ class CKombiPerTA Extends MainPageK {
 		$ta = $_SESSION['tahun_masuk'];	
         $idsmt = $_SESSION['currentPageKombiPerTA']['semester_masuk'];	
 		$kelas=$_SESSION['currentPageKombiPerTA']['kelas'];	        
-		if ($ta == 'none' || $ta == '' || $kelas=='none' || $ta=='' || $this->DB->checkRecordIsExist('tahun', 'ta',$ta)==false) {									
+		if ($ta == 'none' || $ta == '' || $kelas=='none' || $ta=='' || $this->DB->checkRecordIsExist('tahun', 'ta', $ta)==false) {									
 			$result = array();			
 		}else {							
 			$total_kombi1=$this->DB->getCountRowsOfTable("kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas'");
@@ -74,16 +74,16 @@ class CKombiPerTA Extends MainPageK {
 					$str="SELECT idkombi FROM kombi WHERE idkombi NOT IN (SELECT idkombi FROM kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas')";
 					$this->DB->setFieldTable(array('idkombi'));
 					$result=$this->DB->getRecord($str);
-					while (list($k,$v)=each($result)) {
+					while (list($k, $v)=each($result)) {
 						$str = "INSERT INTO kombi_per_ta (idkombi_per_ta,idkelas,idkombi,tahun,idsmt,biaya) VALUES ";
-						$str = $str . "(NULL,'$kelas',".$v['idkombi'].",$ta,$idsmt,0)";
+						$str = $str . "(NULL,'$kelas',".$v['idkombi'].", $ta, $idsmt,0)";
 						$this->DB->insertRecord ($str);
 					}	
 				}else {
 					$result=$this->getLogic('DMaster')->getList("kombi",array('idkombi'));
-					while (list($k,$v)=each($result)) {
+					while (list($k, $v)=each($result)) {
 						$str = "INSERT INTO kombi_per_ta (idkombi_per_ta,idkelas,idkombi,tahun,idsmt,biaya) VALUES ";
-						$str = $str . "(NULL,'$kelas',".$v['idkombi'].",$ta,$idsmt,0)";
+						$str = $str . "(NULL,'$kelas',".$v['idkombi'].", $ta, $idsmt,0)";
 						$this->DB->insertRecord ($str);
 					}		
 				}

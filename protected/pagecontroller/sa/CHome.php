@@ -64,8 +64,8 @@ class CHome extends MainPageSA {
         $this->datamendaftar1->Text="var data1 = [$data1];";
         $this->datamendaftar2->Text="var data2 = [$data2];";
         
-        $this->literalTotalPendaftaran->Text=$totalpendaftaran;
-        $this->literalTotalDulang->Text=$totaldulang;
+        $this->literalTotalPendaftaran->Text = $totalpendaftaran;
+        $this->literalTotalDulang->Text = $totaldulang;
         
         $mendaftartahunini=$datamendaftar[$_SESSION['tahun_pendaftaran']];
         $this->TotalMendaftarTahunINI=$mendaftartahunini;

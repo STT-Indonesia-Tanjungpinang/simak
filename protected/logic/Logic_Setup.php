@@ -34,7 +34,7 @@ class Logic_Setup extends Logic_Global {
             $this->settings=$this->populateSetting ();
             $this->settings['loaded']=true;
             if ($this->Application->Cache) {                
-                $this->Application->Cache->set('settings',$this->settings);
+                $this->Application->Cache->set('settings', $this->settings);
             }else {
                 $_SESSION['settings']=$this->settings;                
             }
@@ -54,7 +54,7 @@ class Logic_Setup extends Logic_Global {
         $this->db->setFieldTable(array('setting_id','key','value'));
         $r=$this->db->getRecord($str);
         $result=array();
-        while (list($k,$v)=each($r)) {
+        while (list($k, $v)=each($r)) {
             $result[$v['key']]=array('setting_id'=>$v['setting_id'],'key'=>$v['key'],'value'=>$v['value']);
         }
         return $result;
@@ -64,7 +64,7 @@ class Logic_Setup extends Logic_Global {
      * @param type $mode
      * @return type
      */
-    public function getSettingValue($keys,$mode='value') {  
+    public function getSettingValue($keys, $mode='value') {  
         $value=$this->settings[$keys][$mode];
         if ($value=='') {            
             $this->loadSetting (true);
@@ -89,7 +89,7 @@ class Logic_Setup extends Logic_Global {
      * 
      */
     public function getAddress () {       
-		$ip=explode('.',$_SERVER['REMOTE_ADDR']);		        
+		$ip=explode('.', $_SERVER['REMOTE_ADDR']);		        
 		$ipaddress=$ip[0];	       	
 		if ($ipaddress == '127' || $ipaddress == '::1') {
 			$url=$this->parameters['address_lokal'];
@@ -162,7 +162,7 @@ class Logic_Setup extends Logic_Global {
      * @param type $string
      */
     public function cleanFileNameString ($filename) {
-        $data=explode ('.',$filename);           
+        $data=explode ('.', $filename);           
         $extensi=$data[count($data)-1];        
         $replacefile=preg_replace('/\W+/', '', $filename);
         $files= str_replace($extensi, '', $replacefile);
@@ -216,7 +216,7 @@ class Logic_Setup extends Logic_Global {
      * @param  $quality - enter 1-100 (100 is best quality) default is 100
      * @return boolean|resource
     */ 
-    public function resizeImage($file,$string= null,$width= 0, $height= 0, $proportional= false, $output= 'file', $delete_original= true, $use_linux_commands = false,$quality = 100) {
+    public function resizeImage($file, $string= null, $width= 0, $height= 0, $proportional= false, $output= 'file', $delete_original= true, $use_linux_commands = false, $quality = 100) {
         if ( $height <= 0 && $width <= 0 ) return false;
         if ( $file === null && $string === null ) return false;
         # Setting defaults and meta
@@ -367,7 +367,7 @@ class Logic_Setup extends Logic_Global {
      * @param type $overwrite
      * @return boolean
      */
-    public function createZIP($files = array(),$destination = '',$overwrite = true) {
+    public function createZIP($files = array(), $destination = '', $overwrite = true) {
         //if the zip file already exists and overwrite is false, return false
         if(file_exists($destination) && !$overwrite) { return false; }
         //vars
@@ -386,15 +386,15 @@ class Logic_Setup extends Logic_Global {
         if(count($valid_files)) {
             //create the archive
             $zip = new ZipArchive();
-            if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
+            if($zip->open($destination, $overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
                 return false;
             }
             //add the files
             foreach($valid_files as $nama_file=>$lokasi_file){
-                $zip->addFile($lokasi_file,$nama_file);
+                $zip->addFile($lokasi_file, $nama_file);
             }
             //debug
-            //echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
+            //echo 'The zip archive contains ', $zip->numFiles,' files with a status of ', $zip->status;
 
             //close the zip -- done!
             $zip->close();

@@ -60,18 +60,18 @@ class CUserON extends MainPageSA {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageUserON']['page_num']=0;}
-        $str = "$str ORDER BY username ASC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY username ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'email', 'group_name', 'active', 'foto', 'kjur', 'logintime'));
-		$r = $this->DB->getRecord($str,$offset+1);	
+		$r = $this->DB->getRecord($str, $offset+1);	
         $result = array();
         while (list($k, $v) = each($r)) {
-            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y',$v['logintime']);
+            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);
             $v['group_name'] = $v['kjur']==0?$v['group_name']:$v['group_name'] . ' '.$_SESSION['daftar_jurusan'][$v['kjur']];
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);        
 	}		    
     public function addProcess($sender, $param) {
         $this->idProcess = 'add';
@@ -88,7 +88,7 @@ class CUserON extends MainPageSA {
         if ($username != '') {
             try {   
                 if ($this->hiddenusername->Value!=$username) {                                                            
-                    if ($this->DB->checkRecordIsExist('username', 'user',$username)) {                                
+                    if ($this->DB->checkRecordIsExist('username', 'user', $username)) {                                
                         throw new Exception ("Username ($username) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }                               
                 }                
@@ -104,7 +104,7 @@ class CUserON extends MainPageSA {
         if ($email != '') {
             try {   
                 if ($this->hiddenemail->Value!=$email) {                    
-                    if ($this->DB->checkRecordIsExist('email', 'user',$email)) {                                
+                    if ($this->DB->checkRecordIsExist('email', 'user', $email)) {                                
                         throw new Exception ("Email ($email) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                     }                               
                 }                
@@ -124,7 +124,7 @@ class CUserON extends MainPageSA {
             $password=$data['password'];           
             $page='on';
             $group_id=$this->cmbAddGroup->Text;  
-            $kjur=($this->cmbAddProdi->Text>0)?$this->cmbAddProdi->Text:0;
+            $kjur=($this->cmbAddProdi->Text>0)?$this->cmbAddProdi->Text : 0;
             $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id='$group_id',kjur='$kjur',active=1,isdeleted=0,theme='limitless',foto='resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
             $this->DB->insertRecord($str);           
             
@@ -133,7 +133,7 @@ class CUserON extends MainPageSA {
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender,$this->RepeaterS);        
+        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;     
         
         $str = "SELECT userid,username,nama,email,group_id,kjur,active FROM user WHERE userid='$id'";
@@ -141,24 +141,24 @@ class CUserON extends MainPageSA {
         $r = $this->DB->getRecord($str);
         
         $result=$r[1];        	
-        $this->txtEditNama->Text=$result['nama'];
-        $this->txtEditEmail->Text=$result['email'];
+        $this->txtEditNama->Text = $result['nama'];
+        $this->txtEditEmail->Text = $result['email'];
         $this->hiddenemail->Value=$result['email'];     
-        $this->txtEditUsername->Text=$result['username'];    
+        $this->txtEditUsername->Text = $result['username'];    
         $this->hiddenusername->Value=$result['username'];
         
         $this->cmbEditGroup->DataSource = $this->Pengguna->removeIdFromArray($this->Pengguna->getListGroup(),'none');
-        $this->cmbEditGroup->Text=$result['group_id'];  
+        $this->cmbEditGroup->Text = $result['group_id'];  
         $this->cmbEditGroup->DataBind();
         $daftar_jurusan=$_SESSION['daftar_jurusan'];
         $daftar_jurusan['none'] = ' ';
         $this->cmbEditProdi->DataSource = $daftar_jurusan;
-        $this->cmbEditProdi->Text=$result['kjur'];
+        $this->cmbEditProdi->Text = $result['kjur'];
         $this->cmbEditProdi->DataBind();       
         
         
         
-        $this->cmbEditStatus->Text=$result['active'];
+        $this->cmbEditStatus->Text = $result['active'];
     }
     public function updateData($sender, $param) {
 		if ($this->Page->isValid) {			
@@ -167,7 +167,7 @@ class CUserON extends MainPageSA {
             $email = addslashes($this->txtEditEmail->Text);
             $username=addslashes($this->txtEditUsername->Text); 
             $group_id=$this->cmbEditGroup->Text;  
-            $kjur=($this->cmbEditProdi->Text>0)?$this->cmbEditProdi->Text:0;
+            $kjur=($this->cmbEditProdi->Text>0)?$this->cmbEditProdi->Text : 0;
             $status=$this->cmbEditStatus->Text;
             
             if ($this->txtEditPassword1->Text == '') {
@@ -183,7 +183,7 @@ class CUserON extends MainPageSA {
 		}
 	}
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);        
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);        
         $this->DB->deleteRecord("user WHERE userid=$id");
         $this->redirect('settings.UserON',true);
     }   

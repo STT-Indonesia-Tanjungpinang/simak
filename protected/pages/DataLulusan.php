@@ -14,14 +14,14 @@ class DataLulusan extends MainPageF {
             $this->populateData();
         }
 	}
-    public function renderCallback ($sender,$param) {
+    public function renderCallback ($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
-	public function Page_Changed ($sender,$param) {
+	public function Page_Changed ($sender, $param) {
 		$_SESSION['currentPageDataLulusan']['page_num']=$param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageDataLulusan']['search']);
 	}
-    public function searchRecord ($sender,$param) {
+    public function searchRecord ($sender, $param) {
 		$_SESSION['currentPageDataLulusan']['search']=true;
 		$this->populateData($_SESSION['currentPageDataLulusan']['search']);
 	}
@@ -58,21 +58,21 @@ class DataLulusan extends MainPageF {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDataLulusan']['page_num']=0;}
-        $str = "$str ORDER BY ta.tahun DESC,ta.idsmt ASC,vdm.nama_mhs ASC LIMIT $offset,$limit";
+        $str = "$str ORDER BY ta.tahun DESC,ta.idsmt ASC,vdm.nama_mhs ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('nim','nirm','nama_mhs','nomor_transkrip','predikat_kelulusan','tanggal_lulus','judul_skripsi','tasmt'));
-		$result=$this->DB->getRecord($str,$offset+1);
+		$result=$this->DB->getRecord($str, $offset+1);
 		$this->RepeaterS->DataSource=$result;
 		$this->RepeaterS->dataBind();
         
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}	
-	public function setDataBound ($sender,$param) {
+	public function setDataBound ($sender, $param) {
 		$item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
-			$nim=$item->DataItem['nim'];			
+			$nim = $item->DataItem['nim'];			
             $this->Nilai->setDataMHS(array('nim'=>$nim));
             $this->Nilai->getTranskrip(false);            
-			$item->lblIpk->Text=$this->Nilai->getIPKAdaNilai();
+			$item->lblIpk->Text = $this->Nilai->getIPKAdaNilai();
 		}	
 	}
 }

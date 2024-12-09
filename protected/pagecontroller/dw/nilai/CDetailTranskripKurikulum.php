@@ -49,7 +49,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
             $this->RepeaterS->dataBind();		
         } catch (Exception $ex) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$ex->getMessage();
+			$this->errorMessage->Text = $ex->getMessage();
         }        
 	}
 	public function printOut($sender, $param) {	

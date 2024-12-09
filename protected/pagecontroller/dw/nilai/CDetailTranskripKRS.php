@@ -49,7 +49,7 @@ class CDetailTranskripKRS extends MainPageDW {
             $this->RepeaterS->dataBind();		
         } catch (Exception $ex) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$ex->getMessage();
+			$this->errorMessage->Text = $ex->getMessage();
         }        
 	}
 	public function printOut($sender, $param) {	
@@ -81,7 +81,7 @@ class CDetailTranskripKRS extends MainPageDW {
                 $this->report->printTranskripKRS($this->Nilai,true);				
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Transkrip KRS';
         $this->modalPrintOut->show();
 	}

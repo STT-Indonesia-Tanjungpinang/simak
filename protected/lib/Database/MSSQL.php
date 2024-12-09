@@ -11,9 +11,9 @@ class MSSQL extends DBGlobal implements DBInterface {
 	* @return void
 	*/
 	public function connectDB ($param) { 
-		$this->conn = @ mssql_connect ($param['host'],$param['user'],$param['password']);		
+		$this->conn = @ mssql_connect ($param['host'], $param['user'], $param['password']);		
 		if ($this->conn) {
-			mssql_select_db ($param['dbname'],$this->conn);
+			mssql_select_db ($param['dbname'], $this->conn);
 		}
 	}
 	/**
@@ -37,7 +37,7 @@ class MSSQL extends DBGlobal implements DBInterface {
 	* @param offset 
 	*
 	*/	
-	public function getRecord ($sqlString,$offset=1) {		
+	public function getRecord ($sqlString, $offset=1) {		
 // 		echo $sqlString;				
 			
 		if (mssql_num_rows($result=$this->query($sqlString)) >= 1) {
@@ -95,7 +95,7 @@ class MSSQL extends DBGlobal implements DBInterface {
 	* @param idrecord nilai id record
 	* @param $opt diperlakukan seperti apa
 	*/
-	public function checkRecordIsExist ($field,$table,$idrecord,$opt="integer") {
+	public function checkRecordIsExist ($field, $table, $idrecord, $opt="integer") {
 		$bool = false;
 		if ($idrecord != "") {
 			$this->setFieldTable(array($field) );

@@ -5,7 +5,7 @@ class TransaksiPembayaranSemesterGenap Extends CTransaksiPembayaranSemesterGenap
 	public function onLoad($param) {
 		parent::onLoad($param);							
     }
-    public function itemCreated($sender,$param){
+    public function itemCreated($sender, $param){
         $item=$param->Item;
         if($item->ItemType==='EditItem') {   
             $item->ColumnJumlahBayar->TextBox->CssClass='form-control';                                   

@@ -15,20 +15,20 @@ class CPIN extends MainPageK {
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $kelas=$this->DMaster->getListKelas();
 			$this->tbCmbKelas->DataSource = $this->DMaster->removeIdFromArray($kelas,'none');
-			$this->tbCmbKelas->Text=$_SESSION['currentPagePIN']['kelas'];			
+			$this->tbCmbKelas->Text = $_SESSION['currentPagePIN']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
-            $this->cmbDisplayRecord->Text=$_SESSION['currentPagePIN']['display_record'];
-            $this->lblModulHeader->Text=$this->getInfoToolbar();            
+            $this->cmbDisplayRecord->Text = $_SESSION['currentPagePIN']['display_record'];
+            $this->lblModulHeader->Text = $this->getInfoToolbar();            
             $this->populateData ();	
 		}	
 	}   
@@ -40,12 +40,12 @@ class CPIN extends MainPageK {
 	}
 	public function changeTbTahunMasuk($sender, $param) {					
 		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}	
     public function changeTbKelas($sender, $param) {				
 		$_SESSION['currentPagePIN']['kelas'] = $this->tbCmbKelas->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}public function searchRecord($sender, $param) {
 		$_SESSION['currentPagePIN']['search']=true;
@@ -97,12 +97,12 @@ class CPIN extends MainPageK {
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePIN']['page_num']=0;}
 		
-		$str = "$str  $str_display ORDER BY pin.no_formulir ASC LIMIT $offset,$limit";
+		$str = "$str  $str_display ORDER BY pin.no_formulir ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('no_pin', 'no_formulir', 'idkelas', 'nama_mhs', 'ket', 'no_pendaftaran'));
-        $r = $this->DB->getRecord($str,$offset+1);
+        $r = $this->DB->getRecord($str, $offset+1);
         $this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();	
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS); 
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS); 
 	} 
     public function checkRequirements($sender, $param) {       
         if (!($this->DB->getCountRowsOfTable ('kelas', 'idkelas') > 0 && $this->DB->getCountRowsOfTable ('ta', 'tahun') > 0)){
@@ -122,15 +122,15 @@ class CPIN extends MainPageK {
             $jumlah_formulir = $no_urut+$jumlah;            
             if ($jumlah <= 1) {                        
                 $no_pin=$no_urut.mt_rand(100000,999999);
-                $values="('$no_pin',$no_urut,$tahun_masuk,'$idkelas')";
+                $values="('$no_pin', $no_urut, $tahun_masuk,'$idkelas')";
             }else {
                 $values='';
                 for ($i=$no_urut;$i<$jumlah_formulir;$i++) {                    
                     $no_pin=$i.mt_rand(100000,999999);
                     if ($jumlah_formulir > $i+1) {
-                        $values=$values."('$no_pin',$i,$tahun_masuk,1,'$idkelas'),";
+                        $values=$values."('$no_pin', $i, $tahun_masuk,1,'$idkelas'),";
                     }else {
-                        $values=$values."('$no_pin',$i,$tahun_masuk,1,'$idkelas')";
+                        $values=$values."('$no_pin', $i, $tahun_masuk,1,'$idkelas')";
                     }
                 }
             }
@@ -163,7 +163,7 @@ class CPIN extends MainPageK {
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar PIN '.strtoupper($_SESSION['currentPagePIN']['display_record']);
         $this->modalPrintOut->show();
      }

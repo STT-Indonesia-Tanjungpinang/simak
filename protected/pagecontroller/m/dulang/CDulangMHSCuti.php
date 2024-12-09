@@ -13,21 +13,21 @@ class CDulangMHSCuti Extends MainPageM {
             $_SESSION['currentPageDulangMHSCuti']['search']=false;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
             $tahun_masuk=$this->getAngkatan ();			            
             $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-            $this->tbCmbTahunMasuk->Text=$_SESSION['currentPageDulangMHSCuti']['tahun_masuk'];						
+            $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSCuti']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
 
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-            $this->tbCmbTA->Text=$_SESSION['ta'];
+            $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
 
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
             $this->tbCmbSemester->DataSource = $semester;
-            $this->tbCmbSemester->Text=$_SESSION['semester'];
+            $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
 
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -64,7 +64,7 @@ class CDulangMHSCuti Extends MainPageM {
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		        
 		$_SESSION['currentPageDulangMHSCuti']['tahun_masuk'] = $_SESSION['ta'];
 		$this->tbCmbTahunMasuk->DataSource = $this->getAngkatan();
-		$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageDulangMHSCuti']['tahun_masuk'];
+		$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSCuti']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
         $this->setInfoToolbar();
 		$this->populateData();
@@ -134,13 +134,13 @@ class CDulangMHSCuti Extends MainPageM {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSCuti']['page_num']=0;}
-		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";				        
+		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt', 'idkelas'));
-		$result=$this->DB->getRecord($str,$offset+1);
+		$result=$this->DB->getRecord($str, $offset+1);
 		$this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();
                 
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}	
     public function printOut($sender, $param) {		
         $this->createObj('reportakademik');
@@ -172,7 +172,7 @@ class CDulangMHSCuti Extends MainPageM {
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         } 
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar Ulang Mahasiswa CUTI';
         $this->modalPrintOut->show();
     }

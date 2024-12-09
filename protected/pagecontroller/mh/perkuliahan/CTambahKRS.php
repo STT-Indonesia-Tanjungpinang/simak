@@ -31,7 +31,7 @@ class CTambahKRS extends MainPageMHS {
     $this->createObj('Finance');
     if (!$this->IsPostBack && !$this->IsCallback) 
     {	            
-      $this->lblModulHeader->Text=$this->getInfoToolbar();            
+      $this->lblModulHeader->Text = $this->getInfoToolbar();            
       try 
       {			                
         $this->KRS->DataKRS=$_SESSION['currentPageKRS']['DataKRS'];							
@@ -39,22 +39,22 @@ class CTambahKRS extends MainPageMHS {
         $tahun=$_SESSION['ta'];
         $datamhs=$this->Pengguna->getDataUser();    
         $datamhs['idsmt'] = $idsmt;
-        $nim=$datamhs['nim'];
+        $nim = $datamhs['nim'];
         
         $this->KRS->setDataMHS($datamhs);
         $this->Finance->setDataMHS($datamhs);
         
         if ($idsmt==3) { 
-          $jumlah_sks_sp=$this->Finance->getSKSFromSP($tahun,$idsmt);
+          $jumlah_sks_sp=$this->Finance->getSKSFromSP($tahun, $idsmt);
           if (!($jumlah_sks_sp > 0)) {
             throw new Exception ("Anda tidak bisa mengisi KRS karena jumlah SKS hanya 0 atau transaksi pembayaran tidak tercatat di sistem.");																			
           }
         }else {
-          $data = $this->Finance->getTresholdPembayaran($tahun,$idsmt,true);				                        
+          $data = $this->Finance->getTresholdPembayaran($tahun, $idsmt,true);				                        
           if (!$data['bool'])throw new Exception ("Anda tidak bisa mengisi KRS karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
         }
                 
-        $datadulang=$this->KRS->getDataDulang($idsmt,$tahun);
+        $datadulang=$this->KRS->getDataDulang($idsmt, $tahun);
         $nama_tahun = $this->DMaster->getNamaTA($tahun);
         $nama_semester = $this->setup->getSemester($idsmt);
         if (!isset($datadulang['iddulang']))throw new Exception ("Anda belum melakukan daftar ulang pada T.A $nama_tahun Semester $nama_semester. Silahkan hubungi Prodi (Bukan Keuangan).");
@@ -85,12 +85,12 @@ class CTambahKRS extends MainPageMHS {
           );		                    
         }                                
         $this->Nilai->setDataMHS($datamhs);
-        $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt,$tahun);
+        $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt, $tahun);
         if ($datadulangbefore['k_status']=='C') {
           $this->KRS->DataKRS['krs']['maxSKS'] = $idsmt==3?$jumlah_sks_sp:$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');                
           $this->KRS->DataKRS['krs']['ipstasmtbefore'] = 'N.A (Status Cuti)';
         }else{
-          $this->KRS->DataKRS['krs']['maxSKS'] = $idsmt==3?$jumlah_sks_sp:$this->Nilai->getMaxSKS($tahun,$idsmt);                
+          $this->KRS->DataKRS['krs']['maxSKS'] = $idsmt==3?$jumlah_sks_sp:$this->Nilai->getMaxSKS($tahun, $idsmt);                
           $this->KRS->DataKRS['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
         }                                                
         
@@ -112,7 +112,7 @@ class CTambahKRS extends MainPageMHS {
         $this->RepeaterPenyelenggaraan->dataBind();
       }catch (Exception $e) {
         $this->idProcess = 'view';	
-        $this->errorMessage->Text=$e->getMessage();	
+        $this->errorMessage->Text = $e->getMessage();	
       }
     }				
   }
@@ -137,12 +137,12 @@ class CTambahKRS extends MainPageMHS {
       $jumlah=$r[1]['jumlah']+$sender->CommandParameter;
       $maxSKS=$datakrs['maxSKS'];
       //if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
-      $idpenyelenggaraan=$this->getDataKeyField($sender,$this->RepeaterPenyelenggaraan);
+      $idpenyelenggaraan=$this->getDataKeyField($sender, $this->RepeaterPenyelenggaraan);
       //check kmatkul syarat apakah lulus		
       $this->KRS->checkMatkulSyaratIDPenyelenggaraan($idpenyelenggaraan);
-      if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul',$idpenyelenggaraan,' AND idkrs='.$idkrs))
+      if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul', $idpenyelenggaraan,' AND idkrs='.$idkrs))
       { 
-        $str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs',$idpenyelenggaraan,0)";
+        $str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs', $idpenyelenggaraan,0)";
         $this->DB->insertRecord($str);			
         $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs=$idkrs";
         $this->DB->updateRecord($str);
@@ -150,11 +150,11 @@ class CTambahKRS extends MainPageMHS {
       }
     }catch (Exception $e) {
       $this->modalMessageError->show();
-      $this->lblContentMessageError->Text=$e->getMessage();					
+      $this->lblContentMessageError->Text = $e->getMessage();					
     }		
   }
   public function hapusMatkul($sender, $param) {		
-    $idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);	
+    $idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);	
     $datakrs=$_SESSION['currentPageKRS']['DataKRS']['krs'];
     $idkrs=$datakrs['idkrs'];
     $this->DB->query ('BEGIN');			

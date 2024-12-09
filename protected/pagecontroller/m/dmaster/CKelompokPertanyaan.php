@@ -40,13 +40,13 @@ class CKelompokPertanyaan extends MainPageM {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKelompokPertanyaan']['page_num']=0;}
-        $str = "$str ORDER BY (orders+0) ASC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY (orders+0) ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idkelompok_pertanyaan', 'idkategori', 'nama_kelompok', 'orders', 'create_at', 'update_at'));
-		$r = $this->DB->getRecord($str,$offset+1);	
+		$r = $this->DB->getRecord($str, $offset+1);	
         
         $this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);        
 	}		    
     public function addProcess($sender, $param) {
         $this->idProcess = 'add';       
@@ -62,15 +62,15 @@ class CKelompokPertanyaan extends MainPageM {
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender,$this->RepeaterS);        
+        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         
         $str = "SELECT nama_kelompok,orders FROM kelompok_pertanyaan WHERE idkelompok_pertanyaan=$id";
         $this->DB->setFieldTable(array('nama_kelompok', 'orders'));
         $r = $this->DB->getRecord($str);
         
-        $this->txtEditNamaKelompok->Text=$r[1]['nama_kelompok'];
-        $this->txtEditUrutan->Text=$r[1]['orders'];
+        $this->txtEditNamaKelompok->Text = $r[1]['nama_kelompok'];
+        $this->txtEditUrutan->Text = $r[1]['orders'];
     }
     public function updateData($sender, $param) {
 		if ($this->Page->isValid) {			
@@ -83,7 +83,7 @@ class CKelompokPertanyaan extends MainPageM {
 		}
 	}
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);        
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);        
         $this->DB->deleteRecord("kelompok_pertanyaan WHERE idkelompok_pertanyaan=$id");
         $this->redirect('dmaster.KelompokPertanyaan',true);
         

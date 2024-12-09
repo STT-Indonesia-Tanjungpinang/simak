@@ -83,8 +83,8 @@
                                 <td><%#$this->DataItem['no']%></td>
                                 <td><%#$this->DataItem['no_transaksi']%></td>						
                                 <td><%#$this->DataItem['no_faktur']%></td>											
-                                <td><%=$this->Page->TGL->tanggal('l, j F Y',$this->DataItem['tanggal'])%></td>	
-                                <td><%=$this->Page->TGL->tanggal('l, j F Y',$this->DataItem['date_added'])%></td>	
+                                <td><%=$this->Page->TGL->tanggal('l, j F Y', $this->DataItem['tanggal'])%></td>	
+                                <td><%=$this->Page->TGL->tanggal('l, j F Y', $this->DataItem['date_added'])%></td>	
                                 <td class="text-right"><%#$this->Page->Finance->toRupiah($this->DataItem['total'])%></td>					
                                 <td>        
                                     <ul class="icons-list">

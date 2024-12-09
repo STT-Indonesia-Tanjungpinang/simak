@@ -28,7 +28,7 @@ class CDetailKRS extends MainPageDW {
             $this->tbCmbOutputReport->DataBind();
 				
             $this->populateData();				
-            $this->lblModulHeader->Text=$this->getInfoToolbar();            
+            $this->lblModulHeader->Text = $this->getInfoToolbar();            
 				
 		}				
 	}
@@ -81,7 +81,7 @@ class CDetailKRS extends MainPageDW {
             
             $_SESSION['currentPageKRS']['DataMHS'] = $datamhs;
             $this->KRS->setDataMHS($datamhs);
-            $this->KRS->getKRS($_SESSION['ta'],$_SESSION['semester']);                                                                        
+            $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);                                                                        
             $_SESSION['currentPageKRS']['DataKRS'] = $this->KRS->DataKRS;
             $this->btnTambah->Enabled=!$this->KRS->DataKRS['krs']['sah'];
              
@@ -89,7 +89,7 @@ class CDetailKRS extends MainPageDW {
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$e->getMessage();	
+			$this->errorMessage->Text = $e->getMessage();	
         }
 
 	}		
@@ -102,16 +102,16 @@ class CDetailKRS extends MainPageDW {
         if ($idsmt==3) {
             $this->createObj('Finance');
             $this->Finance->setDataMHS($_SESSION['currentPageKRS']['DataMHS']);
-            $maxSKS=$this->Finance->getSKSFromSP($tahun,$idsmt);
-            $this->Nilai->getKHSBeforeCurrentSemester($tahun,$idsmt);	
+            $maxSKS=$this->Finance->getSKSFromSP($tahun, $idsmt);
+            $this->Nilai->getKHSBeforeCurrentSemester($tahun, $idsmt);	
             $datakrs['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
         }else{
-           $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt,$tahun);
+           $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt, $tahun);
             if ($datadulangbefore['k_status']=='C') {
                 $maxSKS=$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');                
                 $datakrs['krs']['ipstasmtbefore'] = 'N.A (Status Cuti)';
             }else{
-                $maxSKS=$this->Nilai->getMaxSKS($tahun,$idsmt);
+                $maxSKS=$this->Nilai->getMaxSKS($tahun, $idsmt);
                 $datakrs['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
             }
         }
@@ -169,7 +169,7 @@ class CDetailKRS extends MainPageDW {
                 
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
         $this->modalPrintOut->show();
 	}

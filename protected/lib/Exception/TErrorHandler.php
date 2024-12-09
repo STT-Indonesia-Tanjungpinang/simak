@@ -105,7 +105,7 @@ class TErrorHandler extends TModule
 		if(($templatePath=Prado::getPathOfNamespace($value))!==null && is_dir($templatePath))
 			$this->_templatePath=$templatePath;
 		else
-			throw new TConfigurationException('errorhandler_errortemplatepath_invalid',$value);
+			throw new TConfigurationException('errorhandler_errortemplatepath_invalid', $value);
 	}
     
     /**
@@ -134,7 +134,7 @@ class TErrorHandler extends TModule
 	 * @param mixed sender of the event
 	 * @param mixed event parameter (if the event is raised by TApplication, it refers to the exception instance)
 	 */
-	public function handleError($sender,$param)
+	public function handleError($sender, $param)
 	{
 		static $handling=false;
 		// We need to restore error and exception handlers,
@@ -153,11 +153,11 @@ class TErrorHandler extends TModule
 			if(!headers_sent())
 				header('Content-Type: text/html; charset=UTF-8');
 			if($param instanceof THttpException)
-				$this->handleExternalError($param->getStatusCode(),$param);
+				$this->handleExternalError($param->getStatusCode(), $param);
 			else if($this->getApplication()->getMode()===TApplicationMode::Debug)
 				$this->displayException($param);
 			else
-				$this->handleExternalError(500,$param);
+				$this->handleExternalError(500, $param);
 		}
 	}
 
@@ -196,12 +196,12 @@ class TErrorHandler extends TModule
 	 * @param integer response status code
 	 * @param Exception exception instance
 	 */
-	protected function handleExternalError($statusCode,$exception)
+	protected function handleExternalError($statusCode, $exception)
 	{
 		if(!($exception instanceof THttpException))
 			error_log($exception->__toString());
 
-		$content=$this->getErrorTemplate($statusCode,$exception);
+		$content=$this->getErrorTemplate($statusCode, $exception);
 
 		$serverAdmin=isset($_SERVER['SERVER_ADMIN'])?$_SERVER['SERVER_ADMIN']:'';
 
@@ -237,7 +237,7 @@ class TErrorHandler extends TModule
 				header("HTTP/1.0 $statusCode", true, TPropertyValue::ensureInteger($statusCode));
 		}
 
-		echo strtr($content,$tokens);
+		echo strtr($content, $tokens);
 	}
 
 	/**
@@ -282,8 +282,8 @@ class TErrorHandler extends TModule
 		if($exception instanceof TTemplateException)
 		{
 			$fileName=$exception->getTemplateFile();
-			$lines=empty($fileName)?explode("\n",$exception->getTemplateSource()):@file($fileName);
-			$source=$this->getSourceCode($lines,$exception->getLineNumber());
+			$lines=empty($fileName)?explode("\n", $exception->getTemplateSource()):@file($fileName);
+			$source=$this->getSourceCode($lines, $exception->getLineNumber());
 			if($fileName==='')
 				$fileName='---embedded template---';
 			$errorLine=$exception->getLineNumber();
@@ -300,7 +300,7 @@ class TErrorHandler extends TModule
 				$fileName=$exception->getFile();
 				$errorLine=$exception->getLine();
 			}
-			$source=$this->getSourceCode(@file($fileName),$errorLine);
+			$source=$this->getSourceCode(@file($fileName), $errorLine);
 		}
 
 		if($this->getApplication()->getMode()===TApplicationMode::Debug)
@@ -320,7 +320,7 @@ class TErrorHandler extends TModule
 
 		$content=$this->getExceptionTemplate($exception);
 
-		echo strtr($content,$tokens);
+		echo strtr($content, $tokens);
 	}
 
 	/**
@@ -357,7 +357,7 @@ class TErrorHandler extends TModule
 	 * @param Exception the exception to be displayed
 	 * @return string the template content
 	 */
-	protected function getErrorTemplate($statusCode,$exception)
+	protected function getErrorTemplate($statusCode, $exception)
 	{
 		$base=$this->getErrorTemplatePath().DIRECTORY_SEPARATOR.self::ERROR_FILE_NAME;
 		$lang=Prado::getPreferredLanguage();
@@ -394,7 +394,7 @@ class TErrorHandler extends TModule
 		return $result;
 	}
 
-	private function getPropertyAccessTrace($trace,$pattern)
+	private function getPropertyAccessTrace($trace, $pattern)
 	{
 		$result=null;
 		foreach($trace as $t)
@@ -407,7 +407,7 @@ class TErrorHandler extends TModule
 		return $result;
 	}
 
-	private function getSourceCode($lines,$errorLine)
+	private function getSourceCode($lines, $errorLine)
 	{
 		$beginLine=$errorLine-self::SOURCE_LINES>=0?$errorLine-self::SOURCE_LINES:0;
 		$endLine=$errorLine+self::SOURCE_LINES<=count($lines)?$errorLine+self::SOURCE_LINES:count($lines);
@@ -417,11 +417,11 @@ class TErrorHandler extends TModule
 		{
 			if($i===$errorLine-1)
 			{
-				$line=htmlspecialchars(sprintf("%04d: %s",$i+1,str_replace("\t",'    ',$lines[$i])));
+				$line=htmlspecialchars(sprintf("%04d: %s", $i+1,str_replace("\t",'    ', $lines[$i])));
 				$source.="<div class=\"error\">".$line."</div>";
 			}
 			else
-				$source.=htmlspecialchars(sprintf("%04d: %s",$i+1,str_replace("\t",'    ',$lines[$i])));
+				$source.=htmlspecialchars(sprintf("%04d: %s", $i+1,str_replace("\t",'    ', $lines[$i])));
 		}
 		return $source;
 	}
@@ -429,7 +429,7 @@ class TErrorHandler extends TModule
 	private function addLink($message)
 	{
 		$baseUrl='http://www.pradosoft.com/docs/classdoc';
-		return preg_replace('/\b(T[A-Z]\w+)\b/',"<a href=\"$baseUrl/\${1}\" target=\"_blank\">\${1}</a>",$message);
+		return preg_replace('/\b(T[A-Z]\w+)\b/',"<a href=\"$baseUrl/\${1}\" target=\"_blank\">\${1}</a>", $message);
 	}
 }
 

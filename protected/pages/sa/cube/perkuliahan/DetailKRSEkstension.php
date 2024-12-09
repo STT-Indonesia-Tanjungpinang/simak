@@ -21,7 +21,7 @@ class DetailKRSEkstension extends MainPageSA {
             $this->tbCmbOutputReport->DataBind();
 				
             $this->populateData();				
-            $this->lblModulHeader->Text=$this->getInfoToolbar();            
+            $this->lblModulHeader->Text = $this->getInfoToolbar();            
 				
 		}				
 	}
@@ -34,7 +34,7 @@ class DetailKRSEkstension extends MainPageSA {
 		$text="TA $ta Semester $semester";
 		return $text;
 	}	
-    public function itemBound ($sender,$param) {
+    public function itemBound ($sender, $param) {
         $item=$param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
             if ($item->DataItem['batal']) {
@@ -60,7 +60,7 @@ class DetailKRSEkstension extends MainPageSA {
                     $idkelas_mhs_selected='none';
                     $result = array('none'=>' ');
                 }      
-                while (list($k,$v)=each($r)) {    
+                while (list($k, $v)=each($r)) {    
                     $idkelas_mhs=$v['idkelas_mhs'];
                     $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs",'idkelas_mhs');
                     $kapasitas=(int)$this->DMaster->getKapasitasRuangKelas($v['idruangkelas']);
@@ -70,8 +70,8 @@ class DetailKRSEkstension extends MainPageSA {
                 
                 $item->cmbKelas->DataSOurce=$result;            
                 $item->cmbKelas->DataBind();        
-                $item->cmbKelas->Enabled=!$this->DB->checkRecordIsExist('idkrsmatkul','nilai_matakuliah',$idkrsmatkul);
-                $item->cmbKelas->Text=$idkelas_mhs_selected;
+                $item->cmbKelas->Enabled=!$this->DB->checkRecordIsExist('idkrsmatkul','nilai_matakuliah', $idkrsmatkul);
+                $item->cmbKelas->Text = $idkelas_mhs_selected;
 
                 DetailKRSEkstension::$totalSKS+=$item->DataItem['sks'];
                 DetailKRSEkstension::$jumlahMatkul+=1;
@@ -99,23 +99,23 @@ class DetailKRSEkstension extends MainPageSA {
             $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
             $datamhs['nama_dosen']=$nama_dosen;
             
-            $datadulang=$this->KRS->getDataDulang($datamhs['idsmt'],$datamhs['tahun']);
+            $datadulang=$this->KRS->getDataDulang($datamhs['idsmt'], $datamhs['tahun']);
             $datamhs['kelas_dulang']=$datadulang['idkelas'];
             
             $_SESSION['currentPageKRSEkstension']['DataMHS']=$datamhs;
             $this->KRS->setDataMHS($datamhs);
-            $this->KRS->getKRS($_SESSION['ta'],$_SESSION['semester']);                                                                        
+            $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);                                                                        
             $_SESSION['currentPageKRSEkstension']['DataKRS']=$this->KRS->DataKRS;
             
             $this->RepeaterS->DataSource=$this->KRS->DataKRS['matakuliah'];
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
             $this->idProcess='view';	
-			$this->errorMessage->Text=$e->getMessage();	
+			$this->errorMessage->Text = $e->getMessage();	
         }
 
 	}		
-    public function prosesKelas ($sender,$param) {
+    public function prosesKelas ($sender, $param) {
         $idkelas_mhs=$sender->Text;
         $idkrsmatkul=$this->getDataKeyField($sender, $this->RepeaterS);
         $this->DB->query('BEGIN');
@@ -133,7 +133,7 @@ class DetailKRSEkstension extends MainPageSA {
             $result=$this->DB->getRecord($str);
             $kapasitas=$result[1]['kapasitas'];
             if ($jumlah_peserta_kelas <= $kapasitas) {
-                if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail',$idkrsmatkul)) {
+                if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail', $idkrsmatkul)) {
                     $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul=$idkrsmatkul");
                     $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
                     $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
@@ -148,28 +148,28 @@ class DetailKRSEkstension extends MainPageSA {
             }
         }
     }
-    public function tambahKRS ($sender,$param) {
+    public function tambahKRS ($sender, $param) {
         $this->createObj('Nilai');
         $datakrs=$_SESSION['currentPageKRSEkstension']['DataKRS']; 
         $maxSKS=24;        
         $datakrs['krs']['maxSKS']=$maxSKS;               
         $this->Nilai->setDataMHS($_SESSION['currentPageKRSEkstension']['DataMHS']);
-        $this->Nilai->getKHSBeforeCurrentSemester($datakrs['krs']['tahun'],$datakrs['krs']['idsmt']);
+        $this->Nilai->getKHSBeforeCurrentSemester($datakrs['krs']['tahun'], $datakrs['krs']['idsmt']);
         $datakrs['krs']['ipstasmtbefore']=$this->Nilai->getIPS();
         $_SESSION['currentPageKRSEkstension']['DataKRS']=$datakrs;
         $this->redirect ('perkuliahan.TambahKRSEkstension',true);
     }
-    public function deleteRecord ($sender,$param) {        
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);  
+    public function deleteRecord ($sender, $param) {        
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);  
         $idkrs=$_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs'];
         $this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul=$id");
         $this->redirect ('perkuliahan.DetailKRSEkstension',true,array('id'=>$idkrs));        
     }
-    public function closeDetailKRSEkstension ($sender,$param) { 
+    public function closeDetailKRSEkstension ($sender, $param) { 
         unset($_SESSION['currentPageKRSEkstension']);
         $this->redirect ('perkuliahan.KRSEkstension',true);
     }
-	public function printKRS ($sender,$param) {
+	public function printKRS ($sender, $param) {
         $this->createObj('reportkrs');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -209,7 +209,7 @@ class DetailKRSEkstension extends MainPageSA {
                 
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
         $this->modalPrintOut->show();
 	}

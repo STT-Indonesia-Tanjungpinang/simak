@@ -13,56 +13,56 @@ class CVariables extends MainPageSA {
 	}    
     public function populateData () { 
         //Data Perguruan Tinggi
-        $this->txtNamaPT->Text=$this->setup->getSettingValue('nama_pt');
-        $this->txtNamaPTAlias->Text=$this->setup->getSettingValue('nama_pt_alias');
-        $this->txtAlamatPT->Text=$this->setup->getSettingValue('alamat_pt');
-        $this->txtKotaPT->Text=$this->setup->getSettingValue('kota_pt');
-        $this->txtProvinsiPT->Text=$this->setup->getSettingValue('provinsi_pt');
+        $this->txtNamaPT->Text = $this->setup->getSettingValue('nama_pt');
+        $this->txtNamaPTAlias->Text = $this->setup->getSettingValue('nama_pt_alias');
+        $this->txtAlamatPT->Text = $this->setup->getSettingValue('alamat_pt');
+        $this->txtKotaPT->Text = $this->setup->getSettingValue('kota_pt');
+        $this->txtProvinsiPT->Text = $this->setup->getSettingValue('provinsi_pt');
         //Setting Umum
         $ta = $this->DMaster->getListTA();  
         $this->cmbDefaultTahunPendaftaran->DataSource = $ta;        
-        $this->cmbDefaultTahunPendaftaran->Text=$this->setup->getSettingValue('default_tahun_pendaftaran');
+        $this->cmbDefaultTahunPendaftaran->Text = $this->setup->getSettingValue('default_tahun_pendaftaran');
         $this->cmbDefaultTahunPendaftaran->dataBind();
         
         $this->cmbDefaultTahunAkademik->DataSource = $ta;        
-        $this->cmbDefaultTahunAkademik->Text=$this->setup->getSettingValue('default_ta');
+        $this->cmbDefaultTahunAkademik->Text = $this->setup->getSettingValue('default_ta');
         $this->cmbDefaultTahunAkademik->dataBind();
         
         $semester = $this->setup->getSemester();        
         $this->cmbDefaultSemester->DataSource = $semester;        
-        $this->cmbDefaultSemester->Text=$this->setup->getSettingValue('default_semester');
+        $this->cmbDefaultSemester->Text = $this->setup->getSettingValue('default_semester');
         $this->cmbDefaultSemester->dataBind();
                 
         $daftar_prodi=$this->DMaster->getListProgramStudi(2);        
         $this->cmbDefaultProdi->DataSource = $daftar_prodi;        
-        $this->cmbDefaultProdi->Text=$this->setup->getSettingValue('default_kjur');
+        $this->cmbDefaultProdi->Text = $this->setup->getSettingValue('default_kjur');
         $this->cmbDefaultProdi->dataBind();
 
-        $this->txtJumlahBarisRepeater->Text=$this->setup->getSettingValue('default_pagesize');
-        $this->txtMinimalNilaiKelulusan->Text=$this->setup->getSettingValue('minimal_nilai_kelulusan');
+        $this->txtJumlahBarisRepeater->Text = $this->setup->getSettingValue('default_pagesize');
+        $this->txtMinimalNilaiKelulusan->Text = $this->setup->getSettingValue('minimal_nilai_kelulusan');
         
         $this->chklogger->Checked=$this->setup->getSettingValue('jslogger');
         
         //KRS
-        $this->txtKRSJumlahSKSSetelahCuti->Text=$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');  
-        $this->txtKRSJumlahSKSMhsBaru->Text=$this->setup->getSettingValue('jumlah_sks_krs_mhs_baru');  
+        $this->txtKRSJumlahSKSSetelahCuti->Text = $this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');  
+        $this->txtKRSJumlahSKSMhsBaru->Text = $this->setup->getSettingValue('jumlah_sks_krs_mhs_baru');  
         
         //Transkrip Nilai        
-        $this->txtTranskripNilaiNamaJabatan->Text=$this->setup->getSettingValue('nama_jabatan_transkrip');
+        $this->txtTranskripNilaiNamaJabatan->Text = $this->setup->getSettingValue('nama_jabatan_transkrip');
         $daftardosen=$this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
-        $this->cmbNamaPenandatangan->Text=$this->setup->getSettingValue('id_penandatangan_transkrip');
+        $this->cmbNamaPenandatangan->Text = $this->setup->getSettingValue('id_penandatangan_transkrip');
         $this->cmbNamaPenandatangan->DataSource = $daftardosen;
         $this->cmbNamaPenandatangan->DataBind();
         
         //Kartu Hasil Studi
-        $this->txtKHSNamaJabatan->Text=$this->setup->getSettingValue('nama_jabatan_khs');        
-        $this->cmbNamaPenandatanganKHS->Text=$this->setup->getSettingValue('id_penandatangan_khs');
+        $this->txtKHSNamaJabatan->Text = $this->setup->getSettingValue('nama_jabatan_khs');        
+        $this->cmbNamaPenandatanganKHS->Text = $this->setup->getSettingValue('id_penandatangan_khs');
         $this->cmbNamaPenandatanganKHS->DataSource = $daftardosen;
         $this->cmbNamaPenandatanganKHS->DataBind();
         
         //DPNA
-        $this->txtDPNANamaJabatan->Text=$this->setup->getSettingValue('nama_jabatan_dpna');        
-        $this->cmbNamaPenandatanganDPNA->Text=$this->setup->getSettingValue('id_penandatangan_dpna');
+        $this->txtDPNANamaJabatan->Text = $this->setup->getSettingValue('nama_jabatan_dpna');        
+        $this->cmbNamaPenandatanganDPNA->Text = $this->setup->getSettingValue('id_penandatangan_dpna');
         $this->cmbNamaPenandatanganDPNA->DataSource = $daftardosen;
         $this->cmbNamaPenandatanganDPNA->DataBind();
         

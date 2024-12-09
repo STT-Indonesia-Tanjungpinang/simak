@@ -7,9 +7,9 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
         $this->showPendaftaranKonsentrasi=true;                
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            $this->lblProdi->Text=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];
+            $this->lblProdi->Text = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
             try {
-                $nim=$this->request['id'];                
+                $nim = $this->request['id'];                
                 $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,vdm.idkelas,vdm.k_status FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE vdm.nim='$nim'";
                 $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'iddosen_wali', 'idkelas', 'k_status'));
                 $r = $this->DB->getRecord($str);
@@ -38,7 +38,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
                     $this->btnUnApproved->CssClass='btn';
                 }                
                 $this->cmbKonsentrasiProdi->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListKonsentrasiProgramStudi($datamhs['kjur']),'none');
-                $this->cmbKonsentrasiProdi->Text=$r[1]['idkonsentrasi'];
+                $this->cmbKonsentrasiProdi->Text = $r[1]['idkonsentrasi'];
                 $this->cmbKonsentrasiProdi->DataBind();
                 
                 $this->Nilai->setDataMHS($datamhs);
@@ -46,7 +46,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
                 $this->hiddenJumlahSKS->Value=$this->Nilai->getTotalSKSAdaNilai();
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}	
 	}
@@ -57,7 +57,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
     
     public function mendaftarKonsentrasi($sender, $param) {
         if ($this->IsValid) {
-            $nim=$_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];            
+            $nim = $_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];            
             $jumlah_sks=$this->hiddenJumlahSKS->Value;
             $idkonsentrasi=$this->cmbKonsentrasiProdi->Text;
             $str = "UPDATE pendaftaran_konsentrasi SET idkonsentrasi=$idkonsentrasi,jumlah_sks=$jumlah_sks WHERE nim='$nim'";
@@ -66,7 +66,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
         }
     }
     public function approved($sender, $param) {
-        $nim=$_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];
+        $nim = $_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];
         $idkonsentrasi=$this->cmbKonsentrasiProdi->Text;
         $this->DB->query('BEGIN');
         $str = "UPDATE pendaftaran_konsentrasi SET status_daftar=1 WHERE nim='$nim'";        
@@ -81,7 +81,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
         
     }
     public function unApproved($sender, $param) {
-        $nim=$_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];
+        $nim = $_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];
         $idkonsentrasi=$this->cmbKonsentrasiProdi->Text;
         $this->DB->query('BEGIN');
         $str = "UPDATE pendaftaran_konsentrasi SET status_daftar=0 WHERE nim='$nim'";        

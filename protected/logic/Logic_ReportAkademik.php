@@ -68,18 +68,18 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable (array('idpenyelenggaraan','kmatkul','nmatkul','sks','semester','iddosen'));
         $r= $this->db->getRecord($str);
         $row=11;	            
-        while (list($k,$v)=each ($r)) {
+        while (list($k, $v)=each ($r)) {
           $idpenyelenggaraan=$v['idpenyelenggaraan'];
           $jumlah_peserta=$objDemik->getJumlahMhsInPenyelenggaraan($idpenyelenggaraan);
-          $sheet->setCellValue("A$row",$v['no']);
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$objDemik->getKMatkul($v['kmatkul']));
-          $sheet->setCellValue("D$row",$v['nmatkul']);
-          $sheet->setCellValue("E$row",$v['sks']);
-          $sheet->setCellValue("F$row",$v['semester']);
-          $sheet->setCellValue("G$row",$v['iddosen']);
-          $sheet->setCellValue("H$row",$v['iddosen']);
-          $sheet->setCellValue("I$row",$jumlah_peserta);
+          $sheet->setCellValue("B$row", $objDemik->getKMatkul($v['kmatkul']));
+          $sheet->setCellValue("D$row", $v['nmatkul']);
+          $sheet->setCellValue("E$row", $v['sks']);
+          $sheet->setCellValue("F$row", $v['semester']);
+          $sheet->setCellValue("G$row", $v['iddosen']);
+          $sheet->setCellValue("H$row", $v['iddosen']);
+          $sheet->setCellValue("I$row", $jumlah_peserta);
           $row+=1;
         }
         $row=$row-1;
@@ -195,11 +195,11 @@ class Logic_ReportAkademik extends Logic_Report {
                   $ada_matkul=false;
                 }else {							                                    
                   $sks=$v['sks'];									
-                  $sheet->setCellValue("K$row_genap",$no_semester);
-                  $sheet->setCellValue("L$row_genap",$objDemik->getKMatkul($v['kmatkul']));
+                  $sheet->setCellValue("K$row_genap", $no_semester);
+                  $sheet->setCellValue("L$row_genap", $objDemik->getKMatkul($v['kmatkul']));
                   $sheet->mergeCells("M$row_genap:O$row_genap");
-                  $sheet->setCellValue("M$row_genap",$v['nmatkul']);
-                  $sheet->setCellValue("P$row_genap",$sks);
+                  $sheet->setCellValue("M$row_genap", $v['nmatkul']);
+                  $sheet->setCellValue("P$row_genap", $sks);
                   $keterangan='-';
                   if ($v['idkonsentrasi'] == 0) {
                     if($v['islintas_prodi'] == 1){
@@ -210,7 +210,7 @@ class Logic_ReportAkademik extends Logic_Report {
                   }else{
                     $keterangan='Matkul Konsentrasi';                                        
                   }
-                  $sheet->setCellValue("Q$row_genap",$keterangan);
+                  $sheet->setCellValue("Q$row_genap", $keterangan);
                   $genap_total_sks += $sks;																	
                 }
                 $no_semester+=1;								
@@ -223,13 +223,13 @@ class Logic_ReportAkademik extends Logic_Report {
               }							
               $sheet->mergeCells("M$row_genap:O$row_genap");
               $sheet->setCellValue("M$row_genap",'Jumlah SKS');							
-              $sheet->setCellValue("P$row_genap",$genap_total_sks);							
+              $sheet->setCellValue("P$row_genap", $genap_total_sks);							
             
               $row_genap+=1;
               $row_smt_akhir=$row_genap-1;							
               
               $sheet->mergeCells("J$row_smt_awal:J$row_smt_akhir");
-              $sheet->setCellValue("J$row_smt_awal",$smt[$i]);
+              $sheet->setCellValue("J$row_smt_awal", $smt[$i]);
             }						
           }else {//ganjil				
             $tambah_ganjil_row=true;						
@@ -243,11 +243,11 @@ class Logic_ReportAkademik extends Logic_Report {
                   $ada_matkul=false;
                 }else {												
                   $sks=$s['sks'];									
-                  $sheet->setCellValue("B$row_ganjil",$no_semester);
-                  $sheet->setCellValue("C$row_ganjil",$objDemik->getKMatkul($s['kmatkul']));
+                  $sheet->setCellValue("B$row_ganjil", $no_semester);
+                  $sheet->setCellValue("C$row_ganjil", $objDemik->getKMatkul($s['kmatkul']));
                   $sheet->mergeCells("D$row_ganjil:F$row_ganjil");
-                  $sheet->setCellValue("D$row_ganjil",$s['nmatkul']);
-                  $sheet->setCellValue("G$row_ganjil",$sks);
+                  $sheet->setCellValue("D$row_ganjil", $s['nmatkul']);
+                  $sheet->setCellValue("G$row_ganjil", $sks);
                   $keterangan='-';
                   if ($s['idkonsentrasi'] == 0) {
                     if($s['islintas_prodi'] == 1){
@@ -258,7 +258,7 @@ class Logic_ReportAkademik extends Logic_Report {
                   }else{
                     $keterangan='Matkul Konsentrasi';                                        
                   }
-                  $sheet->setCellValue("H$row_ganjil",$keterangan);									
+                  $sheet->setCellValue("H$row_ganjil", $keterangan);									
                   $ganjil_total_sks += $sks;																	
                 }
                 $sheet->getRowDimension($row_ganjil)->setRowHeight(22);
@@ -270,12 +270,12 @@ class Logic_ReportAkademik extends Logic_Report {
               $sheet->getRowDimension($row_ganjil)->setRowHeight(22);
               $sheet->mergeCells("D$row_ganjil:F$row_ganjil");
               $sheet->setCellValue("D$row_ganjil",'Jumlah SKS');							
-              $sheet->setCellValue("G$row_ganjil",$ganjil_total_sks);							
+              $sheet->setCellValue("G$row_ganjil", $ganjil_total_sks);							
               
               $row_ganjil+=1;							
               $row_smt_akhir=$row_ganjil-1;
               $sheet->mergeCells("A$row_smt_awal:A$row_smt_akhir");
-              $sheet->setCellValue("A$row_smt_awal",$smt[$i]);						
+              $sheet->setCellValue("A$row_smt_awal", $smt[$i]);						
             }																	
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {						
@@ -318,7 +318,7 @@ class Logic_ReportAkademik extends Logic_Report {
    * digunakan untuk mencetak data mahasiwa mahasiswa
    * @return type void
    */
-  public function printDaftarMahasiswa ($objDemik,$objDMaster) {
+  public function printDaftarMahasiswa ($objDemik, $objDMaster) {
     $kjur=$this->dataReport['kjur'];
     $nama_ps=$this->dataReport['nama_ps'];
     $tahun_masuk=$this->dataReport['tahun_masuk'];
@@ -397,26 +397,26 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable(array('no_formulir','nim','nirm','no_formulir','nama_mhs','jk','k_status','iddosen_wali','tempat_lahir','tanggal_lahir','nama_ibu_kandung','nama_agama','nik','alamat_rumah','kelurahan','kecamatan','idkelas'));	
         $r = $this->db->getRecord($str);
         $row=12;
-        while (list($k,$v)=each ($r)) {            
-          $sheet->setCellValue("A$row",$v['no']);
+        while (list($k, $v)=each ($r)) {            
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$v['no_formulir']);
-          $sheet->setCellValueExplicit("D$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("E$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("F$row",$v['nama_mhs']);
-          $sheet->setCellValue("G$row",$v['jk']);
-          $sheet->setCellValue("H$row",$objDMaster->getNamaStatusMHSByID($v['k_status']));
-          $sheet->setCellValue("I$row",$objDMaster->getNamaDosenWaliByID($v['iddosen_wali']));
-          $sheet->setCellValue("J$row",$v['tempat_lahir']);
-          $sheet->setCellValue("K$row",$this->tgl->tanggal('j F Y',$v['tanggal_lahir']));
-          $sheet->setCellValue("L$row",$v['nama_ibu_kandung']);
-          $sheet->setCellValue("M$row",$v['nama_agama']);
-          $sheet->setCellValueExplicit("N$row",$v['nik'],PHPExcel_Cell_DataType::TYPE_STRING);                    
-          $sheet->setCellValue("O$row",$v['alamat_rumah']);
-          $sheet->setCellValue("P$row",$v['kelurahan']);
-          $sheet->setCellValue("Q$row",$v['kecamatan']);
-          $sheet->setCellValue("R$row",$objDMaster->getNamaKelasByID($v['idkelas']));
-          $sheet->setCellValue("S$row",$v['keterangan']);
+          $sheet->setCellValue("B$row", $v['no_formulir']);
+          $sheet->setCellValueExplicit("D$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("E$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("F$row", $v['nama_mhs']);
+          $sheet->setCellValue("G$row", $v['jk']);
+          $sheet->setCellValue("H$row", $objDMaster->getNamaStatusMHSByID($v['k_status']));
+          $sheet->setCellValue("I$row", $objDMaster->getNamaDosenWaliByID($v['iddosen_wali']));
+          $sheet->setCellValue("J$row", $v['tempat_lahir']);
+          $sheet->setCellValue("K$row", $this->tgl->tanggal('j F Y', $v['tanggal_lahir']));
+          $sheet->setCellValue("L$row", $v['nama_ibu_kandung']);
+          $sheet->setCellValue("M$row", $v['nama_agama']);
+          $sheet->setCellValueExplicit("N$row", $v['nik'],PHPExcel_Cell_DataType::TYPE_STRING);                    
+          $sheet->setCellValue("O$row", $v['alamat_rumah']);
+          $sheet->setCellValue("P$row", $v['kelurahan']);
+          $sheet->setCellValue("Q$row", $v['kecamatan']);
+          $sheet->setCellValue("R$row", $objDMaster->getNamaKelasByID($v['idkelas']));
+          $sheet->setCellValue("S$row", $v['keterangan']);
           $row+=1;
         } 
         $row-=1;
@@ -602,7 +602,7 @@ class Logic_ReportAkademik extends Logic_Report {
             }   
             
             //script asli
-            $str = "SELECT vdm.nim,vdm.nama_mhs,vdm.jk FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";
+            $str = "SELECT vdm.nim,vdm.nama_mhs,vdm.jk FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
             
             // if($idkelas == "B") {
             //   $str_kelas = " (vdm.idkelas='$idkelas' or vdm.idkelas='D') ";
@@ -611,17 +611,17 @@ class Logic_ReportAkademik extends Logic_Report {
             // }
             // $str ="SELECT vkm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.jk FROM v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$idpenyelenggaraan' AND  $str_kelas ORDER BY vdm.nama_mhs ASC";
             $this->db->setFieldTable(array('nim','nama_mhs','jk'));	
-            $datapeserta=$this->db->getRecord($str,$offset+1);       
+            $datapeserta=$this->db->getRecord($str, $offset+1);       
             
             $row_awal=18;
             $row=18;
-            while (list($k,$v)=each($datapeserta)) {
+            while (list($k, $v)=each($datapeserta)) {
               $sheet->getRowDimension($row)->setRowHeight(17);
-              $sheet->setCellValue("A$row",$v['no']);
+              $sheet->setCellValue("A$row", $v['no']);
               $sheet->mergeCells("B$row:C$row");
-              $sheet->setCellValue("B$row",$v['nama_mhs']);
-              $sheet->setCellValue("D$row",$v['jk']);
-              $sheet->setCellValueExplicit("E$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+              $sheet->setCellValue("B$row", $v['nama_mhs']);
+              $sheet->setCellValue("D$row", $v['jk']);
+              $sheet->setCellValueExplicit("E$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
               $row+=1;
             }
             $row_footer=$row;
@@ -658,7 +658,7 @@ class Logic_ReportAkademik extends Logic_Report {
 
             $row+=2;
             $sheet->setCellValue("A$row",'Catatan :');
-            $sheet->setCellValue("S$row",$this->setup->getSettingValue('kota_pt').', '.$this->tgl->tanggal('d F Y'));
+            $sheet->setCellValue("S$row", $this->setup->getSettingValue('kota_pt').', '.$this->tgl->tanggal('d F Y'));
             $row+=1;
             $sheet->setCellValue("A$row",'1');
             $sheet->setCellValue("B$row",'Mahasiswa tidak diperkenankan menambah daftar hadir yang telah dikeluarkan.');
@@ -677,7 +677,7 @@ class Logic_ReportAkademik extends Logic_Report {
             }
             
             $row+=2;
-            $sheet->setCellValue("S$row",$nama_dosen);                
+            $sheet->setCellValue("S$row", $nama_dosen);                
           }
         }                
         $this->printOut('daftarhadirmahasiswa');
@@ -689,7 +689,7 @@ class Logic_ReportAkademik extends Logic_Report {
    * digunakan untuk mencetak rekap status mahasiswa
    * @return type void
    */
-  public function printRekapStatusMahasiswa ($objDemik,$objDMaster) {
+  public function printRekapStatusMahasiswa ($objDemik, $objDMaster) {
     $kjur=$this->dataReport['kjur'];
     $k_status=$this->dataReport['k_status'];
     $tahun_masuk=$this->dataReport['tahun_masuk'];
@@ -799,18 +799,18 @@ class Logic_ReportAkademik extends Logic_Report {
         $result=array();
         if (isset($r[1])) {
           $data =array();
-          while (list($k,$v)=each ($r)) {            
+          while (list($k, $v)=each ($r)) {            
             $index=$v['ta'].$v['idsmt'].$v['idkelas'];                        
             $data[$index]=array();
           }  
-          $dataaktif=$objDemik->getRekapStatusMHS($kjur,$ta1,$ta2,'A');
+          $dataaktif=$objDemik->getRekapStatusMHS($kjur, $ta1, $ta2,'A');
           $row=13;
-          while (list($m,$n)=each ($data)) {                                    
-            $sheet->setCellValue("A$row",$v['ta']);				
-            $sheet->setCellValue("B$row",$v['idsmt']);				
-            $sheet->setCellValue("C$row",$v['idkelas']);				
-            $sheet->setCellValue("D$row",$dataaktif[$m]['jumlah_pria']);				
-            $sheet->setCellValue("E$row",$dataaktif[$m]['jumlah_wanita']);				
+          while (list($m, $n)=each ($data)) {                                    
+            $sheet->setCellValue("A$row", $v['ta']);				
+            $sheet->setCellValue("B$row", $v['idsmt']);				
+            $sheet->setCellValue("C$row", $v['idkelas']);				
+            $sheet->setCellValue("D$row", $dataaktif[$m]['jumlah_pria']);				
+            $sheet->setCellValue("E$row", $dataaktif[$m]['jumlah_wanita']);				
             $sheet->setCellValue("F$row",'L + P');	
             $row+=1;
           } 
@@ -848,23 +848,23 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->setCellValue('A7','DAFTAR PESERTA MATAKULIAH');
         $sheet->mergeCells("A8:B8");
         $sheet->setCellValue('A8','KODE');
-        $sheet->setCellValue('C8',$this->dataReport['kmatkul']);
+        $sheet->setCellValue('C8', $this->dataReport['kmatkul']);
         
         $sheet->mergeCells("A9:B9");
         $sheet->setCellValue('A9','NAMA');
-        $sheet->setCellValue('C9',$this->dataReport['nmatkul']);
+        $sheet->setCellValue('C9', $this->dataReport['nmatkul']);
         
         $sheet->mergeCells("A10:B10");
         $sheet->setCellValue('A10','SKS');
-        $sheet->setCellValue('C10',$this->dataReport['sks']);
+        $sheet->setCellValue('C10', $this->dataReport['sks']);
         
         $sheet->mergeCells("A11:B11");
         $sheet->setCellValue('A11','SEMESTER');
-        $sheet->setCellValue('C11',$this->dataReport['nama_semester']);
+        $sheet->setCellValue('C11', $this->dataReport['nama_semester']);
         
          $sheet->mergeCells("A12:B12");
         $sheet->setCellValue('A12','T.A');
-        $sheet->setCellValue('C12',$this->dataReport['nama_tahun']);
+        $sheet->setCellValue('C12', $this->dataReport['nama_tahun']);
 
         $styleArray=array(
                 'font' => array('bold' => true,'size' => 16),
@@ -909,20 +909,20 @@ class Logic_ReportAkademik extends Logic_Report {
         $r = $this->db->getRecord($str_display);
         
         $row=15;
-        while (list($k,$v)=each ($r)) {            
-          $sheet->setCellValue("A$row",$v['no']);
-          $sheet->setCellValueExplicit("B$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("C$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("D$row",$v['nama_mhs']);
-          $sheet->setCellValue("E$row",$objDMaster->getNamaKelasByID($v['idkelas']));
-          $sheet->setCellValue("F$row",$v['tahun_masuk']);
+        while (list($k, $v)=each ($r)) {            
+          $sheet->setCellValue("A$row", $v['no']);
+          $sheet->setCellValueExplicit("B$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("C$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("D$row", $v['nama_mhs']);
+          $sheet->setCellValue("E$row", $objDMaster->getNamaKelasByID($v['idkelas']));
+          $sheet->setCellValue("F$row", $v['tahun_masuk']);
           $status='belum disahkan';
           if ($v['sah']==1 && $v['batal']==0) {
             $status='sah';
           }elseif($v['sah']==1 && $v['batal']==1){
             $status='batal';
           }
-          $sheet->setCellValue("G$row",$status);
+          $sheet->setCellValue("G$row", $status);
           $row+=1;
         } 
         $row-=1;
@@ -1000,14 +1000,14 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable (array('nim','nirm','nama_mhs','tahun_masuk','idkelas','k_status'));
         $r=$this->db->getRecord($str);	
         $row=11;
-        while (list($k,$v)=each ($r)) {            
-          $sheet->setCellValue("A$row",$v['no']);
-          $sheet->setCellValueExplicit("B$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("C$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("D$row",$v['nama_mhs']);
-          $sheet->setCellValue("E$row",$objDMaster->getNamaKelasByID($v['idkelas']));
-          $sheet->setCellValue("F$row",$objDMaster->getNamaStatusMHSByID($v['k_status']));                   
-          $sheet->setCellValue("G$row",$v['tahun_masuk']); 
+        while (list($k, $v)=each ($r)) {            
+          $sheet->setCellValue("A$row", $v['no']);
+          $sheet->setCellValueExplicit("B$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("C$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("D$row", $v['nama_mhs']);
+          $sheet->setCellValue("E$row", $objDMaster->getNamaKelasByID($v['idkelas']));
+          $sheet->setCellValue("F$row", $objDMaster->getNamaStatusMHSByID($v['k_status']));                   
+          $sheet->setCellValue("G$row", $v['tahun_masuk']); 
           $row+=1;
         } 
         $row-=1;
@@ -1045,7 +1045,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(7)->setRowHeight(20);
         $sheet->getRowDimension(8)->setRowHeight(20);
         $sheet->setCellValue("A7","DAFTAR HADIR DOSEN");
-        $sheet->setCellValue("A8",$nama=($this->dataReport['nama_hari']=='')?'JADWAL KESELURUHAN'.',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']:strtoupper($this->dataReport['hari']).',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']);
+        $sheet->setCellValue("A8", $nama=($this->dataReport['nama_hari']=='')?'JADWAL KESELURUHAN'.',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']:strtoupper($this->dataReport['hari']).',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']);
         $styleArray=array(
                 'font' => array('bold' => true,
                         'size' => 16),
@@ -1128,16 +1128,16 @@ class Logic_ReportAkademik extends Logic_Report {
         $result = array();
         $row_awal=12;
         $row=12;
-        while (list($k,$v)=each($r)) {
+        while (list($k, $v)=each($r)) {
           $kmatkul=$v['kmatkul'];
           $v['kode_matkul']=$objDemik->getKMatkul($kmatkul); 
           $sheet->getRowDimension($row)->setRowHeight(17);
-          $sheet->setCellValue("A$row",$v['no']);
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$v['nama_dosen']);
-          $sheet->setCellValue("D$row",$v['kode_matkul']);
-          $sheet->setCellValueExplicit("E$row",$v['nmatkul'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("F$row",$v['jam_masuk'].'-'.$v['jam_keluar'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("B$row", $v['nama_dosen']);
+          $sheet->setCellValue("D$row", $v['kode_matkul']);
+          $sheet->setCellValueExplicit("E$row", $v['nmatkul'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("F$row", $v['jam_masuk'].'-'.$v['jam_keluar'],PHPExcel_Cell_DataType::TYPE_STRING);
           $row+=1;
         }
         $row=$row-1;
@@ -1229,17 +1229,17 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
-        while (list($k,$v)=each ($r)) {       
-          $sheet->setCellValue("A$row",$v['no']);
+        while (list($k, $v)=each ($r)) {       
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$v['no_formulir']);
-          $sheet->setCellValueExplicit("D$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("E$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("F$row",$v['nama_mhs']); 
-          $sheet->setCellValue("G$row",$objDMaster->getNamaKelasByID($v['idkelas'])); 
-          $sheet->setCellValue("H$row",$objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
-          $sheet->setCellValue("I$row",$this->tgl->tanggal('d F Y',$v['tanggal'])); 
-          $sheet->setCellValue("J$row",$v['tahun'].$v['idsmt']);
+          $sheet->setCellValue("B$row", $v['no_formulir']);
+          $sheet->setCellValueExplicit("D$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("E$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("F$row", $v['nama_mhs']); 
+          $sheet->setCellValue("G$row", $objDMaster->getNamaKelasByID($v['idkelas'])); 
+          $sheet->setCellValue("H$row", $objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
+          $sheet->setCellValue("I$row", $this->tgl->tanggal('d F Y', $v['tanggal'])); 
+          $sheet->setCellValue("J$row", $v['tahun'].$v['idsmt']);
           $row+=1;       
         }
         $row=$row-1;
@@ -1326,17 +1326,17 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
-        while (list($k,$v)=each ($r)) {       
-          $sheet->setCellValue("A$row",$v['no']);
+        while (list($k, $v)=each ($r)) {       
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$v['no_formulir']);
-          $sheet->setCellValueExplicit("D$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("E$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("F$row",$v['nama_mhs']); 
-          $sheet->setCellValue("G$row",$objDMaster->getNamaKelasByID($v['idkelas'])); 
-          $sheet->setCellValue("H$row",$objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
-          $sheet->setCellValue("I$row",$this->tgl->tanggal('d F Y',$v['tanggal'])); 
-          $sheet->setCellValue("J$row",$v['tahun'].$v['idsmt']);
+          $sheet->setCellValue("B$row", $v['no_formulir']);
+          $sheet->setCellValueExplicit("D$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("E$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("F$row", $v['nama_mhs']); 
+          $sheet->setCellValue("G$row", $objDMaster->getNamaKelasByID($v['idkelas'])); 
+          $sheet->setCellValue("H$row", $objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
+          $sheet->setCellValue("I$row", $this->tgl->tanggal('d F Y', $v['tanggal'])); 
+          $sheet->setCellValue("J$row", $v['tahun'].$v['idsmt']);
           $row+=1;       
         }
         $row=$row-1;
@@ -1423,17 +1423,17 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
-        while (list($k,$v)=each ($r)) {       
-          $sheet->setCellValue("A$row",$v['no']);
+        while (list($k, $v)=each ($r)) {       
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$v['no_formulir']);
-          $sheet->setCellValueExplicit("D$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("E$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("F$row",$v['nama_mhs']); 
-          $sheet->setCellValue("G$row",$objDMaster->getNamaKelasByID($v['idkelas'])); 
-          $sheet->setCellValue("H$row",$objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
-          $sheet->setCellValue("I$row",$this->tgl->tanggal('d F Y',$v['tanggal'])); 
-          $sheet->setCellValue("J$row",$v['tahun'].$v['idsmt']);
+          $sheet->setCellValue("B$row", $v['no_formulir']);
+          $sheet->setCellValueExplicit("D$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("E$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("F$row", $v['nama_mhs']); 
+          $sheet->setCellValue("G$row", $objDMaster->getNamaKelasByID($v['idkelas'])); 
+          $sheet->setCellValue("H$row", $objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
+          $sheet->setCellValue("I$row", $this->tgl->tanggal('d F Y', $v['tanggal'])); 
+          $sheet->setCellValue("J$row", $v['tahun'].$v['idsmt']);
           $row+=1;       
         }
         $row=$row-1;
@@ -1520,17 +1520,17 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
-        while (list($k,$v)=each ($r)) {       
-          $sheet->setCellValue("A$row",$v['no']);
+        while (list($k, $v)=each ($r)) {       
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$v['no_formulir']);
-          $sheet->setCellValueExplicit("D$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("E$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("F$row",$v['nama_mhs']); 
-          $sheet->setCellValue("G$row",$objDMaster->getNamaKelasByID($v['idkelas'])); 
-          $sheet->setCellValue("H$row",$objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
-          $sheet->setCellValue("I$row",$this->tgl->tanggal('d F Y',$v['tanggal'])); 
-          $sheet->setCellValue("J$row",$v['tahun'].$v['idsmt']);
+          $sheet->setCellValue("B$row", $v['no_formulir']);
+          $sheet->setCellValueExplicit("D$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("E$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("F$row", $v['nama_mhs']); 
+          $sheet->setCellValue("G$row", $objDMaster->getNamaKelasByID($v['idkelas'])); 
+          $sheet->setCellValue("H$row", $objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
+          $sheet->setCellValue("I$row", $this->tgl->tanggal('d F Y', $v['tanggal'])); 
+          $sheet->setCellValue("J$row", $v['tahun'].$v['idsmt']);
           $row+=1;       
         }
         $row=$row-1;
@@ -1617,17 +1617,17 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
-        while (list($k,$v)=each ($r)) {       
-          $sheet->setCellValue("A$row",$v['no']);
+        while (list($k, $v)=each ($r)) {       
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$v['no_formulir']);
-          $sheet->setCellValueExplicit("D$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("E$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("F$row",$v['nama_mhs']); 
-          $sheet->setCellValue("G$row",$objDMaster->getNamaKelasByID($v['idkelas'])); 
-          $sheet->setCellValue("H$row",$objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
-          $sheet->setCellValue("I$row",$this->tgl->tanggal('d F Y',$v['tanggal'])); 
-          $sheet->setCellValue("J$row",$v['tahun'].$v['idsmt']);
+          $sheet->setCellValue("B$row", $v['no_formulir']);
+          $sheet->setCellValueExplicit("D$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("E$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("F$row", $v['nama_mhs']); 
+          $sheet->setCellValue("G$row", $objDMaster->getNamaKelasByID($v['idkelas'])); 
+          $sheet->setCellValue("H$row", $objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
+          $sheet->setCellValue("I$row", $this->tgl->tanggal('d F Y', $v['tanggal'])); 
+          $sheet->setCellValue("J$row", $v['tahun'].$v['idsmt']);
           $row+=1;       
         }
         $row=$row-1;
@@ -1715,17 +1715,17 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
-        while (list($k,$v)=each ($r)) {       
-          $sheet->setCellValue("A$row",$v['no']);
+        while (list($k, $v)=each ($r)) {       
+          $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
-          $sheet->setCellValue("B$row",$v['no_formulir']);
-          $sheet->setCellValueExplicit("D$row",$v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValueExplicit("E$row",$v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
-          $sheet->setCellValue("F$row",$v['nama_mhs']); 
-          $sheet->setCellValue("G$row",$objDMaster->getNamaKelasByID($v['idkelas'])); 
-          $sheet->setCellValue("H$row",$objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
-          $sheet->setCellValue("I$row",$this->tgl->tanggal('d F Y',$v['tanggal'])); 
-          $sheet->setCellValue("J$row",$v['tahun'].$v['idsmt']);
+          $sheet->setCellValue("B$row", $v['no_formulir']);
+          $sheet->setCellValueExplicit("D$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValueExplicit("E$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);
+          $sheet->setCellValue("F$row", $v['nama_mhs']); 
+          $sheet->setCellValue("G$row", $objDMaster->getNamaKelasByID($v['idkelas'])); 
+          $sheet->setCellValue("H$row", $objDMaster->getNamaDosenWaliByID($v['iddosen_wali'])); 
+          $sheet->setCellValue("I$row", $this->tgl->tanggal('d F Y', $v['tanggal'])); 
+          $sheet->setCellValue("J$row", $v['tahun'].$v['idsmt']);
           $row+=1;       
         }
         $row=$row-1;

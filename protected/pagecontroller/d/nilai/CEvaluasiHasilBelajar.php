@@ -16,16 +16,16 @@ class CEvaluasiHasilBelajar extends MainPageD {
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-			$this->tbCmbTA->Text=$_SESSION['ta'];
+			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -85,7 +85,7 @@ class CEvaluasiHasilBelajar extends MainPageD {
         
 	}
     public function printOut($sender, $param) {	
-        $idkelas_mhs = $this->getDataKeyField($sender,$this->RepeaterS);
+        $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
         $this->createObj('reportnilai');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
@@ -117,7 +117,7 @@ class CEvaluasiHasilBelajar extends MainPageD {
             break;
 
 		}		
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Format Evaluasi Hasil Belajr';
         $this->modalPrintOut->show();
 	}

@@ -12,14 +12,14 @@ class CPembayaranFormulir extends MainPageM {
             $_SESSION['currentPagePembayaranFormulir']['search']=false;
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
             $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-            $this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+            $this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();  
+            $this->lblModulHeader->Text = $this->getInfoToolbar();  
             $this->populateData();
 			
 		}
@@ -31,7 +31,7 @@ class CPembayaranFormulir extends MainPageM {
 	}
     public function changeTbTahunMasuk($sender, $param) {					
 		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}
 	public function btnSearch_Click($sender, $param) {		
@@ -69,9 +69,9 @@ class CPembayaranFormulir extends MainPageM {
 //			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 //		}
 //		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num']=0;}
-//		$str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset,$limit ";			
+//		$str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset, $limit ";			
 //		$this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'alamat_rumah', 'dibayarkan'));
-//		$r = $this->DB->getRecord($str,$offset+1);				
+//		$r = $this->DB->getRecord($str, $offset+1);				
 //		$this->RepeaterS->DataSource = $r;
 //		$this->RepeaterS->dataBind();
 	}
@@ -144,7 +144,7 @@ class CPembayaranFormulir extends MainPageM {
 	public function addProcess($sender, $param) {
 		$this->Pengguna->updateActivity();			
 		$ta = $_SESSION['tahun_masuk'];
-		$biaya_pendaftaran=$this->spmb->getBiayaPendaftaran($_SESSION['tahun_masuk'],$_SESSION['kelas']);							
+		$biaya_pendaftaran=$this->spmb->getBiayaPendaftaran($_SESSION['tahun_masuk'], $_SESSION['kelas']);							
 		if ($biaya_pendaftaran>0) {
 			$pembayaran_spmb['biaya_pendaftaran'] = $biaya_pendaftaran;
 			$max_record=$this->DB->getMaxOfRecord('no_formulir',"formulir_pendaftaran WHERE ta = '$ta' AND daftar_via='FO'")+1;		
@@ -176,7 +176,7 @@ class CPembayaranFormulir extends MainPageM {
 				$str="INSERT INTO formulir_pendaftaran (no_formulir,nama_mhs,alamat_rumah,telp_rumah,telp_hp,ta,idsmt,daftar_via,idkelas) VALUES ($no_formulir,'$nama_mhs', '$alamat_rumah', '$telp_rumah', '$telp_hp', '".$_SESSION['tahun_masuk']."', '".$_SESSION['semester']."', 'FO', '".$_SESSION['kelas']."')";
 				$this->DB->query('BEGIN');
 				if ($this->DB->insertRecord($str)) {
-					$str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,email,userpassword) VALUES (NULL,$no_formulir,'".$this->txtAddEmail->Text."', '$userpassword')";
+					$str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,email,userpassword) VALUES (NULL, $no_formulir,'".$this->txtAddEmail->Text."', '$userpassword')";
 					$this->DB->insertRecord($str);
 					$str = 'INSERT INTO bipend (idbipend,tahun,no_faktur,tgl_bayar,no_formulir,gelombang,dibayarkan,ket,userid) VALUES ';
 					$str .= "(NULL,".$_SESSION['tahun_masuk'].",'$no_faktur', '$tgl_bayar', '$no_formulir', '".$_SESSION['gelombang']."', '$dibayarkan', '$ket', '$userid')";				
@@ -204,7 +204,7 @@ class CPembayaranFormulir extends MainPageM {
 			$item->imgKet->ImageUrl = $urlImage;
 			$nama_mhs=$item->DataItem['nama_mhs'];
 			$item->btnHapus->Attributes->Title="Hapus $nama_mhs";
-			if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa',$item->DataItem['no_formulir'])) {
+			if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa', $item->DataItem['no_formulir'])) {
 				$item->btnHapus->Enabled=false;
 				$item->btnHapus->Attributes->OnClick="Modalbox.show(node, {title: this.title}); return false;";
 			}
@@ -215,7 +215,7 @@ class CPembayaranFormulir extends MainPageM {
 		$this->Pengguna->updateActivity();	
 		$this->idProcess = 'edit';
 		$this->disableToolbars();
-		$no_formulir = $this->getDataKeyField($sender,$this->RepeaterS);
+		$no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);
 		$str = 'SELECT bp.no_formulir,fp.nama_mhs,fp.alamat_rumah,fp.telp_rumah,fp.telp_hp,pm.email,bp.no_faktur,bp.tgl_bayar,bp.dibayarkan,bp.ket FROM formulir_pendaftaran fp,bipend bp,profiles_mahasiswa pm WHERE fp.no_formulir=bp.no_formulir AND pm.no_formulir=fp.no_formulir AND bp.no_formulir='.$no_formulir;
 		$this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'alamat_rumah', 'telp_rumah', 'telp_hp', 'email', 'no_faktur', 'tgl_bayar', 'dibayarkan', 'ket'));
 		$r = $this->DB->getRecord($str);	
@@ -223,18 +223,18 @@ class CPembayaranFormulir extends MainPageM {
 		$r = $r[1];
 		$this->txtEditFormulir->Value=$r['no_formulir'];
 		$urut=substr($r['no_formulir'],strlen($_SESSION['tahun_masuk']),4);		
-		$this->txtEditFormulir2->Text=$urut;	
+		$this->txtEditFormulir2->Text = $urut;	
 		$this->txtEditNamaMhs->Text=stripslashes($r['nama_mhs']);
-		$this->txtEditAlamatRumah->Text=$r['alamat_rumah'];
-		$this->txtEditNoTelpRumah->Text=$r['telp_rumah'];
-		$this->txtEditNoHP->Text=$r['telp_hp'];
+		$this->txtEditAlamatRumah->Text = $r['alamat_rumah'];
+		$this->txtEditNoTelpRumah->Text = $r['telp_rumah'];
+		$this->txtEditNoHP->Text = $r['telp_hp'];
 		$this->hidenEditEmail->Value=$r['email'];
-		$this->txtEditEmail->Text=$r['email'];
-		$this->txtEditNoFaktur->Text=$r['no_faktur'];
+		$this->txtEditEmail->Text = $r['email'];
+		$this->txtEditNoFaktur->Text = $r['no_faktur'];
 		$this->hiddenEditNoFaktur->Value=$r['no_faktur'];
-		$this->txtEditTglBayar->Text=$this->TGL->tukarTanggal($r['tgl_bayar'],'entoid');
-		$this->txtEditJumlahBayar->Text=$this->spmb->Finance->toRupiah($r['dibayarkan']);
-		$this->txtEditKeterangan->Text=$r['ket'];
+		$this->txtEditTglBayar->Text = $this->TGL->tukarTanggal($r['tgl_bayar'],'entoid');
+		$this->txtEditJumlahBayar->Text = $this->spmb->Finance->toRupiah($r['dibayarkan']);
+		$this->txtEditKeterangan->Text = $r['ket'];
 	}
 	
 	public function updateData($sender, $param) {
@@ -270,7 +270,7 @@ class CPembayaranFormulir extends MainPageM {
 	
 	public function deleteRecord($sender, $param) {
 		$this->Pengguna->updateActivity();	
-		$no_formulir = $this->getDataKeyField($sender,$this->RepeaterS);		
+		$no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);		
 		$str = "formulir_pendaftaran WHERE no_formulir='$no_formulir'";
 		$this->DB->query ('BEGIN');
 		if ($this->DB->deleteRecord($str) ) {

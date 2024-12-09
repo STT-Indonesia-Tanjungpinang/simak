@@ -8,7 +8,7 @@ class NModalPanel extends TActivePanel {
         
         $this->getPage()->getClientScript()->registerPradoScript("prado");
         $this->getPage()->getClientScript()->registerPradoScript("effects");
-        $this->getPage()->getClientScript()->registerScriptFile('NModalPanel',$this->publishAsset("Assets/NModalPanel/NModalPanel.js"));
+        $this->getPage()->getClientScript()->registerScriptFile('NModalPanel', $this->publishAsset("Assets/NModalPanel/NModalPanel.js"));
     }
     
     public function onLoad($param) {

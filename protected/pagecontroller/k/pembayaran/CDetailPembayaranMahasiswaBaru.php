@@ -48,7 +48,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                 $this->populateTransaksi();
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }      
 		}	
 	}
@@ -98,10 +98,10 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                 $nama_semester = $this->setup->getSemester($idsmt);
                 $this->lblContentMessageError->Text="Tidak bisa menambah Transaksi baru karena komponen biaya di Tahun Masuk $ta semester $nama_semester belum disetting.";
                 $this->modalMessageError->show();
-            }elseif ($this->Finance->getLunasPembayaran($ta,$idsmt)) {
+            }elseif ($this->Finance->getLunasPembayaran($ta, $idsmt)) {
                 $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena sudah lunas.';
                 $this->modalMessageError->show();
-            }elseif ($this->DB->checkRecordIsExist('no_formulir', 'transaksi',$no_formulir," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
+            }elseif ($this->DB->checkRecordIsExist('no_formulir', 'transaksi', $no_formulir," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
                 $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
                 $this->modalMessageError->show();
             }else{
@@ -119,7 +119,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                     $d=$this->DB->getRecord($str);
 
                     $sudah_dibayarkan=array();
-                    while (list($o,$p)=each($d)) {            
+                    while (list($o, $p)=each($d)) {            
                         $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
                     }
                     $str = "SELECT k.idkombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$ta AND idsmt=$idsmt AND kpt.idkelas='$idkelas' AND (periode_pembayaran='sekali' OR periode_pembayaran='semesteran') ORDER BY periode_pembayaran,nama_kombi ASC";
@@ -149,7 +149,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
     public function editRecord($sender, $param) {	        
         $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];    
         if ($datamhs['no_transaksi'] == 'none') {
-            $no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
+            $no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
             $_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']['no_transaksi'] = $no_transaksi;
         }	
 		$this->redirect('pembayaran.TransaksiPembayaranMahasiswaBaru',true);
@@ -157,7 +157,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
 	public function deleteRecord($sender, $param) {	
         $datamhs=$_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']; 
         $no_formulir = $datamhs['no_formulir'];
-		$no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
+		$no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
 		$this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id'=>$no_formulir));
 	}		

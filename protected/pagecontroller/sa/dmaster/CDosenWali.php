@@ -60,13 +60,13 @@ class CDosenWali extends MainPageSA {
             $limit=$itemcount-$offset;
         }
         if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDosenWali']['page_num']=0;}
-        $str = "$str ORDER BY nama_dosen ASC LIMIT $offset,$limit";             
+        $str = "$str ORDER BY nama_dosen ASC LIMIT $offset, $limit";             
         $this->DB->setFieldTable(array('iddosen_wali', 'nidn', 'nipy', 'gelar_depan', 'nama_dosen', 'gelar_belakang', 'telp_hp', 'username', 'status'));
-        $r = $this->DB->getRecord($str,$offset+1);  
+        $r = $this->DB->getRecord($str, $offset+1);  
         
         $this->RepeaterS->DataSource = $r;
         $this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);        
     }
     private function populateDosen () {
         $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM dosen_wali) ORDER BY nama_dosen ASC";
@@ -97,14 +97,14 @@ class CDosenWali extends MainPageSA {
                 while (list($k, $v) = each($r)) {          
                     $dataitem[$v['iddosen_wali']] = $v['nama_dosen'] . ' ['.$v['nidn'].']';   ;                   
                 }   
-                $this->Application->Cache->set('listdw',$dataitem);                
+                $this->Application->Cache->set('listdw', $dataitem);                
             }
             $this->Redirect('dmaster.DosenWali',true);            
         }
     }
     public function deleteRecord($sender, $param) {        
-        $iddosen_wali=$this->getDataKeyField($sender,$this->RepeaterS);          
-        if ($this->DB->checkRecordIsExist('iddosen_wali', 'register_mahasiswa',$iddosen_wali)) {
+        $iddosen_wali=$this->getDataKeyField($sender, $this->RepeaterS);          
+        if ($this->DB->checkRecordIsExist('iddosen_wali', 'register_mahasiswa', $iddosen_wali)) {
             $this->lblHeaderMessageError->Text='Menghapus Dosen Wali';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen wali dengan ID ($iddosen_wali) karena sedang digunakan di register mahasiswa.";
             $this->modalMessageError->Show();        
@@ -118,7 +118,7 @@ class CDosenWali extends MainPageSA {
                 while (list($k, $v) = each($r)) {          
                     $dataitem[$v['iddosen_wali']] = $v['nama_dosen'] . ' ['.$v['nidn'].']';   ;                   
                 }   
-                $this->Application->Cache->set('listdw',$dataitem);                
+                $this->Application->Cache->set('listdw', $dataitem);                
             }
             $this->redirect('dmaster.DosenWali',true);
         }        

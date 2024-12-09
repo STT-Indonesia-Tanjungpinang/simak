@@ -111,7 +111,7 @@ class TCustomDatePicker extends TTextBox
 	 */
 	public function setDateFormat($value)
 	{
-		$this->setViewState('DateFormat',$value,'dd-MM-yyyy');
+		$this->setViewState('DateFormat', $value,'dd-MM-yyyy');
 	}
 
 	/**
@@ -315,7 +315,7 @@ class TCustomDatePicker extends TTextBox
 		else
 		{
 			$date = TPropertyValue::ensureFloat($value);
-			$formatter = Prado::createComponent('System.Util.TSimpleDateFormatter',$this->getDateFormat());
+			$formatter = Prado::createComponent('System.Util.TSimpleDateFormatter', $this->getDateFormat());
 			$this->setText($formatter->format($date));
 		}
 	}
@@ -469,7 +469,7 @@ class TCustomDatePicker extends TTextBox
 	 * @param array the input data collection
 	 * @return boolean whether the data of the component has been changed
 	 */
-	public function loadPostData($key,$values)
+	public function loadPostData($key, $values)
 	{
 		if($this->getInputMode() == TCustomDatePickerInputMode::TextBox)
 			return parent::loadPostData($key, $values);
@@ -644,11 +644,11 @@ class TCustomDatePicker extends TTextBox
 		foreach($formatter->getDayMonthYearOrdering() as $type)
 		{
 			if($type == 'day')
-				$this->renderCalendarDayOptions($writer,$date['mday']);
+				$this->renderCalendarDayOptions($writer, $date['mday']);
 			elseif($type == 'month')
-				$this->renderCalendarMonthOptions($writer,$date['mon']);
+				$this->renderCalendarMonthOptions($writer, $date['mon']);
 			elseif($type == 'year')
-				$this->renderCalendarYearOptions($writer,$date['year']);
+				$this->renderCalendarYearOptions($writer, $date['year']);
 		}
 	}
 
@@ -660,7 +660,7 @@ class TCustomDatePicker extends TTextBox
 	{
 		$pattern = $this->getDateFormat();
 		$pattern = str_replace(array('MMMM', 'MMM'), array('MM','MM'), $pattern);
-		$formatter = Prado::createComponent('System.Util.TSimpleDateFormatter',$pattern);
+		$formatter = Prado::createComponent('System.Util.TSimpleDateFormatter', $pattern);
 		return $formatter->parse($this->getText());
 	}
 
@@ -670,7 +670,7 @@ class TCustomDatePicker extends TTextBox
 	 * @param array list of selection options
 	 * @param mixed selected key.
 	 */
-	private function renderDropDownListOptions($writer,$options,$selected=null)
+	private function renderDropDownListOptions($writer, $options, $selected=null)
 	{
 		foreach($options as $k => $v)
 		{
@@ -800,7 +800,7 @@ class TCustomDatePicker extends TTextBox
 		$writer->addAttribute('id', $this->getDatePickerButtonID());
 		$writer->addAttribute('type', 'button');
 		$writer->addAttribute('class', $this->getCssClass().' TDatePickerButton');
-		$writer->addAttribute('value',$this->getButtonText());
+		$writer->addAttribute('value', $this->getButtonText());
 		if(!$this->getEnabled(true))
 			$writer->addAttribute('disabled', 'disabled');
 		$writer->renderBeginTag("input");
@@ -857,7 +857,7 @@ class TCustomDatePicker extends TTextBox
 	protected function addAttributesToRender($writer)
 	{
 		parent::addAttributesToRender($writer);
-		$writer->addAttribute('id',$this->getClientID());
+		$writer->addAttribute('id', $this->getClientID());
 	}
 
 	/**

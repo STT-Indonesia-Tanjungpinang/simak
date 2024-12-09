@@ -57,7 +57,7 @@ class Logic_Report extends Logic_Global {
 		switch ($driver) {
             case 'excel2003' :								
                 $phpexcel=BASEPATH.'protected/lib/excel/';
-                define ('PHPEXCEL_ROOT',$phpexcel);
+                define ('PHPEXCEL_ROOT', $phpexcel);
                 set_include_path(get_include_path() . PATH_SEPARATOR . $phpexcel);
                 
                 require_once ('PHPExcel.php');                
@@ -68,7 +68,7 @@ class Logic_Report extends Logic_Global {
 			case 'excel2007' :							
                 //phpexcel
                 $phpexcel=BASEPATH.'protected/lib/excel/';
-                define ('PHPEXCEL_ROOT',$phpexcel);
+                define ('PHPEXCEL_ROOT', $phpexcel);
                 set_include_path(get_include_path() . PATH_SEPARATOR . $phpexcel);
                 
                 require_once ('PHPExcel.php');
@@ -109,7 +109,7 @@ class Logic_Report extends Logic_Global {
      * @param type $alignment
      * @param type $columnHeader
      */
-	public function setHeaderPT ($endColumn=null,$alignment=null,$columnHeader='C') {			
+	public function setHeaderPT ($endColumn=null, $alignment=null, $columnHeader='C') {			
         $headerLogo=BASEPATH.$this->setup->getSettingValue('config_logo');
 		switch ($this->getDriver()) {
             case 'pdf' :
@@ -118,15 +118,15 @@ class Logic_Report extends Logic_Global {
                 
                 $rpt->SetFont ('helvetica','B',12);
 				$rpt->setXY(20,5);
-				$rpt->Cell (0,5,$this->setup->getSettingValue('header_line_1'));				
+				$rpt->Cell (0,5, $this->setup->getSettingValue('header_line_1'));				
 				$rpt->setXY(20,8.5);
-				$rpt->Cell (0,8.5,$this->setup->getSettingValue('header_line_2'));
+				$rpt->Cell (0,8.5, $this->setup->getSettingValue('header_line_2'));
 				
 				$rpt->SetFont ('helvetica','B',8);
 				$rpt->setXY(20,11.5);
-				$rpt->Cell (0,11.5,$this->setup->getSettingValue('header_line_3'));
+				$rpt->Cell (0,11.5, $this->setup->getSettingValue('header_line_3'));
 				$rpt->setXY(20,14.5);
-				$rpt->Cell (0,14.5,$this->setup->getSettingValue('header_line_4'));
+				$rpt->Cell (0,14.5, $this->setup->getSettingValue('header_line_4'));
 				$this->currentRow=14.5;
             break;
 			case 'excel2003' :
@@ -149,21 +149,21 @@ class Logic_Report extends Logic_Global {
                 $sheet=$this->rpt->getActiveSheet();
 				$sheet->getRowDimension($row)->setRowHeight(18);
 				$sheet->mergeCells ($columnHeader.$row.':'.$endColumn.$row);
-				$sheet->setCellValue($columnHeader.$row,$this->setup->getSettingValue('header_line_1'));
+				$sheet->setCellValue($columnHeader.$row, $this->setup->getSettingValue('header_line_1'));
 				
 				$row+=1;
 				$sheet->getRowDimension($row)->setRowHeight(18);
 				$sheet->mergeCells ($columnHeader.$row.':'.$endColumn.$row);
-				$sheet->setCellValue($columnHeader.$row,$this->setup->getSettingValue('header_line_2'));
+				$sheet->setCellValue($columnHeader.$row, $this->setup->getSettingValue('header_line_2'));
 				
 				$row+=1;
 				$sheet->getRowDimension($row)->setRowHeight(18);
 				$sheet->mergeCells ($columnHeader.$row.':'.$endColumn.$row);
-				$sheet->setCellValue($columnHeader.$row,$this->setup->getSettingValue('header_line_3'));
+				$sheet->setCellValue($columnHeader.$row, $this->setup->getSettingValue('header_line_3'));
                 $row+=1;
 				$sheet->getRowDimension($row)->setRowHeight(18);
 				$sheet->mergeCells ($columnHeader.$row.':'.$endColumn.$row);
-				$sheet->setCellValue($columnHeader.$row,$this->setup->getSettingValue('header_line_4'));
+				$sheet->setCellValue($columnHeader.$row, $this->setup->getSettingValue('header_line_4'));
 				
 				$row+=1;
 				$sheet->getRowDimension($row)->setRowHeight(18);
@@ -192,7 +192,7 @@ class Logic_Report extends Logic_Global {
      * @param type $filename
      * @param type $debug
      */
-	public function printOut ($filename,$debug=false) {	
+	public function printOut ($filename, $debug=false) {	
 		$filename_to_write = $debug == true ? $filename  : $filename.'_'.date('Y_m_d_H_m_s');	
 		switch ($this->driver) {
 			case 'excel2003' :
@@ -227,12 +227,12 @@ class Logic_Report extends Logic_Global {
      * @param type $FileName
      * @param type $FormatArchive
      */
-    public function printOutArchive ($DataFile,$FileName,$FormatArchive) {	
+    public function printOutArchive ($DataFile, $FileName, $FormatArchive) {	
         switch ($FormatArchive) {
             case 'zip' :                        
                 $namafile=$FileName.'_'.date('Y_m_d_H_m_s').'.zip';
                 $destinationfile=$this->exportedDir['full_path'].$namafile;
-                $this->setup->createZIP($DataFile,$destinationfile);
+                $this->setup->createZIP($DataFile, $destinationfile);
                 $this->exportedDir['pdf_path'].=$namafile;		
             break;
         }
@@ -242,7 +242,7 @@ class Logic_Report extends Logic_Global {
 	* @param obj_out object 
 	* @param text in override text result
 	*/
-	public function setLink ($obj_out,$text='') {
+	public function setLink ($obj_out, $text='') {
 		$filename=$text==''?$this->exportedDir['filename']:$text;		        
 		switch ($this->driver) {
 			case 'excel2003' :

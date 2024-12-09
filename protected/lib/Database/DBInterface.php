@@ -25,25 +25,25 @@ interface DBInterface {
 	* digunakan untuk mendapatkan jumlah baris dari sebuah tabel
 	*
 	*/
-	public function getCountRowsOfTable ($tableName,$fieldname='*');
+	public function getCountRowsOfTable ($tableName, $fieldname='*');
 	
 	/**
 	* digunakan mengecek apakah sebuah nilai terdapat di dalam tabel
 	*
 	*/
-	public function checkRecordIsExist ($field,$table,$idrecord,$opt="integer");
+	public function checkRecordIsExist ($field, $table, $idrecord, $opt="integer");
 	
 	/**
 	* digunakan untuk mendapatkan max sebuah nilai
 	*
 	*/
-	public function getMaxOfRecord ($field,$table);
+	public function getMaxOfRecord ($field, $table);
 	
 	/**
 	* digunakan untuk mendapatkan jumlah nilai dari field pada sebuah tabel
 	*
 	*/
-	public function getSumRowsOfTable ($field,$tableName);
+	public function getSumRowsOfTable ($field, $tableName);
 	
 	/**
 	* digunakan untuk insert data ke tabel

@@ -28,7 +28,7 @@ class CPesertaUjianPMB extends MainPageM {
                 $this->populateData();		
             } catch (Exception $ex) {
                 $this->idProcess = 'view';
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}		
 	}  
@@ -62,7 +62,7 @@ class CPesertaUjianPMB extends MainPageM {
 	}
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender,$this->RepeaterS);        
+        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         
         $this->DataUjianPMB=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
@@ -76,7 +76,7 @@ class CPesertaUjianPMB extends MainPageM {
             $idjadwal_ujian=$v['idjadwal_ujian'];
             $jumlah_peserta = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$idjadwal_ujian",'idjadwal_ujian');
             if ($jumlah_peserta < $v['kapasitas']) {
-                $str = $v['nama_kegiatan'] . ' # '.$this->Page->TGL->tanggal ('l, d F Y',$v['tanggal_ujian']).' # '. $v['jam_mulai'].'-'.$v['jam_akhir'] . ' # '.$this->Page->TGL->tanggal ('l, d F Y',$v['tanggal_akhir_daftar']) .' # '.$v['namaruang'].' ['.$v['kapasitas'].'] sisa '.($v['kapasitas']-$jumlah_peserta);                                                
+                $str = $v['nama_kegiatan'] . ' # '.$this->Page->TGL->tanggal ('l, d F Y', $v['tanggal_ujian']).' # '. $v['jam_mulai'].'-'.$v['jam_akhir'] . ' # '.$this->Page->TGL->tanggal ('l, d F Y', $v['tanggal_akhir_daftar']) .' # '.$v['namaruang'].' ['.$v['kapasitas'].'] sisa '.($v['kapasitas']-$jumlah_peserta);                                                
                 $result[$idjadwal_ujian] = $str;
             }
         }
@@ -97,12 +97,12 @@ class CPesertaUjianPMB extends MainPageM {
         }
     }
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);
         $str = "SELECT no_formulir,idjadwal_ujian FROM peserta_ujian_pmb WHERE idpeserta_ujian=$id";
         $this->DB->setFieldTable(array('idjadwal_ujian', 'no_formulir'));
 		$r = $this->DB->getRecord($str);
         
-        if ($this->DB->checkRecordIsExist ('no_formulir', 'nilai_ujian_masuk',$r[1]['no_formulir'])) {
+        if ($this->DB->checkRecordIsExist ('no_formulir', 'nilai_ujian_masuk', $r[1]['no_formulir'])) {
             $this->lblHeaderMessageError->Text='Menghapus Peserta Ujian PMB';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus peserta ini karena sudah melakukan Ujian PMB.";
             $this->modalMessageError->Show();
@@ -139,7 +139,7 @@ class CPesertaUjianPMB extends MainPageM {
                 $this->report->printBeritaAcaraUjianSPMB($this->DMaster);
             break;
         }                
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Berita Acara Ujian SPMB';
         $this->modalPrintOut->show();
 	}

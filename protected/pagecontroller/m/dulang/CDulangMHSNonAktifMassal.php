@@ -13,24 +13,24 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
             $_SESSION['currentPageDulangMHSNonAktifMassal']['search']=false;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-            $this->tbCmbPs->Text=$_SESSION['kjur'];			
+            $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
             $tahun_masuk=$this->getAngkatan (false);			            
             $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-            $this->tbCmbTahunMasuk->Text=$_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'];						
+            $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
-            $this->labelTahunNonAktif->Text=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
+            $this->labelTahunNonAktif->Text = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
             $this->hiddentahunmasukmass->Value=$_SESSION['tahun_masuk'];
             
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-            $this->tbCmbTA->Text=$_SESSION['ta'];
+            $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
             $this->hiddentamass->Value=$_SESSION['ta'];
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
             $this->tbCmbSemester->DataSource = $semester;
-            $this->tbCmbSemester->Text=$_SESSION['semester'];
+            $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
             $this->hiddenidsmtmass->Value=$_SESSION['semester'];
 
@@ -66,17 +66,17 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
         $_SESSION['tahun_masuk'] = $_SESSION['ta'];    
 		$_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'] = $_SESSION['ta'];
 		$this->tbCmbTahunMasuk->DataSource = $this->getAngkatan();
-		$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'];
+		$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
         $this->hiddentamass->Value=$_SESSION['ta'];
         $this->hiddentahunmasukmass->Value=$_SESSION['tahun_masuk'];
         $this->setInfoToolbar();
-        $this->labelTahunNonAktif->Text=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
+        $this->labelTahunNonAktif->Text = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
 		$this->populateData();
 	}
 	public function changeTbTahunMasuk($sender, $param) {				
 		$_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
-        $this->labelTahunNonAktif->Text=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
+        $this->labelTahunNonAktif->Text = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
         $this->hiddentahunmasukmass->Value=$_SESSION['tahun_masuk'];
         $this->setInfoToolbar();
 		$this->populateData();
@@ -128,7 +128,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
 		$this->RepeaterS->dataBind();
                 
 	}
-    public function GoMass ($param,$sender) {	
+    public function GoMass ($param, $sender) {	
         if ($this->Page->isValid) {            
             $ta=addslashes($this->hiddentamass->value);
             $idsmt=addslashes($this->hiddenidsmtmass->value);
@@ -136,9 +136,9 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
             $status=$this->cmbAddStatus->Text;
             foreach ($this->RepeaterS->Items as $inputan) {
                 $item=$inputan->hiddenidkelas->getNamingContainer();
-                $nim=$this->RepeaterS->DataKeys[$item->getItemIndex()];
+                $nim = $this->RepeaterS->DataKeys[$item->getItemIndex()];
                 $this->Demik->setDataMHS(array('nim'=>$nim));
-                $datadulang=$this->Demik->getDataDulang ($idsmt,$ta);
+                $datadulang=$this->Demik->getDataDulang ($idsmt, $ta);
                 if (!isset($datadulang['iddulang'])) {					
                     $this->DB->query ('BEGIN');						
                     $idkelas=$inputan->hiddenidkelas->Value;;

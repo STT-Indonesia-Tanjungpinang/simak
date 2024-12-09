@@ -14,20 +14,20 @@ class CKUM extends MainPageK {
             $_SESSION['currentPageKUM']['search']=false;   
             $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-			$this->tbCmbTA->Text=$_SESSION['ta'];
+			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();	
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
-			$this->tbCmbSemester->Text=$_SESSION['semester'];
+			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
             $this->tbCmbTahunMasuk->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind(); 
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -67,7 +67,7 @@ class CKUM extends MainPageK {
 	}
     public function changeJenisUjian($sender, $param) {		
 		$_SESSION['currentPageKUM']['jenisujian'] = $this->cmbJenisUjian->Text;
-		$this->cmbJenisUjian->Text=$_SESSION['currentPageKUM']['jenisujian'];
+		$this->cmbJenisUjian->Text = $_SESSION['currentPageKUM']['jenisujian'];
         $this->lblModulHeader->Text=strtoupper($_SESSION['currentPageKUM']['jenisujian']);
 		$this->populateData();
 	}
@@ -123,9 +123,9 @@ class CKUM extends MainPageK {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKUM']['page_num']=0;}
-        $str = "$str LIMIT $offset,$limit";	
+        $str = "$str LIMIT $offset, $limit";	
         $this->DB->setFieldTable(array('no_formulir', 'idkrs', 'nim', 'nama_mhs', 'jk', 'idkelas', 'nkelas', 'semester_masuk', 'perpanjang'));
-        $r = $this->DB->getRecord($str,$offset+1);	        
+        $r = $this->DB->getRecord($str, $offset+1);	        
         
         $komponen_biaya=array();
         if ($semester == 3) {
@@ -157,7 +157,7 @@ class CKUM extends MainPageK {
         while (list($k, $v) = each($r)) {
             $idkrs=$v['idkrs'];
             $no_formulir = $v['no_formulir'];
-            $nim=$v['nim'];
+            $nim = $v['nim'];
             $str = "SELECT COUNT(idkrsmatkul) AS jumlah_matkul,SUM(sks) AS jumlah_sks FROM v_krsmhs WHERE idkrs='$idkrs'";						
             $this->DB->setFieldTable (array('jumlah_matkul', 'jumlah_sks'));
 			$r2=$this->DB->getRecord($str);
@@ -186,7 +186,7 @@ class CKUM extends MainPageK {
         }
         $this->RepeaterS->DataSource= $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
     }
     public function setDataBound($sender, $param) {
 		$item=$param->Item;
@@ -208,8 +208,8 @@ class CKUM extends MainPageK {
             }
             $item->hiddentoglelunas->Value=$bool;
             $item->btnPrintOutR->Enabled=$bool;
-            $item->literalBTNStyle->Text=$btnstyle;
-            $item->literalKet->Text=$keterangan;
+            $item->literalBTNStyle->Text = $btnstyle;
+            $item->literalKet->Text = $keterangan;
         }
     }
     public function printOut($sender, $param) {
@@ -232,7 +232,7 @@ class CKUM extends MainPageK {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
 
-                $this->report->printKUM($_SESSION['currentPageKUM']['jenisujian'],$dataidkrs,$this->KRS,$this->DMaster);                
+                $this->report->printKUM($_SESSION['currentPageKUM']['jenisujian'], $dataidkrs, $this->KRS, $this->DMaster);                
             break;
             case  'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
@@ -244,7 +244,7 @@ class CKUM extends MainPageK {
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Kartu Ujian Mahasiswa1';
         $this->modalPrintOut->show();
     }
@@ -290,10 +290,10 @@ class CKUM extends MainPageK {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 
-                $this->report->printKUM($_SESSION['currentPageKUM']['jenisujian'],$dataidkrs,$this->KRS,$this->DMaster);                
+                $this->report->printKUM($_SESSION['currentPageKUM']['jenisujian'], $dataidkrs, $this->KRS, $this->DMaster);                
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Kartu Ujian Mahasiswa2';
         $this->modalPrintOut->show();
     }

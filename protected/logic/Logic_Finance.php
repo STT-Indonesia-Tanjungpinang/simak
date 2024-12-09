@@ -7,7 +7,7 @@ class Logic_Finance extends Logic_Mahasiswa {
     /**
 	* digunakan untuk mendapatkan biaya pendaftaran berdasarkan tahun, idsmt, dan kelas	
 	*/
-	public function getBiayaPendaftaran ($tahun,$idsmt,$idkelas) {
+	public function getBiayaPendaftaran ($tahun, $idsmt, $idkelas) {
         $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=1 AND tahun=$tahun AND idsmt=$idsmt AND idkelas='$idkelas'";						
 		$this->db->setFieldTable(array('biaya'));
 		$result=$this->db->getRecord($str);
@@ -20,7 +20,7 @@ class Logic_Finance extends Logic_Mahasiswa {
     /**
 	* digunakan untuk mendapatkan biaya cuti berdasarkan tahun, idsmt, dan kelas	
 	*/
-	public function getBiayaCuti ($tahun,$idsmt,$idkelas) {
+	public function getBiayaCuti ($tahun, $idsmt, $idkelas) {
         $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=12 AND tahun=$tahun AND idsmt=$idsmt AND idkelas='$idkelas'";						
 		$this->db->setFieldTable(array('biaya'));
 		$result=$this->db->getRecord($str);
@@ -33,7 +33,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 	/**
 	* digunakan untuk mendapatkan biaya sks berdasarkan tahun, idsmt, dan kelas	
 	*/
-	public function getBiayaSKS ($tahun,$idkelas) {
+	public function getBiayaSKS ($tahun, $idkelas) {
         $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=14 AND tahun=$tahun AND idkelas='$idkelas'";						
 		$this->db->setFieldTable(array('biaya'));
 		$result=$this->db->getRecord($str);
@@ -112,10 +112,10 @@ class Logic_Finance extends Logic_Mahasiswa {
      * digunakan untuk mendapatkan total pembayaran yang telah dilakukan oleh mahasiswa     
      * @return jumlah pembayaran mahasiswa
      */
-    public function getTotalBayarMhs ($tahun_sekarang,$semester_sekarang) {									
+    public function getTotalBayarMhs ($tahun_sekarang, $semester_sekarang) {									
 		$kjur=$this->DataMHS['kjur'];        
         if ($semester_sekarang == 3) { //semester pendek
-            $nim=$this->DataMHS['nim'];	
+            $nim = $this->DataMHS['nim'];	
             $str = "SELECT SUM(dibayarkan) AS jumlah FROM transaksi_sp WHERE tahun=$tahun_sekarang AND idsmt=$semester_sekarang AND kjur=$kjur AND nim='$nim' AND commited=1";											            
         }else {
             $no_formulir=$this->DataMHS['no_formulir'];	
@@ -136,7 +136,7 @@ class Logic_Finance extends Logic_Mahasiswa {
         $tahun_masuk=$this->DataMHS['tahun_masuk'];
         $semester_masuk=$this->DataMHS['semester_masuk'];
         $idkelas=$this->DataMHS['idkelas'];
-        $biaya_pendaftaran=$this->getBiayaPendaftaran($tahun_masuk,$semester_masuk,$idkelas);
+        $biaya_pendaftaran=$this->getBiayaPendaftaran($tahun_masuk, $semester_masuk, $idkelas);
         
         $str = "SELECT td.dibayarkan FROM transaksi t,transaksi_detail td WHERE td.no_transaksi=t.no_transaksi AND t.no_formulir='$no_formulir' AND td.idkombi=1";
         $this->db->setFieldTable(array('dibayarkan'));
@@ -157,21 +157,21 @@ class Logic_Finance extends Logic_Mahasiswa {
 	* untuk mendapatkan lunas pembayaran	
 	* @return boolean atau array
 	*/
-	public function getLunasPembayaran ($tahun_sekarang,$semester_sekarang,$data=false) {        
-        if ($this->isMhsBaru($tahun_sekarang,$semester_sekarang)) {            
+	public function getLunasPembayaran ($tahun_sekarang, $semester_sekarang, $data=false) {        
+        if ($this->isMhsBaru($tahun_sekarang, $semester_sekarang)) {            
             $total_biaya=$this->getTotalBiayaMhsPeriodePembayaran();
-            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang,$semester_sekarang);				
+            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);				
         }elseif($semester_sekarang==3){
-            $nim=$this->DataMHS['nim'];	            
+            $nim = $this->DataMHS['nim'];	            
             $kjur=$this->DataMHS['kjur']; 
-            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang,$semester_sekarang);
+            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);
             $str = "SELECT sks FROM transaksi_sp WHERE nim='$nim' AND tahun=$tahun_sekarang AND idsmt=$semester_sekarang AND kjur='$kjur' AND nim='$nim' AND commited=1";
             $this->db->setFieldTable(array('sks'));
             $r=$this->db->getRecord($str);                         
             $total_biaya=$this->getTotalBiayaMhs('sp') * $r[1]['sks'];		
         }else{            
             $total_biaya=$this->getTotalBiayaMhsPeriodePembayaran('lama');		
-            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang,$semester_sekarang);				            
+            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);				            
         }
         $bool=$total_biaya<=$total_bayar_mhs;
 		if ($data) {
@@ -188,10 +188,10 @@ class Logic_Finance extends Logic_Mahasiswa {
 	* untuk mendapatkan ambang batas pembayaran	
 	* @return boolean atau array
 	*/
-	public function getTresholdPembayaran ($tahun_sekarang,$semester_sekarang,$data=false) {
-		$total_biaya=($this->isMhsBaru($tahun_sekarang,$semester_sekarang))?$this->getTotalBiayaMhsPeriodePembayaran():$this->getTotalBiayaMhsPeriodePembayaran('lama');
+	public function getTresholdPembayaran ($tahun_sekarang, $semester_sekarang, $data=false) {
+		$total_biaya=($this->isMhsBaru($tahun_sekarang, $semester_sekarang))?$this->getTotalBiayaMhsPeriodePembayaran():$this->getTotalBiayaMhsPeriodePembayaran('lama');
 		$total_biaya_setengah=$total_biaya/2;		
-		$total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang,$semester_sekarang);					
+		$total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);					
 		$bool=$total_biaya_setengah<=$total_bayar_mhs;	
 		if ($data) {
 			$data=array();
@@ -210,7 +210,7 @@ class Logic_Finance extends Logic_Mahasiswa {
      * @param type $semester_sekarang
      * @return boolean
      */
-	public function getKelasFromTransaksi($tahun_sekarang,$semester_sekarang) {
+	public function getKelasFromTransaksi($tahun_sekarang, $semester_sekarang) {
 		$no_formulir=$this->DataMHS['no_formulir'];
 		$str = "SELECT idkelas FROM transaksi WHERE tahun=$tahun_sekarang AND idsmt=$semester_sekarang AND no_formulir=$no_formulir LIMIT 0,1";
 		$this->db->setFieldTable(array('idkelas'));
@@ -224,9 +224,9 @@ class Logic_Finance extends Logic_Mahasiswa {
 	* untuk mendapatkan jumlah sks SP	
 	* @return boolean atau array
 	*/
-	public function getSKSFromSP ($tahun_sekarang,$semester_sekarang) {		
+	public function getSKSFromSP ($tahun_sekarang, $semester_sekarang) {		
 		$kjur=$this->DataMHS['kjur'];
-		$nim=$this->DataMHS['nim'];
+		$nim = $this->DataMHS['nim'];
 		$str = "SELECT jumlah_sks FROM transaksi WHERE nim='$nim' AND idsmt=$semester_sekarang AND tahun=$tahun_sekarang AND kjur=$kjur AND commited=1";		
 		$this->db->setFieldTable(array('jumlah_sks'));
 		$r=$this->db->getRecord($str);	
@@ -241,14 +241,14 @@ class Logic_Finance extends Logic_Mahasiswa {
 	* casting ke integer	
 	*/
 	public function toInteger ($stringNumeric) {
-		return str_replace('.','',$stringNumeric);
+		return str_replace('.','', $stringNumeric);
 	}
     /**
 	* Untuk mendapatkan uang dalam format rupiah
 	* @param angka	
 	* @return string dalam rupiah
 	*/
-	public function toRupiah($angka,$tanpa_rp=true)  {
+	public function toRupiah($angka, $tanpa_rp=true)  {
 		if ($angka == '') {
 			$angka=0;
 		}
@@ -257,7 +257,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 		while ($rp>3){
 			$rupiah = ".". substr($angka,-3). $rupiah;
 			$s=strlen($angka) - 3;
-			$angka=substr($angka,0,$s);
+			$angka=substr($angka,0, $s);
 			$rp=strlen($angka);
 		}
 		if ($tanpa_rp) {

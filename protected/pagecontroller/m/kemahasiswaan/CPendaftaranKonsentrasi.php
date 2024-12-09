@@ -14,10 +14,10 @@ class CPendaftaranKonsentrasi extends MainPageM {
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-			$this->tbCmbPs->Text=$_SESSION['kjur'];
+			$this->tbCmbPs->Text = $_SESSION['kjur'];
 			$this->tbCmbPs->Enabled=true;
 			$this->tbCmbPs->dataBind();	
-			$this->lblProdi->Text=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];
+			$this->lblProdi->Text = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -29,7 +29,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->lblProdi->Text=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];        
+        $this->lblProdi->Text = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];        
         $_SESSION['currentPagePendaftaranKonsentrasi']['idkonsentrasi'] = 'none';
         $this->populateKonsentrasi();
 		$this->populateData();
@@ -55,7 +55,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
         $datakonsentrasi=$this->DMaster->getListKonsentrasiProgramStudi();        
         $r=array();
         $i=1;        
-        while (list($k,$v)=each($datakonsentrasi)) {                        
+        while (list($k, $v)=each($datakonsentrasi)) {                        
             if ($v['kjur']==$_SESSION['kjur']){
                 $idkonsentrasi=$v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("pendaftaran_konsentrasi WHERE idkonsentrasi=$idkonsentrasi",'nim');
@@ -74,7 +74,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
     public function itemCreated($sender, $param) {
         $item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {         
-            $item->lblStatusPendaftaran->Text=$this->DMaster->getStatusPendaftaranKonsentrasi($item->DataItem['status_daftar']);
+            $item->lblStatusPendaftaran->Text = $this->DMaster->getStatusPendaftaranKonsentrasi($item->DataItem['status_daftar']);
             switch ($item->DataItem['status_daftar']) {
                 case 0 :
                     $cssclass='label label-info';
@@ -121,16 +121,16 @@ class CPendaftaranKonsentrasi extends MainPageM {
 			$limit=$itemcount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranKonsentrasi']['page_num']=0;}
-        $str = "$str ORDER BY status_daftar ASC,tanggal_daftar DESC LIMIT $offset,$limit";				
+        $str = "$str ORDER BY status_daftar ASC,tanggal_daftar DESC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('nim', 'nama_mhs', 'jumlah_sks', 'kjur', 'idkonsentrasi', 'status_daftar'));
-		$r = $this->DB->getRecord($str,$offset+1);	        
+		$r = $this->DB->getRecord($str, $offset+1);	        
         
         $this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
     }     
     public function approvedFromRepeater($sender, $param) {
-        $nim=$this->getDataKeyField($sender,$this->RepeaterS);
+        $nim = $this->getDataKeyField($sender, $this->RepeaterS);
         $idkonsentrasi=$sender->CommandParameter;
         $this->DB->query('BEGIN');
         $str = "UPDATE pendaftaran_konsentrasi SET status_daftar=1 WHERE nim='$nim'";        

@@ -146,13 +146,13 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label"><strong>TANGGAL KRS: </strong></label>
                                             <div class="col-sm-8">
-                                                <p class="form-control-static"><%# $this->Page->TGL->tanggal('l,j F Y',$this->Page->KRS->DataKRS['krs']['tgl_krs'])%></p>
+                                                <p class="form-control-static"><%# $this->Page->TGL->tanggal('l,j F Y', $this->Page->KRS->DataKRS['krs']['tgl_krs'])%></p>
                                             </div>                            
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label"><strong>KETERANGAN: </strong></label>
                                             <div class="col-sm-8">
-                                                <p class="form-control-static"><b><%# $this->Page->KRS->DataKRS['krs']['sah']==1?'Sah ('.$this->Page->TGL->tanggal('l,j F Y',$this->Page->KRS->DataKRS['krs']['tgl_disahkan']).')':'Belum di sahkan oleh dosen wali.'%></b></p>
+                                                <p class="form-control-static"><b><%# $this->Page->KRS->DataKRS['krs']['sah']==1?'Sah ('.$this->Page->TGL->tanggal('l,j F Y', $this->Page->KRS->DataKRS['krs']['tgl_disahkan']).')':'Belum di sahkan oleh dosen wali.'%></b></p>
                                             </div>                            
                                         </div>                            
                                     </div>

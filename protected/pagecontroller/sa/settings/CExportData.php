@@ -41,7 +41,7 @@ class CExportData extends MainPageSA {
             
         }
     }
-    private function buildSqlInsert ($tablename,$clausa='') {
+    private function buildSqlInsert ($tablename, $clausa='') {
         $result=$this->DB->query('SELECT * FROM '.$tablename.$clausa);        
         $fields_amount  =   $result->field_count;  
         $rows_num=$this->DB->getCountRowsOfTable ($tablename.$clausa);     
@@ -86,7 +86,7 @@ class CExportData extends MainPageSA {
         } 
         return $content .="\n\n";
     }
-    private function exportDataMHS ($value,$mode='nim') {
+    private function exportDataMHS ($value, $mode='nim') {
         switch ($mode) {
             case 'nim' :               
                 $str = "SELECT no_formulir,nim,nirm FROM register_mahasiswa WHERE nim='$value'";
@@ -94,7 +94,7 @@ class CExportData extends MainPageSA {
                 $r = $this->DB->getRecord($str);
 
                 $no_formulir = $r[1]['no_formulir']; 
-                $nim=$r[1]['nim'];    
+                $nim = $r[1]['nim'];    
                 $nirm=$r[1]['nirm'];                
                 $filename=BASEPATH."exported/sql/$value.sql";
                 $fp = fopen ($filename,'w');
@@ -365,8 +365,8 @@ class CExportData extends MainPageSA {
                     $sql =$sql. "--\n";
                     $sql =$sql.$this->buildSqlInsert('tweetscomment'," WHERE userid='$nim'");
 
-                    fwrite($fp,$str);
-                    $this->txtOutput->Text=$sql;
+                    fwrite($fp, $str);
+                    $this->txtOutput->Text = $sql;
                     fclose($fp);
                 }else{
                     throw new Exception("File ($filename) open failed.");
@@ -417,8 +417,8 @@ class CExportData extends MainPageSA {
 //     }
 
 
-//     function Export_Database($host,$user,$pass,$name,  $tables=false, $backup_name=false )     {
-//         $mysqli = new mysqli($host,$user,$pass,$name); 
+//     function Export_Database($host, $user, $pass, $name,  $tables=false, $backup_name=false )     {
+//         $mysqli = new mysqli($host, $user, $pass, $name); 
 //         $mysqli->select_db($name); 
 //         $mysqli->query("SET NAMES 'utf8'");
 

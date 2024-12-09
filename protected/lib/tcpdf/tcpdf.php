@@ -11074,7 +11074,7 @@ class TCPDF {
 	 * @since 2.1.000 (2008-01-07)
 	 * @see StartTransform(), StopTransform()
 	 */
-	public function MirrorP($x='',$y='') {
+	public function MirrorP($x='', $y='') {
 		$this->Scale(-100, -100, $x, $y);
 	}
 
@@ -11087,7 +11087,7 @@ class TCPDF {
 	 * @since 2.1.000 (2008-01-07)
 	 * @see StartTransform(), StopTransform()
 	 */
-	public function MirrorL($angle=0, $x='',$y='') {
+	public function MirrorL($angle=0, $x='', $y='') {
 		$this->Scale(-100, 100, $x, $y);
 		$this->Rotate(-2*($angle-90), $x, $y);
 	}
@@ -11161,7 +11161,7 @@ class TCPDF {
 		$tm[3] = $tm[0];
 		$tm[4] = $x + ($tm[1] * $y) - ($tm[0] * $x);
 		$tm[5] = $y - ($tm[0] * $y) - ($tm[1] * $x);
-		//rotate the coordinate system around ($x,$y)
+		//rotate the coordinate system around ($x, $y)
 		$this->Transform($tm);
 	}
 

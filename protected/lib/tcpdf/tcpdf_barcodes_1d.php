@@ -1741,7 +1741,7 @@ class TCPDFBarcode {
 			}
 			$row %= 6;
 			$col %= 6;
-			$chk = array_keys($checktable, array($row,$col));
+			$chk = array_keys($checktable, array($row, $col));
 			$code .= $chk[0];
 			++$len;
 		}

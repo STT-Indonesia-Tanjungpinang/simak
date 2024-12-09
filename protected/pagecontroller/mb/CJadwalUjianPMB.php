@@ -9,7 +9,7 @@ class CJadwalUjianPMB extends MainPageMB {
             if (!isset($_SESSION['currentPageJadwalUjianPMB'])||$_SESSION['currentPageJadwalUjianPMB']['page_name']!='mb.spmb.JadwalUjianPMB') {                
 				$_SESSION['currentPageJadwalUjianPMB']=array('page_name'=>'mb.spmb.JadwalUjianPMB', 'page_num'=>0,'search'=>false);												
 			}
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
             try {
                 $no_formulir = $this->Pengguna->getDataUser('no_formulir');
                 $this->Demik->setDataMHS(array('no_formulir'=>$no_formulir));
@@ -19,7 +19,7 @@ class CJadwalUjianPMB extends MainPageMB {
                 $this->populateData();	
             } catch (Exception $e) {
                 $this->idProcess = 'view';
-                $this->errorMessage->Text=$e->getMessage();
+                $this->errorMessage->Text = $e->getMessage();
             }
 		}			
 	}
@@ -62,14 +62,14 @@ class CJadwalUjianPMB extends MainPageMB {
          
 	}
     public function pilihRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);
         $str = "SELECT tahun_masuk,idsmt,nama_kegiatan,tanggal_akhir_daftar,status,rk.kapasitas FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian='$id'";
         $this->DB->setFieldTable(array('tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_akhir_daftar', 'status', 'kapasitas'));
 		$r = $this->DB->getRecord($str);	
         try {
             $dataujian=$r[1];
             $no_formulir = $this->Pengguna->getDataUser('no_formulir');
-            if ($this->DB->checkRecordIsExist ('no_formulir', ' peserta_ujian_pmb',$no_formulir)){
+            if ($this->DB->checkRecordIsExist ('no_formulir', ' peserta_ujian_pmb', $no_formulir)){
                 throw new Exception ("No. Formulir sudah terdaftar menjadi peserta ujian PMB pada {$dataujian['nama_kegiatan']} T.A {$dataujian['tahun_masuk']}{$dataujian['idsmt']}");
             }
             if ($dataujian['status']==0){
@@ -91,7 +91,7 @@ class CJadwalUjianPMB extends MainPageMB {
             $this->redirect('JadwalUjianPMB',true);
         } catch (Exception $ex) {
             $this->lblHeaderMessageError->Text='Memilih Jadwal Ujian PMB';
-            $this->lblContentMessageError->Text=$ex->getMessage();
+            $this->lblContentMessageError->Text = $ex->getMessage();
             $this->modalMessageError->Show();
         }
     }   
@@ -99,7 +99,7 @@ class CJadwalUjianPMB extends MainPageMB {
         $this->createObj('reportspmb');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
-        $id = $this->getDataKeyField($sender,$this->RepeaterS);
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);
         
         $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian=$id ORDER BY tanggal_ujian ASC";
         $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'namaruang', 'kapasitas', 'status'));

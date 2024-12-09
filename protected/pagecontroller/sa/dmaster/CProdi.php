@@ -19,7 +19,7 @@ class CProdi extends MainPageSA {
 		$r = $this->DB->getRecord($str);       
         $this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);        
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);        
 	}
 	public function addProcess($sender, $param) {
         $this->idProcess = 'add';	 
@@ -36,7 +36,7 @@ class CProdi extends MainPageSA {
         if ($kjur != '') {
             try {   
                 if ($this->hiddenid->Value!=$kjur) {                                                            
-                    if ($this->DB->checkRecordIsExist('kjur', 'program_studi',$kjur)){                                
+                    if ($this->DB->checkRecordIsExist('kjur', 'program_studi', $kjur)){                                
                         throw new Exception ("Kode P.S ($kjur) sudah tidak tersedia silahkan ganti dengan yang lain.");        
                     }                               
                 }                
@@ -52,7 +52,7 @@ class CProdi extends MainPageSA {
         if ($kjur != '') {
             try {   
                 if ($this->hiddenkodepsforlap->Value!=$kjur) {                                                            
-                    if ($this->DB->checkRecordIsExist('kode_epsbed', 'program_studi',$kjur)){                                
+                    if ($this->DB->checkRecordIsExist('kode_epsbed', 'program_studi', $kjur)){                                
                         throw new Exception ("Kode P.S di Forlap ($kjur) sudah tidak tersedia silahkan ganti dengan yang lain.");        
                     }                               
                 }                
@@ -78,28 +78,28 @@ class CProdi extends MainPageSA {
                 $str = 'SELECT ps.kjur,ps.kode_epsbed,ps.nama_ps,ps.kjenjang,js.njenjang,konsentrasi FROM program_studi ps,jenjang_studi js WHERE js.kjenjang=ps.kjenjang AND ps.kjur!=0';
                 $this->DB->setFieldTable(array('kjur', 'kode_epsbed', 'nama_ps', 'njenjang', 'konsentrasi'));
                 $dataitem = $this->DB->getRecord($str);                
-                $this->Application->Cache->set('listprodi',$dataitem);            
+                $this->Application->Cache->set('listprodi', $dataitem);            
             }
             $this->Redirect('dmaster.Prodi',true);
         }
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';  
-        $kjur = $this->getDataKeyField($sender,$this->RepeaterS);  
+        $kjur = $this->getDataKeyField($sender, $this->RepeaterS);  
         $this->hiddenid->Value=$kjur;
         $str = "SELECT kjur,kode_epsbed,nama_ps,nama_ps_alias,kjenjang,konsentrasi,iddosen FROM program_studi WHERE kjur = $kjur";
         $this->DB->setFieldTable(array('kjur', 'kode_epsbed', 'nama_ps', 'nama_ps_alias', 'kjenjang', 'konsentrasi', 'iddosen'));
         $r = $this->DB->getRecord($str);
 
-        $this->txtEditKodePS->Text=$r[1]['kjur'];
-        $this->txtEditKodePSForlap->Text=$r[1]['kode_epsbed'];
+        $this->txtEditKodePS->Text = $r[1]['kjur'];
+        $this->txtEditKodePSForlap->Text = $r[1]['kode_epsbed'];
         $this->hiddenkodepsforlap->Value=$r[1]['kode_epsbed'];
-        $this->txtEditNama->Text=$r[1]['nama_ps'];
-        $this->txtEditNamaAkronim->Text=$r[1]['nama_ps_alias'];       
-        $this->txtEditKonsentrasi->Text=$r[1]['konsentrasi'];
+        $this->txtEditNama->Text = $r[1]['nama_ps'];
+        $this->txtEditNamaAkronim->Text = $r[1]['nama_ps_alias'];       
+        $this->txtEditKonsentrasi->Text = $r[1]['konsentrasi'];
 
         $this->cmbEditJenjang->dataSource = $this->DMaster->getListJenjang ();
-        $this->cmbEditJenjang->Text=$r[1]['kjenjang'];
+        $this->cmbEditJenjang->Text = $r[1]['kjenjang'];
         $this->cmbEditJenjang->dataBind();       
 
         $daftar_dosen=$this->DMaster->getDaftarDosen();
@@ -123,18 +123,18 @@ class CProdi extends MainPageSA {
                 $str = 'SELECT ps.kjur,ps.kode_epsbed,ps.nama_ps,ps.kjenjang,js.njenjang,konsentrasi FROM program_studi ps,jenjang_studi js WHERE js.kjenjang=ps.kjenjang AND ps.kjur!=0';
                 $this->DB->setFieldTable(array('kjur', 'kode_epsbed', 'nama_ps', 'njenjang', 'konsentrasi'));
                 $dataitem = $this->DB->getRecord($str);                
-                $this->Application->Cache->set('listprodi',$dataitem);            
+                $this->Application->Cache->set('listprodi', $dataitem);            
             }
             $this->Redirect('dmaster.Prodi',true);
         }
     }
     public function deleteRecord($sender, $param) {        
-        $kjur = $this->getDataKeyField($sender,$this->RepeaterS);          
-        if ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran_temp',$kjur," OR kjur2=$kjur")) {
+        $kjur = $this->getDataKeyField($sender, $this->RepeaterS);          
+        if ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran_temp', $kjur," OR kjur2=$kjur")) {
             $this->lblHeaderMessageError->Text='Menghapus Program Studi';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus program studi dengan ID ($kjur) karena sedang digunakan di formulir pendaftaran.";
             $this->modalMessageError->Show();
-        }elseif ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran',$kjur," OR kjur2=$kjur")) {
+        }elseif ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran', $kjur," OR kjur2=$kjur")) {
             $this->lblHeaderMessageError->Text='Menghapus Program Studi';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus program studi dengan ID ($kjur) karena sedang digunakan di formulir pendaftaran.";
             $this->modalMessageError->Show();
@@ -143,7 +143,7 @@ class CProdi extends MainPageSA {
                 $str = 'SELECT ps.kjur,ps.kode_epsbed,ps.nama_ps,ps.kjenjang,js.njenjang,konsentrasi FROM program_studi ps,jenjang_studi js WHERE js.kjenjang=ps.kjenjang AND ps.kjur!=0';
                 $this->DB->setFieldTable(array('kjur', 'kode_epsbed', 'nama_ps', 'njenjang', 'konsentrasi'));
                 $dataitem = $this->DB->getRecord($str);                
-                $this->Application->Cache->set('listprodi',$dataitem);            
+                $this->Application->Cache->set('listprodi', $dataitem);            
             }         
             $this->DB->deleteRecord("program_studi WHERE kjur='$kjur'");
             $this->Redirect('dmaster.Prodi',true);

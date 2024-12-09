@@ -39,25 +39,25 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><strong>TANGGAL MULAI: </strong></label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><%= $this->TGL->tanggal ('j F Y',$this->DataUjian['tgl_ujian'])%></p>
+                                    <p class="form-control-static"><%= $this->TGL->tanggal ('j F Y', $this->DataUjian['tgl_ujian'])%></p>
                                 </div>                            
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><strong>WAKTU MULAI: </strong></label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><%= $this->TGL->tanggal ('H:i:s',$this->DataUjian['tgl_ujian'])%></p>
+                                    <p class="form-control-static"><%= $this->TGL->tanggal ('H:i:s', $this->DataUjian['tgl_ujian'])%></p>
                                 </div>                            
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><strong>TANGGAL SELESAI: </strong></label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><%= $this->TGL->tanggal ('j F Y',$this->DataUjian['tgl_selesai_ujian'])%></p>
+                                    <p class="form-control-static"><%= $this->TGL->tanggal ('j F Y', $this->DataUjian['tgl_selesai_ujian'])%></p>
                                 </div>                            
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><strong>WAKTU SELESAI: </strong></label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><%= $this->TGL->tanggal ('H:i:s',$this->DataUjian['tgl_selesai_ujian'])%></p>
+                                    <p class="form-control-static"><%= $this->TGL->tanggal ('H:i:s', $this->DataUjian['tgl_selesai_ujian'])%></p>
                                 </div>                            
                             </div>                                                        
                         </div>                                        

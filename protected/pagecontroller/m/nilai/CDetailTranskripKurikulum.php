@@ -45,7 +45,7 @@ class CDetailTranskripKurikulum extends MainPageM {
             $this->RepeaterS->dataBind();		
         } catch (Exception $ex) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$ex->getMessage();
+			$this->errorMessage->Text = $ex->getMessage();
         }        
 	}
 	public function printOut($sender, $param) {	
@@ -53,7 +53,7 @@ class CDetailTranskripKurikulum extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';        
         $dataReport=$_SESSION['currentPageDetailTranskripKurikulum']['DataMHS']; 
-        $nim=$dataReport['nim'];
+        $nim = $dataReport['nim'];
         switch ($_SESSION['outputreport']) {
             case  'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
@@ -80,7 +80,7 @@ class CDetailTranskripKurikulum extends MainPageM {
             break;
         }
         
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Transkrip Kurikulum';
         $this->modalPrintOut->show();
 	}

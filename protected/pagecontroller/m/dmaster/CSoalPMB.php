@@ -38,9 +38,9 @@ class CSoalPMB extends MainPageM {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageSoalPMB']['page_num']=0;}
-		$str = "SELECT s.idsoal,nama_soal,date_added,date_modified FROM soal s ORDER BY date_modified DESC LIMIT $offset,$limit";
+		$str = "SELECT s.idsoal,nama_soal,date_added,date_modified FROM soal s ORDER BY date_modified DESC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('idsoal', 'nama_soal', 'date_added', 'date_modified')); 
-		$r = $this->DB->getRecord($str,$offset+1);			
+		$r = $this->DB->getRecord($str, $offset+1);			
         $result = array();       
 		$this->DB->setFieldTable(array('jawaban')); 		
         while (list($k, $v) = each($r)){           
@@ -84,9 +84,9 @@ class CSoalPMB extends MainPageM {
                     $jawaban = addslashes($inputan->txtJawaban->Text);
                     $checked=$inputan->rdJawaban->Checked==true?1:0;
                     if ($countItem > $i+1) {    
-                        $values=$values."(NULL,$idsoal,'$jawaban',$checked),";                            
+                        $values=$values."(NULL, $idsoal,'$jawaban', $checked),";                            
                     }else {
-                        $values=$values."(NULL,$idsoal,'$jawaban',$checked)";                            
+                        $values=$values."(NULL, $idsoal,'$jawaban', $checked)";                            
                     }
                     $i=$i+1;      
 
@@ -102,12 +102,12 @@ class CSoalPMB extends MainPageM {
 	}
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';
-        $id=$this->getDataKeyField($sender,$this->RepeaterS);
+        $id=$this->getDataKeyField($sender, $this->RepeaterS);
         $this->hiddenidsoal->Value=$id;        
         $str = "SELECT nama_soal FROM soal s WHERE idsoal = $id";
         $this->DB->setFieldTable(array('nama_soal'));
         $r = $this->DB->getRecord($str);
-        $this->txtEditNamaSoal->Text=$r[1]['nama_soal'];
+        $this->txtEditNamaSoal->Text = $r[1]['nama_soal'];
         
         $str = "SELECT jawaban,status FROM jawaban WHERE idsoal = $id";
         $this->DB->setFieldTable(array('jawaban', 'status'));
@@ -130,9 +130,9 @@ class CSoalPMB extends MainPageM {
                     $jawaban = addslashes($inputan->txtJawaban->Text);
                     $checked=$inputan->rdJawaban->Checked==true?1:0;
                     if ($countItem > $i+1) {    
-                        $values=$values."(NULL,$id,'$jawaban',$checked),";                            
+                        $values=$values."(NULL, $id,'$jawaban', $checked),";                            
                     }else {
-                        $values=$values."(NULL,$id,'$jawaban',$checked)";                            
+                        $values=$values."(NULL, $id,'$jawaban', $checked)";                            
                     }
                     $i=$i+1;      
 
@@ -147,8 +147,8 @@ class CSoalPMB extends MainPageM {
 		}
 	}
 	public function deleteRecord($sender, $param) {
-        $id=$this->getDataKeyField($sender,$this->RepeaterS);
-        if ($this->DB->checkRecordIsExist('idsoal', 'jawaban_ujian',$id)) {
+        $id=$this->getDataKeyField($sender, $this->RepeaterS);
+        if ($this->DB->checkRecordIsExist('idsoal', 'jawaban_ujian', $id)) {
             $this->lblHeaderMessageError->Text='Menghapus Soal PMB';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus soal dengan ID ($id) karena sedang digunakan di jawaban ujian.";
             $this->modalMessageError->Show();

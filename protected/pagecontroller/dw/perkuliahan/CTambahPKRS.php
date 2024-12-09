@@ -39,7 +39,7 @@ class CTambahPKRS extends MainPageDW {
     $this->createObj('Finance');
     if (!$this->IsPostBack && !$this->IsCallback)
     {	            
-      $this->lblModulHeader->Text=$this->getInfoToolbar();            
+      $this->lblModulHeader->Text = $this->getInfoToolbar();            
       try 
       {	
         $datakrs=$_SESSION['currentPagePKRS']['DataKRS'];
@@ -50,7 +50,7 @@ class CTambahPKRS extends MainPageDW {
           $idsmt = $datakrs['krs']['idsmt'];
           $tahun=$datakrs['krs']['tahun'];
           $datamhs=$_SESSION['currentPagePKRS']['DataMHS'];                                            
-          $nim=$datamhs['nim'];                
+          $nim = $datamhs['nim'];                
           $this->KRS->setDataMHS($datamhs);   
 
           $kjur = $datamhs['kjur'];
@@ -77,7 +77,7 @@ class CTambahPKRS extends MainPageDW {
       catch (Exception $e)
       {
         $this->idProcess = 'view';	
-        $this->errorMessage->Text=$e->getMessage();	
+        $this->errorMessage->Text = $e->getMessage();	
       }
     }				
   }
@@ -99,7 +99,7 @@ class CTambahPKRS extends MainPageDW {
       $datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
       $datakrs['iddata_konversi'] = $this->Pengguna->getDataUser('iddata_konversi');
       $this->KRS->setDataMHS($datakrs);
-      $nim=$datakrs['nim'];
+      $nim = $datakrs['nim'];
       $idkrs=$datakrs['idkrs'];
       $str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs' AND batal=0";
       $this->DB->setFieldTable(array('jumlah'));
@@ -107,13 +107,13 @@ class CTambahPKRS extends MainPageDW {
       $jumlah=$r[1]['jumlah']+$sender->CommandParameter;
       $maxSKS=$datakrs['maxSKS'];
       //if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
-      $idpenyelenggaraan=$this->getDataKeyField($sender,$this->RepeaterPenyelenggaraan);
+      $idpenyelenggaraan=$this->getDataKeyField($sender, $this->RepeaterPenyelenggaraan);
       //check kmatkul syarat apakah lulus		
       $this->KRS->checkMatkulSyaratIDPenyelenggaraan($idpenyelenggaraan);
       $this->DB->query('BEGIN');
-      if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul',$idpenyelenggaraan,' AND idkrs='.$idkrs))
+      if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul', $idpenyelenggaraan,' AND idkrs='.$idkrs))
       { 
-        $str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs',$idpenyelenggaraan,0)";
+        $str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs', $idpenyelenggaraan,0)";
         $this->DB->insertRecord($str);
         $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs=$idkrs";
         $this->DB->updateRecord($str);
@@ -129,11 +129,11 @@ class CTambahPKRS extends MainPageDW {
     catch (Exception $e)
     {
       $this->modalMessageError->show();
-      $this->lblContentMessageError->Text=$e->getMessage();					
+      $this->lblContentMessageError->Text = $e->getMessage();					
     }		
   }
   public function hapusMatkul($sender, $param) {		
-    $idkrsmatkul = $this->getDataKeyField($sender,$this->RepeaterS);
+    $idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);
     
     $datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
     $idkrs=$datakrs['idkrs'];

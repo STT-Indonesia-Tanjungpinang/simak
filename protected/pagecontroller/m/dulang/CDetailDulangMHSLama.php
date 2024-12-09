@@ -13,7 +13,7 @@ class CDetailDulangMHSLama Extends MainPageM {
                     
                     $this->Demik->setDataMHS($datamhs);
                     $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
-                    $this->cmbAddDosenWali->Text=$datamhs['iddosen_wali'];
+                    $this->cmbAddDosenWali->Text = $datamhs['iddosen_wali'];
                     $this->cmbAddDosenWali->dataBind();	           
                     
                     $ta = $this->DMaster->getNamaTA($datamhs['ta']);		
@@ -25,7 +25,7 @@ class CDetailDulangMHSLama Extends MainPageM {
                 }
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}	
 	}

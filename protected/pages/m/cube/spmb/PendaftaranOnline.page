@@ -652,7 +652,7 @@
                                     <td><%#$this->DataItem['nama_mhs']%></td>
                                     <td><%#$this->Page->DMaster->getNamaKelasByID($this->DataItem['idkelas'])%></td> 
                                     <td><%#$this->DataItem['telp_hp']%></td>
-                                    <td><%#$this->Page->TGL->tanggal('l, d-m-Y',$this->DataItem['waktu_mendaftar'])%></td>                                     
+                                    <td><%#$this->Page->TGL->tanggal('l, d-m-Y', $this->DataItem['waktu_mendaftar'])%></td>                                     
                                     <td>
                                         <com:THyperLink  NavigateUrl="<%=$this->Page->setup->getAddress()%>/<%#$this->DataItem['file_bukti_bayar']%>" Text="LIAT BUKTI BAYAR" Enabled="<%#$this->DataItem['file_bukti_bayar']!=''%>"/>                                                                                      
                                         

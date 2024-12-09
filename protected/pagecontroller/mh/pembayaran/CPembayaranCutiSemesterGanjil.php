@@ -13,25 +13,25 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
             }
             $this->setInfoToolbar();
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
-            $this->tbCmbTA->Text=$_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta'];
+            $this->tbCmbTA->Text = $_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta'];
             $this->tbCmbTA->dataBind();
             try {
                 $datamhs = $this->Pengguna->getDataUser();
                 $datamhs['idsmt']=1;
 				$datamhs['ta'] = $_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta'];  
                 $this->Finance->setDataMHS($datamhs);
-                $datadulang=$this->Finance->getDataDulang(1,$datamhs['ta']);
+                $datadulang=$this->Finance->getDataDulang(1, $datamhs['ta']);
                 
                 if (isset($datadulang['iddulang'])) {
                     if ($datadulang['k_status']!='C') {
-                        $nim=$datamhs['nim'];
+                        $nim = $datamhs['nim'];
                         $status=$this->DMaster->getNamaStatusMHSByID ($datadulang['k_status']);
                         $ta = $datadulang['tahun'];
                         throw new Exception ("NIM ($nim) sudah daftar ulang di semester Ganjil T.A $ta dengan status $status.");		
                     }
                 }
                 $this->checkPembayaranSemesterLalu ();
-                CPembayaranCutiSemesterGanjil::$KewajibanMahasiswa = $this->Finance->getBiayaCuti($datamhs['tahun_masuk'],$datamhs['semester_masuk'],$datamhs['idkelas']);
+                CPembayaranCutiSemesterGanjil::$KewajibanMahasiswa = $this->Finance->getBiayaCuti($datamhs['tahun_masuk'], $datamhs['semester_masuk'], $datamhs['idkelas']);
                 $_SESSION['currentPagePembayaranCutiSemesterGanjil']['DataMHS'] = $datamhs;                    
                 $this->populateTransaksi();
                 
@@ -45,7 +45,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
                 }
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
             
 		}	
@@ -65,7 +65,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
     }
     public function populateTransaksi() {
         $datamhs=$_SESSION['currentPagePembayaranCutiSemesterGanjil']['DataMHS'];
-        $nim=$datamhs['nim'];
+        $nim = $datamhs['nim'];
         $tahun=$datamhs['ta'];
         $idsmt=1;
         
@@ -93,7 +93,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
         $no_faktur = $param->Value;		
         if ($no_faktur != '') {
             try {
-                if ($this->DB->checkRecordIsExist('no_faktur', 'transaksi',$no_faktur)) {                                
+                if ($this->DB->checkRecordIsExist('no_faktur', 'transaksi', $no_faktur)) {                                
                     throw new Exception ("Nomor Faktur dari ($no_faktur) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                 }
             }catch (Exception $e) {
@@ -107,14 +107,14 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
             $userid = $this->Pengguna->getDataUser('userid');
             $datamhs=$_SESSION['currentPagePembayaranCutiSemesterGanjil']['DataMHS'];
             $tahun=$datamhs['ta'];
-            $nim=$datamhs['nim'];
+            $nim = $datamhs['nim'];
             
             $no_transaksi='11'.$tahun.mt_rand(900,9999);
             $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
-            $tanggal=date('Y-m-d',$this->cmbAddTanggalFaktur->TimeStamp);
+            $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
             $this->Finance->setDataMHS($datamhs);
-            $dibayarkan=$this->Finance->getBiayaCuti($datamhs['tahun_masuk'],$datamhs['semester_masuk'],$datamhs['idkelas']);
+            $dibayarkan=$this->Finance->getBiayaCuti($datamhs['tahun_masuk'], $datamhs['semester_masuk'], $datamhs['idkelas']);
             
             $str = "INSERT INTO transaksi_cuti SET no_transaksi='$no_transaksi',no_faktur='$no_faktur',tahun=$tahun,idsmt=1,nim='$nim',idkombi=0,dibayarkan=$dibayarkan,commited=0,tanggal='$tanggal',date_added=NOW(),date_modified=NOW(),userid=$userid";
             $this->DB->insertRecord($str);
@@ -124,8 +124,8 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
     }    
     public function deleteRecord($sender, $param) {	
         $datamhs=$_SESSION['currentPagePembayaranCutiSemesterGanjil']['DataMHS']; 
-        $nim=$datamhs['nim'];
-		$no_transaksi=$this->getDataKeyField($sender,$this->ListTransactionRepeater);		
+        $nim = $datamhs['nim'];
+		$no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi_cuti WHERE no_transaksi='$no_transaksi'");		
 		$this->redirect('pembayaran.PembayaranCutiSemesterGanjil',true);
 	}	

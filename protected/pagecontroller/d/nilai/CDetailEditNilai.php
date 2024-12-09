@@ -28,20 +28,20 @@ class CDetailEditNilai extends MainPageD {
         $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
         $this->Demik->InfoKelas['hari'] = $this->TGL->getNamaHari($infokelas['hari']);
         
-        $this->txtPersenQuiz->Text=$infokelas['persen_quiz'];
-        $this->txtPersenTugas->Text=$infokelas['persen_tugas'];
-        $this->txtPersenUTS->Text=$infokelas['persen_uts'];
-        $this->txtPersenUAS->Text=$infokelas['persen_uas'];
-        $this->txtPersenAbsen->Text=$infokelas['persen_absen'];
-        $this->txtPersenHasilProyek->Text=$infokelas['persen_hasil_proyek'];
+        $this->txtPersenQuiz->Text = $infokelas['persen_quiz'];
+        $this->txtPersenTugas->Text = $infokelas['persen_tugas'];
+        $this->txtPersenUTS->Text = $infokelas['persen_uts'];
+        $this->txtPersenUAS->Text = $infokelas['persen_uas'];
+        $this->txtPersenAbsen->Text = $infokelas['persen_absen'];
+        $this->txtPersenHasilProyek->Text = $infokelas['persen_hasil_proyek'];
         
-        $this->cmbJumlahRecord->Text=$_SESSION['currentPageDetailEditNilai']['jumlahrecord'];
+        $this->cmbJumlahRecord->Text = $_SESSION['currentPageDetailEditNilai']['jumlahrecord'];
         $this->RepeaterS->PageSize=$_SESSION['currentPageDetailEditNilai']['jumlahrecord'];
         $_SESSION['currentPageDetailEditNilai']['DataNilai'] = $this->Demik->InfoKelas;
         $this->populateData();	             
       } catch (Exception $ex) {
         $this->idProcess = 'view';	
-        $this->errorMessage->Text=$ex->getMessage();
+        $this->errorMessage->Text = $ex->getMessage();
       }
     }
   }    
@@ -72,7 +72,7 @@ class CDetailEditNilai extends MainPageD {
       $limit=$this->RepeaterS->VirtualItemCount-$offset;
     }
     if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDetailEditNilai']['page_num']=0;}
-    $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";				     
+    $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				     
     $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'nilai_hasil_proyek', 'n_kuan', 'n_kual'));
     $r = $this->DB->getRecord($str);	           
     $result = array();
@@ -97,7 +97,7 @@ class CDetailEditNilai extends MainPageD {
     $this->RepeaterS->DataSource = $result;
     $this->RepeaterS->dataBind();	  
     
-    $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+    $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
   }	
    public function updateDataPersentase($sender, $param) {
     if ($this->IsValid) {

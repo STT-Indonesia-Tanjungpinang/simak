@@ -15,20 +15,20 @@ class CPendaftaranOnline extends MainPageK {
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $kelas=$this->DMaster->getListKelas();
 			$this->tbCmbKelas->DataSource = $this->DMaster->removeIdFromArray($kelas,'none');
-			$this->tbCmbKelas->Text=$_SESSION['currentPagePendaftaranOnline']['kelas'];			
+			$this->tbCmbKelas->Text = $_SESSION['currentPagePendaftaranOnline']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
-            $this->cmbDisplayRecord->Text=$_SESSION['currentPagePendaftaranOnline']['display_record'];
-            $this->lblModulHeader->Text=$this->getInfoToolbar();            
+            $this->cmbDisplayRecord->Text = $_SESSION['currentPagePendaftaranOnline']['display_record'];
+            $this->lblModulHeader->Text = $this->getInfoToolbar();            
             $this->populateData ();	
 		}	
 	}   
@@ -40,12 +40,12 @@ class CPendaftaranOnline extends MainPageK {
 	}
 	public function changeTbTahunMasuk($sender, $param) {					
 		$_SESSION['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}	
     public function changeTbKelas($sender, $param) {				
 		$_SESSION['currentPagePendaftaranOnline']['kelas'] = $this->tbCmbKelas->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}public function searchRecord($sender, $param) {
 		$_SESSION['currentPagePendaftaranOnline']['search']=true;
@@ -97,12 +97,12 @@ class CPendaftaranOnline extends MainPageK {
 		}
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranOnline']['page_num']=0;}
 		
-		$str = "$str  $str_display ORDER BY waktu_mendaftar DESC LIMIT $offset,$limit";
+		$str = "$str  $str_display ORDER BY waktu_mendaftar DESC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('no_pendaftaran', 'no_formulir', 'nama_mhs', 'telp_hp', 'email', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'file_bukti_bayar'));
-        $r = $this->DB->getRecord($str,$offset+1);
+        $r = $this->DB->getRecord($str, $offset+1);
         $this->RepeaterS->DataSource = $r;
 		$this->RepeaterS->dataBind();	
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS); 
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS); 
 	} 
     
     public function printOut($sender, $param) {
@@ -129,7 +129,7 @@ class CPendaftaranOnline extends MainPageK {
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Daftar PIN '.strtoupper($_SESSION['currentPagePendaftaranOnline']['display_record']);
         $this->modalPrintOut->show();
      }

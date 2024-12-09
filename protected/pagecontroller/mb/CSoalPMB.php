@@ -16,7 +16,7 @@ class CSoalPMB extends MainPageMB {
                 if (!$this->Demik->isNoFormulirExist()) {
                     throw new Exception ('Untuk mengikuti ujian silahkan isi formulir terlebih dahulu');
                 }         
-                if (!$this->DB->checkRecordIsExist ('no_formulir', ' peserta_ujian_pmb',$no_formulir)){
+                if (!$this->DB->checkRecordIsExist ('no_formulir', ' peserta_ujian_pmb', $no_formulir)){
                     throw new Exception ("No. Formulir ($no_formulir) belum terdaftar menjadi peserta ujian. Silahkan pilih Jadwal Ujian PMB yang Anda inginkan");
                 }   
                 if ($this->Demik->isMhsRegistered(true)) {
@@ -72,11 +72,11 @@ class CSoalPMB extends MainPageMB {
                     $this->DB->setFieldTable(array('no_pin')); 
                     $r = $this->DB->getRecord($str); 
 
-                    $this->txtAddPIN->Text=$r[1]['no_pin'];
+                    $this->txtAddPIN->Text = $r[1]['no_pin'];
                 }                                                   
             }catch (Exception $e) {
                 $this->idProcess = 'view';
-                $this->errorMessage->Text=$e->getMessage();
+                $this->errorMessage->Text = $e->getMessage();
             }
         }
     }
@@ -85,7 +85,7 @@ class CSoalPMB extends MainPageMB {
         try {
             if ($pin != '') {			            
                 $no_formulir = $this->Pengguna->getDataUser('no_formulir');
-                if (!$this->DB->checkRecordIsExist ('no_pin', 'pin',$pin," AND no_formulir='$no_formulir'")) {
+                if (!$this->DB->checkRecordIsExist ('no_pin', 'pin', $pin," AND no_formulir='$no_formulir'")) {
                     throw new Exception ("Nomor PIN ($pin) tidak terdaftar di Portal.");
                 }     
             }
@@ -98,11 +98,11 @@ class CSoalPMB extends MainPageMB {
         if ($this->IsValid) {
             $no_formulir = $this->Pengguna->getDataUser('no_formulir');
             $pin = addslashes($this->txtAddPIN->Text);
-            if ($this->DB->checkRecordIsExist ('no_pin', 'pin',$pin," AND no_formulir='$no_formulir'")) {
+            if ($this->DB->checkRecordIsExist ('no_pin', 'pin', $pin," AND no_formulir='$no_formulir'")) {
                 $str = "INSERT INTO kartu_ujian (no_formulir,no_ujian,tgl_ujian,tgl_selesai_ujian,isfinish,idtempat_spmb) VALUES ($no_formulir,'$no_formulir',NOW(),'0000-00-00 00:00:00',0,1)";            
                 $this->DB->query('BEGIN');
                 if ($this->DB->insertRecord($str)) {              
-                    $str = "INSERT INTO jawaban_ujian (idsoal,idjawaban,no_formulir) SELECT s.idsoal,0,$no_formulir FROM soal s ORDER BY RAND() LIMIT 80";
+                    $str = "INSERT INTO jawaban_ujian (idsoal,idjawaban,no_formulir) SELECT s.idsoal,0, $no_formulir FROM soal s ORDER BY RAND() LIMIT 80";
                     $this->DB->insertRecord($str);        
                     $this->DB->query('COMMIT');          
                 }else {
@@ -131,7 +131,7 @@ class CSoalPMB extends MainPageMB {
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
             $idsoal = $item->DataItem['idsoal'];
             $idjawaban_tersimpan=$item->DataItem['idjawaban'];
-            $str = "SELECT idjawaban,idsoal,j.jawaban,$idjawaban_tersimpan AS jawaban_tersimpan FROM jawaban j WHERE idsoal = $idsoal";
+            $str = "SELECT idjawaban,idsoal,j.jawaban, $idjawaban_tersimpan AS jawaban_tersimpan FROM jawaban j WHERE idsoal = $idsoal";
             $this->DB->setFieldTable(array('idjawaban', 'idsoal', 'jawaban', 'jawaban_tersimpan')); 
             $r = $this->DB->getRecord($str);                   
             $item->RepeaterJawaban->DataSource = $r;
@@ -148,7 +148,7 @@ class CSoalPMB extends MainPageMB {
             }
 		}
 	} 
-    private function simpanJawaban ($repeater,$no_formulir) {
+    private function simpanJawaban ($repeater, $no_formulir) {
         foreach($repeater->Items as $v) {                
             $repeaterJawaban=$v->RepeaterJawaban->Items;             
             $idsoal = $v->txtIDSoal->Value;             

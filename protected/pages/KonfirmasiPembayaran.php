@@ -9,7 +9,7 @@ class KonfirmasiPembayaran extends MainPageF {
 		   
 		}
 	}    
-	public function cekNomorPendaftaran ($sender,$param) {		
+	public function cekNomorPendaftaran ($sender, $param) {		
         $no_pendaftaran=addslashes($param->Value);		
         if ($no_pendaftaran != '') {
             try {
@@ -25,7 +25,7 @@ class KonfirmasiPembayaran extends MainPageF {
             }	
         }	
 	}
-	public function loadData ($sender,$param) {	
+	public function loadData ($sender, $param) {	
 		if ($this->IsValid) {
 			$this->idProcess='add';
 			$no_pendaftaran=addslashes($this->txtAddNomorPendaftaran->Text);	
@@ -45,7 +45,7 @@ class KonfirmasiPembayaran extends MainPageF {
 	public function getDataMHS($idx) {
 		 return $this->DataMHS[$idx];
 	}
-	 public function uploadBuktiBayar ($sender,$param) {
+	 public function uploadBuktiBayar ($sender, $param) {
 		if ($sender->getHasFile()) {
             $this->lblTipeFileError->Text='';
             $mime=$sender->getFileType();
@@ -53,7 +53,7 @@ class KonfirmasiPembayaran extends MainPageF {
                 $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>File ini bukan tipe gambar</p>
                         </div>'; 
-                $this->lblTipeFileError->Text=$error;
+                $this->lblTipeFileError->Text = $error;
                 return;
             }         
 
@@ -62,7 +62,7 @@ class KonfirmasiPembayaran extends MainPageF {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing png support in gd library.</p>
                         </div>'; 
-                    $this->lblTipeFileError->Text=$error;                    
+                    $this->lblTipeFileError->Text = $error;                    
                     return;
                 }
             }
@@ -71,7 +71,7 @@ class KonfirmasiPembayaran extends MainPageF {
                     $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>missing jpeg support in gd library.</p>
                         </div>'; 
-                    $this->lblTipeFileError->Text=$error;
+                    $this->lblTipeFileError->Text = $error;
                     return;
                 }
             }
@@ -113,7 +113,7 @@ class KonfirmasiPembayaran extends MainPageF {
             $error =  '<div class="alert alert-warning">                
                             <p><strong>Error:</strong>'.$err.'</p>
                         </div>';   
-            $this->lblTipeFileError->Text=$error;
+            $this->lblTipeFileError->Text = $error;
             return;   
         }
     }

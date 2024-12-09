@@ -45,12 +45,12 @@ class Logic_Global extends TModule
   * @param mode
   * @return array list isi tabel
   */
-  public function getList ($tableName,$fieldTable,$orderField=null,$limit=null,$mode=0) 
+  public function getList ($tableName, $fieldTable, $orderField=null, $limit=null, $mode=0) 
   {
     $orderField=$orderField === null?$orderField=$fieldTable[0]. ' ASC':$orderField;		
     if ($limit !== null) 
     {
-      $offset=explode(',',$limit);
+      $offset=explode(',', $limit);
       $offset=$offset[0]+1;
       $limit = 'LIMIT '.$limit;			
     }
@@ -85,7 +85,7 @@ class Logic_Global extends TModule
     {
       if (strpos($v, '.') !== false) 
       {
-        $v2 = explode('.',$v);
+        $v2 = explode('.', $v);
         $v2 = $v2[1];
       }
       else 
@@ -95,7 +95,7 @@ class Logic_Global extends TModule
       $newFieldTable[$k] = $v2;
     }		
     $this->db->setFieldTable($fieldTable);	
-    $result = $this->db->getRecord($str,$offset);		
+    $result = $this->db->getRecord($str, $offset);		
     switch ($mode) 
     {
       case 0 :
@@ -171,10 +171,10 @@ class Logic_Global extends TModule
   * digunakan untuk meremove id dari sebuah array
   * @return array 
   */
-  public function removeIdFromArray ($arr=array(),$id) {
+  public function removeIdFromArray ($arr=array(), $id) {
     if (isset($arr[$id])) {
       $arr2=array();
-      while (list($k,$v)=each($arr)) {
+      while (list($k, $v)=each($arr)) {
         if ($k != $id) {
           $arr2[$k]=$v;
         }

@@ -142,7 +142,7 @@
                             <td><%# $this->Data['nomor_ijazah']%></td>
                             <td><%# $this->Data['nomor_transkrip']%></td>
                             <td><%# $this->Data['predikat_kelulusan']%></td>					
-                            <td><%# $this->page->TGL->tanggal('d/m/Y',$this->Data['tanggal_lulus'])%></td>					
+                            <td><%# $this->page->TGL->tanggal('d/m/Y', $this->Data['tanggal_lulus'])%></td>					
                             <td><%#$this->Page->DMaster->getNamaStatusMHSByID($this->DataItem['k_status'])%> <strong>IPK:</strong> <com:TLiteral ID="lblIpk" /></td>
                             <td><%# $this->Data['tasmt']%></td>
                             <td>

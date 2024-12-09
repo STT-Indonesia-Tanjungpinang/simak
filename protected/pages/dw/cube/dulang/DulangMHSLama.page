@@ -116,7 +116,7 @@
                                     <td><%#$this->DataItem['nirm']%></td>												
                                     <td><%#$this->DataItem['nama_mhs']%></td>											
                                     <td><%#$this->Page->DMaster->getNamaDosenWaliByID($this->DataItem['iddosen_wali'])%></td>
-                                    <td><%#$this->Page->TGL->tanggal('d/m/Y',$this->DataItem['tanggal'])%></td>
+                                    <td><%#$this->Page->TGL->tanggal('d/m/Y', $this->DataItem['tanggal'])%></td>
                                 </tr>	
                             </prop:ItemTemplate>	       
                             <prop:FooterTemplate>

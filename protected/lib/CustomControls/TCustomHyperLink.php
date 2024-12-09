@@ -20,9 +20,9 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 			$writer->addAttribute('disabled','disabled');
 		parent::addAttributesToRender($writer);
 		if(($url=$this->getNavigateUrl())!=='' && $isEnabled)
-			$writer->addAttribute('href',$url);
+			$writer->addAttribute('href', $url);
 		if(($target=$this->getTarget())!=='')
-			$writer->addAttribute('target',$target);
+			$writer->addAttribute('target', $target);
 	}
 
 	/**
@@ -33,7 +33,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	{
 		if(($imageUrl=$this->getImageUrl())==='')
 		{
-			if(($text=$this->getText())!=='')
+			if(($Text = $this->getText())!=='')
 				$writer->write($text);
 			else if($this->getHasControls())
 				parent::renderContents($writer);
@@ -62,7 +62,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 			$image->setHeight($height);
 		if(($toolTip=$this->getToolTip())!=='')
 			$image->setToolTip($toolTip);
-		if(($text=$this->getText())!=='')
+		if(($Text = $this->getText())!=='')
 			$image->setAlternateText($text);
 		if(($align=$this->getImageAlign())!=='')
 			$image->setImageAlign($align);
@@ -84,7 +84,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	 */
 	public function setText($value)
 	{
-		$this->setViewState('Text',$value,'');
+		$this->setViewState('Text', $value,'');
 	}
 
 	/**
@@ -104,7 +104,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	 */
 	public function setImageAlign($value)
 	{
-		$this->setViewState('ImageAlign',$value,'');
+		$this->setViewState('ImageAlign', $value,'');
 	}
 
 	/**
@@ -121,7 +121,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	 */
 	public function setImageHeight($value)
 	{
-		$this->setViewSTate('ImageHeight',$value,'');
+		$this->setViewSTate('ImageHeight', $value,'');
 	}
 
 	/**
@@ -138,7 +138,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	 */
 	public function setImageUrl($value)
 	{
-		$this->setViewState('ImageUrl',$value,'');
+		$this->setViewState('ImageUrl', $value,'');
 	}
 	
 	/**
@@ -155,7 +155,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	 */
 	public function setImageWidth($value)
 	{
-		$this->setViewState('ImageWidth',$value,'');
+		$this->setViewState('ImageWidth', $value,'');
 	}
 
 	/**
@@ -172,7 +172,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	 */
 	public function setNavigateUrl($value)
 	{
-		$this->setViewState('NavigateUrl',$value,'');
+		$this->setViewState('NavigateUrl', $value,'');
 	}
 
 	/**
@@ -215,7 +215,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	 */
 	public function setTarget($value)
 	{
-		$this->setViewState('Target',$value,'');
+		$this->setViewState('Target', $value,'');
 	}
 }
 

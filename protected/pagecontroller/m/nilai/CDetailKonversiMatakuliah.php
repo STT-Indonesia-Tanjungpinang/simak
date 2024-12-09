@@ -39,12 +39,12 @@ class CDetailKonversiMatakuliah extends MainPageM {
             }
             $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'] = $dataView;
             $this->Nilai->setDataMHS($dataView);
-            $nilai=$this->Nilai->getNilaiKonversi($iddata_konversi,$dataView['idkur']);		
+            $nilai=$this->Nilai->getNilaiKonversi($iddata_konversi, $dataView['idkur']);		
             $this->RepeaterS->dataSource = $nilai;
             $this->RepeaterS->dataBind();            	            
         } catch (Exception $ex) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$ex->getMessage();
+			$this->errorMessage->Text = $ex->getMessage();
         }        
 	}
 	public function printOut($sender, $param) {	
@@ -77,7 +77,7 @@ class CDetailKonversiMatakuliah extends MainPageM {
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                                
             break;
         }
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text="Konversi Matakuliah";
         $this->modalPrintOut->show();
 	}

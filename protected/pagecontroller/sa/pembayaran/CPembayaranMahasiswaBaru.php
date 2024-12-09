@@ -14,17 +14,17 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
             
             $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
-			$this->tbCmbPs->Text=$_SESSION['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
-			$this->tbCmbSemesterMasuk->Text=$_SESSION['currentPagePembayaranMahasiswaBaru']['semester_masuk'];
+			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPagePembayaranMahasiswaBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();            
 
             $this->populateData();
@@ -103,8 +103,8 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranMahasiswaBaru']['page_num']=0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'no_formulir', 'nama_mhs', 'commited', 'tasmt'));
-        $str = "$str ORDER BY t.date_added DESC LIMIT $offset,$limit";	
-        $r = $this->DB->getRecord($str,$offset+1);	        
+        $str = "$str ORDER BY t.date_added DESC LIMIT $offset, $limit";	
+        $r = $this->DB->getRecord($str, $offset+1);	        
         $result = array();		
 		while (list($k, $v) = each($r)) {
 			$no_transaksi=$v['no_transaksi'];				
@@ -113,12 +113,12 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
 			$r2=$this->DB->getRecord($str2);				
 			$dibayarkan=$r2[1]['dibayarkan'];						
 			$v['dibayarkan'] = $this->Finance->toRupiah($dibayarkan);													
-			$v['tanggal'] = $this->TGL->tanggal('d/m/Y',$v['tanggal']);
+			$v['tanggal'] = $this->TGL->tanggal('d/m/Y', $v['tanggal']);
 			$result[$k] = $v;
 		}
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function setDataBound($sender, $param) {				
 		$item=$param->Item;
@@ -128,7 +128,7 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
 	}	
 	
     public function batalkanTransaksi($sender, $param) {		
-        $no_transaksi=$this->getDataKeyField($sender,$this->RepeaterS);		
+        $no_transaksi=$this->getDataKeyField($sender, $this->RepeaterS);		
         $str = "UPDATE transaksi SET commited=0 WHERE no_transaksi=$no_transaksi";
         $this->DB->updateRecord($str);
         $this->redirect ('pembayaran.PembayaranMahasiswaBaru',true);        	

@@ -11,7 +11,7 @@ class DetailKRS extends CDetailKRS {
                 }
             } catch (Exception $e) {
                 $this->idProcess='view';	
-                $this->errorMessage->Text=$e->getMessage();
+                $this->errorMessage->Text = $e->getMessage();
             }            
         }        
 	} 

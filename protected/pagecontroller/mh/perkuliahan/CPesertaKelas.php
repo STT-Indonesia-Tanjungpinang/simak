@@ -29,7 +29,7 @@ class CPesertaKelas extends MainPageMHS {
                 $this->populateData();		
             } catch (Exception $ex) {
                 $this->idProcess = 'view';
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
 		}		
 	}  
@@ -64,7 +64,7 @@ class CPesertaKelas extends MainPageMHS {
         }				
         $str = "$str ORDER BY vdm.nama_mhs ASC";
 		$this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'tahun_masuk', 'sah'));	
-		$r = $this->DB->getRecord($str,$offset+1);
+		$r = $this->DB->getRecord($str, $offset+1);
         $result = array();
         while (list($k, $v) = each($r)) {
             $status='belum disahkan';

@@ -10,7 +10,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
       try {
         if (isset($_SESSION['currentPageDulangMHSLulus']['DataMHS']['no_formulir'])) {
           $datamhs=$_SESSION['currentPageDulangMHSLulus']['DataMHS'];
-          $nim=$datamhs['nim'];
+          $nim = $datamhs['nim'];
           $this->Nilai->setDataMHS($datamhs);
           
           $str = "SELECT MAX(tahun) AS tahun,MAX(idsmt) AS idsmt FROM dulang WHERE nim='$nim' GROUP BY tahun,idsmt ORDER BY tahun DESC,idsmt DESC LIMIT 1";
@@ -18,11 +18,11 @@ class CDetailDulangMHSLulus Extends MainPageM {
           $datadulang=$this->DB->getRecord($str);	    
           
           $this->cmbAddTALulus->DataSource=array($datadulang[1]['tahun']=>$this->DMaster->getNamaTA($datadulang[1]['tahun']));
-          $this->cmbAddTALulus->Text=$datadulang[1]['tahun'];
+          $this->cmbAddTALulus->Text = $datadulang[1]['tahun'];
           $this->cmbAddTALulus->dataBind();
                    
           $this->cmbAddSMTLulus->DataSource=array($datadulang[1]['idsmt']=>$this->setup->getSemester($datadulang[1]['idsmt']));
-          $this->cmbAddSMTLulus->Text=$datadulang[1]['idsmt'];
+          $this->cmbAddSMTLulus->Text = $datadulang[1]['idsmt'];
           $this->cmbAddSMTLulus->dataBind();
           
           $this->Nilai->getTranskripFromKRS ();
@@ -39,7 +39,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
             $bool_sks=false;
           }
           
-          $this->literalJumlahSKS->Text=$ket_jumlah_sks;
+          $this->literalJumlahSKS->Text = $ket_jumlah_sks;
           $bool_bebas_keuangan=true;
           
           $this->literalBebasKeuangan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
@@ -50,7 +50,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
             $this->btnSave->CssClass='btn';
           }
           $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
-          $this->cmbAddDosenWali->Text=$datamhs['iddosen_wali'];
+          $this->cmbAddDosenWali->Text = $datamhs['iddosen_wali'];
           $this->cmbAddDosenWali->dataBind();	           
           
           $_SESSION['semester'] = $datadulang[1]['idsmt'];
@@ -62,7 +62,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
         }
       } catch (Exception $ex) {
         $this->idProcess = 'view';	
-        $this->errorMessage->Text=$ex->getMessage();
+        $this->errorMessage->Text = $ex->getMessage();
       }
     }	
   }
@@ -95,7 +95,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
         $status_sebelumnnya = $datamhs['k_status'];
         $tasmt=$ta.$semester;              
         $this->Nilai->setDataMHS(array('nim'=>$nim));
-        $datadulang=$this->Nilai->getDataDulang($semester,$ta);
+        $datadulang=$this->Nilai->getDataDulang($semester, $ta);
         if (isset($datadulang['iddulang'])) {
           $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(),'$kelas', '$status_sebelumnnya', 'L')";
           $this->DB->insertRecord($str);

@@ -150,7 +150,7 @@
                             					<strong>Waktu Mendaftar</strong> 
                             				</td>
                             				<td>
-                            					<%#$this->Page->TGL->tanggal('l, d-m-Y',$this->DataItem['waktu_mendaftar'])%>
+                            					<%#$this->Page->TGL->tanggal('l, d-m-Y', $this->DataItem['waktu_mendaftar'])%>
                         					</td> 
                             			</tr>
                             		</tbody>

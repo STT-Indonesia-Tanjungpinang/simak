@@ -47,7 +47,7 @@ class MagicSquareExample {
       $M = array();
       for ($j = 0; $j < $p; ++$j) {
         for ($i = 0; $i < $p; ++$i) {
-          $aij = $A->get($i,$j);
+          $aij = $A->get($i, $j);
           $M[$i][$j]       = $aij;
           $M[$i][$j+$p]    = $aij + 2*$p*$p;
           $M[$i+$p][$j]    = $aij + 3*$p*$p;
@@ -137,7 +137,7 @@ class MagicSquareExample {
         $c = $M->cond();
 
         if ($c < 1/$eps)
-          echo "<td align='right'>".sprintf("%.3f",$c)."</td>";
+          echo "<td align='right'>".sprintf("%.3f", $c)."</td>";
         else
           echo "<td align='right'>Inf</td>";
 
@@ -147,10 +147,10 @@ class MagicSquareExample {
         $p = $LU->getPivot();
         // Java version: R = L.times(U).minus(M.getMatrix(p,0,n-1));
         $S = $L->times($U);
-        $R = $S->minus($M->getMatrix($p,0,$n-1));
+        $R = $S->minus($M->getMatrix($p,0, $n-1));
         $res = $R->norm1()/($n*$eps);
 
-        echo "<td align='right'>".sprintf("%.3f",$res)."</td>";
+        echo "<td align='right'>".sprintf("%.3f", $res)."</td>";
 
         $QR = new QRDecomposition($M);
         $Q = $QR->getQ();
@@ -159,7 +159,7 @@ class MagicSquareExample {
         $R = $S->minus($M);
         $res = $R->norm1()/($n*$eps);
 
-        echo "<td align='right'>".sprintf("%.3f",$res)."</td>";
+        echo "<td align='right'>".sprintf("%.3f", $res)."</td>";
 
         echo "</tr>";
 
@@ -170,7 +170,7 @@ class MagicSquareExample {
      $stop_time = $this->microtime_float();
      $etime = $stop_time - $start_time;
 
-     echo "<p>Elapsed time is ". sprintf("%.4f",$etime) ." seconds.</p>";
+     echo "<p>Elapsed time is ". sprintf("%.4f", $etime) ." seconds.</p>";
 
   }
 

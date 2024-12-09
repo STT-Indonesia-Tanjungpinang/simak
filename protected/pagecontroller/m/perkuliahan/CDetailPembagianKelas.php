@@ -27,7 +27,7 @@ public function onLoad($param) {
       }
       $iddosen=$_SESSION['currentPagePembagianKelas']['iddosen'];
       $this->cmbAddNamaDosen->DataSource = $daftar_dosen;			
-      $this->cmbAddNamaDosen->Text=$iddosen;
+      $this->cmbAddNamaDosen->Text = $iddosen;
       $this->cmbAddNamaDosen->dataBind();
       
       $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -100,7 +100,7 @@ public function onLoad($param) {
         
         $this->populateData();
       }
-      $this->lblModulHeader->Text=$this->getInfoToolbar();					
+      $this->lblModulHeader->Text = $this->getInfoToolbar();					
     }			
   }
   public function changeDosenPengampu($sender, $param) {
@@ -150,7 +150,7 @@ public function onLoad($param) {
         $jam_keluar=addslashes($this->cmbAddJamKeluar->Text);
         $ruangkelas=$this->cmbAddRuang->Text;
 
-        $str = "INSERT INTO kelas_mhs (idkelas_mhs,idkelas,nama_kelas,hari,jam_masuk,jam_keluar,idpengampu_penyelenggaraan,idruangkelas) VALUES (NULL,'$idkelas',$nama_kelas,'$hari', '$jam_masuk', '$jam_keluar',$id_pengampu_penyelenggaraan,'$ruangkelas')";				
+        $str = "INSERT INTO kelas_mhs (idkelas_mhs,idkelas,nama_kelas,hari,jam_masuk,jam_keluar,idpengampu_penyelenggaraan,idruangkelas) VALUES (NULL,'$idkelas', $nama_kelas,'$hari', '$jam_masuk', '$jam_keluar', $id_pengampu_penyelenggaraan,'$ruangkelas')";				
         $this->DB->insertRecord($str);
         $this->redirect('perkuliahan.DetailPembagianKelas', true);
       }
@@ -169,17 +169,17 @@ public function onLoad($param) {
     $str = "SELECT idpengampu_penyelenggaraan,nidn,nama_dosen FROM v_pengampu_penyelenggaraan WHERE idpenyelenggaraan=$idpenyelenggaraan";
     $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'nidn', 'nama_dosen'));
     $data_pengampu = $this->DB->getRecord($str);	
-    while (list($k,$v)=each($data_pengampu)) { 
+    while (list($k, $v)=each($data_pengampu)) { 
       $idpengampu_penyelenggaraan=$v['idpengampu_penyelenggaraan'];
       $daftar_dosen[$idpengampu_penyelenggaraan] = $v['nama_dosen'] . '['.$v['nidn'].']';
     }
     $this->cmbEditPengampu->DataSource = $daftar_dosen;
-    $this->cmbEditPengampu->Text=$r[1]['idpengampu_penyelenggaraan'];
+    $this->cmbEditPengampu->Text = $r[1]['idpengampu_penyelenggaraan'];
     $this->cmbEditPengampu->dataBind();
     
     //load hari 				
     $this->cmbEditHari->DataSource = $this->TGL->getNamaHari();
-    $this->cmbEditHari->Text=$r[1]['hari'];
+    $this->cmbEditHari->Text = $r[1]['hari'];
     $this->cmbEditHari->dataBind();
     
     //load jam
@@ -204,16 +204,16 @@ public function onLoad($param) {
 
     $this->cmbEditJamMasuk->DataSource = $jam_masuk_keluar;
     $this->cmbEditJamMasuk->dataBind();
-    $this->cmbEditJamMasuk->Text=$r[1]['jam_masuk'];
+    $this->cmbEditJamMasuk->Text = $r[1]['jam_masuk'];
 
     $this->cmbEditJamKeluar->DataSource = $jam_masuk_keluar;    
     $this->cmbEditJamKeluar->dataBind();    
-    $this->cmbEditJamKeluar->Text=$r[1]['jam_keluar'];
+    $this->cmbEditJamKeluar->Text = $r[1]['jam_keluar'];
     
     //load kelas 
     $this->cmbEditRuang->DataSource = $this->getLogic('DMaster')->getRuangKelas();
     $this->cmbEditRuang->dataBind();       
-    $this->cmbEditRuang->Text=$r[1]['idruangkelas'];
+    $this->cmbEditRuang->Text = $r[1]['idruangkelas'];
   }
   public function updateData($sender, $param) {
     if ($this->IsValid) {
@@ -251,7 +251,7 @@ public function onLoad($param) {
     $this->createObj('reportakademik');
     $this->linkOutput->Text='';
     $this->linkOutput->NavigateUrl='#';
-    $idkelas_mhs = $this->getDataKeyField($sender,$this->RepeaterS);
+    $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
     $dataReport=$this->Demik->getInfoKelas($idkelas_mhs);
     switch ($_SESSION['outputreport']) {
       case  'summarypdf' :
@@ -279,7 +279,7 @@ public function onLoad($param) {
         $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
       break;
     }                
-    $this->lblMessagePrintout->Text=$messageprintout;
+    $this->lblMessagePrintout->Text = $messageprintout;
     $this->lblPrintout->Text='Daftar Hadir Mahasiswa';
     $this->modalPrintOut->show();
   }

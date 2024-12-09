@@ -25,10 +25,10 @@ class CDetailPendaftaranOnline extends MainPageM {
                 throw new Exception ("Mahasiswa Dengan No. Pendaftaran ($no_pendaftaran) tidak terdaftar di Portal.");
             }
             $datamhs=$r[1];
-            $datamhs['no_formulir'] = $datamhs['no_formulir']>0?$datamhs['no_formulir']:'N.A';
+            $datamhs['no_formulir'] = $datamhs['no_formulir']> 0 ? $datamhs['no_formulir']:'N.A';
             $datamhs['nama_ps_1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];
             $datamhs['nama_ps_2']=($r[1]['kjur2']>0)?$this->DMaster->getNamaProgramStudiByID($r[1]['kjur2']):'N.A';
-            $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s',$datamhs['waktu_mendaftar']);
+            $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $datamhs['waktu_mendaftar']);
                         
             $this->Demik->setDataMHS($datamhs);
             $_SESSION['currentPageDetailPendaftaranOnline']['DataMHS'] = $datamhs;
@@ -46,7 +46,7 @@ class CDetailPendaftaranOnline extends MainPageM {
             
         }catch (Exception $ex) {
             $this->idProcess = 'view';	                
-            $this->errorMessage->Text=$ex->getMessage();
+            $this->errorMessage->Text = $ex->getMessage();
         }          
     }
     public function getDataMHS($idx) {	
@@ -95,7 +95,7 @@ class CDetailPendaftaranOnline extends MainPageM {
                     $nama_mhs=$r[1]['nama_mhs'];
                     throw new Exception ("No. Formulir  ($no_formulir) sudah terdaftar atas nama $nama_mhs");                                                   
                 }                
-                if (!$this->DB->checkRecordIsExist ('no_formulir', 'pin',$no_formulir)) {
+                if (!$this->DB->checkRecordIsExist ('no_formulir', 'pin', $no_formulir)) {
                      throw new Exception ("No. Formulir  ($no_formulir) tidak terdaftar di PIN.");   
                 }
             }catch (Exception $e) {
@@ -111,7 +111,7 @@ class CDetailPendaftaranOnline extends MainPageM {
         }else{			            
             $this->cmbKjur2->Enabled=true;
 
-            $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'],$sender->Text);									            
+            $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $sender->Text);									            
             $this->cmbKjur2->DataSource = $jurusan;
             $this->cmbKjur2->dataBind();
         }					
@@ -130,19 +130,19 @@ class CDetailPendaftaranOnline extends MainPageM {
             $semester_masuk=$r[1]['semester_masuk'];
             $idkelas=$r[1]['idkelas'];
             $this->DB->query('BEGIN');            
-            $str = "INSERT INTO formulir_pendaftaran (no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,idagama,nama_ibu_kandung,idwarga,nik,idstatus,alamat_kantor,alamat_rumah,kelurahan,kecamatan,telp_kantor,telp_rumah,telp_hp,idjp,pendidikan_terakhir,jurusan,kota,provinsi,tahun_pa,jenis_slta,asal_slta,status_slta,nomor_ijazah,kjur1,kjur2,idkelas,daftar_via,ta,idsmt,waktu_mendaftar) SELECT $no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,idagama,nama_ibu_kandung,idwarga,nik,idstatus,alamat_kantor,alamat_rumah,kelurahan,kecamatan,telp_kantor,telp_rumah,telp_hp,idjp,pendidikan_terakhir,jurusan,kota,provinsi,tahun_pa,jenis_slta,asal_slta,status_slta,nomor_ijazah,$kjur1,$kjur2,'$idkelas',daftar_via,$tahun_masuk,$semester_masuk,NOW() FROM formulir_pendaftaran WHERE no_formulir = $old_no_formulir";
+            $str = "INSERT INTO formulir_pendaftaran (no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,idagama,nama_ibu_kandung,idwarga,nik,idstatus,alamat_kantor,alamat_rumah,kelurahan,kecamatan,telp_kantor,telp_rumah,telp_hp,idjp,pendidikan_terakhir,jurusan,kota,provinsi,tahun_pa,jenis_slta,asal_slta,status_slta,nomor_ijazah,kjur1,kjur2,idkelas,daftar_via,ta,idsmt,waktu_mendaftar) SELECT $no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,idagama,nama_ibu_kandung,idwarga,nik,idstatus,alamat_kantor,alamat_rumah,kelurahan,kecamatan,telp_kantor,telp_rumah,telp_hp,idjp,pendidikan_terakhir,jurusan,kota,provinsi,tahun_pa,jenis_slta,asal_slta,status_slta,nomor_ijazah, $kjur1, $kjur2,'$idkelas',daftar_via, $tahun_masuk, $semester_masuk,NOW() FROM formulir_pendaftaran WHERE no_formulir = $old_no_formulir";
             if ($this->DB->insertRecord($str)) {                
                 //kartu ujian
-                $str = "INSERT INTO kartu_ujian (no_formulir,no_ujian,tgl_ujian,tgl_selesai_ujian,isfinish,idtempat_spmb)SELECT $no_formulir,$no_formulir,NOW(),NOW(),isfinish,idtempat_spmb FROM kartu_ujian WHERE no_formulir = $old_no_formulir";
+                $str = "INSERT INTO kartu_ujian (no_formulir,no_ujian,tgl_ujian,tgl_selesai_ujian,isfinish,idtempat_spmb)SELECT $no_formulir, $no_formulir,NOW(),NOW(),isfinish,idtempat_spmb FROM kartu_ujian WHERE no_formulir = $old_no_formulir";
                 $this->DB->insertRecord($str);                
                 //jawaban_ujian
-                $str = "INSERT INTO jawaban_ujian (idjawabanujian,idsoal,idjawaban,no_formulir)SELECT NULL,idsoal,idjawaban,$no_formulir FROM jawaban_ujian WHERE no_formulir = $old_no_formulir";
+                $str = "INSERT INTO jawaban_ujian (idjawabanujian,idsoal,idjawaban,no_formulir)SELECT NULL,idsoal,idjawaban, $no_formulir FROM jawaban_ujian WHERE no_formulir = $old_no_formulir";
                 $this->DB->insertRecord($str);
                 //nilai_ujian
-                $str = "INSERT INTO nilai_ujian_masuk (idnilai_ujian_masuk,no_formulir,jumlah_soal,jawaban_benar,jawaban_salah,soal_tidak_terjawab,passing_grade_1,passing_grade_2,nilai)SELECT NULL,$no_formulir,jumlah_soal,jawaban_benar,jawaban_salah,soal_tidak_terjawab,passing_grade_1,passing_grade_2,nilai FROM nilai_ujian_masuk WHERE no_formulir = $old_no_formulir";
+                $str = "INSERT INTO nilai_ujian_masuk (idnilai_ujian_masuk,no_formulir,jumlah_soal,jawaban_benar,jawaban_salah,soal_tidak_terjawab,passing_grade_1,passing_grade_2,nilai)SELECT NULL, $no_formulir,jumlah_soal,jawaban_benar,jawaban_salah,soal_tidak_terjawab,passing_grade_1,passing_grade_2,nilai FROM nilai_ujian_masuk WHERE no_formulir = $old_no_formulir";
                 $this->DB->insertRecord($str);
                 //profiles mahasiswa
-                $str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,email,nim,userpassword,theme,photo_profile)SELECT NULL,$no_formulir,email,nim,userpassword,theme,photo_profile FROM profiles_mahasiswa WHERE no_formulir = $old_no_formulir";
+                $str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,email,nim,userpassword,theme,photo_profile)SELECT NULL, $no_formulir,email,nim,userpassword,theme,photo_profile FROM profiles_mahasiswa WHERE no_formulir = $old_no_formulir";
                 $this->DB->insertRecord($str);
 
                 $waktu_mendaftar="$tahun_masuk-08-05 ".date("H:m:s");          

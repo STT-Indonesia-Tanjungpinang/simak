@@ -14,24 +14,24 @@ class CNilaiFinal extends MainPageON {
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
       $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-      $this->tbCmbPs->Text=$_SESSION['kjur'];			
+      $this->tbCmbPs->Text = $_SESSION['kjur'];			
       $this->tbCmbPs->dataBind();	
 
       $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
       $this->tbCmbTA->DataSource = $ta;					
-      $this->tbCmbTA->Text=$_SESSION['ta'];						
+      $this->tbCmbTA->Text = $_SESSION['ta'];						
       $this->tbCmbTA->dataBind();
 
       $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
       $this->tbCmbSemester->DataSource = $semester;
-      $this->tbCmbSemester->Text=$_SESSION['semester'];
+      $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
 
       $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
       $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
       $this->tbCmbOutputReport->DataBind();
 
-      $this->lblModulHeader->Text=$this->getInfoToolbar();			
+      $this->lblModulHeader->Text = $this->getInfoToolbar();			
       $this->populateData();
 
     }
@@ -39,17 +39,17 @@ class CNilaiFinal extends MainPageON {
   }
   public function changeTbTA($sender, $param) {
     $_SESSION['ta'] = $this->tbCmbTA->Text;		
-    $this->lblModulHeader->Text=$this->getInfoToolbar();
+    $this->lblModulHeader->Text = $this->getInfoToolbar();
     $this->populateData($_SESSION['currentPageNilaiFinal']['search']);        
   }	
   public function changeTbSemester($sender, $param) {
     $_SESSION['semester'] = $this->tbCmbSemester->Text;		
-    $this->lblModulHeader->Text=$this->getInfoToolbar();
+    $this->lblModulHeader->Text = $this->getInfoToolbar();
     $this->populateData($_SESSION['currentPageNilaiFinal']['search']);
   }	
   public function changeTbPs($sender, $param) {		
     $_SESSION['kjur'] = $this->tbCmbPs->Text;
-    $this->lblModulHeader->Text=$this->getInfoToolbar();
+    $this->lblModulHeader->Text = $this->getInfoToolbar();
     $this->populateData();
   }
   public function getInfoToolbar() {        
@@ -107,21 +107,21 @@ class CNilaiFinal extends MainPageON {
       $limit=$this->RepeaterS->VirtualItemCount-$offset;
     }
     if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageNilaiFinal']['page_num']=0;}
-    $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset,$limit";
+    $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
     $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'nomor_ijazah', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'k_status', 'tasmt'));
-    $result=$this->DB->getRecord($str,$offset+1);
+    $result=$this->DB->getRecord($str, $offset+1);
     $this->RepeaterS->DataSource = $result;
     $this->RepeaterS->dataBind();
     
-    $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+    $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
   }	
   public function setDataBound($sender, $param) {
     $item=$param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
-      $nim=$item->DataItem['nim'];			
+      $nim = $item->DataItem['nim'];			
       $this->Nilai->setDataMHS(array('nim'=>$nim));
       $this->Nilai->getTranskrip(false);            
-      $item->lblIpk->Text=$this->Nilai->getIPKAdaNilai();
+      $item->lblIpk->Text = $this->Nilai->getIPKAdaNilai();
     }	
   }
   public function cekNIM($sender, $param) {		
@@ -163,13 +163,13 @@ class CNilaiFinal extends MainPageON {
       }	
     }	
   }
-  public function Go($param,$sender) {	
+  public function Go($param, $sender) {	
     if ($this->IsValid) {
       $this->redirect('nilai.DetailNilaiFinal',true);
     }
   }
   public function viewRecord($sender, $param) {		
-    $nim = $this->getDataKeyField($sender,$this->RepeaterS);
+    $nim = $this->getDataKeyField($sender, $this->RepeaterS);
     try {	
       $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,idkelas,k_status,photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
       $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'photo_profile'));
@@ -198,7 +198,7 @@ class CNilaiFinal extends MainPageON {
 
       $this->redirect('nilai.DetailNilaiFinal',true);
     }catch (Exception $e) {
-      $this->lblContentMessageError->Text=$e->getMessage();
+      $this->lblContentMessageError->Text = $e->getMessage();
       $this->modalMessageError->show();
     }	
   }                
@@ -209,7 +209,7 @@ class CNilaiFinal extends MainPageON {
     $bool=true;
     switch ($sender->getId()) {
       case 'btnPrintOutR' :                
-        $nim = $this->getDataKeyField($sender,$this->RepeaterS);				
+        $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
         switch ($_SESSION['outputreport']) {
           case  'summarypdf' :
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
@@ -313,11 +313,11 @@ class CNilaiFinal extends MainPageON {
       break;
     }		
     if ($bool) {
-      $this->lblMessagePrintout->Text=$messageprintout;
+      $this->lblMessagePrintout->Text = $messageprintout;
       $this->lblPrintout->Text='Transkrip Final';
       $this->modalPrintOut->show();
     }else{
-      $this->lblContentMessageError->Text=$errormessage;
+      $this->lblContentMessageError->Text = $errormessage;
       $this->modalMessageError->show();
     }
   }

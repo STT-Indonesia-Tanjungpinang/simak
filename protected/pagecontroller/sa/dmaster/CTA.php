@@ -35,19 +35,19 @@ class CTA extends MainPageSA {
 		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTA']['page_num']=0;}
 
 		$this->DB->setFieldTable (array('tahun', 'tahun_akademik'));
-		$str = "SELECT * FROM ta ORDER BY tahun DESC LIMIT $offset,$limit";
-		$result = $this->DB->getRecord($str,$offset+1);		
+		$str = "SELECT * FROM ta ORDER BY tahun DESC LIMIT $offset, $limit";
+		$result = $this->DB->getRecord($str, $offset+1);		
 		$this->RepeaterS->DataSource = $result;		
 		$this->RepeaterS->dataBind();
         
-         $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);  
+         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);  
 	}
 	public function checkTA($sender, $param) {
         $this->idProcess=$sender->getId()=='addTahun'?'add':'edit';
         $tahun=$param->Value;		
 		try {
 			if ($this->hiddentahun->Value != $tahun) {
-				if ($this->DB->checkRecordIsExist ('tahun', 'ta',$tahun)){
+				if ($this->DB->checkRecordIsExist ('tahun', 'ta', $tahun)){
                     throw new Exception ("T.A $tahun sudah tidak tersedia, silahkan ganti dengan yang lain.");					
                 }
 			}
@@ -66,17 +66,17 @@ class CTA extends MainPageSA {
             if ($this->Application->Cache) { 
                 $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'),'tahun',null,1);
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
-                $this->Application->Cache->set('listta',$dataitem);
+                $this->Application->Cache->set('listta', $dataitem);
             }
 			$this->Redirect('dmaster.TA',true);
 		}
 	}
     public function editRecord($sender, $param) {
-		$tahun=$this->getDataKeyField($sender,$this->RepeaterS);
+		$tahun=$this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
 		$result = $this->DMaster->getList("ta WHERE tahun=$tahun",array('tahun', 'tahun_akademik'));		
 		$this->hiddentahun->Value=$result[1]['tahun'];
-		$this->txtEditTahun->Text=$result[1]['tahun'];		
+		$this->txtEditTahun->Text = $result[1]['tahun'];		
 	}
 	public function updateData($sender, $param) {
 		if ($this->Page->IsValid) {
@@ -87,14 +87,14 @@ class CTA extends MainPageSA {
             if ($this->Application->Cache) { 
                 $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'),'tahun',null,1);
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
-                $this->Application->Cache->set('listta',$dataitem);
+                $this->Application->Cache->set('listta', $dataitem);
             }
             $this->Redirect('dmaster.TA',true);
 		}
 	}
 	public function deleteRecord($sender, $param) {
-		$tahun=$this->getDataKeyField($sender,$this->RepeaterS);
-        if ($this->DB->checkRecordIsExist ('ta', 'formulir_pendaftaran',$tahun)) {
+		$tahun=$this->getDataKeyField($sender, $this->RepeaterS);
+        if ($this->DB->checkRecordIsExist ('ta', 'formulir_pendaftaran', $tahun)) {
             $this->lblHeaderMessageError->Text='Menghapus T.A';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus T.A ($tahun) karena sedang digunakan di pengampu penyelenggaraan.";
             $this->modalMessageError->Show();
@@ -103,7 +103,7 @@ class CTA extends MainPageSA {
             if ($this->Application->Cache) { 
                 $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'),'tahun',null,1);
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
-                $this->Application->Cache->set('listta',$dataitem);
+                $this->Application->Cache->set('listta', $dataitem);
             }
             $this->Redirect('dmaster.TA',true);
         }

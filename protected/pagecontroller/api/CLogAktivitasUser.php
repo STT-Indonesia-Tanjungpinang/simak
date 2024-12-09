@@ -15,7 +15,7 @@ class CLogAktivitasUser extends MainPageAPI {
         $r = $this->DB->getRecord($str);  
         $result = array();
         while (list($k, $v) = each($r)) {
-            $v['date_activity'] = $this->Page->TGL->tanggal('d/m/Y H:m:s',$v['date_activity']);       
+            $v['date_activity'] = $this->Page->TGL->tanggal('d/m/Y H:m:s', $v['date_activity']);       
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;

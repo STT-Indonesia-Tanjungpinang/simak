@@ -13,28 +13,28 @@ class CRekapitulasiDPA extends MainPageM {
             $daftar_prodi=$_SESSION['daftar_jurusan'];                        
             $daftar_prodi['none'] = 'KESELURUHAN';
 			$this->tbCmbPs->DataSource = $daftar_prodi;
-			$this->tbCmbPs->Text=$_SESSION['currentPageRekapitulasiDPA']['kjur'];			
+			$this->tbCmbPs->Text = $_SESSION['currentPageRekapitulasiDPA']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
             $daftar_ta = $this->DMaster->getListTA();	
             $daftar_ta['none'] = 'KESELURUHAN';
 			$this->tbCmbTahunMasuk->DataSource = $daftar_ta;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $kelas=$this->DMaster->getListKelas();
             $kelas['none'] = 'KESELURUHAN';
 			$this->tbCmbKelas->DataSource = $kelas;
-			$this->tbCmbKelas->Text=$_SESSION['currentPageRekapitulasiDPA']['kelas'];			
+			$this->tbCmbKelas->Text = $_SESSION['currentPageRekapitulasiDPA']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
             
             
             $daftar_status=$this->DMaster->getListStatusMHS ();
             $daftar_status['none'] = 'KESELURUHAN';
             $this->cmbStatus->DataSource = $daftar_status;
-            $this->cmbStatus->Text=$_SESSION['currentPageRekapitulasiDPA']['status'];
+            $this->cmbStatus->Text = $_SESSION['currentPageRekapitulasiDPA']['status'];
             $this->cmbStatus->dataBind();
             
             $this->populateData();
@@ -52,17 +52,17 @@ class CRekapitulasiDPA extends MainPageM {
 	}
     public function changeTbPs($sender, $param) {		
         $_SESSION['currentPageRekapitulasiDPA']['kjur'] = $this->tbCmbPs->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateData();
 	}
     public function changeTbTahunMasuk($sender, $param) {					
 		$_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}
     public function changeTbKelas($sender, $param) {				
 		$_SESSION['currentPageRekapitulasiDPA']['kelas'] = $this->tbCmbKelas->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData();
 	}
     public function changeStatus($sender, $param) {
@@ -86,7 +86,7 @@ class CRekapitulasiDPA extends MainPageM {
         $result = array();
         $i=1;
         $this->DB->setFieldTable(array('jk', 'jumlah_jk'));
-        while (list($iddosen_wali,$nama_dw)=each($daftar_dw)){
+        while (list($iddosen_wali, $nama_dw)=each($daftar_dw)){
             $str = "SELECT fp.jk, COUNT(rm.nim) AS jumlah_jk FROM formulir_pendaftaran fp,register_mahasiswa rm WHERE fp.no_formulir=rm.no_formulir  AND rm.iddosen_wali=$iddosen_wali $str_kjur $str_tahun_masuk $str_kelas $str_status GROUP BY fp.jk ORDER BY fp.jk ASC";
             $r = $this->DB->getRecord($str);
             $pria=0;

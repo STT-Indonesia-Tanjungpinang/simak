@@ -11,7 +11,7 @@ class DetailDulangMHSBaru Extends CDetailDulangMHSBaru {
      * @return type array
      * @throws Exception
      */
-	public function getMaxNimAndNirm ($kjur,$ta) {        
+	public function getMaxNimAndNirm ($kjur, $ta) {        
 		$str = "SELECT MAX(NIM) AS nim FROM register_mahasiswa WHERE tahun='$ta' AND kjur='$kjur'";
 		$this->DB->setFieldTable(array('nim'));
 		$r=$this->DB->getRecord($str);

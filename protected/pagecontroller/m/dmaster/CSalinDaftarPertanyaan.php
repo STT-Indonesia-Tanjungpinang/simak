@@ -11,16 +11,16 @@ class CSalinDaftarPertanyaan extends MainPageM {
 				$_SESSION['currentPageKuesioner']=array('page_name'=>'m.perkuliahan.Kuesioner', 'page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
 			}
             $_SESSION['currentPageKuesioner']['search']=false; 
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
             
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->cmbTA->DataSource = $ta;					
-			$this->cmbTA->Text=$_SESSION['ta'];						
+			$this->cmbTA->Text = $_SESSION['ta'];						
 			$this->cmbTA->dataBind();
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->cmbSemester->DataSource = $semester;
-			$this->cmbSemester->Text=$_SESSION['semester'];
+			$this->cmbSemester->Text = $_SESSION['semester'];
 			$this->cmbSemester->dataBind();           
 		}			
 	}    
@@ -47,7 +47,7 @@ class CSalinDaftarPertanyaan extends MainPageM {
             
             $this->DB->query('BEGIN');  
             $this->DB->deleteRecord("kuesioner WHERE tahun=$ta_sekarang AND idsmt=$semester_sekarang");
-            $str = "INSERT INTO kuesioner (old_idkuesioner,idsmt,tahun,idkelompok_pertanyaan,pertanyaan,orders,date_added,date_modified) SELECT idkuesioner,$semester_sekarang,$ta_sekarang,idkelompok_pertanyaan,pertanyaan,orders,date_added,date_modified FROM kuesioner WHERE tahun=$ta AND idsmt=$semester";
+            $str = "INSERT INTO kuesioner (old_idkuesioner,idsmt,tahun,idkelompok_pertanyaan,pertanyaan,orders,date_added,date_modified) SELECT idkuesioner, $semester_sekarang, $ta_sekarang,idkelompok_pertanyaan,pertanyaan,orders,date_added,date_modified FROM kuesioner WHERE tahun=$ta AND idsmt=$semester";
             if ($this->DB->insertRecord($str) ) {                
                 $str = "SELECT idkuesioner,old_idkuesioner FROM kuesioner WHERE idsmt=$semester_sekarang AND tahun=$ta_sekarang";
                 $this->DB->setFieldTable (array('idkuesioner', 'old_idkuesioner'));	        

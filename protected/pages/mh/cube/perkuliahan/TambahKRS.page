@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label"><strong>TANGGAL KRS: </strong></label>
                                             <div class="col-sm-8">
-                                                <p class="form-control-static"><%# $this->Page->TGL->tanggal('l,j F Y',$this->Page->KRS->DataKRS['krs']['tgl_krs'])%></p>
+                                                <p class="form-control-static"><%# $this->Page->TGL->tanggal('l,j F Y', $this->Page->KRS->DataKRS['krs']['tgl_krs'])%></p>
                                             </div>                            
                                         </div>                                                        
                                     </div>
@@ -180,7 +180,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label"><strong>TANGGAL KRS: </strong></label>
                                             <div class="col-sm-8">
-                                                <p class="form-control-static"><%# $this->Page->TGL->tanggal('l,j F Y',$this->Page->KRS->DataKRS['krs']['tgl_krs'])%></p>
+                                                <p class="form-control-static"><%# $this->Page->TGL->tanggal('l,j F Y', $this->Page->KRS->DataKRS['krs']['tgl_krs'])%></p>
                                             </div>                            
                                         </div>                                                        
                                     </div>

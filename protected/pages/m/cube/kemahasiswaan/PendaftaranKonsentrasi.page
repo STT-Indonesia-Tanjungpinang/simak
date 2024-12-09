@@ -172,8 +172,8 @@
                                     <td><%#$this->DataItem['no']%></td>                                       
                                     <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>                                       
                                     <td><%#$this->DataItem['nama_mhs']%></td>
-                                    <td><%#$this->Page->DMaster->getNamaKonsentrasiByID($this->DataItem['idkonsentrasi'],$this->DataItem['kjur'])%></td>
-                                    <td><%#$this->Page->TGL->tanggal('d/m/Y',$this->DataItem['tanggal_daftar'])%></td>
+                                    <td><%#$this->Page->DMaster->getNamaKonsentrasiByID($this->DataItem['idkonsentrasi'], $this->DataItem['kjur'])%></td>
+                                    <td><%#$this->Page->TGL->tanggal('d/m/Y', $this->DataItem['tanggal_daftar'])%></td>
                                     <td><%#$this->DataItem['jumlah_sks']%></td>
                                     <td><com:TLabel ID="lblStatusPendaftaran" /></td>
                                     <td>

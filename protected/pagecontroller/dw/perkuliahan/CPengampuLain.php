@@ -31,7 +31,7 @@ class CPengampuLain extends MainPageDW {
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
             $this->idProcess = 'view';	
-			$this->errorMessage->Text=$e->getMessage();			
+			$this->errorMessage->Text = $e->getMessage();			
         }	
 	}    
    

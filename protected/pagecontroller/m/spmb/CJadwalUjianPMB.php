@@ -16,33 +16,33 @@ class CJadwalUjianPMB extends MainPageM {
                         
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_pendaftaran'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $_SESSION['semester']=1;
             $idsmt = $_SESSION['semester'];
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
-			$this->tbCmbSemesterMasuk->Text=$idsmt;
+			$this->tbCmbSemesterMasuk->Text = $idsmt;
 			$this->tbCmbSemesterMasuk->dataBind();
             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();
             
-            $this->lblModulHeader->Text=$this->getInfoToolbar();
+            $this->lblModulHeader->Text = $this->getInfoToolbar();
 			$this->populateData();		
             
 		}			
 	}
     public function changeTbTahunMasuk($sender, $param) {
 		$_SESSION['tahun_pendaftaran'] = $this->tbCmbTahunMasuk->Text;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageJadwalUjianPMB']['search']);
 	}	
 	public function changeTbSemesterMasuk($sender, $param) {
 		$_SESSION['semester']=1;		
-        $this->lblModulHeader->Text=$this->getInfoToolbar();
+        $this->lblModulHeader->Text = $this->getInfoToolbar();
 		$this->populateData($_SESSION['currentPageJadwalUjianPMB']['search']);
 	}
     public function getInfoToolbar() {        
@@ -90,10 +90,10 @@ class CJadwalUjianPMB extends MainPageM {
             $tahun_masuk=$this->hiddentahunmasuk->Value;
             $semester=1;
             $nama_kegiatan = addslashes($this->txtAddNamaKegiatan->Text);
-            $tgl_ujian=date ('Y-m-d',$this->txtAddTanggalUjian->TimeStamp);
+            $tgl_ujian=date ('Y-m-d', $this->txtAddTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtAddJamMasuk->Text);
             $jam_keluar=addslashes($this->txtAddJamKeluar->Text);
-            $tgl_akhir_pendaftaran=date ('Y-m-d',$this->txtAddTanggalAkhirDaftar->TimeStamp);
+            $tgl_akhir_pendaftaran=date ('Y-m-d', $this->txtAddTanggalAkhirDaftar->TimeStamp);
             $ruangkelas=$this->cmbAddRuang->Text;            
             $str = "INSERT INTO jadwal_ujian_pmb SET idjadwal_ujian=NULL,tahun_masuk=$tahun_masuk,idsmt=$semester,nama_kegiatan='$nama_kegiatan',tanggal_ujian='$tgl_ujian',jam_mulai='$jam_masuk',jam_akhir='$jam_keluar',tanggal_akhir_daftar='$tgl_akhir_pendaftaran',idruangkelas='$ruangkelas',date_added=NOW(),date_modified=NOW(),status=1";
             $this->DB->insertRecord($str);
@@ -103,31 +103,31 @@ class CJadwalUjianPMB extends MainPageM {
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender,$this->RepeaterS);        
+        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         
         $str = "SELECT nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,idruangkelas,status FROM jadwal_ujian_pmb WHERE idjadwal_ujian=$id";
         $this->DB->setFieldTable(array('nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'status'));
         $r = $this->DB->getRecord($str);
         
-        $this->txtEditNamaKegiatan->Text=$r[1]['nama_kegiatan'];
-        $this->txtEditTanggalUjian->Text=$this->TGL->tanggal('d-m-Y',$r[1]['tanggal_ujian']);
-        $this->txtEditJamMasuk->Text=$r[1]['jam_mulai'];
-        $this->txtEditJamKeluar->Text=$r[1]['jam_akhir'];
-        $this->txtEditTanggalAkhirDaftar->Text=$this->TGL->tanggal('d-m-Y',$r[1]['tanggal_akhir_daftar']);
+        $this->txtEditNamaKegiatan->Text = $r[1]['nama_kegiatan'];
+        $this->txtEditTanggalUjian->Text = $this->TGL->tanggal('d-m-Y', $r[1]['tanggal_ujian']);
+        $this->txtEditJamMasuk->Text = $r[1]['jam_mulai'];
+        $this->txtEditJamKeluar->Text = $r[1]['jam_akhir'];
+        $this->txtEditTanggalAkhirDaftar->Text = $this->TGL->tanggal('d-m-Y', $r[1]['tanggal_akhir_daftar']);
         $this->cmbEditRuang->DataSource = $this->DMaster->getRuangKelas();
         $this->cmbEditRuang->dataBind();
-        $this->cmbEditRuang->Text=$r[1]['idruangkelas'];        
-        $this->cmbEditStatus->Text=$r[1]['status'];
+        $this->cmbEditRuang->Text = $r[1]['idruangkelas'];        
+        $this->cmbEditStatus->Text = $r[1]['status'];
     }
     public function updateData($sender, $param) {
         if ($this->IsValid) {
             $id=$this->hiddenid->Value;
             $nama_kegiatan = addslashes($this->txtEditNamaKegiatan->Text);
-            $tgl_ujian=date ('Y-m-d',$this->txtEditTanggalUjian->TimeStamp);
+            $tgl_ujian=date ('Y-m-d', $this->txtEditTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtEditJamMasuk->Text);
             $jam_keluar=addslashes($this->txtEditJamKeluar->Text);
-            $tgl_akhir_pendaftaran=date ('Y-m-d',$this->txtEditTanggalAkhirDaftar->TimeStamp);
+            $tgl_akhir_pendaftaran=date ('Y-m-d', $this->txtEditTanggalAkhirDaftar->TimeStamp);
             $ruangkelas=$this->cmbEditRuang->Text;
             $status=$this->cmbEditStatus->Text;            
             $str = "UPDATE jadwal_ujian_pmb SET nama_kegiatan='$nama_kegiatan',tanggal_ujian='$tgl_ujian',jam_mulai='$jam_masuk',jam_akhir='$jam_keluar',tanggal_akhir_daftar='$tgl_akhir_pendaftaran',idruangkelas='$ruangkelas',date_modified=NOW(),status='$status' WHERE idjadwal_ujian=$id";
@@ -137,8 +137,8 @@ class CJadwalUjianPMB extends MainPageM {
         }
     }
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender,$this->RepeaterS);
-        if ($this->DB->checkRecordIsExist ('idjadwal_ujian', 'peserta_ujian_pmb',$id)) {
+		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+        if ($this->DB->checkRecordIsExist ('idjadwal_ujian', 'peserta_ujian_pmb', $id)) {
             $this->lblHeaderMessageError->Text='Menghapus Jadwal Ujian PMB';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus jadwal ujian dengan ID ($id) karena masih ada pesertanya.";
             $this->modalMessageError->Show();
@@ -148,7 +148,7 @@ class CJadwalUjianPMB extends MainPageM {
         }
     }   
     public function printOut($sender, $param) {		
-        $idjadwal_ujian=$this->getDataKeyField($sender,$this->RepeaterS);
+        $idjadwal_ujian=$this->getDataKeyField($sender, $this->RepeaterS);
         $this->createObj('reportspmb');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';                
@@ -179,7 +179,7 @@ class CJadwalUjianPMB extends MainPageM {
                 $this->report->printBeritaAcaraUjianSPMB($this->DMaster);
             break;
         }                
-        $this->lblMessagePrintout->Text=$messageprintout;
+        $this->lblMessagePrintout->Text = $messageprintout;
         $this->lblPrintout->Text='Berita Acara Ujian SPMB';
         $this->modalPrintOut->show();
 	}

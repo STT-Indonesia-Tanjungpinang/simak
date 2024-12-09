@@ -239,12 +239,12 @@ class TestMatrix {
       $errorCount = $this->try_failure($errorCount,"SingularValueDecomposition...","incorrect singular value decomposition calculation");
 
     $n = $A->getColumnDimension();
-    $A = $A->getMatrix(0,$n-1,0,$n-1);
+    $A = $A->getMatrix(0, $n-1,0, $n-1);
     $A->set(0,0,0.);
 
     $LU = $A->lu();
     $L  = $LU->getL();
-    if ( $this->checkMatrices($A->getMatrix($LU->getPivot(),0,$n-1), $L->times($LU->getU())) )
+    if ( $this->checkMatrices($A->getMatrix($LU->getPivot(),0, $n-1), $L->times($LU->getU())) )
       $this->try_success("LUDecomposition...","");
     else
       $errorCount = $this->try_failure($errorCount,"LUDecomposition...","incorrect LU decomposition calculation");
@@ -272,8 +272,8 @@ class TestMatrix {
     $SUB = new Matrix($subavals);
     $O   = new Matrix($SUB->getRowDimension(),1,1.0);
     $SOL = new Matrix($sqSolution);
-    $SQ = $SUB->getMatrix(0,$SUB->getRowDimension()-1,0,$SUB->getRowDimension()-1);
-    if ( $this->checkMatrices($SQ->solve($SOL),$O) )
+    $SQ = $SUB->getMatrix(0, $SUB->getRowDimension()-1,0, $SUB->getRowDimension()-1);
+    if ( $this->checkMatrices($SQ->solve($SOL), $O) )
       $this->try_success("solve()...","");
     else
      $errorCount = $this->try_failure($errorCount,"solve()...","incorrect lu solve calculation");
@@ -295,7 +295,7 @@ class TestMatrix {
     $Eig = $A->eig();
     $D = $Eig->getD();
     $V = $Eig->getV();
-    if( $this->checkMatrices($A->times($V),$V->times($D)) )
+    if( $this->checkMatrices($A->times($V), $V->times($D)) )
       $this->try_success("EigenvalueDecomposition (symmetric)...","");
     else
       $errorCount = $this->try_failure($errorCount,"EigenvalueDecomposition (symmetric)...","incorrect symmetric Eigenvalue decomposition calculation");
@@ -304,7 +304,7 @@ class TestMatrix {
     $Eig = $A->eig();
     $D = $Eig->getD();
     $V = $Eig->getV();
-    if ( $this->checkMatrices($A->times($V),$V->times($D)) )
+    if ( $this->checkMatrices($A->times($V), $V->times($D)) )
       $this->try_success("EigenvalueDecomposition (nonsymmetric)...","");
     else
       $errorCount = $this->try_failure($errorCount,"EigenvalueDecomposition (nonsymmetric)...","incorrect nonsymmetric Eigenvalue decomposition calculation");
@@ -372,7 +372,7 @@ class TestMatrix {
     $ny = count($y);
     if ($nx == $ny)
       for($i=0; $i < $nx; ++$i)
-        $this->checkScalars($x[$i],$y[$i]);
+        $this->checkScalars($x[$i], $y[$i]);
     else
       die("Attempt to compare vectors of different lengths");
   }
@@ -385,7 +385,7 @@ class TestMatrix {
   function checkArrays($x, $y) {
     $A = new Matrix($x);
     $B = new Matrix($y);
-    return $this->checkMatrices($A,$B);
+    return $this->checkMatrices($A, $B);
   }
 
   /**
@@ -403,7 +403,7 @@ class TestMatrix {
 
     $A = $X->minus($Y);
 
-    if ($A->norm1() > 1000 * $eps * max($X->norm1(),$Y->norm1()))
+    if ($A->norm1() > 1000 * $eps * max($X->norm1(), $Y->norm1()))
       die("The norm of (X-Y) is too large: ".$A->norm1());
     else
       return true;

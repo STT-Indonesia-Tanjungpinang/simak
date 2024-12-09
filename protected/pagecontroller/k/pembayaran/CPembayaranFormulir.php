@@ -14,12 +14,12 @@ class CPembayaranFormulir Extends MainPageK {
           
             $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
-			$this->tbCmbTahunMasuk->Text=$_SESSION['tahun_masuk'];						
+			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
-			$this->tbCmbSemesterMasuk->Text=$_SESSION['currentPagePembayaranFormulir']['semester_masuk'];
+			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPagePembayaranFormulir']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();            
 
             $this->populateData();
@@ -101,8 +101,8 @@ class CPembayaranFormulir Extends MainPageK {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num']=0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'no_formulir', 'commited', 'tasmt', 'no_pendaftaran', 'idkelas'));
-        $str = "$str ORDER BY t.date_added DESC LIMIT $offset,$limit";	
-        $r = $this->DB->getRecord($str,$offset+1);
+        $str = "$str ORDER BY t.date_added DESC LIMIT $offset, $limit";	
+        $r = $this->DB->getRecord($str, $offset+1);
         $result = array();		
 		while (list($k, $v) = each($r)) {
 			$no_transaksi=$v['no_transaksi'];				
@@ -111,14 +111,14 @@ class CPembayaranFormulir Extends MainPageK {
 			$r2=$this->DB->getRecord($str2);				
 			$dibayarkan=$r2[1]['dibayarkan'];						
 			$v['dibayarkan'] = $this->Finance->toRupiah($dibayarkan);	
-			$v['no_pendaftaran'] = $v['no_pendaftaran']>0?$v['no_pendaftaran']:'N.A';
-			$v['tanggal'] = $this->TGL->tanggal('d/m/Y',$v['tanggal']);
+			$v['no_pendaftaran'] = $v['no_pendaftaran']> 0 ? $v['no_pendaftaran']:'N.A';
+			$v['tanggal'] = $this->TGL->tanggal('d/m/Y', $v['tanggal']);
 			$v['nama_kelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']);
 			$result[$k] = $v;
 		}
         $this->RepeaterS->DataSource = $result;
 		$this->RepeaterS->dataBind();     
-        $this->paginationInfo->Text=$this->getInfoPaging($this->RepeaterS);
+        $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function setDataBound($sender, $param) {				
 		$item=$param->Item;
@@ -144,7 +144,7 @@ class CPembayaranFormulir Extends MainPageK {
             }	
         }	
     }
-	public function Go($param,$sender) {	
+	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $no_formulir=addslashes($this->txtNoFormulir->Text);
             $this->redirect('pembayaran.DetailPembayaranFormulir',true,array('id'=>$no_formulir));

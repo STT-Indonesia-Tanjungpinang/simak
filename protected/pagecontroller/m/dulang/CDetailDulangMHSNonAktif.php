@@ -13,11 +13,11 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
                     $this->Nilai->setDataMHS($datamhs);
                     
                     $this->cmbAddTANonAktif->DataSource=array($_SESSION['ta']=>$this->DMaster->getNamaTA($_SESSION['ta']));
-                    $this->cmbAddTANonAktif->Text=$_SESSION['ta'];
+                    $this->cmbAddTANonAktif->Text = $_SESSION['ta'];
                     $this->cmbAddTANonAktif->dataBind();
                      				
                     $this->cmbAddSMTNonAktif->DataSource=array($_SESSION['semester']=>$this->setup->getSemester($_SESSION['semester']));
-                    $this->cmbAddSMTNonAktif->Text=$_SESSION['semester'];
+                    $this->cmbAddSMTNonAktif->Text = $_SESSION['semester'];
                     $this->cmbAddSMTNonAktif->dataBind();
                     
                     $this->Nilai->getTranskripFromKRS ();
@@ -26,10 +26,10 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
                     if ($iddata_konversi > 0) {
                         $jumlah_sks+=$this->DB->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
                     }
-                    $this->literalJumlahSKS->Text=$jumlah_sks;
+                    $this->literalJumlahSKS->Text = $jumlah_sks;
                     
                     $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
-                    $this->cmbAddDosenWali->Text=$datamhs['iddosen_wali'];
+                    $this->cmbAddDosenWali->Text = $datamhs['iddosen_wali'];
                     $this->cmbAddDosenWali->dataBind();	           
                     
                     $this->setInfoToolbar();
@@ -38,7 +38,7 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
                 }
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
-                $this->errorMessage->Text=$ex->getMessage();
+                $this->errorMessage->Text = $ex->getMessage();
             }
         }	
         $this->Nilai->setDataMHS($_SESSION['currentPageDulangMHSNonAktif']['DataMHS']);
