@@ -117,7 +117,10 @@ class CDetailEditNilai extends MainPageD {
    }
   public function saveData($sender, $param) {
     if ($this->IsValid) {
-      $idkelas_mhs=$_SESSION['currentPageDetailEditNilai']['DataNilai']['idkelas_mhs'];
+      $data_nilai = $_SESSION['currentPageDetailEditNilai']['DataNilai'];
+      $idkelas_mhs = $data_nilai['idkelas_mhs'];
+      $kmatkul = $data_nilai['kmatkul'];
+      $nmatkul = $data_nilai['nmatkul'];
       $userid = $this->Pengguna->getDataUser('iddosen');
       $this->createObj('log');
       foreach ($this->RepeaterS->Items As $inputan) 
@@ -180,6 +183,15 @@ class CDetailEditNilai extends MainPageD {
             tanggal_isi_kuesioner='0000-00-00'
           ";
           $this->DB->insertRecord($str);
+
+          $str = "SELECT nim FROM v_krsmhs WHERE idkrsmatkul=$idkrsmatkul";
+          $this->DB->setFieldTable(array('nim'));
+          $result = $this->DB->getRecord($str);
+
+          $nim = $result[1]['nim'];
+
+          $extra = "idkrsmatkul=$idkrsmatkul";
+          $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'input', $n_kual, '', $extra);
         }
       }
       $this->redirect("nilai.DetailEditNilai", true,array('id'=>$idkelas_mhs));
