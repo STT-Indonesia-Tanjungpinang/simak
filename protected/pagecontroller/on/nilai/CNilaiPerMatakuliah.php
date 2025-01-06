@@ -240,7 +240,7 @@ class CNilaiPerMatakuliah extends MainPageON {
           {//insert					
             if (!$this->DB->checkRecordIsExist('idkrsmatkul', 'nilai_matakuliah', $idkrsmatkul)) 
             {
-              $str = "INSERT INTO nilai_matakuliah SET idnilai=NULL,idkrsmatkul = $idkrsmatkul,persentase_quiz=0,persentase_tugas=0,persentase_uts=0,persentase_uas=0,persentase_absen=0,nilai_quiz=0,nilai_tugas=0,nilai_uts=0,nilai_uas=0,nilai_absen=0,n_kuan='$n_kuan',n_kual='$n_kual',userid_input=$userid,userid_modif=$userid,tanggal_input=NOW(),tanggal_modif=NOW(),bydosen=0,ket='',telah_isi_kuesioner=0,tanggal_isi_kuesioner=CURDATE()";				
+              $str = "INSERT INTO nilai_matakuliah SET idnilai=NULL,idkrsmatkul = $idkrsmatkul,persentase_quiz=0,persentase_tugas=0,persentase_uts=0,persentase_uas=0,persentase_absen=0,nilai_quiz=0,nilai_tugas=0,nilai_uts=0,nilai_uas=0,nilai_absen=0,n_kuan='$n_kuan',n_kual='$n_kual',userid_input=$userid,userid_modif=$userid,tanggal_input=NOW(),tanggal_modif=NOW(),bydosen=0,ket='',telah_isi_kuesioner=0,tanggal_isi_kuesioner=CURDATE()";
               $this->DB->insertRecord($str);
 
               $extra = "idkrsmatkul=$idkrsmatkul";

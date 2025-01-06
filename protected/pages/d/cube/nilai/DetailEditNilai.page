@@ -216,6 +216,19 @@
             </com:TActiveDropDownList>
           </div>
           <div class="filter-block pull-right">       
+            <com:TActiveLinkButton ID="btnPublishNilai" OnClick="Page.publishNilai" CssClass="btn btn-primary pull-left" Attributes.Title="Publish Nilai">
+              <prop:Text><i class="fa fa-upload fa-lg"></i></prop:Text>
+              <prop:ClientSide.OnPreDispatch>
+                $('loading').show();
+              </prop:ClientSide.OnPreDispatch>
+              <prop:ClientSide.OnLoading>
+                $('<%=$this->btnPublishNilai->ClientId%>').disabled='disabled';				
+              </prop:ClientSide.OnLoading>
+              <prop:ClientSide.OnComplete>
+                $('<%=$this->btnPublishNilai->ClientId%>').disabled='';				
+                $('loading').hide();
+              </prop:ClientSide.OnComplete>
+            </com:TActiveLinkButton> 
             <com:TActiveLinkButton ID="btnSave" OnClick="Page.saveData" CssClass="btn btn-primary pull-left" Attributes.Title="Simpan Nilai">
               <prop:Text><i class="fa fa-save fa-lg"></i></prop:Text>
               <prop:ClientSide.OnPreDispatch>
@@ -317,7 +330,10 @@
                   </td>
                   <td><%=$this->DataItem['n_kuan']%></td>
                   <td><%=$this->DataItem['am']%></td>
-                  <td><%=$this->DataItem['n_kual']%></td>					                                   	                                 
+                  <td>
+                    <%=$this->DataItem['n_kual']%>
+                    (<%=$this->DataItem['published'] == 0 ? 'BELUM PUBLISH' : 'PUBLISH'%>)
+                  </td>
                 </tr>
               </prop:ItemTemplate>				                
               <prop:FooterTemplate>               

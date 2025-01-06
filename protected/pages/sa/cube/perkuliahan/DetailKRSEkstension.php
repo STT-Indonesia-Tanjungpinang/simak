@@ -122,7 +122,7 @@ class DetailKRSEkstension extends MainPageSA {
         if ($idkelas_mhs=='none') {
             $this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul=$idkrsmatkul");
             $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
-            $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
+            $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner=NULL WHERE idkrsmatkul=$idkrsmatkul");
         
             $this->DB->query('COMMIT');
             $this->redirect('perkuliahan.DetailKRSEkstension', true,array('id'=>$_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs']));
@@ -136,7 +136,7 @@ class DetailKRSEkstension extends MainPageSA {
                 if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail', $idkrsmatkul)) {
                     $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul=$idkrsmatkul");
                     $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
-                    $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner='' WHERE idkrsmatkul=$idkrsmatkul");
+                    $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner=NULL WHERE idkrsmatkul=$idkrsmatkul");
                 }else{
                      $this->DB->insertRecord("INSERT INTO kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs,idkrsmatkul=$idkrsmatkul");
                 }

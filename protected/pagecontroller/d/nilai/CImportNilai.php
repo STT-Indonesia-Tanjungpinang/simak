@@ -132,7 +132,7 @@ class CImportNilai extends MainPageD {
           $item=$inputan->chkProcess->getNamingContainer();
           $idkrsmatkul = $this->RepeaterS->DataKeys[$item->getItemIndex()];
           
-          $str = "REPLACE INTO nilai_matakuliah (idkrsmatkul,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, n_kuan,n_kual,userid_input,tanggal_input,userid_modif,tanggal_modif,bydosen,ket,telah_isi_kuesioner,tanggal_isi_kuesioner) SELECT idkrsmatkul,persentase_quiz,persentase_tugas,persentase_uts,persentase_uas,persentase_absen,nilai_quiz,nilai_tugas,nilai_uts,nilai_uas,nilai_absen,n_kuan,n_kual, $userid,NOW(), $userid,NOW(),1,'imported by dosen',1,NOW() FROM nilai_imported WHERE idkrsmatkul = $idkrsmatkul";																				
+          $str = "REPLACE INTO nilai_matakuliah (idkrsmatkul,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, n_kuan,n_kual,userid_input,tanggal_input,userid_modif,tanggal_modif,bydosen,ket,telah_isi_kuesioner,tanggal_isi_kuesioner,published) SELECT idkrsmatkul,persentase_quiz,persentase_tugas,persentase_uts,persentase_uas,persentase_absen,nilai_quiz,nilai_tugas,nilai_uts,nilai_uas,nilai_absen,n_kuan,n_kual, $userid,NOW(), $userid,NOW(),1,'imported by dosen',1,NOW(),0 FROM nilai_imported WHERE idkrsmatkul = $idkrsmatkul";																				
           $this->DB->insertRecord($str);
           
           $str = "SELECT nim FROM v_krsmhs WHERE idkrsmatkul=$idkrsmatkul";

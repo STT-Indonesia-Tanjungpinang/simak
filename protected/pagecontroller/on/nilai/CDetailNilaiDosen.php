@@ -45,8 +45,25 @@ class CDetailNilaiDosen extends MainPageON
   protected function populateData() {	
     $datakelas=$_SESSION['currentPageDetailNilaiDosen']['DataNilai'];
     $idkelas_mhs=$datakelas['idkelas_mhs'];
-    $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nama_mhs,COALESCE(n.nilai_quiz, 'N.A') AS nilai_quiz, COALESCE(n.nilai_tugas, 'N.A') AS nilai_tugas, COALESCE(n.nilai_uts, 'N.A') AS nilai_uts, COALESCE(n.nilai_uas, 'N.A') AS nilai_uas, COALESCE(n.nilai_absen, 'N.A') AS nilai_absen, COALESCE(n.n_kuan, 'N.A') AS n_kuan,COALESCE(n.n_kual, 'N.A') AS n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs=$idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
-    $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'n_kuan', 'n_kual'));
+    $str = "SELECT 
+      vkm.idkrsmatkul,
+      vdm.nim,
+      vdm.nama_mhs,
+      COALESCE(n.nilai_quiz, 'N.A') AS nilai_quiz,
+      COALESCE(n.nilai_tugas, 'N.A') AS nilai_tugas,
+      COALESCE(n.nilai_uts, 'N.A') AS nilai_uts,
+      COALESCE(n.nilai_uas, 'N.A') AS nilai_uas,
+      COALESCE(n.nilai_absen, 'N.A') AS nilai_absen,
+      COALESCE(n.n_kuan, 'N.A') AS n_kuan,
+      COALESCE(n.n_kual, 'N.A') AS n_kual,
+      n.published
+      FROM kelas_mhs_detail kmd
+      LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) 
+      JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) 
+      JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) 
+      WHERE kmd.idkelas_mhs=$idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC
+    ";        
+    $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'n_kuan', 'n_kual','published'));
     $r = $this->DB->getRecord($str);	           
     $result = array();
     
