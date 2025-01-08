@@ -61,7 +61,7 @@ class CSoalPMB extends MainPageM {
 	}
     public function setJawaban	($sender, $param) {
 		if ($this->IsValid) {
-			$jumlah_jawaban=$this->txtAddJumlahJawaban->Text;
+			$jumlah_jawaban = $this->txtAddJumlahJawaban->Text;
 			$result = array();
 			for ($i=1;$i<=$jumlah_jawaban;$i++) {
 				$data = array('no'=>$i);
@@ -84,11 +84,11 @@ class CSoalPMB extends MainPageM {
                     $jawaban = addslashes($inputan->txtJawaban->Text);
                     $checked=$inputan->rdJawaban->Checked==true?1:0;
                     if ($countItem > $i+1) {    
-                        $values=$values."(NULL, $idsoal,'$jawaban', $checked),";                            
+                        $values = $values."(NULL, $idsoal,'$jawaban', $checked),";                            
                     }else {
-                        $values=$values."(NULL, $idsoal,'$jawaban', $checked)";                            
+                        $values = $values."(NULL, $idsoal,'$jawaban', $checked)";                            
                     }
-                    $i=$i+1;      
+                    $i = $i+1;      
 
                 }
                 $str = "INSERT INTO jawaban (idjawaban,idsoal,jawaban,status) VALUES $values";
@@ -130,11 +130,11 @@ class CSoalPMB extends MainPageM {
                     $jawaban = addslashes($inputan->txtJawaban->Text);
                     $checked=$inputan->rdJawaban->Checked==true?1:0;
                     if ($countItem > $i+1) {    
-                        $values=$values."(NULL, $id,'$jawaban', $checked),";                            
+                        $values = $values."(NULL, $id,'$jawaban', $checked),";                            
                     }else {
-                        $values=$values."(NULL, $id,'$jawaban', $checked)";                            
+                        $values = $values."(NULL, $id,'$jawaban', $checked)";                            
                     }
-                    $i=$i+1;      
+                    $i = $i+1;      
 
                 }
                 $str = "INSERT INTO jawaban (idjawaban,idsoal,jawaban,status) VALUES $values";

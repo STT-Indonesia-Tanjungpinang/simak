@@ -18,7 +18,7 @@ class CTranskripKurikulum extends MainPageMHS {
 		}
 	}	
 	protected function populateData() {		
-        $datamhs=$this->Pengguna->getDataUser();
+        $datamhs = $this->Pengguna->getDataUser();
         $this->Nilai->setDataMHS($datamhs);
 		$transkrip = $this->Nilai->getTranskrip(true,true);		
         

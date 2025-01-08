@@ -32,22 +32,22 @@ class CDosenWali extends MainPageSA {
             switch ($this->cmbKriteria->Text) {
                 case 'nidn' :
                     $clausa="WHERE d.nidn='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
                     $str = "$str $clausa";
                 break;
                 case 'nip' :
                     $clausa="WHERE d.nipy='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
                     $str = "$str $clausa";
                 break;
                 case 'nama_dosen' :
                     $clausa="WHERE d.nama_dosen LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
                     $str = "$str $clausa";
                 break;
             }
         }else{
-            $jumlah_baris=$this->DB->getCountRowsOfTable("dosen_wali",'iddosen');                    
+            $jumlah_baris = $this->DB->getCountRowsOfTable("dosen_wali",'iddosen');                    
             $str = "SELECT dw.iddosen_wali,d.nidn,d.nipy,d.gelar_depan,d.nama_dosen,d.gelar_belakang,d.telp_hp,d.username,d.status FROM dosen_wali dw LEFT JOIN dosen d ON (d.iddosen=dw.iddosen)";         
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDosenWali']['page_num'];
@@ -86,8 +86,8 @@ class CDosenWali extends MainPageSA {
    
     public function saveData($sender, $param) {
         if ($this->Page->isValid) {
-            $iddosen=$this->cmbAddDosen->Text;            
-            $str = "INSERT INTO dosen_wali SET iddosen_wali=NULL,iddosen=$iddosen";
+            $iddosen = $this->cmbAddDosen->Text;            
+            $str = "INSERT INTO dosen_wali SET iddosen_wali=NULL,iddosen = $iddosen";
             $this->DB->insertRecord($str);
             if ($this->Application->Cache) {  
                 $str = "SELECT dw.iddosen_wali,d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen ORDER BY idjabatan DESC,nama_dosen ASC";
@@ -103,13 +103,13 @@ class CDosenWali extends MainPageSA {
         }
     }
     public function deleteRecord($sender, $param) {        
-        $iddosen_wali=$this->getDataKeyField($sender, $this->RepeaterS);          
+        $iddosen_wali = $this->getDataKeyField($sender, $this->RepeaterS);          
         if ($this->DB->checkRecordIsExist('iddosen_wali', 'register_mahasiswa', $iddosen_wali)) {
             $this->lblHeaderMessageError->Text='Menghapus Dosen Wali';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen wali dengan ID ($iddosen_wali) karena sedang digunakan di register mahasiswa.";
             $this->modalMessageError->Show();        
         }else{
-            $this->DB->deleteRecord("dosen_wali WHERE iddosen_wali=$iddosen_wali");            
+            $this->DB->deleteRecord("dosen_wali WHERE iddosen_wali = $iddosen_wali");            
             if ($this->Application->Cache) {  
                 $str = "SELECT dw.iddosen_wali,d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen ORDER BY idjabatan DESC,nama_dosen ASC";
                 $this->DB->setFieldTable(array('iddosen_wali', 'nidn', 'nama_dosen'));                    

@@ -28,15 +28,15 @@ class CNilaiPerMahasiswa extends MainPageON {
             Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal
           </div>");
         }
-        $datamhs=$r[1];
+        $datamhs = $r[1];
         $this->Nilai->setDatamHS($datamhs);
         $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
         
-        $kelas=$this->Nilai->getKelasMhs();                
+        $kelas = $this->Nilai->getKelasMhs();                
         $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
-        $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
+        $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
         $datamhs['nama_dosen'] = $nama_dosen;                
         
         $this->Nilai->setDatamHS($datamhs);
@@ -84,7 +84,7 @@ class CNilaiPerMahasiswa extends MainPageON {
         }   
         $kjur = $this->Pengguna->getDataUser('kjur');
         if ($kjur > 0) {
-          $kjur_mhs=$r[1]['kjur'];
+          $kjur_mhs = $r[1]['kjur'];
           if ($kjur != $kjur_mhs){
             throw new Exception ("Anda tidak berhak mengakses data mahasiswa dengan NIM ($nim).");		
           } 
@@ -180,7 +180,7 @@ class CNilaiPerMahasiswa extends MainPageON {
           {//insert					
             if (!$this->DB->checkRecordIsExist('idkrsmatkul', 'nilai_matakuliah', $idkrsmatkul)) 
             {
-              $str = "matakuliah SET idnilai=NULL,idkrsmatkul = $idkrsmatkul,persentase_quiz=0,persentase_tugas=0,persentase_uts=0,persentase_uas=0,persentase_absen=0,nilai_quiz=0,nilai_tugas=0,nilai_uts=0,nilai_uas=0,nilai_absen=0,n_kuan=$n_kuan,n_kual='$n_kual',userid_input=$userid,userid_modif=$userid,tanggal_input=NOW(),tanggal_modif=NOW(),bydosen=0,ket='',telah_isi_kuesioner=0,tanggal_isi_kuesioner=CURDATE()";				
+              $str = "matakuliah SET idnilai=NULL,idkrsmatkul = $idkrsmatkul,persentase_quiz=0,persentase_tugas=0,persentase_uts=0,persentase_uas=0,persentase_absen=0,nilai_quiz=0,nilai_tugas=0,nilai_uts=0,nilai_uas=0,nilai_absen=0,n_kuan = $n_kuan,n_kual='$n_kual',userid_input=$userid,userid_modif=$userid,tanggal_input=NOW(),tanggal_modif=NOW(),bydosen=0,ket='',telah_isi_kuesioner=0,tanggal_isi_kuesioner=CURDATE()";				
               $this->DB->insertRecord($str);
 
               $extra = "idkrsmatkul=$idkrsmatkul";

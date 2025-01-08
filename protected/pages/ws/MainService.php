@@ -13,7 +13,7 @@ class MainService extends TModule  {
      */
     private $Conn;
     public function __construct () {
-        $this->Parameters=$this->Application->getParameters ();		        
+        $this->Parameters = $this->Application->getParameters ();		        
     }
     /**
      * digunakan untuk koneksi ke database

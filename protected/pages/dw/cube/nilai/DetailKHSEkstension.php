@@ -30,7 +30,7 @@ class DetailKHSEkstension extends MainPageDW {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs' AND vdm.idkelas='C'";
             $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','tasmt','sah'));
             $r=$this->DB->getRecord($str);	           
-            $datamhs=$r[1];
+            $datamhs = $r[1];
             if (!isset($r[1])) {
                 $_SESSION['currentPageDetailKHSEkstension']['DataMHS']=array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
@@ -39,7 +39,7 @@ class DetailKHSEkstension extends MainPageDW {
                 $_SESSION['currentPageDetailKHSEkstension']['DataMHS']=array();
                 throw new Exception("KRS dengan ID ($idkrs) dimiliki oleh Mahasiswa diluar perwalian Anda.");
             }
-            $tahun=$datamhs['tahun'];
+            $tahun = $datamhs['tahun'];
             $idsmt=$datamhs['idsmt'];
             if ($datamhs['sah']==0) {
                 throw new Exception("KRS dengan ID ($idkrs) belum disahkan.");
@@ -67,7 +67,7 @@ class DetailKHSEkstension extends MainPageDW {
     public function itemBound ($sender, $param) {
         $item=$param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') { 
-            $sks=$item->DataItem['sks'];
+            $sks = $item->DataItem['sks'];
             DetailKHSEkstension::$TotalSKS += $sks;            
             $m = (intval($sks)) * $this->Nilai->getAngkaMutu($item->DataItem['n_kual']);
             DetailKHSEkstension::$TotalM += $m;            
@@ -89,7 +89,7 @@ class DetailKHSEkstension extends MainPageDW {
             break;
             case  'pdf' :                
                 $messageprintout='';
-                $tahun=$_SESSION['currentPageDetailKHSEkstension']['DataMHS']['tahun'];
+                $tahun = $_SESSION['currentPageDetailKHSEkstension']['DataMHS']['tahun'];
                 $semester=$_SESSION['currentPageDetailKHSEkstension']['DataMHS']['idsmt'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);        
@@ -105,7 +105,7 @@ class DetailKHSEkstension extends MainPageDW {
                 $dataReport['jabfung_penandatangan_khs']=$this->setup->getSettingValue('jabfung_penandatangan_khs');
                 $dataReport['nidn_penandatangan_khs']=$this->setup->getSettingValue('nidn_penandatangan_khs');
 
-                $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+                $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
                 $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                 $dataReport['nidn_kaprodi']=$kaprodi['nidn'];

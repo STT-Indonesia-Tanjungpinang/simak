@@ -17,16 +17,16 @@ class CPesertaMatakuliah extends MainPageM {
             $this->tbCmbOutputReport->DataBind();            
             try {                     
                 $id=addslashes($this->request['id']);
-                $iddosen_wali=$this->iddosen_wali;
+                $iddosen_wali = $this->iddosen_wali;
                 $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');                
                 $this->hiddenid->Value=$id;
                 $infomatkul = $this->Demik->getInfoMatkul($id,'penyelenggaraan'); 
                 if (!isset($infomatkul['idpenyelenggaraan'])) {                                                
                     throw new Exception ("Kode penyelenggaraan dengan id ($id) tidak terdaftar.");		
                 }
-                $this->Demik->InfoMatkul['jumlah_peserta'] = $this->Demik->getJumlahMhsInPenyelenggaraan($id," AND iddosen_wali=$iddosen_wali");
+                $this->Demik->InfoMatkul['jumlah_peserta'] = $this->Demik->getJumlahMhsInPenyelenggaraan($id," AND iddosen_wali = $iddosen_wali");
                 $kjur = $infomatkul['kjur'];        
-                $ps=$_SESSION['daftar_jurusan'][$kjur];
+                $ps = $_SESSION['daftar_jurusan'][$kjur];
                 $ta = $this->DMaster->getNamaTA($infomatkul['tahun']);
                 $semester = $this->setup->getSemester($infomatkul['idsmt']);
                 $text="Program Studi $ps TA $ta Semester $semester";
@@ -60,7 +60,7 @@ class CPesertaMatakuliah extends MainPageM {
 	}	
     public function getInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
@@ -82,7 +82,7 @@ class CPesertaMatakuliah extends MainPageM {
         $this->lblModulHeader->Text = $this->getInfoToolbar();        
 	}
     public function checkKodeMatkul($sender, $param) {
-		$this->idProcess=$sender->getId()=='viewpeserta'?'add':'edit';
+		$this->idProcess = $sender->getId()=='viewpeserta'?'add':'edit';
         $kmatkul = $param->Value;		
         if ($kmatkul != '') {
             try {   
@@ -120,30 +120,30 @@ class CPesertaMatakuliah extends MainPageM {
         }
     }
     public function populateData ($search=false) {    
-        $iddosen_wali=$this->iddosen_wali;
+        $iddosen_wali = $this->iddosen_wali;
         $id=$_SESSION['currentPagePesertaMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
-        $str = "SELECT vkm.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,km.batal,k.sah FROM v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali=$iddosen_wali";
+        $str = "SELECT vkm.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,km.batal,k.sah FROM v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali";
         if ($search) {            
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
                 case 'nim' :
                     $clausa="AND vdm.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND idpenyelenggaraan='$id' AND vdm.iddosen_wali=$iddosen_wali $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="AND vdm.nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali=$iddosen_wali $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali=$iddosen_wali $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
             }
         }else{                        
-            $jumlah_baris=$this->DB->getCountRowsOfTable("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali=$iddosen_wali",'vdm.nim');
+            $jumlah_baris = $this->DB->getCountRowsOfTable("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali",'vdm.nim');
         }		
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePesertaMatakuliah']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;

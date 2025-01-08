@@ -17,13 +17,13 @@ class CDaftarMahasiswa extends MainPageK {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();				
 			
-			$tahun_masuk=$this->DMaster->getListTA();
+			$tahun_masuk = $this->DMaster->getListTA();
 			$tahun_masuk['none'] = 'All';
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDaftarMahasiswa']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
 			
-            $kelas=$this->DMaster->getListKelas();
+            $kelas = $this->DMaster->getListKelas();
             $kelas['none'] = 'All';
 			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text = $_SESSION['kelas'];			
@@ -77,30 +77,30 @@ class CDaftarMahasiswa extends MainPageK {
             switch ($this->cmbKriteria->Text) {                
                 case 'nim' :
                     $clausa="WHERE nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="WHERE nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="WHERE nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
             }
         }else{
-            $tahun_masuk=$_SESSION['currentPageDaftarMahasiswa']['tahun_masuk'];        
-            $str_tahun_masuk=$tahun_masuk == 'none' ?'':"AND tahun_masuk=$tahun_masuk";
-            $idkonsentrasi=$_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'];
-            $str_konsentrasi = ($idkonsentrasi == 'none' || $idkonsentrasi == '') ?'':" AND idkonsentrasi=$idkonsentrasi";
-            $kelas=$_SESSION['kelas'];
+            $tahun_masuk = $_SESSION['currentPageDaftarMahasiswa']['tahun_masuk'];        
+            $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND tahun_masuk = $tahun_masuk";
+            $idkonsentrasi = $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'];
+            $str_konsentrasi = ($idkonsentrasi == 'none' || $idkonsentrasi == '') ?'':" AND idkonsentrasi = $idkonsentrasi";
+            $kelas = $_SESSION['kelas'];
             $str_kelas = ($kelas == 'none' || $kelas == '')?'':" AND idkelas='$kelas'";
-            $status=$_SESSION['currentPageDaftarMahasiswa']['k_status'];
+            $status = $_SESSION['currentPageDaftarMahasiswa']['k_status'];
             $str_status = $status == 'none'?'':" AND k_status='$status'";
-            $jumlah_baris=$this->DB->getCountRowsOfTable("v_datamhs WHERE kjur = $kjur $str_tahun_masuk $str_konsentrasi $str_kelas $str_status",'nim');		
+            $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs WHERE kjur = $kjur $str_tahun_masuk $str_konsentrasi $str_kelas $str_status",'nim');		
             $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,tempat_lahir,tanggal_lahir,alamat_rumah,kjur,idkonsentrasi,iddosen_wali,tahun_masuk,k_status,idkelas FROM v_datamhs WHERE kjur='$kjur' $str_tahun_masuk $str_konsentrasi $str_kelas $str_status";			
         }		
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDaftarMahasiswa']['page_num'];
@@ -123,7 +123,7 @@ class CDaftarMahasiswa extends MainPageK {
             $dataMHS['tahun_masuk'] = $v['tahun_masuk'];
             $dataMHS['kjur'] = $v['kjur'];
             $dataMHS['idkonsentrasi'] = $v['idkonsentrasi'];
-            $iddata_konversi=$this->Nilai->isMhsPindahan($nim,true);
+            $iddata_konversi = $this->Nilai->isMhsPindahan($nim,true);
             $dataMHS['iddata_konversi'] = $iddata_konversi; 
             $v['iddata_konversi'] = $iddata_konversi;           
             $this->Nilai->setDataMHS($dataMHS);

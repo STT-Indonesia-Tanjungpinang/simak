@@ -13,12 +13,12 @@ class CPendaftaranOnline extends MainPageK {
             $_SESSION['currentPagePendaftaranOnline']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $kelas=$this->DMaster->getListKelas();
+            $kelas = $this->DMaster->getListKelas();
 			$this->tbCmbKelas->DataSource = $this->DMaster->removeIdFromArray($kelas,'none');
 			$this->tbCmbKelas->Text = $_SESSION['currentPagePendaftaranOnline']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
@@ -33,8 +33,8 @@ class CPendaftaranOnline extends MainPageK {
 		}	
 	}   
 	public function getInfoToolbar() {                
-        $nama_kelas=$this->DMaster->getNamaKelasByID($_SESSION['currentPagePendaftaranOnline']['kelas']);
-		$tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
+        $nama_kelas = $this->DMaster->getNamaKelasByID($_SESSION['currentPagePendaftaranOnline']['kelas']);
+		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
 		$text="Kelas $nama_kelas Tahun Masuk $tahunmasuk";
 		return $text;
 	}
@@ -63,8 +63,8 @@ class CPendaftaranOnline extends MainPageK {
 		$this->populateData($_SESSION['currentPagePendaftaranOnline']['search']);
 	}		
 	public function populateData ($search=false) {
-        $idkelas=$_SESSION['currentPagePendaftaranOnline']['kelas'];
-        $tahun_masuk=$_SESSION['tahun_masuk'];   
+        $idkelas = $_SESSION['currentPagePendaftaranOnline']['kelas'];
+        $tahun_masuk = $_SESSION['tahun_masuk'];   
 		$str_display='';		
         if ($search) {        
             $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp";
@@ -78,7 +78,7 @@ class CPendaftaranOnline extends MainPageK {
                 break;
             }
             $str="$str $clausa";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("formulir_pendaftaran_temp$clausa",'no_pendaftaran');		
+            $jumlah_baris = $this->DB->getCountRowsOfTable ("formulir_pendaftaran_temp$clausa",'no_pendaftaran');		
         }else{            
             if ($_SESSION['currentPagePendaftaranOnline']['display_record']=='terdaftar'){
                 $str_display='AND no_formulir > 0';
@@ -86,7 +86,7 @@ class CPendaftaranOnline extends MainPageK {
                 $str_display='AND no_formulir=0';
             }
             $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp WHERE ta = $tahun_masuk $str_display";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("formulir_pendaftaran_temp WHERE ta = $tahun_masuk $str_display",'no_pendaftaran');		
+            $jumlah_baris = $this->DB->getCountRowsOfTable ("formulir_pendaftaran_temp WHERE ta = $tahun_masuk $str_display",'no_pendaftaran');		
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePendaftaranOnline']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;

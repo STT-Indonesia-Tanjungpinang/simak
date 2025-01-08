@@ -17,7 +17,7 @@ class CDulangMHSLama Extends MainPageM {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
-            $tahun_masuk=$this->getAngkatan ();			            
+            $tahun_masuk = $this->getAngkatan ();			            
             $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
             $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSLama']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
@@ -48,10 +48,10 @@ class CDulangMHSLama Extends MainPageM {
     }
     public function setInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
-		$tahunmasuk=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSLama']['tahun_masuk']);		        
+		$tahunmasuk = $_SESSION['currentPageDulangMHSLama']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSLama']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
     public function Page_Changed($sender, $param) {
@@ -93,38 +93,38 @@ class CDulangMHSLama Extends MainPageM {
         $ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
 		$kjur = $_SESSION['kjur'];
-		$tahun_masuk=$_SESSION['currentPageDulangMHSLama']['tahun_masuk'];
-        $iddosen_wali=$_SESSION['currentPageDulangMHSLama']['iddosen_wali'];
-        $str_dw = $iddosen_wali=='none'?'':" AND vdm.iddosen_wali=$iddosen_wali";
-        $str_tahun_masuk=$tahun_masuk=='none'?'':" AND vdm.tahun_masuk=$tahun_masuk";      
+		$tahun_masuk = $_SESSION['currentPageDulangMHSLama']['tahun_masuk'];
+        $iddosen_wali = $_SESSION['currentPageDulangMHSLama']['iddosen_wali'];
+        $str_dw = $iddosen_wali=='none'?'':" AND vdm.iddosen_wali = $iddosen_wali";
+        $str_tahun_masuk = $tahun_masuk=='none'?'':" AND vdm.tahun_masuk = $tahun_masuk";      
         if ($search) {
             $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' AND vdm.kjur='$kjur'";
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {
                 case 'no_formulir' :
                     $clausa="AND vdm.no_formulir='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nim' :
                     $clausa="AND d.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="AND vdm.nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='A' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
             }
         }else{                            
-            $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun=$ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='A' $str_dw $str_tahun_masuk";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun=$ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='A' $str_dw $str_tahun_masuk",'vdm.nim');
+            $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='A' $str_dw $str_tahun_masuk";
+            $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='A' $str_dw $str_tahun_masuk",'vdm.nim');
         }
 		
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDulangMHSLama']['page_num'];
@@ -155,7 +155,7 @@ class CDulangMHSLama Extends MainPageM {
                     if (!isset($r[1])) {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
                     }
-                    $datamhs=$r[1];  
+                    $datamhs = $r[1];  
                     $datamhs['idsmt'] = $_SESSION['semester'];
                     $datamhs['ta'] = $_SESSION['ta'];
                     
@@ -194,7 +194,7 @@ class CDulangMHSLama Extends MainPageM {
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,semester_masuk,iddosen_wali,d.idkelas,d.k_status,d.idsmt,d.tahun,vdm.photo_profile FROM v_datamhs vdm JOIN dulang d ON (d.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE d.iddulang='$iddulang'";
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'photo_profile'));
         $r = $this->DB->getRecord($str);	           
-        $datamhs=$r[1];
+        $datamhs = $r[1];
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($datamhs['nim'],true);
@@ -211,7 +211,7 @@ class CDulangMHSLama Extends MainPageM {
 		$this->DB->query ('BEGIN');
         $this->Demik->setDataMHS(array('nim'=>$nim));
         $datadulang=$this->Demik->getDataDulang($idsmt, $ta);
-        $k_status=$datadulang['status_sebelumnya'];
+        $k_status = $datadulang['status_sebelumnya'];
         $str = "UPDATE register_mahasiswa SET k_status='$k_status' WHERE nim='$nim'";
 		if ($this->DB->updateRecord($str)) {
             $this->DB->deleteRecord("dulang WHERE nim='$nim' AND tahun='$ta' AND idsmt='$idsmt'");

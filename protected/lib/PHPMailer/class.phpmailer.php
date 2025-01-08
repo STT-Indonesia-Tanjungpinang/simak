@@ -3764,7 +3764,7 @@ class PHPMailer
             "\tt=" . $DKIMtime . '; c=' . $DKIMcanonicalization . ";\r\n" .
             "\th=From:To:Subject;\r\n" .
             "\td=" . $this->DKIM_domain . ';' . $ident . "\r\n" .
-            "\tz=$from\r\n" .
+            "\tz = $from\r\n" .
             "\t|$to\r\n" .
             "\t|$subject;\r\n" .
             "\tbh=" . $DKIMb64 . ";\r\n" .

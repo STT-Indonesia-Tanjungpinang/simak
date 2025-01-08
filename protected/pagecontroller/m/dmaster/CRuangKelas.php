@@ -20,7 +20,7 @@ class CRuangKelas Extends MainPageM {
 		$this->populateData();
 	}
 	protected function populateData() {
-		$jumlah_baris=$this->DB->getCountRowsOfTable('ruangkelas', 'idruangkelas');;
+		$jumlah_baris = $this->DB->getCountRowsOfTable('ruangkelas', 'idruangkelas');;
 		$str = "SELECT idruangkelas,namaruang,kapasitas FROM ruangkelas";
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageRuangKelas']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -41,8 +41,8 @@ class CRuangKelas Extends MainPageM {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function checkRuangKelas($sender, $param) {
-        $this->idProcess=$sender->getId()=='addRuangkelas'?'add':'edit';
-        $ruangkelas=$param->Value;		
+        $this->idProcess = $sender->getId()=='addRuangkelas'?'add':'edit';
+        $ruangkelas = $param->Value;		
         if ($ruangkelas != '') {
             try {   
                 if ($this->hiddennamaruang->Value!=$ruangkelas) {                                                            
@@ -72,9 +72,9 @@ class CRuangKelas Extends MainPageM {
 		}
 	}
 	public function editRecord($sender, $param) {
-		$idruangkelas=$this->getDataKeyField($sender, $this->RepeaterS);
+		$idruangkelas = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
-		$result = $this->DMaster->getList("ruangkelas WHERE idruangkelas=$idruangkelas",array('namaruang', 'kapasitas'));
+		$result = $this->DMaster->getList("ruangkelas WHERE idruangkelas = $idruangkelas",array('namaruang', 'kapasitas'));
 		$this->hiddenid->Value=$idruangkelas;
 		$this->hiddennamaruang->Value=$result[1]['namaruang'];
 		$this->txtEditNamaRuang->Text = $result[1]['namaruang'];
@@ -82,10 +82,10 @@ class CRuangKelas Extends MainPageM {
 	}
 	public function updateData($sender, $param) {
 		if ($this->Page->IsValid) {
-            $idruangkelas=$this->hiddenid->Value;
+            $idruangkelas = $this->hiddenid->Value;
 			$namaruang=addslashes(strtoupper($this->txtEditNamaRuang->Text));
 			$kapasitas=  addslashes($this->txtEditKapasitas->Text);
-			$str = "UPDATE ruangkelas SET namaruang='$namaruang',kapasitas='$kapasitas' WHERE idruangkelas=$idruangkelas";
+			$str = "UPDATE ruangkelas SET namaruang='$namaruang',kapasitas='$kapasitas' WHERE idruangkelas = $idruangkelas";
 			$this->DB->updateRecord($str);
             if ($this->Application->Cache) {
                 $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'),'namaruang',null,2);			
@@ -96,13 +96,13 @@ class CRuangKelas Extends MainPageM {
 		}
 	}
     public function deleteRecord($sender, $param) {
-		$idruangkelas=$this->getDataKeyField($sender, $this->RepeaterS);
+		$idruangkelas = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idruangkelas', 'kelas_mhs', $idruangkelas)) {
             $this->lblHeaderMessageError->Text='Menghapus Ruang Kelas';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus ruang kelas dengan ID ($idruangkelas) karena sedang digunakan di kelas mahasiswa.";
             $this->modalMessageError->Show();
         }else{
-            $this->DB->deleteRecord("ruangkelas WHERE idruangkelas=$idruangkelas");
+            $this->DB->deleteRecord("ruangkelas WHERE idruangkelas = $idruangkelas");
             if ($this->Application->Cache) {
                 $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'),'namaruang',null,2);			
                 $dataitem['none'] = 'Daftar Ruang Kelas';    

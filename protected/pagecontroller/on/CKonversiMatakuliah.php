@@ -14,12 +14,12 @@ class CKonversiMatakuliah extends MainPageON {
             
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
-            $daftar_prodi=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');                                    
+            $daftar_prodi = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');                                    
 			$this->tbCmbPs->DataSource = $daftar_prodi;
 			$this->tbCmbPs->Text = $_SESSION['currentPageKonversiMatakuliah']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -30,8 +30,8 @@ class CKonversiMatakuliah extends MainPageON {
 	}
 	public function getInfoToolbar() {        
         $kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];        		
-        $ps=$_SESSION['daftar_jurusan'][$kjur];
-		$tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
+        $ps = $_SESSION['daftar_jurusan'][$kjur];
+		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
 		$text="$ps Tahun Masuk $tahunmasuk";
 		return $text;
 	}
@@ -58,19 +58,19 @@ class CKonversiMatakuliah extends MainPageON {
 	}		
 	public function populateData ($search=false) {			
 		$kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];
-		$tahun_masuk=$_SESSION['tahun_masuk'];		
+		$tahun_masuk = $_SESSION['tahun_masuk'];		
         if ($search) {
             $txtsearch=addslashes($this->txtKriteria->Text);
             $str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.perpanjangan=0";
             switch ($this->cmbKriteria->Text) {                                
                 case 'nama' :
                     $clausa="AND nama LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
                     $str = "$str $clausa";
                 break;
             }            			
         }else{
-            $jumlah_baris=$this->DB->getCountRowsOfTable("data_konversi2 WHERE kjur='$kjur' AND tahun='$tahun_masuk' AND perpanjangan=0",'iddata_konversi');
+            $jumlah_baris = $this->DB->getCountRowsOfTable("data_konversi2 WHERE kjur='$kjur' AND tahun='$tahun_masuk' AND perpanjangan=0",'iddata_konversi');
 			$str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.kjur='$kjur' AND dk2.tahun='$tahun_masuk' AND dk2.perpanjangan=0";
         }			
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -86,9 +86,9 @@ class CKonversiMatakuliah extends MainPageON {
 		$r = $this->DB->getRecord($str, $offset+1);
 		$result = array();        
         while (list($k, $v) = each($r)) {
-            $iddata_konversi=$v['iddata_konversi'];
-            $v['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi=$iddata_konversi");
-            $v['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
+            $iddata_konversi = $v['iddata_konversi'];
+            $v['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi = $iddata_konversi");
+            $v['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
             $v['nim_alias'] = $v['nim']=='' ? 'N.A' : $v['nim'];
             $v['date_added'] = $this->TGL->tanggal('d/m/Y', $v['date_added']);
             $result[$k] = $v;
@@ -136,7 +136,7 @@ class CKonversiMatakuliah extends MainPageON {
             $ps_asal=addslashes(strtoupper($this->txtAddNamaPsAsal->Text));	
             $kjenjang=$this->cmbAddJenjang->Text;            
 			$kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];
-            $tahun_masuk=$_SESSION['tahun_masuk'];
+            $tahun_masuk = $_SESSION['tahun_masuk'];
 			$idkur = $this->hiddenidkur->Value;
             $i=1;
             try {
@@ -144,7 +144,7 @@ class CKonversiMatakuliah extends MainPageON {
                 $str = $str . " (NULL,'$nama', '$alamat', '$notelp', '$nim_asal', '$kode_pt_asal', '$pt_asal', '$kjenjang', '$kode_ps_asal', '$ps_asal', '$tahun_masuk', $kjur, $idkur,0,NOW(),NOW())";
                 $this->DB->query ('BEGIN');
                 if ($this->DB->insertRecord($str)) {						
-                    $iddata_konversi=$this->DB->getLastInsertID();                
+                    $iddata_konversi = $this->DB->getLastInsertID();                
                     foreach ($this->RepeaterAddS->Items As $inputan) {
                         if ($inputan->txtMatkulAsal->Text !== ''&& $inputan->txtSksAsal->Text !=='' && $inputan->cmbNilaiAsal->Text !=='') {
                             $str = 'INSERT INTO nilai_konversi2 (idnilai_konversi,iddata_konversi,kmatkul,kmatkul_asal,matkul_asal,sks_asal,n_kual) VALUES ';					
@@ -173,10 +173,10 @@ class CKonversiMatakuliah extends MainPageON {
 	
 	public function editRecord($sender, $param) {		
 		$this->idProcess = 'edit';        
-		$iddata_konversi=$sender->getId()=='btnDelete' ?$this->hiddenid->Value :$this->getDataKeyField($sender, $this->RepeaterS);		
+		$iddata_konversi = $sender->getId()=='btnDelete' ?$this->hiddenid->Value :$this->getDataKeyField($sender, $this->RepeaterS);		
 		$this->hiddenid->Value=$iddata_konversi;		
 		//load view
-        $str = "SELECT dk.iddata_konversi,dk.nama,dk.alamat,dk.no_telp,dk.nim_asal,dk.kode_pt_asal,dk.nama_pt_asal,dk.kjenjang,dk.kode_ps_asal,dk.nama_ps_asal,dk.tahun,dk.kjur,dk.idkur FROM data_konversi2 dk WHERE dk.iddata_konversi=$iddata_konversi";
+        $str = "SELECT dk.iddata_konversi,dk.nama,dk.alamat,dk.no_telp,dk.nim_asal,dk.kode_pt_asal,dk.nama_pt_asal,dk.kjenjang,dk.kode_ps_asal,dk.nama_ps_asal,dk.tahun,dk.kjur,dk.idkur FROM data_konversi2 dk WHERE dk.iddata_konversi = $iddata_konversi";
         $this->DB->setFieldTable(array('iddata_konversi', 'nama', 'alamat', 'no_telp', 'nim_asal', 'kode_pt_asal', 'nama_pt_asal', 'kjenjang', 'kode_ps_asal', 'nama_ps_asal', 'tahun', 'kjur', 'idkur'));
         $r = $this->DB->getRecord($str);			
         $dataView=$r[1];		
@@ -206,7 +206,7 @@ class CKonversiMatakuliah extends MainPageON {
         $idkur = $this->Nilai->getIDKurikulum($dataView['kjur']);
 		$this->hiddenidkur->Value=$idkur;
         
-		$nilai=$this->Nilai->getNilaiKonversi($iddata_konversi, $idkur);		
+		$nilai = $this->Nilai->getNilaiKonversi($iddata_konversi, $idkur);		
 		$_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'] = $nilai;
 		$this->RepeaterEditS->dataSource = $nilai;
 		$this->RepeaterEditS->dataBind();
@@ -217,7 +217,7 @@ class CKonversiMatakuliah extends MainPageON {
             $i=1;         
             try {
                 $idkur = $this->hiddenidkur->Value;
-                $iddata_konversi=$this->hiddenid->Value;
+                $iddata_konversi = $this->hiddenid->Value;
                 $nim_asal=strtoupper($this->txtEditNimAsal->Text);					
                 $nama=addslashes(strtoupper($this->txtEditNama->Text));
                 $alamat=strtoupper($this->txtEditAlamat->Text);
@@ -233,7 +233,7 @@ class CKonversiMatakuliah extends MainPageON {
                 if ($this->DB->updateRecord($str)) {                           
                     foreach ($this->RepeaterEditS->Items As $inputan) {
                         if ($inputan->txtMatkulAsal->Text !== ''&& $inputan->txtSksAsal->Text !=='' && $inputan->cmbNilaiAsal->Text !=='') {					
-                            $idnilaikonversi=$inputan->hiddenidnilaikonversi->Value;
+                            $idnilaikonversi = $inputan->hiddenidnilaikonversi->Value;
                             $kmatkul_before=$this->Nilai->getKMatkul($_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['kmatkul']);
                             $kmatkul = $idkur.'_'.$kmatkul_before;
                             $kmatkul_asal=strtoupper(trim($inputan->txtKMatkulAsal->Text));						
@@ -245,7 +245,7 @@ class CKonversiMatakuliah extends MainPageON {
                                 $str = $str . " (NULL,'$iddata_konversi', '$kmatkul_asal', '$kmatkul', '$matkul_asal', '$sks_asal', '$nilai_asal')";														
                                 $this->DB->insertRecord($str);
                             }else {                                                        
-                                $str = "UPDATE nilai_konversi2 SET kmatkul='$kmatkul',kmatkul_asal='$kmatkul_asal',matkul_asal='$matkul_asal',sks_asal='$sks_asal',n_kual='$nilai_asal' WHERE idnilai_konversi=$idnilaikonversi";							
+                                $str = "UPDATE nilai_konversi2 SET kmatkul='$kmatkul',kmatkul_asal='$kmatkul_asal',matkul_asal='$matkul_asal',sks_asal='$sks_asal',n_kual='$nilai_asal' WHERE idnilai_konversi = $idnilaikonversi";							
                                 $this->DB->updateRecord($str);                                    
                             }
                         }
@@ -265,12 +265,12 @@ class CKonversiMatakuliah extends MainPageON {
 	}
     public function deleteNilai($sender, $param) {			
 		$this->idProcess = 'edit';
-		$idnilai_konversi=$sender->CommandParameter;		
+		$idnilai_konversi = $sender->CommandParameter;		
 		$this->DB->deleteRecord("nilai_konversi2 WHERE idnilai_konversi='$idnilai_konversi'");			
 		$this->editRecord($sender, $param);
 	}
 	public function deleteRecord($sender, $param) {			
-		$iddata_konversi=$this->getDataKeyField($sender, $this->RepeaterS);
+		$iddata_konversi = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->DB->deleteRecord("data_konversi2 WHERE iddata_konversi='$iddata_konversi'");
 		$this->redirect('KonversiMatakuliah',true);
 	}	

@@ -122,7 +122,7 @@ class TErrorHandler extends TModule
 	 */
 	public function setThemes($value)
 	{
-		$this->_themes=$value;		
+		$this->_themes = $value;		
 	}
     
 	/**
@@ -209,7 +209,7 @@ class TErrorHandler extends TModule
 
 		$errorMessage = $exception->getMessage();
 		if($isDebug)
-			$version=$_SERVER['SERVER_SOFTWARE'].' <a href="http://www.pradosoft.com/">PRADO</a>/'.Prado::getVersion();
+			$version = $_SERVER['SERVER_SOFTWARE'].' <a href="http://www.pradosoft.com/">PRADO</a>/'.Prado::getVersion();
 		else
 		{
 			$version='';
@@ -304,7 +304,7 @@ class TErrorHandler extends TModule
 		}
 
 		if($this->getApplication()->getMode()===TApplicationMode::Debug)
-			$version=$_SERVER['SERVER_SOFTWARE'].' <a href="http://www.pradosoft.com/">PRADO</a>/'.Prado::getVersion();
+			$version = $_SERVER['SERVER_SOFTWARE'].' <a href="http://www.pradosoft.com/">PRADO</a>/'.Prado::getVersion();
 		else
 			$version='';
 
@@ -413,7 +413,7 @@ class TErrorHandler extends TModule
 		$endLine=$errorLine+self::SOURCE_LINES<=count($lines)?$errorLine+self::SOURCE_LINES:count($lines);
 
 		$source='';
-		for($i=$beginLine;$i<$endLine;++$i)
+		for($i = $beginLine;$i<$endLine;++$i)
 		{
 			if($i===$errorLine-1)
 			{

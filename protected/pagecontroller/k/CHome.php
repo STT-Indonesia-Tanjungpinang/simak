@@ -33,7 +33,7 @@ class CHome extends MainPageK {
     public function populateData () {
         $ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];
-        $totalpembayaranmahasiswa = $this->DB->getSumRowsOfTable('dibayarkan',"transaksi t,transaksi_detail td WHERE t.no_transaksi=td.no_transaksi AND t.tahun=$ta AND idsmt=$idsmt");
+        $totalpembayaranmahasiswa = $this->DB->getSumRowsOfTable('dibayarkan',"transaksi t,transaksi_detail td WHERE t.no_transaksi=td.no_transaksi AND t.tahun = $ta AND idsmt=$idsmt");
         CHome::$TotalPembayaranMahasiswa = $totalpembayaranmahasiswa;
     }
 }

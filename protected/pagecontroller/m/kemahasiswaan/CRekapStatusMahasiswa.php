@@ -15,12 +15,12 @@ class CRekapStatusMahasiswa Extends MainPageM {
 			}
             $_SESSION['currentPageRekapStatusMahasiswa']['search']=false; 
             
-            $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
+            $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	            
             
-            $tahun=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');
+            $tahun = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');
             $this->tbCmbTA1->DataSource = $tahun;
             $this->tbCmbTA1->Text= $_SESSION['currentPageRekapStatusMahasiswa']['ta1'];
             $this->tbCmbTA1->dataBind();
@@ -43,7 +43,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
             $this->cmbFilterSemester->Text = $_SESSION['currentPageRekapStatusMahasiswa']['idsmt'];
             $this->cmbFilterSemester->DataBind();
             
-            $kelas=$this->DMaster->getListKelas();			
+            $kelas = $this->DMaster->getListKelas();			
             $kelas['none'] = 'KESELURUHAN';
             $this->cmbFilterKelas->DataSource = $kelas;
             $this->cmbFilterKelas->Text = $_SESSION['currentPageRekapStatusMahasiswa']['idkelas'];
@@ -61,7 +61,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
 	public function getAngkatan ($tanpanone=true) {
 		$dt =$this->DMaster->getListTA();		        
 		$ta = $_SESSION['currentPageRekapStatusMahasiswa']['ta1'];		
-		$tahun_akademik=$tanpanone==true?array('none'=>'All'):array();
+		$tahun_akademik = $tanpanone==true?array('none'=>'All'):array();
 		while (list($k, $v)=each ($dt)) {
 			if ($k != 'none') {
 				if ($k >= $ta) {
@@ -73,7 +73,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
 	}
     public function setInfoToolbar() {                
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta1=$this->DMaster->getNamaTA($_SESSION['currentPageRekapStatusMahasiswa']['ta1']);
         $ta2=$this->DMaster->getNamaTA($_SESSION['currentPageRekapStatusMahasiswa']['ta2']); 
 		$this->lblModulHeader->Text="Program Studi $ps PERIODE $ta1 - $ta2";        
@@ -114,14 +114,14 @@ class CRekapStatusMahasiswa Extends MainPageM {
         $ta2=$_SESSION['currentPageRekapStatusMahasiswa']['ta2'];     
 		$kjur = $_SESSION['kjur'];	
         
-        $k_status=$_SESSION['currentPageRekapStatusMahasiswa']['k_status'];
-        $tahun_masuk=$_SESSION['currentPageRekapStatusMahasiswa']['tahun_masuk'];
+        $k_status = $_SESSION['currentPageRekapStatusMahasiswa']['k_status'];
+        $tahun_masuk = $_SESSION['currentPageRekapStatusMahasiswa']['tahun_masuk'];
         $sql = $tahun_masuk == 'none'?'':"AND tahun_masuk='$tahun_masuk'";        
         
         $idsmt = $_SESSION['currentPageRekapStatusMahasiswa']['idsmt'];        
         $sql.=$idsmt == 'none'?'':"AND idsmt='$idsmt'";
 
-        $idkelas=$_SESSION['currentPageRekapStatusMahasiswa']['idkelas'];        
+        $idkelas = $_SESSION['currentPageRekapStatusMahasiswa']['idkelas'];        
         $sql.=$idkelas == 'none'?'':"AND idkelas='$idkelas'";
         switch ($k_status) {
             case 'A' :                

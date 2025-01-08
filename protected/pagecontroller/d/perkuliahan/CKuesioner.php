@@ -40,7 +40,7 @@ class CKuesioner extends MainPageD {
 	}	
     public function setInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $_SESSION['ta'];		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
@@ -63,19 +63,19 @@ class CKuesioner extends MainPageD {
 		$this->populateData();
 	}		
 	public function populateData() {
-        $iddosen=$this->Pengguna->getDataUser('iddosen');
+        $iddosen = $this->Pengguna->getDataUser('iddosen');
 		$ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
 		$kjur = $_SESSION['kjur'];		
 
-        $str="SELECT vpp.idpengampu_penyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur' AND vpp.iddosen=$iddosen ORDER BY nmatkul ASC";
+        $str="SELECT vpp.idpengampu_penyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur' AND vpp.iddosen = $iddosen ORDER BY nmatkul ASC";
 		$this->DB->setFieldTable (array('idpengampu_penyelenggaraan', 'idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen', 'jumlahmhs'));			
 		$r = $this->DB->getRecord($str);	
         $r = $this->DB->getRecord($str);	
         $result = array();        
         while (list($k, $v) = each($r)) {
-            $idpengampu_penyelenggaraan=$v['idpengampu_penyelenggaraan'];                                    
-            $str="SELECT n_kual FROM kuesioner_hasil WHERE idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan";				
+            $idpengampu_penyelenggaraan = $v['idpengampu_penyelenggaraan'];                                    
+            $str="SELECT n_kual FROM kuesioner_hasil WHERE idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan";				
             $this->DB->setFieldTable (array('n_kual'));			
             $r2=$this->DB->getRecord($str);	
             if (isset($r2[1])) {

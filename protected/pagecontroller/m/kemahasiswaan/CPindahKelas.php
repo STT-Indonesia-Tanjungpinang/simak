@@ -119,7 +119,7 @@ class CPindahKelas Extends MainPageM {
             $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas'));
             $r = $this->DB->getRecord($str);	
             
-            $datamhs=$r[1];  
+            $datamhs = $r[1];  
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
@@ -129,15 +129,15 @@ class CPindahKelas Extends MainPageM {
             $this->Demik->setDataMHS($datamhs);
             
             $this->hiddennim->Value=$datamhs['nim'];			
-            $idkelas=$datamhs['idkelas'];
+            $idkelas = $datamhs['idkelas'];
             $this->hiddenkelaslama->Value=$idkelas;
-            $daftar_kelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas (), $datamhs['idkelas']);
+            $daftar_kelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas (), $datamhs['idkelas']);
             $this->cmbAddKelasBaru->DataSource = $daftar_kelas;
             $this->cmbAddKelasBaru->dataBind();	
 		}
 	}
     public function checkNoSurat($sender, $param) {
-        $this->idProcess=$sender->getId()=='addPindah'?'add':'edit';
+        $this->idProcess = $sender->getId()=='addPindah'?'add':'edit';
         $no_surat=addslashes($param->Value);
 		try {
 			if ($no_surat != '') {
@@ -182,7 +182,7 @@ class CPindahKelas Extends MainPageM {
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas'));
         $r = $this->DB->getRecord($str);	
 
-        $datamhs=$r[1];  
+        $datamhs = $r[1];  
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
@@ -196,7 +196,7 @@ class CPindahKelas Extends MainPageM {
 		$this->hiddennim->Value=$nim;
 		$this->hiddenid->Value=$idpindahkelas;		
         
-        $daftar_kelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas (), $r['idkelas_lama']);
+        $daftar_kelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas (), $r['idkelas_lama']);
         $this->cmbEditKelasBaru->DataSource = $daftar_kelas;
         $this->cmbEditKelasBaru->dataBind();	
 		$this->cmbEditKelasBaru->Text = $r['idkelas_baru'];
@@ -214,7 +214,7 @@ class CPindahKelas Extends MainPageM {
 			$kelas_baru=$this->cmbEditKelasBaru->Text;
 			$no_surat=$this->txtEditNoSurat->getSafeText();
 			$ket=$this->txtEditKeterangan->getSafeText();
-			$str = "UPDATE pindahkelas SET idkelas_baru='$kelas_baru',tanggal='$tanggal',no_surat='$no_surat',keterangan='$ket' WHERE idpindahkelas=$id";
+			$str = "UPDATE pindahkelas SET idkelas_baru='$kelas_baru',tanggal='$tanggal',no_surat='$no_surat',keterangan='$ket' WHERE idpindahkelas = $id";
 			$this->DB->query ('BEGIN');
 			if ($this->DB->updateRecord ($str)) {
                 $nim = $this->hiddennim->Value;

@@ -32,22 +32,22 @@ class CUserDosen extends MainPageSA {
             switch ($this->cmbKriteria->Text) {
                 case 'username' :
                     $clausa="AND username='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND nama LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
                 case 'email' :
                     $clausa="AND email LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
             }
         }else{
-            $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='d'",'userid');		            
+            $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d'",'userid');		            
             $str = "SELECT u.userid,u.username,u.nama,u.email,u.active,u.foto,u.logintime FROM user u WHERE page='d'";			
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageUserDosen']['page_num'];
@@ -73,7 +73,7 @@ class CUserDosen extends MainPageSA {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);        
 	}
     public function checkUsername($sender, $param) {
-		$this->idProcess=$sender->getId()=='addUsername'?'add':'edit';
+		$this->idProcess = $sender->getId()=='addUsername'?'add':'edit';
         $username=$param->Value;		
         if ($username != '') {
             try {   
@@ -89,7 +89,7 @@ class CUserDosen extends MainPageSA {
         }	
     }
     public function checkEmail($sender, $param) {
-		$this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
+		$this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
         $email = $param->Value;		
         if ($email != '') {
             try {   
@@ -128,7 +128,7 @@ class CUserDosen extends MainPageSA {
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
             $username=addslashes($this->txtEditUsername->Text);
-            $status=$this->cmbEditStatus->Text;
+            $status = $this->cmbEditStatus->Text;
             if ($this->txtEditPassword1->Text == '') {
                 $str = "UPDATE user SET username='$username',nama='$nama',email='$email',active='$status' WHERE userid=$id";               
                 $str_dosen = "UPDATE dosen SET username='$username' WHERE username='$username_old'";

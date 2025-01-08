@@ -55,7 +55,7 @@ class rollbackTransaction extends BaseWS {
 					}
 					$result=$r[1];
 					
-		            $str = "UPDATE transaksi_cuti SET commited=0,date_modified=NOW() WHERE no_transaksi=$no_transaksi";
+		            $str = "UPDATE transaksi_cuti SET commited=0,date_modified=NOW() WHERE no_transaksi = $no_transaksi";
 		            $this->DB->updateRecord($str);
 		            
 		            $str = "UPDATE transaksi_api SET commited=0,date_modified=NOW() WHERE no_transaksi='$no_transaksi'";

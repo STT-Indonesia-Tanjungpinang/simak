@@ -528,7 +528,7 @@ class TCustomDatePicker extends TTextBox
 		$options['InputMode'] = $this->getInputMode();
 		$options['Format'] = $this->getDateFormat();
 		$options['FirstDayOfWeek'] = $this->getFirstDayOfWeek();
-		if(($cssClass=$this->getCssClass())!=='')
+		if(($cssClass = $this->getCssClass())!=='')
 			$options['ClassName'] = $cssClass;
 		$options['CalendarStyle'] = $this->getCalendarStyle();
 		$options['FromYear'] = $this->getFromYear();

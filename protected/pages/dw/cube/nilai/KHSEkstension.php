@@ -20,7 +20,7 @@ class KHSEkstension extends MainPageDW {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
-            $tahun_masuk=$this->getAngkatan ();			            
+            $tahun_masuk = $this->getAngkatan ();			            
 			$this->tbCmbTahunMasuk->DataSource=$tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKHSEkstension']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -51,10 +51,10 @@ class KHSEkstension extends MainPageDW {
 	}
     public function setInfoToolbar() {        
         $kjur=$_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
-		$tahunmasuk=$_SESSION['currentPageKHSEkstension']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageKHSEkstension']['tahun_masuk']);		        
+		$tahunmasuk = $_SESSION['currentPageKHSEkstension']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageKHSEkstension']['tahun_masuk']);		        
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
     public function Page_Changed ($sender, $param) {
@@ -97,36 +97,36 @@ class KHSEkstension extends MainPageDW {
 		$this->populateData($_SESSION['currentPageKHSEkstension']['search']);
 	}
     public function populateData($search=false) {	
-        $iddosen_wali=$this->iddosen_wali;
+        $iddosen_wali = $this->iddosen_wali;
 		$ta=$_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
         if ($search) {
-            $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali=$iddosen_wali AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt'";
+            $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali = $iddosen_wali AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt'";
             $txtsearch=$this->txtKriteria->Text;
             switch ($this->cmbKriteria->Text) {                
                 case 'nim' :
                     $clausa="AND vdm.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="AND vdm.nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
             }
         }else{
             $kjur=$_SESSION['kjur'];
-            $tahun_masuk=$_SESSION['currentPageKHSEkstension']['tahun_masuk'];	
-            $str_tahun_masuk=$tahun_masuk == 'none' ?'':" AND vdm.tahun_masuk=$tahun_masuk";            
-            $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali=$iddosen_wali AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' AND kjur=$kjur $str_tahun_masuk";
+            $tahun_masuk = $_SESSION['currentPageKHSEkstension']['tahun_masuk'];	
+            $str_tahun_masuk = $tahun_masuk == 'none' ?'':" AND vdm.tahun_masuk = $tahun_masuk";            
+            $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali = $iddosen_wali AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' AND kjur=$kjur $str_tahun_masuk";
             
-            $jumlah_baris=$this->DB->getCountRowsOfTable("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali=$iddosen_wali AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' AND kjur=$kjur $str_tahun_masuk",'k.idkrs');
+            $jumlah_baris = $this->DB->getCountRowsOfTable("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali = $iddosen_wali AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' AND kjur=$kjur $str_tahun_masuk",'k.idkrs');
         }
 		
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKHSEkstension']['page_num'];
@@ -160,8 +160,8 @@ class KHSEkstension extends MainPageDW {
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) {                                                            
 				$this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
 				$ip=$this->Nilai->getIPS ();
-				$sks=$this->Nilai->getTotalSKS ();                
-                $dataipk=$this->Nilai->getIPKSampaiTASemester($_SESSION['ta'], $_SESSION['semester'],'ipksks');	                				
+				$sks = $this->Nilai->getTotalSKS ();                
+                $dataipk = $this->Nilai->getIPKSampaiTASemester($_SESSION['ta'], $_SESSION['semester'],'ipksks');	                				
 			}else {
                 $bool=false;
                 $trstyle=' class="danger"';
@@ -203,7 +203,7 @@ class KHSEkstension extends MainPageDW {
 
                         $dataReport['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($dataReport['iddosen_wali']);
 
-                        $tahun=$_SESSION['ta'];
+                        $tahun = $_SESSION['ta'];
                         $semester=$_SESSION['semester'];
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
                         $nama_semester = $this->setup->getSemester($semester);
@@ -218,7 +218,7 @@ class KHSEkstension extends MainPageDW {
                         $dataReport['jabfung_penandatangan_khs']=$this->setup->getSettingValue('jabfung_penandatangan_khs');
                         $dataReport['nidn_penandatangan_khs']=$this->setup->getSettingValue('nidn_penandatangan_khs');
 
-                        $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+                        $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
                         $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
                         $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                         $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
@@ -238,7 +238,7 @@ class KHSEkstension extends MainPageDW {
                         $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;
                     case  'summaryexcel' :
-                        $tahun=$_SESSION['ta'];
+                        $tahun = $_SESSION['ta'];
                         $semester=$_SESSION['semester'];
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
                         $nama_semester = $this->setup->getSemester($semester);
@@ -256,7 +256,7 @@ class KHSEkstension extends MainPageDW {
                         $dataReport['jabfung_penandatangan_khs']=$this->setup->getSettingValue('jabfung_penandatangan_khs');
                         $dataReport['nidn_penandatangan_khs']=$this->setup->getSettingValue('nidn_penandatangan_khs');
                         
-                        $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+                        $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
                         $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
                         $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                         $dataReport['nidn_kaprodi']=$kaprodi['nidn'];

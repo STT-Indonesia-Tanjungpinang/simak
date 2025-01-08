@@ -12,7 +12,7 @@ class Logic_ReportKuesioner extends Logic_Report {
         $ta=$this->dataReport['ta'];        
         $idsmt=$this->dataReport['semester'];
         $kjur=$this->dataReport['kjur'];
-        $nama_tahun=$this->dataReport['nama_tahun'];
+        $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         $nama_ps = $this->dataReport['nama_ps'];
         switch ($this->getDriver()) {
@@ -78,7 +78,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $row=11;  
                 while (list($k, $v)=each($r)) {
                     $sheet->setCellValue("A$row", $v['no']);				           
-                    $idpengampu_penyelenggaraan=$v['idpengampu_penyelenggaraan'];                                    
+                    $idpengampu_penyelenggaraan = $v['idpengampu_penyelenggaraan'];                                    
                     $sheet->setCellValue("B$row", $idpengampu_penyelenggaraan);
                     $sheet->setCellValue("C$row", $objKuesioner->getKMatkul($v['kmatkul']));
                     $sheet->setCellValue("D$row", $v['nmatkul']);	                        
@@ -87,7 +87,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                     $sheet->setCellValue("G$row", $v['nidn']);				
                     $sheet->setCellValue("H$row", $v['nama_dosen']);				
                     
-                    $str="SELECT n_kual,total_nilai FROM kuesioner_hasil WHERE idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan";				
+                    $str="SELECT n_kual,total_nilai FROM kuesioner_hasil WHERE idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan";				
                     $this->db->setFieldTable (array('n_kual','total_nilai'));			
                     $r2=$this->db->getRecord($str);	
                     if (isset($r2[1])) {
@@ -127,7 +127,7 @@ class Logic_ReportKuesioner extends Logic_Report {
     public function printKuesionerDosen ($objKuesioner) {
         $ta=$this->dataReport['tahun'];        
         $idsmt=$this->dataReport['idsmt'];        
-        $nama_tahun=$this->dataReport['nama_tahun'];
+        $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         $nmatkul = $this->dataReport['nmatkul'];
         switch ($this->getDriver()) {
@@ -220,16 +220,16 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $sheet->getStyle("A18:I18")->applyFromArray($styleArray);
                 $sheet->getStyle("A18:I18")->getAlignment()->setWrapText(true);
                 
-                $idpengampu_penyelenggaraan=$this->dataReport['idpengampu_penyelenggaraan'];                
+                $idpengampu_penyelenggaraan = $this->dataReport['idpengampu_penyelenggaraan'];                
                 $row=19;  
-                $kelompok_pertanyaan=$this->dataReport['kelompok_pertanyaan'];
+                $kelompok_pertanyaan = $this->dataReport['kelompok_pertanyaan'];
                 $TotalIndikator1=0;
                 $TotalIndikator2=0;
                 $TotalIndikator3=0;
                 $TotalIndikator4=0;
                 $TotalIndikator5=0;
                 while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
-                    $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan=$idkelompok_pertanyaan ORDER BY (orders+0) ASC";
+                    $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan = $idkelompok_pertanyaan ORDER BY (orders+0) ASC";
                     $this->db->setFieldTable(array('idkuesioner','idkelompok_pertanyaan','pertanyaan','orders','date_added'));
                     $r=$this->db->getRecord($str);
                     $jumlah_r=count($r);
@@ -242,7 +242,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                         $row+=1;   
                         
                         $idkuesioner=$r[1]['idkuesioner'];                
-                        $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
+                        $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
                         $this->db->setFieldTable(array('nilai_indikator','jumlah'));
                         $hasil_indikator=$this->db->getRecord($str);
                         $indikator1=0;
@@ -289,7 +289,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                         $row+=1;
                         while (list($k, $v)=each($r)) {
                             $idkuesioner=$v['idkuesioner'];
-                            $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
+                            $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
                             $this->db->setFieldTable(array('nilai_indikator','jumlah'));
                             $hasil_indikator=$this->db->getRecord($str);
                             $indikator1=0;
@@ -363,11 +363,11 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $row+=2;
                 $skor_terendah=$this->dataReport['skor_terendah'];
                 $interval=$this->dataReport['intervals'];
-                $maks_sangatburuk=$skor_terendah+$interval;
-                $maks_buruk=$maks_sangatburuk+$interval;
+                $maks_sangatburuk = $skor_terendah+$interval;
+                $maks_buruk = $maks_sangatburuk+$interval;
                 $maks_sedang=$maks_buruk+$interval;
-                $maks_baik=$maks_sedang+$interval;
-                $maks_sangatbaik=$maks_baik+$maks_baik;
+                $maks_baik = $maks_sedang+$interval;
+                $maks_sangatbaik = $maks_baik+$maks_baik;
                 
                 $sheet->setCellValue("C$row","Interval yang terbentuk :");
                 $row+=1;

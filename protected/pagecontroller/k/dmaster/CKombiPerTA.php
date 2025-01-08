@@ -13,7 +13,7 @@ class CKombiPerTA Extends MainPageK {
             if (!isset($_SESSION['currentPageKombiPerTA'])||$_SESSION['currentPageKombiPerTA']['page_name']!='k.dmaster.KombiPerTA') {
 				$_SESSION['currentPageKombiPerTA']=array('page_name'=>'k.dmaster.KombiPerTA', 'kelas'=>'A', 'semester_masuk'=>1,'periode_pembayaran'=>'none');												
 			}
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -23,7 +23,7 @@ class CKombiPerTA Extends MainPageK {
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageKombiPerTA']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind(); 
             
-            $kelas=$this->DMaster->removeIdFromArray($this->DMaster->getListKelas(),'none');            
+            $kelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas(),'none');            
 			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text = $_SESSION['currentPageKombiPerTA']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
@@ -36,8 +36,8 @@ class CKombiPerTA Extends MainPageK {
 		
 	}
     public function setInfoToolbar() {                
-        $tahun_masuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		        		        
-        $nama_kelas=$this->DMaster->getNamaKelasByID($_SESSION['currentPageKombiPerTA']['kelas']);                    
+        $tahun_masuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		        		        
+        $nama_kelas = $this->DMaster->getNamaKelasByID($_SESSION['currentPageKombiPerTA']['kelas']);                    
 		$this->lblModulHeader->Text="Tahun Masuk $tahun_masuk Kelas $nama_kelas";        
 	}
     public function changeTbKelas($sender, $param) {				
@@ -62,7 +62,7 @@ class CKombiPerTA Extends MainPageK {
 	protected function populateData () {		
 		$ta = $_SESSION['tahun_masuk'];	
         $idsmt = $_SESSION['currentPageKombiPerTA']['semester_masuk'];	
-		$kelas=$_SESSION['currentPageKombiPerTA']['kelas'];	        
+		$kelas = $_SESSION['currentPageKombiPerTA']['kelas'];	        
 		if ($ta == 'none' || $ta == '' || $kelas=='none' || $ta=='' || $this->DB->checkRecordIsExist('tahun', 'ta', $ta)==false) {									
 			$result = array();			
 		}else {							
@@ -88,13 +88,13 @@ class CKombiPerTA Extends MainPageK {
 					}		
 				}
 			}
-            $periode_pembayaran=$_SESSION['currentPageKombiPerTA']['periode_pembayaran'];            
+            $periode_pembayaran = $_SESSION['currentPageKombiPerTA']['periode_pembayaran'];            
             if($periode_pembayaran=='semester_sekali') {
                 $str_periode_pembayaran=" AND k.periode_pembayaran!='none'";
             }else{  
-                $str_periode_pembayaran=$periode_pembayaran=='none' ?'':" AND k.periode_pembayaran='$periode_pembayaran'";
+                $str_periode_pembayaran = $periode_pembayaran=='none' ?'':" AND k.periode_pembayaran='$periode_pembayaran'";
             }
-            $str = "SELECT kpt.idkombi_per_ta,k.idkombi,k.nama_kombi,kpt.biaya,k.periode_pembayaran FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND idsmt=$idsmt AND tahun=$ta AND kpt.idkelas='$kelas'$str_periode_pembayaran ORDER BY periode_pembayaran,nama_kombi ASC";
+            $str = "SELECT kpt.idkombi_per_ta,k.idkombi,k.nama_kombi,kpt.biaya,k.periode_pembayaran FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND idsmt=$idsmt AND tahun = $ta AND kpt.idkelas='$kelas'$str_periode_pembayaran ORDER BY periode_pembayaran,nama_kombi ASC";
             $this->DB->setFieldTable(array('idkombi_per_ta', 'idkombi', 'nama_kombi', 'biaya', 'periode_pembayaran'));
             $r = $this->DB->getRecord($str); 
             $result = array();

@@ -51,11 +51,11 @@ class CJadwalPerkuliahan extends MainPageMHS {
 		return $text;
 	}
 	public function populateData($search=false) {
-        $datamhs=$this->Pengguna->getDataUser();  
+        $datamhs = $this->Pengguna->getDataUser();  
         $ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];
         $kjur = $datamhs['kjur'];        
-        $idkelas=$datamhs['idkelas'];
+        $idkelas = $datamhs['idkelas'];
                
         $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND km.idkelas='$idkelas' ORDER BY hari ASC,idkelas ASC,nama_dosen ASC";
         
@@ -73,7 +73,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
 		$this->RepeaterS->dataBind();     
         
         $nim = $datamhs['nim'];
-        $str = "SELECT vkm.idkelas,vkm.nama_kelas,vkm.hari,vkm.jam_masuk,vkm.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM krsmatkul km, krs k,kelas_mhs_detail kmd,kelas_mhs vkm,v_pengampu_penyelenggaraan vpp, ruangkelas rk  WHERE km.idkrs=k.idkrs AND kmd.idkrsmatkul=km.idkrsmatkul AND vkm.idkelas_mhs=kmd.idkelas_mhs AND vkm.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND rk.idruangkelas=vkm.idruangkelas AND k.nim=$nim AND k.idsmt=$idsmt AND k.tahun=$ta";
+        $str = "SELECT vkm.idkelas,vkm.nama_kelas,vkm.hari,vkm.jam_masuk,vkm.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM krsmatkul km, krs k,kelas_mhs_detail kmd,kelas_mhs vkm,v_pengampu_penyelenggaraan vpp, ruangkelas rk  WHERE km.idkrs=k.idkrs AND kmd.idkrsmatkul=km.idkrsmatkul AND vkm.idkelas_mhs=kmd.idkelas_mhs AND vkm.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND rk.idruangkelas=vkm.idruangkelas AND k.nim=$nim AND k.idsmt=$idsmt AND k.tahun = $ta";
         $this->DB->setFieldTable(array('idkelas', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas'));
 		$r = $this->DB->getRecord($str);	
         $result = array();
@@ -87,8 +87,8 @@ class CJadwalPerkuliahan extends MainPageMHS {
 		$this->RepeaterJadwalSaya->dataBind(); 
 	}
 	public function viewRecord($sender, $param) {
-        $idkelas_mhs=$this->getDataKeyField($sender, $this->RepeaterS);
-        $str = "SELECT iddosen FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) WHERE km.idkelas_mhs=$idkelas_mhs";
+        $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
+        $str = "SELECT iddosen FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) WHERE km.idkelas_mhs = $idkelas_mhs";
 		$this->DB->setFieldTable(array('iddosen'));
 		$r = $this->DB->getRecord($str);	
         $_SESSION['currentPageJadwalPerkuliahan']['iddosen'] = $r[1]['iddosen'];	 

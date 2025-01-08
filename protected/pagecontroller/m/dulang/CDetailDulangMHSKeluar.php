@@ -9,7 +9,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
 		if (!$this->IsPostBack && !$this->IsCallback) {
             try {
                 if (isset($_SESSION['currentPageDulangMHSKeluar']['DataMHS']['no_formulir'])) {
-                    $datamhs=$_SESSION['currentPageDulangMHSKeluar']['DataMHS'];
+                    $datamhs = $_SESSION['currentPageDulangMHSKeluar']['DataMHS'];
                     $nim = $datamhs['nim'];
                     $this->Nilai->setDataMHS($datamhs);
                     
@@ -26,10 +26,10 @@ class CDetailDulangMHSKeluar Extends MainPageM {
                     $this->cmbAddSMTKeluar->dataBind();
                     
                     $this->Nilai->getTranskripFromKRS ();
-                    $jumlah_sks=$this->Nilai->getTotalSKSAdaNilai();
-                    $iddata_konversi=$datamhs['iddata_konversi'];
+                    $jumlah_sks = $this->Nilai->getTotalSKSAdaNilai();
+                    $iddata_konversi = $datamhs['iddata_konversi'];
                     if ($iddata_konversi > 0) {
-                        $jumlah_sks+=$this->DB->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
+                        $jumlah_sks+=$this->DB->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
                     }
                     $ket_jumlah_sks="(saat ini baru $jumlah_sks SKS)";                    
                     $this->literalJumlahSKS->Text = $ket_jumlah_sks;
@@ -57,7 +57,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
 	}
     public function setInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester";        
@@ -69,7 +69,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
         }
     }  
     public function checkDulang($sender, $param) {
-        $datamhs=$_SESSION['currentPageDulangMHSKeluar']['DataMHS'];
+        $datamhs = $_SESSION['currentPageDulangMHSKeluar']['DataMHS'];
         $ta=addslashes($param->Value);		       
         $semester = $this->cmbAddSMTKeluar->Text;            
         try {            
@@ -87,7 +87,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
     }  
     public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
-            $datamhs=$_SESSION['currentPageDulangMHSKeluar']['DataMHS'];						
+            $datamhs = $_SESSION['currentPageDulangMHSKeluar']['DataMHS'];						
 			$ta = $this->cmbAddTAKeluar->Text;							
 			$semester = $this->cmbAddSMTKeluar->Text;
             $_SESSION['semester'] = $semester;
@@ -95,8 +95,8 @@ class CDetailDulangMHSKeluar Extends MainPageM {
             $_SESSION['kjur']= $datamhs['kjur'];
             $_SESSION['currentPageDulangMHSKeluar']['tahun_masuk'] = $datamhs['tahun_masuk'];
             $nim=  $datamhs['nim'];           
-			$kelas=$datamhs['idkelas'];
-            $iddosen_wali=$this->cmbAddDosenWali->Text;
+			$kelas = $datamhs['idkelas'];
+            $iddosen_wali = $this->cmbAddDosenWali->Text;
 			$str = "UPDATE register_mahasiswa SET iddosen_wali='$iddosen_wali',k_status='K' WHERE nim='$nim'";			
 			$this->DB->query ('BEGIN');
 			if ($this->DB->updateRecord($str)) {

@@ -16,7 +16,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
                 if (!isset($r[1])) {                                
                     throw new Exception ("Mahasiswa dengan NIM ($nim) tidak terdaftar di Database, silahkan ganti dengan yang lain.");		
                 }
-                $datamhs=$r[1];
+                $datamhs = $r[1];
                 $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
                 $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
                 $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
@@ -58,20 +58,20 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
     public function mendaftarKonsentrasi($sender, $param) {
         if ($this->IsValid) {
             $nim = $_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];            
-            $jumlah_sks=$this->hiddenJumlahSKS->Value;
-            $idkonsentrasi=$this->cmbKonsentrasiProdi->Text;
-            $str = "UPDATE pendaftaran_konsentrasi SET idkonsentrasi=$idkonsentrasi,jumlah_sks=$jumlah_sks WHERE nim='$nim'";
+            $jumlah_sks = $this->hiddenJumlahSKS->Value;
+            $idkonsentrasi = $this->cmbKonsentrasiProdi->Text;
+            $str = "UPDATE pendaftaran_konsentrasi SET idkonsentrasi = $idkonsentrasi,jumlah_sks = $jumlah_sks WHERE nim='$nim'";
             $this->DB->updateRecord($str);            
             $this->redirect('kemahasiswaan.DetailPendaftaranKonsentrasi',true,array('id'=>$nim));
         }
     }
     public function approved($sender, $param) {
         $nim = $_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];
-        $idkonsentrasi=$this->cmbKonsentrasiProdi->Text;
+        $idkonsentrasi = $this->cmbKonsentrasiProdi->Text;
         $this->DB->query('BEGIN');
         $str = "UPDATE pendaftaran_konsentrasi SET status_daftar=1 WHERE nim='$nim'";        
         if ($this->DB->updateRecord($str)) {            
-            $str = "UPDATE register_mahasiswa SET idkonsentrasi=$idkonsentrasi WHERE nim='$nim'";        
+            $str = "UPDATE register_mahasiswa SET idkonsentrasi = $idkonsentrasi WHERE nim='$nim'";        
             $this->DB->updateRecord($str);
             $this->DB->query('COMMIT');
             $this->redirect('kemahasiswaan.PendaftaranKonsentrasi',true);
@@ -82,7 +82,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
     }
     public function unApproved($sender, $param) {
         $nim = $_SESSION['currentPagePendaftaranKonsentrasi']['DataMHS']['nim'];
-        $idkonsentrasi=$this->cmbKonsentrasiProdi->Text;
+        $idkonsentrasi = $this->cmbKonsentrasiProdi->Text;
         $this->DB->query('BEGIN');
         $str = "UPDATE pendaftaran_konsentrasi SET status_daftar=0 WHERE nim='$nim'";        
         if ($this->DB->updateRecord($str)) {            

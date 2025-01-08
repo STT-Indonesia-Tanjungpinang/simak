@@ -41,8 +41,8 @@ class CDetailPKRS extends MainPageDW {
 	private function populateData ($search=false) {
         try {			
             $idkrs=addslashes($this->request['id']);
-            $datamhs=$_SESSION['currentPagePKRS']['DataMHS'];
-            $datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
+            $datamhs = $_SESSION['currentPagePKRS']['DataMHS'];
+            $datakrs = $_SESSION['currentPagePKRS']['DataKRS']['krs'];
             $this->Page->KRS->DataKRS['krs'] = $datakrs;
             if (!isset($datakrs['idkrs'])) {
                 throw new Exception ('Mohon kembali ke halaman <a href="'.$this->constructUrl('perkuliahan.PKRS',true).'">ini</a>');
@@ -51,7 +51,7 @@ class CDetailPKRS extends MainPageDW {
                 throw new Exception ('Mohon kembali ke halaman <a href="'.$this->constructUrl('perkuliahan.PKRS',true).'">ini</a>');
             }
             $this->KRS->setDataMHS($datamhs);
-            $detailkrs=$this->KRS->getDetailKRS($idkrs);
+            $detailkrs = $this->KRS->getDetailKRS($idkrs);
             $this->RepeaterS->DataSource = $detailkrs;
             $this->RepeaterS->dataBind();
         }catch (Exception $e) {
@@ -87,27 +87,27 @@ class CDetailPKRS extends MainPageDW {
         }
     }	
     public function toggleStatusMatkul($sender, $param){
-		$datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
-        $idkrs=$datakrs['idkrs'];
+		$datakrs = $_SESSION['currentPagePKRS']['DataKRS']['krs'];
+        $idkrs = $datakrs['idkrs'];
         $nim = $datakrs['nim'];
 		$idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);		
 		$id=explode('_', $sender->CommandParameter);
-		$idpenyelenggaraan=$id[1];	
+		$idpenyelenggaraan = $id[1];	
 		if ($id[0]==1) {			
 			try {
 				$str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs' AND batal=0";
 				$this->DB->setFieldTable(array('jumlah'));
 				$r = $this->DB->getRecord($str);	
 				$jumlah=$r[1]['jumlah']+$id[2];				
-				$maks_sks=$datakrs['maxSKS'];
+				$maks_sks = $datakrs['maxSKS'];
 				if ($jumlah > $maks_sks) {
                     throw new Exception ('Matakuliah, tidak bisa disahkan. Karena telah melebihi batas anda');
                 }
                 $str = "UPDATE krsmatkul SET batal=0 WHERE idkrsmatkul = $idkrsmatkul";
 				$this->DB->updateRecord($str);                
-                $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs=$idkrs";
+                $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs = $idkrs";
 				$this->DB->updateRecord($str);
-                $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan=$idpenyelenggaraan,tambah=0,hapus=1,batal=0,sah=1,tanggal=NOW()");										
+                $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan = $idpenyelenggaraan,tambah=0,hapus=1,batal=0,sah=1,tanggal=NOW()");										
 				$this->redirect('perkuliahan.DetailPKRS',true,array('id'=>$idkrs));	
 			} catch (Exception $e) {
 				$this->modalMessageError->show();
@@ -116,7 +116,7 @@ class CDetailPKRS extends MainPageDW {
 		}elseif ($id[0]==0) {		
 			$str = "UPDATE krsmatkul SET batal=1 WHERE idkrsmatkul = $idkrsmatkul";			
 			$this->DB->updateRecord($str);
-            $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan=$idpenyelenggaraan,tambah=0,hapus=0,batal=1,sah=0,tanggal=NOW()");										
+            $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan = $idpenyelenggaraan,tambah=0,hapus=0,batal=1,sah=0,tanggal=NOW()");										
 			$this->redirect('perkuliahan.DetailPKRS',true,array('id'=>$idkrs));	
 		}
 		
@@ -124,13 +124,13 @@ class CDetailPKRS extends MainPageDW {
 	public function hapusMatkul($sender, $param) {		
 		$idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);
         $id=explode('_', $sender->CommandParameter);				
-		$idpenyelenggaraan=$id[1];		
-        $datakrs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];
+		$idpenyelenggaraan = $id[1];		
+        $datakrs = $_SESSION['currentPagePKRS']['DataKRS']['krs'];
         $nim = $datakrs['nim'];
 		$this->DB->query ('BEGIN');		
 		if ($this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul='$idkrsmatkul'")) {
 			$this->DB->deleteRecord("kelas_mhs_detail WHERE idkrsmatkul='$idkrsmatkul'");
-            $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan=$idpenyelenggaraan,tambah=0,hapus=1,batal=0,sah=0,tanggal=NOW()");										
+            $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan = $idpenyelenggaraan,tambah=0,hapus=1,batal=0,sah=0,tanggal=NOW()");										
 			$this->DB->query ('COMMIT');
 		}else {
 			$this->DB->query ('ROLLBACK');
@@ -161,7 +161,7 @@ class CDetailPKRS extends MainPageDW {
             break;
             case  'pdf' :                
                 $messageprintout='';                
-                $tahun=$_SESSION['ta'];
+                $tahun = $_SESSION['ta'];
                 $semester = $_SESSION['semester'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);
@@ -172,7 +172,7 @@ class CDetailPKRS extends MainPageDW {
                 $dataReport['nama_tahun'] = $nama_tahun;
                 $dataReport['nama_semester'] = $nama_semester;        
                 
-                $kaprodi=$this->KRS->getKetuaPRODI($dataReport['kjur']);                  
+                $kaprodi = $this->KRS->getKetuaPRODI($dataReport['kjur']);                  
                 $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
                 $dataReport['nipy_kaprodi'] = $kaprodi['nipy'];

@@ -18,7 +18,7 @@ class CTranskripKurikulum extends MainPageM {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();				
             
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			            
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			            
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageTranskripKurikulum']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -47,8 +47,8 @@ class CTranskripKurikulum extends MainPageM {
 	}
     public function getInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
-		$tahunmasuk=$this->DMaster->getNamaTA($_SESSION['currentPageTranskripKurikulum']['tahun_masuk']);		
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
+		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['currentPageTranskripKurikulum']['tahun_masuk']);		
 		$text="Program Studi $ps Tahun Masuk $tahunmasuk";
 		return $text;
 	}
@@ -65,30 +65,30 @@ class CTranskripKurikulum extends MainPageM {
 	}
 	public function populateData($search=false) {			
         $kjur = $_SESSION['kjur'];      
-        $tahun_masuk=$_SESSION['currentPageTranskripKurikulum']['tahun_masuk'];        
+        $tahun_masuk = $_SESSION['currentPageTranskripKurikulum']['tahun_masuk'];        
         if ($search) {
             $str = "SELECT nim,nama_mhs,jk,kjur,tahun_masuk,idkonsentrasi FROM v_datamhs";			
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
                 case 'nim' :
                     $clausa="WHERE nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="WHERE nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="WHERE nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
             }
         }else{                        
-            $jumlah_baris=$this->DB->getCountRowsOfTable("v_datamhs WHERE kjur = $kjur AND tahun_masuk=$tahun_masuk",'nim');		
-            $str = "SELECT nim,nama_mhs,jk,kjur,tahun_masuk,idkonsentrasi FROM v_datamhs WHERE kjur = $kjur AND tahun_masuk=$tahun_masuk";			
+            $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs WHERE kjur = $kjur AND tahun_masuk = $tahun_masuk",'nim');		
+            $str = "SELECT nim,nama_mhs,jk,kjur,tahun_masuk,idkonsentrasi FROM v_datamhs WHERE kjur = $kjur AND tahun_masuk = $tahun_masuk";			
         }		
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageTranskripKurikulum']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;

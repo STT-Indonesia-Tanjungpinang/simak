@@ -18,7 +18,7 @@ class CPerwalian extends MainPageM {
             $this->cmbDosenWali->Text = $_SESSION['currentPagePerwalian']['iddosen_wali'];
             $this->cmbDosenWali->dataBind();	  
             
-            $daftar_status=$this->DMaster->getListStatusMHS ();
+            $daftar_status = $this->DMaster->getListStatusMHS ();
             $daftar_status['none'] = 'SELURUH';
             $this->tbCmbStatus->DataSource = $daftar_status;
             $this->tbCmbStatus->Text = $_SESSION['currentPagePerwalian']['status'];
@@ -52,8 +52,8 @@ class CPerwalian extends MainPageM {
 		$this->populateData();
 	}
 	protected function populateData ($search=false) {
-        $iddosen_wali=$_SESSION['currentPagePerwalian']['iddosen_wali'];
-        $str_dw = ($iddosen_wali == 'none') ? " WHERE (iddosen_wali='' OR iddosen_wali=0)" : " WHERE iddosen_wali=$iddosen_wali";
+        $iddosen_wali = $_SESSION['currentPagePerwalian']['iddosen_wali'];
+        $str_dw = ($iddosen_wali == 'none') ? " WHERE (iddosen_wali='' OR iddosen_wali=0)" : " WHERE iddosen_wali = $iddosen_wali";
 		if ($search) {       
             $str = "SELECT nim,nirm,nama_mhs,tahun_masuk FROM v_datamhs vdm$str_dw";
             $txtsearch=addslashes($this->txtKriteria->Text);
@@ -75,8 +75,8 @@ class CPerwalian extends MainPageM {
                 break;
             }
         }else{
-            $status=$_SESSION['currentPagePerwalian']['status'];
-            $str_status=$status == 'none'? '' : " AND k_status='$status'";
+            $status = $_SESSION['currentPagePerwalian']['status'];
+            $str_status = $status == 'none'? '' : " AND k_status='$status'";
             $jumlah_record=$this->DB->getCountRowsOfTable("v_datamhs vdm$str_dw $str_status",'vdm.nim');
             $str = "SELECT nim,nirm,nama_mhs,tahun_masuk,idkelas,k_status FROM v_datamhs vdm$str_dw $str_status";
         }
@@ -103,13 +103,13 @@ class CPerwalian extends MainPageM {
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,idkelas,k_status,dk.iddata_konversi,photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi)  LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE vdm.nim='$nim'";
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'iddata_konversi', 'photo_profile'));
         $r = $this->DB->getRecord($str);	           
-        $datamhs=$r[1];
+        $datamhs = $r[1];
         
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-        $this->DataMHS=$datamhs;
+        $this->DataMHs = $datamhs;
         
         $this->hiddennim->Value=$nim;
         $daftar_dw=$this->DMaster->getListDosenWali();
@@ -123,7 +123,7 @@ class CPerwalian extends MainPageM {
 	
 	public function saveData($sender, $param) {		
 		if ($this->IsValid) {
-			$iddosen_wali=$this->cmbAddDW->Text;
+			$iddosen_wali = $this->cmbAddDW->Text;
 			$nim = $this->hiddennim->Value;
 			$str="UPDATE register_mahasiswa SET iddosen_wali='$iddosen_wali' WHERE nim='$nim'";		
 			$this->DB->updateRecord($str);
@@ -131,9 +131,9 @@ class CPerwalian extends MainPageM {
 		}
 	}
     public function printOut($sender, $param) {
-        $iddosen_wali=$_SESSION['currentPagePerwalian']['iddosen_wali'];
+        $iddosen_wali = $_SESSION['currentPagePerwalian']['iddosen_wali'];
         if ($iddosen_wali > 0) {
-            $k_status=$_SESSION['currentPagePerwalian']['status'];
+            $k_status = $_SESSION['currentPagePerwalian']['status'];
             $this->createObj('reportakademik');
             $this->linkOutput->Text='';
             $this->linkOutput->NavigateUrl='#';

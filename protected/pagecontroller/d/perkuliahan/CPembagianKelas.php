@@ -16,7 +16,7 @@ public function onLoad($param) {
 			$this->tbCmbPs->Text = $kjur;			
 			$this->tbCmbPs->dataBind();	
             
-            $tahun=$_SESSION['ta'];
+            $tahun = $_SESSION['ta'];
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
 			$this->tbCmbTA->Text = $tahun;						
@@ -36,7 +36,7 @@ public function onLoad($param) {
 			$this->tbCmbPs->Text = $kjur;			
 			$this->tbCmbPs->dataBind();	
             
-            $tahun=$_SESSION['ta'];
+            $tahun = $_SESSION['ta'];
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTA->DataSource = $ta;					
 			$this->tbCmbTA->Text = $tahun;						
@@ -64,7 +64,7 @@ public function onLoad($param) {
 
     public function getInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
@@ -90,8 +90,8 @@ public function onLoad($param) {
         $ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];
         $kjur = $_SESSION['kjur'];
-        $iddosen=$this->Pengguna->getDataUser('iddosen');
-        $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.sks,vpp.semester,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND vpp.iddosen=$iddosen ORDER BY hari ASC,idkelas ASC,nama_dosen ASC";
+        $iddosen = $this->Pengguna->getDataUser('iddosen');
+        $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.sks,vpp.semester,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND vpp.iddosen = $iddosen ORDER BY hari ASC,idkelas ASC,nama_dosen ASC";
         $this->DB->setFieldTable(array('idkelas_mhs', 'kmatkul', 'nmatkul', 'sks', 'semester', 'nidn', 'idkelas', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas'));
 		$r = $this->DB->getRecord($str);	
         $result = array();

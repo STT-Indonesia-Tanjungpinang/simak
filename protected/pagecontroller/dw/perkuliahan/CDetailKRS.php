@@ -61,7 +61,7 @@ class CDetailKRS extends MainPageDW {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,vdm.iddosen_wali,vdm.idkelas,vdm.k_status,sm.n_status AS status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE krs.idkrs='$idkrs'";
             $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'status', 'idsmt', 'tahun', 'tasmt', 'sah'));
             $r = $this->DB->getRecord($str);	           
-            $datamhs=$r[1];
+            $datamhs = $r[1];
             if (!isset($r[1])) {
                 $_SESSION['currentPageKRS']['DataKRS']=array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
@@ -72,11 +72,11 @@ class CDetailKRS extends MainPageDW {
             }
             $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($datamhs['nim'],true);            
             $this->KRS->setDataMHS($datamhs);
-            $kelas=$this->KRS->getKelasMhs();																	            
+            $kelas = $this->KRS->getKelasMhs();																	            
             $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
             
-            $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
+            $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
             $datamhs['nama_dosen'] = $nama_dosen;
             
             $_SESSION['currentPageKRS']['DataMHS'] = $datamhs;
@@ -95,23 +95,23 @@ class CDetailKRS extends MainPageDW {
 	}		
     public function tambahKRS($sender, $param) {
         $this->createObj('Nilai');
-        $datakrs=$_SESSION['currentPageKRS']['DataKRS'];
+        $datakrs = $_SESSION['currentPageKRS']['DataKRS'];
         $idsmt = $datakrs['krs']['idsmt'];
-        $tahun=$datakrs['krs']['tahun'];        
+        $tahun = $datakrs['krs']['tahun'];        
         $this->Nilai->setDataMHS($_SESSION['currentPageKRS']['DataMHS']);
         if ($idsmt==3) {
             $this->createObj('Finance');
             $this->Finance->setDataMHS($_SESSION['currentPageKRS']['DataMHS']);
-            $maxSKS=$this->Finance->getSKSFromSP($tahun, $idsmt);
+            $maxSKs = $this->Finance->getSKSFromSP($tahun, $idsmt);
             $this->Nilai->getKHSBeforeCurrentSemester($tahun, $idsmt);	
             $datakrs['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
         }else{
            $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt, $tahun);
             if ($datadulangbefore['k_status']=='C') {
-                $maxSKS=$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');                
+                $maxSKs = $this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti');                
                 $datakrs['krs']['ipstasmtbefore'] = 'N.A (Status Cuti)';
             }else{
-                $maxSKS=$this->Nilai->getMaxSKS($tahun, $idsmt);
+                $maxSKs = $this->Nilai->getMaxSKS($tahun, $idsmt);
                 $datakrs['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
             }
         }
@@ -120,7 +120,7 @@ class CDetailKRS extends MainPageDW {
         $this->redirect ('perkuliahan.TambahKRS',true);
     }
     public function sahkanKRS($sender, $param) {
-        $datakrs=$_SESSION['currentPageKRS']['DataKRS'];
+        $datakrs = $_SESSION['currentPageKRS']['DataKRS'];
         $idkrs = $datakrs['krs']['idkrs'];
         $this->KRS->sahkanKRS($idkrs);
         $this->redirect ('perkuliahan.DetailKRS',true,array('id'=>$idkrs));
@@ -145,7 +145,7 @@ class CDetailKRS extends MainPageDW {
             break;
             case  'pdf' :                
                 $messageprintout='';                
-                $tahun=$_SESSION['ta'];
+                $tahun = $_SESSION['ta'];
                 $semester = $_SESSION['semester'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);
@@ -156,7 +156,7 @@ class CDetailKRS extends MainPageDW {
                 $dataReport['nama_tahun'] = $nama_tahun;
                 $dataReport['nama_semester'] = $nama_semester;        
                 
-                $kaprodi=$this->KRS->getKetuaPRODI($dataReport['kjur']);                  
+                $kaprodi = $this->KRS->getKetuaPRODI($dataReport['kjur']);                  
                 $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
                 $dataReport['nipy_kaprodi'] = $kaprodi['nipy'];

@@ -54,7 +54,7 @@ class CNilaiFinal extends MainPageON {
   }
   public function getInfoToolbar() {        
     $kjur = $_SESSION['kjur'];        
-    $ps=$_SESSION['daftar_jurusan'][$kjur];
+    $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
     $text="Program Studi $ps TA $ta Semester $semester";
@@ -81,23 +81,23 @@ class CNilaiFinal extends MainPageON {
       switch ($this->cmbKriteria->Text) {                
         case 'nim' :
           $clausa="AND ta.nim='$txtsearch'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
         case 'nirm' :
           $clausa="AND vdm.nirm='$txtsearch'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
         case 'nama' :
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
       }
     }else{
-      $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status,CONCAT(ta.tahun,'',ta.idsmt) AS tasmt FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun=$ta AND ta.idsmt=$idsmt";
-      $jumlah_baris=$this->DB->getCountRowsOfTable("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun=$ta AND ta.idsmt=$idsmt",'ta.nim');				
+      $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status,CONCAT(ta.tahun,'',ta.idsmt) AS tasmt FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun = $ta AND ta.idsmt=$idsmt";
+      $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun = $ta AND ta.idsmt=$idsmt",'ta.nim');				
     }        
     $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageNilaiFinal']['page_num'];		
     $this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -131,7 +131,7 @@ class CNilaiFinal extends MainPageON {
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,idkelas,k_status,photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'photo_profile'));
         $r = $this->DB->getRecord($str);	 
-        $datamhs=$r[1];
+        $datamhs = $r[1];
         if (!isset($r[1])) {                                   
           throw new Exception ("<br/><br/>NIM ($nim) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");		
         }
@@ -174,7 +174,7 @@ class CNilaiFinal extends MainPageON {
       $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,idkelas,k_status,photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
       $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'photo_profile'));
       $r = $this->DB->getRecord($str);	 
-      $datamhs=$r[1];
+      $datamhs = $r[1];
       
       $str = "SELECT nim,tahun,idsmt FROM dulang WHERE nim='$nim' AND k_status='L' ORDER BY iddulang DESC LIMIT 1";			
       $this->DB->setFieldTable(array('nim', 'tahun', 'idsmt'));
@@ -232,7 +232,7 @@ class CNilaiFinal extends MainPageON {
             $dataReport['nidn_penandatangan_transkrip'] = $this->setup->getSettingValue('nidn_penandatangan_transkrip');
 
             //ketua program studi
-            $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+            $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
             $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
             $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
             $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
@@ -270,7 +270,7 @@ class CNilaiFinal extends MainPageON {
               $dataReport['nidn_penandatangan_transkrip'] = $this->setup->getSettingValue('nidn_penandatangan_transkrip');
 
               //ketua program studi
-              $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+              $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
               $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
               $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
               $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];

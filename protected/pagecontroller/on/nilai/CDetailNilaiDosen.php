@@ -43,8 +43,8 @@ class CDetailNilaiDosen extends MainPageON
     $this->InfoKelasPanel->render($param->NewWriter);
   }
   protected function populateData() {	
-    $datakelas=$_SESSION['currentPageDetailNilaiDosen']['DataNilai'];
-    $idkelas_mhs=$datakelas['idkelas_mhs'];
+    $datakelas = $_SESSION['currentPageDetailNilaiDosen']['DataNilai'];
+    $idkelas_mhs = $datakelas['idkelas_mhs'];
     $str = "SELECT 
       vkm.idkrsmatkul,
       vdm.nim,
@@ -61,7 +61,7 @@ class CDetailNilaiDosen extends MainPageON
       LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) 
       JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) 
       JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) 
-      WHERE kmd.idkelas_mhs=$idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC
+      WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC
     ";        
     $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'n_kuan', 'n_kual','published'));
     $r = $this->DB->getRecord($str);	           

@@ -19,7 +19,7 @@ class CDetailDiskusi extends MainPageM {
                     $str="UPDATE forumposts SET unread=0 WHERE idpost=$id";
                     $this->DB->updateRecord($str);
                     
-                    $this->DataDiskusi=$r[1];
+                    $this->DataDiskusi = $r[1];
                     $_SESSION['currentPageDetailDiskusi']['DataDiskusi'] = $r[1];                    
                     $this->populateData();
                 }
@@ -45,7 +45,7 @@ class CDetailDiskusi extends MainPageM {
     public function kirimKonten($sender, $param) {
 		if ($this->IsValid) {	
             $idpost=$_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idpost'];            
-            $idkategori=$_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idkategori'];
+            $idkategori = $_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idkategori'];
             $judul = $_SESSION['currentPageDetailDiskusi']['DataDiskusi']['title'];
             $content = strip_tags(addslashes($this->txtAddContent->Text));
             $this->txtAddContent->Text='';

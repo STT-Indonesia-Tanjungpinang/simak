@@ -9,7 +9,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
 		if (!$this->IsPostBack && !$this->IsCallback) {
             try {
                 if (isset($_SESSION['currentPageDulangMHSDropOut']['DataMHS']['no_formulir'])) {
-                    $datamhs=$_SESSION['currentPageDulangMHSDropOut']['DataMHS'];
+                    $datamhs = $_SESSION['currentPageDulangMHSDropOut']['DataMHS'];
                     $nim = $datamhs['nim'];
                     $this->Nilai->setDataMHS($datamhs);
                     
@@ -26,10 +26,10 @@ class CDetailDulangMHSDropOut Extends MainPageM {
                     $this->cmbAddSMTDropOut->dataBind();
                     
                     $this->Nilai->getTranskripFromKRS ();
-                    $jumlah_sks=$this->Nilai->getTotalSKSAdaNilai();
-                    $iddata_konversi=$datamhs['iddata_konversi'];
+                    $jumlah_sks = $this->Nilai->getTotalSKSAdaNilai();
+                    $iddata_konversi = $datamhs['iddata_konversi'];
                     if ($iddata_konversi > 0) {
-                        $jumlah_sks+=$this->DB->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
+                        $jumlah_sks+=$this->DB->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
                     }
                     $this->literalJumlahSKS->Text = $jumlah_sks;
                     $this->literalBebasKeuangan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
@@ -51,7 +51,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
 	}
     public function setInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester";        
@@ -63,7 +63,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
         }
     }    
     public function checkDulang($sender, $param) {
-        $datamhs=$_SESSION['currentPageDulangMHSDropOut']['DataMHS'];
+        $datamhs = $_SESSION['currentPageDulangMHSDropOut']['DataMHS'];
         $ta=addslashes($param->Value);		       
         $semester = $this->cmbAddSMTDropOut->Text;            
         try {            
@@ -81,7 +81,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
     }  
     public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
-            $datamhs=$_SESSION['currentPageDulangMHSDropOut']['DataMHS'];						
+            $datamhs = $_SESSION['currentPageDulangMHSDropOut']['DataMHS'];						
 			$ta = $this->cmbAddTADropOut->Text;							
 			$semester = $this->cmbAddSMTDropOut->Text;
             $_SESSION['semester'] = $semester;
@@ -89,7 +89,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
             $_SESSION['kjur']= $datamhs['kjur'];
             $_SESSION['currentPageDulangMHSDropOut']['tahun_masuk'] = $datamhs['tahun_masuk'];
             $nim=  $datamhs['nim'];           
-			$kelas=$datamhs['idkelas'];
+			$kelas = $datamhs['idkelas'];
 			$str = "UPDATE register_mahasiswa SET k_status='D' WHERE nim='$nim'";			
 			$this->DB->query ('BEGIN');
 			if ($this->DB->updateRecord($str)) {

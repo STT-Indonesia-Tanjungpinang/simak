@@ -171,7 +171,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT idkrs FROM krs WHERE nim='$nim'";
                     $r = $this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $idkrs=$row['idkrs'];
+                        $idkrs = $row['idkrs'];
                         $sql =$sql.$this->buildSqlInsert('krsmatkul'," WHERE idkrs='$idkrs'");
                     }   
                     
@@ -326,7 +326,7 @@ class CExportData extends MainPageSA {
                     $str = "SELECT no_transaksi FROM transaksi WHERE no_formulir='$no_formulir'";
                     $r = $this->DB->query($str);
                     while ($row=$r->fetch_assoc()) {           
-                        $no_transaksi=$row['no_transaksi'];
+                        $no_transaksi = $row['no_transaksi'];
                         $sql =$sql.$this->buildSqlInsert('transaksi_detail'," WHERE no_transaksi='$no_transaksi'");
                     }
 

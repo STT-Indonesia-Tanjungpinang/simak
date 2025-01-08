@@ -13,9 +13,9 @@ class CHome extends MainPageSA {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageHome'])||$_SESSION['currentPageHome']['page_name']!='sa.Home') {                                                                                
-                $tahun_pendaftaran=$_SESSION['tahun_pendaftaran'];
+                $tahun_pendaftaran = $_SESSION['tahun_pendaftaran'];
 
-                for ($i=$tahun_pendaftaran-10;$i <=$tahun_pendaftaran;$i+=1) {
+                for ($i = $tahun_pendaftaran-10;$i <=$tahun_pendaftaran;$i+=1) {
                     $data_mendaftar[$i]=0;
                     $data_dulang[$i]=0;
                 }
@@ -67,18 +67,18 @@ class CHome extends MainPageSA {
         $this->literalTotalPendaftaran->Text = $totalpendaftaran;
         $this->literalTotalDulang->Text = $totaldulang;
         
-        $mendaftartahunini=$datamendaftar[$_SESSION['tahun_pendaftaran']];
-        $this->TotalMendaftarTahunINI=$mendaftartahunini;
+        $mendaftartahunini = $datamendaftar[$_SESSION['tahun_pendaftaran']];
+        $this->TotalMendaftarTahunINi = $mendaftartahunini;
         $dulangtahunini=isset($datadulang[$_SESSION['tahun_pendaftaran']]) ? $datadulang[$_SESSION['tahun_pendaftaran']] :0;
-        $this->TotalDulangTahunINI=$dulangtahunini;
+        $this->TotalDulangTahunINi = $dulangtahunini;
         
         $mendaftartahunlalu=isset($datamendaftar[$_SESSION['tahun_pendaftaran']-1])?$datamendaftar[$_SESSION['tahun_pendaftaran']-1]:0;
         $dulangtahunlalu=isset($datadulang[$_SESSION['tahun_pendaftaran']-1])?$datadulang[$_SESSION['tahun_pendaftaran']-1]:0;
         
         $persenmendaftartahunini=($mendaftartahunini > 0) ? @ number_format(($mendaftartahunini/$mendaftartahunlalu)*100,2):0;
-        $this->PersentaseMendaftarTahunINI=$persenmendaftartahunini;
+        $this->PersentaseMendaftarTahunINi = $persenmendaftartahunini;
         $persendulangtahunini=($dulangtahunini > 0) ? @ number_format(($dulangtahunini/$dulangtahunlalu)*100,2):0;
-        $this->PersentaseDulangTahunINI=$persendulangtahunini;
+        $this->PersentaseDulangTahunINi = $persendulangtahunini;
         if ($persenmendaftartahunini <= 100){
             $downmendaftar=number_format(100-$persenmendaftartahunini,2);
             $this->TooltipMendaftar = $downmendaftar.'% Down';
@@ -96,9 +96,9 @@ class CHome extends MainPageSA {
         }
     }
     public function refreshPage($sender, $param) {
-        $tahun_pendaftaran=$_SESSION['tahun_pendaftaran'];
+        $tahun_pendaftaran = $_SESSION['tahun_pendaftaran'];
                                 
-        for ($i=$tahun_pendaftaran-10;$i <=$tahun_pendaftaran;$i+=1) {
+        for ($i = $tahun_pendaftaran-10;$i <=$tahun_pendaftaran;$i+=1) {
             $data_mendaftar[$i]=0;
             $data_dulang[$i]=0;
         }

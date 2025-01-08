@@ -47,7 +47,7 @@ class CEditNilai extends MainPageD
   public function setInfoToolbar()
   {        
     $kjur = $_SESSION['kjur'];        
-    $ps=$_SESSION['daftar_jurusan'][$kjur];
+    $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $_SESSION['ta'];		
     $semester = $this->setup->getSemester($_SESSION['semester']);
     $ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
@@ -73,12 +73,12 @@ class CEditNilai extends MainPageD
   }		
   public function populateData()
   {
-    $iddosen=$this->Pengguna->getDataUser('iddosen');
+    $iddosen = $this->Pengguna->getDataUser('iddosen');
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];
     $kjur = $_SESSION['kjur'];		
 
-    $str = "SELECT vpp.idpengampu_penyelenggaraan,km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.sks,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND vpp.iddosen=$iddosen ORDER BY hari ASC,idkelas ASC";
+    $str = "SELECT vpp.idpengampu_penyelenggaraan,km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.sks,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND vpp.iddosen = $iddosen ORDER BY hari ASC,idkelas ASC";
              
     $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'idkelas_mhs', 'kmatkul', 'nmatkul', 'sks', 'idkelas', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas', 'isi_nilai'));			
     $r = $this->DB->getRecord($str);	

@@ -22,14 +22,14 @@ class CPengampuLain extends MainPageSA {
             if (!isset($this->Demik->InfoMatkul['idpenyelenggaraan'])) {                                                
                 throw new Exception ("Kode penyelenggaraan dengan id ($id) tidak terdaftar.");		
             }               
-            $str = "SELECT pp.idpengampu_penyelenggaraan,p.iddosen AS iddosen_p,pp.iddosen AS iddosen_pp,d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,d.gelar_belakang) AS nama_dosen FROM pengampu_penyelenggaraan pp,penyelenggaraan p,dosen d WHERE pp.idpenyelenggaraan=p.idpenyelenggaraan AND pp.iddosen=d.iddosen AND pp.idpenyelenggaraan=$id";
+            $str = "SELECT pp.idpengampu_penyelenggaraan,p.iddosen AS iddosen_p,pp.iddosen AS iddosen_pp,d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,d.gelar_belakang) AS nama_dosen FROM pengampu_penyelenggaraan pp,penyelenggaraan p,dosen d WHERE pp.idpenyelenggaraan=p.idpenyelenggaraan AND pp.iddosen=d.iddosen AND pp.idpenyelenggaraan = $id";
             $this->DB->setFieldTable (array('idpengampu_penyelenggaraan', 'iddosen_p', 'iddosen_pp', 'nidn', 'nama_dosen'));
             $r = $this->DB->getRecord($str);	
             $result = array();
             while (list($k, $v) = each($r)){
-                $idpengampu_penyelenggaraan=$v['idpengampu_penyelenggaraan'];                
-                $v['jumlah_kelas'] = $this->DB->getCountRowsOfTable("kelas_mhs WHERE idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan",'idkelas_mhs');
-                $v['jumlah_peserta'] = $this->DB->getCountRowsOfTable("v_kelas_mhs WHERE idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan",'idkelas_mhs');;
+                $idpengampu_penyelenggaraan = $v['idpengampu_penyelenggaraan'];                
+                $v['jumlah_kelas'] = $this->DB->getCountRowsOfTable("kelas_mhs WHERE idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan",'idkelas_mhs');
+                $v['jumlah_peserta'] = $this->DB->getCountRowsOfTable("v_kelas_mhs WHERE idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan",'idkelas_mhs');;
                 $result[$k] = $v;
             }
             $this->RepeaterS->DataSource = $result;
@@ -55,7 +55,7 @@ class CPengampuLain extends MainPageSA {
         $id=$this->hiddenid->Value;
         $this->hiddenid->Value=$id;
         $this->Demik->getInfoMatkul($id,'penyelenggaraan');  		
-        $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM pengampu_penyelenggaraan WHERE idpenyelenggaraan=$id)";
+        $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM pengampu_penyelenggaraan WHERE idpenyelenggaraan = $id)";
         $this->DB->setFieldTable(array('iddosen', 'nidn', 'nama_dosen'));
 		$r = $this->DB->getRecord($str);
         
@@ -68,8 +68,8 @@ class CPengampuLain extends MainPageSA {
 	}
 	public function saveData($sender, $param) {
 		if ($this->IsValid) {			
-			$iddosen=$this->cmbAddDaftarDosen->Text;
-			$idpenyelenggaraan=$this->hiddenid->Value;		
+			$iddosen = $this->cmbAddDaftarDosen->Text;
+			$idpenyelenggaraan = $this->hiddenid->Value;		
 			$str = "INSERT INTO pengampu_penyelenggaraan (idpengampu_penyelenggaraan,idpenyelenggaraan,iddosen,verified) VALUES (NULL, $idpenyelenggaraan, $iddosen,0)";
 			$this->DB->insertRecord($str);
             $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
@@ -85,10 +85,10 @@ class CPengampuLain extends MainPageSA {
         
 		$this->hiddenidpp->Value=$idpp;	
         $this->DB->setFieldTable(array('iddosen', 'nidn', 'nama_dosen'));
-		$r = $this->DB->getRecord("SELECT pp.iddosen,CONCAT(d.gelar_depan,' ',d.nama_dosen,d.gelar_belakang) AS nama_dosen,d.nidn FROM dosen d,pengampu_penyelenggaraan pp WHERE d.iddosen=pp.iddosen AND pp.idpengampu_penyelenggaraan=$idpp");        
+		$r = $this->DB->getRecord("SELECT pp.iddosen,CONCAT(d.gelar_depan,' ',d.nama_dosen,d.gelar_belakang) AS nama_dosen,d.nidn FROM dosen d,pengampu_penyelenggaraan pp WHERE d.iddosen=pp.iddosen AND pp.idpengampu_penyelenggaraan = $idpp");        
 		
-        $iddosen=$r[1]['iddosen'];        
-        $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM pengampu_penyelenggaraan WHERE idpenyelenggaraan=$id)";
+        $iddosen = $r[1]['iddosen'];        
+        $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM pengampu_penyelenggaraan WHERE idpenyelenggaraan = $id)";
         $dd=$this->DB->getRecord($str);        
         $DataDosen=array($r[1]['iddosen']=>$r[1]['nama_dosen']. ' ['.$r[1]['nidn'].']');	                
         while (list($k, $v)=each($dd)) {           
@@ -100,18 +100,18 @@ class CPengampuLain extends MainPageSA {
 		$this->cmbEditDaftarDosen->dataBind();		
 	}
     public function updateData($sender, $param) {							
-        $idpenyelenggaraan=$this->hiddenid->Value;
+        $idpenyelenggaraan = $this->hiddenid->Value;
 		$id=$this->hiddenidpp->Value;
-		$iddosen=$this->cmbEditDaftarDosen->Text;		
-		$str = "UPDATE pengampu_penyelenggaraan SET iddosen=$iddosen WHERE idpengampu_penyelenggaraan=$id";
+		$iddosen = $this->cmbEditDaftarDosen->Text;		
+		$str = "UPDATE pengampu_penyelenggaraan SET iddosen = $iddosen WHERE idpengampu_penyelenggaraan = $id";
 		$this->DB->updateRecord($str);
         $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
 		$this->redirect('perkuliahan.PengampuLain',true,array('id'=>$idpenyelenggaraan));
 	}
     public function deleteRecord($sender, $param) {		
 		$id=$this->getDataKeyField($sender, $this->RepeaterS);
-        $idpenyelenggaraan=$this->hiddenid->Value;		
-		$this->DB->deleteRecord("pengampu_penyelenggaraan WHERE idpengampu_penyelenggaraan=$id");
+        $idpenyelenggaraan = $this->hiddenid->Value;		
+		$this->DB->deleteRecord("pengampu_penyelenggaraan WHERE idpengampu_penyelenggaraan = $id");
         $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
 		$this->redirect('perkuliahan.PengampuLain',true,array('id'=>$idpenyelenggaraan));
 	}	

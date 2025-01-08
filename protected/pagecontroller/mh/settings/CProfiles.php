@@ -22,7 +22,7 @@ class CProfiles extends MainPageMHS {
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,kelurahan,kecamatan,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt,pm.photo_profile FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
         $this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_agama', 'nama_ibu_kandung', 'idwarga', 'nik', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'kelurahan', 'kecamatan', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt', 'photo_profile'));
         $r = $this->DB->getRecord($str);
-        $dataMhs=$r[1];								
+        $dataMhs = $r[1];								
         
         $this->txtEditNoFormulir->Text = $no_formulir;				        
         $this->txtEditNamaMhs->Text = $dataMhs['nama_mhs'];
@@ -73,7 +73,7 @@ class CProfiles extends MainPageMHS {
         $this->txtEditNomorIjazah->Text = $dataMhs['nomor_ijazah'];
         
         $this->literalKelasMHS->Text = $this->DMaster->getNamaKelasByID($dataMhs['idkelas']);
-        $daftar_jurusan=$this->DMaster->getListProgramStudi(2);
+        $daftar_jurusan = $this->DMaster->getListProgramStudi(2);
         $this->literalKjur1->Text = $daftar_jurusan[$dataMhs['kjur1']];
         $this->literalKjur2->Text = $dataMhs['kjur2'] > 0 ?$daftar_jurusan[$dataMhs['kjur2']]:'N.A';
 		$this->literalTahunMasuk->Text = $this->DMaster->getNamaTA($dataMhs['ta']);
@@ -112,7 +112,7 @@ class CProfiles extends MainPageMHS {
 			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
 			$tempat_lahir=addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
 			$tgl_lahir=date ('Y-m-d', $this->txtEditTanggalLahir->TimeStamp);
-			$jk=$this->rdEditPria->Checked===true?'L':'P';
+			$jk = $this->rdEditPria->Checked===true?'L':'P';
             $idagama = $this->cmbEditAgama->Text;
             $nama_ibu_kandung=addslashes($this->txtEditNamaIbuKandung->Text);
 			$idwarga = $this->rdEditWNI->Checked===true?'WNI':'WNA';
@@ -123,7 +123,7 @@ class CProfiles extends MainPageMHS {
             $telp_rumah=addslashes($this->txtEditNoTelpRumah->Text);		
             $telp_hp=addslashes($this->txtEditNoTelpHP->Text);
             $email=addslashes($this->txtEditEmail->Text);            
-			$idstatus=$this->rdEditTidakBekerja->Checked===true?'TIDAK_BEKERJA':'PEKERJA';
+			$idstatus = $this->rdEditTidakBekerja->Checked===true?'TIDAK_BEKERJA':'PEKERJA';
 			$alamat_kantor=strtoupper(trim($this->txtEditAlamatKantor->Text));									
 			$telp_kantor=addslashes($this->txtEditNoTelpKantor->Text);
 			$idjp=$this->cmbEditPekerjaanOrtu->Text;

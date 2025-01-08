@@ -23,14 +23,14 @@ class CDetailNilaiFinal extends MainPageON {
       if (!isset($_SESSION['currentPageNilaiFinal']['DataMHS']['nim']) ){
         throw new Exception('Mohon kembali ke halaman Nilai Final.');
       }
-      $datamhs=$_SESSION['currentPageNilaiFinal']['DataMHS'];
+      $datamhs = $_SESSION['currentPageNilaiFinal']['DataMHS'];
       $nim = $datamhs['nim'];
       $this->Nilai->setDataMHS($datamhs);
       $str = "SELECT nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,judul_skripsi,iddosen_pembimbing,iddosen_pembimbing2,iddosen_ketua,iddosen_pemket,tahun,idsmt FROM transkrip_asli WHERE nim='$nim'";
       $this->DB->setFieldTable(array('nomor_ijazah', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
       $r = $this->DB->getRecord($str);
 
-      $daftar_dosen=$this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
+      $daftar_dosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
       
       $this->cmbEditDosenPembimbing->DataSource = $daftar_dosen;
       $this->cmbEditDosenPembimbing->dataBind();     
@@ -103,7 +103,7 @@ class CDetailNilaiFinal extends MainPageON {
   }
   public function saveData($sender, $param) {
     if ($this->IsValid) {						
-      $datamhs=$_SESSION['currentPageNilaiFinal']['DataMHS'];
+      $datamhs = $_SESSION['currentPageNilaiFinal']['DataMHS'];
       $nim = $datamhs['nim'];
       $ta = $datamhs['ta'];
       $idsmt = $datamhs['idsmt'];
@@ -144,7 +144,7 @@ class CDetailNilaiFinal extends MainPageON {
   public function addData($sender, $param) {
     if ($this->IsValid) {	
       $this->createObj('Log');
-      $datamhs=$_SESSION['currentPageNilaiFinal']['DataMHS'];
+      $datamhs = $_SESSION['currentPageNilaiFinal']['DataMHS'];
       $nim = $datamhs['nim'];
       $dataSource = $this->cmbDataSource->Text;
       switch ($datasource) {
@@ -157,9 +157,9 @@ class CDetailNilaiFinal extends MainPageON {
             while (list($k, $v) = each($r)) {
               $kmatkul = $v['kmatkul'];    
               $nmatkul = $v['nmatkul']; 
-              $nmatkul_en=$v['nmatkul_en']; 
+              $nmatkul_en = $v['nmatkul_en']; 
               $n_kual = $v['n_kual'];
-              $sks=$v['sks'];
+              $sks = $v['sks'];
               $semester = $v['semester'];                
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
               $this->DB->insertRecord($str);
@@ -172,7 +172,7 @@ class CDetailNilaiFinal extends MainPageON {
           }
         break;
         case 'konversi' :
-          $iddata_konversi=$datamhs['iddata_konversi'];
+          $iddata_konversi = $datamhs['iddata_konversi'];
           $str = "SELECT kmatkul,nmatkul,nmatkul_en,sks,semester,n_kual FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi'";
           $this->DB->setFieldTable(array('kmatkul', 'nmatkul', 'nmatkul_en', 'sks', 'semester', 'n_kual'));
           $r = $this->DB->getRecord($str);
@@ -181,9 +181,9 @@ class CDetailNilaiFinal extends MainPageON {
             while (list($k, $v) = each($r)) {
               $kmatkul = $v['kmatkul'];    
               $nmatkul = $v['nmatkul']; 
-              $nmatkul_en=$v['nmatkul_en']; 
+              $nmatkul_en = $v['nmatkul_en']; 
               $n_kual = $v['n_kual'];
-              $sks=$v['sks'];
+              $sks = $v['sks'];
               $semester = $v['semester'];                
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
               $this->DB->insertRecord($str);
@@ -196,7 +196,7 @@ class CDetailNilaiFinal extends MainPageON {
           }
         break;
         case 'konversi_transkripkrs' :
-          $iddata_konversi=$datamhs['iddata_konversi'];
+          $iddata_konversi = $datamhs['iddata_konversi'];
           $str = "SELECT kmatkul,nmatkul,nmatkul_en,sks,semester,n_kual FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi'";
           $this->DB->setFieldTable(array('kmatkul', 'nmatkul', 'nmatkul_en', 'sks', 'semester', 'n_kual'));
           $r = $this->DB->getRecord($str);
@@ -208,9 +208,9 @@ class CDetailNilaiFinal extends MainPageON {
             while (list($k, $v) = each($r)) {
               $kmatkul = $v['kmatkul'];    
               $nmatkul = $v['nmatkul']; 
-              $nmatkul_en=$v['nmatkul_en']; 
+              $nmatkul_en = $v['nmatkul_en']; 
               $n_kual = $v['n_kual'];
-              $sks=$v['sks'];
+              $sks = $v['sks'];
               $semester = $v['semester'];   
 
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
@@ -219,9 +219,9 @@ class CDetailNilaiFinal extends MainPageON {
             while (list($k, $v)=each($r2)) {
               $kmatkul = $v['kmatkul'];    
               $nmatkul = $v['nmatkul']; 
-              $nmatkul_en=$v['nmatkul_en']; 
+              $nmatkul_en = $v['nmatkul_en']; 
               $n_kual = $v['n_kual'];
-              $sks=$v['sks'];
+              $sks = $v['sks'];
               $semester = $v['semester'];   
 
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
@@ -243,7 +243,7 @@ class CDetailNilaiFinal extends MainPageON {
     $this->redirect('nilai.DetailNilaiFinal',true,array('id'=>$nim));
   }
   public function resetTranskrip($sender, $param) {
-    $datamhs=$_SESSION['currentPageNilaiFinal']['DataMHS'];
+    $datamhs = $_SESSION['currentPageNilaiFinal']['DataMHS'];
     $nim = $datamhs['nim']; 
     $this->DB->deleteRecord("transkrip_asli_detail WHERE nim='$nim'");
     $this->redirect('nilai.DetailNilaiFinal',true);
@@ -272,7 +272,7 @@ class CDetailNilaiFinal extends MainPageON {
           $dataReport['nidn_penandatangan_transkrip'] = $this->setup->getSettingValue('nidn_penandatangan_transkrip');
 
           //ketua program studi
-          $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+          $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
           $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
           $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
           $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
@@ -293,7 +293,7 @@ class CDetailNilaiFinal extends MainPageON {
           $dataReport['nidn_penandatangan_transkrip'] = $this->setup->getSettingValue('nidn_penandatangan_transkrip');
 
           //ketua program studi
-          $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+          $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
           $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
           $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
           $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];

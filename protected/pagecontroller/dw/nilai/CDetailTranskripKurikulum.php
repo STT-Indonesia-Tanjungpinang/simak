@@ -31,7 +31,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
                 $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS']=array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar.");
             }
-            $datamhs=$r[1];
+            $datamhs = $r[1];
             if ($datamhs['iddosen_wali']!=$this->iddosen_wali){
                 $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS']=array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) dimiliki oleh Mahasiswa diluar perwalian Anda.");

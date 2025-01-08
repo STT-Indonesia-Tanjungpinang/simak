@@ -34,15 +34,15 @@ class CJadwalUjianPMB extends MainPageMB {
 		$this->populateData($_SESSION['currentPageJadwalUjianPMB']['search']);
 	}
 	public function populateData() {	
-        $tahun_masuk=$_SESSION['tahun_masuk'];
+        $tahun_masuk = $_SESSION['tahun_masuk'];
         $idsmt = $_SESSION['semester'];
         $no_formulir = $this->Pengguna->getDataUser('no_formulir');
         $str = "SELECT idjadwal_ujian FROM peserta_ujian_pmb WHERE no_formulir = $no_formulir";
         $this->DB->setFieldTable(array('idjadwal_ujian'));
         $r = $this->DB->getRecord($str);
         if (isset($r[1])) {
-            $idjadwal_ujian=$r[1]['idjadwal_ujian'];
-            $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian=$idjadwal_ujian ORDER BY tanggal_ujian ASC";
+            $idjadwal_ujian = $r[1]['idjadwal_ujian'];
+            $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian = $idjadwal_ujian ORDER BY tanggal_ujian ASC";
             $bool_pilih=false;            
         }else{
             $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE tahun_masuk='$tahun_masuk' AND idsmt='$idsmt' AND status=1 ORDER BY tanggal_ujian ASC";        
@@ -52,8 +52,8 @@ class CJadwalUjianPMB extends MainPageMB {
         $r = $this->DB->getRecord($str);	
         $result = array();
         while (list($k, $v) = each($r)) {  
-            $idjadwal_ujian=$v['idjadwal_ujian'];
-            $v['jumlah_peserta'] = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$idjadwal_ujian",'idjadwal_ujian');            
+            $idjadwal_ujian = $v['idjadwal_ujian'];
+            $v['jumlah_peserta'] = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian = $idjadwal_ujian",'idjadwal_ujian');            
             $v['bool_pilih'] = $bool_pilih;
             $result[$k] = $v;
         }
@@ -67,7 +67,7 @@ class CJadwalUjianPMB extends MainPageMB {
         $this->DB->setFieldTable(array('tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_akhir_daftar', 'status', 'kapasitas'));
 		$r = $this->DB->getRecord($str);	
         try {
-            $dataujian=$r[1];
+            $dataujian = $r[1];
             $no_formulir = $this->Pengguna->getDataUser('no_formulir');
             if ($this->DB->checkRecordIsExist ('no_formulir', ' peserta_ujian_pmb', $no_formulir)){
                 throw new Exception ("No. Formulir sudah terdaftar menjadi peserta ujian PMB pada {$dataujian['nama_kegiatan']} T.A {$dataujian['tahun_masuk']}{$dataujian['idsmt']}");
@@ -80,12 +80,12 @@ class CJadwalUjianPMB extends MainPageMB {
             if ($date_now > $tanggal_akhir_daftar) {
                 throw new Exception ("Tidak bisa mendaftar pada {$dataujian['nama_kegiatan']} T.A {$dataujian['tahun_masuk']}{$dataujian['idsmt']} karena tanggal pendaftaran telah berakhir");
             }
-            $jumlah_peserta = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$id",'idjadwal_ujian');            
+            $jumlah_peserta = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian = $id",'idjadwal_ujian');            
             if ($jumlah_peserta >= $dataujian['kapasitas']){
                 throw new Exception ("Tidak bisa mendaftar pada {$dataujian['nama_kegiatan']} T.A {$dataujian['tahun_masuk']}{$dataujian['idsmt']} karena kapasitas ruangan telah penuh");
             }
             
-            $str = "INSERT INTO peserta_ujian_pmb SET idpeserta_ujian=NULL,no_formulir = $no_formulir,idjadwal_ujian=$id,date_added=NOW()";
+            $str = "INSERT INTO peserta_ujian_pmb SET idpeserta_ujian=NULL,no_formulir = $no_formulir,idjadwal_ujian = $id,date_added=NOW()";
             $this->DB->insertRecord($str);
             
             $this->redirect('JadwalUjianPMB',true);
@@ -101,7 +101,7 @@ class CJadwalUjianPMB extends MainPageMB {
         $this->linkOutput->NavigateUrl='#';
         $id = $this->getDataKeyField($sender, $this->RepeaterS);
         
-        $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian=$id ORDER BY tanggal_ujian ASC";
+        $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian = $id ORDER BY tanggal_ujian ASC";
         $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'namaruang', 'kapasitas', 'status'));
 		$r = $this->DB->getRecord($str);
         $dataReport=$r[1];

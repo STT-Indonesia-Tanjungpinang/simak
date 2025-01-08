@@ -17,13 +17,13 @@ class CPesertaKelas extends MainPageM {
             $this->tbCmbOutputReport->DataBind();            
             try {                     
                 $id=addslashes($this->request['id']); 
-                $infokelas=$this->Demik->getInfoKelas($id);
+                $infokelas = $this->Demik->getInfoKelas($id);
                 if (!isset($infokelas['idkelas_mhs'])){
                     throw new Exception ("Kode Kelas dengan id ($id) tidak terdaftar.");
                 }
                 $infokelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
                 $infokelas['hari'] = $this->Page->TGL->getNamaHari($infokelas['hari']);
-                $this->Demik->InfoKelas=$infokelas;
+                $this->Demik->InfoKelas = $infokelas;
                 $_SESSION['currentPagePembagianKelas']['iddosen'] = $infokelas['iddosen'];
                 $_SESSION['currentPagePesertaKelas']['InfoKelas'] = $infokelas;          
                 $this->populateData();		
@@ -38,29 +38,29 @@ class CPesertaKelas extends MainPageM {
 		$this->populateData($_SESSION['currentPagePesertaMatakuliah']['search']);
 	}
     public function populateData ($search=false) {
-        $idkelas_mhs=$_SESSION['currentPagePesertaKelas']['InfoKelas']['idkelas_mhs'];        
-        $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0";
+        $idkelas_mhs = $_SESSION['currentPagePesertaKelas']['InfoKelas']['idkelas_mhs'];        
+        $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0";
         if ($search) {            
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
                 case 'nim' :
                     $clausa="AND vdm.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="AND vdm.nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm AND kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm AND kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
                     $str = "$str $clausa";
                 break;
             }
         }else{                        
-            $jumlah_baris=$this->DB->getCountRowsOfTable("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0",'kmd.idkrsmatkul');
+            $jumlah_baris = $this->DB->getCountRowsOfTable("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0",'kmd.idkrsmatkul');
         }				
         $str = "$str ORDER BY vdm.nama_mhs ASC";
 		$this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'tahun_masuk', 'sah'));	

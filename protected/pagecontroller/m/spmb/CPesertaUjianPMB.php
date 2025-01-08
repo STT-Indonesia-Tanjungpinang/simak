@@ -17,7 +17,7 @@ class CPesertaUjianPMB extends MainPageM {
             $this->tbCmbOutputReport->DataBind();            
             try {                     
                 $id=addslashes($this->request['id']); 
-                $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,rk.namaruang,rk.kapasitas,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian=$id ORDER BY tanggal_ujian ASC";        
+                $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,rk.namaruang,rk.kapasitas,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian = $id ORDER BY tanggal_ujian ASC";        
                 $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'namaruang', 'kapasitas', 'status'));
                 $r = $this->DB->getRecord($str);
                 if (!isset($r[1])){
@@ -37,8 +37,8 @@ class CPesertaUjianPMB extends MainPageM {
 		$this->populateData($_SESSION['currentPagePesertaMatakuliah']['search']);
 	}
     public function populateData ($search=false) {
-        $idjadwal_ujian=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']['idjadwal_ujian'];        
-        $str = "SELECT pum.idpeserta_ujian,pum.no_formulir,fp.nama_mhs,fp.jk,fp.kjur1,fp.kjur2,pin.no_pin FROM peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian=$idjadwal_ujian";
+        $idjadwal_ujian = $_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']['idjadwal_ujian'];        
+        $str = "SELECT pum.idpeserta_ujian,pum.no_formulir,fp.nama_mhs,fp.jk,fp.kjur1,fp.kjur2,pin.no_pin FROM peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian";
         if ($search) {            
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
@@ -67,14 +67,14 @@ class CPesertaUjianPMB extends MainPageM {
         
         $this->DataUjianPMB=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
         $idsmt = $this->DataUjianPMB['idsmt'];
-        $tahun_masuk=$this->DataUjianPMB['tahun_masuk'];
+        $tahun_masuk = $this->DataUjianPMB['tahun_masuk'];
         $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE tahun_masuk='$tahun_masuk' AND idsmt='$idsmt' AND idjadwal_ujian != $id AND status=1 ORDER BY tanggal_ujian ASC";
         $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'namaruang', 'kapasitas', 'status'));
 		$r = $this->DB->getRecord($str);
         $result = array('none'=>' ');
         while (list($k, $v) = each($r)) {  
-            $idjadwal_ujian=$v['idjadwal_ujian'];
-            $jumlah_peserta = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$idjadwal_ujian",'idjadwal_ujian');
+            $idjadwal_ujian = $v['idjadwal_ujian'];
+            $jumlah_peserta = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian = $idjadwal_ujian",'idjadwal_ujian');
             if ($jumlah_peserta < $v['kapasitas']) {
                 $str = $v['nama_kegiatan'] . ' # '.$this->Page->TGL->tanggal ('l, d F Y', $v['tanggal_ujian']).' # '. $v['jam_mulai'].'-'.$v['jam_akhir'] . ' # '.$this->Page->TGL->tanggal ('l, d F Y', $v['tanggal_akhir_daftar']) .' # '.$v['namaruang'].' ['.$v['kapasitas'].'] sisa '.($v['kapasitas']-$jumlah_peserta);                                                
                 $result[$idjadwal_ujian] = $str;
@@ -88,9 +88,9 @@ class CPesertaUjianPMB extends MainPageM {
     public function updateData($sender, $param) {
         if ($this->IsValid) {
             $id=$this->hiddenid->Value;
-            $idjadwal_ujian=$this->cmbEditJadwal->Text;
+            $idjadwal_ujian = $this->cmbEditJadwal->Text;
             
-            $str = "UPDATE peserta_ujian_pmb SET idjadwal_ujian=$idjadwal_ujian WHERE idpeserta_ujian=$id";
+            $str = "UPDATE peserta_ujian_pmb SET idjadwal_ujian = $idjadwal_ujian WHERE idpeserta_ujian = $id";
             $this->DB->updateRecord($str);
             
             $this->redirect('spmb.PesertaUjianPMB',true,array('id'=>$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']['idjadwal_ujian']));
@@ -98,7 +98,7 @@ class CPesertaUjianPMB extends MainPageM {
     }
     public function deleteRecord($sender, $param) {        
 		$id=$this->getDataKeyField($sender, $this->RepeaterS);
-        $str = "SELECT no_formulir,idjadwal_ujian FROM peserta_ujian_pmb WHERE idpeserta_ujian=$id";
+        $str = "SELECT no_formulir,idjadwal_ujian FROM peserta_ujian_pmb WHERE idpeserta_ujian = $id";
         $this->DB->setFieldTable(array('idjadwal_ujian', 'no_formulir'));
 		$r = $this->DB->getRecord($str);
         
@@ -116,8 +116,8 @@ class CPesertaUjianPMB extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';        
         $dataReport=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
-        $idjadwal_ujian=$dataReport['idjadwal_ujian'];
-        $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian=$idjadwal_ujian",'pum.no_formulir');
+        $idjadwal_ujian = $dataReport['idjadwal_ujian'];
+        $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian",'pum.no_formulir');
 		switch ($_SESSION['outputreport']) {
             case  'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                

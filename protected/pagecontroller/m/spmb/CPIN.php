@@ -13,12 +13,12 @@ class CPIN extends MainPageM {
             $_SESSION['currentPagePIN']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $kelas=$this->DMaster->getListKelas();
+            $kelas = $this->DMaster->getListKelas();
 			$this->tbCmbKelas->DataSource = $this->DMaster->removeIdFromArray($kelas,'none');
 			$this->tbCmbKelas->Text = $_SESSION['currentPagePIN']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
@@ -33,8 +33,8 @@ class CPIN extends MainPageM {
 		}	
 	}   
 	public function getInfoToolbar() {                
-        $nama_kelas=$this->DMaster->getNamaKelasByID($_SESSION['currentPagePIN']['kelas']);
-		$tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);		
+        $nama_kelas = $this->DMaster->getNamaKelasByID($_SESSION['currentPagePIN']['kelas']);
+		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);		
 		$text="Kelas $nama_kelas Tahun Masuk $tahunmasuk";
 		return $text;
 	}
@@ -63,8 +63,8 @@ class CPIN extends MainPageM {
 		$this->populateData($_SESSION['currentPagePIN']['search']);
 	}		
 	public function populateData ($search=false) {
-        $idkelas=$_SESSION['currentPagePIN']['kelas'];
-        $tahun_masuk=$_SESSION['tahun_pendaftaran'];    
+        $idkelas = $_SESSION['currentPagePIN']['kelas'];
+        $tahun_masuk = $_SESSION['tahun_pendaftaran'];    
         if ($search) {        
             $str = "SELECT pin.no_pin,pin.no_formulir,pin.idkelas,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir)";
             $txtsearch=addslashes($this->txtKriteria->Text);
@@ -77,7 +77,7 @@ class CPIN extends MainPageM {
                 break;
             }
             $str="$str $clausa";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir)$clausa",'no_pin');		
+            $jumlah_baris = $this->DB->getCountRowsOfTable ("pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir)$clausa",'no_pin');		
         }else{
             $str_display='';
             if ($_SESSION['currentPagePIN']['display_record']=='terdaftar'){
@@ -85,8 +85,8 @@ class CPIN extends MainPageM {
             }elseif ($_SESSION['currentPagePIN']['display_record']=='belum_terdaftar'){
                 $str_display='AND fp.no_formulir IS NULL';
             }
-            $str = "SELECT pin.no_pin,pin.no_formulir,pin.idkelas,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE pin.tahun_masuk=$tahun_masuk AND pin.idkelas='$idkelas' $str_display";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE tahun_masuk=$tahun_masuk AND pin.idkelas='$idkelas' $str_display",'no_pin');		
+            $str = "SELECT pin.no_pin,pin.no_formulir,pin.idkelas,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE pin.tahun_masuk = $tahun_masuk AND pin.idkelas='$idkelas' $str_display";
+            $jumlah_baris = $this->DB->getCountRowsOfTable ("pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE tahun_masuk = $tahun_masuk AND pin.idkelas='$idkelas' $str_display",'no_pin');		
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePIN']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -112,8 +112,8 @@ class CPIN extends MainPageM {
     }
     public function generatePIN($sender, $param) {
         if ($this->IsValid) {
-            $idkelas=$_SESSION['currentPagePIN']['kelas'];
-            $tahun_masuk=$_SESSION['tahun_pendaftaran'];
+            $idkelas = $_SESSION['currentPagePIN']['kelas'];
+            $tahun_masuk = $_SESSION['tahun_pendaftaran'];
             $max_record=$this->DB->getMaxOfRecord('no_formulir',"pin WHERE tahun_masuk='$tahun_masuk'")+1;		
 			$urut=substr($max_record,strlen($tahun_masuk),4);		
 			$no_urut=($urut=='')?'0001':$urut;
@@ -121,15 +121,15 @@ class CPIN extends MainPageM {
             $jumlah=addslashes($this->txtJumlahFormulir->Text);
             $jumlah_formulir = $no_urut+$jumlah;
             if ($jumlah <= 1) {                        
-                $no_pin=$no_urut.mt_rand(100000,999999);
+                $no_pin = $no_urut.mt_rand(100000,999999);
                 $values="('$no_pin', $no_urut, $tahun_masuk,'$idkelas')";
             }else {
-                for ($i=$no_urut;$i<$jumlah_formulir;$i++) {                    
-                    $no_pin=$i.mt_rand(100000,999999);
+                for ($i = $no_urut;$i<$jumlah_formulir;$i++) {                    
+                    $no_pin = $i.mt_rand(100000,999999);
                     if ($jumlah_formulir > $i+1) {
-                        $values=$values."('$no_pin', $i, $tahun_masuk,1,'$idkelas'),";
+                        $values = $values."('$no_pin', $i, $tahun_masuk,1,'$idkelas'),";
                     }else {
-                        $values=$values."('$no_pin', $i, $tahun_masuk,1,'$idkelas')";
+                        $values = $values."('$no_pin', $i, $tahun_masuk,1,'$idkelas')";
                     }
                 }
             }

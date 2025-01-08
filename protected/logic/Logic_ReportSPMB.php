@@ -13,7 +13,7 @@ class Logic_ReportSPMB extends Logic_Report {
         $this->db->setFieldTable(array('no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','jk','idagama','nama_agama','nama_ibu_kandung','idwarga','nik','idstatus','alamat_kantor','alamat_rumah','telp_rumah','telp_kantor','telp_hp','email','idjp','nama_pekerjaan','pendidikan_terakhir','jurusan','kota','provinsi','tahun_pa','nama_pekerjaan','jenis_slta','asal_slta','status_slta','nomor_ijazah','kjur1','kjur2','idkelas','waktu_mendaftar','ta','idsmt'));
         $r=$this->db->getRecord($str);
         
-        $datamhs=$r[1];
+        $datamhs = $r[1];
         switch ($this->getDriver()) {
             case 'excel2003' :               
             case 'excel2007' :                
@@ -156,9 +156,9 @@ class Logic_ReportSPMB extends Logic_Report {
      */
     public function printFormulirPendaftaranAll ($outputcompress, $daftar_ps, $objDMaster) {  
         $kjur=$this->dataReport['kjur'];        
-        $tahun_masuk=$this->dataReport['tahun_masuk'];
+        $tahun_masuk = $this->dataReport['tahun_masuk'];
         $semester=$this->dataReport['semester'];
-        $nama_tahun=$this->dataReport['nama_tahun'];
+        $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         $daftar_via=$this->dataReport['daftar_via'];
 
@@ -348,7 +348,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $r=$this->db->getRecord($str);
                 
                 while (list($k, $v)=each($r)) {
-                    $datamhs=$v;								
+                    $datamhs = $v;								
                     if ($datamhs['waktu_mendaftar']=='0000-00-00 00:00:00') {							
                         $datamhs['tanggal_lahir'] = '-';
                         $datamhs['jk'] = '-';
@@ -503,7 +503,7 @@ class Logic_ReportSPMB extends Logic_Report {
      */
     public function printNilaiUjian ($daftar_jurusan, $objDMaster) {
         $kjur=$this->dataReport['kjur'];        
-        $tahun_masuk=$this->dataReport['tahun_masuk'];
+        $tahun_masuk = $this->dataReport['tahun_masuk'];
         
         $str_kjur=$kjur=='none'?' AND (num.kjur=0 OR num.kjur IS NULL)':" AND num.kjur=$kjur";	                
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.idkelas,ku.tgl_ujian,ts.nama_tempat,num.kjur,num.jumlah_soal,num.jawaban_benar,num.jawaban_salah,num.nilai,fp.kjur1,fp.kjur2,num.passing_grade_1,num.passing_grade_2,num.kjur AS diterima_di_prodi FROM kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE fp.ta='$tahun_masuk'$str_kjur ORDER BY fp.idkelas ASC,nilai DESC,nama_mhs ASC";
@@ -601,7 +601,7 @@ class Logic_ReportSPMB extends Logic_Report {
                     }else{
                         $pil1='N.A';
                         if ($v['kjur1'] == $v['diterima_di_prodi']) {
-                            $nama_ps=$daftar_jurusan[$v['diterima_di_prodi']];     
+                            $nama_ps = $daftar_jurusan[$v['diterima_di_prodi']];     
                             $ket='DI TERIMA';
                             $pil1="$ket ($nama_ps)";
                         }
@@ -642,8 +642,8 @@ class Logic_ReportSPMB extends Logic_Report {
      * digunakan untuk mencetak penggunaan PIN
      */
     public function printPIN() {
-        $pilihan=$this->dataReport['pilihan'];
-        $tahun_masuk=$this->dataReport['tahun_masuk'];
+        $pilihan = $this->dataReport['pilihan'];
+        $tahun_masuk = $this->dataReport['tahun_masuk'];
         switch ($this->getDriver()) {
             case 'excel2003' :               
             case 'excel2007' :    
@@ -688,7 +688,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 }elseif ($pilihan=='belum_terdaftar'){
                     $str_display='AND fp.no_formulir IS NULL';
                 }
-                $str = "SELECT pin.no_pin,pin.no_formulir,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE pin.tahun_masuk=$tahun_masuk $str_display";
+                $str = "SELECT pin.no_pin,pin.no_formulir,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE pin.tahun_masuk = $tahun_masuk $str_display";
                 $str = "$str  $str_display ORDER BY pin.no_formulir ASC";
                 $this->db->setFieldTable(array('no_pin','no_formulir','nama_mhs','ket'));
                 $r = $this->db->getRecord($str);
@@ -697,7 +697,7 @@ class Logic_ReportSPMB extends Logic_Report {
                     $sheet->setCellValue("B$row", $v['no']);
                     $sheet->setCellValue("C$row", $v['no_formulir']);
                     $sheet->setCellValueExplicit("D$row", $v['no_pin'],PHPExcel_Cell_DataType::TYPE_STRING);
-                    $nama_mhs=$v['nama_mhs'] == '' ? 'N.A' : $v['nama_mhs'];
+                    $nama_mhs = $v['nama_mhs'] == '' ? 'N.A' : $v['nama_mhs'];
                     $sheet->setCellValue("E$row", $nama_mhs);
                     $ket = $v['ket'] == '' ? 'N.A' : 'TELAH DAFTAR';
                     $sheet->setCellValue("F$row", $ket);
@@ -902,9 +902,9 @@ class Logic_ReportSPMB extends Logic_Report {
                 $row+=8;
                 $rpt->setXY(3, $row);
                 $rpt->SetFont ('helvetica','',8);
-                $hari_ujian=$this->tgl->tanggal ('l', $this->dataReport['tanggal_ujian']);
+                $hari_ujian = $this->tgl->tanggal ('l', $this->dataReport['tanggal_ujian']);
                 $terbilang_tanggal=  ucwords($this->setup->toTerbilang($this->tgl->tanggal ('d', $this->dataReport['tanggal_ujian'])));
-                $bulan=$this->tgl->tanggal ('F', $this->dataReport['tanggal_ujian']);
+                $bulan = $this->tgl->tanggal ('F', $this->dataReport['tanggal_ujian']);
                 $terbilang_tahun=  ucwords($this->setup->toTerbilang($this->tgl->tanggal ('Y', $this->dataReport['tanggal_ujian'])));
                 $nama_pt=  ucwords(strtolower($this->setup->getSettingValue('nama_pt')));
                 $txt="Pada hari ini <b>$hari_ujian</b> tanggal <b>$terbilang_tanggal</b> bulan <b>$bulan</b> tahun <b>$terbilang_tahun</b> telah dilaksanakan ujian seleksi penerimaan mahasiswa baru {$nama_pt}.";
@@ -1004,8 +1004,8 @@ class Logic_ReportSPMB extends Logic_Report {
                 $rpt->Cell(23,6,'I',1,0,'C');
                 $rpt->Cell(23,6,'II',1,0,'C');
                 
-                $idjadwal_ujian=$this->dataReport['idjadwal_ujian'];        
-                $str = "SELECT pum.no_formulir,fp.nama_mhs,fp.idkelas,fp.kjur1,fp.kjur2,fp.telp_hp FROM peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian=$idjadwal_ujian ORDER BY fp.no_formulir ASC";
+                $idjadwal_ujian = $this->dataReport['idjadwal_ujian'];        
+                $str = "SELECT pum.no_formulir,fp.nama_mhs,fp.idkelas,fp.kjur1,fp.kjur2,fp.telp_hp FROM peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian ORDER BY fp.no_formulir ASC";
                 $this->db->setFieldTable(array('no_formulir','telp_hp','nama_mhs','idkelas','kjur1','kjur2'));	
                 $r=$this->db->getRecord($str);
                 

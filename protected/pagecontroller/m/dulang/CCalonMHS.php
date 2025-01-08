@@ -17,7 +17,7 @@ class CCalonMHS Extends MainPageM {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -36,8 +36,8 @@ class CCalonMHS Extends MainPageM {
     }
     public function setInfoToolbar() {                
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
+        $tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
         $semester = $this->setup->getSemester($_SESSION['currentPageCalonMHS']['semester_masuk']);		
 		$this->lblModulHeader->Text="Program Studi $ps Tahun Masuk $tahunmasuk Semester $semester ";        
 	}
@@ -69,26 +69,26 @@ class CCalonMHS Extends MainPageM {
 	}
     public function populateData($search=false) {
         $kjur = $_SESSION['kjur']; 
-        $tahun_masuk=$_SESSION['tahun_masuk'];
-        $semester_masuk=$_SESSION['currentPageCalonMHS']['semester_masuk'];
+        $tahun_masuk = $_SESSION['tahun_masuk'];
+        $semester_masuk = $_SESSION['currentPageCalonMHS']['semester_masuk'];
         if ($search) {
-            $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
+            $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
                 case 'no_formulir' :
                     $clausa=" AND fp.no_formulir='$txtsearch'";                    
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
                     $str = "$str $clausa";
                 break;                
                 case 'nama' :
                     $clausa=" AND fp.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
                     $str = "$str $clausa";
                 break;
             }
         }else{            
-            $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun=$tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL",'DISTINCT(fp.no_formulir)');
+            $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
+            $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL",'DISTINCT(fp.no_formulir)');
         }
 		
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageCalonMHS']['page_num'];
@@ -128,7 +128,7 @@ class CCalonMHS Extends MainPageM {
                 if (!isset($r[1])) {                                
                     throw new Exception ("Calon Mahasiswa dengan Nomor Formulir ($no_formulir) tidak terdaftar di Database, silahkan ganti dengan yang lain.");     
                 }
-                $datamhs=$r[1];     
+                $datamhs = $r[1];     
                 $datamhs['idsmt'] = $datamhs['semester_masuk'];
                 $this->Finance->setDataMHS($datamhs);
                 if (!$spmb=$this->Finance->isLulusSPMB(true)) {

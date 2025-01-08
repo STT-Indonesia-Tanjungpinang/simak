@@ -1,13 +1,15 @@
 <?php
 prado::using ('Application.MainPageM');
 class CPesertaKelas extends MainPageM {	
-  public function onLoad($param) {		
+  public function onLoad($param) 
+  {		
     parent::onLoad($param);				
     $this->showSubMenuAkademikPerkuliahan=true;
     $this->showPembagianKelas=true;
     
     $this->createObj('Akademik');
-    if (!$this->IsPostBack && !$this->IsCallback) {
+    if (!$this->IsPostBack && !$this->IsCallback) 
+    {
       if (!isset($_SESSION['currentPagePesertaKelas'])||$_SESSION['currentPagePesertaKelas']['page_name']!='m.perkuliahan.PesertaKelas') {
         $_SESSION['currentPagePesertaKelas']=array('page_name'=>'m.perkuliahan.PesertaKelas', 'page_num'=>0,'search'=>false,'InfoKelas'=>array(),'DaftarKelasTujuan'=>array());
       }  
@@ -15,23 +17,25 @@ class CPesertaKelas extends MainPageM {
       $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
       $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
       $this->tbCmbOutputReport->DataBind();            
-      try {                     
+      try 
+      {                     
         $id=addslashes($this->request['id']); 
-        $infokelas=$this->Demik->getInfoKelas($id);
+        $infokelas = $this->Demik->getInfoKelas($id);
+        
         if (!isset($infokelas['idkelas_mhs'])){
           throw new Exception ("Kode Kelas dengan id ($id) tidak terdaftar.");
         }
         $infokelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
         $infokelas['hari'] = $this->Page->TGL->getNamaHari($infokelas['hari']);
-        $this->Demik->InfoKelas=$infokelas;
+        $this->Demik->InfoKelas = $infokelas;
         $_SESSION['currentPagePembagianKelas']['iddosen'] = $infokelas['iddosen'];
         $_SESSION['currentPagePesertaKelas']['InfoKelas'] = $infokelas;    
         
         $this->hiddenidkelasmhs->Value=$id;
-        $idkelas=$infokelas['idkelas'];
-        $idpenyelenggaraan=$infokelas['idpenyelenggaraan'];
-        $idpengampu_penyelenggaraan=$infokelas['idpengampu_penyelenggaraan'];
-        $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar FROM kelas_mhs km JOIN pengampu_penyelenggaraan pp ON pp.idpengampu_penyelenggaraan=km.idpengampu_penyelenggaraan WHERE idkelas_mhs!='$id' AND idkelas='$idkelas' AND pp.idpenyelenggaraan=$idpenyelenggaraan";
+        $idkelas = $infokelas['idkelas'];
+        $idpenyelenggaraan = $infokelas['idpenyelenggaraan'];
+        $idpengampu_penyelenggaraan = $infokelas['idpengampu_penyelenggaraan'];
+        $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar FROM kelas_mhs km JOIN pengampu_penyelenggaraan pp ON pp.idpengampu_penyelenggaraan=km.idpengampu_penyelenggaraan WHERE idkelas_mhs!='$id' AND pp.idpenyelenggaraan = $idpenyelenggaraan";        
         $this->DB->setFieldTable(array('idkelas_mhs', 'idkelas', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar'));
         $r = $this->DB->getRecord($str);
         
@@ -44,32 +48,35 @@ class CPesertaKelas extends MainPageM {
         $this->cmbKelasTujuan->DataBind();
         
         $this->populateData();		
-      } catch (Exception $ex) {
+      } 
+      catch (Exception $ex) 
+      {
         $this->idProcess = 'view';
         $this->errorMessage->Text = $ex->getMessage();
       }
     }	
     $this->Demik->setInfoKelas($_SESSION['currentPagePesertaKelas']['InfoKelas']);	
   } 
-  public function pindahkanAnggotaKelas($sender, $param) {
+  public function pindahkanAnggotaKelas($sender, $param) 
+  {
     if ($this->IsValid)
     {
-      $old_idkelas_mhs=$this->hiddenidkelasmhs->Value;
+      $old_idkelas_mhs = $this->hiddenidkelasmhs->Value;
       $idkelas_mhs = $this->cmbKelasTujuan->Text;
       
-      $jumlah_peserta = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs OR idkelas_mhs=$old_idkelas_mhs",'idkrsmatkul');
-      $str = "SELECT rk.kapasitas FROM kelas_mhs km JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idkelas_mhs=$idkelas_mhs";
+      $jumlah_peserta = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs OR idkelas_mhs = $old_idkelas_mhs",'idkrsmatkul');
+      $str = "SELECT rk.kapasitas FROM kelas_mhs km JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idkelas_mhs = $idkelas_mhs";
       $this->DB->setFieldTable(array('kapasitas'));
       $r = $this->DB->getRecord($str);
       if ($jumlah_peserta <= $r[1]['kapasitas']) 
       {
-        $str = "UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkelas_mhs=$old_idkelas_mhs";
+        $str = "UPDATE kelas_mhs_detail SET idkelas_mhs = $idkelas_mhs WHERE idkelas_mhs = $old_idkelas_mhs";
         $this->DB->updateRecord($str);
 
-        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
+        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs = $idkelas_mhs";
         $this->DB->updateRecord($str);
         
-        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$old_idkelas_mhs";
+        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs = $old_idkelas_mhs";
         $this->DB->updateRecord($str);
 
         $this->redirect('perkuliahan.PesertaKelas', true, array('id'=>$old_idkelas_mhs));
@@ -95,22 +102,22 @@ class CPesertaKelas extends MainPageM {
   }
   public function pindahkanAnggotaKelasMHS($sender, $param) {
     $idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);	
-    $old_idkelas_mhs=$this->hiddenidkelasmhs->Value;
-    $idkelas_mhs=$sender->Text;
+    $old_idkelas_mhs = $this->hiddenidkelasmhs->Value;
+    $idkelas_mhs = $sender->Text;
     if ($idkelas_mhs != 'none')
     {
-      $jumlah_peserta = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs",'idkrsmatkul')+1;
-      $str = "SELECT rk.kapasitas FROM kelas_mhs km JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idkelas_mhs=$idkelas_mhs";
+      $jumlah_peserta = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkrsmatkul')+1;
+      $str = "SELECT rk.kapasitas FROM kelas_mhs km JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idkelas_mhs = $idkelas_mhs";
       $this->DB->setFieldTable(array('kapasitas'));
       $r = $this->DB->getRecord($str);
       if ($jumlah_peserta <= $r[1]['kapasitas']) {
-        $str = "UPDATE kelas_mhs_detail SET idkelas_mhs=$idkelas_mhs WHERE idkrsmatkul = $idkrsmatkul";
+        $str = "UPDATE kelas_mhs_detail SET idkelas_mhs = $idkelas_mhs WHERE idkrsmatkul = $idkrsmatkul";
         $this->DB->updateRecord($str);
 
-        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$idkelas_mhs";
+        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs = $idkelas_mhs";
         $this->DB->updateRecord($str);
         
-        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs=$old_idkelas_mhs";
+        $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs = $old_idkelas_mhs";
         $this->DB->updateRecord($str);
 
         $this->redirect('perkuliahan.PesertaKelas', true, array('id'=>$this->hiddenidkelasmhs->Value));
@@ -123,29 +130,29 @@ class CPesertaKelas extends MainPageM {
     }
   }
   public function populateData ($search=false) {
-    $idkelas_mhs=$_SESSION['currentPagePesertaKelas']['InfoKelas']['idkelas_mhs'];        
-    $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0";
+    $idkelas_mhs = $_SESSION['currentPagePesertaKelas']['InfoKelas']['idkelas_mhs'];        
+    $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0";
     if ($search) {            
       $txtsearch=addslashes($this->txtKriteria->Text);
       switch ($this->cmbKriteria->Text) {                
         case 'nim' :
           $clausa="AND vdm.nim='$txtsearch'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
           $str = "$str $clausa";
         break;
         case 'nirm' :
           $clausa="AND vdm.nirm='$txtsearch'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm AND kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm AND kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
           $str = "$str $clausa";
         break;
         case 'nama' :
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
           $str = "$str $clausa";
         break;
       }
     }else{                        
-      $jumlah_baris=$this->DB->getCountRowsOfTable("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0",'kmd.idkrsmatkul');
+      $jumlah_baris = $this->DB->getCountRowsOfTable("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0",'kmd.idkrsmatkul');
     }				
     $str = "$str ORDER BY vdm.nama_mhs ASC";
     $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nirm', 'nama_mhs', 'jk', 'tahun_masuk', 'sah'));	

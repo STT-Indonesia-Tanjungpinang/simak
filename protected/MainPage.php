@@ -209,7 +209,7 @@ class MainPage extends TPage
   * id proses tambah, delete, update,show
   */
   protected function setIdProcess ($sender, $param) {		
-    $this->idProcess=$sender->getId();
+    $this->idProcess = $sender->getId();
   }
   
   /**
@@ -286,7 +286,7 @@ class MainPage extends TPage
   public function getAngkatan ($tanpanone=true) {
     $dt =$this->DMaster->getListTA();		        
     $ta=$_SESSION['ta'];		
-    $tahun_akademik=$tanpanone==true?array('none'=>'All'):array();
+    $tahun_akademik = $tanpanone==true?array('none'=>'All'):array();
     while (list($k, $v)=each ($dt)) {
       if ($k != 'none') {
         if ($k <= $ta) {
@@ -316,7 +316,7 @@ class MainPage extends TPage
   public function getInfoPaging ($repeater) {
     $str='';
     if ($repeater->Items->Count() > 0) {
-      $jumlah_baris=$repeater->VirtualItemCount;
+      $jumlah_baris = $repeater->VirtualItemCount;
       $currentPage=$repeater->CurrentPageIndex;
       $offset=$currentPage*$repeater->PageSize;
       $awal=$offset+1;        

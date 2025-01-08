@@ -16,7 +16,7 @@ class CJawabanSoalPMB extends MainPageM {
                 if (!isset($r[1]) ) {
                     throw new Exception("No. Formulir ($no_formulir) tidak terdaftar.");
                 }    
-                $datamhs=$r[1];
+                $datamhs = $r[1];
                 $datamhs['nama_ps1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];
                 $datamhs['nama_ps2'] = $datamhs['kjur2']==0 ?'N.A' :$_SESSION['daftar_jurusan'][$datamhs['kjur2']];
                 $datamhs['diterima_ps1'] = '';
@@ -28,7 +28,7 @@ class CJawabanSoalPMB extends MainPageM {
                 $this->DB->setFieldTable(array('no_formulir', 'tgl_ujian', 'tgl_selesai_ujian', 'isfinish', 'jumlah_soal', 'jawaban_benar', 'jawaban_salah', 'soal_tidak_terjawab', 'nilai', 'kjur'));
                 $r = $this->DB->getRecord($str);      
                 if (isset($r[1]) ) {
-                    $dataujian=$r[1];                                                        
+                    $dataujian = $r[1];                                                        
                     if ($dataujian['isfinish']) {                            
                         if ($dataujian['nilai'] == '') {                                    
                             $jawaban_benar = $this->DB->getCountRowsOfTable("jawaban_ujian ju LEFT JOIN jawaban j ON (j.idjawaban=ju.idjawaban) WHERE no_formulir='$no_formulir' AND ju.idjawaban!=0 AND status=1",'ju.idjawaban');
@@ -51,7 +51,7 @@ class CJawabanSoalPMB extends MainPageM {
                         $datamhs['diterima_ps2']=($kjur2 > 0 && $dataujian['kjur'] == $kjur2)?'<span class="label label-success">DI TERIMA</span>':'';
                         $this->Demik->setDataMHS($datamhs);
 
-                        $this->DataUjian=$dataujian;                                
+                        $this->DataUjian = $dataujian;                                
                         $this->populateSoal();
                     }else{                                
                         throw new Exception ("Ujian PMB Calon Mahasiswa dengan No. Formulir ($no_formulir) belum selelai.");
@@ -80,7 +80,7 @@ class CJawabanSoalPMB extends MainPageM {
         $item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
             $idsoal = $item->DataItem['idsoal'];
-            $idjawaban_tersimpan=$item->DataItem['idjawaban'];
+            $idjawaban_tersimpan = $item->DataItem['idjawaban'];
             $str = "SELECT idjawaban,idsoal,j.jawaban, $idjawaban_tersimpan AS jawaban_tersimpan FROM jawaban j WHERE idsoal = $idsoal";
             $this->DB->setFieldTable(array('idjawaban', 'idsoal', 'jawaban', 'jawaban_tersimpan')); 
             $r = $this->DB->getRecord($str);                   

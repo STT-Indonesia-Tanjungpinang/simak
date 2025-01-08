@@ -54,7 +54,7 @@ class CPenyelenggaraan extends MainPageM {
 	}
     public function getInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
@@ -115,13 +115,13 @@ class CPenyelenggaraan extends MainPageM {
 			$str = "INSERT INTO penyelenggaraan (idpenyelenggaraan,idsmt,tahun,kmatkul,kjur,iddosen) VALUES (NULL,'$idsmt', '$ta', '";
 			$str_pengampu='INSERT INTO pengampu_penyelenggaraan (idpengampu_penyelenggaraan,idpenyelenggaraan,iddosen,verified) VALUES (NULL,';
 			foreach ($this->RepeaterAdd->Items As $inputan) {
-                $iddosen=$inputan->cmbAddDaftarDosen->Text;
+                $iddosen = $inputan->cmbAddDaftarDosen->Text;
 				if ($iddosen != 'none'&& $iddosen !='') {					
 					$kmatkul = $inputan->txtKmatkul->Value;					
 					$str2 = $str . "$kmatkul', '$kjur', $iddosen)";					
 					$this->DB->query('BEGIN');
 					if ($this->DB->insertRecord($str2)) {
-						$idpenyelenggaraan=$this->DB->getLastInsertID();
+						$idpenyelenggaraan = $this->DB->getLastInsertID();
 						$str_pengampu2=$str_pengampu."$idpenyelenggaraan, $iddosen,0)";
 						$this->DB->insertRecord($str_pengampu2);
 						$this->DB->query('COMMIT');
@@ -135,8 +135,8 @@ class CPenyelenggaraan extends MainPageM {
 	}
 	
 	public function ubahPengampuMatkul($sender, $param) {		
-		$idpenyelenggaraan=$this->getDataKeyField($sender, $this->RepeaterS);
-		$iddosen=$sender->Text;				
+		$idpenyelenggaraan = $this->getDataKeyField($sender, $this->RepeaterS);
+		$iddosen = $sender->Text;				
 		$str = "UPDATE penyelenggaraan SET iddosen='$iddosen' WHERE idpenyelenggaraan='$idpenyelenggaraan'";
 		$this->DB->query('BEGIN');
 		if ($this->DB->updateRecord($str)) {			
@@ -156,7 +156,7 @@ class CPenyelenggaraan extends MainPageM {
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";
             $this->modalMessageError->Show();
         }else{
-            $this->DB->deleteRecord("penyelenggaraan WHERE idpenyelenggaraan=$id");
+            $this->DB->deleteRecord("penyelenggaraan WHERE idpenyelenggaraan = $id");
             $this->redirect('perkuliahan.Penyelenggaraan',true);            
         }
 	}	

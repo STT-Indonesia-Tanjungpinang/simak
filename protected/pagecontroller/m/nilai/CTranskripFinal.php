@@ -57,7 +57,7 @@ class CTranskripFinal extends MainPageM {
   }
   public function getInfoToolbar() {        
     $kjur = $_SESSION['kjur'];        
-    $ps=$_SESSION['daftar_jurusan'][$kjur];
+    $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
     $text="Program Studi $ps TA $ta Semester $semester";
@@ -84,23 +84,23 @@ class CTranskripFinal extends MainPageM {
       switch ($this->cmbKriteria->Text) {                
         case 'nim' :
           $clausa="AND ta.nim='$txtsearch'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
         case 'nirm' :
           $clausa="AND vdm.nirm='$txtsearch'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
         case 'nama' :
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
       }
     }else{
-      $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun=$ta AND ta.idsmt=$idsmt";
-      $jumlah_baris=$this->DB->getCountRowsOfTable("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun=$ta AND ta.idsmt=$idsmt",'ta.nim');				
+      $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun = $ta AND ta.idsmt=$idsmt";
+      $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun = $ta AND ta.idsmt=$idsmt",'ta.nim');				
     }        
     $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageTranskripFinal']['page_num'];		
     $this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -133,13 +133,13 @@ class CTranskripFinal extends MainPageM {
       try {				
         $this->Nilai->setNim($nim);
         $r = $this->Nilai->getList("register_mahasiswa WHERE nim='$nim'",array('nim', 'k_status', 'tahun', 'idsmt'));
-        $this->Nilai->dataMhs=$r[1];				
+        $this->Nilai->dataMhs = $r[1];				
         if (!$this->Nilai->isNimExist()) throw new AkademikException ($nim,2);	
         if ($this->Application->getModule ('environment')->checkRequirementTranskripFinal) {
           if ($this->Nilai->dataMhs['k_status']!='L')throw new Exception ("Status ($nim) belum lulus.");
           $awal = $r[1]['tahun'].$r[1]['semester'];
           $akhir = $_SESSION['ta'].$_SESSION['semester'];
-          $totalsks=$this->DB->getSumRowsOfTable('sks',"v_nilai WHERE (tasmt BETWEEN $awal AND $akhir) AND nim='$nim' AND n_kual !='E'");
+          $totalsks = $this->DB->getSumRowsOfTable('sks',"v_nilai WHERE (tasmt BETWEEN $awal AND $akhir) AND nim='$nim' AND n_kual !='E'");
           if ($totalsks <144)throw new Exception ("Pada T.A dan semester ini total SKS ($nim) baru $totalsks harus lebih dari atau sama dengan 144");				
         }
       }catch (AkademikException $e) {

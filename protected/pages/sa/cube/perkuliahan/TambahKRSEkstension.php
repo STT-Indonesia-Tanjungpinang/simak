@@ -30,10 +30,10 @@ class TambahKRSEkstension extends MainPageSA {
 		if (!$this->IsPostBack&&!$this->IsCallback) {	            
             $this->lblModulHeader->Text = $this->getInfoToolbar();            
             try {			                
-                $this->KRS->DataKRS=$_SESSION['currentPageKRSEkstension']['DataKRS'];
+                $this->KRS->DataKRs = $_SESSION['currentPageKRSEkstension']['DataKRS'];
                 $idsmt=$this->KRS->DataKRS['krs']['idsmt'];
-                $tahun=$this->KRS->DataKRS['krs']['tahun'];
-                $datamhs=$_SESSION['currentPageKRSEkstension']['DataMHS'];                                            
+                $tahun = $this->KRS->DataKRS['krs']['tahun'];
+                $datamhs = $_SESSION['currentPageKRSEkstension']['DataMHS'];                                            
                 $nim = $datamhs['nim'];                
                 $this->KRS->setDataMHS($datamhs);   
                 
@@ -41,10 +41,10 @@ class TambahKRSEkstension extends MainPageSA {
                 $idkur=$this->KRS->getIDKurikulum($kjur);
                 $str = "SELECT vp.idpenyelenggaraan,vp.kmatkul,vp.nmatkul,vp.sks,vp.semester,vp.iddosen,vp.nidn,vp.nama_dosen FROM v_penyelenggaraan vp WHERE vp.idpenyelenggaraan NOT IN (SELECT km.idpenyelenggaraan FROM krsmatkul km,krs k WHERE km.idkrs=k.idkrs AND k.nim='$nim') AND vp.idsmt='$idsmt' AND vp.tahun='$tahun' AND vp.kjur='$kjur' AND vp.idkur=$idkur ORDER BY vp.semester ASC,vp.nmatkul ASC";
                 $this->DB->setFieldTable (array('idpenyelenggaraan','kmatkul','nmatkul','sks','semester','iddosen','nidn','nama_dosen'));			
-                $daftar_matkul_diselenggarakan=$this->DB->getRecord($str);
+                $daftar_matkul_diselenggarakan = $this->DB->getRecord($str);
 
-                $idkrs=$this->KRS->DataKRS['krs']['idkrs'];
-                $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs=$idkrs ORDER BY semester ASC,kmatkul ASC";
+                $idkrs = $this->KRS->DataKRS['krs']['idkrs'];
+                $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs = $idkrs ORDER BY semester ASC,kmatkul ASC";
                 $this->DB->setFieldTable(array('idpenyelenggaraan','idkrsmatkul','kmatkul','nmatkul','sks','semester','batal','nidn','nama_dosen'));
                 $matkul=$this->DB->getRecord($str);                
                 $this->RepeaterS->DataSource=$matkul;
@@ -69,17 +69,17 @@ class TambahKRSEkstension extends MainPageSA {
     }
 	public function tambahMatkul($sender, $param) {
 		try {		
-            $datakrs=$_SESSION['currentPageKRSEkstension']['DataKRS']['krs'];
+            $datakrs = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs'];
             $datakrs['iddata_konversi']=$this->Pengguna->getDataUser('iddata_konversi');
             $this->KRS->setDataMHS($datakrs);
-			$idkrs=$datakrs['idkrs'];
+			$idkrs = $datakrs['idkrs'];
 			$str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs'";
 			$this->DB->setFieldTable(array('jumlah'));
 			$r=$this->DB->getRecord($str);
 			$jumlah=$r[1]['jumlah']+$sender->CommandParameter;
-			$maxSKS=$datakrs['maxSKS'];
+			$maxSKs = $datakrs['maxSKS'];
 			if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
-			$idpenyelenggaraan=$this->getDataKeyField($sender, $this->RepeaterPenyelenggaraan);			
+			$idpenyelenggaraan = $this->getDataKeyField($sender, $this->RepeaterPenyelenggaraan);			
 			if (!$this->DB->checkRecordIsExist('idpenyelenggaraan','krsmatkul', $idpenyelenggaraan,' AND idkrs='.$idkrs)) { 
 				$str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs', $idpenyelenggaraan,0)";
 				$this->DB->insertRecord($str);			
@@ -112,7 +112,7 @@ class TambahKRSEkstension extends MainPageSA {
 			}else{
 				$onclick="if(!confirm('Anda yakin mau menghapus $matkul')) return false;";			
 			}
-			$item->btnHapus->Attributes->OnClick=$onclick;
+			$item->btnHapus->Attributes->OnClick = $onclick;
 			TambahKRSEkstension::$totalSKS+=$item->DataItem['sks'];	
 			TambahKRSEkstension::$jumlahMatkul+=1;	
 		}

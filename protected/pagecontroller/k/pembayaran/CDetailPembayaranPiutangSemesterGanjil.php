@@ -18,7 +18,7 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
                 $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,vdm.iddosen_wali,vdm.idkelas,vdm.k_status,sm.n_status AS status,vdm.photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE vdm.nim='$nim'";
                 $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'status', 'photo_profile'));
                 $r = $this->DB->getRecord($str);	           
-                $datamhs=$r[1];
+                $datamhs = $r[1];
                 $datamhs['idsmt'] = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['semester'];
                 $datamhs['ta'] = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['ta'];             
                 if (!isset($r[1])) {
@@ -32,11 +32,11 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
                 $this->Finance->setDataMHS($datamhs);                
                 $datamhs['iddata_konversi'] = $this->Finance->isMhsPindahan($datamhs['nim'],true);            
                 
-                $kelas=$this->Finance->getKelasMhs();                
+                $kelas = $this->Finance->getKelasMhs();                
                 $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
                 $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
-                $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
+                $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                 $datamhs['nama_dosen'] = $nama_dosen;                
                 $this->Finance->setDataMHS($datamhs);
                 
@@ -56,9 +56,9 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
         }        
     }
     public function populateTransaksi() {
-        $datamhs=$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'];
+        $datamhs = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'];
         $nim = $datamhs['nim'];
-        $tahun=$datamhs['ta'];
+        $tahun = $datamhs['ta'];
         $idsmt = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['semester'];
         $kjur = $datamhs['kjur'];
         $str = "SELECT no_transaksi,no_faktur,tanggal,commited,disc,date_added FROM transaksi WHERE tahun='$tahun' AND idsmt='$idsmt' AND nim='$nim' AND kjur='$kjur'";
@@ -66,9 +66,9 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
         $r = $this->DB->getRecord($str);
         $result = array();
         while (list($k, $v) = each($r)) {
-            $no_transaksi=$v['no_transaksi'];
-            $v['total'] = $this->DB->getSumRowsOfTable('dibayarkan',"transaksi_detail WHERE no_transaksi=$no_transaksi");
-            $v['jumlah_disc'] = $v['disc'] > 0 ? $v['total']-(($v['disc']/100)*$v['total']):0;
+            $no_transaksi = $v['no_transaksi'];
+            $v['total'] = $this->DB->getSumRowsOfTable('dibayarkan',"transaksi_detail WHERE no_transaksi = $no_transaksi");
+            $v['jumlah_disc'] = $v['disc'] > 0 ? $v['total']-(($v['disc'] / 100)*$v['total']):0;
             $result[$k] = $v;
         }
         $this->ListTransactionRepeater->DataSource = $result;
@@ -88,13 +88,13 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
 		}
 	}	
 	public function addTransaction($sender, $param) {
-        $datamhs=$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'];    
+        $datamhs = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'];    
         $this->Finance->setDataMHS($datamhs);
         if ($datamhs['no_transaksi'] == 'none') {
             $no_formulir = $datamhs['no_formulir'];
             $nim = $datamhs['nim'];
             $ta = $datamhs['ta'];    
-            $tahun_masuk=$datamhs['tahun_masuk'];
+            $tahun_masuk = $datamhs['tahun_masuk'];
             $idsmt = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['semester'];
             if ($this->Finance->getLunasPembayaran($ta, $idsmt)) {
                 $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena sudah lunas.';
@@ -105,14 +105,14 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
             }else{
                 $no_transaksi='10'.$ta.$idsmt.mt_rand(10000,99999);
                 $no_faktur = $ta.$no_transaksi;
-                $ps=$datamhs['kjur'];                
-                $idkelas=$datamhs['idkelas'];
+                $ps = $datamhs['kjur'];                
+                $idkelas = $datamhs['idkelas'];
                 $userid = $this->Pengguna->getDataUser('userid');
 
                 $this->DB->query ('BEGIN');
-                $str = "INSERT INTO transaksi SET no_transaksi=$no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                
+                $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                
                 if ($this->DB->insertRecord($str)) {
-                    $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE nim=$nim AND tahun=$ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
+                    $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE nim=$nim AND tahun = $ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
                     $this->DB->setFieldTable(array('idkombi', 'sudah_dibayar'));
                     $d=$this->DB->getRecord($str);
 
@@ -120,13 +120,13 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
                     while (list($o, $p)=each($d)) {            
                         $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
                     }
-                    $str = "SELECT k.idkombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun=$tahun_masuk AND idsmt=$idsmt AND kpt.idkelas='$idkelas' AND periode_pembayaran='semesteran' ORDER BY periode_pembayaran,nama_kombi ASC";
+                    $str = "SELECT k.idkombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE  k.idkombi=kpt.idkombi AND tahun = $tahun_masuk AND idsmt=$idsmt AND kpt.idkelas='$idkelas' AND periode_pembayaran='semesteran' ORDER BY periode_pembayaran,nama_kombi ASC";
                     $this->DB->setFieldTable(array('idkombi', 'biaya'));
                     $r = $this->DB->getRecord($str);
 
                     while (list($k, $v) = each($r)) {
                         $biaya = $v['biaya'];
-                        $idkombi=$v['idkombi'];
+                        $idkombi = $v['idkombi'];
                         $sisa_bayar=isset($sudah_dibayarkan[$idkombi]) ? $biaya-$sudah_dibayarkan[$idkombi]:$biaya;
                         $str = "INSERT INTO transaksi_detail (idtransaksi_detail,no_transaksi,idkombi,dibayarkan,jumlah_sks) VALUES(NULL, $no_transaksi, $idkombi, $sisa_bayar,0)";
                         $this->DB->insertRecord($str);
@@ -143,17 +143,17 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
         }
 	}
     public function editRecord($sender, $param) {	        
-        $datamhs=$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'];    
+        $datamhs = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'];    
         if ($datamhs['no_transaksi'] == 'none') {
-            $no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
+            $no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
             $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS']['no_transaksi'] = $no_transaksi;
         }	
 		$this->redirect('pembayaran.TransaksiPembayaranPiutangSemesterGanjil',true);
 	}	
 	public function deleteRecord($sender, $param) {	
-        $datamhs=$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS']; 
+        $datamhs = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS']; 
         $nim = $datamhs['nim'];
-		$no_transaksi=$this->getDataKeyField($sender, $this->ListTransactionRepeater);		
+		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
 		$this->redirect('pembayaran.DetailPembayaranPiutangSemesterGanjil',true,array('id'=>$nim));
 	}		

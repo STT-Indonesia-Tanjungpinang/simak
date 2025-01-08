@@ -5,9 +5,9 @@ class DetailPembayaranPiutangSemesterGanjil Extends CDetailPembayaranPiutangSeme
 		parent::onLoad($param);							
     }
     public function checkPembayaranSemesterLalu () { 
-        $datamhs=$_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS'];
-		$tahun_masuk=$datamhs['tahun_masuk'];
-		$semester_masuk=$datamhs['semester_masuk'];
+        $datamhs = $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS'];
+		$tahun_masuk = $datamhs['tahun_masuk'];
+		$semester_masuk = $datamhs['semester_masuk'];
 		$ta=$datamhs['ta'];	
 		$semester=$_SESSION['currentPagePembayaranSemesterGanjil']['semester'];
 		if ($tahun_masuk == $ta && $semester_masuk==$semester) {						
@@ -17,11 +17,11 @@ class DetailPembayaranPiutangSemesterGanjil Extends CDetailPembayaranPiutangSeme
 			if ($semester < 1) {
 				$no_formulir=$datamhs['no_formulir'];
 				$ta=($ta == $tahun_masuk)?$tahun_masuk:$ta-1;				
-				$semester=$this->DB->checkRecordIsExist ('idsmt','transaksi',3," AND no_formulir=$no_formulir AND tahun=$ta")?3:2;									
+				$semester=$this->DB->checkRecordIsExist ('idsmt','transaksi',3," AND no_formulir=$no_formulir AND tahun = $ta")?3:2;									
 			}else {
 				$ta=($ta == $tahun_masuk)?$tahun_masuk:$ta;	
 			}
-			$idkelas=$this->Finance->getKelasFromTransaksi($ta, $semester);
+			$idkelas = $this->Finance->getKelasFromTransaksi($ta, $semester);
 			$datamhs['idkelas']=$idkelas===false?$datamhs['idkelas']:$idkelas;            
 			if ($idkelas!='C') {
 				$this->Finance->setDataMHS(array('idkelas'=>$idkelas,'tahun_masuk'=>$ta,'idsmt'=>$semester));

@@ -5,16 +5,16 @@ class DetailPembayaranSemesterGanjil Extends CDetailPembayaranSemesterGanjil {
 		parent::onLoad($param);							
     }
     public function checkPembayaranSemesterLalu () { 
-        $datamhs=$_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS'];
-		$tahun_masuk=$datamhs['tahun_masuk'];
-		$semester_masuk=$datamhs['semester_masuk'];
+        $datamhs = $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS'];
+		$tahun_masuk = $datamhs['tahun_masuk'];
+		$semester_masuk = $datamhs['semester_masuk'];
 		$ta=$datamhs['ta'];			
 		if ($tahun_masuk == $ta && $semester_masuk==1) {						
 			return true;
 		}else{								
 			$ta=($ta == $tahun_masuk)?$tahun_masuk:$ta-1;																		
 			$this->Finance->setDataMHS(array('no_formulir'=>$datamhs['no_formulir']));
-			$idkelas=$this->Finance->getKelasFromTransaksi($ta,2);
+			$idkelas = $this->Finance->getKelasFromTransaksi($ta,2);
 			$datamhs['idkelas']=$idkelas===false?$datamhs['idkelas']:$idkelas;            
 			if ($idkelas!='C') {				
 				$this->Finance->setDataMHS(array('no_formulir'=>$datamhs['no_formulir'],'nim'=>$datamhs['nim'],'idkelas'=>$datamhs['idkelas'],'tahun_masuk'=>$tahun_masuk,'idsmt'=>2,'perpanjang'=>$datamhs['perpanjang']));

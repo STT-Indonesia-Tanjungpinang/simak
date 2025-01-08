@@ -10,7 +10,7 @@ class CRekapitulasiDPA extends MainPageM {
             if (!isset($_SESSION['currentPageRekapitulasiDPA'])||$_SESSION['currentPageRekapitulasiDPA']['page_name']!='m.kemahasiswaan.RekapitulasiDPA') {
 				$_SESSION['currentPageRekapitulasiDPA']=array('page_name'=>'m.kemahasiswaan.RekapitulasiDPA', 'page_num'=>0,'kjur'=>'none', 'tahun_masuk'=>'none', 'kelas'=>'none', 'status'=>'none');												
 			}
-            $daftar_prodi=$_SESSION['daftar_jurusan'];                        
+            $daftar_prodi = $_SESSION['daftar_jurusan'];                        
             $daftar_prodi['none'] = 'KESELURUHAN';
 			$this->tbCmbPs->DataSource = $daftar_prodi;
 			$this->tbCmbPs->Text = $_SESSION['currentPageRekapitulasiDPA']['kjur'];			
@@ -22,7 +22,7 @@ class CRekapitulasiDPA extends MainPageM {
 			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $kelas=$this->DMaster->getListKelas();
+            $kelas = $this->DMaster->getListKelas();
             $kelas['none'] = 'KESELURUHAN';
 			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text = $_SESSION['currentPageRekapitulasiDPA']['kelas'];			
@@ -31,7 +31,7 @@ class CRekapitulasiDPA extends MainPageM {
             $this->lblModulHeader->Text = $this->getInfoToolbar();
             
             
-            $daftar_status=$this->DMaster->getListStatusMHS ();
+            $daftar_status = $this->DMaster->getListStatusMHS ();
             $daftar_status['none'] = 'KESELURUHAN';
             $this->cmbStatus->DataSource = $daftar_status;
             $this->cmbStatus->Text = $_SESSION['currentPageRekapitulasiDPA']['status'];
@@ -42,11 +42,11 @@ class CRekapitulasiDPA extends MainPageM {
 	}
     public function getInfoToolbar() {        
         $kjur = $_SESSION['currentPageRekapitulasiDPA']['kjur'];        		
-        $ps=$kjur=='none'?'':'Program Studi '.$_SESSION['daftar_jurusan'][$kjur];
-        $tahun_masuk=$_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'];
-		$tahunmasuk=$tahun_masuk=='none'?'':' Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageRekapitulasiDPA']['tahun_masuk']);		
-		$idkelas=$_SESSION['currentPageRekapitulasiDPA']['kelas'];
-		$kelas=$idkelas=='none'?'':' Kelas '.$this->DMaster->getNamaKelasByID($_SESSION['currentPageRekapitulasiDPA']['kelas']);		
+        $ps = $kjur=='none'?'':'Program Studi '.$_SESSION['daftar_jurusan'][$kjur];
+        $tahun_masuk = $_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'];
+		$tahunmasuk = $tahun_masuk=='none'?'':' Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageRekapitulasiDPA']['tahun_masuk']);		
+		$idkelas = $_SESSION['currentPageRekapitulasiDPA']['kelas'];
+		$kelas = $idkelas=='none'?'':' Kelas '.$this->DMaster->getNamaKelasByID($_SESSION['currentPageRekapitulasiDPA']['kelas']);		
         $text="$ps $tahunmasuk $kelas";
 		return $text;
 	}
@@ -73,21 +73,21 @@ class CRekapitulasiDPA extends MainPageM {
         $kjur = $_SESSION['currentPageRekapitulasiDPA']['kjur'];
         $str_kjur = $kjur=='none'?'':"AND rm.kjur = $kjur";
         
-        $tahun_masuk=$_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'];
-        $str_tahun_masuk=$tahun_masuk=='none'?'':"AND rm.tahun=$tahun_masuk";
+        $tahun_masuk = $_SESSION['currentPageRekapitulasiDPA']['tahun_masuk'];
+        $str_tahun_masuk = $tahun_masuk=='none'?'':"AND rm.tahun = $tahun_masuk";
         
-        $idkelas=$_SESSION['currentPageRekapitulasiDPA']['kelas'];
-        $str_kelas=$idkelas=='none'?'':"AND rm.idkelas='$idkelas'";
+        $idkelas = $_SESSION['currentPageRekapitulasiDPA']['kelas'];
+        $str_kelas = $idkelas=='none'?'':"AND rm.idkelas='$idkelas'";
         
-        $status=$_SESSION['currentPageRekapitulasiDPA']['status'];
-        $str_status=$status == 'none'? '' : " AND rm.k_status='$status'";
+        $status = $_SESSION['currentPageRekapitulasiDPA']['status'];
+        $str_status = $status == 'none'? '' : " AND rm.k_status='$status'";
             
         $daftar_dw=$this->DMaster->removeIdFromArray($this->DMaster->getListDosenWali(),'none');
         $result = array();
         $i=1;
         $this->DB->setFieldTable(array('jk', 'jumlah_jk'));
         while (list($iddosen_wali, $nama_dw)=each($daftar_dw)){
-            $str = "SELECT fp.jk, COUNT(rm.nim) AS jumlah_jk FROM formulir_pendaftaran fp,register_mahasiswa rm WHERE fp.no_formulir=rm.no_formulir  AND rm.iddosen_wali=$iddosen_wali $str_kjur $str_tahun_masuk $str_kelas $str_status GROUP BY fp.jk ORDER BY fp.jk ASC";
+            $str = "SELECT fp.jk, COUNT(rm.nim) AS jumlah_jk FROM formulir_pendaftaran fp,register_mahasiswa rm WHERE fp.no_formulir=rm.no_formulir  AND rm.iddosen_wali = $iddosen_wali $str_kjur $str_tahun_masuk $str_kelas $str_status GROUP BY fp.jk ORDER BY fp.jk ASC";
             $r = $this->DB->getRecord($str);
             $pria=0;
             $wanita=0;

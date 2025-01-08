@@ -12,7 +12,7 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
 			}
             $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['search']=false; 
             
-            $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
+            $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	            
@@ -44,7 +44,7 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
     }
     public function setInfoToolbar() {                
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranPiutangSemesterGanjil']['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
@@ -54,13 +54,13 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
 	}	
     public function changeTbTA($sender, $param) {				
         $ta = $this->tbCmbTA->Text;
-        $tahun_masuk=$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['tahun_masuk'];
+        $tahun_masuk = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['tahun_masuk'];
 		$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['ta'] = $ta < $tahun_masuk ? $tahun_masuk : $ta;    
 		$this->redirect('pembayaran.PembayaranPiutangSemesterGanjil',true);
 	}   
     
     public function changeTbTahunMasuk($sender, $param) {   
-        $tahun_masuk=$this->tbCmbTahunMasuk->Text;
+        $tahun_masuk = $this->tbCmbTahunMasuk->Text;
         $ta = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['tahun_masuk'];
 		$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['ta'] = $ta < $tahun_masuk ? $tahun_masuk : $ta;
         $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['tahun_masuk'] = $tahun_masuk;
@@ -80,25 +80,25 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
 		$this->populateData($_SESSION['currentPagePembayaranPiutangSemesterGanjil']['search']);
 	}		
 	public function populateData($search=false) {	
-        $tahun_masuk=$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['tahun_masuk'];
+        $tahun_masuk = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['tahun_masuk'];
 		$ta = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['ta'];
 		$semester = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['semester'];
 		$kjur = $_SESSION['kjur'];	
         
-        $str = "SELECT vdm.no_formulir,vdm.nirm,vdm.nim,vdm.nama_mhs,vdm.telp_hp,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas AS idkelas_terakhir,d.idkelas AS idkelas_dulang,vdm.k_status AS k_status_terakhir,d.k_status AS k_status_dulang FROM v_datamhs vdm LEFT JOIN (SELECT nim,idkelas,k_status FROM dulang WHERE tahun=$ta AND idsmt=$semester) AS d ON (d.nim=vdm.nim) WHERE vdm.tahun_masuk=$tahun_masuk AND vdm.kjur = $kjur AND d.k_status IS NULL ORDER BY vdm.idkelas DESC,vdm.nama_mhs ASC";        
+        $str = "SELECT vdm.no_formulir,vdm.nirm,vdm.nim,vdm.nama_mhs,vdm.telp_hp,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas AS idkelas_terakhir,d.idkelas AS idkelas_dulang,vdm.k_status AS k_status_terakhir,d.k_status AS k_status_dulang FROM v_datamhs vdm LEFT JOIN (SELECT nim,idkelas,k_status FROM dulang WHERE tahun = $ta AND idsmt=$semester) AS d ON (d.nim=vdm.nim) WHERE vdm.tahun_masuk = $tahun_masuk AND vdm.kjur = $kjur AND d.k_status IS NULL ORDER BY vdm.idkelas DESC,vdm.nama_mhs ASC";        
         $this->DB->setFieldTable(array('no_formulir', 'nirm', 'nim', 'nama_mhs', 'idkelas_terakhir', 'telp_hp', 'kjur', 'tahun_masuk', 'semester_masuk', 'idkelas_terakhir', 'idkelas_dulang', 'k_status_terakhir', 'k_status_dulang'));
         $r = $this->DB->getRecord($str);
         $result = array();
         while (list($k, $v) = each($r)) {
             $nim = $v['nim'];
-            $k_status=$v['k_status_dulang'];
-            $idkelas=$v['idkelas_dulang'];
+            $k_status = $v['k_status_dulang'];
+            $idkelas = $v['idkelas_dulang'];
             if ($k_status=='') {
                 $str = "SELECT idkelas,k_status FROM dulang d1,(SELECT MAX(iddulang) AS iddulang FROM dulang WHERE nim='$nim') AS d2 WHERE d1.iddulang=d2.iddulang";
                 $this->DB->setFieldTable(array('idkelas', 'k_status'));
                 $dulang = $this->DB->getRecord($str);
-                $idkelas=$dulang[1]['idkelas'];
-                $k_status=$dulang[1]['k_status'];
+                $idkelas = $dulang[1]['idkelas'];
+                $k_status = $dulang[1]['k_status'];
             }
             $this->Finance->setDataMHS(array('no_formulir'=>$v['no_formulir'],'nim'=>$v['nim'],'kjur'=>$v['kjur'],'tahun_masuk'=>$v['tahun_masuk'],'semester_masuk'=>$v['semester_masuk'],'idsmt'=>$semester,'idkelas'=>$idkelas));
             $data = $this->Finance->getLunasPembayaran($ta, $semester,true);            
@@ -132,7 +132,7 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
                 $str = "SELECT vdm.tahun_masuk,vdm.semester_masuk FROM v_datamhs vdm WHERE vdm.nim='$nim'";
                 $this->DB->setFieldTable(array('tahun_masuk', 'semester_masuk'));
                 $r = $this->DB->getRecord($str);
-                $datamhs=$r[1];
+                $datamhs = $r[1];
                 if (!isset($r[1])) {                                   
                     throw new Exception ("NIM ($nim) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");		
                 }

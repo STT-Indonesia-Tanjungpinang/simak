@@ -18,17 +18,17 @@ class CDetailDPNA extends MainPageD {
                 if (!isset($this->Demik->InfoKelas['idkelas_mhs'])) {                                                
                     throw new Exception ("Kelas Mahasiswa dengan id ($idkelas_mhs) tidak terdaftar.");		
                 }     
-                $infokelas=$this->Demik->InfoKelas;
+                $infokelas = $this->Demik->InfoKelas;
                 $this->Demik->InfoKelas['nama_ps'] = $_SESSION['daftar_jurusan'][$infokelas['kjur']];
                 $this->Demik->InfoKelas['ta'] = $this->DMaster->getNamaTA($infokelas['tahun']);
                 $this->Demik->InfoKelas['nama_semester'] = $this->setup->getSemester($infokelas['idsmt']);                
                 $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
                 $this->Demik->InfoKelas['hari'] = $this->TGL->getNamaHari($infokelas['hari']);
 
-                $str = "SELECT d.nidn AS nidn_dosen_pengajar,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen_pengajar,d.idjabatan AS idjabatan_dosen_pengajar FROM kelas_mhs km,pengampu_penyelenggaraan pp,dosen d WHERE km.idpengampu_penyelenggaraan=pp.idpengampu_penyelenggaraan AND d.iddosen=pp.iddosen AND idkelas_mhs=$idkelas_mhs";
+                $str = "SELECT d.nidn AS nidn_dosen_pengajar,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen_pengajar,d.idjabatan AS idjabatan_dosen_pengajar FROM kelas_mhs km,pengampu_penyelenggaraan pp,dosen d WHERE km.idpengampu_penyelenggaraan=pp.idpengampu_penyelenggaraan AND d.iddosen=pp.iddosen AND idkelas_mhs = $idkelas_mhs";
                 $this->DB->setFieldTable(array('nidn_dosen_pengajar', 'nama_dosen_pengajar', 'idjabatan_dosen_pengajar'));
                 $r = $this->DB->getRecord($str);
-                $datakelas=$r[1];
+                $datakelas = $r[1];
                 $this->Demik->InfoKelas['nidn_dosen_pengajar'] = $datakelas['nidn_dosen_pengajar'];
                 $this->Demik->InfoKelas['nama_dosen_pengajar'] = $datakelas['nama_dosen_pengajar'];
                 $this->Demik->InfoKelas['idjabatan_dosen_pengajar'] = $datakelas['idjabatan_dosen_pengajar'];                            
@@ -43,19 +43,19 @@ class CDetailDPNA extends MainPageD {
 		}
 	}    
 	protected function populateData() {	
-        $idkelas_mhs=$_SESSION['currentPageDPNA']['DataDPNA']['idkelas_mhs'];
-        $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs=$idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
+        $idkelas_mhs = $_SESSION['currentPageDPNA']['DataDPNA']['idkelas_mhs'];
+        $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
         $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'n_kuan', 'n_kual'));
         $r = $this->DB->getRecord($str);	           
         $result = array();
-        $sks=$this->Demik->InfoKelas['sks'];
+        $sks = $this->Demik->InfoKelas['sks'];
         while (list($k, $v) = each($r)) {
             $n_kuan='-';
             $n_kual='-';
             $am='-';
             $hm='-';
             if ($v['n_kual']!= '') {
-                $n_kuan=$v['n_kuan'];
+                $n_kuan = $v['n_kuan'];
                 $n_kual = $v['n_kual'];
                 $am=$this->Nilai->getAngkaMutu($v['n_kual']);
                 $hm=$am*$sks;
@@ -70,7 +70,7 @@ class CDetailDPNA extends MainPageD {
         $this->RepeaterS->dataBind();	                
 	}
 	public function printOut($sender, $param) {	    
-        $this->Demik->InfoKelas=$_SESSION['currentPageDPNA']['DataDPNA'];
+        $this->Demik->InfoKelas = $_SESSION['currentPageDPNA']['DataDPNA'];
         $dataReport=$_SESSION['currentPageDPNA']['DataDPNA'];             
         $this->createObj('reportnilai');
         $this->linkOutput->Text='';

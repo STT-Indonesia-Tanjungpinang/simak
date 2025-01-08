@@ -27,7 +27,7 @@ class CSoalPMB extends MainPageMB {
                 $r = $this->DB->getRecord($str); 
 
                 if (isset($r[1]) ) {
-                    $dataujian=$r[1];
+                    $dataujian = $r[1];
                     if ($dataujian['isfinish']) {
                         $this->idProcess = 'edit';
                         if ($dataujian['nilai'] == '') {     
@@ -58,10 +58,10 @@ class CSoalPMB extends MainPageMB {
                                     }
                                 }
                             }
-                            $str= "REPLACE INTO nilai_ujian_masuk SET no_formulir = $no_formulir,jumlah_soal = $jumlah_soal,jawaban_benar = $jawaban_benar,jawaban_salah=$jawaban_salah,soal_tidak_terjawab=$soal_tidak_terjawab,passing_grade_1=$passing_grade_1,passing_grade_2=$passing_grade_2,nilai=$nilai,ket_lulus=0";
+                            $str= "REPLACE INTO nilai_ujian_masuk SET no_formulir = $no_formulir,jumlah_soal = $jumlah_soal,jawaban_benar = $jawaban_benar,jawaban_salah=$jawaban_salah,soal_tidak_terjawab=$soal_tidak_terjawab,passing_grade_1=$passing_grade_1,passing_grade_2=$passing_grade_2,nilai = $nilai,ket_lulus=0";
                             $this->DB->insertRecord($str);   
                         }
-                        $this->DataUjian=$dataujian;  
+                        $this->DataUjian = $dataujian;  
                     }else{
                         $this->timerSoalPMB->StartTimerOnLoad=true;
                         $this->populateSoal();
@@ -130,7 +130,7 @@ class CSoalPMB extends MainPageMB {
         $item=$param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
             $idsoal = $item->DataItem['idsoal'];
-            $idjawaban_tersimpan=$item->DataItem['idjawaban'];
+            $idjawaban_tersimpan = $item->DataItem['idjawaban'];
             $str = "SELECT idjawaban,idsoal,j.jawaban, $idjawaban_tersimpan AS jawaban_tersimpan FROM jawaban j WHERE idsoal = $idsoal";
             $this->DB->setFieldTable(array('idjawaban', 'idsoal', 'jawaban', 'jawaban_tersimpan')); 
             $r = $this->DB->getRecord($str);                   
@@ -150,14 +150,14 @@ class CSoalPMB extends MainPageMB {
 	} 
     private function simpanJawaban ($repeater, $no_formulir) {
         foreach($repeater->Items as $v) {                
-            $repeaterJawaban=$v->RepeaterJawaban->Items;             
+            $repeaterJawaban = $v->RepeaterJawaban->Items;             
             $idsoal = $v->txtIDSoal->Value;             
             $idjawaban='';
             foreach ($repeaterJawaban as $inputan) {                        
                 if ($inputan->rdJawaban->Checked) {
                     $item=$inputan->rdJawaban->getNamingContainer();
-                    $idjawaban=$v->RepeaterJawaban->DataKeys[$item->getItemIndex()];
-                    $str = "UPDATE jawaban_ujian SET idjawaban=$idjawaban WHERE idsoal = $idsoal AND no_formulir = $no_formulir";
+                    $idjawaban = $v->RepeaterJawaban->DataKeys[$item->getItemIndex()];
+                    $str = "UPDATE jawaban_ujian SET idjawaban = $idjawaban WHERE idsoal = $idsoal AND no_formulir = $no_formulir";
                     $this->DB->updateRecord($str);
                     break;
                 }
@@ -174,14 +174,14 @@ class CSoalPMB extends MainPageMB {
     public function saveJawabanTimer($sender, $param) {
         $no_formulir = $this->Pengguna->getDataUser('no_formulir');        
         foreach($this->RepeaterS->Items as $v) {                
-            $repeaterJawaban=$v->RepeaterJawaban->Items;             
+            $repeaterJawaban = $v->RepeaterJawaban->Items;             
             $idsoal = $v->txtIDSoal->Value;             
             $idjawaban='';
             foreach ($repeaterJawaban as $inputan) {                        
                 if ($inputan->rdJawaban->Checked) {
                     $item=$inputan->rdJawaban->getNamingContainer();
-                    $idjawaban=$v->RepeaterJawaban->DataKeys[$item->getItemIndex()];
-                    $str = "UPDATE jawaban_ujian SET idjawaban=$idjawaban WHERE idsoal = $idsoal AND no_formulir = $no_formulir";
+                    $idjawaban = $v->RepeaterJawaban->DataKeys[$item->getItemIndex()];
+                    $str = "UPDATE jawaban_ujian SET idjawaban = $idjawaban WHERE idsoal = $idsoal AND no_formulir = $no_formulir";
                     $this->DB->updateRecord($str);
                     break;
                 }
@@ -195,7 +195,7 @@ class CSoalPMB extends MainPageMB {
         $jawaban_salah=$this->DB->getCountRowsOfTable("jawaban_ujian ju LEFT JOIN jawaban j ON (j.idjawaban=ju.idjawaban) WHERE no_formulir='$no_formulir' AND ju.idjawaban!=0 AND status=0",'ju.idjawaban');        
         $soal_tidak_terjawab=$this->DB->getCountRowsOfTable("jawaban_ujian WHERE idjawaban=0 AND no_formulir='$no_formulir'",'idjawaban');        
         $jumlah_soal = $jawaban_benar+$jawaban_salah+$soal_tidak_terjawab;                
-        $nilai=$jawaban_benar > 0 ? ($jawaban_benar/$jumlah_soal)*100:0;
+        $nilai = $jawaban_benar > 0 ? ($jawaban_benar/$jumlah_soal)*100:0;
         
         $str = "UPDATE kartu_ujian SET tgl_selesai_ujian=NOW(),isfinish=1 WHERE no_formulir = $no_formulir";        
         $this->DB->query ('BEGIN');
@@ -215,7 +215,7 @@ class CSoalPMB extends MainPageMB {
                     }
                 }
             }
-            $str= "REPLACE INTO nilai_ujian_masuk SET no_formulir = $no_formulir,jumlah_soal = $jumlah_soal,jawaban_benar = $jawaban_benar,jawaban_salah=$jawaban_salah,soal_tidak_terjawab=$soal_tidak_terjawab,passing_grade_1=$passing_grade_1,passing_grade_2=$passing_grade_2,nilai=$nilai,ket_lulus=0,kjur=0";
+            $str= "REPLACE INTO nilai_ujian_masuk SET no_formulir = $no_formulir,jumlah_soal = $jumlah_soal,jawaban_benar = $jawaban_benar,jawaban_salah=$jawaban_salah,soal_tidak_terjawab=$soal_tidak_terjawab,passing_grade_1=$passing_grade_1,passing_grade_2=$passing_grade_2,nilai = $nilai,ket_lulus=0,kjur=0";
             $this->DB->insertRecord($str);
             $this->DB->query('COMMIT');
             $this->redirect('SoalPMB',true);

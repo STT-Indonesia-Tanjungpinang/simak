@@ -22,8 +22,8 @@ class CDetailKuesioner extends MainPageD {
             
             try {			
                 $idpengampu_penyelenggaraan = addslashes($this->request['id']);   
-                $iddosen=$this->Pengguna->getDataUser('iddosen');
-                $str = "SELECT vpp.idpengampu_penyelenggaraan,vpp.nidn,vpp.nama_dosen,vpp.kmatkul,vpp.nmatkul,vpp.sks,vpp.semester,kh.jumlah_mhs,kh.jumlah_soal,kh.total_nilai,kh.skor_terendah,kh.skor_tertinggi,kh.intervals,kh.n_kual,vpp.tahun,vpp.idsmt,vpp.kjur FROM v_pengampu_penyelenggaraan vpp,kuesioner_hasil kh WHERE kh.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND vpp.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND iddosen=$iddosen";
+                $iddosen = $this->Pengguna->getDataUser('iddosen');
+                $str = "SELECT vpp.idpengampu_penyelenggaraan,vpp.nidn,vpp.nama_dosen,vpp.kmatkul,vpp.nmatkul,vpp.sks,vpp.semester,kh.jumlah_mhs,kh.jumlah_soal,kh.total_nilai,kh.skor_terendah,kh.skor_tertinggi,kh.intervals,kh.n_kual,vpp.tahun,vpp.idsmt,vpp.kjur FROM v_pengampu_penyelenggaraan vpp,kuesioner_hasil kh WHERE kh.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND vpp.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND iddosen = $iddosen";
                 $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'nidn', 'nama_dosen', 'kmatkul', 'nmatkul', 'sks', 'semester', 'jumlah_mhs', 'jumlah_soal', 'total_nilai', 'skor_terendah', 'skor_tertinggi', 'intervals', 'n_kual', 'tahun', 'idsmt', 'kjur'));
                 $r = $this->DB->getRecord($str);	           
                 $datakuesioner = $r[1];
@@ -45,7 +45,7 @@ class CDetailKuesioner extends MainPageD {
 	}    
     public function setInfoToolbar() {        
         $kjur = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['tahun'];		
         $semester = $this->setup->getSemester($_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idsmt']);
 		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
@@ -74,12 +74,12 @@ class CDetailKuesioner extends MainPageD {
         $idpengampu_penyelenggaraan = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idpengampu_penyelenggaraan'];         
         $ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
-        $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();                
+        $kelompok_pertanyaan = $this->DMaster->getListKelompokPertanyaan();                
         $kelompok_pertanyaan[0] = 'UNDEFINED';
         unset($kelompok_pertanyaan['none']);        
         $result = array();
         while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
-            $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan=$idkelompok_pertanyaan ORDER BY (orders+0) ASC";
+            $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan = $idkelompok_pertanyaan ORDER BY (orders+0) ASC";
             $this->DB->setFieldTable(array('idkuesioner', 'idkelompok_pertanyaan', 'pertanyaan', 'orders', 'date_added'));
             $r = $this->DB->getRecord($str);
             $jumlah_r=count($r);
@@ -87,7 +87,7 @@ class CDetailKuesioner extends MainPageD {
                 $r[1]['ada']=true;
                 $r[1]['nama_kelompok'] = $nama_kelompok;
                 $idkuesioner = $r[1]['idkuesioner'];                
-                $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND kj.idkuesioner = $idkuesioner GROUP BY nilai_indikator";
+                $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner = $idkuesioner GROUP BY nilai_indikator";
                 $this->DB->setFieldTable(array('nilai_indikator', 'jumlah'));
                 $hasil_indikator = $this->DB->getRecord($str);
                 $indikator1=0;
@@ -125,7 +125,7 @@ class CDetailKuesioner extends MainPageD {
                 next($r);                
                 while (list($k, $v) = each($r)) {
                     $idkuesioner = $v['idkuesioner'];
-                    $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan AND kj.idkuesioner = $idkuesioner GROUP BY nilai_indikator";
+                    $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner = $idkuesioner GROUP BY nilai_indikator";
                     $this->DB->setFieldTable(array('nilai_indikator', 'jumlah'));
                     $hasil_indikator = $this->DB->getRecord($str);
                     $indikator1=0;
@@ -186,7 +186,7 @@ class CDetailKuesioner extends MainPageD {
                 $dataReport['nama_tahun'] = $nama_tahun;
                 $dataReport['nama_semester'] = $nama_semester;        
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];
-                $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();                
+                $kelompok_pertanyaan = $this->DMaster->getListKelompokPertanyaan();                
                 $kelompok_pertanyaan[0] = 'UNDEFINED';
                 unset($kelompok_pertanyaan['none']);        
                 $dataReport['kelompok_pertanyaan'] = $kelompok_pertanyaan;                    

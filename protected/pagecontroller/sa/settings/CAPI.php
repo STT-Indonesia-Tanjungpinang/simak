@@ -32,22 +32,22 @@ class CAPI extends MainPageSA {
             switch ($this->cmbKriteria->Text) {
                 case 'username' :
                     $clausa="AND username='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='api' $clausa",'userid');                   
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='api' $clausa",'userid');                   
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND nama LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='api' $clausa",'userid');                   
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='api' $clausa",'userid');                   
                     $str = "$str $clausa";
                 break;
                 case 'email' :
                     $clausa="AND email LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='api' $clausa",'userid');                   
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='api' $clausa",'userid');                   
                     $str = "$str $clausa";
                 break;
             }
         }else{
-            $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='api'",'userid');                   
+            $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='api'",'userid');                   
             $str = "SELECT u.userid,u.username,u.nama,u.email,u.active,u.foto,u.ipaddress,u.token,u.logintime,u.active FROM user u WHERE page='api'";         
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageAPI']['page_num'];
@@ -76,7 +76,7 @@ class CAPI extends MainPageSA {
         $this->idProcess = 'add';       
     }
     public function checkUsername($sender, $param) {
-        $this->idProcess=$sender->getId()=='addUsername'?'add':'edit';
+        $this->idProcess = $sender->getId()=='addUsername'?'add':'edit';
         $username=$param->Value;        
         if ($username != '') {
             try {   
@@ -92,7 +92,7 @@ class CAPI extends MainPageSA {
         }   
     }
     public function checkEmail($sender, $param) {
-        $this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
+        $this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
         $email = $param->Value;       
         if ($email != '') {
             try {   
@@ -149,7 +149,7 @@ class CAPI extends MainPageSA {
             $email = addslashes($this->txtEditEmail->Text);
             $username=addslashes($this->txtEditUsername->Text); 
             $ipaddress=addslashes($this->txtEditIPAddress->Text);
-            $status=$this->cmbEditStatus->Text;
+            $status = $this->cmbEditStatus->Text;
             
             if ($this->txtEditPassword1->Text == '') {
                 $str = "UPDATE user SET username='$username',email='$email',nama='$nama',ipaddress='$ipaddress',active='$status' WHERE userid=$id";

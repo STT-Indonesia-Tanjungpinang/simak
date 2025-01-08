@@ -17,7 +17,7 @@ class CDulangMHSBaru Extends MainPageM {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -36,8 +36,8 @@ class CDulangMHSBaru Extends MainPageM {
     }
     public function setInfoToolbar() {                
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
-        $tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
+        $tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
         $semester = $this->setup->getSemester($_SESSION['currentPageDulangMHSBaru']['semester_masuk']);		
 		$this->lblModulHeader->Text="Program Studi $ps Tahun Masuk $tahunmasuk Semester $semester ";        
 	}
@@ -69,36 +69,36 @@ class CDulangMHSBaru Extends MainPageM {
     }
     public function populateData($search=false) {
         $kjur = $_SESSION['kjur']; 
-        $tahun_masuk=$_SESSION['tahun_masuk'];
-        $semester_masuk=$_SESSION['currentPageDulangMHSBaru']['semester_masuk'];  
+        $tahun_masuk = $_SESSION['tahun_masuk'];
+        $semester_masuk = $_SESSION['currentPageDulangMHSBaru']['semester_masuk'];  
         if ($search) {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim";
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
                 case 'no_formulir' :
                     $clausa="AND vdm.no_formulir='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nim' :
                     $clausa="AND d.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="AND vdm.nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
             }
         }else{                   
-            $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND vdm.tahun_masuk='$tahun_masuk' AND vdm.semester_masuk='$semester_masuk' AND d.tahun=$tahun_masuk AND d.idsmt=$semester_masuk AND vdm.kjur='$kjur' AND d.k_status='A'";
-            $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND vdm.tahun_masuk='$tahun_masuk' AND vdm.semester_masuk='$semester_masuk' AND d.tahun=$tahun_masuk AND d.idsmt=$semester_masuk AND vdm.kjur='$kjur' AND d.k_status='A'",'vdm.nim');
+            $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND vdm.tahun_masuk='$tahun_masuk' AND vdm.semester_masuk='$semester_masuk' AND d.tahun = $tahun_masuk AND d.idsmt=$semester_masuk AND vdm.kjur='$kjur' AND d.k_status='A'";
+            $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND vdm.tahun_masuk='$tahun_masuk' AND vdm.semester_masuk='$semester_masuk' AND d.tahun = $tahun_masuk AND d.idsmt=$semester_masuk AND vdm.kjur='$kjur' AND d.k_status='A'",'vdm.nim');
         }
 		
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDulangMHSBaru']['page_num'];
@@ -128,7 +128,7 @@ class CDulangMHSBaru Extends MainPageM {
                     if (!isset($r[1])) {                                
                         throw new Exception ("Calon Mahasiswa dengan Nomor Formulir ($no_formulir) tidak terdaftar di Database, silahkan ganti dengan yang lain.");		
                     }
-                    $datamhs=$r[1];     
+                    $datamhs = $r[1];     
                     $datamhs['idsmt'] = $datamhs['semester_masuk'];
                     $this->Finance->setDataMHS($datamhs);
                     if (!$spmb=$this->Finance->isLulusSPMB(true)) {
@@ -175,7 +175,7 @@ class CDulangMHSBaru Extends MainPageM {
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,semester_masuk,iddosen_wali,d.idkelas,d.k_status FROM v_datamhs vdm JOIN dulang d ON (d.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE vdm.nim='$nim'";
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status'));
         $r = $this->DB->getRecord($str);	           
-        $datamhs=$r[1];
+        $datamhs = $r[1];
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    

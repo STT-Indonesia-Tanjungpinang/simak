@@ -52,13 +52,13 @@ class CPendaftaranKonsentrasi extends MainPageM {
         $this->populateData($_SESSION['currentPagePendaftaranKonsentrasi']['search']);
 	} 
     public function populateKonsentrasi () {			
-        $datakonsentrasi=$this->DMaster->getListKonsentrasiProgramStudi();        
+        $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
         $r=array();
         $i=1;        
         while (list($k, $v)=each($datakonsentrasi)) {                        
             if ($v['kjur']==$_SESSION['kjur']){
-                $idkonsentrasi=$v['idkonsentrasi'];
-                $jumlah = $this->DB->getCountRowsOfTable("pendaftaran_konsentrasi WHERE idkonsentrasi=$idkonsentrasi",'nim');
+                $idkonsentrasi = $v['idkonsentrasi'];
+                $jumlah = $this->DB->getCountRowsOfTable("pendaftaran_konsentrasi WHERE idkonsentrasi = $idkonsentrasi",'nim');
                 $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000' : $jumlah;
                 $r[$i] = $v;
                 $i+=1;
@@ -85,7 +85,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
                     $item->btnRepeaterApproved->CssClass="table-link default";
                 break;
             }
-            $item->lblStatusPendaftaran->CssClass=$cssclass;
+            $item->lblStatusPendaftaran->CssClass = $cssclass;
         }
     }
 	public function populateData ($search=false) {			
@@ -96,19 +96,19 @@ class CPendaftaranKonsentrasi extends MainPageM {
             switch ($this->cmbKriteria->Text) {                
                 case 'nim' :
                     $clausa=" AND vdm.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;                
                 case 'nama' :
                     $clausa=" AND vdm.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
             }
         }else{           
-            $idkonsentrasi=$_SESSION['currentPagePendaftaranKonsentrasi']['idkonsentrasi'];
-            $str_konsentrasi = $idkonsentrasi == 'none'?'':" AND pk.idkonsentrasi=$idkonsentrasi";            
-            $jumlah_baris=$this->DB->getCountRowsOfTable("pendaftaran_konsentrasi pk WHERE kjur = $kjur $str_konsentrasi",'nim');		            
+            $idkonsentrasi = $_SESSION['currentPagePendaftaranKonsentrasi']['idkonsentrasi'];
+            $str_konsentrasi = $idkonsentrasi == 'none'?'':" AND pk.idkonsentrasi = $idkonsentrasi";            
+            $jumlah_baris = $this->DB->getCountRowsOfTable("pendaftaran_konsentrasi pk WHERE kjur = $kjur $str_konsentrasi",'nim');		            
             $str = "SELECT vdm.nim,vdm.nama_mhs,pk.jumlah_sks,pk.kjur,pk.idkonsentrasi,pk.status_daftar FROM v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim AND pk.kjur='$kjur' $str_konsentrasi";			
         }		
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePendaftaranKonsentrasi']['page_num'];
@@ -131,11 +131,11 @@ class CPendaftaranKonsentrasi extends MainPageM {
     }     
     public function approvedFromRepeater($sender, $param) {
         $nim = $this->getDataKeyField($sender, $this->RepeaterS);
-        $idkonsentrasi=$sender->CommandParameter;
+        $idkonsentrasi = $sender->CommandParameter;
         $this->DB->query('BEGIN');
         $str = "UPDATE pendaftaran_konsentrasi SET status_daftar=1 WHERE nim='$nim'";        
         if ($this->DB->updateRecord($str)) {            
-            $str = "UPDATE register_mahasiswa SET idkonsentrasi=$idkonsentrasi WHERE nim='$nim'";        
+            $str = "UPDATE register_mahasiswa SET idkonsentrasi = $idkonsentrasi WHERE nim='$nim'";        
             $this->DB->updateRecord($str);
             $this->DB->query('COMMIT');
             $this->redirect('kemahasiswaan.PendaftaranKonsentrasi',true);

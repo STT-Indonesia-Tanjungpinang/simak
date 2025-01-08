@@ -32,22 +32,22 @@ class CDosen extends MainPageSA {
             switch ($this->cmbKriteria->Text) {
                 case 'nidn' :
                     $clausa="WHERE nidn='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
                 break;
                 case 'nip' :
                     $clausa="WHERE nipy='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
                 break;
                 case 'nama_dosen' :
                     $clausa="WHERE nama_dosen LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
                 break;
             }
         }else{
-            $jumlah_baris=$this->DB->getCountRowsOfTable("dosen",'iddosen');		            
+            $jumlah_baris = $this->DB->getCountRowsOfTable("dosen",'iddosen');		            
             $str = "SELECT iddosen,nidn,nipy,gelar_depan,nama_dosen,gelar_belakang,telp_hp,username,status FROM dosen";			
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDosen']['page_num'];
@@ -74,8 +74,8 @@ class CDosen extends MainPageSA {
         $this->cmbAddJabatanAkademik->dataBind();	             
     }
     public function checkNIDN($sender, $param) {	
-        $this->idProcess=$sender->getId()=='addNidn'?'add':'edit';
-        $nidn=$param->Value;
+        $this->idProcess = $sender->getId()=='addNidn'?'add':'edit';
+        $nidn = $param->Value;
         if ($nidn != '') {
             try {   
                 if ($this->hiddennidn->Value!=$nidn) {                                                            
@@ -90,7 +90,7 @@ class CDosen extends MainPageSA {
         }
 	}
 	public function checkNIPY($sender, $param) {						
-		$this->idProcess=$sender->getId()=='addNidn'?'add':'edit';
+		$this->idProcess = $sender->getId()=='addNidn'?'add':'edit';
         $nipy=$param->Value;
         if ($nipy != '') {
             try {   
@@ -106,7 +106,7 @@ class CDosen extends MainPageSA {
         }
 	}
     public function checkUsername($sender, $param) {
-		$this->idProcess=$sender->getId()=='addUsername'?'add':'edit';
+		$this->idProcess = $sender->getId()=='addUsername'?'add':'edit';
         $username=$param->Value;		
         if ($username != '') {
             try {
@@ -123,7 +123,7 @@ class CDosen extends MainPageSA {
         }	
     }
     public function checkEmail($sender, $param) {
-		$this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
+		$this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
         $email = $param->Value;		
         if ($email != '') {
             try {   
@@ -170,7 +170,7 @@ class CDosen extends MainPageSA {
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $iddosen=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $iddosen = $this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$iddosen;     
         
         $str = "SELECT nidn,nipy,nama_dosen,gelar_depan,gelar_belakang,idjabatan,alamat_dosen,telp_hp,email,username,status FROM dosen WHERE iddosen='$iddosen'";
@@ -200,7 +200,7 @@ class CDosen extends MainPageSA {
     }
     public function updateData($sender, $param) {
 		if ($this->Page->isValid) {
-            $iddosen=$this->hiddenid->Value;
+            $iddosen = $this->hiddenid->Value;
             $username=$this->hiddenusername->Value;
             $nidn = addslashes($this->txtEditNIDN->Text);
             $nipy=addslashes($this->txtEditNIPY->Text);
@@ -211,8 +211,8 @@ class CDosen extends MainPageSA {
 			$alamat_dosen=strtoupper(addslashes($this->txtEditAlamat->Text));
             $no_telepon = addslashes($this->txtEditTelepon->Text);
             $email=addslashes($this->txtEditEmail->Text);
-            $status=$this->cmbEditStatus->Text;
-			$str = "UPDATE dosen SET nidn='$nidn',nipy='$nipy',nama_dosen='$nama',gelar_depan='$gelar_depan',gelar_belakang='$gelar_belakang',idjabatan='$idjabatanfungsional',alamat_dosen='$alamat_dosen',telp_hp='$no_telepon',email='$email',status=$status WHERE iddosen=$iddosen";
+            $status = $this->cmbEditStatus->Text;
+			$str = "UPDATE dosen SET nidn='$nidn',nipy='$nipy',nama_dosen='$nama',gelar_depan='$gelar_depan',gelar_belakang='$gelar_belakang',idjabatan='$idjabatanfungsional',alamat_dosen='$alamat_dosen',telp_hp='$no_telepon',email='$email',status = $status WHERE iddosen = $iddosen";
 			$this->DB->query('BEGIN');
             if ($this->DB->updateRecord($str)) {   
                 if($this->DB->checkRecordIsExist('username', 'user', $username)) {
@@ -236,7 +236,7 @@ class CDosen extends MainPageSA {
         }
 	}
     public function deleteRecord($sender, $param) {        
-		$iddosen=$this->getDataKeyField($sender, $this->RepeaterS);  		
+		$iddosen = $this->getDataKeyField($sender, $this->RepeaterS);  		
         if ($this->DB->checkRecordIsExist('iddosen', 'pengampu_penyelenggaraan', $iddosen)) {
             $this->lblHeaderMessageError->Text='Menghapus Dosen';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena sedang digunakan di pengampu penyelenggaraan.";
@@ -254,7 +254,7 @@ class CDosen extends MainPageSA {
             $this->DB->setFieldTable(array('username'));
             $r = $this->DB->getRecord($str);
             $username=$r[1]['username'];
-            $this->DB->deleteRecord("dosen WHERE iddosen=$iddosen");
+            $this->DB->deleteRecord("dosen WHERE iddosen = $iddosen");
             $this->DB->deleteRecord("user WHERE username='$username'");
             $this->redirect('dmaster.Dosen',true);
         }        

@@ -26,12 +26,12 @@ class CProdi extends MainPageSA {
         $this->cmbAddJenjang->dataSource = $this->DMaster->getListJenjang ();
         $this->cmbAddJenjang->dataBind();                   
 
-        $daftar_dosen=$this->DMaster->getDaftarDosen();
+        $daftar_dosen = $this->DMaster->getDaftarDosen();
         $this->cmbAddKaprodi->DataSource = $daftar_dosen;
         $this->cmbAddKaprodi->DataBind();
     }
     public function checkPS($sender, $param) {    
-        $this->idProcess=$sender->getId()=='addkodeps'?'add':'edit';
+        $this->idProcess = $sender->getId()=='addkodeps'?'add':'edit';
         $kjur = $param->Value;
         if ($kjur != '') {
             try {   
@@ -47,7 +47,7 @@ class CProdi extends MainPageSA {
         }
     }
     public function checkKodePSForlap($sender, $param) {    
-        $this->idProcess=$sender->getId()=='addkodepsforlap'?'add':'edit';
+        $this->idProcess = $sender->getId()=='addkodepsforlap'?'add':'edit';
         $kjur = $param->Value;
         if ($kjur != '') {
             try {   
@@ -70,9 +70,9 @@ class CProdi extends MainPageSA {
             $akronim_ps=addslashes($this->txtAddNamaAkronim->Text);
             $kjenjang=addslashes($this->cmbAddJenjang->Text);
             $konsentrasi=addslashes($this->txtAddKonsentrasi->Text);
-            $iddosen=$this->cmbAddKaprodi->Text;
+            $iddosen = $this->cmbAddKaprodi->Text;
 
-            $str = "INSERT INTO program_studi SET kjur = $kjur,kode_epsbed='$kjur_forlap',nama_ps='$nama_ps',nama_ps_alias='$akronim_ps',kjenjang='$kjenjang',konsentrasi='$konsentrasi',iddosen=$iddosen";
+            $str = "INSERT INTO program_studi SET kjur = $kjur,kode_epsbed='$kjur_forlap',nama_ps='$nama_ps',nama_ps_alias='$akronim_ps',kjenjang='$kjenjang',konsentrasi='$konsentrasi',iddosen = $iddosen";
             $this->DB->insertRecord($str);
             if ($this->Application->Cache) {                        
                 $str = 'SELECT ps.kjur,ps.kode_epsbed,ps.nama_ps,ps.kjenjang,js.njenjang,konsentrasi FROM program_studi ps,jenjang_studi js WHERE js.kjenjang=ps.kjenjang AND ps.kjur!=0';
@@ -102,7 +102,7 @@ class CProdi extends MainPageSA {
         $this->cmbEditJenjang->Text = $r[1]['kjenjang'];
         $this->cmbEditJenjang->dataBind();       
 
-        $daftar_dosen=$this->DMaster->getDaftarDosen();
+        $daftar_dosen = $this->DMaster->getDaftarDosen();
         $this->cmbEditKaprodi->DataSource = $daftar_dosen;
         $this->cmbEditKaprodi->DataBind();            
     }
@@ -115,9 +115,9 @@ class CProdi extends MainPageSA {
             $akronim_ps=addslashes($this->txtEditNamaAkronim->Text);
             $kjenjang=addslashes($this->cmbEditJenjang->Text);
             $konsentrasi=addslashes($this->txtEditKonsentrasi->Text);
-            $iddosen=$this->cmbEditKaprodi->Text;
+            $iddosen = $this->cmbEditKaprodi->Text;
 
-            $str = "UPDATE program_studi SET kjur = $kjur,kode_epsbed='$kjur_forlap',nama_ps='$nama_ps',nama_ps_alias='$akronim_ps',kjenjang='$kjenjang',konsentrasi='$konsentrasi',iddosen=$iddosen WHERE kjur = $id";
+            $str = "UPDATE program_studi SET kjur = $kjur,kode_epsbed='$kjur_forlap',nama_ps='$nama_ps',nama_ps_alias='$akronim_ps',kjenjang='$kjenjang',konsentrasi='$konsentrasi',iddosen = $iddosen WHERE kjur = $id";
             $this->DB->insertRecord($str);
             if ($this->Application->Cache) {                        
                 $str = 'SELECT ps.kjur,ps.kode_epsbed,ps.nama_ps,ps.kjenjang,js.njenjang,konsentrasi FROM program_studi ps,jenjang_studi js WHERE js.kjenjang=ps.kjenjang AND ps.kjur!=0';

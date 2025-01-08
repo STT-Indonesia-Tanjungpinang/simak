@@ -15,7 +15,7 @@ class CKHS extends MainPageMHS {
             if (!isset($_SESSION['currentPageKHS'])||$_SESSION['currentPageKHS']['page_name']!='mh.nilai.KHS') {
 				$_SESSION['currentPageKHS']=array('page_name'=>'mh.nilai.KHS', 'page_num'=>0,'search'=>false);												                                               
 			}            		
-            $nama_tahun=$this->DMaster->getNamaTA ($_SESSION['ta']);
+            $nama_tahun = $this->DMaster->getNamaTA ($_SESSION['ta']);
             $nama_semester = $this->setup->getSemester($_SESSION['semester']);
             $this->labelModuleHeader->Text = "T.A $nama_tahun Semester $nama_semester";
 			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
@@ -47,7 +47,7 @@ class CKHS extends MainPageMHS {
     public function itemBound($sender, $param) {
         $item=$param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {                
-            $sks=$item->DataItem['sks'];
+            $sks = $item->DataItem['sks'];
             KHS::$TotalSKS += $sks;            
             $m = (intval($sks)) * $this->Nilai->getAngkaMutu($item->DataItem['n_kual']);
             KHS::$TotalM += $m;            
@@ -55,12 +55,12 @@ class CKHS extends MainPageMHS {
     }
 	protected function populateData () {						
 		try {			
-            $datamhs=$this->Pengguna->getDataUser();            
+            $datamhs = $this->Pengguna->getDataUser();            
             $this->Nilai->setDataMHS($datamhs);
 			if ($_SESSION['ta']>= 2010 && $datamhs['idkelas']!='C') {
                 $this->createObj('Finance');
                 $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
-                $idkelas=$datadulang['idkelas'];
+                $idkelas = $datadulang['idkelas'];
                 $datamhs['idkelas'] = $idkelas;
                 $datamhs['idsmt'] = $_SESSION['semester'];
                 $this->Finance->setDataMHS($datamhs);
@@ -84,7 +84,7 @@ class CKHS extends MainPageMHS {
 	}	
 	public function printKHS($sender, $param) {
 		$this->createObj('reportnilai');             
-		$tahun=$_SESSION['ta'];
+		$tahun = $_SESSION['ta'];
         $semester = $_SESSION['semester'];
         $nama_tahun = $this->DMaster->getNamaTA($tahun);
         $nama_semester = $this->setup->getSemester($semester);

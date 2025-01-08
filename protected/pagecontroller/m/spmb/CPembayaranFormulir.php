@@ -10,7 +10,7 @@ class CPembayaranFormulir extends MainPageM {
 				$_SESSION['currentPagePembayaranFormulir']=array('page_name'=>'m.spmb.PembayaranFormulir', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false);												
 			}	
             $_SESSION['currentPagePembayaranFormulir']['search']=false;
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
             $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
             $this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
@@ -25,7 +25,7 @@ class CPembayaranFormulir extends MainPageM {
 		}
 	}
     public function getInfoToolbar() {                
-		$tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
+		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
 		$text="Tahun Masuk $tahunmasuk";
 		return $text;
 	}
@@ -49,17 +49,17 @@ class CPembayaranFormulir extends MainPageM {
 	}
 	
 	private function populateData ($search=false) {
-        $tahun_masuk=$_SESSION['tahun_masuk'];
+        $tahun_masuk = $_SESSION['tahun_masuk'];
         
-        $str = "SELECT * FROM transaksi t JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) JOIN pin (pin.no_formulir=t.no_formulir) WHERE td.idkombi=1 AND t.tahun_masuk=$tahun_masuk";
+        $str = "SELECT * FROM transaksi t JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) JOIN pin (pin.no_formulir=t.no_formulir) WHERE td.idkombi=1 AND t.tahun_masuk = $tahun_masuk";
         
 //		$semester = $_SESSION['semester'];
 //		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranFormulir']['page_num'];
 //		if ($str == 'none' || $str == '') {
-//			$jumlah_baris=$this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND fp.ta = '$ta' AND fp.idsmt='$semester' AND fp.idkelas='".$_SESSION['kelas']."'");
+//			$jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND fp.ta = '$ta' AND fp.idsmt='$semester' AND fp.idkelas='".$_SESSION['kelas']."'");
 //			$str = "SELECT bp.no_formulir,fp.nama_mhs,fp.alamat_rumah,bp.dibayarkan FROM formulir_pendaftaran fp,bipend bp,profiles_mahasiswa pm WHERE fp.no_formulir=bp.no_formulir AND pm.no_formulir=fp.no_formulir AND fp.ta = '$ta' AND fp.idsmt='$semester' AND fp.idkelas='".$_SESSION['kelas']."'";	
 //		}else {
-//			$jumlah_baris=$this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND fp.ta = '$ta' AND $str");
+//			$jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND fp.ta = '$ta' AND $str");
 //			$str = "SELECT bp.no_formulir,fp.nama_mhs,fp.alamat_rumah,bp.dibayarkan FROM formulir_pendaftaran fp,bipend bp,profiles_mahasiswa pm WHERE fp.no_formulir=bp.no_formulir AND pm.no_formulir=fp.no_formulir AND fp.ta = '$ta' AND fp.idsmt='$semester' AND fp.idkelas='".$_SESSION['kelas']."' AND $str";	
 //		}		
 //		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -97,7 +97,7 @@ class CPembayaranFormulir extends MainPageM {
 			$id=$sender->getId ();
 			$this->idProcess = ($id=='editEmail')?'edit':'add';			
 			$email = $this->getLogic('Email');
-			$email_mhs=$id=='editEmail'?$this->txtEditEmail->Text:$this->txtAddEmail->Text;
+			$email_mhs = $id=='editEmail'?$this->txtEditEmail->Text:$this->txtAddEmail->Text;
 			if ($email_mhs != '') {
 				$email->setEmailUser ($email_mhs);
 				if (!$email->check())throw new Exception ("Format email ($email_mhs) Anda salah");
@@ -144,7 +144,7 @@ class CPembayaranFormulir extends MainPageM {
 	public function addProcess($sender, $param) {
 		$this->Pengguna->updateActivity();			
 		$ta = $_SESSION['tahun_masuk'];
-		$biaya_pendaftaran=$this->spmb->getBiayaPendaftaran($_SESSION['tahun_masuk'], $_SESSION['kelas']);							
+		$biaya_pendaftaran = $this->spmb->getBiayaPendaftaran($_SESSION['tahun_masuk'], $_SESSION['kelas']);							
 		if ($biaya_pendaftaran>0) {
 			$pembayaran_spmb['biaya_pendaftaran'] = $biaya_pendaftaran;
 			$max_record=$this->DB->getMaxOfRecord('no_formulir',"formulir_pendaftaran WHERE ta = '$ta' AND daftar_via='FO'")+1;		
@@ -170,7 +170,7 @@ class CPembayaranFormulir extends MainPageM {
 			$tgl_bayar = $this->TGL->tukarTanggal ($this->txtTglBayar->Text);				
 			$ket=trim($this->txtAddKeterangan->Text);
 			$userid = $this->Pengguna->getDataUser('userid');
-			$dibayarkan=$this->spmb->Finance->toInteger($this->txtAddJumlahBayar->Text);
+			$dibayarkan = $this->spmb->Finance->toInteger($this->txtAddJumlahBayar->Text);
 			$userpassword=md5(1234);			
 			try {
 				$str="INSERT INTO formulir_pendaftaran (no_formulir,nama_mhs,alamat_rumah,telp_rumah,telp_hp,ta,idsmt,daftar_via,idkelas) VALUES ($no_formulir,'$nama_mhs', '$alamat_rumah', '$telp_rumah', '$telp_hp', '".$_SESSION['tahun_masuk']."', '".$_SESSION['semester']."', 'FO', '".$_SESSION['kelas']."')";
@@ -197,12 +197,12 @@ class CPembayaranFormulir extends MainPageM {
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
 			$url = $this->Themes->getIcon();			
 			$urlImage=$url.'error.png';
-			$dibayarkan=$item->DataItem['dibayarkan'];			
+			$dibayarkan = $item->DataItem['dibayarkan'];			
 			if ($dibayarkan >= $_SESSION['biaya_pendaftaran']) {
 				$urlImage=$url.'sah.png';
 			}
 			$item->imgKet->ImageUrl = $urlImage;
-			$nama_mhs=$item->DataItem['nama_mhs'];
+			$nama_mhs = $item->DataItem['nama_mhs'];
 			$item->btnHapus->Attributes->Title="Hapus $nama_mhs";
 			if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa', $item->DataItem['no_formulir'])) {
 				$item->btnHapus->Enabled=false;
@@ -249,7 +249,7 @@ class CPembayaranFormulir extends MainPageM {
 			$no_faktur=trim($this->txtEditNoFaktur->Text);
 			$ket=trim($this->txtEditKeterangan->Text);
 			$userid = $this->Pengguna->getDataUser('userid');
-			$dibayarkan=$this->spmb->Finance->toInteger($this->txtEditJumlahBayar->Text);
+			$dibayarkan = $this->spmb->Finance->toInteger($this->txtEditJumlahBayar->Text);
 			try {
 				$str = "UPDATE formulir_pendaftaran SET no_formulir='$no_formulir',nama_mhs='$nama_mhs',alamat_rumah='$alamat_rumah',telp_rumah='$telp_rumah',telp_hp='$telp_hp' WHERE no_formulir='".$this->txtEditFormulir->Value."'";
 				$this->DB->query('BEGIN');

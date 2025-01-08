@@ -24,7 +24,7 @@ class Logic_Users extends Logic_Global {
 		if (method_exists($this->U,'getRoles')) {
 			$dataUser=$this->U->getName();	
 			if ($dataUser != 'Guest') {
-				$this->Roles=$this->U->getRoles();			                
+				$this->Roles = $this->U->getRoles();			                
 				$this->DataUser=$dataUser['data_user'];					
 				$this->UserAcl=$dataUser['hak_akses'];
             }		

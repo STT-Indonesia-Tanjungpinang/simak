@@ -14,7 +14,7 @@ class Logic_Mahasiswa extends Logic_Global {
 	* setter DataMHS
 	*/
 	public function setDataMHS ($dataMHS) {
-		$this->DataMHS=$dataMHS;						
+		$this->DataMHs = $dataMHS;						
 	}	
     /**	
 	* getter DataMHS
@@ -114,7 +114,7 @@ class Logic_Mahasiswa extends Logic_Global {
             $r2=$this->db->getRecord($str);						
             if (isset($r2[1])) {
                 $tasmt_dulang=$r[1]['tahun'].$r[1]['idsmt'];
-                $tasmt_pindahkelas=$r2[1]['tahun'].$r2[1]['idsmt'];									
+                $tasmt_pindahkelas = $r2[1]['tahun'].$r2[1]['idsmt'];									
                 if ($tasmt_dulang<$tasmt_pindahkelas) {
                     $kelas['idkelas']=$r2[1]['idkelas'];
                     $kelas['nkelas']=$r2[1]['nkelas'];

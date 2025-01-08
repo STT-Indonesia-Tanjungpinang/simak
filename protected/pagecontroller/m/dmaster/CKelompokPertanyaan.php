@@ -28,7 +28,7 @@ class CKelompokPertanyaan extends MainPageM {
         $this->populateData($_SESSION['currentPageKelompokPertanyaan']['search']);
 	}    
 	protected function populateData ($search=false) {								
-        $jumlah_baris=$this->DB->getCountRowsOfTable('kelompok_pertanyaan', 'idkelompok_pertanyaan');		            
+        $jumlah_baris = $this->DB->getCountRowsOfTable('kelompok_pertanyaan', 'idkelompok_pertanyaan');		            
         $str = 'SELECT idkelompok_pertanyaan,orders,idkategori,nama_kelompok,orders,create_at,update_at FROM kelompok_pertanyaan';			
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKelompokPertanyaan']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -65,7 +65,7 @@ class CKelompokPertanyaan extends MainPageM {
         $id=$this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         
-        $str = "SELECT nama_kelompok,orders FROM kelompok_pertanyaan WHERE idkelompok_pertanyaan=$id";
+        $str = "SELECT nama_kelompok,orders FROM kelompok_pertanyaan WHERE idkelompok_pertanyaan = $id";
         $this->DB->setFieldTable(array('nama_kelompok', 'orders'));
         $r = $this->DB->getRecord($str);
         
@@ -77,14 +77,14 @@ class CKelompokPertanyaan extends MainPageM {
             $id=$this->hiddenid->Value;
             $nama_kelompok=addslashes(strtoupper($this->txtEditNamaKelompok->Text));
             $urutan = addslashes($this->txtEditUrutan->Text);
-			$str = "UPDATE kelompok_pertanyaan SET nama_kelompok='$nama_kelompok',orders='$urutan',update_at=NOW() WHERE idkelompok_pertanyaan=$id";
+			$str = "UPDATE kelompok_pertanyaan SET nama_kelompok='$nama_kelompok',orders='$urutan',update_at=NOW() WHERE idkelompok_pertanyaan = $id";
 			$this->DB->updateRecord($str);			
 			$this->redirect('dmaster.KelompokPertanyaan',true);
 		}
 	}
     public function deleteRecord($sender, $param) {        
 		$id=$this->getDataKeyField($sender, $this->RepeaterS);        
-        $this->DB->deleteRecord("kelompok_pertanyaan WHERE idkelompok_pertanyaan=$id");
+        $this->DB->deleteRecord("kelompok_pertanyaan WHERE idkelompok_pertanyaan = $id");
         $this->redirect('dmaster.KelompokPertanyaan',true);
         
     }        

@@ -37,7 +37,7 @@ class CStopInputNilai extends MainPageON{
 	}	
     public function getInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
@@ -81,31 +81,31 @@ class CStopInputNilai extends MainPageON{
                 case 'nidn' :
                     $clausa=" AND vpp.nidn='$txtsearch'";  
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
                 break;
                 case 'kmatkul' :
                     $clausa="AND vpp.kmatkul LIKE '%$txtsearch%'";  
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
                 break;
                 case 'nmatkul' :
                     $clausa="AND vpp.nmatkul LIKE '%$txtsearch%'";  
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
                 break;
                 case 'nama_dosen' :
                     $clausa="AND vpp.nama_dosen LIKE '%$txtsearch%'";   
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
                 break;
             }
         }else{
             $iddosen = $_SESSION['currentPageStopInputNilai']['iddosen'];
-            $str_dosen = $iddosen == 'none' ? '':" AND vpp.iddosen=$iddosen";
+            $str_dosen = $iddosen == 'none' ? '':" AND vpp.iddosen = $iddosen";
             $nama_hari= $_SESSION['currentPageStopInputNilai']['nama_hari'];
-            $str_nama_hari= $nama_hari == 'none' ? '':" AND km.hari=$nama_hari";
+            $str_nama_hari= $nama_hari == 'none' ? '':" AND km.hari = $nama_hari";
             $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$str_nama_hari $str_dosen";
-            $jumlah_baris=$this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$str_nama_hari $str_dosen",'km.idkelas_mhs');
+            $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$str_nama_hari $str_dosen",'km.idkelas_mhs');
         }      
         
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageStopInputNilai']['page_num'];
@@ -136,7 +136,7 @@ class CStopInputNilai extends MainPageON{
 	public function doVerified($sender, $param) {
 		$id=$this->getDataKeyField($sender, $this->RepeaterS);
 		$verified=$sender->CommandParameter;
-		$str = "UPDATE kelas_mhs SET isi_nilai=$verified WHERE idkelas_mhs=$id";	
+		$str = "UPDATE kelas_mhs SET isi_nilai = $verified WHERE idkelas_mhs = $id";	
 		$this->DB->updateRecord($str);
         $this->populateData($_SESSION['currentPageStopInputNilai']['search']);
 	}

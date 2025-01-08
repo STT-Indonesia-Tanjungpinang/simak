@@ -12,7 +12,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 			}
             $_SESSION['currentPagePembayaranSemesterPendek']['search']=false;             
             
-            $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
+            $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
@@ -22,7 +22,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
             $this->tbCmbTA->Text = $ta;
             $this->tbCmbTA->dataBind();
             
-            $kelas=$this->DMaster->getListKelas();
+            $kelas = $this->DMaster->getListKelas();
             $kelas['none'] = 'All';
 			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text = $_SESSION['currentPagePembayaranSemesterPendek']['kelas'];			
@@ -44,7 +44,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 	}	
     public function setInfoToolbar() {                
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
@@ -79,7 +79,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 		$semester = $_SESSION['currentPagePembayaranSemesterPendek']['semester'];
 		$kjur = $_SESSION['kjur'];	
         
-        $kelas=$_SESSION['currentPagePembayaranSemesterPendek']['kelas'];
+        $kelas = $_SESSION['currentPagePembayaranSemesterPendek']['kelas'];
         $str_kelas = $kelas == 'none'?'':" AND t.idkelas='$kelas'";
         if ($search) {
             $str = "SELECT t.no_transaksi,no_faktur,t.tanggal,t.nim,vdm.nama_mhs,t.jumlah_sks,commited FROM transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester'";
@@ -88,28 +88,28 @@ class CPembayaranSemesterPendek Extends MainPageK {
             switch ($this->cmbKriteria->Text) {     
                 case 'no_transaksi' :
                     $clausa="AND t.no_transaksi='$txtsearch'";                    
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;           
                 case 'no_faktur' :
                     $clausa="AND t.no_faktur='$txtsearch'";                    
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
                 case 'nim' :
                     $clausa="AND t.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	                    
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	                    
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
             }
         }else{
             $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.nim,vdm.nama_mhs,jumlah_sks,commited FROM transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' AND t.kjur = $kjur $str_kelas";
-            $jumlah_baris=$this->DB->getCountRowsOfTable(" transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' AND t.kjur = $kjur $str_kelas",'no_transaksi');
+            $jumlah_baris = $this->DB->getCountRowsOfTable(" transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' AND t.kjur = $kjur $str_kelas",'no_transaksi');
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranSemesterPendek']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;   
@@ -127,11 +127,11 @@ class CPembayaranSemesterPendek Extends MainPageK {
         
         $result = array();		
 		while (list($k, $v) = each($r)) {
-			$no_transaksi=$v['no_transaksi'];				
-			$str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM v_transaksi t WHERE no_transaksi=$no_transaksi";			
+			$no_transaksi = $v['no_transaksi'];				
+			$str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM v_transaksi t WHERE no_transaksi = $no_transaksi";			
 			$this->DB->setFieldTable(array('dibayarkan'));
 			$r2=$this->DB->getRecord($str2);				
-			$dibayarkan=$r2[1]['dibayarkan'];						
+			$dibayarkan = $r2[1]['dibayarkan'];						
 			$v['dibayarkan'] = $this->Finance->toRupiah($dibayarkan);													
 			$v['tanggal'] = $this->TGL->tanggal('d/m/Y', $v['tanggal']);
 			$result[$k] = $v;

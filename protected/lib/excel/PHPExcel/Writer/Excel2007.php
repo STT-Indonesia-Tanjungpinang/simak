@@ -256,7 +256,7 @@ class PHPExcel_Writer_Excel2007 extends PHPExcel_Writer_Abstract implements PHPE
                 $objZip->addFromString($tmpRibbonTarget, $this->spreadSheet->getRibbonXMLData('data'));
                 if ($this->spreadSheet->hasRibbonBinObjects()) {
                     $tmpRootPath=dirname($tmpRibbonTarget).'/';
-                    $ribbonBinObjects=$this->spreadSheet->getRibbonBinObjects('data');//the files to write
+                    $ribbonBinObjects = $this->spreadSheet->getRibbonBinObjects('data');//the files to write
                     foreach ($ribbonBinObjects as $aPath => $aContent) {
                         $objZip->addFromString($tmpRootPath.$aPath, $aContent);
                     }

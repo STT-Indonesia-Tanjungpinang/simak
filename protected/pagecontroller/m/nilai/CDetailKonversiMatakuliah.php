@@ -27,19 +27,19 @@ class CDetailKonversiMatakuliah extends MainPageM {
         try {
             $iddata_konversi=addslashes($this->request['id']);  
             
-            $str = "SELECT dk.iddata_konversi,dk.nama,dk.alamat,dk.no_telp,dk.nim_asal,dk.kode_pt_asal,dk.nama_pt_asal,js.njenjang,dk.kode_ps_asal,dk.nama_ps_asal,dk.tahun,dk.kjur,dk.idkur,date_added FROM data_konversi2 dk,jenjang_studi js WHERE dk.kjenjang=js.kjenjang AND dk.iddata_konversi=$iddata_konversi";
+            $str = "SELECT dk.iddata_konversi,dk.nama,dk.alamat,dk.no_telp,dk.nim_asal,dk.kode_pt_asal,dk.nama_pt_asal,js.njenjang,dk.kode_ps_asal,dk.nama_ps_asal,dk.tahun,dk.kjur,dk.idkur,date_added FROM data_konversi2 dk,jenjang_studi js WHERE dk.kjenjang=js.kjenjang AND dk.iddata_konversi = $iddata_konversi";
             $this->DB->setFieldTable(array('iddata_konversi', 'nama', 'alamat', 'no_telp', 'nim_asal', 'kode_pt_asal', 'nama_pt_asal', 'njenjang', 'kode_ps_asal', 'nama_ps_asal', 'tahun', 'kjur', 'idkur', 'date_added'));
             $r = $this->DB->getRecord($str);			
             $dataView=$r[1];	
-            $dataView['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi=$iddata_konversi");
-            $dataView['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
+            $dataView['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi = $iddata_konversi");
+            $dataView['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
             if (!isset($r[1])) {
                 $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']=array();
                 throw new Exception("Data Konversi dengan ID ($iddata_konversi) tidak terdaftar.");
             }
             $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'] = $dataView;
             $this->Nilai->setDataMHS($dataView);
-            $nilai=$this->Nilai->getNilaiKonversi($iddata_konversi, $dataView['idkur']);		
+            $nilai = $this->Nilai->getNilaiKonversi($iddata_konversi, $dataView['idkur']);		
             $this->RepeaterS->dataSource = $nilai;
             $this->RepeaterS->dataBind();            	            
         } catch (Exception $ex) {
@@ -63,7 +63,7 @@ class CDetailKonversiMatakuliah extends MainPageM {
             case  'excel2007' :                
                 $messageprintout='Hasil konversi matakuliah :';                
                 
-                $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+                $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
                 $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
                 $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];

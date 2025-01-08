@@ -14,12 +14,12 @@ class CKonversiMatakuliah extends MainPageM {
             
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
-            $daftar_prodi=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');                                    
+            $daftar_prodi = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');                                    
 			$this->tbCmbPs->DataSource = $daftar_prodi;
 			$this->tbCmbPs->Text = $_SESSION['currentPageKonversiMatakuliah']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -38,8 +38,8 @@ class CKonversiMatakuliah extends MainPageM {
 	}
 	public function getInfoToolbar() {        
         $kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];        		
-        $ps=$_SESSION['daftar_jurusan'][$kjur];
-		$tahunmasuk=$this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
+        $ps = $_SESSION['daftar_jurusan'][$kjur];
+		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
 		$text="$ps Tahun Masuk $tahunmasuk";
 		return $text;
 	}
@@ -66,19 +66,19 @@ class CKonversiMatakuliah extends MainPageM {
 	}		
 	public function populateData ($search=false) {			
 		$kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];
-		$tahun_masuk=$_SESSION['tahun_masuk'];		
+		$tahun_masuk = $_SESSION['tahun_masuk'];		
         if ($search) {
             $txtsearch=addslashes($this->txtKriteria->Text);
             $str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.perpanjangan=0";
             switch ($this->cmbKriteria->Text) {                                
                 case 'nama' :
                     $clausa="AND nama LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
                     $str = "$str $clausa";
                 break;
             }            			
         }else{
-            $jumlah_baris=$this->DB->getCountRowsOfTable("data_konversi2 WHERE kjur='$kjur' AND tahun='$tahun_masuk' AND perpanjangan=0",'iddata_konversi');
+            $jumlah_baris = $this->DB->getCountRowsOfTable("data_konversi2 WHERE kjur='$kjur' AND tahun='$tahun_masuk' AND perpanjangan=0",'iddata_konversi');
 			$str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.kjur='$kjur' AND dk2.tahun='$tahun_masuk' AND dk2.perpanjangan=0";
         }			
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -94,9 +94,9 @@ class CKonversiMatakuliah extends MainPageM {
 		$r = $this->DB->getRecord($str, $offset+1);
 		$result = array();        
         while (list($k, $v) = each($r)) {
-            $iddata_konversi=$v['iddata_konversi'];
-            $v['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi=$iddata_konversi");
-            $v['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
+            $iddata_konversi = $v['iddata_konversi'];
+            $v['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi = $iddata_konversi");
+            $v['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
             $v['nim_alias'] = $v['nim']=='' ? 'N.A' : $v['nim'];
             $v['date_added'] = $this->TGL->tanggal('d/m/Y', $v['date_added']);
             $result[$k] = $v;

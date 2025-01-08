@@ -39,7 +39,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
    * setter informasi kelas
    */
   public function setInfoKelas ($infoKelas) {
-    $this->InfoKelas=$infoKelas;
+    $this->InfoKelas = $infoKelas;
   }
   /**
    * digunakan untuk mendapatkan daftar semester matakuliah dalam bentuk romawi
@@ -106,7 +106,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
     $jumlah=0;
     switch ($mode_info) {
       case 'penyelenggaraan' :
-        $jumlah=$this->db->getCountRowsOfTable("kelas_mhs km, pengampu_penyelenggaraan pp WHERE km.idpengampu_penyelenggaraan=pp.idpengampu_penyelenggaraan AND pp.idpenyelenggaraan=$id",'km.idkelas_mhs');
+        $jumlah=$this->db->getCountRowsOfTable("kelas_mhs km, pengampu_penyelenggaraan pp WHERE km.idpengampu_penyelenggaraan=pp.idpengampu_penyelenggaraan AND pp.idpenyelenggaraan = $id",'km.idkelas_mhs');
       break;
     }
     return $jumlah;
@@ -135,14 +135,14 @@ class Logic_Akademik extends Logic_Mahasiswa {
         $str = "SELECT pp.idpengampu_penyelenggaraan,pp.idpenyelenggaraan,vp.kmatkul,vp.nmatkul,vp.sks,vp.semester,pp.iddosen,CONCAT(d.gelar_depan,' ',d.nama_dosen,',',d.gelar_belakang) AS nama_dosen,d.nidn,vp.tahun,vp.idsmt FROM v_penyelenggaraan vp,pengampu_penyelenggaraan pp,dosen d WHERE d.iddosen=pp.iddosen AND pp.idpenyelenggaraan=vp.idpenyelenggaraan AND pp.idpengampu_penyelenggaraan='$id'";
         $r=$this->db->getRecord($str);
         if (isset($r[1])) {
-          $idpenyelenggaraan=$r[1]['idpenyelenggaraan'];
+          $idpenyelenggaraan = $r[1]['idpenyelenggaraan'];
 
           $r[1]['kmatkul']=$this->getKmatkul($r[1]['kmatkul']);
           $r[1]['jumlah_peserta']=$this->getJumlahMhsInPengampuPenyelenggaraan($id);
           $this->InfoMatkul=$r[1];
 
           $this->db->setFieldTable (array('nama_dosen','nidn'));
-          $str = "SELECT nidn,CONCAT(gelar_depan,' ',nama_dosen,',',gelar_belakang) AS nama_dosen FROM penyelenggaraan p,dosen d WHERE d.iddosen=p.iddosen AND p.idpenyelenggaraan=$idpenyelenggaraan";
+          $str = "SELECT nidn,CONCAT(gelar_depan,' ',nama_dosen,',',gelar_belakang) AS nama_dosen FROM penyelenggaraan p,dosen d WHERE d.iddosen=p.iddosen AND p.idpenyelenggaraan = $idpenyelenggaraan";
           $r=$this->db->getRecord($str);
           $this->InfoMatkul['nama_dosen_pengampu']=$r[1]['nama_dosen'];
           $this->InfoMatkul['nidn_dosen_pengampu']=$r[1]['nidn'];
@@ -236,12 +236,13 @@ class Logic_Akademik extends Logic_Mahasiswa {
     ));
     $r = $this->db->getRecord($str);
     if (isset($r[1])) {
+      $r[1]['kmatkul_asli']=$r[1]['kmatkul'];
       $r[1]['kmatkul']=$this->getKmatkul($r[1]['kmatkul']);
-      $r[1]['jumlah_peserta']=$this->db->getCountRowsOfTable("kelas_mhs_detail WHERE idkelas_mhs=$id",'idkelas_mhs');
-      $this->InfoKelas=$r[1];
+      $r[1]['jumlah_peserta']=$this->db->getCountRowsOfTable("kelas_mhs_detail WHERE idkelas_mhs = $id",'idkelas_mhs');
+      $this->InfoKelas = $r[1];
 
-      $idpenyelenggaraan=$r[1]['idpenyelenggaraan'];
-      $str = "SELECT nama_dosen AS nama_dosen_pengampu,nidn AS nidn_dosen_pengampu,nama_jabatan AS nama_jabatan_dosen_pengampu FROM kelas_mhs km JOIN v_penyelenggaraan WHERE idpenyelenggaraan=$idpenyelenggaraan";
+      $idpenyelenggaraan = $r[1]['idpenyelenggaraan'];
+      $str = "SELECT nama_dosen AS nama_dosen_pengampu,nidn AS nidn_dosen_pengampu,nama_jabatan AS nama_jabatan_dosen_pengampu FROM kelas_mhs km JOIN v_penyelenggaraan WHERE idpenyelenggaraan = $idpenyelenggaraan";
       $this->db->setFieldTable(array('nama_dosen_pengampu','nidn_dosen_pengampu','nama_jabatan_dosen_pengampu'));
       $r = $this->db->getRecord($str);
 
@@ -259,7 +260,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
    * @return type int
    */
   public function getJumlahMhsInPenyelenggaraan ($idpenyelenggaraan, $options=null) {
-    $jumlah_peserta = $jumlah_peserta=$this->db->getCountRowsOfTable(" krsmatkul km,krs k,register_mahasiswa rm WHERE k.idkrs=km.idkrs AND rm.nim=k.nim AND km.idpenyelenggaraan=$idpenyelenggaraan $options",'km.idkrsmatkul');
+    $jumlah_peserta = $jumlah_peserta=$this->db->getCountRowsOfTable(" krsmatkul km,krs k,register_mahasiswa rm WHERE k.idkrs=km.idkrs AND rm.nim=k.nim AND km.idpenyelenggaraan = $idpenyelenggaraan $options",'km.idkrsmatkul');
     return $jumlah_peserta;
   }
 
@@ -270,7 +271,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
    * @return type int
    */
   public function getJumlahNilaiTerisiPenyelenggaraan ($idpenyelenggaraan, $options=null) {
-    $jumlah_peserta = $jumlah_peserta=$this->db->getCountRowsOfTable(" v_nilai WHERE idpenyelenggaraan=$idpenyelenggaraan $options",'idpenyelenggaraan');
+    $jumlah_peserta = $jumlah_peserta=$this->db->getCountRowsOfTable(" v_nilai WHERE idpenyelenggaraan = $idpenyelenggaraan $options",'idpenyelenggaraan');
     return $jumlah_peserta;
   }
 
@@ -292,7 +293,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
    */
   public function isKrsSah ($tahun, $idsmt) {
     $nim = $this->DataMHS['nim'];
-    $str = "SELECT sah FROM krs WHERE idsmt=$idsmt AND tahun=$tahun AND nim='$nim'";
+    $str = "SELECT sah FROM krs WHERE idsmt=$idsmt AND tahun = $tahun AND nim='$nim'";
     $this->db->setFieldTable(array('sah'));
     $r=$this->db->getRecord($str);
     $bool=false;
@@ -324,7 +325,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
    * @return daftar dosen
    */
   public function getListDosenFromPenyelenggaraan ($idsmt, $tahun) {
-    $str = "SELECT DISTINCT(pp.iddosen) AS iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM penyelenggaraan p,pengampu_penyelenggaraan pp,dosen d WHERE p.idpenyelenggaraan=pp.idpenyelenggaraan AND d.iddosen=pp.iddosen AND p.idsmt=$idsmt AND p.tahun=$tahun ORDER BY d.nama_dosen ASC";
+    $str = "SELECT DISTINCT(pp.iddosen) AS iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM penyelenggaraan p,pengampu_penyelenggaraan pp,dosen d WHERE p.idpenyelenggaraan=pp.idpenyelenggaraan AND d.iddosen=pp.iddosen AND p.idsmt=$idsmt AND p.tahun = $tahun ORDER BY d.nama_dosen ASC";
     $this->db->setFieldTable(array('iddosen','nidn','nama_dosen'));
     $r=$this->db->getRecord($str);
     $result=array('none'=>' ');

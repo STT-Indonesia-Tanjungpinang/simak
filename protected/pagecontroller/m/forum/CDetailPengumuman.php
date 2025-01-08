@@ -19,7 +19,7 @@ class CDetailPengumuman extends MainPageM {
                     $str="UPDATE pengumuman SET unread=0 WHERE idpost=$id";
                     $this->DB->updateRecord($str);
                     
-                    $this->DataDiskusi=$r[1];
+                    $this->DataDiskusi = $r[1];
                     $attachment=array();
                     if ($this->DataDiskusi['file_size'] > 0) {
                         $attachment[]=array('file_name'=>$r[1]['file_name'],'file_size'=>$this->setup->formatSizeUnits($r[1]['file_size']),'file_url'=>$r[1]['file_url']);
@@ -51,7 +51,7 @@ class CDetailPengumuman extends MainPageM {
     public function kirimKonten($sender, $param) {
 		if ($this->IsValid) {	
             $idpost=$_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idpost'];            
-            $idkategori=$_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idkategori'];
+            $idkategori = $_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idkategori'];
             $judul = $_SESSION['currentPageDetailPengumuman']['DataDiskusi']['title'];
             $content = strip_tags(addslashes($this->txtAddContent->Text));
             $this->txtAddContent->Text='';

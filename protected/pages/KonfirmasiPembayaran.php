@@ -34,7 +34,7 @@ class KonfirmasiPembayaran extends MainPageF {
 			$r=$this->DB->getRecord($str);
 			$r[1]['nama_ps_1']=$this->DMaster->getNamaProgramStudiByID($r[1]['kjur1']);
 			$r[1]['nama_ps_2']=($r[1]['kjur2']>0)?$this->DMaster->getNamaProgramStudiByID($r[1]['kjur2']):'N.A';
-			$this->DataMHS=$r[1];
+			$this->DataMHs = $r[1];
 			$this->hiddenid->Value=$no_pendaftaran;
 			
 			$this->imgBuktiBayar->ImageUrl=$r[1]['file_bukti_bayar'];
@@ -83,7 +83,7 @@ class KonfirmasiPembayaran extends MainPageF {
             chmod(BASEPATH."/$path",0644); 
             $this->imgBuktiBayar->ImageUrl=$path; 
 			$this->imgBuktiBayar->Width='400px';
-			$no_pendaftaran=$this->hiddenid->Value;
+			$no_pendaftaran = $this->hiddenid->Value;
             $this->DB->updateRecord("UPDATE formulir_pendaftaran_temp SET file_bukti_bayar='$path' WHERE no_pendaftaran='$no_pendaftaran'");           
         }else {                    
             //error handling

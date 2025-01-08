@@ -40,12 +40,12 @@ class CProfilMahasiswa extends MainPageM {
         unset($_SESSION['currentPageProfilMahasiswa']);
         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
       }
-      $datamhs=$r[1];
+      $datamhs = $r[1];
       $datamhs['nama_ps'] = $this->DMaster->getNamaProgramStudiByID($datamhs['kjur']);
       $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
       $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':strtoupper($datamhs['nama_konsentrasi']);
 
-      $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
+      $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
       $datamhs['nama_dosen'] = $nama_dosen;
       
       //theme
@@ -60,7 +60,7 @@ class CProfilMahasiswa extends MainPageM {
       $datamhs['totalmatkul'] = $this->Nilai->getTotalMatkulAdaNilai();
       $datamhs['totalsks'] = $this->Nilai->getTotalSKSAdaNilai ();            
       
-      $this->DataMHS=$datamhs;
+      $this->DataMHs = $datamhs;
       $_SESSION['currentPageProfilMahasiswa']['DataMHS'] = $this->DataMHS;
       $activeview = $_SESSION['currentPageProfilMahasiswa']['activeviewindex'];                
       if ($activeview == $this->MVProfilMahasiswa->ActiveViewIndex) {
@@ -114,9 +114,9 @@ class CProfilMahasiswa extends MainPageM {
       $v['ta'] = $this->DMaster->getNamaTA($v['tahun']);		
       $v['semester'] = $this->setup->getSemester($v['idsmt']); 
       
-      $jumlah_sks=$this->Nilai->getTotalSKS ();
+      $jumlah_sks = $this->Nilai->getTotalSKS ();
       $jumlah_m=$this->Nilai->getTotalM ();
-      $ips=$this->Nilai->getIPS();
+      $ips = $this->Nilai->getIPS();
       
       $ipk=0;
       $v['jumlah_sks'] = $jumlah_sks;
@@ -141,10 +141,10 @@ class CProfilMahasiswa extends MainPageM {
       $isikrs='tidak isi';
       if ($v['k_status']=='A') {
         $this->KRS->getDataKRS($v['tahun'], $v['idsmt']);  
-        $datakrs=$this->KRS->DataKRS;
+        $datakrs = $this->KRS->DataKRS;
         $isikrs='belum isi';
         if (isset($datakrs['idkrs'])) {
-          $isikrs=$this->KRS->DataKRS['sah']==true ? 'sudah isi [sah]':'sudah isi [belum disahkan]';
+          $isikrs = $this->KRS->DataKRS['sah']==true ? 'sudah isi [sah]':'sudah isi [belum disahkan]';
         }                
       }
       $v['tahun'] = $this->DMaster->getNamaTA($v['tahun']);		
@@ -176,8 +176,8 @@ class CProfilMahasiswa extends MainPageM {
   public function itemCreatedRepeaterKRS($sender, $param) {
     $item=$param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {   
-      $idkrs=$item->DataItem['idkrs'];
-      $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs=$idkrs AND batal=0 ORDER BY semester ASC,kmatkul ASC";
+      $idkrs = $item->DataItem['idkrs'];
+      $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs = $idkrs AND batal=0 ORDER BY semester ASC,kmatkul ASC";
       $this->DB->setFieldTable(array('idpenyelenggaraan', 'idkrsmatkul', 'kmatkul', 'nmatkul', 'sks', 'semester', 'batal', 'nidn', 'nama_dosen'));
       $r = $this->DB->getRecord($str);
       $result = array();
@@ -226,9 +226,9 @@ class CProfilMahasiswa extends MainPageM {
           $this->DB->setFieldTable(array('nama_mhs', 'tahun_masuk', 'nama_ps'));
           $r = $this->DB->getRecord($str);
           if (isset($r[1])) {  
-            $nama_mhs=$r[1]['nama_mhs'];
-            $tahun_masuk=$r[1]['tahun_masuk'];
-            $nama_ps=$r[1]['nama_ps'];
+            $nama_mhs = $r[1]['nama_mhs'];
+            $tahun_masuk = $r[1]['tahun_masuk'];
+            $nama_ps = $r[1]['nama_ps'];
             throw new Exception ("NIM ($nim) sudah terdaftar atas nama $nama_mhs P.S $nama_ps registrasi pada tahun $tahun_masuk");                                                   
           }                
         }
@@ -248,9 +248,9 @@ class CProfilMahasiswa extends MainPageM {
           $this->DB->setFieldTable(array('nama_mhs', 'tahun_masuk', 'nama_ps'));
           $r = $this->DB->getRecord($str);
           if (isset($r[1])) {  
-            $nama_mhs=$r[1]['nama_mhs'];
-            $tahun_masuk=$r[1]['tahun_masuk'];
-            $nama_ps=$r[1]['nama_ps'];
+            $nama_mhs = $r[1]['nama_mhs'];
+            $tahun_masuk = $r[1]['tahun_masuk'];
+            $nama_ps = $r[1]['nama_ps'];
             throw new Exception ("NIRM ($nirm) sudah terdaftar atas nama $nama_mhs P.S $nama_ps registrasi pada tahun $tahun_masuk");                                                   
           }          
         }
@@ -271,7 +271,7 @@ class CProfilMahasiswa extends MainPageM {
       $str = "UPDATE transaksi SET nim='$nim' WHERE nim='$nimasal'";
       $this->DB->updateRecord($str);
       
-      $nama_mhs=$_SESSION['currentPageProfilMahasiswa']['DataMHS']['nama_mhs'];
+      $nama_mhs = $_SESSION['currentPageProfilMahasiswa']['DataMHS']['nama_mhs'];
       $str = "UPDATE forumposts SET userid='$nim',nama_user='$nama_mhs [$nim]' WHERE userid='$nimasal'";
       $this->DB->updateRecord($str);
       

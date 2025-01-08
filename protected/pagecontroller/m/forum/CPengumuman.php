@@ -46,7 +46,7 @@ class CPengumuman extends MainPageM {
             
         }else{
             $str = "SELECT fp.idpost,fp.userid,fk.nama_kategori,fp.title,fp.content,fp.nama_user,fp.tipe,fp.date_added FROM pengumuman fp, forumkategori fk WHERE fp.idkategori=fk.idkategori AND parentpost=0";
-            $jumlah_baris=$this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=0",'idpost');						
+            $jumlah_baris = $this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=0",'idpost');						
         }        
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePengumuman']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -84,7 +84,7 @@ class CPengumuman extends MainPageM {
             
         }else{
             $str = "SELECT fp.idpost,fk.nama_kategori,fp.title,fp.content,fp.userid,fp.nama_user,fp.date_added FROM pengumuman fp, forumkategori fk WHERE fp.idkategori=fk.idkategori AND parentpost=0 AND unread=1";
-            $jumlah_baris=$this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=0 AND unread=1",'idpost');						
+            $jumlah_baris = $this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=0 AND unread=1",'idpost');						
         }        
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePengumuman']['page_num_unread'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -146,7 +146,7 @@ class CPengumuman extends MainPageM {
 			if (file_exists($file_path_temp)) {
 				rename ($file_path_temp, $file_path);
 			}
-            $str = "INSERT INTO pengumuman SET idpost=NULL,idkategori=$idkategori,title='$judul',content='$content',userid=$userid,tipe='m',nama_user='$nama_user',file_name='$file_name',file_type='$file_type',file_size='$file_size',file_path='$file_path',file_url='$file_url',date_added=NOW()";
+            $str = "INSERT INTO pengumuman SET idpost=NULL,idkategori = $idkategori,title='$judul',content='$content',userid=$userid,tipe='m',nama_user='$nama_user',file_name='$file_name',file_type='$file_type',file_size='$file_size',file_path='$file_path',file_url='$file_url',date_added=NOW()";
             $this->DB->insertRecord($str);
             $_SESSION['currentPagePengumuman']['activeviewindex']=0;
             $this->redirect('forum.Pengumuman', true);

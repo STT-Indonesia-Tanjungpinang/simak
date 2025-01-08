@@ -37,7 +37,7 @@ class CProfiles extends MainPageAPI {
         $this->txtEditIPAddress->Text = $result['ipaddress']; 
     }  
     public function checkEmail($sender, $param) {
-        $this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
+        $this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
         $email = $param->Value;       
         if ($email != '') {
             try {   

@@ -100,7 +100,7 @@ try {
       $h = md5("$sn|$salt|$nim");
     }    
     
-    $api_call = "$url/mhs/get.php?h=$h&sn=$sn&nim=$nim";
+    $api_call = "$url/mhs/get.php?h=$h&sn = $sn&nim=$nim";
     $response = request($api_call);    echo "$api_call <br>";
 
     $nama_mhs = urlencode($v['nama_mhs']);
@@ -123,7 +123,7 @@ try {
       {
         $h = md5("$sn|$salt|$nim");
       }    
-      $api_call = "$url/mhs/upd.php?h=$h&sn=$sn&nim=$nim&nama_mhs=$nama_mhs&tempat_lahir=$tempat_lahir&tanggal_lahir=$tanggal_lahir&jk=$jk&telp_hp=$telp_hp&alamat_rumah=$alamat_rumah&email=$email&kjur=$kjur&masuk_tahun=$masuk_tahun&masuk_semester=$masuk_semester&idkelas=$idkelas&k_status=$k_status";      
+      $api_call = "$url/mhs/upd.php?h=$h&sn = $sn&nim=$nim&nama_mhs = $nama_mhs&tempat_lahir=$tempat_lahir&tanggal_lahir=$tanggal_lahir&jk = $jk&telp_hp=$telp_hp&alamat_rumah=$alamat_rumah&email=$email&kjur=$kjur&masuk_tahun = $masuk_tahun&masuk_semester=$masuk_semester&idkelas = $idkelas&k_status = $k_status";      
       $result = request($api_call);      echo "$api_call <br>";
     }
     else if ($response['rc'] == '99')
@@ -137,7 +137,7 @@ try {
       {
         $h = md5("$sn|$salt|$nim");
       }    
-      $api_call = "$url/mhs/add.php?h=$h&sn=$sn&nim=$nim&nama_mhs=$nama_mhs&tempat_lahir=$tempat_lahir&tanggal_lahir=$tanggal_lahir&jk=$jk&telp_hp=$telp_hp&alamat_rumah=$alamat_rumah&email=$email&kjur=$kjur&masuk_tahun=$masuk_tahun&masuk_semester=$masuk_semester&idkelas=$idkelas&k_status=$k_status";      
+      $api_call = "$url/mhs/add.php?h=$h&sn = $sn&nim=$nim&nama_mhs = $nama_mhs&tempat_lahir=$tempat_lahir&tanggal_lahir=$tanggal_lahir&jk = $jk&telp_hp=$telp_hp&alamat_rumah=$alamat_rumah&email=$email&kjur=$kjur&masuk_tahun = $masuk_tahun&masuk_semester=$masuk_semester&idkelas = $idkelas&k_status = $k_status";      
       $result = request($api_call);      echo "$api_call <br>";
     }
     
@@ -182,7 +182,7 @@ try {
    {
      $h = md5("$sn|$salt|$idkrs");
    }    
-   $api_call = "$url/krs/get.php?h=$h&sn=$sn&idkrs=$idkrs";
+   $api_call = "$url/krs/get.php?h=$h&sn = $sn&idkrs = $idkrs";
    $response = request($api_call); echo "$api_call <br>";
 
    if($response['rc'] == '0') //krs ini ada
@@ -192,7 +192,7 @@ try {
      {
        $h = md5("$sn|$salt|$idkrs");
      }    
-     $api_call = "$url/krs/upd.php?h=$h&sn=$sn&idkrs=$idkrs&nim=$nim&no_krs=$no_krs&tgl_krs=$tgl_krs&tahun=$tahun&idsmt=$idsmt&sah=$sah";      
+     $api_call = "$url/krs/upd.php?h=$h&sn = $sn&idkrs = $idkrs&nim=$nim&no_krs = $no_krs&tgl_krs = $tgl_krs&tahun = $tahun&idsmt=$idsmt&sah=$sah";      
      $result = request($api_call);      echo "$api_call <br>";
    }
    else if ($response['rc'] == '99')
@@ -206,7 +206,7 @@ try {
      {
        $h = md5("$sn|$salt|$idkrs");
      }    
-     $api_call = "$url/krs/add.php?h=$h&sn=$sn&idkrs=$idkrs&nim=$nim&no_krs=$no_krs&tgl_krs=$tgl_krs&tahun=$tahun&idsmt=$idsmt&sah=$sah";
+     $api_call = "$url/krs/add.php?h=$h&sn = $sn&idkrs = $idkrs&nim=$nim&no_krs = $no_krs&tgl_krs = $tgl_krs&tahun = $tahun&idsmt=$idsmt&sah=$sah";
      $result = request($api_call);    echo "$api_call <br>";
    }
 
@@ -233,7 +233,7 @@ try {
      {
        $h = md5("$sn|$salt|$idkrsmatkul");
      }    
-     $api_call = "$url/kmk/get.php?h=$h&sn=$sn&idkrsmatkul=$idkrsmatkul";
+     $api_call = "$url/kmk/get.php?h=$h&sn = $sn&idkrsmatkul=$idkrsmatkul";
      $response = request($api_call); echo "$api_call <br>";
      
      if($response['rc'] == '0') //kmatkul ini ada
@@ -243,7 +243,7 @@ try {
        {
          $h = md5("$sn|$salt|$idkrsmatkul");
        }    
-       $api_call = "$url/kmk/upd.php?h=$h&sn=$sn&idkrs=$idkrs&idkrsmatkul=$idkrsmatkul&kmatkul=$kmatkul&idpenyelenggaraan=$idpenyelenggaraan&batal=$batal";      
+       $api_call = "$url/kmk/upd.php?h=$h&sn = $sn&idkrs = $idkrs&idkrsmatkul=$idkrsmatkul&kmatkul=$kmatkul&idpenyelenggaraan = $idpenyelenggaraan&batal=$batal";      
        $response = request($api_call);      echo "$api_call <br>";
      }
      else if ($response['rc'] == '99')
@@ -257,13 +257,13 @@ try {
        {
          $h = md5("$sn|$salt|$idkrsmatkul");
        }    
-       $api_call = "$url/kmk/add.php?h=$h&sn=$sn&idkrs=$idkrs&idkrsmatkul=$idkrsmatkul&kmatkul=$kmatkul&idpenyelenggaraan=$idpenyelenggaraan&batal=$batal";
+       $api_call = "$url/kmk/add.php?h=$h&sn = $sn&idkrs = $idkrs&idkrsmatkul=$idkrsmatkul&kmatkul=$kmatkul&idpenyelenggaraan = $idpenyelenggaraan&batal=$batal";
        $response = request($api_call);      echo "$api_call <br>";
      }
    }
 
    $synced = $result['rc'] == '0' ? 1 : -1;
-   $sql = "UPDATE krs SET synced=:synced,sync_msg=:sync_msg WHERE idkrs=$idkrs";
+   $sql = "UPDATE krs SET synced=:synced,sync_msg=:sync_msg WHERE idkrs = $idkrs";
    $query = $conn->prepare($sql);
    
    $query->bindvalue(':synced', $synced);    
@@ -314,7 +314,7 @@ try {
     {
       $h = md5("$sn|$salt|$idkelas_mhs");
     }    
-    $api_call = "$url/jad/get.php?h=$h&sn=$sn&idkelas_mhs=$idkelas_mhs";
+    $api_call = "$url/jad/get.php?h=$h&sn = $sn&idkelas_mhs = $idkelas_mhs";
     $response = request($api_call); echo "$api_call <br>";
     
     if($response['rc'] == '0') //kelas mhs ini ada
@@ -324,7 +324,7 @@ try {
       {
         $h = md5("$sn|$salt|$idkelas_mhs");
       }    
-      $api_call = "$url/jad/upd.php?h=$h&sn=$sn&idkelas_mhs=$idkelas_mhs&tahun=$tahun&idsmt=$idsmt&kjur=$kjur&kmatkul=$kmatkul&idkelas=$idkelas&nidn=$nidn&nama_kelas=$nama_kelas&hari=$hari&jam_masuk=$jam_masuk&jam_keluar=$jam_keluar";
+      $api_call = "$url/jad/upd.php?h=$h&sn = $sn&idkelas_mhs = $idkelas_mhs&tahun = $tahun&idsmt=$idsmt&kjur=$kjur&kmatkul=$kmatkul&idkelas = $idkelas&nidn = $nidn&nama_kelas = $nama_kelas&hari = $hari&jam_masuk = $jam_masuk&jam_keluar=$jam_keluar";
       
       $result = request($api_call);      echo "$api_call <br>";
     }
@@ -339,7 +339,7 @@ try {
       {
         $h = md5("$sn|$salt|$idkelas_mhs");
       }    
-      $api_call = "$url/jad/add.php?h=$h&sn=$sn&idkelas_mhs=$idkelas_mhs&tahun=$tahun&idsmt=$idsmt&kjur=$kjur&kmatkul=$kmatkul&idkelas=$idkelas&nidn=$nidn&nama_kelas=$nama_kelas&hari=$hari&jam_masuk=$jam_masuk&jam_keluar=$jam_keluar";
+      $api_call = "$url/jad/add.php?h=$h&sn = $sn&idkelas_mhs = $idkelas_mhs&tahun = $tahun&idsmt=$idsmt&kjur=$kjur&kmatkul=$kmatkul&idkelas = $idkelas&nidn = $nidn&nama_kelas = $nama_kelas&hari = $hari&jam_masuk = $jam_masuk&jam_keluar=$jam_keluar";
       $result = request($api_call);    echo "$api_call <br>";
     }
 
@@ -364,7 +364,7 @@ try {
       {
         $h = md5("$sn|$salt|$idkelas_mhs_detail");
       }    
-      $api_call = "$url/kls/get.php?h=$h&sn=$sn&idkelas_mhs_detail=$idkelas_mhs_detail";
+      $api_call = "$url/kls/get.php?h=$h&sn = $sn&idkelas_mhs_detail=$idkelas_mhs_detail";
       $response = request($api_call); echo "$api_call <br>";      
       if($response['rc'] == '0') //id kelas mhs ini ada
       {
@@ -373,7 +373,7 @@ try {
         {
           $h = md5("$sn|$salt|$idkelas_mhs_detail");
         }    
-        $api_call = "$url/kls/upd.php?h=$h&sn=$sn&idkelas_mhs_detail=$idkelas_mhs_detail&idkelas_mhs=$idkelas_mhs&idkrsmatkul=$idkrsmatkul";
+        $api_call = "$url/kls/upd.php?h=$h&sn = $sn&idkelas_mhs_detail=$idkelas_mhs_detail&idkelas_mhs = $idkelas_mhs&idkrsmatkul=$idkrsmatkul";
         $result = request($api_call);      echo "$api_call <br>";
       }
       else if ($response['rc'] == '99')
@@ -387,13 +387,13 @@ try {
         {
           $h = md5("$sn|$salt|$idkelas_mhs_detail");
         }    
-        $api_call = "$url/kls/add.php?h=$h&sn=$sn&idkelas_mhs_detail=$idkelas_mhs_detail&idkelas_mhs=$idkelas_mhs&idkrsmatkul=$idkrsmatkul";
+        $api_call = "$url/kls/add.php?h=$h&sn = $sn&idkelas_mhs_detail=$idkelas_mhs_detail&idkelas_mhs = $idkelas_mhs&idkrsmatkul=$idkrsmatkul";
         $result = request($api_call);    echo "$api_call <br>";
       }
     }
 
     $synced = $result['rc'] == '0' ? 1 : -1;
-    $sql = "UPDATE kelas_mhs SET synced=:synced,sync_msg=:sync_msg WHERE idkelas_mhs=$idkelas_mhs";
+    $sql = "UPDATE kelas_mhs SET synced=:synced,sync_msg=:sync_msg WHERE idkelas_mhs = $idkelas_mhs";
     $query = $conn->prepare($sql);
     
     $query->bindvalue(':synced', $synced);    

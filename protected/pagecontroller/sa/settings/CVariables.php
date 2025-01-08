@@ -33,7 +33,7 @@ class CVariables extends MainPageSA {
         $this->cmbDefaultSemester->Text = $this->setup->getSettingValue('default_semester');
         $this->cmbDefaultSemester->dataBind();
                 
-        $daftar_prodi=$this->DMaster->getListProgramStudi(2);        
+        $daftar_prodi = $this->DMaster->getListProgramStudi(2);        
         $this->cmbDefaultProdi->DataSource = $daftar_prodi;        
         $this->cmbDefaultProdi->Text = $this->setup->getSettingValue('default_kjur');
         $this->cmbDefaultProdi->dataBind();
@@ -49,7 +49,7 @@ class CVariables extends MainPageSA {
         
         //Transkrip Nilai        
         $this->txtTranskripNilaiNamaJabatan->Text = $this->setup->getSettingValue('nama_jabatan_transkrip');
-        $daftardosen=$this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
+        $daftardosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
         $this->cmbNamaPenandatangan->Text = $this->setup->getSettingValue('id_penandatangan_transkrip');
         $this->cmbNamaPenandatangan->DataSource = $daftardosen;
         $this->cmbNamaPenandatangan->DataBind();
@@ -133,7 +133,7 @@ class CVariables extends MainPageSA {
                     $this->DB->updateRecord($str);
                 break;
                 case 'btnSaveTranskripNilai' :                    
-                    $iddosen=$this->cmbNamaPenandatangan->Text;
+                    $iddosen = $this->cmbNamaPenandatangan->Text;
                     $str = "UPDATE setting SET value='$iddosen' WHERE setting_id=20";                                
                     $this->DB->updateRecord($str);
                     
@@ -160,7 +160,7 @@ class CVariables extends MainPageSA {
                     
                 break;
                 case 'btnSaveKHS' :
-                    $iddosen=$this->cmbNamaPenandatanganKHS->Text;
+                    $iddosen = $this->cmbNamaPenandatanganKHS->Text;
                     $str = "UPDATE setting SET value='$iddosen' WHERE setting_id=30";                                
                     $this->DB->updateRecord($str);
                     
@@ -187,7 +187,7 @@ class CVariables extends MainPageSA {
                     
                 break;
                 case 'btnSaveDPNA' :
-                    $iddosen=$this->cmbNamaPenandatanganDPNA->Text;
+                    $iddosen = $this->cmbNamaPenandatanganDPNA->Text;
                     $str = "UPDATE setting SET value='$iddosen' WHERE setting_id=40";                                
                     $this->DB->updateRecord($str);
                     

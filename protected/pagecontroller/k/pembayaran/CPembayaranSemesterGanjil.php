@@ -12,7 +12,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
 			}
             $_SESSION['currentPagePembayaranSemesterGanjil']['search']=false; 
             $bool=!isset($_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']['nim']);
-            $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
+            $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
@@ -23,7 +23,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
             $this->tbCmbTA->Text = $ta;
             $this->tbCmbTA->dataBind();
             
-            $kelas=$this->DMaster->getListKelas();
+            $kelas = $this->DMaster->getListKelas();
             $kelas['none'] = 'All';
 			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text = $_SESSION['currentPagePembayaranSemesterGanjil']['kelas'];			
@@ -46,7 +46,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
 	}	
     public function setInfoToolbar() {                
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGanjil']['ta']);        		
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
 	}
@@ -81,7 +81,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
 		$semester = $_SESSION['currentPagePembayaranSemesterGanjil']['semester'];
 		$kjur = $_SESSION['kjur'];	
         
-        $kelas=$_SESSION['currentPagePembayaranSemesterGanjil']['kelas'];
+        $kelas = $_SESSION['currentPagePembayaranSemesterGanjil']['kelas'];
         $str_kelas = $kelas == 'none'?'':" AND t.idkelas='$kelas'";
         if ($search) {
             $str = "SELECT t.no_transaksi,no_faktur,t.tanggal,t.nim,vdm.nama_mhs,commited FROM transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester'";
@@ -90,28 +90,28 @@ class CPembayaranSemesterGanjil Extends MainPageK {
             switch ($this->cmbKriteria->Text) {              
                 case 'no_transaksi' :
                     $clausa="AND t.no_transaksi='$txtsearch'";                    
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;             
                 case 'no_faktur' :
                     $clausa="AND t.no_faktur='$txtsearch'";                    
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
                 case 'nim' :                    
                     $clausa="AND t.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	                    
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	                    
                     $str = "$str $clausa";
                 break;
                 case 'nama' :                    
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
             }
         }else{
             $str = "SELECT t.no_transaksi,no_faktur,t.tanggal,t.nim,vdm.nama_mhs,commited FROM transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' AND t.kjur = $kjur $str_kelas";
-            $jumlah_baris=$this->DB->getCountRowsOfTable(" transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' AND t.kjur = $kjur $str_kelas",'no_transaksi');
+            $jumlah_baris = $this->DB->getCountRowsOfTable(" transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' AND t.kjur = $kjur $str_kelas",'no_transaksi');
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranSemesterGanjil']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;   
@@ -128,11 +128,11 @@ class CPembayaranSemesterGanjil Extends MainPageK {
         $r = $this->DB->getRecord($str, $offset+1);	        
         $result = array();		
 		while (list($k, $v) = each($r)) {
-			$no_transaksi=$v['no_transaksi'];				
-			$str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM v_transaksi t WHERE no_transaksi=$no_transaksi";			
+			$no_transaksi = $v['no_transaksi'];				
+			$str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM v_transaksi t WHERE no_transaksi = $no_transaksi";			
 			$this->DB->setFieldTable(array('dibayarkan'));
 			$r2=$this->DB->getRecord($str2);				
-			$dibayarkan=$r2[1]['dibayarkan'];						
+			$dibayarkan = $r2[1]['dibayarkan'];						
 			$v['dibayarkan'] = $this->Finance->toRupiah($dibayarkan);													
 			$v['tanggal'] = $this->TGL->tanggal('d/m/Y', $v['tanggal']);
 			$result[$k] = $v;
@@ -158,7 +158,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
                 if (!isset($r[1])) {                                   
                     throw new Exception ("NIM ($nim) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");		
                 }
-                $datamhs=$r[1];
+                $datamhs = $r[1];
                 $ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
                 if ($datamhs['tahun_masuk'] == $ta && $datamhs['semester_masuk']==1) {						
                     $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']=array();

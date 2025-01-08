@@ -1730,7 +1730,7 @@ class QRcode {
 		$parity = 0;
 		foreach ($items as $item) {
 			if ($item['mode'] != QR_MODE_ST) {
-				for ($i=$item['size']-1; $i>=0; --$i) {
+				for ($i = $item['size']-1; $i>=0; --$i) {
 					$parity ^= $item['data'][$i];
 				}
 			}

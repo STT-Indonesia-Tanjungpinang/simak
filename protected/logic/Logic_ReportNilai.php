@@ -13,7 +13,7 @@ class Logic_ReportNilai extends Logic_Report {
     $nim = $this->dataReport['nim'];
     $ta=$this->dataReport['ta'];
     $semester=$this->dataReport['semester'];
-    $nama_tahun=$this->dataReport['nama_tahun'];
+    $nama_tahun = $this->dataReport['nama_tahun'];
     $nama_semester=$this->dataReport['nama_semester'];
     switch ($this->getDriver()) 
     {
@@ -84,7 +84,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(10, 5, 'NM', 1, 0, 'C');						
         $rpt->Cell(47, 5, 'KETERANGAN', 1, 0, 'C');
         $objNilai->setDataMHS(array('nim'=>$nim));
-        $dn=$objNilai->getKHS($ta, $semester);				
+        $dn = $objNilai->getKHS($ta, $semester);				
         $totalSks=0;
         $totalNm=0;
         $row+=5;
@@ -96,7 +96,7 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
           $rpt->Cell(80, 5, $v['nmatkul'], 1, 0, 'L');				
           $n_kual=$v['n_kual']==''?'-':$v['n_kual'];
-          $sks=$v['sks'];
+          $sks = $v['sks'];
           $m=$v['m'];										
           $rpt->Cell(10, 5, $n_kual, 1, 0, 'C');					
           $rpt->Cell(10, 5, $sks, 1, 0, 'C');					
@@ -130,7 +130,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(10, 5, $nilaisemestersekarang['sks'], 1, 0, 'C');
         $rpt->Cell(10, 5, $nilaisemestersekarang['nm'], 1, 0, 'C');
               
-        $ipk=$nilaisemestersekarang['ipk'];                
+        $ipk = $nilaisemestersekarang['ipk'];                
         $rpt->Cell(47, 5, "IPK : $ipk", 1, 0, 'C');
         
         $row+=5;
@@ -161,7 +161,7 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->setXY(31, $row);			
           $rpt->Cell(60, 5, $this->dataReport['nama_jabatan_khs'],0,0,'C');				
                     
-          $nama_ps=$this->dataReport['nama_ps'];			
+          $nama_ps = $this->dataReport['nama_ps'];			
           $rpt->Cell(80, 5, $nama_ps,0,0,'C');		
 
           $row+=20;                    
@@ -173,7 +173,7 @@ class Logic_ReportNilai extends Logic_Report {
           $row+=5;
           $rpt->setXY(31, $row);			
           $nama_jabatan=strtoupper($this->dataReport['jabfung_penandatangan_khs']);
-          $nidn=$this->dataReport['nidn_penandatangan_khs'];
+          $nidn = $this->dataReport['nidn_penandatangan_khs'];
           $rpt->Cell(60, 5, "$nama_jabatan NIDN : $nidn",0,0,'C');
           $rpt->Cell(80, 5, strtoupper($this->dataReport['jabfung_kaprodi']). ' NIDN : '.$this->dataReport['nidn_kaprodi'],0,0,'C');
         }
@@ -191,7 +191,7 @@ class Logic_ReportNilai extends Logic_Report {
     $akhir=$this->dataReport['akhir'];
     $ta=$this->dataReport['ta'];
     $semester=$this->dataReport['semester'];
-    $nama_tahun=$this->dataReport['nama_tahun'];
+    $nama_tahun = $this->dataReport['nama_tahun'];
     $nama_semester=$this->dataReport['nama_semester'];
     switch ($this->getDriver()) {
       case 'excel2003' :               
@@ -205,12 +205,12 @@ class Logic_ReportNilai extends Logic_Report {
         foreach ($repeater->Items as $inputan) {	
           if ($inputan->btnPrintOutR->Enabled) {
             $item=$inputan->btnPrintOutR->getNamingContainer();
-            $idkrs=$repeater->DataKeys[$item->getItemIndex()];                        
+            $idkrs = $repeater->DataKeys[$item->getItemIndex()];                        
             
-            $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs=$idkrs";
+            $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs = $idkrs";
             $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','iddosen_wali'));
             $r=$this->db->getRecord($str);	           
-            $dataMhs=$r[1];
+            $dataMhs = $r[1];
             $nim = $dataMhs['nim'];
                         
             $rpt->AddPage();
@@ -240,7 +240,7 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(0, $row,'Penasihat Akademik');
             $rpt->SetFont ('helvetica','',8);
             $rpt->setXY(38, $row);			
-            $nama_dosen=$objDMaster->getNamaDosenWaliByID ($dataMhs['iddosen_wali']);
+            $nama_dosen = $objDMaster->getNamaDosenWaliByID ($dataMhs['iddosen_wali']);
             $rpt->Cell(0, $row,": $nama_dosen");				
             $rpt->SetFont ('helvetica','B',8);	
             $rpt->setXY(105, $row);			
@@ -273,7 +273,7 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(10, 5, 'NM', 1, 0, 'C');						
             $rpt->Cell(47, 5, 'KETERANGAN', 1, 0, 'C');
             $objNilai->setDataMHS(array('nim'=>$nim));
-            $dn=$objNilai->getKHS($ta, $semester);				
+            $dn = $objNilai->getKHS($ta, $semester);				
             $totalSks=0;
             $totalNm=0;
             $row+=5;
@@ -285,7 +285,7 @@ class Logic_ReportNilai extends Logic_Report {
               $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
               $rpt->Cell(80, 5, $v['nmatkul'], 1, 0, 'L');				
               $n_kual=$v['n_kual']==''?'-':$v['n_kual'];
-              $sks=$v['sks'];
+              $sks = $v['sks'];
               $m=$v['m'];										
               $rpt->Cell(10, 5, $n_kual, 1, 0, 'C');					
               $rpt->Cell(10, 5, $sks, 1, 0, 'C');					
@@ -319,7 +319,7 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(10, 5, $nilaisemestersekarang['sks'], 1, 0, 'C');
             $rpt->Cell(10, 5, $nilaisemestersekarang['nm'], 1, 0, 'C');
 
-            $ipk=$nilaisemestersekarang['ipk'];                
+            $ipk = $nilaisemestersekarang['ipk'];                
             $rpt->Cell(47, 5, "IPK : $ipk", 1, 0, 'C');
 
             $row+=5;
@@ -350,7 +350,7 @@ class Logic_ReportNilai extends Logic_Report {
               $rpt->setXY(31, $row);			
               $rpt->Cell(60, 5, $this->dataReport['nama_jabatan_khs'],0,0,'C');				
 
-              $nama_ps=$this->dataReport['nama_ps'];			
+              $nama_ps = $this->dataReport['nama_ps'];			
               $rpt->Cell(80, 5, $nama_ps,0,0,'C');		
 
               $row+=20;                    
@@ -362,7 +362,7 @@ class Logic_ReportNilai extends Logic_Report {
               $row+=5;
               $rpt->setXY(31, $row);			
               $nama_jabatan=strtoupper($this->dataReport['jabfung_penandatangan_khs']);
-              $nidn=$this->dataReport['nidn_penandatangan_khs'];
+              $nidn = $this->dataReport['nidn_penandatangan_khs'];
               $rpt->Cell(60, 5, "$nama_jabatan NIDN : $nidn",0,0,'C');
               $rpt->Cell(80, 5, strtoupper($this->dataReport['jabfung_kaprodi']). ' NIDN : '.$this->dataReport['nidn_kaprodi'],0,0,'C');
             }
@@ -380,10 +380,10 @@ class Logic_ReportNilai extends Logic_Report {
    */
   public function printSummaryKHS ($objNilai, $objDMaster, $withsignature=false) {
     $ta=$this->dataReport['ta'];
-    $tahun_masuk=$this->dataReport['tahun_masuk'];
+    $tahun_masuk = $this->dataReport['tahun_masuk'];
     $semester=$this->dataReport['semester'];
     $kjur=$this->dataReport['kjur'];
-    $nama_tahun=$this->dataReport['nama_tahun'];
+    $nama_tahun = $this->dataReport['nama_tahun'];
     $nama_semester=$this->dataReport['nama_semester'];
     $nama_ps = $this->dataReport['nama_ps'];
     switch ($this->getDriver()) {
@@ -445,7 +445,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getStyle("A10:L10")->applyFromArray($styleArray);
         $sheet->getStyle("A10:L10")->getAlignment()->setWrapText(true);
         
-        $str_tahun_masuk=$tahun_masuk == 'none' ?'':"AND vdm.tahun_masuk=$tahun_masuk";
+        $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND vdm.tahun_masuk = $tahun_masuk";
         $str = "SELECT k.idkrs,k.tgl_krs,k.nim,nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.idkelas,vdm.tahun_masuk,vdm.semester_masuk,dk.iddata_konversi FROM krs k JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE tahun='$ta' AND idsmt='$semester' AND kjur=$kjur AND k.sah=1 $str_tahun_masuk ORDER BY vdm.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('idkrs','tgl_krs','nim','nirm','nama_mhs','jk','kjur','idkelas','tahun_masuk','semester_masuk','iddata_konversi'));
         $r=$this->db->getRecord($str);
@@ -455,8 +455,8 @@ class Logic_ReportNilai extends Logic_Report {
           $objNilai->setDataMHS(array('nim'=>$nim));
           $objNilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
           $ip=$objNilai->getIPS ();
-          $sks=$objNilai->getTotalSKS ();                
-          $dataipk=$objNilai->getIPKSampaiTASemester($ta, $semester,'ipksks');	                
+          $sks = $objNilai->getTotalSKS ();                
+          $dataipk = $objNilai->getIPKSampaiTASemester($ta, $semester,'ipksks');	                
         
           $sheet->setCellValue("A$row", $v['no']);				                    
           $sheet->setCellValueExplicit("B$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
@@ -471,7 +471,7 @@ class Logic_ReportNilai extends Logic_Report {
           $iddata_konversi = $v['iddata_konversi'];
           $jumlah_sks=0;
           if ($iddata_konversi > 0) {
-            $jumlah_sks=$this->db->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
+            $jumlah_sks = $this->db->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
           }
           $sheet->setCellValue("K$row", $jumlah_sks);
           $sheet->setCellValue("L$row", $objDMaster->getNamaKelasByID($v['idkelas']));
@@ -524,7 +524,7 @@ class Logic_ReportNilai extends Logic_Report {
           $row+=1;
           $sheet->mergeCells("C$row:D$row");                    
           $nama_jabatan=strtoupper($this->dataReport['jabfung_penandatangan_khs']);
-          $nidn=$this->dataReport['nidn_penandatangan_khs'];
+          $nidn = $this->dataReport['nidn_penandatangan_khs'];
           $sheet->setCellValue("C$row","$nama_jabatan NIDN : $nidn");
           $sheet->mergeCells("F$row:I$row");                           
           $sheet->setCellValue("F$row",strtoupper($this->dataReport['jabfung_kaprodi']). ' NIDN : '.$this->dataReport['nidn_kaprodi']);
@@ -645,7 +645,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(119, $row);
         $rpt->Cell(11,4,'MK',1,0,'C');
         
-        $n=$objNilai->getTranskripNilaiKurikulum($this->dataReport['cek_isikuesioner']);
+        $n = $objNilai->getTranskripNilaiKurikulum($this->dataReport['cek_isikuesioner']);
         $totalSks=0;
         $totalM=0;
         $row+=4;
@@ -664,7 +664,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $v) {	
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
-                $sks=$v['sks'];
+                $sks = $v['sks'];
                 $m=($n_kual=='-')?'-':$v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
@@ -693,7 +693,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $s) {
               if ($s['semester']==$i) {
                 $n_kual=$s['n_kual'];
-                $sks=$s['sks'];
+                $sks = $s['sks'];
                 $m=($n_kual=='-')?'-':$s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
@@ -789,7 +789,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk=$ipk==''?'0.00':$ipk;
+        $ipk = $ipk==''?'0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=8;
@@ -914,7 +914,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(119, $row);
         $rpt->Cell(11,4,'MK',1,0,'C');
         
-        $n=$objNilai->getTranskripNilaiKurikulum();
+        $n = $objNilai->getTranskripNilaiKurikulum();
         $totalSks=0;
         $totalM=0;
         $row+=4;
@@ -933,7 +933,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $v) {	
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
-                $sks=$v['sks'];
+                $sks = $v['sks'];
                 $m=($n_kual=='-')?'-':$v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
@@ -962,7 +962,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $s) {
               if ($s['semester']==$i) {
                 $n_kual=$s['n_kual'];
-                $sks=$s['sks'];
+                $sks = $s['sks'];
                 $m=($n_kual=='-')?'-':$s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
@@ -1058,7 +1058,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk=$ipk==''?'0.00':$ipk;
+        $ipk = $ipk==''?'0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=3;
@@ -1158,7 +1158,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['tahun_masuk']);			
         
-        $n=$objNilai->getTranskripFromKRS($this->dataReport['cek_isikuesioner']);
+        $n = $objNilai->getTranskripFromKRS($this->dataReport['cek_isikuesioner']);
         $tampil_column_ganjil=false;
         $tampil_column_genap=false;
         for ($i = 1; $i <= 8; $i++) {
@@ -1239,7 +1239,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $v) {	
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
-                $sks=$v['sks'];
+                $sks = $v['sks'];
                 $m=($n_kual=='-')?'-':$v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
@@ -1271,7 +1271,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $s) {
               if ($s['semester']==$i) {                                
                 $n_kual=$s['n_kual'];
-                $sks=$s['sks'];
+                $sks = $s['sks'];
                 $m=($n_kual=='-')?'-':$s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
@@ -1379,7 +1379,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk=$ipk==''?'0.00':$ipk;
+        $ipk = $ipk==''?'0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=4;
@@ -1408,7 +1408,7 @@ class Logic_ReportNilai extends Logic_Report {
     $biodata=$this->dataReport;
     $nim = $biodata['nim'];
     $objNilai->setDataMHS (array('nim'=>$nim));
-    $n=$objNilai->getTranskrip(false);		
+    $n = $objNilai->getTranskrip(false);		
     switch ($this->getDriver()) {
       case 'excel2003' :               
         case 'excel2007':                        
@@ -1543,7 +1543,7 @@ class Logic_ReportNilai extends Logic_Report {
                 {
                   $n_kual=$v['n_kual'];
                   $n_kual=($n_kual=='-'||$n_kual=='')?'-':$n_kual;
-                  $sks=$v['sks'];
+                  $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
                   
@@ -1579,7 +1579,7 @@ class Logic_ReportNilai extends Logic_Report {
                 {
                   $n_kual=$v['n_kual'];
                   $n_kual=($n_kual=='-'||$n_kual=='')?'-':$n_kual;
-                  $sks=$v['sks'];
+                  $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
   
@@ -1814,7 +1814,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
                 $n_kual=($n_kual=='-'||$n_kual=='')?'-':$n_kual;
-                $sks=$v['sks'];
+                $sks = $v['sks'];
                 $totalSks+=$sks;								
                 $rpt->setXY(106, $row_genap);							
                 $rpt->Cell(15,4, $objNilai->getKMatkul($v['kmatkul']),'L',0,'C');
@@ -1834,7 +1834,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($s['semester']==$i) {
                 $n_kual=$s['n_kual'];
                 $n_kual=($n_kual=='-'||$n_kual=='')?'-':$n_kual;
-                $sks=$s['sks'];
+                $sks = $s['sks'];
                 $totalSks+=$sks;													
                 $rpt->setXY(3, $row_ganjil);						
                 $rpt->Cell(15,4, $objNilai->getKMatkul($s['kmatkul']),0,0,'C');
@@ -1941,8 +1941,8 @@ class Logic_ReportNilai extends Logic_Report {
    */
   public function printDPNA ($objNilai) {    
     $kmatkul=$this->dataReport['kmatkul'];
-    $idkelas_mhs=$this->dataReport['idkelas_mhs'];
-    $kaprodi=$objNilai->getKetuaPRODI($this->dataReport['kjur']);
+    $idkelas_mhs = $this->dataReport['idkelas_mhs'];
+    $kaprodi = $objNilai->getKetuaPRODI($this->dataReport['kjur']);
     switch ($this->getDriver()) {
       case 'excel2003' :               
       case 'excel2007' :                
@@ -1997,8 +1997,8 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->setCellValue("G13",': '.$this->dataReport['ta']);
         
           
-          $idpenyelenggaraan=$this->dataReport['idpenyelenggaraan'];                                        
-          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan=$idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
+          $idpenyelenggaraan = $this->dataReport['idpenyelenggaraan'];                                        
+          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
           $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kuan','n_kual'));
           
           
@@ -2035,12 +2035,12 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->setCellValue("E13",'Hari / Jam');				
           $sheet->setCellValue("G13",': '.$this->dataReport['hari'].', '.$this->dataReport['jam_masuk'].'-'.$this->dataReport['jam_keluar']);
           
-          $idkelas=$this->dataReport['idkelas_mhs'];                    
-          $itemcount=$this->db->getCountRowsOfTable("kelas_mhs_detail kmd JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs=$idkelas AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
+          $idkelas = $this->dataReport['idkelas_mhs'];                    
+          $itemcount=$this->db->getCountRowsOfTable("kelas_mhs_detail kmd JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
           $pagesize=40;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
-          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual,n.n_kuan FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs=$idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
+          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual,n.n_kuan FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
           $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kual','n_kuan'));
         }
         
@@ -2125,7 +2125,7 @@ class Logic_ReportNilai extends Logic_Report {
         
         $row+=5;
         $sheet->setCellValue("C$row", $this->dataReport['nama_penandatangan_dpna']);			
-        $kaprodi=$objNilai->getKetuaPRODI($this->dataReport['kjur']);
+        $kaprodi = $objNilai->getKetuaPRODI($this->dataReport['kjur']);
         $sheet->setCellValue("F$row", $kaprodi['nama_dosen']);	
         
         $nama_dosen_ttd=$this->dataReport['nama_dosen_pengampu'];
@@ -2149,7 +2149,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setTitle('Daftar Peserta dan Nilai Akhir');
         $rpt->setSubject('Daftar Peserta dan Nilai Akhir');
         $rpt->setAutoPageBreak(true,PDF_MARGIN_BOTTOM);
-        $idkelas_mhs=$this->dataReport['idkelas_mhs'];
+        $idkelas_mhs = $this->dataReport['idkelas_mhs'];
         
         $rpt->AddPage('P','F4');
         $this->setHeaderPT();
@@ -2201,12 +2201,12 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->setXY(130, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['ta']);
           
-          $idpenyelenggaraan=$this->dataReport['idpenyelenggaraan'];                    
-          $itemcount=$this->db->getCountRowsOfTable("v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) WHERE vkm.idpenyelenggaraan=$idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
+          $idpenyelenggaraan = $this->dataReport['idpenyelenggaraan'];                    
+          $itemcount=$this->db->getCountRowsOfTable("v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
           $pagesize=39;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
-          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan=$idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
+          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
           $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kual'));
         }else{
           $row+=6;
@@ -2256,12 +2256,12 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->setXY(130, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['hari'].', '.$this->dataReport['jam_masuk'].'-'.$this->dataReport['jam_keluar']);								
           
-          $idkelas=$this->dataReport['idkelas_mhs'];                    
-          $itemcount=$this->db->getCountRowsOfTable("kelas_mhs_detail kmd JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs=$idkelas AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
+          $idkelas = $this->dataReport['idkelas_mhs'];                    
+          $itemcount=$this->db->getCountRowsOfTable("kelas_mhs_detail kmd JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
           $pagesize=39;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
-          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs=$idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
+          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
           $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kual'));
         }
         $row+=23;
@@ -2437,7 +2437,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(10, 5, 'SKS', 1, 0, 'C');				
         $rpt->Cell(10, 5, 'NH', 1, 0, 'C');																		
 
-        $nilai=$objNilai->getNilaiKonversi($this->dataReport['iddata_konversi'], $this->dataReport['idkur']);                
+        $nilai = $objNilai->getNilaiKonversi($this->dataReport['iddata_konversi'], $this->dataReport['idkur']);                
         $jumlah_sks=0;
         $jumlah_matkul=0;
         $row+=5;
@@ -2541,7 +2541,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getStyle("A15:J16")->applyFromArray($styleArray);
         $sheet->getStyle("A15:J16")->getAlignment()->setWrapText(true);
         
-        $nilai=$objNilai->getNilaiKonversi($this->dataReport['iddata_konversi'], $this->dataReport['idkur']);                
+        $nilai = $objNilai->getNilaiKonversi($this->dataReport['iddata_konversi'], $this->dataReport['idkur']);                
         $row=17;     
         $jumlah_sks=0;
         $jumlah_matkul=0;
@@ -2625,15 +2625,17 @@ class Logic_ReportNilai extends Logic_Report {
       case 'excel2003' :               
       case 'excel2007' :  
         $sheet=$this->rpt->getActiveSheet();
-        $idkelas_mhs=$this->dataReport['idkelas_mhs'];
+        $idkelas_mhs = $this->dataReport['idkelas_mhs'];
         $sheet->setCellValue('A1','ID');
         $sheet->setCellValue('B1','NAMA MHS');
         $sheet->setCellValue('C1','NIM');
-        $sheet->setCellValue('D1','PR/QUIZ');
-        $sheet->setCellValue('E1','TUGAS');
-        $sheet->setCellValue('F1','UTS');
-        $sheet->setCellValue('G1','UAS');
-        $sheet->setCellValue('H1','ABSEN');
+        $sheet->setCellValue('D1','AKTIVITAS PARTISIPATIF*');
+        $sheet->setCellValue('E1','HASIL PROYEK*');
+        $sheet->setCellValue('F1','QUIZ');
+        $sheet->setCellValue('G1','TUGAS');
+        $sheet->setCellValue('H1','UTS');
+        $sheet->setCellValue('I1','UAS');
+        $sheet->setCellValue('J1','ABSEN');
         
         $styleArray=array(
                 'font' => array('bold' => true),
@@ -2641,10 +2643,10 @@ class Logic_ReportNilai extends Logic_Report {
                            'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                 'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
               );
-        $sheet->getStyle("A1:H1")->applyFromArray($styleArray);
-        $sheet->getStyle("A1:H1")->getAlignment()->setWrapText(true);
+        $sheet->getStyle("A1:J1")->applyFromArray($styleArray);
+        $sheet->getStyle("A1:J1")->getAlignment()->setWrapText(true);
           
-        $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nama_mhs FROM kelas_mhs_detail kmd JOIN krsmatkul km ON (kmd.idkrsmatkul=km.idkrsmatkul) JOIN krs k ON (km.idkrs=k.idkrs) JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN nilai_matakuliah nm ON (km.idkrsmatkul=nm.idkrsmatkul) WHERE kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 AND nm.idkrsmatkul IS NULL ORDER BY vdm.nama_mhs ASC";
+        $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nama_mhs FROM kelas_mhs_detail kmd JOIN krsmatkul km ON (kmd.idkrsmatkul=km.idkrsmatkul) JOIN krs k ON (km.idkrs=k.idkrs) JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN nilai_matakuliah nm ON (km.idkrsmatkul=nm.idkrsmatkul) WHERE kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 AND nm.idkrsmatkul IS NULL ORDER BY vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('idkrsmatkul','nim','nama_mhs'));	
         $r=$this->db->getRecord($str);    
         $row_awal=2;
@@ -2652,6 +2654,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getColumnDimension('A')->setWidth(10);
         $sheet->getColumnDimension('B')->setWidth(40);
         $sheet->getColumnDimension('C')->setWidth(15);
+        $sheet->getColumnDimension('D')->setWidth(20);
         while (list($k, $v)=each($r)) {
           $sheet->setCellValue("A$row", $v['idkrsmatkul']);
           $sheet->setCellValue("B$row", $v['nama_mhs']);
@@ -2664,8 +2667,8 @@ class Logic_ReportNilai extends Logic_Report {
                            'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                 'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
               );
-        $sheet->getStyle("A$row_awal:H$row")->applyFromArray($styleArray);
-        $sheet->getStyle("A$row_awal:H$row")->getAlignment()->setWrapText(true);
+        $sheet->getStyle("A$row_awal:J$row")->applyFromArray($styleArray);
+        $sheet->getStyle("A$row_awal:J$row")->getAlignment()->setWrapText(true);
         
         $styleArray=array(								
                   'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
@@ -2681,7 +2684,7 @@ class Logic_ReportNilai extends Logic_Report {
    * @param type $objNilai object
    */
   public function printFormatEvaluasiHasilBelajar ($objNilai) { 
-    $idkelas_mhs=$this->dataReport['idkelas_mhs'];
+    $idkelas_mhs = $this->dataReport['idkelas_mhs'];
     switch ($this->getDriver()) {
       case 'excel2003' :               
       case 'excel2007' :          
@@ -2795,7 +2798,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getStyle("A17:T18")->applyFromArray($styleArray);
         $sheet->getStyle("A17:T18")->getAlignment()->setWrapText(true);
         
-        $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.persentase_quiz, n.persentase_tugas, n.persentase_uts, n.persentase_uas, n.persentase_absen, n.nilai_quiz, n.nilai_tugas, n.nilai_uts, n.nilai_uas, n.nilai_absen, n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs=$idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
+        $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.persentase_quiz, n.persentase_tugas, n.persentase_uts, n.persentase_uas, n.persentase_absen, n.nilai_quiz, n.nilai_tugas, n.nilai_uts, n.nilai_uas, n.nilai_absen, n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
         $this->db->setFieldTable(array('idkrsmatkul','nim','nirm','nama_mhs','jk','persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen','n_kuan','n_kual'));
         $r=$this->db->getRecord($str);	
         $row_awal=19;

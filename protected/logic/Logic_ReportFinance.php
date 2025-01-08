@@ -11,10 +11,10 @@ class Logic_ReportFinance extends Logic_Report {
      */
     public function printPiutangJangkaPendek($objFinance, $objDMaster)  {
         $kjur=$this->dataReport['kjur'];
-        $nama_ps=$this->dataReport['nama_ps'];
-        $tahun_masuk=$this->dataReport['tahun_masuk'];
-        $nama_tahun_masuk=$this->dataReport['nama_tahun_masuk'];
-        $kelas=$this->dataReport['kelas'];
+        $nama_ps = $this->dataReport['nama_ps'];
+        $tahun_masuk = $this->dataReport['tahun_masuk'];
+        $nama_tahun_masuk = $this->dataReport['nama_tahun_masuk'];
+        $kelas = $this->dataReport['kelas'];
         switch ($this->getDriver()) {
             case 'excel2003' :               
             case 'excel2007' :              
@@ -94,7 +94,7 @@ class Logic_ReportFinance extends Logic_Report {
                 $komponen_biaya['C']['lama'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');  
                                 
                 $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
-                $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,idkelas,tahun_masuk,semester_masuk FROM v_datamhs WHERE kjur='$kjur'AND tahun_masuk=$tahun_masuk AND k_status!='L' $str_kelas ORDER BY nim ASC,nama_mhs ASC";			                
+                $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,idkelas,tahun_masuk,semester_masuk FROM v_datamhs WHERE kjur='$kjur'AND tahun_masuk = $tahun_masuk AND k_status!='L' $str_kelas ORDER BY nim ASC,nama_mhs ASC";			                
                 $this->db->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tahun_masuk','semester_masuk'));
                 $r = $this->db->getRecord($str);	
                 $row=11; 
@@ -114,21 +114,21 @@ class Logic_ReportFinance extends Logic_Report {
                     $this->db->setFieldTable(array('tahun','idsmt','dibayarkan'));
                     $result = $this->db->query($str);                    
                     $daftar_dibayarkan=array();
-                    while ($baris=$result->fetch_assoc()) {                       
+                    while ($baris = $result->fetch_assoc()) {                       
                        $daftar_dibayarkan[$baris['tahun']][$baris['idsmt']]=$baris['dibayarkan'];              
                     }        
                     $totalpembayaran=0;
                     $totalkewajiban=0;
                     while (list($m, $n)=each($data_dulang)) {
-                        $idkelas=$n['idkelas'];
+                        $idkelas = $n['idkelas'];
                         $sheet->setCellValue("F$row", $objDMaster->getNamaKelasByID($idkelas));
                         $sheet->setCellValue("G$row", $n['tahun']);
                         $sheet->setCellValue("H$row", $n['idsmt']);
                         $sheet->setCellValue("I$row", $objDMaster->getNamaStatusMHSByID ($n['k_status']));
                         if ($n['tahun']==$v['tahun_masuk'] && $v['semester_masuk'] == $n['idsmt']) {
-                            $kewajiban=$komponen_biaya[$idkelas]['baru'][$n['idsmt']];
+                            $kewajiban = $komponen_biaya[$idkelas]['baru'][$n['idsmt']];
                         }else{
-                            $kewajiban=$komponen_biaya[$idkelas]['lama'][$n['idsmt']];
+                            $kewajiban = $komponen_biaya[$idkelas]['lama'][$n['idsmt']];
                         }
                         $totalkewajiban+=$kewajiban;
                         $sheet->setCellValueExplicit("J$row", $objFinance->toRupiah($kewajiban),PHPExcel_Cell_DataType::TYPE_STRING);
@@ -196,17 +196,17 @@ class Logic_ReportFinance extends Logic_Report {
      */
     public function printRekapPembayaranSemester ($objFinance) {
         $kjur=$this->dataReport['kjur'];
-        $nama_ps=$this->dataReport['nama_ps'];
+        $nama_ps = $this->dataReport['nama_ps'];
         
-        $tahun=$this->dataReport['ta'];
-        $nama_tahun=$this->dataReport['nama_tahun'];
+        $tahun = $this->dataReport['ta'];
+        $nama_tahun = $this->dataReport['nama_tahun'];
         
-        $tahun_masuk=$this->dataReport['tahun_masuk'];
-        $nama_tahun_masuk=$this->dataReport['nama_tahun_masuk'];
+        $tahun_masuk = $this->dataReport['tahun_masuk'];
+        $nama_tahun_masuk = $this->dataReport['nama_tahun_masuk'];
         
         $semester=$this->dataReport['semester'];
         $nama_semester=$this->dataReport['nama_semester'];
-        $kelas=$this->dataReport['kelas'];
+        $kelas = $this->dataReport['kelas'];
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
         switch ($this->getDriver()) {
             case 'excel2003' :               
@@ -263,7 +263,7 @@ class Logic_ReportFinance extends Logic_Report {
                 $sheet->getStyle("A10:I10")->applyFromArray($styleArray);
                 $sheet->getStyle("A10:I10")->getAlignment()->setWrapText(true);
                 
-                $str = "SELECT idrekap,no_formulir,nim,nirm,nama_mhs,jk,n_kelas,dibayarkan,kewajiban,sisa FROM rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun=$tahun AND idsmt='$semester'$str_kelas AND tahun_masuk=$tahun_masuk ORDER BY idkelas ASC,nama_mhs ASC";
+                $str = "SELECT idrekap,no_formulir,nim,nirm,nama_mhs,jk,n_kelas,dibayarkan,kewajiban,sisa FROM rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $tahun AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk ORDER BY idkelas ASC,nama_mhs ASC";
                 $this->db->setFieldTable(array('idrekap','no_formulir','nim','nirm','nama_mhs','jk','n_kelas','dibayarkan','kewajiban','sisa'));
                 $r = $this->db->getRecord($str);
                 
@@ -271,9 +271,9 @@ class Logic_ReportFinance extends Logic_Report {
                 $totalkewajiban_all=0;
                 $totalpembayaran_all=0;
                 while (list($k, $v)=each($r)) {
-                    $kewajiban=$v['kewajiban'];
+                    $kewajiban = $v['kewajiban'];
                     $totalkewajiban_all+=$kewajiban;
-                    $dibayarkan=$v['dibayarkan'];
+                    $dibayarkan = $v['dibayarkan'];
                     $totalpembayaran_all+=$dibayarkan;
                     $sisa=$objFinance->toRupiah($v['sisa']);
                     $sheet->setCellValue("A$row", $v['no']);				
@@ -320,8 +320,8 @@ class Logic_ReportFinance extends Logic_Report {
 
     public function printFakturPembayaranMHSLama () {
         $dataReport=$this->dataReport;
-        $no_transaksi=$dataReport['no_transaksi'];
-        $nama_tahun=$dataReport['nama_tahun'];
+        $no_transaksi = $dataReport['no_transaksi'];
+        $nama_tahun = $dataReport['nama_tahun'];
         $nama_semester=$dataReport['nama_semester'];
         switch ($this->getDriver()) {
             case 'excel2003' :               

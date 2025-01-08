@@ -24,7 +24,7 @@ class CDaftarPertanyaan extends MainPageM {
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
-            $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();
+            $kelompok_pertanyaan = $this->DMaster->getListKelompokPertanyaan();
             
             $this->cmbKelompokPertanyaan->DataSource = $kelompok_pertanyaan;
             $this->cmbKelompokPertanyaan->Text = $_SESSION['currentDaftarPertanyaan']['idkelompok_pertanyaan'];
@@ -70,7 +70,7 @@ class CDaftarPertanyaan extends MainPageM {
 	public function populateData($search=false) {
         $ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
-        $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();        
+        $kelompok_pertanyaan = $this->DMaster->getListKelompokPertanyaan();        
         if ($_SESSION['currentDaftarPertanyaan']['idkelompok_pertanyaan']=='none'){            
             $kelompok_pertanyaan[0] = 'UNDEFINED';
             unset($kelompok_pertanyaan['none']);
@@ -79,7 +79,7 @@ class CDaftarPertanyaan extends MainPageM {
         }
         $result = array();
         while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
-            $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan=$idkelompok_pertanyaan ORDER BY (orders+0) ASC";
+            $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan = $idkelompok_pertanyaan ORDER BY (orders+0) ASC";
             $this->DB->setFieldTable(array('idkuesioner', 'idkelompok_pertanyaan', 'pertanyaan', 'orders', 'date_added'));
             $r = $this->DB->getRecord($str);
             $jumlah_r=count($r);
@@ -117,7 +117,7 @@ class CDaftarPertanyaan extends MainPageM {
 	}	
     public function addProcess($sender, $param) {		
         $this->idProcess = 'add';
-        $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();
+        $kelompok_pertanyaan = $this->DMaster->getListKelompokPertanyaan();
         $this->cmbAddKelompokPertanyaan->DataSource = $kelompok_pertanyaan;
         $this->cmbAddKelompokPertanyaan->DataBind();
     }
@@ -125,7 +125,7 @@ class CDaftarPertanyaan extends MainPageM {
 		if ($this->IsValid) {
             $ta = $_SESSION['ta'];
             $idsmt = $_SESSION['semester'];
-            $idkelompok_pertanyaan=$this->cmbAddKelompokPertanyaan->Text;
+            $idkelompok_pertanyaan = $this->cmbAddKelompokPertanyaan->Text;
             $pertanyaan=  addslashes($this->txtAddPertanyaan->Text);
             $urutan = addslashes($this->txtAddUrutan->Text);
             $indikator1=  addslashes($this->txtAddIndikator1->Text);
@@ -155,7 +155,7 @@ class CDaftarPertanyaan extends MainPageM {
         $str = "SELECT idkelompok_pertanyaan,pertanyaan,orders FROM kuesioner WHERE idkuesioner = $id";
         $this->DB->setFieldTable(array('idkelompok_pertanyaan', 'pertanyaan', 'orders'));        
         $r = $this->DB->getRecord($str);
-        $kelompok_pertanyaan=$this->DMaster->getListKelompokPertanyaan();
+        $kelompok_pertanyaan = $this->DMaster->getListKelompokPertanyaan();
         $this->cmbEditKelompokPertanyaan->DataSource = $kelompok_pertanyaan;
         $this->cmbEditKelompokPertanyaan->Text = $r[1]['idkelompok_pertanyaan'];
         $this->cmbEditKelompokPertanyaan->DataBind();
@@ -175,7 +175,7 @@ class CDaftarPertanyaan extends MainPageM {
     public function updateData($sender, $param) {		
 		if ($this->IsValid) {    
             $idkuesioner = $this->hiddenid->Value;
-            $idkelompok_pertanyaan=$this->cmbEditKelompokPertanyaan->Text;
+            $idkelompok_pertanyaan = $this->cmbEditKelompokPertanyaan->Text;
             $pertanyaan=  addslashes($this->txtEditPertanyaan->Text);
             $urutan = addslashes($this->txtEditUrutan->Text);
             $indikator1=  addslashes($this->txtEditIndikator1->Text);
@@ -184,7 +184,7 @@ class CDaftarPertanyaan extends MainPageM {
             $indikator4=  addslashes($this->txtEditIndikator4->Text);
             $indikator5=  addslashes($this->txtEditIndikator5->Text);
             
-            $str = "UPDATE kuesioner SET idkelompok_pertanyaan=$idkelompok_pertanyaan,pertanyaan='$pertanyaan',`orders`='$urutan',date_modified=NOW() WHERE idkuesioner = $idkuesioner";            
+            $str = "UPDATE kuesioner SET idkelompok_pertanyaan = $idkelompok_pertanyaan,pertanyaan='$pertanyaan',`orders`='$urutan',date_modified=NOW() WHERE idkuesioner = $idkuesioner";            
             $this->DB->query('BEGIN');
             if ($this->DB->updateRecord($str)) {
                 $this->DB->deleteRecord("kuesioner_indikator WHERE idkuesioner = $idkuesioner");

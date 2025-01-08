@@ -9,7 +9,7 @@ class CDetailDulangMHSBaru Extends MainPageM {
 		if (!$this->IsPostBack && !$this->IsCallback) {
             try {
                 if (isset($_SESSION['currentPageDulangMHSBaru']['DataMHS']['no_formulir'])) {
-                    $datamhs=$_SESSION['currentPageDulangMHSBaru']['DataMHS'];
+                    $datamhs = $_SESSION['currentPageDulangMHSBaru']['DataMHS'];
                     
                     $this->Demik->setDataMHS($datamhs);
                     $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
@@ -30,7 +30,7 @@ class CDetailDulangMHSBaru Extends MainPageM {
 	}
     public function getDataMHS($idx) {	
         if (isset($_SESSION['currentPageDulangMHSBaru']['DataMHS'])){
-            $datamhs=$_SESSION['currentPageDulangMHSBaru']['DataMHS'];          
+            $datamhs = $_SESSION['currentPageDulangMHSBaru']['DataMHS'];          
             return $datamhs[$idx];
         }        
     }
@@ -42,9 +42,9 @@ class CDetailDulangMHSBaru Extends MainPageM {
                 $this->DB->setFieldTable(array('nama_mhs', 'tahun_masuk', 'nama_ps'));
                 $r = $this->DB->getRecord($str);
                 if (isset($r[1])) {  
-                    $nama_mhs=$r[1]['nama_mhs'];
-                    $tahun_masuk=$r[1]['tahun_masuk'];
-                    $nama_ps=$r[1]['nama_ps'];
+                    $nama_mhs = $r[1]['nama_mhs'];
+                    $tahun_masuk = $r[1]['tahun_masuk'];
+                    $nama_ps = $r[1]['nama_ps'];
                     throw new Exception ("NIM ($nim) sudah terdaftar atas nama $nama_mhs P.S $nama_ps registrasi pada tahun $tahun_masuk");                                                   
                 }                
             }catch (Exception $e) {
@@ -62,9 +62,9 @@ class CDetailDulangMHSBaru Extends MainPageM {
                 $this->DB->setFieldTable(array('nama_mhs', 'tahun_masuk', 'nama_ps'));
                 $r = $this->DB->getRecord($str);
                 if (isset($r[1])) {  
-                    $nama_mhs=$r[1]['nama_mhs'];
-                    $tahun_masuk=$r[1]['tahun_masuk'];
-                    $nama_ps=$r[1]['nama_ps'];
+                    $nama_mhs = $r[1]['nama_mhs'];
+                    $tahun_masuk = $r[1]['tahun_masuk'];
+                    $nama_ps = $r[1]['nama_ps'];
                     throw new Exception ("NIRM ($nirm) sudah terdaftar atas nama $nama_mhs P.S $nama_ps registrasi pada tahun $tahun_masuk");                                                   
                 }                               
             }catch (Exception $e) {
@@ -75,7 +75,7 @@ class CDetailDulangMHSBaru Extends MainPageM {
 	}
     public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
-            $datamhs=$_SESSION['currentPageDulangMHSBaru']['DataMHS'];						
+            $datamhs = $_SESSION['currentPageDulangMHSBaru']['DataMHS'];						
 			$ta = $datamhs['tahun_masuk'];							
 			$semester = $datamhs['semester_masuk'];
 			$tanggal=date ('Y-m-d H:m:s');
@@ -83,8 +83,8 @@ class CDetailDulangMHSBaru Extends MainPageM {
             $nim=  addslashes($this->txtAddNIM->Text);
             $nirm=addslashes($this->txtAddNIRM->Text);
             $kjur = $datamhs['kjur'];
-			$kelas=$datamhs['idkelas'];
-            $iddosen_wali=$this->cmbAddDosenWali->Text;
+			$kelas = $datamhs['idkelas'];
+            $iddosen_wali = $this->cmbAddDosenWali->Text;
 			$str = "INSERT INTO register_mahasiswa (nim,nirm,no_formulir,tahun,idsmt,tanggal,kjur,idkonsentrasi,iddosen_wali,k_status,idkelas,perpanjang) VALUES ('$nim', '$nirm', '$no_formulir', '$ta', '$semester', '$tanggal', '$kjur',0,'$iddosen_wali', 'A', '$kelas',0)";			
 			$this->DB->query ('BEGIN');
 			if ($this->DB->insertRecord($str)) {

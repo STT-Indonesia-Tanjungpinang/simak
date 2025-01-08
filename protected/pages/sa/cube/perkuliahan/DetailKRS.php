@@ -6,7 +6,7 @@ class DetailKRS extends CDetailKRS {
         if (!$this->IsPostBack&&!$this->IsCallback) {
             try {
                 if ($_SESSION['currentPageKRS']['DataMHS']['idkelas'] == 'C') {
-                    $idkrs=$_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs'];
+                    $idkrs = $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs'];
                     throw new Exception("KRS dengan ID ($idkrs) terdaftar di KRS Ekstension.");
                 }
             } catch (Exception $e) {

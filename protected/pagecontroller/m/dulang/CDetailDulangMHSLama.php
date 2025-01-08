@@ -9,7 +9,7 @@ class CDetailDulangMHSLama Extends MainPageM {
 		if (!$this->IsPostBack && !$this->IsCallback) {
             try {
                 if (isset($_SESSION['currentPageDulangMHSLama']['DataMHS']['no_formulir'])) {
-                    $datamhs=$_SESSION['currentPageDulangMHSLama']['DataMHS'];
+                    $datamhs = $_SESSION['currentPageDulangMHSLama']['DataMHS'];
                     
                     $this->Demik->setDataMHS($datamhs);
                     $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
@@ -34,13 +34,13 @@ class CDetailDulangMHSLama Extends MainPageM {
     }    
     public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
-            $datamhs=$_SESSION['currentPageDulangMHSLama']['DataMHS'];						
+            $datamhs = $_SESSION['currentPageDulangMHSLama']['DataMHS'];						
 			$ta = $datamhs['ta'];							
 			$semester = $datamhs['idsmt'];
 			$tanggal=date ('Y-m-d H:m:s');			
             $nim=  $datamhs['nim'];           
-			$kelas=$datamhs['idkelas'];
-            $iddosen_wali=$this->cmbAddDosenWali->Text;
+			$kelas = $datamhs['idkelas'];
+            $iddosen_wali = $this->cmbAddDosenWali->Text;
 			$str = "UPDATE register_mahasiswa SET iddosen_wali='$iddosen_wali',k_status='A' WHERE nim='$nim'";			
 			$this->DB->query ('BEGIN');
 			if ($this->DB->updateRecord($str)) {

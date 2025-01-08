@@ -4740,7 +4740,7 @@ class TCPDF {
 		list($x, $y) = $this->checkPageRegions($h, $x, $y);
 		// recalculate coordinates to account for graphic transformations
 		if (isset($this->transfmatrix) AND !empty($this->transfmatrix)) {
-			for ($i=$this->transfmatrix_key; $i > 0; --$i) {
+			for ($i = $this->transfmatrix_key; $i > 0; --$i) {
 				$maxid = count($this->transfmatrix[$i]) - 1;
 				for ($j=$maxid; $j >= 0; --$j) {
 					$ctm = $this->transfmatrix[$i][$j];
@@ -14407,7 +14407,7 @@ class TCPDF {
 			case 4: { // CMYK
 				$this->gradients[$n]['colspace'] = 'DeviceCMYK';
 				if (!empty($background)) {
-					$this->gradients[$n]['background'] = sprintf('%F %F %F %F', $bcolor[0]/100, $bcolor[1]/100, $bcolor[2]/100, $bcolor[3]/100);
+					$this->gradients[$n]['background'] = sprintf('%F %F %F %F', $bcolor[0] / 100, $bcolor[1] / 100, $bcolor[2] / 100, $bcolor[3] / 100);
 				}
 				break;
 			}
@@ -14462,7 +14462,7 @@ class TCPDF {
 			switch($numcolspace) {
 				case 5:   // SPOT
 				case 4: { // CMYK
-					$this->gradients[$n]['colors'][$key]['color'] = sprintf('%F %F %F %F', $color[0]/100, $color[1]/100, $color[2]/100, $color[3]/100);
+					$this->gradients[$n]['colors'][$key]['color'] = sprintf('%F %F %F %F', $color[0] / 100, $color[1] / 100, $color[2] / 100, $color[3] / 100);
 					break;
 				}
 				case 3: { // RGB

@@ -44,7 +44,7 @@ class CDPNA extends MainPageM {
 	}	
     public function setInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $_SESSION['ta'];		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
@@ -87,22 +87,22 @@ class CDPNA extends MainPageM {
                 case 'kmatkul' :
                     $clausa=" AND kmatkul LIKE '%$txtsearch%'";
                     $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";				            
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						
                 break;				
                 case 'nmatkul':
                     $clausa=" AND nmatkul LIKE '%$txtsearch%'";
                     $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";				            
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						                    
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						                    
                 break;
                 case 'nama_dosen':
                     $clausa=" AND nama_dosen LIKE '%$txtsearch%'";
                     $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen,jumlahmhs FROM v_penyelenggaraan vp, (SELECT idpenyelenggaraan,COUNT(idpenyelenggaraan) AS jumlahmhs FROM v_krsmhs  WHERE idsmt='$idsmt' AND tahun='$ta' AND sah=1 AND batal=0$clausa GROUP BY idpenyelenggaraan) AS vkm  WHERE vkm.idpenyelenggaraan=vp.idpenyelenggaraan AND idsmt='$idsmt' AND tahun='$ta'$clausa";				            
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						                                        
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						                                        
                 break;                
             }
         }else{
             $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'";				
-            $jumlah_baris=$this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'",'vp.idpenyelenggaraan');						
+            $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'",'vp.idpenyelenggaraan');						
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDPNA']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -117,9 +117,9 @@ class CDPNA extends MainPageM {
 		$r = $this->DB->getRecord($str);	
         $result = array();
         while (list($k, $v) = each($r)) {
-            $idpenyelenggaraan=$v['idpenyelenggaraan'];     
-            $jumlahmhs=$this->DB->getCountRowsOfTable("v_krsmhs  WHERE idsmt='$idsmt' AND tahun='$ta' AND sah=1 AND batal=0 AND idpenyelenggaraan=$idpenyelenggaraan",'idpenyelenggaraan');
-            $jumlah_baris= $this->DB->getCountRowsOfTable("krsmatkul km JOIN nilai_matakuliah nm ON (nm.idkrsmatkul=km.idkrsmatkul) WHERE km.idpenyelenggaraan=$idpenyelenggaraan",'km.idkrsmatkul');                        
+            $idpenyelenggaraan = $v['idpenyelenggaraan'];     
+            $jumlahmhs = $this->DB->getCountRowsOfTable("v_krsmhs  WHERE idsmt='$idsmt' AND tahun='$ta' AND sah=1 AND batal=0 AND idpenyelenggaraan = $idpenyelenggaraan",'idpenyelenggaraan');
+            $jumlah_baris= $this->DB->getCountRowsOfTable("krsmatkul km JOIN nilai_matakuliah nm ON (nm.idkrsmatkul=km.idkrsmatkul) WHERE km.idpenyelenggaraan = $idpenyelenggaraan",'km.idkrsmatkul');                        
             $v['jumlahmhs'] = $jumlahmhs;
             $v['belum_ada_nilai'] = $jumlahmhs-$jumlah_baris;
             $result[$k] = $v;

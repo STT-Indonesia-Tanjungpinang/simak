@@ -41,7 +41,7 @@ class CKuesioner extends MainPageM {
 	}	
     public function setInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $_SESSION['ta'];		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
@@ -84,22 +84,22 @@ class CKuesioner extends MainPageM {
                 case 'kmatkul' :
                     $clausa=" AND kmatkul LIKE '%$txtsearch%'";                    
                     $str="SELECT vpp.idpengampu_penyelenggaraan,vpp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa",'vpp.idpengampu_penyelenggaraan');						
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa",'vpp.idpengampu_penyelenggaraan');						
                 break;				
                 case 'nmatkul':
                     $clausa=" AND nmatkul LIKE '%$txtsearch%'";
                     $str="SELECT vpp.idpengampu_penyelenggaraan,vpp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa",'vpp.idpengampu_penyelenggaraan');						
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa",'vpp.idpengampu_penyelenggaraan');						
                 break;
                 case 'nama_dosen':
                     $clausa=" AND nama_dosen LIKE '%$txtsearch%'";
                     $str="SELECT vpp.idpengampu_penyelenggaraan,vpp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa",'vpp.idpengampu_penyelenggaraan');						
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa",'vpp.idpengampu_penyelenggaraan');						
                 break;                
             }
         }else{            
             $str="SELECT vpp.idpengampu_penyelenggaraan,vpp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'";
-            $jumlah_baris=$this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'",'vpp.idpengampu_penyelenggaraan');						
+            $jumlah_baris = $this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'",'vpp.idpengampu_penyelenggaraan');						
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKuesioner']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -114,8 +114,8 @@ class CKuesioner extends MainPageM {
 		$r = $this->DB->getRecord($str);	
         $result = array();        
         while (list($k, $v) = each($r)) {
-            $idpengampu_penyelenggaraan=$v['idpengampu_penyelenggaraan'];                                    
-            $str="SELECT n_kual FROM kuesioner_hasil WHERE idpengampu_penyelenggaraan=$idpengampu_penyelenggaraan";				
+            $idpengampu_penyelenggaraan = $v['idpengampu_penyelenggaraan'];                                    
+            $str="SELECT n_kual FROM kuesioner_hasil WHERE idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan";				
             $this->DB->setFieldTable (array('n_kual'));			
             $r2=$this->DB->getRecord($str);	
             if (isset($r2[1])) {
@@ -152,7 +152,7 @@ class CKuesioner extends MainPageM {
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
             case  'excel2007' :
-                $tahun=$_SESSION['ta'];
+                $tahun = $_SESSION['ta'];
                 $semester = $_SESSION['semester'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);

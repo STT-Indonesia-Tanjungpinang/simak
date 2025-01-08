@@ -32,22 +32,22 @@ class CUserSA extends MainPageSA {
             switch ($this->cmbKriteria->Text) {
                 case 'username' :
                     $clausa="AND username='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='sa' $clausa",'userid');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='sa' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND nama LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='sa' $clausa",'userid');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='sa' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
                 case 'email' :
                     $clausa="AND email LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='sa' $clausa",'userid');		            
+                    $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='sa' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
             }
         }else{
-            $jumlah_baris=$this->DB->getCountRowsOfTable("user WHERE page='sa'",'userid');		            
+            $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='sa'",'userid');		            
             $str = "SELECT u.userid,u.username,u.nama,u.email,ug.group_name,u.active,u.foto,u.kjur,u.logintime FROM user u LEFT JOIN user_group ug ON (ug.group_id=u.group_id) WHERE page='sa'";			
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageUserSA']['page_num'];
@@ -77,13 +77,13 @@ class CUserSA extends MainPageSA {
         $this->idProcess = 'add';
         $this->cmbAddGroup->DataSource = $this->Pengguna->removeIdFromArray($this->Pengguna->getListGroup(),'none');
         $this->cmbAddGroup->DataBind();
-        $daftar_jurusan=$_SESSION['daftar_jurusan'];
+        $daftar_jurusan = $_SESSION['daftar_jurusan'];
         $daftar_jurusan['none'] = ' ';
         $this->cmbAddProdi->DataSource = $daftar_jurusan;
         $this->cmbAddProdi->DataBind();        
     }
     public function checkUsername($sender, $param) {
-		$this->idProcess=$sender->getId()=='addUsername'?'add':'edit';
+		$this->idProcess = $sender->getId()=='addUsername'?'add':'edit';
         $username=$param->Value;		
         if ($username != '') {
             try {   
@@ -99,7 +99,7 @@ class CUserSA extends MainPageSA {
         }	
     }
     public function checkEmail($sender, $param) {
-		$this->idProcess=$sender->getId()=='addEmail'?'add':'edit';
+		$this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
         $email = $param->Value;		
         if ($email != '') {
             try {   
@@ -149,7 +149,7 @@ class CUserSA extends MainPageSA {
         $this->cmbEditGroup->DataSource = $this->Pengguna->removeIdFromArray($this->Pengguna->getListGroup(),'none');
         $this->cmbEditGroup->Text = $result['group_id'];  
         $this->cmbEditGroup->DataBind();
-        $daftar_jurusan=$_SESSION['daftar_jurusan'];
+        $daftar_jurusan = $_SESSION['daftar_jurusan'];
         $daftar_jurusan['none'] = ' ';
         $this->cmbEditProdi->DataSource = $daftar_jurusan;
         $this->cmbEditProdi->Text = $result['kjur'];
@@ -167,7 +167,7 @@ class CUserSA extends MainPageSA {
             $username=addslashes($this->txtEditUsername->Text); 
             $group_id=$this->cmbEditGroup->Text;  
             $kjur = $this->cmbEditProdi->Text;
-            $status=$this->cmbEditStatus->Text;
+            $status = $this->cmbEditStatus->Text;
             
             if ($this->txtEditPassword1->Text == '') {
                 $str = "UPDATE user SET username='$username',nama='$nama',email='$email',group_id='$group_id',kjur='$kjur',active='$status' WHERE userid=$id";               

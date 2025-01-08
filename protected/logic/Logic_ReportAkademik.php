@@ -69,7 +69,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $r= $this->db->getRecord($str);
         $row=11;	            
         while (list($k, $v)=each ($r)) {
-          $idpenyelenggaraan=$v['idpenyelenggaraan'];
+          $idpenyelenggaraan = $v['idpenyelenggaraan'];
           $jumlah_peserta=$objDemik->getJumlahMhsInPenyelenggaraan($idpenyelenggaraan);
           $sheet->setCellValue("A$row", $v['no']);
           $sheet->mergeCells("B$row:C$row");
@@ -107,7 +107,7 @@ class Logic_ReportAkademik extends Logic_Report {
    */
   public function printMatakuliah ($objDemik) {
     $idkur=$this->dataReport['idkur'];        
-    $nama_ps=$this->dataReport['nama_ps'];        
+    $nama_ps = $this->dataReport['nama_ps'];        
     $str = "SELECT ta FROM kurikulum WHERE idkur=$idkur";
     $this->db->setFieldTable(array('ta'));
     $data = $this->db->getRecord($str);
@@ -194,7 +194,7 @@ class Logic_ReportAkademik extends Logic_Report {
                 if ($v['kmatkul'] == '') {
                   $ada_matkul=false;
                 }else {							                                    
-                  $sks=$v['sks'];									
+                  $sks = $v['sks'];									
                   $sheet->setCellValue("K$row_genap", $no_semester);
                   $sheet->setCellValue("L$row_genap", $objDemik->getKMatkul($v['kmatkul']));
                   $sheet->mergeCells("M$row_genap:O$row_genap");
@@ -242,7 +242,7 @@ class Logic_ReportAkademik extends Logic_Report {
                 if ($s['kmatkul'] == '') {
                   $ada_matkul=false;
                 }else {												
-                  $sks=$s['sks'];									
+                  $sks = $s['sks'];									
                   $sheet->setCellValue("B$row_ganjil", $no_semester);
                   $sheet->setCellValue("C$row_ganjil", $objDemik->getKMatkul($s['kmatkul']));
                   $sheet->mergeCells("D$row_ganjil:F$row_ganjil");
@@ -320,9 +320,9 @@ class Logic_ReportAkademik extends Logic_Report {
    */
   public function printDaftarMahasiswa ($objDemik, $objDMaster) {
     $kjur=$this->dataReport['kjur'];
-    $nama_ps=$this->dataReport['nama_ps'];
-    $tahun_masuk=$this->dataReport['tahun_masuk'];
-    $nama_tahun=$this->dataReport['nama_tahun'];
+    $nama_ps = $this->dataReport['nama_ps'];
+    $tahun_masuk = $this->dataReport['tahun_masuk'];
+    $nama_tahun = $this->dataReport['nama_tahun'];
     switch ($this->getDriver()) {
       case 'excel2003' :               
       case 'excel2007' :    
@@ -445,10 +445,10 @@ class Logic_ReportAkademik extends Logic_Report {
    */
    //di modif, source code sudah di backup di folder pushlata
   public function printDaftarHadirMahasiswa () {
-    $idkelas_mhs=$this->dataReport['idkelas_mhs'];   
+    $idkelas_mhs = $this->dataReport['idkelas_mhs'];   
     
     
-    $str = "SELECT nama_dosen FROM v_kelas_mhs WHERE idkelas_mhs=$idkelas_mhs";
+    $str = "SELECT nama_dosen FROM v_kelas_mhs WHERE idkelas_mhs = $idkelas_mhs";
     $this->db->setFieldTable(array('nama_dosen'));
     $r = $this->db->getRecord($str);        
     $nama_dosen = $r[1]['nama_dosen'];
@@ -459,7 +459,7 @@ class Logic_ReportAkademik extends Logic_Report {
     switch ($this->getDriver()) {
       case 'excel2003' :               
       case 'excel2007' :
-        $jumlah_peserta=$this->db->getCountRowsOfTable("kelas_mhs_detail WHERE idkelas_mhs=$idkelas_mhs",'idkrsmatkul');
+        $jumlah_peserta=$this->db->getCountRowsOfTable("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkrsmatkul');
         if ($jumlah_peserta > 0) {
           $jumlah_looping = ceil($jumlah_peserta / 70);
           for ($currentSheet=0;$currentSheet < $jumlah_looping;$currentSheet+=1) {
@@ -602,7 +602,7 @@ class Logic_ReportAkademik extends Logic_Report {
             }   
             
             //script asli
-            $str = "SELECT vdm.nim,vdm.nama_mhs,vdm.jk FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs=$idkelas_mhs AND km.batal=0 ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
+            $str = "SELECT vdm.nim,vdm.nama_mhs,vdm.jk FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
             
             // if($idkelas == "B") {
             //   $str_kelas = " (vdm.idkelas='$idkelas' or vdm.idkelas='D') ";
@@ -691,9 +691,9 @@ class Logic_ReportAkademik extends Logic_Report {
    */
   public function printRekapStatusMahasiswa ($objDemik, $objDMaster) {
     $kjur=$this->dataReport['kjur'];
-    $k_status=$this->dataReport['k_status'];
-    $tahun_masuk=$this->dataReport['tahun_masuk'];
-    $nama_ps=$this->dataReport['nama_ps'];
+    $k_status = $this->dataReport['k_status'];
+    $tahun_masuk = $this->dataReport['tahun_masuk'];
+    $nama_ps = $this->dataReport['nama_ps'];
     $ta1=$this->dataReport['ta1'];
     $ta2=$this->dataReport['ta2'];                
     $nama_tahun1=$this->dataReport['nama_tahun1'];                
@@ -789,7 +789,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A11:V12")->applyFromArray($styleArray);
         $sheet->getStyle("A11:V12")->getAlignment()->setWrapText(true);
         
-        $sql_tahun_masuk=$tahun_masuk == 'none'?'':"AND tahun_masuk='$tahun_masuk'";
+        $sql_tahun_masuk = $tahun_masuk == 'none'?'':"AND tahun_masuk='$tahun_masuk'";
         $sql_status = $k_status == 'none'?'':"k_status='$k_status'";
         $sql = $sql_tahun_masuk . $sql_status;
         $str = "SELECT ta,idsmt,idkelas FROM rekap_status_mahasiswa WHERE (ta >= $ta1 AND ta <= $ta2) AND kjur=$kjur $sql GROUP BY ta,idsmt,idkelas";
@@ -833,7 +833,7 @@ class Logic_ReportAkademik extends Logic_Report {
    * @param type $objDMaster
    */
   public function printPesertaMatakuliah($objDMaster) {
-    $idkelas=$this->dataReport['idkelas'];
+    $idkelas = $this->dataReport['idkelas'];
     switch ($this->getDriver()) {
       case 'excel2003' :               
       case 'excel2007' :    
@@ -947,7 +947,7 @@ class Logic_ReportAkademik extends Logic_Report {
    * digunakan untuk mencetak daftar mahasiswa Dosen Wali
    */
   public function printMahasiswaDW($objDMaster){
-    $iddosen_wali=$this->dataReport['iddosen_wali'];
+    $iddosen_wali = $this->dataReport['iddosen_wali'];
     switch ($this->getDriver()) {
       case 'excel2003' :               
       case 'excel2007' :  
@@ -994,9 +994,9 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A10:G10")->applyFromArray($styleArray);
         $sheet->getStyle("A10:G10")->getAlignment()->setWrapText(true);
         
-        $status=$this->dataReport['k_status'];
-        $str_status=$status == 'none'? '' : "AND k_status='$status'";
-        $str = "SELECT nim,nirm,nama_mhs,tahun_masuk,idkelas,k_status FROM v_datamhs vdm WHERE iddosen_wali=$iddosen_wali $str_status ORDER BY vdm.k_status ASC,vdm.tahun_masuk DESC,vdm.nama_mhs ASC";
+        $status = $this->dataReport['k_status'];
+        $str_status = $status == 'none'? '' : "AND k_status='$status'";
+        $str = "SELECT nim,nirm,nama_mhs,tahun_masuk,idkelas,k_status FROM v_datamhs vdm WHERE iddosen_wali = $iddosen_wali $str_status ORDER BY vdm.k_status ASC,vdm.tahun_masuk DESC,vdm.nama_mhs ASC";
         $this->db->setFieldTable (array('nim','nirm','nama_mhs','tahun_masuk','idkelas','k_status'));
         $r=$this->db->getRecord($str);	
         $row=11;
@@ -1121,7 +1121,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $kjur=$this->dataReport['nama_prodi'];
         $ta=$this->dataReport['nama_tahun'];
         $idsmt=$this->dataReport['nama_semester'];
-        $str_nama_hari=$this->dataReport['nama_hari'];
+        $str_nama_hari = $this->dataReport['nama_hari'];
         $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$str_nama_hari";
         $this->db->setFieldTable(array('idkelas_mhs','kmatkul','nmatkul','nama_dosen','idkelas','nidn','nama_kelas','hari','jam_masuk','jam_keluar','namaruang','kapasitas'));	
         $r=$this->db->getRecord($str);     
@@ -1225,7 +1225,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $sheet->getRowDimension(16)->setRowHeight(20);
         
-        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun=$ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='A' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
+        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='A' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
@@ -1322,7 +1322,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $sheet->getRowDimension(16)->setRowHeight(20);
         
-        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun=$ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='N' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
+        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='N' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
@@ -1419,7 +1419,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $sheet->getRowDimension(16)->setRowHeight(20);
         
-        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun=$ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='C' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
+        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='C' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
@@ -1516,7 +1516,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $sheet->getRowDimension(16)->setRowHeight(20);
         
-        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun=$ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='L' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
+        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='L' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
@@ -1613,7 +1613,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $sheet->getRowDimension(16)->setRowHeight(20);
         
-        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun=$ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='D' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
+        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='D' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
@@ -1711,7 +1711,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $sheet->getRowDimension(16)->setRowHeight(20);
         
-        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun=$ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='K' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
+        $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='K' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;

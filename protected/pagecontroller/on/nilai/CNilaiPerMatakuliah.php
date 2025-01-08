@@ -23,7 +23,7 @@ class CNilaiPerMatakuliah extends MainPageON {
           throw new Exception ("Sebelum input nilai mohon pilih Kode penyelenggaraan.");		
         }
         $kjur = $infomatkul['kjur'];        
-        $ps=$_SESSION['daftar_jurusan'][$kjur];
+        $ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($infomatkul['tahun']);
         $semester = $this->setup->getSemester($infomatkul['idsmt']);
         $text="Program Studi $ps TA $ta Semester $semester";
@@ -63,7 +63,7 @@ class CNilaiPerMatakuliah extends MainPageON {
   }
   public function getInfoToolbar() {        
     $kjur = $_SESSION['kjur'];        
-    $ps=$_SESSION['daftar_jurusan'][$kjur];
+    $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
     $text="Program Studi $ps TA $ta Semester $semester";
@@ -166,22 +166,22 @@ class CNilaiPerMatakuliah extends MainPageON {
       switch ($this->cmbKriteria2->Text) {                
         case 'nim' :
           $clausa="AND vdm.nim='$txtsearch'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";
         break;
         case 'nirm' :
           $clausa="AND vdm.nirm='$txtsearch'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";
         break;
         case 'nama' :
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-          $jumlah_baris=$this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
+          $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";
         break;
       }
     }else{                        
-      $jumlah_baris=$this->DB->getCountRowsOfTable("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1",'vdm.nim');
+      $jumlah_baris = $this->DB->getCountRowsOfTable("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1",'vdm.nim');
     }		
     $this->RepeaterP->CurrentPageIndex=$_SESSION['currentPageNilaiPerMatakuliah']['page_num'];
     $this->RepeaterP->VirtualItemCount=$jumlah_baris;
@@ -207,7 +207,7 @@ class CNilaiPerMatakuliah extends MainPageON {
       }
       $str = "SELECT km.idkelas,km.nama_kelas FROM kelas_mhs km,kelas_mhs_detail kmd WHERE km.idkelas_mhs=kmd.idkelas_mhs AND kmd.idkrsmatkul = $idkrsmatkul LIMIT 1";
       $this->DB->setFieldTable(array('idkelas', 'nama_kelas'));				
-      $datakelas=$this->DB->getRecord($str, $offset+1);
+      $datakelas = $this->DB->getRecord($str, $offset+1);
       $v['namakelas'] = 'N.A';
       if (isset($datakelas[1])) {
         $v['namakelas'] = $this->DMaster->getNamaKelasByID($datakelas[1]['idkelas']).'-'.chr($datakelas[1]['nama_kelas']+64);
@@ -265,7 +265,7 @@ class CNilaiPerMatakuliah extends MainPageON {
           }				
         }
       }
-      $idpenyelenggaraan=$_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
+      $idpenyelenggaraan = $_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
       $this->redirect('nilai.NilaiPerMatakuliah', true,array('id'=>$idpenyelenggaraan));
     }		
   }	
@@ -276,7 +276,7 @@ class CNilaiPerMatakuliah extends MainPageON {
       /*$id=$sender->getId();
       if($id=='btnPrintOutR') {
         
-        $idpenyelenggaraan=$sender->CommandParameter;
+        $idpenyelenggaraan = $sender->CommandParameter;
         $this->txtKriteria->Text="$idpenyelenggaraan";
       }*/  
     }

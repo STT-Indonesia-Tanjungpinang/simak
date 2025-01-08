@@ -64,7 +64,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 			$image->setToolTip($toolTip);
 		if(($Text = $this->getText())!=='')
 			$image->setAlternateText($text);
-		if(($align=$this->getImageAlign())!=='')
+		if(($align = $this->getImageAlign())!=='')
 			$image->setImageAlign($align);
 		$image->setBorderWidth('0');
 		return $image;

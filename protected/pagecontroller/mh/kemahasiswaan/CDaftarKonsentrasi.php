@@ -35,8 +35,8 @@ class CDaftarKonsentrasi extends MainPageMHS {
         if ($this->IsValid) {
             $nim = $this->Pengguna->getDataUser('nim');
             $kjur = $this->Pengguna->getDataUser('kjur');
-            $jumlah_sks=$this->hiddenJumlahSKS->Value;
-            $idkonsentrasi=$this->cmbKonsentrasiProdi->Text;
+            $jumlah_sks = $this->hiddenJumlahSKS->Value;
+            $idkonsentrasi = $this->cmbKonsentrasiProdi->Text;
             $ta = $this->setup->getSettingValue('default_ta');
             $semester = $this->setup->getSettingValue('default_semester');
             try {

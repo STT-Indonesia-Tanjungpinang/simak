@@ -12,7 +12,7 @@ class MainTemplate extends TTemplateControl {
 		}        
 	}
     public function populateThemes() {
-        $themes=$this->Page->setup->getListThemes();
+        $themes = $this->Page->setup->getListThemes();
         $daftarthemes=array();
         foreach ($themes as $k => $v) {
             $daftarthemes[]=array('idtheme'=>$k,'namatheme'=>$v);
@@ -42,7 +42,7 @@ class MainTemplate extends TTemplateControl {
         $status='';
         switch ($page) {
             case 'mh' :
-                $statusmhs=$this->Page->DMaster->getNamaStatusMHSByID ($this->Page->Pengguna->getDataUser('k_status'));
+                $statusmhs = $this->Page->DMaster->getNamaStatusMHSByID ($this->Page->Pengguna->getDataUser('k_status'));
                 $status='<i class="fa fa-circle"></i> '.$statusmhs;            
             break;
         }

@@ -24,7 +24,7 @@ class CDetailEditNilai extends MainPageD {
         if (!$this->Demik->InfoKelas['isi_nilai']) {
           throw new Exception ("Masa pengisian nilai dari sisi Dosen telah berakhir, silahkan hubungi Operator Nilai di Prodi.");
         }
-        $infokelas=$this->Demik->InfoKelas;
+        $infokelas = $this->Demik->InfoKelas;
         $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
         $this->Demik->InfoKelas['hari'] = $this->TGL->getNamaHari($infokelas['hari']);
         
@@ -58,11 +58,11 @@ class CDetailEditNilai extends MainPageD {
     $this->RepeaterS->render($param->NewWriter);	
   }
   protected function populateData() {	
-    $datakelas=$_SESSION['currentPageDetailEditNilai']['DataNilai'];
-    $idkelas_mhs=$datakelas['idkelas_mhs'];
-    $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nama_mhs,n.persentase_quiz, n.persentase_tugas, n.persentase_uts, n.persentase_uas, n.persentase_absen, n.nilai_quiz, n.nilai_tugas, n.nilai_uts, n.nilai_uas, n.nilai_absen, n.nilai_hasil_proyek, n.n_kuan, n.n_kual, n.published FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs=$idkelas_mhs AND vkm.sah=1 AND vkm.batal=0";        
+    $datakelas = $_SESSION['currentPageDetailEditNilai']['DataNilai'];
+    $idkelas_mhs = $datakelas['idkelas_mhs'];
+    $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nama_mhs,n.persentase_quiz, n.persentase_tugas, n.persentase_uts, n.persentase_uas, n.persentase_absen, n.nilai_quiz, n.nilai_tugas, n.nilai_uts, n.nilai_uas, n.nilai_absen, n.nilai_hasil_proyek, n.n_kuan, n.n_kual, n.published FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0";        
     
-    $jumlah_baris=$this->DB->getCountRowsOfTable(" kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs=$idkelas_mhs AND vkm.sah=1 AND vkm.batal=0",'vkm.idkrsmatkul');
+    $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0",'vkm.idkrsmatkul');
     
     $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDetailEditNilai']['page_num'];
     $this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -76,12 +76,12 @@ class CDetailEditNilai extends MainPageD {
     $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'nilai_hasil_proyek', 'n_kuan', 'n_kual', 'published'));
     $r = $this->DB->getRecord($str);	           
     $result = array();
-    $persentase_quiz=$datakelas['persen_quiz'] > 0 ?number_format($datakelas['persen_quiz']/100,2):0;
-    $persentase_tugas=$datakelas['persen_tugas'] > 0 ?number_format($datakelas['persen_tugas']/100,2):0;
-    $persentase_uts=$datakelas['persen_uts'] > 0 ?number_format($datakelas['persen_uts']/100,2):0;
-    $persentase_uas=$datakelas['persen_uas'] > 0 ?number_format($datakelas['persen_uas']/100,2):0;
-    $persentase_absen=$datakelas['persen_absen'] > 0 ?number_format($datakelas['persen_absen']/100,2):0;
-    $persentase_hasil_proyek=$datakelas['persen_hasil_proyek'] > 0 ?number_format($datakelas['persen_hasil_proyek']/100,2):0;
+    $persentase_quiz = $datakelas['persen_quiz'] > 0 ? number_format($datakelas['persen_quiz'] / 100,2):0;
+    $persentase_tugas = $datakelas['persen_tugas'] > 0 ? number_format($datakelas['persen_tugas'] / 100,2):0;
+    $persentase_uts = $datakelas['persen_uts'] > 0 ? number_format($datakelas['persen_uts'] / 100,2):0;
+    $persentase_uas = $datakelas['persen_uas'] > 0 ? number_format($datakelas['persen_uas'] / 100,2):0;
+    $persentase_absen = $datakelas['persen_absen'] > 0 ? number_format($datakelas['persen_absen'] / 100,2):0;
+    $persentase_hasil_proyek = $datakelas['persen_hasil_proyek'] > 0 ? number_format($datakelas['persen_hasil_proyek'] / 100,2):0;
     
     while (list($k, $v) = each($r)) {                
       $v['persentase_quiz'] = $persentase_quiz;
@@ -101,15 +101,15 @@ class CDetailEditNilai extends MainPageD {
   }	
    public function updateDataPersentase($sender, $param) {
     if ($this->IsValid) {
-      $idkelas_mhs=$_SESSION['currentPageDetailEditNilai']['DataNilai']['idkelas_mhs'];
-      $persentase_quiz=$this->txtPersenQuiz->Text;
-      $persentase_tugas=$this->txtPersenTugas->Text;
-      $persentase_uts=$this->txtPersenUTS->Text;
-      $persentase_uas=$this->txtPersenUAS->Text;
-      $persentase_absen=$this->txtPersenAbsen->Text;
-      $persentase_hasil_proyek=$this->txtPersenHasilProyek->Text;
+      $idkelas_mhs = $_SESSION['currentPageDetailEditNilai']['DataNilai']['idkelas_mhs'];
+      $persentase_quiz = $this->txtPersenQuiz->Text;
+      $persentase_tugas = $this->txtPersenTugas->Text;
+      $persentase_uts = $this->txtPersenUTS->Text;
+      $persentase_uas = $this->txtPersenUAS->Text;
+      $persentase_absen = $this->txtPersenAbsen->Text;
+      $persentase_hasil_proyek = $this->txtPersenHasilProyek->Text;
       
-      $str = "UPDATE kelas_mhs SET persen_quiz='$persentase_quiz',persen_tugas='$persentase_tugas',persen_uts='$persentase_uts',persen_uas='$persentase_uas',persen_absen='$persentase_absen',persen_hasil_proyek='$persentase_hasil_proyek' WHERE idkelas_mhs=$idkelas_mhs";
+      $str = "UPDATE kelas_mhs SET persen_quiz='$persentase_quiz',persen_tugas='$persentase_tugas',persen_uts='$persentase_uts',persen_uas='$persentase_uas',persen_absen='$persentase_absen',persen_hasil_proyek='$persentase_hasil_proyek' WHERE idkelas_mhs = $idkelas_mhs";
       $this->DB->updateRecord($str);
      
       $this->redirect("nilai.DetailEditNilai", true,array('id'=>$idkelas_mhs));
@@ -130,12 +130,12 @@ class CDetailEditNilai extends MainPageD {
         {
           $item = $inputan->txtNilaiQuiz->getNamingContainer();
           $idkrsmatkul = $this->RepeaterS->DataKeys[$item->getItemIndex()];
-          $persentase_quiz=$inputan->hiddenpersenquiz->Value;
-          $persentase_tugas=$inputan->hiddenpersentugas->Value;
-          $persentase_uts=$inputan->hiddenpersenuts->Value;
-          $persentase_uas=$inputan->hiddenpersenuas->Value;
-          $persentase_absen=$inputan->hiddenpersenabsen->Value;
-          $persentase_hasil_proyek=$inputan->hiddenpersenhasilproyek->Value;
+          $persentase_quiz = $inputan->hiddenpersenquiz->Value;
+          $persentase_tugas = $inputan->hiddenpersentugas->Value;
+          $persentase_uts = $inputan->hiddenpersenuts->Value;
+          $persentase_uas = $inputan->hiddenpersenuas->Value;
+          $persentase_absen = $inputan->hiddenpersenabsen->Value;
+          $persentase_hasil_proyek = $inputan->hiddenpersenhasilproyek->Value;
 
           $nilai_quiz=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiQuiz->Text)));
           $nilai_quiz=($nilai_quiz >0)?$nilai_quiz:0;
@@ -214,12 +214,12 @@ class CDetailEditNilai extends MainPageD {
         {
           $item = $inputan->txtNilaiQuiz->getNamingContainer();
           $idkrsmatkul = $this->RepeaterS->DataKeys[$item->getItemIndex()];
-          $persentase_quiz=$inputan->hiddenpersenquiz->Value;
-          $persentase_tugas=$inputan->hiddenpersentugas->Value;
-          $persentase_uts=$inputan->hiddenpersenuts->Value;
-          $persentase_uas=$inputan->hiddenpersenuas->Value;
-          $persentase_absen=$inputan->hiddenpersenabsen->Value;
-          $persentase_hasil_proyek=$inputan->hiddenpersenhasilproyek->Value;
+          $persentase_quiz = $inputan->hiddenpersenquiz->Value;
+          $persentase_tugas = $inputan->hiddenpersentugas->Value;
+          $persentase_uts = $inputan->hiddenpersenuts->Value;
+          $persentase_uas = $inputan->hiddenpersenuas->Value;
+          $persentase_absen = $inputan->hiddenpersenabsen->Value;
+          $persentase_hasil_proyek = $inputan->hiddenpersenhasilproyek->Value;
 
           $nilai_quiz=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiQuiz->Text)));
           $nilai_quiz=($nilai_quiz >0)?$nilai_quiz:0;

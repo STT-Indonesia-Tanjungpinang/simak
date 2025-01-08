@@ -31,7 +31,7 @@ class CDetailTranskripKRS extends MainPageM {
                 $_SESSION['currentPageDetailTranskripKRS']['DataMHS']=array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar.");
             }
-            $datamhs=$r[1];
+            $datamhs = $r[1];
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    

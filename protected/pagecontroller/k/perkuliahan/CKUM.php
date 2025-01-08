@@ -12,7 +12,7 @@ class CKUM extends MainPageK {
 				$_SESSION['currentPageKUM']=array('page_name'=>'k.perkuliahan.KUM', 'page_num'=>0,'search'=>false,'jenisujian'=>'uts');												
 			}            
             $_SESSION['currentPageKUM']['search']=false;   
-            $daftar_ps=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
+            $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
@@ -41,7 +41,7 @@ class CKUM extends MainPageK {
     public function setInfoToolbar() {       
         $jenisujian=strtoupper($_SESSION['currentPageKUM']['jenisujian']);
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);        		
 		$this->lblModulHeader->Text="$jenisujian Program Studi $ps T.A $ta";        
 	}
@@ -86,31 +86,31 @@ class CKUM extends MainPageK {
         $ta = $_SESSION['ta'];
 		$semester = $_SESSION['semester'];
 		$kjur = $_SESSION['kjur'];
-		$tahun_masuk=$_SESSION['tahun_masuk'];
-        $str_tahun_masuk=($tahun_masuk == 'none' || $tahun_masuk == 'none') ?'':" AND vdm.tahun_masuk=$tahun_masuk";
+		$tahun_masuk = $_SESSION['tahun_masuk'];
+        $str_tahun_masuk=($tahun_masuk == 'none' || $tahun_masuk == 'none') ?'':" AND vdm.tahun_masuk = $tahun_masuk";
         if ($search) {
-            $str = "SELECT vdm.no_formulir,k.idkrs,k.nim,vdm.nama_mhs,tahun_masuk,semester_masuk,perpanjang FROM krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun=$ta AND k.idsmt=$semester";
+            $str = "SELECT vdm.no_formulir,k.idkrs,k.nim,vdm.nama_mhs,tahun_masuk,semester_masuk,perpanjang FROM krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester";
             $txtsearch=addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
                 case 'nim' :
                     $clausa="AND vdm.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun=$ta AND k.idsmt=$semester $clausa",'k.nim');		
+                    $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="AND vdm.nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun=$ta AND k.idsmt=$semester $clausa",'k.nim');		
+                    $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun=$ta AND k.idsmt=$semester $clausa",'k.nim');		
+                    $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
                 break;
             }
         }else{
-            $str = "SELECT vdm.no_formulir,k.idkrs,k.nim,vdm.nama_mhs,tahun_masuk,semester_masuk,perpanjang FROM krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun=$ta AND k.idsmt=$semester AND vdm.kjur = $kjur $str_tahun_masuk";
-            $jumlah_baris=$this->DB->getCountRowsOfTable("krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun=$ta AND k.idsmt=$semester AND vdm.kjur = $kjur $str_tahun_masuk",'k.nim');		
+            $str = "SELECT vdm.no_formulir,k.idkrs,k.nim,vdm.nama_mhs,tahun_masuk,semester_masuk,perpanjang FROM krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester AND vdm.kjur = $kjur $str_tahun_masuk";
+            $jumlah_baris = $this->DB->getCountRowsOfTable("krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester AND vdm.kjur = $kjur $str_tahun_masuk",'k.nim');		
             
         }
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKUM']['page_num'];
@@ -155,7 +155,7 @@ class CKUM extends MainPageK {
         }
         $result=array ();
         while (list($k, $v) = each($r)) {
-            $idkrs=$v['idkrs'];
+            $idkrs = $v['idkrs'];
             $no_formulir = $v['no_formulir'];
             $nim = $v['nim'];
             $str = "SELECT COUNT(idkrsmatkul) AS jumlah_matkul,SUM(sks) AS jumlah_sks FROM v_krsmhs WHERE idkrs='$idkrs'";						
@@ -164,18 +164,18 @@ class CKUM extends MainPageK {
             $v['jumlah_matkul'] = $r2[1]['jumlah_matkul'] > 0 ?$r2[1]['jumlah_matkul']:0;
             $v['jumlah_sks'] = $r2[1]['jumlah_sks'] > 0 ?$r2[1]['jumlah_sks']:0;
             
-            $str = "SELECT d.idkelas,k.nkelas FROM dulang d,kelas k WHERE d.idkelas=k.idkelas AND tahun=$ta AND idsmt=$semester AND k_status='A' AND nim=$nim ORDER BY iddulang DESC LIMIT 1";
+            $str = "SELECT d.idkelas,k.nkelas FROM dulang d,kelas k WHERE d.idkelas=k.idkelas AND tahun = $ta AND idsmt=$semester AND k_status='A' AND nim=$nim ORDER BY iddulang DESC LIMIT 1";
             $this->DB->setFieldTable (array('idkelas', 'nkelas'));
 			$r2=$this->DB->getRecord($str);
-            $idkelas=$r2[1]['idkelas'];
+            $idkelas = $r2[1]['idkelas'];
             $v['nkelas'] = $r2[1]['nkelas'];
             if ($semester == 3) {
                 
             }else{
-                $str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM transaksi t,transaksi_detail td WHERE td.no_transaksi=t.no_transaksi AND t.no_formulir = $no_formulir AND t.idsmt=$semester AND t.tahun=$ta AND t.commited=1";			
+                $str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM transaksi t,transaksi_detail td WHERE td.no_transaksi=t.no_transaksi AND t.no_formulir = $no_formulir AND t.idsmt=$semester AND t.tahun = $ta AND t.commited=1";			
                 $this->DB->setFieldTable(array('dibayarkan'));
                 $r3=$this->DB->getRecord($str2);				
-                $dibayarkan=$r3[1]['dibayarkan'];
+                $dibayarkan = $r3[1]['dibayarkan'];
                 $kewajiban=($ta==$tahun_masuk && $v['semester_masuk'] == $semester) ? $komponen_biaya[$idkelas]['baru']:$komponen_biaya[$idkelas]['lama'];
                 $sisa = $kewajiban-$dibayarkan;
             }
@@ -221,8 +221,8 @@ class CKUM extends MainPageK {
                 $messageprintout=""; 
                 foreach($this->RepeaterS->Items as $inputan) {						
                     $item=$inputan->hiddentoglelunas->getNamingContainer();
-                    $idkrs=$this->RepeaterS->DataKeys[$item->getItemIndex()];
-                    $islunas=$item->hiddentoglelunas->Value;
+                    $idkrs = $this->RepeaterS->DataKeys[$item->getItemIndex()];
+                    $islunas = $item->hiddentoglelunas->Value;
                     if ($islunas > 0) {
                        $dataidkrs[$idkrs] = $idkrs;
                     }
@@ -249,7 +249,7 @@ class CKUM extends MainPageK {
         $this->modalPrintOut->show();
     }
     public function printOutR($sender, $param) {
-        $idkrs=$this->getDataKeyField($sender, $this->RepeaterS);
+        $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataidkrs[$idkrs] = $idkrs;
         $this->createObj('reportkrs');
         $this->linkOutput->Text='';
@@ -278,10 +278,10 @@ class CKUM extends MainPageK {
                 $dataReport['nama_tahun'] = $nama_tahun; 
                 $dataReport['nama_semester'] = $nama_semester;
                 
-                $nama_dosen=$this->DMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
+                $nama_dosen = $this->DMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
                 $dataReport['nama_dosen'] = $nama_dosen;
                 
-                $kaprodi=$this->KRS->getKetuaPRODI($dataReport['kjur']);
+                $kaprodi = $this->KRS->getKetuaPRODI($dataReport['kjur']);
                 $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
                 $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];

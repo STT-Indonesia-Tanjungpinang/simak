@@ -24,14 +24,14 @@ class Logic_Setup extends Logic_Global {
 	public function __construct ($db) {
 		parent::__construct ($db);	        
         $this->loadSetting();        
-        $this->parameters=$this->Application->getParameters ();	
+        $this->parameters = $this->Application->getParameters ();	
 	}	
     /**
      * digunakan untuk meload setting
      */
     public function loadSetting ($flush=false) {     
         if ($flush) {
-            $this->settings=$this->populateSetting ();
+            $this->settings = $this->populateSetting ();
             $this->settings['loaded']=true;
             if ($this->Application->Cache) {                
                 $this->Application->Cache->set('settings', $this->settings);
@@ -39,10 +39,10 @@ class Logic_Setup extends Logic_Global {
                 $_SESSION['settings']=$this->settings;                
             }
         }elseif ($this->Application->Cache) {
-            $this->settings=$this->Application->Cache->get('settings');
+            $this->settings = $this->Application->Cache->get('settings');
             if (!$this->settings['loaded']) $this->loadSetting (true);
         }else {
-            $this->settings=$_SESSION['settings'];
+            $this->settings = $_SESSION['settings'];
             if (!$this->settings['loaded']) $this->loadSetting (true);
         }        
     }
@@ -90,7 +90,7 @@ class Logic_Setup extends Logic_Global {
      */
     public function getAddress () {       
 		$ip=explode('.', $_SERVER['REMOTE_ADDR']);		        
-		$ipaddress=$ip[0];	       	
+		$ipaddress = $ip[0];	       	
 		if ($ipaddress == '127' || $ipaddress == '::1') {
 			$url=$this->parameters['address_lokal'];
 		}elseif ($ipaddress == '192' || $ip=='10'||$ip=='172'){
@@ -163,7 +163,7 @@ class Logic_Setup extends Logic_Global {
      */
     public function cleanFileNameString ($filename) {
         $data=explode ('.', $filename);           
-        $extensi=$data[count($data)-1];        
+        $extensi = $data[count($data)-1];        
         $replacefile=preg_replace('/\W+/', '', $filename);
         $files= str_replace($extensi, '', $replacefile);
         return "$files.$extensi";

@@ -8,7 +8,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 	* digunakan untuk mendapatkan biaya pendaftaran berdasarkan tahun, idsmt, dan kelas	
 	*/
 	public function getBiayaPendaftaran ($tahun, $idsmt, $idkelas) {
-        $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=1 AND tahun=$tahun AND idsmt=$idsmt AND idkelas='$idkelas'";						
+        $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=1 AND tahun = $tahun AND idsmt=$idsmt AND idkelas='$idkelas'";						
 		$this->db->setFieldTable(array('biaya'));
 		$result=$this->db->getRecord($str);
 		if (isset($result[1])) {
@@ -21,7 +21,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 	* digunakan untuk mendapatkan biaya cuti berdasarkan tahun, idsmt, dan kelas	
 	*/
 	public function getBiayaCuti ($tahun, $idsmt, $idkelas) {
-        $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=12 AND tahun=$tahun AND idsmt=$idsmt AND idkelas='$idkelas'";						
+        $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=12 AND tahun = $tahun AND idsmt=$idsmt AND idkelas='$idkelas'";						
 		$this->db->setFieldTable(array('biaya'));
 		$result=$this->db->getRecord($str);
 		if (isset($result[1])) {
@@ -34,7 +34,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 	* digunakan untuk mendapatkan biaya sks berdasarkan tahun, idsmt, dan kelas	
 	*/
 	public function getBiayaSKS ($tahun, $idkelas) {
-        $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=14 AND tahun=$tahun AND idkelas='$idkelas'";						
+        $str = "SELECT biaya FROM kombi_per_ta WHERE idkombi=14 AND tahun = $tahun AND idkelas='$idkelas'";						
 		$this->db->setFieldTable(array('biaya'));
 		$result=$this->db->getRecord($str);
 		if (isset($result[1])) {
@@ -49,22 +49,22 @@ class Logic_Finance extends Logic_Mahasiswa {
      * @return jumlah biaya mahasiswa
      */
     public function getTotalBiayaMhs ($status='baru') {        
-		$tahun_masuk=$this->DataMHS['tahun_masuk'];
-        $semester_masuk=$this->DataMHS['semester_masuk'];
-		$kelas=$this->DataMHS['idkelas'];
+		$tahun_masuk = $this->DataMHS['tahun_masuk'];
+        $semester_masuk = $this->DataMHS['semester_masuk'];
+		$kelas = $this->DataMHS['idkelas'];
         switch ($status) {
             case 'lama' :
-                $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun=$tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14 AND (idkombi=2 OR idkombi=3 OR idkombi=7 OR idkombi=9)";
+                $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14 AND (idkombi=2 OR idkombi=3 OR idkombi=7 OR idkombi=9)";
             break;
             case 'baru' :
                 if ($this->getDataMhs('perpanjang')==true) {
-                    $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun=$tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14 AND (idkombi=2 OR idkombi=3 OR idkombi=7 OR idkombi=9)";
+                    $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14 AND (idkombi=2 OR idkombi=3 OR idkombi=7 OR idkombi=9)";
                 }else {
-                    $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun=$tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14";								
+                    $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14";								
                 }		
             break;
             case 'sp' :
-                $str = "SELECT biaya AS jumlah FROM kombi_per_ta WHERE tahun=$tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi=14";
+                $str = "SELECT biaya AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi=14";
             break;
         }		
 		$this->db->setFieldTable(array('jumlah'));
@@ -78,22 +78,22 @@ class Logic_Finance extends Logic_Mahasiswa {
      * @return jumlah biaya mahasiswa
      */
     public function getTotalBiayaMhsPeriodePembayaran ($status='baru') {        
-		$tahun_masuk=$this->DataMHS['tahun_masuk'];
-        $semester_masuk=$this->DataMHS['idsmt'];
-		$kelas=$this->DataMHS['idkelas'];
+		$tahun_masuk = $this->DataMHS['tahun_masuk'];
+        $semester_masuk = $this->DataMHS['idsmt'];
+		$kelas = $this->DataMHS['idkelas'];
         switch ($status) {
             case 'lama' :
-                $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND tahun=$tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran='semesteran'";
+                $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran='semesteran'";
             break;
             case 'baru' :
                 if ($this->getDataMhs('perpanjang')==true) {
-                    $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND  tahun=$tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran!='none'";
+                    $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND  tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran!='none'";
                 }else {
-                    $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND  tahun=$tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran!='none'";								
+                    $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND  tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran!='none'";								
                 }		
             break;
             case 'sp' :
-                $str = "SELECT biaya AS jumlah FROM kombi_per_ta WHERE tahun=$tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi=14";
+                $str = "SELECT biaya AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi=14";
             break;
         }		
 		$this->db->setFieldTable(array('jumlah'));
@@ -116,10 +116,10 @@ class Logic_Finance extends Logic_Mahasiswa {
 		$kjur=$this->DataMHS['kjur'];        
         if ($semester_sekarang == 3) { //semester pendek
             $nim = $this->DataMHS['nim'];	
-            $str = "SELECT SUM(dibayarkan) AS jumlah FROM transaksi_sp WHERE tahun=$tahun_sekarang AND idsmt=$semester_sekarang AND kjur=$kjur AND nim='$nim' AND commited=1";											            
+            $str = "SELECT SUM(dibayarkan) AS jumlah FROM transaksi_sp WHERE tahun = $tahun_sekarang AND idsmt=$semester_sekarang AND kjur=$kjur AND nim='$nim' AND commited=1";											            
         }else {
             $no_formulir=$this->DataMHS['no_formulir'];	
-            $str = "SELECT SUM(dibayarkan) AS jumlah FROM v_transaksi WHERE tahun=$tahun_sekarang AND idsmt=$semester_sekarang AND kjur=$kjur AND no_formulir='$no_formulir' AND commited=1";											
+            $str = "SELECT SUM(dibayarkan) AS jumlah FROM v_transaksi WHERE tahun = $tahun_sekarang AND idsmt=$semester_sekarang AND kjur=$kjur AND no_formulir='$no_formulir' AND commited=1";											
         }
 
 		$this->db->setFieldTable(array('jumlah'));
@@ -133,10 +133,10 @@ class Logic_Finance extends Logic_Mahasiswa {
 	*/
 	public function getLunasPembayaranFormulir ($data=false) {
         $no_formulir=$this->DataMHS['no_formulir'];
-        $tahun_masuk=$this->DataMHS['tahun_masuk'];
-        $semester_masuk=$this->DataMHS['semester_masuk'];
-        $idkelas=$this->DataMHS['idkelas'];
-        $biaya_pendaftaran=$this->getBiayaPendaftaran($tahun_masuk, $semester_masuk, $idkelas);
+        $tahun_masuk = $this->DataMHS['tahun_masuk'];
+        $semester_masuk = $this->DataMHS['semester_masuk'];
+        $idkelas = $this->DataMHS['idkelas'];
+        $biaya_pendaftaran = $this->getBiayaPendaftaran($tahun_masuk, $semester_masuk, $idkelas);
         
         $str = "SELECT td.dibayarkan FROM transaksi t,transaksi_detail td WHERE td.no_transaksi=t.no_transaksi AND t.no_formulir='$no_formulir' AND td.idkombi=1";
         $this->db->setFieldTable(array('dibayarkan'));
@@ -160,18 +160,18 @@ class Logic_Finance extends Logic_Mahasiswa {
 	public function getLunasPembayaran ($tahun_sekarang, $semester_sekarang, $data=false) {        
         if ($this->isMhsBaru($tahun_sekarang, $semester_sekarang)) {            
             $total_biaya=$this->getTotalBiayaMhsPeriodePembayaran();
-            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);				
+            $total_bayar_mhs = $this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);				
         }elseif($semester_sekarang==3){
             $nim = $this->DataMHS['nim'];	            
             $kjur=$this->DataMHS['kjur']; 
-            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);
-            $str = "SELECT sks FROM transaksi_sp WHERE nim='$nim' AND tahun=$tahun_sekarang AND idsmt=$semester_sekarang AND kjur='$kjur' AND nim='$nim' AND commited=1";
+            $total_bayar_mhs = $this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);
+            $str = "SELECT sks FROM transaksi_sp WHERE nim='$nim' AND tahun = $tahun_sekarang AND idsmt=$semester_sekarang AND kjur='$kjur' AND nim='$nim' AND commited=1";
             $this->db->setFieldTable(array('sks'));
             $r=$this->db->getRecord($str);                         
             $total_biaya=$this->getTotalBiayaMhs('sp') * $r[1]['sks'];		
         }else{            
             $total_biaya=$this->getTotalBiayaMhsPeriodePembayaran('lama');		
-            $total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);				            
+            $total_bayar_mhs = $this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);				            
         }
         $bool=$total_biaya<=$total_bayar_mhs;
 		if ($data) {
@@ -191,7 +191,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 	public function getTresholdPembayaran ($tahun_sekarang, $semester_sekarang, $data=false) {
 		$total_biaya=($this->isMhsBaru($tahun_sekarang, $semester_sekarang))?$this->getTotalBiayaMhsPeriodePembayaran():$this->getTotalBiayaMhsPeriodePembayaran('lama');
 		$total_biaya_setengah=$total_biaya/2;		
-		$total_bayar_mhs=$this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);					
+		$total_bayar_mhs = $this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);					
 		$bool=$total_biaya_setengah<=$total_bayar_mhs;	
 		if ($data) {
 			$data=array();
@@ -212,7 +212,7 @@ class Logic_Finance extends Logic_Mahasiswa {
      */
 	public function getKelasFromTransaksi($tahun_sekarang, $semester_sekarang) {
 		$no_formulir=$this->DataMHS['no_formulir'];
-		$str = "SELECT idkelas FROM transaksi WHERE tahun=$tahun_sekarang AND idsmt=$semester_sekarang AND no_formulir=$no_formulir LIMIT 0,1";
+		$str = "SELECT idkelas FROM transaksi WHERE tahun = $tahun_sekarang AND idsmt=$semester_sekarang AND no_formulir=$no_formulir LIMIT 0,1";
 		$this->db->setFieldTable(array('idkelas'));
 		$r=$this->db->getRecord($str);		
 		if (isset($r[1]) )
@@ -227,7 +227,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 	public function getSKSFromSP ($tahun_sekarang, $semester_sekarang) {		
 		$kjur=$this->DataMHS['kjur'];
 		$nim = $this->DataMHS['nim'];
-		$str = "SELECT jumlah_sks FROM transaksi WHERE nim='$nim' AND idsmt=$semester_sekarang AND tahun=$tahun_sekarang AND kjur=$kjur AND commited=1";		
+		$str = "SELECT jumlah_sks FROM transaksi WHERE nim='$nim' AND idsmt=$semester_sekarang AND tahun = $tahun_sekarang AND kjur=$kjur AND commited=1";		
 		$this->db->setFieldTable(array('jumlah_sks'));
 		$r=$this->db->getRecord($str);	
         

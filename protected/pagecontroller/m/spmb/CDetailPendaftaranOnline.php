@@ -24,7 +24,7 @@ class CDetailPendaftaranOnline extends MainPageM {
                 unset($_SESSION['currentPageDetailPendaftaranOnline']);
                 throw new Exception ("Mahasiswa Dengan No. Pendaftaran ($no_pendaftaran) tidak terdaftar di Portal.");
             }
-            $datamhs=$r[1];
+            $datamhs = $r[1];
             $datamhs['no_formulir'] = $datamhs['no_formulir']> 0 ? $datamhs['no_formulir']:'N.A';
             $datamhs['nama_ps_1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];
             $datamhs['nama_ps_2']=($r[1]['kjur2']>0)?$this->DMaster->getNamaProgramStudiByID($r[1]['kjur2']):'N.A';
@@ -50,14 +50,14 @@ class CDetailPendaftaranOnline extends MainPageM {
         }          
     }
     public function getDataMHS($idx) {	
-        $datamhs=$_SESSION['currentPageDetailPendaftaranOnline']['DataMHS'];
+        $datamhs = $_SESSION['currentPageDetailPendaftaranOnline']['DataMHS'];
         return $datamhs[$idx];
     }
     public function resetPassword($sender, $param) {        
         $data = $this->Pengguna->createHashPassword(1234);
         $salt=$data['salt'];
         $password=$data['password'];         
-        $no_pendaftaran=$_SESSION['currentPageDetailPendaftaranOnline']['DataMHS']['no_pendaftaran'];
+        $no_pendaftaran = $_SESSION['currentPageDetailPendaftaranOnline']['DataMHS']['no_pendaftaran'];
 
         $str = "UPDATE formulir_pendaftaran_temp SET salt='$salt',userpassword='$password' WHERE no_pendaftaran='$no_pendaftaran'";
         $this->DB->updateRecord($str);
@@ -92,7 +92,7 @@ class CDetailPendaftaranOnline extends MainPageM {
                 $this->DB->setFieldTable(array('nama_mhs'));
                 $r = $this->DB->getRecord($str);
                 if (isset($r[1])) {  
-                    $nama_mhs=$r[1]['nama_mhs'];
+                    $nama_mhs = $r[1]['nama_mhs'];
                     throw new Exception ("No. Formulir  ($no_formulir) sudah terdaftar atas nama $nama_mhs");                                                   
                 }                
                 if (!$this->DB->checkRecordIsExist ('no_formulir', 'pin', $no_formulir)) {
@@ -111,7 +111,7 @@ class CDetailPendaftaranOnline extends MainPageM {
         }else{			            
             $this->cmbKjur2->Enabled=true;
 
-            $jurusan=$this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $sender->Text);									            
+            $jurusan = $this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $sender->Text);									            
             $this->cmbKjur2->DataSource = $jurusan;
             $this->cmbKjur2->dataBind();
         }					
@@ -126,9 +126,9 @@ class CDetailPendaftaranOnline extends MainPageM {
             $str = "SELECT tahun_masuk,semester_masuk,idkelas FROM pin WHERE no_formulir = $no_formulir";
             $this->DB->setFieldTable(array('tahun_masuk', 'semester_masuk', 'idkelas'));
             $r = $this->DB->getRecord($str);
-            $tahun_masuk=$r[1]['tahun_masuk'];
-            $semester_masuk=$r[1]['semester_masuk'];
-            $idkelas=$r[1]['idkelas'];
+            $tahun_masuk = $r[1]['tahun_masuk'];
+            $semester_masuk = $r[1]['semester_masuk'];
+            $idkelas = $r[1]['idkelas'];
             $this->DB->query('BEGIN');            
             $str = "INSERT INTO formulir_pendaftaran (no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,idagama,nama_ibu_kandung,idwarga,nik,idstatus,alamat_kantor,alamat_rumah,kelurahan,kecamatan,telp_kantor,telp_rumah,telp_hp,idjp,pendidikan_terakhir,jurusan,kota,provinsi,tahun_pa,jenis_slta,asal_slta,status_slta,nomor_ijazah,kjur1,kjur2,idkelas,daftar_via,ta,idsmt,waktu_mendaftar) SELECT $no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,idagama,nama_ibu_kandung,idwarga,nik,idstatus,alamat_kantor,alamat_rumah,kelurahan,kecamatan,telp_kantor,telp_rumah,telp_hp,idjp,pendidikan_terakhir,jurusan,kota,provinsi,tahun_pa,jenis_slta,asal_slta,status_slta,nomor_ijazah, $kjur1, $kjur2,'$idkelas',daftar_via, $tahun_masuk, $semester_masuk,NOW() FROM formulir_pendaftaran WHERE no_formulir = $old_no_formulir";
             if ($this->DB->insertRecord($str)) {                
@@ -146,7 +146,7 @@ class CDetailPendaftaranOnline extends MainPageM {
                 $this->DB->insertRecord($str);
 
                 $waktu_mendaftar="$tahun_masuk-08-05 ".date("H:m:s");          
-                $no_pendaftaran=$tahun_masuk.mt_rand(1000,9999).$semester_masuk;
+                $no_pendaftaran = $tahun_masuk.mt_rand(1000,9999).$semester_masuk;
                 $data = $this->Pengguna->createHashPassword($no_pendaftaran);
                 $salt=$data['salt'];
                 $password=$data['password'];       

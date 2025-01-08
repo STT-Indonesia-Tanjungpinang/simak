@@ -32,7 +32,7 @@ class CDetailTranskripFinal extends MainPageM {
                 $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip']=array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar.");
             }
-            $datamhs=$r[1];
+            $datamhs = $r[1];
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
@@ -57,7 +57,7 @@ class CDetailTranskripFinal extends MainPageM {
 			$this->txtEditNomorTranskrip->Text = $datatranskrip[1]['nomor_transkrip'];			
 			$this->cmbEditPredikatKelulusan->Text = $datatranskrip[1]['predikat_kelulusan'];			
 			$this->txtEditTanggalLulus->Text = $this->TGL->tanggal('d-m-Y', $datatranskrip[1]['tanggal_lulus']);
-            $daftar_dosen=$this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
+            $daftar_dosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
             $this->cmbEditDosenPembimbing->DataSource = $daftar_dosen;
             $this->cmbEditDosenPembimbing->dataBind();            
 			$this->cmbEditDosenPembimbing->Text = $datatranskrip[1]['iddosen_pembimbing'];

@@ -47,7 +47,7 @@ class DetailKRSEkstension extends MainPageDW {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,vdm.iddosen_wali,vdm.idkelas,vdm.k_status,sm.n_status AS status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE krs.idkrs='$idkrs'";
             $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','status','idsmt','tahun','tasmt','sah'));
             $r=$this->DB->getRecord($str);	           
-            $datamhs=$r[1];
+            $datamhs = $r[1];
             if (!isset($r[1])) {
                 $_SESSION['currentPageKRSEkstension']['DataKRS']=array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
@@ -55,11 +55,11 @@ class DetailKRSEkstension extends MainPageDW {
             $datamhs['iddata_konversi']=$this->KRS->isMhsPindahan($datamhs['nim'],true);            
             $this->KRS->setDataMHS($datamhs);
             
-            $kelas=$this->KRS->getKelasMhs();	
+            $kelas = $this->KRS->getKelasMhs();	
             $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
             
-            $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
+            $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
             $datamhs['nama_dosen']=$nama_dosen;
             
             $_SESSION['currentPageKRSEkstension']['DataMHS']=$datamhs;
@@ -76,7 +76,7 @@ class DetailKRSEkstension extends MainPageDW {
 	}		
     public function tambahKRS ($sender, $param) {
         $this->createObj('Nilai');
-        $datakrs=$_SESSION['currentPageKRSEkstension']['DataKRS']; 
+        $datakrs = $_SESSION['currentPageKRSEkstension']['DataKRS']; 
         $maxSKS=24;        
         $datakrs['krs']['maxSKS']=$maxSKS;               
         $this->Nilai->setDataMHS($_SESSION['currentPageKRSEkstension']['DataMHS']);
@@ -87,7 +87,7 @@ class DetailKRSEkstension extends MainPageDW {
     }
     public function deleteRecord ($sender, $param) {        
 		$id=$this->getDataKeyField($sender, $this->RepeaterS);  
-        $idkrs=$_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs'];
+        $idkrs = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs'];
         $this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul=$id");
         $this->redirect ('perkuliahan.DetailKRSEkstension',true,array('id'=>$idkrs));        
     }
@@ -111,7 +111,7 @@ class DetailKRSEkstension extends MainPageDW {
             break;
             case  'pdf' :                
                 $messageprintout='';                
-                $tahun=$_SESSION['ta'];
+                $tahun = $_SESSION['ta'];
                 $semester=$_SESSION['semester'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);
@@ -122,7 +122,7 @@ class DetailKRSEkstension extends MainPageDW {
                 $dataReport['nama_tahun']=$nama_tahun;
                 $dataReport['nama_semester']=$nama_semester;        
                 
-                $kaprodi=$this->KRS->getKetuaPRODI($dataReport['kjur']);                  
+                $kaprodi = $this->KRS->getKetuaPRODI($dataReport['kjur']);                  
                 $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                 $dataReport['nipy_kaprodi']=$kaprodi['nipy'];

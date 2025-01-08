@@ -14,7 +14,7 @@ class CJadwalUjianPMB extends MainPageM {
             $_SESSION['currentPageJadwalUjianPMB']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
                         
-            $tahun_masuk=$this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -63,7 +63,7 @@ class CJadwalUjianPMB extends MainPageM {
 		$this->populateData($_SESSION['currentPageJadwalUjianPMB']['search']);
 	}
 	public function populateData($search=false) {	
-        $tahun_masuk=$_SESSION['tahun_pendaftaran'];
+        $tahun_masuk = $_SESSION['tahun_pendaftaran'];
         $idsmt = $_SESSION['semester'];
         $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE tahun_masuk='$tahun_masuk' AND idsmt='$idsmt' ORDER BY tanggal_ujian ASC";
         
@@ -71,8 +71,8 @@ class CJadwalUjianPMB extends MainPageM {
 		$r = $this->DB->getRecord($str);	
         $result = array();
         while (list($k, $v) = each($r)) {  
-            $idjadwal_ujian=$v['idjadwal_ujian'];
-            $v['jumlah_peserta'] = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian=$idjadwal_ujian",'idjadwal_ujian');
+            $idjadwal_ujian = $v['idjadwal_ujian'];
+            $v['jumlah_peserta'] = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian = $idjadwal_ujian",'idjadwal_ujian');
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;
@@ -87,15 +87,15 @@ class CJadwalUjianPMB extends MainPageM {
     }
 	public function saveData($sender, $param) {
         if ($this->IsValid) {
-            $tahun_masuk=$this->hiddentahunmasuk->Value;
+            $tahun_masuk = $this->hiddentahunmasuk->Value;
             $semester=1;
             $nama_kegiatan = addslashes($this->txtAddNamaKegiatan->Text);
             $tgl_ujian=date ('Y-m-d', $this->txtAddTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtAddJamMasuk->Text);
             $jam_keluar=addslashes($this->txtAddJamKeluar->Text);
             $tgl_akhir_pendaftaran=date ('Y-m-d', $this->txtAddTanggalAkhirDaftar->TimeStamp);
-            $ruangkelas=$this->cmbAddRuang->Text;            
-            $str = "INSERT INTO jadwal_ujian_pmb SET idjadwal_ujian=NULL,tahun_masuk=$tahun_masuk,idsmt=$semester,nama_kegiatan='$nama_kegiatan',tanggal_ujian='$tgl_ujian',jam_mulai='$jam_masuk',jam_akhir='$jam_keluar',tanggal_akhir_daftar='$tgl_akhir_pendaftaran',idruangkelas='$ruangkelas',date_added=NOW(),date_modified=NOW(),status=1";
+            $ruangkelas = $this->cmbAddRuang->Text;            
+            $str = "INSERT INTO jadwal_ujian_pmb SET idjadwal_ujian=NULL,tahun_masuk = $tahun_masuk,idsmt=$semester,nama_kegiatan='$nama_kegiatan',tanggal_ujian='$tgl_ujian',jam_mulai='$jam_masuk',jam_akhir='$jam_keluar',tanggal_akhir_daftar='$tgl_akhir_pendaftaran',idruangkelas='$ruangkelas',date_added=NOW(),date_modified=NOW(),status=1";
             $this->DB->insertRecord($str);
             
             $this->redirect('spmb.JadwalUjianPMB', true);
@@ -106,7 +106,7 @@ class CJadwalUjianPMB extends MainPageM {
         $id=$this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         
-        $str = "SELECT nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,idruangkelas,status FROM jadwal_ujian_pmb WHERE idjadwal_ujian=$id";
+        $str = "SELECT nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,idruangkelas,status FROM jadwal_ujian_pmb WHERE idjadwal_ujian = $id";
         $this->DB->setFieldTable(array('nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'status'));
         $r = $this->DB->getRecord($str);
         
@@ -128,9 +128,9 @@ class CJadwalUjianPMB extends MainPageM {
             $jam_masuk=addslashes($this->txtEditJamMasuk->Text);
             $jam_keluar=addslashes($this->txtEditJamKeluar->Text);
             $tgl_akhir_pendaftaran=date ('Y-m-d', $this->txtEditTanggalAkhirDaftar->TimeStamp);
-            $ruangkelas=$this->cmbEditRuang->Text;
-            $status=$this->cmbEditStatus->Text;            
-            $str = "UPDATE jadwal_ujian_pmb SET nama_kegiatan='$nama_kegiatan',tanggal_ujian='$tgl_ujian',jam_mulai='$jam_masuk',jam_akhir='$jam_keluar',tanggal_akhir_daftar='$tgl_akhir_pendaftaran',idruangkelas='$ruangkelas',date_modified=NOW(),status='$status' WHERE idjadwal_ujian=$id";
+            $ruangkelas = $this->cmbEditRuang->Text;
+            $status = $this->cmbEditStatus->Text;            
+            $str = "UPDATE jadwal_ujian_pmb SET nama_kegiatan='$nama_kegiatan',tanggal_ujian='$tgl_ujian',jam_mulai='$jam_masuk',jam_akhir='$jam_keluar',tanggal_akhir_daftar='$tgl_akhir_pendaftaran',idruangkelas='$ruangkelas',date_modified=NOW(),status='$status' WHERE idjadwal_ujian = $id";
             $this->DB->updateRecord($str);
             
             $this->redirect('spmb.JadwalUjianPMB', true);
@@ -148,7 +148,7 @@ class CJadwalUjianPMB extends MainPageM {
         }
     }   
     public function printOut($sender, $param) {		
-        $idjadwal_ujian=$this->getDataKeyField($sender, $this->RepeaterS);
+        $idjadwal_ujian = $this->getDataKeyField($sender, $this->RepeaterS);
         $this->createObj('reportspmb');
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';                
@@ -163,11 +163,11 @@ class CJadwalUjianPMB extends MainPageM {
                 $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";
             break;
             case  'pdf' :                
-                $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,rk.namaruang,rk.kapasitas,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian=$idjadwal_ujian ORDER BY tanggal_ujian ASC";        
+                $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,rk.namaruang,rk.kapasitas,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian = $idjadwal_ujian ORDER BY tanggal_ujian ASC";        
                 $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'namaruang', 'kapasitas', 'status'));
                 $r = $this->DB->getRecord($str);
                 $dataReport=$r[1];        
-                $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian=$idjadwal_ujian",'pum.no_formulir');
+                $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian",'pum.no_formulir');
 
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['tahun_pendaftaran']);
                 $dataReport['jumlah_peserta'] = $jumlah_peserta;

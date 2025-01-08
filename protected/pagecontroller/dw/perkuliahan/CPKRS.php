@@ -72,10 +72,10 @@ class CPKRS extends MainPageDW {
     $this->populateData($_SESSION['currentPagePKRS']['search']);
   }
   private function populateData ($search=false) {
-    $iddosen_wali=$this->iddosen_wali;
+    $iddosen_wali = $this->iddosen_wali;
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];
-    $str = "SELECT p.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,vp.nmatkul,vp.sks,p.tambah,p.hapus,p.batal,p.sah,p.tanggal FROM pkrs p,v_datamhs vdm,v_penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali=$iddosen_wali";
+    $str = "SELECT p.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,vp.nmatkul,vp.sks,p.tambah,p.hapus,p.batal,p.sah,p.tanggal FROM pkrs p,v_datamhs vdm,v_penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali = $iddosen_wali";
       
     if ($search) {
       $txtsearch=addslashes($this->txtKriteria->Text);
@@ -90,9 +90,9 @@ class CPKRS extends MainPageDW {
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
         break;
       }
-      $jumlah_baris = $this->DB->getCountRowsOfTable("pkrs p,v_datamhs vdm,penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali=$iddosen_wali $clausa");
+      $jumlah_baris = $this->DB->getCountRowsOfTable("pkrs p,v_datamhs vdm,penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali = $iddosen_wali $clausa");
     }else{
-      $jumlah_baris = $this->DB->getCountRowsOfTable("pkrs p,v_datamhs vdm,penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali=$iddosen_wali");
+      $jumlah_baris = $this->DB->getCountRowsOfTable("pkrs p,v_datamhs vdm,penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali = $iddosen_wali");
     }        
     $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePKRS']['page_num'];
     $this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -140,13 +140,13 @@ class CPKRS extends MainPageDW {
         if (!isset($r[1])) {
           throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
         }
-        $datamhs=$r[1];
+        $datamhs = $r[1];
         if ($datamhs['iddosen_wali'] != $this->iddosen_wali) {
           throw new Exception("Mahasiswa Dengan NIM ($nim) diluar perwalian Anda.");
         }
         $this->KRS->setDataMHS($datamhs);
         $this->KRS->getKRS($ta, $idsmt);
-        $datakrs=$this->KRS->DataKRS['krs'];
+        $datakrs = $this->KRS->DataKRS['krs'];
         if (!isset($datakrs['idkrs'])) {                    
           $ta = $this->DMaster->getNamaTA($ta);		
           $semester = $this->setup->getSemester($idsmt);
@@ -155,11 +155,11 @@ class CPKRS extends MainPageDW {
         if (!$datakrs['sah']) {  
           throw new Exception ("KRS Mahasiswa Dengan NIM ($nim) di T.A ($ta) Semester $semester belum disahkan !!!");
         }
-        $kelas=$this->KRS->getKelasMhs();																	            
+        $kelas = $this->KRS->getKelasMhs();																	            
         $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];	
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
-        $nama_dosen=$this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
+        $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
         $datamhs['nama_dosen'] = $nama_dosen;
         $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($nim,true);
 
@@ -179,26 +179,26 @@ class CPKRS extends MainPageDW {
     if ($this->IsValid) {
       $this->createObj('Finance');
       $this->createObj('Nilai');
-      $krs=$_SESSION['currentPagePKRS']['DataKRS']['krs'];          
+      $krs = $_SESSION['currentPagePKRS']['DataKRS']['krs'];          
       $krs['tahun_masuk'] = $_SESSION['currentPagePKRS']['DataMHS']['tahun_masuk'];
       $krs['semester_masuk'] = $_SESSION['currentPagePKRS']['DataMHS']['semester_masuk'];
       $krs['kjur'] = $_SESSION['currentPagePKRS']['DataMHS']['kjur'];
       $this->Nilai->setDataMHS($krs);            
-      $idkrs=$krs['idkrs'];
-      $tahun=$krs['tahun'];
+      $idkrs = $krs['idkrs'];
+      $tahun = $krs['tahun'];
       $idsmt = $krs['idsmt'];            
       if ($idsmt==3) {  
         $this->Finance->setDataMHS($krs);
-        $maxSKS=$this->Finance->getSKSFromSP($tahun, $idsmt);
+        $maxSKs = $this->Finance->getSKSFromSP($tahun, $idsmt);
         $this->Nilai->getKHSBeforeCurrentSemester($tahun, $idsmt);
         $krs['ipstasmtbefore'] = $this->Nilai->getIPS();
       }else{
          $datadulangbefore=$this->Nilai->getDataDulangBeforeCurrentSemester($idsmt, $tahun);
          if ($datadulangbefore['k_status']=='C') {
-           $maxSKS=$this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti'); 
+           $maxSKs = $this->setup->getSettingValue('jumlah_sks_krs_setelah_cuti'); 
            $krs['ipstasmtbefore'] = 'N.A (Status Cuti)';
          }else{
-           $maxSKS=$this->Nilai->getMaxSKS($tahun, $idsmt);
+           $maxSKs = $this->Nilai->getMaxSKS($tahun, $idsmt);
            $krs['ipstasmtbefore'] = $this->Nilai->getIPS();
          }               
       }            

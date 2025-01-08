@@ -5,7 +5,7 @@ class KUM extends CKUM {
 		parent::onLoad($param);		                                   
     }
 	public function printOutR ($sender, $param) {
-        $idkrs=$this->getDataKeyField($sender, $this->RepeaterS);
+        $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataidkrs[$idkrs]=$idkrs;
         $this->createObj('reportkrs');
         $this->linkOutput->Text='';
@@ -34,10 +34,10 @@ class KUM extends CKUM {
                 $dataReport['nama_tahun']=$nama_tahun; 
                 $dataReport['nama_semester']=$nama_semester;
                 
-                $nama_dosen=$this->DMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
+                $nama_dosen = $this->DMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
                 $dataReport['nama_dosen']=$nama_dosen;
                 
-                $kaprodi=$this->KRS->getKetuaPRODI($dataReport['kjur']);
+                $kaprodi = $this->KRS->getKetuaPRODI($dataReport['kjur']);
                 $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                 $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
@@ -96,10 +96,10 @@ class KUM extends CKUM {
                     $dataReport['nama_tahun']=$nama_tahun; 
                     $dataReport['nama_semester']=$nama_semester;
 
-                    $nama_dosen=$objDMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
+                    $nama_dosen = $objDMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
                     $dataReport['nama_dosen']=$nama_dosen;
 
-                    $kaprodi=$objKRS->getKetuaPRODI($dataReport['kjur']);
+                    $kaprodi = $objKRS->getKetuaPRODI($dataReport['kjur']);
                     $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
                     $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                     $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
@@ -168,7 +168,7 @@ class KUM extends CKUM {
                             $idkrsmatkul=$v['idkrsmatkul'];
                             $str = "kbm_detail WHERE idkrsmatkul='$idkrsmatkul' AND kehadiran='hadir'";										
                             $flag=' *';
-                            if ($totalpertemuan=$this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
+                            if ($totalpertemuan = $this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
                                 $minimal=round(($totalpertemuan/14)*100);													
                                 $flag=$minimal<75?'*':'';
                             }
@@ -212,8 +212,8 @@ class KUM extends CKUM {
 
                     $row+=5;							
                     $rpt->setXY(120, $row);
-                    $nama_jabatan=$dataReport['jabfung_kaprodi'];
-                    $nidn=$dataReport['nidn_kaprodi'];
+                    $nama_jabatan = $dataReport['jabfung_kaprodi'];
+                    $nidn = $dataReport['nidn_kaprodi'];
                     $rpt->Cell(80, 5, "$nama_jabatan NIDN : $nidn",0,0,'L');
                     
                 }
@@ -225,7 +225,7 @@ class KUM extends CKUM {
                 $this->report->setHeaderPT();
                  
                 $nim = $this->report->dataReport['nim'];
-                $nama_tahun=$this->report->dataReport['nama_tahun'];
+                $nama_tahun = $this->report->dataReport['nama_tahun'];
                 $nama_semester=$this->report->dataReport['nama_semester'];
         
                 $rpt->setTitle('Kartu Ujian Mahasiswa');
@@ -304,7 +304,7 @@ class KUM extends CKUM {
 						$idkrsmatkul=$v['idkrsmatkul'];
 						$str = "kbm_detail WHERE idkrsmatkul='$idkrsmatkul' AND kehadiran='hadir'";										
 						$flag=' *';
-						if ($totalpertemuan=$this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
+						if ($totalpertemuan = $this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
 							$minimal=round(($totalpertemuan/14)*100);													
 							$flag=$minimal<75?'*':'';
 						}

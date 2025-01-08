@@ -27,24 +27,24 @@ class CDetailKonversiMatakuliah extends MainPageON {
 	protected function populateData() {		
         try {
             $iddata_konversi=addslashes($this->request['id']);  
-            $str = "SELECT nim FROM data_konversi WHERE iddata_konversi=$iddata_konversi";
+            $str = "SELECT nim FROM data_konversi WHERE iddata_konversi = $iddata_konversi";
             $this->DB->setFieldTable(array('nim'));
             $r = $this->DB->getRecord($str);
             $this->txtAddNIM->Text=isset($r[1])?$r[1]['nim']:'';
             
-            $str = "SELECT dk.iddata_konversi,dk.nama,dk.alamat,dk.no_telp,dk.nim_asal,dk.kode_pt_asal,dk.nama_pt_asal,js.njenjang,dk.kode_ps_asal,dk.nama_ps_asal,dk.tahun,dk.kjur,dk.idkur,date_added FROM data_konversi2 dk,jenjang_studi js WHERE dk.kjenjang=js.kjenjang AND dk.iddata_konversi=$iddata_konversi";
+            $str = "SELECT dk.iddata_konversi,dk.nama,dk.alamat,dk.no_telp,dk.nim_asal,dk.kode_pt_asal,dk.nama_pt_asal,js.njenjang,dk.kode_ps_asal,dk.nama_ps_asal,dk.tahun,dk.kjur,dk.idkur,date_added FROM data_konversi2 dk,jenjang_studi js WHERE dk.kjenjang=js.kjenjang AND dk.iddata_konversi = $iddata_konversi";
             $this->DB->setFieldTable(array('iddata_konversi', 'nama', 'alamat', 'no_telp', 'nim_asal', 'kode_pt_asal', 'nama_pt_asal', 'njenjang', 'kode_ps_asal', 'nama_ps_asal', 'tahun', 'kjur', 'idkur', 'date_added'));
             $r = $this->DB->getRecord($str);			
             $dataView=$r[1];	
-            $dataView['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi=$iddata_konversi");
-            $dataView['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi=$iddata_konversi");
+            $dataView['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi = $iddata_konversi");
+            $dataView['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
             if (!isset($r[1])) {
                 $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']=array();
                 throw new Exception("Data Konversi dengan ID ($iddata_konversi) tidak terdaftar.");
             }
             $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'] = $dataView;
             $this->Nilai->setDataMHS($dataView);
-            $nilai=$this->Nilai->getNilaiKonversi($iddata_konversi, $dataView['idkur']);		
+            $nilai = $this->Nilai->getNilaiKonversi($iddata_konversi, $dataView['idkur']);		
             $this->RepeaterS->dataSource = $nilai;
             $this->RepeaterS->dataBind();            	            
         } catch (Exception $ex) {
@@ -67,7 +67,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
                 }
                 $kjur = $this->Pengguna->getDataUser('kjur');
                 if ($kjur > 0) {
-                    $kjur_mhs=$r[1]['kjur'];
+                    $kjur_mhs = $r[1]['kjur'];
                     if ($kjur != $kjur_mhs){
                         throw new Exception ("Anda tidak berhak mengakses data mahasiswa dengan NIM ($nim).");		
                     } 
@@ -87,9 +87,9 @@ class CDetailKonversiMatakuliah extends MainPageON {
             $str = "SELECT vdm.nim,vdm.nama_mhs,sm.n_status AS status FROM v_datamhs vdm LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE vdm.nim='$nim'";
             $this->DB->setFieldTable(array('nim', 'nama_mhs', 'status'));
             $r = $this->DB->getRecord($str);
-            $datamhs=$r[1];
+            $datamhs = $r[1];
             
-            $pindahan=$this->Nilai->isMhsPindahan($nim,true);
+            $pindahan = $this->Nilai->isMhsPindahan($nim,true);
             $ulr_profil = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$datamhs['nim']));
             $url='<a href="'.$ulr_profil.'" style="color:#fff">'.$nim.'</a> ';
             $str_pindahan = $pindahan == 0? '' :'<span class="label label-warning">Pindahan</span>';
@@ -101,7 +101,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
     }
     public function linkingData($sender, $param) {		
 		if ($this->IsValid) {		
-			$iddata_konversi=$_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']['iddata_konversi'];
+			$iddata_konversi = $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']['iddata_konversi'];
 			$nim = $this->txtAddNIM->Text;
 			$str = "INSERT INTO data_konversi (idkonversi,iddata_konversi,nim) VALUES (NULL, $iddata_konversi,'$nim')";
 			$this->DB->insertRecord($str);
@@ -110,8 +110,8 @@ class CDetailKonversiMatakuliah extends MainPageON {
     }
     public function unlinkData($sender, $param) {		
 		if ($this->IsValid) {		
-			$iddata_konversi=$_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']['iddata_konversi'];
-			$this->DB->deleteRecord("data_konversi WHERE iddata_konversi=$iddata_konversi");
+			$iddata_konversi = $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']['iddata_konversi'];
+			$this->DB->deleteRecord("data_konversi WHERE iddata_konversi = $iddata_konversi");
 			$this->redirect('DetailKonversiMatakuliah',true,array('id'=>$iddata_konversi));
         }
     }
@@ -131,7 +131,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
             case  'excel2007' :
                 $messageprintout='Hasil konversi matakuliah :';                
                 
-                $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+                $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
                 $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
                 $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
@@ -144,7 +144,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
             case  'pdf' :                
                 $messageprintout='Hasil konversi matakuliah :';                
                 
-                $kaprodi=$this->Nilai->getKetuaPRODI($dataReport['kjur']);
+                $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
                 $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
                 $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
                 $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];

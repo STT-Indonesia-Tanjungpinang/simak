@@ -32,7 +32,7 @@ class commitTransaction extends BaseWS {
 						throw new Exception ("Proses Login telah berhasil, namun data transaksi dengan nomor ($no_transaksi) telah di Commit !!!. Bisa di rollback, beritahu ke bagian keuangan dengan menyebutkan nomor Transaksi ini ($no_transaksi)");
 					}
 					$this->createObj('Finance');
-					$total_tagihan=$this->Finance->getTotalTagihanByNoTransaksi($no_transaksi);
+					$total_tagihan = $this->Finance->getTotalTagihanByNoTransaksi($no_transaksi);
 					$this->DB->query('BEGIN');
 					$this->DB->updateRecord("UPDATE transaksi SET commited=1,date_modified=NOW() WHERE no_transaksi='$no_transaksi'");
 					if ($result['nama_mhs'] == '' && $result['nim'] == '' && $result['kjur'] == 0) {
@@ -50,10 +50,10 @@ class commitTransaction extends BaseWS {
 						$kjur=$result['kjur'];
 						$ta=$result['tahun'];
 						$idsmt=$result['idsmt'];
-						$tahun_masuk=$result['tahun_masuk'];
-						$semester_masuk=$result['semester_masuk'];
-						$idkelas=$result['idkelas'];
-						$k_status=$result['k_status'];
+						$tahun_masuk = $result['tahun_masuk'];
+						$semester_masuk = $result['semester_masuk'];
+						$idkelas = $result['idkelas'];
+						$k_status = $result['k_status'];
 						$datamhs=array('no_formulir'=>$no_formulir,'nim'=>$nim,'kjur'=>$kjur,'tahun_masuk'=>$result['tahun_masuk'],'semester_masuk'=>$semester_masuk,'idkelas'=>$idkelas,'ta'=>$ta,'idsmt'=>$idsmt,'k_status'=>$k_status,'perpanjang'=>$result['perpanjang']);
 						$this->Finance->setDataMHS($datamhs);
 						$datadulang=$this->Finance->getDataDulang($idsmt, $ta);  
@@ -93,7 +93,7 @@ class commitTransaction extends BaseWS {
 					}
 
 					$this->DB->query('BEGIN');
-		            $str = "UPDATE transaksi_cuti SET commited=1,date_modified=NOW() WHERE no_transaksi=$no_transaksi";
+		            $str = "UPDATE transaksi_cuti SET commited=1,date_modified=NOW() WHERE no_transaksi = $no_transaksi";
 		            $this->DB->updateRecord($str);
 
 		            $this->createObj('Finance');
@@ -102,10 +102,10 @@ class commitTransaction extends BaseWS {
 					$kjur=$result['kjur'];
 					$ta=$result['tahun'];
 					$idsmt=$result['idsmt'];
-					$tahun_masuk=$result['tahun_masuk'];
-					$semester_masuk=$result['semester_masuk'];
-					$idkelas=$result['idkelas'];
-					$k_status=$result['k_status'];
+					$tahun_masuk = $result['tahun_masuk'];
+					$semester_masuk = $result['semester_masuk'];
+					$idkelas = $result['idkelas'];
+					$k_status = $result['k_status'];
 					$datamhs=array('no_formulir'=>$no_formulir,'nim'=>$nim,'kjur'=>$kjur,'tahun_masuk'=>$result['tahun_masuk'],'semester_masuk'=>$semester_masuk,'idkelas'=>$idkelas,'ta'=>$ta,'idsmt'=>$idsmt,'k_status'=>$k_status,'perpanjang'=>$result['perpanjang']);
 					$this->Finance->setDataMHS($datamhs);
 		            $datadulang=$this->Finance->getDataDulang($datamhs['ta'], $datamhs['idsmt']);		            

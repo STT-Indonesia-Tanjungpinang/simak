@@ -32,23 +32,23 @@ class DataLulusan extends MainPageF {
             switch ($this->cmbKriteria->Text) {                
                 case 'nim' :
                     $clausa="AND ta.nim='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm' :
                     $clausa="AND vdm.nirm='$txtsearch'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama' :
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
-                    $jumlah_baris=$this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
+                    $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
                     $str = "$str $clausa";
                 break;
             }
         }else{
             $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_transkrip,predikat_kelulusan,tanggal_lulus,ta.judul_skripsi,CONCAT(ta.tahun,'',ta.idsmt) AS tasmt FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L'";
-            $jumlah_baris=$this->DB->getCountRowsOfTable("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L'",'ta.nim');				
+            $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L'",'ta.nim');				
         }        
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDataLulusan']['page_num'];		
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;

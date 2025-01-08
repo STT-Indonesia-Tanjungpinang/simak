@@ -54,14 +54,14 @@ class CPenyelenggaraan extends MainPageDW {
 	}
     public function getInfoToolbar() {        
         $kjur = $_SESSION['kjur'];        
-		$ps=$_SESSION['daftar_jurusan'][$kjur];
+		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
 	public function populateData($search=false) {
-        $iddosen_wali=$this->iddosen_wali;
+        $iddosen_wali = $this->iddosen_wali;
         $ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];
         $kjur = $_SESSION['kjur'];        
@@ -72,8 +72,8 @@ class CPenyelenggaraan extends MainPageDW {
         $r= $this->DB->getRecord($str);
         $result = array();
         while (list($k, $v) = each($r)) {
-            $idpenyelenggaraan=$v['idpenyelenggaraan'];            
-            $jumlah_peserta = $this->Demik->getJumlahMhsInPenyelenggaraan($idpenyelenggaraan," AND iddosen_wali=$iddosen_wali");	
+            $idpenyelenggaraan = $v['idpenyelenggaraan'];            
+            $jumlah_peserta = $this->Demik->getJumlahMhsInPenyelenggaraan($idpenyelenggaraan," AND iddosen_wali = $iddosen_wali");	
             $v['jumlah_peserta'] = $jumlah_peserta;
             $result[$k] = $v;
         }

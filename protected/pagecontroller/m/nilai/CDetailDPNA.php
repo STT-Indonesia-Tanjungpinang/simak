@@ -23,14 +23,14 @@ class CDetailDPNA extends MainPageM {
                 $this->Demik->InfoMatkul['nama_semester'] = $this->setup->getSemester($this->Demik->InfoMatkul['idsmt']);                
                 $_SESSION['currentPageDPNA']['DataDPNA'] = $this->Demik->InfoMatkul;                
                 //daftar kelas            
-                $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas FROM pengampu_penyelenggaraan pp,kelas_mhs km WHERE pp.idpengampu_penyelenggaraan=km.idpengampu_penyelenggaraan AND pp.idpenyelenggaraan=$idpenyelenggaraan";
+                $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas FROM pengampu_penyelenggaraan pp,kelas_mhs km WHERE pp.idpengampu_penyelenggaraan=km.idpengampu_penyelenggaraan AND pp.idpenyelenggaraan = $idpenyelenggaraan";
                 $this->DB->setFieldTable(array('idkelas_mhs', 'idkelas', 'nama_kelas'));
                 $r = $this->DB->getRecord($str);
                 if (isset($r[1])) {
-                    $listkelas=$this->DMaster->getListKelas();
+                    $listkelas = $this->DMaster->getListKelas();
                     $daftar_kelas['none'] = ' ';
                     while (list($k, $v) = each($r)) {
-                        $nama_kelas=$listkelas[$v['idkelas']].'-'.chr($v['nama_kelas']+64);
+                        $nama_kelas = $listkelas[$v['idkelas']].'-'.chr($v['nama_kelas']+64);
                         $daftar_kelas[$v['idkelas_mhs']] = $nama_kelas;
                     }                
                     $this->cmbDaftarKelas->Enabled=true;
@@ -58,19 +58,19 @@ class CDetailDPNA extends MainPageM {
 	}
 	protected function populateData() {		        
         $idpenyelenggaraan = addslashes($this->request['id']);
-        $idkelas=$_SESSION['currentPageDPNA']['idkelas_mhs'];
-        $str = $idkelas == 'none' ?"SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan=$idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC":"SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs=$idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
+        $idkelas = $_SESSION['currentPageDPNA']['idkelas_mhs'];
+        $str = $idkelas == 'none' ?"SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC":"SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
         $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'n_kuan', 'n_kual'));
         $r = $this->DB->getRecord($str);	           
         $result = array();
-        $sks=$_SESSION['currentPageDPNA']['DataDPNA']['sks'];
+        $sks = $_SESSION['currentPageDPNA']['DataDPNA']['sks'];
         while (list($k, $v) = each($r)) {                
             $n_kuan='-';
             $n_kual='-';
             $am='-';
             $hm='-';
             if ($v['n_kual']!= '') {
-                $n_kuan=$v['n_kuan'];
+                $n_kuan = $v['n_kuan'];
                 $n_kual = $v['n_kual'];
                 $am=$this->Nilai->getAngkaMutu($v['n_kual']);
                 $hm=$am*$sks;
@@ -93,10 +93,10 @@ class CDetailDPNA extends MainPageM {
         }
         else
         {
-            $str = "SELECT idkelas,nama_kelas,hari,jam_masuk,jam_keluar,d.nidn AS nidn_dosen_pengajar,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen_pengajar,d.idjabatan AS idjabatan_dosen_pengajar FROM kelas_mhs km,pengampu_penyelenggaraan pp,dosen d WHERE km.idpengampu_penyelenggaraan=pp.idpengampu_penyelenggaraan AND d.iddosen=pp.iddosen AND idkelas_mhs=$idkelas_mhs";
+            $str = "SELECT idkelas,nama_kelas,hari,jam_masuk,jam_keluar,d.nidn AS nidn_dosen_pengajar,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen_pengajar,d.idjabatan AS idjabatan_dosen_pengajar FROM kelas_mhs km,pengampu_penyelenggaraan pp,dosen d WHERE km.idpengampu_penyelenggaraan=pp.idpengampu_penyelenggaraan AND d.iddosen=pp.iddosen AND idkelas_mhs = $idkelas_mhs";
             $this->DB->setFieldTable(array('idkelas', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'nidn_dosen_pengajar', 'nama_dosen_pengajar', 'idjabatan_dosen_pengajar'));
             $r = $this->DB->getRecord($str);
-            $datakelas=$r[1];
+            $datakelas = $r[1];
             $datakelas['namakelas'] = $this->DMaster->getNamaKelasByID($datakelas['idkelas']).'-'.chr($datakelas['nama_kelas']+64);
             $datakelas['hari'] = $this->TGL->getNamaHari($datakelas['hari']);            
             $dataDPNA['idkelas'] = $datakelas['idkelas'];

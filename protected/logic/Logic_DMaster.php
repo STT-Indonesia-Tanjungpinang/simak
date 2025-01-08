@@ -77,7 +77,7 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->getListTA();
             $nama_item=$dataitem[$tahun];
         }else {                        
-            $dataitem=$this->getList("ta WHERE tahun=$tahun",array('tahun_akademik'),'tahun',null,1);
+            $dataitem=$this->getList("ta WHERE tahun = $tahun",array('tahun_akademik'),'tahun',null,1);
             $nama_item=$dataitem[1]['tahun_akademik'];
         }        
         return $nama_item;        
@@ -109,7 +109,7 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->getListKelas();
             $nama_item=$dataitem[$idkelas];
         }else {
-            $dataitem=$this->getList("kelas WHERE idkelas=$idkelas",array('nkelas'),'nkelas');
+            $dataitem=$this->getList("kelas WHERE idkelas = $idkelas",array('nkelas'),'nkelas');
             $nama_item=$dataitem[1]['nkelas'];                               
         }
         return $nama_item;
@@ -136,14 +136,14 @@ class Logic_DMaster extends Logic_Global {
      */
 	public function getKapasitasRuangKelas ($idruangkelas) {
         if ($this->Application->Cache) {            
-            $ruangkelas=$this->Application->Cache->get('listruangkelas');            
+            $ruangkelas = $this->Application->Cache->get('listruangkelas');            
             if (!isset($ruangkelas['none'])) {                
-                $ruangkelas=$this->getRuangKelas();
+                $ruangkelas = $this->getRuangKelas();
             }
             $result=  explode('-', $ruangkelas[$idruangkelas]);
             $dataitem=$result[1];
         }else {                        
-            $str = "SELECT kapasitas FROM ruangkelas WHERE idruangkelas=$idruangkelas";
+            $str = "SELECT kapasitas FROM ruangkelas WHERE idruangkelas = $idruangkelas";
             $this->db->setFieldTable(array('kapasitas'));
             $result=$this->db->getRecord($str);
             $dataitem=isset($result[1])?$result[1]['kapasitas']:0;  
@@ -174,7 +174,7 @@ class Logic_DMaster extends Logic_Global {
      * @return type
      */
     public function getNamaProgramStudiByID ($kjur, $mode=2) {
-		$daftar_prodi=$this->getListProgramStudi($mode);
+		$daftar_prodi = $this->getListProgramStudi($mode);
 		return $daftar_prodi[$kjur];
 	}
     /**
@@ -212,7 +212,7 @@ class Logic_DMaster extends Logic_Global {
         $dataprodi=array();        
         switch($mode) {
 			case 0 :
-				$dataprodi=$dataitem;
+				$dataprodi = $dataitem;
 			break;
 			case 1 :
 				$dataprodi['none'] = 'Daftar Program Studi';				
@@ -286,7 +286,7 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->getListDosenWali();
             $nama_item=$dataitem[$iddosen_wali];
         }else {
-            $str = "SELECT nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen AND dw.iddosen_wali=$iddosen_wali";
+            $str = "SELECT nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen AND dw.iddosen_wali = $iddosen_wali";
             $this->db->setFieldTable(array('nidn','nama_dosen'));			        
             $r = $this->db->getRecord($str);                            
             $nama_item=isset($r[1])?$r[1]['nama_dosen'] . ' ['.$r[1]['nidn'].']':'';                    
@@ -332,7 +332,7 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->getListKonsentrasiProgramStudi($kjur);            
             $nama_item=isset($dataitem[$idkonsentrasi]) ? $dataitem[$idkonsentrasi] :'N.A';
         }else {
-            $dataitem=$this->getList("konsentrasi WHERE idkonsentrasi=$idkonsentrasi",array('nama_konsentrasi'),'nama_konsentrasi');
+            $dataitem=$this->getList("konsentrasi WHERE idkonsentrasi = $idkonsentrasi",array('nama_konsentrasi'),'nama_konsentrasi');
             $nama_item=isset($dataitem[1])?$dataitem[1]['nama_konsentrasi']:'N.A';
         }
         return $nama_item;
@@ -363,7 +363,7 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->getListStatusMHS();
             $nama_item=$dataitem[$k_status];
         }else {
-            $str = "SELECT n_status FROM status_mhs WHERE k_status=$k_status";
+            $str = "SELECT n_status FROM status_mhs WHERE k_status = $k_status";
             $this->db->setFieldTable(array('n_status'));			        
             $r = $this->db->getRecord($str);                            
             $nama_item=isset($r[1])?$r[1]['n_status']:'';                    
@@ -404,11 +404,11 @@ class Logic_DMaster extends Logic_Global {
 	public function getNamaDosenPembimbing ($iddosen) {	
         if ($this->Application->Cache) {            
             $dataitem=$this->getDaftarDosen();
-            $nama_dosen=$dataitem[$iddosen];
+            $nama_dosen = $dataitem[$iddosen];
             $nama_dosen=explode('[', $nama_dosen);
             $nama_item=$nama_dosen[0];
         }else {
-            $str = "SELECT nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d WHERE iddosen=$iddosen";
+            $str = "SELECT nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM dosen d WHERE iddosen = $iddosen";
             $this->db->setFieldTable(array('nidn','nama_dosen'));			        
             $r = $this->db->getRecord($str);                            
             $nama_item=isset($r[1])?$r[1]['nama_dosen']:'';                    
@@ -425,9 +425,9 @@ class Logic_DMaster extends Logic_Global {
         $this->db->setFieldTable(array('iddosen','nipy','nidn','nama_dosen','nama_jabatan','alamat_dosen','telp_hp','email','website')); 
 		$r=$this->db->getRecord($str);		
         if (isset($r[1])) {
-            $datadosen=$r[1];
+            $datadosen = $r[1];
         }
-        $this->DataDosen=$datadosen;
+        $this->DataDosen = $datadosen;
         return $datadosen;
     }
     /**
@@ -452,7 +452,7 @@ class Logic_DMaster extends Logic_Global {
      * @param type $tahun masuk
      */
     public function getDataPassingGrade ($tahun) {        
-        $str = "SELECT kjur,nilai FROM passinggrade WHERE tahun_masuk=$tahun";
+        $str = "SELECT kjur,nilai FROM passinggrade WHERE tahun_masuk = $tahun";
         $this->db->setFieldTable(array('kjur','nilai')); 
         $r=$this->db->getRecord($str);
         $dataitem=array();
@@ -510,7 +510,7 @@ class Logic_DMaster extends Logic_Global {
             $dataitem=$this->getListJabfung();
             $nama_item=$dataitem[$idjabatan];
         }else {
-            $dataitem=$this->getList("jabatan_akademik WHERE idjabatan=$idjabatan",array('nama_jabatan'),'nama_jabatan');
+            $dataitem=$this->getList("jabatan_akademik WHERE idjabatan = $idjabatan",array('nama_jabatan'),'nama_jabatan');
             $nama_item=$dataitem[1]['nama_jabatan'];                               
         }
         return $nama_item;

@@ -47,7 +47,7 @@ class getTransaction extends BaseWS {
 						$payload['nama_kelas']=$result['nkelas'];
 						$this->createObj('Finance');	
 						$totaltagihan = $this->Finance->getTotalTagihanByNoTransaksi($no_transaksi);			
-						$jumlah = $result['disc']>0?($totaltagihan*($result['disc']/100)):$totaltagihan;			
+						$jumlah = $result['disc']>0?($totaltagihan*($result['disc'] / 100)):$totaltagihan;			
 						$payload['totaltagihan']=$jumlah;
 						$payload['commited']=$result['commited'];
                         $payload['keterangan']=$keterangan;

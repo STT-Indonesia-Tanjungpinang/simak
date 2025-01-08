@@ -1648,7 +1648,7 @@ class TCPDF_FONTS {
 			$end = count($uniarr);
 		}
 		$string = '';
-		for ($i=$start; $i < $end; ++$i) {
+		for ($i = $start; $i < $end; ++$i) {
 			$string .= $uniarr[$i];
 		}
 		return $string;

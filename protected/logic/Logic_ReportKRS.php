@@ -9,7 +9,7 @@ class Logic_ReportKRS extends Logic_Report {
      */
     public function printKRS () {
         $nim = $this->dataReport['nim'];
-        $nama_tahun=$this->dataReport['nama_tahun'];
+        $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         
         switch ($this->getDriver()) {
@@ -149,7 +149,7 @@ class Logic_ReportKRS extends Logic_Report {
     public function printKRSAll ($objDMaster, $repeater) {
         $awal=$this->dataReport['awal'];
         $akhir=$this->dataReport['akhir'];
-        $nama_tahun=$this->dataReport['nama_tahun'];
+        $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         switch ($this->getDriver()) {
             case 'excel2003' :               
@@ -162,13 +162,13 @@ class Logic_ReportKRS extends Logic_Report {
 				$rpt->setSubject('KRS Mahasiswa');
                 foreach ($repeater->Items as $inputan) {
                     $item=$inputan->btnPrintOutR->getNamingContainer();
-                    $idkrs=$repeater->DataKeys[$item->getItemIndex()];
+                    $idkrs = $repeater->DataKeys[$item->getItemIndex()];
                     
-                    $str = "SELECT k.idkrs,k.tgl_krs,k.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND k.idkrs=$idkrs"; 
+                    $str = "SELECT k.idkrs,k.tgl_krs,k.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND k.idkrs = $idkrs"; 
                     $this->db->setFieldTable(array('idkrs','tgl_krs','nim','nama_mhs','jk','tahun_masuk','sah'));
                     $r = $this->db->getRecord($str);
                     
-                    $dataMhs=$r[1];
+                    $dataMhs = $r[1];
                     
                     $rpt->AddPage();
                     $this->setHeaderPT();
@@ -234,7 +234,7 @@ class Logic_ReportKRS extends Logic_Report {
                     $totalSks=0;
                     $row+=5;				
                     $rpt->SetFont ('helvetica','',8);
-                    $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs=$idkrs ORDER BY semester ASC,kmatkul ASC";
+                    $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs = $idkrs ORDER BY semester ASC,kmatkul ASC";
                     $this->db->setFieldTable(array('idpenyelenggaraan','idkrsmatkul','kmatkul','nmatkul','sks','semester','batal','nidn','nama_dosen'));
                     $daftarmatkul=$this->db->getRecord($str);                    
                     foreach ($daftarmatkul as $v) {
@@ -335,10 +335,10 @@ class Logic_ReportKRS extends Logic_Report {
                     $dataReport['nama_tahun']=$nama_tahun; 
                     $dataReport['nama_semester']=$nama_semester;
 
-                    $nama_dosen=$objDMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
+                    $nama_dosen = $objDMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
                     $dataReport['nama_dosen']=$nama_dosen;
 
-                    $kaprodi=$objKRS->getKetuaPRODI($dataReport['kjur']);
+                    $kaprodi = $objKRS->getKetuaPRODI($dataReport['kjur']);
                     $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
                     $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                     $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
@@ -407,7 +407,7 @@ class Logic_ReportKRS extends Logic_Report {
                             $idkrsmatkul=$v['idkrsmatkul'];
                             $str = "kbm_detail WHERE idkrsmatkul='$idkrsmatkul' AND kehadiran='hadir'";										
                             $flag=' *';
-                            if ($totalpertemuan=$this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
+                            if ($totalpertemuan = $this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
                                 $minimal=round(($totalpertemuan/14)*100);													
                                 $flag=$minimal<75?'*':'';
                             }
@@ -451,8 +451,8 @@ class Logic_ReportKRS extends Logic_Report {
 
                     $row+=5;							
                     $rpt->setXY(120, $row);
-                    $nama_jabatan=$dataReport['jabfung_kaprodi'];
-                    $nidn=$dataReport['nidn_kaprodi'];
+                    $nama_jabatan = $dataReport['jabfung_kaprodi'];
+                    $nidn = $dataReport['nidn_kaprodi'];
                     $rpt->Cell(80, 5, "$nama_jabatan NIDN : $nidn",0,0,'L');
                     
                 }
@@ -464,7 +464,7 @@ class Logic_ReportKRS extends Logic_Report {
                 $this->setHeaderPT();
                  
                 $nim = $this->dataReport['nim'];
-                $nama_tahun=$this->dataReport['nama_tahun'];
+                $nama_tahun = $this->dataReport['nama_tahun'];
                 $nama_semester=$this->dataReport['nama_semester'];
         
                 $rpt->setTitle('Kartu Ujian Mahasiswa');
@@ -543,7 +543,7 @@ class Logic_ReportKRS extends Logic_Report {
 						$idkrsmatkul=$v['idkrsmatkul'];
 						$str = "kbm_detail WHERE idkrsmatkul='$idkrsmatkul' AND kehadiran='hadir'";										
 						$flag=' *';
-						if ($totalpertemuan=$this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
+						if ($totalpertemuan = $this->db->getCountRowsOfTable($str,'idkrsmatkul')>=1) {
 							$minimal=round(($totalpertemuan/14)*100);													
 							$flag=$minimal<75?'*':'';
 						}
@@ -587,8 +587,8 @@ class Logic_ReportKRS extends Logic_Report {
 				
 				$row+=5;							
 				$rpt->setXY(120, $row);
-                $nama_jabatan=$this->dataReport['jabfung_kaprodi'];
-                $nidn=$this->dataReport['nidn_kaprodi'];
+                $nama_jabatan = $this->dataReport['jabfung_kaprodi'];
+                $nidn = $this->dataReport['nidn_kaprodi'];
 				$rpt->Cell(80, 5, "$nama_jabatan NIDN : $nidn",0,0,'L');	
                 $this->printOut("kum_$nim");
             break;

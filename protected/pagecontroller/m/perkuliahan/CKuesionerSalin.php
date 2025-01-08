@@ -47,10 +47,10 @@ class CKuesionerSalin extends MainPageM {
             $semester = $this->cmbSemester->Text;
             
             $this->DB->query('BEGIN');  
-            $this->DB->deleteRecord("kuesioner WHERE tahun=$ta_sekarang AND idsmt=$semester_sekarang");
-            $str = "INSERT INTO kuesioner (old_idkuesioner,idsmt,tahun,idkelompok_pertanyaan,pertanyaan,orders,date_added,date_modified) SELECT idkuesioner, $semester_sekarang, $ta_sekarang,idkelompok_pertanyaan,pertanyaan,orders,date_added,date_modified FROM kuesioner WHERE tahun=$ta AND idsmt=$semester";
+            $this->DB->deleteRecord("kuesioner WHERE tahun = $ta_sekarang AND idsmt=$semester_sekarang");
+            $str = "INSERT INTO kuesioner (old_idkuesioner,idsmt,tahun,idkelompok_pertanyaan,pertanyaan,orders,date_added,date_modified) SELECT idkuesioner, $semester_sekarang, $ta_sekarang,idkelompok_pertanyaan,pertanyaan,orders,date_added,date_modified FROM kuesioner WHERE tahun = $ta AND idsmt=$semester";
             if ($this->DB->insertRecord($str) ) {                
-                $str = "SELECT idkuesioner,old_idkuesioner FROM kuesioner WHERE idsmt=$semester_sekarang AND tahun=$ta_sekarang";
+                $str = "SELECT idkuesioner,old_idkuesioner FROM kuesioner WHERE idsmt=$semester_sekarang AND tahun = $ta_sekarang";
                 $this->DB->setFieldTable (array('idkuesioner', 'old_idkuesioner'));	        
                 $r = $this->DB->getRecord($str);       
                 while (list($k, $v) = each($r)) {
