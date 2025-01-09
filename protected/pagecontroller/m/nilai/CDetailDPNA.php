@@ -147,10 +147,10 @@ class CDetailDPNA extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'pdf' :
@@ -171,7 +171,7 @@ class CDetailDPNA extends MainPageM {
                 $this->report->printDPNA($this->Nilai,true);
                 
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $dataReport=$_SESSION['currentPageDPNA']['DataDPNA'];        
                 $nama_matakuliah=$dataReport['nmatkul'];
                 

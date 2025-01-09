@@ -175,7 +175,7 @@ class CKRS Extends MainPageDW {
   }
   public function setDataBound($sender, $param) 
   {
-    $item=$param->Item;
+    $item = $param->Item;
     if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
       $idkrs = $item->DataItem['idkrs'];
       $str = "SELECT COUNT(idkrsmatkul) AS jumlah_matkul,SUM(sks) AS jumlah_sks FROM v_krsmhs WHERE idkrs='$idkrs' AND batal=0";						
@@ -339,16 +339,16 @@ class CKRS Extends MainPageDW {
     $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);
     
     switch ($_SESSION['outputreport']) {
-      case  'summarypdf' :
+      case 'summarypdf' :
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
-      case  'summaryexcel' :
+      case 'summaryexcel' :
         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
-      case  'excel2007' :
+      case 'excel2007' :
         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
       break;
-      case  'pdf' :                
+      case 'pdf' :                
         $messageprintout='';                
         $tahun = $_SESSION['ta'];
         $semester = $_SESSION['semester'];

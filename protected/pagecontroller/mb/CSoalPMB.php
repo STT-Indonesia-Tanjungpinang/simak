@@ -127,7 +127,7 @@ class CSoalPMB extends MainPageMB {
         }        
 	}  
     public function dataBindRepeaterJawaban($sender, $param) {
-        $item=$param->Item;
+        $item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
             $idsoal = $item->DataItem['idsoal'];
             $idjawaban_tersimpan = $item->DataItem['idjawaban'];
@@ -139,7 +139,7 @@ class CSoalPMB extends MainPageMB {
         }
     }
     public function setDataBound($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {	
             $idsoal = $item->DataItem['idsoal'];
 			$item->rdJawaban->setUniqueGroupName("jawaban$idsoal");

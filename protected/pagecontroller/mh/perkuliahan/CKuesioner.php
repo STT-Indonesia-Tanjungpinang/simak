@@ -66,11 +66,11 @@ class CKuesioner extends MainPageMHS {
     public function getInfoToolbar() {                
 		$ta = $_SESSION['currentPageKuesioner']['ta'];
 		$semester = $this->setup->getSemester($_SESSION['currentPageKuesioner']['semester']);
-		$text="TA $ta Semester $semester";
+		$text = "TA $ta Semester $semester";
 		return $text;
 	}   
     public function setDataBound($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
             if ($item->DataItem['ada']) {
                 $item->literalNamaKelompok->Text='<tr class="success">

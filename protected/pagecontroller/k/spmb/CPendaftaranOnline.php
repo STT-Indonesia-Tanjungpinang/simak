@@ -110,13 +110,13 @@ class CPendaftaranOnline extends MainPageK {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $messageprintout="";
                 $dataReport['tahun_masuk'] = $_SESSION['tahun_masuk'];
                 $dataReport['pilihan'] = $_SESSION['currentPagePendaftaranOnline']['display_record'];
@@ -125,7 +125,7 @@ class CPendaftaranOnline extends MainPageK {
                 $this->report->setMode($_SESSION['outputreport']);
                 $this->report->printPIN(); 
             break;
-            case  'pdf' :
+            case 'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

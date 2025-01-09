@@ -100,7 +100,7 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
         $this->populateData ();
     }  
     public function saveItem($sender, $param) {                        
-        $item=$param->Item;
+        $item = $param->Item;
         $id=$this->GridS->DataKeys[$item->ItemIndex];   
         
         $datamhs = $_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];

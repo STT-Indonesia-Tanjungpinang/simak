@@ -71,7 +71,7 @@ class CPindahKelas Extends MainPageM {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function processDataBound($sender, $param) {			
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType == 'Item' || $item->ItemType=='AlternatingItem') {
             $this->Demik->setDataMHS(array('nim'=>$item->DataItem['nim']));
 			$datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);

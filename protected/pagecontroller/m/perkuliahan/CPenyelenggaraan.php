@@ -78,7 +78,7 @@ class CPenyelenggaraan extends MainPageM {
 		$this->RepeaterS->dataBind();
 	}
 	public function itemBound($sender, $param) {
-		$item=$param->item;
+		$item = $param->item;
 		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
 			$item->cmbFrontDosen->DataSource = $this->DMaster->removeIdFromArray($_SESSION['currentPagePenyelenggaraan']['DaftarDosen'],'none');			
             $item->cmbFrontDosen->Text = $item->DataItem['iddosen'];
@@ -98,7 +98,7 @@ class CPenyelenggaraan extends MainPageM {
 		$this->RepeaterAdd->dataBind();		
 	}
 	public function setDosen($sender, $param) {
-		$item=$param->item;
+		$item = $param->item;
 		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
             $dd=$_SESSION['currentPagePenyelenggaraan']['DaftarDosen'];
             $dd['none'] = ' ';
@@ -165,13 +165,13 @@ class CPenyelenggaraan extends MainPageM {
 	    $this->linkOutput->Text='';
 	    $this->linkOutput->NavigateUrl='#';
 	    switch ($_SESSION['outputreport']) {
-	        case  'summarypdf' :
+	        case 'summarypdf' :
 	            $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";
 	            break;
-	        case  'summaryexcel' :
+	        case 'summaryexcel' :
 	            $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";
 	            break;
-	        case  'excel2007' :
+	        case 'excel2007' :
 	            $dataReport['kjur'] = $_SESSION['kjur'];
 	            $dataReport['ta'] = $_SESSION['ta'];
 	            $dataReport['idsmt'] = $_SESSION['semester'];
@@ -186,7 +186,7 @@ class CPenyelenggaraan extends MainPageM {
 	            $messageprintout="Daftar Penyelenggaraan Matakuliah : <br/>";
 	            $this->report->printPenyelenggaraan($this->Demik);
             break;
-	        case  'pdf' :
+	        case 'pdf' :
 	            $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
 	    }

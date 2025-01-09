@@ -109,7 +109,7 @@ class CPerwalian extends MainPageM {
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-        $this->DataMHs = $datamhs;
+        $this->DataMHS = $datamhs;
         
         $this->hiddennim->Value=$nim;
         $daftar_dw=$this->DMaster->getListDosenWali();
@@ -138,13 +138,13 @@ class CPerwalian extends MainPageM {
             $this->linkOutput->Text='';
             $this->linkOutput->NavigateUrl='#';
             switch ($_SESSION['outputreport']) {
-                case  'summarypdf' :
+                case 'summarypdf' :
                     $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                 break;
-                case  'summaryexcel' :
+                case 'summaryexcel' :
                     $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                 break;
-                case  'excel2007' :
+                case 'excel2007' :
                     $dataReport['iddosen_wali'] = $iddosen_wali;
                     $dataReport['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($iddosen_wali);
                     $dataReport['k_status'] = $k_status;
@@ -155,7 +155,7 @@ class CPerwalian extends MainPageM {
                     $messageprintout="Daftar Mahasiswa Dosen Wali: <br/>";
                     $this->report->printMahasiswaDW($this->DMaster);                
                 break;
-                case  'pdf' :
+                case 'pdf' :
                     $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
                 break;
             }     

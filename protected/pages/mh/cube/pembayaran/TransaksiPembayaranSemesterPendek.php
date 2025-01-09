@@ -5,7 +5,7 @@ class TransaksiPembayaranSemesterPendek Extends CTransaksiPembayaranSemesterPend
 		parent::onLoad($param);							
     }
     public function itemCreated($sender, $param){
-        $item=$param->Item;
+        $item = $param->Item;
         if($item->ItemType==='EditItem') {   
             $item->ColumnJumlahSKS->TextBox->CssClass='form-control';                                   
             $item->ColumnJumlahSKS->TextBox->Width='70px'; 

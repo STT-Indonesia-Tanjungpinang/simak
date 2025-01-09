@@ -22,7 +22,7 @@ class Home extends MainPageF {
 		$this->RepeaterS->dataBind();        
     }    
     public function setDataBound ($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
             $bool=false;
             if ($item->DataItem['file_size']>0) {                

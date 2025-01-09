@@ -119,16 +119,16 @@ class CPesertaUjianPMB extends MainPageM {
         $idjadwal_ujian = $dataReport['idjadwal_ujian'];
         $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian",'pum.no_formulir');
 		switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :  
+            case 'excel2007' :  
                 $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";
             break;
-            case  'pdf' :                
+            case 'pdf' :                
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['tahun_masuk']);
                 $dataReport['jumlah_peserta'] = $jumlah_peserta;
                 $dataReport['linkoutput'] = $this->linkOutput; 

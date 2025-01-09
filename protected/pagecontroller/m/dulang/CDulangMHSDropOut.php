@@ -227,13 +227,13 @@ class CDulangMHSDropOut Extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
         
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $messageprintout="Daftar Mahasiswa Daftar Ulang Status Drop Out: <br/>";
                 $dataReport['ta'] = $_SESSION['ta'];
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['ta']);
@@ -247,7 +247,7 @@ class CDulangMHSDropOut Extends MainPageM {
                 
                 $this->report->printDulangDropOut($this->DMaster);
             break;
-            case  'pdf' :
+            case 'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         } 

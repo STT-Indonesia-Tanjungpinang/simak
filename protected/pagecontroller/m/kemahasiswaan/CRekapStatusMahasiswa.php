@@ -191,7 +191,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
         }        
 	}
     public function itemCreated($sender, $param) {
-        $item=$param->Item;
+        $item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
             CRekapStatusMahasiswa::$TotalJumlahMahasiswaP+=$item->DataItem['jumlah_pria'];
             CRekapStatusMahasiswa::$TotalJumlahMahasiswaW+=$item->DataItem['jumlah_wanita'];            
@@ -220,13 +220,13 @@ class CRekapStatusMahasiswa Extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $messageprintout="";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['k_status'] = $_SESSION['currentPageRekapStatusMahasiswa']['k_status'];        
@@ -245,7 +245,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
                 
                 $this->report->printRekapStatusMahasiswa($this->Demik, $this->DMaster); 
             break;
-            case  'pdf' :
+            case 'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

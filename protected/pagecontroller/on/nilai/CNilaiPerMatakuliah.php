@@ -135,7 +135,7 @@ class CNilaiPerMatakuliah extends MainPageON {
     $this->populateDataPeserta($_SESSION['currentPageNilaiPerMatakuliah']['search']);
   }    
   public function setData($sender, $param) {
-    $item=$param->Item;
+    $item = $param->Item;
     if ($item->ItemType == 'Item' || $item->ItemType=='AlternatingItem') {	
       $item->cmbNilai->Enabled=$item->DataItem['k_status'] == 'L'?false:true;
       if ($item->DataItem['batal']) {

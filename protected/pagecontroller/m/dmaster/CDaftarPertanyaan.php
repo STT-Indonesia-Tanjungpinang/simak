@@ -51,7 +51,7 @@ class CDaftarPertanyaan extends MainPageM {
     public function getInfoToolbar() {                
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
-		$text="TA $ta Semester $semester";
+		$text = "TA $ta Semester $semester";
 		return $text;
 	}    
     public function searchRecord($sender, $param) {
@@ -59,7 +59,7 @@ class CDaftarPertanyaan extends MainPageM {
 		$this->populateData($_SESSION['currentDaftarPertanyaan']['search']);
 	}
     public function itemCreated($sender, $param) {
-        $item=$param->Item;
+        $item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {		
             if ($item->DataItem['ada']) {
                 $item->literalNamaKelompok->Text='<tr class="success">

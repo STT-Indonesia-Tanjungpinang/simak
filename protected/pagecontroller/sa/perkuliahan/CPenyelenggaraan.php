@@ -78,7 +78,7 @@ class CPenyelenggaraan extends MainPageSA {
 		$this->RepeaterS->dataBind();
 	}
 	public function itemBound($sender, $param) {
-		$item=$param->item;
+		$item = $param->item;
 		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
 			$item->cmbFrontDosen->DataSource = $this->DMaster->removeIdFromArray($_SESSION['currentPagePenyelenggaraan']['DaftarDosen'],'none');			
             $item->cmbFrontDosen->Text = $item->DataItem['iddosen'];
@@ -98,7 +98,7 @@ class CPenyelenggaraan extends MainPageSA {
 		$this->RepeaterAdd->dataBind();		
 	}
 	public function setDosen($sender, $param) {
-		$item=$param->item;
+		$item = $param->item;
 		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
             $dd=$_SESSION['currentPagePenyelenggaraan']['DaftarDosen'];
             $dd['none'] = ' ';

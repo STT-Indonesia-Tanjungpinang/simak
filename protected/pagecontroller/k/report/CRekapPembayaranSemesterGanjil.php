@@ -189,13 +189,13 @@ class CRekapPembayaranSemesterGanjil Extends MainPageK {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $messageprintout="";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
@@ -217,7 +217,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageK {
                 
                 $this->report->printRekapPembayaranSemester($this->Finance, $this->DMaster); 
             break;
-            case  'pdf' :
+            case 'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

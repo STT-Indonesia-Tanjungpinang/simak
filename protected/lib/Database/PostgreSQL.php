@@ -42,7 +42,7 @@ class PostgreSQL extends DBGlobal implements DBInterface {
 // 		echo $sqlString;		
 		if (pg_num_rows($result=$this->query($sqlString)) >= 1) {
 			$ft = $this->getFieldTable("field");
-// 			print_r($ft);
+
 			$countFieldTable = count ($ft);
 			$counter = 1;									
 			while ($row=pg_fetch_array($result)) {
@@ -55,7 +55,7 @@ class PostgreSQL extends DBGlobal implements DBInterface {
 				$counter++;			
 				$offset++;
 			}		
-// 	 		print_r($ListRecord);		
+
 			$this->ListRecord=$ListRecord;									
 		}else {
 			$this->ListRecord=array();									

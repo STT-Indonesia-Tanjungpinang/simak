@@ -45,7 +45,7 @@ class CTambahPKRS extends MainPageDW {
         $datakrs = $_SESSION['currentPagePKRS']['DataKRS'];
         if (isset($datakrs['krs']['idkrs']))
         {
-          $this->KRS->DataKRs = $datakrs;
+          $this->KRS->DataKRS = $datakrs;
           
           $idsmt = $datakrs['krs']['idsmt'];
           $tahun = $datakrs['krs']['tahun'];
@@ -85,7 +85,7 @@ class CTambahPKRS extends MainPageDW {
   {
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
-    $text="TA $ta Semester $semester";
+    $text = "TA $ta Semester $semester";
     return $text;
   }		
   public function getDataMHS($idx) 
@@ -156,7 +156,7 @@ class CTambahPKRS extends MainPageDW {
   }	
   
   public function hitung($sender, $param) {
-    $item=$param->Item;		
+    $item = $param->Item;		
     if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem')
     {
       if ($item->DataItem['batal']) 

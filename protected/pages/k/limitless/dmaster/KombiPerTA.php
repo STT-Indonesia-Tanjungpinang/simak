@@ -5,7 +5,7 @@ class KombiPerTA Extends CKombiPerTA {
 		parent::onLoad($param);				
 	}		
     public function itemCreated($sender, $param){
-        $item=$param->Item;
+        $item = $param->Item;
         if($item->ItemType==='EditItem') {   
             $item->ColumnBiaya->TextBox->CssClass='form-control';                                   
             $item->ColumnBiaya->TextBox->Width='150px'; 

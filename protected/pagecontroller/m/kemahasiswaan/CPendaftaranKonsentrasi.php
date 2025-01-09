@@ -72,7 +72,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
         $this->redirect('kemahasiswaan.PendaftaranKonsentrasi',true);
 	} 
     public function itemCreated($sender, $param) {
-        $item=$param->Item;
+        $item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {         
             $item->lblStatusPendaftaran->Text = $this->DMaster->getStatusPendaftaranKonsentrasi($item->DataItem['status_daftar']);
             switch ($item->DataItem['status_daftar']) {

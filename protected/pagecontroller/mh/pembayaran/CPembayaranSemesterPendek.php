@@ -63,7 +63,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
         $this->ListTransactionRepeater->dataBind();        
     }
 	public function dataBoundListTransactionRepeater($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
                 $item->btnDeleteFromRepeater->Enabled=false;				

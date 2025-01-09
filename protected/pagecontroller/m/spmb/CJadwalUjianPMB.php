@@ -153,16 +153,16 @@ class CJadwalUjianPMB extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';                
 		switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :  
+            case 'excel2007' :  
                 $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";
             break;
-            case  'pdf' :                
+            case 'pdf' :                
                 $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,rk.namaruang,rk.kapasitas,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian = $idjadwal_ujian ORDER BY tanggal_ujian ASC";        
                 $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'namaruang', 'kapasitas', 'status'));
                 $r = $this->DB->getRecord($str);

@@ -148,7 +148,7 @@ class KHSEkstension extends MainPageM {
 	}
 	
 	public function itemBound ($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 			$nim = $item->DataItem['nim'];						
 			$this->Nilai->setDataMHS(array('nim'=>$nim));
@@ -186,16 +186,16 @@ class KHSEkstension extends MainPageM {
 		switch ($sender->getId()) {
 			case 'btnPrintOutR' :
                 switch ($_SESSION['outputreport']) {
-                    case  'summarypdf' :
+                    case 'summarypdf' :
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
-                    case  'summaryexcel' :
+                    case 'summaryexcel' :
                         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
-                    case  'excel2007' :
+                    case 'excel2007' :
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
-                    case  'pdf' :
+                    case 'pdf' :
                         $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);	
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                         $this->DB->setFieldTable(array('nim','nirm','nama_mhs','jk','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','iddosen_wali'));
@@ -235,10 +235,10 @@ class KHSEkstension extends MainPageM {
 			break;			
             case 'btnPrintKHSAll' :
                 switch ($_SESSION['outputreport']) {
-                    case  'summarypdf' :
+                    case 'summarypdf' :
                         $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;
-                    case  'summaryexcel' :
+                    case 'summaryexcel' :
                         $tahun = $_SESSION['ta'];
                         $semester=$_SESSION['semester'];
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
@@ -270,10 +270,10 @@ class KHSEkstension extends MainPageM {
                         $this->printSummaryKHS($this->report,true);
                         
                     break;
-                    case  'excel2007' :
+                    case 'excel2007' :
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
                     break;
-                    case  'pdf' :
+                    case 'pdf' :
                         $messageprintout="Mohon maaf Print out pada mode pdf tidak kami support.";                
                     break;                    
                 }

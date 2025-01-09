@@ -90,13 +90,13 @@ class CEvaluasiHasilBelajar extends MainPageD {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $this->Nilai->getInfoKelas($idkelas_mhs);
                 
                 $dataReport=$this->Nilai->InfoKelas;
@@ -112,7 +112,7 @@ class CEvaluasiHasilBelajar extends MainPageD {
                 $messageprintout="Format Evaluasi Hasil Belajar: <br/>";  
                 $this->report->printFormatEvaluasiHasilBelajar($this->Nilai);              
             break;
-            case  'pdf' :
+            case 'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode PDF belum kami support.";
             break;
 

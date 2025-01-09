@@ -119,7 +119,7 @@ class CTranskripFinal extends MainPageM {
     $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
   }	
   public function setDataBound($sender, $param) {
-    $item=$param->Item;
+    $item = $param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
       $nim = $item->DataItem['nim'];			
       $this->Nilai->setDataMHS(array('nim'=>$nim));
@@ -160,13 +160,13 @@ class CTranskripFinal extends MainPageM {
       case 'btnPrintOutR' :                
         $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
         switch ($_SESSION['outputreport']) {
-          case  'summarypdf' :
+          case 'summarypdf' :
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
-          case  'summaryexcel' :
+          case 'summaryexcel' :
             $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
           break;
-          case  'excel2007' :
+          case 'excel2007' :
             $messageprintout='Transkrip Final : ';
             $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.nama_ps,vdm.k_status,vdm.idkonsentrasi,k.nama_konsentrasi FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
             $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'nama_ps', 'k_status', 'idkonsentrasi', 'nama_konsentrasi'));
@@ -248,13 +248,13 @@ class CTranskripFinal extends MainPageM {
       break;			
       case 'btnPrintTranskripFinalAll' :                 
         switch ($_SESSION['outputreport']) {
-          case  'summarypdf' :
+          case 'summarypdf' :
             $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
           break;
-          case  'summaryexcel' :
+          case 'summaryexcel' :
             $messageprintout="Mohon maaf Print out pada mode summary excel belum kami support.";                
           break;
-          case  'excel2007' :
+          case 'excel2007' :
             $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
           break;
           case 'pdf' :

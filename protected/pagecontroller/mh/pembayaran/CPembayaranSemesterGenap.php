@@ -56,7 +56,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
 		$this->redirect('pembayaran.PembayaranSemesterGenap',true); 
 	}	
 	public function setDataBound($sender, $param) {				
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
                 $item->btnDeleteFromRepeater->Enabled=false;				
@@ -165,16 +165,16 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
         $this->linkOutput->NavigateUrl='#';
         $no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
             break;
-            case  'pdf' :
+            case 'pdf' :
                 $str = "SELECT t.no_transaksi,t.no_faktur,t.kjur,t.tahun,t.idsmt,t.idkelas,t.no_formulir,t.nim,vdm.nama_mhs,vdm.tahun_masuk,t.tanggal,t.userid,t.date_added,t.date_modified FROM transaksi t JOIN v_datamhs vdm ON (vdm.nim=t.nim) WHERE t.no_transaksi='$no_transaksi'";
                 $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'kjur', 'tahun', 'idsmt', 'idkelas', 'no_formulir', 'nim', 'tahun_masuk', 'nama_mhs', 'tanggal', 'userid', 'date_added', 'date_modified'));
                 $r = $this->DB->getRecord($str);

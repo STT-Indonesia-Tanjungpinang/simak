@@ -45,7 +45,7 @@ class CKHS extends MainPageMHS {
 		$this->redirect('nilai.KHS',true);
 	}	
     public function itemBound($sender, $param) {
-        $item=$param->Item;
+        $item = $param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {                
             $sks = $item->DataItem['sks'];
             KHS::$TotalSKS += $sks;            

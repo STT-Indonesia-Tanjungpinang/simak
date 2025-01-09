@@ -60,7 +60,7 @@ class CProfilMahasiswa extends MainPageM {
       $datamhs['totalmatkul'] = $this->Nilai->getTotalMatkulAdaNilai();
       $datamhs['totalsks'] = $this->Nilai->getTotalSKSAdaNilai ();            
       
-      $this->DataMHs = $datamhs;
+      $this->DataMHS = $datamhs;
       $_SESSION['currentPageProfilMahasiswa']['DataMHS'] = $this->DataMHS;
       $activeview = $_SESSION['currentPageProfilMahasiswa']['activeviewindex'];                
       if ($activeview == $this->MVProfilMahasiswa->ActiveViewIndex) {
@@ -94,7 +94,7 @@ class CProfilMahasiswa extends MainPageM {
     return $_SESSION['currentPageProfilMahasiswa']['DataMHS'][$idx];
   }
   public function itemCreatedRepeaterIPSdanIPK($sender, $param) {
-    $item=$param->Item;
+    $item = $param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {   
       CProfilMahasiswa::$totalM += $item->DataItem['jumlah_m'];
       CProfilMahasiswa::$totalSKS += $item->DataItem['jumlah_sks_ada_nilai'];
@@ -174,7 +174,7 @@ class CProfilMahasiswa extends MainPageM {
     $this->RepeaterKRS->dataBind();
   }
   public function itemCreatedRepeaterKRS($sender, $param) {
-    $item=$param->Item;
+    $item = $param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {   
       $idkrs = $item->DataItem['idkrs'];
       $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs = $idkrs AND batal=0 ORDER BY semester ASC,kmatkul ASC";

@@ -57,7 +57,7 @@ class CDetailKuesioner extends MainPageD {
         $this->redirect('perkuliahan.DetailKuesioner', true, array('id'=>$idpengampu_penyelenggaraan));
     }
 	public function itemCreated($sender, $param) {
-        $item=$param->Item;
+        $item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {		
             if ($item->DataItem['ada']) {
                 $item->literalNamaKelompok->Text='<tr class="success">
@@ -170,13 +170,13 @@ class CDetailKuesioner extends MainPageD {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $messageprintout='';
                 $dataReport=$_SESSION['currentPageDetailKuesioner']['DataKuesioner'];                
                 
@@ -196,7 +196,7 @@ class CDetailKuesioner extends MainPageD {
                 $objKuesioner->setMode('excel2007');               
                 $objKuesioner->printKuesionerDosen($this->Kuesioner);
             break;
-            case  'pdf' :                
+            case 'pdf' :                
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

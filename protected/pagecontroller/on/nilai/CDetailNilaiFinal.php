@@ -257,13 +257,13 @@ class CDetailNilaiFinal extends MainPageON {
     $nim = $dataReport['nim'];
     if ($dataReport['k_status'] == 'L') {
       switch ($_SESSION['outputreport']) {
-        case  'summarypdf' :
+        case 'summarypdf' :
           $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
         break;
-        case  'summaryexcel' :
+        case 'summaryexcel' :
           $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
         break;
-        case  'excel2007' :
+        case 'excel2007' :
           $messageprintout='Nilai Final : ';                     
 
           $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');

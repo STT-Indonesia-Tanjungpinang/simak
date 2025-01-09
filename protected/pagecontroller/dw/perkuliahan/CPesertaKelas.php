@@ -84,13 +84,13 @@ class CPesertaKelas extends MainPageM {
         $this->linkOutput->NavigateUrl='#';        
         $dataReport=$_SESSION['currentPagePesertaKelas']['InfoKelas'];
 		switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :               
+            case 'excel2007' :               
                 $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas']+64);
                 $dataReport['hari'] = $this->Page->TGL->getNamaHari($dataReport['hari']);
                 
@@ -105,7 +105,7 @@ class CPesertaKelas extends MainPageM {
                 $messageprintout="Daftar Hadir Mahasiswa : <br/>";
                 $this->report->printDaftarHadirMahasiswa();
             break;
-            case  'pdf' :
+            case 'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
         }                

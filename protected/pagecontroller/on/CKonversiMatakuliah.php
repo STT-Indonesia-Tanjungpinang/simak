@@ -98,7 +98,7 @@ class CKonversiMatakuliah extends MainPageON {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS); 
 	}	
 	public function setDataBound($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {						
 			if ($this->DB->checkRecordIsExist('iddata_konversi', 'data_konversi', $item->DataItem['iddata_konversi'])) {				
 				$item->btnDelete->Enabled=false;				

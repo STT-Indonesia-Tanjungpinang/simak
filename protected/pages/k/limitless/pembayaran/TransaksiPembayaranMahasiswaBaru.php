@@ -6,7 +6,7 @@ class TransaksiPembayaranMahasiswaBaru Extends CTransaksiPembayaranMahasiswaBaru
 		parent::onLoad($param);							
     }
     public function itemCreated($sender, $param){
-        $item=$param->Item;
+        $item = $param->Item;
         if($item->ItemType==='EditItem') {   
             $item->ColumnJumlahBayar->TextBox->CssClass='form-control';                                   
             $item->ColumnJumlahBayar->TextBox->Width='150px'; 

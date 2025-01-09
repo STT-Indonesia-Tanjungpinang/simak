@@ -217,13 +217,13 @@ class CPesertaMatakuliah extends MainPageSA {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case  'summarypdf' :
+            case 'summarypdf' :
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case  'summaryexcel' :
+            case 'summaryexcel' :
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case  'excel2007' :
+            case 'excel2007' :
                 $dataReport=$_SESSION['currentPagePesertaMatakuliah']['InfoMatkul'];
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['tahun']);
                 $dataReport['nama_semester'] = $this->setup->getSemester($dataReport['idsmt']);               
@@ -235,7 +235,7 @@ class CPesertaMatakuliah extends MainPageSA {
                 $messageprintout="Daftar Peserta Matakuliah : <br/>";
                 $this->report->printPesertaMatakuliah($this->DMaster); 
             break;
-            case  'pdf' :
+            case 'pdf' :
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

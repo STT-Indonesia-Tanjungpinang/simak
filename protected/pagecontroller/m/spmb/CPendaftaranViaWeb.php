@@ -128,7 +128,7 @@ class CPendaftaranViaWeb extends MainPageM {
 	}
 	
 	public function itemCreated($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 			$nama_mhs = $item->DataItem['nama_mhs'];
 			$item->btnDelete->Attributes->Title="Hapus $nama_mhs";               
@@ -365,13 +365,13 @@ class CPendaftaranViaWeb extends MainPageM {
 		switch ($sender->getId()) {
 			case 'btnPrintOutFormulirPendaftaran' :
                 switch ($_SESSION['outputreport']) {
-                    case  'summarypdf' :
+                    case 'summarypdf' :
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
-                    case  'summaryexcel' :
+                    case 'summaryexcel' :
                         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
-                    case  'excel2007' :
+                    case 'excel2007' :
                         $kjur = $_SESSION['kjur'];
                         $nama_prodi = $_SESSION['daftar_jurusan'][$kjur];
                         $tahun = $_SESSION['tahun_pendaftaran'];
@@ -394,7 +394,7 @@ class CPendaftaranViaWeb extends MainPageM {
                         $this->report->setMode($_SESSION['outputreport']);
                         $this->report->printFormulirPendaftaranAll($_SESSION['outputcompress'], $_SESSION['daftar_jurusan'], $this->DMaster);                
                     break;
-                    case  'pdf' :
+                    case 'pdf' :
                         $kjur = $_SESSION['kjur'];
                         $nama_prodi = $_SESSION['daftar_jurusan'][$kjur];
                         $tahun = $_SESSION['tahun_pendaftaran'];
@@ -422,16 +422,16 @@ class CPendaftaranViaWeb extends MainPageM {
 			break;
 			case 'btnPrintOutFormulirPendaftaranR' :
                 switch ($_SESSION['outputreport']) {
-                    case  'summarypdf' :
+                    case 'summarypdf' :
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
-                    case  'summaryexcel' :
+                    case 'summaryexcel' :
                         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
-                    case  'excel2007' :
+                    case 'excel2007' :
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
-                    case  'pdf' :
+                    case 'pdf' :
                         $no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);
                         $dataReport['no_formulir'] = $no_formulir; 
                         $dataReport['linkoutput'] = $this->linkOutput; 

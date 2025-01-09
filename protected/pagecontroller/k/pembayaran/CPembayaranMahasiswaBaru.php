@@ -126,7 +126,7 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function setDataBound($sender, $param) {				
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 
 		}		

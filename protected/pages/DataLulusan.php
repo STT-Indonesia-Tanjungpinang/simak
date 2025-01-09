@@ -67,7 +67,7 @@ class DataLulusan extends MainPageF {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}	
 	public function setDataBound ($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
 			$nim = $item->DataItem['nim'];			
             $this->Nilai->setDataMHS(array('nim'=>$nim));

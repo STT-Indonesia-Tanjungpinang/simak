@@ -1,6 +1,7 @@
 <?php
 prado::using ('Application.MainPageM');
-class CDetailKRS extends MainPageM {
+class CDetailKRS extends MainPageM 
+{
   /**
   * total SKS
   */
@@ -17,7 +18,8 @@ class CDetailKRS extends MainPageM {
   * total Matakuliah Batal
   */
   public static $jumlahMatkulBatal=0;
-  public function onLoad($param) {
+  public function onLoad($param) 
+  {
     parent::onLoad($param);	
     $this->showSubMenuAkademikPerkuliahan=true;
     $this->showKRS = true;           
@@ -32,23 +34,30 @@ class CDetailKRS extends MainPageM {
         
     }				
   }
-  public function getDataMHS($idx) {		        
+  public function getDataMHS($idx) 
+  {		        
     return $this->KRS->getDataMHS($idx);
   }
-  public function getInfoToolbar() {                
+  public function getInfoToolbar() 
+  {                
     $ta = $this->DMaster->getNamaTA($this->Page->KRS->DataKRS['krs']['tahun']);
     $semester = $this->setup->getSemester($this->Page->KRS->DataKRS['krs']['idsmt']);
-    $text="TA $ta Semester $semester";
+    $text = "TA $ta Semester $semester";
     return $text;
   }	
-  public function itemBound($sender, $param) {
-    $item=$param->Item;
-    if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
-      if ($item->DataItem['batal']) {
+  public function itemBound($sender, $param)
+  {
+    $item = $param->Item;
+    if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem')
+    {
+      if ($item->DataItem['batal']) 
+      {
         $item->cmbKelas->Enabled=false;
         CDetailKRS::$totalSKSBatal+=$item->DataItem['sks'];
         CDetailKRS::$jumlahMatkulBatal+=1;
-      }else{
+      }
+      else
+      {
         $idkrsmatkul = $item->DataItem['idkrsmatkul'];
         $idpenyelenggaraan = $item->DataItem['idpenyelenggaraan'];
         $idkelas = $_SESSION['currentPageKRS']['DataMHS']['kelas_dulang'];
@@ -56,7 +65,7 @@ class CDetailKRS extends MainPageM {
         $this->DB->setFieldTable(array('idkelas_mhs', 'nama_kelas', 'nama_dosen', 'nidn', 'idruangkelas'));
         $r = $this->DB->getRecord($str);	
         
-        $str = "SELECT idkelas_mhs  FROM kelas_mhs_detail WHERE idkrsmatkul = $idkrsmatkul";            
+        $str = "SELECT idkelas_mhs FROM kelas_mhs_detail WHERE idkrsmatkul = $idkrsmatkul";            
         $this->DB->setFieldTable(array('idkelas_mhs'));
         $r_selected = $this->DB->getRecord($str);
         
@@ -84,17 +93,21 @@ class CDetailKRS extends MainPageM {
       }
     }
   }
-  protected function populateData () {
-    try {			
-      $idkrs=addslashes($this->request['id']);            				
+  protected function populateData () 
+  {
+    try 
+    {			
+      $idkrs = addslashes($this->request['id']);            				
       $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,vdm.iddosen_wali,vdm.idkelas,vdm.k_status,sm.n_status AS status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah,vdm.photo_profile FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE krs.idkrs='$idkrs'";
       $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'status', 'idsmt', 'tahun', 'tasmt', 'sah', 'photo_profile'));
       $r = $this->DB->getRecord($str);	           
       $datamhs = $r[1];
+      
       if (!isset($r[1])) {
         $_SESSION['currentPageKRS']['DataKRS']=array();
         throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
       }  
+      
       $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($datamhs['nim'],true);            
       $this->KRS->setDataMHS($datamhs);
       $kelas = $this->KRS->getKelasMhs();																	            
@@ -104,25 +117,29 @@ class CDetailKRS extends MainPageM {
       $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
       $datamhs['nama_dosen'] = $nama_dosen;
       
-      $datadulang=$this->KRS->getDataDulang($datamhs['idsmt'], $datamhs['tahun']);
+      $datadulang = $this->KRS->getDataDulang($datamhs['idsmt'], $datamhs['tahun']);
       $datamhs['kelas_dulang'] = $datadulang['idkelas'];
-       
+      
       $_SESSION['currentPageKRS']['DataMHS'] = $datamhs;
       $this->KRS->setDataMHS($datamhs);
       
-      $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);                                                                        
+      $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);
+      
       $_SESSION['currentPageKRS']['DataKRS'] = $this->KRS->DataKRS;
       $this->btnTambah->Enabled=!$this->KRS->DataKRS['krs']['sah'];
       
       $this->RepeaterS->DataSource = $this->KRS->DataKRS['matakuliah'];
       $this->RepeaterS->dataBind();
-    }catch (Exception $e) {
+    }
+    catch (Exception $e) 
+    {
       $this->idProcess = 'view';	
       $this->errorMessage->Text = $e->getMessage();	
     }
 
   }		
-  public function prosesKelas($sender, $param) {
+  public function prosesKelas($sender, $param)
+  {
     $idkelas_mhs = $sender->Text;
     $idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);
     $this->DB->query('BEGIN');
@@ -171,7 +188,8 @@ class CDetailKRS extends MainPageM {
       // }
     }
   }
-  public function tambahKRS($sender, $param) {
+  public function tambahKRS($sender, $param)
+  {
     $this->createObj('Nilai');
     $datakrs = $_SESSION['currentPageKRS']['DataKRS'];
     $idsmt = $datakrs['krs']['idsmt'];
@@ -226,25 +244,27 @@ class CDetailKRS extends MainPageM {
       echo 'Caught exception: ',  $e->getMessage(), "\n";
     }*/      
   }
-  public function closeDetailKRS($sender, $param) { 
+  public function closeDetailKRS($sender, $param)
+  { 
     unset($_SESSION['currentPageKRS']);
     $this->redirect ('perkuliahan.KRS',true);
   }
-  public function printKRS($sender, $param) {
+  public function printKRS($sender, $param)
+  {
     $this->createObj('reportkrs');
     $this->linkOutput->Text='';
     $this->linkOutput->NavigateUrl='#';
     switch ($_SESSION['outputreport']) {
-      case  'summarypdf' :
+      case 'summarypdf' :
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
-      case  'summaryexcel' :
+      case 'summaryexcel' :
         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
-      case  'excel2007' :
+      case 'excel2007' :
         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
       break;
-      case  'pdf' :                
+      case 'pdf' :                
         $messageprintout='';                
         $tahun = $_SESSION['ta'];
         $semester = $_SESSION['semester'];

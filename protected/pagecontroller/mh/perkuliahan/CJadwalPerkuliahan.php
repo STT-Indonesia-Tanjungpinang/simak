@@ -47,7 +47,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
     public function getInfoToolbar() { 
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
-		$text="TA $ta Semester $semester";
+		$text = "TA $ta Semester $semester";
 		return $text;
 	}
 	public function populateData($search=false) {

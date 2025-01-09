@@ -193,7 +193,7 @@ class CPembayaranFormulir extends MainPageM {
 		}
 	}
 	public function setDataBound($sender, $param) {
-		$item=$param->Item;
+		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
 			$url = $this->Themes->getIcon();			
 			$urlImage=$url.'error.png';

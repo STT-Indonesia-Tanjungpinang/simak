@@ -30,7 +30,7 @@ class TambahKRSEkstension extends MainPageM {
 		if (!$this->IsPostBack&&!$this->IsCallback) {	            
             $this->lblModulHeader->Text = $this->getInfoToolbar();            
             try {			                
-                $this->KRS->DataKRs = $_SESSION['currentPageKRSEkstension']['DataKRS'];
+                $this->KRS->DataKRS = $_SESSION['currentPageKRSEkstension']['DataKRS'];
                 $idsmt=$this->KRS->DataKRS['krs']['idsmt'];
                 $tahun = $this->KRS->DataKRS['krs']['tahun'];
                 $datamhs = $_SESSION['currentPageKRSEkstension']['DataMHS'];                                            
@@ -61,7 +61,7 @@ class TambahKRSEkstension extends MainPageM {
     public function getInfoToolbar() {                
 		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester=$this->setup->getSemester($_SESSION['semester']);
-		$text="TA $ta Semester $semester";
+		$text = "TA $ta Semester $semester";
 		return $text;
 	}		
 	public function getDataMHS($idx) {		        
@@ -103,7 +103,7 @@ class TambahKRSEkstension extends MainPageM {
 	}	
 	
 	public function hitung ($sender, $param) {
-		$item=$param->Item;		
+		$item = $param->Item;		
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {					
 			$matkul=$item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									
 			if ($_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['sah']&&!$item->DataItem['batal']) {

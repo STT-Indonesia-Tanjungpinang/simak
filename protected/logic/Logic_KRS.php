@@ -5,6 +5,7 @@ class Logic_KRS extends Logic_Akademik {
   * Data KRS
   */
   public $DataKRS;
+
   public function __construct ($db) {
     parent::__construct ($db);			
   }
@@ -91,7 +92,7 @@ class Logic_KRS extends Logic_Akademik {
     $this->db->setFieldTable(array('idkrs','nim','tgl_krs','no_krs','sah','tgl_disahkan','tahun','idsmt','tasmt'));
     $r=$this->db->getRecord($str);		      
     if (isset($r[1])) {
-      $this->DataKRs = $r[1];
+      $this->DataKRS = $r[1];
     }
     return $this->DataKRS;
   }    
@@ -132,7 +133,7 @@ class Logic_KRS extends Logic_Akademik {
       $data['krs']['jumlah_sah']=$jumlah_sah;
       $data['krs']['jumlah_batal']=$jumlah_batal;
     }          
-    $this->DataKRs = $data;
+    $this->DataKRS = $data;
     return $data;
   }    
   /**

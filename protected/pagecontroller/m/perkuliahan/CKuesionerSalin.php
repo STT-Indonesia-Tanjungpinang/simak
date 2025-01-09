@@ -28,7 +28,7 @@ class CKuesionerSalin extends MainPageM {
     public function getInfoToolbar() {                
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
-		$text="TA $ta Semester $semester";
+		$text = "TA $ta Semester $semester";
 		return $text;
 	} 
     public function checkTaSemester($sender, $param) {                

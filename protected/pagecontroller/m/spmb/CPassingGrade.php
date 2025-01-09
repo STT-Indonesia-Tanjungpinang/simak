@@ -83,7 +83,7 @@ class CPassingGrade extends MainPageM {
         
 	}    
     public function onItemCreatedTargetFisik($sender, $param){
-        $item=$param->Item;
+        $item = $param->Item;
         if($item->ItemType==='EditItem') {   
             $item->ColumnNilai->TextBox->CssClass='form-control';                                
             $item->ColumnNilai->TextBox->Width='60px'; 
@@ -99,7 +99,7 @@ class CPassingGrade extends MainPageM {
         $this->populateData(); 
     }
      public function saveItemNilai($sender, $param) {                
-        $item=$param->Item;
+        $item = $param->Item;
         $id=$this->gridPassingGrade->DataKeys[$item->ItemIndex];
         $nilai = $item->ColumnNilai->TextBox->Text > 100 ? 100:$item->ColumnNilai->TextBox->Text; 
         $this->DB->query('BEGIN');
