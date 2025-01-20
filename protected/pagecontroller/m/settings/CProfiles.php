@@ -8,11 +8,11 @@ class CProfiles extends MainPageM {
             if (!isset($_SESSION['currentPageCache'])||$_SESSION['currentPageCache']['page_name']!='m.settings.Profiles') {
 				$_SESSION['currentPageCache']=array('page_name'=>'m.settings.Profiles', 'page_num'=>0);												
 			}            
-            $this->populateData ();
+            $this->populateData();
 		}
         
 	}   
-    public function populateData () {        
+    public function populateData() {        
         $this->imgPhotoUser->ImageUrl = $_SESSION['foto']; 
         $this->cmbTheme->DataSource = $this->setup->getListThemes();
         $this->cmbTheme->Text = $_SESSION['theme'];

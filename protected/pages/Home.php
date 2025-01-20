@@ -4,12 +4,12 @@ class Home extends MainPageF {
 	public function onLoad($param) {		
 		parent::onLoad($param);	         
 		if (!$this->IsPostBack&&!$this->IsCallBack) {            
-            $this->populateData ();
+            $this->populateData();
 		}
 	}
-    public function populateData () {        
+    public function populateData() {        
         $str = "SELECT fp.idpost,fp.userid,fk.nama_kategori,fp.title,fp.content,fp.nama_user,fp.tipe,file_name,file_type,file_size,file_url,fp.date_added FROM pengumuman fp, forumkategori fk WHERE fp.idkategori=fk.idkategori AND parentpost=0 ORDER BY date_added DESC";       
-		$this->DB->setFieldTable (array('idpost','userid','nama_kategori','title','content','nama_user','tipe','file_name','file_type','file_size','file_url','date_added'));			
+		$this->DB->setFieldTable (array('idpost', 'userid', 'nama_kategori', 'title', 'content', 'nama_user', 'tipe', 'file_name', 'file_type', 'file_size', 'file_url', 'date_added'));			
 		$r=$this->DB->getRecord($str);	
         $result=array();
         while (list($k, $v)=each($r)) {

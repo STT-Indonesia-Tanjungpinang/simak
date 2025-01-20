@@ -93,9 +93,9 @@ class TCPDF_PARSER {
 	 * Parse a PDF document an return an array of objects.
 	 * @param $data (string) PDF data to parse.
 	 * @param $cfg (array) Array of configuration parameters:
-	 * 			'die_for_errors' : if true termitate the program execution in case of error, otherwise thows an exception;
-	 * 			'ignore_filter_decoding_errors' : if true ignore filter decoding errors;
-	 * 			'ignore_missing_filter_decoders' : if true ignore missing filter decoding errors.
+	 * 			'die_for_errors': if true termitate the program execution in case of error, otherwise thows an exception;
+	 * 			'ignore_filter_decoding_errors': if true ignore filter decoding errors;
+	 * 			'ignore_missing_filter_decoders': if true ignore missing filter decoding errors.
 	 * @public
 	 * @since 1.0.000 (2011-05-24)
 	 */
@@ -127,9 +127,9 @@ class TCPDF_PARSER {
 	/**
 	 * Set the configuration parameters.
 	 * @param $cfg (array) Array of configuration parameters:
-	 * 			'die_for_errors' : if true termitate the program execution in case of error, otherwise thows an exception;
-	 * 			'ignore_filter_decoding_errors' : if true ignore filter decoding errors;
-	 * 			'ignore_missing_filter_decoders' : if true ignore missing filter decoding errors.
+	 * 			'die_for_errors': if true termitate the program execution in case of error, otherwise thows an exception;
+	 * 			'ignore_filter_decoding_errors': if true ignore filter decoding errors;
+	 * 			'ignore_missing_filter_decoders': if true ignore missing filter decoding errors.
 	 * @public
 	 */
 	protected function setConfig($cfg) {

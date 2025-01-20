@@ -17,12 +17,12 @@ class CCalonMHS Extends MainPageM {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageCalonMHS']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();  
@@ -67,20 +67,20 @@ class CCalonMHS Extends MainPageM {
 		$_SESSION['currentPageKHS']['search']=true;
 		$this->populateData($_SESSION['currentPageKHS']['search']);
 	}
-    public function populateData($search=false) {
+    public function populateData($search = false) {
         $kjur = $_SESSION['kjur']; 
         $tahun_masuk = $_SESSION['tahun_masuk'];
         $semester_masuk = $_SESSION['currentPageCalonMHS']['semester_masuk'];
         if ($search) {
             $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa=" AND fp.no_formulir='$txtsearch'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
                     $str = "$str $clausa";
                 break;                
-                case 'nama' :
+                case 'nama':
                     $clausa=" AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
                     $str = "$str $clausa";
@@ -135,7 +135,7 @@ class CCalonMHS Extends MainPageM {
                     throw new Exception ("Calon Mahasiswa dengan Nomor Formulir ($no_formulir) tidak lulus dalam SPMB.");       
                 }       
                 $datamhs['nama_ps1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];                    
-                $datamhs['nama_ps2'] = $datamhs['kjur2'] == 0 ?'N.A' : $_SESSION['daftar_jurusan'][$datamhs['kjur2']];                    
+                $datamhs['nama_ps2'] = $datamhs['kjur2'] == 0 ?'N.A': $_SESSION['daftar_jurusan'][$datamhs['kjur2']];                    
                 if ($spmb['kjur']==$datamhs['kjur1']) {
                     $datamhs['diterima_ps1'] = '<span class="label label-info">DITERIMA</span>';
                     $datamhs['diterima_ps2'] = '<span class="label label-warning">TIDAK DITERIMA</span>';

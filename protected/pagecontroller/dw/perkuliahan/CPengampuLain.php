@@ -14,7 +14,7 @@ class CPengampuLain extends MainPageDW {
 			$this->populateData();
 		}			
 	}
-	public function populateData () {		
+	public function populateData() {		
 		try {
             $id=addslashes($this->request['id']);         
             $iddosen_wali = $this->iddosen_wali;

@@ -4,7 +4,7 @@ class CNilaiPerMatakuliah extends MainPageON {
   public function onLoad($param) {		
     parent::onLoad($param);				
     $this->showSubMenuAkademikNilai=true;
-    $this->showNilaiPerMatakuliah=true;
+    $this->showNilaiPerMatakuliah = true;
     
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) 
@@ -39,12 +39,12 @@ class CNilaiPerMatakuliah extends MainPageON {
         $this->tbCmbPs->Text = $_SESSION['kjur'];			
         $this->tbCmbPs->dataBind();	
         
-        $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+        $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
         $this->tbCmbTA->DataSource = $ta;					
         $this->tbCmbTA->Text = $_SESSION['ta'];						
         $this->tbCmbTA->dataBind();
 
-        $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+        $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
         $this->tbCmbSemester->DataSource = $semester;
         $this->tbCmbSemester->Text = $_SESSION['semester'];
         $this->tbCmbSemester->dataBind();
@@ -91,7 +91,7 @@ class CNilaiPerMatakuliah extends MainPageON {
     $_SESSION['currentPageNilaiPerMatakuliah']['search']=true;
     $this->populateData($_SESSION['currentPageNilaiPerMatakuliah']['search']);
   }       
-  public function populateData($search=false) {	
+  public function populateData($search = false) {	
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];
     $kjur = $_SESSION['kjur'];        
@@ -100,16 +100,16 @@ class CNilaiPerMatakuliah extends MainPageON {
     if ($search) {
       $txtsearch=  addslashes($this->txtKriteria->Text);           
       switch ($this->cmbKriteria->Text) {                                
-        case 'kmatkul' :
+        case 'kmatkul':
           $clausa="AND kmatkul LIKE '%$txtsearch%'";
         break;
-        case 'nmatkul' :
+        case 'nmatkul':
           $clausa="AND nmatkul LIKE '%$txtsearch%'";
         break;
-        case 'nidn' :
+        case 'nidn':
           $clausa="AND nidn='$txtsearch'";
         break;
-        case 'nama_dosen' :
+        case 'nama_dosen':
           $clausa="AND nama_dosen LIKE '%$txtsearch%'";
         break;
       }            			
@@ -140,8 +140,8 @@ class CNilaiPerMatakuliah extends MainPageON {
       $item->cmbNilai->Enabled=$item->DataItem['k_status'] == 'L'?false:true;
       if ($item->DataItem['batal']) {
         $item->literalKet->Text='Dibatalkan oleh dosen wali.';	
-        $item->txtNilaiAngka->Enabled=false;
-        $item->cmbNilai->Enabled=false;		
+        $item->txtNilaiAngka->Enabled = false;
+        $item->cmbNilai->Enabled = false;		
       }else {
         $item->literalKet->Text='-';
         $item->txtNilaiAngka->Text = $item->DataItem['n_kuan'];
@@ -157,24 +157,24 @@ class CNilaiPerMatakuliah extends MainPageON {
     $_SESSION['currentPageNilaiPerMatakuliah']['search']=true;
     $this->populateDataPeserta($_SESSION['currentPageNilaiPerMatakuliah']['search']);
   }
-  public function populateDataPeserta ($search=false) {      
+  public function populateDataPeserta ($search = false) {      
     $id=$_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
     $str = "SELECT vkm.idkrsmatkul,vkm.nim,vdm.nama_mhs,vdm.jk,nm.n_kuan,nm.n_kual,nm.userid_input,nm.tanggal_input,nm.userid_modif,nm.tanggal_modif,nm.bydosen,nm.ket,vkm.batal,vkm.sah,vdm.k_status FROM v_krsmhs vkm LEFT JOIN nilai_matakuliah nm ON (nm.idkrsmatkul=vkm.idkrsmatkul) JOIN v_datamhs vdm ON (vdm.nim=vkm.nim) WHERE vkm.idpenyelenggaraan='$id' AND vkm.sah=1";	
     
     if ($search) {            
       $txtsearch=$this->txtKriteria2->Text;
       switch ($this->cmbKriteria2->Text) {                
-        case 'nim' :
+        case 'nim':
           $clausa="AND vdm.nim='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";
         break;
-        case 'nirm' :
+        case 'nirm':
           $clausa="AND vdm.nirm='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";
         break;
-        case 'nama' :
+        case 'nama':
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";

@@ -161,12 +161,12 @@ class PHPExcel_Writer_Excel2007_StringTable extends PHPExcel_Writer_Excel2007_Wr
 
                 // Bold
                 $objWriter->startElement($prefix.'b');
-                $objWriter->writeAttribute('val', ($element->getFont()->getBold() ? 'true' : 'false'));
+                $objWriter->writeAttribute('val', ($element->getFont()->getBold() ? 'true': 'false'));
                 $objWriter->endElement();
 
                 // Italic
                 $objWriter->startElement($prefix.'i');
-                $objWriter->writeAttribute('val', ($element->getFont()->getItalic() ? 'true' : 'false'));
+                $objWriter->writeAttribute('val', ($element->getFont()->getItalic() ? 'true': 'false'));
                 $objWriter->endElement();
 
                 // Superscript / subscript
@@ -182,7 +182,7 @@ class PHPExcel_Writer_Excel2007_StringTable extends PHPExcel_Writer_Excel2007_Wr
 
                 // Strikethrough
                 $objWriter->startElement($prefix.'strike');
-                $objWriter->writeAttribute('val', ($element->getFont()->getStrikethrough() ? 'true' : 'false'));
+                $objWriter->writeAttribute('val', ($element->getFont()->getStrikethrough() ? 'true': 'false'));
                 $objWriter->endElement();
 
                 // Color
@@ -258,7 +258,7 @@ class PHPExcel_Writer_Excel2007_StringTable extends PHPExcel_Writer_Excel2007_Wr
             }
             $objWriter->writeAttribute('u', $underlineType);
             // Strikethrough
-            $objWriter->writeAttribute('strike', ($element->getFont()->getStrikethrough() ? 'sngStrike' : 'noStrike'));
+            $objWriter->writeAttribute('strike', ($element->getFont()->getStrikethrough() ? 'sngStrike': 'noStrike'));
 
             // rFont
             $objWriter->startElement($prefix.'latin');

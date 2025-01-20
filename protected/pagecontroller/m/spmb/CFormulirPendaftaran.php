@@ -1,11 +1,15 @@
 <?php
 prado::using ('Application.MainPageM');
-class CFormulirPendaftaran extends MainPageM {		
-  public function onLoad($param) {
+
+class CFormulirPendaftaran extends MainPageM
+{		
+  public function onLoad($param)
+  {
     parent::onLoad($param);			
     $this->showFormulirPendaftaran=true; 
     $this->createObj('Akademik');        
-    if (!$this->IsPostBack && !$this->IsCallBack) {	
+    if (!$this->IsPostBack && !$this->IsCallBack)
+    {	
       if (!isset($_SESSION['currentPageFormulirPendaftaran'])||$_SESSION['currentPageFormulirPendaftaran']['page_name']!='m.spmb.FormulirPendaftaran') {
         $_SESSION['currentPageFormulirPendaftaran']=array('page_name'=>'m.spmb.FormulirPendaftaran', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_dulang'=>'none');												
       }
@@ -19,12 +23,12 @@ class CFormulirPendaftaran extends MainPageM {
       $this->tbCmbPs->Text = $_SESSION['kjur'];			
       $this->tbCmbPs->dataBind();
       
-      $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+      $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
       $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
       $this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
       $this->tbCmbTahunMasuk->dataBind();
             
-      $this->tbCmbSemester->DataSource = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');
+      $this->tbCmbSemester->DataSource = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');
       $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->DataBind();
       
@@ -37,12 +41,13 @@ class CFormulirPendaftaran extends MainPageM {
       $this->tbCmbOutputCompress->DataBind();
       
       $this->lblModulHeader->Text = $this->getInfoToolbar();
-      $this->populateData ();	
+      $this->populateData();	
 
     }	
   }
   
-  public function changeTbTahunMasuk($sender, $param) {					
+  public function changeTbTahunMasuk($sender, $param)
+  {					
     $_SESSION['tahun_pendaftaran'] = $this->tbCmbTahunMasuk->Text;
     $this->lblModulHeader->Text = $this->getInfoToolbar();
     $this->populateData();
@@ -52,12 +57,14 @@ class CFormulirPendaftaran extends MainPageM {
     $this->lblModulHeader->Text = $this->getInfoToolbar();
     $this->populateData();
   }
-  public function changeTbPs($sender, $param) {		
+  public function changeTbPs($sender, $param)
+  {		
     $_SESSION['kjur'] = $this->tbCmbPs->Text;
     $this->lblModulHeader->Text = $this->getInfoToolbar();
     $this->populateData();
   }    
-  public function getInfoToolbar() {        
+  public function getInfoToolbar()
+  {        
     $kjur = $_SESSION['kjur'];        
     $ps = $_SESSION['daftar_jurusan'][$kjur];
     $tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);
@@ -65,77 +72,84 @@ class CFormulirPendaftaran extends MainPageM {
     $text="Program Studi $ps Tahun Pendaftaran $tahunmasuk Semester $semester";
     return $text;
   }
-  public function searchRecord($sender, $param) {
+  public function searchRecord($sender, $param)
+  {
     $_SESSION['currentPageFormulirPendaftaran']['search']=true;
     $this->populateData($_SESSION['currentPageFormulirPendaftaran']['search']);
   }
-  public function changeStatusDulang($sender, $param) {
+  public function changeStatusDulang($sender, $param)
+  {
     $_SESSION['currentPageFormulirPendaftaran']['status_dulang'] = $this->cmbDaftarUlang->Text;
     $this->populateData($_SESSION['currentPageFormulirPendaftaran']['search']);
   }
-  public function renderCallback($sender, $param) {
+  public function renderCallback($sender, $param)
+  {
     $this->RepeaterS->render($param->NewWriter);	
   }
-  public function Page_Changed($sender, $param) {
+  public function Page_Changed($sender, $param)
+  {
     $_SESSION['currentPageFormulirPendaftaran']['page_num'] = $param->NewPageIndex;
     $this->populateData($_SESSION['currentPageFormulirPendaftaran']['search']);
   }		
-  public function populateData ($search=false) {	
+  public function populateData($search = false)
+  {	
     $tahun_masuk = $_SESSION['tahun_pendaftaran'];
     $semester = $_SESSION['semester'];
     $kjur = $_SESSION['kjur'];
     if ($search) {            
       $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.jk,fp.alamat_rumah,fp.telp_hp,nomor_ijazah,IF(char_length(COALESCE(rm.nim,''))>0,'dulang', '-') AS ket,rm.nim FROM formulir_pendaftaran fp JOIN bipend bp ON (fp.no_formulir=bp.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir)";
-      $txtsearch=addslashes($this->txtKriteria->Text);
+      $txtsearch = addslashes($this->txtKriteria->Text);
       switch ($this->cmbKriteria->Text) {
-        case 'no_formulir' :
+        case 'no_formulir':
           $clausa=" fp.no_formulir='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND $clausa",'fp.no_formulir');
           $str = "$str WHERE $clausa";
         break;
-        case 'nama_mhs' :
+        case 'nama_mhs':
           $clausa=" fp.nama_mhs LIKE '%$txtsearch%'";
           $jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND $clausa",'fp.no_formulir');
           $str = "$str WHERE $clausa";
         break;
       }
-    }else{            
+    }
+    else
+    {            
       $status_dulang = $_SESSION['currentPageFormulirPendaftaran']['status_dulang'];
       $str_status='';
       $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
       switch ($status_dulang)
       {
-        case 'belum' :
+        case 'belum':
           $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
           $str_status= " AND rm.nim IS NULL";
         break;
-        case 'sudah' :
+        case 'sudah':
           $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
           $str_status= " AND rm.nim IS NOT NULL";
         break;
-        case 'kjur1' :
+        case 'kjur1':
           $str_kjur = " AND fp.kjur1='$kjur'";
-          $str_status= '';
+          $str_status = '';
         break;
-        case 'kjur1_belum_dulang' :
+        case 'kjur1_belum_dulang':
           $str_kjur = " AND fp.kjur1='$kjur'";
-          $str_status= ' AND rm.nim IS NULL';
+          $str_status = ' AND rm.nim IS NULL';
         break;
-        case 'kjur1_sudah_dulang' :
+        case 'kjur1_sudah_dulang':
           $str_kjur = " AND fp.kjur1='$kjur'";
-          $str_status= ' AND rm.nim IS NOT NULL';
+          $str_status = ' AND rm.nim IS NOT NULL';
         break;
-        case 'kjur2' :
+        case 'kjur2':
           $str_kjur = " AND fp.kjur2='$kjur'";
-          $str_status= '';
+          $str_status = '';
         break;
-        case 'kjur2_belum_dulang' :
+        case 'kjur2_belum_dulang':
           $str_kjur = " AND fp.kjur2='$kjur'";
-          $str_status= ' AND rm.nim IS NULL';
+          $str_status = ' AND rm.nim IS NULL';
         break;
-        case 'kjur2_sudah_dulang' :
+        case 'kjur2_sudah_dulang':
           $str_kjur = " AND fp.kjur2='$kjur'";
-          $str_status= ' AND rm.nim IS NOT NULL';
+          $str_status = ' AND rm.nim IS NOT NULL';
         break;                
       }            
       $jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp JOIN bipend bp ON (fp.no_formulir=bp.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir) WHERE fp.ta = '$tahun_masuk' AND fp.idsmt='$semester'$str_kjur AND fp.daftar_via='WEB'$str_status",'fp.no_formulir');
@@ -169,7 +183,7 @@ class CFormulirPendaftaran extends MainPageM {
         $nim = $item->DataItem['nim'];
         $item->lblKeterangan->CssClass='label label-success';
         $item->lblKeterangan->Text="Sudah [$nim]";
-        $item->btnDelete->Enabled=false;
+        $item->btnDelete->Enabled = false;
         $item->btnDelete->Attributes->OnClick="alert('Tidak bisa dihapus karena sudah daftar ulang');return false;";			
       }else{
         $item->lblKeterangan->CssClass='label label-danger';
@@ -181,7 +195,7 @@ class CFormulirPendaftaran extends MainPageM {
     if ($sender->getId()=='cmbAddKjur1') {
       $this->idProcess = 'add';
       if ($sender->Text == 'none') {
-        $this->cmbAddKjur2->Enabled=false;	
+        $this->cmbAddKjur2->Enabled = false;	
         $this->cmbAddKjur2->Text='none';
       }else{			            
         $this->cmbAddKjur2->Enabled=true;
@@ -199,69 +213,14 @@ class CFormulirPendaftaran extends MainPageM {
     }
     
               
-  }
-  public function updateData($sender, $param) 
-  {
-    if ($this->IsValid) {
-      $no_formulir = $this->txtEditNoFormulir->Text;
-      $nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
-      $tempat_lahir=addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
-      $tgl_lahir=date ('Y-m-d', $this->txtEditTanggalLahir->TimeStamp);
-      $jk = $this->rdEditPria->Checked===true?'L':'P';
-      $idagama = $this->cmbEditAgama->Text;
-      $nama_ibu_kandung=addslashes($this->txtEditNamaIbuKandung->Text);
-      $idwarga = $this->rdEditWNI->Checked===true?'WNI':'WNA';
-      $no_ktp=strtoupper(trim(addslashes($this->txtEditNIK->Text)));
-      $alamat_rumah=strtoupper(trim(addslashes($this->txtEditAlamatKTP->Text)));
-      $kelurahan = addslashes($this->txtEditKelurahan->Text);
-      $kecamatan = addslashes($this->txtEditKecamatan->Text);
-      $telp_rumah=addslashes($this->txtEditNoTelpRumah->Text);		
-      $telp_hp=addslashes($this->txtEditNoTelpHP->Text);
-      $email=addslashes($this->txtEditEmail->Text);            
-      $idstatus = $this->rdEditTidakBekerja->Checked===true?'TIDAK_BEKERJA':'PEKERJA';
-      $alamat_kantor=strtoupper(trim($this->txtEditAlamatKantor->Text));									
-      $telp_kantor=addslashes($this->txtEditNoTelpKantor->Text);
-      $idjp=$this->cmbEditPekerjaanOrtu->Text;
-      $pendidikan_terakhir=strtoupper(addslashes($this->txtEditPendidikanTerakhir->Text));
-      $jurusan=strtoupper(addslashes($this->txtEditJurusan->Text));	
-      $kota=strtoupper(addslashes($this->txtEditKotaPendidikanTerakhir->Text));	
-      $provinsi=strtoupper(addslashes($this->txtEditProvinsiPendidikanTerakhir->Text));	
-      $tahun_pa=strtoupper(trim($this->txtEditTahunPendidikanTerakhir->Text));		
-      $jenisslta = $this->cmbEditJenisSLTA->Text;
-      $asal_slta=strtoupper(addslashes($this->txtEditAsalSLTA->Text));			
-      $statusslta = $this->cmbEditStatusSLTA->Text;
-      $nomor_ijazah=trim($this->txtEditNomorIjazah->Text);	
-      
-      $idkelas = $this->cmbEditKelas->Text; 
-      $kjur1=$this->cmbEditKjur1->Text;
-      $kjur2=($this->cmbEditKjur2->Text)> 0 ? $this->cmbEditKjur2->Text : 0;                       
-      $ta = $this->cmbEditTahunMasuk->Text;
-      $idsmt = $this->cmbEditSemester->Text;           
-        
-      $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota = '$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta = '$jenisslta',asal_slta = '$asal_slta',status_slta = '$statusslta',nomor_ijazah='$nomor_ijazah',idkelas='$idkelas',kjur1='$kjur1',kjur2='$kjur2',ta = $ta,idsmt=$idsmt,daftar_via='WEB' WHERE no_formulir='$no_formulir'";
-      $this->DB->query('BEGIN');
-      if ($this->DB->updateRecord($str)) {
-        $email = $this->txtEditEmail->Text;                
-        $str = "UPDATE profiles_mahasiswa SET email='$email' WHERE no_formulir = $no_formulir";
-        $this->DB->updateRecord($str);
-        
-        $str = "UPDATE register_mahasiswa SET synced='0',sync_msg=NULL WHERE no_formulir = $no_formulir";
-        $this->DB->updateRecord($str);
-
-        $this->DB->query('COMMIT');
-      }else {
-        $this->DB->query('ROLLBACK');
-      }			
-      $this->redirect('spmb.FormulirPendaftaran',true);
-    }
-  }
+  }  
   
   public function editRecord($sender, $param) {
     $this->idProcess = 'edit';
     $no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);
     
-    $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,kelurahan,kecamatan,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
-    $this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_agama', 'nama_ibu_kandung', 'idwarga', 'nik', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'kelurahan', 'kecamatan', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
+    $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,kelurahan,kecamatan,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.id_channel_marketing,fp.nama_referensi,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
+    $this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_agama', 'nama_ibu_kandung', 'idwarga', 'nik', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'kelurahan', 'kecamatan', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'id_channel_marketing', 'nama_referensi', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
     $r = $this->DB->getRecord($str);
     $dataMhs = $r[1];								
     if ($dataMhs['waktu_mendaftar']=='0000-00-00 00:00:00') {							
@@ -323,7 +282,14 @@ class CFormulirPendaftaran extends MainPageM {
     $this->cmbEditStatusSLTA->Text = $dataMhs['status_slta'];
     $this->txtEditNomorIjazah->Text = $dataMhs['nomor_ijazah'];
     
-    $daftarkelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas(),'none');        
+    //marketing
+    $this->cmbEditChannelMarketing->DataSource = $this->DMaster->getListChannelMarketing();
+    $this->cmbEditChannelMarketing->Text = $dataMhs['id_channel_marketing'];    
+    $this->cmbEditChannelMarketing->dataBind();
+
+    $this->txtEditNamaReferensi->Text = $dataMhs['nama_referensi'];
+
+    $daftarkelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas(), 'none');        
     $this->cmbEditKelas->DataSource = $daftarkelas;
     $this->cmbEditKelas->Text = $dataMhs['idkelas'];
     $this->cmbEditKelas->dataBind();
@@ -331,13 +297,16 @@ class CFormulirPendaftaran extends MainPageM {
     
     $bool=!$this->DB->checkRecordIsExist ('no_formulir',"nilai_ujian_masuk", $no_formulir,' AND kjur > 0');
     $daftar_jurusan = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
-    if ($dataMhs['kjur1'] =='') {
+    if ($dataMhs['kjur1'] == '')
+    {
       $this->cmbEditKjur1->DataSource = $daftar_jurusan;
       $this->cmbEditKjur1->Text = $dataMhs['kjur1'];
       $this->cmbEditKjur1->Enabled=$bool;
       $this->cmbEditKjur1->dataBind();
       $this->cmbEditKjur2->Enabled=true;	            
-    }else {					
+    }
+    else 
+    {
       $this->cmbEditKjur1->DataSource = $daftar_jurusan;
       $this->cmbEditKjur1->Text = $dataMhs['kjur1'];
       $this->cmbEditKjur1->Enabled=$bool;
@@ -350,66 +319,173 @@ class CFormulirPendaftaran extends MainPageM {
       $this->cmbEditKjur2->Enabled=true;
     }
     
-    $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+    $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
     $this->cmbEditTahunMasuk->DataSource = $tahun_masuk	;					
     $this->cmbEditTahunMasuk->Text = $dataMhs['ta'];						
     $this->cmbEditTahunMasuk->dataBind();
 
-    $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none'); 
+    $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none'); 
     $this->cmbEditSemester->DataSource = $semester;
     $this->cmbEditSemester->Text = $dataMhs['idsmt'];
     $this->cmbEditSemester->DataBind();
     $this->Demik->setDataMHS(array('no_formulir'=>$no_formulir,'kjur'=>'none'));
-    if ($this->Demik->isMhsRegistered(true)) {
-      $this->cmbEditKelas->Enabled=false;
-      $this->cmbEditTahunMasuk->Enabled=false;
-      $this->cmbEditSemester->Enabled=false;
-      $this->cmbEditKjur1->Enabled=false;
-      $this->cmbEditKjur2->Enabled=false;
+    if ($this->Demik->isMhsRegistered(true))
+    {
+      $this->cmbEditKelas->Enabled = false;
+      $this->cmbEditTahunMasuk->Enabled = false;
+      $this->cmbEditSemester->Enabled = false;
+      $this->cmbEditKjur1->Enabled = false;
+      $this->cmbEditKjur2->Enabled = false;
     }			
-    
   }
   
-  public function deleteRecord($sender, $param) {
+  public function updateData($sender, $param) 
+  {
+    if ($this->IsValid) 
+    {
+      $no_formulir = $this->txtEditNoFormulir->Text;
+      $nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
+      $tempat_lahir = addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
+      $tgl_lahir=date ('Y-m-d', $this->txtEditTanggalLahir->TimeStamp);
+      $jk = $this->rdEditPria->Checked===true?'L':'P';
+      $idagama = $this->cmbEditAgama->Text;
+      $nama_ibu_kandung=addslashes($this->txtEditNamaIbuKandung->Text);
+      $idwarga = $this->rdEditWNI->Checked===true?'WNI':'WNA';
+      $no_ktp=strtoupper(trim(addslashes($this->txtEditNIK->Text)));
+      $alamat_rumah=strtoupper(trim(addslashes($this->txtEditAlamatKTP->Text)));
+      $kelurahan = addslashes($this->txtEditKelurahan->Text);
+      $kecamatan = addslashes($this->txtEditKecamatan->Text);
+      $telp_rumah = addslashes($this->txtEditNoTelpRumah->Text);		
+      $telp_hp = addslashes($this->txtEditNoTelpHP->Text);
+      $email = addslashes($this->txtEditEmail->Text);            
+      $idstatus = $this->rdEditTidakBekerja->Checked===true?'TIDAK_BEKERJA':'PEKERJA';
+      $alamat_kantor = strtoupper(trim($this->txtEditAlamatKantor->Text));									
+      $telp_kantor = addslashes($this->txtEditNoTelpKantor->Text);
+      $idjp = $this->cmbEditPekerjaanOrtu->Text;
+      $pendidikan_terakhir = strtoupper(addslashes($this->txtEditPendidikanTerakhir->Text));
+      $jurusan = strtoupper(addslashes($this->txtEditJurusan->Text));	
+      $kota = strtoupper(addslashes($this->txtEditKotaPendidikanTerakhir->Text));	
+      $provinsi = strtoupper(addslashes($this->txtEditProvinsiPendidikanTerakhir->Text));	
+      $tahun_pa = strtoupper(trim($this->txtEditTahunPendidikanTerakhir->Text));		
+      $jenisslta = $this->cmbEditJenisSLTA->Text;
+      $asal_slta = strtoupper(addslashes($this->txtEditAsalSLTA->Text));			
+      $statusslta = $this->cmbEditStatusSLTA->Text;
+      $nomor_ijazah = trim($this->txtEditNomorIjazah->Text);	
+      
+      //marketing      
+      $id_channel_marketing = $this->cmbEditChannelMarketing->Text;
+      $nama_referensi = trim($this->txtEditNamaReferensi->Text);
+
+      $idkelas = $this->cmbEditKelas->Text; 
+      $kjur1 = $this->cmbEditKjur1->Text;
+      $kjur2 = ($this->cmbEditKjur2->Text)> 0 ? $this->cmbEditKjur2->Text : 0;                       
+      $ta = $this->cmbEditTahunMasuk->Text;
+      $idsmt = $this->cmbEditSemester->Text;           
+        
+      $str = "UPDATE formulir_pendaftaran SET 
+        nama_mhs='$nama_mhs',
+        tempat_lahir='$tempat_lahir',
+        tanggal_lahir='$tgl_lahir',
+        jk='$jk',idagama = $idagama,
+        nama_ibu_kandung='$nama_ibu_kandung',
+        idwarga='$idwarga',
+        nik='$no_ktp',
+        idstatus='$idstatus',
+        alamat_kantor='$alamat_kantor',
+        alamat_rumah='$alamat_rumah',
+        kelurahan='$kelurahan',
+        kecamatan='$kecamatan',
+        telp_kantor='$telp_kantor',
+        telp_rumah='$telp_rumah',
+        telp_hp='$telp_hp',
+        idjp=$idjp,
+        pendidikan_terakhir='$pendidikan_terakhir',
+        jurusan='$jurusan',
+        kota='$kota',
+        provinsi='$provinsi',
+        tahun_pa='$tahun_pa',
+        jenis_slta='$jenisslta',
+        asal_slta='$asal_slta',
+        status_slta='$statusslta',
+        nomor_ijazah='$nomor_ijazah',
+        id_channel_marketing='$id_channel_marketing',
+        nama_referensi='$nama_referensi',
+        idkelas='$idkelas',
+        kjur1='$kjur1',
+        kjur2='$kjur2',
+        ta = $ta,
+        idsmt=$idsmt,
+        daftar_via='WEB' 
+      WHERE no_formulir='$no_formulir'
+      ";
+
+      $this->DB->query('BEGIN');
+      if ($this->DB->updateRecord($str))
+      {
+        $email = $this->txtEditEmail->Text;                
+        $str = "UPDATE profiles_mahasiswa SET email='$email' WHERE no_formulir = $no_formulir";
+        $this->DB->updateRecord($str);
+        
+        $str = "UPDATE register_mahasiswa SET synced='0',sync_msg=NULL WHERE no_formulir = $no_formulir";
+        $this->DB->updateRecord($str);
+
+        $this->DB->query('COMMIT');
+      }else {
+        $this->DB->query('ROLLBACK');
+      }			
+      $this->redirect('spmb.FormulirPendaftaran',true);
+    }
+  }
+
+  public function deleteRecord($sender, $param)
+  {
     $no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);
     try {
-      if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir)) {
+      if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir))
+      {
         throw new Exception ("Tidak menghapus mahasiswa ini karena telah memiliki NIM.");
       }
       $str = "formulir_pendaftaran WHERE no_formulir='$no_formulir'";
       $this->DB->query('BEGIN');
-      if ($this->DB->deleteRecord($str) ) {
+      if ($this->DB->deleteRecord($str))
+      {
         $this->DB->deleteRecord ("transaksi WHERE no_formulir='$no_formulir'");
         $this->DB->query ('COMMIT');
         $this->redirect('spmb.FormulirPendaftaran',true);
-      }else {
+      }
+      else
+      {
         $this->DB->query ('ROLLBACK');
       }	
       
-    } catch (Exception $e) {
+    } 
+    catch (Exception $e)
+    {
       $this->modalMessageError->show();
       $this->lblContentMessageError->Text = $e->getMessage();
     }    	
   }
-  
-  public function closeAddProcess($sender, $param) {
+
+  public function closeAddProcess($sender, $param)
+  {
     unset($_SESSION['addProcess']);
     $this->spmb->redirect('a.m.SPMB.PendaftaranViaFO');
   }
-  public function printOut($sender, $param) {	
+  public function printOut($sender, $param)
+  {	
     $this->createObj('reportspmb');
     $this->linkOutput->Text='';
     $this->linkOutput->NavigateUrl='#';
     switch ($sender->getId()) {
-      case 'btnPrintOutFormulirPendaftaran' :
+      case 'btnPrintOutFormulirPendaftaran':
         switch ($_SESSION['outputreport']) {
-          case 'summarypdf' :
+          case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
-          case 'summaryexcel' :
+          case 'summaryexcel':
             $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
           break;
-          case 'excel2007' :
+          case 'excel2007':
             $kjur = $_SESSION['kjur'];
             $nama_prodi = $_SESSION['daftar_jurusan'][$kjur];
             $tahun = $_SESSION['tahun_pendaftaran'];
@@ -433,7 +509,7 @@ class CFormulirPendaftaran extends MainPageM {
             $this->report->setMode($_SESSION['outputreport']);
             $this->report->printFormulirPendaftaranAll($_SESSION['outputcompress'], $_SESSION['daftar_jurusan'], $this->DMaster);                
           break;
-          case 'pdf' :
+          case 'pdf':
             $kjur = $_SESSION['kjur'];
             $nama_prodi = $_SESSION['daftar_jurusan'][$kjur];
             $tahun = $_SESSION['tahun_pendaftaran'];
@@ -460,18 +536,18 @@ class CFormulirPendaftaran extends MainPageM {
           break;
         }
       break;
-      case 'btnPrintOutFormulirPendaftaranR' :
+      case 'btnPrintOutFormulirPendaftaranR':
         switch ($_SESSION['outputreport']) {
-          case 'summarypdf' :
+          case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
-          case 'summaryexcel' :
+          case 'summaryexcel':
             $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
           break;
-          case 'excel2007' :
+          case 'excel2007':
             $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
           break;
-          case 'pdf' :
+          case 'pdf':
             $no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);
             $dataReport['no_formulir'] = $no_formulir; 
             $dataReport['linkoutput'] = $this->linkOutput; 

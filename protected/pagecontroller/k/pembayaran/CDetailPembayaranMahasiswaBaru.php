@@ -13,7 +13,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
 				$_SESSION['currentPagePembayaranMahasiswaBaru']=array('page_name'=>'k.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'kelas'=>'none', 'tahun_masuk'=>1,'semester_masuk'=>1,'DataMHS'=>array());												
 			}        
             try {
-                $no_formulir=addslashes($this->request['id']);
+                $no_formulir = addslashes($this->request['id']);
                 $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.kjur1,fp.kjur2,idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,pm.photo_profile FROM formulir_pendaftaran fp,profiles_mahasiswa pm WHERE fp.no_formulir=pm.no_formulir AND fp.no_formulir='$no_formulir'";
                 $this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'kjur1', 'kjur2', 'idkelas', 'tahun_masuk', 'semester_masuk', 'photo_profile'));
                 $r = $this->DB->getRecord($str);
@@ -27,7 +27,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                     throw new Exception ("Calon Mahasiswa dengan Nomor Formulir ($no_formulir) tidak lulus dalam SPMB.");		
                 }
                 $datamhs['nama_ps1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];
-                $datamhs['nama_ps2'] = $datamhs['kjur2'] == '' || $datamhs['kjur2'] == 0 ?'N.A' : $_SESSION['daftar_jurusan'][$datamhs['kjur2']];
+                $datamhs['nama_ps2'] = $datamhs['kjur2'] == '' || $datamhs['kjur2'] == 0 ?'N.A': $_SESSION['daftar_jurusan'][$datamhs['kjur2']];
                 if ($spmb['kjur']==$datamhs['kjur1']) {
                     $datamhs['diterima_ps1'] = '<span class="label label-flat border-info text-info-600">DITERIMA</span>';
                     $datamhs['diterima_ps2'] = '<span class="label label-flat border-info text-warning-600">TIDAK DITERIMA</span>';
@@ -79,8 +79,8 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
 		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
-                $item->btnDeleteFromRepeater->Enabled=false;				
-                $item->btnEditFromRepeater->Enabled=false;				
+                $item->btnDeleteFromRepeater->Enabled = false;				
+                $item->btnEditFromRepeater->Enabled = false;				
 			}else{
                 $item->btnDeleteFromRepeater->Attributes->onclick="if(!confirm('Apakah Anda ingin menghapus Transaksi ini?')) return false;";
             }

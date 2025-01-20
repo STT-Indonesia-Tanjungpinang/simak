@@ -17,12 +17,12 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPagePembayaranMahasiswaBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();            
@@ -64,25 +64,25 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
 		$_SESSION['currentPagePembayaranMahasiswaBaru']['search']=true;
 		$this->populateData($_SESSION['currentPagePembayaranMahasiswaBaru']['search']);
 	}
-	public function populateData($search=false) {		
+	public function populateData($search = false) {		
 		$tahun_masuk = $_SESSION['tahun_masuk'];
 		$semester_masuk = $_SESSION['currentPagePembayaranMahasiswaBaru']['semester_masuk'];
 		$kjur = $_SESSION['kjur'];		
         if ($search) {
             $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'no_faktur' :
+                case 'no_faktur':
                     $clausa="AND t.no_faktur='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir $clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t,formulir_pendaftaran fp WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa",'no_transaksi');	
                 break;
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa="AND t.no_formulir='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk $clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t,formulir_pendaftaran fp WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa",'no_transaksi');	
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $str = "SELECT t.no_transaksi,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk $clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t,formulir_pendaftaran fp WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa",'no_transaksi');	

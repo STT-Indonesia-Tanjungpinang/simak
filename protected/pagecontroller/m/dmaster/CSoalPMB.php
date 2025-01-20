@@ -20,7 +20,7 @@ class CSoalPMB extends MainPageM {
 		}		
 	}		
 	public function btnSearch_Click($sender, $param) {		
-		$this->populateData ($this->getStrSearch());
+		$this->populateData($this->getStrSearch());
 	}	
 	public function renderCallback($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
@@ -29,7 +29,7 @@ class CSoalPMB extends MainPageM {
 		$_SESSION['currentPageSoalPMB']['page_num'] = $param->NewPageIndex;
 		$this->populateData();
 	}
-	public function populateData () {	
+	public function populateData() {	
 		$this->RepeaterS->VirtualItemCount=$this->DB->getCountRowsOfTable('soal');	
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageSoalPMB']['page_num'];
 		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;

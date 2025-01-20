@@ -951,7 +951,7 @@ class PHPMailer
             }
         } else {
             //Use this simpler parser
-            $list = explode(',', $addrstr);
+            $list = explode(', ', $addrstr);
             foreach ($list as $address) {
                 $address = trim($address);
                 //Is there a separate name part?
@@ -1469,7 +1469,7 @@ class PHPMailer
             $smtp_from = $this->Sender;
         }
         if (!$this->smtp->mail($smtp_from)) {
-            $this->setError($this->lang('from_failed') . $smtp_from . ' : ' . implode(',', $this->smtp->getError()));
+            $this->setError($this->lang('from_failed') . $smtp_from . ': ' . implode(', ', $this->smtp->getError()));
             throw new phpmailerException($this->ErrorInfo, self::STOP_CRITICAL);
         }
 
@@ -3282,7 +3282,7 @@ class PHPMailer
             foreach ($images[2] as $imgindex => $url) {
                 // Convert data URIs into embedded images
                 if (preg_match('#^data:(image[^;,]*)(;base64)?,#', $url, $match)) {
-                    $data = substr($url, strpos($url, ','));
+                    $data = substr($url, strpos($url, ', '));
                     if ($match[2]) {
                         $data = base64_decode($data);
                     } else {

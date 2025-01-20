@@ -15,8 +15,8 @@ class DetailDulangMHSBaru Extends CDetailDulangMHSBaru {
 		$str = "SELECT MAX(NIM) AS nim FROM register_mahasiswa WHERE tahun='$ta' AND kjur='$kjur'";
 		$this->DB->setFieldTable(array('nim'));
 		$r=$this->DB->getRecord($str);
-		if ($r[1]['nim']=='') {		
-            $tahun=substr($ta,2,2);
+		if ($r[1]['nim']== '') {		
+            $tahun = substr($ta,2,2);
             switch($kjur) {
                 case 1 :
                     $kode=201;

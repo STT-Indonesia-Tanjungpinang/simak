@@ -12,19 +12,19 @@ class KUM extends CKUM {
         $this->linkOutput->NavigateUrl='#';
         
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";                 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="";
                 $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
-                $this->DB->setFieldTable(array('idkrs','no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','tasmt','sah'));
+                $this->DB->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
                 $r=$this->DB->getRecord($str);	           
                 $dataReport=$r[1];
                 
@@ -63,11 +63,11 @@ class KUM extends CKUM {
     public function printKUM ($jenisujian, $dataidkrs, $objKRS, $objDMaster) {
         
         switch ($this->report->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :                
+            case 'excel2003':               
+            case 'excel2007':                
 //                $this->printOut("kum_$nim");
             break;
-            case 'summarypdf' :
+            case 'summarypdf':
                 $this->setMode('pdf');
                 $rpt=$this->report->rpt;
                 
@@ -80,13 +80,13 @@ class KUM extends CKUM {
                     
                     $row=$this->currentRow;
                     $row+=6;
-                    $rpt->SetFont ('helvetica','B',12);	
+                    $rpt->SetFont ('helvetica', 'B',12);	
                     $rpt->setXY(3, $row);			
                     $kartu=($jenisujian=='uts')?'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
                     $rpt->Cell(0, $row, $kartu,0,0,'C');
                     
                     $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
-                    $this->db->setFieldTable(array('idkrs','no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','tasmt','sah'));
+                    $this->db->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
                     $r=$this->db->getRecord($str);	           
                     $dataReport=$r[1];
 
@@ -104,47 +104,47 @@ class KUM extends CKUM {
                     $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                     $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
                     $row+=6;
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(0, $row,'NIM');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nama_mhs'].' ('.$dataReport['jk'].')');
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'Semester');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nama_ps'].' / S-1');
                     $row+=3;
                     $rpt->setXY(3, $row);			
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->Cell(0, $row,'Nama');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nama_dosen']);				
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'T.A');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nim']);
                     $row+=3;
                     $rpt->setXY(3, $row);			
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->Cell(0, $row,'Program Studi');				
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,": $nama_semester / $nama_tahun");				
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'NIRM');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nirm']);			
 
                     $row+=20;
-                    $rpt->SetFont ('helvetica','B',8);
+                    $rpt->SetFont ('helvetica', 'B',8);
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(8, 5, 'NO', 1, 0, 'C');				
                     $rpt->Cell(15, 5, 'KODE', 1, 0, 'C');								
@@ -158,7 +158,7 @@ class KUM extends CKUM {
                     $daftar_matkul=$objKRS->getDetailKRS($idkrs);
                     $totalSks=0;
                     $row+=5;				
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     while (list($k, $v)=each($daftar_matkul)) {
                         $rpt->setXY(3, $row);	
                         $rpt->Cell(8, 5, $v['no'], 1, 0, 'C');				
@@ -189,11 +189,11 @@ class KUM extends CKUM {
 					
                     $row+=3;
                     $rpt->setXY(3, $row);	
-                    $rpt->SetFont ('helvetica','',6);
+                    $rpt->SetFont ('helvetica', '',6);
                     $rpt->Cell(70, 5, 'Catatan : Tanda "*" memiliki arti absensi Mahasiswa kurang dari 75%.' , 0, 0, 'L');	
 
                     $row+=5;
-                    $rpt->SetFont ('helvetica','B',8);
+                    $rpt->SetFont ('helvetica', 'B',8);
                     $rpt->setXY(120, $row);			
                     $rpt->Cell(80, 5, 'Mengetahui,',0,0,'L');				
 
@@ -219,7 +219,7 @@ class KUM extends CKUM {
                 }
                 $this->printOut("kum");
             break;
-            case 'pdf' :
+            case 'pdf':
                 $rpt=$this->report->rpt;
                 $rpt->AddPage();
                 $this->report->setHeaderPT();
@@ -234,7 +234,7 @@ class KUM extends CKUM {
                 
                 $row=$this->report->currentRow;
 				$row+=6;
-				$rpt->SetFont ('helvetica','B',12);	
+				$rpt->SetFont ('helvetica', 'B',12);	
 				$rpt->setXY(3, $row);			
                 $kartu=' KARTU STUDI MAHASISWA (KSM)';
 				$rpt->Cell(0, $row, $kartu,0,0,'C');
@@ -244,41 +244,41 @@ class KUM extends CKUM {
 				$rpt->Cell(0, $row,'UJIAN TENGAH  SEMESTER DAN UJIAN AKHIR SEMESTER',0,0,'C');
 				
 				$row+=6;
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(6, $row);			
 				$rpt->Cell(0, $row,'Nim');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,': '.$this->report->dataReport['nim']);
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0, $row,'Semester');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0, $row,': '."$nama_semester");
 				$row+=3;
 				$rpt->setXY(6, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->Cell(0, $row,'Nama');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,': '.$this->report->dataReport['nama_mhs']);				
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0, $row,'T.A');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0, $row,': '."$nama_tahun");
 				$row+=3;
 				$rpt->setXY(6, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->Cell(0, $row,'Program Studi');				
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,': '.$this->report->dataReport['nama_ps']);						
 				
                 $row+=20;
-				$rpt->SetFont ('helvetica','B',8);
+				$rpt->SetFont ('helvetica', 'B',8);
 				$rpt->setXY(6, $row);			
 				$rpt->Cell(8, 10, 'NO', 1, 0, 'C');				
 				$rpt->Cell(15, 10, 'KODE', 1, 0, 'C');								
@@ -286,7 +286,7 @@ class KUM extends CKUM {
 				$rpt->Cell(8, 10, 'SKS', 1, 0, 'C');							
 				$rpt->Cell(60, 5, 'PARAF PENGAWAS', 1, 0, 'C');
 				$row+=5;
-				$rpt->SetFont ('helvetica','B',8);
+				$rpt->SetFont ('helvetica', 'B',8);
 				$rpt->setXY(107, $row);															
 				$rpt->Cell(30, 5, 'UTS', 1, 0, 'C');				
                 $rpt->Cell(30, 5, 'UAS', 1, 0, 'C');
@@ -294,7 +294,7 @@ class KUM extends CKUM {
                 $daftar_matkul=$objKRS->getDetailKRS($this->report->dataReport['idkrs']);
 				$totalSks=0;
 				$row+=5;				
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
                 while (list($k, $v)=each($daftar_matkul)) {
                     $rpt->setXY(6, $row);	
 					$rpt->Cell(8, 8, $v['no'], 1, 0, 'C');				
@@ -323,19 +323,19 @@ class KUM extends CKUM {
 				
                 $row+=6;
 				$rpt->setXY(3, $row);	
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->Cell(70, 5, 'Catatan : - KSM ini sah apabila telah ditandatangani oleh Mahasiswa dan Bagian Akademik serta telah dibubuhi stempel ' , 0, 0, 'L');	
 				$row+=3;
 				$rpt->setXY(17, $row);	
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->Cell(70, 5, 'dan sudah di verifikasi oleh bagian keuangan.' , 0, 0, 'L');
 				$row+=3;
 				$rpt->setXY(15, $row);	
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->Cell(70, 5, '- KSM merupakan bukti sah pengambilan mata kuliah & syarat untuk mengikuti Ujian Tengah Semester (UTS)' , 0, 0, 'L');
 				$row+=3;
 				$rpt->setXY(15, $row);	
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->Cell(70, 5, '  dan Ujian Akhir Semester (UAS) serta menjadi syarat pedaftaran semester berikutnya.' , 0, 0, 'L');
 
 												
@@ -356,13 +356,13 @@ class KUM extends CKUM {
 
 				$row+=10;				
 				$rpt->setXY(30, $row);	
-				$rpt->Cell(50, 5, 'VERIFIKASI UTS','T,L,R',0,'C');
+				$rpt->Cell(50, 5, 'VERIFIKASI UTS', 'T,L,R',0,'C');
 				$rpt->setXY(100, $row);
-				$rpt->Cell(50, 5, 'VERIFIKASI UAS','T,L,R',0,'C');			
+				$rpt->Cell(50, 5, 'VERIFIKASI UAS', 'T,L,R',0,'C');			
 				$rpt->setXY(30, $row);	
-				$rpt->Cell(50, 20, '','B,L,R',0,'C');
+				$rpt->Cell(50, 20, '', 'B,L,R',0,'C');
 				$rpt->setXY(100, $row);
-				$rpt->Cell(50, 20, '','B,L,R',0,'C');
+				$rpt->Cell(50, 20, '', 'B,L,R',0,'C');
 				
                 $this->report->printOut("kum_$nim");
             break;

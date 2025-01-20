@@ -104,7 +104,7 @@ class PHPExcel_Calculation_Database
                 }
             }
             if ($testConditionCount > 1) {
-                $testConditions[] = 'OR(' . implode(',', $testCondition) . ')';
+                $testConditions[] = 'OR(' . implode(', ', $testCondition) . ')';
                 $testConditionsCount++;
             } elseif ($testConditionCount == 1) {
                 $testConditions[] = $testCondition[0];
@@ -113,7 +113,7 @@ class PHPExcel_Calculation_Database
         }
 
         if ($testConditionsCount > 1) {
-            $testConditionSet = 'AND(' . implode(',', $testConditions) . ')';
+            $testConditionSet = 'AND(' . implode(', ', $testConditions) . ')';
         } elseif ($testConditionsCount == 1) {
             $testConditionSet = $testConditions[0];
         }

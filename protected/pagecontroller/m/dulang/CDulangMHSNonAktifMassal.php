@@ -8,7 +8,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSNonAktifMassal'])||$_SESSION['currentPageDulangMHSNonAktifMassal']['page_name']!='m.dulang.DulangMHSNonAktif') {
-				$_SESSION['currentPageDulangMHSNonAktifMassal']=array('page_name'=>'m.dulang.DulangMHSNonAktif', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$this->setup->getSettingValue('default_ta'),'ta'=>$_SESSION['ta'],'semester'=>$_SESSION['semester']);												
+				$_SESSION['currentPageDulangMHSNonAktifMassal']=array('page_name'=>'m.dulang.DulangMHSNonAktif', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$this->setup->getSettingValue('default_ta'), 'ta'=>$_SESSION['ta'],'semester'=>$_SESSION['semester']);												
 			}
             $_SESSION['currentPageDulangMHSNonAktifMassal']['search']=false;
             
@@ -23,12 +23,12 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
             $this->labelTahunNonAktif->Text = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
             $this->hiddentahunmasukmass->Value=$_SESSION['tahun_masuk'];
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
             $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
             $this->hiddentamass->Value=$_SESSION['ta'];
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
             $this->tbCmbSemester->DataSource = $semester;
             $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
@@ -96,7 +96,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
         $_SESSION['currentPageDulangMHSNonAktifMassal']['search']=true;
         $this->populateData($_SESSION['currentPageDulangMHSNonAktifMassal']['search']);
     }
-    public function populateData($search=false) {
+    public function populateData($search = false) {
         $ta = $_SESSION['currentPageDulangMHSNonAktifMassal']['ta'];
 		$idsmt = $_SESSION['currentPageDulangMHSNonAktifMassal']['semester'];
 		$kjur = $_SESSION['kjur'];
@@ -104,17 +104,17 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
            
         if ($search) {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tahun_masuk,vdm.k_status,vdm.idkelas,vdm.iddosen_wali FROM v_datamhs vdm WHERE vdm.nim NOT IN (SELECT nim FROM dulang WHERE idsmt=$idsmt AND tahun = $ta) AND vdm.kjur = $kjur AND vdm.k_status != 'K' AND vdm.k_status!='L' AND vdm.k_status!='D' AND vdm.tahun_masuk = $tahun_masuk";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa="AND vdm.no_formulir='$txtsearch'";
                     $str = "$str $clausa";
                 break;
-                case 'nim' :
+                case 'nim':
                     $clausa="AND d.nim='$txtsearch'";
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $str = "$str $clausa";
                 break;
@@ -144,7 +144,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
                     $idkelas = $inputan->hiddenidkelas->Value;;
                     $status_sebelumnya = $inputan->hiddenstatus->Value;
                     $tasmt=$ta.$idsmt;
-                    $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$idsmt', '$tasmt',NOW(),'$idkelas', '$status_sebelumnya', 'N')";														
+                    $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$idsmt', '$tasmt',NOW(), '$idkelas', '$status_sebelumnya', 'N')";														
                     if ($this->DB->insertRecord($str)) {
                         if ($status == 1) {
                             $str = "UPDATE register_mahasiswa SET k_status='N' WHERE nim='$nim'";			

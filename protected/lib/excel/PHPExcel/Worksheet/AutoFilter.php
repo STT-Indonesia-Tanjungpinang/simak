@@ -792,14 +792,14 @@ class PHPExcel_Worksheet_AutoFilter
                         array('PHPExcel_Worksheet_AutoFilter', $columnFilterTest['method']),
                         array($cellValue, $columnFilterTest['arguments'])
                     );
-//                echo (($result) ? 'VALID' : 'INVALID'),PHP_EOL;
+//                echo (($result) ? 'VALID': 'INVALID'),PHP_EOL;
                 //    If filter test has resulted in FALSE, exit the loop straightaway rather than running any more tests
                 if (!$result) {
                     break;
                 }
             }
             //    Set show/hide for the row based on the result of the autoFilter result
-//            echo (($result) ? 'SHOW' : 'HIDE'),PHP_EOL;
+//            echo (($result) ? 'SHOW': 'HIDE'),PHP_EOL;
             $this->workSheet->getRowDimension($row)->setVisible($result);
         }
 

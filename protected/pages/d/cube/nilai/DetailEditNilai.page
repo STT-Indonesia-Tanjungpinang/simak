@@ -332,7 +332,7 @@
                   <td><%=$this->DataItem['am']%></td>
                   <td>
                     <%=$this->DataItem['n_kual']%>
-                    (<%=$this->DataItem['published'] == 0 ? 'BELUM PUBLISH' : 'PUBLISH'%>)
+                    (<%=$this->DataItem['published'] == 0 ? 'BELUM PUBLISH': 'PUBLISH'%>)
                   </td>
                 </tr>
               </prop:ItemTemplate>				                

@@ -19,11 +19,11 @@ class CEvaluasiHasilBelajar extends MainPageD {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -90,13 +90,13 @@ class CEvaluasiHasilBelajar extends MainPageD {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $this->Nilai->getInfoKelas($idkelas_mhs);
                 
                 $dataReport=$this->Nilai->InfoKelas;
@@ -112,7 +112,7 @@ class CEvaluasiHasilBelajar extends MainPageD {
                 $messageprintout="Format Evaluasi Hasil Belajar: <br/>";  
                 $this->report->printFormatEvaluasiHasilBelajar($this->Nilai);              
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode PDF belum kami support.";
             break;
 

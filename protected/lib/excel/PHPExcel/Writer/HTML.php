@@ -1034,7 +1034,7 @@ class PHPExcel_Writer_HTML extends PHPExcel_Writer_Abstract implements PHPExcel_
 //        $css = $this->mapBorderStyle($pStyle->getBorderStyle()) . ' #' . $pStyle->getColor()->getRGB();
         //    Create CSS - add !important to non-none border styles for merged cells
         $borderStyle = $this->mapBorderStyle($pStyle->getBorderStyle());
-        $css = $borderStyle . ' #' . $pStyle->getColor()->getRGB() . (($borderStyle == 'none') ? '' : ' !important');
+        $css = $borderStyle . ' #' . $pStyle->getColor()->getRGB() . (($borderStyle == 'none') ? '': ' !important');
 
         return $css;
     }
@@ -1052,7 +1052,7 @@ class PHPExcel_Writer_HTML extends PHPExcel_Writer_Abstract implements PHPExcel_
 
         // Create CSS
         $value = $pStyle->getFillType() == PHPExcel_Style_Fill::FILL_NONE ?
-            'white' : '#' . $pStyle->getStartColor()->getRGB();
+            'white': '#' . $pStyle->getStartColor()->getRGB();
         $css['background-color'] = $value;
 
         return $css;
@@ -1087,7 +1087,7 @@ class PHPExcel_Writer_HTML extends PHPExcel_Writer_Abstract implements PHPExcel_
         $html .= $this->setMargins($pSheet);
             
         if (!$this->useInlineCss) {
-            $gridlines = $pSheet->getShowGridlines() ? ' gridlines' : '';
+            $gridlines = $pSheet->getShowGridlines() ? ' gridlines': '';
             $html .= '    <table border="0" cellpadding="0" cellspacing="0" id="sheet' . $sheetIndex . '" class="sheet' . $sheetIndex . $gridlines . '">' . PHP_EOL;
         } else {
             $style = isset($this->cssStyles['table']) ?

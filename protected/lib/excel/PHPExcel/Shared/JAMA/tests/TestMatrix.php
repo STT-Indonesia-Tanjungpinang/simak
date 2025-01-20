@@ -83,13 +83,13 @@ class TestMatrix {
     $tmp = $B->get(0,0);
     $avals[0][0] = 0.0;
     /** check that constructWithCopy behaves properly **/
-    if ( ( $tmp - $B->get(0,0) ) != 0.0 )
+    if ( ( $tmp - $B->get(0,0)) != 0.0 )
       $errorCount = $this->try_failure($errorCount,"constructWithCopy... ","copy not effected... data visible outside");
     else
       $this->try_success("constructWithCopy... ","");
 
     $I = new Matrix($ivals);
-    if ( $this->checkMatrices($I,Matrix::identity(3,4)) )
+    if ( $this->checkMatrices($I,Matrix::identity(3,4)))
       $this->try_success("identity... ","");
     else
       $errorCount = $this->try_failure($errorCount,"identity... ","identity Matrix not successfully created");
@@ -177,7 +177,7 @@ class TestMatrix {
     echo "<p>Testing linear algebra methods...<p>";
 
     $A = new Matrix($columnwise, 3);
-    if( $this->checkMatrices($A->transpose(), $T) )
+    if( $this->checkMatrices($A->transpose(), $T))
       $this->try_success("Transpose check...");
     else
       $errorCount = $this->try_failure($errorCount, "Transpose check...", "Matrices are not equal");
@@ -244,13 +244,13 @@ class TestMatrix {
 
     $LU = $A->lu();
     $L  = $LU->getL();
-    if ( $this->checkMatrices($A->getMatrix($LU->getPivot(),0, $n-1), $L->times($LU->getU())) )
+    if ( $this->checkMatrices($A->getMatrix($LU->getPivot(),0, $n-1), $L->times($LU->getU())))
       $this->try_success("LUDecomposition...","");
     else
       $errorCount = $this->try_failure($errorCount,"LUDecomposition...","incorrect LU decomposition calculation");
 
     $X = $A->inverse();
-    if ( $this->checkMatrices($A->times($X),Matrix::identity(3,3)) )
+    if ( $this->checkMatrices($A->times($X),Matrix::identity(3,3)))
        $this->try_success("inverse()...","");
      else
        $errorCount = $this->try_failure($errorCount, "inverse()...","incorrect inverse calculation");
@@ -273,7 +273,7 @@ class TestMatrix {
     $O   = new Matrix($SUB->getRowDimension(),1,1.0);
     $SOL = new Matrix($sqSolution);
     $SQ = $SUB->getMatrix(0, $SUB->getRowDimension()-1,0, $SUB->getRowDimension()-1);
-    if ( $this->checkMatrices($SQ->solve($SOL), $O) )
+    if ( $this->checkMatrices($SQ->solve($SOL), $O))
       $this->try_success("solve()...","");
     else
      $errorCount = $this->try_failure($errorCount,"solve()...","incorrect lu solve calculation");
@@ -281,13 +281,13 @@ class TestMatrix {
     $A = new Matrix($pvals);
     $Chol = $A->chol();
     $L = $Chol->getL();
-    if ( $this->checkMatrices($A, $L->times($L->transpose())) )
+    if ( $this->checkMatrices($A, $L->times($L->transpose())))
       $this->try_success("CholeskyDecomposition...","");
     else
       $errorCount = $this->try_failure($errorCount,"CholeskyDecomposition...","incorrect Cholesky decomposition calculation");
 
     $X = $Chol->solve(Matrix::identity(3,3));
-    if ( $this->checkMatrices($A->times($X), Matrix::identity(3,3)) )
+    if ( $this->checkMatrices($A->times($X), Matrix::identity(3,3)))
       $this->try_success("CholeskyDecomposition solve()...","");
     else
       $errorCount = $this->try_failure($errorCount,"CholeskyDecomposition solve()...","incorrect Choleskydecomposition solve calculation");
@@ -295,7 +295,7 @@ class TestMatrix {
     $Eig = $A->eig();
     $D = $Eig->getD();
     $V = $Eig->getV();
-    if( $this->checkMatrices($A->times($V), $V->times($D)) )
+    if( $this->checkMatrices($A->times($V), $V->times($D)))
       $this->try_success("EigenvalueDecomposition (symmetric)...","");
     else
       $errorCount = $this->try_failure($errorCount,"EigenvalueDecomposition (symmetric)...","incorrect symmetric Eigenvalue decomposition calculation");
@@ -304,7 +304,7 @@ class TestMatrix {
     $Eig = $A->eig();
     $D = $Eig->getD();
     $V = $Eig->getV();
-    if ( $this->checkMatrices($A->times($V), $V->times($D)) )
+    if ( $this->checkMatrices($A->times($V), $V->times($D)))
       $this->try_success("EigenvalueDecomposition (nonsymmetric)...","");
     else
       $errorCount = $this->try_failure($errorCount,"EigenvalueDecomposition (nonsymmetric)...","incorrect nonsymmetric Eigenvalue decomposition calculation");

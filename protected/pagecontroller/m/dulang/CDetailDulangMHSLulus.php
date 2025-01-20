@@ -46,7 +46,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
           $bool_bebas_perpustakaan=true;
           $this->literalBebasPerpustakaan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
           if ($bool_sks == false || $bool_bebas_keuangan==false || $bool_bebas_perpustakaan == false) {
-            $this->btnSave->Enabled=false;
+            $this->btnSave->Enabled = false;
             $this->btnSave->CssClass='btn';
           }
           $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
@@ -97,7 +97,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
         $this->Nilai->setDataMHS(array('nim'=>$nim));
         $datadulang=$this->Nilai->getDataDulang($semester, $ta);
         if (isset($datadulang['iddulang'])) {
-          $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(),'$kelas', '$status_sebelumnnya', 'L')";
+          $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(), '$kelas', '$status_sebelumnnya', 'L')";
           $this->DB->insertRecord($str);
         }else{
           $iddulang=$datadulang['iddulang'];

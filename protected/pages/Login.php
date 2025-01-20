@@ -13,34 +13,34 @@ class Login extends MainPage {
 	}
     private function getGoingToPage () {		
 		switch ($this->cmbGoingTo->Text) {
-            case 'sa' :
+            case 'sa':
 				$page = 'SuperAdmin';
 			break;
-			case 'm' :
+			case 'm':
 				$page = 'Manajemen';
 			break;
-			case 'k' :
+			case 'k':
 				$page = 'Keuangan';
 			break;  
-            case 'on' :
+            case 'on':
 				$page = 'OperatorNilai';
 			break;
-            case 'd' :
+            case 'd':
 				$page = 'Dosen';
 			break;
-			case 'dw' :
+			case 'dw':
 				$page = 'DosenWali';
 			break;
-			case 'mh' :
+			case 'mh':
 				$page = 'Mahasiswa';
 			break;
-            case 'al' :
+            case 'al':
 				$page = 'Alumni';
 			break;
-			case 'mb' :
+			case 'mb':
 				$page = 'MahasiswaBaru';
 			break;		
-			case 'ot' :
+			case 'ot':
 				$page = 'OrangtuaWali';
 			break;
 		}		
@@ -84,10 +84,10 @@ class Login extends MainPage {
     public function doLogin ($sender, $param) {
         if ($this->IsValid) {                        
             $pengguna=$this->getLogic('Users');      
-            $setup=$this->getLogic('Setup');
+            $setup = $this->getLogic('Setup');
             $dmaster=$this->getLogic('DMaster');
             switch ($pengguna->getTipeUser()) {
-                case 'sa' :
+                case 'sa':
                     //daftar prodi diload saat awal, tujuannya supaya tidak terus2an diload.
                     $_SESSION['daftar_jurusan']=$dmaster->getListProgramStudi(2);
                     $_SESSION['kjur']=$setup->getSettingValue('default_kjur');
@@ -98,7 +98,7 @@ class Login extends MainPage {
                     
                     $foto='resources/userimages/no_photo.png';
                 break; 
-                case 'dw' :
+                case 'dw':
                     //daftar prodi diload saat awal, tujuannya supaya tidak terus2an diload.
                     $_SESSION['daftar_jurusan']=$dmaster->getListProgramStudi(2);
                     $_SESSION['kjur']=$setup->getSettingValue('default_kjur');           
@@ -109,7 +109,7 @@ class Login extends MainPage {
                     
                     $foto='resources/userimages/no_photo.png';
                 break;
-                case 'd' :
+                case 'd':
                     //daftar prodi diload saat awal, tujuannya supaya tidak terus2an diload.
                     $_SESSION['daftar_jurusan']=$dmaster->getListProgramStudi(2);
                     $_SESSION['kjur']=$setup->getSettingValue('default_kjur');           
@@ -120,7 +120,7 @@ class Login extends MainPage {
                     
                     $foto='resources/userimages/no_photo.png';
                 break;
-                case 'm' :                    
+                case 'm':                    
                     //daftar prodi diload saat awal, tujuannya supaya tidak terus2an diload.
                     $_SESSION['daftar_jurusan']=$dmaster->getListProgramStudi(2);
                     $_SESSION['kjur']=$setup->getSettingValue('default_kjur');           
@@ -131,7 +131,7 @@ class Login extends MainPage {
                     
                     $foto=$pengguna->getDataUser('photo_profile');
                 break;                
-                case 'mh' :
+                case 'mh':
                     $_SESSION['daftar_jurusan']=$dmaster->getListProgramStudi(2);
                     $_SESSION['ta']=$setup->getSettingValue('default_ta') < $pengguna->getDataUser('tahun_masuk') ? $pengguna->getDataUser('tahun_masuk') :$setup->getSettingValue('default_ta');
                     $_SESSION['semester']=$setup->getSettingValue('default_semester');
@@ -139,7 +139,7 @@ class Login extends MainPage {
                     $_SESSION['tahun_pendaftaran']=$_SESSION['tahun_masuk'];
                     $foto=$pengguna->getDataUser('photo_profile');
                 break;
-                case 'k' :
+                case 'k':
                     //daftar prodi diload saat awal, tujuannya supaya tidak terus2an diload.
                     $_SESSION['daftar_jurusan']=$dmaster->getListProgramStudi(2);
                     $_SESSION['kjur']=$setup->getSettingValue('default_kjur');
@@ -150,7 +150,7 @@ class Login extends MainPage {
                     
                     $foto='resources/userimages/no_photo.png';
                 break; 
-                case 'on' :
+                case 'on':
                     $group_id=$pengguna->getDataUser('group_id');
                     if ($group_id==3) {//prodi
                         $kjur=$pengguna->getDataUser('kjur');
@@ -168,7 +168,7 @@ class Login extends MainPage {
                     $_SESSION['tahun_pendaftaran']=$setup->getSettingValue('default_tahun_pendaftaran'); 
                     $foto='resources/userimages/no_photo.png';
                 break; 
-                case 'mb' :
+                case 'mb':
                     $_SESSION['ta']=$pengguna->getDataUser('tahun_masuk');
                     //daftar prodi diload saat awal, tujuannya supaya tidak terus2an diload.
                     $_SESSION['daftar_jurusan']=$dmaster->getListProgramStudi(2); 

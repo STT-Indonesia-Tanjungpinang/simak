@@ -732,7 +732,7 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
 //                                echo 'Author: ', $author,'<br />';
                             }
                             $node = $cell->Comment->Data->asXML();
-//                            $annotation = str_replace('html:','',substr($node,49,-10));
+//                            $annotation = str_replace('html:', '',substr($node,49,-10));
 //                            echo $annotation,'<br />';
                             $annotation = strip_tags($node);
 //                            echo 'Annotation: ', $annotation,'<br />';

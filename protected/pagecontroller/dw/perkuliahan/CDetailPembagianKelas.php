@@ -35,20 +35,20 @@ public function onLoad($param) {
             $this->tbCmbOutputReport->DataBind();
             
             if ($_SESSION['currentPagePembagianKelas']['iddosen'] == 'none') {
-                $this->cmbAddMatakuliah->Enabled=false;
-                $this->cmbAddKelas->Enabled=false;
-                $this->cmbAddHari->Enabled=false;
-                $this->txtAddJamMasuk->Enabled=false;
-                $this->txtAddJamKeluar->Enabled=false;                
-                $this->cmbAddRuang->Enabled=false;
-                $this->btnSave->Enabled=false;
+                $this->cmbAddMatakuliah->Enabled = false;
+                $this->cmbAddKelas->Enabled = false;
+                $this->cmbAddHari->Enabled = false;
+                $this->txtAddJamMasuk->Enabled = false;
+                $this->txtAddJamKeluar->Enabled = false;                
+                $this->cmbAddRuang->Enabled = false;
+                $this->btnSave->Enabled = false;
                 $this->RepeaterS->DataSource=array();
                 $this->RepeaterS->dataBind();  
             }else{
                 $str = "SELECT idpengampu_penyelenggaraan,kmatkul,nmatkul FROM v_pengampu_penyelenggaraan WHERE kjur = $kjur AND tahun = $ta AND idsmt=$idsmt AND iddosen = $iddosen";
                 $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'kmatkul', 'nmatkul'));
                 $r = $this->DB->getRecord($str);	
-                $daftar_matakuliah=array('none'=>'Daftar Matakuliah yang di Ampu');
+                $daftar_matakuliah = array('none'=>'Daftar Matakuliah yang di Ampu');
                 
                 while (list($k, $v) = each($r)) {
                     $kmatkul = $this->Demik->getKMatkul($v['kmatkul']);
@@ -63,7 +63,7 @@ public function onLoad($param) {
                 $this->cmbAddKelas->dataBind();	
                 
                 //load hari 				
-				$this->cmbAddHari->DataSource = $this->DMaster->removeIdFromArray($this->TGL->getNamaHari(),'none');
+				$this->cmbAddHari->DataSource = $this->DMaster->removeIdFromArray($this->TGL->getNamaHari(), 'none');
 				$this->cmbAddHari->dataBind();
                 
                 //load kelas 				
@@ -88,7 +88,7 @@ public function onLoad($param) {
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}    
-	public function populateData($search=false) {	
+	public function populateData($search = false) {	
         $ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];
         $kjur = $_SESSION['kjur'];        
@@ -111,7 +111,7 @@ public function onLoad($param) {
     public function saveData($sender, $param) {
         if ($this->IsValid) {
             $iddosen = $_SESSION['currentPagePembagianKelas']['iddosen'];
-            if ($iddosen == 'none' || $iddosen=='') {
+            if ($iddosen == 'none' || $iddosen== '') {
                 $this->redirect('perkuliahan.DetailPembagianKelas', true);
             }else{
                 $id_pengampu_penyelenggaraan = $this->cmbAddMatakuliah->Text;
@@ -119,7 +119,7 @@ public function onLoad($param) {
                 $nama_kelas = $this->DB->getMaxOfRecord('nama_kelas',"kelas_mhs WHERE idkelas='$idkelas' AND idpengampu_penyelenggaraan = $id_pengampu_penyelenggaraan")+1;
                 $hari = $this->cmbAddHari->Text;
                 $jam_masuk=addslashes($this->txtAddJamMasuk->Text);
-                $jam_keluar=addslashes($this->txtAddJamKeluar->Text);
+                $jam_keluar = addslashes($this->txtAddJamKeluar->Text);
                 $ruangkelas = $this->cmbAddRuang->Text;
 
                 $str = "INSERT INTO kelas_mhs (idkelas_mhs,idkelas,nama_kelas,hari,jam_masuk,jam_keluar,idpengampu_penyelenggaraan,idruangkelas) VALUES (NULL,'$idkelas', $nama_kelas,'$hari', '$jam_masuk', '$jam_keluar', $id_pengampu_penyelenggaraan,'$ruangkelas')";				
@@ -154,7 +154,7 @@ public function onLoad($param) {
             $idkelas_mhs = $this->hiddenid->Value;
             $hari = $this->cmbEditHari->Text;
             $jam_masuk=addslashes($this->txtEditJamMasuk->Text);
-            $jam_keluar=addslashes($this->txtEditJamKeluar->Text);
+            $jam_keluar = addslashes($this->txtEditJamKeluar->Text);
             $ruangkelas = $this->cmbEditRuang->Text;
             
             $str = "UPDATE kelas_mhs SET hari='$hari',jam_masuk='$jam_masuk',jam_keluar='$jam_keluar',idruangkelas='$ruangkelas' WHERE idkelas_mhs = $idkelas_mhs";		
@@ -180,13 +180,13 @@ public function onLoad($param) {
         $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataReport=$this->Demik->getInfoKelas($idkelas_mhs);
 		switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :               
+            case 'excel2007':               
                 $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas']+64);
                 $dataReport['hari'] = $this->Page->TGL->getNamaHari($dataReport['hari']);
                 
@@ -201,7 +201,7 @@ public function onLoad($param) {
                 $messageprintout="Daftar Hadir Mahasiswa : <br/>";
                 $this->report->printDaftarHadirMahasiswa();
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
         }                

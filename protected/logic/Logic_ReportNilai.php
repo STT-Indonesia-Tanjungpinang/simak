@@ -17,11 +17,11 @@ class Logic_ReportNilai extends Logic_Report {
     $nama_semester=$this->dataReport['nama_semester'];
     switch ($this->getDriver()) 
     {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
 //                $this->printOut("khs_$nim");
       break;
-      case 'pdf' :
+      case 'pdf':
         $rpt=$this->rpt;
         $rpt->setTitle('KHS Mahasiswa');
         $rpt->setSubject('KHS Mahasiswa');
@@ -30,51 +30,51 @@ class Logic_ReportNilai extends Logic_Report {
         
         $row=$this->currentRow;
         $row+=6;
-        $rpt->SetFont ('helvetica','B',12);	
+        $rpt->SetFont ('helvetica', 'B',12);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'KARTU HASIL STUDI (KHS)',0,0,'C');
         $row+=6;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Nama Mahasiswa (L/P)');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$this->dataReport['nama_mhs'].' ('.$this->dataReport['jk'].')');
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'P.S / Jenjang');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$this->dataReport['nama_ps'].' / S-1');
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'Penasihat Akademik');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$this->dataReport['nama_dosen']);				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'NIM');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,": $nim");
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'Semester/TA');				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,": $nama_semester / $ta");				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'NIRM');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$this->dataReport['nirm']);			
         
         $row+=20;
-        $rpt->SetFont ('helvetica','B',8);
+        $rpt->SetFont ('helvetica', 'B',8);
         $rpt->setXY(3, $row);			
         $rpt->Cell(13, 5, 'NO', 1, 0, 'C');				
         $rpt->Cell(15, 5, 'KODE', 1, 0, 'C');								
@@ -89,13 +89,13 @@ class Logic_ReportNilai extends Logic_Report {
         $totalNm=0;
         $row+=5;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         while (list($k, $v)=each($dn)) {
           $rpt->setXY(3, $row);			
           $rpt->Cell(13, 5, $v['no'], 1, 0, 'C');							
           $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
           $rpt->Cell(80, 5, $v['nmatkul'], 1, 0, 'L');				
-          $n_kual=$v['n_kual']==''?'-':$v['n_kual'];
+          $n_kual=$v['n_kual']== ''?'-':$v['n_kual'];
           $sks = $v['sks'];
           $m=$v['m'];										
           $rpt->Cell(10, 5, $n_kual, 1, 0, 'C');					
@@ -145,7 +145,7 @@ class Logic_ReportNilai extends Logic_Report {
         
         if ($withsignature) {
           $row+=5;
-          $rpt->SetFont ('helvetica','B',8);
+          $rpt->SetFont ('helvetica', 'B',8);
           $rpt->setXY(31, $row);			
           $rpt->Cell(60, 5, 'Mengetahui',0,0,'C');				
 
@@ -172,7 +172,7 @@ class Logic_ReportNilai extends Logic_Report {
 
           $row+=5;
           $rpt->setXY(31, $row);			
-          $nama_jabatan=strtoupper($this->dataReport['jabfung_penandatangan_khs']);
+          $nama_jabatan = strtoupper($this->dataReport['jabfung_penandatangan_khs']);
           $nidn = $this->dataReport['nidn_penandatangan_khs'];
           $rpt->Cell(60, 5, "$nama_jabatan NIDN : $nidn",0,0,'C');
           $rpt->Cell(80, 5, strtoupper($this->dataReport['jabfung_kaprodi']). ' NIDN : '.$this->dataReport['nidn_kaprodi'],0,0,'C');
@@ -194,11 +194,11 @@ class Logic_ReportNilai extends Logic_Report {
     $nama_tahun = $this->dataReport['nama_tahun'];
     $nama_semester=$this->dataReport['nama_semester'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
 //                $this->printOut("khs_$nim");
       break;
-      case 'pdf' :
+      case 'pdf':
         $rpt=$this->rpt;
         $rpt->setTitle('KHS Mahasiswa');
         $rpt->setSubject('KHS Mahasiswa');
@@ -208,7 +208,7 @@ class Logic_ReportNilai extends Logic_Report {
             $idkrs = $repeater->DataKeys[$item->getItemIndex()];                        
             
             $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs = $idkrs";
-            $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','iddosen_wali'));
+            $this->db->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
             $r=$this->db->getRecord($str);	           
             $dataMhs = $r[1];
             $nim = $dataMhs['nim'];
@@ -218,52 +218,52 @@ class Logic_ReportNilai extends Logic_Report {
                                 
             $row=$this->currentRow;
             $row+=6;
-            $rpt->SetFont ('helvetica','B',12);	
+            $rpt->SetFont ('helvetica', 'B',12);	
             $rpt->setXY(3, $row);			
             $rpt->Cell(0, $row,'KARTU HASIL STUDI (KHS)',0,0,'C');
             $row+=6;
-            $rpt->SetFont ('helvetica','B',8);	
+            $rpt->SetFont ('helvetica', 'B',8);	
             $rpt->setXY(3, $row);			
             $rpt->Cell(0, $row,'Nama Mahasiswa (L/P)');
-            $rpt->SetFont ('helvetica','',8);
+            $rpt->SetFont ('helvetica', '',8);
             $rpt->setXY(38, $row);			
             $rpt->Cell(0, $row,': '.$dataMhs['nama_mhs'].' ('.$dataMhs['jk'].')');
-            $rpt->SetFont ('helvetica','B',8);	
+            $rpt->SetFont ('helvetica', 'B',8);	
             $rpt->setXY(105, $row);			
             $rpt->Cell(0, $row,'P.S / Jenjang');
-            $rpt->SetFont ('helvetica','',8);
+            $rpt->SetFont ('helvetica', '',8);
             $rpt->setXY(130, $row);			
             $rpt->Cell(0, $row,': '.$dataMhs['nama_ps'].' / S-1');
             $row+=3;
             $rpt->setXY(3, $row);			
-            $rpt->SetFont ('helvetica','B',8);	
+            $rpt->SetFont ('helvetica', 'B',8);	
             $rpt->Cell(0, $row,'Penasihat Akademik');
-            $rpt->SetFont ('helvetica','',8);
+            $rpt->SetFont ('helvetica', '',8);
             $rpt->setXY(38, $row);			
             $nama_dosen = $objDMaster->getNamaDosenWaliByID ($dataMhs['iddosen_wali']);
             $rpt->Cell(0, $row,": $nama_dosen");				
-            $rpt->SetFont ('helvetica','B',8);	
+            $rpt->SetFont ('helvetica', 'B',8);	
             $rpt->setXY(105, $row);			
             $rpt->Cell(0, $row,'NIM');
-            $rpt->SetFont ('helvetica','',8);
+            $rpt->SetFont ('helvetica', '',8);
             $rpt->setXY(130, $row);			
             $rpt->Cell(0, $row,": $nim");
             $row+=3;
             $rpt->setXY(3, $row);			
-            $rpt->SetFont ('helvetica','B',8);	
+            $rpt->SetFont ('helvetica', 'B',8);	
             $rpt->Cell(0, $row,'Semester/TA');				
-            $rpt->SetFont ('helvetica','',8);
+            $rpt->SetFont ('helvetica', '',8);
             $rpt->setXY(38, $row);			
             $rpt->Cell(0, $row,": $nama_semester / $ta");				
-            $rpt->SetFont ('helvetica','B',8);	
+            $rpt->SetFont ('helvetica', 'B',8);	
             $rpt->setXY(105, $row);			
             $rpt->Cell(0, $row,'NIRM');
-            $rpt->SetFont ('helvetica','',8);
+            $rpt->SetFont ('helvetica', '',8);
             $rpt->setXY(130, $row);			
             $rpt->Cell(0, $row,': '.$dataMhs['nirm']);			
 
             $row+=20;
-            $rpt->SetFont ('helvetica','B',8);
+            $rpt->SetFont ('helvetica', 'B',8);
             $rpt->setXY(3, $row);			
             $rpt->Cell(13, 5, 'NO', 1, 0, 'C');				
             $rpt->Cell(15, 5, 'KODE', 1, 0, 'C');								
@@ -278,13 +278,13 @@ class Logic_ReportNilai extends Logic_Report {
             $totalNm=0;
             $row+=5;
             $rpt->setXY(3, $row);			
-            $rpt->SetFont ('helvetica','',8);
+            $rpt->SetFont ('helvetica', '',8);
             while (list($k, $v)=each($dn)) {
               $rpt->setXY(3, $row);			
               $rpt->Cell(13, 5, $v['no'], 1, 0, 'C');							
               $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
               $rpt->Cell(80, 5, $v['nmatkul'], 1, 0, 'L');				
-              $n_kual=$v['n_kual']==''?'-':$v['n_kual'];
+              $n_kual=$v['n_kual']== ''?'-':$v['n_kual'];
               $sks = $v['sks'];
               $m=$v['m'];										
               $rpt->Cell(10, 5, $n_kual, 1, 0, 'C');					
@@ -334,7 +334,7 @@ class Logic_ReportNilai extends Logic_Report {
 
             if ($withsignature) {
               $row+=5;
-              $rpt->SetFont ('helvetica','B',8);
+              $rpt->SetFont ('helvetica', 'B',8);
               $rpt->setXY(31, $row);			
               $rpt->Cell(60, 5, 'Mengetahui',0,0,'C');				
 
@@ -361,7 +361,7 @@ class Logic_ReportNilai extends Logic_Report {
 
               $row+=5;
               $rpt->setXY(31, $row);			
-              $nama_jabatan=strtoupper($this->dataReport['jabfung_penandatangan_khs']);
+              $nama_jabatan = strtoupper($this->dataReport['jabfung_penandatangan_khs']);
               $nidn = $this->dataReport['nidn_penandatangan_khs'];
               $rpt->Cell(60, 5, "$nama_jabatan NIDN : $nidn",0,0,'C');
               $rpt->Cell(80, 5, strtoupper($this->dataReport['jabfung_kaprodi']). ' NIDN : '.$this->dataReport['nidn_kaprodi'],0,0,'C');
@@ -387,8 +387,8 @@ class Logic_ReportNilai extends Logic_Report {
     $nama_semester=$this->dataReport['nama_semester'];
     $nama_ps = $this->dataReport['nama_ps'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :          
+      case 'excel2003':               
+      case 'excel2007':          
         $this->setHeaderPT('L'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -423,18 +423,18 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getColumnDimension('K')->setWidth(14);
         $sheet->getColumnDimension('L')->setWidth(18);
                 
-        $sheet->setCellValue('A10','NO');				
-        $sheet->setCellValue('B10','NIM');
-        $sheet->setCellValue('C10','NIRM');				                        
-        $sheet->setCellValue('D10','NAMA');				
-        $sheet->setCellValue('E10','JK');				
-        $sheet->setCellValue('F10','ANGK.');				
-        $sheet->setCellValue('G10','IPS');				
-        $sheet->setCellValue('H10','IPK');				
-        $sheet->setCellValue('I10','SKS SEMESTER');				
-        $sheet->setCellValue('J10','SKS TOTAL');	
-        $sheet->setCellValue('K10','SKS KONVERSI DI AKUI');
-        $sheet->setCellValue('L10','KELAS');
+        $sheet->setCellValue('A10', 'NO');				
+        $sheet->setCellValue('B10', 'NIM');
+        $sheet->setCellValue('C10', 'NIRM');				                        
+        $sheet->setCellValue('D10', 'NAMA');				
+        $sheet->setCellValue('E10', 'JK');				
+        $sheet->setCellValue('F10', 'ANGK.');				
+        $sheet->setCellValue('G10', 'IPS');				
+        $sheet->setCellValue('H10', 'IPK');				
+        $sheet->setCellValue('I10', 'SKS SEMESTER');				
+        $sheet->setCellValue('J10', 'SKS TOTAL');	
+        $sheet->setCellValue('K10', 'SKS KONVERSI DI AKUI');
+        $sheet->setCellValue('L10', 'KELAS');
         
         $styleArray=array(								
                   'font' => array('bold' => true),
@@ -447,14 +447,14 @@ class Logic_ReportNilai extends Logic_Report {
         
         $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND vdm.tahun_masuk = $tahun_masuk";
         $str = "SELECT k.idkrs,k.tgl_krs,k.nim,nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.idkelas,vdm.tahun_masuk,vdm.semester_masuk,dk.iddata_konversi FROM krs k JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE tahun='$ta' AND idsmt='$semester' AND kjur=$kjur AND k.sah=1 $str_tahun_masuk ORDER BY vdm.idkelas ASC,vdm.nama_mhs ASC";
-        $this->db->setFieldTable(array('idkrs','tgl_krs','nim','nirm','nama_mhs','jk','kjur','idkelas','tahun_masuk','semester_masuk','iddata_konversi'));
+        $this->db->setFieldTable(array('idkrs', 'tgl_krs', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'idkelas', 'tahun_masuk', 'semester_masuk', 'iddata_konversi'));
         $r=$this->db->getRecord($str);
         $row=11;                
         while (list($k, $v)=each($r)) {
           $nim = $v['nim'];						
           $objNilai->setDataMHS(array('nim'=>$nim));
           $objNilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
-          $ip=$objNilai->getIPS ();
+          $ip = $objNilai->getIPS ();
           $sks = $objNilai->getTotalSKS ();                
           $dataipk = $objNilai->getIPKSampaiTASemester($ta, $semester,'ipksks');	                
         
@@ -523,7 +523,7 @@ class Logic_ReportNilai extends Logic_Report {
           
           $row+=1;
           $sheet->mergeCells("C$row:D$row");                    
-          $nama_jabatan=strtoupper($this->dataReport['jabfung_penandatangan_khs']);
+          $nama_jabatan = strtoupper($this->dataReport['jabfung_penandatangan_khs']);
           $nidn = $this->dataReport['nidn_penandatangan_khs'];
           $sheet->setCellValue("C$row","$nama_jabatan NIDN : $nidn");
           $sheet->mergeCells("F$row:I$row");                           
@@ -551,11 +551,11 @@ class Logic_ReportNilai extends Logic_Report {
     $objNilai->setDataMHS($biodata);
     $smt=Logic_Akademik::$SemesterMatakuliahRomawi;
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
 //                $this->printOut("khs_$nim");
       break;
-      case 'pdf' :
+      case 'pdf':
         $rpt=$this->rpt;
         $rpt->setTitle('Transkriprip Nilai Kurikulum');
         $rpt->setSubject('Transkrip Nilai Kurikulum');
@@ -564,59 +564,59 @@ class Logic_ReportNilai extends Logic_Report {
         
         $row=$this->currentRow;
         $row+=4;
-        $rpt->SetFont ('helvetica','B',12);	
+        $rpt->SetFont ('helvetica', 'B',12);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'TRANSKRIP NILAI KURIKULUM',0,0,'C');
         $row+=4;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Nama Mahasiswa');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_mhs']);
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Program Studi');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_ps']);
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'Tempat, tanggal lahir');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['tempat_lahir'].', '.$this->tgl->tanggal('j F Y', $biodata['tanggal_lahir']));				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Konsentrasi');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_konsentrasi']);
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'NIM');				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nim']);				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Jenjang');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': Starta 1 (satu)');		
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'NIRM');				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nirm']);				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Angk. Th. Akad');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['tahun_masuk']);			
         
@@ -652,7 +652,7 @@ class Logic_ReportNilai extends Logic_Report {
         $row_ganjil=$row;
         $row_genap = $row;
         $rpt->setXY(3, $row);	
-        $rpt->SetFont ('helvetica','',6);
+        $rpt->SetFont ('helvetica', '',6);
         $tambah_ganjil_row=false;		
         $tambah_genap_row=false;		
         for ($i = 1; $i <= 8; $i++) {
@@ -685,7 +685,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_genap=@ bcdiv($totalM, $totalSks,2);
-            $ipk_genap=$ipk_genap==''?'0.00':$ipk_genap;
+            $ipk_genap = $ipk_genap== ''?'0.00':$ipk_genap;
           }else {//ganjil
             $tambah_ganjil_row=true;
             $ganjil_total_m=0;
@@ -714,7 +714,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil==''?'0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil== ''?'0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
             $tambah_ganjil_row=false;
@@ -732,7 +732,7 @@ class Logic_ReportNilai extends Logic_Report {
                 $rpt->setXY(106, $c);
                 $rpt->Cell(102,4,'',1,0);
               }
-              $row_genap=$sisa;
+              $row_genap = $sisa;
             }		
             //ganjil
             $rpt->setXY(16, $row_ganjil);	
@@ -768,7 +768,7 @@ class Logic_ReportNilai extends Logic_Report {
             $row_genap+=4;
             $rpt->setXY(119, $row_genap);	
             $rpt->Cell(81,4,'Indeks Prestasi Kumulatif',1,0,'L');								
-            $ipk_genap=$ip == '0.00'?'0.00':$ipk_genap;
+            $ipk_genap = $ip == '0.00'?'0.00':$ipk_genap;
             $rpt->Cell(8,4, $ipk_genap,1,0,'C');
             $row_genap+=4;
             $rpt->setXY(119, $row_genap);	
@@ -776,7 +776,7 @@ class Logic_ReportNilai extends Logic_Report {
             $row_genap+=1;						
           }
         }
-        $rpt->SetFont ('helvetica','B',6);
+        $rpt->SetFont ('helvetica', 'B',6);
         $row=$row_genap+4;
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Total Kredit Kumulatif',0,0,'L');
@@ -789,7 +789,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk = $ipk==''?'0.00':$ipk;
+        $ipk = $ipk== ''?'0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=8;
@@ -820,11 +820,11 @@ class Logic_ReportNilai extends Logic_Report {
     $objNilai->setDataMHS($biodata);
     $smt=Logic_Akademik::$SemesterMatakuliahRomawi;
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
 //                $this->printOut("khs_$nim");
       break;
-      case 'pdf' :
+      case 'pdf':
         $rpt=$this->rpt;
         $rpt->setTitle('Transkriprip Nilai Kurikulum');
         $rpt->setSubject('Transkriprip Nilai Kurikulum');
@@ -833,59 +833,59 @@ class Logic_ReportNilai extends Logic_Report {
         
         $row=$this->currentRow;
         $row+=3;
-        $rpt->SetFont ('helvetica','B',12);	
+        $rpt->SetFont ('helvetica', 'B',12);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'TRANSKRIP NILAI KURIKULUM',0,0,'C');
         $row+=3;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Nama Mahasiswa');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_mhs']);
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Program Studi');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_ps']);
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'Tempat, tanggal lahir');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['tempat_lahir'].', '.$this->tgl->tanggal('j F Y', $biodata['tanggal_lahir']));				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Konsentrasi');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_konsentrasi']);
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'NIM');				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nim']);				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Jenjang');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': Starta 1 (satu)');		
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'NIRM');				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nirm']);				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Angk. Th. Akad');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['tahun_masuk']);			
         
@@ -921,7 +921,7 @@ class Logic_ReportNilai extends Logic_Report {
         $row_ganjil=$row;
         $row_genap = $row;
         $rpt->setXY(3, $row);	
-        $rpt->SetFont ('helvetica','',6);
+        $rpt->SetFont ('helvetica', '',6);
         $tambah_ganjil_row=false;		
         $tambah_genap_row=false;		
         for ($i = 1; $i <= 8; $i++) {
@@ -954,7 +954,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_genap=@ bcdiv($totalM, $totalSks,2);
-            $ipk_genap=$ipk_genap==''?'0.00':$ipk_genap;
+            $ipk_genap = $ipk_genap== ''?'0.00':$ipk_genap;
           }else {//ganjil
             $tambah_ganjil_row=true;
             $ganjil_total_m=0;
@@ -983,7 +983,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil==''?'0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil== ''?'0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
             $tambah_ganjil_row=false;
@@ -1001,7 +1001,7 @@ class Logic_ReportNilai extends Logic_Report {
                 $rpt->setXY(106, $c);
                 $rpt->Cell(102,4,'',1,0);
               }
-              $row_genap=$sisa;
+              $row_genap = $sisa;
             }		
             //ganjil
             $rpt->setXY(16, $row_ganjil);	
@@ -1037,7 +1037,7 @@ class Logic_ReportNilai extends Logic_Report {
             $row_genap+=4;
             $rpt->setXY(119, $row_genap);	
             $rpt->Cell(81,4,'Indeks Prestasi Kumulatif',1,0,'L');								
-            $ipk_genap=$ip == '0.00'?'0.00':$ipk_genap;
+            $ipk_genap = $ip == '0.00'?'0.00':$ipk_genap;
             $rpt->Cell(8,4, $ipk_genap,1,0,'C');
             $row_genap+=4;
             $rpt->setXY(119, $row_genap);	
@@ -1045,7 +1045,7 @@ class Logic_ReportNilai extends Logic_Report {
             $row_genap+=1;						
           }
         }
-        $rpt->SetFont ('helvetica','B',6);
+        $rpt->SetFont ('helvetica', 'B',6);
         $row=$row_genap+4;
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Total Kredit Kumulatif',0,0,'L');
@@ -1058,7 +1058,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk = $ipk==''?'0.00':$ipk;
+        $ipk = $ipk== ''?'0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=3;
@@ -1089,11 +1089,11 @@ class Logic_ReportNilai extends Logic_Report {
     $objNilai->setDataMHS($biodata);
     $smt=Logic_Akademik::$SemesterMatakuliahRomawi;
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
 //                $this->printOut("khs_$nim");
       break;
-      case 'pdf' :
+      case 'pdf':
         $rpt=$this->rpt;
         $rpt->setTitle('Transkriprip Nilai KRS');
         $rpt->setSubject('Transkriprip Nilai KRS');
@@ -1102,59 +1102,59 @@ class Logic_ReportNilai extends Logic_Report {
         
         $row=$this->currentRow;
         $row+=6;
-        $rpt->SetFont ('helvetica','B',12);	
+        $rpt->SetFont ('helvetica', 'B',12);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'TRANSKRIP NILAI KURIKULUM',0,0,'C');
         $row+=6;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Nama Mahasiswa');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_mhs']);
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Program Studi');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_ps']);
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'Tempat, tanggal lahir');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['tempat_lahir'].', '.$this->tgl->tanggal('j F Y', $biodata['tanggal_lahir']));				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Konsentrasi');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nama_konsentrasi']);
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'NIM');				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nim']);				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Jenjang');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': Starta 1 (satu)');		
         $row+=3;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->Cell(0, $row,'NIRM');				
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(38, $row);			
         $rpt->Cell(0, $row,': '.$biodata['nirm']);				
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(105, $row);			
         $rpt->Cell(0, $row,'Angk. Th. Akad');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(130, $row);			
         $rpt->Cell(0, $row,': '.$biodata['tahun_masuk']);			
         
@@ -1224,7 +1224,7 @@ class Logic_ReportNilai extends Logic_Report {
         $row_ganjil=$row;
         $row_genap = $row;
         $rpt->setXY(3, $row);	
-        $rpt->SetFont ('helvetica','',6);
+        $rpt->SetFont ('helvetica', '',6);
         $tambah_ganjil_row=false;		
         $tambah_genap_row=false;		
         $bool_khs_genap = false;
@@ -1262,7 +1262,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_genap=@ bcdiv($totalM, $totalSks,2);
-            $ipk_genap=$ipk_genap==''?'0.00':$ipk_genap;
+            $ipk_genap = $ipk_genap== ''?'0.00':$ipk_genap;
           }else {//ganjil
             $tambah_ganjil_row=true;
             $ganjil_total_m=0;
@@ -1294,7 +1294,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil==''?'0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil== ''?'0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
             $tambah_ganjil_row=false;
@@ -1316,7 +1316,7 @@ class Logic_ReportNilai extends Logic_Report {
                   $rpt->Cell(102,4,'',1,0);                                
                 }
               }
-              $row_genap=$sisa;
+              $row_genap = $sisa;
             }		
             if ($bool_khs_ganjil) {
               //ganjil
@@ -1355,7 +1355,7 @@ class Logic_ReportNilai extends Logic_Report {
               $row_genap+=4;
               $rpt->setXY(119, $row_genap);	
               $rpt->Cell(81,4,'Indeks Prestasi Kumulatif',1,0,'L');								
-              $ipk_genap=$ip == '0.00'?'0.00':$ipk_genap;
+              $ipk_genap = $ip == '0.00'?'0.00':$ipk_genap;
               $rpt->Cell(8,4, $ipk_genap,1,0,'C');
               $row_genap+=4;
               $rpt->setXY(119, $row_genap);	
@@ -1366,7 +1366,7 @@ class Logic_ReportNilai extends Logic_Report {
             $bool_khs_ganjil = false;
           }
         }
-        $rpt->SetFont ('helvetica','B',6);
+        $rpt->SetFont ('helvetica', 'B',6);
         $row=$row_genap+4;
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Total Kredit Kumulatif',0,0,'L');
@@ -1379,7 +1379,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk = $ipk==''?'0.00':$ipk;
+        $ipk = $ipk== ''?'0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=4;
@@ -1410,13 +1410,13 @@ class Logic_ReportNilai extends Logic_Report {
     $objNilai->setDataMHS (array('nim'=>$nim));
     $n = $objNilai->getTranskrip(false);		
     switch ($this->getDriver()) {
-      case 'excel2003' :               
+      case 'excel2003':               
         case 'excel2007':                        
           $sheet=$this->rpt->getActiveSheet();
           $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
           $this->rpt->getDefaultStyle()->getFont()->setSize('9');                                    
           
-          $sheet->setCellValue('A1','Nomor Transkrip / Transcript Number : ' . $biodata['dataTranskrip']['nomor_transkrip']);	
+          $sheet->setCellValue('A1', 'Nomor Transkrip / Transcript Number : ' . $biodata['dataTranskrip']['nomor_transkrip']);	
           $styleArray=array(					
             'font' => array('bold' => true),			                 
           );
@@ -1542,7 +1542,7 @@ class Logic_ReportNilai extends Logic_Report {
                 if ($v['semester']==$i)
                 {
                   $n_kual=$v['n_kual'];
-                  $n_kual=($n_kual=='-'||$n_kual=='')?'-':$n_kual;
+                  $n_kual=($n_kual=='-'||$n_kual== '')?'-':$n_kual;
                   $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
@@ -1578,7 +1578,7 @@ class Logic_ReportNilai extends Logic_Report {
                 if ($v['semester']==$i)
                 {
                   $n_kual=$v['n_kual'];
-                  $n_kual=($n_kual=='-'||$n_kual=='')?'-':$n_kual;
+                  $n_kual=($n_kual=='-'||$n_kual== '')?'-':$n_kual;
                   $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
@@ -1617,7 +1617,7 @@ class Logic_ReportNilai extends Logic_Report {
             //   else // berarti tambah row yang genap
             //   {
             //     $sisa=$row_genap + ($row_ganjil-$row_genap);						
-            //     $row_genap=$sisa;
+            //     $row_genap = $sisa;
             //   }
             // }
           }
@@ -1689,25 +1689,25 @@ class Logic_ReportNilai extends Logic_Report {
 
           $this->printOut("transkrip_final_$nim");
         break;
-      case 'pdf' :
+      case 'pdf':
         $rpt=$this->rpt;
         $rpt->setTitle('Transkrip Nilai Final');
         $rpt->setSubject('Transkrip Nilai Final');
-        $rpt->AddPage('P','F4');
+        $rpt->AddPage('P', 'F4');
         $row=43;			
-        $rpt->SetFont ('helvetica','',8);	
+        $rpt->SetFont ('helvetica', '',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0,5,'Nomor Ijazah: '.$biodata['dataTranskrip']['nomor_ijazah'],0,0,'R');
         $row+=6;	
-        $rpt->SetFont ('helvetica','BU',12);	
+        $rpt->SetFont ('helvetica', 'BU',12);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0,5,'TRANSKRIP AKADEMIK',0,0,'C');
         $row+=4;				
-        $rpt->SetFont ('helvetica','B',10);	
+        $rpt->SetFont ('helvetica', 'B',10);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0,5,'Nomor : '.$biodata['dataTranskrip']['nomor_transkrip'],0,0,'C');
         $row+=8;
-        $rpt->SetFont ('helvetica','',8);	
+        $rpt->SetFont ('helvetica', '',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(44,5,'NAMA');	
         $rpt->Cell(1.5,5,':');			
@@ -1753,7 +1753,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(1.5,5,':');						
         $rpt->Cell(150,5, $this->tgl->tanggal('j F Y', $biodata['dataTranskrip']['tanggal_lulus']));		
         $row+=4;
-        $nama_pembimbing1=$biodata['dataTranskrip']['nama_pembimbing1'];					
+        $nama_pembimbing1 = $biodata['dataTranskrip']['nama_pembimbing1'];					
         $rpt->setXY(3, $row);			
         $rpt->Cell(44,5,'PEMBIMBING SKRIPSI');			
         $rpt->Cell(1.5,5,':');			
@@ -1774,15 +1774,15 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(3, $row);			
         $rpt->Cell(44,5,'');	
         $rpt->Cell(1.5,5,'');			
-        $rpt->MultiCell(150,11, $biodata['dataTranskrip']['judul_skripsi'],0,'L',false,0,'','');		
+        $rpt->MultiCell(150,11, $biodata['dataTranskrip']['judul_skripsi'],0,'L',false,0,'', '');		
         
         //field of column ganjil
         $row+=12;
         $rpt->setXY(3, $row);
-        $rpt->Cell(205,3,' ','T',0,'C');
+        $rpt->Cell(205,3,' ', 'T',0,'C');
         $row+=0.7;
         $rpt->setXY(3, $row);				
-        $rpt->Cell(15,5,'KODE','TBR',0,'C');
+        $rpt->Cell(15,5,'KODE', 'TBR',0,'C');
         $rpt->Cell(60,5,'MATA KULIAH',1,0,'C');
         $rpt->Cell(9,5,'SKS',1,0,'C');
         $rpt->Cell(9,5,'AM',1,0,'C');
@@ -1793,14 +1793,14 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(60,5,'MATA KULIAH',1,0,'C');
         $rpt->Cell(9,5,'SKS',1,0,'C');
         $rpt->Cell(9,5,'AM',1,0,'C');
-        $rpt->Cell(9,5,'NM','TBL',0,'C');				
+        $rpt->Cell(9,5,'NM', 'TBL',0,'C');				
         $row+=5;							
         $totalSks=0;
         $totalM=0;				
         $row_ganjil=$row;
         $row_genap = $row;
         $rpt->setXY(3, $row);	
-        $rpt->SetFont ('helvetica','',6);
+        $rpt->SetFont ('helvetica', '',6);
         $tambah_ganjil_row=false;		
         $tambah_genap_row=false;						
         
@@ -1813,11 +1813,11 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $v) {	
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
-                $n_kual=($n_kual=='-'||$n_kual=='')?'-':$n_kual;
+                $n_kual=($n_kual=='-'||$n_kual== '')?'-':$n_kual;
                 $sks = $v['sks'];
                 $totalSks+=$sks;								
                 $rpt->setXY(106, $row_genap);							
-                $rpt->Cell(15,4, $objNilai->getKMatkul($v['kmatkul']),'L',0,'C');
+                $rpt->Cell(15,4, $objNilai->getKMatkul($v['kmatkul']), 'L',0,'C');
                 $rpt->Cell(60,4, $v['nmatkul'],0,0,'L');		
                 $rpt->Cell(9,4, $sks,0,0,'C');
                 $rpt->Cell(9,4, $objNilai->getAngkaMutu($n_kual),0,0,'C');
@@ -1833,7 +1833,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $s) {
               if ($s['semester']==$i) {
                 $n_kual=$s['n_kual'];
-                $n_kual=($n_kual=='-'||$n_kual=='')?'-':$n_kual;
+                $n_kual=($n_kual=='-'||$n_kual== '')?'-':$n_kual;
                 $sks = $s['sks'];
                 $totalSks+=$sks;													
                 $rpt->setXY(3, $row_ganjil);						
@@ -1857,43 +1857,43 @@ class Logic_ReportNilai extends Logic_Report {
                 $rpt->Cell(60,4,'',0,0,'L');		
                 $rpt->Cell(9,4,'',0,0,'C');
                 $rpt->Cell(9,4,'',0,0,'C');
-                $rpt->Cell(9,4,'','R',0,'C');													
+                $rpt->Cell(9,4,'', 'R',0,'C');													
               }
               $row_ganjil=$sisa;
             }else{ // berarti tambah row yang genap
               $sisa=$row_genap + ($row_ganjil-$row_genap);						
               for ($c=$row_genap;$c < $row_ganjil;$c+=4) {
                 $rpt->setXY(106, $c);
-                $rpt->Cell(15,4,'','L',0,'C');
+                $rpt->Cell(15,4,'', 'L',0,'C');
                 $rpt->Cell(60,4,'',0,0,'L');		
                 $rpt->Cell(9,4,'',0,0,'C');
                 $rpt->Cell(9,4,'',0,0,'C');
                 $rpt->Cell(9,4,'',0,0,'C');							
               }
-              $row_genap=$sisa;
+              $row_genap = $sisa;
             }					
           }
         }
         $row=$row_genap;	
         $rpt->setXY(3, $row);	
-        $rpt->Cell(102,4,'','T',0);
+        $rpt->Cell(102,4,'', 'T',0);
         $rpt->Cell(1,4,'',0,0);																						
-        $rpt->Cell(102,4,'','T',0);
+        $rpt->Cell(102,4,'', 'T',0);
         $row=$row_genap+0.7;					
         $rpt->setXY(3, $row);	
-        $rpt->Cell(205,1,' ','T',0);
+        $rpt->Cell(205,1,' ', 'T',0);
         $row+=1;					
-        $rpt->SetFont ('helvetica','B',8);
+        $rpt->SetFont ('helvetica', 'B',8);
         $rpt->setXY(7, $row);	
         $rpt->Cell(65,4,'Jumlah SKS Kumulatif',0);
-        $rpt->SetFont ('helvetica','');
+        $rpt->SetFont ('helvetica', '');
         $rpt->Cell(4,4,': ',0);		
-        $rpt->SetFont ('helvetica','B');						
+        $rpt->SetFont ('helvetica', 'B');						
         $rpt->Cell(130,4,"$totalSks",0);
         $row+=4;
         $rpt->setXY(7, $row);	
         $rpt->Cell(65,4,'Keterangan',0);
-        $rpt->SetFont ('helvetica','');
+        $rpt->SetFont ('helvetica', '');
         $rpt->Cell(4,4,': ',0);		
         $rpt->Cell(45,4,'A = 4 (Sangat Baik)',0);
         $rpt->Cell(85,4,': B = 3 (Baik) : C = 2 (Cukup)',0);
@@ -1912,7 +1912,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(90,4, $this->setup->getSettingValue('kota_pt').', '.$this->tgl->tanggal('j F Y', $biodata['tanggalterbit']),0,0,'C');
         $row+=4;
         $rpt->setXY(40, $row);	
-        $rpt->Cell(65,4, $biodata['nama_jabatan_transkrip'].',',0,0,'C');				
+        $rpt->Cell(65,4, $biodata['nama_jabatan_transkrip'].', ',0,0,'C');				
         $rpt->Cell(90,4,'KETUA PROGRAM STUDI,',0,0,'C');
         $row+=4;
         $rpt->setXY(105, $row);	                
@@ -1920,12 +1920,12 @@ class Logic_ReportNilai extends Logic_Report {
 
         $row+=17;				                
         $rpt->setXY(40, $row);	
-        $rpt->SetFont ('helvetica','B');
+        $rpt->SetFont ('helvetica', 'B');
         $rpt->Cell(65,4, $biodata['nama_penandatangan_transkrip'],0,0,'C');								
         $rpt->Cell(90,4, $biodata['nama_kaprodi'],0,0,'C');
         $row+=4;				
         $rpt->setXY(40, $row);	
-        $rpt->SetFont ('helvetica','');
+        $rpt->SetFont ('helvetica', '');
         $rpt->Cell(65,4,strtoupper($biodata['jabfung_penandatangan_transkrip']). ' NIDN '.$biodata['nidn_penandatangan_transkrip'],0,0,'C');
         $rpt->Cell(90,4,strtoupper($biodata['jabfung_kaprodi']). ' NIDN '.$biodata['nidn_kaprodi'],0,0,'C');
         
@@ -1944,8 +1944,8 @@ class Logic_ReportNilai extends Logic_Report {
     $idkelas_mhs = $this->dataReport['idkelas_mhs'];
     $kaprodi = $objNilai->getKetuaPRODI($this->dataReport['kjur']);
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('K'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -1998,8 +1998,8 @@ class Logic_ReportNilai extends Logic_Report {
         
           
           $idpenyelenggaraan = $this->dataReport['idpenyelenggaraan'];                                        
-          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
-          $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kuan','n_kual'));
+          $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kuan,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
+          $this->db->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'n_kuan', 'n_kual'));
           
           
         }else{
@@ -2040,28 +2040,28 @@ class Logic_ReportNilai extends Logic_Report {
           $pagesize=40;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
-          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual,n.n_kuan FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
-          $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kual','n_kuan'));
+          $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual,n.n_kuan FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
+          $this->db->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'n_kual', 'n_kuan'));
         }
         
         $sheet->mergeCells('A15:A16');				
-        $sheet->setCellValue('A15','NO');				
+        $sheet->setCellValue('A15', 'NO');				
         $sheet->mergeCells('B15:D16');				
-        $sheet->setCellValue('B15','NAMA');				
+        $sheet->setCellValue('B15', 'NAMA');				
         $sheet->mergeCells('E15:E16');				
-        $sheet->setCellValue('E15','JK');				
+        $sheet->setCellValue('E15', 'JK');				
         $sheet->mergeCells('F15:F16');				
-        $sheet->setCellValue('F15','NIM');				
+        $sheet->setCellValue('F15', 'NIM');				
         $sheet->mergeCells('G15:G16');				
-        $sheet->setCellValue('G15','NIRM');				                
+        $sheet->setCellValue('G15', 'NIRM');				                
         $sheet->mergeCells('H15:J15');				
-        $sheet->setCellValue('H15','NILAI');			
+        $sheet->setCellValue('H15', 'NILAI');			
         $sheet->mergeCells('K15:K16');				
-        $sheet->setCellValue('K15','KETERANGAN');				
+        $sheet->setCellValue('K15', 'KETERANGAN');				
         
-        $sheet->setCellValue('H16','ANGKA');			
-        $sheet->setCellValue('I16','AM');			
-        $sheet->setCellValue('J16','HM');			
+        $sheet->setCellValue('H16', 'ANGKA');			
+        $sheet->setCellValue('I16', 'AM');			
+        $sheet->setCellValue('J16', 'HM');			
         
         $styleArray=array(								
                   'font' => array('bold' => true),
@@ -2074,7 +2074,7 @@ class Logic_ReportNilai extends Logic_Report {
         
         $row=17;
         $r=$this->db->getRecord($str);	
-        while (list($k, $v)=each ($r) ){		                    				
+        while (list($k, $v)=each ($r)){		                    				
           $sheet->setCellValue("A$row", $v['no']);				
           $sheet->mergeCells("B$row:D$row");				
           $sheet->setCellValue("B$row", $v['nama_mhs']);				                    
@@ -2082,8 +2082,8 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->setCellValueExplicit("F$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
           $sheet->setCellValueExplicit("G$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);	                        
           $sheet->setCellValue("H$row", $v['n_kuan']);			
-          $am=$v['n_kual']==''?'-':$objNilai->getAngkaMutu($v['n_kual']);
-          $hm=$v['n_kual']==''?'-':$v['n_kual'];
+          $am=$v['n_kual']== ''?'-':$objNilai->getAngkaMutu($v['n_kual']);
+          $hm=$v['n_kual']== ''?'-':$v['n_kual'];
           $sheet->setCellValue("I$row", $am);			
           $sheet->setCellValue("J$row", $hm);			
           $sheet->setCellValue("K$row",'-');	
@@ -2144,60 +2144,60 @@ class Logic_ReportNilai extends Logic_Report {
         
         $this->printOut("dpna_$kmatkul");
       break;
-      case 'pdf' :
+      case 'pdf':
         $rpt=$this->rpt;
         $rpt->setTitle('Daftar Peserta dan Nilai Akhir');
         $rpt->setSubject('Daftar Peserta dan Nilai Akhir');
         $rpt->setAutoPageBreak(true,PDF_MARGIN_BOTTOM);
         $idkelas_mhs = $this->dataReport['idkelas_mhs'];
         
-        $rpt->AddPage('P','F4');
+        $rpt->AddPage('P', 'F4');
         $this->setHeaderPT();
         
         $row=$this->currentRow;
         $row+=6;
-        $rpt->SetFont ('helvetica','B',12);	
+        $rpt->SetFont ('helvetica', 'B',12);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'DAFTAR PESERTA DAN NILAI AKHIR',0,0,'C');                
         if ($idkelas_mhs == 'none'){
           $row+=6;
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(3, $row);			
           $rpt->Cell(0, $row,'Matakuliah');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['nmatkul']);
           $row+=3;
           $rpt->setXY(3, $row);			
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->Cell(0, $row,'Kode / SKS');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['kmatkul'].' / '.$this->dataReport['sks']);				
           $row+=3;
           $rpt->setXY(3, $row);
-          $rpt->SetFont ('helvetica','B',8);						
+          $rpt->SetFont ('helvetica', 'B',8);						
           $rpt->Cell(0, $row,'P.S / Jenjang');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['nama_ps']);
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(105, $row);			
           $rpt->Cell(0, $row,'Dosen Pengampu');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(130, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['nama_dosen_pengampu']);
           $row+=3;
           $rpt->setXY(3, $row);			
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->Cell(0, $row,'Semester');				
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['nama_semester']);	
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(105, $row);			
           $rpt->Cell(0, $row,'T.A');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(130, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['ta']);
           
@@ -2206,53 +2206,53 @@ class Logic_ReportNilai extends Logic_Report {
           $pagesize=39;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
-          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
-          $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kual'));
+          $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual FROM v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=vkm.idkrsmatkul) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
+          $this->db->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'n_kual'));
         }else{
           $row+=6;
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(3, $row);			
           $rpt->Cell(0, $row,'Matakuliah');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['nmatkul']);
           $row+=3;
           $rpt->setXY(3, $row);			
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->Cell(0, $row,'Kode / SKS');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['kmatkul'].' / '.$this->dataReport['sks']);
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(105, $row);			
           $rpt->Cell(0, $row,'Dosen Pengampu');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(130, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['nama_dosen_pengampu']);
           $row+=3;
           $rpt->setXY(3, $row);
-          $rpt->SetFont ('helvetica','B',8);						
+          $rpt->SetFont ('helvetica', 'B',8);						
           $rpt->Cell(0, $row,'P.S / Jenjang');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['nama_ps']);
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(105, $row);			
           $rpt->Cell(0, $row,'Dosen Pengajar');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(130, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['nama_dosen_pengajar']);			
           $row+=3;
           $rpt->setXY(3, $row);			
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->Cell(0, $row,'T.A / SMT / Kelas');				
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(38, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['ta'].' '.$this->dataReport['nama_semester'].' '.$this->dataReport['namakelas']);
-          $rpt->SetFont ('helvetica','B',8);	
+          $rpt->SetFont ('helvetica', 'B',8);	
           $rpt->setXY(105, $row);			
           $rpt->Cell(0, $row,'Hari / Jam');
-          $rpt->SetFont ('helvetica','',8);
+          $rpt->SetFont ('helvetica', '',8);
           $rpt->setXY(130, $row);			
           $rpt->Cell(0, $row,': '.$this->dataReport['hari'].', '.$this->dataReport['jam_masuk'].'-'.$this->dataReport['jam_keluar']);								
           
@@ -2261,11 +2261,11 @@ class Logic_ReportNilai extends Logic_Report {
           $pagesize=39;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
-          $str ="SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
-          $this->db->setFieldTable(array('nim','nirm','nama_mhs','jk','n_kual'));
+          $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";
+          $this->db->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'n_kual'));
         }
         $row+=23;
-        $rpt->SetFont ('helvetica','B',8);
+        $rpt->SetFont ('helvetica', 'B',8);
         $rpt->setXY(3, $row);			
         $rpt->Cell(13, 8, 'NO', 1, 0, 'C');				
         $rpt->Cell(70, 8, 'NAMA', 1, 0, 'C');								
@@ -2280,7 +2280,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(10, 4, 'HM', 1, 0, 'C');																
         $row+=4;				
         $rpt->setXY(3, $row);	
-        $rpt->setFont ('helvetica','',8);                
+        $rpt->setFont ('helvetica', '',8);                
         
         for ($i=0;$i < $jumlahpage;$i++) {        
           $offset=$i*$pagesize;
@@ -2289,22 +2289,22 @@ class Logic_ReportNilai extends Logic_Report {
             $limit=$itemcount-$offset;
           }                                                   
           $r=$this->db->getRecord("$str LIMIT $offset, $limit", $offset+1);	
-          while (list($k, $v)=each ($r) ){		
+          while (list($k, $v)=each ($r)){		
             $rpt->setXY(3, $row);				
             $rpt->Cell(13, 5, $v['no'], 1, 0, 'C');				
             $rpt->Cell(70, 5, $v['nama_mhs'], 1, 0);								
             $rpt->Cell(10, 5, $v['jk'], 1, 0, 'C');							
             $rpt->Cell(20, 5, $v['nim'], 1, 0, 'C');				
             $rpt->Cell(30, 5, $v['nirm'], 1, 0, 'C');				
-            $am=$v['n_kual']==''?'-':$objNilai->getAngkaMutu($v['n_kual']);
-            $hm=$v['n_kual']==''?'-':$v['n_kual'];
+            $am=$v['n_kual']== ''?'-':$objNilai->getAngkaMutu($v['n_kual']);
+            $hm=$v['n_kual']== ''?'-':$v['n_kual'];
             $rpt->Cell(10, 5, $am, 1, 0, 'C');
             $rpt->Cell(10, 5, $hm, 1, 0, 'C');																
             $rpt->Cell(30, 5, '', 1, 0, 'C');
             $row+=5;
           }
           $row+=5;
-          $rpt->SetFont ('helvetica','B',8);
+          $rpt->SetFont ('helvetica', 'B',8);
           $rpt->setXY(3, $row);													
           $tanggal=$this->tgl->tanggal('l, j F Y');				
           $rpt->Cell(192, 5, $this->setup->getSettingValue('kota_pt').", $tanggal",0,0,'R');		
@@ -2341,9 +2341,9 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->Cell(64, 5, $kaprodi['nama_jabatan']. ' NIDN '.$kaprodi['nidn'],0,0,'C');
           $rpt->Cell(64, 5, $nidn_jabatan_dosen_ttd,0,0,'C');                        
           if ($i < ($jumlahpage-1)) {
-            $rpt->AddPage('P','F4');
+            $rpt->AddPage('P', 'F4');
             $row=5;
-            $rpt->SetFont ('helvetica','B',8);
+            $rpt->SetFont ('helvetica', 'B',8);
             $rpt->setXY(3, $row);			
             $rpt->Cell(13, 8, 'NO', 1, 0, 'C');				
             $rpt->Cell(70, 8, 'NAMA', 1, 0, 'C');								
@@ -2358,7 +2358,7 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(10, 4, 'HM', 1, 0, 'C');																
             $row+=4;				
             $rpt->setXY(3, $row);	
-            $rpt->setFont ('helvetica','',8);                
+            $rpt->setFont ('helvetica', '',8);                
           } 
           
         }
@@ -2383,51 +2383,51 @@ class Logic_ReportNilai extends Logic_Report {
 
         $row=$this->currentRow;
         $row+=6;
-        $rpt->SetFont ('helvetica','B',12);	
+        $rpt->SetFont ('helvetica', 'B',12);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'TABEL KONVERSI',0,0,'C');
 
         $row+=6;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Nama Lengkap');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(50, $row);                
         $rpt->Cell(0, $row,': '.$this->dataReport['nama']);				
         $row+=3;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Tempat / Tanggal Lahir');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(50, $row);			
         $rpt->Cell(0, $row,': - ');
         
         $row+=3;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Perguruan Tinggi Asal');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(50, $row);			
         $rpt->Cell(0, $row,': '.$this->dataReport['nama_pt_asal']);
         
         $row+=3;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Jenjang / Program Studi (LAMA)');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(50, $row);			
         $rpt->Cell(0, $row,': '.$this->dataReport['nama_ps_asal'].' ('.$this->dataReport['kode_ps_asal'].') '.$this->dataReport['njenjang']);
         
         $row+=3;
-        $rpt->SetFont ('helvetica','B',8);	
+        $rpt->SetFont ('helvetica', 'B',8);	
         $rpt->setXY(3, $row);			
         $rpt->Cell(0, $row,'Jenjang / Program Studi (BARU)');
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $rpt->setXY(50, $row);			
         $rpt->Cell(0, $row,': '.$this->dataReport['nama_ps']);
 
         $row+=24;
-        $rpt->SetFont ('helvetica','B',8);
+        $rpt->SetFont ('helvetica', 'B',8);
         $rpt->setXY(3, $row);			
         $rpt->Cell(10, 5, 'NO', 1, 0, 'C');			
         $rpt->Cell(70, 5, 'MATAKULIAH ASAL', 1, 0, 'C');	
@@ -2442,7 +2442,7 @@ class Logic_ReportNilai extends Logic_Report {
         $jumlah_matkul=0;
         $row+=5;
         $rpt->setXY(3, $row);			
-        $rpt->SetFont ('helvetica','',8);
+        $rpt->SetFont ('helvetica', '',8);
         $i = 1;
         while (list($k, $v)=each($nilai)) {
           $rpt->setXY(3, $row);
@@ -2467,8 +2467,8 @@ class Logic_ReportNilai extends Logic_Report {
         }
         $this->printOut("konvesrsi_nilai_$nim");
       break;
-      case 'excel2003' :               
-      case 'excel2007' :        
+      case 'excel2003':               
+      case 'excel2007':        
         $this->setHeaderPT('J');
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -2486,27 +2486,27 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getStyle("A7:J7")->applyFromArray($styleArray);
                  
         $sheet->mergeCells('B9:D9');		                
-        $sheet->setCellValue('B9','Nama Lengkap :');
+        $sheet->setCellValue('B9', 'Nama Lengkap :');
         $sheet->mergeCells('E9:H9');
         $sheet->setCellValue('E9', $this->dataReport['nama']);
 
         $sheet->mergeCells('B10:D10');		
-        $sheet->setCellValue('B10','Tempat / Tanggal Lahir :');
+        $sheet->setCellValue('B10', 'Tempat / Tanggal Lahir :');
         $sheet->mergeCells('E10:H10');
-        $sheet->setCellValue('E10','-');
+        $sheet->setCellValue('E10', '-');
 
         $sheet->mergeCells('B11:D11');		
-        $sheet->setCellValue('B11','Perguruan Tinggi Asal :');
+        $sheet->setCellValue('B11', 'Perguruan Tinggi Asal :');
         $sheet->mergeCells('E11:H11');
         $sheet->setCellValue('E11', $this->dataReport['nama_pt_asal'].' ('.$this->dataReport['kode_pt_asal'].')');
 
         $sheet->mergeCells('B12:D12');		
-        $sheet->setCellValue('B12','Jenjang / Program Studi (LAMA) :');
+        $sheet->setCellValue('B12', 'Jenjang / Program Studi (LAMA) :');
         $sheet->mergeCells('E12:H12');
         $sheet->setCellValue('E12', $this->dataReport['nama_ps_asal'].' ('.$this->dataReport['kode_ps_asal'].') '.$this->dataReport['njenjang']);
 
         $sheet->mergeCells('B13:D13');
-        $sheet->setCellValue('B13','Jenjang / Program Studi (BARU) :');
+        $sheet->setCellValue('B13', 'Jenjang / Program Studi (BARU) :');
         $sheet->mergeCells('E13:H13');
         $sheet->setCellValue('E13', $this->dataReport['nama_ps']);
         
@@ -2517,20 +2517,20 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getColumnDimension('F')->setWidth(12);
                 
         $sheet->mergeCells('A15:A16');
-        $sheet->setCellValue('A15','NO');	                
+        $sheet->setCellValue('A15', 'NO');	                
         $sheet->mergeCells('B15:E15');
-        $sheet->setCellValue('B15','NILAI PT ASAL ');                
-        $sheet->setCellValue('B16','KODE MK');				                
-        $sheet->setCellValue('C16','NAMA MK');								
-        $sheet->setCellValue('D16','SKS');				
-        $sheet->setCellValue('E16','NILAI HURUF');				
+        $sheet->setCellValue('B15', 'NILAI PT ASAL ');                
+        $sheet->setCellValue('B16', 'KODE MK');				                
+        $sheet->setCellValue('C16', 'NAMA MK');								
+        $sheet->setCellValue('D16', 'SKS');				
+        $sheet->setCellValue('E16', 'NILAI HURUF');				
         $sheet->mergeCells('F15:J15');  				                                    
-        $sheet->setCellValue('F15','KONVERSI NILAI PT BARU (DIAKUI)');  
-        $sheet->setCellValue('F16','KODE MK');				                
-        $sheet->setCellValue('G16','NAMA MK');								
-        $sheet->setCellValue('H16','SKS');				
-        $sheet->setCellValue('I16','NILAI HURUF');				
-        $sheet->setCellValue('J16','NILAI ANGKA');				
+        $sheet->setCellValue('F15', 'KONVERSI NILAI PT BARU (DIAKUI)');  
+        $sheet->setCellValue('F16', 'KODE MK');				                
+        $sheet->setCellValue('G16', 'NAMA MK');								
+        $sheet->setCellValue('H16', 'SKS');				
+        $sheet->setCellValue('I16', 'NILAI HURUF');				
+        $sheet->setCellValue('J16', 'NILAI ANGKA');				
         
         $styleArray=array(								
                   'font' => array('bold' => true),
@@ -2622,20 +2622,20 @@ class Logic_ReportNilai extends Logic_Report {
    */
   public function printPesertaImportNilai () {
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :  
+      case 'excel2003':               
+      case 'excel2007':  
         $sheet=$this->rpt->getActiveSheet();
         $idkelas_mhs = $this->dataReport['idkelas_mhs'];
-        $sheet->setCellValue('A1','ID');
-        $sheet->setCellValue('B1','NAMA MHS');
-        $sheet->setCellValue('C1','NIM');
-        $sheet->setCellValue('D1','AKTIVITAS PARTISIPATIF*');
-        $sheet->setCellValue('E1','HASIL PROYEK*');
-        $sheet->setCellValue('F1','QUIZ');
-        $sheet->setCellValue('G1','TUGAS');
-        $sheet->setCellValue('H1','UTS');
-        $sheet->setCellValue('I1','UAS');
-        $sheet->setCellValue('J1','ABSEN');
+        $sheet->setCellValue('A1', 'ID');
+        $sheet->setCellValue('B1', 'NAMA MHS');
+        $sheet->setCellValue('C1', 'NIM');
+        $sheet->setCellValue('D1', 'AKTIVITAS PARTISIPATIF*');
+        $sheet->setCellValue('E1', 'HASIL PROYEK*');
+        $sheet->setCellValue('F1', 'QUIZ');
+        $sheet->setCellValue('G1', 'TUGAS');
+        $sheet->setCellValue('H1', 'UTS');
+        $sheet->setCellValue('I1', 'UAS');
+        $sheet->setCellValue('J1', 'ABSEN');
         
         $styleArray=array(
                 'font' => array('bold' => true),
@@ -2647,7 +2647,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getStyle("A1:J1")->getAlignment()->setWrapText(true);
           
         $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nama_mhs FROM kelas_mhs_detail kmd JOIN krsmatkul km ON (kmd.idkrsmatkul=km.idkrsmatkul) JOIN krs k ON (km.idkrs=k.idkrs) JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN nilai_matakuliah nm ON (km.idkrsmatkul=nm.idkrsmatkul) WHERE kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 AND nm.idkrsmatkul IS NULL ORDER BY vdm.nama_mhs ASC";
-        $this->db->setFieldTable(array('idkrsmatkul','nim','nama_mhs'));	
+        $this->db->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs'));	
         $r=$this->db->getRecord($str);    
         $row_awal=2;
         $row=2;
@@ -2686,8 +2686,8 @@ class Logic_ReportNilai extends Logic_Report {
   public function printFormatEvaluasiHasilBelajar ($objNilai) { 
     $idkelas_mhs = $this->dataReport['idkelas_mhs'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :          
+      case 'excel2003':               
+      case 'excel2007':          
         $this->setHeaderPT('J');
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -2705,74 +2705,74 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getStyle("A7:T7")->applyFromArray($styleArray);
                  
         $sheet->mergeCells('E9:F9');		                
-        $sheet->setCellValue('E9','Kode Matakuliah');
-        $sheet->setCellValue('G9',': '.$this->dataReport['kmatkul']);
+        $sheet->setCellValue('E9', 'Kode Matakuliah');
+        $sheet->setCellValue('G9', ': '.$this->dataReport['kmatkul']);
 
         $sheet->mergeCells('E10:F10');		
-        $sheet->setCellValue('E10','Nama Matakuliah');
-        $sheet->setCellValue('G10',': '.$this->dataReport['nmatkul']);
+        $sheet->setCellValue('E10', 'Nama Matakuliah');
+        $sheet->setCellValue('G10', ': '.$this->dataReport['nmatkul']);
         
         $sheet->mergeCells('E11:F11');		
-        $sheet->setCellValue('E11','SKS');
+        $sheet->setCellValue('E11', 'SKS');
         $sheet->setCellValueExplicit("G11",': '.$this->dataReport['sks'],PHPExcel_Cell_DataType::TYPE_STRING);
                 
         $sheet->mergeCells('E12:F12');		
-        $sheet->setCellValue('E12','T.A / Semester');
-        $sheet->setCellValue('G12',': '.$this->dataReport['tahun'].' / '.$this->dataReport['nama_semester']);
+        $sheet->setCellValue('E12', 'T.A / Semester');
+        $sheet->setCellValue('G12', ': '.$this->dataReport['tahun'].' / '.$this->dataReport['nama_semester']);
 
         $sheet->mergeCells('E13:F13');		
-        $sheet->setCellValue('E13','Dosen Pengampu');
-        $sheet->setCellValue('G13',': '.$this->dataReport['nama_dosen_matakuliah'].' ['.$this->dataReport['nidn_dosen_matakuliah'].') ');
+        $sheet->setCellValue('E13', 'Dosen Pengampu');
+        $sheet->setCellValue('G13', ': '.$this->dataReport['nama_dosen_matakuliah'].' ['.$this->dataReport['nidn_dosen_matakuliah'].') ');
 
         $sheet->mergeCells('E14:F14');
-        $sheet->setCellValue('E14','Dosen Pengajar');
-        $sheet->setCellValue('G14',': '.$this->dataReport['nama_dosen'].' ['.$this->dataReport['nidn'].') ');
+        $sheet->setCellValue('E14', 'Dosen Pengajar');
+        $sheet->setCellValue('G14', ': '.$this->dataReport['nama_dosen'].' ['.$this->dataReport['nidn'].') ');
         
         $sheet->mergeCells('E15:F15');
-        $sheet->setCellValue('E15','Kelas');
-        $sheet->setCellValue('G15',': '.$this->dataReport['namakelas']);
+        $sheet->setCellValue('E15', 'Kelas');
+        $sheet->setCellValue('G15', ': '.$this->dataReport['namakelas']);
         
         $sheet->mergeCells('A17:A18');				
-        $sheet->setCellValue('A17','NO');				
+        $sheet->setCellValue('A17', 'NO');				
         $sheet->mergeCells('B17:E18');				
-        $sheet->setCellValue('B17','NAMA');				
+        $sheet->setCellValue('B17', 'NAMA');				
         $sheet->mergeCells('F17:F18');				
-        $sheet->setCellValue('F17','JK');				
+        $sheet->setCellValue('F17', 'JK');				
         $sheet->mergeCells('G17:G18');				
-        $sheet->setCellValue('G17','NIM');				
+        $sheet->setCellValue('G17', 'NIM');				
         $sheet->mergeCells('H17:H18');				
-        $sheet->setCellValue('H17','NIRM');	
+        $sheet->setCellValue('H17', 'NIRM');	
         
         $sheet->mergeCells('I17:J17');				
-        $sheet->setCellValue('I17','QUIZ ('.$this->dataReport['persen_quiz'].'%)');	
+        $sheet->setCellValue('I17', 'QUIZ ('.$this->dataReport['persen_quiz'].'%)');	
         
         $sheet->mergeCells('K17:L17');				
-        $sheet->setCellValue('K17','TUGAS ('.$this->dataReport['persen_tugas'].'%)');	
+        $sheet->setCellValue('K17', 'TUGAS ('.$this->dataReport['persen_tugas'].'%)');	
         
         $sheet->mergeCells('M17:N17');				
-        $sheet->setCellValue('M17','UTS ('.$this->dataReport['persen_uts'].'%)');
+        $sheet->setCellValue('M17', 'UTS ('.$this->dataReport['persen_uts'].'%)');
         
         $sheet->mergeCells('O17:P17');				
-        $sheet->setCellValue('O17','UAS ('.$this->dataReport['persen_uas'].'%)');
+        $sheet->setCellValue('O17', 'UAS ('.$this->dataReport['persen_uas'].'%)');
         
         $sheet->mergeCells('Q17:R17');				
-        $sheet->setCellValue('Q17','ABSEN ('.$this->dataReport['persen_absen'].'%)');
+        $sheet->setCellValue('Q17', 'ABSEN ('.$this->dataReport['persen_absen'].'%)');
         
         $sheet->mergeCells('S17:T17');				
-        $sheet->setCellValue('S17','NILAI AKHIR');
+        $sheet->setCellValue('S17', 'NILAI AKHIR');
         
-        $sheet->setCellValue('I18','NA');			
-        $sheet->setCellValue('J18','%');
-        $sheet->setCellValue('K18','NA');			
-        $sheet->setCellValue('L18','%');	
-        $sheet->setCellValue('M18','NA');			
-        $sheet->setCellValue('N18','%');
-        $sheet->setCellValue('O18','NA');			
-        $sheet->setCellValue('P18','%');
-        $sheet->setCellValue('Q18','NA');			
-        $sheet->setCellValue('R18','%');
-        $sheet->setCellValue('S18','AM');			
-        $sheet->setCellValue('T18','HM');
+        $sheet->setCellValue('I18', 'NA');			
+        $sheet->setCellValue('J18', '%');
+        $sheet->setCellValue('K18', 'NA');			
+        $sheet->setCellValue('L18', '%');	
+        $sheet->setCellValue('M18', 'NA');			
+        $sheet->setCellValue('N18', '%');
+        $sheet->setCellValue('O18', 'NA');			
+        $sheet->setCellValue('P18', '%');
+        $sheet->setCellValue('Q18', 'NA');			
+        $sheet->setCellValue('R18', '%');
+        $sheet->setCellValue('S18', 'AM');			
+        $sheet->setCellValue('T18', 'HM');
         
         $sheet->getColumnDimension('A')->setWidth(10);
         $sheet->getColumnDimension('H')->setWidth(17);
@@ -2799,7 +2799,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getStyle("A17:T18")->getAlignment()->setWrapText(true);
         
         $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.persentase_quiz, n.persentase_tugas, n.persentase_uts, n.persentase_uas, n.persentase_absen, n.nilai_quiz, n.nilai_tugas, n.nilai_uts, n.nilai_uas, n.nilai_absen, n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
-        $this->db->setFieldTable(array('idkrsmatkul','nim','nirm','nama_mhs','jk','persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen','n_kuan','n_kual'));
+        $this->db->setFieldTable(array('idkrsmatkul', 'nim', 'nirm', 'nama_mhs', 'jk', 'persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'n_kuan', 'n_kual'));
         $r=$this->db->getRecord($str);	
         $row_awal=19;
         $row=19;

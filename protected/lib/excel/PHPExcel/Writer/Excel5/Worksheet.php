@@ -379,7 +379,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
         // Row dimensions
         foreach ($phpSheet->getRowDimensions() as $rowDimension) {
             $xfIndex = $rowDimension->getXfIndex() + 15; // there are 15 cellXfs
-            $this->writeRow($rowDimension->getRowIndex() - 1, $rowDimension->getRowHeight(), $xfIndex, ($rowDimension->getVisible() ? '0' : '1'), $rowDimension->getOutlineLevel());
+            $this->writeRow($rowDimension->getRowIndex() - 1, $rowDimension->getRowHeight(), $xfIndex, ($rowDimension->getVisible() ? '0': '1'), $rowDimension->getOutlineLevel());
         }
 
         // Write Cells
@@ -2912,7 +2912,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
                 try {
                     $formula1 = $dataValidation->getFormula1();
                     if ($type == 0x03) { // list type
-                        $formula1 = str_replace(',', chr(0), $formula1);
+                        $formula1 = str_replace(', ', chr(0), $formula1);
                     }
                     $this->parser->parse($formula1);
                     $formula1 = $this->parser->toReversePolish();

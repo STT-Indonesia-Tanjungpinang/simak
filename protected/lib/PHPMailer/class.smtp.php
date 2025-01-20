@@ -384,7 +384,7 @@ class SMTP
 
             self::edebug('Auth method requested: ' . ($authtype ? $authtype : 'UNKNOWN'), self::DEBUG_LOWLEVEL);
             self::edebug(
-                'Auth methods available on the server: ' . implode(',', $this->server_caps['AUTH']),
+                'Auth methods available on the server: ' . implode(', ', $this->server_caps['AUTH']),
                 self::DEBUG_LOWLEVEL
             );
 
@@ -782,7 +782,7 @@ class SMTP
      */
     public function mail($from)
     {
-        $useVerp = ($this->do_verp ? ' XVERP' : '');
+        $useVerp = ($this->do_verp ? ' XVERP': '');
         return $this->sendCommand(
             'MAIL FROM',
             'MAIL FROM:<' . $from . '>' . $useVerp,
@@ -863,12 +863,12 @@ class SMTP
         $this->last_reply = $this->get_lines();
         // Fetch SMTP code and possible error code explanation
         $matches = array();
-        if (preg_match("/^([0-9]{3})[ -](?:([0-9]\\.[0-9]\\.[0-9]) )?/", $this->last_reply, $matches)) {
+        if (preg_match("/^([0-9]{3})[ -](?:([0-9]\\.[0-9]\\.[0-9]))?/", $this->last_reply, $matches)) {
             $code = $matches[1];
             $code_ex = (count($matches) > 2 ? $matches[2] : null);
             // Cut off error code from each response line
             $detail = preg_replace(
-                "/{$code}[ -]".($code_ex ? str_replace('.', '\\.', $code_ex).' ' : '')."/m",
+                "/{$code}[ -]".($code_ex ? str_replace('.', '\\.', $code_ex).' ': '')."/m",
                 '',
                 $this->last_reply
             );

@@ -26,7 +26,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
             }      
 		}	
 	}
-    public function populateData () {
+    public function populateData() {
         $datamhs = $this->Pengguna->getDataUser();
         $no_transaksi = $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'];
         $tahun_masuk = $datamhs['tahun_masuk'];   
@@ -63,11 +63,11 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
     }
 	public function editItem($sender, $param) {                   
         $this->GridS->EditItemIndex=$param->Item->ItemIndex;
-        $this->populateData ();        
+        $this->populateData();        
     }
     public function cancelItem($sender, $param) {                
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();        
+        $this->populateData();        
     }		
     public function deleteItem($sender, $param) {                
         $id=$this->GridS->DataKeys[$param->Item->ItemIndex]; 
@@ -75,7 +75,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
         $no_transaksi = $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'];
         $this->DB->updateRecord("UPDATE transaksi_detail SET dibayarkan=0 WHERE idkombi=14 AND no_transaksi = $no_transaksi");
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }  
     public function saveItem($sender, $param) {                        
         $item = $param->Item;
@@ -95,7 +95,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
         
         $this->DB->query ('BEGIN');
         $str = "UPDATE transaksi_detail SET dibayarkan='$jumlah_bayar',jumlah_sks = $jumlah_sks WHERE no_transaksi = $no_transaksi AND idkombi = $id";
-        if ($this->DB->updateRecord($str) ) {
+        if ($this->DB->updateRecord($str)) {
             $str = "UPDATE transaksi SET jumlah_sks = $jumlah_sks WHERE no_transaksi = $no_transaksi";
             $this->DB->updateRecord($str);
             
@@ -105,7 +105,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
         }       
        
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }
 	public function checkNomorFaktur($sender, $param) {
 		$this->idProcess = $sender->getId()=='addNomorFaktur'?'add':'edit';
@@ -129,7 +129,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
             $no_transaksi = $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'];
             $nim = $datamhs['nim'];
             
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',date_modified=NOW() WHERE no_transaksi = $no_transaksi";
@@ -147,7 +147,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
             $idsmt = $_SESSION['currentPagePembayaranSemesterPendek']['semester'];
             $kelas = $datamhs['idkelas'];
             $k_status = $datamhs['k_status'];
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
             $this->DB->query('BEGIN');

@@ -115,7 +115,7 @@ class DBGlobal {
     }else {
       for ($i=0;$i<$countField;$i++) {
         if ($countField > $i+1) {
-          $field = $field . $fieldTable[$i] . ',';
+          $field = $field . $fieldTable[$i] . ', ';
         }else {
           $field = $field . $fieldTable[$i];
         }

@@ -1734,7 +1734,7 @@ class PHPExcel_Calculation_Engineering
     {
         $realNumber = (is_null($realNumber)) ? 0.0 : PHPExcel_Calculation_Functions::flattenSingleValue($realNumber);
         $imaginary  = (is_null($imaginary))  ? 0.0 : PHPExcel_Calculation_Functions::flattenSingleValue($imaginary);
-        $suffix     = (is_null($suffix))     ? 'i' : PHPExcel_Calculation_Functions::flattenSingleValue($suffix);
+        $suffix     = (is_null($suffix))     ? 'i': PHPExcel_Calculation_Functions::flattenSingleValue($suffix);
 
         if (((is_numeric($realNumber)) && (is_numeric($imaginary))) &&
             (($suffix == 'i') || ($suffix == 'j') || ($suffix == ''))) {

@@ -18,7 +18,7 @@ class CTranskripKurikulum extends MainPageM {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();				
             
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			            
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			            
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageTranskripKurikulum']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -63,24 +63,24 @@ class CTranskripKurikulum extends MainPageM {
 		$_SESSION['currentPageTranskripKurikulum']['search']=true;
 		$this->populateData($_SESSION['currentPageTranskripKurikulum']['search']);
 	}
-	public function populateData($search=false) {			
+	public function populateData($search = false) {			
         $kjur = $_SESSION['kjur'];      
         $tahun_masuk = $_SESSION['currentPageTranskripKurikulum']['tahun_masuk'];        
         if ($search) {
             $str = "SELECT nim,nama_mhs,jk,kjur,tahun_masuk,idkonsentrasi FROM v_datamhs";			
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="WHERE nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="WHERE nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="WHERE nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
@@ -129,19 +129,19 @@ class CTranskripKurikulum extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
 		switch ($sender->getId()) {
-			case 'btnPrintOutR' :
+			case 'btnPrintOutR':
                 $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
                 switch ($_SESSION['outputreport']) {
-                    case 'summarypdf' :
+                    case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
-                    case 'summaryexcel' :
+                    case 'summaryexcel':
                         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
-                    case 'excel2007' :
+                    case 'excel2007':
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
-                    case 'pdf' :
+                    case 'pdf':
                     
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
                         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk'));
@@ -165,18 +165,18 @@ class CTranskripKurikulum extends MainPageM {
                     break;
                 }                
 			break;			
-            case 'btnPrintTranskripKurikulumAll' :
+            case 'btnPrintTranskripKurikulumAll':
                  switch ($_SESSION['outputreport']) {
-                    case 'summarypdf' :
+                    case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;
-                    case 'summaryexcel' :
+                    case 'summaryexcel':
                         $messageprintout="Mohon maaf Print out pada mode summary excel belum kami support.";                
                     break;
-                    case 'excel2007' :
+                    case 'excel2007':
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
                     break;
-                    case 'pdf' :
+                    case 'pdf':
                         $messageprintout="Mohon maaf Print out pada mode pdf tidak kami support.";                                            
                     break;
                 }

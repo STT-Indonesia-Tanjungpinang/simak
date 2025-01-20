@@ -159,9 +159,9 @@ class PHPExcel_Writer_Excel2007_Workbook extends PHPExcel_Writer_Excel2007_Write
     {
         if ($pPHPExcel->getSecurity()->isSecurityEnabled()) {
             $objWriter->startElement('workbookProtection');
-            $objWriter->writeAttribute('lockRevision', ($pPHPExcel->getSecurity()->getLockRevision() ? 'true' : 'false'));
-            $objWriter->writeAttribute('lockStructure', ($pPHPExcel->getSecurity()->getLockStructure() ? 'true' : 'false'));
-            $objWriter->writeAttribute('lockWindows', ($pPHPExcel->getSecurity()->getLockWindows() ? 'true' : 'false'));
+            $objWriter->writeAttribute('lockRevision', ($pPHPExcel->getSecurity()->getLockRevision() ? 'true': 'false'));
+            $objWriter->writeAttribute('lockStructure', ($pPHPExcel->getSecurity()->getLockStructure() ? 'true': 'false'));
+            $objWriter->writeAttribute('lockWindows', ($pPHPExcel->getSecurity()->getLockWindows() ? 'true': 'false'));
 
             if ($pPHPExcel->getSecurity()->getRevisionsPassword() != '') {
                 $objWriter->writeAttribute('revisionsPassword', $pPHPExcel->getSecurity()->getRevisionsPassword());
@@ -397,7 +397,7 @@ class PHPExcel_Writer_Excel2007_Workbook extends PHPExcel_Writer_Excel2007_Write
             // Rows to repeat
             if ($pSheet->getPageSetup()->isRowsToRepeatAtTopSet()) {
                 if ($pSheet->getPageSetup()->isColumnsToRepeatAtLeftSet()) {
-                    $settingString .= ',';
+                    $settingString .= ', ';
                 }
 
                 $repeat = $pSheet->getPageSetup()->getRowsToRepeatAtTop();
@@ -440,7 +440,7 @@ class PHPExcel_Writer_Excel2007_Workbook extends PHPExcel_Writer_Excel2007_Write
                 $chunks[] = '\'' . str_replace("'", "''", $pSheet->getTitle()) . '\'!' . implode(':', $printAreaRect);
             }
 
-            $objWriter->writeRawData(implode(',', $chunks));
+            $objWriter->writeRawData(implode(', ', $chunks));
 
             $objWriter->endElement();
         }

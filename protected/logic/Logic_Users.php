@@ -33,7 +33,7 @@ class Logic_Users extends Logic_Global {
 	/**
 	* set data user from custom source
 	*/
-	public function setDataUser ($datauser=array()) {
+	public function setDataUser ($datauser = array()) {
 		$this->DataUser = $datauser;
 	}
 	/**
@@ -92,7 +92,7 @@ class Logic_Users extends Logic_Global {
 	* digunakan untuk mendapatkan daftar group 	
 	*/	
 	public function getListGroup () {
-		$result = $this->getList('user_group',array('group_id','group_name'),null,null,1);
+		$result = $this->getList('user_group',array('group_id', 'group_name'),null,null, 1);
 		return $result;
 	}
     /**
@@ -100,7 +100,7 @@ class Logic_Users extends Logic_Global {
 	*/
 	public function getModuleAccess ($sectionname, $modulename) {		
 		$modul=$this->UserAcl[$sectionname];	        
-		if ($modul =='') {
+		if ($modul == '') {
 			throw new Exception ("section ($sectionname) tidak di kenal");			
 		}else {
 			$modul_read=$modul[$modulename.'_read'];

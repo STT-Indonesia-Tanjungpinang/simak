@@ -12,11 +12,11 @@ class CPindahKelas Extends MainPageM {
 			}   
 			$_SESSION['currentPagePindahKelas']['search']=false;
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -76,8 +76,8 @@ class CPindahKelas Extends MainPageM {
             $this->Demik->setDataMHS(array('nim'=>$item->DataItem['nim']));
 			$datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
             if (isset($datadulang['iddulang'])) {
-                $item->btnDelete->Enabled=false;
-				$item->btnEdit->Enabled=false;
+                $item->btnDelete->Enabled = false;
+				$item->btnEdit->Enabled = false;
             }else{
                  $item->btnDelete->Attributes->OnClick="if(!confirm('Anda ingin menghapus data pindah kelas dan mengembalikannya ke semula?')) return false;";
             }
@@ -191,7 +191,7 @@ class CPindahKelas Extends MainPageM {
 
         $this->Demik->setDataMHS($datamhs);
         
-		$r = $this->Demik->getList("pindahkelas WHERE idpindahkelas='$idpindahkelas'",array('idkelas_lama', 'idkelas_baru', 'tanggal', 'no_surat', 'keterangan'));
+		$r = $this->Demik->getList("pindahkelas WHERE idpindahkelas='$idpindahkelas'", array('idkelas_lama', 'idkelas_baru', 'tanggal', 'no_surat', 'keterangan'));
 		$r = $r[1];				
 		$this->hiddennim->Value=$nim;
 		$this->hiddenid->Value=$idpindahkelas;		

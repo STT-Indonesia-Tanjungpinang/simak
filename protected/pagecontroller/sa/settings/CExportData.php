@@ -30,7 +30,7 @@ class CExportData extends MainPageSA {
         if ($this->IsValid) {
             try {
                 switch ($sender->getId()) {
-                    case 'btnSaveExportPerMHS' :
+                    case 'btnSaveExportPerMHS':
                         $nim=addslashes($this->txtNIM->Text);
                         $this->exportDataMHS($nim);
                     break;
@@ -57,7 +57,7 @@ class CExportData extends MainPageSA {
                 $content .= "\n(";
                 for($j=0; $j<$fields_amount; $j++)  
                 { 
-                    $row[$j] = str_replace("\n","\\n", addslashes($row[$j]) ); 
+                    $row[$j] = str_replace("\n","\\n", addslashes($row[$j])); 
                     if (isset($row[$j]))
                     {
                         $content .= '"'.addslashes($row[$j]).'"' ; 
@@ -88,7 +88,7 @@ class CExportData extends MainPageSA {
     }
     private function exportDataMHS ($value, $mode='nim') {
         switch ($mode) {
-            case 'nim' :               
+            case 'nim':               
                 $str = "SELECT no_formulir,nim,nirm FROM register_mahasiswa WHERE nim='$value'";
                 $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm'));
                 $r = $this->DB->getRecord($str);
@@ -408,7 +408,7 @@ class CExportData extends MainPageSA {
 //     public function exportData($sender, $param) {
 //         if ($this->IsValid) {
 //             switch ($sender->getId()) {
-//                 case 'btnSaveExportNIM' :
+//                 case 'btnSaveExportNIM':
 //                     $nim=addslashes($this->txtNIM->Text);
 //                     $str = "";
 //                 break;
@@ -438,7 +438,7 @@ class CExportData extends MainPageSA {
 //             $rows_num=$mysqli->affected_rows;     
 //             $res            =   $mysqli->query('SHOW CREATE TABLE '.$table); 
 //             $TableMLine     =   $res->fetch_row();
-//             $content        = (!isset($content) ?  '' : $content) . "\n\n".$TableMLine[1].";\n\n";
+//             $content        = (!isset($content) ?  '': $content) . "\n\n".$TableMLine[1].";\n\n";
 
             // for ($i = 0, $st_counter = 0; $i < $fields_amount;   $i++, $st_counter=0) 
             // {
@@ -451,7 +451,7 @@ class CExportData extends MainPageSA {
             //         $content .= "\n(";
             //         for($j=0; $j<$fields_amount; $j++)  
             //         { 
-            //             $row[$j] = str_replace("\n","\\n", addslashes($row[$j]) ); 
+            //             $row[$j] = str_replace("\n","\\n", addslashes($row[$j])); 
             //             if (isset($row[$j]))
             //             {
             //                 $content .= '"'.$row[$j].'"' ; 

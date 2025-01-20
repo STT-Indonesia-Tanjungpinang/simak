@@ -16,8 +16,8 @@ class Logic_ReportKuesioner extends Logic_Report {
         $nama_semester=$this->dataReport['nama_semester'];
         $nama_ps = $this->dataReport['nama_ps'];
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :          
+            case 'excel2003':               
+            case 'excel2007':          
                 $this->setHeaderPT('J'); 
                 $sheet=$this->rpt->getActiveSheet();
                 $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -50,16 +50,16 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $sheet->getColumnDimension('I')->setWidth(15);
                 $sheet->getColumnDimension('J')->setWidth(15);
                                 
-                $sheet->setCellValue('A10','NO');				
-                $sheet->setCellValue('B10','ID');
-                $sheet->setCellValue('C10','KODE');				                        
-                $sheet->setCellValue('D10','NAMA MATAKULIAH');				
-                $sheet->setCellValue('E10','SKS');				
-                $sheet->setCellValue('F10','SMT');				
-                $sheet->setCellValue('G10','NIDN');				
-                $sheet->setCellValue('H10','NAMA DOSEN');				
-                $sheet->setCellValue('I10','TOTAL NILAI');				
-                $sheet->setCellValue('J10','HASIL');				                                    
+                $sheet->setCellValue('A10', 'NO');				
+                $sheet->setCellValue('B10', 'ID');
+                $sheet->setCellValue('C10', 'KODE');				                        
+                $sheet->setCellValue('D10', 'NAMA MATAKULIAH');				
+                $sheet->setCellValue('E10', 'SKS');				
+                $sheet->setCellValue('F10', 'SMT');				
+                $sheet->setCellValue('G10', 'NIDN');				
+                $sheet->setCellValue('H10', 'NAMA DOSEN');				
+                $sheet->setCellValue('I10', 'TOTAL NILAI');				
+                $sheet->setCellValue('J10', 'HASIL');				                                    
                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
@@ -73,7 +73,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                 
                 
                 $str="SELECT vpp.idpengampu_penyelenggaraan,vpp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur' ORDER BY nmatkul ASC";                
-                $this->db->setFieldTable (array('idpengampu_penyelenggaraan','idpenyelenggaraan','kmatkul','nmatkul','sks','semester','iddosen','nidn','nama_dosen','jumlahmhs'));			
+                $this->db->setFieldTable (array('idpengampu_penyelenggaraan', 'idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen', 'jumlahmhs'));			
                 $r=$this->db->getRecord($str);	                
                 $row=11;  
                 while (list($k, $v)=each($r)) {
@@ -88,7 +88,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                     $sheet->setCellValue("H$row", $v['nama_dosen']);				
                     
                     $str="SELECT n_kual,total_nilai FROM kuesioner_hasil WHERE idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan";				
-                    $this->db->setFieldTable (array('n_kual','total_nilai'));			
+                    $this->db->setFieldTable (array('n_kual', 'total_nilai'));			
                     $r2=$this->db->getRecord($str);	
                     if (isset($r2[1])) {
                         $sheet->setCellValue("I$row", $r2[1]['total_nilai']);
@@ -131,8 +131,8 @@ class Logic_ReportKuesioner extends Logic_Report {
         $nama_semester=$this->dataReport['nama_semester'];
         $nmatkul = $this->dataReport['nmatkul'];
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :          
+            case 'excel2003':               
+            case 'excel2007':          
                 $this->setHeaderPT('I'); 
                 $sheet=$this->rpt->getActiveSheet();
                 $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -155,34 +155,34 @@ class Logic_ReportKuesioner extends Logic_Report {
                 
                 
                 
-                $sheet->setCellValue('A10','NIDN');	
+                $sheet->setCellValue('A10', 'NIDN');	
                 $sheet->setCellValue('C10', $this->dataReport['nidn']);	
-                $sheet->setCellValue('A11','NAMA DOSEN');				
+                $sheet->setCellValue('A11', 'NAMA DOSEN');				
                 $sheet->setCellValue('C11', $this->dataReport['nama_dosen']);	
-                $sheet->setCellValue('A12','KODE MATKUL');				
+                $sheet->setCellValue('A12', 'KODE MATKUL');				
                 $sheet->setCellValue('C12', $this->dataReport['kmatkul']);	
-                $sheet->setCellValue('A13','NAMA MATKUL');				
+                $sheet->setCellValue('A13', 'NAMA MATKUL');				
                 $sheet->setCellValue('C13', $this->dataReport['nmatkul']);	
-                $sheet->setCellValue('A14','SKS');				
+                $sheet->setCellValue('A14', 'SKS');				
                 $sheet->setCellValue('C14', $this->dataReport['sks']);	
-                $sheet->setCellValue('A15','SEMESTER');			
+                $sheet->setCellValue('A15', 'SEMESTER');			
                 $sheet->setCellValue('C15', $this->dataReport['semester']);	
-                $sheet->setCellValue('A16','PROGRAM STUDI');		
+                $sheet->setCellValue('A16', 'PROGRAM STUDI');		
                 $sheet->setCellValue('C16', $this->dataReport['nama_ps']);	
                 
-                $sheet->setCellValue('E10','JUMLAH MHS');	
+                $sheet->setCellValue('E10', 'JUMLAH MHS');	
                 $sheet->setCellValue('G10', $this->dataReport['jumlah_mhs']);	
-                $sheet->setCellValue('E11','JUMLAH SOAL');				
+                $sheet->setCellValue('E11', 'JUMLAH SOAL');				
                 $sheet->setCellValue('G11', $this->dataReport['jumlah_soal']);	
-                $sheet->setCellValue('E12','TOTAL NILAI');				
+                $sheet->setCellValue('E12', 'TOTAL NILAI');				
                 $sheet->setCellValue('G12', $this->dataReport['total_nilai']);	
-                $sheet->setCellValue('E13','SKOR TERENDAH');			
+                $sheet->setCellValue('E13', 'SKOR TERENDAH');			
                 $sheet->setCellValue('G13', $this->dataReport['skor_terendah']);	
-                $sheet->setCellValue('E14','SKOR TERTINGGI');				
+                $sheet->setCellValue('E14', 'SKOR TERTINGGI');				
                 $sheet->setCellValue('G14', $this->dataReport['skor_tertinggi']);	
-                $sheet->setCellValue('E15','INTERVAL');				
+                $sheet->setCellValue('E15', 'INTERVAL');				
                 $sheet->setCellValue('G15', $this->dataReport['intervals']);	
-                $sheet->setCellValue('E16','KETERANGAN');				
+                $sheet->setCellValue('E16', 'KETERANGAN');				
                 $sheet->setCellValue('G16', $this->dataReport['n_kual']);	
                 
                 $styleArray=array(								
@@ -201,15 +201,15 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $sheet->getColumnDimension('H')->setWidth(13);
                 $sheet->getColumnDimension('I')->setWidth(10);                
                                 
-                $sheet->setCellValue('A18','NO');				
-                $sheet->setCellValue('B18','URUT');
-                $sheet->setCellValue('C18','ASPEK YANG LAIN');				                        
-                $sheet->setCellValue('D18','INDIKATOR KE 1');				
-                $sheet->setCellValue('E18','INDIKATOR KE 2');				
-                $sheet->setCellValue('F18','INDIKATOR KE 3');				
-                $sheet->setCellValue('G18','INDIKATOR KE 4');				
-                $sheet->setCellValue('H18','INDIKATOR KE 5');				                
-                $sheet->setCellValue('I18','TOTAL');				                                    
+                $sheet->setCellValue('A18', 'NO');				
+                $sheet->setCellValue('B18', 'URUT');
+                $sheet->setCellValue('C18', 'ASPEK YANG LAIN');				                        
+                $sheet->setCellValue('D18', 'INDIKATOR KE 1');				
+                $sheet->setCellValue('E18', 'INDIKATOR KE 2');				
+                $sheet->setCellValue('F18', 'INDIKATOR KE 3');				
+                $sheet->setCellValue('G18', 'INDIKATOR KE 4');				
+                $sheet->setCellValue('H18', 'INDIKATOR KE 5');				                
+                $sheet->setCellValue('I18', 'TOTAL');				                                    
                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
@@ -230,7 +230,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $TotalIndikator5=0;
                 while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
                     $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan = $idkelompok_pertanyaan ORDER BY (orders+0) ASC";
-                    $this->db->setFieldTable(array('idkuesioner','idkelompok_pertanyaan','pertanyaan','orders','date_added'));
+                    $this->db->setFieldTable(array('idkuesioner', 'idkelompok_pertanyaan', 'pertanyaan', 'orders', 'date_added'));
                     $r=$this->db->getRecord($str);
                     $jumlah_r=count($r);
                     if ($jumlah_r > 0) {                        
@@ -243,7 +243,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                         
                         $idkuesioner=$r[1]['idkuesioner'];                
                         $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
-                        $this->db->setFieldTable(array('nilai_indikator','jumlah'));
+                        $this->db->setFieldTable(array('nilai_indikator', 'jumlah'));
                         $hasil_indikator=$this->db->getRecord($str);
                         $indikator1=0;
                         $indikator2=0;
@@ -253,7 +253,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                         foreach ($hasil_indikator as $hasil) {
                             switch($hasil['nilai_indikator']) {
                                 case 1 :
-                                    $indikator1=$hasil['jumlah'];
+                                    $indikator1 = $hasil['jumlah'];
                                 break;
                                 case 2 :
                                     $indikator2=$hasil['jumlah'];
@@ -290,7 +290,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                         while (list($k, $v)=each($r)) {
                             $idkuesioner=$v['idkuesioner'];
                             $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
-                            $this->db->setFieldTable(array('nilai_indikator','jumlah'));
+                            $this->db->setFieldTable(array('nilai_indikator', 'jumlah'));
                             $hasil_indikator=$this->db->getRecord($str);
                             $indikator1=0;
                             $indikator2=0;
@@ -300,7 +300,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                             foreach ($hasil_indikator as $hasil) {
                                 switch($hasil['nilai_indikator']) {
                                     case 1 :
-                                        $indikator1=$hasil['jumlah'];
+                                        $indikator1 = $hasil['jumlah'];
                                     break;
                                     case 2 :
                                         $indikator2=$hasil['jumlah'];

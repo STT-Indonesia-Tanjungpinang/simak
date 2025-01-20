@@ -176,7 +176,7 @@ class PHPExcel_Writer_Excel2007_Chart extends PHPExcel_Writer_Excel2007_WriterPa
         $this->writeLayout($legend->getLayout(), $objWriter);
 
         $objWriter->startElement('c:overlay');
-        $objWriter->writeAttribute('val', ($legend->getOverlay()) ? '1' : '0');
+        $objWriter->writeAttribute('val', ($legend->getOverlay()) ? '1': '0');
         $objWriter->endElement();
 
         $objWriter->startElement('c:txPr');
@@ -905,10 +905,10 @@ class PHPExcel_Writer_Excel2007_Chart extends PHPExcel_Writer_Excel2007_WriterPa
         if (!is_null($xAxis->getGlowProperty('size'))) {
             $objWriter->startElement('a:glow');
             $objWriter->writeAttribute('rad', $xAxis->getGlowProperty('size'));
-            $objWriter->startElement("a:{$xAxis->getGlowProperty(array('color','type'))}");
-            $objWriter->writeAttribute('val', $xAxis->getGlowProperty(array('color','value')));
+            $objWriter->startElement("a:{$xAxis->getGlowProperty(array('color', 'type'))}");
+            $objWriter->writeAttribute('val', $xAxis->getGlowProperty(array('color', 'value')));
             $objWriter->startElement('a:alpha');
-            $objWriter->writeAttribute('val', $xAxis->getGlowProperty(array('color','alpha')));
+            $objWriter->writeAttribute('val', $xAxis->getGlowProperty(array('color', 'alpha')));
             $objWriter->endElement();
             $objWriter->endElement();
             $objWriter->endElement();
@@ -929,23 +929,23 @@ class PHPExcel_Writer_Excel2007_Chart extends PHPExcel_Writer_Excel2007_WriterPa
             if (!is_null($xAxis->getShadowProperty('algn'))) {
                 $objWriter->writeAttribute('algn', $xAxis->getShadowProperty('algn'));
             }
-            if (!is_null($xAxis->getShadowProperty(array('size','sx')))) {
-                $objWriter->writeAttribute('sx', $xAxis->getShadowProperty(array('size','sx')));
+            if (!is_null($xAxis->getShadowProperty(array('size', 'sx')))) {
+                $objWriter->writeAttribute('sx', $xAxis->getShadowProperty(array('size', 'sx')));
             }
-            if (!is_null($xAxis->getShadowProperty(array('size','sy')))) {
-                $objWriter->writeAttribute('sy', $xAxis->getShadowProperty(array('size','sy')));
+            if (!is_null($xAxis->getShadowProperty(array('size', 'sy')))) {
+                $objWriter->writeAttribute('sy', $xAxis->getShadowProperty(array('size', 'sy')));
             }
-            if (!is_null($xAxis->getShadowProperty(array('size','kx')))) {
-                $objWriter->writeAttribute('kx', $xAxis->getShadowProperty(array('size','kx')));
+            if (!is_null($xAxis->getShadowProperty(array('size', 'kx')))) {
+                $objWriter->writeAttribute('kx', $xAxis->getShadowProperty(array('size', 'kx')));
             }
             if (!is_null($xAxis->getShadowProperty('rotWithShape'))) {
                 $objWriter->writeAttribute('rotWithShape', $xAxis->getShadowProperty('rotWithShape'));
             }
 
-            $objWriter->startElement("a:{$xAxis->getShadowProperty(array('color','type'))}");
-            $objWriter->writeAttribute('val', $xAxis->getShadowProperty(array('color','value')));
+            $objWriter->startElement("a:{$xAxis->getShadowProperty(array('color', 'type'))}");
+            $objWriter->writeAttribute('val', $xAxis->getShadowProperty(array('color', 'value')));
             $objWriter->startElement('a:alpha');
-            $objWriter->writeAttribute('val', $xAxis->getShadowProperty(array('color','alpha')));
+            $objWriter->writeAttribute('val', $xAxis->getShadowProperty(array('color', 'alpha')));
             $objWriter->endElement();
             $objWriter->endElement();
 

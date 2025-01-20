@@ -35,7 +35,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	{
 		$page=$this->getPage();
 		$page->ensureRenderInForm($this);		
-		if(($uniqueID=$this->getUniqueID())!=='')
+		if(($uniqueID=$this->getUniqueID())!== '')
 			$writer->addAttribute('name', $uniqueID);		
 		if($this->getEnabled(true))
 		{
@@ -43,7 +43,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 				$this->renderClientControlScript($writer);
 		}
 		else if($this->getEnabled()) // in this case, parent will not render 'disabled'
-			$writer->addAttribute('disabled','disabled');
+			$writer->addAttribute('disabled', 'disabled');
 
 		parent::addAttributesToRender($writer);
 	}
@@ -74,7 +74,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	{
 		if($this->getCausesValidation())
 		{
-			$group=$this->getValidationGroup();
+			$group = $this->getValidationGroup();
 			return $this->getPage()->getValidators($group)->getCount()>0;
 		}
 		else
@@ -177,7 +177,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function getText()
 	{
-		return $this->getViewState('Text','');
+		return $this->getViewState('Text', '');
 	}
 
 	/**
@@ -235,7 +235,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function getCommandName()
 	{
-		return $this->getViewState('CommandName','');
+		return $this->getViewState('CommandName', '');
 	}
 
 	/**
@@ -251,7 +251,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function getCommandParameter()
 	{
-		return $this->getViewState('CommandParameter','');
+		return $this->getViewState('CommandParameter', '');
 	}
 
 	/**
@@ -267,7 +267,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function getValidationGroup()
 	{
-		return $this->getViewState('ValidationGroup','');
+		return $this->getViewState('ValidationGroup', '');
 	}
 
 	/**

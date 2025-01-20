@@ -241,7 +241,7 @@ class PHPExcel_Calculation
      * @var string
      *
      */
-    private static $localeArgumentSeparator = ',';
+    private static $localeArgumentSeparator = ', ';
     private static $localeFunctions = array();
 
     /**
@@ -2320,7 +2320,7 @@ class PHPExcel_Calculation
         if (in_array($language, self::$validLocaleLanguages)) {
             //    initialise language/locale settings
             self::$localeFunctions = array();
-            self::$localeArgumentSeparator = ',';
+            self::$localeArgumentSeparator = ', ';
             self::$localeBoolean = array('TRUE' => 'TRUE', 'FALSE' => 'FALSE', 'NULL' => 'NULL');
             //    Default is English, if user isn't requesting english, then read the necessary data from the locale files
             if ($locale != 'en_us') {
@@ -2463,7 +2463,7 @@ class PHPExcel_Calculation
             }
         }
 
-        return self::translateFormula(self::$functionReplaceFromExcel, self::$functionReplaceToLocale, $formula, ',', self::$localeArgumentSeparator);
+        return self::translateFormula(self::$functionReplaceFromExcel, self::$functionReplaceToLocale, $formula, ', ', self::$localeArgumentSeparator);
     }
 
 
@@ -2492,7 +2492,7 @@ class PHPExcel_Calculation
             }
         }
 
-        return self::translateFormula(self::$functionReplaceFromLocale, self::$functionReplaceToExcel, $formula, self::$localeArgumentSeparator, ',');
+        return self::translateFormula(self::$functionReplaceFromLocale, self::$functionReplaceToExcel, $formula, self::$localeArgumentSeparator, ', ');
     }
 
 
@@ -3172,7 +3172,7 @@ class PHPExcel_Calculation
 
             //    Find out if we're currently at the beginning of a number, variable, cell reference, function, parenthesis or operand
             $isOperandOrFunction = preg_match($regexpMatchString, substr($formula, $index), $match);
-//echo '$isOperandOrFunction is '.(($isOperandOrFunction) ? 'True' : 'False').PHP_EOL;
+//echo '$isOperandOrFunction is '.(($isOperandOrFunction) ? 'True': 'False').PHP_EOL;
 //var_dump($match);
 
             if ($opCharacter == '-' && !$expectingOperator) {                //    Is it a negation instead of a minus?
@@ -3270,7 +3270,7 @@ class PHPExcel_Calculation
                                     $expectedArgumentCountString = 'between '.$argMatch[1].' and '.$argMatch[3];
                                 }
                                 break;
-                            case ',':
+                            case ', ':
                                 if (($argumentCount != $argMatch[1]) && ($argumentCount != $argMatch[3])) {
                                     $argumentCountError = true;
                                     $expectedArgumentCountString = 'either '.$argMatch[1].' or '.$argMatch[3];
@@ -3284,7 +3284,7 @@ class PHPExcel_Calculation
                 }
                 ++$index;
 
-            } elseif ($opCharacter == ',') {            //    Is this the separator for function arguments?
+            } elseif ($opCharacter == ', ') {            //    Is this the separator for function arguments?
 //echo 'Element is a Function argument separator', PHP_EOL;
                 while (($o2 = $stack->pop()) && $o2['value'] != '(') {        //    Pop off the stack back to the last (
                     if ($o2 === null) {
@@ -3785,7 +3785,7 @@ class PHPExcel_Calculation
                 $argCount = $stack->pop();
                 $argCount = $argCount['value'];
                 if ($functionName != 'MKMATRIX') {
-                    $this->_debugLog->writeDebugLog('Evaluating Function ', self::localeFunc($functionName), '() with ', (($argCount == 0) ? 'no' : $argCount), ' argument', (($argCount == 1) ? '' : 's'));
+                    $this->_debugLog->writeDebugLog('Evaluating Function ', self::localeFunc($functionName), '() with ', (($argCount == 0) ? 'no': $argCount), ' argument', (($argCount == 1) ? '': 's'));
                 }
                 if ((isset(self::$PHPExcelFunctions[$functionName])) || (isset(self::$controlFunctions[$functionName]))) {    // function
                     if (isset(self::$PHPExcelFunctions[$functionName])) {

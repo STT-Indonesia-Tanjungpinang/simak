@@ -10,7 +10,7 @@ class CPembayaranFormulir extends MainPageM {
 				$_SESSION['currentPagePembayaranFormulir']=array('page_name'=>'m.spmb.PembayaranFormulir', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false);												
 			}	
             $_SESSION['currentPagePembayaranFormulir']['search']=false;
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
             $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
             $this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
@@ -36,7 +36,7 @@ class CPembayaranFormulir extends MainPageM {
 	}
 	public function btnSearch_Click($sender, $param) {		
 		$_SESSION['currentPagePembayaranFormulir']['page_num']=0;
-		$this->populateData ($this->getStrSearch());
+		$this->populateData($this->getStrSearch());
 	}
 	
 	public function renderCallback($sender, $param) {
@@ -48,7 +48,7 @@ class CPembayaranFormulir extends MainPageM {
 		$this->populateData($this->getStrSearch());
 	}
 	
-	private function populateData ($search=false) {
+	private function populateData($search = false) {
         $tahun_masuk = $_SESSION['tahun_masuk'];
         
         $str = "SELECT * FROM transaksi t JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) JOIN pin (pin.no_formulir=t.no_formulir) WHERE td.idkombi=1 AND t.tahun_masuk = $tahun_masuk";
@@ -126,12 +126,12 @@ class CPembayaranFormulir extends MainPageM {
 	}
 
 	private function getStrSearch() {
-		$txtSearch=trim(strtoupper($this->txtBerdasarkan->Text));
+		$txtSearch = trim(strtoupper($this->txtBerdasarkan->Text));
 		if ($txtSearch == '') {
 			$str = 'none';
 		}else {
 			switch ($this->cmbBerdasarkan->Text) {
-				case 'no_formulir' :
+				case 'no_formulir':
 					$str = "bp.no_formulir='$txtSearch'";
 				break;				
 				case 'nama_mhs':
@@ -149,7 +149,7 @@ class CPembayaranFormulir extends MainPageM {
 			$pembayaran_spmb['biaya_pendaftaran'] = $biaya_pendaftaran;
 			$max_record=$this->DB->getMaxOfRecord('no_formulir',"formulir_pendaftaran WHERE ta = '$ta' AND daftar_via='FO'")+1;		
 			$urut=substr($max_record,strlen($ta),4);		
-			$urut=($urut=='')?'0001':$urut;
+			$urut=($urut== '')?'0001':$urut;
 			$pembayaran_spmb['no_urut'] = $urut;
 			$_SESSION['pembayaran_spmb'] = $pembayaran_spmb;
 			$this->spmb->redirect('a.m.SPMB.PembayaranSPMB');
@@ -165,7 +165,7 @@ class CPembayaranFormulir extends MainPageM {
 			$no_formulir = $this->txtAddFormulir1->Value.$this->txtAddFormulir2->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtAddNamaMhs->Text)));	
 			$alamat_rumah=strtoupper(trim($this->txtAddAlamatRumah->Text));	
-			$telp_rumah=trim($this->txtAddNoTelpRumah->Text);		
+			$telp_rumah = trim($this->txtAddNoTelpRumah->Text);		
 			$telp_hp=trim($this->txtAddNoHP->Text);
 			$tgl_bayar = $this->TGL->tukarTanggal ($this->txtTglBayar->Text);				
 			$ket=trim($this->txtAddKeterangan->Text);
@@ -205,7 +205,7 @@ class CPembayaranFormulir extends MainPageM {
 			$nama_mhs = $item->DataItem['nama_mhs'];
 			$item->btnHapus->Attributes->Title="Hapus $nama_mhs";
 			if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa', $item->DataItem['no_formulir'])) {
-				$item->btnHapus->Enabled=false;
+				$item->btnHapus->Enabled = false;
 				$item->btnHapus->Attributes->OnClick="Modalbox.show(node, {title: this.title}); return false;";
 			}
 		}
@@ -243,7 +243,7 @@ class CPembayaranFormulir extends MainPageM {
 			$no_formulir = $this->txtEditFormulir1->Value.$this->txtEditFormulir2->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));	
 			$alamat_rumah=strtoupper(trim($this->txtEditAlamatRumah->Text));	
-			$telp_rumah=trim($this->txtEditNoTelpRumah->Text);		
+			$telp_rumah = trim($this->txtEditNoTelpRumah->Text);		
 			$telp_hp=trim($this->txtEditNoHP->Text);
 			$tgl_bayar = $this->TGL->tukarTanggal ($this->txtTglBayar->Text);
 			$no_faktur=trim($this->txtEditNoFaktur->Text);
@@ -273,7 +273,7 @@ class CPembayaranFormulir extends MainPageM {
 		$no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);		
 		$str = "formulir_pendaftaran WHERE no_formulir='$no_formulir'";
 		$this->DB->query ('BEGIN');
-		if ($this->DB->deleteRecord($str) ) {
+		if ($this->DB->deleteRecord($str)) {
 			$this->DB->deleteRecord ("transaksi WHERE no_formulir='$no_formulir'");
 			$this->DB->query ('COMMIT');
 		}else {

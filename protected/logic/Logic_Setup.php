@@ -51,7 +51,7 @@ class Logic_Setup extends Logic_Global {
      */
     private function populateSetting () {
         $str = 'SELECT setting_id,`key`,`value` FROM setting';
-        $this->db->setFieldTable(array('setting_id','key','value'));
+        $this->db->setFieldTable(array('setting_id', 'key', 'value'));
         $r=$this->db->getRecord($str);
         $result=array();
         while (list($k, $v)=each($r)) {
@@ -66,7 +66,7 @@ class Logic_Setup extends Logic_Global {
      */
     public function getSettingValue($keys, $mode='value') {  
         $value=$this->settings[$keys][$mode];
-        if ($value=='') {            
+        if ($value== '') {            
             $this->loadSetting (true);
             $value=$this->settings[$keys][$mode];
         }        
@@ -261,7 +261,7 @@ class Logic_Setup extends Logic_Global {
         
         # This is the resizing/resampling/transparency-preserving magic
         $image_resized = imagecreatetruecolor( $final_width, $final_height );
-        if ( ($info[2] == IMAGETYPE_GIF) || ($info[2] == IMAGETYPE_PNG) ) {
+        if ( ($info[2] == IMAGETYPE_GIF) || ($info[2] == IMAGETYPE_PNG)) {
             $transparency = imagecolortransparent($image);
             $palletsize = imagecolorstotal($image);
             
@@ -287,7 +287,7 @@ class Logic_Setup extends Logic_Global {
                 @unlink($file);            
         }
         # Preparing a method of providing result
-        switch ( strtolower($output) ) {
+        switch ( strtolower($output)) {
             case 'browser':
                 $mime = image_type_to_mime_type($info[2]);
                 header("Content-type: $mime");
@@ -296,7 +296,7 @@ class Logic_Setup extends Logic_Global {
             case 'file':
                 $output = $file;
             break;
-            case 'stream' :
+            case 'stream':
                 ob_start();
                 imagejpeg($image_resized); 
                 $thumbjpg = ob_get_clean();
@@ -330,14 +330,14 @@ class Logic_Setup extends Logic_Global {
      * digunakan untuk mendapatkan tipe file output report
      */
     public function getOutputFileType() {
-        $tipefile=array('pdf'=>'PDF','excel2007'=>'Excel 2007','summarypdf'=>'Summary PDF','summaryexcel'=>'Summary Excel');
+        $tipefile=array('pdf'=>'PDF', 'excel2007'=>'Excel 2007', 'summarypdf'=>'Summary PDF', 'summaryexcel'=>'Summary Excel');
         return $tipefile;
     }
     /**
      * digunakan untuk mendapatkan tipe output compress
      */
     public function getOutputCompressType() {
-        $tipecompress=array('none'=>' ','zip'=>'ZIP');
+        $tipecompress=array('none'=>' ', 'zip'=>'ZIP');
         return $tipecompress;
     }
     /**
@@ -413,7 +413,7 @@ class Logic_Setup extends Logic_Global {
      * @return type integer
      */
     public function toTerbilang($n) {
-        $dasar = array(1 => 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam','tujuh', 'delapan', 'sembilan');
+        $dasar = array(1 => 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan');
         $angka = array(1000000000, 1000000, 1000, 100, 10, 1);
         $satuan = array('milyar', 'juta', 'ribu', 'ratus', 'puluh', '');
 

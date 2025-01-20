@@ -55,7 +55,7 @@ class Logic_Report extends Logic_Global {
 		$path = dirname($this->getPath()).'/';								
 		$host=$this->setup->getAddress().'/';				
 		switch ($driver) {
-            case 'excel2003' :								
+            case 'excel2003':								
                 $phpexcel=BASEPATH.'protected/lib/excel/';
                 define ('PHPEXCEL_ROOT', $phpexcel);
                 set_include_path(get_include_path() . PATH_SEPARATOR . $phpexcel);
@@ -65,7 +65,7 @@ class Logic_Report extends Logic_Global {
                 $this->exportedDir['excel_path']=$host.'exported/excel/';
 				$this->exportedDir['full_path']=$path.'exported/excel/';
 			break;
-			case 'excel2007' :							
+			case 'excel2007':							
                 //phpexcel
                 $phpexcel=BASEPATH.'protected/lib/excel/';
                 define ('PHPEXCEL_ROOT', $phpexcel);
@@ -81,7 +81,7 @@ class Logic_Report extends Logic_Global {
 				$this->exportedDir['excel_path']=$host.'exported/excel/';
 				$this->exportedDir['full_path']=$path.'exported/excel/';
 			break;					
-            case 'pdf' :				
+            case 'pdf':				
                 require_once (BASEPATH.'protected/lib/tcpdf/tcpdf.php');
 				$this->rpt=new TCPDF();			
 				$this->rpt->setCreator ($this->Application->getID());
@@ -91,7 +91,7 @@ class Logic_Report extends Logic_Global {
 				$this->exportedDir['pdf_path']=$host.'exported/pdf/';	
 				$this->exportedDir['full_path']=$path.'exported/pdf/';
 			break;	
-            case 'pdfzip' :
+            case 'pdfzip':
                 $this->exportedDir['pdf_path']=$host.'exported/pdf/';	
 				$this->exportedDir['full_path']=$path.'exported/pdf/';
             break;
@@ -112,25 +112,25 @@ class Logic_Report extends Logic_Global {
 	public function setHeaderPT ($endColumn=null, $alignment=null, $columnHeader='C') {			
         $headerLogo=BASEPATH.$this->setup->getSettingValue('config_logo');
 		switch ($this->getDriver()) {
-            case 'pdf' :
+            case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->Image($headerLogo,3,6,17,17);
                 
-                $rpt->SetFont ('helvetica','B',12);
+                $rpt->SetFont ('helvetica', 'B',12);
 				$rpt->setXY(20,5);
 				$rpt->Cell (0,5, $this->setup->getSettingValue('header_line_1'));				
 				$rpt->setXY(20,8.5);
 				$rpt->Cell (0,8.5, $this->setup->getSettingValue('header_line_2'));
 				
-				$rpt->SetFont ('helvetica','B',8);
+				$rpt->SetFont ('helvetica', 'B',8);
 				$rpt->setXY(20,11.5);
 				$rpt->Cell (0,11.5, $this->setup->getSettingValue('header_line_3'));
 				$rpt->setXY(20,14.5);
 				$rpt->Cell (0,14.5, $this->setup->getSettingValue('header_line_4'));
 				$this->currentRow=14.5;
             break;
-			case 'excel2003' :
-			case 'excel2007' :	
+			case 'excel2003':
+			case 'excel2007':	
                 //cetak logo                
 				$drawing = new PHPExcel_Worksheet_Drawing();		
 				$drawing->setName('Logo');
@@ -195,7 +195,7 @@ class Logic_Report extends Logic_Global {
 	public function printOut ($filename, $debug=false) {	
 		$filename_to_write = $debug == true ? $filename  : $filename.'_'.date('Y_m_d_H_m_s');	
 		switch ($this->driver) {
-			case 'excel2003' :
+			case 'excel2003':
                 //$writer=new PHPExcel_Writer_Excel5($this->rpt);								
                 $writer=PHPExcel_IOFactory::createWriter($this->rpt, 'Excel5');
                 $writer->setPreCalculateFormulas(false);
@@ -204,7 +204,7 @@ class Logic_Report extends Logic_Global {
 				$this->exportedDir['filename']=$filename;
 				$this->exportedDir['excel_path'].=$filename_to_write;		
             break;
-			case 'excel2007' :
+			case 'excel2007':
 				$writer=PHPExcel_IOFactory::createWriter($this->rpt, 'Excel2007');
                 $writer->setPreCalculateFormulas(false);
 				$filename_to_write = "$filename_to_write.xlsx";
@@ -213,7 +213,7 @@ class Logic_Report extends Logic_Global {
 				$this->exportedDir['filename']=$filename;
 				$this->exportedDir['excel_path'].=$filename_to_write;		
 			break;	
-            case 'pdf' :
+            case 'pdf':
 				$filename_to_write="$filename_to_write.pdf";
 				$this->rpt->output ($this->exportedDir['full_path'].$filename_to_write,'F');
 				$this->exportedDir['filename']=$filename;
@@ -229,7 +229,7 @@ class Logic_Report extends Logic_Global {
      */
     public function printOutArchive ($DataFile, $FileName, $FormatArchive) {	
         switch ($FormatArchive) {
-            case 'zip' :                        
+            case 'zip':                        
                 $namafile=$FileName.'_'.date('Y_m_d_H_m_s').'.zip';
                 $destinationfile=$this->exportedDir['full_path'].$namafile;
                 $this->setup->createZIP($DataFile, $destinationfile);
@@ -243,21 +243,21 @@ class Logic_Report extends Logic_Global {
 	* @param text in override text result
 	*/
 	public function setLink ($obj_out, $text='') {
-		$filename=$text==''?$this->exportedDir['filename']:$text;		        
+		$filename=$text== ''?$this->exportedDir['filename']:$text;		        
 		switch ($this->driver) {
-			case 'excel2003' :
+			case 'excel2003':
                 $obj_out->Text = "$filename.xls";
 				$obj_out->NavigateUrl=$this->exportedDir['excel_path'];				
             break;
-			case 'excel2007' :                
+			case 'excel2007':                
 				$obj_out->Text = "$filename.xlsx";
 				$obj_out->NavigateUrl=$this->exportedDir['excel_path'];
 			break;	
-            case 'pdf' :
+            case 'pdf':
 				$obj_out->Text = "$filename.pdf";
 				$obj_out->NavigateUrl=$this->exportedDir['pdf_path'];	
 			break;
-            case 'pdfzip' :
+            case 'pdfzip':
 				$obj_out->Text = "$filename.zip";
 				$obj_out->NavigateUrl=$this->exportedDir['pdf_path'];	
 			break;

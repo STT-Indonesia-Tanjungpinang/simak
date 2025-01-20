@@ -13,7 +13,7 @@ class DetailKHSEkstension extends MainPageM {
         
 		if (!$this->IsPostback&&!$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailKHSEkstension'])||$_SESSION['currentPageDetailKHSEkstension']['page_name']!='m.nilai.DetailKHSEkstension') {
-				$_SESSION['currentPageDetailKHSEkstension']=array('page_name'=>'m.nilai.DetailKHSEkstension','page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+				$_SESSION['currentPageDetailKHSEkstension']=array('page_name'=>'m.nilai.DetailKHSEkstension', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -28,7 +28,7 @@ class DetailKHSEkstension extends MainPageM {
         try {
             $idkrs=addslashes($this->request['id']);            				
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs' AND vdm.idkelas='C'";
-            $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','tasmt','sah'));
+            $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
             $r=$this->DB->getRecord($str);	           
             $datamhs = $r[1];
             if (!isset($r[1])) {
@@ -74,16 +74,16 @@ class DetailKHSEkstension extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
             break;
-            case 'pdf' :                
+            case 'pdf':                
                 $messageprintout='';
                 $tahun = $_SESSION['currentPageDetailKHSEkstension']['DataMHS']['tahun'];
                 $semester=$_SESSION['currentPageDetailKHSEkstension']['DataMHS']['idsmt'];

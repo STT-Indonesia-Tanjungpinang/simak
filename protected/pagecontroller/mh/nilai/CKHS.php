@@ -18,11 +18,11 @@ class CKHS extends MainPageMHS {
             $nama_tahun = $this->DMaster->getNamaTA ($_SESSION['ta']);
             $nama_semester = $this->setup->getSemester($_SESSION['semester']);
             $this->labelModuleHeader->Text = "T.A $nama_tahun Semester $nama_semester";
-			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -53,7 +53,7 @@ class CKHS extends MainPageMHS {
             KHS::$TotalM += $m;            
         }
     }
-	protected function populateData () {						
+	protected function populateData() {						
 		try {			
             $datamhs = $this->Pengguna->getDataUser();            
             $this->Nilai->setDataMHS($datamhs);

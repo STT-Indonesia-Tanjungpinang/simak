@@ -346,9 +346,9 @@ class TCPDF_FONTS {
 						$fmetric['MaxWidth'] = $cwidths[$cid];
 					}
 					$fmetric['AvgWidth'] += $cwidths[$cid];
-					$fmetric['cw'] .= ','.$cid.'=>'.$cwidths[$cid];
+					$fmetric['cw'] .= ', '.$cid.'=>'.$cwidths[$cid];
 				} else {
-					$fmetric['cw'] .= ','.$cid.'=>'.$fmetric['MissingWidth'];
+					$fmetric['cw'] .= ', '.$cid.'=>'.$fmetric['MissingWidth'];
 				}
 			}
 			$fmetric['AvgWidth'] = round($fmetric['AvgWidth'] / count($cwidths));
@@ -795,7 +795,7 @@ class TCPDF_FONTS {
 			for ($cid = 0; $cid <= 65535; ++$cid) {
 				if (isset($ctg[$cid])) {
 					if (isset($cw[$ctg[$cid]])) {
-						$fmetric['cw'] .= ','.$cid.'=>'.$cw[$ctg[$cid]];
+						$fmetric['cw'] .= ', '.$cid.'=>'.$cw[$ctg[$cid]];
 					}
 					if ($addcbbox AND isset($indexToLoc[$ctg[$cid]])) {
 						$offset = ($table['glyf']['offset'] + $indexToLoc[$ctg[$cid]]);
@@ -803,7 +803,7 @@ class TCPDF_FONTS {
 						$yMin = round(TCPDF_STATIC::_getFWORD($font, $offset + 4)) * $urk;
 						$xMax = round(TCPDF_STATIC::_getFWORD($font, $offset + 6)) * $urk;
 						$yMax = round(TCPDF_STATIC::_getFWORD($font, $offset + 8)) * $urk;
-						$fmetric['cbbox'] .= ','.$cid.'=>array('.$xMin.','.$yMin.','.$xMax.','.$yMax.')';
+						$fmetric['cbbox'] .= ', '.$cid.'=>array('.$xMin.', '.$yMin.', '.$xMax.', '.$yMax.')';
 					}
 				}
 			}
@@ -882,18 +882,18 @@ class TCPDF_FONTS {
 			}
 		}
 		$pfile .= '$desc=array(';
-		$pfile .= '\'Flags\'=>'.$fmetric['Flags'].',';
-		$pfile .= '\'FontBBox\'=>\'['.$fmetric['bbox'].']\',';
-		$pfile .= '\'ItalicAngle\'=>'.$fmetric['italicAngle'].',';
-		$pfile .= '\'Ascent\'=>'.$fmetric['Ascent'].',';
-		$pfile .= '\'Descent\'=>'.$fmetric['Descent'].',';
-		$pfile .= '\'Leading\'=>'.$fmetric['Leading'].',';
-		$pfile .= '\'CapHeight\'=>'.$fmetric['CapHeight'].',';
-		$pfile .= '\'XHeight\'=>'.$fmetric['XHeight'].',';
-		$pfile .= '\'StemV\'=>'.$fmetric['StemV'].',';
-		$pfile .= '\'StemH\'=>'.$fmetric['StemH'].',';
-		$pfile .= '\'AvgWidth\'=>'.$fmetric['AvgWidth'].',';
-		$pfile .= '\'MaxWidth\'=>'.$fmetric['MaxWidth'].',';
+		$pfile .= '\'Flags\'=>'.$fmetric['Flags'].', ';
+		$pfile .= '\'FontBBox\'=>\'['.$fmetric['bbox'].']\', ';
+		$pfile .= '\'ItalicAngle\'=>'.$fmetric['italicAngle'].', ';
+		$pfile .= '\'Ascent\'=>'.$fmetric['Ascent'].', ';
+		$pfile .= '\'Descent\'=>'.$fmetric['Descent'].', ';
+		$pfile .= '\'Leading\'=>'.$fmetric['Leading'].', ';
+		$pfile .= '\'CapHeight\'=>'.$fmetric['CapHeight'].', ';
+		$pfile .= '\'XHeight\'=>'.$fmetric['XHeight'].', ';
+		$pfile .= '\'StemV\'=>'.$fmetric['StemV'].', ';
+		$pfile .= '\'StemH\'=>'.$fmetric['StemH'].', ';
+		$pfile .= '\'AvgWidth\'=>'.$fmetric['AvgWidth'].', ';
+		$pfile .= '\'MaxWidth\'=>'.$fmetric['MaxWidth'].', ';
 		$pfile .= '\'MissingWidth\'=>'.$fmetric['MissingWidth'].'';
 		$pfile .= ');'."\n";
 		if (isset($fmetric['cbbox'])) {
@@ -1881,7 +1881,7 @@ class TCPDF_FONTS {
 	public static function UTF8StringToArray($str, $isunicode=true, &$currentfont) {
 		if ($isunicode) {
 			// requires PCRE unicode support turned on
-			$chars = TCPDF_STATIC::pregSplit('//','u', $str, -1, PREG_SPLIT_NO_EMPTY);
+			$chars = TCPDF_STATIC::pregSplit('//', 'u', $str, -1, PREG_SPLIT_NO_EMPTY);
 			$carr = array_map(array('self', 'uniord'), $chars);
 		} else {
 			$chars = str_split($str);
@@ -2017,7 +2017,7 @@ class TCPDF_FONTS {
 		$dos = 'N';
 		$remember = array();
 		// start-of-level-run
-		$sor = $pel % 2 ? 'R' : 'L';
+		$sor = $pel % 2 ? 'R': 'L';
 		$eor = $sor;
 
 		// Array of characters data
@@ -2036,7 +2036,7 @@ class TCPDF_FONTS {
 					$cel = $next_level;
 					$dos = 'N';
 					$sor = $eor;
-					$eor = $cel % 2 ? 'R' : 'L';
+					$eor = $cel % 2 ? 'R': 'L';
 				}
 			} elseif ($ta[$i] == TCPDF_FONT_DATA::$uni_LRE) {
 				// X3. With each LRE, compute the least greater even embedding level.
@@ -2048,7 +2048,7 @@ class TCPDF_FONTS {
 					$cel = $next_level;
 					$dos = 'N';
 					$sor = $eor;
-					$eor = $cel % 2 ? 'R' : 'L';
+					$eor = $cel % 2 ? 'R': 'L';
 				}
 			} elseif ($ta[$i] == TCPDF_FONT_DATA::$uni_RLO) {
 				// X4. With each RLO, compute the least greater odd embedding level.
@@ -2060,7 +2060,7 @@ class TCPDF_FONTS {
 					$cel = $next_level;
 					$dos = 'R';
 					$sor = $eor;
-					$eor = $cel % 2 ? 'R' : 'L';
+					$eor = $cel % 2 ? 'R': 'L';
 				}
 			} elseif ($ta[$i] == TCPDF_FONT_DATA::$uni_LRO) {
 				// X5. With each LRO, compute the least greater even embedding level.
@@ -2072,7 +2072,7 @@ class TCPDF_FONTS {
 					$cel = $next_level;
 					$dos = 'L';
 					$sor = $eor;
-					$eor = $cel % 2 ? 'R' : 'L';
+					$eor = $cel % 2 ? 'R': 'L';
 				}
 			} elseif ($ta[$i] == TCPDF_FONT_DATA::$uni_PDF) {
 				// X7. With each PDF, determine the matching embedding or override code. If there was a valid matching code, restore (pop) the last remembered (pushed) embedding level and directional override.
@@ -2086,7 +2086,7 @@ class TCPDF_FONTS {
 						$cel = $match['cel'];
 						$dos = $match['dos'];
 						$sor = $eor;
-						$eor = ($cel > $match['cel'] ? $cel : $match['cel']) % 2 ? 'R' : 'L';
+						$eor = ($cel > $match['cel'] ? $cel : $match['cel']) % 2 ? 'R': 'L';
 					}
 				}
 			} elseif (($ta[$i] != TCPDF_FONT_DATA::$uni_RLE) AND

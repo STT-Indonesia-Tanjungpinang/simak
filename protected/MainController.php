@@ -9,7 +9,7 @@ class MainController extends TControl {
      */
     public function createObj ($nama_object) {
         switch (strtolower($nama_object)) {                       
-            case 'finance' :
+            case 'finance':
                 prado::using ('Application.logic.Logic_Finance');				
                 $this->Finance = new Logic_Finance ($this->Application->getModule ('db')->getLink());
             break;                                    

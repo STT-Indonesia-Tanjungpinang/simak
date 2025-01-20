@@ -8,10 +8,10 @@ class CVariables extends MainPageSA {
             if (!isset($_SESSION['currentPageVariables'])||$_SESSION['currentPageVariables']['page_name']!='sa.settings.Variables') {
 				$_SESSION['currentPageVariables']=array('page_name'=>'sa.settings.Variables', 'page_num'=>0);												
 			}            
-            $this->populateData (); 
+            $this->populateData(); 
 		}
 	}    
-    public function populateData () { 
+    public function populateData() { 
         //Data Perguruan Tinggi
         $this->txtNamaPT->Text = $this->setup->getSettingValue('nama_pt');
         $this->txtNamaPTAlias->Text = $this->setup->getSettingValue('nama_pt_alias');
@@ -49,7 +49,7 @@ class CVariables extends MainPageSA {
         
         //Transkrip Nilai        
         $this->txtTranskripNilaiNamaJabatan->Text = $this->setup->getSettingValue('nama_jabatan_transkrip');
-        $daftardosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
+        $daftardosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(), 'none');
         $this->cmbNamaPenandatangan->Text = $this->setup->getSettingValue('id_penandatangan_transkrip');
         $this->cmbNamaPenandatangan->DataSource = $daftardosen;
         $this->cmbNamaPenandatangan->DataBind();
@@ -71,7 +71,7 @@ class CVariables extends MainPageSA {
     public function saveData($sender, $param) {
         if ($this->IsValid) {
             switch ($sender->getId()) {
-                case 'btnSaveDataPT' :
+                case 'btnSaveDataPT':
                     $nama_pt=addslashes($this->txtNamaPT->Text);
                     $str = "UPDATE setting SET value='$nama_pt' WHERE setting_id=4";            
                     $this->DB->updateRecord($str);
@@ -93,7 +93,7 @@ class CVariables extends MainPageSA {
                     $this->DB->updateRecord($str);
 
                 break;
-                case 'btnSaveSettingUmum' :
+                case 'btnSaveSettingUmum':
                     $ta= $this->cmbDefaultTahunAkademik->Text;
                     $str = "UPDATE setting SET value='$ta' WHERE setting_id=1";            
                     $this->DB->updateRecord($str);
@@ -123,7 +123,7 @@ class CVariables extends MainPageSA {
                     $this->DB->updateRecord($str);
                     
                 break;
-                case 'btnSaveKRS' :
+                case 'btnSaveKRS':
                     $jumlah_sks_krs_setelah_cuti= $this->txtKRSJumlahSKSSetelahCuti->Text;
                     $str = "UPDATE setting SET value='$jumlah_sks_krs_setelah_cuti' WHERE setting_id=60";            
                     $this->DB->updateRecord($str);
@@ -132,7 +132,7 @@ class CVariables extends MainPageSA {
                     $str = "UPDATE setting SET value='$jumlah_sks_krs_mhs_baru' WHERE setting_id=61";            
                     $this->DB->updateRecord($str);
                 break;
-                case 'btnSaveTranskripNilai' :                    
+                case 'btnSaveTranskripNilai':                    
                     $iddosen = $this->cmbNamaPenandatangan->Text;
                     $str = "UPDATE setting SET value='$iddosen' WHERE setting_id=20";                                
                     $this->DB->updateRecord($str);
@@ -159,7 +159,7 @@ class CVariables extends MainPageSA {
                     $this->DB->updateRecord($str);
                     
                 break;
-                case 'btnSaveKHS' :
+                case 'btnSaveKHS':
                     $iddosen = $this->cmbNamaPenandatanganKHS->Text;
                     $str = "UPDATE setting SET value='$iddosen' WHERE setting_id=30";                                
                     $this->DB->updateRecord($str);
@@ -186,7 +186,7 @@ class CVariables extends MainPageSA {
                     $this->DB->updateRecord($str);                    
                     
                 break;
-                case 'btnSaveDPNA' :
+                case 'btnSaveDPNA':
                     $iddosen = $this->cmbNamaPenandatanganDPNA->Text;
                     $str = "UPDATE setting SET value='$iddosen' WHERE setting_id=40";                                
                     $this->DB->updateRecord($str);

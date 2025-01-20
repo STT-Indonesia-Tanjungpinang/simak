@@ -37,23 +37,23 @@ class CPesertaKelas extends MainPageM {
 		$_SESSION['currentPagePesertaMatakuliah']['search']=true;
 		$this->populateData($_SESSION['currentPagePesertaMatakuliah']['search']);
 	}
-    public function populateData ($search=false) {
+    public function populateData($search = false) {
         $idkelas_mhs = $_SESSION['currentPagePesertaKelas']['InfoKelas']['idkelas_mhs'];        
         $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0";
         if ($search) {            
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm AND kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
                     $str = "$str $clausa";
@@ -84,13 +84,13 @@ class CPesertaKelas extends MainPageM {
         $this->linkOutput->NavigateUrl='#';        
         $dataReport=$_SESSION['currentPagePesertaKelas']['InfoKelas'];
 		switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :               
+            case 'excel2007':               
                 $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas']+64);
                 $dataReport['hari'] = $this->Page->TGL->getNamaHari($dataReport['hari']);
                 
@@ -105,7 +105,7 @@ class CPesertaKelas extends MainPageM {
                 $messageprintout="Daftar Hadir Mahasiswa : <br/>";
                 $this->report->printDaftarHadirMahasiswa();
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
         }                

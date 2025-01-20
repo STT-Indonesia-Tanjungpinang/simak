@@ -14,12 +14,12 @@ class CDaftarPertanyaan extends MainPageM {
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             $this->lblModulHeader->Text = $this->getInfoToolbar();
             
-            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTA->DataSource = $ta;					
 			$this->tbCmbTA->Text = $_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -67,7 +67,7 @@ class CDaftarPertanyaan extends MainPageM {
             }
         }
     }
-	public function populateData($search=false) {
+	public function populateData($search = false) {
         $ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
         $kelompok_pertanyaan = $this->DMaster->getListKelompokPertanyaan();        
@@ -138,7 +138,7 @@ class CDaftarPertanyaan extends MainPageM {
             $this->DB->query('BEGIN');
             if ($this->DB->insertRecord($str)) {
                 $idkuesioner = $this->DB->getLastInsertID();
-                $str ="INSERT INTO kuesioner_indikator (idindikator,idkuesioner,nilai_indikator,nama_indikator) VALUES (NULL, $idkuesioner,1,'$indikator1'),(NULL, $idkuesioner,2,'$indikator2'),(NULL, $idkuesioner,3,'$indikator3'),(NULL, $idkuesioner,4,'$indikator4'),(NULL, $idkuesioner,5,'$indikator5')";
+                $str = "INSERT INTO kuesioner_indikator (idindikator,idkuesioner,nilai_indikator,nama_indikator) VALUES (NULL, $idkuesioner,1,'$indikator1'),(NULL, $idkuesioner,2,'$indikator2'),(NULL, $idkuesioner,3,'$indikator3'),(NULL, $idkuesioner,4,'$indikator4'),(NULL, $idkuesioner,5,'$indikator5')";
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
                 $this->redirect('dmaster.DaftarPertanyaan',true);  
@@ -188,7 +188,7 @@ class CDaftarPertanyaan extends MainPageM {
             $this->DB->query('BEGIN');
             if ($this->DB->updateRecord($str)) {
                 $this->DB->deleteRecord("kuesioner_indikator WHERE idkuesioner = $idkuesioner");
-                $str ="INSERT INTO kuesioner_indikator (idindikator,idkuesioner,nilai_indikator,nama_indikator) VALUES (NULL, $idkuesioner,1,'$indikator1'),(NULL, $idkuesioner,2,'$indikator2'),(NULL, $idkuesioner,3,'$indikator3'),(NULL, $idkuesioner,4,'$indikator4'),(NULL, $idkuesioner,5,'$indikator5')";
+                $str = "INSERT INTO kuesioner_indikator (idindikator,idkuesioner,nilai_indikator,nama_indikator) VALUES (NULL, $idkuesioner,1,'$indikator1'),(NULL, $idkuesioner,2,'$indikator2'),(NULL, $idkuesioner,3,'$indikator3'),(NULL, $idkuesioner,4,'$indikator4'),(NULL, $idkuesioner,5,'$indikator5')";
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
                 $this->redirect('dmaster.DaftarPertanyaan',true);  

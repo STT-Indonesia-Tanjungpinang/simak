@@ -52,7 +52,7 @@ class CDetailKRS extends MainPageM
     {
       if ($item->DataItem['batal']) 
       {
-        $item->cmbKelas->Enabled=false;
+        $item->cmbKelas->Enabled = false;
         CDetailKRS::$totalSKSBatal+=$item->DataItem['sks'];
         CDetailKRS::$jumlahMatkulBatal+=1;
       }
@@ -80,7 +80,7 @@ class CDetailKRS extends MainPageM
           $idkelas_mhs = $v['idkelas_mhs'];
           $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkelas_mhs');
           $kapasitas=(int)$this->DMaster->getKapasitasRuangKelas($v['idruangkelas']);
-          $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '' : ' [PENUH]';
+          $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '': ' [PENUH]';
           $result[$idkelas_mhs] = $this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
         }
         $item->cmbKelas->DataSource = $result;            
@@ -93,7 +93,7 @@ class CDetailKRS extends MainPageM
       }
     }
   }
-  protected function populateData () 
+  protected function populateData() 
   {
     try 
     {			
@@ -111,7 +111,7 @@ class CDetailKRS extends MainPageM
       $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($datamhs['nim'],true);            
       $this->KRS->setDataMHS($datamhs);
       $kelas = $this->KRS->getKelasMhs();																	            
-      $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
+      $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
       $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
       
       $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -255,16 +255,16 @@ class CDetailKRS extends MainPageM
     $this->linkOutput->Text='';
     $this->linkOutput->NavigateUrl='#';
     switch ($_SESSION['outputreport']) {
-      case 'summarypdf' :
+      case 'summarypdf':
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
-      case 'summaryexcel' :
+      case 'summaryexcel':
         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
-      case 'excel2007' :
+      case 'excel2007':
         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
       break;
-      case 'pdf' :                
+      case 'pdf':                
         $messageprintout='';                
         $tahun = $_SESSION['ta'];
         $semester = $_SESSION['semester'];

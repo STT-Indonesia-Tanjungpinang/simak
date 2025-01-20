@@ -23,7 +23,7 @@ class CNilaiUjianPMB extends MainPageM {
 			$this->tbCmbPs->Text = $_SESSION['currentPageNilaiUjianPMB']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
-            $daftar_ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $daftar_ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $daftar_ta;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -37,7 +37,7 @@ class CNilaiUjianPMB extends MainPageM {
             $this->tbCmbOutputCompress->DataBind();
             
             $this->lblModulHeader->Text = $this->getInfoToolbar();            
-            $this->populateData ();	
+            $this->populateData();	
 		}	
 	}    
 	public function getDataMHS($idx) {
@@ -91,7 +91,7 @@ class CNilaiUjianPMB extends MainPageM {
 		$_SESSION['currentPageNilaiUjianPMB']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageNilaiUjianPMB']['search']);
 	}		
-	public function populateData ($search=false) {	
+	public function populateData($search = false) {	
         $tahun_masuk = $_SESSION['tahun_pendaftaran'];
         $kjur = $_SESSION['currentPageNilaiUjianPMB']['kjur'];
         $tgl_awal = $_SESSION['currentPageNilaiUjianPMB']['tgl_ujian_awal'];
@@ -99,19 +99,19 @@ class CNilaiUjianPMB extends MainPageM {
         if ($search) {                        
             $str_kjur = $kjur=='none'?' AND (num.kjur=0 OR num.kjur IS NULL)':" AND num.kjur = $kjur";	                
             $str = "SELECT fp.no_formulir,fp.nama_mhs,ku.tgl_ujian,ts.nama_tempat,num.kjur,num.jumlah_soal,num.jawaban_benar,num.jawaban_salah,num.nilai,fp.kjur1,fp.kjur2,num.passing_grade_1,num.passing_grade_2,num.kjur AS diterima_di_prodi FROM kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$str_kjur";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa=" AND fp.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$clausa",'fp.no_formulir');                    
                     $str="$str $clausa";
                 break;
-                case 'nama_mhs' :
+                case 'nama_mhs':
                     $clausa=" AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$clausa",'fp.no_formulir');
                     $str = "$str $clausa";
                 break;
-                case 'nama_ujian' :
+                case 'nama_ujian':
                     $clausa=" AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$clausa",'fp.no_formulir');
                     $str = "$str $clausa";
@@ -150,7 +150,7 @@ class CNilaiUjianPMB extends MainPageM {
                 if ($v['kjur1'] > 0) {                  
                     $nama_ps = $_SESSION['daftar_jurusan'][$v['kjur1']] . ' ['.$v['passing_grade_1'].']';      
                     $bool1=($v['nilai'] >= $v['passing_grade_1']);
-                    $ket=$bool1 == true ? 'LULUS' : 'GAGAL';                            
+                    $ket=$bool1 == true ? 'LULUS': 'GAGAL';                            
                     $pil1='<a href="#" OnClick="return false;" Title="'.$nama_ps.'">'.$ket.'</a';
 
                 }
@@ -159,8 +159,8 @@ class CNilaiUjianPMB extends MainPageM {
                 $bool2=false;
                 if ($v['kjur2'] > 0) {
                     $nama_ps = $_SESSION['daftar_jurusan'][$v['kjur2']] . ' ['.$v['passing_grade_2'].']';      
-                    $bool2=($v['nilai'] >= $v['passing_grade_2']);
-                    $ket=$bool2 == true ? 'LULUS' : 'GAGAL';                            
+                    $bool2 = ($v['nilai'] >= $v['passing_grade_2']);
+                    $ket=$bool2 == true ? 'LULUS': 'GAGAL';                            
                     $pil2='<a href="#" OnClick="return false;" Title="'.$nama_ps.'">'.$ket.'</a';
                 }            
                 $v['pil2'] = $pil2;
@@ -202,7 +202,7 @@ class CNilaiUjianPMB extends MainPageM {
         $r = $this->DB->getRecord($str);
 
         $r[1]['nama_ps1'] = $_SESSION['daftar_jurusan'][$r[1]['kjur1']];
-        $r[1]['nama_ps2'] = $r[1]['kjur2']==0 ?'N.A' :$_SESSION['daftar_jurusan'][$r[1]['kjur2']];
+        $r[1]['nama_ps2'] = $r[1]['kjur2']==0 ?'N.A':$_SESSION['daftar_jurusan'][$r[1]['kjur2']];
         $r[1]['diterima_ps1'] = '';
         $r[1]['diterima_ps2'] = '';
         $r[1]['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $r[1]['waktu_mendaftar']);
@@ -277,16 +277,16 @@ class CNilaiUjianPMB extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;        
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout='';
                 $dataReport['tahun_masuk'] = $tahun_masuk;
                 $dataReport['kjur'] = $kjur;

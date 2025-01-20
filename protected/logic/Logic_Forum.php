@@ -17,12 +17,12 @@ class Logic_Forum extends Logic_Global {
         if ($this->Application->Cache) {            
             $dataitem=$this->Application->Cache->get('listforumkategori');            
             if (!isset($dataitem['none'])) {                
-                $dataitem=$this->getList ('forumkategori',array('idkategori','nama_kategori'),'idkategori',null,1);			
+                $dataitem=$this->getList ('forumkategori',array('idkategori', 'nama_kategori'), 'idkategori', null, 1);			
                 $dataitem['none'] = 'Daftar Kategori';    
                 $this->Application->Cache->set('listkategori', $dataitem);
             }
         }else {                        
-            $dataitem=$this->getList ('kelas',array('idkategori','nama_kategori'),'idkategori',null,1);			
+            $dataitem=$this->getList ('kelas',array('idkategori', 'nama_kategori'), 'idkategori', null, 1);			
             $dataitem['none'] = 'Daftar Kategori';
         }
         return $dataitem;     		

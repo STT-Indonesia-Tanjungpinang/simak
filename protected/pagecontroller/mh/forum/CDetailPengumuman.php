@@ -22,7 +22,7 @@ class CDetailPengumuman extends MainPageMHS {
                     $this->DataDiskusi = $r[1];
                     $attachment=array();
                     if ($this->DataDiskusi['file_size'] > 0) {
-                        $attachment[]=array('file_name'=>$r[1]['file_name'],'file_size'=>$this->setup->formatSizeUnits($r[1]['file_size']),'file_url'=>$r[1]['file_url']);
+                        $attachment[]=array('file_name'=>$r[1]['file_name'],'file_size'=>$this->setup->formatSizeUnits($r[1]['file_size']), 'file_url'=>$r[1]['file_url']);
                     }
                     $this->RepeaterAttachment->DataSource = $attachment;
                     $this->RepeaterAttachment->DataBind();
@@ -35,7 +35,7 @@ class CDetailPengumuman extends MainPageMHS {
             }            
 		}                
 	}  
-    public function populateData () {
+    public function populateData() {
         $id=$_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idpost'];           
         $str = "SELECT idpost,title,content,nama_user,date_added FROM pengumuman fp WHERE parentpost=$id ORDER BY date_added";        
         $this->DB->setFieldTable (array('idpost', 'title', 'content', 'nama_user', 'date_added'));			

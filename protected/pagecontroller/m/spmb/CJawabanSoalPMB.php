@@ -9,16 +9,16 @@ class CJawabanSoalPMB extends MainPageM {
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	            
             try {          
-                $no_formulir=addslashes($this->request['id']);
+                $no_formulir = addslashes($this->request['id']);
                 $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.alamat_rumah,fp.telp_hp,k.nkelas,fp.kjur1,fp.kjur2,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,fp.waktu_mendaftar FROM formulir_pendaftaran fp,profiles_mahasiswa pm,kelas k WHERE fp.no_formulir=pm.no_formulir AND fp.idkelas=k.idkelas AND fp.no_formulir='$no_formulir'";
                 $this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'alamat_rumah', 'telp_hp', 'nkelas', 'kjur1', 'kjur2', 'tahun_masuk', 'semester_masuk', 'waktu_mendaftar'));
                 $r = $this->DB->getRecord($str);
-                if (!isset($r[1]) ) {
+                if (!isset($r[1])) {
                     throw new Exception("No. Formulir ($no_formulir) tidak terdaftar.");
                 }    
                 $datamhs = $r[1];
                 $datamhs['nama_ps1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];
-                $datamhs['nama_ps2'] = $datamhs['kjur2']==0 ?'N.A' :$_SESSION['daftar_jurusan'][$datamhs['kjur2']];
+                $datamhs['nama_ps2'] = $datamhs['kjur2']==0 ?'N.A':$_SESSION['daftar_jurusan'][$datamhs['kjur2']];
                 $datamhs['diterima_ps1'] = '';
                 $datamhs['diterima_ps2'] = '';
                 $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $datamhs['waktu_mendaftar']);
@@ -27,7 +27,7 @@ class CJawabanSoalPMB extends MainPageM {
                 $str = "SELECT ku.no_formulir,ku.tgl_ujian,ku.tgl_selesai_ujian,ku.isfinish,num.jumlah_soal,num.jawaban_benar,num.jawaban_salah,num.soal_tidak_terjawab,num.nilai,num.kjur FROM kartu_ujian ku LEFT JOIN nilai_ujian_masuk num ON ku.no_formulir=num.no_formulir WHERE ku.no_formulir = $no_formulir";
                 $this->DB->setFieldTable(array('no_formulir', 'tgl_ujian', 'tgl_selesai_ujian', 'isfinish', 'jumlah_soal', 'jawaban_benar', 'jawaban_salah', 'soal_tidak_terjawab', 'nilai', 'kjur'));
                 $r = $this->DB->getRecord($str);      
-                if (isset($r[1]) ) {
+                if (isset($r[1])) {
                     $dataujian = $r[1];                                                        
                     if ($dataujian['isfinish']) {                            
                         if ($dataujian['nilai'] == '') {                                    
@@ -44,7 +44,7 @@ class CJawabanSoalPMB extends MainPageM {
                             $str= "INSERT INTO nilai_ujian_masuk (idnilai_ujian_masuk,no_formulir,jumlah_soal,jawaban_benar,jawaban_salah,soal_tidak_terjawab,nilai,ket_lulus) VALUES (NULL, $no_formulir, $jumlah_soal, $jawaban_benar, $jawaban_salah, $soal_tidak_terjawab, $nilai,0)";
                             $this->DB->insertRecord($str);                                        
                         }
-                        $kjur1=$this->Demik->getDataMHS('kjur1');
+                        $kjur1 = $this->Demik->getDataMHS('kjur1');
                         $kjur2=$this->Demik->getDataMHS('kjur2');
                         $dataujian['kjur'];
                         $datamhs['diterima_ps1']=($kjur1 > 0 && $dataujian['kjur'] == $kjur1)?'<span class="label label-success">DI TERIMA</span>':'';
@@ -96,7 +96,7 @@ class CJawabanSoalPMB extends MainPageM {
             if ($item->DataItem['jawaban_tersimpan'] > 0){                                
                 $item->rdJawaban->Checked=$item->DataItem['jawaban_tersimpan']==$item->DataItem['idjawaban'];
             }
-            $item->rdJawaban->Enabled=false;
+            $item->rdJawaban->Enabled = false;
 		}
 	}            
 }

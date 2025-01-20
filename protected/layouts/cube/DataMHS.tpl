@@ -29,7 +29,7 @@
                                         <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$this->getDataMHS('nim')))%>">
                                             <%= $this->getDataMHS('nim')%>
                                         </a> 
-                                        <%=$this->getDataMHS('iddata_konversi') == 0? '' :'<span class="label label-warning">Pindahan</span>'%>
+                                        <%=$this->getDataMHS('iddata_konversi') == 0? '':'<span class="label label-warning">Pindahan</span>'%>
                                     </p>
                                 </div>                            
                             </div>

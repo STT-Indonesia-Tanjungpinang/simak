@@ -122,7 +122,7 @@ class PHPExcel_Cell_AdvancedValueBinder extends PHPExcel_Cell_DefaultValueBinder
                 return true;
             } elseif (preg_match('/^\$ *(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/', $value)) {
                 // Convert value to number
-                $value = (float) trim(str_replace(array('$',','), '', $value));
+                $value = (float) trim(str_replace(array('$', ','), '', $value));
                 $cell->setValueExplicit($value, PHPExcel_Cell_DataType::TYPE_NUMERIC);
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())

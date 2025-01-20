@@ -506,7 +506,7 @@ class PHPExcel_Style_NumberFormat extends PHPExcel_Style_Supervisor implements P
 
     private static function formatAsFraction(&$value, &$format)
     {
-        $sign = ($value < 0) ? '-' : '';
+        $sign = ($value < 0) ? '-': '';
 
         $integerPart = floor(abs($value));
         $decimalPart = trim(fmod(abs($value), 1), '0.');
@@ -538,7 +538,7 @@ class PHPExcel_Style_NumberFormat extends PHPExcel_Style_Supervisor implements P
             $masks = explode('.', $mask . '.0');
             $result1 = self::complexNumberFormatMask($numbers[0], $masks[0], 1);
             $result2 = strrev(self::complexNumberFormatMask(strrev($numbers[1]), strrev($masks[1]), 1));
-            return (($sign) ? '-' : '') . $result1 . '.' . $result2;
+            return (($sign) ? '-': '') . $result1 . '.' . $result2;
         }
 
         $r = preg_match_all('/0+/', $mask, $result, PREG_OFFSET_CAPTURE);
@@ -565,7 +565,7 @@ class PHPExcel_Style_NumberFormat extends PHPExcel_Style_Supervisor implements P
             $result = $number;
         }
 
-        return (($sign) ? '-' : '') . $result;
+        return (($sign) ? '-': '') . $result;
     }
 
     /**

@@ -269,8 +269,8 @@ class PHPExcel_Calculation_LookupRef
         $args = func_get_args();
         $pCell = array_pop($args);
 
-        $linkURL     = (is_null($linkURL))     ? '' : PHPExcel_Calculation_Functions::flattenSingleValue($linkURL);
-        $displayName = (is_null($displayName)) ? '' : PHPExcel_Calculation_Functions::flattenSingleValue($displayName);
+        $linkURL     = (is_null($linkURL))     ? '': PHPExcel_Calculation_Functions::flattenSingleValue($linkURL);
+        $displayName = (is_null($displayName)) ? '': PHPExcel_Calculation_Functions::flattenSingleValue($displayName);
 
         if ((!is_object($pCell)) || (trim($linkURL) == '')) {
             return PHPExcel_Calculation_Functions::REF();

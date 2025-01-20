@@ -585,7 +585,7 @@ class PHPExcel_Cell
     {
         if (preg_match("/^([$]?[A-Z]{1,3})([$]?\d{1,7})$/", $pCoordinateString, $matches)) {
             return array($matches[1], $matches[2]);
-        } elseif ((strpos($pCoordinateString, ':') !== false) || (strpos($pCoordinateString, ',') !== false)) {
+        } elseif ((strpos($pCoordinateString, ':') !== false) || (strpos($pCoordinateString, ', ') !== false)) {
             throw new PHPExcel_Exception('Cell coordinate string can not be a range of cells');
         } elseif ($pCoordinateString == '') {
             throw new PHPExcel_Exception('Cell coordinate can not be zero-length string');
@@ -604,7 +604,7 @@ class PHPExcel_Cell
      */
     public static function absoluteReference($pCoordinateString = 'A1')
     {
-        if (strpos($pCoordinateString, ':') === false && strpos($pCoordinateString, ',') === false) {
+        if (strpos($pCoordinateString, ':') === false && strpos($pCoordinateString, ', ') === false) {
             // Split out any worksheet name from the reference
             $worksheet = '';
             $cellAddress = explode('!', $pCoordinateString);
@@ -636,7 +636,7 @@ class PHPExcel_Cell
      */
     public static function absoluteCoordinate($pCoordinateString = 'A1')
     {
-        if (strpos($pCoordinateString, ':') === false && strpos($pCoordinateString, ',') === false) {
+        if (strpos($pCoordinateString, ':') === false && strpos($pCoordinateString, ', ') === false) {
             // Split out any worksheet name from the coordinate
             $worksheet = '';
             $cellAddress = explode('!', $pCoordinateString);
@@ -662,7 +662,7 @@ class PHPExcel_Cell
      *
      *    @param    string    $pRange        e.g. 'B4:D9' or 'B4:D9,H2:O11' or 'B4'
      *    @return    array    Array containg one or more arrays containing one or two coordinate strings
-     *                                e.g. array('B4','D9') or array(array('B4','D9'),array('H2','O11'))
+     *                                e.g. array('B4', 'D9') or array(array('B4', 'D9'),array('H2', 'O11'))
      *                                        or array('B4')
      */
     public static function splitRange($pRange = 'A1:A1')
@@ -672,7 +672,7 @@ class PHPExcel_Cell
             $pRange = self::DEFAULT_RANGE;
         }
 
-        $exploded = explode(',', $pRange);
+        $exploded = explode(', ', $pRange);
         $counter = count($exploded);
         for ($i = 0; $i < $counter; ++$i) {
             $exploded[$i] = explode(':', $exploded[$i]);
@@ -700,7 +700,7 @@ class PHPExcel_Cell
         for ($i = 0; $i < $counter; ++$i) {
             $pRange[$i] = implode(':', $pRange[$i]);
         }
-        $imploded = implode(',', $pRange);
+        $imploded = implode(', ', $pRange);
 
         return $imploded;
     }
@@ -751,7 +751,7 @@ class PHPExcel_Cell
         // Calculate range outer borders
         list($rangeStart, $rangeEnd) = self::rangeBoundaries($pRange);
 
-        return array( ($rangeEnd[0] - $rangeStart[0] + 1), ($rangeEnd[1] - $rangeStart[1] + 1) );
+        return array( ($rangeEnd[0] - $rangeStart[0] + 1), ($rangeEnd[1] - $rangeStart[1] + 1));
     }
 
     /**
@@ -868,7 +868,7 @@ class PHPExcel_Cell
         $cellBlocks = explode(' ', str_replace('$', '', strtoupper($pRange)));
         foreach ($cellBlocks as $cellBlock) {
             // Single cell?
-            if (strpos($cellBlock, ':') === false && strpos($cellBlock, ',') === false) {
+            if (strpos($cellBlock, ':') === false && strpos($cellBlock, ', ') === false) {
                 $returnValue[] = $cellBlock;
                 continue;
             }

@@ -19,12 +19,12 @@ class CTranskripFinal extends MainPageM {
       $this->tbCmbPs->Text = $_SESSION['kjur'];			
       $this->tbCmbPs->dataBind();	
 
-      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
       $this->tbCmbTA->DataSource = $ta;					
       $this->tbCmbTA->Text = $_SESSION['ta'];						
       $this->tbCmbTA->dataBind();
 
-      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
       $this->tbCmbSemester->DataSource = $semester;
       $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
@@ -74,25 +74,25 @@ class CTranskripFinal extends MainPageM {
     $_SESSION['currentPageTranskripFinal']['search']=true;
     $this->populateData($_SESSION['currentPageTranskripFinal']['search']);
   }
-  public function populateData($search=false) {							
+  public function populateData($search = false) {							
     $kjur = $_SESSION['kjur'];
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];                
     if ($search) {
       $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim";
-      $txtsearch=addslashes($this->txtKriteria->Text);
+      $txtsearch = addslashes($this->txtKriteria->Text);
       switch ($this->cmbKriteria->Text) {                
-        case 'nim' :
+        case 'nim':
           $clausa="AND ta.nim='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
-        case 'nirm' :
+        case 'nirm':
           $clausa="AND vdm.nirm='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
-        case 'nama' :
+        case 'nama':
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
@@ -132,7 +132,7 @@ class CTranskripFinal extends MainPageM {
     if ($nim != '') {
       try {				
         $this->Nilai->setNim($nim);
-        $r = $this->Nilai->getList("register_mahasiswa WHERE nim='$nim'",array('nim', 'k_status', 'tahun', 'idsmt'));
+        $r = $this->Nilai->getList("register_mahasiswa WHERE nim='$nim'", array('nim', 'k_status', 'tahun', 'idsmt'));
         $this->Nilai->dataMhs = $r[1];				
         if (!$this->Nilai->isNimExist()) throw new AkademikException ($nim,2);	
         if ($this->Application->getModule ('environment')->checkRequirementTranskripFinal) {
@@ -157,16 +157,16 @@ class CTranskripFinal extends MainPageM {
     $this->linkOutput->NavigateUrl='#';
     $bool=true;
     switch ($sender->getId()) {
-      case 'btnPrintOutR' :                
+      case 'btnPrintOutR':                
         $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
         switch ($_SESSION['outputreport']) {
-          case 'summarypdf' :
+          case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
-          case 'summaryexcel' :
+          case 'summaryexcel':
             $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
           break;
-          case 'excel2007' :
+          case 'excel2007':
             $messageprintout='Transkrip Final : ';
             $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.nama_ps,vdm.k_status,vdm.idkonsentrasi,k.nama_konsentrasi FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
             $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'nama_ps', 'k_status', 'idkonsentrasi', 'nama_konsentrasi'));
@@ -190,7 +190,7 @@ class CTranskripFinal extends MainPageM {
 
               $str = "SELECT nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,judul_skripsi,iddosen_pembimbing,iddosen_pembimbing2,iddosen_ketua,iddosen_pemket,tahun,idsmt FROM transkrip_asli WHERE nim='$nim'";
               $this->DB->setFieldTable(array('nomor_ijazah', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
-              $datatranskrip=$this->DB->getRecord($str);                            
+              $datatranskrip = $this->DB->getRecord($str);                            
               $datatranskrip[1]['nama_pembimbing1'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing']);
               $datatranskrip[1]['nama_pembimbing2'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing2']);            
               $dataReport['tanggalterbit']=date('Y-m-d');
@@ -206,7 +206,7 @@ class CTranskripFinal extends MainPageM {
               $errormessage="Mahasiswa dengan NIM ($nim) statusnya belum lulus !!!.";
             }
           break;
-          case 'pdf' :
+          case 'pdf':
             $messageprintout='Transkrip Final : ';
             $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.nama_ps,vdm.k_status,vdm.idkonsentrasi,k.nama_konsentrasi FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
             $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'nama_ps', 'k_status', 'idkonsentrasi', 'nama_konsentrasi'));
@@ -229,7 +229,7 @@ class CTranskripFinal extends MainPageM {
 
               $str = "SELECT nomor_transkrip,predikat_kelulusan,tanggal_lulus,judul_skripsi,iddosen_pembimbing,iddosen_pembimbing2,iddosen_ketua,iddosen_pemket,tahun,idsmt FROM transkrip_asli WHERE nim='$nim'";
               $this->DB->setFieldTable(array('nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
-              $datatranskrip=$this->DB->getRecord($str);
+              $datatranskrip = $this->DB->getRecord($str);
 
               $datatranskrip[1]['nama_pembimbing1'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing']);
               $datatranskrip[1]['nama_pembimbing2'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing2']);            
@@ -246,18 +246,18 @@ class CTranskripFinal extends MainPageM {
           break;
         }
       break;			
-      case 'btnPrintTranskripFinalAll' :                 
+      case 'btnPrintTranskripFinalAll':                 
         switch ($_SESSION['outputreport']) {
-          case 'summarypdf' :
+          case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
           break;
-          case 'summaryexcel' :
+          case 'summaryexcel':
             $messageprintout="Mohon maaf Print out pada mode summary excel belum kami support.";                
           break;
-          case 'excel2007' :
+          case 'excel2007':
             $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
           break;
-          case 'pdf' :
+          case 'pdf':
             $messageprintout="Mohon maaf Print out pada mode pdf tidak kami support.";                                            
           break;
         }

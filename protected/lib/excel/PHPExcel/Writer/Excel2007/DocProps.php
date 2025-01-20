@@ -239,7 +239,7 @@ class PHPExcel_Writer_Excel2007_DocProps extends PHPExcel_Writer_Excel2007_Write
                     $objWriter->writeElement('vt:r8', $propertyValue);
                     break;
                 case 'b':
-                    $objWriter->writeElement('vt:bool', ($propertyValue) ? 'true' : 'false');
+                    $objWriter->writeElement('vt:bool', ($propertyValue) ? 'true': 'false');
                     break;
                 case 'd':
                     $objWriter->startElement('vt:filetime');

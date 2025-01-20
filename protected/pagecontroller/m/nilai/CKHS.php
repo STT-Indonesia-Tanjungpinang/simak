@@ -26,11 +26,11 @@ class CKHS extends MainPageM {
 			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKHS']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -96,24 +96,24 @@ class CKHS extends MainPageM {
 		$_SESSION['currentPageKHS']['search']=true;
 		$this->populateData($_SESSION['currentPageKHS']['search']);
 	}
-	public function populateData($search=false) {				
+	public function populateData($search = false) {				
 		$ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
         if ($search) {
             $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan,0 AS boolpembayaran FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt'";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
@@ -164,7 +164,7 @@ class CKHS extends MainPageM {
                 $datamhs=array('no_formulir'=>$item->DataItem['no_formulir'],'nim'=>$nim,'kjur'=>$item->DataItem['kjur'],'tahun_masuk'=>$item->DataItem['tahun_masuk'],'semester_masuk'=>$item->DataItem['semester_masuk'],'idsmt'=>$_SESSION['semester'],'idkelas'=>$idkelas);
                 $this->Finance->setDataMHS($datamhs);                                				
 				$this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
-				$ip=$this->Nilai->getIPS ();
+				$ip = $this->Nilai->getIPS ();
 				$sks = $this->Nilai->getTotalSKS ();                
                 $dataipk = $this->Nilai->getIPKSampaiTASemester($_SESSION['ta'], $_SESSION['semester'],'ipksks');	                
                 $lunaspembayaran = $this->Finance->getLunasPembayaran($_SESSION['ta'], $_SESSION['semester']);
@@ -195,18 +195,18 @@ class CKHS extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
 		switch ($sender->getId()) {
-			case 'btnPrintOutR' :
+			case 'btnPrintOutR':
                 switch ($_SESSION['outputreport']) {
-                    case 'summarypdf' :
+                    case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
-                    case 'summaryexcel' :
+                    case 'summaryexcel':
                         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
-                    case 'excel2007' :
+                    case 'excel2007':
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
-                    case 'pdf' :
+                    case 'pdf':
                         $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);	
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                         $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
@@ -244,14 +244,14 @@ class CKHS extends MainPageM {
                     break;
                 }                
 			break;			
-            case 'btnPrintKHSAll' :                
+            case 'btnPrintKHSAll':                
                 $repeater = $this->RepeaterS;
                 if ($repeater->Items->Count() > 0) {
                     switch ($_SESSION['outputreport']) {
-                        case 'summarypdf' :
+                        case 'summarypdf':
                             $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                         break;
-                        case 'summaryexcel' :
+                        case 'summaryexcel':
                             $tahun = $_SESSION['ta'];
                             $semester = $_SESSION['semester'];
                             $nama_tahun = $this->DMaster->getNamaTA($tahun);
@@ -283,10 +283,10 @@ class CKHS extends MainPageM {
                             $this->report->printSummaryKHS($this->Nilai, $this->DMaster,true);
 
                         break;
-                        case 'excel2007' :
+                        case 'excel2007':
                             $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
                         break;
-                        case 'pdf' :
+                        case 'pdf':
                             $tahun = $_SESSION['ta'];
                             $semester = $_SESSION['semester'];
                             $nama_tahun = $this->DMaster->getNamaTA($tahun);

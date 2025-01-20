@@ -449,10 +449,10 @@ class PHPExcel_DocumentProperties
      * @param mixed $propertyValue
      * @param string $propertyType
      *      'i'    : Integer
-     *   'f' : Floating Point
-     *   's' : String
-     *   'd' : Date/Time
-     *   'b' : Boolean
+     *   'f': Floating Point
+     *   's': String
+     *   'd': Date/Time
+     *   'b': Boolean
      * @return PHPExcel_DocumentProperties
      */
     public function setCustomProperty($propertyName, $propertyValue = '', $propertyType = null)

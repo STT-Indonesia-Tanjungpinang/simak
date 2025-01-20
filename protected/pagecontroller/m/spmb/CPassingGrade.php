@@ -11,14 +11,14 @@ class CPassingGrade extends MainPageM {
             if (!isset($_SESSION['currentPagePassingGrade'])||$_SESSION['currentPagePassingGrade']['page_name']!='m.spmb.PassingGrade') {
 				$_SESSION['currentPagePassingGrade']=array('page_name'=>'m.spmb.PassingGrade', 'idjadwal_ujian'=>'none');												
 			}            
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $this->populateJadwalUjian();
             $this->lblModulHeader->Text = $this->getInfoToolbar();
-            $this->populateData ();	
+            $this->populateData();	
 
 		}	
 	}
@@ -53,7 +53,7 @@ class CPassingGrade extends MainPageM {
         $this->cmbJadwalUjian->Text = $_SESSION['currentPagePassingGrade']['idjadwal_ujian'];						
         $this->cmbJadwalUjian->dataBind();
     }
-	public function populateData () {	
+	public function populateData() {	
         $idjadwal_ujian = $_SESSION['currentPagePassingGrade']['idjadwal_ujian'];
         $str = "SELECT pg.idpassing_grade,ps.kjur,ps.nama_ps,ps.konsentrasi,js.njenjang,pg.nilai FROM passinggrade pg,program_studi ps,jenjang_studi js WHERE ps.kjur=pg.kjur AND js.kjenjang=ps.kjenjang AND idjadwal_ujian='$idjadwal_ujian' ORDER BY pg.kjur ASC";
         $this->DB->setFieldTable(array('idpassing_grade', 'kjur', 'nama_ps', 'konsentrasi', 'njenjang', 'nilai'));				
@@ -61,7 +61,7 @@ class CPassingGrade extends MainPageM {
         
         $result = array();
         while (list($k, $v) = each($r)){
-            $v['nama_ps'] = $v['konsentrasi']==''?$v['nama_ps']:$v['nama_ps'].' KONS. '.$v['konsentrasi'];
+            $v['nama_ps'] = $v['konsentrasi']== ''?$v['nama_ps']:$v['nama_ps'].' KONS. '.$v['konsentrasi'];
             $result[$k] = $v;    
         }
 		$this->gridPassingGrade->DataSource = $result;
@@ -111,7 +111,7 @@ class CPassingGrade extends MainPageM {
             $kjur = $r[1]['kjur'];
             $idjadwal_ujian = $r[1]['idjadwal_ujian'];
             
-            $str = "UPDATE nilai_ujian_masuk num JOIN peserta_ujian_pmb pup ON (num.no_formulir=pup.no_formulir) JOIN formulir_pendaftaran fp ON (fp.no_formulir=pup.no_formulir) SET num.passing_grade_1=$nilai WHERE  pup.idjadwal_ujian = $idjadwal_ujian AND fp.kjur1=$kjur";
+            $str = "UPDATE nilai_ujian_masuk num JOIN peserta_ujian_pmb pup ON (num.no_formulir=pup.no_formulir) JOIN formulir_pendaftaran fp ON (fp.no_formulir=pup.no_formulir) SET num.passing_grade_1 = $nilai WHERE  pup.idjadwal_ujian = $idjadwal_ujian AND fp.kjur1 = $kjur";
             $this->DB->updateRecord($str);
             
             $str = "UPDATE nilai_ujian_masuk num JOIN peserta_ujian_pmb pup ON (num.no_formulir=pup.no_formulir) JOIN formulir_pendaftaran fp ON (fp.no_formulir=pup.no_formulir) SET num.passing_grade_2=$nilai WHERE  pup.idjadwal_ujian = $idjadwal_ujian AND fp.kjur2=$kjur";
@@ -122,6 +122,6 @@ class CPassingGrade extends MainPageM {
             $this->DB->query('ROLLBACK');
         }
         $this->gridPassingGrade->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
      }
 }

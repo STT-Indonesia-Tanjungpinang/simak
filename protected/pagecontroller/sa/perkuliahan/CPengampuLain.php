@@ -14,7 +14,7 @@ class CPengampuLain extends MainPageSA {
 			$this->populateData();
 		}			
 	}
-	public function populateData () {		
+	public function populateData() {		
 		try {
             $id=addslashes($this->request['id']);
             $this->hiddenid->Value=$id;
@@ -43,8 +43,8 @@ class CPengampuLain extends MainPageSA {
 		$item = $param->item;
 		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
 			if ($item->DataItem['iddosen_p']==$item->DataItem['iddosen_pp']) {
-				$item->btnEdit->Enabled=false;	
-				$item->btnDelete->Enabled=false;
+				$item->btnEdit->Enabled = false;	
+				$item->btnDelete->Enabled = false;
                 $item->btnDelete->Attributes->OnClick='';
 			}			
 			
@@ -77,7 +77,7 @@ class CPengampuLain extends MainPageSA {
 		}
 	}	
 	public function editRecord($sender, $param) {		
-        $idpp=$this->getDataKeyField($sender, $this->RepeaterS);
+        $idpp = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
 		$id=$this->hiddenid->Value;
         $this->hiddenid->Value=$id;

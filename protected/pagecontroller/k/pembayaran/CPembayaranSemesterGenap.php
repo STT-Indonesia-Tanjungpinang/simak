@@ -8,7 +8,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGenap'])||$_SESSION['currentPagePembayaranSemesterGenap']['page_name']!='k.pembayaran.PembayaranSemesterGenap') {
-				$_SESSION['currentPagePembayaranSemesterGenap']=array('page_name'=>'k.pembayaran.PembayaranSemesterGenap', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'),'semester'=>2,'kelas'=>'none', 'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranSemesterGenap']=array('page_name'=>'k.pembayaran.PembayaranSemesterGenap', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'), 'semester'=>2,'kelas'=>'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranSemesterGenap']['search']=false; 
             $bool=!isset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']);
@@ -19,7 +19,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
 			$this->tbCmbPs->dataBind();	
             
             $ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA (),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA (), 'none');
             $this->tbCmbTA->Enabled=$bool;
             $this->tbCmbTA->Text = $ta;
             $this->tbCmbTA->dataBind();
@@ -74,7 +74,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
 		$_SESSION['currentPagePembayaranSemesterGenap']['search']=true;
 		$this->populateData($_SESSION['currentPagePembayaranSemesterGenap']['search']);
 	}
-	public function populateData($search=false) {		
+	public function populateData($search = false) {		
 		$ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];
 		$semester = $_SESSION['currentPagePembayaranSemesterGenap']['semester'];
 		$kjur = $_SESSION['kjur'];	
@@ -84,24 +84,24 @@ class CPembayaranSemesterGenap Extends MainPageK {
         if ($search) {
             $str = "SELECT t.no_transaksi,no_faktur,t.tanggal,t.nim,vdm.nama_mhs,commited FROM transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester'";
             $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'no_transaksi' :
+                case 'no_transaksi':
                     $clausa="AND t.no_transaksi='$txtsearch'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
-                case 'no_faktur' :
+                case 'no_faktur':
                     $clausa="AND t.no_faktur='$txtsearch'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
-                case 'nim' :
+                case 'nim':
                     $clausa="AND t.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	                    
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";

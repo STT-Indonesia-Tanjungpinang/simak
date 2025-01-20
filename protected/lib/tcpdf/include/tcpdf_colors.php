@@ -270,7 +270,7 @@ class TCPDF_COLORS {
 	 * @return array RGB or CMYK color, or false in case of error.
 	 * @public static
 	 */
-	public static function convertHTMLColorToDec($hcolor, &$spotc, $defcol=array('R'=>128,'G'=>128,'B'=>128)) {
+	public static function convertHTMLColorToDec($hcolor, &$spotc, $defcol = array('R'=>128,'G'=>128,'B'=>128)) {
 		$color = preg_replace('/[\s]*/', '', $hcolor); // remove extra spaces
 		$color = strtolower($color);
 		// check for javascript color array syntax
@@ -321,7 +321,7 @@ class TCPDF_COLORS {
 		if (substr($color, 0, 3) == 'rgb') {
 			$codes = substr($color, 4);
 			$codes = str_replace(')', '', $codes);
-			$returncolor = explode(',', $codes);
+			$returncolor = explode(', ', $codes);
 			foreach ($returncolor as $key => $val) {
 				if (strpos($val, '%') > 0) {
 					// percentage
@@ -338,7 +338,7 @@ class TCPDF_COLORS {
 		if (substr($color, 0, 4) == 'cmyk') {
 			$codes = substr($color, 5);
 			$codes = str_replace(')', '', $codes);
-			$returncolor = explode(',', $codes);
+			$returncolor = explode(', ', $codes);
 			foreach ($returncolor as $key => $val) {
 				if (strpos($val, '%') !== false) {
 					// percentage

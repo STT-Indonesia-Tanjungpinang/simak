@@ -284,7 +284,7 @@ class TErrorHandler extends TModule
 			$fileName=$exception->getTemplateFile();
 			$lines=empty($fileName)?explode("\n", $exception->getTemplateSource()):@file($fileName);
 			$source=$this->getSourceCode($lines, $exception->getLineNumber());
-			if($fileName==='')
+			if($fileName=== '')
 				$fileName='---embedded template---';
 			$errorLine=$exception->getLineNumber();
 		}

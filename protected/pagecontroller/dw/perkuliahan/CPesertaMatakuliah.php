@@ -33,9 +33,9 @@ class CPesertaMatakuliah extends MainPageM {
                 
                 $this->lblModulHeader->Text = $text;
                 $_SESSION['currentPagePesertaMatakuliah']['InfoMatkul'] = $infomatkul;                
-                $this->tbCmbPs->Enabled=false;
-                $this->tbCmbTA->Enabled=false;
-                $this->tbCmbSemester->Enabled=false;
+                $this->tbCmbPs->Enabled = false;
+                $this->tbCmbTA->Enabled = false;
+                $this->tbCmbSemester->Enabled = false;
                 $this->populateData();		
             } catch (Exception $ex) {
                 $this->idProcess = 'view';        
@@ -44,12 +44,12 @@ class CPesertaMatakuliah extends MainPageM {
                 $this->tbCmbPs->Text = $_SESSION['kjur'];			
                 $this->tbCmbPs->dataBind();	
                 
-                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
                 $this->tbCmbTA->DataSource = $ta;					
                 $this->tbCmbTA->Text = $_SESSION['ta'];						
                 $this->tbCmbTA->dataBind();
 
-                $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+                $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
                 $this->tbCmbSemester->DataSource = $semester;
                 $this->tbCmbSemester->Text = $_SESSION['semester'];
                 $this->tbCmbSemester->dataBind();
@@ -119,24 +119,24 @@ class CPesertaMatakuliah extends MainPageM {
             
         }
     }
-    public function populateData ($search=false) {    
+    public function populateData($search = false) {    
         $iddosen_wali = $this->iddosen_wali;
         $id=$_SESSION['currentPagePesertaMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
         $str = "SELECT vkm.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,km.batal,k.sah FROM v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali";
         if ($search) {            
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,krs k, krsmatkul km WHERE k.nim=vdm.nim AND km.idpenyelenggaraan='$id' AND vdm.iddosen_wali = $iddosen_wali $clausa",'vdm.nim');
                     $str = "$str $clausa";

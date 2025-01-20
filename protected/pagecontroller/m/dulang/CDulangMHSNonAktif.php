@@ -21,11 +21,11 @@ class CDulangMHSNonAktif Extends MainPageM {
             $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSNonAktif']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
             $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
             $this->tbCmbSemester->DataSource = $semester;
             $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
@@ -90,7 +90,7 @@ class CDulangMHSNonAktif Extends MainPageM {
         $_SESSION['currentPageDulangMHSNonAktif']['search']=true;
         $this->populateData($_SESSION['currentPageDulangMHSNonAktif']['search']);
     }
-    public function populateData($search=false) {
+    public function populateData($search = false) {
         $ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
 		$kjur = $_SESSION['kjur'];
@@ -100,24 +100,24 @@ class CDulangMHSNonAktif Extends MainPageM {
         $str_tahun_masuk = $tahun_masuk=='none'?'':" AND vdm.tahun_masuk = $tahun_masuk";      
         if ($search) {
             $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='N'";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa="AND vdm.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='N' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nim' :
+                case 'nim':
                     $clausa="AND d.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='N' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='N' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='N' $clausa",'vdm.nim');
                     $str = "$str $clausa";
@@ -229,13 +229,13 @@ class CDulangMHSNonAktif Extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
         
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="Daftar Mahasiswa Daftar Ulang Status NON-AKTIF: <br/>";
                 $dataReport['ta'] = $_SESSION['ta'];
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['ta']);
@@ -249,7 +249,7 @@ class CDulangMHSNonAktif Extends MainPageM {
                 
                 $this->report->printDulangNONAKTIF($this->DMaster);
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         } 

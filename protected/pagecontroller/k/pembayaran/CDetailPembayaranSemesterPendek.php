@@ -31,7 +31,7 @@ class CDetailPembayaranSemesterPendek Extends MainPageK {
                 $datamhs['iddata_konversi'] = $this->Finance->isMhsPindahan($datamhs['nim'],true);            
                 
                 $kelas = $this->Finance->getKelasMhs();                
-                $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
+                $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
                 $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
                 $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -82,8 +82,8 @@ class CDetailPembayaranSemesterPendek Extends MainPageK {
 		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
-                $item->btnDeleteFromRepeater->Enabled=false;				
-                $item->btnEditFromRepeater->Enabled=false;				
+                $item->btnDeleteFromRepeater->Enabled = false;				
+                $item->btnEditFromRepeater->Enabled = false;				
 			}else{
                 $item->btnDeleteFromRepeater->Attributes->onclick="if(!confirm('Apakah Anda ingin menghapus Transaksi ini?')) return false;";
             }

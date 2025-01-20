@@ -20,13 +20,13 @@ class CPembagianKelas extends MainPageM {
       $this->tbCmbPs->dataBind();	
       
       $tahun = $_SESSION['ta'];
-      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
       $this->tbCmbTA->DataSource = $ta;					
       $this->tbCmbTA->Text = $tahun;						
       $this->tbCmbTA->dataBind();
       
       $idsmt = $_SESSION['semester'];
-      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
       $this->tbCmbSemester->DataSource = $semester;
       $this->tbCmbSemester->Text = $idsmt;
       $this->tbCmbSemester->dataBind();
@@ -101,25 +101,25 @@ class CPembagianKelas extends MainPageM {
     $_SESSION['currentPagePembagianKelas']['search']=true;
     $this->populateData($_SESSION['currentPagePembagianKelas']['search']);
   }
-  public function populateData($search=false) {	
+  public function populateData($search = false) {	
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];
     $kjur = $_SESSION['kjur'];        
     
     if ($search) {
-      $txtsearch=addslashes($this->txtKriteria->Text);
+      $txtsearch = addslashes($this->txtKriteria->Text);
       switch ($this->cmbKriteria->Text) {                
-        case 'nidn' :
+        case 'nidn':
           $clausa=" AND vpp.nidn='$txtsearch'";  
           $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
           $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
         break;
-        case 'nama_matakuliah' :
+        case 'nama_matakuliah':
           $clausa="AND vpp.nmatkul LIKE '%$txtsearch%'";  
           $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
           $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
         break;
-        case 'nama_dosen' :
+        case 'nama_dosen':
           $clausa="AND vpp.nama_dosen LIKE '%$txtsearch%'";   
           $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
           $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
@@ -174,13 +174,13 @@ class CPembagianKelas extends MainPageM {
     echo $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
     $dataReport=$this->Demik->getInfoKelas($idkelas_mhs);
     switch ($_SESSION['outputreport']) {
-      case 'summarypdf' :
+      case 'summarypdf':
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
-      case 'summaryexcel' :
+      case 'summaryexcel':
         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
-      case 'excel2007' :               
+      case 'excel2007':               
         $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas']+64);
         $dataReport['hari'] = $this->Page->TGL->getNamaHari($dataReport['hari']);
         
@@ -195,7 +195,7 @@ class CPembagianKelas extends MainPageM {
         $messageprintout="Daftar Hadir Mahasiswa : <br/>";
         $this->report->printDaftarHadirMahasiswa();
       break;
-      case 'pdf' :
+      case 'pdf':
         $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";
       break;
     }                

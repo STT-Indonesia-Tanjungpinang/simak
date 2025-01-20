@@ -13,7 +13,7 @@ class CDetailPembayaranFormulir Extends MainPageK {
 				$_SESSION['currentPagePembayaranFormulir']=array('page_name'=>'k.pembayaran.PembayaranFormulir', 'page_num'=>0,'search'=>false,'kelas'=>'none', 'semester_masuk'=>1,'DataMHS'=>array());												
 			}        
             try {
-                $no_formulir=addslashes($this->request['id']);
+                $no_formulir = addslashes($this->request['id']);
                 $str = "SELECT no_formulir,idkelas,tahun_masuk,1 AS semester_masuk FROM pin WHERE no_formulir='$no_formulir'";
                 $this->DB->setFieldTable(array('no_formulir', 'idkelas', 'tahun_masuk', 'semester_masuk'));
                 $r = $this->DB->getRecord($str);
@@ -64,8 +64,8 @@ class CDetailPembayaranFormulir Extends MainPageK {
 		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
-                $item->btnDeleteFromRepeater->Enabled=false;				
-                $item->btnEditFromRepeater->Enabled=false;				
+                $item->btnDeleteFromRepeater->Enabled = false;				
+                $item->btnEditFromRepeater->Enabled = false;				
 			}else{
                 $item->btnDeleteFromRepeater->Attributes->onclick="if(!confirm('Apakah Anda ingin menghapus Transaksi ini?')) return false;";
             }

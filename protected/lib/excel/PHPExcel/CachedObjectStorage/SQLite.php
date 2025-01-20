@@ -53,7 +53,7 @@ class PHPExcel_CachedObjectStorage_SQLite extends PHPExcel_CachedObjectStorage_C
         if ($this->currentCellIsDirty && !empty($this->currentObjectID)) {
             $this->currentObject->detach();
 
-            if (!$this->DBHandle->queryExec("INSERT OR REPLACE INTO kvp_".$this->TableName." VALUES('".$this->currentObjectID."','".sqlite_escape_string(serialize($this->currentObject))."')")) {
+            if (!$this->DBHandle->queryExec("INSERT OR REPLACE INTO kvp_".$this->TableName." VALUES('".$this->currentObjectID."', '".sqlite_escape_string(serialize($this->currentObject))."')")) {
                 throw new PHPExcel_Exception(sqlite_error_string($this->DBHandle->lastError()));
             }
             $this->currentCellIsDirty = false;

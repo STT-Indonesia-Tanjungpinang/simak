@@ -38,7 +38,7 @@ class DetailKRSEkstension extends MainPageM {
         $item = $param->Item;
         if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
             if ($item->DataItem['batal']) {
-                $item->cmbKelas->Enabled=false;
+                $item->cmbKelas->Enabled = false;
                 CDetailKRS::$totalSKSBatal+=$item->DataItem['sks'];
                 CDetailKRS::$jumlahMatkulBatal+=1;
             }else{
@@ -46,7 +46,7 @@ class DetailKRSEkstension extends MainPageM {
                 $idpenyelenggaraan = $item->DataItem['idpenyelenggaraan'];
                 $idkelas = $_SESSION['currentPageKRSEkstension']['DataMHS']['kelas_dulang'];
                 $str = "SELECT km.idkelas_mhs,km.nama_kelas,vpp.nama_dosen,vpp.nidn,km.idruangkelas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) WHERE vpp.idpenyelenggaraan = $idpenyelenggaraan AND km.idkelas='$idkelas'  ORDER BY hari ASC,idkelas ASC,nama_dosen ASC";            
-                $this->DB->setFieldTable(array('idkelas_mhs','nama_kelas','nama_dosen','nidn','idruangkelas'));
+                $this->DB->setFieldTable(array('idkelas_mhs', 'nama_kelas', 'nama_dosen', 'nidn', 'idruangkelas'));
                 $r = $this->DB->getRecord($str);	
                 
                 $str = "SELECT idkelas_mhs  FROM kelas_mhs_detail WHERE idkrsmatkul=$idkrsmatkul";            
@@ -64,13 +64,13 @@ class DetailKRSEkstension extends MainPageM {
                     $idkelas_mhs = $v['idkelas_mhs'];
                     $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkelas_mhs');
                     $kapasitas=(int)$this->DMaster->getKapasitasRuangKelas($v['idruangkelas']);
-                    $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '' : ' [PENUH]';
+                    $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '': ' [PENUH]';
                     $result[$idkelas_mhs]=$this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
                 }
                 
                 $item->cmbKelas->DataSOurce=$result;            
                 $item->cmbKelas->DataBind();        
-                $item->cmbKelas->Enabled=!$this->DB->checkRecordIsExist('idkrsmatkul','nilai_matakuliah', $idkrsmatkul);
+                $item->cmbKelas->Enabled=!$this->DB->checkRecordIsExist('idkrsmatkul', 'nilai_matakuliah', $idkrsmatkul);
                 $item->cmbKelas->Text = $idkelas_mhs_selected;
 
                 DetailKRSEkstension::$totalSKS+=$item->DataItem['sks'];
@@ -78,11 +78,11 @@ class DetailKRSEkstension extends MainPageM {
             }
         }
     }
-	protected function populateData () {
+	protected function populateData() {
         try {			
             $idkrs=addslashes($this->request['id']);            				
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,vdm.iddosen_wali,vdm.idkelas,vdm.k_status,sm.n_status AS status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah,vdm.photo_profile FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE krs.idkrs='$idkrs'";
-            $this->DB->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','status','idsmt','tahun','tasmt','sah','photo_profile'));
+            $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'status', 'idsmt', 'tahun', 'tasmt', 'sah', 'photo_profile'));
             $r=$this->DB->getRecord($str);	           
             $datamhs = $r[1];
             if (!isset($r[1])) {
@@ -93,7 +93,7 @@ class DetailKRSEkstension extends MainPageM {
             $this->KRS->setDataMHS($datamhs);
             
             $kelas = $this->KRS->getKelasMhs();	
-            $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
+            $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
             
             $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -133,7 +133,7 @@ class DetailKRSEkstension extends MainPageM {
             $result=$this->DB->getRecord($str);
             $kapasitas = $result[1]['kapasitas'];
             if ($jumlah_peserta_kelas <= $kapasitas) {
-                if ($this->DB->checkRecordIsExist('idkrsmatkul','kelas_mhs_detail', $idkrsmatkul)) {
+                if ($this->DB->checkRecordIsExist('idkrsmatkul', 'kelas_mhs_detail', $idkrsmatkul)) {
                     $this->DB->updateRecord("UPDATE kelas_mhs_detail SET idkelas_mhs = $idkelas_mhs WHERE idkrsmatkul=$idkrsmatkul");
                     $this->DB->deleteRecord("kuesioner_jawaban WHERE idkrsmatkul=$idkrsmatkul");
                     $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner=NULL WHERE idkrsmatkul=$idkrsmatkul");
@@ -174,16 +174,16 @@ class DetailKRSEkstension extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
             break;
-            case 'pdf' :                
+            case 'pdf':                
                 $messageprintout='';                
                 $tahun = $_SESSION['ta'];
                 $semester=$_SESSION['semester'];

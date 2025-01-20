@@ -20,7 +20,7 @@ class CDetailNilaiFinal extends MainPageON {
   }
   protected function populateData() {		
     try {
-      if (!isset($_SESSION['currentPageNilaiFinal']['DataMHS']['nim']) ){
+      if (!isset($_SESSION['currentPageNilaiFinal']['DataMHS']['nim'])){
         throw new Exception('Mohon kembali ke halaman Nilai Final.');
       }
       $datamhs = $_SESSION['currentPageNilaiFinal']['DataMHS'];
@@ -30,7 +30,7 @@ class CDetailNilaiFinal extends MainPageON {
       $this->DB->setFieldTable(array('nomor_ijazah', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
       $r = $this->DB->getRecord($str);
 
-      $daftar_dosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
+      $daftar_dosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(), 'none');
       
       $this->cmbEditDosenPembimbing->DataSource = $daftar_dosen;
       $this->cmbEditDosenPembimbing->dataBind();     
@@ -39,7 +39,7 @@ class CDetailNilaiFinal extends MainPageON {
       $this->cmbEditDosenPembimbing2->dataBind();
 
       if (isset($r[1])) {
-        $datatranskrip=$r[1];             
+        $datatranskrip = $r[1];             
              
         $this->cmbEditDosenPembimbing->Text = $datatranskrip['iddosen_pembimbing'];
         $this->cmbEditDosenPembimbing2->Text = $datatranskrip['iddosen_pembimbing2'];	
@@ -76,7 +76,7 @@ class CDetailNilaiFinal extends MainPageON {
     }        
   }
   public function checkNoIjazah($sender, $param) {
-    $no_ijazah=addslashes($param->Value);
+    $no_ijazah = addslashes($param->Value);
     try {			
       if ($this->hiddennomorijazah->Value!=$no_ijazah) {
         if ($this->DB->checkRecordIsExist('nomor_ijazah', 'transkrip_asli', $no_ijazah)) {
@@ -89,7 +89,7 @@ class CDetailNilaiFinal extends MainPageON {
     }
   }
   public function checkNoTranskrip($sender, $param) {
-    $no_transkrip=addslashes($param->Value);
+    $no_transkrip = addslashes($param->Value);
     try {			
       if ($this->hiddennomortranskrip->Value!=$no_transkrip) {
         if ($this->DB->checkRecordIsExist('nomor_transkrip', 'transkrip_asli', $no_transkrip)) {
@@ -109,12 +109,12 @@ class CDetailNilaiFinal extends MainPageON {
       $idsmt = $datamhs['idsmt'];
       
       $no_ijazah=$this->txtEditNomorIjazah->Text;
-      $no_transkrip=$this->txtEditNomorTranskrip->Text;			
+      $no_transkrip = $this->txtEditNomorTranskrip->Text;			
       $predikat=$this->cmbEditPredikatKelulusan->Text;
       $tanggal_lulus=date('Y-m-d', $this->txtEditTanggalLulus->TimeStamp);						
       $pembimbing=$this->cmbEditDosenPembimbing->Text;						
       $pembimbing2=$this->cmbEditDosenPembimbing2->Text;						
-      $judul_skripsi=strtoupper(addslashes($this->txtEditJuduluSkripsi->Text));						
+      $judul_skripsi = strtoupper(addslashes($this->txtEditJuduluSkripsi->Text));						
       $ketua = $this->setup->getSettingValue('id_penandatangan_transkrip');						
       $pemket=$this->setup->getSettingValue('id_penandatangan_khs');	
       
@@ -148,7 +148,7 @@ class CDetailNilaiFinal extends MainPageON {
       $nim = $datamhs['nim'];
       $dataSource = $this->cmbDataSource->Text;
       switch ($datasource) {
-        case 'transkrip_krs' :
+        case 'transkrip_krs':
           $str = "SELECT vnk.kmatkul,vnk.nmatkul,vnk.nmatkul_en,vnk.sks,semester,IF(char_length(COALESCE(vnk2.n_kual,'-'))>0,vnk2.n_kual,'') AS n_kual FROM v_nilai_khs vnk,(SELECT idkrsmatkul,MIN(n_kual) AS n_kual FROM `v_nilai_khs` WHERE nim='$nim' GROUP BY kmatkul ORDER BY (semester+0), kmatkul ASC) AS vnk2 WHERE vnk.idkrsmatkul=vnk2.idkrsmatkul";
           $this->DB->setFieldTable(array('kmatkul', 'nmatkul', 'nmatkul_en', 'sks', 'semester', 'n_kual'));
           $r = $this->DB->getRecord($str);
@@ -171,7 +171,7 @@ class CDetailNilaiFinal extends MainPageON {
             $this->modalMessageError->show();
           }
         break;
-        case 'konversi' :
+        case 'konversi':
           $iddata_konversi = $datamhs['iddata_konversi'];
           $str = "SELECT kmatkul,nmatkul,nmatkul_en,sks,semester,n_kual FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi'";
           $this->DB->setFieldTable(array('kmatkul', 'nmatkul', 'nmatkul_en', 'sks', 'semester', 'n_kual'));
@@ -195,7 +195,7 @@ class CDetailNilaiFinal extends MainPageON {
             $this->modalMessageError->show();
           }
         break;
-        case 'konversi_transkripkrs' :
+        case 'konversi_transkripkrs':
           $iddata_konversi = $datamhs['iddata_konversi'];
           $str = "SELECT kmatkul,nmatkul,nmatkul_en,sks,semester,n_kual FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi'";
           $this->DB->setFieldTable(array('kmatkul', 'nmatkul', 'nmatkul_en', 'sks', 'semester', 'n_kual'));
@@ -257,13 +257,13 @@ class CDetailNilaiFinal extends MainPageON {
     $nim = $dataReport['nim'];
     if ($dataReport['k_status'] == 'L') {
       switch ($_SESSION['outputreport']) {
-        case 'summarypdf' :
+        case 'summarypdf':
           $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
         break;
-        case 'summaryexcel' :
+        case 'summaryexcel':
           $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
         break;
-        case 'excel2007' :
+        case 'excel2007':
           $messageprintout='Nilai Final : ';                     
 
           $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
@@ -284,7 +284,7 @@ class CDetailNilaiFinal extends MainPageON {
           $this->report->setMode($_SESSION['outputreport']);
           $this->report->printTranskripFinal($this->Nilai,true);				              
         break;
-        case 'pdf' :                    
+        case 'pdf':                    
           $messageprintout='Nilai Final : ';                     
 
           $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');

@@ -50,7 +50,7 @@ class PHPExcel_Reader_CSV extends PHPExcel_Reader_Abstract implements PHPExcel_R
      * @access    private
      * @var string
      */
-    private $delimiter = ',';
+    private $delimiter = ', ';
 
     /**
      * Enclosure
@@ -326,7 +326,7 @@ class PHPExcel_Reader_CSV extends PHPExcel_Reader_Abstract implements PHPExcel_R
      * @param    string    $pValue        Delimiter, defaults to ,
      * @return    PHPExcel_Reader_CSV
      */
-    public function setDelimiter($pValue = ',')
+    public function setDelimiter($pValue = ', ')
     {
         $this->delimiter = $pValue;
         return $this;

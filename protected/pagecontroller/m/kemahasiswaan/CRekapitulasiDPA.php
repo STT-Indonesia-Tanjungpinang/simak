@@ -69,7 +69,7 @@ class CRekapitulasiDPA extends MainPageM {
 		$_SESSION['currentPageRekapitulasiDPA']['status'] = $this->cmbStatus->Text;
 		$this->populateData();
 	}
-	protected function populateData ($search=false) {
+	protected function populateData($search = false) {
         $kjur = $_SESSION['currentPageRekapitulasiDPA']['kjur'];
         $str_kjur = $kjur=='none'?'':"AND rm.kjur = $kjur";
         
@@ -80,9 +80,9 @@ class CRekapitulasiDPA extends MainPageM {
         $str_kelas = $idkelas=='none'?'':"AND rm.idkelas='$idkelas'";
         
         $status = $_SESSION['currentPageRekapitulasiDPA']['status'];
-        $str_status = $status == 'none'? '' : " AND rm.k_status='$status'";
+        $str_status = $status == 'none'? '': " AND rm.k_status='$status'";
             
-        $daftar_dw=$this->DMaster->removeIdFromArray($this->DMaster->getListDosenWali(),'none');
+        $daftar_dw=$this->DMaster->removeIdFromArray($this->DMaster->getListDosenWali(), 'none');
         $result = array();
         $i=1;
         $this->DB->setFieldTable(array('jk', 'jumlah_jk'));
@@ -94,10 +94,10 @@ class CRekapitulasiDPA extends MainPageM {
             $jumlah=0;
             foreach ($r as $v) {
                 switch ($v['jk']) {
-                    case 'L' :
+                    case 'L':
                         $pria = $v['jumlah_jk'];
                     break;
-                    case 'P' :
+                    case 'P':
                         $wanita = $v['jumlah_jk'];
                     break;
                 }

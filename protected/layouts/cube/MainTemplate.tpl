@@ -50,7 +50,7 @@
                                     <li class="item">
                                         <com:TActiveLinkButton ID="btnChangeTheme" ClientSide.PostState="false" OnClick="SourceTemplateControl.changeTheme" Enabled="<%#$_SESSION['theme']!=$this->DataItem['idtheme']%>" CommandParameter="<%#$this->DataItem['idtheme']%>">
                                             <prop:Text>
-                                                <%#$_SESSION['theme']==$this->DataItem['idtheme'] ? '<i class="fa fa-check-square"></i>' :''%>
+                                                <%#$_SESSION['theme']==$this->DataItem['idtheme'] ? '<i class="fa fa-check-square"></i>':''%>
                                                 <%#$this->DataItem['namatheme']%>
                                             </prop:Text>
                                             <prop:ClientSide.OnPreDispatch>

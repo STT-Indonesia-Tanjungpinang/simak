@@ -64,7 +64,7 @@ class PHPExcel_Calculation_MathTrig
 
     private static function romanCut($num, $n)
     {
-        return ($num - ($num % $n ) ) / $n;
+        return ($num - ($num % $n )) / $n;
     }
 
 

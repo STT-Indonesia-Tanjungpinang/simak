@@ -10,7 +10,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
         $this->showPembayaranCutiSemesterGanjil=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGanjil'])||$_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_name']!='k.pembayaran.PembayaranCutiSemesterGanjil') {
-				$_SESSION['currentPagePembayaranCutiSemesterGanjil']=array('page_name'=>'k.pembayaran.PembayaranCutiSemesterGanjil', 'page_num'=>0,'search'=>false,'DataMHS'=>array(),'ta'=>$_SESSION['ta']);												
+				$_SESSION['currentPagePembayaranCutiSemesterGanjil']=array('page_name'=>'k.pembayaran.PembayaranCutiSemesterGanjil', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta'=>$_SESSION['ta']);												
 			}
              try {
                 $nim=addslashes($this->request['id']);                           				
@@ -39,7 +39,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
                 $datamhs['iddata_konversi'] = $this->Finance->isMhsPindahan($datamhs['nim'],true);            
                 
                 $kelas = $this->Finance->getKelasMhs();                
-                $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
+                $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
                 $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
                 $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -52,9 +52,9 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
                 $this->populateTransaksi();
                 
                 if ($this->ListTransactionRepeater->Items->Count() > 0) {
-                    $this->txtAddNomorFaktur->Enabled=false;
-                    $this->cmbAddTanggalFaktur->Enabled=false;
-                    $this->btnSave->Enabled=false;
+                    $this->txtAddNomorFaktur->Enabled = false;
+                    $this->cmbAddTanggalFaktur->Enabled = false;
+                    $this->btnSave->Enabled = false;
                    
                 }
             }catch (Exception $ex) {
@@ -86,8 +86,8 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
 		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
-                $item->btnDeleteFromRepeater->Enabled=false;
-                $item->btnCommitFromRepeater->Enabled=false;
+                $item->btnDeleteFromRepeater->Enabled = false;
+                $item->btnCommitFromRepeater->Enabled = false;
 			}else{
                 $item->btnDeleteFromRepeater->Attributes->onclick="if(!confirm('Apakah Anda ingin menghapus Transaksi ini?')) return false;";
             }
@@ -116,7 +116,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
             $nim = $datamhs['nim'];
             
             $no_transaksi='11'.$tahun.mt_rand(900,9999);
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
             $this->Finance->setDataMHS($datamhs);

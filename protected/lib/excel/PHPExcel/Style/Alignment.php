@@ -454,8 +454,8 @@ class PHPExcel_Style_Alignment extends PHPExcel_Style_Supervisor implements PHPE
             $this->horizontal .
             $this->vertical .
             $this->textRotation .
-            ($this->wrapText ? 't' : 'f') .
-            ($this->shrinkToFit ? 't' : 'f') .
+            ($this->wrapText ? 't': 'f') .
+            ($this->shrinkToFit ? 't': 'f') .
             $this->indent .
             $this->readorder .
             __CLASS__

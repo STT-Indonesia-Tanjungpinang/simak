@@ -53,17 +53,17 @@ class Logic_Finance extends Logic_Mahasiswa {
         $semester_masuk = $this->DataMHS['semester_masuk'];
 		$kelas = $this->DataMHS['idkelas'];
         switch ($status) {
-            case 'lama' :
+            case 'lama':
                 $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14 AND (idkombi=2 OR idkombi=3 OR idkombi=7 OR idkombi=9)";
             break;
-            case 'baru' :
+            case 'baru':
                 if ($this->getDataMhs('perpanjang')==true) {
                     $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14 AND (idkombi=2 OR idkombi=3 OR idkombi=7 OR idkombi=9)";
                 }else {
                     $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14";								
                 }		
             break;
-            case 'sp' :
+            case 'sp':
                 $str = "SELECT biaya AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi=14";
             break;
         }		
@@ -82,17 +82,17 @@ class Logic_Finance extends Logic_Mahasiswa {
         $semester_masuk = $this->DataMHS['idsmt'];
 		$kelas = $this->DataMHS['idkelas'];
         switch ($status) {
-            case 'lama' :
+            case 'lama':
                 $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran='semesteran'";
             break;
-            case 'baru' :
+            case 'baru':
                 if ($this->getDataMhs('perpanjang')==true) {
                     $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND  tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran!='none'";
                 }else {
                     $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND  tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran!='none'";								
                 }		
             break;
-            case 'sp' :
+            case 'sp':
                 $str = "SELECT biaya AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi=14";
             break;
         }		
@@ -215,7 +215,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 		$str = "SELECT idkelas FROM transaksi WHERE tahun = $tahun_sekarang AND idsmt=$semester_sekarang AND no_formulir=$no_formulir LIMIT 0,1";
 		$this->db->setFieldTable(array('idkelas'));
 		$r=$this->db->getRecord($str);		
-		if (isset($r[1]) )
+		if (isset($r[1]))
 			return $r[1]['idkelas'];
 		else
 			return false;
@@ -241,7 +241,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 	* casting ke integer	
 	*/
 	public function toInteger ($stringNumeric) {
-		return str_replace('.','', $stringNumeric);
+		return str_replace('.', '', $stringNumeric);
 	}
     /**
 	* Untuk mendapatkan uang dalam format rupiah
@@ -257,7 +257,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 		while ($rp>3){
 			$rupiah = ".". substr($angka,-3). $rupiah;
 			$s=strlen($angka) - 3;
-			$angka=substr($angka,0, $s);
+			$angka = substr($angka,0, $s);
 			$rp=strlen($angka);
 		}
 		if ($tanpa_rp) {

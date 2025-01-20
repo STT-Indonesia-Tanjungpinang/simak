@@ -3,12 +3,12 @@ prado::using ('Application.MainPageM');
 class CKonversiMatakuliah extends MainPageM {	
 	public function onLoad($param) {
 		parent::onLoad($param);					
-        $this->showKonversiMatakuliah=true;
+        $this->showKonversiMatakuliah = true;
         $this->showSubMenuAkademikNilai=true;
         $this->createObj('Nilai');			
 		if (!$this->IsPostBack && !$this->IsCallBack) {
             if (!isset($_SESSION['currentPageKonversiMatakuliah'])||$_SESSION['currentPageKonversiMatakuliah']['page_name']!='m.spmb.KonversiMatakuliah') {
-				$_SESSION['currentPageKonversiMatakuliah']=array('page_name'=>'m.spmb.KonversiMatakuliah', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'daftarmatkul'=>array(),'kjur'=>$_SESSION['kjur']);												
+				$_SESSION['currentPageKonversiMatakuliah']=array('page_name'=>'m.spmb.KonversiMatakuliah', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'daftarmatkul'=>array(), 'kjur'=>$_SESSION['kjur']);												
 			}
             $_SESSION['currentPageKonversiMatakuliah']['search']=false;
             
@@ -19,7 +19,7 @@ class CKonversiMatakuliah extends MainPageM {
 			$this->tbCmbPs->Text = $_SESSION['currentPageKonversiMatakuliah']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -64,14 +64,14 @@ class CKonversiMatakuliah extends MainPageM {
 		$_SESSION['currentPageKonversiMatakuliah']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageKonversiMatakuliah']['search']);
 	}		
-	public function populateData ($search=false) {			
+	public function populateData($search = false) {			
 		$kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];
 		$tahun_masuk = $_SESSION['tahun_masuk'];		
         if ($search) {
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             $str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.perpanjangan=0";
             switch ($this->cmbKriteria->Text) {                                
-                case 'nama' :
+                case 'nama':
                     $clausa="AND nama LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
                     $str = "$str $clausa";
@@ -97,7 +97,7 @@ class CKonversiMatakuliah extends MainPageM {
             $iddata_konversi = $v['iddata_konversi'];
             $v['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi = $iddata_konversi");
             $v['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
-            $v['nim_alias'] = $v['nim']=='' ? 'N.A' : $v['nim'];
+            $v['nim_alias'] = $v['nim']== '' ? 'N.A': $v['nim'];
             $v['date_added'] = $this->TGL->tanggal('d/m/Y', $v['date_added']);
             $result[$k] = $v;
         }

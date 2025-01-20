@@ -9,7 +9,7 @@ class CPesertaMatakuliah extends MainPageSA {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePesertaMatakuliah'])||$_SESSION['currentPagePesertaMatakuliah']['page_name']!='sa.perkuliahan.PesertaMatakuliah') {
-				$_SESSION['currentPagePesertaMatakuliah']=array('page_name'=>'sa.perkuliahan.PesertaMatakuliah', 'page_num'=>0,'search'=>false,'InfoMatkul'=>array(),'idkelas'=>'none');
+				$_SESSION['currentPagePesertaMatakuliah']=array('page_name'=>'sa.perkuliahan.PesertaMatakuliah', 'page_num'=>0,'search'=>false,'InfoMatkul'=>array(), 'idkelas'=>'none');
 			}  
             $_SESSION['currentPagePesertaMatakuliah']['search']=false;            
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -25,9 +25,9 @@ class CPesertaMatakuliah extends MainPageSA {
                 }
                 
                 $_SESSION['currentPagePesertaMatakuliah']['InfoMatkul'] = $infomatkul;                
-                $this->tbCmbPs->Enabled=false;
-                $this->tbCmbTA->Enabled=false;
-                $this->tbCmbSemester->Enabled=false;
+                $this->tbCmbPs->Enabled = false;
+                $this->tbCmbTA->Enabled = false;
+                $this->tbCmbSemester->Enabled = false;
                 
                 $kelas = $this->DMaster->getListKelas();
                 $kelas['none'] = 'All';
@@ -41,13 +41,13 @@ class CPesertaMatakuliah extends MainPageSA {
                 $this->tbCmbPs->dataBind();	
 
                 $tahun = $_SESSION['ta'];
-                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
                 $this->tbCmbTA->DataSource = $ta;					
                 $this->tbCmbTA->Text = $tahun;						
                 $this->tbCmbTA->dataBind();
 
                 $idsmt = $_SESSION['semester'];
-                $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+                $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
                 $this->tbCmbSemester->DataSource = $semester;
                 $this->tbCmbSemester->Text = $idsmt;
                 $this->tbCmbSemester->dataBind();
@@ -65,12 +65,12 @@ class CPesertaMatakuliah extends MainPageSA {
                 $this->tbCmbPs->Text = $_SESSION['kjur'];			
                 $this->tbCmbPs->dataBind();	
                 
-                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+                $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
                 $this->tbCmbTA->DataSource = $ta;					
                 $this->tbCmbTA->Text = $_SESSION['ta'];						
                 $this->tbCmbTA->dataBind();
 
-                $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+                $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
                 $this->tbCmbSemester->DataSource = $semester;
                 $this->tbCmbSemester->Text = $_SESSION['semester'];
                 $this->tbCmbSemester->dataBind();
@@ -146,23 +146,23 @@ class CPesertaMatakuliah extends MainPageSA {
             
         }
     }
-    public function populateData ($search=false) {      
+    public function populateData($search = false) {      
         $id=$_SESSION['currentPagePesertaMatakuliah']['InfoMatkul']['idpenyelenggaraan'];        
         if ($search) {            
             $str = "SELECT vkm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.jk,vdm.tahun_masuk,vkm.batal,vkm.sah,kmd.idkelas_mhs,km.nama_kelas,hari,jam_masuk,jam_keluar FROM v_krsmhs vkm JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) LEFT JOIN kelas_mhs_detail kmd ON (vkm.idkrsmatkul=kmd.idkrsmatkul) LEFT JOIN kelas_mhs km ON (kmd.idkelas_mhs=km.idkelas_mhs) WHERE idpenyelenggaraan='$id'";            
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' $clausa",'vdm.nim');
                     $str = "$str $clausa";
@@ -170,7 +170,7 @@ class CPesertaMatakuliah extends MainPageSA {
             }
         }else{ 
             $idkelas = $_SESSION['currentPagePesertaMatakuliah']['idkelas'];
-            $str_kelas=($idkelas=='' || $idkelas=='none') ? '' : " AND vdm.idkelas='$idkelas'";
+            $str_kelas=($idkelas== '' || $idkelas=='none') ? '': " AND vdm.idkelas='$idkelas'";
             $str = "SELECT vkm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.jk,vdm.tahun_masuk,vkm.batal,vkm.sah,kmd.idkelas_mhs,km.nama_kelas,hari,jam_masuk,jam_keluar FROM v_krsmhs vkm JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) LEFT JOIN kelas_mhs_detail kmd ON (vkm.idkrsmatkul=kmd.idkrsmatkul) LEFT JOIN kelas_mhs km ON (kmd.idkelas_mhs=km.idkelas_mhs) WHERE idpenyelenggaraan='$id'$str_kelas";            
             
             $jumlah_baris = $this->DB->getCountRowsOfTable("v_krsmhs vkm JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id'$str_kelas",'vdm.nim');
@@ -217,13 +217,13 @@ class CPesertaMatakuliah extends MainPageSA {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $dataReport=$_SESSION['currentPagePesertaMatakuliah']['InfoMatkul'];
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['tahun']);
                 $dataReport['nama_semester'] = $this->setup->getSemester($dataReport['idsmt']);               
@@ -235,14 +235,14 @@ class CPesertaMatakuliah extends MainPageSA {
                 $messageprintout="Daftar Peserta Matakuliah : <br/>";
                 $this->report->printPesertaMatakuliah($this->DMaster); 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
         $idkelas = $_SESSION['currentPagePesertaMatakuliah']['idkelas'];
-        $str_kelas=($idkelas=='' || $idkelas=='none') ? '' : " AND vdm.idkelas='$idkelas'";
+        $str_kelas=($idkelas== '' || $idkelas=='none') ? '': " AND vdm.idkelas='$idkelas'";
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Daftar Peserta '. $label=($idkelas=="none") ? 'Semua Kelas' : $this->DMaster->getNamaKelasByID($idkelas) ;
+        $this->lblPrintout->Text='Daftar Peserta '. $label=($idkelas=="none") ? 'Semua Kelas': $this->DMaster->getNamaKelasByID($idkelas) ;
         $this->modalPrintOut->show();
      }
 }

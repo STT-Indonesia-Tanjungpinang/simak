@@ -29,7 +29,7 @@ class CDetailDiskusi extends MainPageMHS {
             }            
 		}                
 	}  
-    public function populateData () {
+    public function populateData() {
         $id=$_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idpost'];           
         $str = "SELECT idpost,title,content,nama_user,date_added FROM forumposts fp WHERE parentpost=$id ORDER BY date_added";        
         $this->DB->setFieldTable (array('idpost', 'title', 'content', 'nama_user', 'date_added'));			

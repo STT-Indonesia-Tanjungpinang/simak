@@ -13,8 +13,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $kjur=$this->dataReport['kjur'];
     $idkur=$objDemik->getIDKurikulum($kjur);
     switch ($this->getDriver()) {
-      case 'excel2003' :
-      case 'excel2007' :
+      case 'excel2003':
+      case 'excel2007':
         $this->setHeaderPT('I');
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');
@@ -44,15 +44,15 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getColumnDimension('H')->setWidth(40);
         $sheet->getColumnDimension('I')->setWidth(15);
         
-        $sheet->setCellValue('A10','NO');
+        $sheet->setCellValue('A10', 'NO');
         $sheet->mergeCells("B10:C10");
-        $sheet->setCellValue('B10','KODE');
-        $sheet->setCellValue('D10','NAMA');
-        $sheet->setCellValue('E10','SKS');
-        $sheet->setCellValue('F10','SMT');
-        $sheet->setCellValue('G10','DOSEN PENGAMPU UTAMA');
-        $sheet->setCellValue('H10','DOSEN PENGAMPU');
-        $sheet->setCellValue('I10','JUMLAH PESERTA');
+        $sheet->setCellValue('B10', 'KODE');
+        $sheet->setCellValue('D10', 'NAMA');
+        $sheet->setCellValue('E10', 'SKS');
+        $sheet->setCellValue('F10', 'SMT');
+        $sheet->setCellValue('G10', 'DOSEN PENGAMPU UTAMA');
+        $sheet->setCellValue('H10', 'DOSEN PENGAMPU');
+        $sheet->setCellValue('I10', 'JUMLAH PESERTA');
         $sheet->getRowDimension(10)->setRowHeight(25);
         
         $styleArray=array(
@@ -65,7 +65,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A10:I10")->getAlignment()->setWrapText(true);
         
         $str = "SELECT idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen FROM v_penyelenggaraan WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND idkur=$idkur ORDER BY semester ASC,kmatkul ASC";
-        $this->db->setFieldTable (array('idpenyelenggaraan','kmatkul','nmatkul','sks','semester','iddosen'));
+        $this->db->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen'));
         $r= $this->db->getRecord($str);
         $row=11;	            
         while (list($k, $v)=each ($r)) {
@@ -113,8 +113,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $data = $this->db->getRecord($str);
     $tahun_kurikulum=$data[1]['ta'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('Q'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -146,22 +146,22 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getColumnDimension('Q')->setWidth(20);
         
         //field of column ganjil				
-        $sheet->setCellValue('A10','SMT');				
-        $sheet->setCellValue('B10','NO');
-        $sheet->setCellValue('C10','KODE MK');				
+        $sheet->setCellValue('A10', 'SMT');				
+        $sheet->setCellValue('B10', 'NO');
+        $sheet->setCellValue('C10', 'KODE MK');				
         $sheet->mergeCells('D10:F10');
-        $sheet->setCellValue('D10','MATA KULIAH');				
-        $sheet->setCellValue('G10','SKS');				
-        $sheet->setCellValue('H10','KETERANGAN');				
+        $sheet->setCellValue('D10', 'MATA KULIAH');				
+        $sheet->setCellValue('G10', 'SKS');				
+        $sheet->setCellValue('H10', 'KETERANGAN');				
         
         //field of column genap				
-        $sheet->setCellValue('J10','SMT');				
-        $sheet->setCellValue('K10','NO');
-        $sheet->setCellValue('L10','KODE MK');				
+        $sheet->setCellValue('J10', 'SMT');				
+        $sheet->setCellValue('K10', 'NO');
+        $sheet->setCellValue('L10', 'KODE MK');				
         $sheet->mergeCells('M10:O10');
-        $sheet->setCellValue('M10','MATA KULIAH');				
-        $sheet->setCellValue('P10','SKS');				
-        $sheet->setCellValue('Q10','KETERANGAN');				
+        $sheet->setCellValue('M10', 'MATA KULIAH');				
+        $sheet->setCellValue('P10', 'SKS');				
+        $sheet->setCellValue('Q10', 'KETERANGAN');				
         
         $styleArray=array(
                 'font' => array('bold' => true),
@@ -178,7 +178,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $tambah_ganjil_row=false;		
         $tambah_genap_row=false;		
         $str = "SELECT m.kmatkul,m.nmatkul,m.sks,m.semester,m.idkonsentrasi,k.nama_konsentrasi,m.ispilihan,m.islintas_prodi FROM matakuliah m LEFT JOIN konsentrasi k ON (k.idkonsentrasi=m.idkonsentrasi) WHERE idkur=$idkur ORDER BY semester,kmatkul ASC";			                
-        $this->db->setFieldTable(array('kmatkul','nmatkul','sks','semester','idkonsentrasi','nama_konsentrasi','ispilihan','islintas_prodi','aktif'));
+        $this->db->setFieldTable(array('kmatkul', 'nmatkul', 'sks', 'semester', 'idkonsentrasi', 'nama_konsentrasi', 'ispilihan', 'islintas_prodi', 'aktif'));
         $data = $this->db->getRecord($str);
         
         $smt = $objDemik->getSemesterMatakuliahRomawi();
@@ -308,7 +308,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $this->printOut('daftarmatakuliah');
       break;
-      case 'pdf' :
+      case 'pdf':
                         
       break;
     }
@@ -324,8 +324,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $tahun_masuk = $this->dataReport['tahun_masuk'];
     $nama_tahun = $this->dataReport['nama_tahun'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :    
+      case 'excel2003':               
+      case 'excel2007':    
         $this->setHeaderPT('S');                
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -364,25 +364,25 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getColumnDimension('Q')->setWidth(25);
         $sheet->getColumnDimension('R')->setWidth(15);
         
-        $sheet->setCellValue('A11','NO');
+        $sheet->setCellValue('A11', 'NO');
         $sheet->mergeCells("B11:C11");
-        $sheet->setCellValue('B11','NO. FORMULIR');
-        $sheet->setCellValue('D11','NIM');
-        $sheet->setCellValue('E11','NIRM');
-        $sheet->setCellValue('F11','NAMA');
-        $sheet->setCellValue('G11','JK');
-        $sheet->setCellValue('H11','STATUS AKHIR');
-        $sheet->setCellValue('I11','DOSEN WALI');
-        $sheet->setCellValue('J11','TEMPAT LAHIR');
-        $sheet->setCellValue('K11','TANGGAL LAHIR');
-        $sheet->setCellValue('L11','NAMA IBU');
-        $sheet->setCellValue('M11','AGAMA');
-        $sheet->setCellValue('N11','NO. NIK');
-        $sheet->setCellValue('O11','ALAMAT');
-        $sheet->setCellValue('P11','KELURAHAN');
-        $sheet->setCellValue('Q11','KECAMATAN');
-        $sheet->setCellValue('R11','KELAS');
-        $sheet->setCellValue('S11','KET.');
+        $sheet->setCellValue('B11', 'NO. FORMULIR');
+        $sheet->setCellValue('D11', 'NIM');
+        $sheet->setCellValue('E11', 'NIRM');
+        $sheet->setCellValue('F11', 'NAMA');
+        $sheet->setCellValue('G11', 'JK');
+        $sheet->setCellValue('H11', 'STATUS AKHIR');
+        $sheet->setCellValue('I11', 'DOSEN WALI');
+        $sheet->setCellValue('J11', 'TEMPAT LAHIR');
+        $sheet->setCellValue('K11', 'TANGGAL LAHIR');
+        $sheet->setCellValue('L11', 'NAMA IBU');
+        $sheet->setCellValue('M11', 'AGAMA');
+        $sheet->setCellValue('N11', 'NO. NIK');
+        $sheet->setCellValue('O11', 'ALAMAT');
+        $sheet->setCellValue('P11', 'KELURAHAN');
+        $sheet->setCellValue('Q11', 'KECAMATAN');
+        $sheet->setCellValue('R11', 'KELAS');
+        $sheet->setCellValue('S11', 'KET.');
          
         $styleArray=array(
                 'font' => array('bold' => true),
@@ -394,7 +394,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A11:S11")->getAlignment()->setWrapText(true);
         
         $str = "SELECT fp.no_formulir,rm.nim,rm.nirm,rm.no_formulir,fp.nama_mhs,fp.jk,rm.k_status,rm.iddosen_wali,fp.tempat_lahir,fp.tanggal_lahir,fp.nama_ibu_kandung,a.nama_agama,fp.nik,fp.alamat_rumah,fp.kelurahan,fp.kecamatan,rm.idkelas FROM formulir_pendaftaran fp JOIN register_mahasiswa rm ON (fp.no_formulir=rm.no_formulir) LEFT JOIN agama a ON (a.idagama=fp.idagama) WHERE rm.kjur='$kjur' AND fp.ta=$tahun_masuk ORDER BY fp.nama_mhs ASC,rm.idkelas ASC";
-        $this->db->setFieldTable(array('no_formulir','nim','nirm','no_formulir','nama_mhs','jk','k_status','iddosen_wali','tempat_lahir','tanggal_lahir','nama_ibu_kandung','nama_agama','nik','alamat_rumah','kelurahan','kecamatan','idkelas'));	
+        $this->db->setFieldTable(array('no_formulir', 'nim', 'nirm', 'no_formulir', 'nama_mhs', 'jk', 'k_status', 'iddosen_wali', 'tempat_lahir', 'tanggal_lahir', 'nama_ibu_kandung', 'nama_agama', 'nik', 'alamat_rumah', 'kelurahan', 'kecamatan', 'idkelas'));	
         $r = $this->db->getRecord($str);
         $row=12;
         while (list($k, $v)=each ($r)) {            
@@ -457,8 +457,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $idkelas  = $this->dataReport['idkelas'];
             
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :
+      case 'excel2003':               
+      case 'excel2007':
         $jumlah_peserta=$this->db->getCountRowsOfTable("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkrsmatkul');
         if ($jumlah_peserta > 0) {
           $jumlah_looping = ceil($jumlah_peserta / 70);
@@ -495,30 +495,30 @@ class Logic_ReportAkademik extends Logic_Report {
             $sheet->getRowDimension(13)->setRowHeight(20);
 
             //field of column left				
-            $sheet->setCellValue('B9','MATA KULIAH / KODE');				
-            $sheet->setCellValue('B10','PROGRAM STUDI / JENJANG');
-            $sheet->setCellValue('B11','SEMESTER / TAHUN AKADEMIK');				
-            $sheet->setCellValue('B12','RUANG'); //new
+            $sheet->setCellValue('B9', 'MATA KULIAH / KODE');				
+            $sheet->setCellValue('B10', 'PROGRAM STUDI / JENJANG');
+            $sheet->setCellValue('B11', 'SEMESTER / TAHUN AKADEMIK');				
+            $sheet->setCellValue('B12', 'RUANG'); //new
               
-            $sheet->setCellValue('D9',': '.$this->dataReport['nmatkul'].' / '.$this->dataReport['kmatkul']);				
-            $sheet->setCellValue('D10',': '.$this->dataReport['nama_prodi']);
-            $sheet->setCellValue('D11',': '.$this->dataReport['nama_semester']. ' - '.$this->dataReport['nama_tahun']);			
-            $sheet->setCellValue('D12',': -');
+            $sheet->setCellValue('D9', ': '.$this->dataReport['nmatkul'].' / '.$this->dataReport['kmatkul']);				
+            $sheet->setCellValue('D10', ': '.$this->dataReport['nama_prodi']);
+            $sheet->setCellValue('D11', ': '.$this->dataReport['nama_semester']. ' - '.$this->dataReport['nama_tahun']);			
+            $sheet->setCellValue('D12', ': -');
 
-            $sheet->setCellValue('M9','KELAS');				
-            $sheet->setCellValue('M10','JUMLAH SKS');
-            $sheet->setCellValue('M11','DOSEN PENGAJAR');				
-            $sheet->setCellValue('M12','HARI / WAKTU'); //new
+            $sheet->setCellValue('M9', 'KELAS');				
+            $sheet->setCellValue('M10', 'JUMLAH SKS');
+            $sheet->setCellValue('M11', 'DOSEN PENGAJAR');				
+            $sheet->setCellValue('M12', 'HARI / WAKTU'); //new
 
             if($idkelas == "B") {
-              $sheet->setCellValue('P9',': KARYAWAN / TG.UBAN (S1)-A');	
+              $sheet->setCellValue('P9', ': KARYAWAN / TG.UBAN (S1)-A');	
             }else{
-              $sheet->setCellValue('P9',': '.$this->dataReport['namakelas']);	
+              $sheet->setCellValue('P9', ': '.$this->dataReport['namakelas']);	
             }
                   
-            $sheet->setCellValue('P10',': '.$this->dataReport['sks']);
-            $sheet->setCellValue('P11',': '.$nama_dosen);
-            $sheet->setCellValue('P12',': '.$this->dataReport['hari'] . ' ['.$this->dataReport['jam_masuk'].'-'.$this->dataReport['jam_keluar'].']');
+            $sheet->setCellValue('P10', ': '.$this->dataReport['sks']);
+            $sheet->setCellValue('P11', ': '.$nama_dosen);
+            $sheet->setCellValue('P12', ': '.$this->dataReport['hari'] . ' ['.$this->dataReport['jam_masuk'].'-'.$this->dataReport['jam_keluar'].']');
             
             $sheet->mergeCells("V15:X15");
             $styleArray=array(
@@ -530,21 +530,21 @@ class Logic_ReportAkademik extends Logic_Report {
             
             $sheet->getRowDimension(16)->setRowHeight(20);
             $sheet->mergeCells("A16:A17");
-            $sheet->setCellValue('A16','NO');
+            $sheet->setCellValue('A16', 'NO');
             $sheet->mergeCells("B16:C17");
-            $sheet->setCellValue('B16','NAMA MAHASISWA');
+            $sheet->setCellValue('B16', 'NAMA MAHASISWA');
             $sheet->mergeCells("D16:D17");
-            $sheet->setCellValue('D16','L/P');
+            $sheet->setCellValue('D16', 'L/P');
             $sheet->mergeCells("E16:E17");
-            $sheet->setCellValue('E16','NIM');
+            $sheet->setCellValue('E16', 'NIM');
             $sheet->mergeCells("F16:U16");
-            $sheet->setCellValue('F16','PARAF TANDA HADIR KULIAH / PRAKTIKUM KE'); 
+            $sheet->setCellValue('F16', 'PARAF TANDA HADIR KULIAH / PRAKTIKUM KE'); 
             $sheet->mergeCells("V16:V17");
-            $sheet->setCellValue('V16','JUMLAH HADIR');               
+            $sheet->setCellValue('V16', 'JUMLAH HADIR');               
             $sheet->mergeCells("W16:W17");
-            $sheet->setCellValue('W16','%');                
+            $sheet->setCellValue('W16', '%');                
             $sheet->mergeCells("X16:X17");
-            $sheet->setCellValue('X16','KETR.'); 
+            $sheet->setCellValue('X16', 'KETR.'); 
 
             $sheet->getColumnDimension('C')->setWidth(23);
             $sheet->getColumnDimension('D')->setWidth(5);
@@ -609,8 +609,8 @@ class Logic_ReportAkademik extends Logic_Report {
             // }else{
             //   $str_kelas = " vdm.idkelas='$idkelas' ";
             // }
-            // $str ="SELECT vkm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.jk FROM v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$idpenyelenggaraan' AND  $str_kelas ORDER BY vdm.nama_mhs ASC";
-            $this->db->setFieldTable(array('nim','nama_mhs','jk'));	
+            // $str = "SELECT vkm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.jk FROM v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$idpenyelenggaraan' AND  $str_kelas ORDER BY vdm.nama_mhs ASC";
+            $this->db->setFieldTable(array('nim', 'nama_mhs', 'jk'));	
             $datapeserta=$this->db->getRecord($str, $offset+1);       
             
             $row_awal=18;
@@ -694,13 +694,13 @@ class Logic_ReportAkademik extends Logic_Report {
     $k_status = $this->dataReport['k_status'];
     $tahun_masuk = $this->dataReport['tahun_masuk'];
     $nama_ps = $this->dataReport['nama_ps'];
-    $ta1=$this->dataReport['ta1'];
+    $ta1 = $this->dataReport['ta1'];
     $ta2=$this->dataReport['ta2'];                
-    $nama_tahun1=$this->dataReport['nama_tahun1'];                
+    $nama_tahun1 = $this->dataReport['nama_tahun1'];                
     $nama_tahun2=$this->dataReport['nama_tahun2'];   
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('Q'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -738,47 +738,47 @@ class Logic_ReportAkademik extends Logic_Report {
         
         //field of column ganjil
         $sheet->mergeCells('A11:A12');
-        $sheet->setCellValue('A11','T.A');
+        $sheet->setCellValue('A11', 'T.A');
         $sheet->mergeCells('B11:B12');
-        $sheet->setCellValue('B11','SMT');
+        $sheet->setCellValue('B11', 'SMT');
         $sheet->mergeCells('C11:c12');
-        $sheet->setCellValue('C11','KELAS');				
+        $sheet->setCellValue('C11', 'KELAS');				
         
         $sheet->mergeCells('D11:F11');
-        $sheet->setCellValue('D11','AKTIF');
-        $sheet->setCellValue('D12','L');				
-        $sheet->setCellValue('E12','P');				
-        $sheet->setCellValue('F12','L + P');		
+        $sheet->setCellValue('D11', 'AKTIF');
+        $sheet->setCellValue('D12', 'L');				
+        $sheet->setCellValue('E12', 'P');				
+        $sheet->setCellValue('F12', 'L + P');		
         
         $sheet->mergeCells('G11:I11');
-        $sheet->setCellValue('G11','NON-AKTIF');
-        $sheet->setCellValue('G12','L');				
-        $sheet->setCellValue('H12','P');				
-        $sheet->setCellValue('I12','L + P');
+        $sheet->setCellValue('G11', 'NON-AKTIF');
+        $sheet->setCellValue('G12', 'L');				
+        $sheet->setCellValue('H12', 'P');				
+        $sheet->setCellValue('I12', 'L + P');
         
         $sheet->mergeCells('J11:M11');
-        $sheet->setCellValue('J11','CUTI');
-        $sheet->setCellValue('J12','L');				
-        $sheet->setCellValue('K12','P');				
-        $sheet->setCellValue('L12','L + P');
+        $sheet->setCellValue('J11', 'CUTI');
+        $sheet->setCellValue('J12', 'L');				
+        $sheet->setCellValue('K12', 'P');				
+        $sheet->setCellValue('L12', 'L + P');
                 
         $sheet->mergeCells('N11:P11');
-        $sheet->setCellValue('N11','KELUAR');
-        $sheet->setCellValue('N12','L');				
-        $sheet->setCellValue('O12','P');				
-        $sheet->setCellValue('P12','L + P');
+        $sheet->setCellValue('N11', 'KELUAR');
+        $sheet->setCellValue('N12', 'L');				
+        $sheet->setCellValue('O12', 'P');				
+        $sheet->setCellValue('P12', 'L + P');
         
         $sheet->mergeCells('Q11:S11');
-        $sheet->setCellValue('Q11','DROP OUT');
-        $sheet->setCellValue('Q12','L');				
-        $sheet->setCellValue('R12','P');				
-        $sheet->setCellValue('S12','L + P');
+        $sheet->setCellValue('Q11', 'DROP OUT');
+        $sheet->setCellValue('Q12', 'L');				
+        $sheet->setCellValue('R12', 'P');				
+        $sheet->setCellValue('S12', 'L + P');
         
         $sheet->mergeCells('T11:W11');
-        $sheet->setCellValue('T11','LULUS');
-        $sheet->setCellValue('T12','L');				
-        $sheet->setCellValue('U12','P');				
-        $sheet->setCellValue('V12','L + P');
+        $sheet->setCellValue('T11', 'LULUS');
+        $sheet->setCellValue('T12', 'L');				
+        $sheet->setCellValue('U12', 'P');				
+        $sheet->setCellValue('V12', 'L + P');
         
         $styleArray=array(
                 'font' => array('bold' => true),
@@ -793,7 +793,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sql_status = $k_status == 'none'?'':"k_status='$k_status'";
         $sql = $sql_tahun_masuk . $sql_status;
         $str = "SELECT ta,idsmt,idkelas FROM rekap_status_mahasiswa WHERE (ta >= $ta1 AND ta <= $ta2) AND kjur=$kjur $sql GROUP BY ta,idsmt,idkelas";
-        $this->db->setFieldTable(array('ta','idsmt','idkelas'));	
+        $this->db->setFieldTable(array('ta', 'idsmt', 'idkelas'));	
         $r = $this->db->getRecord($str);  
         
         $result=array();
@@ -835,8 +835,8 @@ class Logic_ReportAkademik extends Logic_Report {
   public function printPesertaMatakuliah($objDMaster) {
     $idkelas = $this->dataReport['idkelas'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :    
+      case 'excel2003':               
+      case 'excel2007':    
         $this->setHeaderPT('G');                
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -845,25 +845,25 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->mergeCells("A7:G7");
         
         $sheet->getRowDimension(7)->setRowHeight(20);
-        $sheet->setCellValue('A7','DAFTAR PESERTA MATAKULIAH');
+        $sheet->setCellValue('A7', 'DAFTAR PESERTA MATAKULIAH');
         $sheet->mergeCells("A8:B8");
-        $sheet->setCellValue('A8','KODE');
+        $sheet->setCellValue('A8', 'KODE');
         $sheet->setCellValue('C8', $this->dataReport['kmatkul']);
         
         $sheet->mergeCells("A9:B9");
-        $sheet->setCellValue('A9','NAMA');
+        $sheet->setCellValue('A9', 'NAMA');
         $sheet->setCellValue('C9', $this->dataReport['nmatkul']);
         
         $sheet->mergeCells("A10:B10");
-        $sheet->setCellValue('A10','SKS');
+        $sheet->setCellValue('A10', 'SKS');
         $sheet->setCellValue('C10', $this->dataReport['sks']);
         
         $sheet->mergeCells("A11:B11");
-        $sheet->setCellValue('A11','SEMESTER');
+        $sheet->setCellValue('A11', 'SEMESTER');
         $sheet->setCellValue('C11', $this->dataReport['nama_semester']);
         
          $sheet->mergeCells("A12:B12");
-        $sheet->setCellValue('A12','T.A');
+        $sheet->setCellValue('A12', 'T.A');
         $sheet->setCellValue('C12', $this->dataReport['nama_tahun']);
 
         $styleArray=array(
@@ -879,13 +879,13 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getColumnDimension('E')->setWidth(20);
         $sheet->getColumnDimension('F')->setWidth(10);
         $sheet->getColumnDimension('G')->setWidth(15);
-        $sheet->setCellValue('A14','NO');
-        $sheet->setCellValue('B14','NIM');
-        $sheet->setCellValue('C14','NIRM');
-        $sheet->setCellValue('D14','NAMA');
-        $sheet->setCellValue('E14','KELAS');
-        $sheet->setCellValue('F14','TAHUN');
-        $sheet->setCellValue('G14','KET');
+        $sheet->setCellValue('A14', 'NO');
+        $sheet->setCellValue('B14', 'NIM');
+        $sheet->setCellValue('C14', 'NIRM');
+        $sheet->setCellValue('D14', 'NAMA');
+        $sheet->setCellValue('E14', 'KELAS');
+        $sheet->setCellValue('F14', 'TAHUN');
+        $sheet->setCellValue('G14', 'KET');
         $styleArray=array(
                 'font' => array('bold' => true),
                 'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -905,7 +905,7 @@ class Logic_ReportAkademik extends Logic_Report {
         {
           $str_display="SELECT vkm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.jk,vdm.tahun_masuk,vkm.batal,vkm.sah FROM v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vdm.idkelas='$idkelas'";
         }
-        $this->db->setFieldTable(array('nim','nirm','nama_mhs','idkelas','jk','tahun_masuk','batal','sah'));	
+        $this->db->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'idkelas', 'jk', 'tahun_masuk', 'batal', 'sah'));	
         $r = $this->db->getRecord($str_display);
         
         $row=15;
@@ -949,8 +949,8 @@ class Logic_ReportAkademik extends Logic_Report {
   public function printMahasiswaDW($objDMaster){
     $iddosen_wali = $this->dataReport['iddosen_wali'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :  
+      case 'excel2003':               
+      case 'excel2007':  
         $this->setHeaderPT('G'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -978,13 +978,13 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getColumnDimension('E')->setWidth(20);
         $sheet->getColumnDimension('F')->setWidth(17);
         $sheet->getColumnDimension('G')->setWidth(15);
-        $sheet->setCellValue('A10','NO');
-        $sheet->setCellValue('B10','NIM');
-        $sheet->setCellValue('C10','NIRM');
-        $sheet->setCellValue('D10','NAMA');
-        $sheet->setCellValue('E10','KELAS');
-        $sheet->setCellValue('F10','STATUS');
-        $sheet->setCellValue('G10','TAHUN MASUK');
+        $sheet->setCellValue('A10', 'NO');
+        $sheet->setCellValue('B10', 'NIM');
+        $sheet->setCellValue('C10', 'NIRM');
+        $sheet->setCellValue('D10', 'NAMA');
+        $sheet->setCellValue('E10', 'KELAS');
+        $sheet->setCellValue('F10', 'STATUS');
+        $sheet->setCellValue('G10', 'TAHUN MASUK');
         $styleArray=array(
                 'font' => array('bold' => true),
                 'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -995,9 +995,9 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A10:G10")->getAlignment()->setWrapText(true);
         
         $status = $this->dataReport['k_status'];
-        $str_status = $status == 'none'? '' : "AND k_status='$status'";
+        $str_status = $status == 'none'? '': "AND k_status='$status'";
         $str = "SELECT nim,nirm,nama_mhs,tahun_masuk,idkelas,k_status FROM v_datamhs vdm WHERE iddosen_wali = $iddosen_wali $str_status ORDER BY vdm.k_status ASC,vdm.tahun_masuk DESC,vdm.nama_mhs ASC";
-        $this->db->setFieldTable (array('nim','nirm','nama_mhs','tahun_masuk','idkelas','k_status'));
+        $this->db->setFieldTable (array('nim', 'nirm', 'nama_mhs', 'tahun_masuk', 'idkelas', 'k_status'));
         $r=$this->db->getRecord($str);	
         $row=11;
         while (list($k, $v)=each ($r)) {            
@@ -1033,8 +1033,8 @@ class Logic_ReportAkademik extends Logic_Report {
    */
   public function printDaftarHadirDosen($objDemik){
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :  
+      case 'excel2003':               
+      case 'excel2007':  
         $this->setHeaderPT('X'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -1045,7 +1045,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(7)->setRowHeight(20);
         $sheet->getRowDimension(8)->setRowHeight(20);
         $sheet->setCellValue("A7","DAFTAR HADIR DOSEN");
-        $sheet->setCellValue("A8", $nama=($this->dataReport['nama_hari']=='')?'JADWAL KESELURUHAN'.',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']:strtoupper($this->dataReport['hari']).',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']);
+        $sheet->setCellValue("A8", $nama=($this->dataReport['nama_hari']== '')?'JADWAL KESELURUHAN'.',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']:strtoupper($this->dataReport['hari']).',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']);
         $styleArray=array(
                 'font' => array('bold' => true,
                         'size' => 16),
@@ -1057,19 +1057,19 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $sheet->getRowDimension(15)->setRowHeight(20);
         $sheet->mergeCells("A10:A11");
-        $sheet->setCellValue('A10','NO');
+        $sheet->setCellValue('A10', 'NO');
         $sheet->mergeCells("B10:C11");
-        $sheet->setCellValue('B10','NAMA DOSEN');
+        $sheet->setCellValue('B10', 'NAMA DOSEN');
         $sheet->mergeCells("D10:D11");
-        $sheet->setCellValue('D10','KODE MATKUL');
+        $sheet->setCellValue('D10', 'KODE MATKUL');
         $sheet->mergeCells("E10:E11");
-        $sheet->setCellValue('E10','MATAKULIAH');
+        $sheet->setCellValue('E10', 'MATAKULIAH');
         $sheet->mergeCells("F10:F11");
-        $sheet->setCellValue('F10','JAM'); 
+        $sheet->setCellValue('F10', 'JAM'); 
         $sheet->mergeCells("G10:V10");
-        $sheet->setCellValue('G10','PARAF TANDA HADIR DOSEN'); 
+        $sheet->setCellValue('G10', 'PARAF TANDA HADIR DOSEN'); 
         $sheet->mergeCells("Q10:Q11");
-        $sheet->setCellValue('Q10','JUMLAH HADIR');               
+        $sheet->setCellValue('Q10', 'JUMLAH HADIR');               
         
         $sheet->getColumnDimension('C')->setWidth(23);
         $sheet->getColumnDimension('D')->setWidth(12);
@@ -1123,7 +1123,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $idsmt=$this->dataReport['nama_semester'];
         $str_nama_hari = $this->dataReport['nama_hari'];
         $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$str_nama_hari";
-        $this->db->setFieldTable(array('idkelas_mhs','kmatkul','nmatkul','nama_dosen','idkelas','nidn','nama_kelas','hari','jam_masuk','jam_keluar','namaruang','kapasitas'));	
+        $this->db->setFieldTable(array('idkelas_mhs', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas'));	
         $r=$this->db->getRecord($str);     
         $result = array();
         $row_awal=12;
@@ -1172,8 +1172,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('I'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -1194,16 +1194,16 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A8:A8")->applyFromArray($styleArray);
         
         $sheet->getRowDimension(15)->setRowHeight(20);
-        $sheet->setCellValue('A10','NO');
+        $sheet->setCellValue('A10', 'NO');
         $sheet->mergeCells("B10:C10");
-        $sheet->setCellValue('B10','NO. FORMULIR');
-        $sheet->setCellValue('D10','NIM');
-        $sheet->setCellValue('E10','NIRM');
-        $sheet->setCellValue('F10','NAMA MHS');
-        $sheet->setCellValue('G10','KELAS'); 
-        $sheet->setCellValue('H10','DOSEN WALI'); 
-        $sheet->setCellValue('I10','TANGGAL DAFTAR ULANG'); 
-        $sheet->setCellValue('J10','T.A DAN SMT DAFTAR ULANG');
+        $sheet->setCellValue('B10', 'NO. FORMULIR');
+        $sheet->setCellValue('D10', 'NIM');
+        $sheet->setCellValue('E10', 'NIRM');
+        $sheet->setCellValue('F10', 'NAMA MHS');
+        $sheet->setCellValue('G10', 'KELAS'); 
+        $sheet->setCellValue('H10', 'DOSEN WALI'); 
+        $sheet->setCellValue('I10', 'TANGGAL DAFTAR ULANG'); 
+        $sheet->setCellValue('J10', 'T.A DAN SMT DAFTAR ULANG');
         
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
@@ -1226,7 +1226,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(16)->setRowHeight(20);
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='A' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
-        $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
+        $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
@@ -1269,8 +1269,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('I'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -1291,16 +1291,16 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A8:A8")->applyFromArray($styleArray);
         
         $sheet->getRowDimension(15)->setRowHeight(20);
-        $sheet->setCellValue('A10','NO');
+        $sheet->setCellValue('A10', 'NO');
         $sheet->mergeCells("B10:C10");
-        $sheet->setCellValue('B10','NO. FORMULIR');
-        $sheet->setCellValue('D10','NIM');
-        $sheet->setCellValue('E10','NIRM');
-        $sheet->setCellValue('F10','NAMA MHS'); 
-        $sheet->setCellValue('G10','KELAS'); 
-        $sheet->setCellValue('H10','DOSEN WALI'); 
-        $sheet->setCellValue('I10','TANGGAL DAFTAR ULANG'); 
-        $sheet->setCellValue('J10','T.A DAN SMT DAFTAR ULANG');
+        $sheet->setCellValue('B10', 'NO. FORMULIR');
+        $sheet->setCellValue('D10', 'NIM');
+        $sheet->setCellValue('E10', 'NIRM');
+        $sheet->setCellValue('F10', 'NAMA MHS'); 
+        $sheet->setCellValue('G10', 'KELAS'); 
+        $sheet->setCellValue('H10', 'DOSEN WALI'); 
+        $sheet->setCellValue('I10', 'TANGGAL DAFTAR ULANG'); 
+        $sheet->setCellValue('J10', 'T.A DAN SMT DAFTAR ULANG');
         
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
@@ -1323,7 +1323,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(16)->setRowHeight(20);
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='N' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
-        $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
+        $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
@@ -1366,8 +1366,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('I'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -1388,16 +1388,16 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A8:A8")->applyFromArray($styleArray);
         
         $sheet->getRowDimension(15)->setRowHeight(20);
-        $sheet->setCellValue('A10','NO');
+        $sheet->setCellValue('A10', 'NO');
         $sheet->mergeCells("B10:C10");
-        $sheet->setCellValue('B10','NO. FORMULIR');
-        $sheet->setCellValue('D10','NIM');
-        $sheet->setCellValue('E10','NIRM');
-        $sheet->setCellValue('F10','NAMA MHS'); 
-        $sheet->setCellValue('G10','KELAS'); 
-        $sheet->setCellValue('H10','DOSEN WALI'); 
-        $sheet->setCellValue('I10','TANGGAL DAFTAR ULANG'); 
-        $sheet->setCellValue('J10','T.A DAN SMT DAFTAR ULANG');
+        $sheet->setCellValue('B10', 'NO. FORMULIR');
+        $sheet->setCellValue('D10', 'NIM');
+        $sheet->setCellValue('E10', 'NIRM');
+        $sheet->setCellValue('F10', 'NAMA MHS'); 
+        $sheet->setCellValue('G10', 'KELAS'); 
+        $sheet->setCellValue('H10', 'DOSEN WALI'); 
+        $sheet->setCellValue('I10', 'TANGGAL DAFTAR ULANG'); 
+        $sheet->setCellValue('J10', 'T.A DAN SMT DAFTAR ULANG');
         
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
@@ -1420,7 +1420,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(16)->setRowHeight(20);
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='C' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
-        $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
+        $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
@@ -1463,8 +1463,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('I'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -1485,16 +1485,16 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A8:A8")->applyFromArray($styleArray);
         
         $sheet->getRowDimension(15)->setRowHeight(20);
-        $sheet->setCellValue('A10','NO');
+        $sheet->setCellValue('A10', 'NO');
         $sheet->mergeCells("B10:C10");
-        $sheet->setCellValue('B10','NO. FORMULIR');
-        $sheet->setCellValue('D10','NIM');
-        $sheet->setCellValue('E10','NIRM');
-        $sheet->setCellValue('F10','NAMA MHS'); 
-        $sheet->setCellValue('G10','KELAS'); 
-        $sheet->setCellValue('H10','DOSEN WALI'); 
-        $sheet->setCellValue('I10','TANGGAL DAFTAR ULANG'); 
-        $sheet->setCellValue('J10','T.A DAN SMT DAFTAR ULANG');
+        $sheet->setCellValue('B10', 'NO. FORMULIR');
+        $sheet->setCellValue('D10', 'NIM');
+        $sheet->setCellValue('E10', 'NIRM');
+        $sheet->setCellValue('F10', 'NAMA MHS'); 
+        $sheet->setCellValue('G10', 'KELAS'); 
+        $sheet->setCellValue('H10', 'DOSEN WALI'); 
+        $sheet->setCellValue('I10', 'TANGGAL DAFTAR ULANG'); 
+        $sheet->setCellValue('J10', 'T.A DAN SMT DAFTAR ULANG');
         
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
@@ -1517,7 +1517,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(16)->setRowHeight(20);
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='L' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
-        $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
+        $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
@@ -1560,8 +1560,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('I'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -1582,16 +1582,16 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A8:A8")->applyFromArray($styleArray);
         
         $sheet->getRowDimension(15)->setRowHeight(20);
-        $sheet->setCellValue('A10','NO');
+        $sheet->setCellValue('A10', 'NO');
         $sheet->mergeCells("B10:C10");
-        $sheet->setCellValue('B10','NO. FORMULIR');
-        $sheet->setCellValue('D10','NIM');
-        $sheet->setCellValue('E10','NIRM');
-        $sheet->setCellValue('F10','NAMA MHS'); 
-        $sheet->setCellValue('G10','KELAS'); 
-        $sheet->setCellValue('H10','DOSEN WALI'); 
-        $sheet->setCellValue('I10','TANGGAL DAFTAR ULANG'); 
-        $sheet->setCellValue('J10','T.A DAN SMT DAFTAR ULANG');
+        $sheet->setCellValue('B10', 'NO. FORMULIR');
+        $sheet->setCellValue('D10', 'NIM');
+        $sheet->setCellValue('E10', 'NIRM');
+        $sheet->setCellValue('F10', 'NAMA MHS'); 
+        $sheet->setCellValue('G10', 'KELAS'); 
+        $sheet->setCellValue('H10', 'DOSEN WALI'); 
+        $sheet->setCellValue('I10', 'TANGGAL DAFTAR ULANG'); 
+        $sheet->setCellValue('J10', 'T.A DAN SMT DAFTAR ULANG');
         
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
@@ -1614,7 +1614,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(16)->setRowHeight(20);
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='D' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
-        $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
+        $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
@@ -1658,8 +1658,8 @@ class Logic_ReportAkademik extends Logic_Report {
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
     switch ($this->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
         $this->setHeaderPT('I'); 
         $sheet=$this->rpt->getActiveSheet();
         $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -1680,16 +1680,16 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A8:A8")->applyFromArray($styleArray);
         
         $sheet->getRowDimension(15)->setRowHeight(20);
-        $sheet->setCellValue('A10','NO');
+        $sheet->setCellValue('A10', 'NO');
         $sheet->mergeCells("B10:C10");
-        $sheet->setCellValue('B10','NO. FORMULIR');
-        $sheet->setCellValue('D10','NIM');
-        $sheet->setCellValue('E10','NIRM');
-        $sheet->setCellValue('F10','NAMA MHS'); 
-        $sheet->setCellValue('G10','KELAS'); 
-        $sheet->setCellValue('H10','DOSEN WALI'); 
-        $sheet->setCellValue('I10','TANGGAL DAFTAR ULANG'); 
-        $sheet->setCellValue('J10','T.A DAN SMT DAFTAR ULANG');
+        $sheet->setCellValue('B10', 'NO. FORMULIR');
+        $sheet->setCellValue('D10', 'NIM');
+        $sheet->setCellValue('E10', 'NIRM');
+        $sheet->setCellValue('F10', 'NAMA MHS'); 
+        $sheet->setCellValue('G10', 'KELAS'); 
+        $sheet->setCellValue('H10', 'DOSEN WALI'); 
+        $sheet->setCellValue('I10', 'TANGGAL DAFTAR ULANG'); 
+        $sheet->setCellValue('J10', 'T.A DAN SMT DAFTAR ULANG');
         
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(15);
@@ -1712,7 +1712,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(16)->setRowHeight(20);
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='K' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
-        $this->db->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','idkelas','iddosen_wali','tanggal','tahun','idsmt'));
+        $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
         $r=$this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       

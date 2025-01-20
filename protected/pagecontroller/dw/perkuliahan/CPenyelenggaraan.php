@@ -18,12 +18,12 @@ class CPenyelenggaraan extends MainPageDW {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTA->DataSource = $ta;					
 			$this->tbCmbTA->Text = $_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -60,7 +60,7 @@ class CPenyelenggaraan extends MainPageDW {
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
-	public function populateData($search=false) {
+	public function populateData($search = false) {
         $iddosen_wali = $this->iddosen_wali;
         $ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];

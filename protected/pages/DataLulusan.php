@@ -6,7 +6,7 @@ class DataLulusan extends MainPageF {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
             if (!isset($_SESSION['currentPageDataLulusan'])||$_SESSION['currentPageDataLulusan']['page_name']!='DataLulusan') {					
-                $_SESSION['currentPageDataLulusan']=array('page_name'=>'DataLulusan','page_num'=>0,'search'=>false,'tanggal_terbit'=>'none','DataMHS'=>array(),'DataNilai'=>array());												
+                $_SESSION['currentPageDataLulusan']=array('page_name'=>'DataLulusan', 'page_num'=>0,'search'=>false,'tanggal_terbit'=>'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
             }
             $_SESSION['currentPageDataLulusan']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -25,22 +25,22 @@ class DataLulusan extends MainPageF {
 		$_SESSION['currentPageDataLulusan']['search']=true;
 		$this->populateData($_SESSION['currentPageDataLulusan']['search']);
 	}
-    public function populateData($search=false) {	     
+    public function populateData($search = false) {	     
         if ($search) {
             $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_transkrip,predikat_kelulusan,tanggal_lulus,ta.judul_skripsi,CONCAT(ta.tahun,'',ta.idsmt) AS tasmt FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND ta.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.k_status='L' $clausa",'ta.nim');
                     $str = "$str $clausa";
@@ -59,7 +59,7 @@ class DataLulusan extends MainPageF {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDataLulusan']['page_num']=0;}
         $str = "$str ORDER BY ta.tahun DESC,ta.idsmt ASC,vdm.nama_mhs ASC LIMIT $offset, $limit";
-		$this->DB->setFieldTable(array('nim','nirm','nama_mhs','nomor_transkrip','predikat_kelulusan','tanggal_lulus','judul_skripsi','tasmt'));
+		$this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'tasmt'));
 		$result=$this->DB->getRecord($str, $offset+1);
 		$this->RepeaterS->DataSource=$result;
 		$this->RepeaterS->dataBind();

@@ -35,7 +35,7 @@ class CTransaksiPembayaranPiutangSemesterGanjil Extends MainPageK {
             return $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'][$idx];
         }
     }
-    public function populateData () {
+    public function populateData() {
         $datamhs = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'];        
         $no_transaksi = $datamhs['no_transaksi'];
         $no_formulir = $datamhs['no_formulir'];
@@ -87,11 +87,11 @@ class CTransaksiPembayaranPiutangSemesterGanjil Extends MainPageK {
     }
 	public function editItem($sender, $param) {                   
         $this->GridS->EditItemIndex=$param->Item->ItemIndex;
-        $this->populateData ();        
+        $this->populateData();        
     }
     public function cancelItem($sender, $param) {                
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();        
+        $this->populateData();        
     }		
     public function deleteItem($sender, $param) {                
         $id=$this->GridS->DataKeys[$param->Item->ItemIndex]; 
@@ -99,7 +99,7 @@ class CTransaksiPembayaranPiutangSemesterGanjil Extends MainPageK {
         $no_transaksi = $datamhs['no_transaksi'];
         $this->DB->updateRecord("UPDATE transaksi_detail SET dibayarkan=0 WHERE idkombi = $id AND no_transaksi = $no_transaksi");
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }  
     public function saveItem($sender, $param) {                        
         $item = $param->Item;
@@ -132,7 +132,7 @@ class CTransaksiPembayaranPiutangSemesterGanjil Extends MainPageK {
             $this->DB->updateRecord($str);       
         }
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }
 	public function checkNomorFaktur($sender, $param) {
 		$this->idProcess = $sender->getId()=='addNomorFaktur'?'add':'edit';
@@ -156,7 +156,7 @@ class CTransaksiPembayaranPiutangSemesterGanjil Extends MainPageK {
             $no_transaksi = $datamhs['no_transaksi'];
             $nim = $datamhs['nim'];
             
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);            
             $disc=addslashes($this->txtAddDisc->Text);            
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
@@ -172,7 +172,7 @@ class CTransaksiPembayaranPiutangSemesterGanjil Extends MainPageK {
             $no_transaksi = $datamhs['no_transaksi'];
             $nim = $datamhs['nim'];
        
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);       
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);       
             $disc=addslashes($this->txtAddDisc->Text);                 
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             

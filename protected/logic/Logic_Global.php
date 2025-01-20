@@ -50,7 +50,7 @@ class Logic_Global extends TModule
     $orderField=$orderField === null?$orderField=$fieldTable[0]. ' ASC':$orderField;		
     if ($limit !== null) 
     {
-      $offset=explode(',', $limit);
+      $offset=explode(', ', $limit);
       $offset=$offset[0]+1;
       $limit = 'LIMIT '.$limit;			
     }
@@ -72,7 +72,7 @@ class Logic_Global extends TModule
       {
         if ($countField > $i+1) 
         {
-          $field = $field . $fieldTable[$i] . ',';
+          $field = $field . $fieldTable[$i] . ', ';
         }
         else 
         {
@@ -171,7 +171,7 @@ class Logic_Global extends TModule
   * digunakan untuk meremove id dari sebuah array
   * @return array 
   */
-  public function removeIdFromArray ($arr=array(), $id) {
+  public function removeIdFromArray ($arr = array(), $id) {
     if (isset($arr[$id])) {
       $arr2=array();
       while (list($k, $v)=each($arr)) {

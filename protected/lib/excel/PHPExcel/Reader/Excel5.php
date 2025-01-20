@@ -1135,7 +1135,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                     case pack('C', 0x06):
                         // print area
                         //    in general, formula looks like this: Foo!$C$7:$J$66,Bar!$A$1:$IV$2
-                        $ranges = explode(',', $definedName['formula']); // FIXME: what if sheetname contains comma?
+                        $ranges = explode(', ', $definedName['formula']); // FIXME: what if sheetname contains comma?
 
                         $extractedRanges = array();
                         foreach ($ranges as $range) {
@@ -1152,7 +1152,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                             }
                         }
                         if ($docSheet = $this->phpExcel->getSheetByName($sheetName)) {
-                            $docSheet->getPageSetup()->setPrintArea(implode(',', $extractedRanges)); // C7:J66,A1:IV2
+                            $docSheet->getPageSetup()->setPrintArea(implode(', ', $extractedRanges)); // C7:J66,A1:IV2
                         }
                         break;
                     case pack('C', 0x07):
@@ -1166,7 +1166,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                         //        columns A-B repeat
                         // 3. both repeating rows and repeating columns
                         //        formula looks like this: Sheet!$A$1:$B$65536,Sheet!$A$1:$IV$2
-                        $ranges = explode(',', $definedName['formula']); // FIXME: what if sheetname contains comma?
+                        $ranges = explode(', ', $definedName['formula']); // FIXME: what if sheetname contains comma?
                         foreach ($ranges as $range) {
                             // $range should look like this one of these
                             //        Sheet!$A$1:$B$65536
@@ -4620,7 +4620,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                     if ($nullOffset) {
                         $url = substr($url, 0, $nullOffset);
                     }
-                    $url .= $hasText ? '#' : '';
+                    $url .= $hasText ? '#': '';
                     $offset += $us;
                     break;
                 case 'local':
@@ -4673,7 +4673,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                     // construct the path
                     $url = str_repeat('..\\', $upLevelCount);
                     $url .= ($sz > 0) ? $extendedFilePath : $shortenedFilePath; // use extended path if available
-                    $url .= $hasText ? '#' : '';
+                    $url .= $hasText ? '#': '';
 
                     break;
                 case 'UNC':
@@ -4861,7 +4861,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 
             // in list type validity, null characters are used as item separators
             if ($type == PHPExcel_Cell_DataValidation::TYPE_LIST) {
-                $formula1 = str_replace(chr(0), ',', $formula1);
+                $formula1 = str_replace(chr(0), ', ', $formula1);
             }
         } catch (PHPExcel_Exception $e) {
             return;
@@ -5445,7 +5445,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                             $ops[] = array_pop($formulaStrings);
                         }
                         $ops = array_reverse($ops);
-                        $formulaStrings[] = "$space1$space0{$token['data']['function']}(" . implode(',', $ops) . ")";
+                        $formulaStrings[] = "$space1$space0{$token['data']['function']}(" . implode(', ', $ops) . ")";
                         unset($space0, $space1);
                     } else {
                         // add-in function
@@ -5455,7 +5455,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                         }
                         $ops = array_reverse($ops);
                         $function = array_pop($formulaStrings);
-                        $formulaStrings[] = "$space1$space0$function(" . implode(',', $ops) . ")";
+                        $formulaStrings[] = "$space1$space0$function(" . implode(', ', $ops) . ")";
                         unset($space0, $space1);
                     }
                     break;
@@ -5591,7 +5591,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
             case 0x10:
                 $name = 'tList';
                 $size = 1;
-                $data = ',';
+                $data = ', ';
                 break;
             case 0x11:
                 $name = 'tRange';
@@ -5710,7 +5710,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                 // offset: 1; size: 1; 0 = false, 1 = true;
                 $name = 'tBool';
                 $size = 2;
-                $data = ord($formulaData[1]) ? 'TRUE' : 'FALSE';
+                $data = ord($formulaData[1]) ? 'TRUE': 'FALSE';
                 break;
             case 0x1E:    //    integer
                 // offset: 1; size: 2; unsigned 16-bit integer
@@ -5723,7 +5723,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                 $name = 'tNum';
                 $size = 9;
                 $data = self::extractNumber(substr($formulaData, 1));
-                $data = str_replace(',', '.', (string)$data); // in case non-English locale
+                $data = str_replace(', ', '.', (string)$data); // in case non-English locale
                 break;
             case 0x20:    //    array constant
             case 0x40:
@@ -7222,7 +7222,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                 $arrayData = substr($arrayData, $constant['size']);
                 $size += $constant['size'];
             }
-            $matrixChunks[] = implode(',', $items); // looks like e.g. '1,"hello"'
+            $matrixChunks[] = implode(', ', $items); // looks like e.g. '1,"hello"'
         }
         $matrix = '{' . implode(';', $matrixChunks) . '}';
 

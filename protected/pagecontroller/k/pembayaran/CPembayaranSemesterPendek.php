@@ -8,7 +8,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterPendek'])||$_SESSION['currentPagePembayaranSemesterPendek']['page_name']!='k.pembayaran.PembayaranSemesterPendek') {
-				$_SESSION['currentPagePembayaranSemesterPendek']=array('page_name'=>'k.pembayaran.PembayaranSemesterPendek', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'),'semester'=>3,'kelas'=>'none', 'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranSemesterPendek']=array('page_name'=>'k.pembayaran.PembayaranSemesterPendek', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'), 'semester'=>3,'kelas'=>'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranSemesterPendek']['search']=false;             
             
@@ -18,7 +18,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 			$this->tbCmbPs->dataBind();	
             
             $ta = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA (),'none');            
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA (), 'none');            
             $this->tbCmbTA->Text = $ta;
             $this->tbCmbTA->dataBind();
             
@@ -31,9 +31,9 @@ class CPembayaranSemesterPendek Extends MainPageK {
 			if (isset($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim'])) {
 				$this->linkDetailPembayaran->Visible=true;
 				$this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterPendek',true,array('id'=>$_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim']));
-				$this->txtNIM->Enabled=false;
-				$this->btnGo->Enabled=false;
-				$this->tbCmbTA->Enabled=false;
+				$this->txtNIM->Enabled = false;
+				$this->btnGo->Enabled = false;
+				$this->tbCmbTA->Enabled = false;
 			}else{
 				$this->linkDetailPembayaran->Visible=false;
 			}
@@ -74,7 +74,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 		$_SESSION['currentPagePembayaranSemesterPendek']['search']=true;
 		$this->populateData($_SESSION['currentPagePembayaranSemesterPendek']['search']);
 	}
-	public function populateData($search=false) {		
+	public function populateData($search = false) {		
 		$ta = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];
 		$semester = $_SESSION['currentPagePembayaranSemesterPendek']['semester'];
 		$kjur = $_SESSION['kjur'];	
@@ -84,24 +84,24 @@ class CPembayaranSemesterPendek Extends MainPageK {
         if ($search) {
             $str = "SELECT t.no_transaksi,no_faktur,t.tanggal,t.nim,vdm.nama_mhs,t.jumlah_sks,commited FROM transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester'";
             $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {     
-                case 'no_transaksi' :
+                case 'no_transaksi':
                     $clausa="AND t.no_transaksi='$txtsearch'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;           
-                case 'no_faktur' :
+                case 'no_faktur':
                     $clausa="AND t.no_faktur='$txtsearch'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
-                case 'nim' :
+                case 'nim':
                     $clausa="AND t.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	                    
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";

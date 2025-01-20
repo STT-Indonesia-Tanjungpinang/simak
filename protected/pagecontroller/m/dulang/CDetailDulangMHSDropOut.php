@@ -17,7 +17,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
                     $this->DB->setFieldTable(array('tahun', 'idsmt'));
                     $datadulang=$this->DB->getRecord($str);	    
                     
-                    $this->cmbAddTADropOut->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($datamhs['tahun_masuk']),'none');
+                    $this->cmbAddTADropOut->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($datamhs['tahun_masuk']), 'none');
                     $this->cmbAddTADropOut->Text = $datadulang[1]['tahun'];
                     $this->cmbAddTADropOut->dataBind();
                      				
@@ -95,7 +95,7 @@ class CDetailDulangMHSDropOut Extends MainPageM {
 			if ($this->DB->updateRecord($str)) {
                 $status_sebelumnnya = $datamhs['k_status'];
                 $tasmt=$ta.$semester;        
-                $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(),'$kelas', '$status_sebelumnnya', 'D')";
+                $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(), '$kelas', '$status_sebelumnnya', 'D')";
                 $this->DB->insertRecord($str);               
 				$this->DB->query('COMMIT');
                 unset($_SESSION['currentPageDulangMHSDropOut']['DataMHS']);

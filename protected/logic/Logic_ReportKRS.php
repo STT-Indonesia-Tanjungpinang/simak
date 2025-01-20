@@ -13,11 +13,11 @@ class Logic_ReportKRS extends Logic_Report {
         $nama_semester=$this->dataReport['nama_semester'];
         
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :                
+            case 'excel2003':               
+            case 'excel2007':                
 //                $this->printOut("krs_$nim");
             break;
-            case 'pdf' :
+            case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->setTitle('KRS Mahasiswa');
 				$rpt->setSubject('KRS Mahasiswa');
@@ -26,53 +26,53 @@ class Logic_ReportKRS extends Logic_Report {
                 
                 $row=$this->currentRow;
                 $row+=6;
-                $rpt->SetFont ('helvetica','B',12);	
+                $rpt->SetFont ('helvetica', 'B',12);	
                 $rpt->setXY(3, $row);			
                 $kartu='KARTU RENCANA STUDI (KRS)';
                 $rpt->Cell(0, $row, $kartu,0,0,'C');
 
                 $row+=6;
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
                 $rpt->setXY(3, $row);			
                 $rpt->Cell(0, $row,'Nama Mahasiswa (L/P)');
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $rpt->setXY(38, $row);			
                 $rpt->Cell(0, $row,': '.$this->dataReport['nama_mhs']);
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
                 $rpt->setXY(105, $row);			
                 $rpt->Cell(0, $row,'P.S / Jenjang');
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $rpt->setXY(130, $row);			
                 $rpt->Cell(0, $row,': '.$this->dataReport['nama_ps'].' / S-1');
                 $row+=3;
                 $rpt->setXY(3, $row);			
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
                 $rpt->Cell(0, $row,'Penasihat Akademik');
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $rpt->setXY(38, $row);			
                 $rpt->Cell(0, $row,': '.$this->dataReport['nama_dosen']);				
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
                 $rpt->setXY(105, $row);			
                 $rpt->Cell(0, $row,'NIM');
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $rpt->setXY(130, $row);			
                 $rpt->Cell(0, $row,': '.$this->dataReport['nim']);
                 $row+=3;
                 $rpt->setXY(3, $row);			
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
                 $rpt->Cell(0, $row,'Semester/TA');				
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $rpt->setXY(38, $row);			
                 $rpt->Cell(0, $row,': '.$nama_semester.' / '.$nama_tahun);				
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
                 $rpt->setXY(105, $row);			
                 $rpt->Cell(0, $row,'NIRM');
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $rpt->setXY(130, $row);			
                 $rpt->Cell(0, $row,': '.$this->dataReport['nirm']);	
 
                 $row+=20;
-                $rpt->SetFont ('helvetica','B',8);
+                $rpt->SetFont ('helvetica', 'B',8);
                 $rpt->setXY(3, $row);			
                 $rpt->Cell(8, 5, 'NO', 1, 0, 'C');				
                 $rpt->Cell(15, 5, 'KODE', 1, 0, 'C');								
@@ -83,7 +83,7 @@ class Logic_ReportKRS extends Logic_Report {
 
                 $totalSks=0;
                 $row+=5;				
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $daftarmatkul=$this->dataReport['matakuliah'];
                 
                 foreach ($daftarmatkul as $v) {
@@ -99,7 +99,7 @@ class Logic_ReportKRS extends Logic_Report {
                         $row+=5;
                     }
                 }
-                $rpt->SetFont ('helvetica','B',8);
+                $rpt->SetFont ('helvetica', 'B',8);
                 $rpt->setXY(3, $row);							
                 $rpt->Cell(113, 5, 'Jumlah SKS',0,0,'C');
                 $rpt->Cell(8, 5, $totalSks,0,0,'C');
@@ -132,7 +132,7 @@ class Logic_ReportKRS extends Logic_Report {
                 
                 $row+=10;
                 if (!$this->dataReport['krs']['sah']) {
-                    $rpt->SetFont ('helvetica','I',8);
+                    $rpt->SetFont ('helvetica', 'I',8);
                     $rpt->setXY(3, $row);
                     $rpt->Cell(200, 5, 'KRS INI BELUM DISAHKAN OLEH DOSEN WALI',1,0,'C');
                 }
@@ -152,11 +152,11 @@ class Logic_ReportKRS extends Logic_Report {
         $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :                
+            case 'excel2003':               
+            case 'excel2007':                
 //                $this->printOut("krs_$nim");
             break;
-            case 'pdf' :
+            case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->setTitle('KRS Mahasiswa');
 				$rpt->setSubject('KRS Mahasiswa');
@@ -165,7 +165,7 @@ class Logic_ReportKRS extends Logic_Report {
                     $idkrs = $repeater->DataKeys[$item->getItemIndex()];
                     
                     $str = "SELECT k.idkrs,k.tgl_krs,k.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND k.idkrs = $idkrs"; 
-                    $this->db->setFieldTable(array('idkrs','tgl_krs','nim','nama_mhs','jk','tahun_masuk','sah'));
+                    $this->db->setFieldTable(array('idkrs', 'tgl_krs', 'nim', 'nama_mhs', 'jk', 'tahun_masuk', 'sah'));
                     $r = $this->db->getRecord($str);
                     
                     $dataMhs = $r[1];
@@ -175,53 +175,53 @@ class Logic_ReportKRS extends Logic_Report {
                     
                     $row=$this->currentRow;
                     $row+=6;
-                    $rpt->SetFont ('helvetica','B',12);	
+                    $rpt->SetFont ('helvetica', 'B',12);	
                     $rpt->setXY(3, $row);			
                     $kartu='KARTU RENCANA STUDI (KRS)';
                     $rpt->Cell(0, $row, $kartu,0,0,'C');
 
                     $row+=6;
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(0, $row,'Nama Mahasiswa (L/P)');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,': '.$dataMhs['nama_mhs']);
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'P.S / Jenjang');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$this->dataReport['nama_ps'].' / S-1');
                     $row+=3;
                     $rpt->setXY(3, $row);			
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->Cell(0, $row,'Penasihat Akademik');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,': '.$this->dataReport['nama_dosen']);				
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'NIM');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$dataMhs['nim']);
                     $row+=3;
                     $rpt->setXY(3, $row);			
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->Cell(0, $row,'Semester/TA');				
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,': '.$nama_semester.' / '.$nama_tahun);				
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'NIRM');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$dataMhs['nirm']);	
 
                     $row+=20;
-                    $rpt->SetFont ('helvetica','B',8);
+                    $rpt->SetFont ('helvetica', 'B',8);
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(8, 5, 'NO', 1, 0, 'C');				
                     $rpt->Cell(15, 5, 'KODE', 1, 0, 'C');								
@@ -233,9 +233,9 @@ class Logic_ReportKRS extends Logic_Report {
 
                     $totalSks=0;
                     $row+=5;				
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs = $idkrs ORDER BY semester ASC,kmatkul ASC";
-                    $this->db->setFieldTable(array('idpenyelenggaraan','idkrsmatkul','kmatkul','nmatkul','sks','semester','batal','nidn','nama_dosen'));
+                    $this->db->setFieldTable(array('idpenyelenggaraan', 'idkrsmatkul', 'kmatkul', 'nmatkul', 'sks', 'semester', 'batal', 'nidn', 'nama_dosen'));
                     $daftarmatkul=$this->db->getRecord($str);                    
                     foreach ($daftarmatkul as $v) {
                         if ($v['batal'] == 0) {
@@ -250,7 +250,7 @@ class Logic_ReportKRS extends Logic_Report {
                             $row+=5;
                         }
                     }
-                    $rpt->SetFont ('helvetica','B',8);
+                    $rpt->SetFont ('helvetica', 'B',8);
                     $rpt->setXY(3, $row);							
                     $rpt->Cell(113, 5, 'Jumlah SKS',0,0,'C');
                     $rpt->Cell(8, 5, $totalSks,0,0,'C');
@@ -282,7 +282,7 @@ class Logic_ReportKRS extends Logic_Report {
 
                     $row+=10;
                     if (!$this->dataReport['krs']['sah']) {
-                        $rpt->SetFont ('helvetica','I',8);
+                        $rpt->SetFont ('helvetica', 'I',8);
                         $rpt->setXY(3, $row);
                         $rpt->Cell(200, 5, 'KRS INI BELUM DISAHKAN OLEH DOSEN WALI',1,0,'C');
                     }
@@ -302,11 +302,11 @@ class Logic_ReportKRS extends Logic_Report {
     public function printKUM ($jenisujian, $dataidkrs, $objKRS, $objDMaster) {
         
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :                
+            case 'excel2003':               
+            case 'excel2007':                
 //                $this->printOut("kum_$nim");
             break;
-            case 'summarypdf' :
+            case 'summarypdf':
                 $this->setMode('pdf');
                 $rpt=$this->rpt;
                 
@@ -319,13 +319,13 @@ class Logic_ReportKRS extends Logic_Report {
                     
                     $row=$this->currentRow;
                     $row+=6;
-                    $rpt->SetFont ('helvetica','B',12);	
+                    $rpt->SetFont ('helvetica', 'B',12);	
                     $rpt->setXY(3, $row);			
                     $kartu=($jenisujian=='uts')?'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
                     $rpt->Cell(0, $row, $kartu,0,0,'C');
                     
                     $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
-                    $this->db->setFieldTable(array('idkrs','no_formulir','nim','nirm','nama_mhs','jk','tempat_lahir','tanggal_lahir','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','tahun_masuk','semester_masuk','iddosen_wali','idkelas','k_status','idsmt','tahun','tasmt','sah'));
+                    $this->db->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
                     $r=$this->db->getRecord($str);	           
                     $dataReport=$r[1];
 
@@ -343,47 +343,47 @@ class Logic_ReportKRS extends Logic_Report {
                     $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
                     $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
                     $row+=6;
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(0, $row,'Nama Mahasiswa (L/P)');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nama_mhs'].' ('.$dataReport['jk'].')');
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'P.S / Jenjang');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nama_ps'].' / S-1');
                     $row+=3;
                     $rpt->setXY(3, $row);			
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->Cell(0, $row,'Penasihat Akademik');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nama_dosen']);				
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'NIM');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nim']);
                     $row+=3;
                     $rpt->setXY(3, $row);			
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->Cell(0, $row,'Semester/TA');				
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(38, $row);			
                     $rpt->Cell(0, $row,": $nama_semester / $nama_tahun");				
-                    $rpt->SetFont ('helvetica','B',8);	
+                    $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(105, $row);			
                     $rpt->Cell(0, $row,'NIRM');
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     $rpt->setXY(130, $row);			
                     $rpt->Cell(0, $row,': '.$dataReport['nirm']);			
 
                     $row+=20;
-                    $rpt->SetFont ('helvetica','B',8);
+                    $rpt->SetFont ('helvetica', 'B',8);
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(8, 6, 'NO', 1, 0, 'C');				
                     $rpt->Cell(15, 6, 'KODE', 1, 0, 'C');								
@@ -397,7 +397,7 @@ class Logic_ReportKRS extends Logic_Report {
                     $daftar_matkul=$objKRS->getDetailKRS($idkrs);
                     $totalSks=0;
                     $row+=6;				
-                    $rpt->SetFont ('helvetica','',8);
+                    $rpt->SetFont ('helvetica', '',8);
                     while (list($k, $v)=each($daftar_matkul)) {
                         $rpt->setXY(3, $row);	
                         $rpt->Cell(8, 6, $v['no'], 1, 0, 'C');				
@@ -421,18 +421,18 @@ class Logic_ReportKRS extends Logic_Report {
                         $totalSks+=$v['sks'];
                         $row+=6;
                     }
-                    $rpt->SetFont ('helvetica','B',8);
+                    $rpt->SetFont ('helvetica', 'B',8);
                     $rpt->setXY(3, $row);
                     $rpt->Cell(93, 6, 'TOTAL SKS' , 1, 0, 'R');							
                     $rpt->Cell(8, 6, $totalSks, 1, 0, 'C');
 
                     $row+=5;
                     $rpt->setXY(3, $row);	
-                    $rpt->SetFont ('helvetica','',6);
+                    $rpt->SetFont ('helvetica', '',6);
                     $rpt->Cell(70, 5, 'Catatan : Tanda "*" memiliki arti absensi Mahasiswa kurang dari 75%.' , 0, 0, 'L');	
 
                     $row+=5;
-                    $rpt->SetFont ('helvetica','B',8);
+                    $rpt->SetFont ('helvetica', 'B',8);
                     $rpt->setXY(120, $row);			
                     $rpt->Cell(80, 5, 'Mengetahui,',0,0,'L');				
 
@@ -458,7 +458,7 @@ class Logic_ReportKRS extends Logic_Report {
                 }
                 $this->printOut("kum");
             break;
-            case 'pdf' :
+            case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->AddPage();
                 $this->setHeaderPT();
@@ -473,53 +473,53 @@ class Logic_ReportKRS extends Logic_Report {
                 
                 $row=$this->currentRow;
 				$row+=6;
-				$rpt->SetFont ('helvetica','B',12);	
+				$rpt->SetFont ('helvetica', 'B',12);	
 				$rpt->setXY(3, $row);			
                 $kartu=($jenisujian=='uts')?'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
 				$rpt->Cell(0, $row, $kartu,0,0,'C');
                 
 				$row+=6;
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(3, $row);			
 				$rpt->Cell(0, $row,'Nama Mahasiswa (L/P)');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,': '.$this->dataReport['nama_mhs'].' ('.$this->dataReport['jk'].')');
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0, $row,'P.S / Jenjang');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0, $row,': '.$this->dataReport['nama_ps'].' / S-1');
 				$row+=3;
 				$rpt->setXY(3, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->Cell(0, $row,'Penasihat Akademik');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,': '.$this->dataReport['nama_dosen']);				
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0, $row,'NIM');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0, $row,": $nim");
 				$row+=3;
 				$rpt->setXY(3, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->Cell(0, $row,'Semester/TA');				
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,": $nama_semester / $nama_tahun");				
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0, $row,'NIRM');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0, $row,': '.$this->dataReport['nirm']);			
 				
                 $row+=20;
-				$rpt->SetFont ('helvetica','B',8);
+				$rpt->SetFont ('helvetica', 'B',8);
 				$rpt->setXY(3, $row);			
 				$rpt->Cell(8, 6, 'NO', 1, 0, 'C');				
 				$rpt->Cell(15, 6, 'KODE', 1, 0, 'C');								
@@ -533,7 +533,7 @@ class Logic_ReportKRS extends Logic_Report {
                 $daftar_matkul=$objKRS->getDetailKRS($this->dataReport['idkrs']);
 				$totalSks=0;
 				$row+=6;				
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
                 while (list($k, $v)=each($daftar_matkul)) {
                     $rpt->setXY(3, $row);	
 					$rpt->Cell(8, 6, $v['no'], 1, 0, 'C');				
@@ -557,18 +557,18 @@ class Logic_ReportKRS extends Logic_Report {
 					$totalSks+=$v['sks'];
 					$row+=6;
 				}
-                $rpt->SetFont ('helvetica','B',8);
+                $rpt->SetFont ('helvetica', 'B',8);
                 $rpt->setXY(3, $row);
                 $rpt->Cell(93, 6, 'TOTAL SKS' , 1, 0, 'R');							
                 $rpt->Cell(8, 6, $totalSks, 1, 0, 'C');
                 
                 $row+=5;
 				$rpt->setXY(3, $row);	
-				$rpt->SetFont ('helvetica','',6);
+				$rpt->SetFont ('helvetica', '',6);
 				$rpt->Cell(70, 5, 'Catatan : Tanda "*" memiliki arti absensi Mahasiswa kurang dari 75%.' , 0, 0, 'L');	
 				
 				$row+=5;
-				$rpt->SetFont ('helvetica','B',8);
+				$rpt->SetFont ('helvetica', 'B',8);
 				$rpt->setXY(120, $row);			
 				$rpt->Cell(80, 5, 'Mengetahui,',0,0,'L');				
 				

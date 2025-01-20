@@ -8,11 +8,11 @@ class CProfiles extends MainPageMHS {
             if (!isset($_SESSION['currentPageCache'])||$_SESSION['currentPageCache']['page_name']!='mh.settings.Profiles') {
 				$_SESSION['currentPageCache']=array('page_name'=>'mh.settings.Profiles', 'page_num'=>0);												
 			}            
-            $this->populateData ();
+            $this->populateData();
 		}
         
 	}   
-    public function populateData () {
+    public function populateData() {
         $this->cmbTheme->DataSource = $this->setup->getListThemes();
         $this->cmbTheme->Text = $_SESSION['theme'];
         $this->cmbTheme->DataBind();
@@ -110,7 +110,7 @@ class CProfiles extends MainPageMHS {
 		if ($this->IsValid) {
 			$no_formulir = $this->txtEditNoFormulir->Text;
 			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
-			$tempat_lahir=addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
+			$tempat_lahir = addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
 			$tgl_lahir=date ('Y-m-d', $this->txtEditTanggalLahir->TimeStamp);
 			$jk = $this->rdEditPria->Checked===true?'L':'P';
             $idagama = $this->cmbEditAgama->Text;
@@ -120,24 +120,24 @@ class CProfiles extends MainPageMHS {
             $alamat_rumah=strtoupper(trim(addslashes($this->txtEditAlamatKTP->Text)));
             $kelurahan = addslashes($this->txtEditKelurahan->Text);
             $kecamatan = addslashes($this->txtEditKecamatan->Text);
-            $telp_rumah=addslashes($this->txtEditNoTelpRumah->Text);		
-            $telp_hp=addslashes($this->txtEditNoTelpHP->Text);
-            $email=addslashes($this->txtEditEmail->Text);            
+            $telp_rumah = addslashes($this->txtEditNoTelpRumah->Text);		
+            $telp_hp = addslashes($this->txtEditNoTelpHP->Text);
+            $email = addslashes($this->txtEditEmail->Text);            
 			$idstatus = $this->rdEditTidakBekerja->Checked===true?'TIDAK_BEKERJA':'PEKERJA';
-			$alamat_kantor=strtoupper(trim($this->txtEditAlamatKantor->Text));									
-			$telp_kantor=addslashes($this->txtEditNoTelpKantor->Text);
-			$idjp=$this->cmbEditPekerjaanOrtu->Text;
-			$pendidikan_terakhir=strtoupper(addslashes($this->txtEditPendidikanTerakhir->Text));
-			$jurusan=strtoupper(addslashes($this->txtEditJurusan->Text));	
-			$kota=strtoupper(addslashes($this->txtEditKotaPendidikanTerakhir->Text));	
-			$provinsi=strtoupper(addslashes($this->txtEditProvinsiPendidikanTerakhir->Text));	
-			$tahun_pa=strtoupper(trim($this->txtEditTahunPendidikanTerakhir->Text));		
+			$alamat_kantor = strtoupper(trim($this->txtEditAlamatKantor->Text));									
+			$telp_kantor = addslashes($this->txtEditNoTelpKantor->Text);
+			$idjp = $this->cmbEditPekerjaanOrtu->Text;
+			$pendidikan_terakhir = strtoupper(addslashes($this->txtEditPendidikanTerakhir->Text));
+			$jurusan = strtoupper(addslashes($this->txtEditJurusan->Text));	
+			$kota = strtoupper(addslashes($this->txtEditKotaPendidikanTerakhir->Text));	
+			$provinsi = strtoupper(addslashes($this->txtEditProvinsiPendidikanTerakhir->Text));	
+			$tahun_pa = strtoupper(trim($this->txtEditTahunPendidikanTerakhir->Text));		
             $jenisslta = $this->cmbEditJenisSLTA->Text;
-			$asal_slta=strtoupper(addslashes($this->txtEditAsalSLTA->Text));			
+			$asal_slta = strtoupper(addslashes($this->txtEditAsalSLTA->Text));			
             $statusslta = $this->cmbEditStatusSLTA->Text;
-			$nomor_ijazah=trim($this->txtEditNomorIjazah->Text);                  
+			$nomor_ijazah = trim($this->txtEditNomorIjazah->Text);                  
             	
-            $str ="UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp=$idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota = '$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta = '$jenisslta',asal_slta = '$asal_slta',status_slta = '$statusslta',nomor_ijazah='$nomor_ijazah' WHERE no_formulir='$no_formulir'";
+            $str = "UPDATE formulir_pendaftaran SET nama_mhs='$nama_mhs',tempat_lahir='$tempat_lahir',tanggal_lahir='$tgl_lahir',jk='$jk',idagama = $idagama,nama_ibu_kandung='$nama_ibu_kandung',idwarga='$idwarga',nik='$no_ktp',idstatus='$idstatus',alamat_kantor='$alamat_kantor',alamat_rumah='$alamat_rumah',kelurahan='$kelurahan',kecamatan='$kecamatan',telp_kantor='$telp_kantor',telp_rumah='$telp_rumah',telp_hp='$telp_hp',idjp = $idjp,pendidikan_terakhir='$pendidikan_terakhir',jurusan='$jurusan',kota = '$kota',provinsi='$provinsi',tahun_pa='$tahun_pa',jenis_slta = '$jenisslta',asal_slta = '$asal_slta',status_slta = '$statusslta',nomor_ijazah='$nomor_ijazah' WHERE no_formulir='$no_formulir'";
             $this->DB->query('BEGIN');
 			if ($this->DB->updateRecord($str)) {
                 $email = $this->txtEditEmail->Text;                

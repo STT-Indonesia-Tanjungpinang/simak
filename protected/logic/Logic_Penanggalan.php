@@ -9,19 +9,19 @@ class Logic_Penanggalan extends Logic_Global {
     /*
      * nama hari dalam bahasa ingris
      */
-    private $dayName = array('Sunday', 'Monday', 'Tuesday','Wednesday', 'Thursday', 'Friday', 'Saturday');
+    private $dayName = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     /*
      * nama hari dalam bahasa indonesia
      */
-    private $namaHari = array('none'=>' ','Minggu', 'Senin', 'Selasa','Rabu', 'Kamis', 'Jumat', 'Sabtu');
+    private $namaHari = array('none'=>' ', 'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
     /*
      * nama bulan dalam bahasa ingris
      */
-    private $monthName = array('January', 'February', 'March', 'April', 'May','June', 'July', 'August', 'September', 'October', 'November' , 'December');
+    private $monthName = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November' , 'December');
     /*
      * nama bulan dalam bahasa indonesia
      */
-    private $namaBulan = array('Januari', 'Februari', 'Maret', 'April', 'Mei','Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+    private $namaBulan = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
     /**
      * digunakan untuk memformat tanggal
      * @param type $format
@@ -38,7 +38,7 @@ class Logic_Penanggalan extends Logic_Global {
                 $tgl = new DateTime($date, new DateTimeZone('Asia/Jakarta'));
             }
         }		
-        $result = str_replace($this->dayName, array('Minggu', 'Senin', 'Selasa','Rabu', 'Kamis', 'Jumat', 'Sabtu'), $tgl->format ($format));
+        $result = str_replace($this->dayName, array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'), $tgl->format ($format));
         return str_replace($this->monthName, $this->namaBulan, $result);
 	}   
     /**
@@ -51,7 +51,7 @@ class Logic_Penanggalan extends Logic_Global {
         return str_replace($this->monthName, $this->namaBulan, $result);        
     }
     public function pluralize( $count, $text )  {
-        return $count . ( ( $count == 1 ) ? ( " $text" ) : ( " ${text}" ) );
+        return $count . ( ( $count == 1 ) ? ( " $text" ) : ( " ${text}" ));
     }
     /**
 	* digunakan untuk mengetahui perbedaan waktu
@@ -62,7 +62,7 @@ class Logic_Penanggalan extends Logic_Global {
         $interval = $datetime1->diff($datetime2);   
 		$tanggal='';
 		switch ($mode) {
-			case 'tahunbulan' :
+			case 'tahunbulan':
 				if ($interval->y >= 1 || $interval->m >= 1) {
 					if ($interval->y >= 1 ) 
 						$tanggal=$this->pluralize( $interval->y, 'Tahun ');
@@ -70,7 +70,7 @@ class Logic_Penanggalan extends Logic_Global {
 						$tanggal=$tanggal.$this->pluralize( $interval->m, 'Bulan ');
 				}
 			break;			
-            case 'lastlogin' :                
+            case 'lastlogin':                
                 if ($interval->y > 1) {
                     $tanggal='Lebih dari 1 Tahun';
                 }elseif ($interval->i > 1) {
@@ -87,7 +87,7 @@ class Logic_Penanggalan extends Logic_Global {
                     $tanggal='Kurang dari 1 Menit';
                 }
             break;
-            case 'lasttweet' :                                
+            case 'lasttweet':                                
                 if ($interval->i > 1) {                                                            
                     if ($interval->d < 1) {
                         if ($interval->h >= 1 ) 
@@ -125,16 +125,16 @@ class Logic_Penanggalan extends Logic_Global {
         $datetime1 = new DateTime($date1, new DateTimeZone('Asia/Jakarta'));
         $datetime2 = new DateTime($date2, new DateTimeZone('Asia/Jakarta'));
         $interval = $datetime1->diff($datetime2);   
-		$tanggal=array();
+		$tanggal = array();
 		switch ($mode) {
-			case 'tahun' :
+			case 'tahun':
 				$tanggal=$interval->y;
 			break;						
-			case 'bulan' :
+			case 'bulan':
 				$tanggal=$interval->format("%m");
 			break;
-			case 'tahunbulan' :
-				$tanggal=array('tahun'=>$interval->y,'bulan'=>$interval->m);
+			case 'tahunbulan':
+				$tanggal = array('tahun'=>$interval->y,'bulan'=>$interval->m);
 			break;
 		}        
         return $tanggal;

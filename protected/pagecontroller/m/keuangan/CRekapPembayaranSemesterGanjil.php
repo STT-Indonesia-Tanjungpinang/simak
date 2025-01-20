@@ -21,7 +21,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	            
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');;
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');;
             $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();
             
@@ -84,7 +84,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
 		$_SESSION['currentPageRekapPembayaranSemesterGanjil']['search']=true;
         $this->populateData($_SESSION['currentPageRekapPembayaranSemesterGanjil']['search']);
 	} 
-	public function populateData($search=false) {		
+	public function populateData($search = false) {		
 		$ta = $_SESSION['ta'];
         $tahun_masuk = $_SESSION['tahun_masuk'];     
 		$semester = $_SESSION['currentPageRekapPembayaranSemesterGanjil']['semester'];
@@ -94,19 +94,19 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
         $str = "SELECT idrekap,no_formulir,nim,nirm,nama_mhs,jk,n_kelas,dibayarkan,kewajiban,sisa FROM rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $ta AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk";
         if ($search) {            
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {  
-                case 'nim' :
+                case 'nim':
                     $clausa="AND nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $ta AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk $clausa",'nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $ta AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk $clausa",'nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $ta AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk $clausa",'nim');
                     $str = "$str $clausa";
@@ -212,7 +212,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
     }
     public function refreshRecord($sender, $param) {
         $idrekap = $this->getDataKeyField($sender, $this->RepeaterS);
-        $str = "SELECT nim,tahun_masuk,semester_masuk,idsmt,tahun,idkelas FROM rekap_laporan_pembayaran_per_semester WHERE idrekap=$idrekap";
+        $str = "SELECT nim,tahun_masuk,semester_masuk,idsmt,tahun,idkelas FROM rekap_laporan_pembayaran_per_semester WHERE idrekap = $idrekap";
         $this->DB->setFieldTable(array('nim', 'tahun_masuk', 'semester_masuk', 'idsmt', 'tahun', 'idkelas'));
         $r = $this->DB->getRecord($str);   
         $nim = $r[1]['nim'];
@@ -225,7 +225,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
         $r2=$this->DB->getRecord($str2);
         $dibayarkan = $r2[1]['dibayarkan'];
         $sisa = $kewajiban-$dibayarkan;
-        $str = "UPDATE rekap_laporan_pembayaran_per_semester SET dibayarkan='$dibayarkan', kewajiban='$kewajiban', sisa='$sisa' WHERE idrekap=$idrekap";
+        $str = "UPDATE rekap_laporan_pembayaran_per_semester SET dibayarkan='$dibayarkan', kewajiban='$kewajiban', sisa='$sisa' WHERE idrekap = $idrekap";
         $this->DB->updateRecord($str);
         
         $this->redirect('keuangan.RekapPembayaranSemesterGanjil', true);
@@ -235,13 +235,13 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
@@ -263,7 +263,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
                 
                 $this->report->printRekapPembayaranSemester($this->Finance, $this->DMaster); 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

@@ -479,74 +479,74 @@ class TCPDF_STATIC {
 		// Paper cordinates are calculated in this way: (inches * 72) where (1 inch = 25.4 mm)
 		switch (strtoupper($format)) {
 			// ISO 216 A Series + 2 SIS 014711 extensions
-			case 'A0' : {$pf = array( 2383.937, 3370.394); break;}
-			case 'A1' : {$pf = array( 1683.780, 2383.937); break;}
-			case 'A2' : {$pf = array( 1190.551, 1683.780); break;}
-			case 'A3' : {$pf = array(  841.890, 1190.551); break;}
-			case 'A4' : {$pf = array(  595.276,  841.890); break;}
-			case 'A5' : {$pf = array(  419.528,  595.276); break;}
-			case 'A6' : {$pf = array(  297.638,  419.528); break;}
-			case 'A7' : {$pf = array(  209.764,  297.638); break;}
-			case 'A8' : {$pf = array(  147.402,  209.764); break;}
-			case 'A9' : {$pf = array(  104.882,  147.402); break;}
+			case 'A0': {$pf = array( 2383.937, 3370.394); break;}
+			case 'A1': {$pf = array( 1683.780, 2383.937); break;}
+			case 'A2': {$pf = array( 1190.551, 1683.780); break;}
+			case 'A3': {$pf = array(  841.890, 1190.551); break;}
+			case 'A4': {$pf = array(  595.276,  841.890); break;}
+			case 'A5': {$pf = array(  419.528,  595.276); break;}
+			case 'A6': {$pf = array(  297.638,  419.528); break;}
+			case 'A7': {$pf = array(  209.764,  297.638); break;}
+			case 'A8': {$pf = array(  147.402,  209.764); break;}
+			case 'A9': {$pf = array(  104.882,  147.402); break;}
 			case 'A10': {$pf = array(   73.701,  104.882); break;}
 			case 'A11': {$pf = array(   51.024,   73.701); break;}
 			case 'A12': {$pf = array(   36.850,   51.024); break;}
 			// ISO 216 B Series + 2 SIS 014711 extensions
-			case 'B0' : {$pf = array( 2834.646, 4008.189); break;}
-			case 'B1' : {$pf = array( 2004.094, 2834.646); break;}
-			case 'B2' : {$pf = array( 1417.323, 2004.094); break;}
-			case 'B3' : {$pf = array( 1000.630, 1417.323); break;}
-			case 'B4' : {$pf = array(  708.661, 1000.630); break;}
-			case 'B5' : {$pf = array(  498.898,  708.661); break;}
-			case 'B6' : {$pf = array(  354.331,  498.898); break;}
-			case 'B7' : {$pf = array(  249.449,  354.331); break;}
-			case 'B8' : {$pf = array(  175.748,  249.449); break;}
-			case 'B9' : {$pf = array(  124.724,  175.748); break;}
+			case 'B0': {$pf = array( 2834.646, 4008.189); break;}
+			case 'B1': {$pf = array( 2004.094, 2834.646); break;}
+			case 'B2': {$pf = array( 1417.323, 2004.094); break;}
+			case 'B3': {$pf = array( 1000.630, 1417.323); break;}
+			case 'B4': {$pf = array(  708.661, 1000.630); break;}
+			case 'B5': {$pf = array(  498.898,  708.661); break;}
+			case 'B6': {$pf = array(  354.331,  498.898); break;}
+			case 'B7': {$pf = array(  249.449,  354.331); break;}
+			case 'B8': {$pf = array(  175.748,  249.449); break;}
+			case 'B9': {$pf = array(  124.724,  175.748); break;}
 			case 'B10': {$pf = array(   87.874,  124.724); break;}
 			case 'B11': {$pf = array(   62.362,   87.874); break;}
 			case 'B12': {$pf = array(   42.520,   62.362); break;}
 			// ISO 216 C Series + 2 SIS 014711 extensions + 2 EXTENSION
-			case 'C0' : {$pf = array( 2599.370, 3676.535); break;}
-			case 'C1' : {$pf = array( 1836.850, 2599.370); break;}
-			case 'C2' : {$pf = array( 1298.268, 1836.850); break;}
-			case 'C3' : {$pf = array(  918.425, 1298.268); break;}
-			case 'C4' : {$pf = array(  649.134,  918.425); break;}
-			case 'C5' : {$pf = array(  459.213,  649.134); break;}
-			case 'C6' : {$pf = array(  323.150,  459.213); break;}
-			case 'C7' : {$pf = array(  229.606,  323.150); break;}
-			case 'C8' : {$pf = array(  161.575,  229.606); break;}
-			case 'C9' : {$pf = array(  113.386,  161.575); break;}
+			case 'C0': {$pf = array( 2599.370, 3676.535); break;}
+			case 'C1': {$pf = array( 1836.850, 2599.370); break;}
+			case 'C2': {$pf = array( 1298.268, 1836.850); break;}
+			case 'C3': {$pf = array(  918.425, 1298.268); break;}
+			case 'C4': {$pf = array(  649.134,  918.425); break;}
+			case 'C5': {$pf = array(  459.213,  649.134); break;}
+			case 'C6': {$pf = array(  323.150,  459.213); break;}
+			case 'C7': {$pf = array(  229.606,  323.150); break;}
+			case 'C8': {$pf = array(  161.575,  229.606); break;}
+			case 'C9': {$pf = array(  113.386,  161.575); break;}
 			case 'C10': {$pf = array(   79.370,  113.386); break;}
 			case 'C11': {$pf = array(   56.693,   79.370); break;}
 			case 'C12': {$pf = array(   39.685,   56.693); break;}
 			case 'C76': {$pf = array(  229.606,  459.213); break;}
-			case 'DL' : {$pf = array(  311.811,  623.622); break;}
+			case 'DL': {$pf = array(  311.811,  623.622); break;}
 			// SIS 014711 E Series
-			case 'E0' : {$pf = array( 2491.654, 3517.795); break;}
-			case 'E1' : {$pf = array( 1757.480, 2491.654); break;}
-			case 'E2' : {$pf = array( 1247.244, 1757.480); break;}
-			case 'E3' : {$pf = array(  878.740, 1247.244); break;}
-			case 'E4' : {$pf = array(  623.622,  878.740); break;}
-			case 'E5' : {$pf = array(  439.370,  623.622); break;}
-			case 'E6' : {$pf = array(  311.811,  439.370); break;}
-			case 'E7' : {$pf = array(  221.102,  311.811); break;}
-			case 'E8' : {$pf = array(  155.906,  221.102); break;}
-			case 'E9' : {$pf = array(  110.551,  155.906); break;}
+			case 'E0': {$pf = array( 2491.654, 3517.795); break;}
+			case 'E1': {$pf = array( 1757.480, 2491.654); break;}
+			case 'E2': {$pf = array( 1247.244, 1757.480); break;}
+			case 'E3': {$pf = array(  878.740, 1247.244); break;}
+			case 'E4': {$pf = array(  623.622,  878.740); break;}
+			case 'E5': {$pf = array(  439.370,  623.622); break;}
+			case 'E6': {$pf = array(  311.811,  439.370); break;}
+			case 'E7': {$pf = array(  221.102,  311.811); break;}
+			case 'E8': {$pf = array(  155.906,  221.102); break;}
+			case 'E9': {$pf = array(  110.551,  155.906); break;}
 			case 'E10': {$pf = array(   76.535,  110.551); break;}
 			case 'E11': {$pf = array(   53.858,   76.535); break;}
 			case 'E12': {$pf = array(   36.850,   53.858); break;}
 			// SIS 014711 G Series
-			case 'G0' : {$pf = array( 2715.591, 3838.110); break;}
-			case 'G1' : {$pf = array( 1919.055, 2715.591); break;}
-			case 'G2' : {$pf = array( 1357.795, 1919.055); break;}
-			case 'G3' : {$pf = array(  958.110, 1357.795); break;}
-			case 'G4' : {$pf = array(  677.480,  958.110); break;}
-			case 'G5' : {$pf = array(  479.055,  677.480); break;}
-			case 'G6' : {$pf = array(  337.323,  479.055); break;}
-			case 'G7' : {$pf = array(  238.110,  337.323); break;}
-			case 'G8' : {$pf = array(  167.244,  238.110); break;}
-			case 'G9' : {$pf = array(  119.055,  167.244); break;}
+			case 'G0': {$pf = array( 2715.591, 3838.110); break;}
+			case 'G1': {$pf = array( 1919.055, 2715.591); break;}
+			case 'G2': {$pf = array( 1357.795, 1919.055); break;}
+			case 'G3': {$pf = array(  958.110, 1357.795); break;}
+			case 'G4': {$pf = array(  677.480,  958.110); break;}
+			case 'G5': {$pf = array(  479.055,  677.480); break;}
+			case 'G6': {$pf = array(  337.323,  479.055); break;}
+			case 'G7': {$pf = array(  238.110,  337.323); break;}
+			case 'G8': {$pf = array(  167.244,  238.110); break;}
+			case 'G9': {$pf = array(  119.055,  167.244); break;}
 			case 'G10': {$pf = array(   82.205,  119.055); break;}
 			case 'G11': {$pf = array(   59.528,   82.205); break;}
 			case 'G12': {$pf = array(   39.685,   59.528); break;}
@@ -585,20 +585,20 @@ class TCPDF_STATIC {
 			case 'ANSI_A': {$pf = array(  612.000,  792.000); break;}
 			// Traditional 'Loose' North American Paper Sizes
 			case 'USLEDGER':
-			case 'LEDGER' : {$pf = array( 1224.000,  792.000); break;}
+			case 'LEDGER': {$pf = array( 1224.000,  792.000); break;}
 			case 'ORGANIZERK':
 			case 'BIBLE':
 			case 'USTABLOID':
 			case 'TABLOID': {$pf = array(  792.000, 1224.000); break;}
 			case 'ORGANIZERM':
 			case 'USLETTER':
-			case 'LETTER' : {$pf = array(  612.000,  792.000); break;}
+			case 'LETTER': {$pf = array(  612.000,  792.000); break;}
 			case 'USLEGAL':
 			case 'LEGAL'  : {$pf = array(  612.000, 1008.000); break;}
 			case 'GOVERNMENTLETTER':
 			case 'GLETTER': {$pf = array(  576.000,  756.000); break;}
 			case 'JUNIORLEGAL':
-			case 'JLEGAL' : {$pf = array(  576.000,  360.000); break;}
+			case 'JLEGAL': {$pf = array(  576.000,  360.000); break;}
 			// Other North American Paper Sizes
 			case 'QUADDEMY': {$pf = array( 2520.000, 3240.000); break;}
 			case 'SUPER_B': {$pf = array(  936.000, 1368.000); break;}
@@ -621,20 +621,20 @@ class TCPDF_STATIC {
 			case 'P5': {$pf = array(  396.850,  609.449); break;}
 			case 'P6': {$pf = array(  303.307,  396.850); break;}
 			// North American Architectural Sizes
-			case 'ARCH_E' : {$pf = array( 2592.000, 3456.000); break;}
+			case 'ARCH_E': {$pf = array( 2592.000, 3456.000); break;}
 			case 'ARCH_E1': {$pf = array( 2160.000, 3024.000); break;}
-			case 'ARCH_D' : {$pf = array( 1728.000, 2592.000); break;}
+			case 'ARCH_D': {$pf = array( 1728.000, 2592.000); break;}
 			case 'BROADSHEET':
-			case 'ARCH_C' : {$pf = array( 1296.000, 1728.000); break;}
-			case 'ARCH_B' : {$pf = array(  864.000, 1296.000); break;}
-			case 'ARCH_A' : {$pf = array(  648.000,  864.000); break;}
+			case 'ARCH_C': {$pf = array( 1296.000, 1728.000); break;}
+			case 'ARCH_B': {$pf = array(  864.000, 1296.000); break;}
+			case 'ARCH_A': {$pf = array(  648.000,  864.000); break;}
 			// --- North American Envelope Sizes ---
 			//   - Announcement Envelopes
 			case 'ANNENV_A2'  : {$pf = array(  314.640,  414.000); break;}
 			case 'ANNENV_A6'  : {$pf = array(  342.000,  468.000); break;}
 			case 'ANNENV_A7'  : {$pf = array(  378.000,  522.000); break;}
 			case 'ANNENV_A8'  : {$pf = array(  396.000,  584.640); break;}
-			case 'ANNENV_A10' : {$pf = array(  450.000,  692.640); break;}
+			case 'ANNENV_A10': {$pf = array(  450.000,  692.640); break;}
 			case 'ANNENV_SLIM': {$pf = array(  278.640,  638.640); break;}
 			//   - Commercial Envelopes
 			case 'COMMENV_N6_1/4': {$pf = array(  252.000,  432.000); break;}
@@ -647,44 +647,44 @@ class TCPDF_STATIC {
 			case 'COMMENV_N14'   : {$pf = array(  360.000,  828.000); break;}
 			//   - Catalogue Envelopes
 			case 'CATENV_N1'     : {$pf = array(  432.000,  648.000); break;}
-			case 'CATENV_N1_3/4' : {$pf = array(  468.000,  684.000); break;}
+			case 'CATENV_N1_3/4': {$pf = array(  468.000,  684.000); break;}
 			case 'CATENV_N2'     : {$pf = array(  468.000,  720.000); break;}
 			case 'CATENV_N3'     : {$pf = array(  504.000,  720.000); break;}
 			case 'CATENV_N6'     : {$pf = array(  540.000,  756.000); break;}
 			case 'CATENV_N7'     : {$pf = array(  576.000,  792.000); break;}
 			case 'CATENV_N8'     : {$pf = array(  594.000,  810.000); break;}
-			case 'CATENV_N9_1/2' : {$pf = array(  612.000,  756.000); break;}
-			case 'CATENV_N9_3/4' : {$pf = array(  630.000,  810.000); break;}
+			case 'CATENV_N9_1/2': {$pf = array(  612.000,  756.000); break;}
+			case 'CATENV_N9_3/4': {$pf = array(  630.000,  810.000); break;}
 			case 'CATENV_N10_1/2': {$pf = array(  648.000,  864.000); break;}
 			case 'CATENV_N12_1/2': {$pf = array(  684.000,  900.000); break;}
 			case 'CATENV_N13_1/2': {$pf = array(  720.000,  936.000); break;}
 			case 'CATENV_N14_1/4': {$pf = array(  810.000,  882.000); break;}
 			case 'CATENV_N14_1/2': {$pf = array(  828.000, 1044.000); break;}
 			// Japanese (JIS P 0138-61) Standard B-Series
-			case 'JIS_B0' : {$pf = array( 2919.685, 4127.244); break;}
-			case 'JIS_B1' : {$pf = array( 2063.622, 2919.685); break;}
-			case 'JIS_B2' : {$pf = array( 1459.843, 2063.622); break;}
-			case 'JIS_B3' : {$pf = array( 1031.811, 1459.843); break;}
-			case 'JIS_B4' : {$pf = array(  728.504, 1031.811); break;}
-			case 'JIS_B5' : {$pf = array(  515.906,  728.504); break;}
-			case 'JIS_B6' : {$pf = array(  362.835,  515.906); break;}
-			case 'JIS_B7' : {$pf = array(  257.953,  362.835); break;}
-			case 'JIS_B8' : {$pf = array(  181.417,  257.953); break;}
-			case 'JIS_B9' : {$pf = array(  127.559,  181.417); break;}
+			case 'JIS_B0': {$pf = array( 2919.685, 4127.244); break;}
+			case 'JIS_B1': {$pf = array( 2063.622, 2919.685); break;}
+			case 'JIS_B2': {$pf = array( 1459.843, 2063.622); break;}
+			case 'JIS_B3': {$pf = array( 1031.811, 1459.843); break;}
+			case 'JIS_B4': {$pf = array(  728.504, 1031.811); break;}
+			case 'JIS_B5': {$pf = array(  515.906,  728.504); break;}
+			case 'JIS_B6': {$pf = array(  362.835,  515.906); break;}
+			case 'JIS_B7': {$pf = array(  257.953,  362.835); break;}
+			case 'JIS_B8': {$pf = array(  181.417,  257.953); break;}
+			case 'JIS_B9': {$pf = array(  127.559,  181.417); break;}
 			case 'JIS_B10': {$pf = array(   90.709,  127.559); break;}
 			case 'JIS_B11': {$pf = array(   62.362,   90.709); break;}
 			case 'JIS_B12': {$pf = array(   45.354,   62.362); break;}
 			// PA Series
-			case 'PA0' : {$pf = array( 2381.102, 3174.803,); break;}
-			case 'PA1' : {$pf = array( 1587.402, 2381.102); break;}
-			case 'PA2' : {$pf = array( 1190.551, 1587.402); break;}
-			case 'PA3' : {$pf = array(  793.701, 1190.551); break;}
-			case 'PA4' : {$pf = array(  595.276,  793.701); break;}
-			case 'PA5' : {$pf = array(  396.850,  595.276); break;}
-			case 'PA6' : {$pf = array(  297.638,  396.850); break;}
-			case 'PA7' : {$pf = array(  198.425,  297.638); break;}
-			case 'PA8' : {$pf = array(  147.402,  198.425); break;}
-			case 'PA9' : {$pf = array(   99.213,  147.402); break;}
+			case 'PA0': {$pf = array( 2381.102, 3174.803,); break;}
+			case 'PA1': {$pf = array( 1587.402, 2381.102); break;}
+			case 'PA2': {$pf = array( 1190.551, 1587.402); break;}
+			case 'PA3': {$pf = array(  793.701, 1190.551); break;}
+			case 'PA4': {$pf = array(  595.276,  793.701); break;}
+			case 'PA5': {$pf = array(  396.850,  595.276); break;}
+			case 'PA6': {$pf = array(  297.638,  396.850); break;}
+			case 'PA7': {$pf = array(  198.425,  297.638); break;}
+			case 'PA8': {$pf = array(  147.402,  198.425); break;}
+			case 'PA9': {$pf = array(   99.213,  147.402); break;}
 			case 'PA10': {$pf = array(   73.701,   99.213); break;}
 			// Standard Photographic Print Sizes
 			case 'PASSPORT_PHOTO': {$pf = array(   99.213,  127.559); break;}
@@ -701,14 +701,14 @@ class TCPDF_STATIC {
 			case '6P':
 			case '8R'  : {$pf = array(  575.433,  720.000); break;}
 			case '6PW':
-			case 'S8R' : {$pf = array(  575.433,  864.567); break;}
+			case 'S8R': {$pf = array(  575.433,  864.567); break;}
 			case '4P':
-			case '10R' : {$pf = array(  720.000,  864.567); break;}
+			case '10R': {$pf = array(  720.000,  864.567); break;}
 			case '4PW':
 			case 'S10R': {$pf = array(  720.000, 1080.000); break;}
-			case '11R' : {$pf = array(  790.866, 1009.134); break;}
+			case '11R': {$pf = array(  790.866, 1009.134); break;}
 			case 'S11R': {$pf = array(  790.866, 1224.567); break;}
-			case '12R' : {$pf = array(  864.567, 1080.000); break;}
+			case '12R': {$pf = array(  864.567, 1080.000); break;}
 			case 'S12R': {$pf = array(  864.567, 1292.598); break;}
 			// Common Newspaper Sizes
 			case 'NEWSPAPER_BROADSHEET': {$pf = array( 2125.984, 1700.787); break;}
@@ -719,7 +719,7 @@ class TCPDF_STATIC {
 			case 'CREDIT_CARD':
 			case 'BUSINESS_CARD':
 			case 'BUSINESS_CARD_ISO7810': {$pf = array(  153.014,  242.646); break;}
-			case 'BUSINESS_CARD_ISO216' : {$pf = array(  147.402,  209.764); break;}
+			case 'BUSINESS_CARD_ISO216': {$pf = array(  147.402,  209.764); break;}
 			case 'BUSINESS_CARD_IT':
 			case 'BUSINESS_CARD_UK':
 			case 'BUSINESS_CARD_FR':
@@ -738,8 +738,8 @@ class TCPDF_STATIC {
 			case 'BUSINESS_CARD_HU':
 			case 'BUSINESS_CARD_IL'     : {$pf = array(  141.732,  255.118); break;}
 			// Billboards
-			case '4SHEET' : {$pf = array( 2880.000, 4320.000); break;}
-			case '6SHEET' : {$pf = array( 3401.575, 5102.362); break;}
+			case '4SHEET': {$pf = array( 2880.000, 4320.000); break;}
+			case '6SHEET': {$pf = array( 3401.575, 5102.362); break;}
 			case '12SHEET': {$pf = array( 8640.000, 4320.000); break;}
 			case '16SHEET': {$pf = array( 5760.000, 8640.000); break;}
 			case '32SHEET': {$pf = array(11520.000, 8640.000); break;}
@@ -777,12 +777,12 @@ class TCPDF_STATIC {
 			case 'EN_SMALL_FOOLSCAP'   : {$pf = array(  954.000, 1188.000); break;}
 			case 'EN_POTT'             : {$pf = array(  900.000, 1080.000); break;}
 			//   - Old Imperial Belgian Sizes
-			case 'BE_GRAND_AIGLE' : {$pf = array( 1984.252, 2948.031); break;}
+			case 'BE_GRAND_AIGLE': {$pf = array( 1984.252, 2948.031); break;}
 			case 'BE_COLOMBIER'   : {$pf = array( 1757.480, 2409.449); break;}
 			case 'BE_DOUBLE_CARRE': {$pf = array( 1757.480, 2607.874); break;}
 			case 'BE_ELEPHANT'    : {$pf = array( 1746.142, 2182.677); break;}
-			case 'BE_PETIT_AIGLE' : {$pf = array( 1700.787, 2381.102); break;}
-			case 'BE_GRAND_JESUS' : {$pf = array( 1559.055, 2069.291); break;}
+			case 'BE_PETIT_AIGLE': {$pf = array( 1700.787, 2381.102); break;}
+			case 'BE_GRAND_JESUS': {$pf = array( 1559.055, 2069.291); break;}
 			case 'BE_JESUS'       : {$pf = array( 1530.709, 2069.291); break;}
 			case 'BE_RAISIN'      : {$pf = array( 1417.323, 1842.520); break;}
 			case 'BE_GRAND_MEDIAN': {$pf = array( 1303.937, 1714.961); break;}
@@ -796,7 +796,7 @@ class TCPDF_STATIC {
 			case 'BE_ROSETTE'     : {$pf = array(  765.354,  983.622); break;}
 			//   - Old Imperial French Sizes
 			case 'FR_UNIVERS'          : {$pf = array( 2834.646, 3685.039); break;}
-			case 'FR_DOUBLE_COLOMBIER' : {$pf = array( 2551.181, 3571.654); break;}
+			case 'FR_DOUBLE_COLOMBIER': {$pf = array( 2551.181, 3571.654); break;}
 			case 'FR_GRANDE_MONDE'     : {$pf = array( 2551.181, 3571.654); break;}
 			case 'FR_DOUBLE_SOLEIL'    : {$pf = array( 2267.717, 3401.575); break;}
 			case 'FR_DOUBLE_JESUS'     : {$pf = array( 2154.331, 3174.803); break;}
@@ -832,7 +832,7 @@ class TCPDF_STATIC {
 	/**
 	 * Set page boundaries.
 	 * @param $page (int) page number
-	 * @param $type (string) valid values are: <ul><li>'MediaBox' : the boundaries of the physical medium on which the page shall be displayed or printed;</li><li>'CropBox' : the visible region of default user space;</li><li>'BleedBox' : the region to which the contents of the page shall be clipped when output in a production environment;</li><li>'TrimBox' : the intended dimensions of the finished page after trimming;</li><li>'ArtBox' : the page's meaningful content (including potential white space).</li></ul>
+	 * @param $type (string) valid values are: <ul><li>'MediaBox': the boundaries of the physical medium on which the page shall be displayed or printed;</li><li>'CropBox': the visible region of default user space;</li><li>'BleedBox': the region to which the contents of the page shall be clipped when output in a production environment;</li><li>'TrimBox': the intended dimensions of the finished page after trimming;</li><li>'ArtBox': the page's meaningful content (including potential white space).</li></ul>
 	 * @param $llx (float) lower-left x coordinate in user units.
 	 * @param $lly (float) lower-left y coordinate in user units.
 	 * @param $urx (float) upper-right x coordinate in user units.
@@ -2031,8 +2031,8 @@ class TCPDF_STATIC {
 		}
 		// split groups of selectors (comma-separated list of selectors)
 		foreach ($cssblocks as $key => $block) {
-			if (strpos($block[0], ',') > 0) {
-				$selectors = explode(',', $block[0]);
+			if (strpos($block[0], ', ') > 0) {
+				$selectors = explode(', ', $block[0]);
 				foreach ($selectors as $sel) {
 					$cssblocks[] = array(0 => trim($sel), 1 => $block[1]);
 				}

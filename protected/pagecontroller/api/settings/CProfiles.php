@@ -8,7 +8,7 @@ class CProfiles extends MainPageAPI {
              $this->populateData();                   
         }                
     }
-    protected function populateData () {
+    protected function populateData() {
     	$userid = $this->Pengguna->getDataUser('userid');
         $str = "SELECT u.userid,u.username,u.nama,u.email,u.active,u.foto,u.ipaddress,u.token,u.logintime,u.active FROM user u WHERE page='api' AND userid='$userid'";                         
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'email', 'ipaddress', 'token', 'foto', 'logintime', 'active'));

@@ -17,7 +17,7 @@ class DetailPembayaranPiutangSemesterGenap Extends CDetailPembayaranPiutangSemes
 			if ($semester < 1) {
 				$no_formulir=$datamhs['no_formulir'];
 				$ta=($ta == $tahun_masuk)?$tahun_masuk:$ta-1;				
-				$semester=$this->DB->checkRecordIsExist ('idsmt','transaksi',3," AND no_formulir=$no_formulir AND tahun = $ta")?3:2;									
+				$semester=$this->DB->checkRecordIsExist ('idsmt', 'transaksi',3," AND no_formulir=$no_formulir AND tahun = $ta")?3:2;									
 			}else {
 				$ta=($ta == $tahun_masuk)?$tahun_masuk:$ta;	
 			}

@@ -17,16 +17,16 @@ class CKUM extends MainPageK {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();	
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
             
-            $this->tbCmbTahunMasuk->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');					
+            $this->tbCmbTahunMasuk->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind(); 
             
@@ -39,7 +39,7 @@ class CKUM extends MainPageK {
 		}                
 	}
     public function setInfoToolbar() {       
-        $jenisujian=strtoupper($_SESSION['currentPageKUM']['jenisujian']);
+        $jenisujian = strtoupper($_SESSION['currentPageKUM']['jenisujian']);
         $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);        		
@@ -82,7 +82,7 @@ class CKUM extends MainPageK {
 		$_SESSION['currentPageKUM']['search']=true;
 		$this->populateData($_SESSION['currentPageKUM']['search']);
 	}
-    public function populateData($search=false) {
+    public function populateData($search = false) {
         $ta = $_SESSION['ta'];
 		$semester = $_SESSION['semester'];
 		$kjur = $_SESSION['kjur'];
@@ -90,19 +90,19 @@ class CKUM extends MainPageK {
         $str_tahun_masuk=($tahun_masuk == 'none' || $tahun_masuk == 'none') ?'':" AND vdm.tahun_masuk = $tahun_masuk";
         if ($search) {
             $str = "SELECT vdm.no_formulir,k.idkrs,k.nim,vdm.nama_mhs,tahun_masuk,semester_masuk,perpanjang FROM krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
@@ -217,7 +217,7 @@ class CKUM extends MainPageK {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout=""; 
                 foreach($this->RepeaterS->Items as $inputan) {						
                     $item=$inputan->hiddentoglelunas->getNamingContainer();
@@ -234,13 +234,13 @@ class CKUM extends MainPageK {
 
                 $this->report->printKUM($_SESSION['currentPageKUM']['jenisujian'], $dataidkrs, $this->KRS, $this->DMaster);                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";                 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";
             break;
         }
@@ -256,16 +256,16 @@ class CKUM extends MainPageK {
         $this->linkOutput->NavigateUrl='#';
         
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";                 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="";
                 $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                 $this->DB->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));

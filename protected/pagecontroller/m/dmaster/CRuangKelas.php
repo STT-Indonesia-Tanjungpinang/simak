@@ -64,7 +64,7 @@ class CRuangKelas Extends MainPageM {
 			$this->DB->insertRecord($str);
             
             if ($this->Application->Cache) {
-                $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'),'namaruang',null,2);			
+                $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'), 'namaruang', null,2);			
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
                 $this->Application->Cache->set('listruangkelas', $dataitem);                
             }
@@ -74,7 +74,7 @@ class CRuangKelas Extends MainPageM {
 	public function editRecord($sender, $param) {
 		$idruangkelas = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
-		$result = $this->DMaster->getList("ruangkelas WHERE idruangkelas = $idruangkelas",array('namaruang', 'kapasitas'));
+		$result = $this->DMaster->getList("ruangkelas WHERE idruangkelas = $idruangkelas", array('namaruang', 'kapasitas'));
 		$this->hiddenid->Value=$idruangkelas;
 		$this->hiddennamaruang->Value=$result[1]['namaruang'];
 		$this->txtEditNamaRuang->Text = $result[1]['namaruang'];
@@ -88,7 +88,7 @@ class CRuangKelas Extends MainPageM {
 			$str = "UPDATE ruangkelas SET namaruang='$namaruang',kapasitas='$kapasitas' WHERE idruangkelas = $idruangkelas";
 			$this->DB->updateRecord($str);
             if ($this->Application->Cache) {
-                $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'),'namaruang',null,2);			
+                $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'), 'namaruang', null,2);			
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
                 $this->Application->Cache->set('listruangkelas', $dataitem);                
             }
@@ -104,7 +104,7 @@ class CRuangKelas Extends MainPageM {
         }else{
             $this->DB->deleteRecord("ruangkelas WHERE idruangkelas = $idruangkelas");
             if ($this->Application->Cache) {
-                $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'),'namaruang',null,2);			
+                $dataitem=$this->DMaster->getList ('ruangkelas',array('idruangkelas', 'namaruang', 'kapasitas'), 'namaruang', null,2);			
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
                 $this->Application->Cache->set('listruangkelas', $dataitem);                
             }

@@ -23,15 +23,15 @@ class CPKRS extends MainPageDW {
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPagePKRS'])||$_SESSION['currentPagePKRS']['page_name']!='dw.perkuliahan.PKRS')
       {					
-        $_SESSION['currentPagePKRS']=array('page_name'=>'dw.perkuliahan.PKRS', 'search'=>false,'page_num'=>0,'DataKRS'=>array(),'DataMHS'=>array());												
+        $_SESSION['currentPagePKRS']=array('page_name'=>'dw.perkuliahan.PKRS', 'search'=>false,'page_num'=>0,'DataKRS'=>array(), 'DataMHS'=>array());												
       }
       $_SESSION['currentPagePKRS']['search']=false;
 
-      $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+      $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
       $this->tbCmbTA->Text = $_SESSION['ta'];
       $this->tbCmbTA->dataBind();			
 
-      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
       $this->tbCmbSemester->DataSource = $semester;
       $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
@@ -71,22 +71,22 @@ class CPKRS extends MainPageDW {
     $_SESSION['currentPagePKRS']['search']=true;
     $this->populateData($_SESSION['currentPagePKRS']['search']);
   }
-  private function populateData ($search=false) {
+  private function populateData($search = false) {
     $iddosen_wali = $this->iddosen_wali;
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];
     $str = "SELECT p.nim,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,vp.nmatkul,vp.sks,p.tambah,p.hapus,p.batal,p.sah,p.tanggal FROM pkrs p,v_datamhs vdm,v_penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali = $iddosen_wali";
       
     if ($search) {
-      $txtsearch=addslashes($this->txtKriteria->Text);
+      $txtsearch = addslashes($this->txtKriteria->Text);
       switch ($this->cmbKriteria->Text) {                
-        case 'nim' :
+        case 'nim':
           $clausa="AND vdm.nim='$txtsearch'";                    
         break;
-        case 'nirm' :
+        case 'nirm':
           $clausa="AND vdm.nirm='$txtsearch'";                    
         break;
-        case 'nama' :
+        case 'nama':
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
         break;
       }
@@ -156,7 +156,7 @@ class CPKRS extends MainPageDW {
           throw new Exception ("KRS Mahasiswa Dengan NIM ($nim) di T.A ($ta) Semester $semester belum disahkan !!!");
         }
         $kelas = $this->KRS->getKelasMhs();																	            
-        $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];	
+        $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];	
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    

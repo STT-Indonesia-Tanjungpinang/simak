@@ -86,7 +86,7 @@ class PostgreSQL extends DBGlobal implements DBInterface {
 	public function checkRecordIsExist ($field, $table, $idrecord, $opt="integer") {
 		$bool = false;
 		if ($idrecord != "") {
-			$this->setFieldTable(array($field) );
+			$this->setFieldTable(array($field));
 			if ($opt == "string") {
 				$idrecord="'".$idrecord."'";
 			}

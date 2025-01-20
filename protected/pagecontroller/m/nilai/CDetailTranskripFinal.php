@@ -9,7 +9,7 @@ class CDetailTranskripFinal extends MainPageM {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailTranskripFinal'])||$_SESSION['currentPageDetailTranskripFinal']['page_name']!='m.nilai.DetailTranskripFinal') {
-				$_SESSION['currentPageDetailTranskripFinal']=array('page_name'=>'m.nilai.DetailTranskripFinal', 'page_num'=>0,'search'=>false,'DataMHS'=>array(),'DataTranskrip');
+				$_SESSION['currentPageDetailTranskripFinal']=array('page_name'=>'m.nilai.DetailTranskripFinal', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'DataTranskrip');
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -43,8 +43,8 @@ class CDetailTranskripFinal extends MainPageM {
             
             $str = "SELECT nomor_transkrip,predikat_kelulusan,tanggal_lulus,judul_skripsi,iddosen_pembimbing,iddosen_pembimbing2,iddosen_ketua,iddosen_pemket,tahun,idsmt FROM transkrip_asli WHERE nim='$nim'";
             $this->DB->setFieldTable(array('nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
-            $datatranskrip=$this->DB->getRecord($str);
-            if (!isset($datatranskrip[1]) ) {
+            $datatranskrip = $this->DB->getRecord($str);
+            if (!isset($datatranskrip[1])) {
                 $_SESSION['currentPageDetailTranskripFinal']['DataMHS']=array();
                 $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip']=array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar di Transkrip Final.");
@@ -57,7 +57,7 @@ class CDetailTranskripFinal extends MainPageM {
 			$this->txtEditNomorTranskrip->Text = $datatranskrip[1]['nomor_transkrip'];			
 			$this->cmbEditPredikatKelulusan->Text = $datatranskrip[1]['predikat_kelulusan'];			
 			$this->txtEditTanggalLulus->Text = $this->TGL->tanggal('d-m-Y', $datatranskrip[1]['tanggal_lulus']);
-            $daftar_dosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(),'none');
+            $daftar_dosen = $this->DMaster->removeIdFromArray($this->DMaster->getDaftarDosen(), 'none');
             $this->cmbEditDosenPembimbing->DataSource = $daftar_dosen;
             $this->cmbEditDosenPembimbing->dataBind();            
 			$this->cmbEditDosenPembimbing->Text = $datatranskrip[1]['iddosen_pembimbing'];
@@ -87,16 +87,16 @@ class CDetailTranskripFinal extends MainPageM {
         $nim = $dataReport['nim'];
         if ($dataReport['k_status'] == 'L') {
             switch ($_SESSION['outputreport']) {
-                case 'summarypdf' :
+                case 'summarypdf':
                     $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                 break;
-                case 'summaryexcel' :
+                case 'summaryexcel':
                     $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                 break;
-                case 'excel2007' :
+                case 'excel2007':
                     $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                 break;
-                case 'pdf' :                    
+                case 'pdf':                    
                     $messageprintout='Transkrip Final : ';                     
                     $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
                     $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');

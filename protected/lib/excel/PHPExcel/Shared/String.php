@@ -410,7 +410,7 @@ class PHPExcel_Shared_String
     public static function FormatNumber($value)
     {
         if (is_float($value)) {
-            return str_replace(',', '.', $value);
+            return str_replace(', ', '.', $value);
         }
         return (string) $value;
     }
@@ -677,7 +677,7 @@ class PHPExcel_Shared_String
     public static function convertToNumberIfFraction(&$operand)
     {
         if (preg_match('/^'.self::STRING_REGEXP_FRACTION.'$/i', $operand, $match)) {
-            $sign = ($match[1] == '-') ? '-' : '+';
+            $sign = ($match[1] == '-') ? '-': '+';
             $fractionFormula = '='.$sign.$match[2].$sign.$match[3];
             $operand = PHPExcel_Calculation::getInstance()->_calculateFormulaValue($fractionFormula);
             return true;
@@ -732,7 +732,7 @@ class PHPExcel_Shared_String
 
             if (self::$thousandsSeparator == '') {
                 // Default to .
-                self::$thousandsSeparator = ',';
+                self::$thousandsSeparator = ', ';
             }
         }
         return self::$thousandsSeparator;
@@ -744,7 +744,7 @@ class PHPExcel_Shared_String
      *
      * @param string $pValue Character for thousands separator
      */
-    public static function setThousandsSeparator($pValue = ',')
+    public static function setThousandsSeparator($pValue = ', ')
     {
         self::$thousandsSeparator = $pValue;
     }

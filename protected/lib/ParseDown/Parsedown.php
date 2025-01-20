@@ -660,7 +660,7 @@ class Parsedown
 
         if (chop($Line['text'], $Line['text'][0]) === '')
         {
-            $Block['element']['name'] = $Line['text'][0] === '=' ? 'h1' : 'h2';
+            $Block['element']['name'] = $Line['text'][0] === '=' ? 'h1': 'h2';
 
             return $Block;
         }
@@ -825,7 +825,7 @@ class Parsedown
 
                 if (substr($dividerCell, - 1) === ':')
                 {
-                    $alignment = $alignment === 'left' ? 'center' : 'right';
+                    $alignment = $alignment === 'left' ? 'center': 'right';
                 }
 
                 $alignments []= $alignment;

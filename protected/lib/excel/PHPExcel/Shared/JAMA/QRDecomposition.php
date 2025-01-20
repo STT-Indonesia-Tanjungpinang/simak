@@ -177,7 +177,7 @@ class PHPExcel_Shared_JAMA_QRDecomposition
         /*
         for($i = 0; $i < count($Q); ++$i) {
             for($j = 0; $j < count($Q); ++$j) {
-                if (! isset($Q[$i][$j]) ) {
+                if (! isset($Q[$i][$j])) {
                     $Q[$i][$j] = 0;
                 }
             }

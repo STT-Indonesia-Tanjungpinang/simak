@@ -44,14 +44,14 @@ class CHome extends MainPageM {
       $this->populateData();
     }                
   }  
-  public function populateData () {
+  public function populateData() {
     $totalpendaftaran=0;
     $totaldulang=0;
     $datamendaftar = $_SESSION['currentPageHome']['datamendaftar'];
     $data1='';
     foreach ($datamendaftar as $tahun=>$jumlah) {
       $ta = $tahun-1;
-      $data1=$data1."[gd($ta,12,31), $jumlah],";     
+      $data1 = $data1."[gd($ta,12,31), $jumlah],";     
       $totalpendaftaran+=$jumlah;
     }
     $datadulang=$_SESSION['currentPageHome']['datadulang'];        
@@ -83,7 +83,7 @@ class CHome extends MainPageM {
       $downmendaftar=number_format(100-$persenmendaftartahunini,2);
       $this->TooltipMendaftar = $downmendaftar.'% Down';
     }else{
-      $upmendaftar=abs(number_format(100-$persenmendaftartahunini,2));
+      $upmendaftar = abs(number_format(100-$persenmendaftartahunini,2));
       $this->TooltipMendaftar = $upmendaftar.'% Up';
     }
     

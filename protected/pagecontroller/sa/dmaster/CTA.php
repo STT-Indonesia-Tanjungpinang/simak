@@ -9,7 +9,7 @@ class CTA extends MainPageSA {
             if (!isset($_SESSION['currentPageTA'])||$_SESSION['currentPageTA']['page_name']!='sa.dmaster.TA') {
 				$_SESSION['currentPageTA']=array('page_name'=>'sa.dmaster.TA', 'page_num'=>0,'search'=>false);
 			}
-			$this->populateData ();			
+			$this->populateData();			
 		}
 	}
 	
@@ -18,10 +18,10 @@ class CTA extends MainPageSA {
 	}
 	public function Page_Changed($sender, $param) {
 		$_SESSION['currentPageTA']['page_num'] = $param->NewPageIndex;	
-		$this->populateData ();	
+		$this->populateData();	
 	}
 	
-	protected function populateData () {
+	protected function populateData() {
         $jumlah_baris = $this->DB->getCountRowsOfTable('ta', 'tahun');
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageTA']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
@@ -59,12 +59,12 @@ class CTA extends MainPageSA {
 	
 	public function saveData($sender, $param) {
 		if ($this->Page->IsValid) {
-			$ta1=$this->txtAddTahun->Text;
+			$ta1 = $this->txtAddTahun->Text;
 			$ta2=$this->txtAddTahun->Text+1;
 			$str = "INSERT INTO ta (tahun,tahun_akademik) VALUES ($ta1,'$ta1/$ta2')";
 			$this->DB->insertRecord($str);	
             if ($this->Application->Cache) { 
-                $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'),'tahun',null,1);
+                $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'), 'tahun', null, 1);
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
                 $this->Application->Cache->set('listta', $dataitem);
             }
@@ -74,18 +74,18 @@ class CTA extends MainPageSA {
     public function editRecord($sender, $param) {
 		$tahun = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
-		$result = $this->DMaster->getList("ta WHERE tahun = $tahun",array('tahun', 'tahun_akademik'));		
+		$result = $this->DMaster->getList("ta WHERE tahun = $tahun", array('tahun', 'tahun_akademik'));		
 		$this->hiddentahun->Value=$result[1]['tahun'];
 		$this->txtEditTahun->Text = $result[1]['tahun'];		
 	}
 	public function updateData($sender, $param) {
 		if ($this->Page->IsValid) {
-			$ta1=$this->txtEditTahun->Text;
+			$ta1 = $this->txtEditTahun->Text;
 			$ta2=$this->txtEditTahun->Text+1;
 			$str = "UPDATE ta SET tahun = $ta1,tahun_akademik='$ta1/$ta2' WHERE tahun=".$this->hiddentahun->Value;
 			$this->DB->updateRecord($str);
             if ($this->Application->Cache) { 
-                $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'),'tahun',null,1);
+                $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'), 'tahun', null, 1);
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
                 $this->Application->Cache->set('listta', $dataitem);
             }
@@ -101,7 +101,7 @@ class CTA extends MainPageSA {
         }else{
             $this->DB->deleteRecord("ta WHERE tahun = $tahun");
             if ($this->Application->Cache) { 
-                $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'),'tahun',null,1);
+                $dataitem=$this->DMaster->getList('ta',array('tahun', 'tahun_akademik'), 'tahun', null, 1);
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
                 $this->Application->Cache->set('listta', $dataitem);
             }

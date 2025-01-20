@@ -760,7 +760,7 @@ class PHPExcel_Writer_Excel5_Workbook extends PHPExcel_Writer_Excel5_BIFFwriter
                     $formulaData .= pack('Cvvvvv', 0x3B, $i, $print_rowmin, $print_rowmax, $print_colmin, $print_colmax);
 
                     if ($j > 0) {
-                        $formulaData .= pack('C', 0x10); // list operator token ','
+                        $formulaData .= pack('C', 0x10); // list operator token ', '
                     }
                 }
 

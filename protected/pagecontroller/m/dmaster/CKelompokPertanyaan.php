@@ -27,7 +27,7 @@ class CKelompokPertanyaan extends MainPageM {
 		$_SESSION['currentPageKelompokPertanyaan']['search']=true;
         $this->populateData($_SESSION['currentPageKelompokPertanyaan']['search']);
 	}    
-	protected function populateData ($search=false) {								
+	protected function populateData($search = false) {								
         $jumlah_baris = $this->DB->getCountRowsOfTable('kelompok_pertanyaan', 'idkelompok_pertanyaan');		            
         $str = 'SELECT idkelompok_pertanyaan,orders,idkategori,nama_kelompok,orders,create_at,update_at FROM kelompok_pertanyaan';			
         $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKelompokPertanyaan']['page_num'];

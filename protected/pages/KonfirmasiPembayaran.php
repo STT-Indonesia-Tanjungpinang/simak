@@ -30,7 +30,7 @@ class KonfirmasiPembayaran extends MainPageF {
 			$this->idProcess='add';
 			$no_pendaftaran=addslashes($this->txtAddNomorPendaftaran->Text);	
 			$str  = "SELECT no_pendaftaran, nama_mhs,tempat_lahir,tanggal_lahir,jk,email,telp_hp,kjur1,kjur2,idkelas,ta,idsmt,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp WHERE no_pendaftaran='$no_pendaftaran'";
-			$this->DB->setFieldTable(array('no_pendaftaran','nama_mhs','tempat_lahir','tanggal_lahir','jk','email','telp_hp','kjur1','kjur2','idkelas','ta','idsmt','waktu_mendaftar','file_bukti_bayar'));
+			$this->DB->setFieldTable(array('no_pendaftaran', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'email', 'telp_hp', 'kjur1', 'kjur2', 'idkelas', 'ta', 'idsmt', 'waktu_mendaftar', 'file_bukti_bayar'));
 			$r=$this->DB->getRecord($str);
 			$r[1]['nama_ps_1']=$this->DMaster->getNamaProgramStudiByID($r[1]['kjur1']);
 			$r[1]['nama_ps_2']=($r[1]['kjur2']>0)?$this->DMaster->getNamaProgramStudiByID($r[1]['kjur2']):'N.A';

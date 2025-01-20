@@ -55,16 +55,16 @@ class CDetailTranskripKurikulum extends MainPageM {
         $dataReport=$_SESSION['currentPageDetailTranskripKurikulum']['DataMHS']; 
         $nim = $dataReport['nim'];
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
             break;
-            case 'pdf' :
+            case 'pdf':
                 $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
                 $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
                 $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');

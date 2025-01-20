@@ -29,7 +29,7 @@ class Logic_Log extends Logic_Users
     }
     else
     {
-      $this->db->insertRecord("INSERT INTO log_master (userid,tipe_id) VALUES ('$userid','$tipe')");
+      $this->db->insertRecord("INSERT INTO log_master (userid,tipe_id) VALUES ('$userid', '$tipe')");
       $r = $this->db->getRecord("SELECT idlog_master FROM log_master WHERE userid=$userid");
       $this->idlogmaster = $r[1]['idlog_master'];
     }
@@ -46,21 +46,21 @@ class Logic_Log extends Logic_Users
     $ket = '';
     switch (strtolower($aktivitas))
     {
-      case 'delete' :
+      case 'delete':
         $ket = "hapus nilai $nilai_awal";
       break;
-        case 'deleteall' :
+        case 'deleteall':
         $ket = "hapus nilai keseluruhan";
       break;
-      case 'input' :
+      case 'input':
         $ket = "menginputkan nilai $nilai_awal";
       break;
-      case 'update' :
-        $nilai_akhir = $nilai_akhir == ''? 'tidak ada nilai' : $nilai_akhir;
+      case 'update':
+        $nilai_akhir = $nilai_akhir == ''? 'tidak ada nilai': $nilai_akhir;
         $ket = "mengubah nilai $nilai_awal menjadi $nilai_akhir";
       break;
     }		
-    $str = "$str ('$idlogmaster',NOW(),'$nim','$kmatkul','$nmatkul','$aktivitas','$ket')";
+    $str = "$str ('$idlogmaster',NOW(), '$nim', '$kmatkul', '$nmatkul', '$aktivitas', '$ket')";
     $this->db->insertRecord($str);
   }
   /**
@@ -74,21 +74,21 @@ class Logic_Log extends Logic_Users
     $ket = '';
     switch (strtolower($aktivitas))
     {
-      case 'delete' :
+      case 'delete':
         $ket = "hapus nilai $nilai_awal";
       break;
-        case 'deleteall' :
+        case 'deleteall':
         $ket = "hapus nilai keseluruhan";
       break;
-      case 'input' :
+      case 'input':
         $ket = "menginputkan nilai $nilai_awal";
       break;
-      case 'update' :
-        $nilai_akhir = $nilai_akhir == ''? 'tidak ada nilai' : $nilai_akhir;
+      case 'update':
+        $nilai_akhir = $nilai_akhir == ''? 'tidak ada nilai': $nilai_akhir;
         $ket = "mengubah nilai $nilai_awal menjadi $nilai_akhir";
       break;
     }		
-    $str = "$str ('$idlogmaster',NOW(),'$nim','$kmatkul','$nmatkul','$aktivitas','$ket $extra')";
+    $str = "$str ('$idlogmaster',NOW(), '$nim', '$kmatkul', '$nmatkul', '$aktivitas', '$ket $extra')";
     $this->db->insertRecord($str);
   }
 }

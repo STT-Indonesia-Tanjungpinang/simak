@@ -18,12 +18,12 @@ class CPenyelenggaraan extends MainPageM {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	
             
-            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTA->DataSource = $ta;					
 			$this->tbCmbTA->Text = $_SESSION['ta'];						
 			$this->tbCmbTA->dataBind();
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -60,7 +60,7 @@ class CPenyelenggaraan extends MainPageM {
 		$text="Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
-	public function populateData($search=false) {	
+	public function populateData($search = false) {	
         $ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];
         $kjur = $_SESSION['kjur'];        
@@ -165,13 +165,13 @@ class CPenyelenggaraan extends MainPageM {
 	    $this->linkOutput->Text='';
 	    $this->linkOutput->NavigateUrl='#';
 	    switch ($_SESSION['outputreport']) {
-	        case 'summarypdf' :
+	        case 'summarypdf':
 	            $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";
 	            break;
-	        case 'summaryexcel' :
+	        case 'summaryexcel':
 	            $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";
 	            break;
-	        case 'excel2007' :
+	        case 'excel2007':
 	            $dataReport['kjur'] = $_SESSION['kjur'];
 	            $dataReport['ta'] = $_SESSION['ta'];
 	            $dataReport['idsmt'] = $_SESSION['semester'];
@@ -186,7 +186,7 @@ class CPenyelenggaraan extends MainPageM {
 	            $messageprintout="Daftar Penyelenggaraan Matakuliah : <br/>";
 	            $this->report->printPenyelenggaraan($this->Demik);
             break;
-	        case 'pdf' :
+	        case 'pdf':
 	            $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
 	    }

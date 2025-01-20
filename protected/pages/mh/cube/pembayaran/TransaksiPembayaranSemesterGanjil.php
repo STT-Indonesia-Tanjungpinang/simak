@@ -19,8 +19,8 @@ class TransaksiPembayaranSemesterGanjil Extends CTransaksiPembayaranSemesterGanj
         }
         if($item->ItemType==='Item' || $item->ItemType==='AlternatingItem')  {            
             if ($item->DataItem['sudah_dibayar'] >= $item->DataItem['biaya']) {
-                $item->EditColumn->Enabled=false;
-                $item->DeleteColumn->Enabled=false;
+                $item->EditColumn->Enabled = false;
+                $item->DeleteColumn->Enabled = false;
             }
             $item->EditColumn->EditButton->ClientSide->OnPreDispatch="Pace.stop();Pace.start();";
             $item->EditColumn->EditButton->CssClass='btn btn-icon btn-xs';

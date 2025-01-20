@@ -119,10 +119,10 @@ class CDaftarMahasiswa extends MainPageM {
         $jumlah_wanita=0;
         foreach ($jumlah_jk as $v) {
             switch ($v['jk']) {
-                case 'L' :
+                case 'L':
                     $jumlah_pria = $v['jumlah'];
                 break;
-                case 'P' :
+                case 'P':
                     $jumlah_wanita = $v['jumlah'];
                 break;
             }
@@ -132,7 +132,7 @@ class CDaftarMahasiswa extends MainPageM {
     }
     public function populateKonsentrasi () {			
         $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
-        $r=array();
+        $r = array();
         $i=1;
         $tahun_masuk = $_SESSION['tahun_masuk'];        
         $kelas = $_SESSION['kelas'];
@@ -153,7 +153,7 @@ class CDaftarMahasiswa extends MainPageM {
             if ($v['kjur']==$_SESSION['kjur']){
                 $idkonsentrasi = $v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("register_mahasiswa rm LEFT JOIN data_konversi dk ON (dk.nim=rm.nim) WHERE rm.idkonsentrasi = $idkonsentrasi $str_tahun_masuk $str_kelas $str_status",'rm.nim');
-                $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000' : $jumlah;
+                $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000': $jumlah;
                 $r[$i] = $v;
                 $i+=1;
             }
@@ -165,28 +165,28 @@ class CDaftarMahasiswa extends MainPageM {
 		$_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = 'none';
         $this->redirect('kemahasiswaan.DaftarMahasiswa',true);
 	} 
-	public function populateData ($search=false) {			
+	public function populateData($search = false) {			
         $kjur = $_SESSION['kjur'];        
         if ($search) {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.alamat_rumah,vdm.kjur,vdm.idkonsentrasi,vdm.iddosen_wali,vdm.tahun_masuk,vdm.k_status,vdm.idkelas,dk.iddata_konversi,vdm.photo_profile FROM v_datamhs vdm LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim)";			
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="WHERE vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="WHERE vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa="WHERE vdm.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm $clausa",'vdm.no_formulir');
                     $str = "$str $clausa";
                     break;
-                case 'nama' :
+                case 'nama':
                     $clausa="WHERE vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm $clausa",'vdm.nim');
                     $str = "$str $clausa";
@@ -250,13 +250,13 @@ class CDaftarMahasiswa extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];                
@@ -270,7 +270,7 @@ class CDaftarMahasiswa extends MainPageM {
                 
                 $this->report->printDaftarMahasiswa($this->Demik, $this->DMaster); 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

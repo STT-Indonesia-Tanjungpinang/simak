@@ -10,7 +10,7 @@ class CDetailEditNilai extends MainPageD {
     
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPageDetailEditNilai'])||$_SESSION['currentPageDetailEditNilai']['page_name']!='d.nilai.DetailEditNilai') {
-        $_SESSION['currentPageDetailEditNilai']=array('page_name'=>'d.nilai.DetailEditNilai', 'page_num'=>0,'search'=>false,'DataNilai'=>array(),'jumlahrecord'=>50);
+        $_SESSION['currentPageDetailEditNilai']=array('page_name'=>'d.nilai.DetailEditNilai', 'page_num'=>0,'search'=>false,'DataNilai'=>array(), 'jumlahrecord'=>50);
       }  
       $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
       $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

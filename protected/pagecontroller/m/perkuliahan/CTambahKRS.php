@@ -116,7 +116,7 @@ class CTambahKRS extends MainPageM {
 			$matkul = $item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									
 			if ($_SESSION['currentPageKRS']['DataKRS']['krs']['sah']&&!$item->DataItem['batal']) {
 				$onclick="alert('Tidak bisa menghapus Matakuliah $matkul, karena sudah disahkan oleh Dosen Wali.')";
-				$item->btnHapus->Enabled=false;
+				$item->btnHapus->Enabled = false;
 			}else{
 				$onclick="if(!confirm('Anda yakin mau menghapus $matkul')) return false;";			
 			}

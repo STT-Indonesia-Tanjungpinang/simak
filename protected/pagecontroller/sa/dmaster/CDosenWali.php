@@ -25,22 +25,22 @@ class CDosenWali extends MainPageSA {
         $_SESSION['currentPageDosenWali']['search']=true;
         $this->populateData($_SESSION['currentPageDosenWali']['search']);
     }    
-    protected function populateData ($search=false) {
+    protected function populateData($search = false) {
         if ($search) {
             $str = "SELECT dw.iddosen_wali,d.nidn,d.nipy,d.gelar_depan,d.nama_dosen,d.gelar_belakang,d.telp_hp,d.username,d.status FROM dosen_wali dw JOIN LEFT dosen d ON (d.iddosen=dw.iddosen)";         
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {
-                case 'nidn' :
+                case 'nidn':
                     $clausa="WHERE d.nidn='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
                     $str = "$str $clausa";
                 break;
-                case 'nip' :
+                case 'nip':
                     $clausa="WHERE d.nipy='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
                     $str = "$str $clausa";
                 break;
-                case 'nama_dosen' :
+                case 'nama_dosen':
                     $clausa="WHERE d.nama_dosen LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    
                     $str = "$str $clausa";

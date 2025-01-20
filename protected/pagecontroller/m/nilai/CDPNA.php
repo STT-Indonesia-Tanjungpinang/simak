@@ -12,7 +12,7 @@ class CDPNA extends MainPageM {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDPNA'])||$_SESSION['currentPageDPNA']['page_name']!='m.nilai.DPNA') {
-                $_SESSION['currentPageDPNA']=array('page_name'=>'m.nilai.DPNA', 'page_num'=>0,'search'=>false,'DataDPNA'=>array(),'idkelas_mhs'=>'none');
+                $_SESSION['currentPageDPNA']=array('page_name'=>'m.nilai.DPNA', 'page_num'=>0,'search'=>false,'DataDPNA'=>array(), 'idkelas_mhs'=>'none');
 			}  
             $_SESSION['currentPageDPNA']['search']=false;            
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -21,11 +21,11 @@ class CDPNA extends MainPageM {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -77,14 +77,14 @@ class CDPNA extends MainPageM {
 		$_SESSION['currentPageDPNA']['search']=true;
 		$this->populateData($_SESSION['currentPageDPNA']['search']);
 	}	
-	public function populateData($search=false) {				
+	public function populateData($search = false) {				
 		$ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
 		$kjur = $_SESSION['kjur'];		
         if ($search) {            
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) { 
-                case 'kmatkul' :
+                case 'kmatkul':
                     $clausa=" AND kmatkul LIKE '%$txtsearch%'";
                     $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";				            
                     $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						

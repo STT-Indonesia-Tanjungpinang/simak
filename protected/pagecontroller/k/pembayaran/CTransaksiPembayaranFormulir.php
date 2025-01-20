@@ -41,7 +41,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
             return $_SESSION['currentPagePembayaranFormulir']['DataMHS'][$idx];
         }
     }
-    public function populateData () {
+    public function populateData() {
         $datamhs = $_SESSION['currentPagePembayaranFormulir']['DataMHS'];        
         $no_transaksi = $datamhs['no_transaksi'];
         $no_formulir = $datamhs['no_formulir'];
@@ -91,11 +91,11 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
     }
 	public function editItem($sender, $param) {                   
         $this->GridS->EditItemIndex=$param->Item->ItemIndex;
-        $this->populateData ();        
+        $this->populateData();        
     }
     public function cancelItem($sender, $param) {                
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();        
+        $this->populateData();        
     }		
     public function deleteItem($sender, $param) {                
         $id=$this->GridS->DataKeys[$param->Item->ItemIndex]; 
@@ -103,7 +103,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
         $no_transaksi = $datamhs['no_transaksi'];
         $this->DB->updateRecord("UPDATE transaksi_detail SET dibayarkan=0 WHERE idkombi = $id AND no_transaksi = $no_transaksi");
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }  
     public function saveItem($sender, $param) {                        
         $item = $param->Item;
@@ -135,7 +135,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
             $this->DB->updateRecord($str);       
         }
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }
 	public function checkNomorFaktur($sender, $param) {
 		$this->idProcess = $sender->getId()=='addNomorFaktur'?'add':'edit';
@@ -186,7 +186,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
             $no_transaksi = $datamhs['no_transaksi'];
             $no_formulir = $datamhs['no_formulir'];
 			
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             $no_pendaftaran = $this->txtAddNomorPendaftaran->Text;
             
@@ -209,7 +209,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
             $no_transaksi = $datamhs['no_transaksi'];
             $no_formulir = $datamhs['no_formulir'];
             
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             $no_pendaftaran = $this->txtAddNomorPendaftaran->Text;
 

@@ -530,12 +530,12 @@ class PHPExcel_Style_Font extends PHPExcel_Style_Supervisor implements PHPExcel_
         return md5(
             $this->name .
             $this->size .
-            ($this->bold ? 't' : 'f') .
-            ($this->italic ? 't' : 'f') .
-            ($this->superScript ? 't' : 'f') .
-            ($this->subScript ? 't' : 'f') .
+            ($this->bold ? 't': 'f') .
+            ($this->italic ? 't': 'f') .
+            ($this->superScript ? 't': 'f') .
+            ($this->subScript ? 't': 'f') .
             $this->underline .
-            ($this->strikethrough ? 't' : 'f') .
+            ($this->strikethrough ? 't': 'f') .
             $this->color->getHashCode() .
             __CLASS__
         );

@@ -24,7 +24,7 @@ class CProfilMahasiswa extends MainPageM {
     $this->createObj('Nilai');
     if (!$this->IsPostBack && !$this->IsCallback) {	
       if (!isset($_SESSION['currentPageProfilMahasiswa'])||$_SESSION['currentPageProfilMahasiswa']['page_name']!='m.kemahasiswaan.ProfilMahasiswa') {
-        $_SESSION['currentPageProfilMahasiswa']=array('page_name'=>'m.kemahasiswaan.ProfilMahasiswa', 'page_num'=>0,'DataMHS'=>array(),'activeviewindex'=>0);												
+        $_SESSION['currentPageProfilMahasiswa']=array('page_name'=>'m.kemahasiswaan.ProfilMahasiswa', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
       }
 
       $this->MVProfilMahasiswa->ActiveViewIndex=$_SESSION['currentPageProfilMahasiswa']['activeviewindex'];             
@@ -137,7 +137,7 @@ class CProfilMahasiswa extends MainPageM {
     $r = $this->DB->getRecord($str);                
     $result = array();
     while(list($k, $v) = each($r)) {
-      $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-' :$this->TGL->tanggal('l, d F Y', $v['tanggal']);
+      $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-':$this->TGL->tanggal('l, d F Y', $v['tanggal']);
       $isikrs='tidak isi';
       if ($v['k_status']=='A') {
         $this->KRS->getDataKRS($v['tahun'], $v['idsmt']);  

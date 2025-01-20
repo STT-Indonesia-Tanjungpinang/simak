@@ -254,7 +254,7 @@ switch($_REQUEST['decomposition']) {
 					<li><a href="benchmark.php?decomposition=eigenvalue">Eigenvalue</a></li>
 					<li><a href="benchmark.php?decomposition=lu">LU</a></li>
 					<li><a href="benchmark.php?decomposition=qr">QR</a></li>
-					<li><a href="benchmark.php?decomposition=svd">Singular Value</a></li>
+					<li><a href="benchmark.php?decomposition = svd">Singular Value</a></li>
 				</ul>
 			</li>
 		</ul>

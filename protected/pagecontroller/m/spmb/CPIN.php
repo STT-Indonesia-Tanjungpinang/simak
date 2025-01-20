@@ -13,7 +13,7 @@ class CPIN extends MainPageM {
             $_SESSION['currentPagePIN']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -29,7 +29,7 @@ class CPIN extends MainPageM {
             
             $this->cmbDisplayRecord->Text = $_SESSION['currentPagePIN']['display_record'];
             $this->lblModulHeader->Text = $this->getInfoToolbar();            
-            $this->populateData ();	
+            $this->populateData();	
 		}	
 	}   
 	public function getInfoToolbar() {                
@@ -62,17 +62,17 @@ class CPIN extends MainPageM {
 		$_SESSION['currentPagePIN']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPagePIN']['search']);
 	}		
-	public function populateData ($search=false) {
+	public function populateData($search = false) {
         $idkelas = $_SESSION['currentPagePIN']['kelas'];
         $tahun_masuk = $_SESSION['tahun_pendaftaran'];    
         if ($search) {        
             $str = "SELECT pin.no_pin,pin.no_formulir,pin.idkelas,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir)";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa=" WHERE pin.no_formulir='$txtsearch'"; 
                 break;
-                case 'nama_mhs' :
+                case 'nama_mhs':
                     $clausa=" WHERE fp.nama_mhs LIKE '%$txtsearch%'";                    
                 break;
             }
@@ -116,9 +116,9 @@ class CPIN extends MainPageM {
             $tahun_masuk = $_SESSION['tahun_pendaftaran'];
             $max_record=$this->DB->getMaxOfRecord('no_formulir',"pin WHERE tahun_masuk='$tahun_masuk'")+1;		
 			$urut=substr($max_record,strlen($tahun_masuk),4);		
-			$no_urut=($urut=='')?'0001':$urut;
+			$no_urut=($urut== '')?'0001':$urut;
 			$no_urut=$tahun_masuk.$no_urut;                        
-            $jumlah=addslashes($this->txtJumlahFormulir->Text);
+            $jumlah = addslashes($this->txtJumlahFormulir->Text);
             $jumlah_formulir = $no_urut+$jumlah;
             if ($jumlah <= 1) {                        
                 $no_pin = $no_urut.mt_rand(100000,999999);
@@ -143,13 +143,13 @@ class CPIN extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="";
                 $dataReport['tahun_masuk'] = $_SESSION['tahun_pendaftaran'];
                 $dataReport['pilihan'] = $_SESSION['currentPagePIN']['display_record'];
@@ -158,7 +158,7 @@ class CPIN extends MainPageM {
                 $this->report->setMode($_SESSION['outputreport']);
                 $this->report->printPIN(); 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

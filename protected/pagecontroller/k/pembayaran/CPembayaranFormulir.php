@@ -12,12 +12,12 @@ class CPembayaranFormulir Extends MainPageK {
 			}
             $_SESSION['currentPagePembayaranFormulir']['search']=false; 
           
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPagePembayaranFormulir']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();            
@@ -58,29 +58,29 @@ class CPembayaranFormulir Extends MainPageK {
 		$_SESSION['currentPagePembayaranFormulir']['search']=true;
 		$this->populateData($_SESSION['currentPagePembayaranFormulir']['search']);
 	}
-	public function populateData($search=false) {		
+	public function populateData($search = false) {		
 		$tahun_masuk = $_SESSION['tahun_masuk'];
 		$semester_masuk = $_SESSION['currentPagePembayaranFormulir']['semester_masuk'];
         if ($search) {
             $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {           
-                case 'no_transaksi' :
+                case 'no_transaksi':
                     $clausa=" AND t.no_transaksi='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran,t.idkelas FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa",'t.no_transaksi');
                 break;
-                case 'no_faktur' :
+                case 'no_faktur':
                     $clausa=" AND t.no_faktur='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran,t.idkelas FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa",'t.no_transaksi');
                 break;
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa=" AND t.no_formulir='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa",'t.no_transaksi');
                 break;
-				case 'no_pendaftaran' :
+				case 'no_pendaftaran':
                     $clausa=" AND fpt.no_pendaftaran='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa",'t.no_transaksi');
@@ -128,7 +128,7 @@ class CPembayaranFormulir Extends MainPageK {
 	}	
 	
     public function cekNomorFormulir($sender, $param) {		
-        $noformulir=addslashes($param->Value);		
+        $noformulir = addslashes($param->Value);		
         if ($noformulir != '') {
             try {               
                 $str = "SELECT no_formulir FROM pin WHERE no_formulir='$noformulir'";
@@ -146,7 +146,7 @@ class CPembayaranFormulir Extends MainPageK {
     }
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
-            $no_formulir=addslashes($this->txtNoFormulir->Text);
+            $no_formulir = addslashes($this->txtNoFormulir->Text);
             $this->redirect('pembayaran.DetailPembayaranFormulir',true,array('id'=>$no_formulir));
         }
 	}

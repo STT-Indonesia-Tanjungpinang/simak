@@ -29,7 +29,7 @@ class CDulangMHSLama Extends MainPageMHS {
 		$r = $this->DB->getRecord($str);                
         $result = array();
         while(list($k, $v) = each($r)) {
-            $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-' :$this->TGL->tanggal('l, d F Y', $v['tanggal']);
+            $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-':$this->TGL->tanggal('l, d F Y', $v['tanggal']);
             $isikrs='tidak isi';
             if ($v['k_status']=='A') {
                 $this->KRS->getDataKRS($v['tahun'], $v['idsmt']);  

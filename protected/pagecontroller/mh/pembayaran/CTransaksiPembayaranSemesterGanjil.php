@@ -34,7 +34,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGanjil']['ta']);        		
 		$this->labelModuleHeader->Text="T.A $ta";        
 	}    
-    public function populateData () {
+    public function populateData() {
         $datamhs = $this->Pengguna->getDataUser();
         $no_transaksi = $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'];
         $no_formulir = $datamhs['no_formulir'];
@@ -86,11 +86,11 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
     }
 	public function editItem($sender, $param) {                   
         $this->GridS->EditItemIndex=$param->Item->ItemIndex;
-        $this->populateData ();        
+        $this->populateData();        
     }
     public function cancelItem($sender, $param) {                
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();        
+        $this->populateData();        
     }		
     public function deleteItem($sender, $param) {                
         $id=$this->GridS->DataKeys[$param->Item->ItemIndex]; 
@@ -98,7 +98,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
         $no_transaksi = $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'];
         $this->DB->updateRecord("UPDATE transaksi_detail SET dibayarkan=0 WHERE idkombi = $id AND no_transaksi = $no_transaksi");
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }  
     public function saveItem($sender, $param) {                        
         $item = $param->Item;
@@ -131,7 +131,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
             $this->DB->updateRecord($str);       
         }
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }
 	public function checkNomorFaktur($sender, $param) {
 		$this->idProcess = $sender->getId()=='addNomorFaktur'?'add':'edit';
@@ -155,7 +155,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
             $no_transaksi = $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'];
             $nim = $datamhs['nim'];
             
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',date_modified=NOW() WHERE no_transaksi='$no_transaksi'";

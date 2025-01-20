@@ -350,46 +350,46 @@ class MainPage extends TPage
    */
   public function createObj ($nama_object) {
     switch (strtolower($nama_object)) {
-      case 'dmaster' :
+      case 'dmaster':
         $this->DMaster = $this->getLogic('DMaster');
       break;                        
-      case 'akademik' :
+      case 'akademik':
         $this->Demik = $this->getLogic('Akademik');
       break;    
-      case 'krs' :
+      case 'krs':
         $this->KRS = $this->getLogic('KRS');
       break;                        
-      case 'kuesioner' :
+      case 'kuesioner':
         $this->Kuesioner = $this->getLogic('Kuesioner');
       break;
-      case 'nilai' :
+      case 'nilai':
         $this->Nilai = $this->getLogic('Nilai');
       break;                        
-      case 'finance' :
+      case 'finance':
         $this->Finance = $this->getLogic('Finance');
       break;                        
-      case 'report' :
+      case 'report':
         $this->report = $this->getLogic('Report');
       break;
-      case 'reportspmb' :
+      case 'reportspmb':
         $this->report = $this->getLogic('ReportSPMB');
       break;
-      case 'reportakademik' :
+      case 'reportakademik':
         $this->report = $this->getLogic('ReportAkademik');
       break;
-      case 'reportkrs' :
+      case 'reportkrs':
         $this->report = $this->getLogic('ReportKRS');
       break;
-      case 'reportnilai' :
+      case 'reportnilai':
         $this->report = $this->getLogic('ReportNilai');
       break;
-      case 'reportfinance' :
+      case 'reportfinance':
         $this->report = $this->getLogic('ReportFinance');
       break;
-      case 'forum' :
+      case 'forum':
         $this->Forum = $this->getLogic('Forum');                
       break; 
-      case 'log' :
+      case 'log':
         $this->Log = $this->getLogic('Log');
         $this->Log->getIdLogMaster();
       break;        

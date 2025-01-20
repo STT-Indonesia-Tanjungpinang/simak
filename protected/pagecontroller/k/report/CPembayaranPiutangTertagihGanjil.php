@@ -16,7 +16,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();				
                         
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
             $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();	
             
@@ -85,7 +85,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
 		$_SESSION['currentPagePiutangJangkaPendek']['search']=true;
         $this->populateData($_SESSION['currentPagePiutangJangkaPendek']['search']);
 	}    
-	public function populateData ($search=false) {			
+	public function populateData($search = false) {			
         $kjur = $_SESSION['kjur'];  
         $ta = $_SESSION['ta'];                    
         $tahun_masuk = $_SESSION['currentPagePiutangJangkaPendek']['tahun_masuk'];                    
@@ -143,7 +143,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
             $v['n_status_ganjil']=isset($dulang_ganjil[1])?$this->DMaster->getNamaStatusMHSByID ($dulang_ganjil[1]['k_status']):'N.A';                                    
             $str = "SELECT k_status FROM dulang WHERE idsmt=2 AND tahun = $ta AND nim='$nim'";
             $this->DB->setFieldTable(array('k_status'));
-            $dulang_genap=$this->DB->getRecord($str);            
+            $dulang_genap = $this->DB->getRecord($str);            
             $v['n_status_genap']=isset($dulang_genap[1])?$this->DMaster->getNamaStatusMHSByID ($dulang_genap[1]['k_status']):'N.A';                                    
             
             //perhitungan
@@ -161,15 +161,15 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
     }
     
     public function getTotalBayarMHS ($no_formulir, $ta, $tahun_masuk, $semester_masuk, $komponen_biaya, $idkelas) {                        
-        $sudahbayar=array(1=>array('sudahbayar'=>0,'belumbayar'=>0),2=>array('sudahbayar'=>0,'belumbayar'=>0));
+        $sudahbayar = array(1=>array('sudahbayar'=>0,'belumbayar'=>0),2=>array('sudahbayar'=>0,'belumbayar'=>0));
         if ($ta==$tahun_masuk && $semester_masuk == 1) {
             $kewajiban_ganjil = $komponen_biaya[$idkelas]['baru'][1];
             $pembayaran_ganjil = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=1 AND idkombi!=1");
             $sudahbayar[1]['sudahbayar'] = $pembayaran_ganjil;
             $sudahbayar[1]['belumbayar'] = $kewajiban_ganjil-$pembayaran_ganjil;
             
-            $kewajiban_genap=$komponen_biaya[$idkelas]['lama'][2];
-            $pembayaran_genap=$this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=2 AND idkombi!=1");
+            $kewajiban_genap = $komponen_biaya[$idkelas]['lama'][2];
+            $pembayaran_genap = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=2 AND idkombi!=1");
             $sudahbayar[2]['sudahbayar'] = $pembayaran_genap;
             $sudahbayar[2]['belumbayar'] = $kewajiban_genap-$pembayaran_genap;
         }elseif ($ta==$tahun_masuk && $semester_masuk == 2) {
@@ -184,8 +184,8 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
             $sudahbayar[1]['sudahbayar'] = $pembayaran_ganjil;
             $sudahbayar[1]['belumbayar'] = $kewajiban_ganjil-$pembayaran_ganjil;
             
-            $kewajiban_genap=$komponen_biaya[$idkelas]['lama'][2];
-            $pembayaran_genap=$this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=2 AND idkombi!=1");
+            $kewajiban_genap = $komponen_biaya[$idkelas]['lama'][2];
+            $pembayaran_genap = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=2 AND idkombi!=1");
             $sudahbayar[2]['sudahbayar'] = $pembayaran_genap;
             $sudahbayar[2]['belumbayar'] = $kewajiban_genap-$pembayaran_genap;
         }
@@ -196,13 +196,13 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
@@ -222,7 +222,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
                 
                 $this->report->printPiutangJangkaPendek($this->Finance, $this->DMaster); 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

@@ -43,7 +43,7 @@ class Logic_Mahasiswa extends Logic_Global {
   public function isLulusSPMB ($with_nilai=false) {		
     $no_formulir=$this->DataMHS['no_formulir'];
     $str = "SELECT nilai,ket_lulus,kjur FROM nilai_ujian_masuk WHERE no_formulir='$no_formulir' AND ket_lulus='1'";
-    $this->db->setFieldTable (array('nilai','ket_lulus','kjur'));
+    $this->db->setFieldTable (array('nilai', 'ket_lulus', 'kjur'));
     $result=$this->db->getRecord($str);
     $nilai=false;
     if (isset($result[1])) {				
@@ -64,7 +64,7 @@ class Logic_Mahasiswa extends Logic_Global {
   public function isMhsRegistered ($tanpaprodi=false) {
     $no_formulir=$this->DataMHS['no_formulir'];
     $kjur=isset($this->DataMHS['kjur'])?$this->DataMHS['kjur']:'';
-    $bool=$tanpaprodi==true?$this->db->checkRecordIsExist('no_formulir','register_mahasiswa', $no_formulir):$this->db->checkRecordIsExist('no_formulir','register_mahasiswa', $no_formulir," AND kjur=$kjur");
+    $bool=$tanpaprodi==true?$this->db->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir):$this->db->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir," AND kjur=$kjur");
     
     return $bool;
 
@@ -75,7 +75,7 @@ class Logic_Mahasiswa extends Logic_Global {
   */
   public function isNoFormulirExist() {		
     $no_formulir=$this->DataMHS['no_formulir'];        
-    $bool=$this->db->checkRecordIsExist('no_formulir','formulir_pendaftaran', $no_formulir);			
+    $bool=$this->db->checkRecordIsExist('no_formulir', 'formulir_pendaftaran', $no_formulir);			
     return $bool;			
     
   }
@@ -106,7 +106,7 @@ class Logic_Mahasiswa extends Logic_Global {
   public function getKelasMhs () {
     $nim = $this->DataMHS['nim'];
     $str = "SELECT d.tahun,d.idsmt,k.idkelas,k.nkelas FROM kelas k,dulang d WHERE k.idkelas=d.idkelas AND d.iddulang=(SELECT MAX(iddulang) FROM dulang WHERE nim='$nim')";
-    $this->db->setFieldTable(array('tahun','idsmt','idkelas','nkelas'));					
+    $this->db->setFieldTable(array('tahun', 'idsmt', 'idkelas', 'nkelas'));					
     $r=$this->db->getRecord($str);					
     if (isset($r[1])) {						
       $kelas['idkelas']=$r[1]['idkelas'];
@@ -123,11 +123,11 @@ class Logic_Mahasiswa extends Logic_Global {
       }
     }else {
       $str = "SELECT fp.idkelas AS idkelas_fp,k.nkelas AS nkelas_fp,rm.idkelas AS idkelas_rm,k2.nkelas AS nkelas_rm FROM formulir_pendaftaran fp LEFT JOIN kelas k ON (fp.idkelas=k.idkelas) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir) LEFT JOIN kelas k2 ON (k2.idkelas=rm.idkelas) WHERE rm.nim='$nim'"; 						
-      $this->db->setFieldTable(array('idkelas_fp','nkelas_fp','idkelas_rm','nkelas_rm'));
+      $this->db->setFieldTable(array('idkelas_fp', 'nkelas_fp', 'idkelas_rm', 'nkelas_rm'));
       $r2=$this->db->getRecord($str);
       if (isset($r2[1])) {
-        $kelas['idkelas']=$r2[1]['idkelas_rm']==''?$r2[1]['idkelas_fp']:$r2[1]['idkelas_rm'];
-        $kelas['nkelas']=$r2[1]['idkelas_rm']==''?$r2[1]['nkelas_fp']:$r2[1]['nkelas_rm'];;
+        $kelas['idkelas']=$r2[1]['idkelas_rm']== ''?$r2[1]['idkelas_fp']:$r2[1]['idkelas_rm'];
+        $kelas['nkelas']=$r2[1]['idkelas_rm']== ''?$r2[1]['nkelas_fp']:$r2[1]['nkelas_rm'];;
       }
     }
     return $kelas;
@@ -150,16 +150,16 @@ class Logic_Mahasiswa extends Logic_Global {
   public function getJumlahSeluruhMHS ($k_status=null) {
     $jumlah=0;
     switch ($k_status) {
-      case 'A' :
+      case 'A':
         $jumlah=$this->db->getCountRowsOfTable("register_mahasiswa WHERE k_status='A'",'nim');		            
       break;            
-      case 'L' :                
+      case 'L':                
         $jumlah=$this->db->getCountRowsOfTable("register_mahasiswa WHERE k_status='L'",'nim');		            
       break;  
-      case 'C' :                
+      case 'C':                
         $jumlah=$this->db->getCountRowsOfTable("register_mahasiswa WHERE k_status='C'",'nim');		            
       break;
-      case 'N' :                
+      case 'N':                
         $jumlah=$this->db->getCountRowsOfTable("register_mahasiswa WHERE k_status='N'",'nim');		            
       break;
     }
@@ -175,13 +175,13 @@ class Logic_Mahasiswa extends Logic_Global {
   public function updateRegisterMHS ($mode, $status=null, $kelas=null) {		
     $nim = $this->DataMHS['nim'];
     switch ($mode) {
-      case 'status' :
+      case 'status':
         $str = "UPDATE register_mahasiswa SET k_status='$status' WHERE nim='$nim'";
       break;
-      case 'kelas' :
+      case 'kelas':
         $str = "UPDATE register_mahasiswa SET idkelas='$kelas' WHERE nim='$nim'";
       break;			
-      case 'all' :
+      case 'all':
         $str = "UPDATE register_mahasiswa SET idkelas='$kelas',status='$status' WHERE nim='$nim'";
       break;			
     }		
@@ -197,7 +197,7 @@ class Logic_Mahasiswa extends Logic_Global {
   {
     $nim = $this->DataMHS['nim'];
     $str = "SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND idsmt='$idsmt' AND tahun='$tahun'";			
-    $this->db->setFieldTable(array('iddulang','nim','tahun','idsmt','tanggal','idkelas','status_sebelumnya','k_status'));
+    $this->db->setFieldTable(array('iddulang', 'nim', 'tahun', 'idsmt', 'tanggal', 'idkelas', 'status_sebelumnya', 'k_status'));
     $r=$this->db->getRecord($str);						        
     if (isset($r[1])) {				            
       return $r[1];
@@ -215,7 +215,7 @@ class Logic_Mahasiswa extends Logic_Global {
     $nim = $this->DataMHS['nim'];
     $current_tasmt=$tahun.$idsmt;
     $str = ($this->getDataMHS('tahun_masuk')==$tahun&&$this->getDataMHS('semester_masuk')==$idsmt)?"SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND tasmt <= $current_tasmt ORDER BY iddulang DESC LIMIT 1":"SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND tasmt < $current_tasmt ORDER BY iddulang DESC LIMIT 1";
-    $this->db->setFieldTable(array('iddulang','nim','tahun','idsmt','tanggal','idkelas','status_sebelumnya','k_status'));
+    $this->db->setFieldTable(array('iddulang', 'nim', 'tahun', 'idsmt', 'tanggal', 'idkelas', 'status_sebelumnya', 'k_status'));
     $r=$this->db->getRecord($str);						        
     if (isset($r[1])) {				            
       return $r[1];

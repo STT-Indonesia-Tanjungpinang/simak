@@ -19,12 +19,12 @@ class CStopInputNilai extends MainPageON{
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
 
-            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
             $this->tbCmbTA->DataSource = $ta;					
             $this->tbCmbTA->Text = $_SESSION['ta'];						
             $this->tbCmbTA->dataBind();
 
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
             $this->tbCmbSemester->DataSource = $semester;
             $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
@@ -70,30 +70,30 @@ class CStopInputNilai extends MainPageON{
 		$_SESSION['currentPageStopInputNilai']['search']=true;
 		$this->populateData($_SESSION['currentPageStopInputNilai']['search']);
 	}
-	protected function populateData ($search=false){
+	protected function populateData($search = false){
 		$ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];
         $kjur = $_SESSION['kjur'];        
         
         if ($search) {
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nidn' :
+                case 'nidn':
                     $clausa=" AND vpp.nidn='$txtsearch'";  
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
                 break;
-                case 'kmatkul' :
+                case 'kmatkul':
                     $clausa="AND vpp.kmatkul LIKE '%$txtsearch%'";  
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
                 break;
-                case 'nmatkul' :
+                case 'nmatkul':
                     $clausa="AND vpp.nmatkul LIKE '%$txtsearch%'";  
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');
                 break;
-                case 'nama_dosen' :
+                case 'nama_dosen':
                     $clausa="AND vpp.nama_dosen LIKE '%$txtsearch%'";   
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan AND idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'km.idkelas_mhs');

@@ -18,11 +18,11 @@ class CKuesioner extends MainPageM {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();
             
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -74,14 +74,14 @@ class CKuesioner extends MainPageM {
 		$_SESSION['currentPageKuesioner']['search']=true;
 		$this->populateData($_SESSION['currentPageKuesioner']['search']);
 	}
-	public function populateData($search=false) {				
+	public function populateData($search = false) {				
 		$ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
 		$kjur = $_SESSION['kjur'];		
         if ($search) {            
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) { 
-                case 'kmatkul' :
+                case 'kmatkul':
                     $clausa=" AND kmatkul LIKE '%$txtsearch%'";                    
                     $str="SELECT vpp.idpengampu_penyelenggaraan,vpp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa",'vpp.idpengampu_penyelenggaraan');						
@@ -142,16 +142,16 @@ class CKuesioner extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
 		switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $tahun = $_SESSION['ta'];
                 $semester = $_SESSION['semester'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);

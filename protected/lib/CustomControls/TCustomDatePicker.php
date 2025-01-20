@@ -102,7 +102,7 @@ class TCustomDatePicker extends TTextBox
 	 */
 	public function getDateFormat()
 	{
-		return $this->getViewState('DateFormat','dd-MM-yyyy');
+		return $this->getViewState('DateFormat', 'dd-MM-yyyy');
 	}
 
 	/**
@@ -298,7 +298,7 @@ class TCustomDatePicker extends TTextBox
 	 */
 	public function getTimeStamp()
 	{
-		if(trim($this->getText())==='')
+		if(trim($this->getText())=== '')
 			return null;
 		else
 			return $this->getTimeStampFromText();
@@ -310,7 +310,7 @@ class TCustomDatePicker extends TTextBox
 	 */
 	public function setTimeStamp($value)
 	{
-		if($value===null || (is_string($value) && trim($value)===''))
+		if($value===null || (is_string($value) && trim($value)=== ''))
 			$this->setText('');
 		else
 		{
@@ -513,7 +513,7 @@ class TCustomDatePicker extends TTextBox
 		//$date = @mktime(0, 0, 0, $month, $day, $year);
 
 		$pattern = $this->getDateFormat();
-		$pattern = str_replace(array('MMMM', 'MMM'), array('MM','MM'), $pattern);
+		$pattern = str_replace(array('MMMM', 'MMM'), array('MM', 'MM'), $pattern);
 		$formatter = Prado::createComponent('System.Util.TSimpleDateFormatter', $pattern);
 		return $formatter->format($date);
 	}
@@ -528,7 +528,7 @@ class TCustomDatePicker extends TTextBox
 		$options['InputMode'] = $this->getInputMode();
 		$options['Format'] = $this->getDateFormat();
 		$options['FirstDayOfWeek'] = $this->getFirstDayOfWeek();
-		if(($cssClass = $this->getCssClass())!=='')
+		if(($cssClass = $this->getCssClass())!== '')
 			$options['ClassName'] = $cssClass;
 		$options['CalendarStyle'] = $this->getCalendarStyle();
 		$options['FromYear'] = $this->getFromYear();
@@ -659,7 +659,7 @@ class TCustomDatePicker extends TTextBox
 	protected function getTimeStampFromText()
 	{
 		$pattern = $this->getDateFormat();
-		$pattern = str_replace(array('MMMM', 'MMM'), array('MM','MM'), $pattern);
+		$pattern = str_replace(array('MMMM', 'MMM'), array('MM', 'MM'), $pattern);
 		$formatter = Prado::createComponent('System.Util.TSimpleDateFormatter', $pattern);
 		return $formatter->parse($this->getText());
 	}

@@ -8,11 +8,11 @@ class CProfiles extends MainPageDW {
             if (!isset($_SESSION['currentPageCache'])||$_SESSION['currentPageCache']['page_name']!='dw.settings.Profiles') {
 				$_SESSION['currentPageCache']=array('page_name'=>'dw.settings.Profiles', 'page_num'=>0);												
 			}            
-            $this->populateData ();
+            $this->populateData();
 		}
         
 	}   
-    public function populateData () {
+    public function populateData() {
         $this->cmbTheme->DataSource = $this->setup->getListThemes();
         $this->cmbTheme->Text = $_SESSION['theme'];
         $this->cmbTheme->DataBind();

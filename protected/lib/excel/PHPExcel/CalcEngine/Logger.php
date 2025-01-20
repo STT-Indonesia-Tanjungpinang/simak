@@ -121,12 +121,12 @@ class PHPExcel_CalcEngine_Logger
             $cellReference = implode(' -> ', $this->cellStack->showStack());
             if ($this->echoDebugLog) {
                 echo $cellReference,
-                    ($this->cellStack->count() > 0 ? ' => ' : ''),
+                    ($this->cellStack->count() > 0 ? ' => ': ''),
                     $message,
                     PHP_EOL;
             }
             $this->debugLog[] = $cellReference .
-                ($this->cellStack->count() > 0 ? ' => ' : '') .
+                ($this->cellStack->count() > 0 ? ' => ': '') .
                 $message;
         }
     }

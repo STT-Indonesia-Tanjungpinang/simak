@@ -37,7 +37,7 @@ class CPengumuman extends MainPageMHS {
 		$_SESSION['currentPagePengumuman']['page_num'] = $param->NewPageIndex;
 		$this->populateNewsFeed($_SESSION['currentPagePengumuman']['search']);
 	}
-    public function populateNewsFeed ($search=false) {
+    public function populateNewsFeed ($search = false) {
         if ($search) {  
             
         }else{
@@ -59,7 +59,7 @@ class CPengumuman extends MainPageMHS {
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
             switch ($v['tipe']) {
-                case 'mh' :                    
+                case 'mh':                    
                     $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$v['userid']));
                 break;
                 default :
@@ -75,7 +75,7 @@ class CPengumuman extends MainPageMHS {
         
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
     }    
-    public function populateUnread ($search=false) {
+    public function populateUnread ($search = false) {
         if ($search) {  
             
         }else{

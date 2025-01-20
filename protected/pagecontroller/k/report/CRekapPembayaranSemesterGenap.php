@@ -17,7 +17,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
 			$this->tbCmbPs->dataBind();	            
             
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');;
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');;
             $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();
             
@@ -74,7 +74,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
 		$_SESSION['currentPageRekapPembayaranSemesterGenap']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageRekapPembayaranSemesterGenap']['search']);
 	}		
-	public function populateData($search=false) {		
+	public function populateData($search = false) {		
 		$ta = $_SESSION['ta'];
         $tahun_masuk = $_SESSION['tahun_masuk'];     
 		$semester = $_SESSION['currentPageRekapPembayaranSemesterGenap']['semester'];
@@ -166,7 +166,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
     }
     public function refreshRecord($sender, $param) {
         $idrekap = $this->getDataKeyField($sender, $this->RepeaterS);
-        $str = "SELECT nim,tahun_masuk,semester_masuk,idsmt,tahun,idkelas FROM rekap_laporan_pembayaran_per_semester WHERE idrekap=$idrekap";
+        $str = "SELECT nim,tahun_masuk,semester_masuk,idsmt,tahun,idkelas FROM rekap_laporan_pembayaran_per_semester WHERE idrekap = $idrekap";
         $this->DB->setFieldTable(array('nim', 'tahun_masuk', 'semester_masuk', 'idsmt', 'tahun', 'idkelas'));
         $r = $this->DB->getRecord($str);   
         $nim = $r[1]['nim'];
@@ -179,7 +179,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $r2=$this->DB->getRecord($str2);
         $dibayarkan = $r2[1]['dibayarkan']> 0 ? $r2[1]['dibayarkan']:0;
         $sisa = $kewajiban-$dibayarkan;
-        $str = "UPDATE rekap_laporan_pembayaran_per_semester SET dibayarkan='$dibayarkan', kewajiban='$kewajiban', sisa='$sisa' WHERE idrekap=$idrekap";
+        $str = "UPDATE rekap_laporan_pembayaran_per_semester SET dibayarkan='$dibayarkan', kewajiban='$kewajiban', sisa='$sisa' WHERE idrekap = $idrekap";
         $this->DB->updateRecord($str);
         
         $this->redirect('report.RekapPembayaranSemesterGenap', true);
@@ -189,13 +189,13 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
@@ -217,7 +217,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
                 
                 $this->report->printRekapPembayaranSemester($this->Finance); 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

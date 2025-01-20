@@ -167,8 +167,8 @@ class PHPExcel_ReferenceHelper
     {
         $aBreaks = $pSheet->getBreaks();
         ($pNumCols > 0 || $pNumRows > 0) ?
-            uksort($aBreaks, array('PHPExcel_ReferenceHelper','cellReverseSort')) :
-            uksort($aBreaks, array('PHPExcel_ReferenceHelper','cellSort'));
+            uksort($aBreaks, array('PHPExcel_ReferenceHelper', 'cellReverseSort')) :
+            uksort($aBreaks, array('PHPExcel_ReferenceHelper', 'cellSort'));
 
         foreach ($aBreaks as $key => $value) {
             if (self::cellAddressInDeleteRange($key, $beforeRow, $pNumRows, $beforeColumnIndex, $pNumCols)) {
@@ -227,7 +227,7 @@ class PHPExcel_ReferenceHelper
     protected function adjustHyperlinks($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
         $aHyperlinkCollection = $pSheet->getHyperlinkCollection();
-        ($pNumCols > 0 || $pNumRows > 0) ? uksort($aHyperlinkCollection, array('PHPExcel_ReferenceHelper','cellReverseSort')) : uksort($aHyperlinkCollection, array('PHPExcel_ReferenceHelper','cellSort'));
+        ($pNumCols > 0 || $pNumRows > 0) ? uksort($aHyperlinkCollection, array('PHPExcel_ReferenceHelper', 'cellReverseSort')) : uksort($aHyperlinkCollection, array('PHPExcel_ReferenceHelper', 'cellSort'));
 
         foreach ($aHyperlinkCollection as $key => $value) {
             $newReference = $this->updateCellReference($key, $pBefore, $pNumCols, $pNumRows);
@@ -251,7 +251,7 @@ class PHPExcel_ReferenceHelper
     protected function adjustDataValidations($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
         $aDataValidationCollection = $pSheet->getDataValidationCollection();
-        ($pNumCols > 0 || $pNumRows > 0) ? uksort($aDataValidationCollection, array('PHPExcel_ReferenceHelper','cellReverseSort')) : uksort($aDataValidationCollection, array('PHPExcel_ReferenceHelper','cellSort'));
+        ($pNumCols > 0 || $pNumRows > 0) ? uksort($aDataValidationCollection, array('PHPExcel_ReferenceHelper', 'cellReverseSort')) : uksort($aDataValidationCollection, array('PHPExcel_ReferenceHelper', 'cellSort'));
         
         foreach ($aDataValidationCollection as $key => $value) {
             $newReference = $this->updateCellReference($key, $pBefore, $pNumCols, $pNumRows);
@@ -297,8 +297,8 @@ class PHPExcel_ReferenceHelper
     {
         $aProtectedCells = $pSheet->getProtectedCells();
         ($pNumCols > 0 || $pNumRows > 0) ?
-            uksort($aProtectedCells, array('PHPExcel_ReferenceHelper','cellReverseSort')) :
-            uksort($aProtectedCells, array('PHPExcel_ReferenceHelper','cellSort'));
+            uksort($aProtectedCells, array('PHPExcel_ReferenceHelper', 'cellReverseSort')) :
+            uksort($aProtectedCells, array('PHPExcel_ReferenceHelper', 'cellSort'));
         foreach ($aProtectedCells as $key => $value) {
             $newReference = $this->updateCellReference($key, $pBefore, $pNumCols, $pNumRows);
             if ($key != $newReference) {
@@ -651,14 +651,14 @@ class PHPExcel_ReferenceHelper
                 $matchCount = preg_match_all('/'.self::REFHELPER_REGEXP_ROWRANGE.'/i', ' '.$formulaBlock.' ', $matches, PREG_SET_ORDER);
                 if ($matchCount > 0) {
                     foreach ($matches as $match) {
-                        $fromString = ($match[2] > '') ? $match[2].'!' : '';
+                        $fromString = ($match[2] > '') ? $match[2].'!': '';
                         $fromString .= $match[3].':'.$match[4];
                         $modified3 = substr($this->updateCellReference('$A'.$match[3], $pBefore, $pNumCols, $pNumRows), 2);
                         $modified4 = substr($this->updateCellReference('$A'.$match[4], $pBefore, $pNumCols, $pNumRows), 2);
 
                         if ($match[3].':'.$match[4] !== $modified3.':'.$modified4) {
                             if (($match[2] == '') || (trim($match[2], "'") == $sheetName)) {
-                                $toString = ($match[2] > '') ? $match[2].'!' : '';
+                                $toString = ($match[2] > '') ? $match[2].'!': '';
                                 $toString .= $modified3.':'.$modified4;
                                 //    Max worksheet size is 1,048,576 rows by 16,384 columns in Excel 2007, so our adjustments need to be at least one digit more
                                 $column = 100000;
@@ -676,14 +676,14 @@ class PHPExcel_ReferenceHelper
                 $matchCount = preg_match_all('/'.self::REFHELPER_REGEXP_COLRANGE.'/i', ' '.$formulaBlock.' ', $matches, PREG_SET_ORDER);
                 if ($matchCount > 0) {
                     foreach ($matches as $match) {
-                        $fromString = ($match[2] > '') ? $match[2].'!' : '';
+                        $fromString = ($match[2] > '') ? $match[2].'!': '';
                         $fromString .= $match[3].':'.$match[4];
                         $modified3 = substr($this->updateCellReference($match[3].'$1', $pBefore, $pNumCols, $pNumRows), 0, -2);
                         $modified4 = substr($this->updateCellReference($match[4].'$1', $pBefore, $pNumCols, $pNumRows), 0, -2);
 
                         if ($match[3].':'.$match[4] !== $modified3.':'.$modified4) {
                             if (($match[2] == '') || (trim($match[2], "'") == $sheetName)) {
-                                $toString = ($match[2] > '') ? $match[2].'!' : '';
+                                $toString = ($match[2] > '') ? $match[2].'!': '';
                                 $toString .= $modified3.':'.$modified4;
                                 //    Max worksheet size is 1,048,576 rows by 16,384 columns in Excel 2007, so our adjustments need to be at least one digit more
                                 $column = PHPExcel_Cell::columnIndexFromString(trim($match[3], '$')) + 100000;
@@ -701,14 +701,14 @@ class PHPExcel_ReferenceHelper
                 $matchCount = preg_match_all('/'.self::REFHELPER_REGEXP_CELLRANGE.'/i', ' '.$formulaBlock.' ', $matches, PREG_SET_ORDER);
                 if ($matchCount > 0) {
                     foreach ($matches as $match) {
-                        $fromString = ($match[2] > '') ? $match[2].'!' : '';
+                        $fromString = ($match[2] > '') ? $match[2].'!': '';
                         $fromString .= $match[3].':'.$match[4];
                         $modified3 = $this->updateCellReference($match[3], $pBefore, $pNumCols, $pNumRows);
                         $modified4 = $this->updateCellReference($match[4], $pBefore, $pNumCols, $pNumRows);
 
                         if ($match[3].$match[4] !== $modified3.$modified4) {
                             if (($match[2] == '') || (trim($match[2], "'") == $sheetName)) {
-                                $toString = ($match[2] > '') ? $match[2].'!' : '';
+                                $toString = ($match[2] > '') ? $match[2].'!': '';
                                 $toString .= $modified3.':'.$modified4;
                                 list($column, $row) = PHPExcel_Cell::coordinateFromString($match[3]);
                                 //    Max worksheet size is 1,048,576 rows by 16,384 columns in Excel 2007, so our adjustments need to be at least one digit more
@@ -728,13 +728,13 @@ class PHPExcel_ReferenceHelper
 
                 if ($matchCount > 0) {
                     foreach ($matches as $match) {
-                        $fromString = ($match[2] > '') ? $match[2].'!' : '';
+                        $fromString = ($match[2] > '') ? $match[2].'!': '';
                         $fromString .= $match[3];
 
                         $modified3 = $this->updateCellReference($match[3], $pBefore, $pNumCols, $pNumRows);
                         if ($match[3] !== $modified3) {
                             if (($match[2] == '') || (trim($match[2], "'") == $sheetName)) {
-                                $toString = ($match[2] > '') ? $match[2].'!' : '';
+                                $toString = ($match[2] > '') ? $match[2].'!': '';
                                 $toString .= $modified3;
                                 list($column, $row) = PHPExcel_Cell::coordinateFromString($match[3]);
                                 //    Max worksheet size is 1,048,576 rows by 16,384 columns in Excel 2007, so our adjustments need to be at least one digit more
@@ -783,10 +783,10 @@ class PHPExcel_ReferenceHelper
         if (strpos($pCellRange, "!") !== false) {
             return $pCellRange;
         // Is it a range or a single cell?
-        } elseif (strpos($pCellRange, ':') === false && strpos($pCellRange, ',') === false) {
+        } elseif (strpos($pCellRange, ':') === false && strpos($pCellRange, ', ') === false) {
             // Single cell
             return $this->updateSingleCellReference($pCellRange, $pBefore, $pNumCols, $pNumRows);
-        } elseif (strpos($pCellRange, ':') !== false || strpos($pCellRange, ',') !== false) {
+        } elseif (strpos($pCellRange, ':') !== false || strpos($pCellRange, ', ') !== false) {
             // Range
             return $this->updateCellRange($pCellRange, $pBefore, $pNumCols, $pNumRows);
         } else {
@@ -835,7 +835,7 @@ class PHPExcel_ReferenceHelper
      */
     private function updateCellRange($pCellRange = 'A1:A1', $pBefore = 'A1', $pNumCols = 0, $pNumRows = 0)
     {
-        if (strpos($pCellRange, ':') !== false || strpos($pCellRange, ',') !== false) {
+        if (strpos($pCellRange, ':') !== false || strpos($pCellRange, ', ') !== false) {
             // Update range
             $range = PHPExcel_Cell::splitRange($pCellRange);
             $ic = count($range);
@@ -873,7 +873,7 @@ class PHPExcel_ReferenceHelper
      */
     private function updateSingleCellReference($pCellReference = 'A1', $pBefore = 'A1', $pNumCols = 0, $pNumRows = 0)
     {
-        if (strpos($pCellReference, ':') === false && strpos($pCellReference, ',') === false) {
+        if (strpos($pCellReference, ':') === false && strpos($pCellReference, ', ') === false) {
             // Get coordinates of $pBefore
             list($beforeColumn, $beforeRow) = PHPExcel_Cell::coordinateFromString($pBefore);
 

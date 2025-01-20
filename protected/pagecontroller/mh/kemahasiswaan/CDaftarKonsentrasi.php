@@ -19,7 +19,7 @@ class CDaftarKonsentrasi extends MainPageMHS {
             $this->populateData();
 		}        
 	}   
-    public function populateData () {
+    public function populateData() {
         $nim = $this->Pengguna->getDataUser('nim');
         $str = "SELECT idkonsentrasi,jumlah_sks,tahun,idsmt,status_daftar FROM pendaftaran_konsentrasi WHERE nim='$nim'";
         $this->DB->setFieldTable(array('idkonsentrasi', 'jumlah_sks', 'tahun', 'idsmt', 'status_daftar'));
@@ -27,8 +27,8 @@ class CDaftarKonsentrasi extends MainPageMHS {
         
         if (isset($r[1])){
             $this->cmbKonsentrasiProdi->Text = $r[1]['idkonsentrasi'];
-            $this->cmbKonsentrasiProdi->Enabled=false;
-            $this->btnDaftarKonsentrasi->Enabled=false;            
+            $this->cmbKonsentrasiProdi->Enabled = false;
+            $this->btnDaftarKonsentrasi->Enabled = false;            
         }
     }
     public function mendaftarKonsentrasi($sender, $param) {

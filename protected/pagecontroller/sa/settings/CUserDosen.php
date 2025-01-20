@@ -25,22 +25,22 @@ class CUserDosen extends MainPageSA {
 		$_SESSION['currentPageUserDosen']['search']=true;
         $this->populateData($_SESSION['currentPageUserDosen']['search']);
 	}    
-	protected function populateData ($search=false) {
+	protected function populateData($search = false) {
         if ($search) {
             $str = "SELECT u.userid,u.username,u.nama,u.email,ug.group_name,u.active,u.foto,u.logintime FROM user u LEFT JOIN user_group ug ON (ug.group_id=u.group_id) WHERE page='d'";			
             $txtsearch=$this->txtKriteria->Text;
             switch ($this->cmbKriteria->Text) {
-                case 'username' :
+                case 'username':
                     $clausa="AND username='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND nama LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
-                case 'email' :
+                case 'email':
                     $clausa="AND email LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";

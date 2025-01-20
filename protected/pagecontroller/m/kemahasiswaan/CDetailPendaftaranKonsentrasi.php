@@ -30,14 +30,14 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
                     throw new Exception ("Mahasiswa dengan NIM ($nim) belum memilih konsentrasi.");		
                 }
                 if ($r[1]['status_daftar']==1) {
-                    $this->cmbKonsentrasiProdi->Enabled=false;
-                    $this->btnApproved->Enabled=false;
+                    $this->cmbKonsentrasiProdi->Enabled = false;
+                    $this->btnApproved->Enabled = false;
                     $this->btnApproved->CssClass='btn';
                 }else{
-                    $this->btnUnApproved->Enabled=false;
+                    $this->btnUnApproved->Enabled = false;
                     $this->btnUnApproved->CssClass='btn';
                 }                
-                $this->cmbKonsentrasiProdi->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListKonsentrasiProgramStudi($datamhs['kjur']),'none');
+                $this->cmbKonsentrasiProdi->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListKonsentrasiProgramStudi($datamhs['kjur']), 'none');
                 $this->cmbKonsentrasiProdi->Text = $r[1]['idkonsentrasi'];
                 $this->cmbKonsentrasiProdi->DataBind();
                 

@@ -8,7 +8,7 @@ class CDetailPendaftaranOnline extends MainPageM {
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailPendaftaranOnline'])||$_SESSION['currentPageDetailPendaftaranOnline']['page_name']!='m.spmb.DetailPendaftaranOnline') {
-				$_SESSION['currentPageDetailPendaftaranOnline']=array('page_name'=>'m.spmb.DetailPendaftaranOnline', 'page_num'=>0,'DataMHS'=>array(),'activeviewindex'=>0);												
+				$_SESSION['currentPageDetailPendaftaranOnline']=array('page_name'=>'m.spmb.DetailPendaftaranOnline', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
 			}
 
             $this->MVDetailPendaftaranOnline->ActiveViewIndex=$_SESSION['currentPageDetailPendaftaranOnline']['activeviewindex'];             
@@ -106,7 +106,7 @@ class CDetailPendaftaranOnline extends MainPageM {
 	}	
     public function changePs($sender, $param) {        
         if ($sender->Text == 'none') {
-            $this->cmbKjur2->Enabled=false;	
+            $this->cmbKjur2->Enabled = false;	
             $this->cmbKjur2->Text='none';
         }else{			            
             $this->cmbKjur2->Enabled=true;
@@ -120,8 +120,8 @@ class CDetailPendaftaranOnline extends MainPageM {
         if ($this->IsValid) {
             $old_no_formulir = $this->hiddennopendaftaran->Value;
             $no_formulir=  addslashes($this->txtNoFormulir->Text);            
-            $kjur1=$this->cmbKjur1->Text;            
-            $kjur2=($this->cmbKjur2->Text == 'none' || $this->cmbKjur2->Text == '')?0:$this->cmbKjur2->Text;
+            $kjur1 = $this->cmbKjur1->Text;            
+            $kjur2 = ($this->cmbKjur2->Text == 'none' || $this->cmbKjur2->Text == '')?0:$this->cmbKjur2->Text;
             
             $str = "SELECT tahun_masuk,semester_masuk,idkelas FROM pin WHERE no_formulir = $no_formulir";
             $this->DB->setFieldTable(array('tahun_masuk', 'semester_masuk', 'idkelas'));

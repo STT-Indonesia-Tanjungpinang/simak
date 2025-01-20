@@ -10,16 +10,16 @@ class Logic_ReportSPMB extends Logic_Report {
     public function printFormulirPendaftaran ($daftar_ps, $objDMaster) {
         $no_formulir=$this->dataReport['no_formulir'];
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,jp.nama_pekerjaan,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
-        $this->db->setFieldTable(array('no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','jk','idagama','nama_agama','nama_ibu_kandung','idwarga','nik','idstatus','alamat_kantor','alamat_rumah','telp_rumah','telp_kantor','telp_hp','email','idjp','nama_pekerjaan','pendidikan_terakhir','jurusan','kota','provinsi','tahun_pa','nama_pekerjaan','jenis_slta','asal_slta','status_slta','nomor_ijazah','kjur1','kjur2','idkelas','waktu_mendaftar','ta','idsmt'));
+        $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_agama', 'nama_ibu_kandung', 'idwarga', 'nik', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'nama_pekerjaan', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
         $r=$this->db->getRecord($str);
         
         $datamhs = $r[1];
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :                
+            case 'excel2003':               
+            case 'excel2007':                
 
             break;
-            case 'pdf' :                
+            case 'pdf':                
                 $rpt=$this->rpt;
                 $rpt->setTitle('Formulir Pendaftaran Mahasiswa');
                 $rpt->setSubject('Formulir Pendaftaran Mahasiswa');
@@ -28,12 +28,12 @@ class Logic_ReportSPMB extends Logic_Report {
 
                 $row=$this->currentRow;
                 $row+=6;
-                $rpt->SetFont ('helvetica','B',12);	
+                $rpt->SetFont ('helvetica', 'B',12);	
                 $rpt->setXY(3, $row);			
                 $kartu='Formulir Pendaftaran Mahasiswa Baru';
                 $rpt->Cell(120, $row, $kartu,0,0,'C');
 
-                $rpt->SetFont ('helvetica','',8);	
+                $rpt->SetFont ('helvetica', '',8);	
                 $row+=15;
                 $rpt->setXY(3, $row);			
                 $rpt->Cell(40,5,'No Formulir',1,0);
@@ -50,7 +50,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $row+=5;				
                 $rpt->setXY(3, $row);			
                 $rpt->Cell(40,5,'Tanggal Lahir',1,0);				
-                $tgl=$datamhs['tanggal_lahir']==''?': -':$this->tgl->tanggal('l, j F Y', $datamhs['tanggal_lahir'],1,0);
+                $tgl=$datamhs['tanggal_lahir']== ''?': -':$this->tgl->tanggal('l, j F Y', $datamhs['tanggal_lahir'],1,0);
                 $rpt->Cell(80,5,": $tgl",1,0);
                 $row+=5;				
                 $rpt->setXY(3, $row);			
@@ -166,44 +166,44 @@ class Logic_ReportSPMB extends Logic_Report {
         $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
         switch ($this->dataReport['status_dulang'])
         {
-            case 'belum' :
+            case 'belum':
                 $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
                 $str_status= " AND rm.nim IS NULL";
             break;
-            case 'sudah' :
+            case 'sudah':
                 $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
                 $str_status= " AND rm.nim IS NOT NULL";
             break;
-            case 'kjur1' :
+            case 'kjur1':
                 $str_kjur = " AND fp.kjur1='$kjur'";
-                $str_status= '';
+                $str_status = '';
             break;
-            case 'kjur1_belum_dulang' :
+            case 'kjur1_belum_dulang':
                 $str_kjur = " AND fp.kjur1='$kjur'";
-                $str_status= ' AND rm.nim IS NULL';
+                $str_status = ' AND rm.nim IS NULL';
             break;
-            case 'kjur1_sudah_dulang' :
+            case 'kjur1_sudah_dulang':
                 $str_kjur = " AND fp.kjur1='$kjur'";
-                $str_status= ' AND rm.nim IS NOT NULL';
+                $str_status = ' AND rm.nim IS NOT NULL';
             break;
-            case 'kjur2' :
+            case 'kjur2':
                 $str_kjur = " AND fp.kjur2='$kjur'";
-                $str_status= '';
+                $str_status = '';
             break;
-            case 'kjur2_belum_dulang' :
+            case 'kjur2_belum_dulang':
                 $str_kjur = " AND fp.kjur2='$kjur'";
-                $str_status= ' AND rm.nim IS NULL';
+                $str_status = ' AND rm.nim IS NULL';
             break;
-            case 'kjur2_sudah_dulang' :
+            case 'kjur2_sudah_dulang':
                 $str_kjur = " AND fp.kjur2='$kjur'";
-                $str_status= ' AND rm.nim IS NOT NULL';
+                $str_status = ' AND rm.nim IS NOT NULL';
             break;            
         }            
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' : 
+            case 'excel2003':               
+            case 'excel2007': 
                 $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,fp.nama_ibu_kandung,a.nama_agama,nik,fp.idwarga,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,jp.nama_pekerjaan,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND ta='$tahun_masuk' AND idsmt='$semester'$str_kjur AND daftar_via='$daftar_via'$str_status";
-                $this->db->setFieldTable(array('no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','jk','idagama','nama_ibu_kandung','nama_agama','nik','idwarga','idstatus','alamat_kantor','alamat_rumah','telp_rumah','telp_kantor','telp_hp','email','idjp','nama_pekerjaan','pendidikan_terakhir','jurusan','kota','provinsi','tahun_pa','nama_pekerjaan','jenis_slta','asal_slta','status_slta','nomor_ijazah','kjur1','kjur2','idkelas','waktu_mendaftar','ta','idsmt'));
+                $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_ibu_kandung', 'nama_agama', 'nik', 'idwarga', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'nama_pekerjaan', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
                 $r=$this->db->getRecord($str);
                 
                 $this->setHeaderPT('Z');
@@ -251,33 +251,33 @@ class Logic_ReportSPMB extends Logic_Report {
                 $sheet->getColumnDimension('Z')->setWidth(30);
                 $sheet->getColumnDimension('AA')->setWidth(17);
                                 
-                $sheet->setCellValue('A10','NO');				
-                $sheet->setCellValue('B10','NO. FORMULIR');
-                $sheet->setCellValue('C10','NAMA');
-                $sheet->setCellValue('D10','TEMPAT LAHIR');
-                $sheet->setCellValue('E10','TANGGAL LAHIR');
-                $sheet->setCellValue('F10','JK');
-                $sheet->setCellValue('G10','AGAMA');
-                $sheet->setCellValue('H10','NAMA IBU KANDUNG');
-                $sheet->setCellValue('I10','NIK');
-                $sheet->setCellValue('J10','WARGA NEGARA');
-                $sheet->setCellValue('K10','ALAMAT RUMAH');
-                $sheet->setCellValue('L10','NO. TELP. RUMAH');
-                $sheet->setCellValue('M10','NOMOR HP');
-                $sheet->setCellValue('N10','STATUS KEPEGAWAIAN');
-                $sheet->setCellValue('O10','NO. TELP. KANTOR');
-                $sheet->setCellValue('P10','PEKERJAAN ORANG TUA');
-                $sheet->setCellValue('Q10','PENDIDIKAN TERAKHIR');
-                $sheet->setCellValue('R10','JURUSAN');
-                $sheet->setCellValue('S10','KAB/KODYA/KOTA');
-                $sheet->setCellValue('T10','PROVINSI');
-                $sheet->setCellValue('U10','JENIS SLTA');
-                $sheet->setCellValue('V10','ASAL SLTA');
-                $sheet->setCellValue('W10','STATUS SLTA');
-                $sheet->setCellValue('X10','NOMOR IJAZAH');
-                $sheet->setCellValue('Y10','PROGRAM STUDI 1');
-                $sheet->setCellValue('Z10','PROGRAM STUDI 2');
-                $sheet->setCellValue('AA10','KELAS');
+                $sheet->setCellValue('A10', 'NO');				
+                $sheet->setCellValue('B10', 'NO. FORMULIR');
+                $sheet->setCellValue('C10', 'NAMA');
+                $sheet->setCellValue('D10', 'TEMPAT LAHIR');
+                $sheet->setCellValue('E10', 'TANGGAL LAHIR');
+                $sheet->setCellValue('F10', 'JK');
+                $sheet->setCellValue('G10', 'AGAMA');
+                $sheet->setCellValue('H10', 'NAMA IBU KANDUNG');
+                $sheet->setCellValue('I10', 'NIK');
+                $sheet->setCellValue('J10', 'WARGA NEGARA');
+                $sheet->setCellValue('K10', 'ALAMAT RUMAH');
+                $sheet->setCellValue('L10', 'NO. TELP. RUMAH');
+                $sheet->setCellValue('M10', 'NOMOR HP');
+                $sheet->setCellValue('N10', 'STATUS KEPEGAWAIAN');
+                $sheet->setCellValue('O10', 'NO. TELP. KANTOR');
+                $sheet->setCellValue('P10', 'PEKERJAAN ORANG TUA');
+                $sheet->setCellValue('Q10', 'PENDIDIKAN TERAKHIR');
+                $sheet->setCellValue('R10', 'JURUSAN');
+                $sheet->setCellValue('S10', 'KAB/KODYA/KOTA');
+                $sheet->setCellValue('T10', 'PROVINSI');
+                $sheet->setCellValue('U10', 'JENIS SLTA');
+                $sheet->setCellValue('V10', 'ASAL SLTA');
+                $sheet->setCellValue('W10', 'STATUS SLTA');
+                $sheet->setCellValue('X10', 'NOMOR IJAZAH');
+                $sheet->setCellValue('Y10', 'PROGRAM STUDI 1');
+                $sheet->setCellValue('Z10', 'PROGRAM STUDI 2');
+                $sheet->setCellValue('AA10', 'KELAS');
                 $styleArray=array(								
                                     'font' => array('bold' => true),
                                     'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -315,7 +315,7 @@ class Logic_ReportSPMB extends Logic_Report {
                     $sheet->setCellValue("Y$row", $daftar_ps[$v['kjur1']]);
                     $sheet->setCellValue("Z$row", $daftar_ps[$v['kjur2']]);
                     $sheet->setCellValue("AA$row", $objDMaster->getNamaKelasByID ($v['idkelas']));
-                    $this->db->setFieldTable(array('idstatus','alamat_kantor','alamat_rumah','telp_rumah','telp_kantor','telp_hp','email','idjp','pendidikan_terakhir','jurusan','kota','provinsi','tahun_pa','nama_pekerjaan'));
+                    $this->db->setFieldTable(array('idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan'));
                     $row+=1;
                 }
                 $row-=1;
@@ -340,11 +340,11 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                 $this->printOut("pendaftaranmahasiswabaru_$tahun_masuk");
             break;
-            case 'pdf' :     
+            case 'pdf':     
                 $offset=$this->dataReport['offset'];
                 $limit=$this->dataReport['limit'];
                 $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,fp.nama_ibu_kandung,a.nama_agama,nik,fp.idwarga,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,jp.nama_pekerjaan,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND ta='$tahun_masuk' AND idsmt='$semester'$str_kjur AND daftar_via='$daftar_via'$str_status LIMIT $offset, $limit";
-                $this->db->setFieldTable(array('no_formulir','nama_mhs','tempat_lahir','tanggal_lahir','jk','idagama','nama_ibu_kandung','nama_agama','nik','idwarga','idstatus','alamat_kantor','alamat_rumah','telp_rumah','telp_kantor','telp_hp','email','idjp','nama_pekerjaan','pendidikan_terakhir','jurusan','kota','provinsi','tahun_pa','nama_pekerjaan','jenis_slta','asal_slta','status_slta','nomor_ijazah','kjur1','kjur2','idkelas','waktu_mendaftar','ta','idsmt'));
+                $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_ibu_kandung', 'nama_agama', 'nik', 'idwarga', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'nama_pekerjaan', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
                 $r=$this->db->getRecord($str);
                 
                 while (list($k, $v)=each($r)) {
@@ -369,12 +369,12 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                     $row=$this->currentRow;
                     $row+=6;
-                    $rpt->SetFont ('helvetica','B',12);	
+                    $rpt->SetFont ('helvetica', 'B',12);	
                     $rpt->setXY(3, $row);			
                     $kartu='Formulir Pendaftaran Mahasiswa Baru';
                     $rpt->Cell(120, $row, $kartu,0,0,'C');
 
-                    $rpt->SetFont ('helvetica','',8);	
+                    $rpt->SetFont ('helvetica', '',8);	
                     $row+=15;
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(40,5,'No Formulir',1,0);
@@ -391,7 +391,7 @@ class Logic_ReportSPMB extends Logic_Report {
                     $row+=5;				
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(40,5,'Tanggal Lahir',1,0);				
-                    $tgl=$datamhs['tanggal_lahir']==''?': -':$this->tgl->tanggal('l, j F Y', $datamhs['tanggal_lahir'],1,0);
+                    $tgl=$datamhs['tanggal_lahir']== ''?': -':$this->tgl->tanggal('l, j F Y', $datamhs['tanggal_lahir'],1,0);
                     $rpt->Cell(80,5,": $tgl",1,0);
                     $row+=5;				
                     $rpt->setXY(3, $row);			
@@ -507,12 +507,12 @@ class Logic_ReportSPMB extends Logic_Report {
         
         $str_kjur=$kjur=='none'?' AND (num.kjur=0 OR num.kjur IS NULL)':" AND num.kjur=$kjur";	                
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.idkelas,ku.tgl_ujian,ts.nama_tempat,num.kjur,num.jumlah_soal,num.jawaban_benar,num.jawaban_salah,num.nilai,fp.kjur1,fp.kjur2,num.passing_grade_1,num.passing_grade_2,num.kjur AS diterima_di_prodi FROM kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE fp.ta='$tahun_masuk'$str_kjur ORDER BY fp.idkelas ASC,nilai DESC,nama_mhs ASC";
-        $this->db->setFieldTable(array('no_formulir','nama_mhs','idkelas','tgl_ujian','jumlah_soal','jawaban_benar','jawaban_salah','nilai','kjur1','kjur2','passing_grade_1','passing_grade_2','diterima_di_prodi'));				
+        $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'idkelas', 'tgl_ujian', 'jumlah_soal', 'jawaban_benar', 'jawaban_salah', 'nilai', 'kjur1', 'kjur2', 'passing_grade_1', 'passing_grade_2', 'diterima_di_prodi'));				
         $r = $this->db->getRecord($str);        
         
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :    
+            case 'excel2003':               
+            case 'excel2007':    
                 $this->setHeaderPT('M');
                 $sheet=$this->rpt->getActiveSheet();
                 $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -549,19 +549,19 @@ class Logic_ReportSPMB extends Logic_Report {
                 $sheet->getColumnDimension('L')->setWidth(40);
                 $sheet->getColumnDimension('M')->setWidth(12);
                                 
-                $sheet->setCellValue('A10','NO');				
-                $sheet->setCellValue('B10','NO. UJIAN');
-                $sheet->setCellValue('C10','NAMA');	
-                $sheet->setCellValue('D10','KELAS');	
-                $sheet->setCellValue('E10','TANGGAL UJIAN');				
-                $sheet->setCellValue('F10','JUMLAH SOAL');				
-                $sheet->setCellValue('G10','JAWABAN BENAR');				
-                $sheet->setCellValue('H10','JAWABAN SALAH');				
-                $sheet->setCellValue('I10','NILAI');				
-                $sheet->setCellValue('J10','PILIHAN PRODI I');
-                $sheet->setCellValue('K10','KET. PRODI I');
-                $sheet->setCellValue('L10','PILIHAN PRODI II');	
-                $sheet->setCellValue('M10','KET. PRODI II');
+                $sheet->setCellValue('A10', 'NO');				
+                $sheet->setCellValue('B10', 'NO. UJIAN');
+                $sheet->setCellValue('C10', 'NAMA');	
+                $sheet->setCellValue('D10', 'KELAS');	
+                $sheet->setCellValue('E10', 'TANGGAL UJIAN');				
+                $sheet->setCellValue('F10', 'JUMLAH SOAL');				
+                $sheet->setCellValue('G10', 'JAWABAN BENAR');				
+                $sheet->setCellValue('H10', 'JAWABAN SALAH');				
+                $sheet->setCellValue('I10', 'NILAI');				
+                $sheet->setCellValue('J10', 'PILIHAN PRODI I');
+                $sheet->setCellValue('K10', 'KET. PRODI I');
+                $sheet->setCellValue('L10', 'PILIHAN PRODI II');	
+                $sheet->setCellValue('M10', 'KET. PRODI II');
                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
@@ -587,16 +587,16 @@ class Logic_ReportSPMB extends Logic_Report {
                         $pil1='N.A';
                         $bool1=false;
                         if ($v['kjur1'] > 0) {                  
-                            $pil1=$daftar_jurusan[$v['kjur1']];      
+                            $pil1 = $daftar_jurusan[$v['kjur1']];      
                             $bool1=($v['nilai'] >= $v['passing_grade_1']);
-                            $ket1=$bool1 == true ? 'LULUS' : 'GAGAL';
+                            $ket1 = $bool1 == true ? 'LULUS': 'GAGAL';
                         }                       
                         $pil2='N.A';
                         $bool2=false;
                         if ($v['kjur2'] > 0) {
                             $pil2=$daftar_jurusan[$v['kjur2']];      
-                            $bool2=($v['nilai'] >= $v['passing_grade_2']);
-                            $ket2=$bool2 == true ? 'LULUS' : 'GAGAL';     
+                            $bool2 = ($v['nilai'] >= $v['passing_grade_2']);
+                            $ket2=$bool2 == true ? 'LULUS': 'GAGAL';     
                         }                   
                     }else{
                         $pil1='N.A';
@@ -645,8 +645,8 @@ class Logic_ReportSPMB extends Logic_Report {
         $pilihan = $this->dataReport['pilihan'];
         $tahun_masuk = $this->dataReport['tahun_masuk'];
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :    
+            case 'excel2003':               
+            case 'excel2007':    
                 $this->setHeaderPT('G');                
                 $sheet=$this->rpt->getActiveSheet();
                 $this->rpt->getDefaultStyle()->getFont()->setName('Arial');                
@@ -668,11 +668,11 @@ class Logic_ReportSPMB extends Logic_Report {
                 $sheet->getColumnDimension('D')->setWidth(20);
                 $sheet->getColumnDimension('E')->setWidth(35);
                 $sheet->getColumnDimension('F')->setWidth(20);
-                $sheet->setCellValue('B9','NO');
-                $sheet->setCellValue('C9','NO. FORMULIR');
-                $sheet->setCellValue('D9','PIN');
-                $sheet->setCellValue('E9','NAMA');
-                $sheet->setCellValue('F9','KETERANGAN');
+                $sheet->setCellValue('B9', 'NO');
+                $sheet->setCellValue('C9', 'NO. FORMULIR');
+                $sheet->setCellValue('D9', 'PIN');
+                $sheet->setCellValue('E9', 'NAMA');
+                $sheet->setCellValue('F9', 'KETERANGAN');
                 $styleArray=array(
 								'font' => array('bold' => true),
 								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -690,16 +690,16 @@ class Logic_ReportSPMB extends Logic_Report {
                 }
                 $str = "SELECT pin.no_pin,pin.no_formulir,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE pin.tahun_masuk = $tahun_masuk $str_display";
                 $str = "$str  $str_display ORDER BY pin.no_formulir ASC";
-                $this->db->setFieldTable(array('no_pin','no_formulir','nama_mhs','ket'));
+                $this->db->setFieldTable(array('no_pin', 'no_formulir', 'nama_mhs', 'ket'));
                 $r = $this->db->getRecord($str);
                 $row=10;
                 while (list($k, $v)=each ($r)) {            
                     $sheet->setCellValue("B$row", $v['no']);
                     $sheet->setCellValue("C$row", $v['no_formulir']);
                     $sheet->setCellValueExplicit("D$row", $v['no_pin'],PHPExcel_Cell_DataType::TYPE_STRING);
-                    $nama_mhs = $v['nama_mhs'] == '' ? 'N.A' : $v['nama_mhs'];
+                    $nama_mhs = $v['nama_mhs'] == '' ? 'N.A': $v['nama_mhs'];
                     $sheet->setCellValue("E$row", $nama_mhs);
-                    $ket = $v['ket'] == '' ? 'N.A' : 'TELAH DAFTAR';
+                    $ket = $v['ket'] == '' ? 'N.A': 'TELAH DAFTAR';
                     $sheet->setCellValue("F$row", $ket);
                     $row+=1;
                 } 
@@ -725,7 +725,7 @@ class Logic_ReportSPMB extends Logic_Report {
      */
     public function printKartuUjianPMB() {
         switch ($this->getDriver()) {
-            case 'pdf' :
+            case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->setTitle('Kartu Ujian PMB');
 				$rpt->setSubject('Kartu Ujian PMB');
@@ -734,74 +734,74 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                 $row=$this->currentRow;
 				$row+=6;
-				$rpt->SetFont ('helvetica','B',12);	
+				$rpt->SetFont ('helvetica', 'B',12);	
 				$rpt->setXY(3, $row);			
 				$rpt->Cell(0, $row,'KARTU UJIAN PMB',0,0,'C');
                 
                 $row+=20;
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(3, $row);			
-				$rpt->Cell(0,7,'No. Formulir','LT');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->Cell(0,7,'No. Formulir', 'LT');
+				$rpt->SetFont ('helvetica', '',8);
                 $rpt->setXY(38, $row);			
 				$rpt->Cell(0,7,': '.$this->dataReport['no_formulir']);
                 
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0,7,'Tanggal');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
-				$rpt->Cell(0,7,': '.$this->tgl->Tanggal('l, d F Y', $this->dataReport['tanggal_ujian']),'TR');
+				$rpt->Cell(0,7,': '.$this->tgl->Tanggal('l, d F Y', $this->dataReport['tanggal_ujian']), 'TR');
                 
                 $row+=7;
 				$rpt->setXY(3, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
-				$rpt->Cell(0,7,'Nama Peserta','L');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', 'B',8);	
+				$rpt->Cell(0,7,'Nama Peserta', 'L');
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0,7,': '.$this->dataReport['nama_mhs']);
                 
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0,7,'Jam');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0,7,': '.$this->dataReport['jam_mulai']. ' - '.$this->dataReport['jam_akhir'],'R');
                 
                 $row+=7;
 				$rpt->setXY(3, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
-				$rpt->Cell(0,7,'Prodi. Pilihan ke - 1','L');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', 'B',8);	
+				$rpt->Cell(0,7,'Prodi. Pilihan ke - 1', 'L');
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0,7,': '.$this->dataReport['nama_ps1']);
                 
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0,7,'Ruangan');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0,7,': '.$this->dataReport['namaruang'],'R');
                 
                 $row+=7;
 				$rpt->setXY(3, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
-				$rpt->Cell(0,7,'Prodi. Pilihan ke - 2','BL');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', 'B',8);	
+				$rpt->Cell(0,7,'Prodi. Pilihan ke - 2', 'BL');
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0,7,': '.$this->dataReport['nama_ps2'],'B');
                 
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
-				$rpt->Cell(0,7,'Periode','B');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->Cell(0,7,'Periode', 'B');
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0,7,': '.$this->dataReport['nama_kegiatan'],'BR');
                 
                 $row+=20;
-                $rpt->Image($this->dataReport['photo_profile'],15, $row,35,35,'','','',false,300,'',false,false,1);
+                $rpt->Image($this->dataReport['photo_profile'],15, $row,35,35,'', '', '',false,300,'',false,false,1);
                 
-                $rpt->SetFont ('helvetica','B',8);
+                $rpt->SetFont ('helvetica', 'B',8);
                 $rpt->setXY(105, $row);               				
                 $rpt->Cell(105, 5, $this->setup->getSettingValue('kota_pt').", ................................................",0,0,'L');		
 
@@ -815,10 +815,10 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                 $row+=20;
                 $rpt->setXY(3, $row);
-                $rpt->SetFont ('helvetica','B',6);
+                $rpt->SetFont ('helvetica', 'B',6);
                 $rpt->Cell(28, 5, "TATA TERTIB UJIAN PMB :",'B',0,'L');
                 $row+=5;
-                $rpt->SetFont ('helvetica','',6);
+                $rpt->SetFont ('helvetica', '',6);
                 $rpt->setXY(3, $row);
                 $rpt->Cell(14, 5, '1. Pakaian ');
                 $rpt->Cell(3, 5, ':');
@@ -843,10 +843,10 @@ class Logic_ReportSPMB extends Logic_Report {
                               
                 $row+=5;
                 $rpt->setXY(3, $row);
-                $rpt->SetFont ('helvetica','B',6);
+                $rpt->SetFont ('helvetica', 'B',6);
                 $rpt->Cell(65, 5, "PERLENGKAPAN YANG HARUS DIBAWA PADA SAAT UJIAN :",'B',0,'L');
 
-                $rpt->SetFont ('helvetica','',6);
+                $rpt->SetFont ('helvetica', '',6);
                 $row+=5;
                 $rpt->setXY(3, $row);
                 $rpt->Cell(50, 5, '1. Kartu Tanda Peserta ini.');
@@ -883,16 +883,16 @@ class Logic_ReportSPMB extends Logic_Report {
      */
     public function printBeritaAcaraUjianSPMB ($objDMaster) {
         switch ($this->getDriver()) {
-            case 'pdf' :
+            case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->setTitle('Berita Acara Ujian SPMB');
 				$rpt->setSubject('Berita Acara Ujian SPMB');
-                $rpt->AddPage('P','LETTER');
+                $rpt->AddPage('P', 'LETTER');
 				$this->setHeaderPT();
                 
                 $row=$this->currentRow;
 				$row+=12;
-				$rpt->SetFont ('helvetica','B',12);	
+				$rpt->SetFont ('helvetica', 'B',12);	
 				$rpt->setXY(3, $row);			
 				$rpt->Cell(0,6,'BERITA ACARA UJIAN SELEKSI PENERIMAAN MAHASISWA BARU',0,0,'C');
                 $row+=6;
@@ -901,7 +901,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                 $row+=8;
                 $rpt->setXY(3, $row);
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $hari_ujian = $this->tgl->tanggal ('l', $this->dataReport['tanggal_ujian']);
                 $terbilang_tanggal=  ucwords($this->setup->toTerbilang($this->tgl->tanggal ('d', $this->dataReport['tanggal_ujian'])));
                 $bulan = $this->tgl->tanggal ('F', $this->dataReport['tanggal_ujian']);
@@ -914,7 +914,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $rpt->setXY(30, $row);
                 $rpt->Cell(50,6,'1. Jenis Ujian');
                 $rpt->Cell(5,6,':');
-                $rpt->Cell(0,6,'Tertulis / Wawancara *)','B');
+                $rpt->Cell(0,6,'Tertulis / Wawancara *)', 'B');
                 
                 $row+=6;
                 $rpt->setXY(30, $row);
@@ -932,40 +932,40 @@ class Logic_ReportSPMB extends Logic_Report {
                 $rpt->setXY(30, $row);
                 $rpt->Cell(50,6,'4. Jumlah yang Tidak Hadir');
                 $rpt->Cell(5,6,':');
-                $rpt->Cell(0,6,'','B');
+                $rpt->Cell(0,6,'', 'B');
                 
                 $row+=6;
                 $rpt->setXY(30, $row);
                 $rpt->Cell(50,6,'5. Nomor Peserta yang Tidak Hadir');
                 $rpt->Cell(5,6,':');
-                $rpt->Cell(0,6,'1. ','B');
+                $rpt->Cell(0,6,'1. ', 'B');
                 
                 $row+=6;
                 $rpt->setXY(30, $row);
                 $rpt->Cell(50,6,'');
                 $rpt->Cell(5,6,'');
-                $rpt->Cell(0,6,'2. ','B');
+                $rpt->Cell(0,6,'2. ', 'B');
                 $row+=6;
                 $rpt->setXY(30, $row);
                 $rpt->Cell(50,6,'');
                 $rpt->Cell(5,6,'');
-                $rpt->Cell(0,6,'3. ','B');
+                $rpt->Cell(0,6,'3. ', 'B');
                 $row+=6;
                 $rpt->setXY(30, $row);
                 $rpt->Cell(50,6,'');
                 $rpt->Cell(5,6,'');
-                $rpt->Cell(0,6,'4. ','B');
+                $rpt->Cell(0,6,'4. ', 'B');
                 $row+=6;
                 $rpt->setXY(30, $row);
                 $rpt->Cell(50,6,'');
                 $rpt->Cell(5,6,'');
-                $rpt->Cell(0,6,'5. ','B');
+                $rpt->Cell(0,6,'5. ', 'B');
                 
                 $row+=6;
                 $rpt->setXY(30, $row);
                 $rpt->Cell(50,6,'6. Keterangan');
                 $rpt->Cell(5,6,':');
-                $rpt->Cell(0,6,'','B');
+                $rpt->Cell(0,6,'', 'B');
                 
                 $row+=10;
                 $rpt->setXY(3, $row);
@@ -975,14 +975,14 @@ class Logic_ReportSPMB extends Logic_Report {
                 $rpt->setXY(3, $row);
                 $rpt->Cell(20,6,'1. Nama');
                 $rpt->Cell(5,6,':');
-                $rpt->Cell(50,6,'','B');
+                $rpt->Cell(50,6,'', 'B');
                 $rpt->Cell(35,6,'(');
                 $rpt->Cell(0,6,')');
                 $row+=6;
                 $rpt->setXY(3, $row);
                 $rpt->Cell(20,6,'2. Nama');
                 $rpt->Cell(5,6,':');
-                $rpt->Cell(50,6,'','B');
+                $rpt->Cell(50,6,'', 'B');
                 $rpt->Cell(35,6,'(');
                 $rpt->Cell(0,6,')');
                 
@@ -991,7 +991,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $rpt->Cell(0,5,'Daftar Peserta :');
                 
                 $row+=10;
-                $rpt->SetFont ('helvetica','B',8);
+                $rpt->SetFont ('helvetica', 'B',8);
                 $rpt->setXY(3, $row);
                 $rpt->Cell(30,12,'NO. FORMULIR',1,0,'C');
                 $rpt->Cell(50,12,"NAMA PESERTA",1,0,'C');
@@ -1006,10 +1006,10 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                 $idjadwal_ujian = $this->dataReport['idjadwal_ujian'];        
                 $str = "SELECT pum.no_formulir,fp.nama_mhs,fp.idkelas,fp.kjur1,fp.kjur2,fp.telp_hp FROM peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian ORDER BY fp.no_formulir ASC";
-                $this->db->setFieldTable(array('no_formulir','telp_hp','nama_mhs','idkelas','kjur1','kjur2'));	
+                $this->db->setFieldTable(array('no_formulir', 'telp_hp', 'nama_mhs', 'idkelas', 'kjur1', 'kjur2'));	
                 $r=$this->db->getRecord($str);
                 
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $row+=6;
                 while (list($k, $v)=each($r)) {                    
                     $rpt->setXY(3, $row);
@@ -1024,7 +1024,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 }
                 $row+=5;
                 $rpt->setXY(3, $row);
-                $rpt->SetFont ('helvetica','B',8);
+                $rpt->SetFont ('helvetica', 'B',8);
                 $rpt->Cell(0,5,'Mengetahui',0,0,'C');
                 $row+=5;
                 $rpt->setXY(3, $row);

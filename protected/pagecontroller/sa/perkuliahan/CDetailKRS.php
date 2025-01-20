@@ -46,7 +46,7 @@ class CDetailKRS extends MainPageSA {
     $item = $param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
       if ($item->DataItem['batal']) {
-        $item->cmbKelas->Enabled=false;
+        $item->cmbKelas->Enabled = false;
         CDetailKRS::$totalSKSBatal+=$item->DataItem['sks'];
         CDetailKRS::$jumlahMatkulBatal+=1;
       }else{
@@ -61,7 +61,7 @@ class CDetailKRS extends MainPageSA {
           $idkelas_mhs = $v['idkelas_mhs'];
           $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkelas_mhs');
           $kapasitas=(int)$this->DMaster->getKapasitasRuangKelas($v['idruangkelas']);
-          $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '' : ' [PENUH]';
+          $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '': ' [PENUH]';
           $result[$v['idkelas_mhs']] = $this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
         }
 
@@ -77,7 +77,7 @@ class CDetailKRS extends MainPageSA {
       }
     }
   }
-  protected function populateData () {
+  protected function populateData() {
     try {			
       $idkrs=addslashes($this->request['id']);            				
       $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,vdm.iddosen_wali,vdm.idkelas,vdm.k_status,sm.n_status AS status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE krs.idkrs='$idkrs'";
@@ -91,7 +91,7 @@ class CDetailKRS extends MainPageSA {
       $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($datamhs['nim'],true);            
       $this->KRS->setDataMHS($datamhs);
       $kelas = $this->KRS->getKelasMhs();																	            
-      $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
+      $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
       $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
       
       $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -208,16 +208,16 @@ class CDetailKRS extends MainPageSA {
     $this->linkOutput->Text='';
     $this->linkOutput->NavigateUrl='#';
     switch ($_SESSION['outputreport']) {
-      case 'summarypdf' :
+      case 'summarypdf':
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
-      case 'summaryexcel' :
+      case 'summaryexcel':
         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
-      case 'excel2007' :
+      case 'excel2007':
         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
       break;
-      case 'pdf' :                
+      case 'pdf':                
         $messageprintout='';                
         $tahun = $_SESSION['ta'];
         $semester = $_SESSION['semester'];

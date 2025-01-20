@@ -9,10 +9,10 @@ class CProdi extends MainPageSA {
             if (!isset($_SESSION['currentPageProdi'])||$_SESSION['currentPageProdi']['page_name']!='sa.dmaster.Prodi') {
 				$_SESSION['currentPageProdi']=array('page_name'=>'sa.dmaster.Prodi', 'page_num'=>0,'search'=>false);
 			}            
-            $this->populateData ();			
+            $this->populateData();			
 		}
 	}
-	protected function populateData ($search=false) {        
+	protected function populateData($search = false) {        
         $str = "SELECT ps.kjur,ps.kode_epsbed,ps.nama_ps,ps.nama_ps_alias,js.njenjang,ps.konsentrasi,ps.idkur,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen FROM program_studi ps LEFT JOIN jenjang_studi js ON (js.kjenjang=ps.kjenjang) LEFT JOIN dosen d ON (d.iddosen=ps.iddosen) WHERE kjur!=0 ORDER BY kjur ASC";	
        				
         $this->DB->setFieldTable(array('kjur', 'kode_epsbed', 'nama_ps', 'nama_ps_alias', 'njenjang', 'konsentrasi', 'idkur', 'nama_dosen'));
@@ -64,8 +64,8 @@ class CProdi extends MainPageSA {
     }
     public function saveData($sender, $param) {
         if ($this->IsValid) {
-            $kjur=addslashes($this->txtAddKodePS->Text);
-            $kjur_forlap=addslashes($this->txtAddKodePSForlap->Text);
+            $kjur = addslashes($this->txtAddKodePS->Text);
+            $kjur_forlap = addslashes($this->txtAddKodePSForlap->Text);
             $nama_ps=addslashes($this->txtAddNama->Text);
             $akronim_ps=addslashes($this->txtAddNamaAkronim->Text);
             $kjenjang=addslashes($this->cmbAddJenjang->Text);
@@ -109,8 +109,8 @@ class CProdi extends MainPageSA {
     public function updateData($sender, $param) {
         if ($this->IsValid) {
             $id=$this->hiddenid->Value;
-            $kjur=addslashes($this->txtEditKodePS->Text);
-            $kjur_forlap=addslashes($this->txtEditKodePSForlap->Text);
+            $kjur = addslashes($this->txtEditKodePS->Text);
+            $kjur_forlap = addslashes($this->txtEditKodePSForlap->Text);
             $nama_ps=addslashes($this->txtEditNama->Text);
             $akronim_ps=addslashes($this->txtEditNamaAkronim->Text);
             $kjenjang=addslashes($this->cmbEditJenjang->Text);

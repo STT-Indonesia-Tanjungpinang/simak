@@ -26,7 +26,7 @@ class CKRS Extends MainPageDW {
     if (!$this->IsPostBack && !$this->IsCallback) 
     {						
       if (!isset($_SESSION['currentPageKRS'])||$_SESSION['currentPageKRS']['page_name']!='dw.perkuliahan.KRS') {					
-        $_SESSION['currentPageKRS']=array('page_name'=>'dw.perkuliahan.KRS', 'page_num'=>0,'mode_krs'=>'sudah', 'iddosen_wali'=>'none', 'tahun_masuk'=>'none', 'DataKRS'=>array(),'DataMHS'=>array());												
+        $_SESSION['currentPageKRS']=array('page_name'=>'dw.perkuliahan.KRS', 'page_num'=>0,'mode_krs'=>'sudah', 'iddosen_wali'=>'none', 'tahun_masuk'=>'none', 'DataKRS'=>array(), 'DataMHS'=>array());												
       }
       $_SESSION['currentPageKRS']['search']=false;
       
@@ -39,11 +39,11 @@ class CKRS Extends MainPageDW {
       $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKRS']['tahun_masuk'];						
       $this->tbCmbTahunMasuk->dataBind();
 
-      $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+      $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
       $this->tbCmbTA->Text = $_SESSION['ta'];
       $this->tbCmbTA->dataBind();			
 
-      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
       $this->tbCmbSemester->DataSource = $semester;
       $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
@@ -110,7 +110,7 @@ class CKRS Extends MainPageDW {
     $_SESSION['currentPageKRS']['search']=true;
     $this->populateData($_SESSION['currentPageKRS']['search']);
   }
-  public function populateData($search=false) {
+  public function populateData($search = false) {
     $iddosen_wali = $this->iddosen_wali;
     $ta = $_SESSION['ta'];
     $semester = $_SESSION['semester'];
@@ -119,15 +119,15 @@ class CKRS Extends MainPageDW {
     $str_tahun_masuk = $tahun_masuk == 'none' || $tahun_masuk == '' ? '':" AND vdm.tahun_masuk = $tahun_masuk";
     if ($search) 
     {
-      $txtsearch=addslashes($this->txtKriteria->Text);
+      $txtsearch = addslashes($this->txtKriteria->Text);
       switch ($this->cmbKriteria->Text) {                
-        case 'nim' :
+        case 'nim':
           $clausa="AND vdm.nim='$txtsearch'";                                        
         break;
-        case 'nirm' :
+        case 'nirm':
           $clausa="AND vdm.nirm='$txtsearch'";                    
         break;
-        case 'nama' :
+        case 'nama':
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
         break;
       }
@@ -339,16 +339,16 @@ class CKRS Extends MainPageDW {
     $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);
     
     switch ($_SESSION['outputreport']) {
-      case 'summarypdf' :
+      case 'summarypdf':
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
-      case 'summaryexcel' :
+      case 'summaryexcel':
         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
-      case 'excel2007' :
+      case 'excel2007':
         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
       break;
-      case 'pdf' :                
+      case 'pdf':                
         $messageprintout='';                
         $tahun = $_SESSION['ta'];
         $semester = $_SESSION['semester'];

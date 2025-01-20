@@ -78,9 +78,9 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
 		$_SESSION['currentPagePembayaranPiutangSemesterGenap']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPagePembayaranPiutangSemesterGenap']['search']);
 	}		
-	public function populateData($search=false) {	
+	public function populateData($search = false) {	
         $tahun_masuk = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'];
-        $str_tahun_masuk=($tahun_masuk=='none'||$tahun_masuk=='')?'':" AND vdm.tahun_masuk = $tahun_masuk";
+        $str_tahun_masuk=($tahun_masuk=='none'||$tahun_masuk== '')?'':" AND vdm.tahun_masuk = $tahun_masuk";
 		$ta = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['ta'];
 		$semester = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['semester'];
 		$kjur = $_SESSION['kjur'];	
@@ -93,7 +93,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
             $nim = $v['nim'];
             $k_status = $v['k_status_dulang'];
             $idkelas = $v['idkelas_dulang'];
-            if ($k_status=='') {
+            if ($k_status== '') {
                 $str = "SELECT idkelas,k_status FROM dulang d1,(SELECT MAX(iddulang) AS iddulang FROM dulang WHERE nim='$nim') AS d2 WHERE d1.iddulang=d2.iddulang";
                 $this->DB->setFieldTable(array('idkelas', 'k_status'));
                 $dulang = $this->DB->getRecord($str);

@@ -215,7 +215,7 @@ foreach ($inopt as $opt => $val) {
 		}
 		case 'i':
 		case 'fonts': {
-			$options['fonts'] = explode(',', $val);
+			$options['fonts'] = explode(', ', $val);
 			break;
 		}
 		case 'h':

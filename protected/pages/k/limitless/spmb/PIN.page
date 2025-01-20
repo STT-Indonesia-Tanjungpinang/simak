@@ -157,11 +157,11 @@
                         <tr>
                             <td><%#$this->DataItem['no']%></td>
                             <td><%#$this->DataItem['no_formulir']%></td>
-							<td><%#$this->DataItem['no_pendaftaran']==''?'N.A':$this->DataItem['no_pendaftaran']%></td>									
+							<td><%#$this->DataItem['no_pendaftaran']== ''?'N.A':$this->DataItem['no_pendaftaran']%></td>									
                             <td><%#$this->DataItem['no_pin']%></td>
                             <td><%#$this->Page->DMaster->getNamaKelasByID($this->DataItem['idkelas'])%></td>
-                            <td><%#($this->DataItem['nama_mhs']=='')?'N.A':$this->DataItem['nama_mhs']%></td>
-                            <td><span class="label <%#($this->DataItem['ket']=='')?'label-default':'label-success'%>"><i class="<%#($this->DataItem['ket']=='')?'icon-cancel-square':'icon-checkbox-checked'%>"></i></td>
+                            <td><%#($this->DataItem['nama_mhs']== '')?'N.A':$this->DataItem['nama_mhs']%></td>
+                            <td><span class="label <%#($this->DataItem['ket']== '')?'label-default':'label-success'%>"><i class="<%#($this->DataItem['ket']== '')?'icon-cancel-square':'icon-checkbox-checked'%>"></i></td>
                         </tr>                         
                     </prop:ItemTemplate>                        
                     <prop:FooterTemplate>

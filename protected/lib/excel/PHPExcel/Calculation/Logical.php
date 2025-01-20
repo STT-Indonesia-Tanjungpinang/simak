@@ -277,8 +277,8 @@ class PHPExcel_Calculation_Logical
      */
     public static function IFERROR($testValue = '', $errorpart = '')
     {
-        $testValue = (is_null($testValue)) ? '' : PHPExcel_Calculation_Functions::flattenSingleValue($testValue);
-        $errorpart = (is_null($errorpart)) ? '' : PHPExcel_Calculation_Functions::flattenSingleValue($errorpart);
+        $testValue = (is_null($testValue)) ? '': PHPExcel_Calculation_Functions::flattenSingleValue($testValue);
+        $errorpart = (is_null($errorpart)) ? '': PHPExcel_Calculation_Functions::flattenSingleValue($errorpart);
 
         return self::STATEMENT_IF(PHPExcel_Calculation_Functions::IS_ERROR($testValue), $errorpart, $testValue);
     }

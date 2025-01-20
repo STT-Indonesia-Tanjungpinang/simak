@@ -53,13 +53,13 @@ class CPendaftaranKonsentrasi extends MainPageM {
 	} 
     public function populateKonsentrasi () {			
         $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
-        $r=array();
+        $r = array();
         $i=1;        
         while (list($k, $v)=each($datakonsentrasi)) {                        
             if ($v['kjur']==$_SESSION['kjur']){
                 $idkonsentrasi = $v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("pendaftaran_konsentrasi WHERE idkonsentrasi = $idkonsentrasi",'nim');
-                $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000' : $jumlah;
+                $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000': $jumlah;
                 $r[$i] = $v;
                 $i+=1;
             }
@@ -81,25 +81,25 @@ class CPendaftaranKonsentrasi extends MainPageM {
                 break;
                 case 1 :
                     $cssclass='label label-success';
-                    $item->btnRepeaterApproved->Enabled=false;                                        
+                    $item->btnRepeaterApproved->Enabled = false;                                        
                     $item->btnRepeaterApproved->CssClass="table-link default";
                 break;
             }
             $item->lblStatusPendaftaran->CssClass = $cssclass;
         }
     }
-	public function populateData ($search=false) {			
+	public function populateData($search = false) {			
         $kjur = $_SESSION['kjur'];        
         if ($search) {
             $str = "SELECT vdm.nim,vdm.nama_mhs,pk.jumlah_sks,pk.kjur,pk.idkonsentrasi,pk.status_daftar FROM v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim";			
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa=" AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;                
-                case 'nama' :
+                case 'nama':
                     $clausa=" AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";

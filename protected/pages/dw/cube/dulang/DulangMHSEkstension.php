@@ -9,7 +9,7 @@ class DulangMHSEkstension Extends MainPageDW {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
             if (!isset($_SESSION['currentPageDulangMHSEkstension'])||$_SESSION['currentPageDulangMHSEkstension']['page_name']!='dw.dulang.DulangMHSEkstension') {
-				$_SESSION['currentPageDulangMHSEkstension']=array('page_name'=>'dw.dulang.DulangMHSEkstension','page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none','DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSEkstension']=array('page_name'=>'dw.dulang.DulangMHSEkstension', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSEkstension']['search']=false;
             
@@ -22,11 +22,11 @@ class DulangMHSEkstension Extends MainPageDW {
             $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
 
-            $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
             $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
 
-            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
             $this->tbCmbSemester->DataSource=$semester;
             $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
@@ -85,7 +85,7 @@ class DulangMHSEkstension Extends MainPageDW {
         $this->setInfoToolbar();
 		$this->populateData();
 	}
-    public function populateData($search=false) {
+    public function populateData($search = false) {
         $iddosen_wali = $this->iddosen_wali;
         $ta=$_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
@@ -96,17 +96,17 @@ class DulangMHSEkstension Extends MainPageDW {
             $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan,0 AS boolpembayaran FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt' AND vdm.idkelas='C' AND vdm.iddosen_wali = $iddosen_wali";
             $txtsearch=$this->txtKriteria->Text;
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt' AND vdm.idkelas='C' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt' AND vdm.idkelas='C' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt' AND vdm.idkelas='C' $clausa",'vdm.nim');
                     $str = "$str $clausa";
@@ -126,7 +126,7 @@ class DulangMHSEkstension Extends MainPageDW {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSEkstension']['page_num']=0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
-		$this->DB->setFieldTable(array('iddulang','no_formulir','nim','nirm','nama_mhs','iddosen_wali','tanggal'));
+		$this->DB->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal'));
 		$result=$this->DB->getRecord($str);
 		$this->RepeaterS->DataSource=$result;
 		$this->RepeaterS->dataBind();

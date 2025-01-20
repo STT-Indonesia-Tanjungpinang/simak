@@ -46,7 +46,7 @@ class CJadwalUjianPMB extends MainPageMB {
             $bool_pilih=false;            
         }else{
             $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE tahun_masuk='$tahun_masuk' AND idsmt='$idsmt' AND status=1 ORDER BY tanggal_ujian ASC";        
-            $bool_pilih=true;            
+            $bool_pilih = true;            
         }
         $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'namaruang', 'kapasitas', 'status'));
         $r = $this->DB->getRecord($str);	

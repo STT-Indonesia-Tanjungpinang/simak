@@ -68,24 +68,24 @@ class CDaftarMahasiswa extends MainPageK {
 		$_SESSION['currentPageDaftarMahasiswa']['search']=true;
         $this->populateData($_SESSION['currentPageDaftarMahasiswa']['search']);
 	}      
-	public function populateData ($search=false) {			
+	public function populateData($search = false) {			
         $kjur = $_SESSION['kjur'];        
         if ($search) {
             $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,tempat_lahir,tanggal_lahir,alamat_rumah,kjur,idkonsentrasi,iddosen_wali,tahun_masuk,k_status,idkelas FROM v_datamhs";			
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
 			$this->cmbKriteria->Text;
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="WHERE nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="WHERE nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="WHERE nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
@@ -143,13 +143,13 @@ class CDaftarMahasiswa extends MainPageK {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];                
@@ -163,7 +163,7 @@ class CDaftarMahasiswa extends MainPageK {
                 
                 $this->report->printDaftarMahasiswa($this->Demik, $this->DMaster); 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

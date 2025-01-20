@@ -63,7 +63,7 @@ class PHPExcel_Calculation_FormulaParser
     const PAREN_CLOSE   = ')';
     const SEMICOLON     = ';';
     const WHITESPACE    = ' ';
-    const COMMA         = ',';
+    const COMMA         = ', ';
     const ERROR_START   = '#';
 
     const OPERATORS_SN             = "+-";
@@ -501,7 +501,7 @@ class PHPExcel_Calculation_FormulaParser
                     (($previousToken->getTokenType() == PHPExcel_Calculation_FormulaToken::TOKEN_TYPE_FUNCTION) && ($previousToken->getTokenSubType() == PHPExcel_Calculation_FormulaToken::TOKEN_SUBTYPE_STOP)) ||
                     (($previousToken->getTokenType() == PHPExcel_Calculation_FormulaToken::TOKEN_TYPE_SUBEXPRESSION) && ($previousToken->getTokenSubType() == PHPExcel_Calculation_FormulaToken::TOKEN_SUBTYPE_STOP)) ||
                     ($previousToken->getTokenType() == PHPExcel_Calculation_FormulaToken::TOKEN_TYPE_OPERAND)
-                  ) ) {
+                  )) {
                 continue;
             }
 
@@ -513,7 +513,7 @@ class PHPExcel_Calculation_FormulaParser
                     (($nextToken->getTokenType() == PHPExcel_Calculation_FormulaToken::TOKEN_TYPE_FUNCTION) && ($nextToken->getTokenSubType() == PHPExcel_Calculation_FormulaToken::TOKEN_SUBTYPE_START)) ||
                     (($nextToken->getTokenType() == PHPExcel_Calculation_FormulaToken::TOKEN_TYPE_SUBEXPRESSION) && ($nextToken->getTokenSubType() == PHPExcel_Calculation_FormulaToken::TOKEN_SUBTYPE_START)) ||
                     ($nextToken->getTokenType() == PHPExcel_Calculation_FormulaToken::TOKEN_TYPE_OPERAND)
-                  ) ) {
+                  )) {
                 continue;
             }
 

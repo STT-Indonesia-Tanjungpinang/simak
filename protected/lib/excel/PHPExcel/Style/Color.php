@@ -142,7 +142,7 @@ class PHPExcel_Style_Color extends PHPExcel_Style_Supervisor implements PHPExcel
      * Apply styles from array
      *
      * <code>
-     * $objPHPExcel->getActiveSheet()->getStyle('B2')->getFont()->getColor()->applyFromArray( array('rgb' => '808080') );
+     * $objPHPExcel->getActiveSheet()->getStyle('B2')->getFont()->getColor()->applyFromArray( array('rgb' => '808080'));
      * </code>
      *
      * @param    array    $pStyles    Array containing style information
@@ -337,7 +337,7 @@ class PHPExcel_Style_Color extends PHPExcel_Style_Supervisor implements PHPExcel
             str_pad(dechex($green), 2, '0', 0) .
             str_pad(dechex($blue), 2, '0', 0)
         );
-        return (($rgba) ? 'FF' : '') . $rgb;
+        return (($rgba) ? 'FF': '') . $rgb;
     }
 
     /**

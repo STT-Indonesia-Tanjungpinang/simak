@@ -9,10 +9,10 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
         $this->showPembayaranCutiSemesterGenap=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGenap'])||$_SESSION['currentPagePembayaranCutiSemesterGenap']['page_name']!='mh.pembayaran.PembayaranCutiSemesterGenap') {
-				$_SESSION['currentPagePembayaranCutiSemesterGenap']=array('page_name'=>'mh.pembayaran.PembayaranCutiSemesterGenap', 'page_num'=>0,'search'=>false,'DataMHS'=>array(),'ta'=>$_SESSION['ta']);												
+				$_SESSION['currentPagePembayaranCutiSemesterGenap']=array('page_name'=>'mh.pembayaran.PembayaranCutiSemesterGenap', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta'=>$_SESSION['ta']);												
             }
             $this->setInfoToolbar();
-            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
             $this->tbCmbTA->Text = $_SESSION['currentPagePembayaranCutiSemesterGenap']['ta'];
             $this->tbCmbTA->dataBind();
             try {
@@ -36,9 +36,9 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
                 $this->populateTransaksi();
                 
                 if ($this->ListTransactionRepeater->Items->Count() > 0) {
-                    $this->txtAddNomorFaktur->Enabled=false;
-                    $this->cmbAddTanggalFaktur->Enabled=false;
-                    $this->btnSave->Enabled=false;
+                    $this->txtAddNomorFaktur->Enabled = false;
+                    $this->cmbAddTanggalFaktur->Enabled = false;
+                    $this->btnSave->Enabled = false;
                    
                 }else{
                     $this->txtAddNomorFaktur->Text='11'.$datamhs['ta'].mt_rand(900,9999);
@@ -80,8 +80,8 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
 		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
-                $item->btnDeleteFromRepeater->Enabled=false;
-                $item->btnCommitFromRepeater->Enabled=false;
+                $item->btnDeleteFromRepeater->Enabled = false;
+                $item->btnCommitFromRepeater->Enabled = false;
 			}else{
                 $item->btnDeleteFromRepeater->Attributes->onclick="if(!confirm('Apakah Anda ingin menghapus Transaksi ini?')) return false;";
             }
@@ -110,7 +110,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
             $nim = $datamhs['nim'];
             
             $no_transaksi='11'.$tahun.mt_rand(900,9999);
-            $no_faktur=addslashes($this->txtAddNomorFaktur->Text);            
+            $no_faktur = addslashes($this->txtAddNomorFaktur->Text);            
             $tanggal=date('Y-m-d', $this->cmbAddTanggalFaktur->TimeStamp);
             
             $this->Finance->setDataMHS($datamhs);

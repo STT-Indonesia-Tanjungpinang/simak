@@ -97,7 +97,7 @@ class CDetailKuesioner extends MainPageM {
                 foreach ($hasil_indikator as $hasil) {
                     switch($hasil['nilai_indikator']) {
                         case 1 :
-                            $indikator1=$hasil['jumlah'];
+                            $indikator1 = $hasil['jumlah'];
                         break;
                         case 2 :
                             $indikator2=$hasil['jumlah'];
@@ -135,7 +135,7 @@ class CDetailKuesioner extends MainPageM {
                     foreach ($hasil_indikator as $hasil) {
                         switch($hasil['nilai_indikator']) {
                             case 1 :
-                                $indikator1=$hasil['jumlah'];
+                                $indikator1 = $hasil['jumlah'];
                             break;
                             case 2 :
                                 $indikator2=$hasil['jumlah'];
@@ -169,13 +169,13 @@ class CDetailKuesioner extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout='';
                 $dataReport=$_SESSION['currentPageDetailKuesioner']['DataKuesioner'];                
                 
@@ -195,7 +195,7 @@ class CDetailKuesioner extends MainPageM {
                 $objKuesioner->setMode('excel2007');               
                 $objKuesioner->printKuesionerDosen($this->Kuesioner);
             break;
-            case 'pdf' :                
+            case 'pdf':                
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

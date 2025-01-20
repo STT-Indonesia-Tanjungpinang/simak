@@ -51,24 +51,24 @@ class CPerwalian extends MainPageM {
 		$_SESSION['currentPagePerwalian']['status'] = $this->tbCmbStatus->Text;
 		$this->populateData();
 	}
-	protected function populateData ($search=false) {
+	protected function populateData($search = false) {
         $iddosen_wali = $_SESSION['currentPagePerwalian']['iddosen_wali'];
         $str_dw = ($iddosen_wali == 'none') ? " WHERE (iddosen_wali='' OR iddosen_wali=0)" : " WHERE iddosen_wali = $iddosen_wali";
 		if ($search) {       
             $str = "SELECT nim,nirm,nama_mhs,tahun_masuk FROM v_datamhs vdm$str_dw";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_record=$this->DB->getCountRowsOfTable("v_datamhs vdm$str_dw $clausa",'vdm.nim'); 
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_record=$this->DB->getCountRowsOfTable("v_datamhs vdm$str_dw $clausa",'vdm.nim'); 
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_record=$this->DB->getCountRowsOfTable("v_datamhs vdm$str_dw $clausa",'vdm.nim'); 
                     $str = "$str $clausa";
@@ -76,7 +76,7 @@ class CPerwalian extends MainPageM {
             }
         }else{
             $status = $_SESSION['currentPagePerwalian']['status'];
-            $str_status = $status == 'none'? '' : " AND k_status='$status'";
+            $str_status = $status == 'none'? '': " AND k_status='$status'";
             $jumlah_record=$this->DB->getCountRowsOfTable("v_datamhs vdm$str_dw $str_status",'vdm.nim');
             $str = "SELECT nim,nirm,nama_mhs,tahun_masuk,idkelas,k_status FROM v_datamhs vdm$str_dw $str_status";
         }
@@ -138,13 +138,13 @@ class CPerwalian extends MainPageM {
             $this->linkOutput->Text='';
             $this->linkOutput->NavigateUrl='#';
             switch ($_SESSION['outputreport']) {
-                case 'summarypdf' :
+                case 'summarypdf':
                     $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                 break;
-                case 'summaryexcel' :
+                case 'summaryexcel':
                     $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                 break;
-                case 'excel2007' :
+                case 'excel2007':
                     $dataReport['iddosen_wali'] = $iddosen_wali;
                     $dataReport['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($iddosen_wali);
                     $dataReport['k_status'] = $k_status;
@@ -155,7 +155,7 @@ class CPerwalian extends MainPageM {
                     $messageprintout="Daftar Mahasiswa Dosen Wali: <br/>";
                     $this->report->printMahasiswaDW($this->DMaster);                
                 break;
-                case 'pdf' :
+                case 'pdf':
                     $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
                 break;
             }     

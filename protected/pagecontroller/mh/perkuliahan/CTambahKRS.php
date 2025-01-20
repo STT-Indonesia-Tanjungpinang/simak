@@ -45,7 +45,7 @@ class CTambahKRS extends MainPageMHS {
         $this->Finance->setDataMHS($datamhs);
         
         if ($idsmt==3) { 
-          $jumlah_sks_sp=$this->Finance->getSKSFromSP($tahun, $idsmt);
+          $jumlah_sks_sp = $this->Finance->getSKSFromSP($tahun, $idsmt);
           if (!($jumlah_sks_sp > 0)) {
             throw new Exception ("Anda tidak bisa mengisi KRS karena jumlah SKS hanya 0 atau transaksi pembayaran tidak tercatat di sistem.");																			
           }
@@ -180,7 +180,7 @@ class CTambahKRS extends MainPageMHS {
       $matkul = $item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									
       if ($_SESSION['currentPageKRS']['DataKRS']['krs']['sah']&&!$item->DataItem['batal']) {
         $onclick="alert('Tidak bisa menghapus Matakuliah $matkul, karena sudah disahkan oleh Dosen Wali.')";
-        $item->btnHapus->Enabled=false;
+        $item->btnHapus->Enabled = false;
       }else{
         $onclick="if(!confirm('Anda yakin mau menghapus $matkul')) return false;";			
       }

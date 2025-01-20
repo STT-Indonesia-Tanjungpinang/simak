@@ -12,7 +12,7 @@ class CNilaiPerMahasiswa extends MainPageON {
     {
       if (!isset($_SESSION['currentPageNilaiPerMahasiswa'])||$_SESSION['currentPageNilaiPerMahasiswa']['page_name']!='on.nilai.NilaiPerMahasiswa')
       {
-        $_SESSION['currentPageNilaiPerMahasiswa']=array('page_name'=>'on.nilai.NilaiPerMahasiswa', 'DataMHS'=>array(),'semester'=>$_SESSION['semester'],'ta'=>$_SESSION['ta']);												
+        $_SESSION['currentPageNilaiPerMahasiswa']=array('page_name'=>'on.nilai.NilaiPerMahasiswa', 'DataMHS'=>array(), 'semester'=>$_SESSION['semester'],'ta'=>$_SESSION['ta']);												
       }
       $nim = addslashes($this->request['id']);       
       try 
@@ -33,7 +33,7 @@ class CNilaiPerMahasiswa extends MainPageON {
         $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
         
         $kelas = $this->Nilai->getKelasMhs();                
-        $datamhs['nkelas']=($kelas['nkelas']=='')?'Belum ada':$kelas['nkelas'];			                    
+        $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -43,25 +43,25 @@ class CNilaiPerMahasiswa extends MainPageON {
         $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS'] = $datamhs;
         
         $ta = $_SESSION['currentPageNilaiPerMahasiswa']['ta'];
-        $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+        $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
         $this->tbCmbTA->Text = $ta;
         $this->tbCmbTA->dataBind();			
         
         $idsmt = $_SESSION['currentPageNilaiPerMahasiswa']['semester'];
-        $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+        $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
         $this->tbCmbSemester->DataSource = $semester;
         $this->tbCmbSemester->Text = $idsmt;
         $this->tbCmbSemester->dataBind();
         
         $this->setInfoToolbar();
         
-        $this->populateData ();
+        $this->populateData();
         
       }
       catch (Exception $ex)
       {
         $this->idProcess = 'view';
-        $this->errormessage->Text=  empty($nim) ? '' : $ex->getMessage();
+        $this->errormessage->Text=  empty($nim) ? '': $ex->getMessage();
       }
     }
   }	
@@ -115,7 +115,7 @@ class CNilaiPerMahasiswa extends MainPageON {
     $this->redirect('nilai.NilaiPerMahasiswa', true,array('id'=>$nim));
   }
   
-  public function populateData () {
+  public function populateData() {
     $ta = $_SESSION['currentPageNilaiPerMahasiswa']['ta'];
     $idsmt = $_SESSION['currentPageNilaiPerMahasiswa']['semester'];
     $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
@@ -144,8 +144,8 @@ class CNilaiPerMahasiswa extends MainPageON {
     if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {					
       if ($item->DataItem['batal']) {
         $item->literalKet->Text='Dibatalkan oleh dosen wali.';	
-        $item->txtNilaiAngka->Enabled=false;
-        $item->cmbNilai->Enabled=false;		
+        $item->txtNilaiAngka->Enabled = false;
+        $item->cmbNilai->Enabled = false;		
       }else {
         $item->literalKet->Text='-';
         $item->txtNilaiAngka->Text = $item->DataItem['n_kuan'];

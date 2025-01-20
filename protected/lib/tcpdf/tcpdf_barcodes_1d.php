@@ -170,7 +170,7 @@ class TCPDFBarcode {
  	 * @return image or false in case of error.
  	 * @public
 	 */
-	public function getBarcodePNG($w=2, $h=30, $color=array(0,0,0)) {
+	public function getBarcodePNG($w=2, $h=30, $color = array(0,0,0)) {
 		// calculate image size
 		$width = ($this->barcode_array['maxw'] * $w);
 		$height = $h;
@@ -184,7 +184,7 @@ class TCPDFBarcode {
 		} elseif (extension_loaded('imagick')) {
 			$imagick = true;
 			$bgcol = new imagickpixel('rgb(255,255,255');
-			$fgcol = new imagickpixel('rgb('.$color[0].','.$color[1].','.$color[2].')');
+			$fgcol = new imagickpixel('rgb('.$color[0].', '.$color[1].', '.$color[2].')');
 			$png = new Imagick();
 			$png->newImage($width, $height, 'none', 'png');
 			$bar = new imagickdraw();
@@ -1405,41 +1405,41 @@ class TCPDFBarcode {
 				'9'=>'1110100')
 		);
 		$parities = array(
-			'0'=>array('A','A','A','A','A','A'),
-			'1'=>array('A','A','B','A','B','B'),
-			'2'=>array('A','A','B','B','A','B'),
-			'3'=>array('A','A','B','B','B','A'),
-			'4'=>array('A','B','A','A','B','B'),
-			'5'=>array('A','B','B','A','A','B'),
-			'6'=>array('A','B','B','B','A','A'),
-			'7'=>array('A','B','A','B','A','B'),
-			'8'=>array('A','B','A','B','B','A'),
-			'9'=>array('A','B','B','A','B','A')
+			'0'=>array('A', 'A', 'A', 'A', 'A', 'A'),
+			'1'=>array('A', 'A', 'B', 'A', 'B', 'B'),
+			'2'=>array('A', 'A', 'B', 'B', 'A', 'B'),
+			'3'=>array('A', 'A', 'B', 'B', 'B', 'A'),
+			'4'=>array('A', 'B', 'A', 'A', 'B', 'B'),
+			'5'=>array('A', 'B', 'B', 'A', 'A', 'B'),
+			'6'=>array('A', 'B', 'B', 'B', 'A', 'A'),
+			'7'=>array('A', 'B', 'A', 'B', 'A', 'B'),
+			'8'=>array('A', 'B', 'A', 'B', 'B', 'A'),
+			'9'=>array('A', 'B', 'B', 'A', 'B', 'A')
 		);
 		$upce_parities = array();
 		$upce_parities[0] = array(
-			'0'=>array('B','B','B','A','A','A'),
-			'1'=>array('B','B','A','B','A','A'),
-			'2'=>array('B','B','A','A','B','A'),
-			'3'=>array('B','B','A','A','A','B'),
-			'4'=>array('B','A','B','B','A','A'),
-			'5'=>array('B','A','A','B','B','A'),
-			'6'=>array('B','A','A','A','B','B'),
-			'7'=>array('B','A','B','A','B','A'),
-			'8'=>array('B','A','B','A','A','B'),
-			'9'=>array('B','A','A','B','A','B')
+			'0'=>array('B', 'B', 'B', 'A', 'A', 'A'),
+			'1'=>array('B', 'B', 'A', 'B', 'A', 'A'),
+			'2'=>array('B', 'B', 'A', 'A', 'B', 'A'),
+			'3'=>array('B', 'B', 'A', 'A', 'A', 'B'),
+			'4'=>array('B', 'A', 'B', 'B', 'A', 'A'),
+			'5'=>array('B', 'A', 'A', 'B', 'B', 'A'),
+			'6'=>array('B', 'A', 'A', 'A', 'B', 'B'),
+			'7'=>array('B', 'A', 'B', 'A', 'B', 'A'),
+			'8'=>array('B', 'A', 'B', 'A', 'A', 'B'),
+			'9'=>array('B', 'A', 'A', 'B', 'A', 'B')
 		);
 		$upce_parities[1] = array(
-			'0'=>array('A','A','A','B','B','B'),
-			'1'=>array('A','A','B','A','B','B'),
-			'2'=>array('A','A','B','B','A','B'),
-			'3'=>array('A','A','B','B','B','A'),
-			'4'=>array('A','B','A','A','B','B'),
-			'5'=>array('A','B','B','A','A','B'),
-			'6'=>array('A','B','B','B','A','A'),
-			'7'=>array('A','B','A','B','A','B'),
-			'8'=>array('A','B','A','B','B','A'),
-			'9'=>array('A','B','B','A','B','A')
+			'0'=>array('A', 'A', 'A', 'B', 'B', 'B'),
+			'1'=>array('A', 'A', 'B', 'A', 'B', 'B'),
+			'2'=>array('A', 'A', 'B', 'B', 'A', 'B'),
+			'3'=>array('A', 'A', 'B', 'B', 'B', 'A'),
+			'4'=>array('A', 'B', 'A', 'A', 'B', 'B'),
+			'5'=>array('A', 'B', 'B', 'A', 'A', 'B'),
+			'6'=>array('A', 'B', 'B', 'B', 'A', 'A'),
+			'7'=>array('A', 'B', 'A', 'B', 'A', 'B'),
+			'8'=>array('A', 'B', 'A', 'B', 'B', 'A'),
+			'9'=>array('A', 'B', 'B', 'A', 'B', 'A')
 		);
 		$k = 0;
 		$seq = '101'; // left guard bar
@@ -1536,22 +1536,22 @@ class TCPDFBarcode {
 		);
 		$parities = array();
 		$parities[2] = array(
-			'0'=>array('A','A'),
-			'1'=>array('A','B'),
-			'2'=>array('B','A'),
-			'3'=>array('B','B')
+			'0'=>array('A', 'A'),
+			'1'=>array('A', 'B'),
+			'2'=>array('B', 'A'),
+			'3'=>array('B', 'B')
 		);
 		$parities[5] = array(
-			'0'=>array('B','B','A','A','A'),
-			'1'=>array('B','A','B','A','A'),
-			'2'=>array('B','A','A','B','A'),
-			'3'=>array('B','A','A','A','B'),
-			'4'=>array('A','B','B','A','A'),
-			'5'=>array('A','A','B','B','A'),
-			'6'=>array('A','A','A','B','B'),
-			'7'=>array('A','B','A','B','A'),
-			'8'=>array('A','B','A','A','B'),
-			'9'=>array('A','A','B','A','B')
+			'0'=>array('B', 'B', 'A', 'A', 'A'),
+			'1'=>array('B', 'A', 'B', 'A', 'A'),
+			'2'=>array('B', 'A', 'A', 'B', 'A'),
+			'3'=>array('B', 'A', 'A', 'A', 'B'),
+			'4'=>array('A', 'B', 'B', 'A', 'A'),
+			'5'=>array('A', 'A', 'B', 'B', 'A'),
+			'6'=>array('A', 'A', 'A', 'B', 'B'),
+			'7'=>array('A', 'B', 'A', 'B', 'A'),
+			'8'=>array('A', 'B', 'A', 'A', 'B'),
+			'9'=>array('A', 'A', 'B', 'A', 'B')
 		);
 		$p = $parities[$len][$r];
 		$seq = '1011'; // left guard bar

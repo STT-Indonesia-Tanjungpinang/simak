@@ -53,16 +53,16 @@ class CDetailTranskripKRS extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';        
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
             break;
-            case 'pdf' :                    
+            case 'pdf':                    
                 $messageprintout='Transkrip Sementara : ';
                 $dataReport=$_SESSION['currentPageDetailTranskripKRS']['DataMHS'];  
                 $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');

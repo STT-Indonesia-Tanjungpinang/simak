@@ -13,23 +13,23 @@ class CKombiPerTA Extends MainPageK {
             if (!isset($_SESSION['currentPageKombiPerTA'])||$_SESSION['currentPageKombiPerTA']['page_name']!='k.dmaster.KombiPerTA') {
 				$_SESSION['currentPageKombiPerTA']=array('page_name'=>'k.dmaster.KombiPerTA', 'kelas'=>'A', 'semester_masuk'=>1,'periode_pembayaran'=>'none');												
 			}
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageKombiPerTA']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind(); 
             
-            $kelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas(),'none');            
+            $kelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas(), 'none');            
 			$this->tbCmbKelas->DataSource = $kelas;
 			$this->tbCmbKelas->Text = $_SESSION['currentPageKombiPerTA']['kelas'];			
 			$this->tbCmbKelas->dataBind();	
             
             $this->cmbPeriodePembayaran->Text = $_SESSION['currentPageKombiPerTA']['periode_pembayaran'];			
-			$this->populateData ();	
+			$this->populateData();	
             $this->setInfoToolbar();
 		
 		}			
@@ -59,17 +59,17 @@ class CKombiPerTA Extends MainPageK {
 		$_SESSION['currentPageKombiPerTA']['periode_pembayaran'] = $this->cmbPeriodePembayaran->Text;		        
 		$this->populateData();
 	}
-	protected function populateData () {		
+	protected function populateData() {		
 		$ta = $_SESSION['tahun_masuk'];	
         $idsmt = $_SESSION['currentPageKombiPerTA']['semester_masuk'];	
 		$kelas = $_SESSION['currentPageKombiPerTA']['kelas'];	        
-		if ($ta == 'none' || $ta == '' || $kelas=='none' || $ta=='' || $this->DB->checkRecordIsExist('tahun', 'ta', $ta)==false) {									
+		if ($ta == 'none' || $ta == '' || $kelas=='none' || $ta== '' || $this->DB->checkRecordIsExist('tahun', 'ta', $ta)==false) {									
 			$result = array();			
 		}else {							
-			$total_kombi1=$this->DB->getCountRowsOfTable("kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas'");
+			$total_kombi1 = $this->DB->getCountRowsOfTable("kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas'");
 			$total_kombi2=$this->DB->getCountRowsOfTable('kombi');
 			if ($total_kombi1 != $total_kombi2) {			
-				$result=$this->Finance->getList("kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas'",array('idkombi'));
+				$result=$this->Finance->getList("kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas'", array('idkombi'));
 				if (isset($result[1])) {
 					$str="SELECT idkombi FROM kombi WHERE idkombi NOT IN (SELECT idkombi FROM kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas')";
 					$this->DB->setFieldTable(array('idkombi'));
@@ -80,7 +80,7 @@ class CKombiPerTA Extends MainPageK {
 						$this->DB->insertRecord ($str);
 					}	
 				}else {
-					$result=$this->getLogic('DMaster')->getList("kombi",array('idkombi'));
+					$result=$this->getLogic('DMaster')->getList("kombi", array('idkombi'));
 					while (list($k, $v)=each($result)) {
 						$str = "INSERT INTO kombi_per_ta (idkombi_per_ta,idkelas,idkombi,tahun,idsmt,biaya) VALUES ";
 						$str = $str . "(NULL,'$kelas',".$v['idkombi'].", $ta, $idsmt,0)";
@@ -110,17 +110,17 @@ class CKombiPerTA Extends MainPageK {
 	}
 	public function editItem($sender, $param) {                   
         $this->GridS->EditItemIndex=$param->Item->ItemIndex;
-        $this->populateData ();        
+        $this->populateData();        
     }
     public function cancelItem($sender, $param) {                
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();        
+        $this->populateData();        
     }		
     public function deleteItem($sender, $param) {                
         $id=$this->GridS->DataKeys[$param->Item->ItemIndex];        
         $this->DB->updateRecord("UPDATE kombi_per_ta SET biaya=0 WHERE idkombi_per_ta = $id");
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }  
     public function saveItem($sender, $param) {                        
         $item = $param->Item;
@@ -129,7 +129,7 @@ class CKombiPerTA Extends MainPageK {
         $str = "UPDATE kombi_per_ta SET biaya='$biaya' WHERE idkombi_per_ta = $id";
         $this->DB->updateRecord($str);       
         $this->GridS->EditItemIndex=-1;
-        $this->populateData ();
+        $this->populateData();
     }
 }
 class TotalPrice extends MainController

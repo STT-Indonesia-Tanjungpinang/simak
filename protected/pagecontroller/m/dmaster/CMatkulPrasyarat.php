@@ -3,7 +3,7 @@ prado::using ('Application.MainPageM');
 class CMatkulPrasyarat extends MainPageM {		    	
 	public function onLoad($param) {
 		parent::onLoad($param);		
-        $this->showMatakuliah=true;        
+        $this->showMatakuliah = true;        
         $this->createObj('Akademik');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
@@ -13,7 +13,7 @@ class CMatkulPrasyarat extends MainPageM {
 			$this->populateData();            
 		}
 	}   
-	protected function populateData () {						
+	protected function populateData() {						
         try {
             $id=addslashes($this->request['id']);
             $kmatkul = $this->Demik->getKMatkul($id);

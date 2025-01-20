@@ -16,8 +16,8 @@ class Logic_ReportFinance extends Logic_Report {
         $nama_tahun_masuk = $this->dataReport['nama_tahun_masuk'];
         $kelas = $this->dataReport['kelas'];
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :              
+            case 'excel2003':               
+            case 'excel2007':              
                 $this->setHeaderPT('L');
                 
                 $sheet=$this->rpt->getActiveSheet();
@@ -49,18 +49,18 @@ class Logic_ReportFinance extends Logic_Report {
                 $sheet->getColumnDimension('L')->setWidth(17);
                 
                 $sheet->getRowDimension(10)->setRowHeight(22);                
-                $sheet->setCellValue('A10','NO');				
-                $sheet->setCellValue('B10','NIM');
-                $sheet->setCellValue('C10','NIRM');				                        
-                $sheet->setCellValue('D10','NAMA MAHASISWA');				
-                $sheet->setCellValue('E10','JK');	
-                $sheet->setCellValue('F10','KELAS');	                
-                $sheet->setCellValue('G10','T.A');		
-                $sheet->setCellValue('H10','SMT');		
-                $sheet->setCellValue('I10','STATUS');				
-                $sheet->setCellValue('J10','BIAYA');				
-                $sheet->setCellValue('K10','SUDAH BAYAR');	
-                $sheet->setCellValue('L10','BELUM BAYAR');				
+                $sheet->setCellValue('A10', 'NO');				
+                $sheet->setCellValue('B10', 'NIM');
+                $sheet->setCellValue('C10', 'NIRM');				                        
+                $sheet->setCellValue('D10', 'NAMA MAHASISWA');				
+                $sheet->setCellValue('E10', 'JK');	
+                $sheet->setCellValue('F10', 'KELAS');	                
+                $sheet->setCellValue('G10', 'T.A');		
+                $sheet->setCellValue('H10', 'SMT');		
+                $sheet->setCellValue('I10', 'STATUS');				
+                $sheet->setCellValue('J10', 'BIAYA');				
+                $sheet->setCellValue('K10', 'SUDAH BAYAR');	
+                $sheet->setCellValue('L10', 'BELUM BAYAR');				
                                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
@@ -95,7 +95,7 @@ class Logic_ReportFinance extends Logic_Report {
                                 
                 $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
                 $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,idkelas,tahun_masuk,semester_masuk FROM v_datamhs WHERE kjur='$kjur'AND tahun_masuk = $tahun_masuk AND k_status!='L' $str_kelas ORDER BY nim ASC,nama_mhs ASC";			                
-                $this->db->setFieldTable(array('no_formulir','nim','nirm','nama_mhs','jk','tahun_masuk','semester_masuk'));
+                $this->db->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tahun_masuk', 'semester_masuk'));
                 $r = $this->db->getRecord($str);	
                 $row=11; 
                 while (list($k, $v)=each($r)) {
@@ -107,11 +107,11 @@ class Logic_ReportFinance extends Logic_Report {
                     $sheet->setCellValue("D$row", $v['nama_mhs']);
                     $sheet->setCellValue("E$row", $v['jk']);
                     $str = "SELECT tahun,idsmt,idkelas,k_status FROM dulang WHERE nim='$nim'";
-                    $this->db->setFieldTable(array('tahun','idsmt','idkelas','k_status'));
+                    $this->db->setFieldTable(array('tahun', 'idsmt', 'idkelas', 'k_status'));
                     $data_dulang = $this->db->getRecord($str);
                     
                     $str="SELECT tahun,idsmt,SUM(dibayarkan) AS dibayarkan FROM v_transaksi WHERE no_formulir='$no_formulir' AND idkombi!=1 GROUP BY tahun,idsmt";
-                    $this->db->setFieldTable(array('tahun','idsmt','dibayarkan'));
+                    $this->db->setFieldTable(array('tahun', 'idsmt', 'dibayarkan'));
                     $result = $this->db->query($str);                    
                     $daftar_dibayarkan=array();
                     while ($baris = $result->fetch_assoc()) {                       
@@ -209,8 +209,8 @@ class Logic_ReportFinance extends Logic_Report {
         $kelas = $this->dataReport['kelas'];
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :              
+            case 'excel2003':               
+            case 'excel2007':              
                 $this->setHeaderPT('I');
                 $sheet=$this->rpt->getActiveSheet();
                 
@@ -243,15 +243,15 @@ class Logic_ReportFinance extends Logic_Report {
                 $sheet->getColumnDimension('I')->setWidth(15);                
                 
                 $sheet->getRowDimension(10)->setRowHeight(22);                
-                $sheet->setCellValue('A10','NO');				
-                $sheet->setCellValue('B10','NIM');
-                $sheet->setCellValue('C10','NIRM');				                        
-                $sheet->setCellValue('D10','NAMA MAHASISWA');				
-                $sheet->setCellValue('E10','JK');	
-                $sheet->setCellValue('F10','KELAS');	                
-                $sheet->setCellValue('G10','KEWAJIBAN');		
-                $sheet->setCellValue('H10','PEMBAYARAN');		
-                $sheet->setCellValue('I10','SISA');				
+                $sheet->setCellValue('A10', 'NO');				
+                $sheet->setCellValue('B10', 'NIM');
+                $sheet->setCellValue('C10', 'NIRM');				                        
+                $sheet->setCellValue('D10', 'NAMA MAHASISWA');				
+                $sheet->setCellValue('E10', 'JK');	
+                $sheet->setCellValue('F10', 'KELAS');	                
+                $sheet->setCellValue('G10', 'KEWAJIBAN');		
+                $sheet->setCellValue('H10', 'PEMBAYARAN');		
+                $sheet->setCellValue('I10', 'SISA');				
                 
                 
                 $styleArray=array(								
@@ -264,7 +264,7 @@ class Logic_ReportFinance extends Logic_Report {
                 $sheet->getStyle("A10:I10")->getAlignment()->setWrapText(true);
                 
                 $str = "SELECT idrekap,no_formulir,nim,nirm,nama_mhs,jk,n_kelas,dibayarkan,kewajiban,sisa FROM rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $tahun AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk ORDER BY idkelas ASC,nama_mhs ASC";
-                $this->db->setFieldTable(array('idrekap','no_formulir','nim','nirm','nama_mhs','jk','n_kelas','dibayarkan','kewajiban','sisa'));
+                $this->db->setFieldTable(array('idrekap', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'n_kelas', 'dibayarkan', 'kewajiban', 'sisa'));
                 $r = $this->db->getRecord($str);
                 
                 $row=11;
@@ -324,11 +324,11 @@ class Logic_ReportFinance extends Logic_Report {
         $nama_tahun = $dataReport['nama_tahun'];
         $nama_semester=$dataReport['nama_semester'];
         switch ($this->getDriver()) {
-            case 'excel2003' :               
-            case 'excel2007' :                
+            case 'excel2003':               
+            case 'excel2007':                
 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->setTitle('Transkriprip Nilai Kurikulum');
                 $rpt->setSubject('Transkriprip Nilai Kurikulum');
@@ -337,51 +337,51 @@ class Logic_ReportFinance extends Logic_Report {
 
                 $row=$this->currentRow;
 				$row+=12;
-                $rpt->SetFont ('helvetica','B',12);	
+                $rpt->SetFont ('helvetica', 'B',12);	
 				$rpt->setXY(30, $row);			
                 $rpt->Cell(150,5,"BUKTI PEMBAYARAN BIAYA KULIAH T.A $nama_tahun SEMESTER $nama_semester",'B',0,'C');
                 $row+=5;
-                $rpt->SetFont ('helvetica','',8);
+                $rpt->SetFont ('helvetica', '',8);
                 $rpt->setXY(30, $row);			
                 $rpt->Cell(150,5,"No. Transaksi: $no_transaksi No. Faktur ".$dataReport['no_faktur'],0,0,'C');
 
                 $row+=0;
-                $rpt->SetFont ('helvetica','B',8);	
+                $rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(3, $row);			
 				$rpt->Cell(0, $row,'Nama Mahasiswa');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,': '.$dataReport['nama_mhs']);
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0, $row,'Program Studi');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
                 $rpt->Cell(0, $row,': '.$dataReport['nama_ps']);
                 $row+=3;
 				$rpt->setXY(3, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->Cell(0, $row,'NIM');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,': '.$dataReport['nim']);				
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0, $row,'No. Formulir');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
                 $rpt->Cell(0, $row,': '.$dataReport['no_formulir']);
                 $row+=3;
 				$rpt->setXY(3, $row);			
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->Cell(0, $row,'Tahun Masuk');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(38, $row);			
 				$rpt->Cell(0, $row,': '.$dataReport['tahun_masuk']);				
-				$rpt->SetFont ('helvetica','B',8);	
+				$rpt->SetFont ('helvetica', 'B',8);	
 				$rpt->setXY(105, $row);			
 				$rpt->Cell(0, $row,'Kelas');
-				$rpt->SetFont ('helvetica','',8);
+				$rpt->SetFont ('helvetica', '',8);
 				$rpt->setXY(130, $row);			
 				$rpt->Cell(0, $row,': '.$dataReport['namakelas']);
                 

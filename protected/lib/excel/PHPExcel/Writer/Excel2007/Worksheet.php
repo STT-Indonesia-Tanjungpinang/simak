@@ -169,8 +169,8 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
 
         // outlinePr
         $objWriter->startElement('outlinePr');
-        $objWriter->writeAttribute('summaryBelow', ($pSheet->getShowSummaryBelow() ? '1' : '0'));
-        $objWriter->writeAttribute('summaryRight', ($pSheet->getShowSummaryRight() ? '1' : '0'));
+        $objWriter->writeAttribute('summaryBelow', ($pSheet->getShowSummaryBelow() ? '1': '0'));
+        $objWriter->writeAttribute('summaryRight', ($pSheet->getShowSummaryRight() ? '1': '0'));
         $objWriter->endElement();
 
         // pageSetUpPr
@@ -218,7 +218,7 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
 
         // sheetView
         $objWriter->startElement('sheetView');
-        $objWriter->writeAttribute('tabSelected', $sheetSelected ? '1' : '0');
+        $objWriter->writeAttribute('tabSelected', $sheetSelected ? '1': '0');
         $objWriter->writeAttribute('workbookViewId', '0');
 
         // Zoom scales
@@ -274,7 +274,7 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
             }
             if ($ySplit > 1) {
                 $objWriter->writeAttribute('ySplit', $ySplit - 1);
-                $pane = ($xSplit > 1) ? 'bottomRight' : 'bottomLeft';
+                $pane = ($xSplit > 1) ? 'bottomRight': 'bottomLeft';
             }
             $objWriter->writeAttribute('topLeftCell', $topLeftCell);
             $objWriter->writeAttribute('activePane', $pane);
@@ -443,22 +443,22 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
             $objWriter->writeAttribute('password', $pSheet->getProtection()->getPassword());
         }
 
-        $objWriter->writeAttribute('sheet', ($pSheet->getProtection()->getSheet() ? 'true' : 'false'));
-        $objWriter->writeAttribute('objects', ($pSheet->getProtection()->getObjects() ? 'true' : 'false'));
-        $objWriter->writeAttribute('scenarios', ($pSheet->getProtection()->getScenarios() ? 'true' : 'false'));
-        $objWriter->writeAttribute('formatCells', ($pSheet->getProtection()->getFormatCells() ? 'true' : 'false'));
-        $objWriter->writeAttribute('formatColumns', ($pSheet->getProtection()->getFormatColumns() ? 'true' : 'false'));
-        $objWriter->writeAttribute('formatRows', ($pSheet->getProtection()->getFormatRows() ? 'true' : 'false'));
-        $objWriter->writeAttribute('insertColumns', ($pSheet->getProtection()->getInsertColumns() ? 'true' : 'false'));
-        $objWriter->writeAttribute('insertRows', ($pSheet->getProtection()->getInsertRows() ? 'true' : 'false'));
-        $objWriter->writeAttribute('insertHyperlinks', ($pSheet->getProtection()->getInsertHyperlinks() ? 'true' : 'false'));
-        $objWriter->writeAttribute('deleteColumns', ($pSheet->getProtection()->getDeleteColumns() ? 'true' : 'false'));
-        $objWriter->writeAttribute('deleteRows', ($pSheet->getProtection()->getDeleteRows() ? 'true' : 'false'));
-        $objWriter->writeAttribute('selectLockedCells', ($pSheet->getProtection()->getSelectLockedCells() ? 'true' : 'false'));
-        $objWriter->writeAttribute('sort', ($pSheet->getProtection()->getSort() ? 'true' : 'false'));
-        $objWriter->writeAttribute('autoFilter', ($pSheet->getProtection()->getAutoFilter() ? 'true' : 'false'));
-        $objWriter->writeAttribute('pivotTables', ($pSheet->getProtection()->getPivotTables() ? 'true' : 'false'));
-        $objWriter->writeAttribute('selectUnlockedCells', ($pSheet->getProtection()->getSelectUnlockedCells() ? 'true' : 'false'));
+        $objWriter->writeAttribute('sheet', ($pSheet->getProtection()->getSheet() ? 'true': 'false'));
+        $objWriter->writeAttribute('objects', ($pSheet->getProtection()->getObjects() ? 'true': 'false'));
+        $objWriter->writeAttribute('scenarios', ($pSheet->getProtection()->getScenarios() ? 'true': 'false'));
+        $objWriter->writeAttribute('formatCells', ($pSheet->getProtection()->getFormatCells() ? 'true': 'false'));
+        $objWriter->writeAttribute('formatColumns', ($pSheet->getProtection()->getFormatColumns() ? 'true': 'false'));
+        $objWriter->writeAttribute('formatRows', ($pSheet->getProtection()->getFormatRows() ? 'true': 'false'));
+        $objWriter->writeAttribute('insertColumns', ($pSheet->getProtection()->getInsertColumns() ? 'true': 'false'));
+        $objWriter->writeAttribute('insertRows', ($pSheet->getProtection()->getInsertRows() ? 'true': 'false'));
+        $objWriter->writeAttribute('insertHyperlinks', ($pSheet->getProtection()->getInsertHyperlinks() ? 'true': 'false'));
+        $objWriter->writeAttribute('deleteColumns', ($pSheet->getProtection()->getDeleteColumns() ? 'true': 'false'));
+        $objWriter->writeAttribute('deleteRows', ($pSheet->getProtection()->getDeleteRows() ? 'true': 'false'));
+        $objWriter->writeAttribute('selectLockedCells', ($pSheet->getProtection()->getSelectLockedCells() ? 'true': 'false'));
+        $objWriter->writeAttribute('sort', ($pSheet->getProtection()->getSort() ? 'true': 'false'));
+        $objWriter->writeAttribute('autoFilter', ($pSheet->getProtection()->getAutoFilter() ? 'true': 'false'));
+        $objWriter->writeAttribute('pivotTables', ($pSheet->getProtection()->getPivotTables() ? 'true': 'false'));
+        $objWriter->writeAttribute('selectUnlockedCells', ($pSheet->getProtection()->getSelectUnlockedCells() ? 'true': 'false'));
         $objWriter->endElement();
     }
 
@@ -509,11 +509,11 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
                     } elseif ($conditional->getConditionType() == PHPExcel_Style_Conditional::CONDITION_CONTAINSTEXT
                         && $conditional->getOperatorType() == PHPExcel_Style_Conditional::OPERATOR_BEGINSWITH
                         && !is_null($conditional->getText())) {
-                        $objWriter->writeElement('formula', 'LEFT(' . $cellCoordinate . ',' . strlen($conditional->getText()) . ')="' . $conditional->getText() . '"');
+                        $objWriter->writeElement('formula', 'LEFT(' . $cellCoordinate . ', ' . strlen($conditional->getText()) . ')="' . $conditional->getText() . '"');
                     } elseif ($conditional->getConditionType() == PHPExcel_Style_Conditional::CONDITION_CONTAINSTEXT
                         && $conditional->getOperatorType() == PHPExcel_Style_Conditional::OPERATOR_ENDSWITH
                         && !is_null($conditional->getText())) {
-                        $objWriter->writeElement('formula', 'RIGHT(' . $cellCoordinate . ',' . strlen($conditional->getText()) . ')="' . $conditional->getText() . '"');
+                        $objWriter->writeElement('formula', 'RIGHT(' . $cellCoordinate . ', ' . strlen($conditional->getText()) . ')="' . $conditional->getText() . '"');
                     } elseif ($conditional->getConditionType() == PHPExcel_Style_Conditional::CONDITION_CONTAINSTEXT
                         && $conditional->getOperatorType() == PHPExcel_Style_Conditional::OPERATOR_NOTCONTAINS
                         && !is_null($conditional->getText())) {
@@ -800,7 +800,7 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
                             } elseif ($rule->getRuleType() === PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_RULETYPE_TOPTENFILTER) {
                                 //    Top 10 Filter Rule
                                 $objWriter->writeAttribute('val', $rule->getValue());
-                                $objWriter->writeAttribute('percent', (($rule->getOperator() === PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_TOPTEN_PERCENT) ? '1' : '0'));
+                                $objWriter->writeAttribute('percent', (($rule->getOperator() === PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_TOPTEN_PERCENT) ? '1': '0'));
                                 $objWriter->writeAttribute('top', (($rule->getGrouping() === PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_TOPTEN_TOP) ? '1': '0'));
                             } else {
                                 //    Filter, DateGroupItem or CustomFilter
@@ -881,10 +881,10 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
     {
         // headerFooter
         $objWriter->startElement('headerFooter');
-        $objWriter->writeAttribute('differentOddEven', ($pSheet->getHeaderFooter()->getDifferentOddEven() ? 'true' : 'false'));
-        $objWriter->writeAttribute('differentFirst', ($pSheet->getHeaderFooter()->getDifferentFirst() ? 'true' : 'false'));
-        $objWriter->writeAttribute('scaleWithDoc', ($pSheet->getHeaderFooter()->getScaleWithDocument() ? 'true' : 'false'));
-        $objWriter->writeAttribute('alignWithMargins', ($pSheet->getHeaderFooter()->getAlignWithMargins() ? 'true' : 'false'));
+        $objWriter->writeAttribute('differentOddEven', ($pSheet->getHeaderFooter()->getDifferentOddEven() ? 'true': 'false'));
+        $objWriter->writeAttribute('differentFirst', ($pSheet->getHeaderFooter()->getDifferentFirst() ? 'true': 'false'));
+        $objWriter->writeAttribute('scaleWithDoc', ($pSheet->getHeaderFooter()->getScaleWithDocument() ? 'true': 'false'));
+        $objWriter->writeAttribute('alignWithMargins', ($pSheet->getHeaderFooter()->getAlignWithMargins() ? 'true': 'false'));
 
         $objWriter->writeElement('oddHeader', $pSheet->getHeaderFooter()->getOddHeader());
         $objWriter->writeElement('oddFooter', $pSheet->getHeaderFooter()->getOddFooter());
@@ -1140,10 +1140,10 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
                         break;
                     case 'n':            // Numeric
                         // force point as decimal separator in case current locale uses comma
-                        $objWriter->writeElement('v', str_replace(',', '.', $cellValue));
+                        $objWriter->writeElement('v', str_replace(', ', '.', $cellValue));
                         break;
                     case 'b':            // Boolean
-                        $objWriter->writeElement('v', ($cellValue ? '1' : '0'));
+                        $objWriter->writeElement('v', ($cellValue ? '1': '0'));
                         break;
                     case 'e':            // Error
                         if (substr($cellValue, 0, 1) == '=') {

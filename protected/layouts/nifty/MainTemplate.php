@@ -26,11 +26,11 @@ class MainTemplate extends TTemplateControl {
         $userid=$this->Page->Pengguna->getDataUser('userid');
         $page = $this->Page->Pengguna->getDataUser('page');
         switch ($page) {
-            case 'm' :
+            case 'm':
                 $str = "UPDATE simak_user SET theme='$theme' WHERE userid='$userid'";
                 $this->Page->DB->updateRecord($str);
             break;
-            case 'mh' :
+            case 'mh':
                 $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE nim='$userid'";                 
                 $this->Page->DB->updateRecord($str);
             break;
@@ -41,7 +41,7 @@ class MainTemplate extends TTemplateControl {
         $page = $this->Page->Pengguna->getDataUser('page');
         $status='';
         switch ($page) {
-            case 'mh' :
+            case 'mh':
                 $statusmhs = $this->Page->DMaster->getNamaStatusMHSByID ($this->Page->Pengguna->getDataUser('k_status'));
                 $status='<i class="fa fa-circle"></i> '.$statusmhs;            
             break;

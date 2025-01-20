@@ -1565,7 +1565,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
                                         switch ((string)$definedName['name']) {
                                             case '_xlnm._FilterDatabase':
                                                 if ((string)$definedName['hidden'] !== '1') {
-                                                    $extractedRange = explode(',', $extractedRange);
+                                                    $extractedRange = explode(', ', $extractedRange);
                                                     foreach ($extractedRange as $range) {
                                                         $autoFilterRange = $range;
                                                         if (strpos($autoFilterRange, ':') !== false) {
@@ -1576,7 +1576,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
                                                 break;
                                             case '_xlnm.Print_Titles':
                                                 // Split $extractedRange
-                                                $extractedRange = explode(',', $extractedRange);
+                                                $extractedRange = explode(', ', $extractedRange);
 
                                                 // Set print titles
                                                 foreach ($extractedRange as $range) {
@@ -1593,7 +1593,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
                                                 }
                                                 break;
                                             case '_xlnm.Print_Area':
-                                                $rangeSets = explode(',', $extractedRange);        // FIXME: what if sheetname contains comma?
+                                                $rangeSets = explode(', ', $extractedRange);        // FIXME: what if sheetname contains comma?
                                                 $newRangeSets = array();
                                                 foreach ($rangeSets as $rangeSet) {
                                                     $range = explode('!', $rangeSet);    // FIXME: what if sheetname contains exclamation mark?
@@ -1603,7 +1603,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
                                                     }
                                                     $newRangeSets[] = str_replace('$', '', $rangeSet);
                                                 }
-                                                $docSheet->getPageSetup()->setPrintArea(implode(',', $newRangeSets));
+                                                $docSheet->getPageSetup()->setPrintArea(implode(', ', $newRangeSets));
                                                 break;
 
                                             default:

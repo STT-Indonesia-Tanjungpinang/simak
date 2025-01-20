@@ -41,7 +41,7 @@ if (!defined('PCLZIP_READ_BLOCK_SIZE')) {
 //define('PCLZIP_SEPARATOR', ' ');
 // Recommanded values for smart separation of filenames.
 if (!defined('PCLZIP_SEPARATOR')) {
-    define('PCLZIP_SEPARATOR', ',');
+    define('PCLZIP_SEPARATOR', ', ');
 }
 
 // ----- Error configuration
@@ -217,7 +217,7 @@ class PclZip
 
         // ----- Tests the zlib
         if (!function_exists('gzopen')) {
-            die('Abort '.basename(__FILE__).' : Missing zlib extensions');
+            die('Abort '.basename(__FILE__).': Missing zlib extensions');
         }
 
         // ----- Set the attributes
@@ -791,7 +791,7 @@ class PclZip
     // Parameters :
     //     $p_index : A single index (integer) or a string of indexes of files to
     //                            extract. The form of the string is "0,4-6,8-12" with only numbers
-    //                            and '-' for range or ',' to separate ranges. No spaces or ';'
+    //                            and '-' for range or ', ' to separate ranges. No spaces or ';'
     //                            are allowed.
     //     $p_path : Path where the files and directories are to be extracted
     //     $p_remove_path : First part ('root' part) of the memorized path
@@ -4910,7 +4910,7 @@ function PclZipUtilPathReduction($p_dir)
 
         // ----- Study directories from last to first
         $v_skip = 0;
-        for ($i=sizeof($v_list)-1; $i>=0; $i--) {
+        for ($i = sizeof($v_list)-1; $i>=0; $i--) {
             // ----- Look for current path
             if ($v_list[$i] == ".") {
                 // ----- Ignore this directory

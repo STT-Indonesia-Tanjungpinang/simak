@@ -85,10 +85,10 @@ class PHPExcel_Reader_Excel5_MD5
         $C = $this->c;
         $D = $this->d;
 
-        $F = array('PHPExcel_Reader_Excel5_MD5','f');
-        $G = array('PHPExcel_Reader_Excel5_MD5','g');
-        $H = array('PHPExcel_Reader_Excel5_MD5','h');
-        $I = array('PHPExcel_Reader_Excel5_MD5','i');
+        $F = array('PHPExcel_Reader_Excel5_MD5', 'f');
+        $G = array('PHPExcel_Reader_Excel5_MD5', 'g');
+        $H = array('PHPExcel_Reader_Excel5_MD5', 'h');
+        $I = array('PHPExcel_Reader_Excel5_MD5', 'i');
 
         /* ROUND 1 */
         self::step($F, $A, $B, $C, $D, $words[0], 7, 0xd76aa478);

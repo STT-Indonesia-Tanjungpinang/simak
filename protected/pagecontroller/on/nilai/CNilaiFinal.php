@@ -8,7 +8,7 @@ class CNilaiFinal extends MainPageON {
     $this->createObj('Nilai');
     if (!$this->IsPostBack && !$this->IsCallback) {	
       if (!isset($_SESSION['currentPageNilaiFinal'])||$_SESSION['currentPageNilaiFinal']['page_name']!='on.nilai.NilaiFinal') {					
-        $_SESSION['currentPageNilaiFinal']=array('page_name'=>'on.nilai.NilaiFinal', 'page_num'=>0,'search'=>false,'tanggal_terbit'=>'none', 'DataMHS'=>array(),'DataNilai'=>array());												
+        $_SESSION['currentPageNilaiFinal']=array('page_name'=>'on.nilai.NilaiFinal', 'page_num'=>0,'search'=>false,'tanggal_terbit'=>'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
       }
       $_SESSION['currentPageNilaiFinal']['search']=false;
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -17,12 +17,12 @@ class CNilaiFinal extends MainPageON {
       $this->tbCmbPs->Text = $_SESSION['kjur'];			
       $this->tbCmbPs->dataBind();	
 
-      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
       $this->tbCmbTA->DataSource = $ta;					
       $this->tbCmbTA->Text = $_SESSION['ta'];						
       $this->tbCmbTA->dataBind();
 
-      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
       $this->tbCmbSemester->DataSource = $semester;
       $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
@@ -71,25 +71,25 @@ class CNilaiFinal extends MainPageON {
     $_SESSION['currentPageNilaiFinal']['search']=true;
     $this->populateData($_SESSION['currentPageNilaiFinal']['search']);
   }
-  public function populateData($search=false) {							
+  public function populateData($search = false) {							
     $kjur = $_SESSION['kjur'];
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];                
     if ($search) {
       $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status,CONCAT(ta.tahun,'',ta.idsmt) AS tasmt FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim";
-      $txtsearch=addslashes($this->txtKriteria->Text);
+      $txtsearch = addslashes($this->txtKriteria->Text);
       switch ($this->cmbKriteria->Text) {                
-        case 'nim' :
+        case 'nim':
           $clausa="AND ta.nim='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
-        case 'nirm' :
+        case 'nirm':
           $clausa="AND vdm.nirm='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
-        case 'nama' :
+        case 'nama':
           $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
@@ -208,16 +208,16 @@ class CNilaiFinal extends MainPageON {
     $this->linkOutput->NavigateUrl='#';
     $bool=true;
     switch ($sender->getId()) {
-      case 'btnPrintOutR' :                
+      case 'btnPrintOutR':                
         $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
         switch ($_SESSION['outputreport']) {
-          case 'summarypdf' :
+          case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
-          case 'summaryexcel' :
+          case 'summaryexcel':
             $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
           break;
-          case 'excel2007' :
+          case 'excel2007':
             $messageprintout='Transkrip Final : ';
           $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.nama_ps,vdm.k_status,vdm.kjur,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
           $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'nama_ps', 'k_status', 'kjur', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk'));
@@ -239,7 +239,7 @@ class CNilaiFinal extends MainPageON {
 
             $str = "SELECT nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,judul_skripsi,iddosen_pembimbing,iddosen_pembimbing2,iddosen_ketua,iddosen_pemket,tahun,idsmt FROM transkrip_asli WHERE nim='$nim'";
             $this->DB->setFieldTable(array('nomor_ijazah', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
-            $datatranskrip=$this->DB->getRecord($str);
+            $datatranskrip = $this->DB->getRecord($str);
 
             $datatranskrip[1]['nama_pembimbing1'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing']);
             $datatranskrip[1]['nama_pembimbing2'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing2']);            
@@ -255,7 +255,7 @@ class CNilaiFinal extends MainPageON {
             $errormessage="Mahasiswa dengan NIM ($nim) statusnya belum lulus !!!.";
           }                               
           break;
-          case 'pdf' :
+          case 'pdf':
             $messageprintout='Transkrip Final : ';
             $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.nama_ps,vdm.k_status,vdm.kjur,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
             $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'nama_ps', 'k_status', 'kjur', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk'));
@@ -277,7 +277,7 @@ class CNilaiFinal extends MainPageON {
 
               $str = "SELECT nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,judul_skripsi,iddosen_pembimbing,iddosen_pembimbing2,iddosen_ketua,iddosen_pemket,tahun,idsmt FROM transkrip_asli WHERE nim='$nim'";
               $this->DB->setFieldTable(array('nomor_ijazah', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
-              $datatranskrip=$this->DB->getRecord($str);
+              $datatranskrip = $this->DB->getRecord($str);
 
               $datatranskrip[1]['nama_pembimbing1'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing']);
               $datatranskrip[1]['nama_pembimbing2'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing2']);            
@@ -295,18 +295,18 @@ class CNilaiFinal extends MainPageON {
           break;
         }
       break;			
-      case 'btnPrintNilaiFinalAll' :                 
+      case 'btnPrintNilaiFinalAll':                 
         switch ($_SESSION['outputreport']) {
-          case 'summarypdf' :
+          case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
           break;
-          case 'summaryexcel' :
+          case 'summaryexcel':
             $messageprintout="Mohon maaf Print out pada mode summary excel belum kami support.";                
           break;
-          case 'excel2007' :
+          case 'excel2007':
             $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
           break;
-          case 'pdf' :
+          case 'pdf':
             $messageprintout="Mohon maaf Print out pada mode pdf tidak kami support.";                                            
           break;
         }

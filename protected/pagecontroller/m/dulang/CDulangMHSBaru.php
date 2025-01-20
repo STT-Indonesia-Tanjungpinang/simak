@@ -17,12 +17,12 @@ class CDulangMHSBaru Extends MainPageM {
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
             
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester=array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageDulangMHSBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();  
@@ -67,30 +67,30 @@ class CDulangMHSBaru Extends MainPageM {
         $_SESSION['currentPageDulangMHSBaru']['search']=true;
         $this->populateData($_SESSION['currentPageDulangMHSBaru']['search']);
     }
-    public function populateData($search=false) {
+    public function populateData($search = false) {
         $kjur = $_SESSION['kjur']; 
         $tahun_masuk = $_SESSION['tahun_masuk'];
         $semester_masuk = $_SESSION['currentPageDulangMHSBaru']['semester_masuk'];  
         if ($search) {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa="AND vdm.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nim' :
+                case 'nim':
                     $clausa="AND d.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
@@ -118,7 +118,7 @@ class CDulangMHSBaru Extends MainPageM {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function cekNomorFormulir($sender, $param) {		
-        $no_formulir=addslashes($param->Value);		
+        $no_formulir = addslashes($param->Value);		
         if ($no_formulir != '') {
             try {
                 if (!isset($_SESSION['currentPageDulangMHSBaru']['DataMHS']['no_formulir'])) {
@@ -135,7 +135,7 @@ class CDulangMHSBaru Extends MainPageM {
                         throw new Exception ("Calon Mahasiswa dengan Nomor Formulir ($no_formulir) tidak lulus dalam SPMB.");		
                     }       
                     $datamhs['nama_ps1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];                    
-                    $datamhs['nama_ps2'] = $datamhs['kjur2'] == 0 ?'N.A' : $_SESSION['daftar_jurusan'][$datamhs['kjur2']];                    
+                    $datamhs['nama_ps2'] = $datamhs['kjur2'] == 0 ?'N.A': $_SESSION['daftar_jurusan'][$datamhs['kjur2']];                    
                     if ($spmb['kjur']==$datamhs['kjur1']) {
                         $datamhs['diterima_ps1'] = '<span class="label label-info">DITERIMA</span>';
                         $datamhs['diterima_ps2'] = '<span class="label label-warning">TIDAK DITERIMA</span>';
@@ -165,7 +165,7 @@ class CDulangMHSBaru Extends MainPageM {
     }
     public function Go($sender, $param) {	
         if ($this->Page->isValid) {            
-            $no_formulir=addslashes($this->txtNoFormulir->Text);
+            $no_formulir = addslashes($this->txtNoFormulir->Text);
             $this->redirect('dulang.DetailDulangMHSBaru',true,array('id'=>$no_formulir));
         }
 	}

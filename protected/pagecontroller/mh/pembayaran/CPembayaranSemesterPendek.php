@@ -11,7 +11,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
 				$_SESSION['currentPagePembayaranSemesterPendek']=array('page_name'=>'mh.pembayaran.PembayaranSemesterPendek', 'page_num'=>0,'ta'=>$_SESSION['ta'],'no_transaksi'=>'none');
             }        
             $this->setInfoToolbar();
-			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');;
+			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');;
             $this->tbCmbTA->Text = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];
             $this->tbCmbTA->dataBind();
             try {                
@@ -66,8 +66,8 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
 		$item = $param->Item;
 		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
 			if ($item->DataItem['commited']) {
-                $item->btnDeleteFromRepeater->Enabled=false;				
-                $item->btnEditFromRepeater->Enabled=false;				
+                $item->btnDeleteFromRepeater->Enabled = false;				
+                $item->btnEditFromRepeater->Enabled = false;				
 			}else{
                 $item->btnDeleteFromRepeater->Attributes->onclick="if(!confirm('Apakah Anda ingin menghapus Transaksi ini?')) return false;";
             }

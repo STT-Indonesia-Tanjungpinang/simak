@@ -11,7 +11,7 @@ class KHSEkstension extends MainPageDW {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
             if (!isset($_SESSION['currentPageKHSEkstension'])||$_SESSION['currentPageKHSEkstension']['page_name']!='dw.nilai.KHSEkstension') {
-				$_SESSION['currentPageKHSEkstension']=array('page_name'=>'dw.nilai.KHSEkstension','page_num'=>0,'search'=>false,'iddosen_wali'=>'none','tahun_masuk'=>$_SESSION['tahun_masuk']);
+				$_SESSION['currentPageKHSEkstension']=array('page_name'=>'dw.nilai.KHSEkstension', 'page_num'=>0,'search'=>false,'iddosen_wali'=>'none', 'tahun_masuk'=>$_SESSION['tahun_masuk']);
 			}   
 			$_SESSION['currentPageKHSEkstension']['search']=false;
             $this->RepeaterS->PageSize=10;
@@ -25,11 +25,11 @@ class KHSEkstension extends MainPageDW {
 			$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKHSEkstension']['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+            $this->tbCmbTA->DataSource=$this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
-            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource=$semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -96,7 +96,7 @@ class KHSEkstension extends MainPageDW {
 		$_SESSION['currentPageKHSEkstension']['search']=true;
 		$this->populateData($_SESSION['currentPageKHSEkstension']['search']);
 	}
-    public function populateData($search=false) {	
+    public function populateData($search = false) {	
         $iddosen_wali = $this->iddosen_wali;
 		$ta=$_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
@@ -104,17 +104,17 @@ class KHSEkstension extends MainPageDW {
             $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali = $iddosen_wali AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt'";
             $txtsearch=$this->txtKriteria->Text;
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa="AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
                     $str = "$str $clausa";
@@ -138,7 +138,7 @@ class KHSEkstension extends MainPageDW {
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKHSEkstension']['page_num']=0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
-		$this->DB->setFieldTable(array('idkrs','tgl_krs','no_formulir','nim','nirm','nama_mhs','jk','kjur','tahun_masuk','semester_masuk','idkelas','sah','tgl_disahkan'));
+		$this->DB->setFieldTable(array('idkrs', 'tgl_krs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'tahun_masuk', 'semester_masuk', 'idkelas', 'sah', 'tgl_disahkan'));
 		$result=$this->DB->getRecord($str);
 		$this->RepeaterS->DataSource=$result;
 		$this->RepeaterS->dataBind();
@@ -156,10 +156,10 @@ class KHSEkstension extends MainPageDW {
             $sks=0;
             $status='-';
             $trstyle='';
-            $dataipk=array('ipk'=>'0.00','sks'=>0);
+            $dataipk=array('ipk'=>'0.00', 'sks'=>0);
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) {                                                            
 				$this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
-				$ip=$this->Nilai->getIPS ();
+				$ip = $this->Nilai->getIPS ();
 				$sks = $this->Nilai->getTotalSKS ();                
                 $dataipk = $this->Nilai->getIPKSampaiTASemester($_SESSION['ta'], $_SESSION['semester'],'ipksks');	                				
 			}else {
@@ -183,21 +183,21 @@ class KHSEkstension extends MainPageDW {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
 		switch ($sender->getId()) {
-			case 'btnPrintOutR' :
+			case 'btnPrintOutR':
                 switch ($_SESSION['outputreport']) {
-                    case 'summarypdf' :
+                    case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
-                    case 'summaryexcel' :
+                    case 'summaryexcel':
                         $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
-                    case 'excel2007' :
+                    case 'excel2007':
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
-                    case 'pdf' :
+                    case 'pdf':
                         $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);	
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
-                        $this->DB->setFieldTable(array('nim','nirm','nama_mhs','jk','kjur','nama_ps','idkonsentrasi','nama_konsentrasi','iddosen_wali'));
+                        $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
                         $r=$this->DB->getRecord($str);	           
                         $dataReport=$r[1];
 
@@ -232,12 +232,12 @@ class KHSEkstension extends MainPageDW {
                     break;
                 }                
 			break;			
-            case 'btnPrintKHSAll' :
+            case 'btnPrintKHSAll':
                 switch ($_SESSION['outputreport']) {
-                    case 'summarypdf' :
+                    case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;
-                    case 'summaryexcel' :
+                    case 'summaryexcel':
                         $tahun = $_SESSION['ta'];
                         $semester=$_SESSION['semester'];
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
@@ -269,10 +269,10 @@ class KHSEkstension extends MainPageDW {
                         $this->report->printSummaryKHS($this->Nilai, $this->DMaster,true);
                         
                     break;
-                    case 'excel2007' :
+                    case 'excel2007':
                         $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
                     break;
-                    case 'pdf' :
+                    case 'pdf':
                         $messageprintout="Mohon maaf Print out pada mode pdf tidak kami support.";                
                     break;                    
                 }

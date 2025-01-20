@@ -85,7 +85,7 @@ class CDaftarMahasiswa extends MainPageDW {
 	} 
     public function populateKonsentrasi () {			
         $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
-        $r=array();
+        $r = array();
         $i=1;
         $tahun_masuk = $_SESSION['tahun_masuk'];        
         $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND tahun = $tahun_masuk";
@@ -97,7 +97,7 @@ class CDaftarMahasiswa extends MainPageDW {
             if ($v['kjur']==$_SESSION['kjur']){
                 $idkonsentrasi = $v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("register_mahasiswa WHERE idkonsentrasi = $idkonsentrasi $str_tahun_masuk $str_kelas $str_status",'nim');
-                $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000' : $jumlah;
+                $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000': $jumlah;
                 $r[$i] = $v;
                 $i+=1;
             }
@@ -109,24 +109,24 @@ class CDaftarMahasiswa extends MainPageDW {
 		$_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = 'none';
         $this->redirect('kemahasiswaan.DaftarMahasiswa',true);
 	} 
-	public function populateData ($search=false) {
+	public function populateData($search = false) {
         $iddosen_wali = $this->iddosen_wali;
         $kjur = $_SESSION['kjur'];        
         if ($search) {
             $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,tempat_lahir,tanggal_lahir,alamat_rumah,kjur,idkonsentrasi,iddosen_wali,tahun_masuk,k_status,idkelas,photo_profile FROM v_datamhs";			
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'nim' :
+                case 'nim':
                     $clausa=" WHERE iddosen_wali = $iddosen_wali AND nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs$clausa",'nim');
                     $str = "$str $clausa";
                 break;
-                case 'nirm' :
+                case 'nirm':
                     $clausa=" WHERE iddosen_wali = $iddosen_wali AND nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs$clausa",'nim');
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa=" WHERE iddosen_wali = $iddosen_wali AND nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs$clausa",'nim');
                     $str = "$str $clausa";

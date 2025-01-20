@@ -41,7 +41,7 @@ class CDiskusi extends MainPageMHS {
 		$_SESSION['currentPageDiskusi']['page_num'] = $param->NewPageIndex;
 		$this->populateNewsFeed($_SESSION['currentPageDiskusi']['search']);
 	}
-    public function populateNewsFeed ($search=false) {
+    public function populateNewsFeed ($search = false) {
         if ($search) {  
             
         }else{
@@ -65,14 +65,14 @@ class CDiskusi extends MainPageMHS {
             $userid=$v['userid'];
             $photo='resources/userimages/no_photo.png';
             switch ($v['tipe']) {
-                case 'mh' :   
+                case 'mh':   
                     $str = "SELECT photo_profile FROM profiles_mahasiswa WHERE nim='$userid'";
                     $this->DB->setFieldTable (array('photo_profile'));			
                     $profile=$this->DB->getRecord($str);	
                     $photo=$profile[1]['photo_profile'];
                     $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$v['userid']));
                 break;
-                case 'm' :
+                case 'm':
                     $str = "SELECT foto AS photo_profile FROM user WHERE userid='$userid'";
                     $this->DB->setFieldTable (array('photo_profile'));			
                     $profile=$this->DB->getRecord($str);	
@@ -93,7 +93,7 @@ class CDiskusi extends MainPageMHS {
         
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
     }    
-    public function populateUnread ($search=false) {
+    public function populateUnread ($search = false) {
         if ($search) {  
             
         }else{
@@ -116,7 +116,7 @@ class CDiskusi extends MainPageMHS {
             $idpost=$v['idpost'];
             $photo='resources/userimages/no_photo.png';
             switch ($v['tipe']) {
-                case 'mh' :   
+                case 'mh':   
                     $str = "SELECT photo_profile FROM profiles_mahasiswa WHERE nim='$userid'";
                     $this->DB->setFieldTable (array('photo_profile'));			
                     $profile=$this->DB->getRecord($str);	

@@ -3,12 +3,12 @@ prado::using ('Application.MainPageON');
 class CKonversiMatakuliah extends MainPageON {	
 	public function onLoad($param) {
 		parent::onLoad($param);					
-        $this->showKonversiMatakuliah=true;
+        $this->showKonversiMatakuliah = true;
         $this->createObj('Nilai');			
 		if (!$this->IsPostBack && !$this->IsCallBack) {
             
             if (!isset($_SESSION['currentPageKonversiMatakuliah'])||$_SESSION['currentPageKonversiMatakuliah']['page_name']!='on.KonversiMatakuliah') {
-				$_SESSION['currentPageKonversiMatakuliah']=array('page_name'=>'on.KonversiMatakuliah', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'daftarmatkul'=>array(),'kjur'=>$_SESSION['kjur']);												
+				$_SESSION['currentPageKonversiMatakuliah']=array('page_name'=>'on.KonversiMatakuliah', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'daftarmatkul'=>array(), 'kjur'=>$_SESSION['kjur']);												
 			}
             $_SESSION['currentPageKonversiMatakuliah']['search']=false;
             
@@ -19,7 +19,7 @@ class CKonversiMatakuliah extends MainPageON {
 			$this->tbCmbPs->Text = $_SESSION['currentPageKonversiMatakuliah']['kjur'];			
 			$this->tbCmbPs->dataBind();
             
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -56,14 +56,14 @@ class CKonversiMatakuliah extends MainPageON {
 		$_SESSION['currentPageKonversiMatakuliah']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageKonversiMatakuliah']['search']);
 	}		
-	public function populateData ($search=false) {			
+	public function populateData($search = false) {			
 		$kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];
 		$tahun_masuk = $_SESSION['tahun_masuk'];		
         if ($search) {
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             $str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.perpanjangan=0";
             switch ($this->cmbKriteria->Text) {                                
-                case 'nama' :
+                case 'nama':
                     $clausa="AND nama LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
                     $str = "$str $clausa";
@@ -89,7 +89,7 @@ class CKonversiMatakuliah extends MainPageON {
             $iddata_konversi = $v['iddata_konversi'];
             $v['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi = $iddata_konversi");
             $v['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
-            $v['nim_alias'] = $v['nim']=='' ? 'N.A' : $v['nim'];
+            $v['nim_alias'] = $v['nim']== '' ? 'N.A': $v['nim'];
             $v['date_added'] = $this->TGL->tanggal('d/m/Y', $v['date_added']);
             $result[$k] = $v;
         }
@@ -101,7 +101,7 @@ class CKonversiMatakuliah extends MainPageON {
 		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {						
 			if ($this->DB->checkRecordIsExist('iddata_konversi', 'data_konversi', $item->DataItem['iddata_konversi'])) {				
-				$item->btnDelete->Enabled=false;				
+				$item->btnDelete->Enabled = false;				
 			}
 		}
 	}		
@@ -129,11 +129,11 @@ class CKonversiMatakuliah extends MainPageON {
             $nim_asal=strtoupper($this->txtAddNimAsal->Text);					
             $nama=addslashes(strtoupper($this->txtAddNama->Text));
             $alamat=strtoupper($this->txtAddAlamat->Text);
-            $notelp=addslashes($this->txtAddNoTelp->Text);	
-            $kode_pt_asal=addslashes($this->txtAddKodePtAsal->Text);
-            $pt_asal=addslashes(strtoupper($this->txtAddNamaPtAsal->Text));
-            $kode_ps_asal=addslashes($this->txtAddKodePsAsal->Text);
-            $ps_asal=addslashes(strtoupper($this->txtAddNamaPsAsal->Text));	
+            $notelp = addslashes($this->txtAddNoTelp->Text);	
+            $kode_pt_asal = addslashes($this->txtAddKodePtAsal->Text);
+            $pt_asal = addslashes(strtoupper($this->txtAddNamaPtAsal->Text));
+            $kode_ps_asal = addslashes($this->txtAddKodePsAsal->Text);
+            $ps_asal = addslashes(strtoupper($this->txtAddNamaPsAsal->Text));	
             $kjenjang=$this->cmbAddJenjang->Text;            
 			$kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];
             $tahun_masuk = $_SESSION['tahun_masuk'];
@@ -146,13 +146,13 @@ class CKonversiMatakuliah extends MainPageON {
                 if ($this->DB->insertRecord($str)) {						
                     $iddata_konversi = $this->DB->getLastInsertID();                
                     foreach ($this->RepeaterAddS->Items As $inputan) {
-                        if ($inputan->txtMatkulAsal->Text !== ''&& $inputan->txtSksAsal->Text !=='' && $inputan->cmbNilaiAsal->Text !=='') {
+                        if ($inputan->txtMatkulAsal->Text !== ''&& $inputan->txtSksAsal->Text !== '' && $inputan->cmbNilaiAsal->Text !== '') {
                             $str = 'INSERT INTO nilai_konversi2 (idnilai_konversi,iddata_konversi,kmatkul,kmatkul_asal,matkul_asal,sks_asal,n_kual) VALUES ';					
                             $kmatkul = $_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['kmatkul'];
                             $kmatkul_asal=strtoupper(trim($inputan->txtKMatkulAsal->Text));
-                            $matkul_asal=addslashes(strtoupper(trim($inputan->txtMatkulAsal->Text)));
+                            $matkul_asal = addslashes(strtoupper(trim($inputan->txtMatkulAsal->Text)));
                             $nilai_asal = $inputan->cmbNilaiAsal->Text;
-                            $sks_asal=addslashes($inputan->txtSksAsal->Text);  
+                            $sks_asal = addslashes($inputan->txtSksAsal->Text);  
                             $str = $str . " (NULL,'$iddata_konversi', '$kmatkul', '$kmatkul_asal', '$matkul_asal', '$sks_asal', '$nilai_asal')";
                             $this->DB->insertRecord($str);					
                         }
@@ -193,13 +193,13 @@ class CKonversiMatakuliah extends MainPageON {
 		$this->txtEditKodePsAsal->Text = $dataView['kode_ps_asal'];
 		$this->txtEditNamaPsAsal->Text = $dataView['nama_ps_asal'];
 		
-		$this->cmbEditTahunAkademik->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+		$this->cmbEditTahunAkademik->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 		$this->cmbEditTahunAkademik->Text = $dataView['tahun'];			
 		$this->cmbEditTahunAkademik->dataBind();
 		
 		$this->cmbEditNamaPsTujuan->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
 		$this->cmbEditNamaPsTujuan->Text = $dataView['kjur'];
-        $this->cmbEditNamaPsTujuan->Enabled=false;
+        $this->cmbEditNamaPsTujuan->Enabled = false;
 		$this->cmbEditNamaPsTujuan->dataBind();
         
 		$this->lblEditKurikulum->Text = $this->Nilai->getKurikulumName($dataView['kjur']);
@@ -221,25 +221,25 @@ class CKonversiMatakuliah extends MainPageON {
                 $nim_asal=strtoupper($this->txtEditNimAsal->Text);					
                 $nama=addslashes(strtoupper($this->txtEditNama->Text));
                 $alamat=strtoupper($this->txtEditAlamat->Text);
-                $notelp=addslashes($this->txtEditNoTelp->Text);	
-                $kode_pt_asal=addslashes($this->txtEditKodePtAsal->Text);
-                $pt_asal=addslashes(strtoupper($this->txtEditNamaPtAsal->Text));
-                $kode_ps_asal=addslashes($this->txtEditKodePsAsal->Text);
-                $ps_asal=addslashes(strtoupper($this->txtEditNamaPsAsal->Text));	
+                $notelp = addslashes($this->txtEditNoTelp->Text);	
+                $kode_pt_asal = addslashes($this->txtEditKodePtAsal->Text);
+                $pt_asal = addslashes(strtoupper($this->txtEditNamaPtAsal->Text));
+                $kode_ps_asal = addslashes($this->txtEditKodePsAsal->Text);
+                $ps_asal = addslashes(strtoupper($this->txtEditNamaPsAsal->Text));	
                 $kjenjang=$this->cmbEditJenjang->Text;
                 $ta = $this->cmbEditTahunAkademik->Text;            
                 $this->DB->query('BEGIN');
                 $str = "UPDATE data_konversi2 SET nim_asal='$nim_asal',nama='$nama',alamat='$alamat',no_telp='$notelp',kode_pt_asal='$kode_pt_asal',nama_pt_asal='$pt_asal',kjenjang='$kjenjang',kode_ps_asal='$kode_ps_asal',nama_ps_asal='$ps_asal',tahun='$ta',date_modified=NOW() WHERE iddata_konversi='$iddata_konversi'";                
                 if ($this->DB->updateRecord($str)) {                           
                     foreach ($this->RepeaterEditS->Items As $inputan) {
-                        if ($inputan->txtMatkulAsal->Text !== ''&& $inputan->txtSksAsal->Text !=='' && $inputan->cmbNilaiAsal->Text !=='') {					
+                        if ($inputan->txtMatkulAsal->Text !== ''&& $inputan->txtSksAsal->Text !== '' && $inputan->cmbNilaiAsal->Text !== '') {					
                             $idnilaikonversi = $inputan->hiddenidnilaikonversi->Value;
                             $kmatkul_before=$this->Nilai->getKMatkul($_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['kmatkul']);
                             $kmatkul = $idkur.'_'.$kmatkul_before;
                             $kmatkul_asal=strtoupper(trim($inputan->txtKMatkulAsal->Text));						
                             $matkul_asal=strtoupper(trim($inputan->txtMatkulAsal->Text));						
                             $nilai_asal = $inputan->cmbNilaiAsal->Text;
-                            $sks_asal=addslashes($inputan->txtSksAsal->Text);                        
+                            $sks_asal = addslashes($inputan->txtSksAsal->Text);                        
                             if ($idnilaikonversi == '') {
                                 $str = 'INSERT INTO nilai_konversi2 (idnilai_konversi,iddata_konversi,kmatkul_asal,kmatkul,matkul_asal,sks_asal,n_kual) VALUES ';											
                                 $str = $str . " (NULL,'$iddata_konversi', '$kmatkul_asal', '$kmatkul', '$matkul_asal', '$sks_asal', '$nilai_asal')";														

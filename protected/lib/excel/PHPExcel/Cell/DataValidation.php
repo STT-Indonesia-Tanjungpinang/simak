@@ -463,10 +463,10 @@ class PHPExcel_Cell_DataValidation
             $this->type = PHPExcel_Cell_DataValidation::TYPE_NONE .
             $this->errorStyle = PHPExcel_Cell_DataValidation::STYLE_STOP .
             $this->operator .
-            ($this->allowBlank ? 't' : 'f') .
-            ($this->showDropDown ? 't' : 'f') .
-            ($this->showInputMessage ? 't' : 'f') .
-            ($this->showErrorMessage ? 't' : 'f') .
+            ($this->allowBlank ? 't': 'f') .
+            ($this->showDropDown ? 't': 'f') .
+            ($this->showInputMessage ? 't': 'f') .
+            ($this->showErrorMessage ? 't': 'f') .
             $this->errorTitle .
             $this->error .
             $this->promptTitle .

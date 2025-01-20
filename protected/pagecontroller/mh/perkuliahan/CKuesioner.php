@@ -9,10 +9,10 @@ class CKuesioner extends MainPageMHS {
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKuesioner'])||$_SESSION['currentPageKuesioner']['page_name']!='d.perkuliahan.Kuesioner') {                
-				$_SESSION['currentPageKuesioner']=array('page_name'=>'d.perkuliahan.Kuesioner', 'DataMatakuliah'=>array(),'ta'=>$_SESSION['ta'],'semester'=>$_SESSION['semester'],'idpengampu_penyelenggaraan'=>'none');												
+				$_SESSION['currentPageKuesioner']=array('page_name'=>'d.perkuliahan.Kuesioner', 'DataMatakuliah'=>array(), 'ta'=>$_SESSION['ta'],'semester'=>$_SESSION['semester'],'idpengampu_penyelenggaraan'=>'none');												
 			}
             try {
-                $idkrsmatkul=addslashes($this->request['id']);   
+                $idkrsmatkul = addslashes($this->request['id']);   
                 $str = "SELECT idpengampu_penyelenggaraan,iddosen,nidn,nama_dosen FROM v_kelas_mhs WHERE idkrsmatkul = $idkrsmatkul";
                 $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'iddosen', 'nidn', 'nama_dosen'));
                 $dk = $this->DB->getRecord($str);
@@ -77,7 +77,7 @@ class CKuesioner extends MainPageMHS {
                                                     <td colspan="9">'.$item->DataItem['nama_kelompok'].'</td></tr>';
             }
             $idkuesioner = $item->DataItem['idkuesioner'];
-            $daftar_indikator = $this->Demik->getList("kuesioner_indikator WHERE idkuesioner = $idkuesioner AND nama_indikator != 'none'",array('idindikator', 'nama_indikator'),'nilai_indikator',null,1);              
+            $daftar_indikator = $this->Demik->getList("kuesioner_indikator WHERE idkuesioner = $idkuesioner AND nama_indikator != 'none'", array('idindikator', 'nama_indikator'), 'nilai_indikator', null, 1);              
             $item->cmbJawaban->DataSource = $daftar_indikator;
             $item->cmbJawaban->DataBind();
         }        

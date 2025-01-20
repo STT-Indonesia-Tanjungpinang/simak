@@ -64,7 +64,7 @@ class CImportNilai extends MainPageD {
         $file_type=$sender->FileType;
         $bool=false;
         switch ($file_type) {
-          case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' :
+          case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
             $bool=true;
           break;
         }

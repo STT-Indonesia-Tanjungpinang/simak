@@ -13,7 +13,7 @@ class CPendaftaranOnline extends MainPageK {
             $_SESSION['currentPagePendaftaranOnline']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
@@ -29,7 +29,7 @@ class CPendaftaranOnline extends MainPageK {
             
             $this->cmbDisplayRecord->Text = $_SESSION['currentPagePendaftaranOnline']['display_record'];
             $this->lblModulHeader->Text = $this->getInfoToolbar();            
-            $this->populateData ();	
+            $this->populateData();	
 		}	
 	}   
 	public function getInfoToolbar() {                
@@ -62,18 +62,18 @@ class CPendaftaranOnline extends MainPageK {
 		$_SESSION['currentPagePendaftaranOnline']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPagePendaftaranOnline']['search']);
 	}		
-	public function populateData ($search=false) {
+	public function populateData($search = false) {
         $idkelas = $_SESSION['currentPagePendaftaranOnline']['kelas'];
         $tahun_masuk = $_SESSION['tahun_masuk'];   
 		$str_display='';		
         if ($search) {        
             $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp";
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {
-                case 'no_registrasi' :
+                case 'no_registrasi':
                     $clausa=" WHERE no_pendaftaran='$txtsearch'"; 
                 break;
-                case 'nama_mhs' :
+                case 'nama_mhs':
                     $clausa=" WHERE nama_mhs LIKE '%$txtsearch%'";                    
                 break;
             }
@@ -110,13 +110,13 @@ class CPendaftaranOnline extends MainPageK {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout="";
                 $dataReport['tahun_masuk'] = $_SESSION['tahun_masuk'];
                 $dataReport['pilihan'] = $_SESSION['currentPagePendaftaranOnline']['display_record'];
@@ -125,7 +125,7 @@ class CPendaftaranOnline extends MainPageK {
                 $this->report->setMode($_SESSION['outputreport']);
                 $this->report->printPIN(); 
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }

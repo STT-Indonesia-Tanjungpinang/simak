@@ -31,11 +31,11 @@ class CKRS extends MainPageMHS {
       } 
       $this->lblModulHeader->Text = $this->getInfoToolbar();
       
-      $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')),'none');
+      $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
       $this->tbCmbTA->Text = $_SESSION['ta'];
       $this->tbCmbTA->dataBind();			
       
-      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
       $this->tbCmbSemester->DataSource = $semester;
       $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
@@ -67,7 +67,7 @@ class CKRS extends MainPageMHS {
     $item = $param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {    
       if ($item->DataItem['batal']) {
-        $item->cmbKelas->Enabled=false;
+        $item->cmbKelas->Enabled = false;
         CKRS::$totalSKSBatal+=$item->DataItem['sks'];
         CKRS::$jumlahMatkulBatal+=1;
       }else{
@@ -93,7 +93,7 @@ class CKRS extends MainPageMHS {
           $idkelas_mhs = $v['idkelas_mhs'];
           $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkelas_mhs');
           $kapasitas=(int)$this->DMaster->getKapasitasRuangKelas($v['idruangkelas']);
-          $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '' : ' [PENUH]';
+          $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '': ' [PENUH]';
           $result[$idkelas_mhs] = $this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
         }                
         $item->cmbKelas->DataSource = $result;            
@@ -117,7 +117,7 @@ class CKRS extends MainPageMHS {
         $r_lock_kelas = $this->DB->getRecord($str_lock_kelas);
         $value_lock_kelas = $r_lock_kelas[1]['value'];
         if($value_lock_kelas=="1" && $idkelas_mhs_selected!="none"){
-          $item->cmbKelas->Enabled=false;
+          $item->cmbKelas->Enabled = false;
         }
         
         CKRS::$totalSKS+=$item->DataItem['sks'];
@@ -125,7 +125,7 @@ class CKRS extends MainPageMHS {
       }
     }
   }
-  protected function populateData () {
+  protected function populateData() {
     try {			
       $datamhs = $this->Pengguna->getDataUser();  
       $this->KRS->setDataMHS($datamhs);
@@ -209,16 +209,16 @@ class CKRS extends MainPageMHS {
     $jumlah_matkul = $_SESSION['currentPageKRS']['DataKRS']['krs']['jumlah_sah'];	        
     if ($jumlah_kelas >= $jumlah_matkul) {
       switch ($_SESSION['outputreport']) {
-        case 'summarypdf' :
+        case 'summarypdf':
           $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
         break;
-        case 'summaryexcel' :
+        case 'summaryexcel':
           $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
         break;
-        case 'excel2007' :
+        case 'excel2007':
           $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
         break;
-        case 'pdf' :                                
+        case 'pdf':                                
           $dataReport['krs'] = $_SESSION['currentPageKRS']['DataKRS']['krs'];        
           $dataReport['matakuliah'] = $_SESSION['currentPageKRS']['DataKRS']['matakuliah'];        
           $dataReport['nama_tahun'] = $nama_tahun;
@@ -266,16 +266,16 @@ class CKRS extends MainPageMHS {
       $messageprintout="Mohon maaf, anda tidak bisa mencetak KSM karena administrasi, Silahkan hubungi bagian keuangan.";
     }else{
       switch ($_SESSION['outputreport']) {
-        case 'summarypdf' :
+        case 'summarypdf':
           $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
         break;
-        case 'summaryexcel' :
+        case 'summaryexcel':
           $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
         break;
-        case 'excel2007' :
+        case 'excel2007':
           $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
         break;
-        case 'pdf' :                                
+        case 'pdf':                                
               
           $messageprintout="";
           $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
@@ -318,10 +318,10 @@ class CKRS extends MainPageMHS {
   public function printKUM ($jenisujian, $dataidkrs, $objKRS, $objDMaster) {
     
     switch ($this->report->getDriver()) {
-      case 'excel2003' :               
-      case 'excel2007' :                
+      case 'excel2003':               
+      case 'excel2007':                
       break;
-      case 'summarypdf' :
+      case 'summarypdf':
         $this->setMode('pdf');
         $rpt=$this->report->rpt;
         
@@ -473,7 +473,7 @@ class CKRS extends MainPageMHS {
         }
         $this->printOut("kum");
       break;
-      case 'pdf' :
+      case 'pdf':
         $rpt=$this->report->rpt;
         $rpt->AddPage();
         $this->report->setHeaderPT();

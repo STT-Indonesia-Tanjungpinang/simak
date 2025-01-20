@@ -42,7 +42,7 @@ class Autorisasi extends TModule implements IUserManager {
 		$um->setUser($username);
 		$result = $um->getUser();
         switch ($result['page']) {
-            case 'mh' :
+            case 'mh':
                 $pass=md5($password);
                 if ($result['k_status']=='A' || $result['k_status']=='C' || $result['k_status']=='N') {                                        			
                     $message="Gagal. Silahkan masukan username dan password dengan benar.";
@@ -50,7 +50,7 @@ class Autorisasi extends TModule implements IUserManager {
                     $message="Mohon maaf status Anda diluar AKTIF. Hubungi Bagian Administrasi.";		
                 }
             break;
-            case 'al' :
+            case 'al':
                 $pass=md5($password);
                 if ($result['k_status']=='L') {                                        			
                     $message="Gagal. Silahkan masukan username dan password dengan benar.";
@@ -58,22 +58,22 @@ class Autorisasi extends TModule implements IUserManager {
                     $message="Mohon maaf status Anda diluar LULUS. Hubungi Bagian Administrasi.";		
                 }
             break;
-			case 'mb' :
+			case 'mb':
 				$pass=hash('sha256', $result['salt'] . hash('sha256', $password));
 				$_SESSION['userpassword_mb']=$password;
                 $message="Gagal. Silahkan masukan username dan password dengan benar.";
 			break;
-            case 'dw' :
-            case 'd' :
-            case 'k' :
-            case 'on' :
-            case 'api' :
-            case 'sa' :
+            case 'dw':
+            case 'd':
+            case 'k':
+            case 'on':
+            case 'api':
+            case 'sa':
                 $pass=hash('sha256', $result['salt'] . hash('sha256', $password));
                 $message="Gagal. Silahkan masukan username dan password dengan benar.";
             break;
-            case 'm' :
-                if ($result['salt']=='') {
+            case 'm':
+                if ($result['salt']== '') {
                     $pass=md5($password);
                 }else{
                     $pass=hash('sha256', $result['salt'] . hash('sha256', $password));

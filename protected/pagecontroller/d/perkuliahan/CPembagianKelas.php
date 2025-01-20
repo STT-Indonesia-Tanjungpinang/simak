@@ -17,13 +17,13 @@ public function onLoad($param) {
 			$this->tbCmbPs->dataBind();	
             
             $tahun = $_SESSION['ta'];
-            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTA->DataSource = $ta;					
 			$this->tbCmbTA->Text = $tahun;						
 			$this->tbCmbTA->dataBind();
             
             $idsmt = $_SESSION['semester'];
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $idsmt;
 			$this->tbCmbSemester->dataBind();
@@ -37,13 +37,13 @@ public function onLoad($param) {
 			$this->tbCmbPs->dataBind();	
             
             $tahun = $_SESSION['ta'];
-            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTA->DataSource = $ta;					
 			$this->tbCmbTA->Text = $tahun;						
 			$this->tbCmbTA->dataBind();
             
             $idsmt = $_SESSION['semester'];
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource = $semester;
 			$this->tbCmbSemester->Text = $idsmt;
 			$this->tbCmbSemester->dataBind();
@@ -86,7 +86,7 @@ public function onLoad($param) {
         $this->lblModulHeader->Text = $this->getInfoToolbar();
         $this->populateData();
 	}
-	public function populateData($search=false) {	
+	public function populateData($search = false) {	
         $ta = $_SESSION['ta'];
         $idsmt = $_SESSION['semester'];
         $kjur = $_SESSION['kjur'];
@@ -112,13 +112,13 @@ public function onLoad($param) {
         $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataReport=$this->Demik->getInfoKelas($idkelas_mhs);
 		switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :               
+            case 'excel2007':               
                 $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas']+64);
                 $dataReport['hari'] = $this->Page->TGL->getNamaHari($dataReport['hari']);
                 
@@ -133,7 +133,7 @@ public function onLoad($param) {
                 $messageprintout="Daftar Hadir Mahasiswa : <br/>";
                 $this->report->printDaftarHadirMahasiswa();
             break;
-            case 'pdf' :
+            case 'pdf':
                 $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
         }                

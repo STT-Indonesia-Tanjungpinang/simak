@@ -53,7 +53,7 @@ class DBFactory extends TModule {
 	private function linkOpen() {
 		$this->prepareParameters();
 		switch ($this->DbType) {
-			case 'postgres' :
+			case 'postgres':
 				prado::using ('Application.lib.Database.PostgreSQL');
 				$this->Link = new PostgreSQL ();
 				$config=array("host" => $this->Host,
@@ -62,7 +62,7 @@ class DBFactory extends TModule {
 			 				"password" => $this->UserPassword,
 							"dbname" => $this->DbName);
 			break;
-			case 'mysql' :
+			case 'mysql':
 				prado::using ('Application.lib.Database.MySQL');
 				$this->Link = new MySQL ();
 				$config=array("host" => $this->Host,

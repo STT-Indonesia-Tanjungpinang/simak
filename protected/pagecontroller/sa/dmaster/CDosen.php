@@ -25,22 +25,22 @@ class CDosen extends MainPageSA {
 		$_SESSION['currentPageDosen']['search']=true;
         $this->populateData($_SESSION['currentPageDosen']['search']);
 	}    
-	protected function populateData ($search=false) {
+	protected function populateData($search = false) {
         if ($search) {
             $str = "SELECT iddosen,nidn,nipy,gelar_depan,nama_dosen,gelar_belakang,telp_hp,username,status FROM dosen";			
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {
-                case 'nidn' :
+                case 'nidn':
                     $clausa="WHERE nidn='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
                 break;
-                case 'nip' :
+                case 'nip':
                     $clausa="WHERE nipy='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
                 break;
-                case 'nama_dosen' :
+                case 'nama_dosen':
                     $clausa="WHERE nama_dosen LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
@@ -110,7 +110,7 @@ class CDosen extends MainPageSA {
         $username=$param->Value;		
         if ($username != '') {
             try {
-                if ($this->DB->checkRecordIsExist('username', 'dosen', $username) ) {
+                if ($this->DB->checkRecordIsExist('username', 'dosen', $username)) {
                     throw new Exception ("Username ($username) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                 }                
                 if($this->DB->checkRecordIsExist('username', 'user', $username)) {
@@ -142,13 +142,13 @@ class CDosen extends MainPageSA {
 		if ($this->Page->isValid) {
             $nidn = addslashes($this->txtAddNIDN->Text);
             $nipy=addslashes($this->txtAddNIPY->Text);
-            $nama=strtoupper(addslashes($this->txtAddNama->Text));
+            $nama = strtoupper(addslashes($this->txtAddNama->Text));
 			$gelar_depan = addslashes($this->txtAddGelarDepan->Text);
 			$gelar_belakang=addslashes($this->txtAddGelarBelakang->Text);
             $idjabatanfungsional = $this->cmbAddJabatanAkademik->Text;
-			$alamat_dosen=strtoupper(addslashes($this->txtAddAlamat->Text));
+			$alamat_dosen = strtoupper(addslashes($this->txtAddAlamat->Text));
             $no_telepon = addslashes($this->txtAddTelepon->Text);
-            $email=addslashes($this->txtAddEmail->Text);
+            $email = addslashes($this->txtAddEmail->Text);
             $username=addslashes($this->txtAddUsername->Text);
 			$password=md5(txtAddPassword1);
             
@@ -204,13 +204,13 @@ class CDosen extends MainPageSA {
             $username=$this->hiddenusername->Value;
             $nidn = addslashes($this->txtEditNIDN->Text);
             $nipy=addslashes($this->txtEditNIPY->Text);
-            $nama=strtoupper(addslashes($this->txtEditNama->Text));
+            $nama = strtoupper(addslashes($this->txtEditNama->Text));
 			$gelar_depan = addslashes($this->txtEditGelarDepan->Text);
 			$gelar_belakang=addslashes($this->txtEditGelarBelakang->Text);
             $idjabatanfungsional = $this->cmbEditJabatanAkademik->Text;
-			$alamat_dosen=strtoupper(addslashes($this->txtEditAlamat->Text));
+			$alamat_dosen = strtoupper(addslashes($this->txtEditAlamat->Text));
             $no_telepon = addslashes($this->txtEditTelepon->Text);
-            $email=addslashes($this->txtEditEmail->Text);
+            $email = addslashes($this->txtEditEmail->Text);
             $status = $this->cmbEditStatus->Text;
 			$str = "UPDATE dosen SET nidn='$nidn',nipy='$nipy',nama_dosen='$nama',gelar_depan='$gelar_depan',gelar_belakang='$gelar_belakang',idjabatan='$idjabatanfungsional',alamat_dosen='$alamat_dosen',telp_hp='$no_telepon',email='$email',status = $status WHERE iddosen = $iddosen";
 			$this->DB->query('BEGIN');

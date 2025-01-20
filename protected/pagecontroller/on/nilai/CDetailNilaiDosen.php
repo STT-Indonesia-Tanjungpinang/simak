@@ -63,12 +63,12 @@ class CDetailNilaiDosen extends MainPageON
       JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) 
       WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC
     ";        
-    $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'n_kuan', 'n_kual','published'));
+    $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'n_kuan', 'n_kual', 'published'));
     $r = $this->DB->getRecord($str);	           
     $result = array();
     
     while (list($k, $v) = each($r)) { 
-      $v['am'] = $v['n_kual']=='N.A' ? 'N.A' : $this->Nilai->getAngkaMutu($v['n_kual']);
+      $v['am'] = $v['n_kual']=='N.A' ? 'N.A': $this->Nilai->getAngkaMutu($v['n_kual']);
       $result[$k] = $v;
     }
     $this->RepeaterS->DataSource = $result;

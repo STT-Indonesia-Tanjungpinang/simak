@@ -19,12 +19,12 @@ class CChangePenyelenggaraan extends MainPageM
       $this->tbCmbPs->Text = $_SESSION['kjur'];			
       $this->tbCmbPs->dataBind();	
       
-      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+      $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
       $this->tbCmbTA->DataSource = $ta;					
       $this->tbCmbTA->Text = $_SESSION['ta'];						
       $this->tbCmbTA->dataBind();
       
-      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+      $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
       $this->tbCmbSemester->DataSource = $semester;
       $this->tbCmbSemester->Text = $_SESSION['semester'];
       $this->tbCmbSemester->dataBind();
@@ -85,7 +85,7 @@ class CChangePenyelenggaraan extends MainPageM
     $_SESSION['currentPageChangePenyelenggaraan']['idkur'] = $this->cmbFilterKurikulum->Text;
     $this->populateData();
   }
-  public function populateData($search=false) {	
+  public function populateData($search = false) {	
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];
     $kjur = $_SESSION['kjur'];        

@@ -36,17 +36,17 @@ class CPesertaUjianPMB extends MainPageM {
 		$_SESSION['currentPagePesertaMatakuliah']['search']=true;
 		$this->populateData($_SESSION['currentPagePesertaMatakuliah']['search']);
 	}
-    public function populateData ($search=false) {
+    public function populateData($search = false) {
         $idjadwal_ujian = $_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']['idjadwal_ujian'];        
         $str = "SELECT pum.idpeserta_ujian,pum.no_formulir,fp.nama_mhs,fp.jk,fp.kjur1,fp.kjur2,pin.no_pin FROM peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian";
         if ($search) {            
-            $txtsearch=addslashes($this->txtKriteria->Text);
+            $txtsearch = addslashes($this->txtKriteria->Text);
             switch ($this->cmbKriteria->Text) {                
-                case 'no_formulir' :
+                case 'no_formulir':
                     $clausa="AND fp.no_formulir='$txtsearch'";
                     $str = "$str $clausa";
                 break;
-                case 'nama' :
+                case 'nama':
                     $clausa="AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $str = "$str $clausa";
                 break;
@@ -119,16 +119,16 @@ class CPesertaUjianPMB extends MainPageM {
         $idjadwal_ujian = $dataReport['idjadwal_ujian'];
         $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian",'pum.no_formulir');
 		switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :  
+            case 'excel2007':  
                 $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";
             break;
-            case 'pdf' :                
+            case 'pdf':                
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['tahun_masuk']);
                 $dataReport['jumlah_peserta'] = $jumlah_peserta;
                 $dataReport['linkoutput'] = $this->linkOutput; 

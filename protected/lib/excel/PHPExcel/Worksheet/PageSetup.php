@@ -600,7 +600,7 @@ class PHPExcel_Worksheet_PageSetup
         if ($index == 0) {
             return $this->printArea;
         }
-        $printAreas = explode(',', $this->printArea);
+        $printAreas = explode(', ', $this->printArea);
         if (isset($printAreas[$index-1])) {
             return $printAreas[$index-1];
         }
@@ -621,7 +621,7 @@ class PHPExcel_Worksheet_PageSetup
         if ($index == 0) {
             return !is_null($this->printArea);
         }
-        $printAreas = explode(',', $this->printArea);
+        $printAreas = explode(', ', $this->printArea);
         return isset($printAreas[$index-1]);
     }
 
@@ -639,10 +639,10 @@ class PHPExcel_Worksheet_PageSetup
         if ($index == 0) {
             $this->printArea = null;
         } else {
-            $printAreas = explode(',', $this->printArea);
+            $printAreas = explode(', ', $this->printArea);
             if (isset($printAreas[$index-1])) {
                 unset($printAreas[$index-1]);
-                $this->printArea = implode(',', $printAreas);
+                $this->printArea = implode(', ', $printAreas);
             }
         }
 
@@ -684,7 +684,7 @@ class PHPExcel_Worksheet_PageSetup
             if ($index == 0) {
                 $this->printArea = $value;
             } else {
-                $printAreas = explode(',', $this->printArea);
+                $printAreas = explode(', ', $this->printArea);
                 if ($index < 0) {
                     $index = count($printAreas) - abs($index) + 1;
                 }
@@ -692,13 +692,13 @@ class PHPExcel_Worksheet_PageSetup
                     throw new PHPExcel_Exception('Invalid index for setting print range.');
                 }
                 $printAreas[$index-1] = $value;
-                $this->printArea = implode(',', $printAreas);
+                $this->printArea = implode(', ', $printAreas);
             }
         } elseif ($method == self::SETPRINTRANGE_INSERT) {
             if ($index == 0) {
-                $this->printArea .= ($this->printArea == '') ? $value : ','.$value;
+                $this->printArea .= ($this->printArea == '') ? $value : ', '.$value;
             } else {
-                $printAreas = explode(',', $this->printArea);
+                $printAreas = explode(', ', $this->printArea);
                 if ($index < 0) {
                     $index = abs($index) - 1;
                 }
@@ -706,7 +706,7 @@ class PHPExcel_Worksheet_PageSetup
                     throw new PHPExcel_Exception('Invalid index for setting print range.');
                 }
                 $printAreas = array_merge(array_slice($printAreas, 0, $index), array($value), array_slice($printAreas, $index));
-                $this->printArea = implode(',', $printAreas);
+                $this->printArea = implode(', ', $printAreas);
             }
         } else {
             throw new PHPExcel_Exception('Invalid method for setting print range.');

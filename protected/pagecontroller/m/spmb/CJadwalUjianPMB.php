@@ -14,14 +14,14 @@ class CJadwalUjianPMB extends MainPageM {
             $_SESSION['currentPageJadwalUjianPMB']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
                         
-            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(),'none');			
+            $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_pendaftaran'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
             $_SESSION['semester']=1;
             $idsmt = $_SESSION['semester'];
-            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(),'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $idsmt;
 			$this->tbCmbSemesterMasuk->dataBind();
@@ -62,7 +62,7 @@ class CJadwalUjianPMB extends MainPageM {
 		$_SESSION['currentPageJadwalUjianPMB']['search']=true;
 		$this->populateData($_SESSION['currentPageJadwalUjianPMB']['search']);
 	}
-	public function populateData($search=false) {	
+	public function populateData($search = false) {	
         $tahun_masuk = $_SESSION['tahun_pendaftaran'];
         $idsmt = $_SESSION['semester'];
         $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE tahun_masuk='$tahun_masuk' AND idsmt='$idsmt' ORDER BY tanggal_ujian ASC";
@@ -92,7 +92,7 @@ class CJadwalUjianPMB extends MainPageM {
             $nama_kegiatan = addslashes($this->txtAddNamaKegiatan->Text);
             $tgl_ujian=date ('Y-m-d', $this->txtAddTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtAddJamMasuk->Text);
-            $jam_keluar=addslashes($this->txtAddJamKeluar->Text);
+            $jam_keluar = addslashes($this->txtAddJamKeluar->Text);
             $tgl_akhir_pendaftaran=date ('Y-m-d', $this->txtAddTanggalAkhirDaftar->TimeStamp);
             $ruangkelas = $this->cmbAddRuang->Text;            
             $str = "INSERT INTO jadwal_ujian_pmb SET idjadwal_ujian=NULL,tahun_masuk = $tahun_masuk,idsmt=$semester,nama_kegiatan='$nama_kegiatan',tanggal_ujian='$tgl_ujian',jam_mulai='$jam_masuk',jam_akhir='$jam_keluar',tanggal_akhir_daftar='$tgl_akhir_pendaftaran',idruangkelas='$ruangkelas',date_added=NOW(),date_modified=NOW(),status=1";
@@ -126,7 +126,7 @@ class CJadwalUjianPMB extends MainPageM {
             $nama_kegiatan = addslashes($this->txtEditNamaKegiatan->Text);
             $tgl_ujian=date ('Y-m-d', $this->txtEditTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtEditJamMasuk->Text);
-            $jam_keluar=addslashes($this->txtEditJamKeluar->Text);
+            $jam_keluar = addslashes($this->txtEditJamKeluar->Text);
             $tgl_akhir_pendaftaran=date ('Y-m-d', $this->txtEditTanggalAkhirDaftar->TimeStamp);
             $ruangkelas = $this->cmbEditRuang->Text;
             $status = $this->cmbEditStatus->Text;            
@@ -153,16 +153,16 @@ class CJadwalUjianPMB extends MainPageM {
         $this->linkOutput->Text='';
         $this->linkOutput->NavigateUrl='#';                
 		switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :  
+            case 'excel2007':  
                 $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";
             break;
-            case 'pdf' :                
+            case 'pdf':                
                 $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,rk.namaruang,rk.kapasitas,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian = $idjadwal_ujian ORDER BY tanggal_ujian ASC";        
                 $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'namaruang', 'kapasitas', 'status'));
                 $r = $this->DB->getRecord($str);

@@ -249,7 +249,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 //                    $rowIndex = 0;
 //                    foreach ($worksheetData as $key => $rowData) {
 //                        switch ($key) {
-//                            case 'table-row' :
+//                            case 'table-row':
 //                                $rowDataTableAttributes = $rowData->attributes($namespacesContent['table']);
 //                                $rowRepeats = (isset($rowDataTableAttributes['number-rows-repeated'])) ?
 //                                        $rowDataTableAttributes['number-rows-repeated'] : 1;
@@ -619,7 +619,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
                                             $value = preg_replace('/\[([^\.]+)\.([^\.]+)\]/Ui', '$1!$2', $value);       //  Cell reference in another sheet
                                             $value = preg_replace('/\[\.([^\.]+):\.([^\.]+)\]/Ui', '$1:$2', $value);    //  Cell range reference
                                             $value = preg_replace('/\[\.([^\.]+)\]/Ui', '$1', $value);                  //  Simple cell reference
-                                            $value = PHPExcel_Calculation::translateSeparator(';', ',', $value, $inBraces);
+                                            $value = PHPExcel_Calculation::translateSeparator(';', ', ', $value, $inBraces);
                                         }
                                     }
                                     unset($value);

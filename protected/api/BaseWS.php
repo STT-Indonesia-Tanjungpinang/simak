@@ -102,7 +102,7 @@ class BaseWS extends TJsonResponse {
   private function linkOpen() {
     $this->prepareParameters();
     switch ($this->DbType) {
-      case 'postgres' :
+      case 'postgres':
         prado::using ('Application.lib.Database.PostgreSQL');
         $this->DB = new PostgreSQL ();
         $config=array("host" => $this->Host,
@@ -112,7 +112,7 @@ class BaseWS extends TJsonResponse {
           "dbname" => $this->DbName
         );
       break;
-      case 'mysql' :
+      case 'mysql':
         prado::using ('Application.lib.Database.MySQL');
         $this->DB = new MySQL ();
         $config = array("host" => $this->Host,
@@ -147,35 +147,35 @@ class BaseWS extends TJsonResponse {
   {
     switch (strtolower($nama_object)) 
     {
-      case 'dmaster' :
+      case 'dmaster':
         prado::using('Application.logic.Logic_DMaster');
         $this->DMaster = new Logic_DMaster($this->DB);
       break;                        
-      case 'akademik' :
+      case 'akademik':
         prado::using('Application.logic.Logic_Akademik');
         $this->Demik = new Logic_Akademik($this->DB);
       break;    
-      case 'krs' :
+      case 'krs':
         prado::using('Application.logic.Logic_KRS');
         $this->KRS = new Logic_KRS($this->DB);
       break;                        
-      case 'kuesioner' :
+      case 'kuesioner':
         prado::using('Application.logic.Logic_Kuesioner');
         $this->Kuesioner = new Logic_Kuesioner($this->DB);
       break;
-      case 'nilai' :
+      case 'nilai':
         prado::using('Application.logic.Logic_Nilai');
         $this->Nilai = new Logic_Nilai($this->DB);
       break;                        
-      case 'finance' :
+      case 'finance':
         prado::using('Application.logic.Logic_Finance');
         $this->Finance = new Logic_Finance($this->DB);
       break;  
-      case 'pengguna' :
+      case 'pengguna':
         prado::using('Application.logic.Logic_Users');
         $this->Pengguna = new Logic_Users($this->DB);
       break;
-      case 'log' :
+      case 'log':
         prado::using('Application.logic.Logic_Log');
         $this->Log = new Logic_Log($this->DB);
       break;
@@ -200,15 +200,15 @@ class BaseWS extends TJsonResponse {
       }
       else
       {
-        $alamat_ip=$_SERVER['REMOTE_ADDR'];
+        $alamat_ip = $_SERVER['REMOTE_ADDR'];
       }
       $str = "SELECT userid,username,token,ipaddress,active FROM user WHERE username='$username' AND token='$token'";
-      $this->DB->setFieldTable(array('userid','username','token','ipaddress','active'));
+      $this->DB->setFieldTable(array('userid', 'username', 'token', 'ipaddress', 'active'));
       $r  = $this->DB->getRecord($str);
       if (isset($r[1]))
       {	
         $data=$r[1];
-        $_ip = explode(',', $data['ipaddress']);
+        $_ip = explode(', ', $data['ipaddress']);
         $jumlah_ip=count($_ip);
         $bool=-1;
         for ($i=0;$i<$jumlah_ip;$i+=1)

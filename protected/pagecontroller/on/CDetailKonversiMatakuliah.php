@@ -7,7 +7,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
     public $NilaiSemesterSekarang;
 	public function onLoad($param) {
 		parent::onLoad($param);				
-        $this->showKonversiMatakuliah=true;    
+        $this->showKonversiMatakuliah = true;    
         $this->createObj('Nilai');
         $this->createObj('Finance');
         
@@ -92,7 +92,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
             $pindahan = $this->Nilai->isMhsPindahan($nim,true);
             $ulr_profil = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$datamhs['nim']));
             $url='<a href="'.$ulr_profil.'" style="color:#fff">'.$nim.'</a> ';
-            $str_pindahan = $pindahan == 0? '' :'<span class="label label-warning">Pindahan</span>';
+            $str_pindahan = $pindahan == 0? '':'<span class="label label-warning">Pindahan</span>';
             $this->labelNIM->Text = $url.$str_pindahan;
             $this->labelNamaMHS->Text = $datamhs['nama_mhs'];
             $this->labelStatusMSH->Text = $datamhs['status'];            
@@ -122,13 +122,13 @@ class CDetailKonversiMatakuliah extends MainPageON {
         $dataReport=$_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'];                
         $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];
         switch ($_SESSION['outputreport']) {
-            case 'summarypdf' :
+            case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
-            case 'summaryexcel' :
+            case 'summaryexcel':
                 $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
-            case 'excel2007' :
+            case 'excel2007':
                 $messageprintout='Hasil konversi matakuliah :';                
                 
                 $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
@@ -141,7 +141,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
                 $this->report->setMode($_SESSION['outputreport']);
                 $this->report->printKonversiMatakuliah($this->Nilai);
             break;
-            case 'pdf' :                
+            case 'pdf':                
                 $messageprintout='Hasil konversi matakuliah :';                
                 
                 $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
