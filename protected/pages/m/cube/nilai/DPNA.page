@@ -111,7 +111,7 @@
                                     <td><%# $this->DataItem['jumlahmhs']%></td>
                                     <td><%# $this->DataItem['belum_ada_nilai']%></td>
                                     <td>
-                                        <com:THyperLink ID="anchorDetailDPNA" NavigateUrl="<%#$this->Page->constructUrl('nilai.DetailDPNA',true,array('id'=>$this->DataItem['idpenyelenggaraan']))%>" CssClass="table-link" Attributes.title="Detail DPNA">                                                                                
+                                        <com:THyperLink ID="anchorDetailDPNA" NavigateUrl="<%#$this->Page->constructUrl('nilai.DetailDPNA',true,array('id' => $this->DataItem['idpenyelenggaraan']))%>" CssClass="table-link" Attributes.title="Detail DPNA">                                                                                
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-eye fa-stack-1x fa-inverse"></i>                                        

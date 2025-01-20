@@ -11,12 +11,12 @@ class CEditNilai extends MainPageD
     $this->createObj('Nilai');
     if (!$this->IsPostBack && !$this->IsCallback) 
     {
-      if (!isset($_SESSION['currentPageEditNilai'])||$_SESSION['currentPageEditNilai']['page_name']!='d.nilai.EditNilai') 
+      if (!isset($_SESSION['currentPageEditNilai']) || $_SESSION['currentPageEditNilai']['page_name'] != 'd.nilai.EditNilai') 
       {
-        $_SESSION['currentPageEditNilai']=array('page_name'=>'d.nilai.EditNilai', 'page_num'=>0,'search'=>false);
+        $_SESSION['currentPageEditNilai'] = array('page_name' => 'd.nilai.EditNilai', 'page_num'=>0,'search'=>false);
       }  
       $_SESSION['currentPageEditNilai']['search']=false;
-      $_SESSION['currentPageDetailEditNilai']=array();
+      $_SESSION['currentPageDetailEditNilai'] = array();
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
       $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');

@@ -141,7 +141,7 @@
                             <td>
                                 <ul class="icons-list">
                                     <li class="text-primary-600">
-                                        <a href="<%#$this->Page->constructUrl('pembayaran.DetailPembayaranSemesterGanjil',true,array('id'=>$this->DataItem['nim']))%>" title="Detail Transaksi">
+                                        <a href="<%#$this->Page->constructUrl('pembayaran.DetailPembayaranSemesterGanjil',true,array('id' => $this->DataItem['nim']))%>" title="Detail Transaksi">
                                             <i class="icon-eye"></i>
                                         </a>
                                     </li>                                    

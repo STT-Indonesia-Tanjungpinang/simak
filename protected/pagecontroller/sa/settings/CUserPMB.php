@@ -6,8 +6,8 @@ class CUserPMB extends MainPageSA {
         $this->showSubMenuSettingSistem=true;
         $this->showUserPMB=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageUserPMB'])||$_SESSION['currentPageUserPMB']['page_name']!='sa.settings.UserPMB') {
-				$_SESSION['currentPageUserPMB']=array('page_name'=>'sa.settings.UserPMB', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageUserPMB']) || $_SESSION['currentPageUserPMB']['page_name'] != 'sa.settings.UserPMB') {
+				$_SESSION['currentPageUserPMB'] = array('page_name' => 'sa.settings.UserPMB', 'page_num'=>0,'search'=>false);
 			}
             $_SESSION['currentPageUserPMB']['search']=false;
             $this->populateData();            

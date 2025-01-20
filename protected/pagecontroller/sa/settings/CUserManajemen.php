@@ -6,8 +6,8 @@ class CUserManajemen extends MainPageSA {
         $this->showSubMenuSettingSistem=true;
         $this->showUserManajemen=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageUserManajemen'])||$_SESSION['currentPageUserManajemen']['page_name']!='sa.settings.UserManajemen') {
-				$_SESSION['currentPageUserManajemen']=array('page_name'=>'sa.settings.UserManajemen', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageUserManajemen']) || $_SESSION['currentPageUserManajemen']['page_name'] != 'sa.settings.UserManajemen') {
+				$_SESSION['currentPageUserManajemen'] = array('page_name' => 'sa.settings.UserManajemen', 'page_num'=>0,'search'=>false);
 			}
             $_SESSION['currentPageUserManajemen']['search']=false;
             $this->populateData();            

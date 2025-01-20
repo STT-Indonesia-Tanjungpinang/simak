@@ -12,7 +12,7 @@ class CHome extends MainPageM {
     $this->showDashboard=true;       
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {              
-      if (!isset($_SESSION['currentPageHome'])||$_SESSION['currentPageHome']['page_name']!='m.Home') {                                                                                
+      if (!isset($_SESSION['currentPageHome']) || $_SESSION['currentPageHome']['page_name'] != 'm.Home') {                                                                                
         $tahun_pendaftaran = $_SESSION['tahun_pendaftaran'];
 
         for ($i = $tahun_pendaftaran-10;$i <=$tahun_pendaftaran;$i+=1) {
@@ -32,13 +32,13 @@ class CHome extends MainPageM {
         while (list($k, $v) = each($r)) {
           $data_dulang[$v['ta']] = $v['jumlah'];
         }
-        $_SESSION['currentPageHome']=array('page_name'=>'m.Home',
-                           'jumlahmhsaktif'=>$this->Demik->getJumlahSeluruhMHS('A'),                                                   
-                           'jumlahmhslulus'=>$this->Demik->getJumlahSeluruhMHS('L'),
-                           'jumlahmhscuti'=>$this->Demik->getJumlahSeluruhMHS('C'),                                                   
-                           'jumlahmhsnonaktif'=>$this->Demik->getJumlahSeluruhMHS('N'),                                                   
-                           'datamendaftar'=>$data_mendaftar,
-                           'datadulang'=>$data_dulang
+        $_SESSION['currentPageHome'] = array('page_name' => 'm.Home',
+                           'jumlahmhsaktif' => $this->Demik->getJumlahSeluruhMHS('A'),                                                   
+                           'jumlahmhslulus' => $this->Demik->getJumlahSeluruhMHS('L'),
+                           'jumlahmhscuti' => $this->Demik->getJumlahSeluruhMHS('C'),                                                   
+                           'jumlahmhsnonaktif' => $this->Demik->getJumlahSeluruhMHS('N'),                                                   
+                           'datamendaftar' => $data_mendaftar,
+                           'datadulang' => $data_dulang
                            );
       }
       $this->populateData();
@@ -115,13 +115,13 @@ class CHome extends MainPageM {
     while (list($k, $v) = each($r)) {
       $data_dulang[$v['ta']] = $v['jumlah'];
     }
-    $_SESSION['currentPageHome']=array('page_name'=>'m.Home',
-                       'jumlahmhsaktif'=>$this->Demik->getJumlahSeluruhMHS('A'),                                                   
-                       'jumlahmhslulus'=>$this->Demik->getJumlahSeluruhMHS('L'),
-                       'jumlahmhscuti'=>$this->Demik->getJumlahSeluruhMHS('C'),                                                   
-                       'jumlahmhsnonaktif'=>$this->Demik->getJumlahSeluruhMHS('N'),                                                   
-                       'datamendaftar'=>$data_mendaftar,
-                       'datadulang'=>$data_dulang
+    $_SESSION['currentPageHome'] = array('page_name' => 'm.Home',
+                       'jumlahmhsaktif' => $this->Demik->getJumlahSeluruhMHS('A'),                                                   
+                       'jumlahmhslulus' => $this->Demik->getJumlahSeluruhMHS('L'),
+                       'jumlahmhscuti' => $this->Demik->getJumlahSeluruhMHS('C'),                                                   
+                       'jumlahmhsnonaktif' => $this->Demik->getJumlahSeluruhMHS('N'),                                                   
+                       'datamendaftar' => $data_mendaftar,
+                       'datadulang' => $data_dulang
                        );        
     $this->redirect('Home',true);
   }

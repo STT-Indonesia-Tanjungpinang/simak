@@ -8,8 +8,8 @@ class CPerwalian extends MainPageM {
         $this->showPerwalian=true;
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePerwalian'])||$_SESSION['currentPagePerwalian']['page_name']!='m.kemahasiswaan.perwalian') {
-				$_SESSION['currentPagePerwalian']=array('page_name'=>'m.kemahasiswaan.perwalian', 'page_num'=>0,'search'=>false,'iddosen_wali'=>'none', 'status'=>'none');												
+            if (!isset($_SESSION['currentPagePerwalian']) || $_SESSION['currentPagePerwalian']['page_name'] != 'm.kemahasiswaan.perwalian') {
+				$_SESSION['currentPagePerwalian'] = array('page_name' => 'm.kemahasiswaan.perwalian', 'page_num'=>0,'search'=>false,'iddosen_wali' => 'none', 'status' => 'none');												
 			}
             $_SESSION['currentPagePerwalian']['search']=false;
             $daftar_dw=$this->DMaster->getListDosenWali();

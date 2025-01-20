@@ -7,8 +7,8 @@ class CNilaiFinal extends MainPageON {
     $this->showNilaiFinal=true;    
     $this->createObj('Nilai');
     if (!$this->IsPostBack && !$this->IsCallback) {	
-      if (!isset($_SESSION['currentPageNilaiFinal'])||$_SESSION['currentPageNilaiFinal']['page_name']!='on.nilai.NilaiFinal') {					
-        $_SESSION['currentPageNilaiFinal']=array('page_name'=>'on.nilai.NilaiFinal', 'page_num'=>0,'search'=>false,'tanggal_terbit'=>'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
+      if (!isset($_SESSION['currentPageNilaiFinal']) || $_SESSION['currentPageNilaiFinal']['page_name'] != 'on.nilai.NilaiFinal') {					
+        $_SESSION['currentPageNilaiFinal'] = array('page_name' => 'on.nilai.NilaiFinal', 'page_num'=>0,'search'=>false,'tanggal_terbit' => 'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
       }
       $_SESSION['currentPageNilaiFinal']['search']=false;
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -119,7 +119,7 @@ class CNilaiFinal extends MainPageON {
     $item = $param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
       $nim = $item->DataItem['nim'];			
-      $this->Nilai->setDataMHS(array('nim'=>$nim));
+      $this->Nilai->setDataMHS(array('nim' => $nim));
       $this->Nilai->getTranskrip(false);            
       $item->lblIpk->Text = $this->Nilai->getIPKAdaNilai();
     }	

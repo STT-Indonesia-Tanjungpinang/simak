@@ -7,8 +7,8 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $this->showReportRekapPembayaranGenap=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageRekapPembayaranSemesterGenap'])||$_SESSION['currentPageRekapPembayaranSemesterGenap']['page_name']!='k.report.RekapPembayaranSemesterGenap') {
-				$_SESSION['currentPageRekapPembayaranSemesterGenap']=array('page_name'=>'k.report.RekapPembayaranSemesterGenap', 'page_num'=>0,'search'=>false,'semester'=>2,'kelas'=>'none');												
+            if (!isset($_SESSION['currentPageRekapPembayaranSemesterGenap']) || $_SESSION['currentPageRekapPembayaranSemesterGenap']['page_name'] != 'k.report.RekapPembayaranSemesterGenap') {
+				$_SESSION['currentPageRekapPembayaranSemesterGenap'] = array('page_name' => 'k.report.RekapPembayaranSemesterGenap', 'page_num'=>0,'search'=>false,'semester'=>2,'kelas' => 'none');												
 			}
             $_SESSION['currentPageRekapPembayaranSemesterGenap']['search']=false; 
             
@@ -128,15 +128,15 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $r = $this->DB->getRecord($str);    
         
         $komponen_biaya=array();
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'A'));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'A'));
         $komponen_biaya['A']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');
         $komponen_biaya['A']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');         
         
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'B'));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'B'));
         $komponen_biaya['B']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['B']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');       
         
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'C'));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'C'));
         $komponen_biaya['C']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['C']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');        
         
@@ -172,7 +172,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $nim = $r[1]['nim'];
         $semester = $r[1]['idsmt'];
         $ta = $r[1]['tahun'];
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$r[1]['tahun_masuk'],'idsmt'=>$r[1]['semester_masuk'],'idkelas'=>$r[1]['idkelas']));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $r[1]['tahun_masuk'],'idsmt' => $r[1]['semester_masuk'],'idkelas' => $r[1]['idkelas']));
         $kewajiban=($r[1]['tahun']==$r[1]['tahun_masuk'] && $r[1]['semester_masuk'] == $r[1]['idsmt']) ?$this->Finance->getTotalBiayaMhsPeriodePembayaran('baru'):$this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
         $str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM transaksi t,transaksi_detail td WHERE td.no_transaksi=t.no_transaksi AND t.nim=$nim AND t.idsmt=$semester AND t.tahun = $ta AND t.commited=1";			
         $this->DB->setFieldTable(array('dibayarkan'));

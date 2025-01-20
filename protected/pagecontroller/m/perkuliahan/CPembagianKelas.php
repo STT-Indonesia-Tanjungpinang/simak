@@ -8,8 +8,8 @@ class CPembagianKelas extends MainPageM {
     
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {
-      if (!isset($_SESSION['currentPagePembagianKelas'])||$_SESSION['currentPagePembagianKelas']['page_name']!='m.perkuliahan.PembagianKelas') {                
-        $_SESSION['currentPagePembagianKelas']=array('page_name'=>'m.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'iddosen'=>'none', 'nama_hari'=>'none');												
+      if (!isset($_SESSION['currentPagePembagianKelas']) || $_SESSION['currentPagePembagianKelas']['page_name'] != 'm.perkuliahan.PembagianKelas') {                
+        $_SESSION['currentPagePembagianKelas'] = array('page_name' => 'm.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'iddosen' => 'none', 'nama_hari' => 'none');												
       }
       $_SESSION['currentPagePembagianKelas']['search']=false;
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -44,7 +44,7 @@ class CPembagianKelas extends MainPageM {
       $str = "SELECT DISTINCT(vpp.iddosen) AS iddosen,vpp.nama_dosen,vpp.nidn FROM kelas_mhs km,v_pengampu_penyelenggaraan vpp WHERE vpp.idpengampu_penyelenggaraan=km.idpengampu_penyelenggaraan AND vpp.tahun = $tahun AND vpp.idsmt=$idsmt AND vpp.kjur = $kjur ORDER BY vpp.nama_dosen ASC";
       $this->DB->setFieldTable(array('iddosen', 'nidn', 'nama_dosen'));
       $r = $this->DB->getRecord($str);	
-      $daftar_dosen=array('none'=>'Keseluruhan');
+      $daftar_dosen=array('none' => 'Keseluruhan');
       while (list($k, $v) = each($r)) { 
         $iddosen = $v['iddosen'];
         $daftar_dosen[$iddosen] = $v['nama_dosen'] . '['.$v['nidn'].']';

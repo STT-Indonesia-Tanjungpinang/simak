@@ -10,8 +10,8 @@ class KHSEkstension extends MainPageM {
         
         $this->createObj('Nilai');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
-            if (!isset($_SESSION['currentPageKHSEkstension'])||$_SESSION['currentPageKHSEkstension']['page_name']!='m.nilai.KHSEkstension') {
-				$_SESSION['currentPageKHSEkstension']=array('page_name'=>'m.nilai.KHSEkstension', 'page_num'=>0,'search'=>false,'iddosen_wali'=>'none', 'tahun_masuk'=>$_SESSION['tahun_masuk']);
+            if (!isset($_SESSION['currentPageKHSEkstension']) || $_SESSION['currentPageKHSEkstension']['page_name'] != 'm.nilai.KHSEkstension') {
+				$_SESSION['currentPageKHSEkstension'] = array('page_name' => 'm.nilai.KHSEkstension', 'page_num'=>0,'search'=>false,'iddosen_wali' => 'none', 'tahun_masuk' => $_SESSION['tahun_masuk']);
 			}   
 			$_SESSION['currentPageKHSEkstension']['search']=false;
             $this->RepeaterS->PageSize=10;
@@ -151,13 +151,13 @@ class KHSEkstension extends MainPageM {
 		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 			$nim = $item->DataItem['nim'];						
-			$this->Nilai->setDataMHS(array('nim'=>$nim));
+			$this->Nilai->setDataMHS(array('nim' => $nim));
             $bool=true;
             $ip='0.00';            
             $sks=0;
             $status='-';
             $trstyle='';
-            $dataipk=array('ipk'=>'0.00', 'sks'=>0);
+            $dataipk=array('ipk' => '0.00', 'sks'=>0);
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) {                                                            
 				$this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
 				$ip = $this->Nilai->getIPS ();
@@ -360,7 +360,7 @@ class KHSEkstension extends MainPageM {
                 $row=11;                
                 while (list($k, $v) = each($r)) {
                     $nim = $v['nim'];						
-                    $this->Nilai->setDataMHS(array('nim'=>$nim));
+                    $this->Nilai->setDataMHS(array('nim' => $nim));
                     $this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
                     $ip = $this->Nilai->getIPS ();
                     $sks = $this->Nilai->getTotalSKS ();                

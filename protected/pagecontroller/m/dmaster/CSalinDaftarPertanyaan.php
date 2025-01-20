@@ -7,8 +7,8 @@ class CSalinDaftarPertanyaan extends MainPageM {
         $this->showDaftarPertanyaan=true;        
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageKuesioner'])||$_SESSION['currentPageKuesioner']['page_name']!='m.perkuliahan.Kuesioner') {                
-				$_SESSION['currentPageKuesioner']=array('page_name'=>'m.perkuliahan.Kuesioner', 'page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
+            if (!isset($_SESSION['currentPageKuesioner']) || $_SESSION['currentPageKuesioner']['page_name'] != 'm.perkuliahan.Kuesioner') {                
+				$_SESSION['currentPageKuesioner'] = array('page_name' => 'm.perkuliahan.Kuesioner', 'page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
 			}
             $_SESSION['currentPageKuesioner']['search']=false; 
             $this->lblModulHeader->Text = $this->getInfoToolbar();

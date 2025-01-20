@@ -83,7 +83,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(10, 5, 'SKS', 1, 0, 'C');				
         $rpt->Cell(10, 5, 'NM', 1, 0, 'C');						
         $rpt->Cell(47, 5, 'KETERANGAN', 1, 0, 'C');
-        $objNilai->setDataMHS(array('nim'=>$nim));
+        $objNilai->setDataMHS(array('nim' => $nim));
         $dn = $objNilai->getKHS($ta, $semester);				
         $totalSks=0;
         $totalNm=0;
@@ -272,7 +272,7 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(10, 5, 'SKS', 1, 0, 'C');				
             $rpt->Cell(10, 5, 'NM', 1, 0, 'C');						
             $rpt->Cell(47, 5, 'KETERANGAN', 1, 0, 'C');
-            $objNilai->setDataMHS(array('nim'=>$nim));
+            $objNilai->setDataMHS(array('nim' => $nim));
             $dn = $objNilai->getKHS($ta, $semester);				
             $totalSks=0;
             $totalNm=0;
@@ -452,7 +452,7 @@ class Logic_ReportNilai extends Logic_Report {
         $row=11;                
         while (list($k, $v) = each($r)) {
           $nim = $v['nim'];						
-          $objNilai->setDataMHS(array('nim'=>$nim));
+          $objNilai->setDataMHS(array('nim' => $nim));
           $objNilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
           $ip = $objNilai->getIPS ();
           $sks = $objNilai->getTotalSKS ();                
@@ -1407,7 +1407,7 @@ class Logic_ReportNilai extends Logic_Report {
   public function printTranskripFinal ($objNilai) {
     $biodata=$this->dataReport;
     $nim = $biodata['nim'];
-    $objNilai->setDataMHS (array('nim'=>$nim));
+    $objNilai->setDataMHS (array('nim' => $nim));
     $n = $objNilai->getTranskrip(false);		
     switch ($this->getDriver()) {
       case 'excel2003':               
@@ -2812,15 +2812,15 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->setCellValueExplicit("H$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);			
           
           $sheet->setCellValue("I$row", $v['nilai_quiz']);	
-          $sheet->setCellValue("J$row",($v['persentase_quiz'] > 0 || $v['nilai_quiz']!='') ? $v['persentase_quiz']*$v['nilai_quiz']:'');	
+          $sheet->setCellValue("J$row",($v['persentase_quiz'] > 0 || $v['nilai_quiz'] != '') ? $v['persentase_quiz']*$v['nilai_quiz']:'');	
           $sheet->setCellValue("K$row", $v['nilai_tugas']);
-          $sheet->setCellValue("L$row",($v['persentase_tugas'] > 0 || $v['nilai_tugas']!='') ? $v['persentase_tugas']*$v['nilai_tugas']:'');
+          $sheet->setCellValue("L$row",($v['persentase_tugas'] > 0 || $v['nilai_tugas'] != '') ? $v['persentase_tugas']*$v['nilai_tugas']:'');
           $sheet->setCellValue("M$row", $v['nilai_uts']);
-          $sheet->setCellValue("N$row",($v['persentase_uts'] > 0 || $v['nilai_uts']!='') ? $v['persentase_uts']*$v['nilai_uts']:'');
+          $sheet->setCellValue("N$row",($v['persentase_uts'] > 0 || $v['nilai_uts'] != '') ? $v['persentase_uts']*$v['nilai_uts']:'');
           $sheet->setCellValue("O$row", $v['nilai_uas']);
-          $sheet->setCellValue("P$row",($v['persentase_uas'] > 0 || $v['nilai_uas']!='') ? $v['persentase_uas']*$v['nilai_uas'] :'');
+          $sheet->setCellValue("P$row",($v['persentase_uas'] > 0 || $v['nilai_uas'] != '') ? $v['persentase_uas']*$v['nilai_uas'] :'');
           $sheet->setCellValue("Q$row", $v['nilai_absen']);
-          $sheet->setCellValue("R$row",($v['persentase_absen'] > 0 || $v['nilai_absen']!='') ? $v['persentase_absen']*$v['nilai_absen'] :'');
+          $sheet->setCellValue("R$row",($v['persentase_absen'] > 0 || $v['nilai_absen'] != '') ? $v['persentase_absen']*$v['nilai_absen'] :'');
           $sheet->setCellValue("S$row", $v['n_kuan']);	
            $sheet->setCellValue("T$row", $v['n_kual']);	
           $row+=1;

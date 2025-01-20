@@ -9,7 +9,7 @@ class CSoalPMB extends MainPageMB {
         if (!$this->IsPostBack && !$this->IsCallback) {	            
             try {          
                 $no_formulir = $this->Pengguna->getDataUser('no_formulir');
-                $this->Demik->setDataMHS(array('no_formulir'=>$no_formulir));
+                $this->Demik->setDataMHS(array('no_formulir' => $no_formulir));
                 if (!$this->DB->getCountRowsOfTable('soal') > 0) {
                     throw new Exception ('Soal Ujian PMB belum di inputkan, silahkan hubungi panitia PMB');
                 }

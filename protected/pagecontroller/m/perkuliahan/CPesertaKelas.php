@@ -10,8 +10,8 @@ class CPesertaKelas extends MainPageM {
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) 
     {
-      if (!isset($_SESSION['currentPagePesertaKelas'])||$_SESSION['currentPagePesertaKelas']['page_name']!='m.perkuliahan.PesertaKelas') {
-        $_SESSION['currentPagePesertaKelas']=array('page_name'=>'m.perkuliahan.PesertaKelas', 'page_num'=>0,'search'=>false,'InfoKelas'=>array(), 'DaftarKelasTujuan'=>array());
+      if (!isset($_SESSION['currentPagePesertaKelas']) || $_SESSION['currentPagePesertaKelas']['page_name'] != 'm.perkuliahan.PesertaKelas') {
+        $_SESSION['currentPagePesertaKelas'] = array('page_name' => 'm.perkuliahan.PesertaKelas', 'page_num'=>0,'search'=>false,'InfoKelas'=>array(), 'DaftarKelasTujuan'=>array());
       }  
       $_SESSION['currentPagePesertaKelas']['search']=false;            
       $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -39,7 +39,7 @@ class CPesertaKelas extends MainPageM {
         $this->DB->setFieldTable(array('idkelas_mhs', 'idkelas', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar'));
         $r = $this->DB->getRecord($str);
         
-        $daftar_kelas = array('none'=>' ');
+        $daftar_kelas = array('none' => ' ');
         while (list($k, $v) = each($r)) {
           $daftar_kelas[$v['idkelas_mhs']] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64).' '.$this->Page->TGL->getNamaHari($v['hari']). ' '.$v['jam_masuk'].'-'.$v['jam_keluar'];
         }
@@ -79,7 +79,7 @@ class CPesertaKelas extends MainPageM {
         $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs = $old_idkelas_mhs";
         $this->DB->updateRecord($str);
 
-        $this->redirect('perkuliahan.PesertaKelas', true, array('id'=>$old_idkelas_mhs));
+        $this->redirect('perkuliahan.PesertaKelas', true, array('id' => $old_idkelas_mhs));
       }
       else
       {
@@ -120,7 +120,7 @@ class CPesertaKelas extends MainPageM {
         $str = "UPDATE kelas_mhs SET synced=0,sync_msg=null WHERE idkelas_mhs = $old_idkelas_mhs";
         $this->DB->updateRecord($str);
 
-        $this->redirect('perkuliahan.PesertaKelas', true, array('id'=>$this->hiddenidkelasmhs->Value));
+        $this->redirect('perkuliahan.PesertaKelas', true, array('id' => $this->hiddenidkelasmhs->Value));
       }
       else
       {

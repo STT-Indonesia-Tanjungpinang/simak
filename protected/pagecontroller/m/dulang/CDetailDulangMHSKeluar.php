@@ -74,7 +74,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
         $semester = $this->cmbAddSMTKeluar->Text;            
         try {            
             $nim = $datamhs['nim'];
-            $this->Nilai->setDataMHS(array('nim'=>$nim));
+            $this->Nilai->setDataMHS(array('nim' => $nim));
             $datadulang=$this->Nilai->getDataDulang($semester, $ta);
             
             if (isset($datadulang['iddulang'])) {

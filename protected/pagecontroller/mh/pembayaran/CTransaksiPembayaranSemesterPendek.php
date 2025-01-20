@@ -38,7 +38,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
         
         $transaksi=array();
         while (list($m, $n)=each($k)) {              
-            $transaksi[$n['idkombi']]=array('dibayarkan'=>$n['dibayarkan'],'jumlah_sks'=>$n['jumlah_sks']);
+            $transaksi[$n['idkombi']] = array('dibayarkan' => $n['dibayarkan'],'jumlah_sks' => $n['jumlah_sks']);
         }
         
         $str = "SELECT k.idkombi,k.nama_kombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND tahun = $tahun_masuk AND idsmt=1 AND kpt.idkelas='$kelas' AND kpt.idkombi=14 ORDER BY periode_pembayaran,nama_kombi ASC";
@@ -185,7 +185,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
 		$no_transaksi = $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'];		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");
         $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = 'none';
-		$this->redirect('pembayaran.PembayaranSemesterPendek',true,array('id'=>$nim));
+		$this->redirect('pembayaran.PembayaranSemesterPendek',true,array('id' => $nim));
 	}
     public function closeDetail($sender, $param) {
         $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = 'none';

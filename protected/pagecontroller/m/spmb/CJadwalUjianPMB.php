@@ -8,8 +8,8 @@ class CJadwalUjianPMB extends MainPageM {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageJadwalUjianPMB'])||$_SESSION['currentPageJadwalUjianPMB']['page_name']!='m.perkuliahan.JadwalUjianPMB') {                
-				$_SESSION['currentPageJadwalUjianPMB']=array('page_name'=>'m.perkuliahan.JadwalUjianPMB', 'page_num'=>0,'search'=>false);												
+            if (!isset($_SESSION['currentPageJadwalUjianPMB']) || $_SESSION['currentPageJadwalUjianPMB']['page_name'] != 'm.perkuliahan.JadwalUjianPMB') {                
+				$_SESSION['currentPageJadwalUjianPMB'] = array('page_name' => 'm.perkuliahan.JadwalUjianPMB', 'page_num'=>0,'search'=>false);												
 			}
             $_SESSION['currentPageJadwalUjianPMB']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

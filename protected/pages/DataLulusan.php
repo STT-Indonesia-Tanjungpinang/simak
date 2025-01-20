@@ -5,8 +5,8 @@ class DataLulusan extends MainPageF {
 		parent::onLoad($param);	    
         $this->createObj('Nilai');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
-            if (!isset($_SESSION['currentPageDataLulusan'])||$_SESSION['currentPageDataLulusan']['page_name']!='DataLulusan') {					
-                $_SESSION['currentPageDataLulusan']=array('page_name'=>'DataLulusan', 'page_num'=>0,'search'=>false,'tanggal_terbit'=>'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
+            if (!isset($_SESSION['currentPageDataLulusan']) || $_SESSION['currentPageDataLulusan']['page_name'] != 'DataLulusan') {					
+                $_SESSION['currentPageDataLulusan'] = array('page_name' => 'DataLulusan', 'page_num'=>0,'search'=>false,'tanggal_terbit' => 'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
             }
             $_SESSION['currentPageDataLulusan']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -70,7 +70,7 @@ class DataLulusan extends MainPageF {
 		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
 			$nim = $item->DataItem['nim'];			
-            $this->Nilai->setDataMHS(array('nim'=>$nim));
+            $this->Nilai->setDataMHS(array('nim' => $nim));
             $this->Nilai->getTranskrip(false);            
 			$item->lblIpk->Text = $this->Nilai->getIPKAdaNilai();
 		}	

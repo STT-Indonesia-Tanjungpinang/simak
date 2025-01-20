@@ -15,7 +15,7 @@ class MainTemplate extends TTemplateControl {
         $themes = $this->Page->setup->getListThemes();
         $daftarthemes = array();
         foreach ($themes as $k => $v) {
-            $daftarthemes[]=array('idtheme'=>$k,'namatheme'=>$v);
+            $daftarthemes[] = array('idtheme' => $k,'namatheme' => $v);
         }        
         $this->RepeaterTheme->DataSource=$daftarthemes;
         $this->RepeaterTheme->DataBind();

@@ -10,8 +10,8 @@ class CRekapStatusMahasiswa Extends MainPageM {
         $this->createObj('Finance');
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageRekapStatusMahasiswa'])||$_SESSION['currentPageRekapStatusMahasiswa']['page_name']!='m.kemahasiswaan.RekapStatusMahasiswa') {
-				$_SESSION['currentPageRekapStatusMahasiswa']=array('page_name'=>'m.kemahasiswaan.RekapStatusMahasiswa', 'page_num'=>0,'search'=>false,'ta1'=>$_SESSION['ta'],'ta2'=>$_SESSION['ta'],'k_status'=>'none', 'tahun_masuk'=>'none', 'idsmt'=>'none', 'idkelas'=>'none');												
+            if (!isset($_SESSION['currentPageRekapStatusMahasiswa']) || $_SESSION['currentPageRekapStatusMahasiswa']['page_name'] != 'm.kemahasiswaan.RekapStatusMahasiswa') {
+				$_SESSION['currentPageRekapStatusMahasiswa'] = array('page_name' => 'm.kemahasiswaan.RekapStatusMahasiswa', 'page_num'=>0,'search'=>false,'ta1' => $_SESSION['ta'],'ta2' => $_SESSION['ta'],'k_status' => 'none', 'tahun_masuk' => 'none', 'idsmt' => 'none', 'idkelas' => 'none');												
 			}
             $_SESSION['currentPageRekapStatusMahasiswa']['search']=false; 
             
@@ -61,7 +61,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
 	public function getAngkatan ($tanpanone=true) {
 		$dt =$this->DMaster->getListTA();		        
 		$ta = $_SESSION['currentPageRekapStatusMahasiswa']['ta1'];		
-		$tahun_akademik = $tanpanone==true?array('none'=>'All'):array();
+		$tahun_akademik = $tanpanone==true?array('none' => 'All'):array();
 		while (list($k, $v)=each ($dt)) {
 			if ($k != 'none') {
 				if ($k >= $ta) {

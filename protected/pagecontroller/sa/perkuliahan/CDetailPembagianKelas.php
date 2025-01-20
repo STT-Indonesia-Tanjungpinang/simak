@@ -8,8 +8,8 @@ public function onLoad($param) {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembagianKelas'])||$_SESSION['currentPagePembagianKelas']['page_name']!='sa.perkuliahan.PembagianKelas') {                
-				$_SESSION['currentPagePembagianKelas']=array('page_name'=>'sa.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'iddosen'=>'none', 'nama_hari'=>'none');												
+            if (!isset($_SESSION['currentPagePembagianKelas']) || $_SESSION['currentPagePembagianKelas']['page_name'] != 'sa.perkuliahan.PembagianKelas') {                
+				$_SESSION['currentPagePembagianKelas'] = array('page_name' => 'sa.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'iddosen' => 'none', 'nama_hari' => 'none');												
 			}
             $_SESSION['currentPagePembagianKelas']['search']=false;
             
@@ -20,7 +20,7 @@ public function onLoad($param) {
             $str = "SELECT DISTINCT(iddosen),nidn,nama_dosen FROM v_pengampu_penyelenggaraan WHERE kjur = $kjur AND tahun = $ta AND idsmt=$idsmt";
             $this->DB->setFieldTable(array('iddosen', 'nidn', 'nama_dosen'));
             $r = $this->DB->getRecord($str);	
-            $daftar_dosen=array('none'=>'Daftar Dosen');
+            $daftar_dosen=array('none' => 'Daftar Dosen');
             while (list($k, $v) = each($r)) { 
                 $iddosen = $v['iddosen'];
                 $daftar_dosen[$iddosen] = $v['nama_dosen'] . '['.$v['nidn'].']';
@@ -48,7 +48,7 @@ public function onLoad($param) {
                 $str = "SELECT idpengampu_penyelenggaraan,kmatkul,nmatkul FROM v_pengampu_penyelenggaraan WHERE kjur = $kjur AND tahun = $ta AND idsmt=$idsmt AND iddosen = $iddosen";
                 $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'kmatkul', 'nmatkul'));
                 $r = $this->DB->getRecord($str);	
-                $daftar_matakuliah = array('none'=>'Daftar Matakuliah yang di Ampu');
+                $daftar_matakuliah = array('none' => 'Daftar Matakuliah yang di Ampu');
                 
                 while (list($k, $v) = each($r)) {
                     $kmatkul = $this->Demik->getKMatkul($v['kmatkul']);

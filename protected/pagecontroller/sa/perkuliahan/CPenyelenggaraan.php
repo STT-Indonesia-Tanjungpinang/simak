@@ -8,8 +8,8 @@ class CPenyelenggaraan extends MainPageSA {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePenyelenggaraan'])||$_SESSION['currentPagePenyelenggaraan']['page_name']!='sa.perkuliahan.Penyelenggaraan') {                
-				$_SESSION['currentPagePenyelenggaraan']=array('page_name'=>'sa.perkuliahan.Penyelenggaraan', 'page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
+            if (!isset($_SESSION['currentPagePenyelenggaraan']) || $_SESSION['currentPagePenyelenggaraan']['page_name'] != 'sa.perkuliahan.Penyelenggaraan') {                
+				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'sa.perkuliahan.Penyelenggaraan', 'page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
 			}
             $_SESSION['currentPagePenyelenggaraan']['search']=false;
             $_SESSION['currentPagePenyelenggaraan']['DaftarDosen'] = $this->DMaster->getDaftarDosen();

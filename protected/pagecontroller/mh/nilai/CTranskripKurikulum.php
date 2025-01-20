@@ -8,8 +8,8 @@ class CTranskripKurikulum extends MainPageMHS {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageTranskripKurikulum'])||$_SESSION['currentPageTranskripKurikulum']['page_name']!='mh.nilai.TranskripKurikulum') {
-				$_SESSION['currentPageTranskripKurikulum']=array('page_name'=>'mh.nilai.TranskripKurikulum', 'page_num'=>0,'search'=>false);												                                               
+            if (!isset($_SESSION['currentPageTranskripKurikulum']) || $_SESSION['currentPageTranskripKurikulum']['page_name'] != 'mh.nilai.TranskripKurikulum') {
+				$_SESSION['currentPageTranskripKurikulum'] = array('page_name' => 'mh.nilai.TranskripKurikulum', 'page_num'=>0,'search'=>false);												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

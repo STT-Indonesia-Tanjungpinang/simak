@@ -8,8 +8,8 @@ class CDetailTranskripKurikulum extends MainPageM {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDetailTranskripKurikulum'])||$_SESSION['currentPageDetailTranskripKurikulum']['page_name']!='m.nilai.DetailTranskripKurikulum') {
-				$_SESSION['currentPageDetailTranskripKurikulum']=array('page_name'=>'m.nilai.DetailTranskripKurikulum', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+            if (!isset($_SESSION['currentPageDetailTranskripKurikulum']) || $_SESSION['currentPageDetailTranskripKurikulum']['page_name'] != 'm.nilai.DetailTranskripKurikulum') {
+				$_SESSION['currentPageDetailTranskripKurikulum'] = array('page_name' => 'm.nilai.DetailTranskripKurikulum', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -28,7 +28,7 @@ class CDetailTranskripKurikulum extends MainPageM {
             $r = $this->DB->getRecord($str);				
             
             if (!isset($r[1])) {
-                $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS']=array();
+                $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS'] = array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar.");
             }
             $datamhs = $r[1];

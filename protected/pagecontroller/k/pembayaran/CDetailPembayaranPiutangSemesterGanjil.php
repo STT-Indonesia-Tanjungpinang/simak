@@ -10,8 +10,8 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
         $this->showPembayaranPiutangSemesterGanjil=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGanjil'])||$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['page_name']!='k.pembayaran.PembayaranPiutangSemesterGanjil') {
-				$_SESSION['currentPagePembayaranPiutangSemesterGanjil']=array('page_name'=>'k.pembayaran.PembayaranPiutangSemesterGanjil', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta')-1,'semester'=>1,'tahun_masuk'=>$this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGanjil']) || $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['page_name'] != 'k.pembayaran.PembayaranPiutangSemesterGanjil') {
+				$_SESSION['currentPagePembayaranPiutangSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGanjil', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester'=>1,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
 			}        
             try {
                 $nim=addslashes($this->request['id']);                           				
@@ -22,11 +22,11 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
                 $datamhs['idsmt'] = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['semester'];
                 $datamhs['ta'] = $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['ta'];             
                 if (!isset($r[1])) {
-                    $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS']=array();
+                    $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'] = array();
                     throw new Exception ("NIM ($nim) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");
                 }      
                 if ($datamhs['tahun_masuk'] == $datamhs['ta'] && $datamhs['semester_masuk']==1) {						
-                    $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS']=array();
+                    $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['DataMHS'] = array();
                     throw new Exception ("NIM ($nim) adalah seorang Mahasiswa baru, mohon diproses di Pembayaran->Mahasiswa Baru.");
                 }
                 $this->Finance->setDataMHS($datamhs);                
@@ -155,7 +155,7 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
         $nim = $datamhs['nim'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranPiutangSemesterGanjil',true,array('id'=>$nim));
+		$this->redirect('pembayaran.DetailPembayaranPiutangSemesterGanjil',true,array('id' => $nim));
 	}		
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);

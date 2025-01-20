@@ -9,8 +9,8 @@ class CTranskripFinal extends MainPageM {
     
     if (!$this->IsPostBack && !$this->IsCallback) {			
 
-      if (!isset($_SESSION['currentPageTranskripFinal'])||$_SESSION['currentPageTranskripFinal']['page_name']!='m.nilai.TranskripFinal') {					
-        $_SESSION['currentPageTranskripFinal']=array('page_name'=>'m.nilai.TranskripFinal', 'page_num'=>0,'search'=>false,'tanggal_terbit'=>'none');												
+      if (!isset($_SESSION['currentPageTranskripFinal']) || $_SESSION['currentPageTranskripFinal']['page_name'] != 'm.nilai.TranskripFinal') {					
+        $_SESSION['currentPageTranskripFinal'] = array('page_name' => 'm.nilai.TranskripFinal', 'page_num'=>0,'search'=>false,'tanggal_terbit' => 'none');												
       }
       $_SESSION['currentPageTranskripFinal']['search']=false;
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -122,7 +122,7 @@ class CTranskripFinal extends MainPageM {
     $item = $param->Item;
     if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
       $nim = $item->DataItem['nim'];			
-      $this->Nilai->setDataMHS(array('nim'=>$nim));
+      $this->Nilai->setDataMHS(array('nim' => $nim));
       $this->Nilai->getTranskrip(false);            
       $item->lblIpk->Text = $this->Nilai->getIPKAdaNilai();
     }	
@@ -136,7 +136,7 @@ class CTranskripFinal extends MainPageM {
         $this->Nilai->dataMhs = $r[1];				
         if (!$this->Nilai->isNimExist()) throw new AkademikException ($nim,2);	
         if ($this->Application->getModule ('environment')->checkRequirementTranskripFinal) {
-          if ($this->Nilai->dataMhs['k_status']!='L')throw new Exception ("Status ($nim) belum lulus.");
+          if ($this->Nilai->dataMhs['k_status'] != 'L')throw new Exception ("Status ($nim) belum lulus.");
           $awal = $r[1]['tahun'].$r[1]['semester'];
           $akhir = $_SESSION['ta'].$_SESSION['semester'];
           $totalsks = $this->DB->getSumRowsOfTable('sks',"v_nilai WHERE (tasmt BETWEEN $awal AND $akhir) AND nim='$nim' AND n_kual !='E'");

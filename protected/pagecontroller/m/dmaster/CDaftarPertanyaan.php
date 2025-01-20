@@ -7,8 +7,8 @@ class CDaftarPertanyaan extends MainPageM {
         $this->showDaftarPertanyaan=true;
                 
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentDaftarPertanyaan'])||$_SESSION['currentDaftarPertanyaan']['page_name']!='m.dmaster.DaftarPertanyaan') {                
-				$_SESSION['currentDaftarPertanyaan']=array('page_name'=>'m.dmaster.DaftarPertanyaan', 'page_num'=>0,'search'=>false,'idkelompok_pertanyaan'=>'none');												
+            if (!isset($_SESSION['currentDaftarPertanyaan']) || $_SESSION['currentDaftarPertanyaan']['page_name'] != 'm.dmaster.DaftarPertanyaan') {                
+				$_SESSION['currentDaftarPertanyaan'] = array('page_name' => 'm.dmaster.DaftarPertanyaan', 'page_num'=>0,'search'=>false,'idkelompok_pertanyaan' => 'none');												
 			}
             $_SESSION['currentDaftarPertanyaan']['search']=false; 
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

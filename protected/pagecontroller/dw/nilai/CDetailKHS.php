@@ -13,8 +13,8 @@ class CDetailKHS extends MainPageDW {
         $this->createObj('Finance');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDetailKHS'])||$_SESSION['currentPageDetailKHS']['page_name']!='dw.nilai.DetailKHS') {
-				$_SESSION['currentPageDetailKHS']=array('page_name'=>'dw.nilai.DetailKHS', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+            if (!isset($_SESSION['currentPageDetailKHS']) || $_SESSION['currentPageDetailKHS']['page_name'] != 'dw.nilai.DetailKHS') {
+				$_SESSION['currentPageDetailKHS'] = array('page_name' => 'dw.nilai.DetailKHS', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -33,11 +33,11 @@ class CDetailKHS extends MainPageDW {
             $r = $this->DB->getRecord($str);	           
             $datamhs = $r[1];
             if (!isset($r[1])) {
-                $_SESSION['currentPageDetailKHS']['DataMHS']=array();
+                $_SESSION['currentPageDetailKHS']['DataMHS'] = array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
             }            
             if ($datamhs['iddosen_wali']!=$this->iddosen_wali){
-                $_SESSION['currentPageDetailKHS']['DataMHS']=array();
+                $_SESSION['currentPageDetailKHS']['DataMHS'] = array();
                 throw new Exception("KRS dengan ID ($idkrs) dimiliki oleh Mahasiswa diluar perwalian Anda.");
             }
             $tahun = $datamhs['tahun'];

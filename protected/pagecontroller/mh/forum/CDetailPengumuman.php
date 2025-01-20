@@ -7,8 +7,8 @@ class CDetailPengumuman extends MainPageMHS {
         $this->showPengumuman=true;                     
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
-            if (!isset($_SESSION['currentPageDetailPengumuman'])||$_SESSION['currentPageDetailPengumuman']['page_name']!='mh.forum.DetailPengumuman') {                                                                                
-                $_SESSION['currentPageDetailPengumuman']=array('page_name'=>'mh.forum.DetailPengumuman', 'page_num'=>0,'search'=>false,'DataDiskusi'=>array());
+            if (!isset($_SESSION['currentPageDetailPengumuman']) || $_SESSION['currentPageDetailPengumuman']['page_name'] != 'mh.forum.DetailPengumuman') {                                                                                
+                $_SESSION['currentPageDetailPengumuman'] = array('page_name' => 'mh.forum.DetailPengumuman', 'page_num'=>0,'search'=>false,'DataDiskusi'=>array());
             }            
             try {
                 $id=addslashes($this->request['id']);
@@ -22,7 +22,7 @@ class CDetailPengumuman extends MainPageMHS {
                     $this->DataDiskusi = $r[1];
                     $attachment=array();
                     if ($this->DataDiskusi['file_size'] > 0) {
-                        $attachment[]=array('file_name'=>$r[1]['file_name'],'file_size'=>$this->setup->formatSizeUnits($r[1]['file_size']), 'file_url'=>$r[1]['file_url']);
+                        $attachment[] = array('file_name' => $r[1]['file_name'],'file_size' => $this->setup->formatSizeUnits($r[1]['file_size']), 'file_url' => $r[1]['file_url']);
                     }
                     $this->RepeaterAttachment->DataSource = $attachment;
                     $this->RepeaterAttachment->DataBind();
@@ -31,7 +31,7 @@ class CDetailPengumuman extends MainPageMHS {
                 }
             } catch (Exception $ex) {
                 $this->idProcess = 'view';
-                $_SESSION['currentPageDetailPengumuman']['DataDiskusi']=array();
+                $_SESSION['currentPageDetailPengumuman']['DataDiskusi'] = array();
             }            
 		}                
 	}  

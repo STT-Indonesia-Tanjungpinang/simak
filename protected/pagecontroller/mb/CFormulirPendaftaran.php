@@ -8,8 +8,8 @@ class CFormulirPendaftaran extends MainPageMB {
 		if (!$this->IsPostBack && !$this->IsCallback) {
             $this->lblModulHeader->Text='T.A '.$this->DMaster->getNamaTA($this->Pengguna->getDataUser('tahun_masuk'));
             try {                
-                if (!isset($_SESSION['currentPageFormulirPendaftaran'])||$_SESSION['currentPageFormulirPendaftaran']['page_name']!='mb.FormulirPendaftaran') {
-                    $_SESSION['currentPageFormulirPendaftaran']=array('page_name'=>'mb.FormulirPendaftaran', 'page_num'=>0,'reguler'=>0,'karyawan'=>0,'ekstensi'=>0,'temp_file'=>'');												
+                if (!isset($_SESSION['currentPageFormulirPendaftaran']) || $_SESSION['currentPageFormulirPendaftaran']['page_name'] != 'mb.FormulirPendaftaran') {
+                    $_SESSION['currentPageFormulirPendaftaran'] = array('page_name' => 'mb.FormulirPendaftaran', 'page_num'=>0,'reguler'=>0,'karyawan'=>0,'ekstensi'=>0,'temp_file' => '');												
                 }
                 $semester_default=$this->Pengguna->getDataUser('semester_masuk');
                 $reguler = $this->Finance->getBiayaPendaftaran($_SESSION['tahun_masuk'], $semester_default,'A');							
@@ -21,7 +21,7 @@ class CFormulirPendaftaran extends MainPageMB {
                 if ($reguler <= 0 || $karyawan <= 0 || $ekstensi <= 0){                    
                     throw new Exception ("Biaya Pendaftaran kelas Reguler, Karyawan, Ekstensi belum di set oleh Manajemen");
                 }
-                $this->Finance->setDataMHS(array('no_formulir'=>$this->Pengguna->getDataUser('no_formulir')));
+                $this->Finance->setDataMHS(array('no_formulir' => $this->Pengguna->getDataUser('no_formulir')));
                 if ($this->Finance->isMhsRegistered(true)) {
                     throw new Exception ("Anda sudah ter-register sebagai mahasiswa,maka dari itu tidak bisa mengisi atau mengubah formulir lagi");
                 }elseif ($this->Finance->isNoFormulirExist()) {	

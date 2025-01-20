@@ -7,8 +7,8 @@ class CDulangMHSLulus Extends MainPageM {
     $this->showDulangMHSLulus=true;                
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {
-      if (!isset($_SESSION['currentPageDulangMHSLulus'])||$_SESSION['currentPageDulangMHSLulus']['page_name']!='m.dulang.DulangMHSLulus') {
-        $_SESSION['currentPageDulangMHSLulus']=array('page_name'=>'m.dulang.DulangMHSLulus', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none', 'DataMHS'=>array());												
+      if (!isset($_SESSION['currentPageDulangMHSLulus']) || $_SESSION['currentPageDulangMHSLulus']['page_name'] != 'm.dulang.DulangMHSLulus') {
+        $_SESSION['currentPageDulangMHSLulus'] = array('page_name' => 'm.dulang.DulangMHSLulus', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
       }
       $_SESSION['currentPageDulangMHSLulus']['search']=false;
       
@@ -165,7 +165,7 @@ class CDulangMHSLulus Extends MainPageM {
           $this->Demik->setDataMHS($datamhs);
           $datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
           if (isset($datadulang['iddulang'])) {         
-            if ($datadulang['k_status']!='A') {
+            if ($datadulang['k_status'] != 'A') {
               throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
             }                        
           }                    
@@ -185,7 +185,7 @@ class CDulangMHSLulus Extends MainPageM {
   public function Go($param, $sender) {	
     if ($this->Page->isValid) {            
       $nim=addslashes($this->txtNIM->Text);
-      $this->redirect('dulang.DetailDulangMHSLulus',true,array('id'=>$nim));
+      $this->redirect('dulang.DetailDulangMHSLulus',true,array('id' => $nim));
     }
   }
   public function viewRecord($sender, $param) {	

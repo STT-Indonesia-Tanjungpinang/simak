@@ -8,8 +8,8 @@ class CDetailTranskripKRS extends MainPageDW {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDetailTranskripKRS'])||$_SESSION['currentPageDetailTranskripKRS']['page_name']!='dw.nilai.DetailTranskripKRS') {
-				$_SESSION['currentPageDetailTranskripKRS']=array('page_name'=>'dw.nilai.DetailTranskripKRS', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+            if (!isset($_SESSION['currentPageDetailTranskripKRS']) || $_SESSION['currentPageDetailTranskripKRS']['page_name'] != 'dw.nilai.DetailTranskripKRS') {
+				$_SESSION['currentPageDetailTranskripKRS'] = array('page_name' => 'dw.nilai.DetailTranskripKRS', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -28,12 +28,12 @@ class CDetailTranskripKRS extends MainPageDW {
             $r = $this->DB->getRecord($str);				
             
             if (!isset($r[1])) {
-                $_SESSION['currentPageDetailTranskripKRS']['DataMHS']=array();
+                $_SESSION['currentPageDetailTranskripKRS']['DataMHS'] = array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar.");
             }
             $datamhs = $r[1];
             if ($datamhs['iddosen_wali']!=$this->iddosen_wali){
-                $_SESSION['currentPageDetailTranskripKRS']['DataMHS']=array();
+                $_SESSION['currentPageDetailTranskripKRS']['DataMHS'] = array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) dimiliki oleh Mahasiswa diluar perwalian Anda.");
             }
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);

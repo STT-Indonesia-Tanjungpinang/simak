@@ -10,9 +10,9 @@ class CImportNilai extends MainPageD {
     
     if (!$this->IsPostBack && !$this->IsCallback) 
     {
-      if (!isset($_SESSION['currentPageImportNilai'])||$_SESSION['currentPageImportNilai']['page_name']!='d.nilai.ImportNilai')
+      if (!isset($_SESSION['currentPageImportNilai']) || $_SESSION['currentPageImportNilai']['page_name'] != 'd.nilai.ImportNilai')
       {
-        $_SESSION['currentPageImportNilai']=array('page_name'=>'d.nilai.ImportNilai', 'page_num'=>0,'search'=>false,'DataNilai'=>array());
+        $_SESSION['currentPageImportNilai'] = array('page_name' => 'd.nilai.ImportNilai', 'page_num'=>0,'search'=>false,'DataNilai'=>array());
       }  
 
       try {
@@ -109,7 +109,7 @@ class CImportNilai extends MainPageD {
           $this->DB->insertRecord($str);
         }
         
-        $this->redirect("nilai.ImportNilai", true,array('id'=>$idkelas_mhs));
+        $this->redirect("nilai.ImportNilai", true,array('id' => $idkelas_mhs));
       }
       catch (Exception $e)
       {
@@ -152,7 +152,7 @@ class CImportNilai extends MainPageD {
           $this->DB->deleteRecord("nilai_imported WHERE idkrsmatkul = $idkrsmatkul");
         }
       }
-      $this->redirect("nilai.ImportNilai", true,array('id'=>$idkelas_mhs));
+      $this->redirect("nilai.ImportNilai", true,array('id' => $idkelas_mhs));
     }
     
   }
@@ -162,7 +162,7 @@ class CImportNilai extends MainPageD {
     {
       $idkelas_mhs = $_SESSION['currentPageImportNilai']['DataNilai']['idkelas_mhs'];
       $this->DB->deleteREcord("nilai_imported WHERE idkelas_mhs = $idkelas_mhs");
-      $this->redirect("nilai.ImportNilai", true,array('id'=>$idkelas_mhs));
+      $this->redirect("nilai.ImportNilai", true,array('id' => $idkelas_mhs));
     }
   }
   public function printOut($sender, $param)

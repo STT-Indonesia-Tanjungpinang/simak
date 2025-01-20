@@ -6,8 +6,8 @@ class CUserKeuangan extends MainPageSA {
         $this->showSubMenuSettingSistem=true;
         $this->showUserKeuangan=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageUserKeuangan'])||$_SESSION['currentPageUserKeuangan']['page_name']!='sa.settings.UserKeuangan') {
-				$_SESSION['currentPageUserKeuangan']=array('page_name'=>'sa.settings.UserKeuangan', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageUserKeuangan']) || $_SESSION['currentPageUserKeuangan']['page_name'] != 'sa.settings.UserKeuangan') {
+				$_SESSION['currentPageUserKeuangan'] = array('page_name' => 'sa.settings.UserKeuangan', 'page_num'=>0,'search'=>false);
 			}
             $_SESSION['currentPageUserKeuangan']['search']=false;
             $this->populateData();            

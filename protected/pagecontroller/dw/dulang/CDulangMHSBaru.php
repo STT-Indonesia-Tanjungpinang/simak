@@ -8,8 +8,8 @@ class CDulangMHSBaru Extends MainPageDW {
         $this->createObj('Finance');
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDulangMHSBaru'])||$_SESSION['currentPageDulangMHSBaru']['page_name']!='dw.dulang.DulangMHSBaru') {
-				$_SESSION['currentPageDulangMHSBaru']=array('page_name'=>'dw.dulang.DulangMHSBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPageDulangMHSBaru']) || $_SESSION['currentPageDulangMHSBaru']['page_name'] != 'dw.dulang.DulangMHSBaru') {
+				$_SESSION['currentPageDulangMHSBaru'] = array('page_name' => 'dw.dulang.DulangMHSBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSBaru']['search']=false;
             
@@ -22,7 +22,7 @@ class CDulangMHSBaru Extends MainPageDW {
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1' => 'GANJIL', '2' => 'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageDulangMHSBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();  

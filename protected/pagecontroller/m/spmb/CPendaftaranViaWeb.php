@@ -6,8 +6,8 @@ class CPendaftaranViaWeb extends MainPageM {
 		$this->showPendaftaranViaWeb=true; 
         $this->createObj('Akademik');        
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
-            if (!isset($_SESSION['currentPagePendaftaranWeb'])||$_SESSION['currentPagePendaftaranWeb']['page_name']!='m.spmb.PendaftaranWeb') {
-				$_SESSION['currentPagePendaftaranWeb']=array('page_name'=>'m.spmb.PendaftaranWeb', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_dulang'=>'none');												
+            if (!isset($_SESSION['currentPagePendaftaranWeb']) || $_SESSION['currentPagePendaftaranWeb']['page_name'] != 'm.spmb.PendaftaranWeb') {
+				$_SESSION['currentPagePendaftaranWeb'] = array('page_name' => 'm.spmb.PendaftaranWeb', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_dulang' => 'none');												
 			}
             $_SESSION['currentPagePendaftaranWeb']['search']=false;
             $this->cmbDaftarUlang->Text = $_SESSION['currentPagePendaftaranWeb']['status_dulang'];
@@ -321,7 +321,7 @@ class CPendaftaranViaWeb extends MainPageM {
         $this->cmbEditSemester->DataSource = $semester;
         $this->cmbEditSemester->Text = $dataMhs['idsmt'];
         $this->cmbEditSemester->DataBind();
-        $this->Demik->setDataMHS(array('no_formulir'=>$no_formulir,'kjur'=>'none'));
+        $this->Demik->setDataMHS(array('no_formulir' => $no_formulir,'kjur' => 'none'));
 		if ($this->Demik->isMhsRegistered(true)) {
 			$this->cmbEditKelas->Enabled = false;
 			$this->cmbEditTahunMasuk->Enabled = false;

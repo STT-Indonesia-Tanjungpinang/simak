@@ -5,8 +5,8 @@ class CDosen extends MainPageM {
 		parent::onLoad($param);		     
         $this->showDosen=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDosen'])||$_SESSION['currentPageDosen']['page_name']!='m.dmaster.Dosen') {
-				$_SESSION['currentPageDosen']=array('page_name'=>'m.dmaster.Dosen', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageDosen']) || $_SESSION['currentPageDosen']['page_name'] != 'm.dmaster.Dosen') {
+				$_SESSION['currentPageDosen'] = array('page_name' => 'm.dmaster.Dosen', 'page_num'=>0,'search'=>false);
 			}
             $_SESSION['currentPageDosen']['search']=false;
             $this->populateData();            

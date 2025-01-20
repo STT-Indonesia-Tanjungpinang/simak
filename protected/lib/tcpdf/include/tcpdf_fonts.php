@@ -346,9 +346,9 @@ class TCPDF_FONTS {
 						$fmetric['MaxWidth'] = $cwidths[$cid];
 					}
 					$fmetric['AvgWidth'] += $cwidths[$cid];
-					$fmetric['cw'] .= ', '.$cid.'=>'.$cwidths[$cid];
+					$fmetric['cw'] .= ', '.$cid.' => '.$cwidths[$cid];
 				} else {
-					$fmetric['cw'] .= ', '.$cid.'=>'.$fmetric['MissingWidth'];
+					$fmetric['cw'] .= ', '.$cid.' => '.$fmetric['MissingWidth'];
 				}
 			}
 			$fmetric['AvgWidth'] = round($fmetric['AvgWidth'] / count($cwidths));
@@ -795,7 +795,7 @@ class TCPDF_FONTS {
 			for ($cid = 0; $cid <= 65535; ++$cid) {
 				if (isset($ctg[$cid])) {
 					if (isset($cw[$ctg[$cid]])) {
-						$fmetric['cw'] .= ', '.$cid.'=>'.$cw[$ctg[$cid]];
+						$fmetric['cw'] .= ', '.$cid.' => '.$cw[$ctg[$cid]];
 					}
 					if ($addcbbox AND isset($indexToLoc[$ctg[$cid]])) {
 						$offset = ($table['glyf']['offset'] + $indexToLoc[$ctg[$cid]]);
@@ -882,19 +882,19 @@ class TCPDF_FONTS {
 			}
 		}
 		$pfile .= '$desc=array(';
-		$pfile .= '\'Flags\'=>'.$fmetric['Flags'].', ';
+		$pfile .= '\'Flags\' => '.$fmetric['Flags'].', ';
 		$pfile .= '\'FontBBox\'=>\'['.$fmetric['bbox'].']\', ';
-		$pfile .= '\'ItalicAngle\'=>'.$fmetric['italicAngle'].', ';
-		$pfile .= '\'Ascent\'=>'.$fmetric['Ascent'].', ';
-		$pfile .= '\'Descent\'=>'.$fmetric['Descent'].', ';
-		$pfile .= '\'Leading\'=>'.$fmetric['Leading'].', ';
-		$pfile .= '\'CapHeight\'=>'.$fmetric['CapHeight'].', ';
-		$pfile .= '\'XHeight\'=>'.$fmetric['XHeight'].', ';
-		$pfile .= '\'StemV\'=>'.$fmetric['StemV'].', ';
-		$pfile .= '\'StemH\'=>'.$fmetric['StemH'].', ';
-		$pfile .= '\'AvgWidth\'=>'.$fmetric['AvgWidth'].', ';
-		$pfile .= '\'MaxWidth\'=>'.$fmetric['MaxWidth'].', ';
-		$pfile .= '\'MissingWidth\'=>'.$fmetric['MissingWidth'].'';
+		$pfile .= '\'ItalicAngle\' => '.$fmetric['italicAngle'].', ';
+		$pfile .= '\'Ascent\' => '.$fmetric['Ascent'].', ';
+		$pfile .= '\'Descent\' => '.$fmetric['Descent'].', ';
+		$pfile .= '\'Leading\' => '.$fmetric['Leading'].', ';
+		$pfile .= '\'CapHeight\' => '.$fmetric['CapHeight'].', ';
+		$pfile .= '\'XHeight\' => '.$fmetric['XHeight'].', ';
+		$pfile .= '\'StemV\' => '.$fmetric['StemV'].', ';
+		$pfile .= '\'StemH\' => '.$fmetric['StemH'].', ';
+		$pfile .= '\'AvgWidth\' => '.$fmetric['AvgWidth'].', ';
+		$pfile .= '\'MaxWidth\' => '.$fmetric['MaxWidth'].', ';
+		$pfile .= '\'MissingWidth\' => '.$fmetric['MissingWidth'].'';
 		$pfile .= ');'."\n";
 		if (isset($fmetric['cbbox'])) {
 			$pfile .= '$cbbox=array('.substr($fmetric['cbbox'], 1).');'."\n";

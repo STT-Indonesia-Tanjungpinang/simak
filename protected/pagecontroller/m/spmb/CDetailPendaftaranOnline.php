@@ -7,8 +7,8 @@ class CDetailPendaftaranOnline extends MainPageM {
         $this->showPendaftaranOnline=true;
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPageDetailPendaftaranOnline'])||$_SESSION['currentPageDetailPendaftaranOnline']['page_name']!='m.spmb.DetailPendaftaranOnline') {
-				$_SESSION['currentPageDetailPendaftaranOnline']=array('page_name'=>'m.spmb.DetailPendaftaranOnline', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
+            if (!isset($_SESSION['currentPageDetailPendaftaranOnline']) || $_SESSION['currentPageDetailPendaftaranOnline']['page_name'] != 'm.spmb.DetailPendaftaranOnline') {
+				$_SESSION['currentPageDetailPendaftaranOnline'] = array('page_name' => 'm.spmb.DetailPendaftaranOnline', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
 			}
 
             $this->MVDetailPendaftaranOnline->ActiveViewIndex=$_SESSION['currentPageDetailPendaftaranOnline']['activeviewindex'];             
@@ -41,7 +41,7 @@ class CDetailPendaftaranOnline extends MainPageM {
                 }
             }else{
                 $_SESSION['currentPageDetailPendaftaranOnline']['activeviewindex'] = $this->MVDetailPendaftaranOnline->ActiveViewIndex;
-                $this->redirect('spmb.DetailPendaftaranOnline',true,array('id'=>$datamhs['no_formulir']));
+                $this->redirect('spmb.DetailPendaftaranOnline',true,array('id' => $datamhs['no_formulir']));
             }       
             
         }catch (Exception $ex) {
@@ -81,7 +81,7 @@ class CDetailPendaftaranOnline extends MainPageM {
             $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE no_formulir='$no_formulir'";            
             $this->DB->updateRecord($str);            
            
-            $this->redirect('spmb.DetailPendaftaranOnline',true,array('id'=>$no_formulir));
+            $this->redirect('spmb.DetailPendaftaranOnline',true,array('id' => $no_formulir));
         }
     }
     public function checkNoFormulir($sender, $param) {					
@@ -158,7 +158,7 @@ class CDetailPendaftaranOnline extends MainPageM {
                 $this->DB->query('ROLLBACK');
             }
             
-            $this->redirect('spmb.DetailPendaftaranOnline',true,array('id'=>$no_formulir));
+            $this->redirect('spmb.DetailPendaftaranOnline',true,array('id' => $no_formulir));
         }
     }
 }

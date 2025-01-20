@@ -49,7 +49,7 @@ class DetailKRSEkstension extends MainPageDW {
             $r=$this->DB->getRecord($str);	           
             $datamhs = $r[1];
             if (!isset($r[1])) {
-                $_SESSION['currentPageKRSEkstension']['DataKRS']=array();
+                $_SESSION['currentPageKRSEkstension']['DataKRS'] = array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
             }  
             $datamhs['iddata_konversi']=$this->KRS->isMhsPindahan($datamhs['nim'],true);            
@@ -89,7 +89,7 @@ class DetailKRSEkstension extends MainPageDW {
 		$id=$this->getDataKeyField($sender, $this->RepeaterS);  
         $idkrs = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs'];
         $this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul=$id");
-        $this->redirect ('perkuliahan.DetailKRSEkstension',true,array('id'=>$idkrs));        
+        $this->redirect ('perkuliahan.DetailKRSEkstension',true,array('id' => $idkrs));        
     }
     public function closeDetailKRSEkstension ($sender, $param) { 
         unset($_SESSION['currentPageKRSEkstension']);

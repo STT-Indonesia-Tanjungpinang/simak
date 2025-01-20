@@ -8,8 +8,8 @@ class CDaftarMahasiswa extends MainPageDW {
                 
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPageDaftarMahasiswa'])||$_SESSION['currentPageDaftarMahasiswa']['page_name']!='dw.kemahasiswaan.DaftarMahasiswa') {
-				$_SESSION['currentPageDaftarMahasiswa']=array('page_name'=>'dw.kemahasiswaan.DaftarMahasiswa', 'page_num'=>0,'search'=>false,'idkonsentrasi'=>'none', 'k_status'=>'none');												
+            if (!isset($_SESSION['currentPageDaftarMahasiswa']) || $_SESSION['currentPageDaftarMahasiswa']['page_name'] != 'dw.kemahasiswaan.DaftarMahasiswa') {
+				$_SESSION['currentPageDaftarMahasiswa'] = array('page_name' => 'dw.kemahasiswaan.DaftarMahasiswa', 'page_num'=>0,'search'=>false,'idkonsentrasi' => 'none', 'k_status' => 'none');												
 			}
             $_SESSION['currentPageDaftarMahasiswa']['search']=false;
             

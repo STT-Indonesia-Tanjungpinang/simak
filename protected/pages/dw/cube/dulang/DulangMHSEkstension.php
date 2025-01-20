@@ -8,8 +8,8 @@ class DulangMHSEkstension Extends MainPageDW {
         $this->createObj('Finance');
         $this->createObj('Akademik');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
-            if (!isset($_SESSION['currentPageDulangMHSEkstension'])||$_SESSION['currentPageDulangMHSEkstension']['page_name']!='dw.dulang.DulangMHSEkstension') {
-				$_SESSION['currentPageDulangMHSEkstension']=array('page_name'=>'dw.dulang.DulangMHSEkstension', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none', 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPageDulangMHSEkstension']) || $_SESSION['currentPageDulangMHSEkstension']['page_name'] != 'dw.dulang.DulangMHSEkstension') {
+				$_SESSION['currentPageDulangMHSEkstension'] = array('page_name' => 'dw.dulang.DulangMHSEkstension', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSEkstension']['search']=false;
             

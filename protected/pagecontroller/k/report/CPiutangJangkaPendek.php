@@ -7,8 +7,8 @@ class CPiutangJangkaPendek extends MainPageK {
         $this->showReportPiutangJangkaPendek=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPagePiutangJangkaPendek'])||$_SESSION['currentPagePiutangJangkaPendek']['page_name']!='k.report.PiutangJangkaPendek') {
-				$_SESSION['currentPagePiutangJangkaPendek']=array('page_name'=>'k.report.PiutangJangkaPendek', 'page_num'=>0,'search'=>false,'kelas'=>'none', 'tahun_masuk'=>$_SESSION['tahun_masuk']);												
+            if (!isset($_SESSION['currentPagePiutangJangkaPendek']) || $_SESSION['currentPagePiutangJangkaPendek']['page_name'] != 'k.report.PiutangJangkaPendek') {
+				$_SESSION['currentPagePiutangJangkaPendek'] = array('page_name' => 'k.report.PiutangJangkaPendek', 'page_num'=>0,'search'=>false,'kelas' => 'none', 'tahun_masuk' => $_SESSION['tahun_masuk']);												
 			}
             $_SESSION['currentPagePiutangJangkaPendek']['search']=false;                       
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
@@ -110,24 +110,24 @@ class CPiutangJangkaPendek extends MainPageK {
         $result = array();      
         
         $komponen_biaya=array();
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>1,'idkelas'=>'A', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'A', 'perpanjang'=>false));
         $komponen_biaya['A']['baru'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');
         $komponen_biaya['A']['lama'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>2,'idkelas'=>'A', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'A', 'perpanjang'=>false));
         $komponen_biaya['A']['baru'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');       
         $komponen_biaya['A']['lama'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');  
         
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>1,'idkelas'=>'B', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'B', 'perpanjang'=>false));
         $komponen_biaya['B']['baru'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['B']['lama'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');            
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>2,'idkelas'=>'B', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'B', 'perpanjang'=>false));
         $komponen_biaya['B']['baru'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['B']['lama'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
         
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>1,'idkelas'=>'C', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'C', 'perpanjang'=>false));
         $komponen_biaya['C']['baru'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['C']['lama'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama'); 
-        $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>2,'idkelas'=>'C', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'C', 'perpanjang'=>false));
         $komponen_biaya['C']['baru'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['C']['lama'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
         

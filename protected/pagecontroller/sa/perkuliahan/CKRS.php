@@ -23,8 +23,8 @@ class CKRS Extends MainPageSA {
         $this->createObj('Finance');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {						
-            if (!isset($_SESSION['currentPageKRS'])||$_SESSION['currentPageKRS']['page_name']!='sa.perkuliahan.KRS') {					
-                $_SESSION['currentPageKRS']=array('page_name'=>'sa.perkuliahan.KRS', 'page_num'=>0,'mode_krs'=>'sudah', 'iddosen_wali'=>'none', 'tahun_masuk'=>'none', 'DataKRS'=>array(), 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPageKRS']) || $_SESSION['currentPageKRS']['page_name'] != 'sa.perkuliahan.KRS') {					
+                $_SESSION['currentPageKRS'] = array('page_name' => 'sa.perkuliahan.KRS', 'page_num'=>0,'mode_krs' => 'sudah', 'iddosen_wali' => 'none', 'tahun_masuk' => 'none', 'DataKRS'=>array(), 'DataMHS'=>array());												
             }
             $_SESSION['currentPageKRS']['search']=false;
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -203,7 +203,7 @@ class CKRS Extends MainPageSA {
 		$nim=addslashes($param->Value);
         try {
             if ($nim != '') {			            
-                $datamhs = array('nim'=>$nim);
+                $datamhs = array('nim' => $nim);
                 $this->KRS->setDataMHS($datamhs);
                 $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);                
                 if (isset($this->KRS->DataKRS['krs']['idkrs'])) {           
@@ -258,7 +258,7 @@ class CKRS Extends MainPageSA {
                     if ($status== 'K'||$status== 'L'||$status== 'D') throw new Exception ("Status Anda tidak aktif, sehingga tidak bisa mengisi KRS.");						
                     if ($datadulang['k_status'] != 'A')throw new Exception ("Anda pada tahun akademik dan semester sekarang tidak aktif.");									                                        
                     
-                    $_SESSION['currentPageKRS']['DataKRS']=array();                    
+                    $_SESSION['currentPageKRS']['DataKRS'] = array();                    
                 }                
             }
         }catch(Exception $e) {			
@@ -285,7 +285,7 @@ class CKRS Extends MainPageSA {
                 $this->redirect ('perkuliahan.TambahKRS',true);
             }elseif(isset($krs['idkrs']) && $krs['sah']==1){
                 $idkrs = $krs['idkrs'];
-                $this->redirect ('perkuliahan.DetailKRS',true,array('id'=>$idkrs));
+                $this->redirect ('perkuliahan.DetailKRS',true,array('id' => $idkrs));
             }else{
                 $idsmt = $_SESSION['semester'];
                 $tahun = $_SESSION['ta'];
@@ -296,13 +296,13 @@ class CKRS Extends MainPageSA {
                 
                 $str = "INSERT INTO krs SET idkrs=NULL,tgl_krs='$tanggal',no_krs = $no_krs,nim='$nim',idsmt='$idsmt',tahun='$tahun',tasmt='$tasmt',sah=0,tgl_disahkan='0000-00-00'";
                 $this->DB->insertRecord($str);					
-                $this->KRS->DataKRS['krs'] = array('idkrs'=>$this->DB->getLastInsertID(),
-                                                    'tgl_krs'=>$tanggal,
-                                                    'no_krs'=>$no_krs,
-                                                    'nim'=>$nim,
-                                                    'idsmt'=>$idsmt,
-                                                    'tahun'=>$tahun,
-                                                    'tasmt'=>$tasmt);		   
+                $this->KRS->DataKRS['krs'] = array('idkrs' => $this->DB->getLastInsertID(),
+                                                    'tgl_krs' => $tanggal,
+                                                    'no_krs' => $no_krs,
+                                                    'nim' => $nim,
+                                                    'idsmt' => $idsmt,
+                                                    'tahun' => $tahun,
+                                                    'tasmt' => $tasmt);		   
                 
                 $this->KRS->DataKRS['krs']['maxSKS'] = $idsmt==3?$this->Finance->getSKSFromSP($tahun, $idsmt):$this->Nilai->getMaxSKS($tahun, $idsmt);                
                 $this->KRS->DataKRS['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();                                                   

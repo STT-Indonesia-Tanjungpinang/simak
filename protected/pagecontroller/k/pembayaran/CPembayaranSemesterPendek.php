@@ -7,8 +7,8 @@ class CPembayaranSemesterPendek Extends MainPageK {
         $this->showPembayaranSemesterPendek=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranSemesterPendek'])||$_SESSION['currentPagePembayaranSemesterPendek']['page_name']!='k.pembayaran.PembayaranSemesterPendek') {
-				$_SESSION['currentPagePembayaranSemesterPendek']=array('page_name'=>'k.pembayaran.PembayaranSemesterPendek', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'), 'semester'=>3,'kelas'=>'none', 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranSemesterPendek']) || $_SESSION['currentPagePembayaranSemesterPendek']['page_name'] != 'k.pembayaran.PembayaranSemesterPendek') {
+				$_SESSION['currentPagePembayaranSemesterPendek'] = array('page_name' => 'k.pembayaran.PembayaranSemesterPendek', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester'=>3,'kelas' => 'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranSemesterPendek']['search']=false;             
             
@@ -30,7 +30,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
             
 			if (isset($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim'])) {
 				$this->linkDetailPembayaran->Visible=true;
-				$this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterPendek',true,array('id'=>$_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim']));
+				$this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterPendek',true,array('id' => $_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim']));
 				$this->txtNIM->Enabled = false;
 				$this->btnGo->Enabled = false;
 				$this->tbCmbTA->Enabled = false;
@@ -166,7 +166,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranSemesterPendek',true,array('id'=>$nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterPendek',true,array('id' => $nim));
         }
 	}
 	

@@ -9,8 +9,8 @@ class CStopInputNilai extends MainPageON{
         $this->showStopInputNilai=true;    
 		$this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageStopInputNilai'])||$_SESSION['currentPageStopInputNilai']['page_name']!='on.nilai.StopInputNilai') {					
-                $_SESSION['currentPageStopInputNilai']=array('page_name'=>'on.nilai.StopInputNilai', 'page_num'=>0,'search'=>false,'iddosen'=>'none', 'nama_hari'=>'none');												
+            if (!isset($_SESSION['currentPageStopInputNilai']) || $_SESSION['currentPageStopInputNilai']['page_name'] != 'on.nilai.StopInputNilai') {					
+                $_SESSION['currentPageStopInputNilai'] = array('page_name' => 'on.nilai.StopInputNilai', 'page_num'=>0,'search'=>false,'iddosen' => 'none', 'nama_hari' => 'none');												
             }
             $_SESSION['currentPageNilaiFinal']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

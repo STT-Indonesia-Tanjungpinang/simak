@@ -6,8 +6,8 @@ class CPengumuman extends MainPageM {
         $this->showPengumuman=true;                     
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
-            if (!isset($_SESSION['currentPagePengumuman'])||$_SESSION['currentPagePengumuman']['page_name']!='m.forum.Pengumuman') {                                                                                
-                $_SESSION['currentPagePengumuman']=array('page_name'=>'m.forum.Pengumuman', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
+            if (!isset($_SESSION['currentPagePengumuman']) || $_SESSION['currentPagePengumuman']['page_name'] != 'm.forum.Pengumuman') {                                                                                
+                $_SESSION['currentPagePengumuman'] = array('page_name' => 'm.forum.Pengumuman', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPagePengumuman']['activeviewindex']; 
 		}                
@@ -64,7 +64,7 @@ class CPengumuman extends MainPageM {
             $idpost=$v['idpost'];
             switch ($v['tipe']) {
                 case 'mh':                    
-                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$v['userid']));
+                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $v['userid']));
                 break;
                 default :
                     $urlprofiluser='#';
@@ -157,6 +157,6 @@ class CPengumuman extends MainPageM {
         $id=$this->getDataKeyField($sender, $this->RepeaterUnread);        
         $str="UPDATE pengumuman SET unread=0 WHERE idpost=$id";
         $this->DB->updateRecord($str);
-        $this->redirect('forum.DetailPengumuman', true, array('id'=>$id));
+        $this->redirect('forum.DetailPengumuman', true, array('id' => $id));
     }
 }

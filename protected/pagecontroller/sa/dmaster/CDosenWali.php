@@ -6,8 +6,8 @@ class CDosenWali extends MainPageSA {
         $this->showSubMenuLembaga=true;          
         $this->showDosenWali=true;   
         if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDosenWali'])||$_SESSION['currentPageDosenWali']['page_name']!='sa.dmaster.DosenWali') {
-                $_SESSION['currentPageDosenWali']=array('page_name'=>'sa.dmaster.DosenWali', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageDosenWali']) || $_SESSION['currentPageDosenWali']['page_name'] != 'sa.dmaster.DosenWali') {
+                $_SESSION['currentPageDosenWali'] = array('page_name' => 'sa.dmaster.DosenWali', 'page_num'=>0,'search'=>false);
             }
             $_SESSION['currentPageDosenWali']['search']=false;
             $this->populateData();            

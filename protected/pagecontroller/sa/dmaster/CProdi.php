@@ -6,8 +6,8 @@ class CProdi extends MainPageSA {
         $this->showSubMenuLembaga=true;
         $this->showProdi=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageProdi'])||$_SESSION['currentPageProdi']['page_name']!='sa.dmaster.Prodi') {
-				$_SESSION['currentPageProdi']=array('page_name'=>'sa.dmaster.Prodi', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageProdi']) || $_SESSION['currentPageProdi']['page_name'] != 'sa.dmaster.Prodi') {
+				$_SESSION['currentPageProdi'] = array('page_name' => 'sa.dmaster.Prodi', 'page_num'=>0,'search'=>false);
 			}            
             $this->populateData();			
 		}

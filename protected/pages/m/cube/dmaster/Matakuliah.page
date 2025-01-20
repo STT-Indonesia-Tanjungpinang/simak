@@ -629,7 +629,7 @@
                   <td><%# $this->DataItem['prasyarat']%></td>
                   <td><%# $this->DataItem['keterangan']%></td>                                
                   <td>
-                    <a href="<%#$this->Page->constructUrl('dmaster.MatkulPrasyarat',true,array('id'=>$this->DataItem['kmatkul']))%>" class="table-link" title="Prasyarat Matakuliah">                                        
+                    <a href="<%#$this->Page->constructUrl('dmaster.MatkulPrasyarat',true,array('id' => $this->DataItem['kmatkul']))%>" class="table-link" title="Prasyarat Matakuliah">                                        
                       <span class="fa-stack">
                         <i class="fa fa-square fa-stack-2x"></i>
                         <i class="fa fa-spoon fa-stack-1x fa-inverse"></i>

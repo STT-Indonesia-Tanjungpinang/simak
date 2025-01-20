@@ -157,7 +157,7 @@
 									<tfoot>
 										<tr>
 											<td colspan="4">
-												<com:THyperLink  NavigateUrl="<%=$this->Page->setup->getAddress()%>/<%#$this->DataItem['file_bukti_bayar']%>" Text="LIAT BUKTI BAYAR" Enabled="<%#$this->DataItem['file_bukti_bayar']!=''%>"/>												
+												<com:THyperLink  NavigateUrl="<%=$this->Page->setup->getAddress()%>/<%#$this->DataItem['file_bukti_bayar']%>" Text="LIAT BUKTI BAYAR" Enabled="<%#$this->DataItem['file_bukti_bayar'] != ''%>"/>												
 											</td>
 										</tr>
 									</tfoot>

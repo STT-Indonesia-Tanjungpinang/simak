@@ -44,10 +44,10 @@ class Logic_Users extends Logic_Global {
 		if ($new) {
 			$salt = substr(md5(uniqid(rand(), true)), 0, 6);	
 			$password = hash('sha256', $salt . hash('sha256', $password));
-			$data =array('salt'=>$salt,'password'=>$password);			
+			$data =array('salt' => $salt,'password' => $password);			
 		}else {
 			$data = hash('sha256', $salt . hash('sha256', $password));	
-			$data =array('salt'=>$salt,'password'=>$password);		
+			$data =array('salt' => $salt,'password' => $password);		
 		}
 		return $data;
 	}

@@ -10,7 +10,7 @@ class Logic_Setup extends Logic_Global {
      * daftar semester
      * @var array
      */
-    private $semester = array('none'=>'Daftar Semester',1=>'GANJIL',2=>'GENAP',3=>'PENDEK');
+    private $semester = array('none' => 'Daftar Semester',1=>'GANJIL',2=>'GENAP',3=>'PENDEK');
     /**
      *
      * setting application
@@ -55,7 +55,7 @@ class Logic_Setup extends Logic_Global {
         $r=$this->db->getRecord($str);
         $result=array();
         while (list($k, $v) = each($r)) {
-            $result[$v['key']]=array('setting_id'=>$v['setting_id'],'key'=>$v['key'],'value'=>$v['value']);
+            $result[$v['key']] = array('setting_id' => $v['setting_id'],'key' => $v['key'],'value' => $v['value']);
         }
         return $result;
     }
@@ -330,14 +330,14 @@ class Logic_Setup extends Logic_Global {
      * digunakan untuk mendapatkan tipe file output report
      */
     public function getOutputFileType() {
-        $tipefile=array('pdf'=>'PDF', 'excel2007'=>'Excel 2007', 'summarypdf'=>'Summary PDF', 'summaryexcel'=>'Summary Excel');
+        $tipefile=array('pdf' => 'PDF', 'excel2007' => 'Excel 2007', 'summarypdf' => 'Summary PDF', 'summaryexcel' => 'Summary Excel');
         return $tipefile;
     }
     /**
      * digunakan untuk mendapatkan tipe output compress
      */
     public function getOutputCompressType() {
-        $tipecompress = array('none'=>' ', 'zip'=>'ZIP');
+        $tipecompress = array('none' => ' ', 'zip' => 'ZIP');
         return $tipecompress;
     }
     /**

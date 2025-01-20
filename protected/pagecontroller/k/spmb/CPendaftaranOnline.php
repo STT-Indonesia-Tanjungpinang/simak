@@ -7,8 +7,8 @@ class CPendaftaranOnline extends MainPageK {
 		$this->showPendaftaranOnline=true;
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
-            if (!isset($_SESSION['currentPagePendaftaranOnline'])||$_SESSION['currentPagePendaftaranOnline']['page_name']!='k.spmb.PendaftaranOnline') {
-				$_SESSION['currentPagePendaftaranOnline']=array('page_name'=>'k.spmb.PendaftaranOnline', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'display_record'=>'all', 'kelas'=>'A');												
+            if (!isset($_SESSION['currentPagePendaftaranOnline']) || $_SESSION['currentPagePendaftaranOnline']['page_name'] != 'k.spmb.PendaftaranOnline') {
+				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'k.spmb.PendaftaranOnline', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'display_record' => 'all', 'kelas' => 'A');												
 			}
             $_SESSION['currentPagePendaftaranOnline']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

@@ -6,8 +6,8 @@ class CRuangKelas Extends MainPageM {
 		$this->showSubMenuDMasterPerkuliahan=true;
 		$this->showRuangKelas=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageRuangKelas'])||$_SESSION['currentPageRuangKelas']['page_name']!='sa.dmaster.RuangKelas') {
-				$_SESSION['currentPageRuangKelas']=array('page_name'=>'sa.dmaster.RuangKelas', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageRuangKelas']) || $_SESSION['currentPageRuangKelas']['page_name'] != 'sa.dmaster.RuangKelas') {
+				$_SESSION['currentPageRuangKelas'] = array('page_name' => 'sa.dmaster.RuangKelas', 'page_num'=>0,'search'=>false);
 			}
 			$this->populateData();
 		}

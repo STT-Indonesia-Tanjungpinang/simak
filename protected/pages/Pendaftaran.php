@@ -217,7 +217,7 @@ class Pendaftaran extends MainPageF
         $this->DB->query('ROLLBACK');
       }
       
-      $this->redirect('PendaftaranSuccess',false,array('id'=>$no_pendaftaran));
+      $this->redirect('PendaftaranSuccess',false,array('id' => $no_pendaftaran));
     }
   }
 }

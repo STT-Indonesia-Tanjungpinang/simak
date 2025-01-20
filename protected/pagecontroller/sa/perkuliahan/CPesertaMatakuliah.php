@@ -8,8 +8,8 @@ class CPesertaMatakuliah extends MainPageSA {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePesertaMatakuliah'])||$_SESSION['currentPagePesertaMatakuliah']['page_name']!='sa.perkuliahan.PesertaMatakuliah') {
-				$_SESSION['currentPagePesertaMatakuliah']=array('page_name'=>'sa.perkuliahan.PesertaMatakuliah', 'page_num'=>0,'search'=>false,'InfoMatkul'=>array(), 'idkelas'=>'none');
+            if (!isset($_SESSION['currentPagePesertaMatakuliah']) || $_SESSION['currentPagePesertaMatakuliah']['page_name'] != 'sa.perkuliahan.PesertaMatakuliah') {
+				$_SESSION['currentPagePesertaMatakuliah'] = array('page_name' => 'sa.perkuliahan.PesertaMatakuliah', 'page_num'=>0,'search'=>false,'InfoMatkul'=>array(), 'idkelas' => 'none');
 			}  
             $_SESSION['currentPagePesertaMatakuliah']['search']=false;            
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -114,7 +114,7 @@ class CPesertaMatakuliah extends MainPageSA {
                 $this->DB->setFieldTable (array('idpenyelenggaraan'));			
                 $r= $this->DB->getRecord($str);
                 if (isset($r[1])) {                                                    
-                    $this->redirect('perkuliahan.PesertaMatakuliah', true, array('id'=>$r[1]['idpenyelenggaraan']));
+                    $this->redirect('perkuliahan.PesertaMatakuliah', true, array('id' => $r[1]['idpenyelenggaraan']));
                 }else{
                     throw new Exception ("Kode matakuliah ($kmatkul) tidak diselenggarakan silahkan ganti dengan yang lain.");		
                 }                               

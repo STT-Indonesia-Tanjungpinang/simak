@@ -6,8 +6,8 @@ class CUserON extends MainPageSA {
         $this->showSubMenuSettingSistem=true;
         $this->showUserON=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageUserON'])||$_SESSION['currentPageUserON']['page_name']!='sa.settings.UserON') {
-				$_SESSION['currentPageUserON']=array('page_name'=>'sa.settings.UserON', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageUserON']) || $_SESSION['currentPageUserON']['page_name'] != 'sa.settings.UserON') {
+				$_SESSION['currentPageUserON'] = array('page_name' => 'sa.settings.UserON', 'page_num'=>0,'search'=>false);
 			}
             $_SESSION['currentPageUserON']['search']=false;
             $this->populateData();            

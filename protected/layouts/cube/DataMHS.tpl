@@ -10,7 +10,7 @@
             <div class="main-box-body clearfix">
                 <div class="row">
                     <div class="col-sm-2">
-                        <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$this->getDataMHS('nim')))%>">
+                        <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->getDataMHS('nim')))%>">
                             <img src="<%=$this->getDataMHS('photo_profile')%>" alt="" onerror="no_photo(this,'resources/userimages/no_photo.png')" width="150" height="150" class="img-rounded img-responsive" />
                         </a>                        
                     </div>                   
@@ -26,7 +26,7 @@
                                 <label class="col-sm-3 control-label"><strong>NIM: </strong></label>
                                 <div class="col-sm-9">
                                     <p class="form-control-static">
-                                        <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$this->getDataMHS('nim')))%>">
+                                        <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->getDataMHS('nim')))%>">
                                             <%= $this->getDataMHS('nim')%>
                                         </a> 
                                         <%=$this->getDataMHS('iddata_konversi') == 0? '':'<span class="label label-warning">Pindahan</span>'%>

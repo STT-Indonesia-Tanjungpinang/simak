@@ -6,8 +6,8 @@ class CDosen extends MainPageSA {
         $this->showSubMenuLembaga=true;		     
         $this->showDosen=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDosen'])||$_SESSION['currentPageDosen']['page_name']!='sa.dmaster.Dosen') {
-				$_SESSION['currentPageDosen']=array('page_name'=>'sa.dmaster.Dosen', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageDosen']) || $_SESSION['currentPageDosen']['page_name'] != 'sa.dmaster.Dosen') {
+				$_SESSION['currentPageDosen'] = array('page_name' => 'sa.dmaster.Dosen', 'page_num'=>0,'search'=>false);
 			}
             $_SESSION['currentPageDosen']['search']=false;
             $this->populateData();            

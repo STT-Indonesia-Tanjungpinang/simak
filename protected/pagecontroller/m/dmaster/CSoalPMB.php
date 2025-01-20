@@ -6,12 +6,12 @@ class CSoalPMB extends MainPageM {
 		parent::onLoad($param);		
 		$this->showSoalPMB = true;
 		if (!$this->IsPostBack && !$this->IsCallBack) {					
-			if (!isset($_SESSION['currentPageSoalPMB'])||$_SESSION['currentPageSoalPMB']['page_name']!='m.dmaster.SoalPMB') {
-                $_SESSION['currentPageSoalPMB']=array('page_name'=>'m.dmaster.SoalPMB', 'page_num'=>0,'search'=>false);
+			if (!isset($_SESSION['currentPageSoalPMB']) || $_SESSION['currentPageSoalPMB']['page_name'] != 'm.dmaster.SoalPMB') {
+                $_SESSION['currentPageSoalPMB'] = array('page_name' => 'm.dmaster.SoalPMB', 'page_num'=>0,'search'=>false);
 			}
             $result = array();
 			for ($i=1;$i<=4;$i++) {
-				$data = array('no'=>$i);
+				$data = array('no' => $i);
 				$result[] = $data;
 			}
 			$this->RepeaterJawaban->DataSource = $result;
@@ -64,7 +64,7 @@ class CSoalPMB extends MainPageM {
 			$jumlah_jawaban = $this->txtAddJumlahJawaban->Text;
 			$result = array();
 			for ($i=1;$i<=$jumlah_jawaban;$i++) {
-				$data = array('no'=>$i);
+				$data = array('no' => $i);
 				$result[] = $data;
 			}
 			$this->RepeaterJawaban->DataSource = $result;

@@ -245,7 +245,7 @@
                             <prop:ItemTemplate>
                                     <tr>
                                         <td><%#$this->DataItem['no']%></td>
-                                        <td><a href="<%#$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
+                                        <td><a href="<%#$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
                                         <td><%# $this->Data['nirm']%></td>                                        						
                                         <td><%#$this->DataItem['nama_mhs']%></td>	
                                         <td><%#$this->Page->DMaster->getNamaKelasByID($this->DataItem['idkelas'])%></td>

@@ -7,8 +7,8 @@ class CCalonWisuda Extends MainPageM {
         $this->showCalonWisuda=true;                
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageCalonWisuda'])||$_SESSION['currentPageCalonWisuda']['page_name']!='m.kemahasiswaan.CalonWisuda') {
-				$_SESSION['currentPageCalonWisuda']=array('page_name'=>'m.kemahasiswaan.CalonWisuda', 'page_num'=>0,'search'=>false);												
+            if (!isset($_SESSION['currentPageCalonWisuda']) || $_SESSION['currentPageCalonWisuda']['page_name'] != 'm.kemahasiswaan.CalonWisuda') {
+				$_SESSION['currentPageCalonWisuda'] = array('page_name' => 'm.kemahasiswaan.CalonWisuda', 'page_num'=>0,'search'=>false);												
 			}
             $_SESSION['currentPageCalonWisuda']['search']=false;
             
@@ -96,7 +96,7 @@ class CCalonWisuda Extends MainPageM {
                     $this->Demik->setDataMHS($datamhs);
                     $datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
                     if (isset($datadulang['iddulang'])) {         
-                        if ($datadulang['k_status']!='A') {
+                        if ($datadulang['k_status'] != 'A') {
                             throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
                         }                        
                     }                    
@@ -116,7 +116,7 @@ class CCalonWisuda Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailCalonWisuda',true,array('id'=>$nim));
+            $this->redirect('dulang.DetailCalonWisuda',true,array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	

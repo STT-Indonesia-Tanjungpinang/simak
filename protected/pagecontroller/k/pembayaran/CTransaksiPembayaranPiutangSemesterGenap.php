@@ -163,7 +163,7 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',disc='$disc',date_modified=NOW() WHERE no_transaksi = $no_transaksi";
             $this->DB->updateRecord($str);
             unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id'=>$nim));
+            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id' => $nim));
         }
     }
     public function commitData($sender, $param) {
@@ -182,14 +182,14 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
             
             $this->DB->query('COMMIT');
             unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id'=>$nim));
+            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id' => $nim));
         }
     }
     public function closeTransaction($sender, $param) {
         $datamhs = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS'];            
         $nim = $datamhs['nim'];
         unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);
-        $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id'=>$nim));
+        $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id' => $nim));
     }
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);
@@ -201,7 +201,7 @@ class CTransaksiPembayaranPiutangSemesterGenap Extends MainPageK {
 		$no_transaksi = $datamhs['no_transaksi'];		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");
         unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);
-		$this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id'=>$nim));
+		$this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id' => $nim));
 	}
 }
 class TotalPrice extends MainController

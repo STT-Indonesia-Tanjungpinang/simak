@@ -12,8 +12,8 @@ class CKHS extends MainPageMHS {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageKHS'])||$_SESSION['currentPageKHS']['page_name']!='mh.nilai.KHS') {
-				$_SESSION['currentPageKHS']=array('page_name'=>'mh.nilai.KHS', 'page_num'=>0,'search'=>false);												                                               
+            if (!isset($_SESSION['currentPageKHS']) || $_SESSION['currentPageKHS']['page_name'] != 'mh.nilai.KHS') {
+				$_SESSION['currentPageKHS'] = array('page_name' => 'mh.nilai.KHS', 'page_num'=>0,'search'=>false);												                                               
 			}            		
             $nama_tahun = $this->DMaster->getNamaTA ($_SESSION['ta']);
             $nama_semester = $this->setup->getSemester($_SESSION['semester']);
@@ -57,7 +57,7 @@ class CKHS extends MainPageMHS {
 		try {			
             $datamhs = $this->Pengguna->getDataUser();            
             $this->Nilai->setDataMHS($datamhs);
-			if ($_SESSION['ta']>= 2010 && $datamhs['idkelas']!='C') {
+			if ($_SESSION['ta']>= 2010 && $datamhs['idkelas'] != 'C') {
                 $this->createObj('Finance');
                 $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
                 $idkelas = $datadulang['idkelas'];

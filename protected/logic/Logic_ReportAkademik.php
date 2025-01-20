@@ -801,7 +801,7 @@ class Logic_ReportAkademik extends Logic_Report {
           $data =array();
           while (list($k, $v)=each ($r)) {            
             $index=$v['ta'].$v['idsmt'].$v['idkelas'];                        
-            $data[$index]=array();
+            $data[$index] = array();
           }  
           $dataaktif=$objDemik->getRekapStatusMHS($kjur, $ta1, $ta2,'A');
           $row=13;

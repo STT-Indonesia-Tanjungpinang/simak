@@ -254,7 +254,7 @@
                                     <td><%#$this->DataItem['namaruang'].' ['.$this->DataItem['kapasitas'].']'%></td>                                    
                                     <td><span class="label<%# $this->Data['status']==1?' label-success':' label-default'%>"><%# $this->Data['status']==1?'BUKA':'TUTUP'%></span></td>
                                     <td>
-                                        <a href="<%#$this->Page->constructUrl('spmb.PesertaUjianPMB',true,array('id'=>$this->DataItem['idjadwal_ujian']))%>" class="table-link" title="Daftar Peserta Ujian PMB">                                        
+                                        <a href="<%#$this->Page->constructUrl('spmb.PesertaUjianPMB',true,array('id' => $this->DataItem['idjadwal_ujian']))%>" class="table-link" title="Daftar Peserta Ujian PMB">                                        
                                             <%#$this->DataItem['jumlah_peserta']%>
                                         </a>
                                     </td>

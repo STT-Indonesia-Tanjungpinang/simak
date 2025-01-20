@@ -6,8 +6,8 @@ class CUserSA extends MainPageSA {
         $this->showSubMenuSettingSistem=true;
         $this->showUserSA=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageUserSA'])||$_SESSION['currentPageUserSA']['page_name']!='sa.settings.UserSA') {
-				$_SESSION['currentPageUserSA']=array('page_name'=>'sa.settings.UserSA', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageUserSA']) || $_SESSION['currentPageUserSA']['page_name'] != 'sa.settings.UserSA') {
+				$_SESSION['currentPageUserSA'] = array('page_name' => 'sa.settings.UserSA', 'page_num'=>0,'search'=>false);
 			}
             $_SESSION['currentPageUserSA']['search']=false;
             $this->populateData();            

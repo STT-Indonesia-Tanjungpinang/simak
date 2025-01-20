@@ -8,8 +8,8 @@ class CCalonMHS Extends MainPageM {
         $this->createObj('Finance');
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageCalonMHS'])||$_SESSION['currentPageCalonMHS']['page_name']!='m.dulang.CalonMHS') {
-				$_SESSION['currentPageCalonMHS']=array('page_name'=>'m.dulang.CalonMHS', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPageCalonMHS']) || $_SESSION['currentPageCalonMHS']['page_name'] != 'm.dulang.CalonMHS') {
+				$_SESSION['currentPageCalonMHS'] = array('page_name' => 'm.dulang.CalonMHS', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
             $_SESSION['currentPageCalonMHS']['search']=false;
             
@@ -22,7 +22,7 @@ class CCalonMHS Extends MainPageM {
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1' => 'GANJIL', '2' => 'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageCalonMHS']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();  
@@ -157,7 +157,7 @@ class CCalonMHS Extends MainPageM {
                 }
                 $_SESSION['currentPageDulangMHSBaru']['DataMHS'] = $datamhs;                        
             }
-            $this->redirect('dulang.DetailDulangMHSBaru',true,array('id'=>$no_formulir));
+            $this->redirect('dulang.DetailDulangMHSBaru',true,array('id' => $no_formulir));
         }catch (Exception $e) {
             $this->lblContentMessageError->Text = $e->getMessage();
             $this->modalMessageError->show();

@@ -6,13 +6,13 @@ class CJadwalUjianPMB extends MainPageMB {
         $this->showJadwalUjianPMB=true;
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageJadwalUjianPMB'])||$_SESSION['currentPageJadwalUjianPMB']['page_name']!='mb.spmb.JadwalUjianPMB') {                
-				$_SESSION['currentPageJadwalUjianPMB']=array('page_name'=>'mb.spmb.JadwalUjianPMB', 'page_num'=>0,'search'=>false);												
+            if (!isset($_SESSION['currentPageJadwalUjianPMB']) || $_SESSION['currentPageJadwalUjianPMB']['page_name'] != 'mb.spmb.JadwalUjianPMB') {                
+				$_SESSION['currentPageJadwalUjianPMB'] = array('page_name' => 'mb.spmb.JadwalUjianPMB', 'page_num'=>0,'search'=>false);												
 			}
             $this->lblModulHeader->Text = $this->getInfoToolbar();
             try {
                 $no_formulir = $this->Pengguna->getDataUser('no_formulir');
-                $this->Demik->setDataMHS(array('no_formulir'=>$no_formulir));
+                $this->Demik->setDataMHS(array('no_formulir' => $no_formulir));
                 if (!$this->Demik->isNoFormulirExist()) {
                     throw new Exception ('Untuk mengikuti ujian silahkan isi formulir terlebih dahulu');
                 }

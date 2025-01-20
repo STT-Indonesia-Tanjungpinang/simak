@@ -8,8 +8,8 @@ class CDetailTranskripFinal extends MainPageM {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDetailTranskripFinal'])||$_SESSION['currentPageDetailTranskripFinal']['page_name']!='m.nilai.DetailTranskripFinal') {
-				$_SESSION['currentPageDetailTranskripFinal']=array('page_name'=>'m.nilai.DetailTranskripFinal', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'DataTranskrip');
+            if (!isset($_SESSION['currentPageDetailTranskripFinal']) || $_SESSION['currentPageDetailTranskripFinal']['page_name'] != 'm.nilai.DetailTranskripFinal') {
+				$_SESSION['currentPageDetailTranskripFinal'] = array('page_name' => 'm.nilai.DetailTranskripFinal', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'DataTranskrip');
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -28,8 +28,8 @@ class CDetailTranskripFinal extends MainPageM {
             $r = $this->DB->getRecord($str);				
             
             if (!isset($r[1])) {
-                $_SESSION['currentPageDetailTranskripFinal']['DataMHS']=array();
-                $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip']=array();
+                $_SESSION['currentPageDetailTranskripFinal']['DataMHS'] = array();
+                $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip'] = array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar.");
             }
             $datamhs = $r[1];
@@ -45,8 +45,8 @@ class CDetailTranskripFinal extends MainPageM {
             $this->DB->setFieldTable(array('nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'iddosen_pembimbing', 'iddosen_pembimbing2', 'iddosen_ketua', 'iddosen_pemket', 'tahun', 'idsmt'));
             $datatranskrip = $this->DB->getRecord($str);
             if (!isset($datatranskrip[1])) {
-                $_SESSION['currentPageDetailTranskripFinal']['DataMHS']=array();
-                $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip']=array();
+                $_SESSION['currentPageDetailTranskripFinal']['DataMHS'] = array();
+                $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip'] = array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar di Transkrip Final.");
             }
             $datatranskrip[1]['nama_pembimbing1'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing']);

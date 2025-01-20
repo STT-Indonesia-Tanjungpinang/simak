@@ -8,8 +8,8 @@ class CPesertaUjianPMB extends MainPageM {
         $this->showJadwalUjianPMB=true;
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePesertaUjianPMB'])||$_SESSION['currentPagePesertaUjianPMB']['page_name']!='m.spmb.PesertaUjianPMB') {
-				$_SESSION['currentPagePesertaUjianPMB']=array('page_name'=>'m.spmb.PesertaUjianPMB', 'page_num'=>0,'search'=>false,'DataUjianPMB');
+            if (!isset($_SESSION['currentPagePesertaUjianPMB']) || $_SESSION['currentPagePesertaUjianPMB']['page_name'] != 'm.spmb.PesertaUjianPMB') {
+				$_SESSION['currentPagePesertaUjianPMB'] = array('page_name' => 'm.spmb.PesertaUjianPMB', 'page_num'=>0,'search'=>false,'DataUjianPMB');
 			}  
             $_SESSION['currentPagePesertaUjianPMB']['search']=false;            
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -71,7 +71,7 @@ class CPesertaUjianPMB extends MainPageM {
         $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE tahun_masuk='$tahun_masuk' AND idsmt='$idsmt' AND idjadwal_ujian != $id AND status=1 ORDER BY tanggal_ujian ASC";
         $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'namaruang', 'kapasitas', 'status'));
 		$r = $this->DB->getRecord($str);
-        $result = array('none'=>' ');
+        $result = array('none' => ' ');
         while (list($k, $v) = each($r)) {  
             $idjadwal_ujian = $v['idjadwal_ujian'];
             $jumlah_peserta = $this->DB->getCountRowsOfTable("peserta_ujian_pmb WHERE idjadwal_ujian = $idjadwal_ujian",'idjadwal_ujian');
@@ -93,7 +93,7 @@ class CPesertaUjianPMB extends MainPageM {
             $str = "UPDATE peserta_ujian_pmb SET idjadwal_ujian = $idjadwal_ujian WHERE idpeserta_ujian = $id";
             $this->DB->updateRecord($str);
             
-            $this->redirect('spmb.PesertaUjianPMB',true,array('id'=>$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']['idjadwal_ujian']));
+            $this->redirect('spmb.PesertaUjianPMB',true,array('id' => $_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']['idjadwal_ujian']));
         }
     }
     public function deleteRecord($sender, $param) {        
@@ -108,7 +108,7 @@ class CPesertaUjianPMB extends MainPageM {
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("peserta_ujian_pmb WHERE idpeserta_ujian='$id'");
-            $this->redirect('spmb.PesertaUjianPMB',true,array('id'=>$r[1]['idjadwal_ujian']));
+            $this->redirect('spmb.PesertaUjianPMB',true,array('id' => $r[1]['idjadwal_ujian']));
         }
     }  
     public function printOut($sender, $param) {		

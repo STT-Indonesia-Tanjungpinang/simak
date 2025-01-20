@@ -8,8 +8,8 @@ class CDulangMHSBaru Extends MainPageM {
         $this->createObj('Finance');
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDulangMHSBaru'])||$_SESSION['currentPageDulangMHSBaru']['page_name']!='m.dulang.DulangMHSBaru') {
-				$_SESSION['currentPageDulangMHSBaru']=array('page_name'=>'m.dulang.DulangMHSBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPageDulangMHSBaru']) || $_SESSION['currentPageDulangMHSBaru']['page_name'] != 'm.dulang.DulangMHSBaru') {
+				$_SESSION['currentPageDulangMHSBaru'] = array('page_name' => 'm.dulang.DulangMHSBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSBaru']['search']=false;
             
@@ -22,7 +22,7 @@ class CDulangMHSBaru Extends MainPageM {
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1' => 'GANJIL', '2' => 'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageDulangMHSBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();  
@@ -166,7 +166,7 @@ class CDulangMHSBaru Extends MainPageM {
     public function Go($sender, $param) {	
         if ($this->Page->isValid) {            
             $no_formulir = addslashes($this->txtNoFormulir->Text);
-            $this->redirect('dulang.DetailDulangMHSBaru',true,array('id'=>$no_formulir));
+            $this->redirect('dulang.DetailDulangMHSBaru',true,array('id' => $no_formulir));
         }
 	}
     public function viewRecord($sender, $param) {	

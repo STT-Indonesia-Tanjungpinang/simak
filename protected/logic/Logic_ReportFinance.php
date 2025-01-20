@@ -72,24 +72,24 @@ class Logic_ReportFinance extends Logic_Report {
                 $sheet->getStyle("A10:L10")->getAlignment()->setWrapText(true);
                 
                 $komponen_biaya=array();
-                $objFinance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>1,'idkelas'=>'A'));
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'A'));
                 $komponen_biaya['A']['baru'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');
                 $komponen_biaya['A']['lama'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');
-                $objFinance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>2,'idkelas'=>'A'));
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'A'));
                 $komponen_biaya['A']['baru'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');       
                 $komponen_biaya['A']['lama'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');  
 
-                $objFinance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>1,'idkelas'=>'B'));
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'B'));
                 $komponen_biaya['B']['baru'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
                 $komponen_biaya['B']['lama'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');            
-                $objFinance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>2,'idkelas'=>'B'));
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'B'));
                 $komponen_biaya['B']['baru'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
                 $komponen_biaya['B']['lama'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');
 
-                $objFinance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>1,'idkelas'=>'C'));
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'C'));
                 $komponen_biaya['C']['baru'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
                 $komponen_biaya['C']['lama'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama'); 
-                $objFinance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>2,'idkelas'=>'C'));
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'C'));
                 $komponen_biaya['C']['baru'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
                 $komponen_biaya['C']['lama'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');  
                                 

@@ -8,11 +8,11 @@ class CEvaluasiHasilBelajar extends MainPageD {
         
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageEvaluasiHasilBelajar'])||$_SESSION['currentPageEvaluasiHasilBelajar']['page_name']!='d.nilai.EvaluasiHasilBelajar') {
-				$_SESSION['currentPageEvaluasiHasilBelajar']=array('page_name'=>'d.nilai.EvaluasiHasilBelajar', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageEvaluasiHasilBelajar']) || $_SESSION['currentPageEvaluasiHasilBelajar']['page_name'] != 'd.nilai.EvaluasiHasilBelajar') {
+				$_SESSION['currentPageEvaluasiHasilBelajar'] = array('page_name' => 'd.nilai.EvaluasiHasilBelajar', 'page_num'=>0,'search'=>false);
 			}  
             $_SESSION['currentPageEvaluasiHasilBelajar']['search']=false;
-            $_SESSION['currentPageDetailEvaluasiHasilBelajar']=array();
+            $_SESSION['currentPageDetailEvaluasiHasilBelajar'] = array();
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');

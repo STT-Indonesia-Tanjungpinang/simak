@@ -7,8 +7,8 @@ class CDaftarKonsentrasi extends MainPageMHS {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {              
-            if (!isset($_SESSION['currentPageDaftarKonsentrasi'])||$_SESSION['currentPageDaftarKonsentrasi']['page_name']!='mh.akademik.DaftarKonsentrasi') {
-				$_SESSION['currentPageDaftarKonsentrasi']=array('page_name'=>'mh.akademik.DaftarKonsentrasi', 'page_num'=>0,'search'=>false);												
+            if (!isset($_SESSION['currentPageDaftarKonsentrasi']) || $_SESSION['currentPageDaftarKonsentrasi']['page_name'] != 'mh.akademik.DaftarKonsentrasi') {
+				$_SESSION['currentPageDaftarKonsentrasi'] = array('page_name' => 'mh.akademik.DaftarKonsentrasi', 'page_num'=>0,'search'=>false);												
 			}    
             $this->Nilai->setDataMHS($this->Pengguna->getDataUser()); 
             $this->Nilai->getTranskripFromKonversidanKRS();

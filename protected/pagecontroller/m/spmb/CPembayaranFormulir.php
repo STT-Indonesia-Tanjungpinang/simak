@@ -6,8 +6,8 @@ class CPembayaranFormulir extends MainPageM {
         $this->showSubMenuSPMBPendaftaran=true;
         $this->showPembayaranFormulir=true;
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
-            if (!isset($_SESSION['currentPagePembayaranFormulir'])||$_SESSION['currentPagePembayaranFormulir']['page_name']!='m.spmb.PembayaranFormulir') {
-				$_SESSION['currentPagePembayaranFormulir']=array('page_name'=>'m.spmb.PembayaranFormulir', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false);												
+            if (!isset($_SESSION['currentPagePembayaranFormulir']) || $_SESSION['currentPagePembayaranFormulir']['page_name'] != 'm.spmb.PembayaranFormulir') {
+				$_SESSION['currentPagePembayaranFormulir'] = array('page_name' => 'm.spmb.PembayaranFormulir', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false);												
 			}	
             $_SESSION['currentPagePembayaranFormulir']['search']=false;
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			

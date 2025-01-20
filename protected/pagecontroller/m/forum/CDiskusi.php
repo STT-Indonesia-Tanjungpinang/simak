@@ -6,8 +6,8 @@ class CDiskusi extends MainPageM {
         $this->showForumDiskusi=true;                     
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
-            if (!isset($_SESSION['currentPageDiskusi'])||$_SESSION['currentPageDiskusi']['page_name']!='m.forum.Diskusi') {                                                                                
-                $_SESSION['currentPageDiskusi']=array('page_name'=>'m.forum.Diskusi', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
+            if (!isset($_SESSION['currentPageDiskusi']) || $_SESSION['currentPageDiskusi']['page_name'] != 'm.forum.Diskusi') {                                                                                
+                $_SESSION['currentPageDiskusi'] = array('page_name' => 'm.forum.Diskusi', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPageDiskusi']['activeviewindex']; 
 		}                
@@ -70,7 +70,7 @@ class CDiskusi extends MainPageM {
                     $this->DB->setFieldTable (array('photo_profile'));			
                     $profile=$this->DB->getRecord($str);	
                     $photo=$profile[1]['photo_profile'];
-                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$v['userid']));
+                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $v['userid']));
                 break;
                 case 'm':
                     $str = "SELECT foto AS photo_profile FROM user WHERE userid='$userid'";
@@ -122,7 +122,7 @@ class CDiskusi extends MainPageM {
                     $this->DB->setFieldTable (array('photo_profile'));			
                     $profile=$this->DB->getRecord($str);	
                     $photo=$profile[1]['photo_profile'];
-                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id'=>$v['userid']));
+                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $v['userid']));
                 break;
                 default :
                     $urlprofiluser='#';
@@ -156,6 +156,6 @@ class CDiskusi extends MainPageM {
         $id=$this->getDataKeyField($sender, $this->RepeaterUnread);        
         $str="UPDATE forumposts SET unread=0 WHERE idpost=$id";
         $this->DB->updateRecord($str);
-        $this->redirect('forum.DetailDiskusi', true, array('id'=>$id));
+        $this->redirect('forum.DetailDiskusi', true, array('id' => $id));
     }
 }

@@ -9,8 +9,8 @@ class CDetailPembayaranFormulir Extends MainPageK {
         $this->showPembayaranFormulir=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranFormulir'])||$_SESSION['currentPagePembayaranFormulir']['page_name']!='k.pembayaran.PembayaranFormulir') {
-				$_SESSION['currentPagePembayaranFormulir']=array('page_name'=>'k.pembayaran.PembayaranFormulir', 'page_num'=>0,'search'=>false,'kelas'=>'none', 'semester_masuk'=>1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranFormulir']) || $_SESSION['currentPagePembayaranFormulir']['page_name'] != 'k.pembayaran.PembayaranFormulir') {
+				$_SESSION['currentPagePembayaranFormulir'] = array('page_name' => 'k.pembayaran.PembayaranFormulir', 'page_num'=>0,'search'=>false,'kelas' => 'none', 'semester_masuk'=>1,'DataMHS'=>array());												
 			}        
             try {
                 $no_formulir = addslashes($this->request['id']);
@@ -143,7 +143,7 @@ class CDetailPembayaranFormulir Extends MainPageK {
         $no_formulir = $datamhs['no_formulir'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranFormulir',true,array('id'=>$no_formulir));
+		$this->redirect('pembayaran.DetailPembayaranFormulir',true,array('id' => $no_formulir));
 	}		
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranFormulir']['DataMHS']);

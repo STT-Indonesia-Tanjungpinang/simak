@@ -7,8 +7,8 @@ class CDetailFormulir extends MainPageM {
         $this->showFormulirPendaftaran=true;
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPageDetailFormulir'])||$_SESSION['currentPageDetailFormulir']['page_name']!='m.spmb.DetailFormulir') {
-				$_SESSION['currentPageDetailFormulir']=array('page_name'=>'m.spmb.DetailFormulir', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
+            if (!isset($_SESSION['currentPageDetailFormulir']) || $_SESSION['currentPageDetailFormulir']['page_name'] != 'm.spmb.DetailFormulir') {
+				$_SESSION['currentPageDetailFormulir'] = array('page_name' => 'm.spmb.DetailFormulir', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
 			}
 
             $this->MVDetailFormulir->ActiveViewIndex=$_SESSION['currentPageDetailFormulir']['activeviewindex'];             
@@ -51,7 +51,7 @@ class CDetailFormulir extends MainPageM {
                 }
             }else{
                 $_SESSION['currentPageDetailFormulir']['activeviewindex'] = $this->MVDetailFormulir->ActiveViewIndex;
-                $this->redirect('spmb.DetailFormulir',true,array('id'=>$datamhs['no_formulir']));
+                $this->redirect('spmb.DetailFormulir',true,array('id' => $datamhs['no_formulir']));
             }       
             
         }catch (Exception $ex) {
@@ -88,7 +88,7 @@ class CDetailFormulir extends MainPageM {
             $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE no_formulir='$no_formulir'";            
             $this->DB->updateRecord($str);            
            
-            $this->redirect('spmb.DetailFormulir',true,array('id'=>$no_formulir));
+            $this->redirect('spmb.DetailFormulir',true,array('id' => $no_formulir));
         }
     }
     public function checkNoFormulir($sender, $param) {					
@@ -165,7 +165,7 @@ class CDetailFormulir extends MainPageM {
                 $this->DB->query('ROLLBACK');
             }
             
-            $this->redirect('spmb.DetailFormulir',true,array('id'=>$no_formulir));
+            $this->redirect('spmb.DetailFormulir',true,array('id' => $no_formulir));
         }
     }
 }

@@ -7,8 +7,8 @@ class CPindahKelas Extends MainPageM {
         $this->showPindahKelas=true;
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePindahKelas'])||$_SESSION['currentPagePindahKelas']['page_name']!='m.kemahasiswaan.PindahKelas') {
-				$_SESSION['currentPagePindahKelas']=array('page_name'=>'m.kemahasiswaan.PindahKelas', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPagePindahKelas']) || $_SESSION['currentPagePindahKelas']['page_name'] != 'm.kemahasiswaan.PindahKelas') {
+				$_SESSION['currentPagePindahKelas'] = array('page_name' => 'm.kemahasiswaan.PindahKelas', 'page_num'=>0,'search'=>false);
 			}   
 			$_SESSION['currentPagePindahKelas']['search']=false;
             
@@ -73,7 +73,7 @@ class CPindahKelas Extends MainPageM {
 	public function processDataBound($sender, $param) {			
 		$item = $param->Item;
 		if ($item->ItemType == 'Item' || $item->ItemType=='AlternatingItem') {
-            $this->Demik->setDataMHS(array('nim'=>$item->DataItem['nim']));
+            $this->Demik->setDataMHS(array('nim' => $item->DataItem['nim']));
 			$datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
             if (isset($datadulang['iddulang'])) {
                 $item->btnDelete->Enabled = false;
@@ -91,7 +91,7 @@ class CPindahKelas Extends MainPageM {
 			if ($this->DB->checkRecordIsExist('nim', 'pindahkelas', $nim," AND idsmt='$idsmt' AND tahun='$ta'")){
                 throw new Exception ("NIM ($nim) pada T.A dan Semester ini, telah melakukan pindah kelas !!!");
             }
-            $this->Demik->setDataMHS(array('nim'=>$nim));
+            $this->Demik->setDataMHS(array('nim' => $nim));
 			$datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
             if (isset($datadulang['iddulang'])) {
                 throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");

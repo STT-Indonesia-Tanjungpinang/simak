@@ -11,8 +11,8 @@ class CDPNA extends MainPageM {
         
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDPNA'])||$_SESSION['currentPageDPNA']['page_name']!='m.nilai.DPNA') {
-                $_SESSION['currentPageDPNA']=array('page_name'=>'m.nilai.DPNA', 'page_num'=>0,'search'=>false,'DataDPNA'=>array(), 'idkelas_mhs'=>'none');
+            if (!isset($_SESSION['currentPageDPNA']) || $_SESSION['currentPageDPNA']['page_name'] != 'm.nilai.DPNA') {
+                $_SESSION['currentPageDPNA'] = array('page_name' => 'm.nilai.DPNA', 'page_num'=>0,'search'=>false,'DataDPNA'=>array(), 'idkelas_mhs' => 'none');
 			}  
             $_SESSION['currentPageDPNA']['search']=false;            
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

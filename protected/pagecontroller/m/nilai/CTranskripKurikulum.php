@@ -8,8 +8,8 @@ class CTranskripKurikulum extends MainPageM {
 		$this->createObj('Nilai');
                 
 		if (!$this->IsPostBack && !$this->IsCallback) {			
-            if (!isset($_SESSION['currentPageTranskripKurikulum'])||$_SESSION['currentPageTranskripKurikulum']['page_name']!='m.nilai.TranskripKurikulum') {
-				$_SESSION['currentPageTranskripKurikulum']=array('page_name'=>'m.nilai.TranskripKurikulum', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['ta']);
+            if (!isset($_SESSION['currentPageTranskripKurikulum']) || $_SESSION['currentPageTranskripKurikulum']['page_name'] != 'm.nilai.TranskripKurikulum') {
+				$_SESSION['currentPageTranskripKurikulum'] = array('page_name' => 'm.nilai.TranskripKurikulum', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['ta']);
 			}          
             $_SESSION['currentPageTranskripKurikulum']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

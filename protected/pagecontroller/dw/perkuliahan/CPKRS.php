@@ -21,9 +21,9 @@ class CPKRS extends MainPageDW {
     $this->createObj('KRS');
       
     if (!$this->IsPostBack && !$this->IsCallback) {
-      if (!isset($_SESSION['currentPagePKRS'])||$_SESSION['currentPagePKRS']['page_name']!='dw.perkuliahan.PKRS')
+      if (!isset($_SESSION['currentPagePKRS']) || $_SESSION['currentPagePKRS']['page_name'] != 'dw.perkuliahan.PKRS')
       {					
-        $_SESSION['currentPagePKRS']=array('page_name'=>'dw.perkuliahan.PKRS', 'search'=>false,'page_num'=>0,'DataKRS'=>array(), 'DataMHS'=>array());												
+        $_SESSION['currentPagePKRS'] = array('page_name' => 'dw.perkuliahan.PKRS', 'search'=>false,'page_num'=>0,'DataKRS'=>array(), 'DataMHS'=>array());												
       }
       $_SESSION['currentPagePKRS']['search']=false;
 
@@ -204,7 +204,7 @@ class CPKRS extends MainPageDW {
       }            
       $krs['maxSKS'] = $maxSKS;
       $_SESSION['currentPagePKRS']['DataKRS']['krs'] = $krs;
-      $this->redirect ('perkuliahan.DetailPKRS',true,array('id'=>$idkrs));
+      $this->redirect ('perkuliahan.DetailPKRS',true,array('id' => $idkrs));
     }		
   }	
   public function printOut($sender, $param) {

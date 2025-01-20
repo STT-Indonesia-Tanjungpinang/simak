@@ -7,8 +7,8 @@ class CRekapitulasiDPA extends MainPageM {
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showPerwalian=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageRekapitulasiDPA'])||$_SESSION['currentPageRekapitulasiDPA']['page_name']!='m.kemahasiswaan.RekapitulasiDPA') {
-				$_SESSION['currentPageRekapitulasiDPA']=array('page_name'=>'m.kemahasiswaan.RekapitulasiDPA', 'page_num'=>0,'kjur'=>'none', 'tahun_masuk'=>'none', 'kelas'=>'none', 'status'=>'none');												
+            if (!isset($_SESSION['currentPageRekapitulasiDPA']) || $_SESSION['currentPageRekapitulasiDPA']['page_name'] != 'm.kemahasiswaan.RekapitulasiDPA') {
+				$_SESSION['currentPageRekapitulasiDPA'] = array('page_name' => 'm.kemahasiswaan.RekapitulasiDPA', 'page_num'=>0,'kjur' => 'none', 'tahun_masuk' => 'none', 'kelas' => 'none', 'status' => 'none');												
 			}
             $daftar_prodi = $_SESSION['daftar_jurusan'];                        
             $daftar_prodi['none'] = 'KESELURUHAN';
@@ -103,7 +103,7 @@ class CRekapitulasiDPA extends MainPageM {
                 }
             }
             
-            $result[$i]=array('no'=>$i,'iddosen_wali'=>$iddosen_wali,'nama_dw'=>$nama_dw,'pria'=>$pria,'wanita'=>$wanita,'jumlah'=>$pria+$wanita);
+            $result[$i] = array('no' => $i,'iddosen_wali' => $iddosen_wali,'nama_dw' => $nama_dw,'pria' => $pria,'wanita' => $wanita,'jumlah' => $pria+$wanita);
             $i+=1;
         }
         $this->RepeaterS->DataSource = $result;

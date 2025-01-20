@@ -9,8 +9,8 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
         $this->showPembayaranMahasiswaBaru=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru'])||$_SESSION['currentPagePembayaranMahasiswaBaru']['page_name']!='k.pembayaran.PembayaranMahasiswaBaru') {
-				$_SESSION['currentPagePembayaranMahasiswaBaru']=array('page_name'=>'k.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'kelas'=>'none', 'tahun_masuk'=>1,'semester_masuk'=>1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru']) || $_SESSION['currentPagePembayaranMahasiswaBaru']['page_name'] != 'k.pembayaran.PembayaranMahasiswaBaru') {
+				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'k.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'kelas' => 'none', 'tahun_masuk'=>1,'semester_masuk'=>1,'DataMHS'=>array());												
 			}        
             try {
                 $no_formulir = addslashes($this->request['id']);
@@ -159,7 +159,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
         $no_formulir = $datamhs['no_formulir'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id'=>$no_formulir));
+		$this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id' => $no_formulir));
 	}		
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']);

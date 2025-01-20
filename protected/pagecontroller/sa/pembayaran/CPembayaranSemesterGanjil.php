@@ -7,8 +7,8 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
         $this->showPembayaranSemesterGanjil=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranSemesterGanjil'])||$_SESSION['currentPagePembayaranSemesterGanjil']['page_name']!='sa.pembayaran.PembayaranSemesterGanjil') {
-				$_SESSION['currentPagePembayaranSemesterGanjil']=array('page_name'=>'sa.pembayaran.PembayaranSemesterGanjil', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'), 'semester'=>1,'kelas'=>'none', 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranSemesterGanjil']) || $_SESSION['currentPagePembayaranSemesterGanjil']['page_name'] != 'sa.pembayaran.PembayaranSemesterGanjil') {
+				$_SESSION['currentPagePembayaranSemesterGanjil'] = array('page_name' => 'sa.pembayaran.PembayaranSemesterGanjil', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester'=>1,'kelas' => 'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranSemesterGanjil']['search']=false; 
             $bool=!isset($_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']['nim']);

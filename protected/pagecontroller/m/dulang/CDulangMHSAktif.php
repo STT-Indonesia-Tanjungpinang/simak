@@ -8,8 +8,8 @@ class CDulangMHSAktif Extends MainPageM {
         $this->createObj('Finance');
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDulangMHSAktif'])||$_SESSION['currentPageDulangMHSAktif']['page_name']!='m.dulang.DulangMHSAktif') {
-				$_SESSION['currentPageDulangMHSAktif']=array('page_name'=>'m.dulang.DulangMHSAktif', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none', 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPageDulangMHSAktif']) || $_SESSION['currentPageDulangMHSAktif']['page_name'] != 'm.dulang.DulangMHSAktif') {
+				$_SESSION['currentPageDulangMHSAktif'] = array('page_name' => 'm.dulang.DulangMHSAktif', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSAktif']['search']=false;
             
@@ -185,7 +185,7 @@ class CDulangMHSAktif Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailDulangMHSAktif',true,array('id'=>$nim));
+            $this->redirect('dulang.DetailDulangMHSAktif',true,array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	
@@ -208,7 +208,7 @@ class CDulangMHSAktif Extends MainPageM {
 		$idsmt = $this->hiddenidsmt->Value;
 		$ta = $this->hiddenta->Value;
 		$this->DB->query ('BEGIN');
-        $this->Demik->setDataMHS(array('nim'=>$nim));
+        $this->Demik->setDataMHS(array('nim' => $nim));
         $datadulang=$this->Demik->getDataDulang($idsmt, $ta);
         $k_status = $datadulang['status_sebelumnya'];
         $str = "UPDATE register_mahasiswa SET k_status='$k_status' WHERE nim='$nim'";

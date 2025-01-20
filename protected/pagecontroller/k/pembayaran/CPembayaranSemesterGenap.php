@@ -7,8 +7,8 @@ class CPembayaranSemesterGenap Extends MainPageK {
         $this->showPembayaranSemesterGenap=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranSemesterGenap'])||$_SESSION['currentPagePembayaranSemesterGenap']['page_name']!='k.pembayaran.PembayaranSemesterGenap') {
-				$_SESSION['currentPagePembayaranSemesterGenap']=array('page_name'=>'k.pembayaran.PembayaranSemesterGenap', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta'), 'semester'=>2,'kelas'=>'none', 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranSemesterGenap']) || $_SESSION['currentPagePembayaranSemesterGenap']['page_name'] != 'k.pembayaran.PembayaranSemesterGenap') {
+				$_SESSION['currentPagePembayaranSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranSemesterGenap', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester'=>2,'kelas' => 'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranSemesterGenap']['search']=false; 
             $bool=!isset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']);
@@ -36,7 +36,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
                 $this->txtNIM->Visible=false;
                 $this->btnGo->Visible=false;
                 $this->linkDetailPembayaran->Visible=true;
-                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGenap',true,array('id'=>$_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']));
+                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGenap',true,array('id' => $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']));
             }                
             $this->populateData();
             $this->setInfoToolbar();
@@ -159,7 +159,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
                 $datamhs = $r[1];
                 $ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];                
                 if ($datamhs['tahun_masuk'] == $ta && $datamhs['semester_masuk']==2) {						
-                    $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']=array();
+                    $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS'] = array();
                     throw new Exception ("NIM ($nim) adalah seorang Mahasiswa baru, mohon diproses di Pembayaran->Mahasiswa Baru.");
                 }
 
@@ -169,7 +169,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
                 $this->Finance->setDataMHS($datamhs);                              
                 $datadulang=$this->Finance->getDataDulang($semester, $ta);
                 if ($datadulang['k_status']=='N' || $datadulang['k_status']=='D') {
-                    $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']=array();
+                    $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS'] = array();
                     throw new Exception ("Status NIM ($nim) NON-AKTIF atau DROP-OUT silahkan melakukan pembayaran melalui Pembayaran Piutang.");
                 }
             }catch (Exception $e) {
@@ -181,7 +181,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranSemesterGenap',true,array('id'=>$nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterGenap',true,array('id' => $nim));
         }
 	}
 	

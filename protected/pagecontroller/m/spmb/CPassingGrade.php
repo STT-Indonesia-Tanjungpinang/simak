@@ -8,8 +8,8 @@ class CPassingGrade extends MainPageM {
 		$this->showPassingGradePMB=true;
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
-            if (!isset($_SESSION['currentPagePassingGrade'])||$_SESSION['currentPagePassingGrade']['page_name']!='m.spmb.PassingGrade') {
-				$_SESSION['currentPagePassingGrade']=array('page_name'=>'m.spmb.PassingGrade', 'idjadwal_ujian'=>'none');												
+            if (!isset($_SESSION['currentPagePassingGrade']) || $_SESSION['currentPagePassingGrade']['page_name'] != 'm.spmb.PassingGrade') {
+				$_SESSION['currentPagePassingGrade'] = array('page_name' => 'm.spmb.PassingGrade', 'idjadwal_ujian' => 'none');												
 			}            
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
@@ -45,7 +45,7 @@ class CPassingGrade extends MainPageM {
         $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE tahun_masuk='$tahun_masuk' ORDER BY tanggal_ujian ASC";                
         $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'namaruang', 'kapasitas', 'status'));
         $r = $this->DB->getRecord($str);	
-        $result = array('none'=>' ');
+        $result = array('none' => ' ');
         while (list($k, $v) = each($r)) {  
             $result[$v['idjadwal_ujian']] = $v['nama_kegiatan'] . ' # '.$this->TGL->tanggal('l, d F Y', $v['tanggal_ujian']) .' # '.$v['jam_mulai'].'-'.$v['jam_akhir'].'';            
         }

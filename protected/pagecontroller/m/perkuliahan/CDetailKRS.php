@@ -74,7 +74,7 @@ class CDetailKRS extends MainPageM
           $result = array();
         }else{
           $idkelas_mhs_selected='none';
-          $result = array('none'=>' ');
+          $result = array('none' => ' ');
         }      
         while (list($k, $v) = each($r)) {    
           $idkelas_mhs = $v['idkelas_mhs'];
@@ -104,7 +104,7 @@ class CDetailKRS extends MainPageM
       $datamhs = $r[1];
       
       if (!isset($r[1])) {
-        $_SESSION['currentPageKRS']['DataKRS']=array();
+        $_SESSION['currentPageKRS']['DataKRS'] = array();
         throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
       }  
       
@@ -153,7 +153,7 @@ class CDetailKRS extends MainPageM
       $this->DB->updateRecord($str);
 
       $this->DB->query('COMMIT');
-      $this->redirect('perkuliahan.DetailKRS', true,array('id'=>$_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
+      $this->redirect('perkuliahan.DetailKRS', true,array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
     }
     else
     {
@@ -179,7 +179,7 @@ class CDetailKRS extends MainPageM
         $this->DB->updateRecord($str);
 
         $this->DB->query('COMMIT');
-        $this->redirect('perkuliahan.DetailKRS', true,array('id'=>$_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
+        $this->redirect('perkuliahan.DetailKRS', true,array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
       // }
       // else
       // {

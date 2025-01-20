@@ -286,7 +286,7 @@ class MainPage extends TPage
   public function getAngkatan ($tanpanone=true) {
     $dt =$this->DMaster->getListTA();		        
     $ta=$_SESSION['ta'];		
-    $tahun_akademik = $tanpanone==true?array('none'=>'All'):array();
+    $tahun_akademik = $tanpanone==true?array('none' => 'All'):array();
     while (list($k, $v)=each ($dt)) {
       if ($k != 'none') {
         if ($k <= $ta) {

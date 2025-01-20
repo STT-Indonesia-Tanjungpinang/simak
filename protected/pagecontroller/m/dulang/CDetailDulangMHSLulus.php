@@ -94,7 +94,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
       if ($this->DB->updateRecord($str)) {
         $status_sebelumnnya = $datamhs['k_status'];
         $tasmt=$ta.$semester;              
-        $this->Nilai->setDataMHS(array('nim'=>$nim));
+        $this->Nilai->setDataMHS(array('nim' => $nim));
         $datadulang=$this->Nilai->getDataDulang($semester, $ta);
         if (isset($datadulang['iddulang'])) {
           $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(), '$kelas', '$status_sebelumnnya', 'L')";

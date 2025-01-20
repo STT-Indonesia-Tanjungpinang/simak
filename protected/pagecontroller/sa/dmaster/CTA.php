@@ -6,8 +6,8 @@ class CTA extends MainPageSA {
         $this->showSubMenuDMasterPerkuliahan=true;
         $this->showTA=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageTA'])||$_SESSION['currentPageTA']['page_name']!='sa.dmaster.TA') {
-				$_SESSION['currentPageTA']=array('page_name'=>'sa.dmaster.TA', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageTA']) || $_SESSION['currentPageTA']['page_name'] != 'sa.dmaster.TA') {
+				$_SESSION['currentPageTA'] = array('page_name' => 'sa.dmaster.TA', 'page_num'=>0,'search'=>false);
 			}
 			$this->populateData();			
 		}

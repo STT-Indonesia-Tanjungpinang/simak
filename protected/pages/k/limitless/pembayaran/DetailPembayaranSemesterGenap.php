@@ -11,11 +11,11 @@ class DetailPembayaranSemesterGenap Extends CDetailPembayaranSemesterGenap {
 		$ta=$datamhs['ta'];			
 		if ($tahun_masuk != $ta && $semester_masuk!=2) {	
 			$ta=($ta == $tahun_masuk)?$tahun_masuk:$ta;																		
-			$this->Finance->setDataMHS(array('no_formulir'=>$datamhs['no_formulir']));
+			$this->Finance->setDataMHS(array('no_formulir' => $datamhs['no_formulir']));
 			$idkelas = $this->Finance->getKelasFromTransaksi($ta,1);
 			$datamhs['idkelas']=$idkelas===false?$datamhs['idkelas']:$idkelas;            
 			if ($idkelas!='C') {				
-				$this->Finance->setDataMHS(array('no_formulir'=>$datamhs['no_formulir'],'nim'=>$datamhs['nim'],'idkelas'=>$datamhs['idkelas'],'tahun_masuk'=>$tahun_masuk,'idsmt'=>1,'perpanjang'=>$datamhs['perpanjang']));
+				$this->Finance->setDataMHS(array('no_formulir' => $datamhs['no_formulir'],'nim' => $datamhs['nim'],'idkelas' => $datamhs['idkelas'],'tahun_masuk' => $tahun_masuk,'idsmt'=>1,'perpanjang' => $datamhs['perpanjang']));
 			 	$totalbiaya=($tahun_masuk==$ta&&$semester_masuk==1)?$this->Finance->getTotalBiayaMhsPeriodePembayaran ():$this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');				
 				$this->Finance->setDataMHS($datamhs);
 				$totalbayar=$this->Finance->getTotalBayarMhs($ta,1);				

@@ -11,8 +11,8 @@ class CDetailKonversiMatakuliah extends MainPageM {
         $this->showKonversiMatakuliah = true;    
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDetailKonversiMatakuliah'])||$_SESSION['currentPageDetailKonversiMatakuliah']['page_name']!='m.spmb.DetailKonversiMatakuliah') {
-				$_SESSION['currentPageDetailKonversiMatakuliah']=array('page_name'=>'m.spmb.DetailKonversiMatakuliah', 'page_num'=>0,'search'=>false,'DataKonversi'=>array());												                                               
+            if (!isset($_SESSION['currentPageDetailKonversiMatakuliah']) || $_SESSION['currentPageDetailKonversiMatakuliah']['page_name'] != 'm.spmb.DetailKonversiMatakuliah') {
+				$_SESSION['currentPageDetailKonversiMatakuliah'] = array('page_name' => 'm.spmb.DetailKonversiMatakuliah', 'page_num'=>0,'search'=>false,'DataKonversi'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -34,7 +34,7 @@ class CDetailKonversiMatakuliah extends MainPageM {
             $dataView['jumlahmatkul'] = $this->DB->getCountRowsOfTable("nilai_konversi2 WHERE iddata_konversi = $iddata_konversi");
             $dataView['jumlahsks'] = $this->DB->getSumRowsOfTable('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
             if (!isset($r[1])) {
-                $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']=array();
+                $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'] = array();
                 throw new Exception("Data Konversi dengan ID ($iddata_konversi) tidak terdaftar.");
             }
             $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'] = $dataView;

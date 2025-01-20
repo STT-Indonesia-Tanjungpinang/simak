@@ -7,8 +7,8 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
         $this->showPembayaranMahasiswaBaru=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru'])||$_SESSION['currentPagePembayaranMahasiswaBaru']['page_name']!='sa.pembayaran.PembayaranMahasiswaBaru') {
-				$_SESSION['currentPagePembayaranMahasiswaBaru']=array('page_name'=>'sa.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru']) || $_SESSION['currentPagePembayaranMahasiswaBaru']['page_name'] != 'sa.pembayaran.PembayaranMahasiswaBaru') {
+				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'sa.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranMahasiswaBaru']['search']=false; 
             
@@ -22,7 +22,7 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1' => 'GANJIL', '2' => 'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPagePembayaranMahasiswaBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();            

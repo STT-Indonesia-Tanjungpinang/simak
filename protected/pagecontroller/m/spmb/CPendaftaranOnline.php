@@ -6,8 +6,8 @@ class CPendaftaranOnline extends MainPageM {
 		$this->showPendaftaranOnline=true; 
         $this->createObj('Akademik');        
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
-            if (!isset($_SESSION['currentPagePendaftaranOnline'])||$_SESSION['currentPagePendaftaranOnline']['page_name']!='m.spmb.PendaftaranOnline') {
-				$_SESSION['currentPagePendaftaranOnline']=array('page_name'=>'m.spmb.PendaftaranOnline', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_konfirmasi'=>'none', 'kelas'=>'A');												
+            if (!isset($_SESSION['currentPagePendaftaranOnline']) || $_SESSION['currentPagePendaftaranOnline']['page_name'] != 'm.spmb.PendaftaranOnline') {
+				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'm.spmb.PendaftaranOnline', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_konfirmasi' => 'none', 'kelas' => 'A');												
 			}
             $_SESSION['currentPagePendaftaranOnline']['search']=false;
             $this->cmbKonfirmasi->Text = $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi'];
@@ -276,7 +276,7 @@ class CPendaftaranOnline extends MainPageM {
         $this->cmbEditSemester->DataSource = $semester;
         $this->cmbEditSemester->Text = $dataMhs['idsmt'];
         $this->cmbEditSemester->DataBind();
-        $this->Demik->setDataMHS(array('no_formulir'=>$no_formulir,'kjur'=>'none'));
+        $this->Demik->setDataMHS(array('no_formulir' => $no_formulir,'kjur' => 'none'));
 		if ($this->Demik->isMhsRegistered(true)) {
 			$this->cmbEditKelas->Enabled = false;
 			$this->cmbEditTahunMasuk->Enabled = false;

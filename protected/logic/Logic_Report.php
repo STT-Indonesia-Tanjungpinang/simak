@@ -178,7 +178,7 @@ class Logic_Report extends Logic_Global {
 				
 				$sheet->duplicateStyleArray(array(
 												'font' => array('bold' => true),
-												'alignment' => array('horizontal'=>$alignment,
+												'alignment' => array('horizontal' => $alignment,
 														'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)					   	
 												),
 												$columnHeader.$this->currentRow.':'.$columnHeader.$row

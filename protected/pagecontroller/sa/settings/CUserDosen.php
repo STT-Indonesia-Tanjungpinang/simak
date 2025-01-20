@@ -6,8 +6,8 @@ class CUserDosen extends MainPageSA {
         $this->showSubMenuSettingSistem=true;
         $this->showUserDosen=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageUserDosen'])||$_SESSION['currentPageUserDosen']['page_name']!='sa.settings.UserDosen') {
-				$_SESSION['currentPageUserDosen']=array('page_name'=>'sa.settings.UserDosen', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageUserDosen']) || $_SESSION['currentPageUserDosen']['page_name'] != 'sa.settings.UserDosen') {
+				$_SESSION['currentPageUserDosen'] = array('page_name' => 'sa.settings.UserDosen', 'page_num'=>0,'search'=>false);
 			}
             $_SESSION['currentPageUserDosen']['search']=false;
             $this->populateData();            

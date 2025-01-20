@@ -7,8 +7,8 @@ class CDetailDiskusi extends MainPageM {
         $this->showForumDiskusi=true;                     
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
-            if (!isset($_SESSION['currentPageDetailDiskusi'])||$_SESSION['currentPageDetailDiskusi']['page_name']!='m.forum.DetailDiskusi') {                                                                                
-                $_SESSION['currentPageDetailDiskusi']=array('page_name'=>'m.forum.DetailDiskusi', 'page_num'=>0,'search'=>false,'DataDiskusi'=>array());
+            if (!isset($_SESSION['currentPageDetailDiskusi']) || $_SESSION['currentPageDetailDiskusi']['page_name'] != 'm.forum.DetailDiskusi') {                                                                                
+                $_SESSION['currentPageDetailDiskusi'] = array('page_name' => 'm.forum.DetailDiskusi', 'page_num'=>0,'search'=>false,'DataDiskusi'=>array());
             }            
             try {
                 $id=addslashes($this->request['id']);
@@ -25,7 +25,7 @@ class CDetailDiskusi extends MainPageM {
                 }
             } catch (Exception $ex) {
                 $this->idProcess = 'view';
-                $_SESSION['currentPageDetailDiskusi']['DataDiskusi']=array();
+                $_SESSION['currentPageDetailDiskusi']['DataDiskusi'] = array();
             }            
 		}                
 	}  

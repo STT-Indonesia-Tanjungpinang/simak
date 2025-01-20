@@ -5,7 +5,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
    * daftar semester matakuliah
    * @var type
    */
-  public static $SemesterMatakuliah = array ('none'=>' ',1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8);
+  public static $SemesterMatakuliah = array ('none' => ' ',1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8);
   /**
    * daftar semester matakuliah bentuk romawi
    * @var type
@@ -314,7 +314,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
     if (isset($r[1])) {
       return $r[1];
     }else {
-      return array('nidn'=>'N.A', 'nama_dosen'=>'N.A', 'nipy'=>'N.A', 'nama_jabatan'=>'N.A');
+      return array('nidn' => 'N.A', 'nama_dosen' => 'N.A', 'nipy' => 'N.A', 'nama_jabatan' => 'N.A');
     }
 
   }
@@ -328,7 +328,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
     $str = "SELECT DISTINCT(pp.iddosen) AS iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM penyelenggaraan p,pengampu_penyelenggaraan pp,dosen d WHERE p.idpenyelenggaraan=pp.idpenyelenggaraan AND d.iddosen=pp.iddosen AND p.idsmt=$idsmt AND p.tahun = $tahun ORDER BY d.nama_dosen ASC";
     $this->db->setFieldTable(array('iddosen', 'nidn', 'nama_dosen'));
     $r=$this->db->getRecord($str);
-    $result=array('none'=>' ');
+    $result=array('none' => ' ');
     if (isset($r[1])) {
       while (list($k, $v) = each($r)) {
         $result[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
@@ -353,7 +353,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
       $temp_data1 =array();
       while (list($k, $v)=each ($r)) {
         $index=$v['ta'].$v['idsmt'].$v['idkelas'];
-        $data=array('index'=>$index,'ta'=>$v['ta'],'idsmt'=>$v['idsmt'],'idkelas'=>$v['idkelas'],'jumlah_pria'=>0,'jumlah_wanita'=>0,'jumlah'=>0);
+        $data=array('index' => $index,'ta' => $v['ta'],'idsmt' => $v['idsmt'],'idkelas' => $v['idkelas'],'jumlah_pria'=>0,'jumlah_wanita'=>0,'jumlah'=>0);
         $temp_data1[$index]=$data;
       }
       $i=1;

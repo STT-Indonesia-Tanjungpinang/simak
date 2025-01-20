@@ -8,8 +8,8 @@ class CKUM extends MainPageK {
         $this->createObj('Finance');
         $this->createObj('KRS');
 		if (!$this->IsPostBack && !$this->IsCallback) {   
-            if (!isset($_SESSION['currentPageKUM'])||$_SESSION['currentPageKUM']['page_name']!='k.perkuliahan.KUM') {
-				$_SESSION['currentPageKUM']=array('page_name'=>'k.perkuliahan.KUM', 'page_num'=>0,'search'=>false,'jenisujian'=>'uts');												
+            if (!isset($_SESSION['currentPageKUM']) || $_SESSION['currentPageKUM']['page_name'] != 'k.perkuliahan.KUM') {
+				$_SESSION['currentPageKUM'] = array('page_name' => 'k.perkuliahan.KUM', 'page_num'=>0,'search'=>false,'jenisujian' => 'uts');												
 			}            
             $_SESSION['currentPageKUM']['search']=false;   
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
@@ -129,27 +129,27 @@ class CKUM extends MainPageK {
         
         $komponen_biaya=array();
         if ($semester == 3) {
-            $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'A', 'perpanjang'=>false));
+            $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'A', 'perpanjang'=>false));
             $komponen_biaya['A']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('sp');
             $komponen_biaya['A']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('sp');         
 
-            $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'B', 'perpanjang'=>false));
+            $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'B', 'perpanjang'=>false));
             $komponen_biaya['B']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('sp');            
             $komponen_biaya['B']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('sp');       
 
-            $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'C', 'perpanjang'=>false));
+            $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'C', 'perpanjang'=>false));
             $komponen_biaya['C']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('sp');            
             $komponen_biaya['C']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('sp');
         }else{
-            $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'A', 'perpanjang'=>false));
+            $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'A', 'perpanjang'=>false));
             $komponen_biaya['A']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');
             $komponen_biaya['A']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');         
 
-            $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'B', 'perpanjang'=>false));
+            $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'B', 'perpanjang'=>false));
             $komponen_biaya['B']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
             $komponen_biaya['B']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');       
 
-            $this->Finance->setDataMHS(array('tahun_masuk'=>$tahun_masuk,'idsmt'=>$semester,'idkelas'=>'C', 'perpanjang'=>false));
+            $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' => $semester,'idkelas' => 'C', 'perpanjang'=>false));
             $komponen_biaya['C']['baru'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
             $komponen_biaya['C']['lama'] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
         }

@@ -6,8 +6,8 @@ class CAPI extends MainPageSA {
         $this->showSubMenuSettingSistem=true;
         $this->showAPI=true;   
         if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageAPI'])||$_SESSION['currentPageAPI']['page_name']!='sa.settings.API') {
-                $_SESSION['currentPageAPI']=array('page_name'=>'sa.settings.API', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageAPI']) || $_SESSION['currentPageAPI']['page_name'] != 'sa.settings.API') {
+                $_SESSION['currentPageAPI'] = array('page_name' => 'sa.settings.API', 'page_num'=>0,'search'=>false);
             }
             $_SESSION['currentPageAPI']['search']=false;
             $this->populateData();            

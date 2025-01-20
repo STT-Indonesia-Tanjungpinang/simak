@@ -25,9 +25,9 @@ class CKRS extends MainPageMHS {
     $this->createObj('KRS');
     if (!$this->IsPostBack && !$this->IsCallback)
     {	
-      if (!isset($_SESSION['currentPageKRS'])||$_SESSION['currentPageKRS']['page_name']!='mh.perkuliahan.KRS')
+      if (!isset($_SESSION['currentPageKRS']) || $_SESSION['currentPageKRS']['page_name'] != 'mh.perkuliahan.KRS')
       {
-        $_SESSION['currentPageKRS']=array('page_name'=>'mh.perkuliahan.KRS', 'page_num'=>0,'DataKRS'=>array());
+        $_SESSION['currentPageKRS'] = array('page_name' => 'mh.perkuliahan.KRS', 'page_num'=>0,'DataKRS'=>array());
       } 
       $this->lblModulHeader->Text = $this->getInfoToolbar();
       
@@ -87,7 +87,7 @@ class CKRS extends MainPageMHS {
           $result = array();
         }else{
           $idkelas_mhs_selected='none';
-          $result = array('none'=>' ');
+          $result = array('none' => ' ');
         }                
         while (list($k, $v) = each($r)) { 
           $idkelas_mhs = $v['idkelas_mhs'];

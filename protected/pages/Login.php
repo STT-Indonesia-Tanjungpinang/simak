@@ -155,7 +155,7 @@ class Login extends MainPage {
                     if ($group_id==3) {//prodi
                         $kjur=$pengguna->getDataUser('kjur');
                         $daftar_jurusan = $dmaster->getListProgramStudi(2);
-                        $_SESSION['daftar_jurusan']=array($kjur=>$daftar_jurusan[$kjur]);
+                        $_SESSION['daftar_jurusan'] = array($kjur=>$daftar_jurusan[$kjur]);
                         $_SESSION['kjur']=$kjur;
                         $_SESSION['ta']=$setup->getSettingValue('default_ta'); 
                     }else{

@@ -11,8 +11,8 @@ class CKHS extends MainPageDW {
         $this->createObj('Nilai');
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageKHS'])||$_SESSION['currentPageKHS']['page_name']!='m.nilai.KHS') {
-				$_SESSION['currentPageKHS']=array('page_name'=>'m.nilai.KHS', 'page_num'=>0,'search'=>false,'iddosen_wali'=>'none', 'tahun_masuk'=>'none');
+            if (!isset($_SESSION['currentPageKHS']) || $_SESSION['currentPageKHS']['page_name'] != 'm.nilai.KHS') {
+				$_SESSION['currentPageKHS'] = array('page_name' => 'm.nilai.KHS', 'page_num'=>0,'search'=>false,'iddosen_wali' => 'none', 'tahun_masuk' => 'none');
 			}   
 			$_SESSION['currentPageKHS']['search']=false;
             $this->RepeaterS->PageSize=10;
@@ -150,17 +150,17 @@ class CKHS extends MainPageDW {
 		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 			$nim = $item->DataItem['nim'];						
-			$this->Nilai->setDataMHS(array('nim'=>$nim));
+			$this->Nilai->setDataMHS(array('nim' => $nim));
             $bool=true;
             $ip='0.00';            
             $sks=0;
             $status='-';
             $trstyle='';
-            $dataipk=array('ipk'=>'0.00', 'sks'=>0);
+            $dataipk=array('ipk' => '0.00', 'sks'=>0);
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) { 
                 $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);                
                 $idkelas = $datadulang['idkelas'];
-                $datamhs = array('no_formulir'=>$item->DataItem['no_formulir'],'nim'=>$nim,'kjur'=>$item->DataItem['kjur'],'tahun_masuk'=>$item->DataItem['tahun_masuk'],'semester_masuk'=>$item->DataItem['semester_masuk'],'idsmt'=>$_SESSION['semester'],'idkelas'=>$idkelas);
+                $datamhs = array('no_formulir' => $item->DataItem['no_formulir'],'nim' => $nim,'kjur' => $item->DataItem['kjur'],'tahun_masuk' => $item->DataItem['tahun_masuk'],'semester_masuk' => $item->DataItem['semester_masuk'],'idsmt' => $_SESSION['semester'],'idkelas' => $idkelas);
                 $this->Finance->setDataMHS($datamhs);                                				
 				$this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
 				$ip = $this->Nilai->getIPS ();

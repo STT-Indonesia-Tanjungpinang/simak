@@ -8,8 +8,8 @@ class CJadwalPerkuliahan extends MainPageMHS {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageJadwalPerkuliahan'])||$_SESSION['currentPageJadwalPerkuliahan']['page_name']!='m.perkuliahan.JadwalPerkuliahan') {                
-				$_SESSION['currentPageJadwalPerkuliahan']=array('page_name'=>'m.perkuliahan.JadwalPerkuliahan', 'page_num'=>0,'search'=>false,'iddosen'=>'none');												
+            if (!isset($_SESSION['currentPageJadwalPerkuliahan']) || $_SESSION['currentPageJadwalPerkuliahan']['page_name'] != 'm.perkuliahan.JadwalPerkuliahan') {                
+				$_SESSION['currentPageJadwalPerkuliahan'] = array('page_name' => 'm.perkuliahan.JadwalPerkuliahan', 'page_num'=>0,'search'=>false,'iddosen' => 'none');												
 			}
             $_SESSION['currentPageJadwalPerkuliahan']['search']=false;            
             

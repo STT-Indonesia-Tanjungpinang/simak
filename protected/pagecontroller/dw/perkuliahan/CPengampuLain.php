@@ -8,8 +8,8 @@ class CPengampuLain extends MainPageDW {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {				
-            if (!isset($_SESSION['currentPagePengampuLain'])||$_SESSION['currentPagePengampuLain']['page_name']!='m.perkuliahan.PengampuLain') {
-				$_SESSION['currentPagePengampuLain']=array('page_name'=>'m.perkuliahan.PengampuLain', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPagePengampuLain']) || $_SESSION['currentPagePengampuLain']['page_name'] != 'm.perkuliahan.PengampuLain') {
+				$_SESSION['currentPagePengampuLain'] = array('page_name' => 'm.perkuliahan.PengampuLain', 'page_num'=>0,'search'=>false);
 			}
 			$this->populateData();
 		}			

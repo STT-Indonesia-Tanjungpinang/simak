@@ -7,8 +7,8 @@ class CKonversiMatakuliah extends MainPageM {
         $this->showSubMenuAkademikNilai=true;
         $this->createObj('Nilai');			
 		if (!$this->IsPostBack && !$this->IsCallBack) {
-            if (!isset($_SESSION['currentPageKonversiMatakuliah'])||$_SESSION['currentPageKonversiMatakuliah']['page_name']!='m.spmb.KonversiMatakuliah') {
-				$_SESSION['currentPageKonversiMatakuliah']=array('page_name'=>'m.spmb.KonversiMatakuliah', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'daftarmatkul'=>array(), 'kjur'=>$_SESSION['kjur']);												
+            if (!isset($_SESSION['currentPageKonversiMatakuliah']) || $_SESSION['currentPageKonversiMatakuliah']['page_name'] != 'm.spmb.KonversiMatakuliah') {
+				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'm.spmb.KonversiMatakuliah', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'daftarmatkul'=>array(), 'kjur' => $_SESSION['kjur']);												
 			}
             $_SESSION['currentPageKonversiMatakuliah']['search']=false;
             

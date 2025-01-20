@@ -7,8 +7,8 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
         $this->showDulangMHSNonAktif=true;     
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDulangMHSNonAktifMassal'])||$_SESSION['currentPageDulangMHSNonAktifMassal']['page_name']!='m.dulang.DulangMHSNonAktif') {
-				$_SESSION['currentPageDulangMHSNonAktifMassal']=array('page_name'=>'m.dulang.DulangMHSNonAktif', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$this->setup->getSettingValue('default_ta'), 'ta'=>$_SESSION['ta'],'semester'=>$_SESSION['semester']);												
+            if (!isset($_SESSION['currentPageDulangMHSNonAktifMassal']) || $_SESSION['currentPageDulangMHSNonAktifMassal']['page_name'] != 'm.dulang.DulangMHSNonAktif') {
+				$_SESSION['currentPageDulangMHSNonAktifMassal'] = array('page_name' => 'm.dulang.DulangMHSNonAktif', 'page_num'=>0,'search'=>false,'tahun_masuk' => $this->setup->getSettingValue('default_ta'), 'ta' => $_SESSION['ta'],'semester' => $_SESSION['semester']);												
 			}
             $_SESSION['currentPageDulangMHSNonAktifMassal']['search']=false;
             
@@ -137,7 +137,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
             foreach ($this->RepeaterS->Items as $inputan) {
                 $item=$inputan->hiddenidkelas->getNamingContainer();
                 $nim = $this->RepeaterS->DataKeys[$item->getItemIndex()];
-                $this->Demik->setDataMHS(array('nim'=>$nim));
+                $this->Demik->setDataMHS(array('nim' => $nim));
                 $datadulang=$this->Demik->getDataDulang ($idsmt, $ta);
                 if (!isset($datadulang['iddulang'])) {					
                     $this->DB->query ('BEGIN');						

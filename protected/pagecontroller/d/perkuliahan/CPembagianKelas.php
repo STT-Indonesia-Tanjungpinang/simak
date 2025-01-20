@@ -8,8 +8,8 @@ public function onLoad($param) {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembagianKelas'])||$_SESSION['currentPagePembagianKelas']['page_name']!='d.perkuliahan.PembagianKelas') {                
-				$_SESSION['currentPagePembagianKelas']=array('page_name'=>'d.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'nama_hari'=>'none');												
+            if (!isset($_SESSION['currentPagePembagianKelas']) || $_SESSION['currentPagePembagianKelas']['page_name'] != 'd.perkuliahan.PembagianKelas') {                
+				$_SESSION['currentPagePembagianKelas'] = array('page_name' => 'd.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'nama_hari' => 'none');												
 			}
             $kjur = $_SESSION['kjur'];	
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');

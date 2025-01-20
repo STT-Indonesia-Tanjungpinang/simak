@@ -12,9 +12,9 @@ class CDetailNilaiDosen extends MainPageON
     
     if (!$this->IsPostBack && !$this->IsCallback)
     {
-      if (!isset($_SESSION['currentPageDetailNilaiDosen'])||$_SESSION['currentPageDetailNilaiDosen']['page_name']!='on.nilai.DetailNilaiDosen')
+      if (!isset($_SESSION['currentPageDetailNilaiDosen']) || $_SESSION['currentPageDetailNilaiDosen']['page_name'] != 'on.nilai.DetailNilaiDosen')
       {
-        $_SESSION['currentPageDetailNilaiDosen']=array('page_name'=>'on.nilai.DetailNilaiDosen', 'page_num'=>0,'search'=>false,'DataNilai'=>array());
+        $_SESSION['currentPageDetailNilaiDosen'] = array('page_name' => 'on.nilai.DetailNilaiDosen', 'page_num'=>0,'search'=>false,'DataNilai'=>array());
       }  
       try 
       {

@@ -10,15 +10,15 @@ class CKombiPerTA Extends MainPageK {
         $this->showDMaster=true;
         $this->showKombiPerTA=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageKombiPerTA'])||$_SESSION['currentPageKombiPerTA']['page_name']!='k.dmaster.KombiPerTA') {
-				$_SESSION['currentPageKombiPerTA']=array('page_name'=>'k.dmaster.KombiPerTA', 'kelas'=>'A', 'semester_masuk'=>1,'periode_pembayaran'=>'none');												
+            if (!isset($_SESSION['currentPageKombiPerTA']) || $_SESSION['currentPageKombiPerTA']['page_name'] != 'k.dmaster.KombiPerTA') {
+				$_SESSION['currentPageKombiPerTA'] = array('page_name' => 'k.dmaster.KombiPerTA', 'kelas' => 'A', 'semester_masuk'=>1,'periode_pembayaran' => 'none');												
 			}
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1' => 'GANJIL', '2' => 'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPageKombiPerTA']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind(); 

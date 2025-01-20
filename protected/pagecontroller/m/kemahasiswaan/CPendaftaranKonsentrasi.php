@@ -7,8 +7,8 @@ class CPendaftaranKonsentrasi extends MainPageM {
         $this->showPendaftaranKonsentrasi=true;
                         
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPagePendaftaranKonsentrasi'])||$_SESSION['currentPagePendaftaranKonsentrasi']['page_name']!='m.kemahasiswaan.PendaftaranKonsentrasi') {
-				$_SESSION['currentPagePendaftaranKonsentrasi']=array('page_name'=>'m.kemahasiswaan.PendaftaranKonsentrasi', 'page_num'=>0,'search'=>false,'idkonsentrasi'=>'none', 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePendaftaranKonsentrasi']) || $_SESSION['currentPagePendaftaranKonsentrasi']['page_name'] != 'm.kemahasiswaan.PendaftaranKonsentrasi') {
+				$_SESSION['currentPagePendaftaranKonsentrasi'] = array('page_name' => 'm.kemahasiswaan.PendaftaranKonsentrasi', 'page_num'=>0,'search'=>false,'idkonsentrasi' => 'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePendaftaranKonsentrasi']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

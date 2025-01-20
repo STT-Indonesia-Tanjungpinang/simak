@@ -7,8 +7,8 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
         $this->showPembayaranMahasiswaBaru=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru'])||$_SESSION['currentPagePembayaranMahasiswaBaru']['page_name']!='k.pembayaran.PembayaranMahasiswaBaru') {
-				$_SESSION['currentPagePembayaranMahasiswaBaru']=array('page_name'=>'k.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru']) || $_SESSION['currentPagePembayaranMahasiswaBaru']['page_name'] != 'k.pembayaran.PembayaranMahasiswaBaru') {
+				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'k.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranMahasiswaBaru']['search']=false; 
             
@@ -22,7 +22,7 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
 			$this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
 			$this->tbCmbTahunMasuk->dataBind();
             
-            $semester = array('1'=>'GANJIL', '2'=>'GENAP');  				
+            $semester = array('1' => 'GANJIL', '2' => 'GENAP');  				
 			$this->tbCmbSemesterMasuk->DataSource = $semester;
 			$this->tbCmbSemesterMasuk->Text = $_SESSION['currentPagePembayaranMahasiswaBaru']['semester_masuk'];
 			$this->tbCmbSemesterMasuk->dataBind();            
@@ -151,7 +151,7 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $no_formulir = addslashes($this->txtNoFormulir->Text);
-            $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id'=>$no_formulir));
+            $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id' => $no_formulir));
         }
 	}
 	

@@ -10,11 +10,11 @@ class DetailPembayaranSemesterPendek Extends CDetailPembayaranSemesterPendek {
         $semester_masuk = $datamhs['semester_masuk'];
         $ta=$datamhs['ta'];         
 
-        $this->Finance->setDataMHS(array('no_formulir'=>$datamhs['no_formulir']));
+        $this->Finance->setDataMHS(array('no_formulir' => $datamhs['no_formulir']));
         $idkelas = $this->Finance->getKelasFromTransaksi($ta,2);
         $datamhs['idkelas']=$idkelas===false?$datamhs['idkelas']:$idkelas;            
         if ($idkelas!='C') {                
-            $this->Finance->setDataMHS(array('no_formulir'=>$datamhs['no_formulir'],'nim'=>$datamhs['nim'],'idkelas'=>$datamhs['idkelas'],'tahun_masuk'=>$tahun_masuk,'idsmt'=>2,'perpanjang'=>$datamhs['perpanjang']));
+            $this->Finance->setDataMHS(array('no_formulir' => $datamhs['no_formulir'],'nim' => $datamhs['nim'],'idkelas' => $datamhs['idkelas'],'tahun_masuk' => $tahun_masuk,'idsmt'=>2,'perpanjang' => $datamhs['perpanjang']));
             $totalbiaya=$this->Finance->getTotalBiayaMhsPeriodePembayaran ('lama');
             $this->Finance->setDataMHS($datamhs);
             $totalbayar=$this->Finance->getTotalBayarMhs($ta,2);                

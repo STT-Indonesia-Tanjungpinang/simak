@@ -8,8 +8,8 @@ class CTranskripKRS extends MainPageMHS {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageTranskripKRS'])||$_SESSION['currentPageTranskripKRS']['page_name']!='mh.nilai.TranskripKRS') {
-				$_SESSION['currentPageTranskripKRS']=array('page_name'=>'mh.nilai.TranskripKRS', 'page_num'=>0,'search'=>false);												                                               
+            if (!isset($_SESSION['currentPageTranskripKRS']) || $_SESSION['currentPageTranskripKRS']['page_name'] != 'mh.nilai.TranskripKRS') {
+				$_SESSION['currentPageTranskripKRS'] = array('page_name' => 'mh.nilai.TranskripKRS', 'page_num'=>0,'search'=>false);												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

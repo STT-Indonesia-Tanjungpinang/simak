@@ -63,11 +63,11 @@ class CDetailKRS extends MainPageDW {
             $r = $this->DB->getRecord($str);	           
             $datamhs = $r[1];
             if (!isset($r[1])) {
-                $_SESSION['currentPageKRS']['DataKRS']=array();
+                $_SESSION['currentPageKRS']['DataKRS'] = array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
             }  
             if ($datamhs['iddosen_wali']!=$this->iddosen_wali){
-                $_SESSION['currentPageKRS']['DataKRS']=array();
+                $_SESSION['currentPageKRS']['DataKRS'] = array();
                 throw new Exception("KRS dengan ID ($idkrs) dimiliki oleh Mahasiswa diluar perwalian Anda.");
             }
             $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($datamhs['nim'],true);            
@@ -123,7 +123,7 @@ class CDetailKRS extends MainPageDW {
         $datakrs = $_SESSION['currentPageKRS']['DataKRS'];
         $idkrs = $datakrs['krs']['idkrs'];
         $this->KRS->sahkanKRS($idkrs);
-        $this->redirect ('perkuliahan.DetailKRS',true,array('id'=>$idkrs));
+        $this->redirect ('perkuliahan.DetailKRS',true,array('id' => $idkrs));
     }
     public function closeDetailKRS($sender, $param) { 
         unset($_SESSION['currentPageKRS']);

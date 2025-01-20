@@ -7,8 +7,8 @@ class CPembayaranCutiSemesterGenap Extends MainPageK {
         $this->showMenuPembayaran=true;
         $this->showPembayaranCutiSemesterGenap=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPagePembayaranCutiSemesterGenap'])||$_SESSION['currentPagePembayaranCutiSemesterGenap']['page_name']!='k.pembayaran.PembayaranCutiSemesterGenap') {
-				$_SESSION['currentPagePembayaranCutiSemesterGenap']=array('page_name'=>'k.pembayaran.PembayaranCutiSemesterGenap', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta'=>$_SESSION['ta']);												
+            if (!isset($_SESSION['currentPagePembayaranCutiSemesterGenap']) || $_SESSION['currentPagePembayaranCutiSemesterGenap']['page_name'] != 'k.pembayaran.PembayaranCutiSemesterGenap') {
+				$_SESSION['currentPagePembayaranCutiSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranCutiSemesterGenap', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta' => $_SESSION['ta']);												
 			}
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
@@ -78,11 +78,11 @@ class CPembayaranCutiSemesterGenap Extends MainPageK {
                 if (isset($datamhs[1])) {                                   
                     throw new Exception ("<br /><br />NIM ($nim) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");		
                 }
-                $this->Finance->setDataMHS(array('nim'=>$nim));
+                $this->Finance->setDataMHS(array('nim' => $nim));
                 $datadulang=$this->Finance->getDataDulang(2, $_SESSION['currentPagePembayaranCutiSemesterGenap']['ta']);
                 
                 if (isset($datadulang['iddulang'])) {
-                    if ($datadulang['k_status']!='C') {
+                    if ($datadulang['k_status'] != 'C') {
                         $status = $this->DMaster->getNamaStatusMHSByID ($datadulang['k_status']);
                         $ta = $datadulang['tahun'];
                         throw new Exception ("<br /><br />NIM ($nim) sudah daftar ulang di semester Genap T.A $ta dengan status $status.");		
@@ -97,7 +97,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageK {
 	public function Go($param, $sender) {
         if ($this->IsValid) {				
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGenap',true,array('id'=>$nim));
+            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGenap',true,array('id' => $nim));
         }					
 	}
 }

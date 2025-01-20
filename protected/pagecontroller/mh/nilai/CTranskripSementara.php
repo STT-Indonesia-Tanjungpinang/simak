@@ -8,8 +8,8 @@ class CTranskripSementara extends MainPageMHS {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageTranskripSementara'])||$_SESSION['currentPageTranskripSementara']['page_name']!='mh.nilai.TranskripSementara') {
-				$_SESSION['currentPageTranskripSementara']=array('page_name'=>'mh.nilai.TranskripSementara', 'page_num'=>0,'search'=>false);												                                               
+            if (!isset($_SESSION['currentPageTranskripSementara']) || $_SESSION['currentPageTranskripSementara']['page_name'] != 'mh.nilai.TranskripSementara') {
+				$_SESSION['currentPageTranskripSementara'] = array('page_name' => 'mh.nilai.TranskripSementara', 'page_num'=>0,'search'=>false);												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

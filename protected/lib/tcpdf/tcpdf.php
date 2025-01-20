@@ -687,7 +687,7 @@ class TCPDF {
 	 * @since 5.9.174 (2012-07-25)
 	 * @protected
 	 */
-	protected $txtshadow = array('enabled'=>false, 'depth_w'=>0, 'depth_h'=>0, 'color'=>false, 'opacity'=>1, 'blend_mode'=>'Normal');
+	protected $txtshadow = array('enabled'=>false, 'depth_w'=>0, 'depth_h'=>0, 'color'=>false, 'opacity'=>1, 'blend_mode' => 'Normal');
 
 	/**
 	 * Default number of columns for html table.
@@ -1328,7 +1328,7 @@ class TCPDF {
 	 * @protected
 	 * @since 4.8.000 (2009-09-07)
 	 */
-	protected $default_form_prop = array('lineWidth'=>1, 'borderStyle'=>'solid', 'fillColor'=>array(255, 255, 255), 'strokeColor'=>array(128, 128, 128));
+	protected $default_form_prop = array('lineWidth'=>1, 'borderStyle' => 'solid', 'fillColor'=>array(255, 255, 255), 'strokeColor'=>array(128, 128, 128));
 
 	/**
 	 * Javascript objects array.
@@ -1880,20 +1880,20 @@ class TCPDF {
 		$this->last_enc_key = '';
 		// standard Unicode fonts
 		$this->CoreFonts = array(
-			'courier'=>'Courier',
-			'courierB'=>'Courier-Bold',
-			'courierI'=>'Courier-Oblique',
-			'courierBI'=>'Courier-BoldOblique',
-			'helvetica'=>'Helvetica',
-			'helveticaB'=>'Helvetica-Bold',
-			'helveticaI'=>'Helvetica-Oblique',
-			'helveticaBI'=>'Helvetica-BoldOblique',
-			'times'=>'Times-Roman',
-			'timesB'=>'Times-Bold',
-			'timesI'=>'Times-Italic',
-			'timesBI'=>'Times-BoldItalic',
-			'symbol'=>'Symbol',
-			'zapfdingbats'=>'ZapfDingbats'
+			'courier' => 'Courier',
+			'courierB' => 'Courier-Bold',
+			'courierI' => 'Courier-Oblique',
+			'courierBI' => 'Courier-BoldOblique',
+			'helvetica' => 'Helvetica',
+			'helveticaB' => 'Helvetica-Bold',
+			'helveticaI' => 'Helvetica-Oblique',
+			'helveticaBI' => 'Helvetica-BoldOblique',
+			'times' => 'Times-Roman',
+			'timesB' => 'Times-Bold',
+			'timesI' => 'Times-Italic',
+			'timesBI' => 'Times-BoldItalic',
+			'symbol' => 'Symbol',
+			'zapfdingbats' => 'ZapfDingbats'
 		);
 		// set scale factor
 		$this->setPageUnit($unit);
@@ -1961,7 +1961,7 @@ class TCPDF {
 			// PCRE unicode support is turned OFF
 			$this->setSpacesRE('/[^\S\xa0]/');
 		}
-		$this->default_form_prop = array('lineWidth'=>1, 'borderStyle'=>'solid', 'fillColor'=>array(255, 255, 255), 'strokeColor'=>array(128, 128, 128));
+		$this->default_form_prop = array('lineWidth'=>1, 'borderStyle' => 'solid', 'fillColor'=>array(255, 255, 255), 'strokeColor'=>array(128, 128, 128));
 		// set file ID for trailer
 		$serformat = (is_array($format) ? serialize($format) : $format);
 		$this->file_id = md5(TCPDF_STATIC::getRandomSeed('TCPDF'.$orientation.$unit.$serformat.$encoding));
@@ -4280,7 +4280,7 @@ class TCPDF {
 			$enc = '';
 		}
 		if (!isset($cidinfo) OR TCPDF_STATIC::empty_string($cidinfo)) {
-			$cidinfo = array('Registry'=>'Adobe', 'Ordering'=>'Identity', 'Supplement'=>0);
+			$cidinfo = array('Registry' => 'Adobe', 'Ordering' => 'Identity', 'Supplement'=>0);
 			$cidinfo['uni2cid'] = array();
 		}
 		if (!isset($ctg) OR TCPDF_STATIC::empty_string($ctg)) {
@@ -4708,7 +4708,7 @@ class TCPDF {
 	 * @see AddLink(), Annotation(), Cell(), Write(), Image()
 	 */
 	public function Link($x, $y, $w, $h, $link, $spaces=0) {
-		$this->Annotation($x, $y, $w, $h, $link, array('Subtype'=>'Link'), $spaces);
+		$this->Annotation($x, $y, $w, $h, $link, array('Subtype' => 'Link'), $spaces);
 	}
 
 	/**
@@ -4724,7 +4724,7 @@ class TCPDF {
 	 * @public
 	 * @since 4.0.018 (2008-08-06)
 	 */
-	public function Annotation($x, $y, $w, $h, $text, $opt=array('Subtype'=>'Text'), $spaces=0) {
+	public function Annotation($x, $y, $w, $h, $text, $opt=array('Subtype' => 'Text'), $spaces=0) {
 		if ($this->inxobj) {
 			// store parameters for later use on template
 			$this->xobjects[$this->xobjid]['annotations'][] = array('x' => $x, 'y' => $y, 'w' => $w, 'h' => $h, 'text' => $text, 'opt' => $opt, 'spaces' => $spaces);
@@ -16636,7 +16636,7 @@ class TCPDF {
 						}
 						if (isset($dom[$key]['style']['border-style'])) {
 							$brd_styles = preg_split('/[\s]+/', trim($dom[$key]['style']['border-style']));
-							if (isset($brd_styles[3]) AND ($brd_styles[3]!='none')) {
+							if (isset($brd_styles[3]) AND ($brd_styles[3] != 'none')) {
 								$dom[$key]['border']['L']['cap'] = 'square';
 								$dom[$key]['border']['L']['join'] = 'miter';
 								$dom[$key]['border']['L']['dash'] = $this->getCSSBorderDashStyle($brd_styles[3]);
@@ -18968,7 +18968,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 						}
 						$w = $this->GetStringWidth($value) * 1.5;
 						$h *= 1.6;
-						$prop = array('lineWidth'=>1, 'borderStyle'=>'beveled', 'fillColor'=>array(196, 196, 196), 'strokeColor'=>array(255, 255, 255));
+						$prop = array('lineWidth'=>1, 'borderStyle' => 'beveled', 'fillColor'=>array(196, 196, 196), 'strokeColor'=>array(255, 255, 255));
 						$action = array();
 						$action['S'] = 'SubmitForm';
 						$action['F'] = $this->form_action;
@@ -18987,8 +18987,8 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 						}
 						$w = $this->GetStringWidth($value) * 1.5;
 						$h *= 1.6;
-						$prop = array('lineWidth'=>1, 'borderStyle'=>'beveled', 'fillColor'=>array(196, 196, 196), 'strokeColor'=>array(255, 255, 255));
-						$this->Button($name, $w, $h, $value, array('S'=>'ResetForm'), $prop, $opt, '', '', false);
+						$prop = array('lineWidth'=>1, 'borderStyle' => 'beveled', 'fillColor'=>array(196, 196, 196), 'strokeColor'=>array(255, 255, 255));
+						$this->Button($name, $w, $h, $value, array('S' => 'ResetForm'), $prop, $opt, '', '', false);
 						break;
 					}
 					case 'file': {
@@ -18999,7 +18999,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 						}
 						$w = $this->GetStringWidth($value) * 2;
 						$h *= 1.2;
-						$prop = array('lineWidth'=>1, 'borderStyle'=>'beveled', 'fillColor'=>array(196, 196, 196), 'strokeColor'=>array(255, 255, 255));
+						$prop = array('lineWidth'=>1, 'borderStyle' => 'beveled', 'fillColor'=>array(196, 196, 196), 'strokeColor'=>array(255, 255, 255));
 						$jsaction = 'var f=this.getField(\''.$name.'\'); f.browseForFileToSubmit();';
 						$this->Button('FB_'.$name, $w, $h, $value, $jsaction, $prop, $opt, '', '', false);
 						break;
@@ -19020,7 +19020,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							break;
 						}
 						$value = 'img';
-						//$opt['mk'] = array('i'=>$img, 'tp'=>1, 'if'=>array('sw'=>'A', 's'=>'A', 'fb'=>false));
+						//$opt['mk'] = array('i' => $img, 'tp'=>1, 'if'=>array('sw' => 'A', 's' => 'A', 'fb'=>false));
 						if (isset($tag['attribute']['onclick']) AND !empty($tag['attribute']['onclick'])) {
 							$jsaction = $tag['attribute']['onclick'];
 						} else {
@@ -19035,7 +19035,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 						}
 						$w = $this->GetStringWidth($value) * 1.5;
 						$h *= 1.6;
-						$prop = array('lineWidth'=>1, 'borderStyle'=>'beveled', 'fillColor'=>array(196, 196, 196), 'strokeColor'=>array(255, 255, 255));
+						$prop = array('lineWidth'=>1, 'borderStyle' => 'beveled', 'fillColor'=>array(196, 196, 196), 'strokeColor'=>array(255, 255, 255));
 						if (isset($tag['attribute']['onclick']) AND !empty($tag['attribute']['onclick'])) {
 							$jsaction = $tag['attribute']['onclick'];
 						} else {
@@ -19289,7 +19289,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				// set default border
 				if (isset($table_el['attribute']['border']) AND ($table_el['attribute']['border'] > 0)) {
 					// set default border
-					$border = array('LTRB' => array('width' => $this->getCSSBorderWidth($table_el['attribute']['border']), 'cap'=>'square', 'join'=>'miter', 'dash'=> 0, 'color'=>array(0,0,0)));
+					$border = array('LTRB' => array('width' => $this->getCSSBorderWidth($table_el['attribute']['border']), 'cap' => 'square', 'join' => 'miter', 'dash'=> 0, 'color'=>array(0,0,0)));
 				} else {
 					$border = 0;
 				}
@@ -20192,7 +20192,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					$this->x -= $lspace;
 				}
 				$prev_line_style = $this->linestyleWidth.' '.$this->linestyleCap.' '.$this->linestyleJoin.' '.$this->linestyleDash.' '.$this->DrawColor;
-				$new_line_style = array('width' => ($r / 3), 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color'=>$color);
+				$new_line_style = array('width' => ($r / 3), 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => $color);
 				$this->Circle(($this->x + $r), ($this->y + ($this->lasth / 2)), ($r * (1 - (1/6))), 0, 360, 'D', $new_line_style, array(), 8);
 				$this->_out($prev_line_style); // restore line settings
 				break;
@@ -21774,7 +21774,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	 * @since 5.9.174 (2012-07-25)
 	 * @public
 	*/
-	public function setTextShadow($params = array('enabled'=>false, 'depth_w'=>0, 'depth_h'=>0, 'color'=>false, 'opacity'=>1, 'blend_mode'=>'Normal')) {
+	public function setTextShadow($params = array('enabled'=>false, 'depth_w'=>0, 'depth_h'=>0, 'color'=>false, 'opacity'=>1, 'blend_mode' => 'Normal')) {
 		if (isset($params['enabled'])) {
 			$this->txtshadow['enabled'] = $params['enabled']?true:false;
 		} else {

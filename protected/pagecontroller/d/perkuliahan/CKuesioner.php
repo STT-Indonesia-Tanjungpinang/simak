@@ -7,8 +7,8 @@ class CKuesioner extends MainPageD {
         $this->showKuesioner=true;        
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageKuesioner'])||$_SESSION['currentPageKuesioner']['page_name']!='d.perkuliahan.Kuesioner') {
-				$_SESSION['currentPageKuesioner']=array('page_name'=>'d.perkuliahan.Kuesioner', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageKuesioner']) || $_SESSION['currentPageKuesioner']['page_name'] != 'd.perkuliahan.Kuesioner') {
+				$_SESSION['currentPageKuesioner'] = array('page_name' => 'd.perkuliahan.Kuesioner', 'page_num'=>0,'search'=>false);
 			}  
             $_SESSION['currentPageKuesioner']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

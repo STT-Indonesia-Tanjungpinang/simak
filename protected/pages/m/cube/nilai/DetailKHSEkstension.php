@@ -12,8 +12,8 @@ class DetailKHSEkstension extends MainPageM {
         $this->createObj('Nilai');        
         
 		if (!$this->IsPostback&&!$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDetailKHSEkstension'])||$_SESSION['currentPageDetailKHSEkstension']['page_name']!='m.nilai.DetailKHSEkstension') {
-				$_SESSION['currentPageDetailKHSEkstension']=array('page_name'=>'m.nilai.DetailKHSEkstension', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+            if (!isset($_SESSION['currentPageDetailKHSEkstension']) || $_SESSION['currentPageDetailKHSEkstension']['page_name'] != 'm.nilai.DetailKHSEkstension') {
+				$_SESSION['currentPageDetailKHSEkstension'] = array('page_name' => 'm.nilai.DetailKHSEkstension', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -32,7 +32,7 @@ class DetailKHSEkstension extends MainPageM {
             $r=$this->DB->getRecord($str);	           
             $datamhs = $r[1];
             if (!isset($r[1])) {
-                $_SESSION['currentPageDetailKHSEkstension']['DataMHS']=array();
+                $_SESSION['currentPageDetailKHSEkstension']['DataMHS'] = array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
             }            
             $tahun = $datamhs['tahun'];

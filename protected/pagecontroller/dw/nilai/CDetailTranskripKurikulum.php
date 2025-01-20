@@ -8,8 +8,8 @@ class CDetailTranskripKurikulum extends MainPageDW {
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDetailTranskripKurikulum'])||$_SESSION['currentPageDetailTranskripKurikulum']['page_name']!='dw.nilai.DetailTranskripKurikulum') {
-				$_SESSION['currentPageDetailTranskripKurikulum']=array('page_name'=>'dw.nilai.DetailTranskripKurikulum', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+            if (!isset($_SESSION['currentPageDetailTranskripKurikulum']) || $_SESSION['currentPageDetailTranskripKurikulum']['page_name'] != 'dw.nilai.DetailTranskripKurikulum') {
+				$_SESSION['currentPageDetailTranskripKurikulum'] = array('page_name' => 'dw.nilai.DetailTranskripKurikulum', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -28,12 +28,12 @@ class CDetailTranskripKurikulum extends MainPageDW {
             $r = $this->DB->getRecord($str);				
             
             if (!isset($r[1])) {
-                $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS']=array();
+                $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS'] = array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) tidak terdaftar.");
             }
             $datamhs = $r[1];
             if ($datamhs['iddosen_wali']!=$this->iddosen_wali){
-                $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS']=array();
+                $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS'] = array();
                 throw new Exception("Mahasiswa dengan NIM ($nim) dimiliki oleh Mahasiswa diluar perwalian Anda.");
             }
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);

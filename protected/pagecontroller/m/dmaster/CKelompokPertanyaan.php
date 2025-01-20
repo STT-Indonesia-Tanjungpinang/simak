@@ -8,8 +8,8 @@ class CKelompokPertanyaan extends MainPageM {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageKelompokPertanyaan'])||$_SESSION['currentPageKelompokPertanyaan']['page_name']!='m.dmaster.KelompokPertanyaan') {
-				$_SESSION['currentPageKelompokPertanyaan']=array('page_name'=>'m.dmaster.KelompokPertanyaan', 'page_num'=>0,'search'=>false,'idkonsentrasi'=>'none', 'semester'=>'none');
+            if (!isset($_SESSION['currentPageKelompokPertanyaan']) || $_SESSION['currentPageKelompokPertanyaan']['page_name'] != 'm.dmaster.KelompokPertanyaan') {
+				$_SESSION['currentPageKelompokPertanyaan'] = array('page_name' => 'm.dmaster.KelompokPertanyaan', 'page_num'=>0,'search'=>false,'idkonsentrasi' => 'none', 'semester' => 'none');
 			}
             $_SESSION['currentPageKelompokPertanyaan']['search']=false;            
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

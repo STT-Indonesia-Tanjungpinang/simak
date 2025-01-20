@@ -7,8 +7,8 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
         $this->showPembayaranPiutangSemesterGanjil=true;                
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGanjil'])||$_SESSION['currentPagePembayaranPiutangSemesterGanjil']['page_name']!='k.pembayaran.PembayaranPiutangSemesterGanjil') {
-				$_SESSION['currentPagePembayaranPiutangSemesterGanjil']=array('page_name'=>'k.pembayaran.PembayaranPiutangSemesterGanjil', 'page_num'=>0,'search'=>false,'ta'=>$this->setup->getSettingValue('default_ta')-1,'semester'=>1,'tahun_masuk'=>$this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGanjil']) || $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['page_name'] != 'k.pembayaran.PembayaranPiutangSemesterGanjil') {
+				$_SESSION['currentPagePembayaranPiutangSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGanjil', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester'=>1,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
 			}
             $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['search']=false; 
             
@@ -100,7 +100,7 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
                 $idkelas = $dulang[1]['idkelas'];
                 $k_status = $dulang[1]['k_status'];
             }
-            $this->Finance->setDataMHS(array('no_formulir'=>$v['no_formulir'],'nim'=>$v['nim'],'kjur'=>$v['kjur'],'tahun_masuk'=>$v['tahun_masuk'],'semester_masuk'=>$v['semester_masuk'],'idsmt'=>$semester,'idkelas'=>$idkelas));
+            $this->Finance->setDataMHS(array('no_formulir' => $v['no_formulir'],'nim' => $v['nim'],'kjur' => $v['kjur'],'tahun_masuk' => $v['tahun_masuk'],'semester_masuk' => $v['semester_masuk'],'idsmt' => $semester,'idkelas' => $idkelas));
             $data = $this->Finance->getLunasPembayaran($ta, $semester,true);            
             if (!$data['bool']) {
                 $v['nkelas'] = $this->DMaster->getNamaKelasByID($idkelas);
@@ -149,7 +149,7 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
 	public function Go($sender, $param) {	
         if ($this->IsValid) {            
             $nim = $sender->getId()=='btnGoRepeater'?$this->getDataKeyField($sender, $this->RepeaterS):addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGanjil',true,array('id'=>$nim));
+            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGanjil',true,array('id' => $nim));
         }
 	}
 	

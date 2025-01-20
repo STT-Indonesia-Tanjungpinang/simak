@@ -8,8 +8,8 @@ class CNilaiUjianPMB extends MainPageM {
 		$this->showNilaiUjianPMB=true;
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
-            if (!isset($_SESSION['currentPageNilaiUjianPMB'])||$_SESSION['currentPageNilaiUjianPMB']['page_name']!='m.spmb.NilaiUjianPMB') {
-				$_SESSION['currentPageNilaiUjianPMB']=array('page_name'=>'m.spmb.NilaiUjianPMB', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'kjur'=>'none', 'tgl_ujian_awal'=>$_SESSION['tahun_pendaftaran'].'-01-01', 'tgl_ujian_akhir'=>$this->TGL->tanggal('Y-m-t', $_SESSION['tahun_pendaftaran'].'-09-01'));												
+            if (!isset($_SESSION['currentPageNilaiUjianPMB']) || $_SESSION['currentPageNilaiUjianPMB']['page_name'] != 'm.spmb.NilaiUjianPMB') {
+				$_SESSION['currentPageNilaiUjianPMB'] = array('page_name' => 'm.spmb.NilaiUjianPMB', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'kjur' => 'none', 'tgl_ujian_awal' => $_SESSION['tahun_pendaftaran'].'-01-01', 'tgl_ujian_akhir' => $this->TGL->tanggal('Y-m-t', $_SESSION['tahun_pendaftaran'].'-09-01'));												
 			}
             $_SESSION['currentPageNilaiUjianPMB']['search']=false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -213,8 +213,8 @@ class CNilaiUjianPMB extends MainPageM {
         $dataujian = $this->DB->getRecord($str);         
         $this->DataUjian = $dataujian[1];
         $this->hiddenid->Value=$this->DataUjian['idnilai_ujian_masuk'];
-        $ps = array('none'=>' ', $r[1]['kjur1']=>$_SESSION['daftar_jurusan'][$r[1]['kjur1']]);        
-        if ($r[1]['kjur2']!='' && $r[1]['kjur2']!=0) {
+        $ps = array('none' => ' ', $r[1]['kjur1']=>$_SESSION['daftar_jurusan'][$r[1]['kjur1']]);        
+        if ($r[1]['kjur2'] != '' && $r[1]['kjur2']!=0) {
            $ps[$r[1]['kjur2']] = $_SESSION['daftar_jurusan'][$r[1]['kjur2']];            
         }
         $this->cmbAddKjur->DataSource = $ps;

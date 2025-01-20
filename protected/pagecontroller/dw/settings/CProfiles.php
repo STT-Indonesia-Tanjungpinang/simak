@@ -5,8 +5,8 @@ class CProfiles extends MainPageDW {
 		parent::onLoad($param);		
         $this->showProfiles=true;        
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPageCache'])||$_SESSION['currentPageCache']['page_name']!='dw.settings.Profiles') {
-				$_SESSION['currentPageCache']=array('page_name'=>'dw.settings.Profiles', 'page_num'=>0);												
+            if (!isset($_SESSION['currentPageCache']) || $_SESSION['currentPageCache']['page_name'] != 'dw.settings.Profiles') {
+				$_SESSION['currentPageCache'] = array('page_name' => 'dw.settings.Profiles', 'page_num'=>0);												
 			}            
             $this->populateData();
 		}

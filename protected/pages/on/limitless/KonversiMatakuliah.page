@@ -647,7 +647,7 @@
                             <td>
                                 <ul class="icons-list">
                                     <li class="text-primary-600">
-                                        <a href="<%#$this->Page->constructUrl('DetailKonversiMatakuliah',true,array('id'=>$this->DataItem['iddata_konversi']))%>" title="Detail Konversi Matakuliah">                                        
+                                        <a href="<%#$this->Page->constructUrl('DetailKonversiMatakuliah',true,array('id' => $this->DataItem['iddata_konversi']))%>" title="Detail Konversi Matakuliah">                                        
                                             <i class="icon-eye"></i>
                                         </a>
                                     </li>   

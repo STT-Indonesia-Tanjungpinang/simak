@@ -7,8 +7,8 @@ class CDulangMHSNonAktif Extends MainPageM {
         $this->showDulangMHSNonAktif=true;     
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDulangMHSNonAktif'])||$_SESSION['currentPageDulangMHSNonAktif']['page_name']!='m.dulang.DulangMHSNonAktif') {
-				$_SESSION['currentPageDulangMHSNonAktif']=array('page_name'=>'m.dulang.DulangMHSNonAktif', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none', 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPageDulangMHSNonAktif']) || $_SESSION['currentPageDulangMHSNonAktif']['page_name'] != 'm.dulang.DulangMHSNonAktif') {
+				$_SESSION['currentPageDulangMHSNonAktif'] = array('page_name' => 'm.dulang.DulangMHSNonAktif', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSNonAktif']['search']=false;
             
@@ -182,7 +182,7 @@ class CDulangMHSNonAktif Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailDulangMHSNonAktif',true,array('id'=>$nim));
+            $this->redirect('dulang.DetailDulangMHSNonAktif',true,array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	

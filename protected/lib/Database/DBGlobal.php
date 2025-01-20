@@ -47,7 +47,7 @@ class DBGlobal {
   */
   public function setFieldTable ($field=array()) {	 
     foreach ($field as $k => $v) {
-      $ft[]=array("field" => $v);			 
+      $ft[] = array("field" => $v);			 
     }
     $this->FieldTable = $ft;
   }

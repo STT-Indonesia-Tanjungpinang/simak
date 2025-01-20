@@ -1627,31 +1627,31 @@ class TCPDF_STATIC {
 				case 'border.d':
 				case 'dashed': {
 					$opt['border'] = array(0, 0, $linewidth, array(3, 2));
-					$opt['bs'] = array('w'=>$linewidth, 's'=>'D', 'd'=>array(3, 2));
+					$opt['bs'] = array('w' => $linewidth, 's' => 'D', 'd'=>array(3, 2));
 					break;
 				}
 				case 'border.b':
 				case 'beveled': {
 					$opt['border'] = array(0, 0, $linewidth);
-					$opt['bs'] = array('w'=>$linewidth, 's'=>'B');
+					$opt['bs'] = array('w' => $linewidth, 's' => 'B');
 					break;
 				}
 				case 'border.i':
 				case 'inset': {
 					$opt['border'] = array(0, 0, $linewidth);
-					$opt['bs'] = array('w'=>$linewidth, 's'=>'I');
+					$opt['bs'] = array('w' => $linewidth, 's' => 'I');
 					break;
 				}
 				case 'border.u':
 				case 'underline': {
 					$opt['border'] = array(0, 0, $linewidth);
-					$opt['bs'] = array('w'=>$linewidth, 's'=>'U');
+					$opt['bs'] = array('w' => $linewidth, 's' => 'U');
 					break;
 				}
 				case 'border.s':
 				case 'solid': {
 					$opt['border'] = array(0, 0, $linewidth);
-					$opt['bs'] = array('w'=>$linewidth, 's'=>'S');
+					$opt['bs'] = array('w' => $linewidth, 's' => 'S');
 					break;
 				}
 				default: {

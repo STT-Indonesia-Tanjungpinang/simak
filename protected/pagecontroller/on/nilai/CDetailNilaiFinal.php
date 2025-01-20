@@ -240,7 +240,7 @@ class CDetailNilaiFinal extends MainPageON {
   public function deleteRecord($sender, $param) {	
     $idtranskrip_detail = $this->getDataKeyField($sender, $this->RepeaterS);
     $this->DB->deleteRecord("transkrip_asli_detail WHERE idtranskrip_detail = $idtranskrip_detail");
-    $this->redirect('nilai.DetailNilaiFinal',true,array('id'=>$nim));
+    $this->redirect('nilai.DetailNilaiFinal',true,array('id' => $nim));
   }
   public function resetTranskrip($sender, $param) {
     $datamhs = $_SESSION['currentPageNilaiFinal']['DataMHS'];

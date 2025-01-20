@@ -5,8 +5,8 @@ class CProfiles extends MainPageON {
 		parent::onLoad($param);		
         $this->showProfiles=true;        
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPageCache'])||$_SESSION['currentPageCache']['page_name']!='on.settings.Profiles') {
-				$_SESSION['currentPageCache']=array('page_name'=>'on.settings.Profiles', 'page_num'=>0);												
+            if (!isset($_SESSION['currentPageCache']) || $_SESSION['currentPageCache']['page_name'] != 'on.settings.Profiles') {
+				$_SESSION['currentPageCache'] = array('page_name' => 'on.settings.Profiles', 'page_num'=>0);												
 			}
 		}
 	}

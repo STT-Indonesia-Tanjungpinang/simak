@@ -13,7 +13,7 @@ class Logic_Penanggalan extends Logic_Global {
     /*
      * nama hari dalam bahasa indonesia
      */
-    private $namaHari = array('none'=>' ', 'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
+    private $namaHari = array('none' => ' ', 'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
     /*
      * nama bulan dalam bahasa ingris
      */
@@ -134,7 +134,7 @@ class Logic_Penanggalan extends Logic_Global {
 				$tanggal=$interval->format("%m");
 			break;
 			case 'tahunbulan':
-				$tanggal = array('tahun'=>$interval->y,'bulan'=>$interval->m);
+				$tanggal = array('tahun' => $interval->y,'bulan' => $interval->m);
 			break;
 		}        
         return $tanggal;

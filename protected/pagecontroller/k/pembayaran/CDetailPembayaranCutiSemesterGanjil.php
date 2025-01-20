@@ -9,8 +9,8 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
         $this->showMenuPembayaran=true;
         $this->showPembayaranCutiSemesterGanjil=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPagePembayaranCutiSemesterGanjil'])||$_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_name']!='k.pembayaran.PembayaranCutiSemesterGanjil') {
-				$_SESSION['currentPagePembayaranCutiSemesterGanjil']=array('page_name'=>'k.pembayaran.PembayaranCutiSemesterGanjil', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta'=>$_SESSION['ta']);												
+            if (!isset($_SESSION['currentPagePembayaranCutiSemesterGanjil']) || $_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_name'] != 'k.pembayaran.PembayaranCutiSemesterGanjil') {
+				$_SESSION['currentPagePembayaranCutiSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranCutiSemesterGanjil', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta' => $_SESSION['ta']);												
 			}
              try {
                 $nim=addslashes($this->request['id']);                           				
@@ -30,7 +30,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
                 $datadulang=$this->Finance->getDataDulang(1, $datamhs['ta']);
                 
                 if (isset($datadulang['iddulang'])) {
-                    if ($datadulang['k_status']!='C') {
+                    if ($datadulang['k_status'] != 'C') {
                         $status = $this->DMaster->getNamaStatusMHSByID ($datadulang['k_status']);
                         $ta = $datadulang['tahun'];
                         throw new Exception ("NIM ($nim) sudah daftar ulang di semester Ganjil T.A $ta dengan status $status.");		
@@ -125,7 +125,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
             $str = "INSERT INTO transaksi_cuti SET no_transaksi='$no_transaksi',no_faktur='$no_faktur',tahun = $tahun,idsmt=1,nim='$nim',idkombi=0,dibayarkan = $dibayarkan,commited=0,tanggal='$tanggal',date_added=NOW(),date_modified=NOW(),userid=$userid";
             $this->DB->insertRecord($str);
             
-            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil',true,array('id'=>$nim));
+            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil',true,array('id' => $nim));
         }
     }
     public function commitData($sender, $param) {
@@ -158,7 +158,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
                 $this->DB->updateRecord($str);
             }
             $this->DB->query('COMMIT');
-            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil',true,array('id'=>$nim));
+            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil',true,array('id' => $nim));
         }
     }
     public function deleteRecord($sender, $param) {	
@@ -166,7 +166,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
         $nim = $datamhs['nim'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi_cuti WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil',true,array('id'=>$nim));
+		$this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil',true,array('id' => $nim));
 	}	
     public function closeTransaction($sender, $param) {
         unset($_SESSION['currentPagePembayaranCutiSemesterGanjil']['DataMHS']);

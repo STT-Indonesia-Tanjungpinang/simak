@@ -7,8 +7,8 @@ class CDulangMHSKeluar Extends MainPageM {
         $this->showDulangMHSKeluar=true;                
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageDulangMHSKeluar'])||$_SESSION['currentPageDulangMHSKeluar']['page_name']!='m.dulang.DulangMHSKeluar') {
-				$_SESSION['currentPageDulangMHSKeluar']=array('page_name'=>'m.dulang.DulangMHSKeluar', 'page_num'=>0,'search'=>false,'tahun_masuk'=>$_SESSION['tahun_masuk'],'iddosen_wali'=>'none', 'DataMHS'=>array());												
+            if (!isset($_SESSION['currentPageDulangMHSKeluar']) || $_SESSION['currentPageDulangMHSKeluar']['page_name'] != 'm.dulang.DulangMHSKeluar') {
+				$_SESSION['currentPageDulangMHSKeluar'] = array('page_name' => 'm.dulang.DulangMHSKeluar', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
 			}
             $_SESSION['currentPageDulangMHSKeluar']['search']=false;
             
@@ -170,7 +170,7 @@ class CDulangMHSKeluar Extends MainPageM {
                     $this->Demik->setDataMHS($datamhs);
                     $datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
                     if (isset($datadulang['iddulang'])) {         
-                        if ($datadulang['k_status']!='A') {
+                        if ($datadulang['k_status'] != 'A') {
                             throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
                         }                        
                     }                    
@@ -190,7 +190,7 @@ class CDulangMHSKeluar Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailDulangMHSKeluar',true,array('id'=>$nim));
+            $this->redirect('dulang.DetailDulangMHSKeluar',true,array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	

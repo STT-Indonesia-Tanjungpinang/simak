@@ -13,8 +13,8 @@ class CDetailKuesioner extends MainPageD {
         $this->showKuesioner = true;           
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPageDetailKuesioner'])||$_SESSION['currentPageDetailKuesioner']['page_name']!='d.perkuliahan.DetailKuesioner') {
-				$_SESSION['currentPageDetailKuesioner']=array('page_name'=>'d.perkuliahan.DetailKuesioner', 'page_num'=>0,'DataKuesioner'=>array());
+            if (!isset($_SESSION['currentPageDetailKuesioner']) || $_SESSION['currentPageDetailKuesioner']['page_name'] != 'd.perkuliahan.DetailKuesioner') {
+				$_SESSION['currentPageDetailKuesioner'] = array('page_name' => 'd.perkuliahan.DetailKuesioner', 'page_num'=>0,'DataKuesioner'=>array());
 			}             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -28,7 +28,7 @@ class CDetailKuesioner extends MainPageD {
                 $r = $this->DB->getRecord($str);	           
                 $datakuesioner = $r[1];
                 if (!isset($r[1])) {
-                    $_SESSION['currentPageDetailKuesioner']['DataKuesioner']=array();
+                    $_SESSION['currentPageDetailKuesioner']['DataKuesioner'] = array();
                     throw new Exception("Data Kuesioner dengan ID ($idpengampu_penyelenggaraan) tidak terdaftar.");
                 }  
                 $datakuesioner['kmatkul'] = $this->Kuesioner->getKMatkul($datakuesioner['kmatkul']);
@@ -54,7 +54,7 @@ class CDetailKuesioner extends MainPageD {
     public function hitungKuesioner($sender, $param) {
         $idpengampu_penyelenggaraan = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idpengampu_penyelenggaraan']; 
         $this->Kuesioner->hitungKuesioner($idpengampu_penyelenggaraan,'update');
-        $this->redirect('perkuliahan.DetailKuesioner', true, array('id'=>$idpengampu_penyelenggaraan));
+        $this->redirect('perkuliahan.DetailKuesioner', true, array('id' => $idpengampu_penyelenggaraan));
     }
 	public function itemCreated($sender, $param) {
         $item = $param->Item;

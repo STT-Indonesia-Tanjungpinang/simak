@@ -74,14 +74,14 @@ class CTambahKRS extends MainPageMHS {
           $tasmt=$tahun.$idsmt;
           $str = "INSERT INTO krs SET idkrs=NULL,tgl_krs='$tanggal',no_krs = $no_krs,nim='$nim',idsmt='$idsmt',tahun='$tahun',tasmt='$tasmt',sah=0,tgl_disahkan='0000-00-00'";
           $this->DB->insertRecord($str);					
-          $this->KRS->DataKRS['krs'] = array('idkrs'=>$this->DB->getLastInsertID(),
-            'tgl_krs'=>$tanggal,
-            'no_krs'=>$no_krs,
+          $this->KRS->DataKRS['krs'] = array('idkrs' => $this->DB->getLastInsertID(),
+            'tgl_krs' => $tanggal,
+            'no_krs' => $no_krs,
             'sah'=>0,
-            'nim'=>$nim,
-            'idsmt'=>$idsmt,
-            'tahun'=>$tahun,
-            'tasmt'=>$tasmt
+            'nim' => $nim,
+            'idsmt' => $idsmt,
+            'tahun' => $tahun,
+            'tasmt' => $tasmt
           );		                    
         }                                
         $this->Nilai->setDataMHS($datamhs);

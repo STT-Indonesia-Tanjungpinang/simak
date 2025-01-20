@@ -7,11 +7,11 @@ class CKuesioner extends MainPageM {
         $this->showKuesioner=true;        
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPageKuesioner'])||$_SESSION['currentPageKuesioner']['page_name']!='m.perkuliahan.Kuesioner') {
-				$_SESSION['currentPageKuesioner']=array('page_name'=>'m.perkuliahan.Kuesioner', 'page_num'=>0,'search'=>false);
+            if (!isset($_SESSION['currentPageKuesioner']) || $_SESSION['currentPageKuesioner']['page_name'] != 'm.perkuliahan.Kuesioner') {
+				$_SESSION['currentPageKuesioner'] = array('page_name' => 'm.perkuliahan.Kuesioner', 'page_num'=>0,'search'=>false);
 			}  
             $_SESSION['currentPageKuesioner']['search']=false;
-            $_SESSION['currentPageDetailKuesioner']=array();
+            $_SESSION['currentPageDetailKuesioner'] = array();
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');

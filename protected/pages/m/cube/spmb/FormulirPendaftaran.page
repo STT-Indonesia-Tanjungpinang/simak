@@ -660,7 +660,7 @@
               <prop:ItemTemplate>
                 <tr>
                   <td><%#$this->DataItem['no']%></td>
-                  <td><a href="<%#$this->Page->constructUrl('spmb.DetailFormulir',true,array('id'=>$this->DataItem['no_formulir']))%>"><%#$this->DataItem['no_formulir']%></a></td>
+                  <td><a href="<%#$this->Page->constructUrl('spmb.DetailFormulir',true,array('id' => $this->DataItem['no_formulir']))%>"><%#$this->DataItem['no_formulir']%></a></td>
                   <td><%#$this->DataItem['nama_mhs']%></td>
                   <td><%#$this->DataItem['alamat_rumah']%></td>		
                   <td><%#$this->DataItem['telp_hp']%></td>						

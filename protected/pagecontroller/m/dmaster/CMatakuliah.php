@@ -7,8 +7,8 @@ class CMatakuliah extends MainPageM {
     
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {
-      if (!isset($_SESSION['currentPageMatakuliah'])||$_SESSION['currentPageMatakuliah']['page_name']!='m.dmaster.Matakuliah') {
-        $_SESSION['currentPageMatakuliah']=array('page_name'=>'m.dmaster.Matakuliah', 'page_num'=>0,'search'=>false,'idkonsentrasi'=>'none', 'semester'=>'none');
+      if (!isset($_SESSION['currentPageMatakuliah']) || $_SESSION['currentPageMatakuliah']['page_name'] != 'm.dmaster.Matakuliah') {
+        $_SESSION['currentPageMatakuliah'] = array('page_name' => 'm.dmaster.Matakuliah', 'page_num'=>0,'search'=>false,'idkonsentrasi' => 'none', 'semester' => 'none');
       }
       $_SESSION['currentPageMatakuliah']['search']=false;
       $_SESSION['outputreport'] = 'excel2007';

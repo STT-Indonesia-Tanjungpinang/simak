@@ -164,12 +164,12 @@
                                         </com:TActiveDropDownList>
                                     </td>
                                     <td>
-                                        <a href="<%#$this->Page->constructUrl('perkuliahan.PesertaMatakuliah',true,array('id'=>$this->DataItem['idpenyelenggaraan']))%>" class="table-link" title="Daftar Peserta Matakuliah">                                        
+                                        <a href="<%#$this->Page->constructUrl('perkuliahan.PesertaMatakuliah',true,array('id' => $this->DataItem['idpenyelenggaraan']))%>" class="table-link" title="Daftar Peserta Matakuliah">                                        
                                             <%# $this->Data['jumlah_peserta']%>
                                         </a>
                                     </td>
                                     <td width="90">
-                                        <a href="<%#$this->Page->constructUrl('perkuliahan.PengampuLain',true,array('id'=>$this->DataItem['idpenyelenggaraan']))%>" class="table-link" title="Tambah Pengampu Lain">                                        
+                                        <a href="<%#$this->Page->constructUrl('perkuliahan.PengampuLain',true,array('id' => $this->DataItem['idpenyelenggaraan']))%>" class="table-link" title="Tambah Pengampu Lain">                                        
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-plus-square-o fa-stack-1x fa-inverse"></i>

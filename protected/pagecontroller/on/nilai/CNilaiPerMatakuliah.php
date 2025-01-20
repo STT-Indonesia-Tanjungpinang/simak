@@ -9,9 +9,9 @@ class CNilaiPerMatakuliah extends MainPageON {
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) 
     {
-      if (!isset($_SESSION['currentPageNilaiPerMatakuliah'])||$_SESSION['currentPageNilaiPerMatakuliah']['page_name']!='on.nilai.NilaiPerMatakuliah') 
+      if (!isset($_SESSION['currentPageNilaiPerMatakuliah']) || $_SESSION['currentPageNilaiPerMatakuliah']['page_name'] != 'on.nilai.NilaiPerMatakuliah') 
       {
-        $_SESSION['currentPageNilaiPerMatakuliah']=array('page_name'=>'on.nilai.NilaiPerMatakuliah', 'page_num'=>0,'search'=>false,'InfoMatkul'=>array());
+        $_SESSION['currentPageNilaiPerMatakuliah'] = array('page_name' => 'on.nilai.NilaiPerMatakuliah', 'page_num'=>0,'search'=>false,'InfoMatkul'=>array());
       }  
       $_SESSION['currentPageNilaiPerMatakuliah']['search']=false;
       try 
@@ -266,7 +266,7 @@ class CNilaiPerMatakuliah extends MainPageON {
         }
       }
       $idpenyelenggaraan = $_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
-      $this->redirect('nilai.NilaiPerMatakuliah', true,array('id'=>$idpenyelenggaraan));
+      $this->redirect('nilai.NilaiPerMatakuliah', true,array('id' => $idpenyelenggaraan));
     }		
   }	
   public function printOut($sender, $param) 

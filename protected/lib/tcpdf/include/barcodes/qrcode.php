@@ -803,7 +803,7 @@ class QRcode {
 		do {
 			if ($this->bit == -1) {
 				$this->bit = 0;
-				return array('x'=>$this->x, 'y'=>$this->y);
+				return array('x' => $this->x, 'y' => $this->y);
 			}
 			$x = $this->x;
 			$y = $this->y;
@@ -843,7 +843,7 @@ class QRcode {
 			$this->x = $x;
 			$this->y = $y;
 		} while(ord($this->frame[$y][$x]) & 0x80);
-		return array('x'=>$x, 'y'=>$y);
+		return array('x' => $x, 'y' => $y);
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - -

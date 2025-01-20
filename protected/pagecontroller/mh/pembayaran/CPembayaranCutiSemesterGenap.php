@@ -8,8 +8,8 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
         $this->createObj('Finance');
         $this->showPembayaranCutiSemesterGenap=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPagePembayaranCutiSemesterGenap'])||$_SESSION['currentPagePembayaranCutiSemesterGenap']['page_name']!='mh.pembayaran.PembayaranCutiSemesterGenap') {
-				$_SESSION['currentPagePembayaranCutiSemesterGenap']=array('page_name'=>'mh.pembayaran.PembayaranCutiSemesterGenap', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta'=>$_SESSION['ta']);												
+            if (!isset($_SESSION['currentPagePembayaranCutiSemesterGenap']) || $_SESSION['currentPagePembayaranCutiSemesterGenap']['page_name'] != 'mh.pembayaran.PembayaranCutiSemesterGenap') {
+				$_SESSION['currentPagePembayaranCutiSemesterGenap'] = array('page_name' => 'mh.pembayaran.PembayaranCutiSemesterGenap', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta' => $_SESSION['ta']);												
             }
             $this->setInfoToolbar();
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
@@ -23,7 +23,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
                 $datadulang=$this->Finance->getDataDulang(2, $datamhs['ta']);
                 
                 if (isset($datadulang['iddulang'])) {
-                    if ($datadulang['k_status']!='C') {
+                    if ($datadulang['k_status'] != 'C') {
                         $nim = $datamhs['nim'];
                         $status = $this->DMaster->getNamaStatusMHSByID ($datadulang['k_status']);
                         $ta = $datadulang['tahun'];
