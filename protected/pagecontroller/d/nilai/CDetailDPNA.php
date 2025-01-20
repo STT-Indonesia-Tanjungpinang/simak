@@ -13,7 +13,7 @@ class CDetailDPNA extends MainPageD {
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();            
             try {
-                $idkelas_mhs=addslashes($this->request['id']);
+                $idkelas_mhs = addslashes($this->request['id']);
                 $this->Demik->getInfoKelas($idkelas_mhs);                
                 if (!isset($this->Demik->InfoKelas['idkelas_mhs'])) {                                                
                     throw new Exception ("Kelas Mahasiswa dengan id ($idkelas_mhs) tidak terdaftar.");		

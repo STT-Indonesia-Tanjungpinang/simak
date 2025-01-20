@@ -66,8 +66,8 @@ class CProdi extends MainPageSA {
         if ($this->IsValid) {
             $kjur = addslashes($this->txtAddKodePS->Text);
             $kjur_forlap = addslashes($this->txtAddKodePSForlap->Text);
-            $nama_ps=addslashes($this->txtAddNama->Text);
-            $akronim_ps=addslashes($this->txtAddNamaAkronim->Text);
+            $nama_ps = addslashes($this->txtAddNama->Text);
+            $akronim_ps = addslashes($this->txtAddNamaAkronim->Text);
             $kjenjang=addslashes($this->cmbAddJenjang->Text);
             $konsentrasi=addslashes($this->txtAddKonsentrasi->Text);
             $iddosen = $this->cmbAddKaprodi->Text;
@@ -111,8 +111,8 @@ class CProdi extends MainPageSA {
             $id=$this->hiddenid->Value;
             $kjur = addslashes($this->txtEditKodePS->Text);
             $kjur_forlap = addslashes($this->txtEditKodePSForlap->Text);
-            $nama_ps=addslashes($this->txtEditNama->Text);
-            $akronim_ps=addslashes($this->txtEditNamaAkronim->Text);
+            $nama_ps = addslashes($this->txtEditNama->Text);
+            $akronim_ps = addslashes($this->txtEditNamaAkronim->Text);
             $kjenjang=addslashes($this->cmbEditJenjang->Text);
             $konsentrasi=addslashes($this->txtEditKonsentrasi->Text);
             $iddosen = $this->cmbEditKaprodi->Text;

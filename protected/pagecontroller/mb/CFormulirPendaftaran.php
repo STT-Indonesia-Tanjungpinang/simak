@@ -199,9 +199,9 @@ class CFormulirPendaftaran extends MainPageMB {
 							
 	}
     public function checkEmail($sender, $param) {
-        $id=$sender->getId ();
+        $id=$sender->getId();
         $this->idProcess = ($id=='editEmail')?'edit':'add';			
-        $email_mhs=addslashes($param->Value);
+        $email_mhs = addslashes($param->Value);
 		try {			
 			if ($email_mhs != '') {
 				if ($this->hiddenemail->Value != $email_mhs) {
@@ -219,7 +219,7 @@ class CFormulirPendaftaran extends MainPageMB {
         $this->idProcess = 'add';
 		if ($this->IsValid) {
 			$no_formulir = $this->txtAddNoFormulir->Text;
-			$nama_mhs=addslashes(strtoupper(trim($this->txtAddNamaMhs->Text)));			
+			$nama_mhs = addslashes(strtoupper(trim($this->txtAddNamaMhs->Text)));			
 			$tempat_lahir = addslashes(strtoupper(trim($this->txtAddTempatLahir->Text)));						
 			$tgl_lahir=date ('Y-m-d', $this->txtAddTanggalLahir->TimeStamp);
 			$jk = $this->rdAddPria->Checked===true?'L':'P';
@@ -292,7 +292,7 @@ class CFormulirPendaftaran extends MainPageMB {
         $this->idProcess = 'edit';
 		if ($this->IsValid) {
 			$no_formulir = $this->txtEditNoFormulir->Text;
-			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
+			$nama_mhs = addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
 			$tempat_lahir = addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
 			$tgl_lahir=date ('Y-m-d', $this->txtEditTanggalLahir->TimeStamp);
 			$jk = $this->rdEditPria->Checked===true?'L':'P';

@@ -39,7 +39,7 @@ class CPesertaKelas extends MainPageM {
         $this->DB->setFieldTable(array('idkelas_mhs', 'idkelas', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar'));
         $r = $this->DB->getRecord($str);
         
-        $daftar_kelas=array('none'=>' ');
+        $daftar_kelas = array('none'=>' ');
         while (list($k, $v) = each($r)) {
           $daftar_kelas[$v['idkelas_mhs']] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64).' '.$this->Page->TGL->getNamaHari($v['hari']). ' '.$v['jam_masuk'].'-'.$v['jam_keluar'];
         }

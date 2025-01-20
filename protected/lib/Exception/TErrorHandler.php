@@ -215,7 +215,7 @@ class TErrorHandler extends TModule
 			$version='';
 			$errorMessage = self::hideSecurityRelated($errorMessage, $exception);
 		}
-		$tokens=array(
+		$tokens = array(
 			'%%StatusCode%%' => "$statusCode",
 			'%%ErrorMessage%%' => htmlspecialchars($errorMessage),
 			'%%ServerAdmin%%' => $serverAdmin,
@@ -308,7 +308,7 @@ class TErrorHandler extends TModule
 		else
 			$version='';
 
-		$tokens=array(
+		$tokens = array(
 			'%%ErrorType%%' => get_class($exception),
 			'%%ErrorMessage%%' => $this->addLink(htmlspecialchars($exception->getMessage())),
 			'%%SourceFile%%' => htmlspecialchars($fileName).' ('.$errorLine.')',

@@ -77,7 +77,7 @@ class CPembayaranFormulir extends MainPageM {
 	}
 	public function checkNoFormulir($sender, $param) {	
 		try {
-			$id=$sender->getId ();
+			$id=$sender->getId();
 			$this->idProcess = ($id=='addNoFormulir')?'add':'edit';	
 			$no_formulir=($id=='addNoFormulir')?$this->txtAddFormulir1->Value.$this->txtAddFormulir2->Text:$this->txtEditFormulir1->Value.$this->txtEditFormulir2->Text;			
 			if ($this->txtEditFormulir->Value != $no_formulir) {
@@ -94,7 +94,7 @@ class CPembayaranFormulir extends MainPageM {
 	
 	public function checkEmail($sender, $param) {
 		try {
-			$id=$sender->getId ();
+			$id=$sender->getId();
 			$this->idProcess = ($id=='editEmail')?'edit':'add';			
 			$email = $this->getLogic('Email');
 			$email_mhs = $id=='editEmail'?$this->txtEditEmail->Text:$this->txtAddEmail->Text;
@@ -112,7 +112,7 @@ class CPembayaranFormulir extends MainPageM {
 	}
 	public function checkNoFaktur($sender, $param) {
 		try {			
-			$id=$sender->getId ();
+			$id=$sender->getId();
 			$this->idProcess = ($id=='addNoFaktur')?'add':'edit';			
 			$no_faktur = ($id=='addNoFaktur')?$this->txtAddNoFaktur->Text:$this->txtEditNoFaktur->Text;			
 			if ($this->hiddenEditNoFaktur->Value != $no_faktur) {
@@ -163,7 +163,7 @@ class CPembayaranFormulir extends MainPageM {
 			$this->Pengguna->updateActivity();	
 			$no_faktur=trim($this->txtAddNoFaktur->Text);			
 			$no_formulir = $this->txtAddFormulir1->Value.$this->txtAddFormulir2->Text;
-			$nama_mhs=addslashes(strtoupper(trim($this->txtAddNamaMhs->Text)));	
+			$nama_mhs = addslashes(strtoupper(trim($this->txtAddNamaMhs->Text)));	
 			$alamat_rumah=strtoupper(trim($this->txtAddAlamatRumah->Text));	
 			$telp_rumah = trim($this->txtAddNoTelpRumah->Text);		
 			$telp_hp=trim($this->txtAddNoHP->Text);
@@ -241,7 +241,7 @@ class CPembayaranFormulir extends MainPageM {
 		if ($this->IsValid) {
 			$this->Pengguna->updateActivity();	
 			$no_formulir = $this->txtEditFormulir1->Value.$this->txtEditFormulir2->Text;
-			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));	
+			$nama_mhs = addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));	
 			$alamat_rumah=strtoupper(trim($this->txtEditAlamatRumah->Text));	
 			$telp_rumah = trim($this->txtEditNoTelpRumah->Text);		
 			$telp_hp=trim($this->txtEditNoHP->Text);

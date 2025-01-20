@@ -40,7 +40,7 @@ class CDetailPKRS extends MainPageDW {
 	}	
 	private function populateData($search = false) {
         try {			
-            $idkrs=addslashes($this->request['id']);
+            $idkrs = addslashes($this->request['id']);
             $datamhs = $_SESSION['currentPagePKRS']['DataMHS'];
             $datakrs = $_SESSION['currentPagePKRS']['DataKRS']['krs'];
             $this->Page->KRS->DataKRS['krs'] = $datakrs;

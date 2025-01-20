@@ -13,7 +13,7 @@ class MainTemplate extends TTemplateControl {
 	}
     public function populateThemes() {
         $themes = $this->Page->setup->getListThemes();
-        $daftarthemes=array();
+        $daftarthemes = array();
         foreach ($themes as $k => $v) {
             $daftarthemes[]=array('idtheme'=>$k,'namatheme'=>$v);
         }        

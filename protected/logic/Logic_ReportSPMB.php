@@ -287,7 +287,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $sheet->getStyle("A10:AA10")->applyFromArray($styleArray);
                 $sheet->getStyle("A10:AA10")->getAlignment()->setWrapText(true);
                 $row=11;                
-                while (list($k, $v)=each($r)) { 
+                while (list($k, $v) = each($r)) { 
                     $sheet->setCellValue("A$row", $v['no']);		
                     $sheet->setCellValue("B$row", $v['no_formulir']);		
                     $sheet->setCellValue("C$row", $v['nama_mhs']);
@@ -347,7 +347,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_ibu_kandung', 'nama_agama', 'nik', 'idwarga', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'nama_pekerjaan', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
                 $r=$this->db->getRecord($str);
                 
-                while (list($k, $v)=each($r)) {
+                while (list($k, $v) = each($r)) {
                     $datamhs = $v;								
                     if ($datamhs['waktu_mendaftar']=='0000-00-00 00:00:00') {							
                         $datamhs['tanggal_lahir'] = '-';
@@ -572,7 +572,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $sheet->getStyle("A10:M10")->applyFromArray($styleArray);
                 $sheet->getStyle("A10:M10")->getAlignment()->setWrapText(true);
                 $row=11;                
-                while (list($k, $v)=each($r)) { 
+                while (list($k, $v) = each($r)) { 
                     $sheet->setCellValue("A$row", $v['no']);		
                     $sheet->setCellValue("B$row", $v['no_formulir']);		
                     $sheet->setCellValue("C$row", $v['nama_mhs']);	
@@ -1011,7 +1011,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                 $rpt->SetFont ('helvetica', '',8);
                 $row+=6;
-                while (list($k, $v)=each($r)) {                    
+                while (list($k, $v) = each($r)) {                    
                     $rpt->setXY(3, $row);
                     $rpt->Cell(30,6, $v['no_formulir'],1,0,'C');
                     $rpt->Cell(50,6, $v['nama_mhs'],1);

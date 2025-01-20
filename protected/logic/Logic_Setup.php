@@ -54,7 +54,7 @@ class Logic_Setup extends Logic_Global {
         $this->db->setFieldTable(array('setting_id', 'key', 'value'));
         $r=$this->db->getRecord($str);
         $result=array();
-        while (list($k, $v)=each($r)) {
+        while (list($k, $v) = each($r)) {
             $result[$v['key']]=array('setting_id'=>$v['setting_id'],'key'=>$v['key'],'value'=>$v['value']);
         }
         return $result;
@@ -337,7 +337,7 @@ class Logic_Setup extends Logic_Global {
      * digunakan untuk mendapatkan tipe output compress
      */
     public function getOutputCompressType() {
-        $tipecompress=array('none'=>' ', 'zip'=>'ZIP');
+        $tipecompress = array('none'=>' ', 'zip'=>'ZIP');
         return $tipecompress;
     }
     /**
@@ -443,7 +443,7 @@ class Logic_Setup extends Logic_Global {
         $folder = 'themes/';
         $weeds = array('.', '..');
         $directories = array_diff(scandir($folder), $weeds);
-        $themefolders=array();
+        $themefolders = array();
         foreach($directories as $value) {
             if ($value != 'default') { 
                 if(is_dir($folder.$value)){

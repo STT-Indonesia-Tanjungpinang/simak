@@ -57,7 +57,7 @@ class CProfiles extends MainPageAPI {
             $id=$this->hiddenid->Value;
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
-            $ipaddress=addslashes($this->txtEditIPAddress->Text);
+            $ipaddress = addslashes($this->txtEditIPAddress->Text);
             
             if ($this->txtEditPassword1->Text == '') {
                 $str = "UPDATE user SET email='$email',nama='$nama',ipaddress='$ipaddress' WHERE userid=$id";

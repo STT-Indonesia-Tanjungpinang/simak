@@ -190,7 +190,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
             $no_formulir = $v['no_formulir'];
 			$nim = $v['nim'];
             $nirm=$v['nirm'];
-            $nama_mhs=addslashes($v['nama_mhs']);
+            $nama_mhs = addslashes($v['nama_mhs']);
             $jk = $v['jk'];
             $tahun_masuk = $v['tahun_masuk'];
             $semester_masuk = $v['semester_masuk'];

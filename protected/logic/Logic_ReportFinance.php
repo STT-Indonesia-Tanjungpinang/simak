@@ -98,7 +98,7 @@ class Logic_ReportFinance extends Logic_Report {
                 $this->db->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tahun_masuk', 'semester_masuk'));
                 $r = $this->db->getRecord($str);	
                 $row=11; 
-                while (list($k, $v)=each($r)) {
+                while (list($k, $v) = each($r)) {
                     $no_formulir=$v['no_formulir'];                                          
                     $nim = $v['nim'];                                                      
                     $sheet->setCellValue("A$row", $v['no']);
@@ -270,7 +270,7 @@ class Logic_ReportFinance extends Logic_Report {
                 $row=11;
                 $totalkewajiban_all=0;
                 $totalpembayaran_all=0;
-                while (list($k, $v)=each($r)) {
+                while (list($k, $v) = each($r)) {
                     $kewajiban = $v['kewajiban'];
                     $totalkewajiban_all+=$kewajiban;
                     $dibayarkan = $v['dibayarkan'];

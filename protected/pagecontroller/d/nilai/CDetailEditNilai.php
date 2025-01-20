@@ -16,7 +16,7 @@ class CDetailEditNilai extends MainPageD {
       $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
       $this->tbCmbOutputReport->DataBind();            
       try {
-        $idkelas_mhs=addslashes($this->request['id']);
+        $idkelas_mhs = addslashes($this->request['id']);
         $this->Demik->getInfoKelas($idkelas_mhs);                
         if (!isset($this->Demik->InfoKelas['idkelas_mhs'])) {                                                
           throw new Exception ("Kelas Mahasiswa dengan id ($idkelas_mhs) tidak terdaftar.");		
@@ -140,13 +140,13 @@ class CDetailEditNilai extends MainPageD {
           $nilai_quiz=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiQuiz->Text)));
           $nilai_quiz=($nilai_quiz >0)?$nilai_quiz:0;
 
-          $nilai_tugas=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiTugas->Text)));
+          $nilai_tugas = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiTugas->Text)));
           $nilai_tugas=($nilai_tugas >0)?$nilai_tugas:0;
 
-          $nilai_uts=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUTS->Text)));
+          $nilai_uts = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUTS->Text)));
           $nilai_uts=($nilai_uts >0)?$nilai_uts:0;
 
-          $nilai_uas=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUAS->Text)));
+          $nilai_uas = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUAS->Text)));
           $nilai_uas=($nilai_uas >0)?$nilai_uas:0;
 
           $nilai_absen = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiAbsen->Text)));  
@@ -224,13 +224,13 @@ class CDetailEditNilai extends MainPageD {
           $nilai_quiz=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiQuiz->Text)));
           $nilai_quiz=($nilai_quiz >0)?$nilai_quiz:0;
 
-          $nilai_tugas=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiTugas->Text)));
+          $nilai_tugas = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiTugas->Text)));
           $nilai_tugas=($nilai_tugas >0)?$nilai_tugas:0;
 
-          $nilai_uts=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUTS->Text)));
+          $nilai_uts = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUTS->Text)));
           $nilai_uts=($nilai_uts >0)?$nilai_uts:0;
 
-          $nilai_uas=addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUAS->Text)));
+          $nilai_uas = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiUAS->Text)));
           $nilai_uas=($nilai_uas >0)?$nilai_uas:0;
 
           $nilai_absen = addslashes(floatval(preg_replace('/[^\d.]/', '', $inputan->txtNilaiAbsen->Text)));  

@@ -450,7 +450,7 @@ class Logic_ReportNilai extends Logic_Report {
         $this->db->setFieldTable(array('idkrs', 'tgl_krs', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'idkelas', 'tahun_masuk', 'semester_masuk', 'iddata_konversi'));
         $r=$this->db->getRecord($str);
         $row=11;                
-        while (list($k, $v)=each($r)) {
+        while (list($k, $v) = each($r)) {
           $nim = $v['nim'];						
           $objNilai->setDataMHS(array('nim'=>$nim));
           $objNilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
@@ -2655,7 +2655,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getColumnDimension('B')->setWidth(40);
         $sheet->getColumnDimension('C')->setWidth(15);
         $sheet->getColumnDimension('D')->setWidth(20);
-        while (list($k, $v)=each($r)) {
+        while (list($k, $v) = each($r)) {
           $sheet->setCellValue("A$row", $v['idkrsmatkul']);
           $sheet->setCellValue("B$row", $v['nama_mhs']);
           $sheet->setCellValueExplicit("C$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
@@ -2803,7 +2803,7 @@ class Logic_ReportNilai extends Logic_Report {
         $r=$this->db->getRecord($str);	
         $row_awal=19;
         $row=19;
-        while (list($k, $v)=each($r)) { 			
+        while (list($k, $v) = each($r)) { 			
           $sheet->setCellValue("A$row", $v['no']);				
           $sheet->mergeCells("B$row:E$row");				
           $sheet->setCellValue("B$row", $v['nama_mhs']);			

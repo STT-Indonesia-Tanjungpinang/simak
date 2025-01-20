@@ -76,7 +76,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $this->db->setFieldTable (array('idpengampu_penyelenggaraan', 'idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen', 'jumlahmhs'));			
                 $r=$this->db->getRecord($str);	                
                 $row=11;  
-                while (list($k, $v)=each($r)) {
+                while (list($k, $v) = each($r)) {
                     $sheet->setCellValue("A$row", $v['no']);				           
                     $idpengampu_penyelenggaraan = $v['idpengampu_penyelenggaraan'];                                    
                     $sheet->setCellValue("B$row", $idpengampu_penyelenggaraan);
@@ -287,7 +287,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                         $TotalIndikator5+=$indikator5;
                         next($r);         
                         $row+=1;
-                        while (list($k, $v)=each($r)) {
+                        while (list($k, $v) = each($r)) {
                             $idkuesioner=$v['idkuesioner'];
                             $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
                             $this->db->setFieldTable(array('nilai_indikator', 'jumlah'));

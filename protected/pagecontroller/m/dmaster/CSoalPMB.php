@@ -71,7 +71,7 @@ class CSoalPMB extends MainPageM {
 			$this->RepeaterJawaban->dataBind();
 		}
 	}
-	public function saveData () {
+	public function saveData() {
 		if ($this->IsValid) {
             $nama_soal=  addslashes($this->txtAddNamaSoal->Text);
             $str = "INSERT INTO soal (idsoal,nama_soal,date_added,date_modified) VALUES (NULL,'$nama_soal',NOW(),NOW())";

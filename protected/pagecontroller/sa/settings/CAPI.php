@@ -112,7 +112,7 @@ class CAPI extends MainPageSA {
             $nama = addslashes($this->txtAddNama->Text);
             $email = addslashes($this->txtAddEmail->Text);
             $username=addslashes($this->txtAddUsername->Text);
-            $ipaddress=addslashes($this->txtAddIPAddress->Text);
+            $ipaddress = addslashes($this->txtAddIPAddress->Text);
             $data = $this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
             $salt=$data['salt'];
             $password=$data['password'];      
@@ -148,7 +148,7 @@ class CAPI extends MainPageSA {
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
             $username=addslashes($this->txtEditUsername->Text); 
-            $ipaddress=addslashes($this->txtEditIPAddress->Text);
+            $ipaddress = addslashes($this->txtEditIPAddress->Text);
             $status = $this->cmbEditStatus->Text;
             
             if ($this->txtEditPassword1->Text == '') {

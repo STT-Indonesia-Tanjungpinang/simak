@@ -1128,7 +1128,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $result = array();
         $row_awal=12;
         $row=12;
-        while (list($k, $v)=each($r)) {
+        while (list($k, $v) = each($r)) {
           $kmatkul=$v['kmatkul'];
           $v['kode_matkul']=$objDemik->getKMatkul($kmatkul); 
           $sheet->getRowDimension($row)->setRowHeight(17);

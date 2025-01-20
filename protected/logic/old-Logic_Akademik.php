@@ -311,7 +311,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
 		$r=$this->db->getRecord($str);
         $result=array('none'=>' ');	
 		if (isset($r[1])) {			
-            while (list($k, $v)=each($r)) {
+            while (list($k, $v) = each($r)) {
                 $result[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
             }			
 		}

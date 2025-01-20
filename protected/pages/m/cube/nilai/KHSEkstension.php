@@ -358,7 +358,7 @@ class KHSEkstension extends MainPageM {
                 $this->DB->setFieldTable(array('idkrs', 'tgl_krs', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'idkelas', 'tahun_masuk', 'semester_masuk', 'iddata_konversi'));
                 $r=$this->DB->getRecord($str);
                 $row=11;                
-                while (list($k, $v)=each($r)) {
+                while (list($k, $v) = each($r)) {
                     $nim = $v['nim'];						
                     $this->Nilai->setDataMHS(array('nim'=>$nim));
                     $this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);

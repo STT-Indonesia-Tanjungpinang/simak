@@ -12,7 +12,7 @@ class Home extends MainPageF {
 		$this->DB->setFieldTable (array('idpost', 'userid', 'nama_kategori', 'title', 'content', 'nama_user', 'tipe', 'file_name', 'file_type', 'file_size', 'file_url', 'date_added'));			
 		$r=$this->DB->getRecord($str);	
         $result=array();
-        while (list($k, $v)=each($r)) {
+        while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];           
             $v['jumlahcomment']=$this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=$idpost",'idpost');
             $v['tanggal_post']=$this->page->TGL->tanggal('l, d F Y H:i', $v['date_added']);

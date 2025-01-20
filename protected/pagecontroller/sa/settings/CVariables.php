@@ -76,7 +76,7 @@ class CVariables extends MainPageSA {
                     $str = "UPDATE setting SET value='$nama_pt' WHERE setting_id=4";            
                     $this->DB->updateRecord($str);
 
-                    $nama_pt_alias=addslashes($this->txtNamaPTAlias->Text);
+                    $nama_pt_alias = addslashes($this->txtNamaPTAlias->Text);
                     $str = "UPDATE setting SET value='$nama_pt_alias' WHERE setting_id=5";            
                     $this->DB->updateRecord($str);
 

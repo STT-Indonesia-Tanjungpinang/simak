@@ -59,7 +59,7 @@ class CRuangKelas Extends MainPageM {
 	public function saveData($sender, $param) {
 		if ($this->Page->IsValid) {
 			$namaruang=addslashes(strtoupper($this->txtAddNamaRuang->Text));
-			$kapasitas=addslashes($this->txtAddKapasitas->Text);
+			$kapasitas = addslashes($this->txtAddKapasitas->Text);
 			$str = "INSERT INTO ruangkelas (namaruang,kapasitas) VALUES ('$namaruang', '$kapasitas')";
 			$this->DB->insertRecord($str);
             

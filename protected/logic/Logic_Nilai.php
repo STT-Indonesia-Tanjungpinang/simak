@@ -145,7 +145,7 @@ class Logic_Nilai extends Logic_Akademik {
       $r=$this->db->getRecord($str);			            
       $str = "SELECT n_kual,telah_isi_kuesioner,tahun FROM v_nilai WHERE nim='$nim' AND kmatkul=";
       $str_konversi = "SELECT n_kual FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi' AND kmatkul=";			            
-      while (list($k, $v)=each($r)) {	
+      while (list($k, $v) = each($r)) {	
         $kmatkul=$v['kmatkul'];
         $str2 = $str . "'$kmatkul' ORDER BY n_kual ASC LIMIT 1";                     
         $this->db->setFieldTable (array('n_kual', 'telah_isi_kuesioner', 'tahun'));
@@ -231,7 +231,7 @@ class Logic_Nilai extends Logic_Akademik {
     $str = "SELECT n_kual,telah_isi_kuesioner,tahun FROM v_nilai WHERE nim='$nim' AND published=1 AND kmatkul=";
     $str_konversi = "SELECT n_kual,tahun FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi' AND kmatkul=";        
     $result=array();
-    while (list($k, $v)=each($r)) {	
+    while (list($k, $v) = each($r)) {	
       $kmatkul=$v['kmatkul'];
       $str2 = $str . "'$kmatkul' ORDER BY n_kual ASC LIMIT 1";
       $this->db->setFieldTable (array('n_kual', 'telah_isi_kuesioner', 'tahun'));
@@ -312,7 +312,7 @@ class Logic_Nilai extends Logic_Akademik {
     $r=$this->db->getRecord($str);        
 
     $result=array();
-    while (list($k, $v)=each($r)) {	
+    while (list($k, $v) = each($r)) {	
       if ($v['tahun']>=2015){                
         if ($cek_isikuesioner) {
           if ($v['telah_isi_kuesioner']==0) {                    
@@ -361,7 +361,7 @@ class Logic_Nilai extends Logic_Akademik {
     $r=$this->db->getRecord($str);        
 
     $result=array();
-    while (list($k, $v)=each($r)) {	
+    while (list($k, $v) = each($r)) {	
       if ($v['tahun']>=2015){                
         if ($cek_isikuesioner) {
           if ($v['telah_isi_kuesioner']==0) {                    
@@ -438,7 +438,7 @@ class Logic_Nilai extends Logic_Akademik {
     $r=$this->db->getRecord($str);		
     $result=array();
     if ($cek_isikuesioner) {
-      while (list($a, $b)=each($r)) {
+      while (list($a, $b) = each($r)) {
         $b['kmatkul']=$this->getKMatkul($b['kmatkul']);
         $hm=$b['n_kual'];
         if ($b['tahun']>=2015){
@@ -483,7 +483,7 @@ class Logic_Nilai extends Logic_Akademik {
         }			
       }
     }else{
-      while (list($a, $b)=each($r)) {
+      while (list($a, $b) = each($r)) {
         $b['kmatkul']=$this->getKMatkul($b['kmatkul']);
         $hm=$b['n_kual'];                
         if ($hm == '') {

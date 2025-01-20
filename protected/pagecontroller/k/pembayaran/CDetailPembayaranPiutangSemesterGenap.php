@@ -117,7 +117,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
                     $d=$this->DB->getRecord($str);
 
                     $sudah_dibayarkan=array();
-                    while (list($o, $p)=each($d)) {            
+                    while (list($o, $p) = each($d)) {            
                         $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
                     }
                     

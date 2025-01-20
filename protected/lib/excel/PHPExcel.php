@@ -299,7 +299,7 @@ class PHPExcel
             case 'types':
                 if (is_array($this->ribbonBinObjects) &&
                     array_key_exists('data', $this->ribbonBinObjects) && is_array($this->ribbonBinObjects['data'])) {
-                    $tmpTypes=array_keys($this->ribbonBinObjects['data']);
+                    $tmpTypes = array_keys($this->ribbonBinObjects['data']);
                     $ReturnData = array_unique(array_map(array($this, 'getExtensionOnly'), $tmpTypes));
                 } else {
                     $ReturnData=array(); // the caller want an array... not null if empty

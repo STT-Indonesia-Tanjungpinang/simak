@@ -28,7 +28,7 @@ class DetailDulangMHSEkstension Extends MainPageM {
     public function getDataMHS($idx) {		        
         return $this->Demik->getDataMHS($idx);
     }    
-    public function saveData ($sender, $param) {		
+    public function saveData($sender, $param) {		
 		if ($this->IsValid) {	
             $datamhs = $_SESSION['currentPageDulangMHSEkstension']['DataMHS'];						
 			$ta=$datamhs['ta'];							

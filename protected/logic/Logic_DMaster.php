@@ -274,7 +274,7 @@ class Logic_DMaster extends Logic_Global
         $this->db->setFieldTable(array('iddosen_wali', 'nidn', 'nama_dosen'));			        
         $r = $this->db->getRecord($str);                
         $dataitem['none'] = 'Daftar Dosen Wali';				
-        while (list($k, $v)=each($r)) {			
+        while (list($k, $v) = each($r)) {			
           $dataitem[$v['iddosen_wali']]=$v['nama_dosen'] . ' ['.$v['nidn'].']';	;					
         }	
         $this->Application->Cache->set('listdw', $dataitem);
@@ -284,7 +284,7 @@ class Logic_DMaster extends Logic_Global
       $this->db->setFieldTable(array('iddosen_wali', 'nidn', 'nama_dosen'));			        
       $r = $this->db->getRecord($str);                
       $dataitem['none'] = 'Daftar Dosen Wali';				
-      while (list($k, $v)=each($r)) {			
+      while (list($k, $v) = each($r)) {			
         $dataitem[$v['iddosen_wali']]=$v['nama_dosen'] . ' ['.$v['nidn'].']';				
       }	
     }
@@ -323,7 +323,7 @@ class Logic_DMaster extends Logic_Global
         $dataitem=$r;
       }else{
         $dataitem['none'] = 'Daftar Konsentrasi Program Studi';
-        while (list($k, $v)=each($r)) {
+        while (list($k, $v) = each($r)) {
           if ($kjur == $v['kjur']) {
             $dataitem[$v['idkonsentrasi']]=$v['nama_konsentrasi'];
           }
@@ -394,7 +394,7 @@ class Logic_DMaster extends Logic_Global
         $this->db->setFieldTable (array('iddosen', 'nama_dosen', 'nidn'));			
         $r= $this->db->getRecord($str);
         $dataitem['none'] = 'Daftar Dosen';   
-        while (list($k, $v)=each($r)) {
+        while (list($k, $v) = each($r)) {
           $dataitem[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
         }
         $this->Application->Cache->set('listdosen', $dataitem);
@@ -403,7 +403,7 @@ class Logic_DMaster extends Logic_Global
         $this->db->setFieldTable (array('iddosen', 'nama_dosen', 'nidn'));			
         $r= $this->db->getRecord($str);
         $dataitem['none'] = 'Daftar Dosen';   
-        while (list($k, $v)=each($r)) {
+        while (list($k, $v) = each($r)) {
           $dataitem[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
         }
       }
@@ -470,7 +470,7 @@ class Logic_DMaster extends Logic_Global
     $r=$this->db->getRecord($str);
     $dataitem=array();
     if (isset($r[1])) {            
-      while (list($k, $v)=each($r)) {
+      while (list($k, $v) = each($r)) {
         $dataitem[$v['kjur']]=$v['nilai'];
       }                    
     }    

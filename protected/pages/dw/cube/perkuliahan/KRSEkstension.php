@@ -206,7 +206,7 @@ class KRSEkstension Extends MainPageDW {
 		$nim=addslashes($param->Value);
         try {
             if ($nim != '') {			            
-                $datamhs=array('nim'=>$nim);
+                $datamhs = array('nim'=>$nim);
                 $this->KRS->setDataMHS($datamhs);
                 $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);                
                 if (isset($this->KRS->DataKRS['krs']['idkrs'])) {           

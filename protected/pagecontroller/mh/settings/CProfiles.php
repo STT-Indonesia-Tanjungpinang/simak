@@ -109,7 +109,7 @@ class CProfiles extends MainPageMHS {
     public function saveDataFP($sender, $param) {
 		if ($this->IsValid) {
 			$no_formulir = $this->txtEditNoFormulir->Text;
-			$nama_mhs=addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
+			$nama_mhs = addslashes(strtoupper(trim($this->txtEditNamaMhs->Text)));			
 			$tempat_lahir = addslashes(strtoupper(trim($this->txtEditTempatLahir->Text)));						
 			$tgl_lahir=date ('Y-m-d', $this->txtEditTanggalLahir->TimeStamp);
 			$jk = $this->rdEditPria->Checked===true?'L':'P';

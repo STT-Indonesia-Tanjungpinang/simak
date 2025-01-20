@@ -213,7 +213,7 @@ class CNilaiUjianPMB extends MainPageM {
         $dataujian = $this->DB->getRecord($str);         
         $this->DataUjian = $dataujian[1];
         $this->hiddenid->Value=$this->DataUjian['idnilai_ujian_masuk'];
-        $ps=array('none'=>' ', $r[1]['kjur1']=>$_SESSION['daftar_jurusan'][$r[1]['kjur1']]);        
+        $ps = array('none'=>' ', $r[1]['kjur1']=>$_SESSION['daftar_jurusan'][$r[1]['kjur1']]);        
         if ($r[1]['kjur2']!='' && $r[1]['kjur2']!=0) {
            $ps[$r[1]['kjur2']] = $_SESSION['daftar_jurusan'][$r[1]['kjur2']];            
         }
