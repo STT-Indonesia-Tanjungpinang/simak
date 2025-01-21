@@ -77,9 +77,9 @@ class CPembayaranFormulir extends MainPageM {
 	}
 	public function checkNoFormulir($sender, $param) {	
 		try {
-			$id=$sender->getId();
-			$this->idProcess = ($id=='addNoFormulir')?'add':'edit';	
-			$no_formulir=($id=='addNoFormulir')?$this->txtAddFormulir1->Value.$this->txtAddFormulir2->Text:$this->txtEditFormulir1->Value.$this->txtEditFormulir2->Text;			
+			$id = $sender->getId();
+			$this->idProcess = ($id == 'addNoFormulir') ? 'add':'edit';	
+			$no_formulir=($id == 'addNoFormulir')?$this->txtAddFormulir1->Value.$this->txtAddFormulir2->Text:$this->txtEditFormulir1->Value.$this->txtEditFormulir2->Text;			
 			if ($this->txtEditFormulir->Value != $no_formulir) {
 				$this->spmb->setNoFormulir($no_formulir);
 				if ($this->spmb->isNoFormulirExist()) throw new Exception ("No Formulir $no_formulir Sudah ada, silahkan ganti dengan yang lain.");
@@ -87,17 +87,17 @@ class CPembayaranFormulir extends MainPageM {
 				if ($no_formulir>=$no_formulir_via_web)throw new Exception ("No Formulir jangan lebih dari $no_formulir_via_web karena diperuntukan untuk pendaftaran melalui web (secara online).");
 			}
 		}catch (Exception $e) {
-			$param->IsValid=false;
-			$sender->ErrorMessage=$e->getMessage();
+			$param->IsValid = false;
+			$sender->ErrorMessage = $e->getMessage();
 		}	
 	}
 	
 	public function checkEmail($sender, $param) {
 		try {
-			$id=$sender->getId();
-			$this->idProcess = ($id=='editEmail')?'edit':'add';			
+			$id = $sender->getId();
+			$this->idProcess = ($id == 'editEmail') ? 'edit' : 'add';			
 			$email = $this->getLogic('Email');
-			$email_mhs = $id=='editEmail'?$this->txtEditEmail->Text:$this->txtAddEmail->Text;
+			$email_mhs = $id == 'editEmail'?$this->txtEditEmail->Text:$this->txtAddEmail->Text;
 			if ($email_mhs != '') {
 				$email->setEmailUser ($email_mhs);
 				if (!$email->check())throw new Exception ("Format email ($email_mhs) Anda salah");
@@ -106,22 +106,22 @@ class CPembayaranFormulir extends MainPageM {
 				}
 			}
 		}catch (Exception $e) {
-			$param->IsValid=false;
-			$sender->ErrorMessage=$e->getMessage();
+			$param->IsValid = false;
+			$sender->ErrorMessage = $e->getMessage();
 		}	
 	}
 	public function checkNoFaktur($sender, $param) {
 		try {			
-			$id=$sender->getId();
-			$this->idProcess = ($id=='addNoFaktur')?'add':'edit';			
-			$no_faktur = ($id=='addNoFaktur')?$this->txtAddNoFaktur->Text:$this->txtEditNoFaktur->Text;			
+			$id = $sender->getId();
+			$this->idProcess = ($id == 'addNoFaktur') ? 'add':'edit';			
+			$no_faktur = ($id == 'addNoFaktur')?$this->txtAddNoFaktur->Text:$this->txtEditNoFaktur->Text;			
 			if ($this->hiddenEditNoFaktur->Value != $no_faktur) {
 				$this->spmb->Finance->setNoFaktur($no_faktur);
 				if ($this->spmb->Finance->isNoFakturExist('bipend'))throw new Exception ("($no_faktur) sudah ada. Ganti dengan yang lain.");
 			}
 		}catch (Exception $e) {
-			$param->IsValid=false;
-			$sender->ErrorMessage=$e->getMessage();
+			$param->IsValid = false;
+			$sender->ErrorMessage = $e->getMessage();
 		}		
 	}
 
@@ -130,7 +130,7 @@ class CPembayaranFormulir extends MainPageM {
 		if ($txtSearch == '') {
 			$str = 'none';
 		}else {
-			switch ($this->cmbBerdasarkan->Text) {
+			switch($this->cmbBerdasarkan->Text) {
 				case 'no_formulir':
 					$str = "bp.no_formulir='$txtSearch'";
 				break;				
@@ -145,11 +145,11 @@ class CPembayaranFormulir extends MainPageM {
 		$this->Pengguna->updateActivity();			
 		$ta = $_SESSION['tahun_masuk'];
 		$biaya_pendaftaran = $this->spmb->getBiayaPendaftaran($_SESSION['tahun_masuk'], $_SESSION['kelas']);							
-		if ($biaya_pendaftaran>0) {
+		if ($biaya_pendaftaran> 0) {
 			$pembayaran_spmb['biaya_pendaftaran'] = $biaya_pendaftaran;
 			$max_record=$this->DB->getMaxOfRecord('no_formulir',"formulir_pendaftaran WHERE ta = '$ta' AND daftar_via='FO'")+1;		
 			$urut=substr($max_record,strlen($ta),4);		
-			$urut=($urut== '')?'0001':$urut;
+			$urut=($urut== '') ? '0001':$urut;
 			$pembayaran_spmb['no_urut'] = $urut;
 			$_SESSION['pembayaran_spmb'] = $pembayaran_spmb;
 			$this->spmb->redirect('a.m.SPMB.PembayaranSPMB');

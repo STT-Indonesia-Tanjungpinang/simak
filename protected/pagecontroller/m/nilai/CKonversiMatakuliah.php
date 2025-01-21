@@ -70,7 +70,7 @@ class CKonversiMatakuliah extends MainPageM {
         if ($search) {
             $txtsearch = addslashes($this->txtKriteria->Text);
             $str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.perpanjangan=0";
-            switch ($this->cmbKriteria->Text) {                                
+            switch($this->cmbKriteria->Text) {                                
                 case 'nama':
                     $clausa="AND nama LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
@@ -107,7 +107,7 @@ class CKonversiMatakuliah extends MainPageM {
 	}	
     public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';        
         
     }

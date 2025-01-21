@@ -71,7 +71,7 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
         if ($search) {
             $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {    
+            switch($this->cmbKriteria->Text) {    
                 case 'no_transaksi':
                     $clausa="AND t.no_transaksi='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa";
@@ -143,8 +143,8 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
                     throw new Exception ("Nomor Formulir ($noformulir) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");		
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }

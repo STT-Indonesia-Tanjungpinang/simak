@@ -3,7 +3,7 @@ prado::using ('Application.MainPageON');
 class CNilaiPerMahasiswa extends MainPageON {	
   public $pnlInputNim = false;
   public $pnlInputPenyelenggaraan = false;
-  public function onLoad ($param) {
+  public function onLoad($param) {
     parent::onLoad($param);	
     $this->createObj('Nilai');
     $this->showSubMenuAkademikNilai=true;
@@ -33,7 +33,7 @@ class CNilaiPerMahasiswa extends MainPageON {
         $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
         
         $kelas = $this->Nilai->getKelasMhs();                
-        $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
+        $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -90,8 +90,8 @@ class CNilaiPerMahasiswa extends MainPageON {
           } 
         }
       }catch (Exception $e) {
-        $param->IsValid=false;
-        $sender->ErrorMessage=$e->getMessage();
+        $param->IsValid = false;
+        $sender->ErrorMessage = $e->getMessage();
       }	
     }	
   }

@@ -1,8 +1,8 @@
 <?php
 prado::using ('Application.MainPageSA');
 class CTA extends MainPageSA {	
-	public function onLoad ($param) {		
-		parent::onLoad ($param);
+	public function onLoad($param) {		
+		parent::onLoad($param);
         $this->showSubMenuDMasterPerkuliahan=true;
         $this->showTA=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
@@ -43,7 +43,7 @@ class CTA extends MainPageSA {
          $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);  
 	}
 	public function checkTA($sender, $param) {
-        $this->idProcess = $sender->getId()=='addTahun'?'add':'edit';
+        $this->idProcess = $sender->getId() == 'addTahun'?'add':'edit';
         $tahun = $param->Value;		
 		try {
 			if ($this->hiddentahun->Value != $tahun) {
@@ -52,8 +52,8 @@ class CTA extends MainPageSA {
                 }
 			}
 		}catch (Exception $e) {
-			$param->IsValid=false;
-            $sender->ErrorMessage=$e->getMessage();
+			$param->IsValid = false;
+            $sender->ErrorMessage = $e->getMessage();
 		}	
 	}	
 	

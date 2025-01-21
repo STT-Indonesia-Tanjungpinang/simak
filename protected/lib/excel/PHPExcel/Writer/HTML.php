@@ -190,7 +190,7 @@ class PHPExcel_Writer_HTML extends PHPExcel_Writer_Abstract implements PHPExcel_
      */
     private function mapVAlign($vAlign)
     {
-        switch ($vAlign) {
+        switch($vAlign) {
             case PHPExcel_Style_Alignment::VERTICAL_BOTTOM:
                 return 'bottom';
             case PHPExcel_Style_Alignment::VERTICAL_TOP:
@@ -211,7 +211,7 @@ class PHPExcel_Writer_HTML extends PHPExcel_Writer_Abstract implements PHPExcel_
      */
     private function mapHAlign($hAlign)
     {
-        switch ($hAlign) {
+        switch($hAlign) {
             case PHPExcel_Style_Alignment::HORIZONTAL_GENERAL:
                 return false;
             case PHPExcel_Style_Alignment::HORIZONTAL_LEFT:
@@ -236,7 +236,7 @@ class PHPExcel_Writer_HTML extends PHPExcel_Writer_Abstract implements PHPExcel_
      */
     private function mapBorderStyle($borderStyle)
     {
-        switch ($borderStyle) {
+        switch($borderStyle) {
             case PHPExcel_Style_Border::BORDER_NONE:
                 return 'none';
             case PHPExcel_Style_Border::BORDER_DASHDOT:

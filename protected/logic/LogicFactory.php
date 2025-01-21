@@ -16,7 +16,7 @@ class LogicFactory extends TModule {
   */
   public function getInstanceOfClass ($className) 
   {		
-    switch ($className) 
+    switch($className) 
     {
       case 'Users':
         prado::using ('Application.logic.Logic_Users');

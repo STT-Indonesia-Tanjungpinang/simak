@@ -85,7 +85,7 @@ class CDetailNilaiFinal extends MainPageON {
       }
     }catch (Exception $e) {
       $sender->ErrorMessage = $e->getMessage();
-      $param->IsValid=false;
+      $param->IsValid = false;
     }
   }
   public function checkNoTranskrip($sender, $param) {
@@ -98,7 +98,7 @@ class CDetailNilaiFinal extends MainPageON {
       }
     }catch (Exception $e) {
       $sender->ErrorMessage = $e->getMessage();
-      $param->IsValid=false;
+      $param->IsValid = false;
     }
   }
   public function saveData($sender, $param) {
@@ -147,7 +147,7 @@ class CDetailNilaiFinal extends MainPageON {
       $datamhs = $_SESSION['currentPageNilaiFinal']['DataMHS'];
       $nim = $datamhs['nim'];
       $dataSource = $this->cmbDataSource->Text;
-      switch ($datasource) {
+      switch($datasource) {
         case 'transkrip_krs':
           $str = "SELECT vnk.kmatkul,vnk.nmatkul,vnk.nmatkul_en,vnk.sks,semester,IF(char_length(COALESCE(vnk2.n_kual,'-'))>0,vnk2.n_kual,'') AS n_kual FROM v_nilai_khs vnk,(SELECT idkrsmatkul,MIN(n_kual) AS n_kual FROM `v_nilai_khs` WHERE nim='$nim' GROUP BY kmatkul ORDER BY (semester+0), kmatkul ASC) AS vnk2 WHERE vnk.idkrsmatkul=vnk2.idkrsmatkul";
           $this->DB->setFieldTable(array('kmatkul', 'nmatkul', 'nmatkul_en', 'sks', 'semester', 'n_kual'));
@@ -250,13 +250,13 @@ class CDetailNilaiFinal extends MainPageON {
   }
   public function printOut($sender, $param) {	
     $this->createObj('reportnilai');          
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';   
     
     $dataReport=$_SESSION['currentPageNilaiFinal']['DataMHS']; 
     $nim = $dataReport['nim'];
     if ($dataReport['k_status'] == 'L') {
-      switch ($_SESSION['outputreport']) {
+      switch($_SESSION['outputreport']) {
         case 'summarypdf':
           $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
         break;

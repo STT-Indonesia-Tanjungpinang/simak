@@ -77,7 +77,7 @@ class TCPDF_FILTERS {
 	 * @public static
 	 */
 	public static function decodeFilter($filter, $data) {
-		switch ($filter) {
+		switch($filter) {
 			case 'ASCIIHexDecode': {
 				return self::decodeFilterASCIIHexDecode($data);
 				break;
@@ -242,7 +242,7 @@ class TCPDF_FILTERS {
 			$tuple += $pow85[($group_pos - 1)];
 		}
 		// last tuple (if any)
-		switch ($group_pos) {
+		switch($group_pos) {
 			case 4: {
 				$decoded .= chr($tuple >> 24).chr($tuple >> 16).chr($tuple >> 8);
 				break;

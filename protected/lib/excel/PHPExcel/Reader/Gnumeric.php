@@ -247,7 +247,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                 }
                 foreach ($officePropertyDC as $propertyName => $propertyValue) {
                     $propertyValue = (string) $propertyValue;
-                    switch ($propertyName) {
+                    switch($propertyName) {
                         case 'title':
                             $docProps->setTitle(trim($propertyValue));
                             break;
@@ -275,7 +275,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                 foreach ($officePropertyMeta as $propertyName => $propertyValue) {
                     $attributes = $propertyValue->attributes($namespacesMeta['meta']);
                     $propertyValue = (string) $propertyValue;
-                    switch ($propertyName) {
+                    switch($propertyName) {
                         case 'keyword':
                             $docProps->setKeywords(trim($propertyValue));
                             break;
@@ -290,7 +290,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                             break;
                         case 'user-defined':
                             list(, $attrName) = explode(':', $attributes['name']);
-                            switch ($attrName) {
+                            switch($attrName) {
                                 case 'publisher':
                                     $docProps->setCompany(trim($propertyValue));
                                     break;
@@ -309,7 +309,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
             foreach ($gnmXML->Summary->Item as $summaryItem) {
                 $propertyName = $summaryItem->name;
                 $propertyValue = $summaryItem->{'val-string'};
-                switch ($propertyName) {
+                switch($propertyName) {
                     case 'title':
                         $docProps->setTitle(trim($propertyValue));
                         break;
@@ -359,12 +359,12 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                     foreach ($sheet->PrintInformation->Margins->children('gnm', true) as $key => $margin) {
                         $marginAttributes = $margin->attributes();
                         $marginSize = 72 / 100;    //    Default
-                        switch ($marginAttributes['PrefUnit']) {
+                        switch($marginAttributes['PrefUnit']) {
                             case 'mm':
                                 $marginSize = intval($marginAttributes['Points']) / 100;
                                 break;
                         }
-                        switch ($key) {
+                        switch($key) {
                             case 'top':
                                 $objPHPExcel->getActiveSheet()->getPageMargins()->setTop($marginSize);
                                 break;
@@ -438,7 +438,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                     }
                     $type = PHPExcel_Cell_DataType::TYPE_FORMULA;
                 } else {
-                    switch ($ValueType) {
+                    switch($ValueType) {
                         case '10':        //    NULL
                             $type = PHPExcel_Cell_DataType::TYPE_NULL;
                             break;
@@ -501,7 +501,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                         $styleArray['numberformat']['code'] = (string) $styleAttributes['Format'];
                         //    If readDataOnly is false, we set all formatting information
                         if (!$this->readDataOnly) {
-                            switch ($styleAttributes['HAlign']) {
+                            switch($styleAttributes['HAlign']) {
                                 case '1':
                                     $styleArray['alignment']['horizontal'] = PHPExcel_Style_Alignment::HORIZONTAL_GENERAL;
                                     break;
@@ -523,7 +523,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                                     break;
                             }
 
-                            switch ($styleAttributes['VAlign']) {
+                            switch($styleAttributes['VAlign']) {
                                 case '1':
                                     $styleArray['alignment']['vertical'] = PHPExcel_Style_Alignment::VERTICAL_TOP;
                                     break;
@@ -550,7 +550,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                                 $styleArray['fill']['color']['rgb'] = $styleArray['fill']['startcolor']['rgb'] = $RGB;
                                 $RGB2 = self::parseGnumericColour($styleAttributes["PatternColor"]);
                                 $styleArray['fill']['endcolor']['rgb'] = $RGB2;
-                                switch ($shade) {
+                                switch($shade) {
                                     case '1':
                                         $styleArray['fill']['type'] = PHPExcel_Style_Fill::FILL_SOLID;
                                         break;
@@ -622,7 +622,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                             $styleArray['font']['bold'] = ($fontAttributes['Bold'] == '1') ? true : false;
                             $styleArray['font']['italic'] = ($fontAttributes['Italic'] == '1') ? true : false;
                             $styleArray['font']['strike'] = ($fontAttributes['StrikeThrough'] == '1') ? true : false;
-                            switch ($fontAttributes['Underline']) {
+                            switch($fontAttributes['Underline']) {
                                 case '1':
                                     $styleArray['font']['underline'] = PHPExcel_Style_Font::UNDERLINE_SINGLE;
                                     break;
@@ -639,7 +639,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
                                     $styleArray['font']['underline'] = PHPExcel_Style_Font::UNDERLINE_NONE;
                                     break;
                             }
-                            switch ($fontAttributes['Script']) {
+                            switch($fontAttributes['Script']) {
                                 case '1':
                                     $styleArray['font']['superScript'] = true;
                                     break;
@@ -784,7 +784,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
             $styleArray['color']['rgb'] = self::parseGnumericColour($borderAttributes["Color"]);
         }
 
-        switch ($borderAttributes["Style"]) {
+        switch($borderAttributes["Style"]) {
             case '0':
                 $styleArray['style'] = PHPExcel_Style_Border::BORDER_NONE;
                 break;

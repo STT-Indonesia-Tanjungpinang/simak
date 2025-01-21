@@ -209,7 +209,7 @@ class SMTP
             call_user_func($this->Debugoutput, $str, $this->do_debug);
             return;
         }
-        switch ($this->Debugoutput) {
+        switch($this->Debugoutput) {
             case 'error_log':
                 //Don't output, just log
                 error_log($str);
@@ -409,7 +409,7 @@ class SMTP
         } elseif (empty($authtype)) {
             $authtype = 'LOGIN';
         }
-        switch ($authtype) {
+        switch($authtype) {
             case 'PLAIN':
                 // Start authentication
                 if (!$this->sendCommand('AUTH', 'AUTH PLAIN', 334)) {
@@ -751,7 +751,7 @@ class SMTP
                     $fields = $fields[0];
                 } else {
                     $name = array_shift($fields);
-                    switch ($name) {
+                    switch($name) {
                         case 'SIZE':
                             $fields = ($fields ? $fields[0] : 0);
                             break;

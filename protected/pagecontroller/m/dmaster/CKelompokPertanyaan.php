@@ -62,7 +62,7 @@ class CKelompokPertanyaan extends MainPageM {
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         
         $str = "SELECT nama_kelompok,orders FROM kelompok_pertanyaan WHERE idkelompok_pertanyaan = $id";
@@ -74,7 +74,7 @@ class CKelompokPertanyaan extends MainPageM {
     }
     public function updateData($sender, $param) {
 		if ($this->Page->isValid) {			
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $nama_kelompok=addslashes(strtoupper($this->txtEditNamaKelompok->Text));
             $urutan = addslashes($this->txtEditUrutan->Text);
 			$str = "UPDATE kelompok_pertanyaan SET nama_kelompok='$nama_kelompok',orders='$urutan',update_at=NOW() WHERE idkelompok_pertanyaan = $id";
@@ -83,7 +83,7 @@ class CKelompokPertanyaan extends MainPageM {
 		}
 	}
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);        
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);        
         $this->DB->deleteRecord("kelompok_pertanyaan WHERE idkelompok_pertanyaan = $id");
         $this->redirect('dmaster.KelompokPertanyaan',true);
         

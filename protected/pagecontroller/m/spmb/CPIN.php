@@ -68,7 +68,7 @@ class CPIN extends MainPageM {
         if ($search) {        
             $str = "SELECT pin.no_pin,pin.no_formulir,pin.idkelas,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir)";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'no_formulir':
                     $clausa=" WHERE pin.no_formulir='$txtsearch'"; 
                 break;
@@ -106,7 +106,7 @@ class CPIN extends MainPageM {
 	} 
     public function checkRequirements($sender, $param) {       
         if (!($this->DB->getCountRowsOfTable ('kelas', 'idkelas') > 0 && $this->DB->getCountRowsOfTable ('ta', 'tahun') > 0)){
-            $param->IsValid=false;
+            $param->IsValid = false;
             $sender->ErrorMessage="Jenis Kelas atau Tahun Akademik belum di inputkan";
         }
     }
@@ -116,7 +116,7 @@ class CPIN extends MainPageM {
             $tahun_masuk = $_SESSION['tahun_pendaftaran'];
             $max_record=$this->DB->getMaxOfRecord('no_formulir',"pin WHERE tahun_masuk='$tahun_masuk'")+1;		
 			$urut=substr($max_record,strlen($tahun_masuk),4);		
-			$no_urut=($urut== '')?'0001':$urut;
+			$no_urut=($urut== '') ? '0001':$urut;
 			$no_urut=$tahun_masuk.$no_urut;                        
             $jumlah = addslashes($this->txtJumlahFormulir->Text);
             $jumlah_formulir = $no_urut+$jumlah;
@@ -140,9 +140,9 @@ class CPIN extends MainPageM {
     }
     public function printOut($sender, $param) {
         $this->createObj('reportspmb');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

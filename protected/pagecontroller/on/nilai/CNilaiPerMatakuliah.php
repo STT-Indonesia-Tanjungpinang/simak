@@ -99,7 +99,7 @@ class CNilaiPerMatakuliah extends MainPageON {
     $clausa='';
     if ($search) {
       $txtsearch=  addslashes($this->txtKriteria->Text);           
-      switch ($this->cmbKriteria->Text) {                                
+      switch($this->cmbKriteria->Text) {                                
         case 'kmatkul':
           $clausa="AND kmatkul LIKE '%$txtsearch%'";
         break;
@@ -158,12 +158,12 @@ class CNilaiPerMatakuliah extends MainPageON {
     $this->populateDataPeserta($_SESSION['currentPageNilaiPerMatakuliah']['search']);
   }
   public function populateDataPeserta ($search = false) {      
-    $id=$_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
+    $id = $_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
     $str = "SELECT vkm.idkrsmatkul,vkm.nim,vdm.nama_mhs,vdm.jk,nm.n_kuan,nm.n_kual,nm.userid_input,nm.tanggal_input,nm.userid_modif,nm.tanggal_modif,nm.bydosen,nm.ket,vkm.batal,vkm.sah,vdm.k_status FROM v_krsmhs vkm LEFT JOIN nilai_matakuliah nm ON (nm.idkrsmatkul=vkm.idkrsmatkul) JOIN v_datamhs vdm ON (vdm.nim=vkm.nim) WHERE vkm.idpenyelenggaraan='$id' AND vkm.sah=1";	
     
     if ($search) {            
       $txtsearch=$this->txtKriteria2->Text;
-      switch ($this->cmbKriteria2->Text) {                
+      switch($this->cmbKriteria2->Text) {                
         case 'nim':
           $clausa="AND vdm.nim='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
@@ -273,8 +273,8 @@ class CNilaiPerMatakuliah extends MainPageON {
   {
     if ($this->IsValid) {      
       echo "tes";
-      /*$id=$sender->getId();
-      if($id=='btnPrintOutR') {
+      /*$id = $sender->getId();
+      if($id == 'btnPrintOutR') {
         
         $idpenyelenggaraan = $sender->CommandParameter;
         $this->txtKriteria->Text="$idpenyelenggaraan";

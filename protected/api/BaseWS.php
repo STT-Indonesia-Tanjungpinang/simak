@@ -101,7 +101,7 @@ class BaseWS extends TJsonResponse {
   */
   private function linkOpen() {
     $this->prepareParameters();
-    switch ($this->DbType) {
+    switch($this->DbType) {
       case 'postgres':
         prado::using ('Application.lib.Database.PostgreSQL');
         $this->DB = new PostgreSQL ();
@@ -145,7 +145,7 @@ class BaseWS extends TJsonResponse {
    */
   public function createObj($nama_object)
   {
-    switch (strtolower($nama_object)) 
+    switch(strtolower($nama_object)) 
     {
       case 'dmaster':
         prado::using('Application.logic.Logic_DMaster');
@@ -219,7 +219,7 @@ class BaseWS extends TJsonResponse {
           }
         }
         $this->payload['connection'] = $bool;
-        if ($bool>0)
+        if ($bool> 0)
         {
           $this->payload['message']="Username ($username) dan Token ($token) Valid !!!";
         }

@@ -70,16 +70,16 @@ class PHPExcel_Reader_Excel2007_Chart
         $dispBlanksAs = $plotVisOnly = null;
 
         foreach ($chartElementsC as $chartElementKey => $chartElement) {
-            switch ($chartElementKey) {
+            switch($chartElementKey) {
                 case "chart":
                     foreach ($chartElement as $chartDetailsKey => $chartDetails) {
                         $chartDetailsC = $chartDetails->children($namespacesChartMeta['c']);
-                        switch ($chartDetailsKey) {
+                        switch($chartDetailsKey) {
                             case "plotArea":
                                 $plotAreaLayout = $XaxisLable = $YaxisLable = null;
                                 $plotSeries = $plotAttributes = array();
                                 foreach ($chartDetails as $chartDetailKey => $chartDetail) {
-                                    switch ($chartDetailKey) {
+                                    switch($chartDetailKey) {
                                         case "layout":
                                             $plotAreaLayout = self::chartLayoutDetails($chartDetail, $namespacesChartMeta, 'plotArea');
                                             break;
@@ -180,7 +180,7 @@ class PHPExcel_Reader_Excel2007_Chart
                                 $legendLayout = null;
                                 $legendOverlay = false;
                                 foreach ($chartDetails as $chartDetailKey => $chartDetail) {
-                                    switch ($chartDetailKey) {
+                                    switch($chartDetailKey) {
                                         case "legendPos":
                                             $legendPos = self::getAttribute($chartDetail, 'val', 'string');
                                             break;
@@ -208,11 +208,11 @@ class PHPExcel_Reader_Excel2007_Chart
         $caption = array();
         $titleLayout = null;
         foreach ($titleDetails as $titleDetailKey => $chartDetail) {
-            switch ($titleDetailKey) {
+            switch($titleDetailKey) {
                 case "tx":
                     $titleDetails = $chartDetail->rich->children($namespacesChartMeta['a']);
                     foreach ($titleDetails as $titleKey => $titleDetail) {
-                        switch ($titleKey) {
+                        switch($titleKey) {
                             case "p":
                                 $titleDetailPart = $titleDetail->children($namespacesChartMeta['a']);
                                 $caption[] = self::parseRichText($titleDetailPart);
@@ -253,14 +253,14 @@ class PHPExcel_Reader_Excel2007_Chart
 
         $seriesDetailSet = $chartDetail->children($namespacesChartMeta['c']);
         foreach ($seriesDetailSet as $seriesDetailKey => $seriesDetails) {
-            switch ($seriesDetailKey) {
+            switch($seriesDetailKey) {
                 case "grouping":
                     $multiSeriesType = self::getAttribute($chartDetail->grouping, 'val', 'string');
                     break;
                 case "ser":
                     $marker = null;
                     foreach ($seriesDetails as $seriesKey => $seriesDetail) {
-                        switch ($seriesKey) {
+                        switch($seriesKey) {
                             case "idx":
                                 $seriesIndex = self::getAttribute($seriesDetail, 'val', 'integer');
                                 break;
@@ -333,7 +333,7 @@ class PHPExcel_Reader_Excel2007_Chart
         $pointCount = 0;
 
         foreach ($seriesValueSet as $seriesValueIdx => $seriesValue) {
-            switch ($seriesValueIdx) {
+            switch($seriesValueIdx) {
                 case 'ptCount':
                     $pointCount = self::getAttribute($seriesValue, 'val', 'integer');
                     break;
@@ -366,7 +366,7 @@ class PHPExcel_Reader_Excel2007_Chart
 
         foreach ($seriesValueSet->lvl as $seriesLevelIdx => $seriesLevel) {
             foreach ($seriesLevel as $seriesValueIdx => $seriesValue) {
-                switch ($seriesValueIdx) {
+                switch($seriesValueIdx) {
                     case 'ptCount':
                         $pointCount = self::getAttribute($seriesValue, 'val', 'integer');
                         break;
@@ -492,7 +492,7 @@ class PHPExcel_Reader_Excel2007_Chart
     private static function setChartAttributes($plotArea, $plotAttributes)
     {
         foreach ($plotAttributes as $plotAttributeKey => $plotAttributeValue) {
-            switch ($plotAttributeKey) {
+            switch($plotAttributeKey) {
                 case 'showLegendKey':
                     $plotArea->setShowLegendKey($plotAttributeValue);
                     break;

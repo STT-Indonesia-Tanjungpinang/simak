@@ -246,7 +246,7 @@ class Logic_Setup extends Logic_Global {
             $cropHeight = ($height_old - $height * $x) / 2;
         }
         # Loading image to memory according to type
-        switch ( $info[2] ) {
+        switch( $info[2] ) {
             case 
                 IMAGETYPE_JPEG:  $file !== null ? $image = imagecreatefromjpeg($file) : $image = imagecreatefromstring($string);  
             break;
@@ -287,7 +287,7 @@ class Logic_Setup extends Logic_Global {
                 @unlink($file);            
         }
         # Preparing a method of providing result
-        switch ( strtolower($output)) {
+        switch( strtolower($output)) {
             case 'browser':
                 $mime = image_type_to_mime_type($info[2]);
                 header("Content-type: $mime");
@@ -310,7 +310,7 @@ class Logic_Setup extends Logic_Global {
         }
         
         # Writing image according to type to the output destination and image quality
-        switch ( $info[2] ) {
+        switch( $info[2] ) {
             case IMAGETYPE_GIF:   
                 imagegif($image_resized, $output);    
             break;
@@ -458,7 +458,7 @@ class Logic_Setup extends Logic_Global {
      */
     public function getImageType ($filename) {
         $type   = exif_imagetype($filename);
-        switch ( $type ) {
+        switch( $type ) {
             case 1:   
                 $tipe='gif';   
             break;

@@ -62,7 +62,7 @@ class CJadwalUjianPMB extends MainPageMB {
          
 	}
     public function pilihRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         $str = "SELECT tahun_masuk,idsmt,nama_kegiatan,tanggal_akhir_daftar,status,rk.kapasitas FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian='$id'";
         $this->DB->setFieldTable(array('tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_akhir_daftar', 'status', 'kapasitas'));
 		$r = $this->DB->getRecord($str);	
@@ -97,7 +97,7 @@ class CJadwalUjianPMB extends MainPageMB {
     }   
     public function printOut($sender, $param) {		
         $this->createObj('reportspmb');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
         $id = $this->getDataKeyField($sender, $this->RepeaterS);
         
@@ -123,7 +123,7 @@ class CJadwalUjianPMB extends MainPageMB {
         
         $this->report->printKartuUjianPMB();    
         
-        $this->lblMessagePrintout->Text='';
+        $this->lblMessagePrintout->Text = '';
         $this->lblPrintout->Text='Kartu Ujian PMB';
         $this->modalPrintOut->show();
 	}

@@ -220,7 +220,7 @@ class PHPExcel_Cell
     public function setValueExplicit($pValue = null, $pDataType = PHPExcel_Cell_DataType::TYPE_STRING)
     {
         // set the value according to data type
-        switch ($pDataType) {
+        switch($pDataType) {
             case PHPExcel_Cell_DataType::TYPE_NULL:
                 $this->value = $pValue;
                 break;

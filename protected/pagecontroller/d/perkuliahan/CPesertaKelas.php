@@ -42,7 +42,7 @@ class CPesertaKelas extends MainPageD {
         $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tahun_masuk,k.sah FROM kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0";
         if ($search) {            
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("kelas_mhs_detail kmd,krsmatkul km,krs k,v_datamhs vdm WHERE kmd.idkrsmatkul=km.idkrsmatkul AND km.idkrs=k.idkrs AND k.nim=vdm.nim AND kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 $clausa",'kmd.idkrsmatkul');
@@ -80,10 +80,10 @@ class CPesertaKelas extends MainPageD {
 	}
     public function printOut($sender, $param) {		
         $this->createObj('reportakademik');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';        
         $dataReport=$_SESSION['currentPagePesertaKelas']['InfoKelas'];
-		switch ($_SESSION['outputreport']) {
+		switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

@@ -51,7 +51,7 @@ class CMatakuliah extends MainPageM {
     $this->redirect('dmaster.Matakuliah',true);
   }
   public function filterKonsentrasi($sender, $param) {
-    $id=$this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
+    $id = $this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
     $_SESSION['currentPageMatakuliah']['idkonsentrasi'] = $id;
     $this->populateKonsentrasi();
     $this->populateData();
@@ -85,7 +85,7 @@ class CMatakuliah extends MainPageM {
     if ($search) {
       $str = "SELECT m.kmatkul,m.nmatkul,m.nmatkul_en,m.sks,m.semester,m.idkonsentrasi,k.nama_konsentrasi,m.ispilihan,m.islintas_prodi,m.aktif FROM matakuliah m LEFT JOIN konsentrasi k ON (k.idkonsentrasi=m.idkonsentrasi) WHERE idkur = $idkur";			
       $txtsearch = addslashes($this->txtKriteria->Text);
-      switch ($this->cmbKriteria->Text) {
+      switch($this->cmbKriteria->Text) {
         case 'kode':
           $clausa="AND kmatkul='{$idkur}_$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah WHERE idkur = $idkur $clausa",'kmatkul');		            
@@ -180,7 +180,7 @@ class CMatakuliah extends MainPageM {
     $this->cmbAddSemester->dataBind();
   }
   public function checkKodeMatkul($sender, $param) {
-    $this->idProcess = $sender->getId()=='addKodeMatkul'?'add':'edit';
+    $this->idProcess = $sender->getId() == 'addKodeMatkul'?'add':'edit';
     $idkur = $this->idProcess=='add'?$this->hiddenaddidkur->Value:$this->hiddeneditidkur->Value;
     $kmatkul = addslashes($param->Value);		
     if ($kmatkul != '') {
@@ -192,8 +192,8 @@ class CMatakuliah extends MainPageM {
           }                               
         }                
       }catch (Exception $e) {
-        $param->IsValid=false;
-        $sender->ErrorMessage=$e->getMessage();
+        $param->IsValid = false;
+        $sender->ErrorMessage = $e->getMessage();
       }	
     }	
   }
@@ -233,7 +233,7 @@ class CMatakuliah extends MainPageM {
   }
   public function editRecord($sender, $param) {
     $this->idProcess = 'edit';        
-    $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+    $id = $this->getDataKeyField($sender, $this->RepeaterS);        
     $this->hiddenid->Value=$id;        
     
     $str = "SELECT kmatkul,idkur,nmatkul,nmatkul_en,sks,idkonsentrasi,ispilihan,islintas_prodi,semester,sks_tatap_muka,sks_praktikum,sks_praktik_lapangan,minimal_nilai,syarat_ta,aktif FROM matakuliah WHERE kmatkul='$id'";
@@ -281,7 +281,7 @@ class CMatakuliah extends MainPageM {
   }
   public function updateData($sender, $param) {
     if ($this->Page->isValid) {			
-      $id=$this->hiddenid->Value;
+      $id = $this->hiddenid->Value;
       $idkur = $this->hiddeneditidkur->Value;
       $kmatkul = $this->txtEditKodeMatkul->Text;
       $kode_matkul = $idkur."_$kmatkul";
@@ -311,7 +311,7 @@ class CMatakuliah extends MainPageM {
     }
   }
   public function deleteRecord($sender, $param) {        
-    $id=$this->getDataKeyField($sender, $this->RepeaterS);
+    $id = $this->getDataKeyField($sender, $this->RepeaterS);
     if ($this->DB->checkRecordIsExist ('kmatkul', 'penyelenggaraan', $id)) {	
       $kmatkul = $this->Demik->getKMatkul($id);
       $this->lblHeaderMessageError->Text='Menghapus Matakuliah';

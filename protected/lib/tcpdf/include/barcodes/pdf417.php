@@ -664,7 +664,7 @@ class PDF417 {
 		for ($r = 0; $r < $rows; ++$r) {
 			// row start code
 			$row = $pstart;
-			switch ($cid) {
+			switch($cid) {
 				case 0: {
 					$L = ((30 * intval($r / 3)) + intval(($rows - 1) / 3));
 					break;
@@ -685,7 +685,7 @@ class PDF417 {
 				$row .= sprintf('%17b', $this->clusters[$cid][$codewords[$k]]);
 				++$k;
 			}
-			switch ($cid) {
+			switch($cid) {
 				case 0: {
 					$L = ((30 * intval($r / 3)) + ($cols - 1));
 					break;

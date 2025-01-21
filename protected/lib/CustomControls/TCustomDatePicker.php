@@ -449,7 +449,7 @@ class TCustomDatePicker extends TTextBox
 	{
 		if($this->getShowCalendar())
 		{
-			switch ($this->getMode())
+			switch($this->getMode())
 			{
 				case TCustomDatePickerMode::Button:
 					$this->renderButtonDatePicker($writer);

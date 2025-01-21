@@ -20,7 +20,7 @@ class MainPageON extends MainPage {
      * show page stop input nilai oleh dosen [nilai]
      */
     public $showStopInputNilai=false;
-	public function onLoad ($param) {		
+	public function onLoad($param) {		
 		parent::onLoad($param);				
         if (!$this->IsPostBack&&!$this->IsCallBack) {	           
         }

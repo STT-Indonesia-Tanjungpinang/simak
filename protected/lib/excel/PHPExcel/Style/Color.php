@@ -105,7 +105,7 @@ class PHPExcel_Style_Color extends PHPExcel_Style_Supervisor implements PHPExcel
      */
     public function getSharedComponent()
     {
-        switch ($this->parentPropertyName) {
+        switch($this->parentPropertyName) {
             case 'endColor':
                 return $this->parent->getSharedComponent()->getEndColor();
             case 'color':
@@ -123,7 +123,7 @@ class PHPExcel_Style_Color extends PHPExcel_Style_Supervisor implements PHPExcel
      */
     public function getStyleArray($array)
     {
-        switch ($this->parentPropertyName) {
+        switch($this->parentPropertyName) {
             case 'endColor':
                 $key = 'endcolor';
                 break;

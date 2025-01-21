@@ -74,7 +74,7 @@ class CCalonMHS Extends MainPageM {
         if ($search) {
             $str = "SELECT DISTINCT(fp.no_formulir),fp.nama_mhs,fp.jk,t.idkelas,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.kjur,rm.perpanjang FROM transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'no_formulir':
                     $clausa=" AND fp.no_formulir='$txtsearch'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    

@@ -231,7 +231,7 @@ class PHPExcel_Writer_Excel2007_DocProps extends PHPExcel_Writer_Excel2007_Write
             $objWriter->writeAttribute('pid', $key+2);
             $objWriter->writeAttribute('name', $customProperty);
 
-            switch ($propertyType) {
+            switch($propertyType) {
                 case 'i':
                     $objWriter->writeElement('vt:i4', $propertyValue);
                     break;

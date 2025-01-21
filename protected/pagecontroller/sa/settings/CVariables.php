@@ -6,7 +6,7 @@ class CVariables extends MainPageSA {
 		$this->showVariable=true;       
 		if (!$this->IsPostBack && !$this->IsCallback) {	           
             if (!isset($_SESSION['currentPageVariables']) || $_SESSION['currentPageVariables']['page_name'] != 'sa.settings.Variables') {
-				$_SESSION['currentPageVariables'] = array('page_name' => 'sa.settings.Variables', 'page_num'=>0);												
+				$_SESSION['currentPageVariables'] = array('page_name' => 'sa.settings.Variables', 'page_num'=> 0);												
 			}            
             $this->populateData(); 
 		}
@@ -70,7 +70,7 @@ class CVariables extends MainPageSA {
     }
     public function saveData($sender, $param) {
         if ($this->IsValid) {
-            switch ($sender->getId()) {
+            switch($sender->getId()) {
                 case 'btnSaveDataPT':
                     $nama_pt=addslashes($this->txtNamaPT->Text);
                     $str = "UPDATE setting SET value='$nama_pt' WHERE setting_id=4";            

@@ -41,7 +41,7 @@ class Autorisasi extends TModule implements IUserManager {
 		$um = new UserManager();
 		$um->setUser($username);
 		$result = $um->getUser();
-        switch ($result['page']) {
+        switch($result['page']) {
             case 'mh':
                 $pass=md5($password);
                 if ($result['k_status']=='A' || $result['k_status']=='C' || $result['k_status']=='N') {                                        			

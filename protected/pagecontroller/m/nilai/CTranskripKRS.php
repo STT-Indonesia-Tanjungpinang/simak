@@ -1,7 +1,7 @@
 <?php
 prado::using ('Application.MainPageM');
 class CTranskripKRS extends MainPageM {	
-	public function onLoad ($param) {
+	public function onLoad($param) {
 		parent::onLoad($param);		
         $this->showSubMenuAkademikNilai=true;
         $this->showTranskripKRS=true;    
@@ -69,7 +69,7 @@ class CTranskripKRS extends MainPageM {
         if ($search) {
             $str = "SELECT nim,nama_mhs,jk,kjur,tahun_masuk,idkonsentrasi,tahun_masuk FROM v_datamhs";			
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="WHERE nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
@@ -126,12 +126,12 @@ class CTranskripKRS extends MainPageM {
 	}		
 	public function printOut($sender, $param) {		
         $this->createObj('reportnilai');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-		switch ($sender->getId()) {
+		switch($sender->getId()) {
 			case 'btnPrintOutR':                
 				$nim = $this->getDataKeyField($sender, $this->RepeaterS);				
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
@@ -164,7 +164,7 @@ class CTranskripKRS extends MainPageM {
                 }
 			break;			
             case 'btnPrintTranskripKRSAll':                 
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;

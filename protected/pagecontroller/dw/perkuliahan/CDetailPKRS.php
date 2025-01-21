@@ -147,9 +147,9 @@ class CDetailPKRS extends MainPageDW {
     }
 	public function printKRS($sender, $param) {
         $this->createObj('reportkrs');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

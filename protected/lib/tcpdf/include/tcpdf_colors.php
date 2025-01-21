@@ -277,7 +277,7 @@ class TCPDF_COLORS {
 		if (strpos($color, '[') !== false) {
 			if (preg_match('/[\[][\"\'](t|g|rgb|cmyk)[\"\'][\,]?([0-9\.]*)[\,]?([0-9\.]*)[\,]?([0-9\.]*)[\,]?([0-9\.]*)[\]]/', $color, $m) > 0) {
 				$returncolor = array();
-				switch ($m[1]) {
+				switch($m[1]) {
 					case 'cmyk': {
 						// RGB
 						$returncolor['C'] = max(0, min(100, (floatval($m[2]) * 100)));
@@ -368,7 +368,7 @@ class TCPDF_COLORS {
 			$color_code = substr($color, 1);
 		}
 		// HEXADECIMAL REPRESENTATION
-		switch (strlen($color_code)) {
+		switch(strlen($color_code)) {
 			case 3: {
 				// 3-digit RGB hexadecimal representation
 				$r = substr($color_code, 0, 1);
@@ -415,7 +415,7 @@ class TCPDF_COLORS {
 	public static function getColorStringFromArray($c) {
 		$c = array_values($c);
 		$color = '[';
-		switch (count($c)) {
+		switch(count($c)) {
 			case 4: {
 				// CMYK
 				$color .= sprintf('%F %F %F %F', (max(0, min(100, floatval($c[0]))) / 100), (max(0, min(100, floatval($c[1]))) / 100), (max(0, min(100, floatval($c[2]))) / 100), (max(0, min(100, floatval($c[3]))) / 100));

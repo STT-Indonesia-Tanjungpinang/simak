@@ -128,7 +128,7 @@ class CKRS Extends MainPageSA {
         $str_tahun_masuk = $tahun_masuk=='none'?'':" AND vdm.tahun_masuk = $tahun_masuk";        
         if ($search) {
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";                                        
                 break;
@@ -262,8 +262,8 @@ class CKRS Extends MainPageSA {
                 }                
             }
         }catch(Exception $e) {			
-            $sender->ErrorMessage=$e->getMessage();				
-            $param->IsValid=false;			
+            $sender->ErrorMessage = $e->getMessage();				
+            $param->IsValid = false;			
 		}
 	}
 	public function isiKRS($sender, $param) {
@@ -315,10 +315,10 @@ class CKRS Extends MainPageSA {
     }
     public function printOut($sender, $param) {
         $this->createObj('reportkrs');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
         
-        switch ($sender->getId()) {
+        switch($sender->getId()) {
 			case 'btnPrintOutR':
                 $nim = $this->getDataKeyField($sender, $this->RepeaterS);
                 $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE vdm.nim='$nim'";
@@ -330,7 +330,7 @@ class CKRS Extends MainPageSA {
                 $this->KRS->setDataMHS($datamhs);
                 $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);
 
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
@@ -369,7 +369,7 @@ class CKRS Extends MainPageSA {
             case 'btnPrintKRSAll':
                 $repeater = $this->RepeaterS;
                 if ($repeater->Items->Count() > 0) {
-                    switch ($_SESSION['outputreport']) {
+                    switch($_SESSION['outputreport']) {
                         case 'summarypdf':
                             $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                         break;

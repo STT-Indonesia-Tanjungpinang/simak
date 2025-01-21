@@ -8,7 +8,7 @@ class Logic_Nilai extends Logic_Akademik {
   /**
   * property untuk angka mutu
   */
-  private $AngkaMutu=array('A'=>4,'B'=>3,'C'=>2,'D'=>1,'E'=>0); 		
+  private $AngkaMutu=array('A'=>4,'B'=>3,'C'=>2,'D'=>1,'E'=> 0); 		
   /**
   * Property untuk menyimpan data nilai dari hasil getTranskrip (),getKHS ()
   */
@@ -187,7 +187,7 @@ class Logic_Nilai extends Logic_Akademik {
             $m=$am*$v['sks'];	
           }			
         }	
-        $v['n_kual']=($hm== '')?'-':$hm;
+        $v['n_kual']=($hm== '') ? '-':$hm;
         $v['am']=$am;
         $v['m']=$m;	                               
         if ($v['idkonsentrasi'] == 0) {
@@ -272,7 +272,7 @@ class Logic_Nilai extends Logic_Akademik {
           $m=$am*$v['sks'];                    
         }			
       }	
-      $v['n_kual']=($hm== '')?'-':$hm;
+      $v['n_kual']=($hm== '') ? '-':$hm;
       $v['am']=$am;
       $v['m']=$m;		                        
       if ($v['idkonsentrasi'] == 0) {               
@@ -543,7 +543,7 @@ class Logic_Nilai extends Logic_Akademik {
     $this->db->setFieldTable(array('sks', 'n_kual'));
     $result=$this->db->getRecord($str);
     
-    $nilai=array('total_sks'=>0,'total_nm'=>0);
+    $nilai=array('total_sks'=>0,'total_nm'=> 0);
     if (isset($result[1])) {
       while (list($k, $v)=each($result )) {                
         $total_sks = $total_sks+$v['sks'];
@@ -572,8 +572,8 @@ class Logic_Nilai extends Logic_Akademik {
     if ($mode == null) {
       return $this->getIPSAdaNilai();        
     }else{
-      $data=array('ipk' => '0.00', 'sks'=>0);
-      switch ($mode) {
+      $data=array('ipk' => '0.00', 'sks'=> 0);
+      switch($mode) {
         case 'ipksks':
           $data['ipk']=$this->getIPSAdaNilai();
           $data['sks']=$this->getTotalSKS();                    

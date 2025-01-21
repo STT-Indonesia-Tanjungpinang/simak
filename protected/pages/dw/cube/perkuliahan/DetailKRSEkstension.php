@@ -56,7 +56,7 @@ class DetailKRSEkstension extends MainPageDW {
             $this->KRS->setDataMHS($datamhs);
             
             $kelas = $this->KRS->getKelasMhs();	
-            $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
+            $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
             
             $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -86,7 +86,7 @@ class DetailKRSEkstension extends MainPageDW {
         $this->redirect ('perkuliahan.TambahKRSEkstension',true);
     }
     public function deleteRecord ($sender, $param) {        
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);  
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);  
         $idkrs = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs'];
         $this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul=$id");
         $this->redirect ('perkuliahan.DetailKRSEkstension',true,array('id' => $idkrs));        
@@ -97,9 +97,9 @@ class DetailKRSEkstension extends MainPageDW {
     }
 	public function printKRS ($sender, $param) {
         $this->createObj('reportkrs');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

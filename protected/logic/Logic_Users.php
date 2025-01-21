@@ -69,7 +69,7 @@ class Logic_Users extends Logic_Global {
 	* @return datauser
 	*/
 	public function getDataUser ($id='all') {						
-	    if ($id=='all') {
+	    if ($id == 'all') {
 			return $this->DataUser;
 	    }else{
 	        return isset($this->DataUser[$id])?$this->DataUser[$id]:'N.A';
@@ -129,10 +129,10 @@ class Logic_Users extends Logic_Global {
      * @param type $activity
      */
     public function insertNewActivity ($page, $activity) {
-    	$userid=$this->getUserid ();
+    	$userid = $this->getUserid ();
     	if ($userid > 0) {    		
-		    $username=$this->getUsername ();
-		    $str = "INSERT INTO log_aktivitas_user SET userid=$userid,username='$username',halaman='$page',aktivitas='$activity',date_activity=NOW()";
+		    $username = $this->getUsername ();
+		    $str = "INSERT INTO log_aktivitas_user SET userid = $userid,username='$username',halaman='$page',aktivitas='$activity',date_activity=NOW()";
 		    $this->db->insertRecord($str);        
     	}
     } 

@@ -12,7 +12,7 @@ class Login extends MainPage {
 		}
 	}
     private function getGoingToPage () {		
-		switch ($this->cmbGoingTo->Text) {
+		switch($this->cmbGoingTo->Text) {
             case 'sa':
 				$page = 'SuperAdmin';
 			break;
@@ -59,7 +59,7 @@ class Login extends MainPage {
                     <strong>Error!</strong>
                     '.$e->getMessage().'</div>';
 				$sender->ErrorMessage=$message;					
-				$param->IsValid=false;		
+				$param->IsValid = false;		
 			}
         }							
 		
@@ -76,7 +76,7 @@ class Login extends MainPage {
                     <strong>Error!</strong>
                     '.$e->getMessage().'</div>';
 				$sender->ErrorMessage=$message;					
-				$param->IsValid=false;		
+				$param->IsValid = false;		
 			}
         }							
 		
@@ -86,7 +86,7 @@ class Login extends MainPage {
             $pengguna=$this->getLogic('Users');      
             $setup = $this->getLogic('Setup');
             $dmaster=$this->getLogic('DMaster');
-            switch ($pengguna->getTipeUser()) {
+            switch($pengguna->getTipeUser()) {
                 case 'sa':
                     //daftar prodi diload saat awal, tujuannya supaya tidak terus2an diload.
                     $_SESSION['daftar_jurusan']=$dmaster->getListProgramStudi(2);
@@ -151,7 +151,7 @@ class Login extends MainPage {
                     $foto='resources/userimages/no_photo.png';
                 break; 
                 case 'on':
-                    $group_id=$pengguna->getDataUser('group_id');
+                    $group_id = $pengguna->getDataUser('group_id');
                     if ($group_id==3) {//prodi
                         $kjur=$pengguna->getDataUser('kjur');
                         $daftar_jurusan = $dmaster->getListProgramStudi(2);

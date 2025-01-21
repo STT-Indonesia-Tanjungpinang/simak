@@ -7,7 +7,7 @@ class CDiskusi extends MainPageD {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDiskusi']) || $_SESSION['currentPageDiskusi']['page_name'] != 'd.forum.Diskusi') {                                                                                
-                $_SESSION['currentPageDiskusi'] = array('page_name' => 'd.forum.Diskusi', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
+                $_SESSION['currentPageDiskusi'] = array('page_name' => 'd.forum.Diskusi', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=> 0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPageDiskusi']['activeviewindex']; 
 		}                
@@ -15,7 +15,7 @@ class CDiskusi extends MainPageD {
     public function changeView($sender, $param) {                
         $activeview = $_SESSION['currentPageDiskusi']['activeviewindex'];                
         if ($activeview == $this->MVMenuForum->ActiveViewIndex) {
-            switch ($activeview) {
+            switch($activeview) {
                 case 0 : //diskusi newsfeed
                     $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
                     $this->populateNewsFeed();
@@ -62,9 +62,9 @@ class CDiskusi extends MainPageD {
         $result = array();
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
-            $userid=$v['userid'];
+            $userid = $v['userid'];
             $photo='resources/userimages/no_photo.png';
-            switch ($v['tipe']) {
+            switch($v['tipe']) {
                 case 'mh':   
                     $str = "SELECT photo_profile FROM profiles_mahasiswa WHERE nim='$userid'";
                     $this->DB->setFieldTable (array('photo_profile'));			
@@ -138,7 +138,7 @@ class CDiskusi extends MainPageD {
         }
     }
     public function setUnreadFalse($sender, $param) {
-        $id=$this->getDataKeyField($sender, $this->RepeaterUnread);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterUnread);        
         $str="UPDATE forumposts SET unread=0 WHERE idpost=$id";
         $this->DB->updateRecord($str);
         $this->redirect('forum.DetailDiskusi', true, array('id' => $id));

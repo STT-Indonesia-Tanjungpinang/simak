@@ -168,7 +168,7 @@ class PHPExcel_Shared_ZipStreamWrapper
      */
     public function stream_seek($offset, $whence)
     {
-        switch ($whence) {
+        switch($whence) {
             case SEEK_SET:
                 if ($offset < strlen($this->data) && $offset >= 0) {
                      $this->position = $offset;

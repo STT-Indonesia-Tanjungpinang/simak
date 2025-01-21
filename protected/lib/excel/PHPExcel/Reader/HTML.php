@@ -247,10 +247,10 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
                     $attributeArray[$attribute->name] = $attribute->value;
                 }
 
-                switch ($child->nodeName) {
+                switch($child->nodeName) {
                     case 'meta':
                         foreach ($attributeArray as $attributeName => $attributeValue) {
-                            switch ($attributeName) {
+                            switch($attributeName) {
                                 case 'content':
                                     //    TODO
                                     //    Extract character set, so we can convert to UTF-8 if required
@@ -306,7 +306,7 @@ class PHPExcel_Reader_HTML extends PHPExcel_Reader_Abstract implements PHPExcel_
                     case 'a':
 //                        echo 'START OF HYPERLINK: ' , '<br />';
                         foreach ($attributeArray as $attributeName => $attributeValue) {
-                            switch ($attributeName) {
+                            switch($attributeName) {
                                 case 'href':
 //                                    echo 'Link to ' , $attributeValue , '<br />';
                                     $sheet->getCell($column . $row)->getHyperlink()->setUrl($attributeValue);

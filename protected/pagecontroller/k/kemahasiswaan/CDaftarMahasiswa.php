@@ -57,7 +57,7 @@ class CDaftarMahasiswa extends MainPageK {
 		$this->populateData($_SESSION['currentPageDaftarMahasiswa']['search']);
 	}
     public function filterKonsentrasi($sender, $param) {
-        $id=$this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
+        $id = $this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
         $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = $id;
         
         $this->populateSummary();
@@ -74,7 +74,7 @@ class CDaftarMahasiswa extends MainPageK {
             $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,tempat_lahir,tanggal_lahir,alamat_rumah,kjur,idkonsentrasi,iddosen_wali,tahun_masuk,k_status,idkelas FROM v_datamhs";			
             $txtsearch = addslashes($this->txtKriteria->Text);
 			$this->cmbKriteria->Text;
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="WHERE nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
@@ -97,7 +97,7 @@ class CDaftarMahasiswa extends MainPageK {
             $idkonsentrasi = $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'];
             $str_konsentrasi = ($idkonsentrasi == 'none' || $idkonsentrasi == '') ?'':" AND idkonsentrasi = $idkonsentrasi";
             $kelas = $_SESSION['kelas'];
-            $str_kelas = ($kelas == 'none' || $kelas == '')?'':" AND idkelas='$kelas'";
+            $str_kelas = ($kelas == 'none' || $kelas == '') ? '':" AND idkelas='$kelas'";
             $status = $_SESSION['currentPageDaftarMahasiswa']['k_status'];
             $str_status = $status == 'none'?'':" AND k_status='$status'";
             $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs WHERE kjur = $kjur $str_tahun_masuk $str_konsentrasi $str_kelas $str_status",'nim');		
@@ -140,9 +140,9 @@ class CDaftarMahasiswa extends MainPageK {
     }
     public function printOut($sender, $param) {	
         $this->createObj('reportakademik');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

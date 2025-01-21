@@ -190,7 +190,7 @@ class MainPage extends TPage
     $this->Theme=$theme;
     $this->MasterClass="Application.layouts.$theme.MainTemplate";				
   }
-  public function onLoad ($param) {		
+  public function onLoad($param) {		
     parent::onLoad($param);						            
     //instantiasi fungsi tanggal
     $this->TGL = $this->getLogic ('Penanggalan');        
@@ -349,7 +349,7 @@ class MainPage extends TPage
    * digunakan untuk membuat berbagai macam object
    */
   public function createObj ($nama_object) {
-    switch (strtolower($nama_object)) {
+    switch(strtolower($nama_object)) {
       case 'dmaster':
         $this->DMaster = $this->getLogic('DMaster');
       break;                        

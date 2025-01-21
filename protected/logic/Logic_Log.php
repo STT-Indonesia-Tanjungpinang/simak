@@ -22,7 +22,7 @@ class Logic_Log extends Logic_Users
     $userid = $this->getUserid();
     $tipe = $this->getTipeUser();
     $this->db->setFieldTable(array('idlog_master'));
-    $r = $this->db->getRecord("SELECT idlog_master FROM log_master WHERE userid=$userid");
+    $r = $this->db->getRecord("SELECT idlog_master FROM log_master WHERE userid = $userid");
     if (isset($r[1]))
     {
       $this->idlogmaster = $r[1]['idlog_master'];
@@ -30,7 +30,7 @@ class Logic_Log extends Logic_Users
     else
     {
       $this->db->insertRecord("INSERT INTO log_master (userid,tipe_id) VALUES ('$userid', '$tipe')");
-      $r = $this->db->getRecord("SELECT idlog_master FROM log_master WHERE userid=$userid");
+      $r = $this->db->getRecord("SELECT idlog_master FROM log_master WHERE userid = $userid");
       $this->idlogmaster = $r[1]['idlog_master'];
     }
     return $this->idlogmaster;
@@ -44,7 +44,7 @@ class Logic_Log extends Logic_Users
     $idlogmaster = $this->idlogmaster;		
     $str = "INSERT INTO log_transkrip_asli (idlog_master,tanggal,nim,kmatkul,nmatkul,aktivitas,keterangan) VALUES ";
     $ket = '';
-    switch (strtolower($aktivitas))
+    switch(strtolower($aktivitas))
     {
       case 'delete':
         $ket = "hapus nilai $nilai_awal";
@@ -72,7 +72,7 @@ class Logic_Log extends Logic_Users
     $idlogmaster = $this->idlogmaster;		
     $str = "INSERT INTO log_nilai_matakuliah (idlog_master,tanggal,nim,kmatkul,nmatkul,aktivitas,keterangan) VALUES ";
     $ket = '';
-    switch (strtolower($aktivitas))
+    switch(strtolower($aktivitas))
     {
       case 'delete':
         $ket = "hapus nilai $nilai_awal";

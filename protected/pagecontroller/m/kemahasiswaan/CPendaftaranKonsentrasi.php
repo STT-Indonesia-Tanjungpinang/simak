@@ -38,7 +38,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
 		$this->RepeaterS->render($param->NewWriter);	
 	}	
     public function filterKonsentrasi($sender, $param) {
-        $id=$this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
+        $id = $this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
         $_SESSION['currentPagePendaftaranKonsentrasi']['idkonsentrasi'] = $id;
         $this->populateKonsentrasi();
         $this->populateData();
@@ -75,7 +75,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
         $item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {         
             $item->lblStatusPendaftaran->Text = $this->DMaster->getStatusPendaftaranKonsentrasi($item->DataItem['status_daftar']);
-            switch ($item->DataItem['status_daftar']) {
+            switch($item->DataItem['status_daftar']) {
                 case 0 :
                     $cssclass='label label-info';
                 break;
@@ -93,7 +93,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
         if ($search) {
             $str = "SELECT vdm.nim,vdm.nama_mhs,pk.jumlah_sks,pk.kjur,pk.idkonsentrasi,pk.status_daftar FROM v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim";			
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa=" AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');

@@ -1,7 +1,7 @@
 <?php
 
 class MainTemplate extends TTemplateControl {
-    public function onLoad ($param) {
+    public function onLoad($param) {
 		parent::onLoad($param);		        
 		if (!$this->Page->IsPostBack&&!$this->Page->IsCallback) {		
             $tipeuser=$this->Page->Pengguna->getTipeUser();
@@ -23,9 +23,9 @@ class MainTemplate extends TTemplateControl {
     public function changeTheme ($sender, $param) {
         $theme=$sender->CommandParameter;        
         $_SESSION['theme']=$theme;
-        $userid=$this->Page->Pengguna->getDataUser('userid');
+        $userid = $this->Page->Pengguna->getDataUser('userid');
         $page = $this->Page->Pengguna->getDataUser('page');
-        switch ($page) {
+        switch($page) {
             case 'm':
                 $str = "UPDATE simak_user SET theme='$theme' WHERE userid='$userid'";
                 $this->Page->DB->updateRecord($str);
@@ -40,7 +40,7 @@ class MainTemplate extends TTemplateControl {
     public function getStatusUser() {
         $page = $this->Page->Pengguna->getDataUser('page');
         $status='';
-        switch ($page) {
+        switch($page) {
             case 'mh':
                 $statusmhs = $this->Page->DMaster->getNamaStatusMHSByID ($this->Page->Pengguna->getDataUser('k_status'));
                 $status='<i class="fa fa-circle"></i> '.$statusmhs;            

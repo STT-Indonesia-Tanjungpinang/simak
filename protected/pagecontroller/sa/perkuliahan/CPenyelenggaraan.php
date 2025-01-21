@@ -150,7 +150,7 @@ class CPenyelenggaraan extends MainPageSA {
 	}
 	
 	public function deleteRecord($sender, $param) {		
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idpenyelenggaraan', 'krsmatkul', $id)) {	            
             $this->lblHeaderMessageError->Text='Menghapus Penyelenggaraan Matakuliah';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";

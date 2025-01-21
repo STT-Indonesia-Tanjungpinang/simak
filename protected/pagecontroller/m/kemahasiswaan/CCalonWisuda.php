@@ -30,7 +30,7 @@ class CCalonWisuda Extends MainPageM {
         if ($search) {
             $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='L'";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'no_formulir':
                     $clausa="AND vdm.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.k_status='L' $clausa",'vdm.nim');
@@ -108,8 +108,8 @@ class CCalonWisuda Extends MainPageM {
                     $_SESSION['currentPageCalonWisuda']['DataMHS'] = $datamhs;
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
@@ -159,10 +159,10 @@ class CCalonWisuda Extends MainPageM {
 	}
     public function printOut($sender, $param) {		
         $this->createObj('reportakademik');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
         
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

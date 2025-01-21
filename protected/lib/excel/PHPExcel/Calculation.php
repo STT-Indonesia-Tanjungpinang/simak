@@ -2365,7 +2365,7 @@ class PHPExcel_Calculation
                         if (strpos($localeSetting, '=') !== false) {
                             list($settingName, $settingValue) = explode('=', $localeSetting);
                             $settingName = strtoupper(trim($settingName));
-                            switch ($settingName) {
+                            switch($settingName) {
                                 case 'ARGUMENTSEPARATOR':
                                     self::$localeArgumentSeparator = trim($settingValue);
                                     break;
@@ -2390,7 +2390,7 @@ class PHPExcel_Calculation
         $strlen = mb_strlen($formula);
         for ($i = 0; $i < $strlen; ++$i) {
             $chr = mb_substr($formula, $i, 1);
-            switch ($chr) {
+            switch($chr) {
                 case '{':
                     $inBraces = true;
                     break;
@@ -3257,7 +3257,7 @@ class PHPExcel_Calculation
                         $isOperandOrFunction = preg_match('/(\d*)([-+,])(\d*)/', $expectedArgumentCount, $argMatch);
 //print_r($argMatch);
 //echo PHP_EOL;
-                        switch ($argMatch[2]) {
+                        switch($argMatch[2]) {
                             case '+':
                                 if ($argumentCount < $argMatch[1]) {
                                     $argumentCountError = true;
@@ -3545,7 +3545,7 @@ class PHPExcel_Calculation
                 }
 
                 //    Process the operation in the appropriate manner
-                switch ($token) {
+                switch($token) {
                     //    Comparison (Boolean) Operators
                     case '>':            //    Greater than
                     case '<':            //    Less than
@@ -4015,7 +4015,7 @@ class PHPExcel_Calculation
         $useLowercaseFirstComparison = is_string($operand1) && is_string($operand2) && PHPExcel_Calculation_Functions::getCompatibilityMode() == PHPExcel_Calculation_Functions::COMPATIBILITY_OPENOFFICE;
 
         //    execute the necessary operation
-        switch ($operation) {
+        switch($operation) {
             //    Greater than
             case '>':
                 if ($useLowercaseFirstComparison) {
@@ -4120,12 +4120,12 @@ class PHPExcel_Calculation
             }
         } else {
             if ((PHPExcel_Calculation_Functions::getCompatibilityMode() != PHPExcel_Calculation_Functions::COMPATIBILITY_OPENOFFICE) &&
-                ((is_string($operand1) && !is_numeric($operand1) && strlen($operand1)>0) ||
-                 (is_string($operand2) && !is_numeric($operand2) && strlen($operand2)>0))) {
+                ((is_string($operand1) && !is_numeric($operand1) && strlen($operand1)> 0) ||
+                 (is_string($operand2) && !is_numeric($operand2) && strlen($operand2)> 0))) {
                 $result = PHPExcel_Calculation_Functions::VALUE();
             } else {
                 //    If we're dealing with non-matrix operations, execute the necessary operation
-                switch ($operation) {
+                switch($operation) {
                     //    Addition
                     case '+':
                         $result = $operand1 + $operand2;

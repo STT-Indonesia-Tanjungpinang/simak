@@ -14,9 +14,9 @@ class commitTransaction extends BaseWS {
 				throw new Exception ("Proses Login telah berhasil, namun ada error yaitu data no_transaksi kosong !!!");
 			}
 			$no_transaksi=addslashes($data['no_transaksi']);
-			$userid=$this->Pengguna->getDataUser('userid');
+			$userid = $this->Pengguna->getDataUser('userid');
 			$tipe_transaksi = substr($no_transaksi, 0,2);
-			switch ($tipe_transaksi) {
+			switch($tipe_transaksi) {
 				case 10: //bayar biasa
 					$str = "SELECT t.no_transaksi,t.kjur,t.no_formulir,fp.nama_mhs,t.nim,t.tahun,t.idsmt,t.idkelas,rm.k_status,rm.perpanjang,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.commited FROM transaksi t LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (t.no_formulir=rm.no_formulir) WHERE t.no_transaksi='$no_transaksi'";
 					$this->DB->setFieldTable(array('no_transaksi', 'kjur', 'no_formulir', 'nama_mhs', 'nim', 'tahun', 'idsmt', 'idkelas', 'k_status', 'perpanjang', 'commited', 'tahun_masuk', 'semester_masuk'));		

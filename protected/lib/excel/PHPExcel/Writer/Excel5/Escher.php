@@ -77,7 +77,7 @@ class PHPExcel_Writer_Excel5_Escher
         // initialize
         $this->data = '';
 
-        switch (get_class($this->object)) {
+        switch(get_class($this->object)) {
             case 'PHPExcel_Shared_Escher':
                 if ($dggContainer = $this->object->getDggContainer()) {
                     $writer = new PHPExcel_Writer_Excel5_Escher($dggContainer);
@@ -222,7 +222,7 @@ class PHPExcel_Writer_Excel5_Escher
                 // this is an atom record
 
                 // write the record
-                switch ($this->object->getParent()->getBlipType()) {
+                switch($this->object->getParent()->getBlipType()) {
                     case PHPExcel_Shared_Escher_DggContainer_BstoreContainer_BSE::BLIPTYPE_JPEG:
                         // initialize
                         $innerData = '';

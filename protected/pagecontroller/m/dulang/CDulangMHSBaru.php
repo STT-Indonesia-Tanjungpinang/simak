@@ -74,7 +74,7 @@ class CDulangMHSBaru Extends MainPageM {
         if ($search) {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.iddosen_wali,d.tanggal,d.idkelas FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'no_formulir':
                     $clausa="AND vdm.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
@@ -158,8 +158,8 @@ class CDulangMHSBaru Extends MainPageM {
                     $_SESSION['currentPageDulangMHSBaru']['DataMHS'] = $datamhs;                    
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }

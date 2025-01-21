@@ -63,7 +63,7 @@ $url = "http://mostti.wanayasa.net:17180/links/api2";
 $salt = 'S771';
 $h = '11'; //saat development
 try {
-  $conn = new PDO("mysql:host=$host;port=3306;dbname=$db", $user, $password);
+  $conn = new PDO("mysql:host=$host;port=3306;dbname = $db", $user, $password);
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   

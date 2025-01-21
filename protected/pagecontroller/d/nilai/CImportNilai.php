@@ -63,7 +63,7 @@ class CImportNilai extends MainPageD {
       {
         $file_type=$sender->FileType;
         $bool=false;
-        switch ($file_type) {
+        switch($file_type) {
           case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
             $bool=true;
           break;
@@ -168,7 +168,7 @@ class CImportNilai extends MainPageD {
   public function printOut($sender, $param)
   {	
     $this->createObj('reportnilai');
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
     
     $dataReport=$_SESSION['currentPageImportNilai']['DataNilai'];

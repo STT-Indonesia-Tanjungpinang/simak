@@ -52,7 +52,7 @@ class DBFactory extends TModule {
 	*/
 	private function linkOpen() {
 		$this->prepareParameters();
-		switch ($this->DbType) {
+		switch($this->DbType) {
 			case 'postgres':
 				prado::using ('Application.lib.Database.PostgreSQL');
 				$this->Link = new PostgreSQL ();

@@ -41,7 +41,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                 $datamhs['iddata_konversi'] = $this->Finance->isMhsPindahan($datamhs['nim'],true);            
                 
                 $kelas = $this->Finance->getKelasMhs();                
-                $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
+                $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
                 $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
                 $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -97,7 +97,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
 		}
 	}
     public function checkNomorFaktur($sender, $param) {
-		$this->idProcess = $sender->getId()=='addNomorFaktur'?'add':'edit';
+		$this->idProcess = $sender->getId() == 'addNomorFaktur'?'add':'edit';
         $no_faktur = $param->Value;		
         if ($no_faktur != '') {
             try {
@@ -105,8 +105,8 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
                     throw new Exception ("Nomor Faktur dari ($no_faktur) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
@@ -124,7 +124,7 @@ class CDetailPembayaranCutiSemesterGenap Extends MainPageK {
             $this->Finance->setDataMHS($datamhs);
             $dibayarkan = $this->Finance->getBiayaCuti($datamhs['tahun_masuk'], $datamhs['semester_masuk'], $datamhs['idkelas']);
             
-            $str = "INSERT INTO transaksi_cuti SET no_transaksi='$no_transaksi',no_faktur='$no_faktur',tahun = $tahun,idsmt=2,nim='$nim',idkombi=0,dibayarkan = $dibayarkan,commited=0,tanggal='$tanggal',date_added=NOW(),date_modified=NOW(),userid=$userid";
+            $str = "INSERT INTO transaksi_cuti SET no_transaksi='$no_transaksi',no_faktur='$no_faktur',tahun = $tahun,idsmt=2,nim='$nim',idkombi=0,dibayarkan = $dibayarkan,commited=0,tanggal='$tanggal',date_added=NOW(),date_modified=NOW(),userid = $userid";
             $this->DB->insertRecord($str);
             
             $this->redirect('pembayaran.DetailPembayaranCutiSemesterGenap',true,array('id' => $nim));

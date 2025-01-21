@@ -6,7 +6,7 @@ class CExportData extends MainPageSA {
         $this->showVariable=true;       
         if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageExportData']) || $_SESSION['currentPageExportData']['page_name'] != 'sa.settings.ExportData') {
-                $_SESSION['currentPageExportData'] = array('page_name' => 'sa.settings.ExportData', 'page_num'=>0);                                              
+                $_SESSION['currentPageExportData'] = array('page_name' => 'sa.settings.ExportData', 'page_num'=> 0);                                              
             }            
         }
     }     
@@ -21,15 +21,15 @@ class CExportData extends MainPageSA {
                     throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }   
         }   
     }
     public function exportData($sender, $param) {
         if ($this->IsValid) {
             try {
-                switch ($sender->getId()) {
+                switch($sender->getId()) {
                     case 'btnSaveExportPerMHS':
                         $nim=addslashes($this->txtNIM->Text);
                         $this->exportDataMHS($nim);
@@ -87,7 +87,7 @@ class CExportData extends MainPageSA {
         return $content .="\n\n";
     }
     private function exportDataMHS ($value, $mode='nim') {
-        switch ($mode) {
+        switch($mode) {
             case 'nim':               
                 $str = "SELECT no_formulir,nim,nirm FROM register_mahasiswa WHERE nim='$value'";
                 $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm'));
@@ -385,7 +385,7 @@ class CExportData extends MainPageSA {
 // 		$this->showVariable=true;       
 // 		if (!$this->IsPostBack && !$this->IsCallback) {	           
 //             if (!isset($_SESSION['currentPageExportData']) || $_SESSION['currentPageExportData']['page_name'] != 'sa.settings.ExportData') {
-// 				$_SESSION['currentPageExportData'] = array('page_name' => 'sa.settings.ExportData', 'page_num'=>0);												
+// 				$_SESSION['currentPageExportData'] = array('page_name' => 'sa.settings.ExportData', 'page_num'=> 0);												
 // 			}            
 // 		}
 // 	}     
@@ -400,14 +400,14 @@ class CExportData extends MainPageSA {
 //                     throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
 //                 }
 //             }catch (Exception $e) {
-//                 $param->IsValid=false;
-//                 $sender->ErrorMessage=$e->getMessage();
+//                 $param->IsValid = false;
+//                 $sender->ErrorMessage = $e->getMessage();
 //             }   
 //         }   
 //     }
 //     public function exportData($sender, $param) {
 //         if ($this->IsValid) {
-//             switch ($sender->getId()) {
+//             switch($sender->getId()) {
 //                 case 'btnSaveExportNIM':
 //                     $nim=addslashes($this->txtNIM->Text);
 //                     $str = "";

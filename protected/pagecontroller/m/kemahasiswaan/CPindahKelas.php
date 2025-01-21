@@ -106,8 +106,8 @@ class CPindahKelas Extends MainPageM {
                 }
             }
 		}catch (Exception $e) {
-			$param->IsValid=false;
-            $sender->ErrorMessage=$e->getMessage();
+			$param->IsValid = false;
+            $sender->ErrorMessage = $e->getMessage();
             $this->populateData();
 		}	
 	}
@@ -137,7 +137,7 @@ class CPindahKelas Extends MainPageM {
 		}
 	}
     public function checkNoSurat($sender, $param) {
-        $this->idProcess = $sender->getId()=='addPindah'?'add':'edit';
+        $this->idProcess = $sender->getId() == 'addPindah'?'add':'edit';
         $no_surat=addslashes($param->Value);
 		try {
 			if ($no_surat != '') {
@@ -148,8 +148,8 @@ class CPindahKelas Extends MainPageM {
                 } 
             }
 		}catch (Exception $e) {
-			$param->IsValid=false;
-            $sender->ErrorMessage=$e->getMessage();
+			$param->IsValid = false;
+            $sender->ErrorMessage = $e->getMessage();
 		}	
 	}
 	public function saveData($sender, $param) {
@@ -209,7 +209,7 @@ class CPindahKelas Extends MainPageM {
 	}
 	public function updateData($sender, $param) {
 		if ($this->Page->IsValid) {
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
 			$tanggal=date ('Y-m-d', $this->cmbEditTanggal->TimeStamp);
 			$kelas_baru=$this->cmbEditKelasBaru->Text;
 			$no_surat=$this->txtEditNoSurat->getSafeText();
@@ -228,7 +228,7 @@ class CPindahKelas Extends MainPageM {
 	}	
 	public function deleteRecord($sender, $param) {
 		$idpindahkelas= $this->getDataKeyField($sender, $this->RepeaterS);
-		$id=$sender->CommandParameter;			
+		$id = $sender->CommandParameter;			
 		$this->DB->query ('BEGIN');
 		if ($this->DB->deleteRecord("pindahkelas WHERE idpindahkelas='$idpindahkelas'")) {
 			$id=explode('_', $id);

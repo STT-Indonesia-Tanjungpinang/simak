@@ -23,7 +23,7 @@ class CHome extends MainPageAPI {
     }  
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
         $this->hiddenid->Value=$id;     
         
         $str = "SELECT userid,username,nama,email,ipaddress,active FROM user WHERE userid='$id'";
@@ -37,7 +37,7 @@ class CHome extends MainPageAPI {
         $this->txtEditIPAddress->Text = $result['ipaddress']; 
     }  
     public function checkEmail($sender, $param) {
-        $this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
+        $this->idProcess = $sender->getId() == 'addEmail'?'add':'edit';
         $email = $param->Value;       
         if ($email != '') {
             try {   
@@ -47,25 +47,25 @@ class CHome extends MainPageAPI {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }   
         }   
     }     
     public function updateData($sender, $param) {
         if ($this->Page->isValid) {         
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
             $ipaddress = addslashes($this->txtEditIPAddress->Text);
             
             if ($this->txtEditPassword1->Text == '') {
-                $str = "UPDATE user SET email='$email',nama='$nama',ipaddress='$ipaddress' WHERE userid=$id";
+                $str = "UPDATE user SET email='$email',nama='$nama',ipaddress='$ipaddress' WHERE userid = $id";
             }else {
                 $data = $this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];                              
-                $str = "UPDATE user SET userpassword='$password',salt='$salt',ipaddress='$ipaddress',nama='$nama',email='$email' WHERE userid=$id";
+                $str = "UPDATE user SET userpassword='$password',salt='$salt',ipaddress='$ipaddress',nama='$nama',email='$email' WHERE userid = $id";
             }
             $this->DB->updateRecord($str); 
             $this->redirect('Home',true);
@@ -75,7 +75,7 @@ class CHome extends MainPageAPI {
     	$userid = $this->Pengguna->getDataUser('userid');
     	$data = $this->Pengguna->createHashPassword(mt_rand(1,1000));        
         $password=$data['password'];
-        $str = "UPDATE user SET token='$password' WHERE userid=$userid";
+        $str = "UPDATE user SET token='$password' WHERE userid = $userid";
         $this->DB->updateRecord($str); 
     	$this->redirect('Home',true);
     }

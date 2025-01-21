@@ -1997,7 +1997,7 @@ class TCPDF {
 	public function setPageUnit($unit) {
 		$unit = strtolower($unit);
 		//Set scale factor
-		switch ($unit) {
+		switch($unit) {
 			// points
 			case 'px':
 			case 'pt': {
@@ -2358,7 +2358,7 @@ class TCPDF {
 	 */
 	public function setTempRTL($mode) {
 		$newmode = false;
-		switch (strtoupper($mode)) {
+		switch(strtoupper($mode)) {
 			case 'LTR':
 			case 'L': {
 				if ($this->rtl) {
@@ -2718,7 +2718,7 @@ class TCPDF {
 				$line_width = $style['width'];
 			}
 			$adj = 0; // line width inside the cell
-			switch ($mode) {
+			switch($mode) {
 				case 'ext': {
 					$adj = 0;
 					break;
@@ -3698,7 +3698,7 @@ class TCPDF {
 		}
 		$tint = (max(0, min(100, $tint)) / 100);
 		$pdfcolor = sprintf('/CS%d ', $this->spot_colors[$name]['i']);
-		switch ($type) {
+		switch($type) {
 			case 'draw': {
 				$pdfcolor .= sprintf('CS %F SCN', $tint);
 				$this->DrawColor = $pdfcolor;
@@ -3898,7 +3898,7 @@ class TCPDF {
 				$pdfcolor = $this->setSpotColor($type, $name, 100);
 			}
 		}
-		switch ($type) {
+		switch($type) {
 			case 'draw': {
 				$pdfcolor .= strtoupper($suffix);
 				$this->DrawColor = $pdfcolor;
@@ -4280,7 +4280,7 @@ class TCPDF {
 			$enc = '';
 		}
 		if (!isset($cidinfo) OR TCPDF_STATIC::empty_string($cidinfo)) {
-			$cidinfo = array('Registry' => 'Adobe', 'Ordering' => 'Identity', 'Supplement'=>0);
+			$cidinfo = array('Registry' => 'Adobe', 'Ordering' => 'Identity', 'Supplement'=> 0);
 			$cidinfo['uni2cid'] = array();
 		}
 		if (!isset($ctg) OR TCPDF_STATIC::empty_string($ctg)) {
@@ -5068,10 +5068,10 @@ class TCPDF {
 		$prev_font_stretching = $this->font_stretching;
 		$prev_font_spacing = $this->font_spacing;
 		// cell vertical alignment
-		switch ($calign) {
+		switch($calign) {
 			case 'A': {
 				// font top
-				switch ($valign) {
+				switch($valign) {
 					case 'T': {
 						// top
 						$y -= $this->cell_padding['T'];
@@ -5094,7 +5094,7 @@ class TCPDF {
 			}
 			case 'L': {
 				// font baseline
-				switch ($valign) {
+				switch($valign) {
 					case 'T': {
 						// top
 						$y -= ($this->cell_padding['T'] + $this->FontAscent);
@@ -5117,7 +5117,7 @@ class TCPDF {
 			}
 			case 'D': {
 				// font bottom
-				switch ($valign) {
+				switch($valign) {
 					case 'T': {
 						// top
 						$y -= ($this->cell_padding['T'] + $this->FontAscent + $this->FontDescent);
@@ -5156,7 +5156,7 @@ class TCPDF {
 			}
 		}
 		// text vertical alignment
-		switch ($valign) {
+		switch($valign) {
 			case 'T': {
 				// top
 				$yt = $y + $this->cell_padding['T'];
@@ -5380,7 +5380,7 @@ class TCPDF {
 			}
 			// replace carriage return characters
 			$txt2 = str_replace("\r", ' ', $txt2);
-			switch ($align) {
+			switch($align) {
 				case 'C': {
 					$dx = ($w - $width) / 2;
 					break;
@@ -5577,7 +5577,7 @@ class TCPDF {
 				$prev_style = $this->linestyleWidth.' '.$this->linestyleCap.' '.$this->linestyleJoin.' '.$this->linestyleDash.' '.$this->DrawColor.' ';
 				$s .= $this->SetLineStyle($style, true)."\n";
 			}
-			switch ($mode) {
+			switch($mode) {
 				case 'ext': {
 					$off = (($this->LineWidth / 2) * $k);
 					$xL = $xeL - $off;
@@ -6580,7 +6580,7 @@ class TCPDF {
 		} // end while i < nb
 		// print last substring (if any)
 		if ($l > 0) {
-			switch ($align) {
+			switch($align) {
 				case 'J':
 				case 'C': {
 					$w = $w;
@@ -6854,7 +6854,7 @@ class TCPDF {
 				// height difference
 				$hdiff = ($oldh - $h);
 				// vertical alignment
-				switch (strtoupper($fitbox{1})) {
+				switch(strtoupper($fitbox{1})) {
 					case 'T': {
 						break;
 					}
@@ -6875,7 +6875,7 @@ class TCPDF {
 				// width difference
 				$wdiff = ($oldw - $w);
 				// horizontal alignment
-				switch (strtoupper($fitbox{0})) {
+				switch(strtoupper($fitbox{0})) {
 					case 'L': {
 						if ($this->rtl) {
 							$x -= $wdiff;
@@ -8135,7 +8135,7 @@ class TCPDF {
 						$fval = 0;
 						if (is_array($pl['opt']['f'])) {
 							foreach ($pl['opt']['f'] as $f) {
-								switch (strtolower($f)) {
+								switch(strtolower($f)) {
 									case 'invisible': {
 										$fval += 1 << 0;
 										break;
@@ -8299,7 +8299,7 @@ class TCPDF {
 					}
 					$lineendings = array('Square', 'Circle', 'Diamond', 'OpenArrow', 'ClosedArrow', 'None', 'Butt', 'ROpenArrow', 'RClosedArrow', 'Slash');
 					// Annotation types
-					switch (strtolower($pl['opt']['subtype'])) {
+					switch(strtolower($pl['opt']['subtype'])) {
 						case 'text': {
 							if (isset($pl['opt']['open'])) {
 								$annots .= ' /Open '. (strtolower($pl['opt']['open']) == 'true' ? 'true': 'false');
@@ -10449,7 +10449,7 @@ class TCPDF {
 		if (!$this->encrypted) {
 			return $s;
 		}
-		switch ($this->encryptdata['mode']) {
+		switch($this->encryptdata['mode']) {
 			case 0:   // RC4-40
 			case 1: { // RC4-128
 				$s = TCPDF_STATIC::_RC4($this->_objectkey($n), $s, $this->last_enc_key, $this->last_enc_key_c);
@@ -10873,7 +10873,7 @@ class TCPDF {
 		$this->encryptdata['user_password'] = $user_pass;
 		$this->encryptdata['owner_password'] = $owner_pass;
 		$this->encryptdata['mode'] = $mode;
-		switch ($mode) {
+		switch($mode) {
 			case 0: { // RC4 40 bit
 				$this->encryptdata['V'] = 1;
 				$this->encryptdata['Length'] = 40;
@@ -12151,7 +12151,7 @@ class TCPDF {
 		$y2R = $y1 + ($arm_size * sin($dir_angle - $arm_angle));
 		$mode = 'D';
 		$style = array();
-		switch ($head_style) {
+		switch($head_style) {
 			case 0: {
 				// draw only arrowhead arms
 				$mode = 'D';
@@ -12651,7 +12651,7 @@ class TCPDF {
 		$tmpid = $this->startTemplate($w, $h, false);
 		$align = '';
 		if (isset($popt['q'])) {
-			switch ($popt['q']) {
+			switch($popt['q']) {
 				case 0: {
 					$align = 'L';
 					break;
@@ -13177,7 +13177,7 @@ class TCPDF {
 						$ff = 0;
 						if (is_array($val)) {
 							foreach ($val AS $flag) {
-								switch ($flag) {
+								switch($flag) {
 									case 'Include/Exclude': {
 										$ff += 1 << 0;
 										break;
@@ -13982,7 +13982,7 @@ class TCPDF {
 		$xb = $x;
 		$yb = $y;
 		foreach ($bars as $col) {
-			switch ($col) {
+			switch($col) {
 				// set transition colors
 				case 'A': { // BLACK (GRAYSCALE)
 					$col_a = array(255);
@@ -14107,7 +14107,7 @@ class TCPDF {
 		$dw = ($w / 4); // horizontal space to leave before the intersection point
 		$dh = ($h / 4); // vertical space to leave before the intersection point
 		foreach ($crops as $crop) {
-			switch ($crop) {
+			switch($crop) {
 				case 'T':
 				case 'TOP': {
 					$x1 = $x;
@@ -14911,7 +14911,7 @@ class TCPDF {
 			$skip = false;
 			if ($fixoutvals) {
 				// check for values outside the bounding box
-				switch ($cmd) {
+				switch($cmd) {
 					case 'm':
 					case 'l':
 					case 'L': {
@@ -14926,7 +14926,7 @@ class TCPDF {
 					}
 				}
 			}
-			switch ($cmd) {
+			switch($cmd) {
 				case 'm':
 				case 'l':
 				case 'v':
@@ -15242,7 +15242,7 @@ class TCPDF {
 			$wold = $w;
 			$w = (($arrcode['maxw'] * $xres) + (2 * $hpadding));
 			if (isset($style['cellfitalign'])) {
-				switch ($style['cellfitalign']) {
+				switch($style['cellfitalign']) {
 					case 'L': {
 						if ($this->rtl) {
 							$x -= ($wold - $w);
@@ -15320,7 +15320,7 @@ class TCPDF {
 		if (!isset($style['align'])) {
 			$style['align'] = 'C';
 		}
-		switch ($style['align']) {
+		switch($style['align']) {
 			case 'L': {
 				$xpos = $xpos_rect + $hpadding;
 				break;
@@ -15782,7 +15782,7 @@ class TCPDF {
 	 * @since 5.7.000 (2010-08-02)
 	 */
 	protected function getCSSBorderDashStyle($style) {
-		switch (strtolower($style)) {
+		switch(strtolower($style)) {
 			case 'none':
 			case 'hidden': {
 				$dash = -1;
@@ -15820,7 +15820,7 @@ class TCPDF {
 	protected function getCSSBorderStyle($cssborder) {
 		$bprop = preg_split('/[\s]+/', trim($cssborder));
 		$border = array(); // value to be returned
-		switch (count($bprop)) {
+		switch(count($bprop)) {
 			case 3: {
 				$width = $bprop[0];
 				$style = $bprop[1];
@@ -15871,7 +15871,7 @@ class TCPDF {
 	public function getCSSPadding($csspadding, $width=0) {
 		$padding = preg_split('/[\s]+/', trim($csspadding));
 		$cell_padding = array(); // value to be returned
-		switch (count($padding)) {
+		switch(count($padding)) {
 			case 4: {
 				$cell_padding['T'] = $padding[0];
 				$cell_padding['R'] = $padding[1];
@@ -15925,7 +15925,7 @@ class TCPDF {
 	public function getCSSMargin($cssmargin, $width=0) {
 		$margin = preg_split('/[\s]+/', trim($cssmargin));
 		$cell_margin = array(); // value to be returned
-		switch (count($margin)) {
+		switch(count($margin)) {
 			case 4: {
 				$cell_margin['T'] = $margin[0];
 				$cell_margin['R'] = $margin[1];
@@ -15979,7 +15979,7 @@ class TCPDF {
 	public function getCSSBorderMargin($cssbspace, $width=0) {
 		$space = preg_split('/[\s]+/', trim($cssbspace));
 		$border_spacing = array(); // value to be returned
-		switch (count($space)) {
+		switch(count($space)) {
 			case 2: {
 				$border_spacing['H'] = $space[0];
 				$border_spacing['V'] = $space[1];
@@ -16013,7 +16013,7 @@ class TCPDF {
 	protected function getCSSFontSpacing($spacing, $parent=0) {
 		$val = 0; // value to be returned
 		$spacing = trim($spacing);
-		switch ($spacing) {
+		switch($spacing) {
 			case 'normal': {
 				$val = 0;
 				break;
@@ -16044,7 +16044,7 @@ class TCPDF {
 	protected function getCSSFontStretching($stretch, $parent=100) {
 		$val = 100; // value to be returned
 		$stretch = trim($stretch);
-		switch ($stretch) {
+		switch($stretch) {
 			case 'ultra-condensed': {
 				$val = 40;
 				break;
@@ -16116,7 +16116,7 @@ class TCPDF {
 	public function getHTMLFontUnits($val, $refsize=12, $parent_size=12, $defaultunit='pt') {
 		$refsize = TCPDF_FONTS::getFontRefSize($refsize);
 		$parent_size = TCPDF_FONTS::getFontRefSize($parent_size, $refsize);
-		switch ($val) {
+		switch($val) {
 			case 'xx-small': {
 				$size = ($refsize - 4);
 				break;
@@ -16527,7 +16527,7 @@ class TCPDF {
 						// line-height
 						if (isset($dom[$key]['style']['line-height'])) {
 							$lineheight = trim($dom[$key]['style']['line-height']);
-							switch ($lineheight) {
+							switch($lineheight) {
 								// A normal line height. This is default
 								case 'normal': {
 									$dom[$key]['line-height'] = $dom[0]['line-height'];
@@ -17605,7 +17605,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									$prev_epsposbeg = $epsposbeg;
 									$currentxpos = 0;
 									// shift blocks of code
-									switch ($strpiece[2][0]) {
+									switch($strpiece[2][0]) {
 										case 'Td':
 										case 'cm':
 										case 'm':
@@ -18917,7 +18917,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					$checked = false;
 				}
 				if (isset($tag['align'])) {
-					switch ($tag['align']) {
+					switch($tag['align']) {
 						case 'C': {
 							$opt['q'] = 1;
 							break;
@@ -18932,7 +18932,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 						}
 					}
 				}
-				switch ($tag['attribute']['type']) {
+				switch($tag['attribute']['type']) {
 					case 'text': {
 						if (isset($value)) {
 							$opt['v'] = $value;
@@ -20077,7 +20077,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				}
 			}
 		}
-		switch ($unit) {
+		switch($unit) {
 			// percentage
 			case '%': {
 				$retval = (($value * $refsize) / 100);
@@ -20167,7 +20167,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			$img = explode('|', $listtype);
 			$listtype = 'img';
 		}
-		switch ($listtype) {
+		switch($listtype) {
 			// unordered types
 			case 'none': {
 				break;
@@ -20218,7 +20218,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				}
 				$imgtype = strtolower($img[1]);
 				$prev_y = $this->y;
-				switch ($imgtype) {
+				switch($imgtype) {
 					case 'svg': {
 						$this->ImageSVG($img[4], $this->x, ($this->y + (($this->lasth - $img[3]) / 2)), $img[2], $img[3], '', 'T', '', 0, false);
 						break;
@@ -22604,7 +22604,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				$tmp = array();
 				if (preg_match('/[\s]+preserveAspectRatio[\s]*=[\s]*"([^"]*)"/si', $regs[1], $tmp)) {
 					$aspect_ratio = preg_split('/[\s]+/si', $tmp[1]);
-					switch (count($aspect_ratio)) {
+					switch(count($aspect_ratio)) {
 						case 3: {
 							$aspect_ratio_align = $aspect_ratio[1];
 							$aspect_ratio_ms = $aspect_ratio[2];
@@ -22712,7 +22712,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				}
 			}
 			// correct X alignment
-			switch (substr($aspect_ratio_align, 1, 3)) {
+			switch(substr($aspect_ratio_align, 1, 3)) {
 				case 'Min': {
 					// do nothing
 					break;
@@ -22728,7 +22728,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				}
 			}
 			// correct Y alignment
-			switch (substr($aspect_ratio_align, 5)) {
+			switch(substr($aspect_ratio_align, 5)) {
 				case 'Min': {
 					// do nothing
 					break;
@@ -23105,7 +23105,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 		$font_size = $this->getHTMLFontUnits($font_size, $this->svgstyles[0]['font-size'], $prevsvgstyle['font-size'], $this->svgunit);
 		$font_stretch = $this->getCSSFontStretching($font_stretch, $svgstyle['font-stretch']);
 		$font_spacing = $this->getCSSFontSpacing($font_spacing, $svgstyle['letter-spacing']);
-		switch ($font_style) {
+		switch($font_style) {
 			case 'italic': {
 				$font_style = 'I';
 				break;
@@ -23120,14 +23120,14 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				break;
 			}
 		}
-		switch ($font_weight) {
+		switch($font_weight) {
 			case 'bold':
 			case 'bolder': {
 				$font_style .= 'B';
 				break;
 			}
 		}
-		switch ($svgstyle['text-decoration']) {
+		switch($svgstyle['text-decoration']) {
 			case 'underline': {
 				$font_style .= 'U';
 				break;
@@ -23224,7 +23224,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			// store current origin point
 			$x0 = $x;
 			$y0 = $y;
-			switch (strtoupper($cmd)) {
+			switch(strtoupper($cmd)) {
 				case 'M': { // moveto
 					foreach ($params as $ck => $cp) {
 						if (($ck % 2) == 0) {

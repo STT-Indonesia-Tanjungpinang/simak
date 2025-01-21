@@ -499,7 +499,7 @@ class PHPExcel_DocumentProperties
 
     public static function convertProperty($propertyValue, $propertyType)
     {
-        switch ($propertyType) {
+        switch($propertyType) {
             case 'empty':     //    Empty
                 return '';
                 break;
@@ -558,7 +558,7 @@ class PHPExcel_DocumentProperties
 
     public static function convertPropertyType($propertyType)
     {
-        switch ($propertyType) {
+        switch($propertyType) {
             case 'i1':       //    1-Byte Signed Integer
             case 'i2':       //    2-Byte Signed Integer
             case 'i4':       //    4-Byte Signed Integer

@@ -463,7 +463,7 @@ class PHPExcel_Writer_Excel5 extends PHPExcel_Writer_Abstract implements PHPExce
 
                     list($imagesx, $imagesy, $imageFormat) = getimagesize($filename);
 
-                    switch ($imageFormat) {
+                    switch($imageFormat) {
                         case 1: // GIF, not supported by BIFF8, we convert to PNG
                             $blipType = PHPExcel_Shared_Escher_DggContainer_BstoreContainer_BSE::BLIPTYPE_PNG;
                             ob_start();
@@ -499,7 +499,7 @@ class PHPExcel_Writer_Excel5 extends PHPExcel_Writer_Abstract implements PHPExce
 
                     $bstoreContainer->addBSE($BSE);
                 } elseif ($drawing instanceof PHPExcel_Worksheet_MemoryDrawing) {
-                    switch ($drawing->getRenderingFunction()) {
+                    switch($drawing->getRenderingFunction()) {
                         case PHPExcel_Worksheet_MemoryDrawing::RENDERING_JPEG:
                             $blipType = PHPExcel_Shared_Escher_DggContainer_BstoreContainer_BSE::BLIPTYPE_JPEG;
                             $renderingFunction = 'imagejpeg';

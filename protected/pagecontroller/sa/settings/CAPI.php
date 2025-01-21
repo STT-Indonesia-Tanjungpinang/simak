@@ -29,7 +29,7 @@ class CAPI extends MainPageSA {
         if ($search) {
             $str = "SELECT u.userid,u.username,u.nama,u.email,u.active,u.foto,u.logintime FROM user u WHERE page='api'";            
             $txtsearch=$this->txtKriteria->Text;
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'username':
                     $clausa="AND username='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='api' $clausa",'userid');                   
@@ -76,8 +76,8 @@ class CAPI extends MainPageSA {
         $this->idProcess = 'add';       
     }
     public function checkUsername($sender, $param) {
-        $this->idProcess = $sender->getId()=='addUsername'?'add':'edit';
-        $username=$param->Value;        
+        $this->idProcess = $sender->getId() == 'addUsername'?'add':'edit';
+        $username = $param->Value;        
         if ($username != '') {
             try {   
                 if ($this->hiddenusername->Value!=$username) {                                                            
@@ -86,13 +86,13 @@ class CAPI extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }   
         }   
     }
     public function checkEmail($sender, $param) {
-        $this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
+        $this->idProcess = $sender->getId() == 'addEmail'?'add':'edit';
         $email = $param->Value;       
         if ($email != '') {
             try {   
@@ -102,8 +102,8 @@ class CAPI extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }   
         }   
     }
@@ -125,7 +125,7 @@ class CAPI extends MainPageSA {
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
         $this->hiddenid->Value=$id;     
         
         $str = "SELECT userid,username,nama,email,ipaddress,active FROM user WHERE userid='$id'";
@@ -144,7 +144,7 @@ class CAPI extends MainPageSA {
     }
     public function updateData($sender, $param) {
         if ($this->Page->isValid) {         
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
             $username=addslashes($this->txtEditUsername->Text); 
@@ -152,28 +152,28 @@ class CAPI extends MainPageSA {
             $status = $this->cmbEditStatus->Text;
             
             if ($this->txtEditPassword1->Text == '') {
-                $str = "UPDATE user SET username='$username',email='$email',nama='$nama',ipaddress='$ipaddress',active='$status' WHERE userid=$id";
+                $str = "UPDATE user SET username='$username',email='$email',nama='$nama',ipaddress='$ipaddress',active='$status' WHERE userid = $id";
             }else {
                 $data = $this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];                              
-                $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',ipaddress='$ipaddress',nama='$nama',email='$email',active='$status' WHERE userid=$id";
+                $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',ipaddress='$ipaddress',nama='$nama',email='$email',active='$status' WHERE userid = $id";
             }
             $this->DB->updateRecord($str); 
             $this->redirect('settings.API',true);
         }
     }
     public function resetToken($sender, $param) { 
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);
         $data = $this->Pengguna->createHashPassword(mt_rand(1,1000));        
         $password=$data['password'];
-        $str = "UPDATE user SET token='$password' WHERE userid=$id";
+        $str = "UPDATE user SET token='$password' WHERE userid = $id";
         $this->DB->updateRecord($str); 
         $this->redirect('settings.API',true);
     }
     public function deleteRecord($sender, $param) {        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
-        $this->DB->deleteRecord("user WHERE userid=$id");
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
+        $this->DB->deleteRecord("user WHERE userid = $id");
         $this->redirect('settings.API',true);
     }   
     

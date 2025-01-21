@@ -121,7 +121,7 @@ class PHPExcel_Calculation_Financial
      */
     private static function daysPerYear($year, $basis = 0)
     {
-        switch ($basis) {
+        switch($basis) {
             case 0:
             case 2:
             case 4:
@@ -334,7 +334,7 @@ class PHPExcel_Calculation_Financial
             $fRest -= $fNRate;
 
             if ($fRest < 0.0) {
-                switch ($period - $n) {
+                switch($period - $n) {
                     case 0:
                     case 1:
                         return round($cost * 0.5, 0);
@@ -520,7 +520,7 @@ class PHPExcel_Calculation_Financial
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        switch ($basis) {
+        switch($basis) {
             case 3:
                 // Actual/365
                 return 365 / $frequency;
@@ -713,7 +713,7 @@ class PHPExcel_Calculation_Financial
         $settlement = self::couponFirstPeriodDate($settlement, $maturity, $frequency, true);
         $daysBetweenSettlementAndMaturity = PHPExcel_Calculation_DateTime::YEARFRAC($settlement, $maturity, $basis) * 365;
 
-        switch ($frequency) {
+        switch($frequency) {
             case 1: // annual payments
                 return ceil($daysBetweenSettlementAndMaturity / 360);
             case 2: // half-yearly

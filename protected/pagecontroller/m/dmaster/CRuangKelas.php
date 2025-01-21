@@ -41,7 +41,7 @@ class CRuangKelas Extends MainPageM {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function checkRuangKelas($sender, $param) {
-        $this->idProcess = $sender->getId()=='addRuangkelas'?'add':'edit';
+        $this->idProcess = $sender->getId() == 'addRuangkelas'?'add':'edit';
         $ruangkelas = $param->Value;		
         if ($ruangkelas != '') {
             try {   
@@ -51,8 +51,8 @@ class CRuangKelas Extends MainPageM {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
 	}

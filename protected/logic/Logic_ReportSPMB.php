@@ -14,7 +14,7 @@ class Logic_ReportSPMB extends Logic_Report {
         $r=$this->db->getRecord($str);
         
         $datamhs = $r[1];
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':                
 
@@ -164,7 +164,7 @@ class Logic_ReportSPMB extends Logic_Report {
 
         $str_status='';
         $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
-        switch ($this->dataReport['status_dulang'])
+        switch($this->dataReport['status_dulang'])
         {
             case 'belum':
                 $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
@@ -199,7 +199,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $str_status = ' AND rm.nim IS NOT NULL';
             break;            
         }            
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007': 
                 $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,fp.nama_ibu_kandung,a.nama_agama,nik,fp.idwarga,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,jp.nama_pekerjaan,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND ta='$tahun_masuk' AND idsmt='$semester'$str_kjur AND daftar_via='$daftar_via'$str_status";
@@ -510,7 +510,7 @@ class Logic_ReportSPMB extends Logic_Report {
         $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'idkelas', 'tgl_ujian', 'jumlah_soal', 'jawaban_benar', 'jawaban_salah', 'nilai', 'kjur1', 'kjur2', 'passing_grade_1', 'passing_grade_2', 'diterima_di_prodi'));				
         $r = $this->db->getRecord($str);        
         
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':    
                 $this->setHeaderPT('M');
@@ -644,7 +644,7 @@ class Logic_ReportSPMB extends Logic_Report {
     public function printPIN() {
         $pilihan = $this->dataReport['pilihan'];
         $tahun_masuk = $this->dataReport['tahun_masuk'];
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':    
                 $this->setHeaderPT('G');                
@@ -724,7 +724,7 @@ class Logic_ReportSPMB extends Logic_Report {
      * digunakan untuk memprint kartu ujian PMB
      */
     public function printKartuUjianPMB() {
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->setTitle('Kartu Ujian PMB');
@@ -882,7 +882,7 @@ class Logic_ReportSPMB extends Logic_Report {
      * @param type $objNilai object
      */
     public function printBeritaAcaraUjianSPMB ($objDMaster) {
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->setTitle('Berita Acara Ujian SPMB');

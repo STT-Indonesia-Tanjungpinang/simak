@@ -417,7 +417,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
                 }
                 $this->writeRichTextString($row, $column, $cVal->getPlainText(), $xfIndex, $arrcRun);
             } else {
-                switch ($cell->getDatatype()) {
+                switch($cell->getDatatype()) {
                     case PHPExcel_Cell_DataType::TYPE_STRING:
                     case PHPExcel_Cell_DataType::TYPE_NULL:
                         if ($cVal === '' || $cVal === null) {
@@ -2145,7 +2145,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
             $coordinates = PHPExcel_Cell::coordinateFromString($cell);
 
             // Decide what to do by the type of break
-            switch ($breakType) {
+            switch($breakType) {
                 case PHPExcel_Worksheet::BREAK_COLUMN:
                     // Add to list of vertical breaks
                     $vbreaks[] = PHPExcel_Cell::columnIndexFromString($coordinates[0]) - 1;
@@ -2796,7 +2796,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 
                 // data type
                 $type = $dataValidation->getType();
-                switch ($type) {
+                switch($type) {
                     case PHPExcel_Cell_DataValidation::TYPE_NONE:
                         $type = 0x00;
                         break;
@@ -2826,7 +2826,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 
                 // error style
                 $errorStyle = $dataValidation->getType();
-                switch ($errorStyle) {
+                switch($errorStyle) {
                     case PHPExcel_Cell_DataValidation::STYLE_STOP:
                         $errorStyle = 0x00;
                         break;
@@ -2858,7 +2858,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 
                 // condition operator
                 $operator = $dataValidation->getOperator();
-                switch ($operator) {
+                switch($operator) {
                     case PHPExcel_Cell_DataValidation::OPERATOR_BETWEEN:
                         $operator = 0x00;
                         break;
@@ -2960,7 +2960,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
      */
     private static function mapErrorCode($errorCode)
     {
-        switch ($errorCode) {
+        switch($errorCode) {
             case '#NULL!':
                 return 0x00;
             case '#DIV/0!':
@@ -3027,7 +3027,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
         } elseif ($conditional->getConditionType() == PHPExcel_Style_Conditional::CONDITION_CELLIS) {
             $type = 0x01;
 
-            switch ($conditional->getOperatorType()) {
+            switch($conditional->getOperatorType()) {
                 case PHPExcel_Style_Conditional::OPERATOR_NONE:
                     $operatorType = 0x00;
                     break;
@@ -3210,7 +3210,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
                 $fontEscapement = 1;
             }
             // Underline type
-            switch ($conditional->getStyle()->getFont()->getUnderline()) {
+            switch($conditional->getStyle()->getFont()->getUnderline()) {
                 case PHPExcel_Style_Font::UNDERLINE_NONE:
                     $dataBlockFont .= pack('C', 0x00);
                     $fontUnderline = 0;
@@ -3238,7 +3238,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
             // Not used (3)
             $dataBlockFont .= pack('vC', 0x0000, 0x00);
             // Font color index
-            switch ($conditional->getStyle()->getFont()->getColor()->getRGB()) {
+            switch($conditional->getStyle()->getFont()->getColor()->getRGB()) {
                 case '000000':
                     $colorIdx = 0x08;
                     break;
@@ -3439,7 +3439,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
         if ($bFormatAlign == 1) {
             $blockAlign = 0;
             // Alignment and text break
-            switch ($conditional->getStyle()->getAlignment()->getHorizontal()) {
+            switch($conditional->getStyle()->getAlignment()->getHorizontal()) {
                 case PHPExcel_Style_Alignment::HORIZONTAL_GENERAL:
                     $blockAlign = 0;
                     break;
@@ -3464,7 +3464,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
             } else {
                 $blockAlign |= 0 << 3;
             }
-            switch ($conditional->getStyle()->getAlignment()->getVertical()) {
+            switch($conditional->getStyle()->getAlignment()->getVertical()) {
                 case PHPExcel_Style_Alignment::VERTICAL_BOTTOM:
                     $blockAlign = 2 << 4;
                     break;
@@ -3499,7 +3499,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
         }
         if ($bFormatBorder == 1) {
             $blockLineStyle = 0;
-            switch ($conditional->getStyle()->getBorders()->getLeft()->getBorderStyle()) {
+            switch($conditional->getStyle()->getBorders()->getLeft()->getBorderStyle()) {
                 case PHPExcel_Style_Border::BORDER_NONE:
                     $blockLineStyle |= 0x00;
                     break;
@@ -3543,7 +3543,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
                     $blockLineStyle |= 0x0D;
                     break;
             }
-            switch ($conditional->getStyle()->getBorders()->getRight()->getBorderStyle()) {
+            switch($conditional->getStyle()->getBorders()->getRight()->getBorderStyle()) {
                 case PHPExcel_Style_Border::BORDER_NONE:
                     $blockLineStyle |= 0x00 << 4;
                     break;
@@ -3587,7 +3587,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
                     $blockLineStyle |= 0x0D << 4;
                     break;
             }
-            switch ($conditional->getStyle()->getBorders()->getTop()->getBorderStyle()) {
+            switch($conditional->getStyle()->getBorders()->getTop()->getBorderStyle()) {
                 case PHPExcel_Style_Border::BORDER_NONE:
                     $blockLineStyle |= 0x00 << 8;
                     break;
@@ -3631,7 +3631,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
                     $blockLineStyle |= 0x0D << 8;
                     break;
             }
-            switch ($conditional->getStyle()->getBorders()->getBottom()->getBorderStyle()) {
+            switch($conditional->getStyle()->getBorders()->getBottom()->getBorderStyle()) {
                 case PHPExcel_Style_Border::BORDER_NONE:
                     $blockLineStyle |= 0x00 << 12;
                     break;
@@ -3683,7 +3683,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
             //@todo writeCFRule() => $blockColor => Index Color for top line
             //@todo writeCFRule() => $blockColor => Index Color for bottom line
             //@todo writeCFRule() => $blockColor => Index Color for diagonal line
-            switch ($conditional->getStyle()->getBorders()->getDiagonal()->getBorderStyle()) {
+            switch($conditional->getStyle()->getBorders()->getDiagonal()->getBorderStyle()) {
                 case PHPExcel_Style_Border::BORDER_NONE:
                     $blockColor |= 0x00 << 21;
                     break;
@@ -3732,7 +3732,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
         if ($bFormatFill == 1) {
             // Fill Patern Style
             $blockFillPatternStyle = 0;
-            switch ($conditional->getStyle()->getFill()->getFillType()) {
+            switch($conditional->getStyle()->getFill()->getFillType()) {
                 case PHPExcel_Style_Fill::FILL_NONE:
                     $blockFillPatternStyle = 0x00;
                     break;
@@ -3801,7 +3801,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
                     break;
             }
             // Color
-            switch ($conditional->getStyle()->getFill()->getStartColor()->getRGB()) {
+            switch($conditional->getStyle()->getFill()->getStartColor()->getRGB()) {
                 case '000000':
                     $colorIdxBg = 0x08;
                     break;
@@ -3975,7 +3975,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
                     break;
             }
             // Fg Color
-            switch ($conditional->getStyle()->getFill()->getEndColor()->getRGB()) {
+            switch($conditional->getStyle()->getFill()->getEndColor()->getRGB()) {
                 case '000000':
                     $colorIdxFg = 0x08;
                     break;

@@ -100,7 +100,7 @@ class CPassingGrade extends MainPageM {
     }
      public function saveItemNilai($sender, $param) {                
         $item = $param->Item;
-        $id=$this->gridPassingGrade->DataKeys[$item->ItemIndex];
+        $id = $this->gridPassingGrade->DataKeys[$item->ItemIndex];
         $nilai = $item->ColumnNilai->TextBox->Text > 100 ? 100:$item->ColumnNilai->TextBox->Text; 
         $this->DB->query('BEGIN');
         $str = "UPDATE passinggrade SET nilai = $nilai WHERE idpassing_grade=$id";

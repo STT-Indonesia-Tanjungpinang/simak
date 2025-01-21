@@ -29,7 +29,7 @@ class CUserDosen extends MainPageSA {
         if ($search) {
             $str = "SELECT u.userid,u.username,u.nama,u.email,ug.group_name,u.active,u.foto,u.logintime FROM user u LEFT JOIN user_group ug ON (ug.group_id=u.group_id) WHERE page='d'";			
             $txtsearch=$this->txtKriteria->Text;
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'username':
                     $clausa="AND username='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
@@ -73,8 +73,8 @@ class CUserDosen extends MainPageSA {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);        
 	}
     public function checkUsername($sender, $param) {
-		$this->idProcess = $sender->getId()=='addUsername'?'add':'edit';
-        $username=$param->Value;		
+		$this->idProcess = $sender->getId() == 'addUsername'?'add':'edit';
+        $username = $param->Value;		
         if ($username != '') {
             try {   
                 if ($this->hiddenusername->Value!=$username) {                                                            
@@ -83,13 +83,13 @@ class CUserDosen extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
     public function checkEmail($sender, $param) {
-		$this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
+		$this->idProcess = $sender->getId() == 'addEmail'?'add':'edit';
         $email = $param->Value;		
         if ($email != '') {
             try {   
@@ -99,14 +99,14 @@ class CUserDosen extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }    
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;     
         
         $str = "SELECT userid,username,nama,email,group_id,kjur,active FROM user WHERE userid='$id'";
@@ -123,20 +123,20 @@ class CUserDosen extends MainPageSA {
     }
     public function updateData($sender, $param) {
 		if ($this->Page->isValid) {			
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $username_old=$this->hiddenusername->Value;
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
             $username=addslashes($this->txtEditUsername->Text);
             $status = $this->cmbEditStatus->Text;
             if ($this->txtEditPassword1->Text == '') {
-                $str = "UPDATE user SET username='$username',nama='$nama',email='$email',active='$status' WHERE userid=$id";               
+                $str = "UPDATE user SET username='$username',nama='$nama',email='$email',active='$status' WHERE userid = $id";               
                 $str_dosen = "UPDATE dosen SET username='$username' WHERE username='$username_old'";
             }else {
                 $data = $this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];
-                $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',active='$status' WHERE userid=$id";
+                $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',active='$status' WHERE userid = $id";
                 $str_dosen = "UPDATE dosen SET username='$username' WHERE username='$username_old'";
             }
             $this->DB->updateRecord($str);
@@ -145,8 +145,8 @@ class CUserDosen extends MainPageSA {
 		}
 	}
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);        
-        $this->DB->deleteRecord("user WHERE userid=$id");
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);        
+        $this->DB->deleteRecord("user WHERE userid = $id");
         $this->redirect('settings.UserDosen',true);
     }   
     

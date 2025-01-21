@@ -29,7 +29,7 @@ class DetailPembayaranPiutangSemesterGanjil Extends CDetailPembayaranPiutangSeme
 				$this->Finance->setDataMHS($datamhs);
 				$totalbayar=$this->Finance->getTotalBayarMhs($ta, $semester);
                 $sisa=$totalbiaya-$totalbayar;
-                if ($sisa>0) {
+                if ($sisa> 0) {
 					$sisa=$this->Finance->toRupiah($sisa);
 					$tasmt="T.A ".$this->DMaster->getNamaTA($ta).' semester '.$this->setup->getSemester($semester);
 					throw new Exception ('Mahasiswa a.n '.$datamhs['nama_mhs']." Memiliki tunggakan sebesar ($sisa) pada $tasmt, harap untuk dilunasi terlebih dahulu.");

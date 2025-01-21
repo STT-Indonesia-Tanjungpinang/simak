@@ -12,7 +12,7 @@ class MainPageMB extends MainPage {
      * show page soal PMB
      */
     public $showSoalPMB=false;    
-	public function onLoad ($param) {		
+	public function onLoad($param) {		
 		parent::onLoad($param);				
         if (!$this->IsPostBack&&!$this->IsCallBack) {	
             

@@ -150,7 +150,7 @@ class CPenyelenggaraan extends MainPageM {
 	}
 	
 	public function deleteRecord($sender, $param) {		
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idpenyelenggaraan', 'krsmatkul', $id)) {	            
             $this->lblHeaderMessageError->Text='Menghapus Penyelenggaraan Matakuliah';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";
@@ -162,9 +162,9 @@ class CPenyelenggaraan extends MainPageM {
 	}	
 	public function printOut($sender, $param) {		
 	    $this->createObj('reportakademik');
-	    $this->linkOutput->Text='';
+	    $this->linkOutput->Text = '';
 	    $this->linkOutput->NavigateUrl='#';
-	    switch ($_SESSION['outputreport']) {
+	    switch($_SESSION['outputreport']) {
 	        case 'summarypdf':
 	            $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";
 	            break;

@@ -35,7 +35,7 @@ class CKuesionerSalin extends MainPageM {
         $ta = $param->Value;        
         if ($_SESSION['ta'] == $ta && $_SESSION['semester'] == $this->cmbSemester->Text) {
             $sender->ErrorMessage="Tidak bisa menyalin dari T.A dan Semester KE T.A dan Semester yang sama.";
-            $param->IsValid=false;
+            $param->IsValid = false;
         }
     }
     public function salinKuesioner($sender, $param) {                

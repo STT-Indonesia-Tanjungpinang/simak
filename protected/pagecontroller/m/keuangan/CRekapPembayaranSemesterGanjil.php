@@ -95,7 +95,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
         $str = "SELECT idrekap,no_formulir,nim,nirm,nama_mhs,jk,n_kelas,dibayarkan,kewajiban,sisa FROM rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $ta AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk";
         if ($search) {            
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {  
+            switch($this->cmbKriteria->Text) {  
                 case 'nim':
                     $clausa="AND nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $ta AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk $clausa",'nim');
@@ -232,9 +232,9 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
     }
 	public function printOut($sender, $param) {	
         $this->createObj('reportfinance');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

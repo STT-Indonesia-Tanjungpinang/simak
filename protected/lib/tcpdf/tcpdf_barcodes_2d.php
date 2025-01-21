@@ -235,7 +235,7 @@ class TCPDF2DBarcode {
 	public function setBarcode($code, $type) {
 		$mode = explode(', ', $type);
 		$qrtype = strtoupper($mode[0]);
-		switch ($qrtype) {
+		switch($qrtype) {
 			case 'DATAMATRIX': { // DATAMATRIX (ISO/IEC 16022)
 				require_once(dirname(__FILE__).'/include/barcodes/datamatrix.php');
 				$qrcode = new Datamatrix($code);

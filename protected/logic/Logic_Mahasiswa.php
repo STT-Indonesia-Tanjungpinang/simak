@@ -149,7 +149,7 @@ class Logic_Mahasiswa extends Logic_Global {
    */
   public function getJumlahSeluruhMHS ($k_status=null) {
     $jumlah=0;
-    switch ($k_status) {
+    switch($k_status) {
       case 'A':
         $jumlah=$this->db->getCountRowsOfTable("register_mahasiswa WHERE k_status='A'",'nim');		            
       break;            
@@ -174,7 +174,7 @@ class Logic_Mahasiswa extends Logic_Global {
    */
   public function updateRegisterMHS ($mode, $status=null, $kelas=null) {		
     $nim = $this->DataMHS['nim'];
-    switch ($mode) {
+    switch($mode) {
       case 'status':
         $str = "UPDATE register_mahasiswa SET k_status='$status' WHERE nim='$nim'";
       break;

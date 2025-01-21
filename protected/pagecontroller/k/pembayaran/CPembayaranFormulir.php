@@ -64,7 +64,7 @@ class CPembayaranFormulir Extends MainPageK {
         if ($search) {
             $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {           
+            switch($this->cmbKriteria->Text) {           
                 case 'no_transaksi':
                     $clausa=" AND t.no_transaksi='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran,t.idkelas FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
@@ -139,8 +139,8 @@ class CPembayaranFormulir Extends MainPageK {
                 }
                 
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }

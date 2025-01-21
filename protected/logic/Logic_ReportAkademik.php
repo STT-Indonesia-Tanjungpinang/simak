@@ -12,7 +12,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
     $idkur=$objDemik->getIDKurikulum($kjur);
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':
       case 'excel2007':
         $this->setHeaderPT('I');
@@ -112,7 +112,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $this->db->setFieldTable(array('ta'));
     $data = $this->db->getRecord($str);
     $tahun_kurikulum=$data[1]['ta'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('Q'); 
@@ -323,7 +323,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $nama_ps = $this->dataReport['nama_ps'];
     $tahun_masuk = $this->dataReport['tahun_masuk'];
     $nama_tahun = $this->dataReport['nama_tahun'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':    
         $this->setHeaderPT('S');                
@@ -456,7 +456,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $idpenyelenggaraan = $this->dataReport['idpenyelenggaraan'];
     $idkelas  = $this->dataReport['idkelas'];
             
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':
         $jumlah_peserta=$this->db->getCountRowsOfTable("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkrsmatkul');
@@ -698,7 +698,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $ta2=$this->dataReport['ta2'];                
     $nama_tahun1 = $this->dataReport['nama_tahun1'];                
     $nama_tahun2=$this->dataReport['nama_tahun2'];   
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('Q'); 
@@ -834,7 +834,7 @@ class Logic_ReportAkademik extends Logic_Report {
    */
   public function printPesertaMatakuliah($objDMaster) {
     $idkelas = $this->dataReport['idkelas'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':    
         $this->setHeaderPT('G');                
@@ -896,7 +896,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getStyle("A14:G14")->getAlignment()->setWrapText(true);
           
         $str_display='';
-        $id=$this->dataReport['idpenyelenggaraan'];
+        $id = $this->dataReport['idpenyelenggaraan'];
         if($idkelas=='none')
         {
           $str_display="SELECT vkm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.jk,vdm.tahun_masuk,vkm.batal,vkm.sah FROM v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id'";
@@ -948,7 +948,7 @@ class Logic_ReportAkademik extends Logic_Report {
    */
   public function printMahasiswaDW($objDMaster){
     $iddosen_wali = $this->dataReport['iddosen_wali'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':  
         $this->setHeaderPT('G'); 
@@ -1032,7 +1032,7 @@ class Logic_ReportAkademik extends Logic_Report {
    * digunakan untuk mencetak daftar hadir mahasiswa
    */
   public function printDaftarHadirDosen($objDemik){
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':  
         $this->setHeaderPT('X'); 
@@ -1045,7 +1045,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $sheet->getRowDimension(7)->setRowHeight(20);
         $sheet->getRowDimension(8)->setRowHeight(20);
         $sheet->setCellValue("A7","DAFTAR HADIR DOSEN");
-        $sheet->setCellValue("A8", $nama=($this->dataReport['nama_hari']== '')?'JADWAL KESELURUHAN'.',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']:strtoupper($this->dataReport['hari']).',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']);
+        $sheet->setCellValue("A8", $nama=($this->dataReport['nama_hari']== '') ? 'JADWAL KESELURUHAN'.',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']:strtoupper($this->dataReport['hari']).',SEMESTER '.$this->dataReport['nama_semester']. ' T.A '.$this->dataReport['nama_tahun']);
         $styleArray=array(
                 'font' => array('bold' => true,
                         'size' => 16),
@@ -1171,7 +1171,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $idsmt=$this->dataReport['idsmt'];
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('I'); 
@@ -1268,7 +1268,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $idsmt=$this->dataReport['idsmt'];
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('I'); 
@@ -1365,7 +1365,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $idsmt=$this->dataReport['idsmt'];
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('I'); 
@@ -1462,7 +1462,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $idsmt=$this->dataReport['idsmt'];
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('I'); 
@@ -1559,7 +1559,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $idsmt=$this->dataReport['idsmt'];
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('I'); 
@@ -1657,7 +1657,7 @@ class Logic_ReportAkademik extends Logic_Report {
     $idsmt=$this->dataReport['idsmt'];
     $ta=$this->dataReport['ta'];
     $kjur=$this->dataReport['kjur'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('I'); 

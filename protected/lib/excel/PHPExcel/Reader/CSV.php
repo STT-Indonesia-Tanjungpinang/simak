@@ -131,7 +131,7 @@ class PHPExcel_Reader_CSV extends PHPExcel_Reader_Abstract implements PHPExcel_R
     {
         rewind($this->fileHandle);
 
-        switch ($this->inputEncoding) {
+        switch($this->inputEncoding) {
             case 'UTF-8':
                 fgets($this->fileHandle, 4) == "\xEF\xBB\xBF" ?
                     fseek($this->fileHandle, 3) : fseek($this->fileHandle, 0);

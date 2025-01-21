@@ -178,7 +178,7 @@ class TCPDF_IMAGES {
 			$channels = intval($a['channels']);
 		}
 		// default colour space
-		switch ($channels) {
+		switch($channels) {
 			case 1: {
 				$colspace = 'DeviceGray';
 				break;

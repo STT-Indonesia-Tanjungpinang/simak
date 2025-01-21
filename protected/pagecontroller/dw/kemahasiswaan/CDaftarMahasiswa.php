@@ -74,7 +74,7 @@ class CDaftarMahasiswa extends MainPageDW {
 		$this->populateData($_SESSION['currentPageDaftarMahasiswa']['search']);
 	}
     public function filterKonsentrasi($sender, $param) {
-        $id=$this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
+        $id = $this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
         $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = $id;
         $this->populateKonsentrasi();
         $this->populateData();
@@ -115,7 +115,7 @@ class CDaftarMahasiswa extends MainPageDW {
         if ($search) {
             $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,tempat_lahir,tanggal_lahir,alamat_rumah,kjur,idkonsentrasi,iddosen_wali,tahun_masuk,k_status,idkelas,photo_profile FROM v_datamhs";			
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa=" WHERE iddosen_wali = $iddosen_wali AND nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs$clausa",'nim');

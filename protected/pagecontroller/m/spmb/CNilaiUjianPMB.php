@@ -100,7 +100,7 @@ class CNilaiUjianPMB extends MainPageM {
             $str_kjur = $kjur=='none'?' AND (num.kjur=0 OR num.kjur IS NULL)':" AND num.kjur = $kjur";	                
             $str = "SELECT fp.no_formulir,fp.nama_mhs,ku.tgl_ujian,ts.nama_tempat,num.kjur,num.jumlah_soal,num.jawaban_benar,num.jawaban_salah,num.nilai,fp.kjur1,fp.kjur2,num.passing_grade_1,num.passing_grade_2,num.kjur AS diterima_di_prodi FROM kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$str_kjur";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'no_formulir':
                     $clausa=" AND fp.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$clausa",'fp.no_formulir');                    
@@ -225,7 +225,7 @@ class CNilaiUjianPMB extends MainPageM {
         $kjur = $param->Value;		
         if ($kjur != '') {
             try {
-                $id=$this->hiddenid->Value;
+                $id = $this->hiddenid->Value;
                 $str = "SELECT passing_grade_1,passing_grade_2 FROM nilai_ujian_masuk WHERE idnilai_ujian_masuk = $id";
                 $this->DB->setFieldTable(array('passing_grade_1', 'passing_grade_2')); 
                 $r = $this->DB->getRecord($str);                   
@@ -240,14 +240,14 @@ class CNilaiUjianPMB extends MainPageM {
                     throw new Exception ("Nilai Passing Grade Pil.2 belum disetting di jadwal ujian.");	
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
     public function saveData($sender, $param) {
 		if ($this->IsValid) {		            
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $prodi = $this->cmbAddKjur->Text;
 			$str = "UPDATE nilai_ujian_masuk SET ket_lulus=1,kjur = $prodi WHERE idnilai_ujian_masuk = $id";
 			$this->DB->updateRecord($str);
@@ -274,9 +274,9 @@ class CNilaiUjianPMB extends MainPageM {
         $this->createObj('reportspmb');
         $tahun_masuk = $_SESSION['tahun_pendaftaran'];
         $kjur = $_SESSION['currentPageNilaiUjianPMB']['kjur'];                       
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

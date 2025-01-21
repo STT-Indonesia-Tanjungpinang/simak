@@ -8,7 +8,7 @@ class CDetailPendaftaranOnline extends MainPageM {
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailPendaftaranOnline']) || $_SESSION['currentPageDetailPendaftaranOnline']['page_name'] != 'm.spmb.DetailPendaftaranOnline') {
-				$_SESSION['currentPageDetailPendaftaranOnline'] = array('page_name' => 'm.spmb.DetailPendaftaranOnline', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
+				$_SESSION['currentPageDetailPendaftaranOnline'] = array('page_name' => 'm.spmb.DetailPendaftaranOnline', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=> 0);												
 			}
 
             $this->MVDetailPendaftaranOnline->ActiveViewIndex=$_SESSION['currentPageDetailPendaftaranOnline']['activeviewindex'];             
@@ -27,14 +27,14 @@ class CDetailPendaftaranOnline extends MainPageM {
             $datamhs = $r[1];
             $datamhs['no_formulir'] = $datamhs['no_formulir']> 0 ? $datamhs['no_formulir']:'N.A';
             $datamhs['nama_ps_1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];
-            $datamhs['nama_ps_2']=($r[1]['kjur2']>0)?$this->DMaster->getNamaProgramStudiByID($r[1]['kjur2']):'N.A';
+            $datamhs['nama_ps_2']=($r[1]['kjur2']> 0)?$this->DMaster->getNamaProgramStudiByID($r[1]['kjur2']):'N.A';
             $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $datamhs['waktu_mendaftar']);
                         
             $this->Demik->setDataMHS($datamhs);
             $_SESSION['currentPageDetailPendaftaranOnline']['DataMHS'] = $datamhs;
             $activeview = $_SESSION['currentPageDetailPendaftaranOnline']['activeviewindex'];                
             if ($activeview == $this->MVDetailPendaftaranOnline->ActiveViewIndex) {
-                switch ($activeview) {
+                switch($activeview) {
                     case 0 : 
                         
                     break;                  
@@ -99,8 +99,8 @@ class CDetailPendaftaranOnline extends MainPageM {
                      throw new Exception ("No. Formulir  ($no_formulir) tidak terdaftar di PIN.");   
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
 	}	

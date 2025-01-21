@@ -103,7 +103,7 @@ class PHPExcel_Reader_Excel5_Escher
             // offset: 2; size: 2: Record Type
             $fbt = PHPExcel_Reader_Excel5::getInt2d($this->data, $this->pos + 2);
 
-            switch ($fbt) {
+            switch($fbt) {
                 case self::DGGCONTAINER:
                     $this->readDggContainer();
                     break;

@@ -29,7 +29,7 @@ class CUserKeuangan extends MainPageSA {
         if ($search) {
             $str = "SELECT u.userid,u.username,u.nama,u.email,ug.group_name,u.active,u.foto,u.logintime FROM user u LEFT JOIN user_group ug ON (ug.group_id=u.group_id) WHERE page='k'";			
             $txtsearch=$this->txtKriteria->Text;
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'username':
                     $clausa="AND username='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='k' $clausa",'userid');		            
@@ -83,8 +83,8 @@ class CUserKeuangan extends MainPageSA {
         $this->cmbAddProdi->DataBind();        
     }
     public function checkUsername($sender, $param) {
-		$this->idProcess = $sender->getId()=='addUsername'?'add':'edit';
-        $username=$param->Value;		
+		$this->idProcess = $sender->getId() == 'addUsername'?'add':'edit';
+        $username = $param->Value;		
         if ($username != '') {
             try {   
                 if ($this->hiddenusername->Value!=$username) {                                                            
@@ -93,13 +93,13 @@ class CUserKeuangan extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
     public function checkEmail($sender, $param) {
-		$this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
+		$this->idProcess = $sender->getId() == 'addEmail'?'add':'edit';
         $email = $param->Value;		
         if ($email != '') {
             try {   
@@ -109,8 +109,8 @@ class CUserKeuangan extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
@@ -123,8 +123,8 @@ class CUserKeuangan extends MainPageSA {
             $salt=$data['salt'];
             $password=$data['password'];           
             $page='k';
-            $group_id=$this->cmbAddGroup->Text;  
-            $kjur=($this->cmbAddProdi->Text>0)?$this->cmbAddProdi->Text : 0;
+            $group_id = $this->cmbAddGroup->Text;  
+            $kjur=($this->cmbAddProdi->Text> 0)?$this->cmbAddProdi->Text : 0;
             $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id='$group_id',kjur='$kjur',active=1,isdeleted=0,theme='limitless',foto='resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
             $this->DB->insertRecord($str);           
             
@@ -133,7 +133,7 @@ class CUserKeuangan extends MainPageSA {
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;     
         
         $str = "SELECT userid,username,nama,email,group_id,kjur,active FROM user WHERE userid='$id'";
@@ -162,29 +162,29 @@ class CUserKeuangan extends MainPageSA {
     }
     public function updateData($sender, $param) {
 		if ($this->Page->isValid) {			
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
             $username=addslashes($this->txtEditUsername->Text); 
-            $group_id=$this->cmbEditGroup->Text;  
-            $kjur=($this->cmbEditProdi->Text>0)?$this->cmbEditProdi->Text : 0;
+            $group_id = $this->cmbEditGroup->Text;  
+            $kjur=($this->cmbEditProdi->Text> 0)?$this->cmbEditProdi->Text : 0;
             $status = $this->cmbEditStatus->Text;
             
             if ($this->txtEditPassword1->Text == '') {
-                $str = "UPDATE user SET username='$username',nama='$nama',email='$email',group_id='$group_id',kjur='$kjur',active='$status' WHERE userid=$id";               
+                $str = "UPDATE user SET username='$username',nama='$nama',email='$email',group_id='$group_id',kjur='$kjur',active='$status' WHERE userid = $id";               
             }else {
                 $data = $this->Pengguna->createHashPassword($this->txtEditPassword1->Text);
                 $salt=$data['salt'];
                 $password=$data['password'];
-                $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',group_id='$group_id',kjur='$kjur',active='$status' WHERE userid=$id";               
+                $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',group_id='$group_id',kjur='$kjur',active='$status' WHERE userid = $id";               
             }
             $this->DB->updateRecord($str); 
 			$this->redirect('settings.UserKeuangan',true);
 		}
 	}
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);        
-        $this->DB->deleteRecord("user WHERE userid=$id");
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);        
+        $this->DB->deleteRecord("user WHERE userid = $id");
         $this->redirect('settings.UserKeuangan',true);
     }   
     

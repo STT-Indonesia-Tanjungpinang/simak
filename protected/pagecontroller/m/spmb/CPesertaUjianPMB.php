@@ -41,7 +41,7 @@ class CPesertaUjianPMB extends MainPageM {
         $str = "SELECT pum.idpeserta_ujian,pum.no_formulir,fp.nama_mhs,fp.jk,fp.kjur1,fp.kjur2,pin.no_pin FROM peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian";
         if ($search) {            
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'no_formulir':
                     $clausa="AND fp.no_formulir='$txtsearch'";
                     $str = "$str $clausa";
@@ -62,7 +62,7 @@ class CPesertaUjianPMB extends MainPageM {
 	}
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         
         $this->DataUjianPMB=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
@@ -87,7 +87,7 @@ class CPesertaUjianPMB extends MainPageM {
     }
     public function updateData($sender, $param) {
         if ($this->IsValid) {
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $idjadwal_ujian = $this->cmbEditJadwal->Text;
             
             $str = "UPDATE peserta_ujian_pmb SET idjadwal_ujian = $idjadwal_ujian WHERE idpeserta_ujian = $id";
@@ -97,7 +97,7 @@ class CPesertaUjianPMB extends MainPageM {
         }
     }
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         $str = "SELECT no_formulir,idjadwal_ujian FROM peserta_ujian_pmb WHERE idpeserta_ujian = $id";
         $this->DB->setFieldTable(array('idjadwal_ujian', 'no_formulir'));
 		$r = $this->DB->getRecord($str);
@@ -113,12 +113,12 @@ class CPesertaUjianPMB extends MainPageM {
     }  
     public function printOut($sender, $param) {		
         $this->createObj('reportspmb');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';        
         $dataReport=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
         $idjadwal_ujian = $dataReport['idjadwal_ujian'];
         $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian",'pum.no_formulir');
-		switch ($_SESSION['outputreport']) {
+		switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

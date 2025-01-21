@@ -1,7 +1,7 @@
 <?php
 prado::using ('Application.MainPageDW');
 class CTranskripKurikulum extends MainPageDW {	
-	public function onLoad ($param) {
+	public function onLoad($param) {
 		parent::onLoad($param);		
         $this->showSubMenuAkademikNilai=true;
         $this->showTranskripKurikulum=true;    
@@ -70,7 +70,7 @@ class CTranskripKurikulum extends MainPageDW {
         if ($search) {
             $str = "SELECT nim,nama_mhs,jk,tahun_masuk,kjur,idkonsentrasi FROM v_datamhs WHERE iddosen_wali = $iddosen_wali";			
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="AND nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs WHERE iddosen_wali = $iddosen_wali $clausa",'nim');
@@ -127,12 +127,12 @@ class CTranskripKurikulum extends MainPageDW {
 	}		
 	public function printOut($sender, $param) {		
         $this->createObj('reportnilai');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-		switch ($sender->getId()) {
+		switch($sender->getId()) {
 			case 'btnPrintOutR':
                 $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
@@ -167,7 +167,7 @@ class CTranskripKurikulum extends MainPageDW {
                 }                
 			break;			
             case 'btnPrintTranskripKurikulumAll':
-                 switch ($_SESSION['outputreport']) {
+                 switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;

@@ -15,7 +15,7 @@ class Logic_ReportKuesioner extends Logic_Report {
         $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         $nama_ps = $this->dataReport['nama_ps'];
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':          
                 $this->setHeaderPT('J'); 
@@ -130,7 +130,7 @@ class Logic_ReportKuesioner extends Logic_Report {
         $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         $nmatkul = $this->dataReport['nmatkul'];
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':          
                 $this->setHeaderPT('I'); 

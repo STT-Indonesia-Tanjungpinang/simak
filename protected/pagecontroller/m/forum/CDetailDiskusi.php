@@ -30,7 +30,7 @@ class CDetailDiskusi extends MainPageM {
 		}                
 	}  
     public function populateData() {
-        $id=$_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idpost'];           
+        $id = $_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idpost'];           
         $str = "SELECT idpost,title,content,nama_user,date_added FROM forumposts fp WHERE parentpost=$id ORDER BY date_added";        
         $this->DB->setFieldTable (array('idpost', 'title', 'content', 'nama_user', 'date_added'));			
         $r = $this->DB->getRecord($str);	
@@ -48,7 +48,7 @@ class CDetailDiskusi extends MainPageM {
             $idkategori = $_SESSION['currentPageDetailDiskusi']['DataDiskusi']['idkategori'];
             $judul = $_SESSION['currentPageDetailDiskusi']['DataDiskusi']['title'];
             $content = strip_tags(addslashes($this->txtAddContent->Text));
-            $this->txtAddContent->Text='';
+            $this->txtAddContent->Text = '';
             $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user = $this->Pengguna->getDataUser('username');                        
             $str = "INSERT INTO forumposts (idpost,idkategori,parentpost,title,content,userid,tipe,nama_user,date_added) VALUES (NULL, $idkategori, $idpost,'$judul', '$content', $userid,'m', '$nama_user',NOW())";                   

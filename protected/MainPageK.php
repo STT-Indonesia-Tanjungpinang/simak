@@ -76,7 +76,7 @@ class MainPageK extends MainPage {
      * show page piutang jangka pendek [report]
      */
     public $showReportPiutangJangkaPendek=false;
-	public function onLoad ($param) {		
+	public function onLoad($param) {		
 		parent::onLoad($param);				
         if (!$this->IsPostBack&&!$this->IsCallBack) {	
             

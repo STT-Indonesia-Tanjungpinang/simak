@@ -89,8 +89,8 @@ class CPembayaranCutiSemesterGenap Extends MainPageK {
                     }
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }

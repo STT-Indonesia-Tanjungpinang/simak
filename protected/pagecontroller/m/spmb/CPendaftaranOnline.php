@@ -71,7 +71,7 @@ class CPendaftaranOnline extends MainPageM {
         if ($search) {        
             $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'no_registrasi':
                     $clausa=" WHERE no_pendaftaran='$txtsearch'"; 
                 break;
@@ -87,7 +87,7 @@ class CPendaftaranOnline extends MainPageM {
         }else{               
             $status_konfirmasi = $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi'];
             $str_konfirmasi ='';
-            switch ($status_konfirmasi)
+            switch($status_konfirmasi)
             {
                 case 'belum':
                     $str_konfirmasi="AND file_bukti_bayar=''";
@@ -315,11 +315,11 @@ class CPendaftaranOnline extends MainPageM {
 	}
 	public function printOut($sender, $param) {	
         $this->createObj('reportspmb');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-		switch ($sender->getId()) {
+		switch($sender->getId()) {
 			case 'btnPrintOutPendaftaranOnline':
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
@@ -376,7 +376,7 @@ class CPendaftaranOnline extends MainPageM {
                 }
 			break;
 			case 'btnPrintOutPendaftaranOnlineR':
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;

@@ -473,7 +473,7 @@ class Datamatrix {
 	 */
 	protected function isCharMode($chr, $mode) {
 		$status = false;
-		switch ($mode) {
+		switch($mode) {
 			case ENC_ASCII: { // ASCII character 0 to 127
 				$status = (($chr >= 0) AND ($chr <= 127));
 				break;
@@ -649,7 +649,7 @@ class Datamatrix {
 	 * @protected
 	 */
 	protected function getSwitchEncodingCodeword($mode) {
-		switch ($mode) {
+		switch($mode) {
 			case ENC_ASCII: { // ASCII character 0 to 127
 				$cw = 254;
 				break;
@@ -707,7 +707,7 @@ class Datamatrix {
 		$cw_num = 0; // number of data codewords
 		$data_lenght = strlen($data); // number of chars
 		while ($pos < $data_lenght) {
-			switch ($enc) {
+			switch($enc) {
 				case ENC_ASCII: { // STEP B. While in ASCII encodation
 					if (($data_lenght > 1) AND ($pos < ($data_lenght - 1)) AND ($this->isCharMode(ord($data[$pos]), ENC_ASCII_NUM) AND $this->isCharMode(ord($data[$pos + 1]), ENC_ASCII_NUM))) {
 						// 1. If the next data sequence is at least 2 consecutive digits, encode the next two digits as a double digit in ASCII mode.

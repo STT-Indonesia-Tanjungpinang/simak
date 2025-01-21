@@ -76,8 +76,8 @@ class CDetailKonversiMatakuliah extends MainPageON {
                     throw new Exception ("Data Konversi ini tidak bisa dihubungkan dengan NIM ($nim) karena NIM ini sudah terhubung dengan yang lain.");
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
 	}
@@ -117,11 +117,11 @@ class CDetailKonversiMatakuliah extends MainPageON {
     }
 	public function printOut($sender, $param) {
         $this->createObj('reportnilai');             
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
         $dataReport=$_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'];                
         $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

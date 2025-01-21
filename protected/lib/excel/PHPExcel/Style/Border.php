@@ -111,7 +111,7 @@ class PHPExcel_Style_Border extends PHPExcel_Style_Supervisor implements PHPExce
      */
     public function getSharedComponent()
     {
-        switch ($this->parentPropertyName) {
+        switch($this->parentPropertyName) {
             case 'allBorders':
             case 'horizontal':
             case 'inside':
@@ -140,7 +140,7 @@ class PHPExcel_Style_Border extends PHPExcel_Style_Supervisor implements PHPExce
      */
     public function getStyleArray($array)
     {
-        switch ($this->parentPropertyName) {
+        switch($this->parentPropertyName) {
             case 'allBorders':
             case 'bottom':
             case 'diagonal':

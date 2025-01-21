@@ -70,7 +70,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
         $this->populateData();        
     }		
     public function deleteItem($sender, $param) {                
-        $id=$this->GridS->DataKeys[$param->Item->ItemIndex]; 
+        $id = $this->GridS->DataKeys[$param->Item->ItemIndex]; 
         $datamhs = $this->Pengguna->getDataUser();
         $no_transaksi = $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'];
         $this->DB->updateRecord("UPDATE transaksi_detail SET dibayarkan=0 WHERE idkombi=14 AND no_transaksi = $no_transaksi");
@@ -79,7 +79,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
     }  
     public function saveItem($sender, $param) {                        
         $item = $param->Item;
-        $id=$this->GridS->DataKeys[$item->ItemIndex];  
+        $id = $this->GridS->DataKeys[$item->ItemIndex];  
         $datamhs = $this->Pengguna->getDataUser();
         $no_transaksi = $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'];
         $tahun_masuk = $datamhs['tahun_masuk'];    
@@ -108,7 +108,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
         $this->populateData();
     }
 	public function checkNomorFaktur($sender, $param) {
-		$this->idProcess = $sender->getId()=='addNomorFaktur'?'add':'edit';
+		$this->idProcess = $sender->getId() == 'addNomorFaktur'?'add':'edit';
         $no_faktur = $param->Value;		
         if ($no_faktur != '') {
             try {
@@ -118,8 +118,8 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
                     }
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }

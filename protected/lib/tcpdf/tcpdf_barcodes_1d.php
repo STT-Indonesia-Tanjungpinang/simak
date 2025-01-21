@@ -231,7 +231,7 @@ class TCPDFBarcode {
  	 * @public
 	 */
 	public function setBarcode($code, $type) {
-		switch (strtoupper($type)) {
+		switch(strtoupper($type)) {
 			case 'C39': { // CODE 39 - ANSI MH10.8M-1983 - USD-3 - 3 of 9.
 				$arrcode = $this->barcode_code39($code, false, false);
 				break;
@@ -931,7 +931,7 @@ class TCPDFBarcode {
 	 * C128 barcodes.
 	 * Very capable code, excellent density, high reliability; in very wide use world-wide
 	 * @param $code (string) code to represent.
-	 * @param $type (string) barcode type: A, B, C or empty for automatic switch (AUTO mode)
+	 * @param $type (string) barcode type: A, B, C or empty for automatic switch(AUTO mode)
 	 * @return array barcode representation.
 	 * @protected
 	 */
@@ -1174,7 +1174,7 @@ class TCPDFBarcode {
 							if ($key == 0) {
 								$tmpchr = ord($seq[1]{0});
 								if (($seq[2] == 1) AND ($tmpchr >= 241) AND ($tmpchr <= 244) AND isset($sequence[($key + 1)]) AND ($sequence[($key + 1)][0] != 'B')) {
-									switch ($sequence[($key + 1)][0]) {
+									switch($sequence[($key + 1)][0]) {
 										case 'A': {
 											$startid = 103;
 											$sequence[$key][0] = 'A';
@@ -1754,7 +1754,7 @@ class TCPDFBarcode {
 		}
 		for ($i = 0; $i < $len; ++$i) {
 			for ($j = 0; $j < 4; ++$j) {
-				switch ($barmode[$code{$i}][$j]) {
+				switch($barmode[$code{$i}][$j]) {
 					case 1: {
 						$p = 0;
 						$h = 2;
@@ -1973,7 +1973,7 @@ class TCPDFBarcode {
 		$seq = '';
 		$code = intval($code);
 		do {
-			switch ($code % 3) {
+			switch($code % 3) {
 				case 0: {
 					$seq .= '3';
 					$code = ($code - 3) / 3;
@@ -1996,7 +1996,7 @@ class TCPDFBarcode {
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 2, 'bcode' => array());
 		$len = strlen($seq);
 		for ($i = 0; $i < $len; ++$i) {
-			switch ($seq{$i}) {
+			switch($seq{$i}) {
 				case '1': {
 					$p = 1;
 					$h = 1;
@@ -2045,7 +2045,7 @@ class TCPDFBarcode {
 			$routing_code = '';
 		}
 		// Conversion of Routing Code
-		switch (strlen($routing_code)) {
+		switch(strlen($routing_code)) {
 			case 0: {
 				$binary_code = 0;
 				break;

@@ -80,7 +80,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
 	}		
 	public function populateData($search = false) {	
         $tahun_masuk = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'];
-        $str_tahun_masuk=($tahun_masuk=='none'||$tahun_masuk== '')?'':" AND vdm.tahun_masuk = $tahun_masuk";
+        $str_tahun_masuk=($tahun_masuk=='none'||$tahun_masuk== '') ? '':" AND vdm.tahun_masuk = $tahun_masuk";
 		$ta = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['ta'];
 		$semester = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['semester'];
 		$kjur = $_SESSION['kjur'];	
@@ -142,14 +142,14 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
                     throw new Exception ("NIM ($nim) adalah seorang Mahasiswa baru, mohon diproses di Pembayaran->Mahasiswa Baru.");
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
 	public function Go($sender, $param) {	
         if ($this->IsValid) {            
-            $nim = $sender->getId()=='btnGoRepeater'?$this->getDataKeyField($sender, $this->RepeaterS):addslashes($this->txtNIM->Text);
+            $nim = $sender->getId() == 'btnGoRepeater'?$this->getDataKeyField($sender, $this->RepeaterS):addslashes($this->txtNIM->Text);
             $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id' => $nim));
         }
 	}

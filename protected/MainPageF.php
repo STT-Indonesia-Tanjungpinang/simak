@@ -6,7 +6,7 @@ class MainPageF extends MainPage {
 		$this->MasterClass="Application.layouts.FrontTemplate";	
         $this->Theme='limitless';
 	}
-	public function onLoad ($param) {		
+	public function onLoad($param) {		
 		parent::onLoad($param);	
         if (!$this->IsPostBack&&!$this->IsCallBack) {	
             

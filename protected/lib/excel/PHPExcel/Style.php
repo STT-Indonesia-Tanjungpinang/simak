@@ -325,7 +325,7 @@ class PHPExcel_Style extends PHPExcel_Style_Supervisor implements PHPExcel_IComp
 
                             // inner edges that are not touching the region should take the 'inside' border properties if they have been set
                             foreach ($innerEdges as $innerEdge) {
-                                switch ($innerEdge) {
+                                switch($innerEdge) {
                                     case 'top':
                                     case 'bottom':
                                         // should pick up 'horizontal' border property if set
@@ -365,7 +365,7 @@ class PHPExcel_Style extends PHPExcel_Style_Supervisor implements PHPExcel_IComp
                 }
 
                 // First loop through columns, rows, or cells to find out which styles are affected by this operation
-                switch ($selectionType) {
+                switch($selectionType) {
                     case 'COLUMN':
                         $oldXfIndexes = array();
                         for ($col = $rangeStart[0]; $col <= $rangeEnd[0]; ++$col) {
@@ -410,7 +410,7 @@ class PHPExcel_Style extends PHPExcel_Style_Supervisor implements PHPExcel_IComp
                 }
 
                 // Loop through columns, rows, or cells again and update the XF index
-                switch ($selectionType) {
+                switch($selectionType) {
                     case 'COLUMN':
                         for ($col = $rangeStart[0]; $col <= $rangeEnd[0]; ++$col) {
                             $columnDimension = $this->getActiveSheet()->getColumnDimensionByColumn($col);

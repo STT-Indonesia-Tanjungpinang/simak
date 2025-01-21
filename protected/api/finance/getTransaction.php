@@ -15,7 +15,7 @@ class getTransaction extends BaseWS {
 			}
 			$no_transaksi=addslashes($data['no_transaksi']);
 			$tipe_transaksi = substr($no_transaksi, 0,2);
-			switch ($tipe_transaksi) {
+			switch($tipe_transaksi) {
 				case 10: //bayar biasa
 					$str = "SELECT t.no_transaksi,t.no_faktur,t.kjur,t.tahun,t.idsmt,t.idkelas,k.nkelas,t.no_formulir,fp.nama_mhs,t.nim,t.disc,t.commited,t.tanggal,t.date_added FROM transaksi t LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN kelas k ON (k.idkelas=t.idkelas) WHERE t.no_transaksi='$no_transaksi'";
 					$this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'kjur', 'tahun', 'idsmt', 'idkelas', 'nkelas', 'no_formulir', 'nama_mhs', 'nim', 'disc', 'commited', 'tanggal', 'date_added'));		

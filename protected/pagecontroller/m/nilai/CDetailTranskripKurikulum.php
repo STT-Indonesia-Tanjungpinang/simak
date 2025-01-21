@@ -50,11 +50,11 @@ class CDetailTranskripKurikulum extends MainPageM {
 	}
 	public function printOut($sender, $param) {	
         $this->createObj('reportnilai');            
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';        
         $dataReport=$_SESSION['currentPageDetailTranskripKurikulum']['DataMHS']; 
         $nim = $dataReport['nim'];
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

@@ -99,7 +99,7 @@ class TActiveCustomDatePicker extends TCustomDatePicker  implements ICallbackEve
 			{
 				$s = Prado::createComponent('System.Util.TDateTimeStamp');
 				$date = $s->getDate($this->getTimeStampFromText());
-				$id=$this->getClientID();
+				$id = $this->getClientID();
 				$cb->select($id.TControl::CLIENT_ID_SEPARATOR.'day', 'Value', $date['mday'], 'select');
 				$cb->select($id.TControl::CLIENT_ID_SEPARATOR.'month', 'Value', $date['mon']-1, 'select');
 				$cb->select($id.TControl::CLIENT_ID_SEPARATOR.'year', 'Value', $date['year'], 'select');

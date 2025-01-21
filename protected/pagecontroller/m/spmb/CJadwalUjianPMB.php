@@ -103,7 +103,7 @@ class CJadwalUjianPMB extends MainPageM {
     }
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;        
         
         $str = "SELECT nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,idruangkelas,status FROM jadwal_ujian_pmb WHERE idjadwal_ujian = $id";
@@ -122,7 +122,7 @@ class CJadwalUjianPMB extends MainPageM {
     }
     public function updateData($sender, $param) {
         if ($this->IsValid) {
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $nama_kegiatan = addslashes($this->txtEditNamaKegiatan->Text);
             $tgl_ujian=date ('Y-m-d', $this->txtEditTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtEditJamMasuk->Text);
@@ -137,7 +137,7 @@ class CJadwalUjianPMB extends MainPageM {
         }
     }
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idjadwal_ujian', 'peserta_ujian_pmb', $id)) {
             $this->lblHeaderMessageError->Text='Menghapus Jadwal Ujian PMB';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus jadwal ujian dengan ID ($id) karena masih ada pesertanya.";
@@ -150,9 +150,9 @@ class CJadwalUjianPMB extends MainPageM {
     public function printOut($sender, $param) {		
         $idjadwal_ujian = $this->getDataKeyField($sender, $this->RepeaterS);
         $this->createObj('reportspmb');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';                
-		switch ($_SESSION['outputreport']) {
+		switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

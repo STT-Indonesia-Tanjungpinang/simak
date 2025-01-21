@@ -7,7 +7,7 @@ class PDPTService {
      */
     public function getPrice($symbol)
     {
-        switch ($symbol) {
+        switch($symbol) {
             case 'us':
                 $value=2.5;
             break;

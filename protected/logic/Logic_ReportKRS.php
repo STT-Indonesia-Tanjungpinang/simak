@@ -12,7 +12,7 @@ class Logic_ReportKRS extends Logic_Report {
         $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
         
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':                
 //                $this->printOut("krs_$nim");
@@ -151,7 +151,7 @@ class Logic_ReportKRS extends Logic_Report {
         $akhir=$this->dataReport['akhir'];
         $nama_tahun = $this->dataReport['nama_tahun'];
         $nama_semester=$this->dataReport['nama_semester'];
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':                
 //                $this->printOut("krs_$nim");
@@ -301,7 +301,7 @@ class Logic_ReportKRS extends Logic_Report {
      */
     public function printKUM ($jenisujian, $dataidkrs, $objKRS, $objDMaster) {
         
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':                
 //                $this->printOut("kum_$nim");
@@ -321,7 +321,7 @@ class Logic_ReportKRS extends Logic_Report {
                     $row+=6;
                     $rpt->SetFont ('helvetica', 'B',12);	
                     $rpt->setXY(3, $row);			
-                    $kartu=($jenisujian=='uts')?'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
+                    $kartu=($jenisujian=='uts') ? 'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
                     $rpt->Cell(0, $row, $kartu,0,0,'C');
                     
                     $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
@@ -475,7 +475,7 @@ class Logic_ReportKRS extends Logic_Report {
 				$row+=6;
 				$rpt->SetFont ('helvetica', 'B',12);	
 				$rpt->setXY(3, $row);			
-                $kartu=($jenisujian=='uts')?'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
+                $kartu=($jenisujian=='uts') ? 'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
 				$rpt->Cell(0, $row, $kartu,0,0,'C');
                 
 				$row+=6;

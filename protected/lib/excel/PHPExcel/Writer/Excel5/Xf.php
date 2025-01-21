@@ -523,7 +523,7 @@ class PHPExcel_Writer_Excel5_Xf
      */
     private static function mapLocked($locked)
     {
-        switch ($locked) {
+        switch($locked) {
             case PHPExcel_Style_Protection::PROTECTION_INHERIT:
                 return 1;
             case PHPExcel_Style_Protection::PROTECTION_PROTECTED:
@@ -543,7 +543,7 @@ class PHPExcel_Writer_Excel5_Xf
      */
     private static function mapHidden($hidden)
     {
-        switch ($hidden) {
+        switch($hidden) {
             case PHPExcel_Style_Protection::PROTECTION_INHERIT:
                 return 0;
             case PHPExcel_Style_Protection::PROTECTION_PROTECTED:

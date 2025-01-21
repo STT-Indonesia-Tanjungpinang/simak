@@ -32,7 +32,7 @@ class MainPageMHS extends MainPage {
      * show page pembayaran Cuti semester Genap [pembayaran]
      */
     public $showPembayaranCutiSemesterGenap=false;
-	public function onLoad ($param) {		
+	public function onLoad($param) {		
 		parent::onLoad($param);				
         if (!$this->IsPostBack&&!$this->IsCallBack) {	
             

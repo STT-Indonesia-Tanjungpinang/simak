@@ -47,7 +47,7 @@ class Pendaftaran extends MainPageF
   public function checkEmail ($sender, $param)
   {
     $id = $sender->getId();
-    $this->idProcess = ($id=='editEmail')?'edit':'add';
+    $this->idProcess = ($id == 'editEmail') ? 'edit' : 'add';
     $email_mhs = addslashes($param->Value);
     try 
     {
@@ -65,8 +65,8 @@ class Pendaftaran extends MainPageF
     }
     catch (Exception $e)
     {
-      $param->IsValid=false;
-      $sender->ErrorMessage=$e->getMessage();
+      $param->IsValid = false;
+      $sender->ErrorMessage = $e->getMessage();
     }
   }
   public function saveData($sender, $param)
@@ -96,7 +96,7 @@ class Pendaftaran extends MainPageF
       $no_formulir=$form[1]['no_formulir'];
       $no_transaksi='10'.$ta.$idsmt.mt_rand(10000,99999);
       $no_faktur=$ta.$no_transaksi;        
-      $userid=$no_formulir;
+      $userid = $no_formulir;
 
       $this->DB->query ('BEGIN');
       $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur=0,tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim=0,tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";
@@ -172,7 +172,7 @@ class Pendaftaran extends MainPageF
         $str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,nim,email,userpassword,theme,photo_profile) VALUES (NULL, $no_formulir,0,'$email', '$userpassword', 'cube', '$photo_profile')";
         $this->DB->insertRecord($str);
         $ket="Input Via WEB";
-        $userid=$no_formulir;
+        $userid = $no_formulir;
         $str = 'INSERT INTO bipend (idbipend,tahun,no_faktur,tgl_bayar,no_formulir,gelombang,dibayarkan,ket,userid) VALUES ';
         $str .= "(NULL, $ta,'$no_formulir',NOW(), '$no_formulir', '1', '$sisa_bayar', '$ket', '$userid')";				
         $this->DB->insertRecord($str);

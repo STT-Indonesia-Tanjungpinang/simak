@@ -37,7 +37,7 @@ class PHPExcel_Shared_CodePage
      */
     public static function NumberToName($codePage = 1252)
     {
-        switch ($codePage) {
+        switch($codePage) {
             case 367:
                 return 'ASCII';    //    ASCII
             case 437:

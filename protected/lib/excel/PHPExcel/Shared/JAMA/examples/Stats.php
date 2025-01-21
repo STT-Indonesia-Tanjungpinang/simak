@@ -1565,7 +1565,7 @@ class Base {/*{{{*/
             $d = ($flag) ? $key : $value;
             $v = ($flag) ? $value : $key;
             if (!is_numeric($d)) {
-                switch ($this->_nullOption) {
+                switch($this->_nullOption) {
                     case STATS_IGNORE_NULL :
                         unset($this->_data["$key"]);
                         break;

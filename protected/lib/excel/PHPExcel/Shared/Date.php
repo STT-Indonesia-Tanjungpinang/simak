@@ -298,7 +298,7 @@ class PHPExcel_Shared_Date
         }
 
         // Switch on formatcode
-        switch ($pFormatCode) {
+        switch($pFormatCode) {
             //    Explicitly defined date formats
             case PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD:
             case PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD2:

@@ -64,13 +64,13 @@ class CMatkulPrasyarat extends MainPageM {
                 if ($datamatkul['semester'] <= $r[1]['semester']) {
                     throw new Exception ("Semester matakuliah yang di inputkan tidak boleh lebih besar atau lebih besar sama dengan dari matakuliah ini.");		
                 }      
-                $id=$datamatkul['kmatkul'];
+                $id = $datamatkul['kmatkul'];
                 if ($this->DB->checkRecordIsExist("kmatkul_syarat",'matakuliah_syarat', $kmatkul, " AND kmatkul='$id'")) {                                
                     throw new Exception ("Kode matakuliah ($kmatkul) sudah menjadi prasyarat matakuliah ini.");		
                 } 
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
@@ -84,7 +84,7 @@ class CMatkulPrasyarat extends MainPageM {
         }
     }
     public function deleteRecord($sender, $param) { 		
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);		
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);		
 		$this->DB->deleteRecord("matakuliah_syarat WHERE idsyarat_kmatkul='$id'");
         $kmatkul = $_SESSION['currentPageMatkulPrasyarat']['dataMatkul']['kmatkul'];	
 		$this->redirect('dmaster.MatkulPrasyarat',true,array('id' => $kmatkul));

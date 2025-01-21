@@ -108,7 +108,7 @@ class CPembagianKelas extends MainPageM {
     
     if ($search) {
       $txtsearch = addslashes($this->txtKriteria->Text);
-      switch ($this->cmbKriteria->Text) {                
+      switch($this->cmbKriteria->Text) {                
         case 'nidn':
           $clausa=" AND vpp.nidn='$txtsearch'";  
           $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
@@ -169,11 +169,11 @@ class CPembagianKelas extends MainPageM {
   }	
   public function printOut($sender, $param) {		
     $this->createObj('reportakademik');
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
     echo $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
     $dataReport=$this->Demik->getInfoKelas($idkelas_mhs);
-    switch ($_SESSION['outputreport']) {
+    switch($_SESSION['outputreport']) {
       case 'summarypdf':
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;

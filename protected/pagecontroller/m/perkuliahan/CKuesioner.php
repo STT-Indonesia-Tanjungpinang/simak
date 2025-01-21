@@ -80,7 +80,7 @@ class CKuesioner extends MainPageM {
 		$kjur = $_SESSION['kjur'];		
         if ($search) {            
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) { 
+            switch($this->cmbKriteria->Text) { 
                 case 'kmatkul':
                     $clausa=" AND kmatkul LIKE '%$txtsearch%'";                    
                     $str="SELECT vpp.idpengampu_penyelenggaraan,vpp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur'$clausa";
@@ -139,9 +139,9 @@ class CKuesioner extends MainPageM {
     }
     
     public function printOut($sender, $param) {		
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-		switch ($_SESSION['outputreport']) {
+		switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

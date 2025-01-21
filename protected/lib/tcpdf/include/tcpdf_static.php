@@ -477,7 +477,7 @@ class TCPDF_STATIC {
 	 */
 	public static function getPageSizeFromFormat($format) {
 		// Paper cordinates are calculated in this way: (inches * 72) where (1 inch = 25.4 mm)
-		switch (strtoupper($format)) {
+		switch(strtoupper($format)) {
 			// ISO 216 A Series + 2 SIS 014711 extensions
 			case 'A0': {$pf = array( 2383.937, 3370.394); break;}
 			case 'A1': {$pf = array( 1683.780, 2383.937); break;}
@@ -892,7 +892,7 @@ class TCPDF_STATIC {
 	 * @public static
 	 */
 	public static function getPageLayoutMode($layout='SinglePage') {
-		switch ($layout) {
+		switch($layout) {
 			case 'default':
 			case 'single':
 			case 'SinglePage': {
@@ -935,7 +935,7 @@ class TCPDF_STATIC {
 	 * @public static
 	 */
 	public static function getPageMode($mode='UseNone') {
-		switch ($mode) {
+		switch($mode) {
 			case 'UseNone': {
 				$page_mode = 'UseNone';
 				break;
@@ -1031,7 +1031,7 @@ class TCPDF_STATIC {
 			$brd = $newbrd;
 		}
 		foreach ($brd as $border => $style) {
-			switch ($position) {
+			switch($position) {
 				case 'start': {
 					if (strpos($border, 'B') !== false) {
 						// remove bottom line
@@ -1596,7 +1596,7 @@ class TCPDF_STATIC {
 		$opt = array(); // value to be returned
 		// alignment: Controls how the text is laid out within the text field.
 		if (isset($prop['alignment'])) {
-			switch ($prop['alignment']) {
+			switch($prop['alignment']) {
 				case 'left': {
 					$opt['q'] = 0;
 					break;
@@ -1623,7 +1623,7 @@ class TCPDF_STATIC {
 		}
 		// borderStyle: The border style for a field.
 		if (isset($prop['borderStyle'])) {
-			switch ($prop['borderStyle']) {
+			switch($prop['borderStyle']) {
 				case 'border.d':
 				case 'dashed': {
 					$opt['border'] = array(0, 0, $linewidth, array(3, 2));
@@ -1683,7 +1683,7 @@ class TCPDF_STATIC {
 		}
 		// buttonScaleHow: Controls how the icon is scaled (if necessary) to fit inside the button face.
 		if (isset($prop['buttonScaleHow'])) {
-			switch ($prop['buttonScaleHow']) {
+			switch($prop['buttonScaleHow']) {
 				case 'scaleHow.proportional': {
 					$opt['mk']['if']['s'] = 'P';
 					break;
@@ -1696,7 +1696,7 @@ class TCPDF_STATIC {
 		}
 		// buttonScaleWhen: Controls when an icon is scaled to fit inside the button face.
 		if (isset($prop['buttonScaleWhen'])) {
-			switch ($prop['buttonScaleWhen']) {
+			switch($prop['buttonScaleWhen']) {
 				case 'scaleWhen.always': {
 					$opt['mk']['if']['sw'] = 'A';
 					break;
@@ -1717,7 +1717,7 @@ class TCPDF_STATIC {
 		}
 		// buttonPosition: Controls how the text and the icon of the button are positioned with respect to each other within the button face.
 		if (isset($prop['buttonPosition'])) {
-			switch ($prop['buttonPosition']) {
+			switch($prop['buttonPosition']) {
 				case 0:
 				case 'position.textOnly': {
 					$opt['mk']['tp'] = 0;
@@ -1915,7 +1915,7 @@ class TCPDF_STATIC {
 		}
 		// highlight: Defines how a button reacts when a user clicks it.
 		if (isset($prop['highlight'])) {
-			switch ($prop['highlight']) {
+			switch($prop['highlight']) {
 				case 'none':
 				case 'highlight.n': {
 					$opt['h'] = 'N';
@@ -2165,7 +2165,7 @@ class TCPDF_STATIC {
 				$attrib = strtolower(trim($attrib[0]));
 				if (!empty($attrib)) {
 					// check if matches class, id, attribute, pseudo-class or pseudo-element
-					switch ($attrib{0}) {
+					switch($attrib{0}) {
 						case '.': { // class
 							if (in_array(substr($attrib, 1), $class)) {
 								$valid = true;
@@ -2184,7 +2184,7 @@ class TCPDF_STATIC {
 								$att = strtolower($attrmatch[1]);
 								$val = $attrmatch[3];
 								if (isset($dom[$key]['attribute'][$att])) {
-									switch ($attrmatch[2]) {
+									switch($attrmatch[2]) {
 										case '=': {
 											if ($dom[$key]['attribute'][$att] == $val) {
 												$valid = true;
@@ -2249,7 +2249,7 @@ class TCPDF_STATIC {
 					$valid = false;
 					// check remaining selector part
 					$selector = substr($selector, 0, $offset);
-					switch ($operator) {
+					switch($operator) {
 						case ' ': { // descendant of an element
 							while ($dom[$key]['parent'] > 0) {
 								if (self::isValidCSSSelectorForTag($dom, $dom[$key]['parent'], $selector)) {
@@ -2626,7 +2626,7 @@ class TCPDF_STATIC {
 					$e = 0;
 					$f = 0;
 					$regs = array();
-					switch ($data[1]) {
+					switch($data[1]) {
 						case 'matrix': {
 							if (preg_match('/([a-z0-9\-\.]+)[\,\s]+([a-z0-9\-\.]+)[\,\s]+([a-z0-9\-\.]+)[\,\s]+([a-z0-9\-\.]+)[\,\s]+([a-z0-9\-\.]+)[\,\s]+([a-z0-9\-\.]+)/si', $data[2], $regs)) {
 								$a = $regs[1];

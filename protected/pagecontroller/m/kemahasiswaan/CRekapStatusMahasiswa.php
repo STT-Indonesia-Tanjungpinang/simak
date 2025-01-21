@@ -123,7 +123,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
 
         $idkelas = $_SESSION['currentPageRekapStatusMahasiswa']['idkelas'];        
         $sql.=$idkelas == 'none'?'':"AND idkelas='$idkelas'";
-        switch ($k_status) {
+        switch($k_status) {
             case 'A':                
                 $r = $this->Demik->getRekapStatusMHS($kjur, $ta1, $ta2,'A', $sql);
                 $this->RepeaterAktifS->DataSource = $r;
@@ -217,9 +217,9 @@ class CRekapStatusMahasiswa Extends MainPageM {
     
 	public function printOut($sender, $param) {	
         $this->createObj('reportakademik');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

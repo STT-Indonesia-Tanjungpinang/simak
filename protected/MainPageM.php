@@ -144,7 +144,7 @@ class MainPageM extends MainPage {
      * show page rekapitulasi pembayaran semester ganjil[keuangan]
      */
     public $showReportRekapPembayaranGanjil=false;
-	public function onLoad ($param) {
+	public function onLoad($param) {
 		parent::onLoad($param);
         if (!$this->IsPostBack&&!$this->IsCallBack) {
         }

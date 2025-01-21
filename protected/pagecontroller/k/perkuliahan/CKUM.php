@@ -91,7 +91,7 @@ class CKUM extends MainPageK {
         if ($search) {
             $str = "SELECT vdm.no_formulir,k.idkrs,k.nim,vdm.nama_mhs,tahun_masuk,semester_masuk,perpanjang FROM krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
@@ -214,9 +214,9 @@ class CKUM extends MainPageK {
     }
     public function printOut($sender, $param) {
         $this->createObj('reportkrs');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout=""; 
                 foreach($this->RepeaterS->Items as $inputan) {						
@@ -252,10 +252,10 @@ class CKUM extends MainPageK {
         $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataidkrs[$idkrs] = $idkrs;
         $this->createObj('reportkrs');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
         
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

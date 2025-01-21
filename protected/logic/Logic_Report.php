@@ -54,7 +54,7 @@ class Logic_Report extends Logic_Global {
 		$this->driver = $driver;
 		$path = dirname($this->getPath()).'/';								
 		$host=$this->setup->getAddress().'/';				
-		switch ($driver) {
+		switch($driver) {
             case 'excel2003':								
                 $phpexcel=BASEPATH.'protected/lib/excel/';
                 define ('PHPEXCEL_ROOT', $phpexcel);
@@ -111,7 +111,7 @@ class Logic_Report extends Logic_Global {
      */
 	public function setHeaderPT ($endColumn=null, $alignment=null, $columnHeader='C') {			
         $headerLogo=BASEPATH.$this->setup->getSettingValue('config_logo');
-		switch ($this->getDriver()) {
+		switch($this->getDriver()) {
             case 'pdf':
                 $rpt=$this->rpt;
                 $rpt->Image($headerLogo,3,6,17,17);
@@ -194,7 +194,7 @@ class Logic_Report extends Logic_Global {
      */
 	public function printOut ($filename, $debug=false) {	
 		$filename_to_write = $debug == true ? $filename  : $filename.'_'.date('Y_m_d_H_m_s');	
-		switch ($this->driver) {
+		switch($this->driver) {
 			case 'excel2003':
                 //$writer=new PHPExcel_Writer_Excel5($this->rpt);								
                 $writer=PHPExcel_IOFactory::createWriter($this->rpt, 'Excel5');
@@ -228,7 +228,7 @@ class Logic_Report extends Logic_Global {
      * @param type $FormatArchive
      */
     public function printOutArchive ($DataFile, $FileName, $FormatArchive) {	
-        switch ($FormatArchive) {
+        switch($FormatArchive) {
             case 'zip':                        
                 $namafile=$FileName.'_'.date('Y_m_d_H_m_s').'.zip';
                 $destinationfile=$this->exportedDir['full_path'].$namafile;
@@ -243,8 +243,8 @@ class Logic_Report extends Logic_Global {
 	* @param text in override text result
 	*/
 	public function setLink ($obj_out, $text='') {
-		$filename=$text== ''?$this->exportedDir['filename']:$text;		        
-		switch ($this->driver) {
+		$filename = $text== ''?$this->exportedDir['filename']:$text;		        
+		switch($this->driver) {
 			case 'excel2003':
                 $obj_out->Text = "$filename.xls";
 				$obj_out->NavigateUrl=$this->exportedDir['excel_path'];				

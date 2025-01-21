@@ -2,8 +2,8 @@
 prado::using ('Application.MainPageMB');
 class CSoalPMB extends MainPageMB {
     public $DataUjian;
-    public function onLoad ($param) {
-        parent::onLoad ($param);        
+    public function onLoad($param) {
+        parent::onLoad($param);        
         $this->showSoalPMB = true;	    
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	            
@@ -90,8 +90,8 @@ class CSoalPMB extends MainPageMB {
                 }     
             }
         }catch(Exception $e) {			
-            $sender->ErrorMessage=$e->getMessage();				
-            $param->IsValid=false;			
+            $sender->ErrorMessage = $e->getMessage();				
+            $param->IsValid = false;			
 		}
     }
     public function startUjian($sender, $param) {        

@@ -916,7 +916,7 @@ class PHPExcel_Writer_Excel5_Workbook extends PHPExcel_Writer_Excel5_BIFFwriter
         $record    = 0x0085;                    // Record identifier
 
         // sheet state
-        switch ($sheet->getSheetState()) {
+        switch($sheet->getSheetState()) {
             case PHPExcel_Worksheet::SHEETSTATE_VISIBLE:
                 $ss = 0x00;
                 break;

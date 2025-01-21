@@ -24,7 +24,7 @@ class CProfilMahasiswa extends MainPageM {
     $this->createObj('Nilai');
     if (!$this->IsPostBack && !$this->IsCallback) {	
       if (!isset($_SESSION['currentPageProfilMahasiswa']) || $_SESSION['currentPageProfilMahasiswa']['page_name'] != 'm.kemahasiswaan.ProfilMahasiswa') {
-        $_SESSION['currentPageProfilMahasiswa'] = array('page_name' => 'm.kemahasiswaan.ProfilMahasiswa', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
+        $_SESSION['currentPageProfilMahasiswa'] = array('page_name' => 'm.kemahasiswaan.ProfilMahasiswa', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=> 0);												
       }
 
       $this->MVProfilMahasiswa->ActiveViewIndex=$_SESSION['currentPageProfilMahasiswa']['activeviewindex'];             
@@ -64,7 +64,7 @@ class CProfilMahasiswa extends MainPageM {
       $_SESSION['currentPageProfilMahasiswa']['DataMHS'] = $this->DataMHS;
       $activeview = $_SESSION['currentPageProfilMahasiswa']['activeviewindex'];                
       if ($activeview == $this->MVProfilMahasiswa->ActiveViewIndex) {
-        switch ($activeview) {
+        switch($activeview) {
           case 0 : //ips dan ipk
             $this->populateIPSdanIPK();
           break;   
@@ -233,8 +233,8 @@ class CProfilMahasiswa extends MainPageM {
           }                
         }
       }catch (Exception $e) {
-        $param->IsValid=false;
-        $sender->ErrorMessage=$e->getMessage();
+        $param->IsValid = false;
+        $sender->ErrorMessage = $e->getMessage();
       }	
     }	
   }
@@ -255,8 +255,8 @@ class CProfilMahasiswa extends MainPageM {
           }          
         }
       }catch (Exception $e) {
-        $param->IsValid=false;
-        $sender->ErrorMessage=$e->getMessage();
+        $param->IsValid = false;
+        $sender->ErrorMessage = $e->getMessage();
       }	
     }
   }

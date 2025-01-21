@@ -76,7 +76,7 @@ class CDetailNilaiDosen extends MainPageON
   }
   public function printOut($sender, $param) {	
     $this->createObj('reportnilai');
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
     
   }

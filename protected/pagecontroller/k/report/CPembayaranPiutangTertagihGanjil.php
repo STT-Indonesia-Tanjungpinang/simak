@@ -161,7 +161,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
     }
     
     public function getTotalBayarMHS ($no_formulir, $ta, $tahun_masuk, $semester_masuk, $komponen_biaya, $idkelas) {                        
-        $sudahbayar = array(1=>array('sudahbayar'=>0,'belumbayar'=>0),2=>array('sudahbayar'=>0,'belumbayar'=>0));
+        $sudahbayar = array(1=>array('sudahbayar'=>0,'belumbayar'=> 0),2=>array('sudahbayar'=>0,'belumbayar'=> 0));
         if ($ta==$tahun_masuk && $semester_masuk == 1) {
             $kewajiban_ganjil = $komponen_biaya[$idkelas]['baru'][1];
             $pembayaran_ganjil = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=1 AND idkombi!=1");
@@ -193,9 +193,9 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
     }    
     public function printOut($sender, $param) {	
         $this->createObj('reportfinance');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

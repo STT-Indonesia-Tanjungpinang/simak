@@ -100,7 +100,7 @@ class MainPageSA extends MainPage {
      * show page export data[setting]
      */
     public $showExportData=false;
-	public function onLoad ($param) {		
+	public function onLoad($param) {		
 		parent::onLoad($param);				
         if (!$this->IsPostBack&&!$this->IsCallBack) {	           
         }

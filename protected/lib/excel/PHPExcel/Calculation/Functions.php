@@ -550,7 +550,7 @@ class PHPExcel_Calculation_Functions
             $value = array_shift($value);
         }
 
-        switch (gettype($value)) {
+        switch(gettype($value)) {
             case 'double':
             case 'float':
             case 'integer':

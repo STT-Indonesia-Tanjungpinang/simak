@@ -24,7 +24,7 @@ class LoginAPI extends MainPage {
                     <strong>Error!</strong>
                     '.$e->getMessage().'</div>';
 				$sender->ErrorMessage=$message;					
-				$param->IsValid=false;		
+				$param->IsValid = false;		
 			}
         }							
 		
@@ -41,7 +41,7 @@ class LoginAPI extends MainPage {
                     <strong>Error!</strong>
                     '.$e->getMessage().'</div>';
 				$sender->ErrorMessage=$message;					
-				$param->IsValid=false;		
+				$param->IsValid = false;		
 			}
         }							
 		

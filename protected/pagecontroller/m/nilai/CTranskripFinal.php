@@ -1,7 +1,7 @@
 <?php
 prado::using ('Application.MainPageM');
 class CTranskripFinal extends MainPageM {	
-  public function onLoad ($param) {
+  public function onLoad($param) {
     parent::onLoad($param);		
     $this->showSubMenuAkademikNilai=true;
     $this->showTranskripFinal=true;    
@@ -81,7 +81,7 @@ class CTranskripFinal extends MainPageM {
     if ($search) {
       $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim";
       $txtsearch = addslashes($this->txtKriteria->Text);
-      switch ($this->cmbKriteria->Text) {                
+      switch($this->cmbKriteria->Text) {                
         case 'nim':
           $clausa="AND ta.nim='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
@@ -143,23 +143,23 @@ class CTranskripFinal extends MainPageM {
           if ($totalsks <144)throw new Exception ("Pada T.A dan semester ini total SKS ($nim) baru $totalsks harus lebih dari atau sama dengan 144");				
         }
       }catch (AkademikException $e) {
-        $sender->ErrorMessage=$e->pesanKesalahan();				
-        $param->IsValid=false;
+        $sender->ErrorMessage = $e->pesanKesalahan();				
+        $param->IsValid = false;
       }catch(Exception $e) {			
-        $sender->ErrorMessage=$e->getMessage();				
-        $param->IsValid=false;
+        $sender->ErrorMessage = $e->getMessage();				
+        $param->IsValid = false;
       }			
     }
   }
   public function printOut($sender, $param) {		
     $this->createObj('reportnilai');
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
     $bool=true;
-    switch ($sender->getId()) {
+    switch($sender->getId()) {
       case 'btnPrintOutR':                
         $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
           case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
@@ -247,7 +247,7 @@ class CTranskripFinal extends MainPageM {
         }
       break;			
       case 'btnPrintTranskripFinalAll':                 
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
           case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
           break;

@@ -41,7 +41,7 @@ class MainPageDW extends MainPage {
      * @var integer
      */
     public $iddosen_wali;
-	public function onLoad ($param) {		
+	public function onLoad($param) {		
 		parent::onLoad($param);				
         $this->iddosen_wali = $this->Pengguna->getDataUser('iddosen_wali');
         if (!$this->IsPostBack&&!$this->IsCallBack) {	

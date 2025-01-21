@@ -359,7 +359,7 @@ class TCPDF_PARSER {
 						$row_left = $row[($i - 1)];
 						$row_upleft = $prev_row[($j - 1)];
 					}
-					switch ($predictor) {
+					switch($predictor) {
 						case 10: { // PNG prediction (on encoding, PNG None on all rows)
 							$ddata[$k][$j] = $row[$i];
 							break;
@@ -385,7 +385,7 @@ class TCPDF_PARSER {
 							$pc = abs($p - $row_upleft);
 							$pmin = min($pa, $pb, $pc);
 							// return minumum distance
-							switch ($pmin) {
+							switch($pmin) {
 								case $pa: {
 									$ddata[$k][$j] = (($row[$i] + $row_left) & 0xff);
 									break;
@@ -437,7 +437,7 @@ class TCPDF_PARSER {
 				$obj_num = 0;
 			}
 			foreach ($sdata as $k => $row) {
-				switch ($row[0]) {
+				switch($row[0]) {
 					case 0: { // (f) linked list of free objects
 						++$obj_num;
 						break;
@@ -488,7 +488,7 @@ class TCPDF_PARSER {
 		// get first char
 		$char = $this->pdfdata[$offset];
 		// get object type
-		switch ($char) {
+		switch($char) {
 			case '%': { // \x25 PERCENT SIGN
 				// skip comment and search for next token
 				$next = strcspn($this->pdfdata, "\r\n", $offset);
@@ -521,7 +521,7 @@ class TCPDF_PARSER {
 							break;
 						}
 						$ch = $this->pdfdata{$strpos};
-						switch ($ch) {
+						switch($ch) {
 							case '\\': { // REVERSE SOLIDUS (5Ch) (Backslash)
 								// skip next character
 								++$strpos;

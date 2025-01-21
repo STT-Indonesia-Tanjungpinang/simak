@@ -372,7 +372,7 @@ class PHPExcel_Worksheet_AutoFilter
         foreach ($dataSet as $rule) {
             if (is_numeric($rule['value'])) {
                 //    Numeric values are tested using the appropriate operator
-                switch ($rule['operator']) {
+                switch($rule['operator']) {
                     case PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_EQUAL:
                         $retVal    = ($cellValue == $rule['value']);
                         break;
@@ -393,7 +393,7 @@ class PHPExcel_Worksheet_AutoFilter
                         break;
                 }
             } elseif ($rule['value'] == '') {
-                switch ($rule['operator']) {
+                switch($rule['operator']) {
                     case PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_EQUAL:
                         $retVal    = (($cellValue == '') || ($cellValue === null));
                         break;
@@ -409,7 +409,7 @@ class PHPExcel_Worksheet_AutoFilter
                 $retVal    = preg_match('/^'.$rule['value'].'$/i', $cellValue);
             }
             //    If there are multiple conditions, then we need to test both using the appropriate join operator
-            switch ($join) {
+            switch($join) {
                 case PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_COLUMN_JOIN_OR:
                     $returnVal = $returnVal || $retVal;
                     //    Break as soon as we have a TRUE match for OR joins,
@@ -476,7 +476,7 @@ class PHPExcel_Worksheet_AutoFilter
         $ruleValues = array();
         $baseDate = PHPExcel_Calculation_DateTime::DATENOW();
         //    Calculate start/end dates for the required date range based on current date
-        switch ($dynamicRuleType) {
+        switch($dynamicRuleType) {
             case PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_RULETYPE_DYNAMIC_LASTWEEK:
                 $baseDate = strtotime('-7 days', $baseDate);
                 break;
@@ -503,7 +503,7 @@ class PHPExcel_Worksheet_AutoFilter
                 break;
         }
 
-        switch ($dynamicRuleType) {
+        switch($dynamicRuleType) {
             case PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_RULETYPE_DYNAMIC_TODAY:
             case PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_RULETYPE_DYNAMIC_YESTERDAY:
             case PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_RULETYPE_DYNAMIC_TOMORROW:
@@ -546,7 +546,7 @@ class PHPExcel_Worksheet_AutoFilter
                 break;
         }
 
-        switch ($dynamicRuleType) {
+        switch($dynamicRuleType) {
             //    Adjust Today dates for Yesterday and Tomorrow
             case PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_RULETYPE_DYNAMIC_YESTERDAY:
                 --$maxVal;
@@ -601,7 +601,7 @@ class PHPExcel_Worksheet_AutoFilter
         $columnFilterTests = array();
         foreach ($this->columns as $columnID => $filterColumn) {
             $rules = $filterColumn->getRules();
-            switch ($filterColumn->getFilterType()) {
+            switch($filterColumn->getFilterType()) {
                 case PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_FILTER:
                     $ruleValues = array();
                     //    Build a list of the filter value selections

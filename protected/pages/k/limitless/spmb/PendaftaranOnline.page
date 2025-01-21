@@ -164,7 +164,7 @@
                             	</table>                            	
                             </td>
                             <td><%#$this->DataItem['no_formulir'] >0 ?$this->DataItem['no_formulir']:'N.A'%></td>
-                            <td><span class="label <%#($this->DataItem['no_formulir']==0)?'label-default':'label-success'%>"><i class="<%#($this->DataItem['no_formulir']>0)?'icon-cancel-square':'icon-checkbox-checked'%>"></i></td>
+                            <td><span class="label <%#($this->DataItem['no_formulir']==0)?'label-default':'label-success'%>"><i class="<%#($this->DataItem['no_formulir']> 0)?'icon-cancel-square':'icon-checkbox-checked'%>"></i></td>
                         </tr>                         
                     </prop:ItemTemplate>                        
                     <prop:FooterTemplate>

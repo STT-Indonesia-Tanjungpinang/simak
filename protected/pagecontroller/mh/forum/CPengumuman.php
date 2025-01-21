@@ -7,7 +7,7 @@ class CPengumuman extends MainPageMHS {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPagePengumuman']) || $_SESSION['currentPagePengumuman']['page_name'] != 'mh.forum.Pengumuman') {                                                                                
-                $_SESSION['currentPagePengumuman'] = array('page_name' => 'mh.forum.Pengumuman', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
+                $_SESSION['currentPagePengumuman'] = array('page_name' => 'mh.forum.Pengumuman', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=> 0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPagePengumuman']['activeviewindex']; 
 		}                
@@ -15,7 +15,7 @@ class CPengumuman extends MainPageMHS {
     public function changeView($sender, $param) {                
         $activeview = $_SESSION['currentPagePengumuman']['activeviewindex'];                
         if ($activeview == $this->MVMenuForum->ActiveViewIndex) {
-            switch ($activeview) {
+            switch($activeview) {
                 case 0 : //diskusi newsfeed
                     $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
                     $this->populateNewsFeed();
@@ -58,7 +58,7 @@ class CPengumuman extends MainPageMHS {
         $result = array();
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
-            switch ($v['tipe']) {
+            switch($v['tipe']) {
                 case 'mh':                    
                     $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $v['userid']));
                 break;
@@ -107,7 +107,7 @@ class CPengumuman extends MainPageMHS {
     }
     
     public function setUnreadFalse($sender, $param) {
-        $id=$this->getDataKeyField($sender, $this->RepeaterUnread);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterUnread);        
         $str="UPDATE pengumuman SET unread=0 WHERE idpost=$id";
         $this->DB->updateRecord($str);
         $this->redirect('forum.DetailPengumuman', true, array('id' => $id));

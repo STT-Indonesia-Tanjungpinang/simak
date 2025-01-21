@@ -52,7 +52,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 		$tahun_masuk = $this->DataMHS['tahun_masuk'];
         $semester_masuk = $this->DataMHS['semester_masuk'];
 		$kelas = $this->DataMHS['idkelas'];
-        switch ($status) {
+        switch($status) {
             case 'lama':
                 $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta WHERE tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND idkombi != 1 AND idkombi != 12 AND idkombi != 13 AND idkombi != 14 AND (idkombi=2 OR idkombi=3 OR idkombi=7 OR idkombi=9)";
             break;
@@ -81,7 +81,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 		$tahun_masuk = $this->DataMHS['tahun_masuk'];
         $semester_masuk = $this->DataMHS['idsmt'];
 		$kelas = $this->DataMHS['idkelas'];
-        switch ($status) {
+        switch($status) {
             case 'lama':
                 $str = "SELECT SUM(biaya) AS jumlah FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND tahun = $tahun_masuk AND idsmt=$semester_masuk AND idkelas='$kelas' AND periode_pembayaran='semesteran'";
             break;

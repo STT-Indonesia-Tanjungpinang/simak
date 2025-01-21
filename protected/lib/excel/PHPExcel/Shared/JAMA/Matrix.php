@@ -67,7 +67,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 //Rectangular matrix - m x n initialized from 2D array
                 case 'array':
                     $this->m = count($args[0]);
@@ -172,7 +172,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 //A($i0...; $j0...)
                 case 'integer,integer':
                     list($i0, $j0) = $args;
@@ -472,7 +472,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -512,7 +512,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -566,7 +566,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -606,7 +606,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -661,7 +661,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -702,7 +702,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -757,7 +757,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -818,7 +818,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -860,7 +860,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -902,7 +902,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -943,7 +943,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args  = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $B = $args[0];
@@ -1038,7 +1038,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];
@@ -1092,7 +1092,7 @@ class PHPExcel_Shared_JAMA_Matrix
             $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
-            switch ($match) {
+            switch($match) {
                 case 'object':
                     if ($args[0] instanceof PHPExcel_Shared_JAMA_Matrix) {
                         $M = $args[0];

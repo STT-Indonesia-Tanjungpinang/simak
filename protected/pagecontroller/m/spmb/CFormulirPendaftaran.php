@@ -99,7 +99,7 @@ class CFormulirPendaftaran extends MainPageM
     if ($search) {            
       $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.jk,fp.alamat_rumah,fp.telp_hp,nomor_ijazah,IF(char_length(COALESCE(rm.nim,''))>0,'dulang', '-') AS ket,rm.nim FROM formulir_pendaftaran fp JOIN bipend bp ON (fp.no_formulir=bp.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir)";
       $txtsearch = addslashes($this->txtKriteria->Text);
-      switch ($this->cmbKriteria->Text) {
+      switch($this->cmbKriteria->Text) {
         case 'no_formulir':
           $clausa=" fp.no_formulir='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND $clausa",'fp.no_formulir');
@@ -117,7 +117,7 @@ class CFormulirPendaftaran extends MainPageM
       $status_dulang = $_SESSION['currentPageFormulirPendaftaran']['status_dulang'];
       $str_status='';
       $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
-      switch ($status_dulang)
+      switch($status_dulang)
       {
         case 'belum':
           $str_kjur = " AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')";
@@ -192,7 +192,7 @@ class CFormulirPendaftaran extends MainPageM
     }
   }	
   public function changePs($sender, $param) {
-    if ($sender->getId()=='cmbAddKjur1') {
+    if ($sender->getId() == 'cmbAddKjur1') {
       $this->idProcess = 'add';
       if ($sender->Text == 'none') {
         $this->cmbAddKjur2->Enabled = false;	
@@ -474,11 +474,11 @@ class CFormulirPendaftaran extends MainPageM
   public function printOut($sender, $param)
   {	
     $this->createObj('reportspmb');
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
-    switch ($sender->getId()) {
+    switch($sender->getId()) {
       case 'btnPrintOutFormulirPendaftaran':
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
           case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
@@ -537,7 +537,7 @@ class CFormulirPendaftaran extends MainPageM
         }
       break;
       case 'btnPrintOutFormulirPendaftaranR':
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
           case 'summarypdf':
             $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;

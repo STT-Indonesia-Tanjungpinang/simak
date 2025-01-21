@@ -6,7 +6,7 @@ class CProfiles extends MainPageD {
         $this->showProfiles=true;        
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageCache']) || $_SESSION['currentPageCache']['page_name'] != 'd.settings.Profiles') {
-				$_SESSION['currentPageCache'] = array('page_name' => 'd.settings.Profiles', 'page_num'=>0);												
+				$_SESSION['currentPageCache'] = array('page_name' => 'd.settings.Profiles', 'page_num'=> 0);												
 			}            
             $this->populateData();
 		}
@@ -23,14 +23,14 @@ class CProfiles extends MainPageD {
             $theme=$this->cmbTheme->Text;
             $_SESSION['theme'] = $theme;
             $userid = $this->Pengguna->getDataUser('userid');
-            $str = "UPDATE user SET theme='$theme' WHERE userid=$userid";            
+            $str = "UPDATE user SET theme='$theme' WHERE userid = $userid";            
             $this->DB->updateRecord($str);
             $this->redirect('settings.Profiles',true);
         }
     }
     public function saveDataPassword($sender, $param) {
         if ($this->IsValid) {
-            $username=$this->Pengguna->getDataUser('username');
+            $username = $this->Pengguna->getDataUser('username');
             if ($this->txtPassword->Text != '') {  
                 $data = $this->Pengguna->createHashPassword($this->txtPassword->Text);
                 $salt=$data['salt'];

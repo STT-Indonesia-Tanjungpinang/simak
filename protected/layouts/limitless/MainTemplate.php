@@ -1,6 +1,6 @@
 <?php
 class MainTemplate extends TTemplateControl {    
-    public function onLoad ($param) {
+    public function onLoad($param) {
 		parent::onLoad($param);	
         if (!$this->Page->IsPostBack&&!$this->Page->IsCallback) {		
             $tipeuser=$this->Page->Pengguna->getTipeUser();

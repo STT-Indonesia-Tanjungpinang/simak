@@ -89,7 +89,7 @@ class CDaftarMahasiswa extends MainPageM {
 		$this->populateData($_SESSION['currentPageDaftarMahasiswa']['search']);
 	}
     public function filterKonsentrasi($sender, $param) {
-        $id=$this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
+        $id = $this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
         $_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = $id;
         
         $this->populateSummary();
@@ -118,7 +118,7 @@ class CDaftarMahasiswa extends MainPageM {
         $jumlah_pria=0;
         $jumlah_wanita=0;
         foreach ($jumlah_jk as $v) {
-            switch ($v['jk']) {
+            switch($v['jk']) {
                 case 'L':
                     $jumlah_pria = $v['jumlah'];
                 break;
@@ -170,7 +170,7 @@ class CDaftarMahasiswa extends MainPageM {
         if ($search) {
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.alamat_rumah,vdm.kjur,vdm.idkonsentrasi,vdm.iddosen_wali,vdm.tahun_masuk,vdm.k_status,vdm.idkelas,dk.iddata_konversi,vdm.photo_profile FROM v_datamhs vdm LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim)";			
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="WHERE vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm $clausa",'vdm.nim');
@@ -247,9 +247,9 @@ class CDaftarMahasiswa extends MainPageM {
     }
     public function printOut($sender, $param) {	
         $this->createObj('reportakademik');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

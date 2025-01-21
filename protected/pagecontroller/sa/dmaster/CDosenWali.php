@@ -29,7 +29,7 @@ class CDosenWali extends MainPageSA {
         if ($search) {
             $str = "SELECT dw.iddosen_wali,d.nidn,d.nipy,d.gelar_depan,d.nama_dosen,d.gelar_belakang,d.telp_hp,d.username,d.status FROM dosen_wali dw JOIN LEFT dosen d ON (d.iddosen=dw.iddosen)";         
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'nidn':
                     $clausa="WHERE d.nidn='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');                    

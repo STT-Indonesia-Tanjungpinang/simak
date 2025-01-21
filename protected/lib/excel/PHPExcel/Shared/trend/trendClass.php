@@ -95,7 +95,7 @@ class trendClass
 
         $key = md5($trendType.$const.serialize($yValues).serialize($xValues));
         //    Determine which trend method has been requested
-        switch ($trendType) {
+        switch($trendType) {
             //    Instantiate and return the class for the requested trend method
             case self::TREND_LINEAR:
             case self::TREND_LOGARITHMIC:

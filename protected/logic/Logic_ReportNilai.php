@@ -15,7 +15,7 @@ class Logic_ReportNilai extends Logic_Report {
     $semester=$this->dataReport['semester'];
     $nama_tahun = $this->dataReport['nama_tahun'];
     $nama_semester=$this->dataReport['nama_semester'];
-    switch ($this->getDriver()) 
+    switch($this->getDriver()) 
     {
       case 'excel2003':               
       case 'excel2007':                
@@ -193,7 +193,7 @@ class Logic_ReportNilai extends Logic_Report {
     $semester=$this->dataReport['semester'];
     $nama_tahun = $this->dataReport['nama_tahun'];
     $nama_semester=$this->dataReport['nama_semester'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
 //                $this->printOut("khs_$nim");
@@ -386,7 +386,7 @@ class Logic_ReportNilai extends Logic_Report {
     $nama_tahun = $this->dataReport['nama_tahun'];
     $nama_semester=$this->dataReport['nama_semester'];
     $nama_ps = $this->dataReport['nama_ps'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':          
         $this->setHeaderPT('L'); 
@@ -550,7 +550,7 @@ class Logic_ReportNilai extends Logic_Report {
     $nim = $biodata['nim'];
     $objNilai->setDataMHS($biodata);
     $smt=Logic_Akademik::$SemesterMatakuliahRomawi;
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
 //                $this->printOut("khs_$nim");
@@ -665,7 +665,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-')?'-':$v['m'];
+                $m=($n_kual=='-') ? '-':$v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -694,7 +694,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($s['semester']==$i) {
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-')?'-':$s['m']; 								
+                $m=($n_kual=='-') ? '-':$s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -819,7 +819,7 @@ class Logic_ReportNilai extends Logic_Report {
     $nim = $biodata['nim'];
     $objNilai->setDataMHS($biodata);
     $smt=Logic_Akademik::$SemesterMatakuliahRomawi;
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
 //                $this->printOut("khs_$nim");
@@ -934,7 +934,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-')?'-':$v['m'];
+                $m=($n_kual=='-') ? '-':$v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -963,7 +963,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($s['semester']==$i) {
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-')?'-':$s['m']; 								
+                $m=($n_kual=='-') ? '-':$s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -1088,7 +1088,7 @@ class Logic_ReportNilai extends Logic_Report {
     $nim = $biodata['nim'];
     $objNilai->setDataMHS($biodata);
     $smt=Logic_Akademik::$SemesterMatakuliahRomawi;
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
 //                $this->printOut("khs_$nim");
@@ -1240,7 +1240,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-')?'-':$v['m'];
+                $m=($n_kual=='-') ? '-':$v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -1272,7 +1272,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($s['semester']==$i) {                                
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-')?'-':$s['m']; 								
+                $m=($n_kual=='-') ? '-':$s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -1409,7 +1409,7 @@ class Logic_ReportNilai extends Logic_Report {
     $nim = $biodata['nim'];
     $objNilai->setDataMHS (array('nim' => $nim));
     $n = $objNilai->getTranskrip(false);		
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
         case 'excel2007':                        
           $sheet=$this->rpt->getActiveSheet();
@@ -1542,7 +1542,7 @@ class Logic_ReportNilai extends Logic_Report {
                 if ($v['semester']==$i)
                 {
                   $n_kual=$v['n_kual'];
-                  $n_kual=($n_kual=='-'||$n_kual== '')?'-':$n_kual;
+                  $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
                   $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
@@ -1578,7 +1578,7 @@ class Logic_ReportNilai extends Logic_Report {
                 if ($v['semester']==$i)
                 {
                   $n_kual=$v['n_kual'];
-                  $n_kual=($n_kual=='-'||$n_kual== '')?'-':$n_kual;
+                  $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
                   $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
@@ -1813,7 +1813,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $v) {	
               if ($v['semester']==$i) {
                 $n_kual=$v['n_kual'];
-                $n_kual=($n_kual=='-'||$n_kual== '')?'-':$n_kual;
+                $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
                 $sks = $v['sks'];
                 $totalSks+=$sks;								
                 $rpt->setXY(106, $row_genap);							
@@ -1833,7 +1833,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $s) {
               if ($s['semester']==$i) {
                 $n_kual=$s['n_kual'];
-                $n_kual=($n_kual=='-'||$n_kual== '')?'-':$n_kual;
+                $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
                 $sks = $s['sks'];
                 $totalSks+=$sks;													
                 $rpt->setXY(3, $row_ganjil);						
@@ -1943,7 +1943,7 @@ class Logic_ReportNilai extends Logic_Report {
     $kmatkul=$this->dataReport['kmatkul'];
     $idkelas_mhs = $this->dataReport['idkelas_mhs'];
     $kaprodi = $objNilai->getKetuaPRODI($this->dataReport['kjur']);
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
         $this->setHeaderPT('K'); 
@@ -2373,7 +2373,7 @@ class Logic_ReportNilai extends Logic_Report {
    * @param type $objNilai object
    */
   public function printKonversiMatakuliah ($objNilai) {         
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'pdf':
         $rpt=$this->rpt;
         $rpt->setTitle('Konversi Nilai');
@@ -2621,7 +2621,7 @@ class Logic_ReportNilai extends Logic_Report {
    * @return type void
    */
   public function printPesertaImportNilai () {
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':  
         $sheet=$this->rpt->getActiveSheet();
@@ -2685,7 +2685,7 @@ class Logic_ReportNilai extends Logic_Report {
    */
   public function printFormatEvaluasiHasilBelajar ($objNilai) { 
     $idkelas_mhs = $this->dataReport['idkelas_mhs'];
-    switch ($this->getDriver()) {
+    switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':          
         $this->setHeaderPT('J');

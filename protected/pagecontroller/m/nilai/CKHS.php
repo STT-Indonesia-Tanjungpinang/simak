@@ -3,7 +3,7 @@ prado::using ('Application.MainPageM');
 class CKHS extends MainPageM {	
 	public $nilai_semester_lalu;
 	public $total_sks_nm_saat_ini;
-	public function onLoad ($param) {
+	public function onLoad($param) {
 		parent::onLoad($param);	 	
         $this->showSubMenuAkademikNilai=true;
         $this->showKHS=true;
@@ -102,7 +102,7 @@ class CKHS extends MainPageM {
         if ($search) {
             $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan,0 AS boolpembayaran FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt'";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
@@ -157,7 +157,7 @@ class CKHS extends MainPageM {
             $sks=0;
             $status='-';
             $trstyle='';
-            $dataipk=array('ipk' => '0.00', 'sks'=>0);
+            $dataipk=array('ipk' => '0.00', 'sks'=> 0);
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) { 
                 $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);                
                 $idkelas = $datadulang['idkelas'];
@@ -192,11 +192,11 @@ class CKHS extends MainPageM {
 	
 	public function printOut($sender, $param) {		
         $this->createObj('reportnilai');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-		switch ($sender->getId()) {
+		switch($sender->getId()) {
 			case 'btnPrintOutR':
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
@@ -247,7 +247,7 @@ class CKHS extends MainPageM {
             case 'btnPrintKHSAll':                
                 $repeater = $this->RepeaterS;
                 if ($repeater->Items->Count() > 0) {
-                    switch ($_SESSION['outputreport']) {
+                    switch($_SESSION['outputreport']) {
                         case 'summarypdf':
                             $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                         break;

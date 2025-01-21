@@ -26,46 +26,46 @@ class UserManager extends TAuthManager {
 	*/
 	public function setUser ($username) {
 		$datauser = explode('/', $username);
-		$this->username=$datauser[0];
+		$this->username = $datauser[0];
 		$this->page=$datauser[1];
 	}
 	/**
 	* get roles username	
 	*/
 	public function getDataUser () {				
-		$username=$this->username;
-		switch ($this->page) {
+		$username = $this->username;
+		switch($this->page) {
             case 'SuperAdmin':
                 $str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.isdeleted,u.foto,u.theme FROM user u WHERE username='$username' AND u.page='sa'";
                 $this->db->setFieldTable (array('userid', 'username', 'nama', 'email', 'page', 'isdeleted', 'foto', 'theme'));							
                 $r= $this->db->getRecord($str);	
 				$this->dataUser['data_user']=$r[1];	
-                $userid=$this->dataUser['data_user']['userid'];
-                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid=$userid");
+                $userid = $this->dataUser['data_user']['userid'];
+                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid = $userid");
             break;     
             case 'Api':
                 $str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.isdeleted,u.foto,u.theme FROM user u WHERE username='$username' AND u.page='api'";
                 $this->db->setFieldTable (array('userid', 'username', 'nama', 'email', 'page', 'isdeleted', 'foto', 'theme'));							
                 $r= $this->db->getRecord($str);	
 				$this->dataUser['data_user']=$r[1];	
-                $userid=$this->dataUser['data_user']['userid'];
-                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid=$userid");
+                $userid = $this->dataUser['data_user']['userid'];
+                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid = $userid");
             break;            
             case 'Keuangan':				
 				$str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.isdeleted,u.foto,u.theme FROM user u WHERE username='$username' AND u.page='k'";
                 $this->db->setFieldTable (array('userid', 'username', 'nama', 'email', 'page', 'isdeleted', 'foto', 'theme'));							
                 $r= $this->db->getRecord($str);	
 				$this->dataUser['data_user']=$r[1];	
-                $userid=$this->dataUser['data_user']['userid'];
-                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid=$userid");
+                $userid = $this->dataUser['data_user']['userid'];
+                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid = $userid");
 			break;
             case 'OperatorNilai':
                 $str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.group_id,u.kjur,u.isdeleted,u.foto,u.theme FROM user u WHERE username='$username' AND u.page='on'";
                 $this->db->setFieldTable (array('userid', 'username', 'nama', 'email', 'page', 'group_id', 'kjur', 'isdeleted', 'foto', 'theme'));							
                 $r= $this->db->getRecord($str);	
 				$this->dataUser['data_user']=$r[1];	
-                $userid=$this->dataUser['data_user']['userid'];
-                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid=$userid");
+                $userid = $this->dataUser['data_user']['userid'];
+                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid = $userid");
             break;
 			case 'Manajemen':	
                 $str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.group_id,u.kjur,u.isdeleted,u.foto AS photo_profile,u.theme FROM user u WHERE username='$username' AND u.page='m'";
@@ -76,8 +76,8 @@ class UserManager extends TAuthManager {
 				$this->dataUser['data_user']['username']=$username;				
 				$this->dataUser['data_user']['page']='m';
 				$this->dataUser['hak_akses']=$this->loadAclUser($result[1]['userid']);
-                $userid=$this->dataUser['data_user']['userid'];
-                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid=$userid");
+                $userid = $this->dataUser['data_user']['userid'];
+                $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid = $userid");
 			break;            
 			case 'Mahasiswa':	                
                 $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.jk,vdm.alamat_rumah,vdm.email,vdm.kjur,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.iddosen_wali,vdm.tahun_masuk,vdm.semester_masuk,vdm.nama_ps,vdm.k_status AS k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas,perpanjang,theme,photo_profile FROM v_datamhs vdm LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN kelas ke ON (ke.idkelas=vdm.idkelas) WHERE nim='$username'";
@@ -123,7 +123,7 @@ class UserManager extends TAuthManager {
                     $mhs->setDataMHS (array('nim' => $username));										
                     $kelas = $mhs->getKelasMhs();																	
                     $dataMhs['idkelas']=($kelas['idkelas']== '')?null:$kelas['idkelas'];
-                    $dataMhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
+                    $dataMhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
                     $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi']==0) ? '-':$dataMhs['nama_konsentrasi'];
                     $dataMhs['iddata_konversi']=$mhs->isMhsPindahan($username,true);
                     
@@ -184,9 +184,9 @@ class UserManager extends TAuthManager {
 	* digunakan untuk mendapatkan data user	
 	*/
 	public function getUser () {
-        $username=$this->username;
+        $username = $this->username;
         $data_user = array('page' => '', 'userpassword' => '', 'active'=>1);
-		switch ($this->page) {
+		switch($this->page) {
             case 'SuperAdmin':
                 $str = "SELECT u.username,u.userpassword,u.salt,u.page,u.active FROM user u WHERE username='$username' AND active=1 AND page='sa'";
                 $this->db->setFieldTable (array('username', 'userpassword', 'salt', 'page', 'active'));							
@@ -256,7 +256,7 @@ class UserManager extends TAuthManager {
 					 $data_user['page']='mb';
 					 $data_user['active']=1;
 				}else{
-					$data_user = array('page' => '', 'userpassword' => '', 'active'=>0);
+					$data_user = array('page' => '', 'userpassword' => '', 'active'=> 0);
 				}               		
 			break;
             case 'Alumni':

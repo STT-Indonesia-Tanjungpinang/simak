@@ -1,8 +1,8 @@
 <?php
 prado::using ('Application.MainPageSA');
 class CProdi extends MainPageSA {	
-	public function onLoad ($param) {		
-		parent::onLoad ($param);
+	public function onLoad($param) {		
+		parent::onLoad($param);
         $this->showSubMenuLembaga=true;
         $this->showProdi=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
@@ -31,7 +31,7 @@ class CProdi extends MainPageSA {
         $this->cmbAddKaprodi->DataBind();
     }
     public function checkPS($sender, $param) {    
-        $this->idProcess = $sender->getId()=='addkodeps'?'add':'edit';
+        $this->idProcess = $sender->getId() == 'addkodeps'?'add':'edit';
         $kjur = $param->Value;
         if ($kjur != '') {
             try {   
@@ -41,13 +41,13 @@ class CProdi extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }   
         }
     }
     public function checkKodePSForlap($sender, $param) {    
-        $this->idProcess = $sender->getId()=='addkodepsforlap'?'add':'edit';
+        $this->idProcess = $sender->getId() == 'addkodepsforlap'?'add':'edit';
         $kjur = $param->Value;
         if ($kjur != '') {
             try {   
@@ -57,8 +57,8 @@ class CProdi extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }   
         }
     }
@@ -108,7 +108,7 @@ class CProdi extends MainPageSA {
     }
     public function updateData($sender, $param) {
         if ($this->IsValid) {
-            $id=$this->hiddenid->Value;
+            $id = $this->hiddenid->Value;
             $kjur = addslashes($this->txtEditKodePS->Text);
             $kjur_forlap = addslashes($this->txtEditKodePSForlap->Text);
             $nama_ps = addslashes($this->txtEditNama->Text);

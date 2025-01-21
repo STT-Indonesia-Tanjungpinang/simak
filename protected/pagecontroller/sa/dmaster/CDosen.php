@@ -29,7 +29,7 @@ class CDosen extends MainPageSA {
         if ($search) {
             $str = "SELECT iddosen,nidn,nipy,gelar_depan,nama_dosen,gelar_belakang,telp_hp,username,status FROM dosen";			
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'nidn':
                     $clausa="WHERE nidn='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
@@ -74,7 +74,7 @@ class CDosen extends MainPageSA {
         $this->cmbAddJabatanAkademik->dataBind();	             
     }
     public function checkNIDN($sender, $param) {	
-        $this->idProcess = $sender->getId()=='addNidn'?'add':'edit';
+        $this->idProcess = $sender->getId() == 'addNidn'?'add':'edit';
         $nidn = $param->Value;
         if ($nidn != '') {
             try {   
@@ -84,13 +84,13 @@ class CDosen extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }
 	}
 	public function checkNIPY($sender, $param) {						
-		$this->idProcess = $sender->getId()=='addNidn'?'add':'edit';
+		$this->idProcess = $sender->getId() == 'addNidn'?'add':'edit';
         $nipy=$param->Value;
         if ($nipy != '') {
             try {   
@@ -100,14 +100,14 @@ class CDosen extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }
 	}
     public function checkUsername($sender, $param) {
-		$this->idProcess = $sender->getId()=='addUsername'?'add':'edit';
-        $username=$param->Value;		
+		$this->idProcess = $sender->getId() == 'addUsername'?'add':'edit';
+        $username = $param->Value;		
         if ($username != '') {
             try {
                 if ($this->DB->checkRecordIsExist('username', 'dosen', $username)) {
@@ -117,13 +117,13 @@ class CDosen extends MainPageSA {
                     throw new Exception ("Username ($username) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                 }                              
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
     public function checkEmail($sender, $param) {
-		$this->idProcess = $sender->getId()=='addEmail'?'add':'edit';
+		$this->idProcess = $sender->getId() == 'addEmail'?'add':'edit';
         $email = $param->Value;		
         if ($email != '') {
             try {   
@@ -133,8 +133,8 @@ class CDosen extends MainPageSA {
                     }                               
                 }                
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
@@ -201,7 +201,7 @@ class CDosen extends MainPageSA {
     public function updateData($sender, $param) {
 		if ($this->Page->isValid) {
             $iddosen = $this->hiddenid->Value;
-            $username=$this->hiddenusername->Value;
+            $username = $this->hiddenusername->Value;
             $nidn = addslashes($this->txtEditNIDN->Text);
             $nipy=addslashes($this->txtEditNIPY->Text);
             $nama = strtoupper(addslashes($this->txtEditNama->Text));
@@ -253,7 +253,7 @@ class CDosen extends MainPageSA {
             $str = "SELECT username,status FROM dosen WHERE iddosen='$iddosen'";
             $this->DB->setFieldTable(array('username'));
             $r = $this->DB->getRecord($str);
-            $username=$r[1]['username'];
+            $username = $r[1]['username'];
             $this->DB->deleteRecord("dosen WHERE iddosen = $iddosen");
             $this->DB->deleteRecord("user WHERE username='$username'");
             $this->redirect('dmaster.Dosen',true);

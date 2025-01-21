@@ -91,7 +91,7 @@ class CDetailKRS extends MainPageSA {
       $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($datamhs['nim'],true);            
       $this->KRS->setDataMHS($datamhs);
       $kelas = $this->KRS->getKelasMhs();																	            
-      $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];			                    
+      $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
       $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
       
       $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -205,9 +205,9 @@ class CDetailKRS extends MainPageSA {
   }
   public function printKRS($sender, $param) {
     $this->createObj('reportkrs');
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
-    switch ($_SESSION['outputreport']) {
+    switch($_SESSION['outputreport']) {
       case 'summarypdf':
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;

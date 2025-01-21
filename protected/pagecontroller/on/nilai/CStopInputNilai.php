@@ -3,7 +3,7 @@ prado::using ('Application.MainPageON');
 class CStopInputNilai extends MainPageON{	
 	public $pnlInputNim = false;
 	public $pnlInputPenyelenggaraan = false;
-	public function onLoad ($param) {
+	public function onLoad($param) {
 		parent::onLoad($param);	
 		$this->showSubMenuAkademikNilai=true;
         $this->showStopInputNilai=true;    
@@ -77,7 +77,7 @@ class CStopInputNilai extends MainPageON{
         
         if ($search) {
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nidn':
                     $clausa=" AND vpp.nidn='$txtsearch'";  
                     $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas,km.isi_nilai FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";
@@ -134,7 +134,7 @@ class CStopInputNilai extends MainPageON{
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function doVerified($sender, $param) {
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);
 		$verified=$sender->CommandParameter;
 		$str = "UPDATE kelas_mhs SET isi_nilai = $verified WHERE idkelas_mhs = $id";	
 		$this->DB->updateRecord($str);

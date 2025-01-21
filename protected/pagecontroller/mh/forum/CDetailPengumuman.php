@@ -36,7 +36,7 @@ class CDetailPengumuman extends MainPageMHS {
 		}                
 	}  
     public function populateData() {
-        $id=$_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idpost'];           
+        $id = $_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idpost'];           
         $str = "SELECT idpost,title,content,nama_user,date_added FROM pengumuman fp WHERE parentpost=$id ORDER BY date_added";        
         $this->DB->setFieldTable (array('idpost', 'title', 'content', 'nama_user', 'date_added'));			
         $r = $this->DB->getRecord($str);	
@@ -54,7 +54,7 @@ class CDetailPengumuman extends MainPageMHS {
             $idkategori = $_SESSION['currentPageDetailPengumuman']['DataDiskusi']['idkategori'];
             $judul = $_SESSION['currentPageDetailPengumuman']['DataDiskusi']['title'];
             $content = strip_tags(addslashes($this->txtAddContent->Text));
-            $this->txtAddContent->Text='';
+            $this->txtAddContent->Text = '';
             $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user = $this->Pengguna->getDataUser('username');                        
             $str = "INSERT INTO pengumuman (idpost,idkategori,parentpost,title,content,userid,tipe,nama_user,date_added) VALUES (NULL, $idkategori, $idpost,'$judul', '$content', $userid,'m', '$nama_user',NOW())";                   

@@ -283,7 +283,7 @@ class SingularValueDecomposition
             ++$k;
 
             // Perform the task indicated by kase.
-            switch ($kase) {
+            switch($kase) {
                 // Deflate negligible s(p).
                 case 1:
                     $f = $e[$p-2];

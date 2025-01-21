@@ -107,7 +107,7 @@ class CPesertaMatakuliah extends MainPageM {
   }
   public function checkKodeMatkul($sender, $param) 
   {
-    $this->idProcess = $sender->getId()=='viewpeserta'?'add':'edit';
+    $this->idProcess = $sender->getId() == 'viewpeserta'?'add':'edit';
     $kmatkul = $param->Value;		
     if ($kmatkul != '') {
       try {   
@@ -123,8 +123,8 @@ class CPesertaMatakuliah extends MainPageM {
           throw new Exception ("Kode matakuliah ($kmatkul) tidak diselenggarakan silahkan ganti dengan yang lain.");		
         }                               
       }catch (Exception $e) {
-        $param->IsValid=false;
-        $sender->ErrorMessage=$e->getMessage();
+        $param->IsValid = false;
+        $sender->ErrorMessage = $e->getMessage();
       }	
     }	
   }
@@ -151,11 +151,11 @@ class CPesertaMatakuliah extends MainPageM {
     }
   }
   public function populateData($search = false) {      
-    $id=$_SESSION['currentPagePesertaMatakuliah']['InfoMatkul']['idpenyelenggaraan'];        
+    $id = $_SESSION['currentPagePesertaMatakuliah']['InfoMatkul']['idpenyelenggaraan'];        
     if ($search) {            
       $str = "SELECT vkm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.jk,vdm.tahun_masuk,vkm.batal,vkm.sah,kmd.idkelas_mhs,km.nama_kelas,hari,jam_masuk,jam_keluar FROM v_krsmhs vkm JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) LEFT JOIN kelas_mhs_detail kmd ON (vkm.idkrsmatkul=kmd.idkrsmatkul) LEFT JOIN kelas_mhs km ON (kmd.idkelas_mhs=km.idkelas_mhs) WHERE idpenyelenggaraan='$id'";            
       $txtsearch = addslashes($this->txtKriteria->Text);
-      switch ($this->cmbKriteria->Text) {                
+      switch($this->cmbKriteria->Text) {                
         case 'nim':
           $clausa="AND vdm.nim='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' $clausa",'vdm.nim');
@@ -218,9 +218,9 @@ class CPesertaMatakuliah extends MainPageM {
   public function printOut($sender, $param) {
      
     $this->createObj('reportakademik');
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
-    switch ($_SESSION['outputreport']) {
+    switch($_SESSION['outputreport']) {
       case 'summarypdf':
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;

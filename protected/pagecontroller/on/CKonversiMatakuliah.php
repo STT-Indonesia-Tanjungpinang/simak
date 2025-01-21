@@ -62,7 +62,7 @@ class CKonversiMatakuliah extends MainPageON {
         if ($search) {
             $txtsearch = addslashes($this->txtKriteria->Text);
             $str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.perpanjangan=0";
-            switch ($this->cmbKriteria->Text) {                                
+            switch($this->cmbKriteria->Text) {                                
                 case 'nama':
                     $clausa="AND nama LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
@@ -173,7 +173,7 @@ class CKonversiMatakuliah extends MainPageON {
 	
 	public function editRecord($sender, $param) {		
 		$this->idProcess = 'edit';        
-		$iddata_konversi = $sender->getId()=='btnDelete' ?$this->hiddenid->Value :$this->getDataKeyField($sender, $this->RepeaterS);		
+		$iddata_konversi = $sender->getId() == 'btnDelete' ?$this->hiddenid->Value :$this->getDataKeyField($sender, $this->RepeaterS);		
 		$this->hiddenid->Value=$iddata_konversi;		
 		//load view
         $str = "SELECT dk.iddata_konversi,dk.nama,dk.alamat,dk.no_telp,dk.nim_asal,dk.kode_pt_asal,dk.nama_pt_asal,dk.kjenjang,dk.kode_ps_asal,dk.nama_ps_asal,dk.tahun,dk.kjur,dk.idkur FROM data_konversi2 dk WHERE dk.iddata_konversi = $iddata_konversi";
@@ -276,7 +276,7 @@ class CKonversiMatakuliah extends MainPageON {
 	}	
     public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';        
         
     }

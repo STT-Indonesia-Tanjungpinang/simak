@@ -633,7 +633,7 @@ class PclZip
 
     // --------------------------------------------------------------------------------
     // Function :
-    //     extract($p_path="./", $p_remove_path="")
+    //     extract($p_path = "./", $p_remove_path = "")
     //     extract([$p_option, $p_option_value, ...])
     // Description :
     //     This method supports two synopsis. The first one is historical.
@@ -779,7 +779,7 @@ class PclZip
 
     // --------------------------------------------------------------------------------
     // Function :
-    //     extractByIndex($p_index, $p_path="./", $p_remove_path="")
+    //     extractByIndex($p_index, $p_path = "./", $p_remove_path = "")
     //     extractByIndex($p_index, [$p_option, $p_option_value, ...])
     // Description :
     //     This method supports two synopsis. The first one is historical.
@@ -1369,7 +1369,7 @@ class PclZip
             }
 
             // ----- Look for next option
-            switch ($p_options_list[$i]) {
+            switch($p_options_list[$i]) {
                 // ----- Look for options that request a path value
                 case PCLZIP_OPT_PATH:
                 case PCLZIP_OPT_REMOVE_PATH:
@@ -1775,7 +1775,7 @@ class PclZip
             }
 
             // ----- Look for attribute
-            switch ($v_key) {
+            switch($v_key) {
                 case PCLZIP_ATT_FILE_NAME:
                     if (!is_string($v_value)) {
                         PclZip::privErrorLog(PCLZIP_ERR_INVALID_ATTRIBUTE_VALUE, "Invalid type ".gettype($v_value).". String expected for attribute '".PclZipUtilOptionText($v_key)."'");
@@ -4531,7 +4531,7 @@ class PclZip
         $v_result = 1;
 
         // ----- Remove the final '/'
-        if (($p_is_dir) && (substr($p_dir, -1)=='/')) {
+        if (($p_is_dir) && (substr($p_dir, -1) == '/')) {
             $p_dir = substr($p_dir, 0, strlen($p_dir)-1);
         }
 

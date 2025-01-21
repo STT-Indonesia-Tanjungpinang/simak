@@ -88,7 +88,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
             $rels = simplexml_load_string($this->securityScan($this->getFromZipArchive($zip, "_rels/.rels")), 'SimpleXMLElement', PHPExcel_Settings::getLibXmlLoaderOptions());
             if ($rels !== false) {
                 foreach ($rels->Relationship as $rel) {
-                    switch ($rel["Type"]) {
+                    switch($rel["Type"]) {
                         case "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument":
                             if (basename($rel["Target"]) == 'workbook.xml') {
                                 $xl = true;
@@ -130,7 +130,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
             $this->securityScan($this->getFromZipArchive($zip, "_rels/.rels"), 'SimpleXMLElement', PHPExcel_Settings::getLibXmlLoaderOptions())
         ); //~ http://schemas.openxmlformats.org/package/2006/relationships");
         foreach ($rels->Relationship as $rel) {
-            switch ($rel["Type"]) {
+            switch($rel["Type"]) {
                 case "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument":
                     $xmlWorkbook = simplexml_load_string(
                         $this->securityScan($this->getFromZipArchive($zip, "{$rel['Target']}"), 'SimpleXMLElement', PHPExcel_Settings::getLibXmlLoaderOptions())
@@ -354,7 +354,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
         //    Read the theme first, because we need the colour scheme when reading the styles
         $wbRels = simplexml_load_string($this->securityScan($this->getFromZipArchive($zip, "xl/_rels/workbook.xml.rels")), 'SimpleXMLElement', PHPExcel_Settings::getLibXmlLoaderOptions()); //~ http://schemas.openxmlformats.org/package/2006/relationships");
         foreach ($wbRels->Relationship as $rel) {
-            switch ($rel["Type"]) {
+            switch($rel["Type"]) {
                 case "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme":
                     $themeOrderArray = array('lt1', 'dk1', 'lt2', 'dk2');
                     $themeOrderAdditional = count($themeOrderArray);
@@ -391,7 +391,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 
         $rels = simplexml_load_string($this->securityScan($this->getFromZipArchive($zip, "_rels/.rels")), 'SimpleXMLElement', PHPExcel_Settings::getLibXmlLoaderOptions()); //~ http://schemas.openxmlformats.org/package/2006/relationships");
         foreach ($rels->Relationship as $rel) {
-            switch ($rel["Type"]) {
+            switch($rel["Type"]) {
                 case "http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties":
                     $xmlCore = simplexml_load_string($this->securityScan($this->getFromZipArchive($zip, "{$rel['Target']}")), 'SimpleXMLElement', PHPExcel_Settings::getLibXmlLoaderOptions());
                     if (is_object($xmlCore)) {
@@ -468,7 +468,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
                     $worksheets = array();
                     $macros = $customUI = null;
                     foreach ($relsWorkbook->Relationship as $ele) {
-                        switch ($ele['Type']) {
+                        switch($ele['Type']) {
                             case "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet":
                                 $worksheets[(string) $ele["Id"]] = $ele["Target"];
                                 break;
@@ -828,7 +828,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
     //                                    echo 'Cell Data Type is ', $cellDataType, ': ';
     //
                                         // Read cell!
-                                        switch ($cellDataType) {
+                                        switch($cellDataType) {
                                             case "s":
     //                                            echo 'String', PHP_EOL;
                                                 if ((string)$c->v != '') {
@@ -1562,7 +1562,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
                                     // Some definedNames are only applicable if we are on the same sheet...
                                     if ((string)$definedName['localSheetId'] != '' && (string)$definedName['localSheetId'] == $sheetId) {
                                         // Switch on type
-                                        switch ((string)$definedName['name']) {
+                                        switch((string)$definedName['name']) {
                                             case '_xlnm._FilterDatabase':
                                                 if ((string)$definedName['hidden'] !== '1') {
                                                     $extractedRange = explode(', ', $extractedRange);
@@ -1638,7 +1638,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
                                 if ((string)$definedName['localSheetId'] != '') {
                                     // Local defined name
                                     // Switch on type
-                                    switch ((string)$definedName['name']) {
+                                    switch((string)$definedName['name']) {
                                         case '_xlnm._FilterDatabase':
                                         case '_xlnm.Print_Titles':
                                         case '_xlnm.Print_Area':
@@ -1704,7 +1704,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
         if (!$this->readDataOnly) {
             $contentTypes = simplexml_load_string($this->securityScan($this->getFromZipArchive($zip, "[Content_Types].xml")), 'SimpleXMLElement', PHPExcel_Settings::getLibXmlLoaderOptions());
             foreach ($contentTypes->Override as $contentType) {
-                switch ($contentType["ContentType"]) {
+                switch($contentType["ContentType"]) {
                     case "application/vnd.openxmlformats-officedocument.drawingml.chart+xml":
                         if ($this->includeCharts) {
                             $chartEntryRef = ltrim($contentType['PartName'], '/');

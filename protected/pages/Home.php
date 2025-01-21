@@ -25,7 +25,7 @@ class Home extends MainPageF {
 		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
             $bool=false;
-            if ($item->DataItem['file_size']>0) {                
+            if ($item->DataItem['file_size']> 0) {                
                 $bool=true;
             }
             $item->literalattachment->Visible=$bool;

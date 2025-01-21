@@ -71,7 +71,7 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
         if ($search) {
             $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'no_faktur':
                     $clausa="AND t.no_faktur='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir $clausa";

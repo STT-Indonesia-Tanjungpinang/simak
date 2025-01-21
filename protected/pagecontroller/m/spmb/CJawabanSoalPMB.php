@@ -2,8 +2,8 @@
 prado::using ('Application.MainPageM');
 class CJawabanSoalPMB extends MainPageM {
     public $DataUjian;
-    public function onLoad ($param) {
-        parent::onLoad ($param);        
+    public function onLoad($param) {
+        parent::onLoad($param);        
         $this->showSubMenuSPMBUjianPMB=true;
         $this->showNilaiUjianPMB = true;	    
         $this->createObj('Akademik');

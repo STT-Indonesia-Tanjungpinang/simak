@@ -3,7 +3,7 @@ prado::using ('Application.MainPageDW');
 class KHSEkstension extends MainPageDW {	
 	public $nilai_semester_lalu;
 	public $total_sks_nm_saat_ini;
-	public function onLoad ($param) {
+	public function onLoad($param) {
 		parent::onLoad($param);	 		
         $this->showSubMenuAkademikNilai=true;
         $this->showKHSEkstension=true;
@@ -103,7 +103,7 @@ class KHSEkstension extends MainPageDW {
         if ($search) {
             $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.iddosen_wali = $iddosen_wali AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt'";
             $txtsearch=$this->txtKriteria->Text;
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' $clausa",'vdm.nim');
@@ -156,7 +156,7 @@ class KHSEkstension extends MainPageDW {
             $sks=0;
             $status='-';
             $trstyle='';
-            $dataipk=array('ipk' => '0.00', 'sks'=>0);
+            $dataipk=array('ipk' => '0.00', 'sks'=> 0);
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) {                                                            
 				$this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
 				$ip = $this->Nilai->getIPS ();
@@ -180,11 +180,11 @@ class KHSEkstension extends MainPageDW {
 	
 	public function printOut ($sender, $param) {		
         $this->createObj('reportnilai');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-		switch ($sender->getId()) {
+		switch($sender->getId()) {
 			case 'btnPrintOutR':
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
@@ -233,7 +233,7 @@ class KHSEkstension extends MainPageDW {
                 }                
 			break;			
             case 'btnPrintKHSAll':
-                switch ($_SESSION['outputreport']) {
+                switch($_SESSION['outputreport']) {
                     case 'summarypdf':
                         $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;

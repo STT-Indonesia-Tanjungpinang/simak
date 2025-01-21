@@ -167,7 +167,7 @@ $inopt = getopt($sopt, $lopt);
 
 // import options (with some sanitization)
 foreach ($inopt as $opt => $val) {
-	switch ($opt) {
+	switch($opt) {
 		case 't':
 		case 'type': {
 			if (in_array($val, array('TrueTypeUnicode', 'TrueType', 'Type1', 'CID0JP', 'CID0KR', 'CID0CS', 'CID0CT'))) {

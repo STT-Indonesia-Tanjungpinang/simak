@@ -96,7 +96,7 @@ class Logic_Global extends TModule
     }		
     $this->db->setFieldTable($fieldTable);	
     $result = $this->db->getRecord($str, $offset);		
-    switch ($mode) 
+    switch($mode) 
     {
       case 0 :
         $list_=$result;

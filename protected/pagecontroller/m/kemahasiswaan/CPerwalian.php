@@ -2,7 +2,7 @@
 prado::using ('Application.MainPageM');
 class CPerwalian extends MainPageM {	
     private $DataMHS;
-	public function onLoad ($param) {
+	public function onLoad($param) {
 		parent::onLoad($param);
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showPerwalian=true;
@@ -57,7 +57,7 @@ class CPerwalian extends MainPageM {
 		if ($search) {       
             $str = "SELECT nim,nirm,nama_mhs,tahun_masuk FROM v_datamhs vdm$str_dw";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {                
+            switch($this->cmbKriteria->Text) {                
                 case 'nim':
                     $clausa="AND vdm.nim='$txtsearch'";
                     $jumlah_record=$this->DB->getCountRowsOfTable("v_datamhs vdm$str_dw $clausa",'vdm.nim'); 
@@ -135,9 +135,9 @@ class CPerwalian extends MainPageM {
         if ($iddosen_wali > 0) {
             $k_status = $_SESSION['currentPagePerwalian']['status'];
             $this->createObj('reportakademik');
-            $this->linkOutput->Text='';
+            $this->linkOutput->Text = '';
             $this->linkOutput->NavigateUrl='#';
-            switch ($_SESSION['outputreport']) {
+            switch($_SESSION['outputreport']) {
                 case 'summarypdf':
                     $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                 break;

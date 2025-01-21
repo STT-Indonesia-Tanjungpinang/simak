@@ -696,7 +696,7 @@ class PHPMailer
             call_user_func($this->Debugoutput, $str, $this->SMTPDebug);
             return;
         }
-        switch ($this->Debugoutput) {
+        switch($this->Debugoutput) {
             case 'error_log':
                 //Don't output, just log
                 error_log($str);
@@ -1066,7 +1066,7 @@ class PHPMailer
                 }
             }
         }
-        switch ($patternselect) {
+        switch($patternselect) {
             case 'pcre8':
                 /**
                  * Uses the same RFC5322 regex on which FILTER_VALIDATE_EMAIL is based, but allows dotless domains.
@@ -1292,7 +1292,7 @@ class PHPMailer
     {
         try {
             // Choose the mailer and send through it
-            switch ($this->Mailer) {
+            switch($this->Mailer) {
                 case 'sendmail':
                 case 'qmail':
                     return $this->sendmailSend($this->MIMEHeader, $this->MIMEBody);
@@ -1903,7 +1903,7 @@ class PHPMailer
             return;
         }
 
-        switch ($this->message_type) {
+        switch($this->message_type) {
             case 'alt':
             case 'alt_inline':
             case 'alt_attach':
@@ -2021,7 +2021,7 @@ class PHPMailer
     {
         $result = '';
         $ismultipart = true;
-        switch ($this->message_type) {
+        switch($this->message_type) {
             case 'inline':
                 $result .= $this->headerLine('Content-Type', 'multipart/related;');
                 $result .= $this->textLine("\tboundary=\"" . $this->boundary[1] . '"');
@@ -2126,7 +2126,7 @@ class PHPMailer
         }
         //Use this as a preamble in all multipart message types
         $mimepre = "This is a multi-part message in MIME format." . $this->LE . $this->LE;
-        switch ($this->message_type) {
+        switch($this->message_type) {
             case 'inline':
                 $body .= $mimepre;
                 $body .= $this->getBoundary($this->boundary[1], $bodyCharSet, '', $bodyEncoding);
@@ -2613,7 +2613,7 @@ class PHPMailer
     public function encodeString($str, $encoding = 'base64')
     {
         $encoded = '';
-        switch (strtolower($encoding)) {
+        switch(strtolower($encoding)) {
             case 'base64':
                 $encoded = chunk_split(base64_encode($str), 76, $this->LE);
                 break;
@@ -2649,7 +2649,7 @@ class PHPMailer
     public function encodeHeader($str, $position = 'text')
     {
         $matchcount = 0;
-        switch (strtolower($position)) {
+        switch(strtolower($position)) {
             case 'phrase':
                 if (!preg_match('/[\200-\377]/', $str)) {
                     // Can't use addslashes as we don't know the value of magic_quotes_sybase
@@ -2827,7 +2827,7 @@ class PHPMailer
         // There should not be any EOL in the string
         $pattern = '';
         $encoded = str_replace(array("\r", "\n"), '', $str);
-        switch (strtolower($position)) {
+        switch(strtolower($position)) {
             case 'phrase':
                 // RFC 2047 section 5.3
                 $pattern = '^A-Za-z0-9!*+\/ -';
@@ -3533,7 +3533,7 @@ class PHPMailer
                 $ret['filename'] = $pathinfo[3];
             }
         }
-        switch ($options) {
+        switch($options) {
             case PATHINFO_DIRNAME:
             case 'dirname':
                 return $ret['dirname'];

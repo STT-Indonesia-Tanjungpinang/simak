@@ -149,7 +149,7 @@ class CDaftarPertanyaan extends MainPageM {
 	}
     public function editRecord($sender, $param) {		
         $this->idProcess = 'edit';        
-        $id=$this->getDataKeyField($sender, $this->RepeaterS);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterS);        
 		$this->hiddenid->Value=$id;    
         
         $str = "SELECT idkelompok_pertanyaan,pertanyaan,orders FROM kuesioner WHERE idkuesioner = $id";
@@ -198,7 +198,7 @@ class CDaftarPertanyaan extends MainPageM {
         }
 	}
     public function deleteRecord($sender, $param) {        
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         
         $this->DB->deleteRecord("kuesioner WHERE idkuesioner='$id'");
         $this->redirect('dmaster.DaftarPertanyaan',true);  

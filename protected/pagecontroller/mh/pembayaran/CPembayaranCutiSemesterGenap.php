@@ -89,7 +89,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
 		}
 	}
     public function checkNomorFaktur($sender, $param) {
-		$this->idProcess = $sender->getId()=='addNomorFaktur'?'add':'edit';
+		$this->idProcess = $sender->getId() == 'addNomorFaktur'?'add':'edit';
         $no_faktur = $param->Value;		
         if ($no_faktur != '') {
             try {
@@ -97,8 +97,8 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
                     throw new Exception ("Nomor Faktur dari ($no_faktur) sudah tidak tersedia silahkan ganti dengan yang lain.");		
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
     }
@@ -116,7 +116,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
             $this->Finance->setDataMHS($datamhs);
             $dibayarkan = $this->Finance->getBiayaCuti($datamhs['tahun_masuk'], $datamhs['semester_masuk'], $datamhs['idkelas']);
             
-            $str = "INSERT INTO transaksi_cuti SET no_transaksi='$no_transaksi',no_faktur='$no_faktur',tahun = $tahun,idsmt=2,nim='$nim',idkombi=0,dibayarkan = $dibayarkan,commited=0,date_added=NOW(),date_modified=NOW(),tanggal='$tanggal',userid=$userid";
+            $str = "INSERT INTO transaksi_cuti SET no_transaksi='$no_transaksi',no_faktur='$no_faktur',tahun = $tahun,idsmt=2,nim='$nim',idkombi=0,dibayarkan = $dibayarkan,commited=0,date_added=NOW(),date_modified=NOW(),tanggal='$tanggal',userid = $userid";
             $this->DB->insertRecord($str);
             
             $this->redirect('pembayaran.PembayaranCutiSemesterGenap',true);

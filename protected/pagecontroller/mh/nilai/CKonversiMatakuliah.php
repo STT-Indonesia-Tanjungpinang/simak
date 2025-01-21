@@ -53,11 +53,11 @@ class CKonversiMatakuliah extends MainPageMHS {
 	}
 	public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
         $dataReport=$_SESSION['currentPageKonversiMatakuliah']['DataKonversi'];
         $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

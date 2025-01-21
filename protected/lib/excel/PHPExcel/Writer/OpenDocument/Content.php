@@ -192,7 +192,7 @@ class PHPExcel_Writer_OpenDocument_Content extends PHPExcel_Writer_OpenDocument_
             $this->writeCellSpan($objWriter, $column, $prev_column);
             $objWriter->startElement('table:table-cell');
 
-            switch ($cell->getDataType()) {
+            switch($cell->getDataType()) {
                 case PHPExcel_Cell_DataType::TYPE_BOOL:
                     $objWriter->writeAttribute('office:value-type', 'boolean');
                     $objWriter->writeAttribute('office:value', $cell->getValue());

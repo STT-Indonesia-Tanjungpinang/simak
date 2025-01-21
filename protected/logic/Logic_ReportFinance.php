@@ -15,7 +15,7 @@ class Logic_ReportFinance extends Logic_Report {
         $tahun_masuk = $this->dataReport['tahun_masuk'];
         $nama_tahun_masuk = $this->dataReport['nama_tahun_masuk'];
         $kelas = $this->dataReport['kelas'];
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':              
                 $this->setHeaderPT('L');
@@ -208,7 +208,7 @@ class Logic_ReportFinance extends Logic_Report {
         $nama_semester=$this->dataReport['nama_semester'];
         $kelas = $this->dataReport['kelas'];
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':              
                 $this->setHeaderPT('I');
@@ -323,7 +323,7 @@ class Logic_ReportFinance extends Logic_Report {
         $no_transaksi = $dataReport['no_transaksi'];
         $nama_tahun = $dataReport['nama_tahun'];
         $nama_semester=$dataReport['nama_semester'];
-        switch ($this->getDriver()) {
+        switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':                
 

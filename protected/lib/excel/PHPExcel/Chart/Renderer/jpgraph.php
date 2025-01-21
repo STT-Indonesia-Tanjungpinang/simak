@@ -184,7 +184,7 @@ class PHPExcel_Chart_Renderer_jpgraph
         if (!is_null($legend)) {
             $legendPosition = $legend->getPosition();
             $legendOverlay = $legend->getOverlay();
-            switch ($legendPosition) {
+            switch($legendPosition) {
                 case 'r':
                     $this->graph->legend->SetPos(0.01, 0.5, 'right', 'center');    //    right
                     $this->graph->legend->SetColumns(1);
@@ -749,7 +749,7 @@ class PHPExcel_Chart_Renderer_jpgraph
         for ($i = 0; $i < $groupCount; ++$i) {
             $dimensions = null;
             $chartType = $this->chart->getPlotArea()->getPlotGroupByIndex($i)->getPlotType();
-            switch ($chartType) {
+            switch($chartType) {
                 case 'area3DChart':
                     $dimensions = '3d';
                     // no break
@@ -812,7 +812,7 @@ class PHPExcel_Chart_Renderer_jpgraph
             }
         }
 
-        switch ($chartType) {
+        switch($chartType) {
             case 'area3DChart':
                 $dimensions = '3d';
                 // no break

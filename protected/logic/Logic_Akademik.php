@@ -104,7 +104,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
    */
   public function getJumlahKelas ($id, $mode_info) {
     $jumlah=0;
-    switch ($mode_info) {
+    switch($mode_info) {
       case 'penyelenggaraan':
         $jumlah=$this->db->getCountRowsOfTable("kelas_mhs km, pengampu_penyelenggaraan pp WHERE km.idpengampu_penyelenggaraan=pp.idpengampu_penyelenggaraan AND pp.idpenyelenggaraan = $id",'km.idkelas_mhs');
       break;
@@ -118,7 +118,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
    * @return array
    */
   public function getInfoMatkul($id, $mode_info) {
-    switch ($mode_info) {
+    switch($mode_info) {
       case 'penyelenggaraan':
         $this->db->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen_pengampu', 'nama_dosen_pengampu', 'nidn_dosen_pengampu', 'idjabatan_dosen_pengampu', 'nama_jabatan_dosen_pengampu', 'kjur', 'tahun', 'idsmt'));
         $str = "SELECT idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen AS iddosen_pengampu,nama_dosen AS nama_dosen_pengampu,nidn AS nidn_dosen_pengampu,idjabatan AS idjabatan_dosen_pengampu,nama_jabatan AS nama_jabatan_dosen_pengampu,kjur,tahun,idsmt FROM v_penyelenggaraan WHERE idpenyelenggaraan='$id'";
@@ -353,7 +353,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
       $temp_data1 =array();
       while (list($k, $v)=each ($r)) {
         $index=$v['ta'].$v['idsmt'].$v['idkelas'];
-        $data=array('index' => $index,'ta' => $v['ta'],'idsmt' => $v['idsmt'],'idkelas' => $v['idkelas'],'jumlah_pria'=>0,'jumlah_wanita'=>0,'jumlah'=>0);
+        $data=array('index' => $index,'ta' => $v['ta'],'idsmt' => $v['idsmt'],'idkelas' => $v['idkelas'],'jumlah_pria'=>0,'jumlah_wanita'=>0,'jumlah'=> 0);
         $temp_data1[$index]=$data;
       }
       $i=1;

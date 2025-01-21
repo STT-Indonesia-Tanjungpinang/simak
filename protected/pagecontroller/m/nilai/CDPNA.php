@@ -83,7 +83,7 @@ class CDPNA extends MainPageM {
 		$kjur = $_SESSION['kjur'];		
         if ($search) {            
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) { 
+            switch($this->cmbKriteria->Text) { 
                 case 'kmatkul':
                     $clausa=" AND kmatkul LIKE '%$txtsearch%'";
                     $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";				            

@@ -79,7 +79,7 @@
                     <span>Dashboard</span>											
                 </a>                                        
             </li> 
-            <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser()=='k'%>">
+            <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'k'%>">
             <li class="dropdown<%=$this->Page->showDMaster==true?' active':''%> visible">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-puzzle4 position-left"></i> Data Master <span class="caret"></span>
@@ -253,7 +253,7 @@
                 </ul>
             </li>
             </com:TLiteral>
-            <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser()=='on'%>">
+            <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'on'%>">
             <li<%=$this->Page->showKonversiMatakuliah==true?' class="active"':''%>>
                 <a href="<%=$this->Page->constructUrl('KonversiMatakuliah',true)%>">
                     <i class="icon-share3 position-left"></i> 

@@ -79,7 +79,7 @@ class CPKRS extends MainPageDW {
       
     if ($search) {
       $txtsearch = addslashes($this->txtKriteria->Text);
-      switch ($this->cmbKriteria->Text) {                
+      switch($this->cmbKriteria->Text) {                
         case 'nim':
           $clausa="AND vdm.nim='$txtsearch'";                    
         break;
@@ -156,7 +156,7 @@ class CPKRS extends MainPageDW {
           throw new Exception ("KRS Mahasiswa Dengan NIM ($nim) di T.A ($ta) Semester $semester belum disahkan !!!");
         }
         $kelas = $this->KRS->getKelasMhs();																	            
-        $datamhs['nkelas']=($kelas['nkelas']== '')?'Belum ada':$kelas['nkelas'];	
+        $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];	
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
@@ -169,8 +169,8 @@ class CPKRS extends MainPageDW {
         
       }
     }catch(Exception $e) {			
-      $sender->ErrorMessage=$e->getMessage();				
-      $param->IsValid=false;			
+      $sender->ErrorMessage = $e->getMessage();				
+      $param->IsValid = false;			
     }
 
   }	

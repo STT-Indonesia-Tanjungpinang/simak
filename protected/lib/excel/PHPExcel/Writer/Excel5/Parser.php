@@ -773,7 +773,7 @@ class PHPExcel_Writer_Excel5_Parser
      */
     private function convertError($errorCode)
     {
-        switch ($errorCode) {
+        switch($errorCode) {
             case '#NULL!':
                 return pack("C", 0x00);
             case '#DIV/0!':
@@ -1089,7 +1089,7 @@ class PHPExcel_Writer_Excel5_Parser
      */
     private function match($token)
     {
-        switch ($token) {
+        switch($token) {
             case "+":
             case "-":
             case "*":

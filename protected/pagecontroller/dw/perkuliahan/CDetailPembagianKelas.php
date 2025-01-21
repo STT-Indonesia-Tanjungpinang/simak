@@ -175,11 +175,11 @@ public function onLoad($param) {
     }
     public function printOut($sender, $param) {		
         $this->createObj('reportakademik');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
         $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataReport=$this->Demik->getInfoKelas($idkelas_mhs);
-		switch ($_SESSION['outputreport']) {
+		switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

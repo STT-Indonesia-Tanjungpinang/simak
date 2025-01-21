@@ -117,14 +117,14 @@ class CKombiPerTA Extends MainPageK {
         $this->populateData();        
     }		
     public function deleteItem($sender, $param) {                
-        $id=$this->GridS->DataKeys[$param->Item->ItemIndex];        
+        $id = $this->GridS->DataKeys[$param->Item->ItemIndex];        
         $this->DB->updateRecord("UPDATE kombi_per_ta SET biaya=0 WHERE idkombi_per_ta = $id");
         $this->GridS->EditItemIndex=-1;
         $this->populateData();
     }  
     public function saveItem($sender, $param) {                        
         $item = $param->Item;
-        $id=$this->GridS->DataKeys[$item->ItemIndex];   
+        $id = $this->GridS->DataKeys[$item->ItemIndex];   
         $biaya = $this->Finance->toInteger(addslashes($item->ColumnBiaya->TextBox->Text));                         
         $str = "UPDATE kombi_per_ta SET biaya='$biaya' WHERE idkombi_per_ta = $id";
         $this->DB->updateRecord($str);       

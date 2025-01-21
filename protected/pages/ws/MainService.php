@@ -20,9 +20,9 @@ class MainService extends TModule  {
      */
     protected function connectDB () {
         $host=$this->Parameters['db_host'];
-        $username=$this->Parameters['db_username'];
+        $username = $this->Parameters['db_username'];
 		$password=$this->Parameters['db_userpassword'];
-		$dbname=$this->Parameters['db_name'];
+		$dbname = $this->Parameters['db_name'];
 		
         $this->Conn = new mysqli ($host, $username, $password, $dbname);
         if($this->Conn->connect_errno > 0){

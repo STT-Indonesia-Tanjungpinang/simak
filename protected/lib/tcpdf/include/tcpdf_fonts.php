@@ -119,7 +119,7 @@ class TCPDF_FONTS {
 			}
 		}
 		// set font type
-		switch ($fonttype) {
+		switch($fonttype) {
 			case 'CID0CT':
 			case 'CID0CS':
 			case 'CID0KR':
@@ -555,7 +555,7 @@ class TCPDF_FONTS {
 					$offset = $table['cmap']['offset'] + $enctable['offset'];
 					$format = TCPDF_STATIC::_getUSHORT($font, $offset);
 					$offset += 2;
-					switch ($format) {
+					switch($format) {
 						case 0: { // Format 0: Byte encoding table
 							$offset += 4; // skip length and version/language
 							for ($c = 0; $c < 256; ++$c) {
@@ -834,7 +834,7 @@ class TCPDF_FONTS {
 			$pfile .= '$originalsize='.$fmetric['originalsize'].';'."\n";
 			if ($fmetric['type'] == 'cidfont0') {
 				// CID-0
-				switch ($fonttype) {
+				switch($fonttype) {
 					case 'CID0JP': {
 						$pfile .= '// Japanese'."\n";
 						$pfile .= '$enc=\'UniJIS-UTF16-H\';'."\n";
@@ -845,7 +845,7 @@ class TCPDF_FONTS {
 					case 'CID0KR': {
 						$pfile .= '// Korean'."\n";
 						$pfile .= '$enc=\'UniKS-UTF16-H\';'."\n";
-						$pfile .= '$cidinfo=array(\'Registry\'=>\'Adobe\', \'Ordering\'=>\'Korea1\',\'Supplement\'=>0);'."\n";
+						$pfile .= '$cidinfo=array(\'Registry\'=>\'Adobe\', \'Ordering\'=>\'Korea1\',\'Supplement\'=> 0);'."\n";
 						$pfile .= 'include(dirname(__FILE__).\'/uni2cid_ak12.php\');'."\n";
 						break;
 					}
@@ -860,7 +860,7 @@ class TCPDF_FONTS {
 					default: {
 						$pfile .= '// Chinese Traditional'."\n";
 						$pfile .= '$enc=\'UniCNS-UTF16-H\';'."\n";
-						$pfile .= '$cidinfo=array(\'Registry\'=>\'Adobe\', \'Ordering\'=>\'CNS1\',\'Supplement\'=>0);'."\n";
+						$pfile .= '$cidinfo=array(\'Registry\'=>\'Adobe\', \'Ordering\'=>\'CNS1\',\'Supplement\'=> 0);'."\n";
 						$pfile .= 'include(dirname(__FILE__).\'/uni2cid_aj16.php\');'."\n";
 						break;
 					}
@@ -1017,7 +1017,7 @@ class TCPDF_FONTS {
 			$offset = $table['cmap']['offset'] + $enctable['offset'];
 			$format = TCPDF_STATIC::_getUSHORT($font, $offset);
 			$offset += 2;
-			switch ($format) {
+			switch($format) {
 				case 0: { // Format 0: Byte encoding table
 					$offset += 4; // skip length and version/language
 					for ($c = 0; $c < 256; ++$c) {
@@ -2534,7 +2534,7 @@ class TCPDF_FONTS {
 	 * @public static
 	 */
 	public static function getFontRefSize($size, $refsize=12) {
-		switch ($size) {
+		switch($size) {
 			case 'xx-small': {
 				$size = ($refsize - 4);
 				break;

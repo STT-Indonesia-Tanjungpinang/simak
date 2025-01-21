@@ -52,7 +52,7 @@ class CPengampuLain extends MainPageM {
 	}
     public function addProcess($sender, $param) {			
 		$this->idProcess = 'add';		
-        $id=$this->hiddenid->Value;
+        $id = $this->hiddenid->Value;
         $this->hiddenid->Value=$id;
         $this->Demik->getInfoMatkul($id,'penyelenggaraan');  		
         $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM pengampu_penyelenggaraan WHERE idpenyelenggaraan = $id)";
@@ -79,7 +79,7 @@ class CPengampuLain extends MainPageM {
 	public function editRecord($sender, $param) {		
         $idpp = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
-		$id=$this->hiddenid->Value;
+		$id = $this->hiddenid->Value;
         $this->hiddenid->Value=$id;
         $this->Demik->getInfoMatkul($id,'penyelenggaraan');  			
         
@@ -101,7 +101,7 @@ class CPengampuLain extends MainPageM {
 	}
     public function updateData($sender, $param) {							
         $idpenyelenggaraan = $this->hiddenid->Value;
-		$id=$this->hiddenidpp->Value;
+		$id = $this->hiddenidpp->Value;
 		$iddosen = $this->cmbEditDaftarDosen->Text;		
 		$str = "UPDATE pengampu_penyelenggaraan SET iddosen = $iddosen WHERE idpengampu_penyelenggaraan = $id";
 		$this->DB->updateRecord($str);
@@ -109,7 +109,7 @@ class CPengampuLain extends MainPageM {
 		$this->redirect('perkuliahan.PengampuLain',true,array('id' => $idpenyelenggaraan));
 	}
     public function deleteRecord($sender, $param) {		
-		$id=$this->getDataKeyField($sender, $this->RepeaterS);
+		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         $idpenyelenggaraan = $this->hiddenid->Value;		
 		$this->DB->deleteRecord("pengampu_penyelenggaraan WHERE idpengampu_penyelenggaraan = $id");
         $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';

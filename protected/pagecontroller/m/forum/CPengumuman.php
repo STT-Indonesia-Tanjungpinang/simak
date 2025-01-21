@@ -7,7 +7,7 @@ class CPengumuman extends MainPageM {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPagePengumuman']) || $_SESSION['currentPagePengumuman']['page_name'] != 'm.forum.Pengumuman') {                                                                                
-                $_SESSION['currentPagePengumuman'] = array('page_name' => 'm.forum.Pengumuman', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=>0);
+                $_SESSION['currentPagePengumuman'] = array('page_name' => 'm.forum.Pengumuman', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=> 0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPagePengumuman']['activeviewindex']; 
 		}                
@@ -15,7 +15,7 @@ class CPengumuman extends MainPageM {
     public function changeView($sender, $param) {                
         $activeview = $_SESSION['currentPagePengumuman']['activeviewindex'];                
         if ($activeview == $this->MVMenuForum->ActiveViewIndex) {
-            switch ($activeview) {
+            switch($activeview) {
                 case 0 : //diskusi newsfeed
                     $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
                     $this->populateNewsFeed();
@@ -62,7 +62,7 @@ class CPengumuman extends MainPageM {
         $result = array();
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
-            switch ($v['tipe']) {
+            switch($v['tipe']) {
                 case 'mh':                    
                     $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $v['userid']));
                 break;
@@ -111,10 +111,10 @@ class CPengumuman extends MainPageM {
     }    
     public function filepengumumanUploaded($sender, $param) {
         if($sender->HasFile) {
-            $file_name=$sender->FileName;
+            $file_name = $sender->FileName;
             $file_size=$sender->FileSize;
             $file_type=$sender->FileType;
-            $real_file_name=$this->setup->cleanFileNameString($file_name);
+            $real_file_name = $this->setup->cleanFileNameString($file_name);
             $file_path=BASEPATH."resources/files/$real_file_name";
             $file_path_temp=BASEPATH."resources/tmp/$real_file_name";
             $file_url="resources/files/$real_file_name";
@@ -137,7 +137,7 @@ class CPengumuman extends MainPageM {
             $userid = $this->Pengguna->getDataUser('userid');                        
             $nama_user = $this->Pengguna->getDataUser('username'); 
             
-			$file_name=$this->hiddenfile_name->Value;
+			$file_name = $this->hiddenfile_name->Value;
 			$file_type=$this->hiddenfile_type->Value;
 			$file_size=$this->hiddenfile_size->Value;
 			$file_path=$this->hiddenfile_path->Value;
@@ -146,7 +146,7 @@ class CPengumuman extends MainPageM {
 			if (file_exists($file_path_temp)) {
 				rename ($file_path_temp, $file_path);
 			}
-            $str = "INSERT INTO pengumuman SET idpost=NULL,idkategori = $idkategori,title='$judul',content='$content',userid=$userid,tipe='m',nama_user='$nama_user',file_name='$file_name',file_type='$file_type',file_size='$file_size',file_path='$file_path',file_url='$file_url',date_added=NOW()";
+            $str = "INSERT INTO pengumuman SET idpost=NULL,idkategori = $idkategori,title='$judul',content='$content',userid = $userid,tipe='m',nama_user='$nama_user',file_name='$file_name',file_type='$file_type',file_size='$file_size',file_path='$file_path',file_url='$file_url',date_added=NOW()";
             $this->DB->insertRecord($str);
             $_SESSION['currentPagePengumuman']['activeviewindex']=0;
             $this->redirect('forum.Pengumuman', true);
@@ -154,7 +154,7 @@ class CPengumuman extends MainPageM {
         }
     }
     public function setUnreadFalse($sender, $param) {
-        $id=$this->getDataKeyField($sender, $this->RepeaterUnread);        
+        $id = $this->getDataKeyField($sender, $this->RepeaterUnread);        
         $str="UPDATE pengumuman SET unread=0 WHERE idpost=$id";
         $this->DB->updateRecord($str);
         $this->redirect('forum.DetailPengumuman', true, array('id' => $id));

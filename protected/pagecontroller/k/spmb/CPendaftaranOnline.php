@@ -69,7 +69,7 @@ class CPendaftaranOnline extends MainPageK {
         if ($search) {        
             $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp";
             $txtsearch = addslashes($this->txtKriteria->Text);
-            switch ($this->cmbKriteria->Text) {
+            switch($this->cmbKriteria->Text) {
                 case 'no_registrasi':
                     $clausa=" WHERE no_pendaftaran='$txtsearch'"; 
                 break;
@@ -107,9 +107,9 @@ class CPendaftaranOnline extends MainPageK {
     
     public function printOut($sender, $param) {
         $this->createObj('reportspmb');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

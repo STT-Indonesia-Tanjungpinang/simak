@@ -351,7 +351,7 @@ class PHPExcel_Writer_Excel2007_Style extends PHPExcel_Writer_Excel2007_WriterPa
         // Write border
         $objWriter->startElement('border');
         // Diagonal?
-        switch ($pBorders->getDiagonalDirection()) {
+        switch($pBorders->getDiagonalDirection()) {
             case PHPExcel_Style_Borders::DIAGONAL_UP:
                 $objWriter->writeAttribute('diagonalUp', 'true');
                 $objWriter->writeAttribute('diagonalDown', 'false');

@@ -8,7 +8,7 @@ class CDetailFormulir extends MainPageM {
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailFormulir']) || $_SESSION['currentPageDetailFormulir']['page_name'] != 'm.spmb.DetailFormulir') {
-				$_SESSION['currentPageDetailFormulir'] = array('page_name' => 'm.spmb.DetailFormulir', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=>0);												
+				$_SESSION['currentPageDetailFormulir'] = array('page_name' => 'm.spmb.DetailFormulir', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=> 0);												
 			}
 
             $this->MVDetailFormulir->ActiveViewIndex=$_SESSION['currentPageDetailFormulir']['activeviewindex'];             
@@ -41,7 +41,7 @@ class CDetailFormulir extends MainPageM {
             $_SESSION['currentPageDetailFormulir']['DataMHS'] = $datamhs;
             $activeview = $_SESSION['currentPageDetailFormulir']['activeviewindex'];                
             if ($activeview == $this->MVDetailFormulir->ActiveViewIndex) {
-                switch ($activeview) {
+                switch($activeview) {
                     case 0 : 
                         $this->hiddennoformulir->Value=$no_formulir;
                         $jurusan = $this->DMaster->removeKjur($_SESSION['daftar_jurusan'],'none');									            
@@ -106,8 +106,8 @@ class CDetailFormulir extends MainPageM {
                      throw new Exception ("No. Formulir  ($no_formulir) tidak terdaftar di PIN.");   
                 }
             }catch (Exception $e) {
-                $param->IsValid=false;
-                $sender->ErrorMessage=$e->getMessage();
+                $param->IsValid = false;
+                $sender->ErrorMessage = $e->getMessage();
             }	
         }	
 	}	

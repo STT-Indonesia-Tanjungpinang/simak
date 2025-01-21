@@ -248,7 +248,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
 //
 //                    $rowIndex = 0;
 //                    foreach ($worksheetData as $key => $rowData) {
-//                        switch ($key) {
+//                        switch($key) {
 //                            case 'table-row':
 //                                $rowDataTableAttributes = $rowData->attributes($namespacesContent['table']);
 //                                $rowRepeats = (isset($rowDataTableAttributes['number-rows-repeated'])) ?
@@ -350,7 +350,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
             }
             foreach ($officePropertyDC as $propertyName => $propertyValue) {
                 $propertyValue = (string) $propertyValue;
-                switch ($propertyName) {
+                switch($propertyName) {
                     case 'title':
                         $docProps->setTitle($propertyValue);
                         break;
@@ -378,7 +378,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
             foreach ($officePropertyMeta as $propertyName => $propertyValue) {
                 $propertyValueAttributes = $propertyValue->attributes($namespacesMeta['meta']);
                 $propertyValue = (string) $propertyValue;
-                switch ($propertyName) {
+                switch($propertyName) {
                     case 'initial-creator':
                         $docProps->setCreator($propertyValue);
                         break;
@@ -395,7 +395,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
                             if ($key == 'name') {
                                 $propertyValueName = (string) $value;
                             } elseif ($key == 'value-type') {
-                                switch ($value) {
+                                switch($value) {
                                     case 'date':
                                         $propertyValue = PHPExcel_DocumentProperties::convertProperty($propertyValue, 'date');
                                         $propertyValueType = PHPExcel_DocumentProperties::PROPERTY_TYPE_DATE;
@@ -458,7 +458,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
                 $rowID = 1;
                 foreach ($worksheetData as $key => $rowData) {
 //                    echo '<b>'.$key.'</b><br />';
-                    switch ($key) {
+                    switch($key) {
                         case 'table-header-rows':
                             foreach ($rowData as $key => $cellData) {
                                 $rowData = $cellData;
@@ -538,7 +538,7 @@ class PHPExcel_Reader_OOCalc extends PHPExcel_Reader_Abstract implements PHPExce
                                     $allCellDataText = implode($dataArray, "\n");
 
 //                                    echo 'Value Type is '.$cellDataOfficeAttributes['value-type'].'<br />';
-                                    switch ($cellDataOfficeAttributes['value-type']) {
+                                    switch($cellDataOfficeAttributes['value-type']) {
                                         case 'string':
                                             $type = PHPExcel_Cell_DataType::TYPE_STRING;
                                             $dataValue = $allCellDataText;

@@ -61,7 +61,7 @@ class Logic_Penanggalan extends Logic_Global {
         $datetime2 = new DateTime($date2, new DateTimeZone('Asia/Jakarta'));
         $interval = $datetime1->diff($datetime2);   
 		$tanggal='';
-		switch ($mode) {
+		switch($mode) {
 			case 'tahunbulan':
 				if ($interval->y >= 1 || $interval->m >= 1) {
 					if ($interval->y >= 1 ) 
@@ -126,7 +126,7 @@ class Logic_Penanggalan extends Logic_Global {
         $datetime2 = new DateTime($date2, new DateTimeZone('Asia/Jakarta'));
         $interval = $datetime1->diff($datetime2);   
 		$tanggal = array();
-		switch ($mode) {
+		switch($mode) {
 			case 'tahun':
 				$tanggal=$interval->y;
 			break;						

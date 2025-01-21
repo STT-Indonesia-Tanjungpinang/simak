@@ -2,7 +2,7 @@
 prado::using ('Application.MainPageM');
 class CRekapitulasiDPA extends MainPageM {	
     private $DataMHS;
-	public function onLoad ($param) {
+	public function onLoad($param) {
 		parent::onLoad($param);
         $this->showSubMenuAkademikKemahasiswaan=true;
         $this->showPerwalian=true;
@@ -93,7 +93,7 @@ class CRekapitulasiDPA extends MainPageM {
             $wanita=0;
             $jumlah=0;
             foreach ($r as $v) {
-                switch ($v['jk']) {
+                switch($v['jk']) {
                     case 'L':
                         $pria = $v['jumlah_jk'];
                     break;

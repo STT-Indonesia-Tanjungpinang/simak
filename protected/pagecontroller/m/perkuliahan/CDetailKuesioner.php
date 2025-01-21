@@ -166,9 +166,9 @@ class CDetailKuesioner extends MainPageM {
 		$this->RepeaterS->dataBind();
 	}	    
 	public function printKuesioner($sender, $param) {        
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;

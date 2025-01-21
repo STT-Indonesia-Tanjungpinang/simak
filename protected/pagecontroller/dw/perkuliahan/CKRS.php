@@ -120,7 +120,7 @@ class CKRS Extends MainPageDW {
     if ($search) 
     {
       $txtsearch = addslashes($this->txtKriteria->Text);
-      switch ($this->cmbKriteria->Text) {                
+      switch($this->cmbKriteria->Text) {                
         case 'nim':
           $clausa="AND vdm.nim='$txtsearch'";                                        
         break;
@@ -265,8 +265,8 @@ class CKRS Extends MainPageDW {
         }                
       }
     }catch(Exception $e) {			
-      $sender->ErrorMessage=$e->getMessage();				
-      $param->IsValid=false;			
+      $sender->ErrorMessage = $e->getMessage();				
+      $param->IsValid = false;			
     }
   }
   public function isiKRS($sender, $param) {
@@ -326,7 +326,7 @@ class CKRS Extends MainPageDW {
   public function printOut($sender, $param) {
     $nim = $this->getDataKeyField($sender, $this->RepeaterS); 
     $this->createObj('reportkrs');
-    $this->linkOutput->Text='';
+    $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
     
     $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE vdm.nim='$nim'";
@@ -338,7 +338,7 @@ class CKRS Extends MainPageDW {
     $this->KRS->setDataMHS($datamhs);
     $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);
     
-    switch ($_SESSION['outputreport']) {
+    switch($_SESSION['outputreport']) {
       case 'summarypdf':
         $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;

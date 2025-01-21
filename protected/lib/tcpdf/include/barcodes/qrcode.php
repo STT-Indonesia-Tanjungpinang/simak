@@ -1444,7 +1444,7 @@ class QRcode {
 	 protected function splitString() {
 		while (strlen($this->dataStr) > 0) {
 			$mode = $this->identifyMode(0);
-			switch ($mode) {
+			switch($mode) {
 				case QR_MODE_NM: {
 					$length = $this->eatNum();
 					break;

@@ -343,7 +343,7 @@ class PHPExcel_Shared_Font
         $fontSize = $font->getSize();
 
         // Calculate column width in pixels. We assume fixed glyph width. Result varies with font name and size.
-        switch ($fontName) {
+        switch($fontName) {
             case 'Calibri':
                 // value 8.26 was found via interpolation by inspecting real Excel files with Calibri 11 font.
                 $columnWidth = (int) (8.26 * PHPExcel_Shared_String::CountCharacters($columnText));
@@ -437,7 +437,7 @@ class PHPExcel_Shared_Font
         $italic      = $font->getItalic();
 
         // Check if we can map font to true type font file
-        switch ($name) {
+        switch($name) {
             case 'Arial':
                 $fontFile = (
                     $bold ? ($italic ? self::ARIAL_BOLD_ITALIC : self::ARIAL_BOLD)
@@ -540,7 +540,7 @@ class PHPExcel_Shared_Font
      */
     public static function getCharsetFromFontName($name)
     {
-        switch ($name) {
+        switch($name) {
             // Add more cases. Check FONT records in real Excel files.
             case 'EucrosiaUPC':
                 return self::CHARSET_ANSI_THAI;
@@ -597,9 +597,9 @@ class PHPExcel_Shared_Font
      */
     public static function getDefaultRowHeightByFont(PHPExcel_Style_Font $font)
     {
-        switch ($font->getName()) {
+        switch($font->getName()) {
             case 'Arial':
-                switch ($font->getSize()) {
+                switch($font->getSize()) {
                     case 10:
                         // inspection of Arial 10 workbook says 12.75pt ~17px
                         $rowHeight = 12.75;
@@ -642,7 +642,7 @@ class PHPExcel_Shared_Font
                 break;
 
             case 'Calibri':
-                switch ($font->getSize()) {
+                switch($font->getSize()) {
                     case 11:
                         // inspection of Calibri 11 workbook says 15.00pt ~20px
                         $rowHeight = 15;
@@ -689,7 +689,7 @@ class PHPExcel_Shared_Font
                 break;
 
             case 'Verdana':
-                switch ($font->getSize()) {
+                switch($font->getSize()) {
                     case 10:
                         // inspection of Verdana 10 workbook says 12.75pt ~17px
                         $rowHeight = 12.75;

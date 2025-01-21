@@ -8,10 +8,10 @@ class KUM extends CKUM {
         $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);
         $dataidkrs[$idkrs]=$idkrs;
         $this->createObj('reportkrs');
-        $this->linkOutput->Text='';
+        $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
         
-        switch ($_SESSION['outputreport']) {
+        switch($_SESSION['outputreport']) {
             case 'summarypdf':
                 $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
@@ -62,7 +62,7 @@ class KUM extends CKUM {
      */
     public function printKUM ($jenisujian, $dataidkrs, $objKRS, $objDMaster) {
         
-        switch ($this->report->getDriver()) {
+        switch($this->report->getDriver()) {
             case 'excel2003':               
             case 'excel2007':                
 //                $this->printOut("kum_$nim");
@@ -82,7 +82,7 @@ class KUM extends CKUM {
                     $row+=6;
                     $rpt->SetFont ('helvetica', 'B',12);	
                     $rpt->setXY(3, $row);			
-                    $kartu=($jenisujian=='uts')?'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
+                    $kartu=($jenisujian=='uts') ? 'KARTU UJIAN TENGAH SEMESTER (UTS)':'KARTU UJIAN AKHIR SEMESTER (UAS)';
                     $rpt->Cell(0, $row, $kartu,0,0,'C');
                     
                     $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";

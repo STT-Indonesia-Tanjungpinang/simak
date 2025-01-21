@@ -81,8 +81,8 @@ class CDetailDulangMHSKeluar Extends MainPageM {
                 throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
             }          
         }catch (Exception $e) {
-            $param->IsValid=false;
-            $sender->ErrorMessage=$e->getMessage();
+            $param->IsValid = false;
+            $sender->ErrorMessage = $e->getMessage();
         }	    
     }  
     public function saveData($sender, $param) {		
