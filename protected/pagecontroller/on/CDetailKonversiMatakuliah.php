@@ -13,7 +13,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailKonversiMatakuliah']) || $_SESSION['currentPageDetailKonversiMatakuliah']['page_name'] != 'm.spmb.DetailKonversiMatakuliah') {
-				$_SESSION['currentPageDetailKonversiMatakuliah'] = array('page_name' => 'm.spmb.DetailKonversiMatakuliah', 'page_num'=>0,'search'=>false,'DataKonversi'=>array());												                                               
+				$_SESSION['currentPageDetailKonversiMatakuliah'] = array('page_name' => 'm.spmb.DetailKonversiMatakuliah', 'page_num' => 0, 'search' => false,'DataKonversi'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -90,7 +90,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
             $datamhs = $r[1];
             
             $pindahan = $this->Nilai->isMhsPindahan($nim,true);
-            $ulr_profil = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $datamhs['nim']));
+            $ulr_profil = $this->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $datamhs['nim']));
             $url='<a href="'.$ulr_profil.'" style="color:#fff">'.$nim.'</a> ';
             $str_pindahan = $pindahan == 0? '':'<span class="label label-warning">Pindahan</span>';
             $this->labelNIM->Text = $url.$str_pindahan;
@@ -105,14 +105,14 @@ class CDetailKonversiMatakuliah extends MainPageON {
 			$nim = $this->txtAddNIM->Text;
 			$str = "INSERT INTO data_konversi (idkonversi,iddata_konversi,nim) VALUES (NULL, $iddata_konversi,'$nim')";
 			$this->DB->insertRecord($str);
-			$this->redirect('DetailKonversiMatakuliah',true,array('id' => $iddata_konversi));
+			$this->redirect('DetailKonversiMatakuliah', true,array('id' => $iddata_konversi));
         }
     }
     public function unlinkData($sender, $param) {		
 		if ($this->IsValid) {		
 			$iddata_konversi = $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi']['iddata_konversi'];
 			$this->DB->deleteRecord("data_konversi WHERE iddata_konversi = $iddata_konversi");
-			$this->redirect('DetailKonversiMatakuliah',true,array('id' => $iddata_konversi));
+			$this->redirect('DetailKonversiMatakuliah', true,array('id' => $iddata_konversi));
         }
     }
 	public function printOut($sender, $param) {

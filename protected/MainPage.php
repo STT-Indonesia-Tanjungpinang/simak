@@ -290,7 +290,7 @@ class MainPage extends TPage
     while (list($k, $v)=each ($dt)) {
       if ($k != 'none') {
         if ($k <= $ta) {
-          $tahun_akademik[$k]=$v;
+          $tahun_akademik[$k] = $v;
         }
       }			
     }        

@@ -213,7 +213,7 @@ class CVariables extends MainPageSA {
                 break;
             }
             $this->setup->loadSetting(true);            
-            $this->redirect('settings.Variables',true);
+            $this->redirect('settings.Variables', true);
         }
     }
 }

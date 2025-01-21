@@ -74,14 +74,14 @@ class CKombiPerTA Extends MainPageK {
 					$str="SELECT idkombi FROM kombi WHERE idkombi NOT IN (SELECT idkombi FROM kombi_per_ta WHERE idsmt=$idsmt AND tahun='$ta' AND idkelas='$kelas')";
 					$this->DB->setFieldTable(array('idkombi'));
 					$result=$this->DB->getRecord($str);
-					while (list($k, $v)=each($result)) {
+					while (list($k, $v) = each($result)) {
 						$str = "INSERT INTO kombi_per_ta (idkombi_per_ta,idkelas,idkombi,tahun,idsmt,biaya) VALUES ";
 						$str = $str . "(NULL,'$kelas',".$v['idkombi'].", $ta, $idsmt,0)";
 						$this->DB->insertRecord ($str);
 					}	
 				}else {
 					$result=$this->getLogic('DMaster')->getList("kombi", array('idkombi'));
-					while (list($k, $v)=each($result)) {
+					while (list($k, $v) = each($result)) {
 						$str = "INSERT INTO kombi_per_ta (idkombi_per_ta,idkelas,idkombi,tahun,idsmt,biaya) VALUES ";
 						$str = $str . "(NULL,'$kelas',".$v['idkombi'].", $ta, $idsmt,0)";
 						$this->DB->insertRecord ($str);

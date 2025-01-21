@@ -53,7 +53,7 @@ class LoginAPI extends MainPage {
             $_SESSION['theme']=$pengguna->getDataUser('theme');            
             $_SESSION['outputreport'] = 'pdf';
             $_SESSION['outputcompress'] = 'none';            
-            $this->redirect('Home',true);
+            $this->redirect('Home', true);
         }
     }    
 }

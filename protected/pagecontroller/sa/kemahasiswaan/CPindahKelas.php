@@ -8,9 +8,9 @@ class CPindahKelas Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePindahKelas']) || $_SESSION['currentPagePindahKelas']['page_name'] != 'sa.kemahasiswaan.PindahKelas') {
-				$_SESSION['currentPagePindahKelas'] = array('page_name' => 'sa.kemahasiswaan.PindahKelas', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPagePindahKelas'] = array('page_name' => 'sa.kemahasiswaan.PindahKelas', 'page_num' => 0, 'search' => false);
 			}   
-			$_SESSION['currentPagePindahKelas']['search']=false;
+			$_SESSION['currentPagePindahKelas']['search'] = false;
             
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
 			$this->tbCmbTA->Text = $_SESSION['ta'];
@@ -61,7 +61,7 @@ class CPindahKelas Extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePindahKelas']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePindahKelas']['page_num'] = 0;}
 		$str = "SELECT pk.idpindahkelas,pk.no_surat,pk.tanggal,pk.nim,vdm.nama_mhs,vdm.tahun_masuk,pk.idkelas_lama,pk.idkelas_baru FROM v_datamhs vdm,pindahkelas pk WHERE vdm.nim=pk.nim AND pk.tahun='$ta' AND pk.idsmt='$idsmt' ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('idpindahkelas', 'no_surat', 'tanggal', 'nim', 'nama_mhs', 'tahun_masuk', 'idkelas_lama', 'idkelas_baru'));
 		$r = $this->DB->getRecord($str, $offset+1);
@@ -74,7 +74,7 @@ class CPindahKelas Extends MainPageM {
 		$item = $param->Item;
 		if ($item->ItemType == 'Item' || $item->ItemType=='AlternatingItem') {
             $this->Demik->setDataMHS(array('nim' => $item->DataItem['nim']));
-			$datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
+			$datadulang = $this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
             if (isset($datadulang['iddulang'])) {
                 $item->btnDelete->Enabled = false;
 				$item->btnEdit->Enabled = false;
@@ -92,7 +92,7 @@ class CPindahKelas Extends MainPageM {
                 throw new Exception ("NIM ($nim) pada T.A dan Semester ini, telah melakukan pindah kelas !!!");
             }
             $this->Demik->setDataMHS(array('nim' => $nim));
-			$datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
+			$datadulang = $this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
             if (isset($datadulang['iddulang'])) {
                 throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
             }
@@ -123,7 +123,7 @@ class CPindahKelas Extends MainPageM {
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
             $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
             
             $this->Demik->setDataMHS($datamhs);
@@ -171,7 +171,7 @@ class CPindahKelas Extends MainPageM {
 			}else {
 				$this->DB->query ('ROLLBACK');
 			}
-			$this->redirect('kemahasiswaan.PindahKelas',true);
+			$this->redirect('kemahasiswaan.PindahKelas', true);
 		}		
 	}
     public function editRecord($sender, $param) {
@@ -186,7 +186,7 @@ class CPindahKelas Extends MainPageM {
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
 
         $this->Demik->setDataMHS($datamhs);
@@ -223,7 +223,7 @@ class CPindahKelas Extends MainPageM {
 			}else {
 				$this->DB->query ('ROLLBACK');
 			}
-			$this->redirect('kemahasiswaan.PindahKelas',true);
+			$this->redirect('kemahasiswaan.PindahKelas', true);
 		}
 	}	
 	public function deleteRecord($sender, $param) {
@@ -241,6 +241,6 @@ class CPindahKelas Extends MainPageM {
 		}else {
 			$this->DB->query ('ROLLBACK');
 		}
-        $this->redirect('kemahasiswaan.PindahKelas',true);
+        $this->redirect('kemahasiswaan.PindahKelas', true);
 	}
 }

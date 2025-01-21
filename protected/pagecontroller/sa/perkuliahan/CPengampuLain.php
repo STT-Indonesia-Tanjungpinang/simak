@@ -9,7 +9,7 @@ class CPengampuLain extends MainPageSA {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {				
             if (!isset($_SESSION['currentPagePengampuLain']) || $_SESSION['currentPagePengampuLain']['page_name'] != 'sa.perkuliahan.PengampuLain') {
-				$_SESSION['currentPagePengampuLain'] = array('page_name' => 'sa.perkuliahan.PengampuLain', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPagePengampuLain'] = array('page_name' => 'sa.perkuliahan.PengampuLain', 'page_num' => 0, 'search' => false);
 			}
 			$this->populateData();
 		}			
@@ -73,7 +73,7 @@ class CPengampuLain extends MainPageSA {
 			$str = "INSERT INTO pengampu_penyelenggaraan (idpengampu_penyelenggaraan,idpenyelenggaraan,iddosen,verified) VALUES (NULL, $idpenyelenggaraan, $iddosen,0)";
 			$this->DB->insertRecord($str);
             $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
-			$this->redirect('perkuliahan.PengampuLain',true,array('id' => $idpenyelenggaraan));
+			$this->redirect('perkuliahan.PengampuLain', true,array('id' => $idpenyelenggaraan));
 		}
 	}	
 	public function editRecord($sender, $param) {		
@@ -91,7 +91,7 @@ class CPengampuLain extends MainPageSA {
         $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM pengampu_penyelenggaraan WHERE idpenyelenggaraan = $id)";
         $dd=$this->DB->getRecord($str);        
         $DataDosen=array($r[1]['iddosen']=>$r[1]['nama_dosen']. ' ['.$r[1]['nidn'].']');	                
-        while (list($k, $v)=each($dd)) {           
+        while (list($k, $v) = each($dd)) {           
             $DataDosen[$v['iddosen']] = $v['nama_dosen']. ' ['.$v['nidn'].']';           			
         }
         
@@ -106,13 +106,13 @@ class CPengampuLain extends MainPageSA {
 		$str = "UPDATE pengampu_penyelenggaraan SET iddosen = $iddosen WHERE idpengampu_penyelenggaraan = $id";
 		$this->DB->updateRecord($str);
         $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
-		$this->redirect('perkuliahan.PengampuLain',true,array('id' => $idpenyelenggaraan));
+		$this->redirect('perkuliahan.PengampuLain', true,array('id' => $idpenyelenggaraan));
 	}
     public function deleteRecord($sender, $param) {		
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         $idpenyelenggaraan = $this->hiddenid->Value;		
 		$this->DB->deleteRecord("pengampu_penyelenggaraan WHERE idpengampu_penyelenggaraan = $id");
         $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
-		$this->redirect('perkuliahan.PengampuLain',true,array('id' => $idpenyelenggaraan));
+		$this->redirect('perkuliahan.PengampuLain', true,array('id' => $idpenyelenggaraan));
 	}	
 }

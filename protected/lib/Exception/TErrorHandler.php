@@ -413,7 +413,7 @@ class TErrorHandler extends TModule
 		$endLine=$errorLine+self::SOURCE_LINES<=count($lines)?$errorLine+self::SOURCE_LINES:count($lines);
 
 		$source='';
-		for($i = $beginLine;$i<$endLine;++$i)
+		for($i = $beginLine;$i < $endLine;++$i)
 		{
 			if($i===$errorLine-1)
 			{

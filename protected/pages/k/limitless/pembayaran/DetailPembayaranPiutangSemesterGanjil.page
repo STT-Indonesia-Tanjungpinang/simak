@@ -3,7 +3,7 @@
     <i class="icon-calculator3 position-left"></i> <span class="text-semibold">Pembayaran Piutang Semester Ganjil</span>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
+    <li><a href="<%=$this->Page->constructUrl('Home', true)%>">HOME</a></li> 
     <li><a href="#">PEMBAYARAN</a></li>
     <li class="active">PIUTANG SEMESTER GENAP</li>     
 </com:TContent>
@@ -23,7 +23,7 @@
         <div class="heading-elements">
             <ul class="icons-list">                
                 <li>
-                    <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranPiutangSemesterGanjil',true);%>" data-action="closeredirect"></a>
+                    <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranPiutangSemesterGanjil', true);%>" data-action="closeredirect"></a>
                 </li>
             </ul>
         </div>        

@@ -3,13 +3,13 @@ prado::using ('Application.MainPageMHS');
 class CTranskripKRS extends MainPageMHS {		
 	public function onLoad($param) {
 		parent::onLoad($param);							
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showTranskripKRS=true;    
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageTranskripKRS']) || $_SESSION['currentPageTranskripKRS']['page_name'] != 'mh.nilai.TranskripKRS') {
-				$_SESSION['currentPageTranskripKRS'] = array('page_name' => 'mh.nilai.TranskripKRS', 'page_num'=>0,'search'=>false);												                                               
+				$_SESSION['currentPageTranskripKRS'] = array('page_name' => 'mh.nilai.TranskripKRS', 'page_num' => 0, 'search' => false);												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

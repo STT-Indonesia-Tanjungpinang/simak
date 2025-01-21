@@ -98,7 +98,7 @@ class CDetailDulangMHSBaru Extends MainPageM {
 				$this->DB->updateRecord($str);			
 				$this->DB->query('COMMIT');
                 unset($_SESSION['currentPageDulangMHSBaru']);
-                $this->redirect('dulang.DulangMHSBaru',true);
+                $this->redirect('dulang.DulangMHSBaru', true);
 			}else {
 				$this->DB->query('ROLLBACK');
 			}
@@ -106,6 +106,6 @@ class CDetailDulangMHSBaru Extends MainPageM {
 	}
     public function closeDetailDulang($sender, $param) {
         unset($_SESSION['currentPageDulangMHSBaru']['DataMHS']);
-        $this->redirect('dulang.DulangMHSBaru',true);
+        $this->redirect('dulang.DulangMHSBaru', true);
     }
 }

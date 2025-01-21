@@ -7,9 +7,9 @@ class CPendaftaranOnline extends MainPageM {
         $this->createObj('Akademik');        
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePendaftaranOnline']) || $_SESSION['currentPagePendaftaranOnline']['page_name'] != 'm.spmb.PendaftaranOnline') {
-				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'm.spmb.PendaftaranOnline', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_konfirmasi' => 'none', 'kelas' => 'A');												
+				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'm.spmb.PendaftaranOnline', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'status_konfirmasi' => 'none', 'kelas' => 'A');												
 			}
-            $_SESSION['currentPagePendaftaranOnline']['search']=false;
+            $_SESSION['currentPagePendaftaranOnline']['search'] = false;
             $this->cmbKonfirmasi->Text = $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi'];
             
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -112,7 +112,7 @@ class CPendaftaranOnline extends MainPageM {
         if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
             $limit=$this->RepeaterS->VirtualItemCount-$offset;
         }
-        if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranOnline']['page_num']=0;}
+        if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranOnline']['page_num'] = 0;}
         
         $str = "$str ORDER BY waktu_mendaftar DESC LIMIT $offset, $limit";
         $this->DB->setFieldTable(array('no_pendaftaran', 'no_formulir', 'nama_mhs', 'telp_hp', 'email', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'file_bukti_bayar'));
@@ -169,7 +169,7 @@ class CPendaftaranOnline extends MainPageM {
             }else {
                 $this->DB->query('ROLLBACK');
             }			
-            $this->redirect('spmb.PendaftaranOnline',true);
+            $this->redirect('spmb.PendaftaranOnline', true);
         }
 	}
 	
@@ -298,7 +298,7 @@ class CPendaftaranOnline extends MainPageM {
             if ($this->DB->deleteRecord($str)) {
                 $this->DB->deleteRecord ("transaksi WHERE no_formulir='$no_formulir'");
                 $this->DB->query ('COMMIT');
-                $this->redirect('spmb.PendaftaranOnline',true);
+                $this->redirect('spmb.PendaftaranOnline', true);
             }else {
                 $this->DB->query ('ROLLBACK');
             }	

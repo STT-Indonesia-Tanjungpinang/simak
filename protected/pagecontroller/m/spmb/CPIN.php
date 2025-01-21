@@ -8,9 +8,9 @@ class CPIN extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePIN']) || $_SESSION['currentPagePIN']['page_name'] != 'm.spmb.PIN') {
-				$_SESSION['currentPagePIN'] = array('page_name' => 'm.spmb.PIN', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'display_record' => 'all', 'kelas' => 'A');												
+				$_SESSION['currentPagePIN'] = array('page_name' => 'm.spmb.PIN', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'display_record' => 'all', 'kelas' => 'A');												
 			}
-            $_SESSION['currentPagePIN']['search']=false;
+            $_SESSION['currentPagePIN']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
@@ -95,7 +95,7 @@ class CPIN extends MainPageM {
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePIN']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePIN']['page_num'] = 0;}
 		
 		$str = "$str  $str_display ORDER BY pin.no_formulir ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('no_pin', 'no_formulir', 'idkelas', 'nama_mhs', 'ket'));
@@ -124,7 +124,7 @@ class CPIN extends MainPageM {
                 $no_pin = $no_urut.mt_rand(100000,999999);
                 $values="('$no_pin', $no_urut, $tahun_masuk,'$idkelas')";
             }else {
-                for ($i = $no_urut;$i<$jumlah_formulir;$i++) {                    
+                for ($i = $no_urut;$i < $jumlah_formulir;$i++) {                    
                     $no_pin = $i.mt_rand(100000,999999);
                     if ($jumlah_formulir > $i+1) {
                         $values = $values."('$no_pin', $i, $tahun_masuk,1,'$idkelas'),";
@@ -135,7 +135,7 @@ class CPIN extends MainPageM {
             }
             $str="INSERT INTO pin (no_pin,no_formulir,tahun_masuk,semester_masuk,idkelas) VALUES $values";
             $this->DB->insertRecord($str);
-            $this->redirect('spmb.PIN',true);
+            $this->redirect('spmb.PIN', true);
         }
     }
     public function printOut($sender, $param) {

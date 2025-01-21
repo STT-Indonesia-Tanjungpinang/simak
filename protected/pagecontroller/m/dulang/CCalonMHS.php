@@ -9,9 +9,9 @@ class CCalonMHS Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageCalonMHS']) || $_SESSION['currentPageCalonMHS']['page_name'] != 'm.dulang.CalonMHS') {
-				$_SESSION['currentPageCalonMHS'] = array('page_name' => 'm.dulang.CalonMHS', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPageCalonMHS'] = array('page_name' => 'm.dulang.CalonMHS', 'page_num' => 0, 'search' => false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
-            $_SESSION['currentPageCalonMHS']['search']=false;
+            $_SESSION['currentPageCalonMHS']['search'] = false;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -98,7 +98,7 @@ class CCalonMHS Extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageCalonMHS']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageCalonMHS']['page_num'] = 0;}
 		$str = "$str ORDER BY t.idkelas ASC,fp.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'jk', 'idkelas', 'tahun_masuk', 'semester_masuk', 'kjur', 'perpanjang'));
 		$r = $this->DB->getRecord($str, $offset+1);
@@ -145,7 +145,7 @@ class CCalonMHS Extends MainPageM {
                 }
                 $datamhs['kjur'] = $spmb['kjur'];
                 $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-                $datamhs['perpanjang']=false;
+                $datamhs['perpanjang'] = false;
                 $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $datamhs['waktu_mendaftar']);
                 $this->Finance->setDataMHS($datamhs);                               
                 if ($this->Finance->isMhsRegistered()){
@@ -157,7 +157,7 @@ class CCalonMHS Extends MainPageM {
                 }
                 $_SESSION['currentPageDulangMHSBaru']['DataMHS'] = $datamhs;                        
             }
-            $this->redirect('dulang.DetailDulangMHSBaru',true,array('id' => $no_formulir));
+            $this->redirect('dulang.DetailDulangMHSBaru', true,array('id' => $no_formulir));
         }catch (Exception $e) {
             $this->lblContentMessageError->Text = $e->getMessage();
             $this->modalMessageError->show();

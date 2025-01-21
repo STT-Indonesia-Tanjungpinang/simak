@@ -3,14 +3,14 @@ prado::using ('Application.MainPageD');
 class CDetailEditNilai extends MainPageD {    
      public function onLoad($param) {
     parent::onLoad($param);							
-    $this->showSubMenuAkademikNilai=true;
+    $this->showSubMenuAkademikNilai = true;
     $this->showEditNilai=true;    
     $this->createObj('Akademik');        
     $this->createObj('Nilai');        
     
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPageDetailEditNilai']) || $_SESSION['currentPageDetailEditNilai']['page_name'] != 'd.nilai.DetailEditNilai') {
-        $_SESSION['currentPageDetailEditNilai'] = array('page_name' => 'd.nilai.DetailEditNilai', 'page_num'=>0,'search'=>false,'DataNilai'=>array(), 'jumlahrecord'=>50);
+        $_SESSION['currentPageDetailEditNilai'] = array('page_name' => 'd.nilai.DetailEditNilai', 'page_num' => 0, 'search' => false,'DataNilai'=>array(), 'jumlahrecord'=>50);
       }  
       $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
       $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -71,7 +71,7 @@ class CDetailEditNilai extends MainPageD {
     if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
       $limit=$this->RepeaterS->VirtualItemCount-$offset;
     }
-    if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDetailEditNilai']['page_num']=0;}
+    if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDetailEditNilai']['page_num'] = 0;}
     $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				     
     $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'nilai_hasil_proyek', 'n_kuan', 'n_kual', 'published'));
     $r = $this->DB->getRecord($str);	           

@@ -7,9 +7,9 @@ class CAPI extends MainPageSA {
         $this->showAPI=true;   
         if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageAPI']) || $_SESSION['currentPageAPI']['page_name'] != 'sa.settings.API') {
-                $_SESSION['currentPageAPI'] = array('page_name' => 'sa.settings.API', 'page_num'=>0,'search'=>false);
+                $_SESSION['currentPageAPI'] = array('page_name' => 'sa.settings.API', 'page_num' => 0, 'search' => false);
             }
-            $_SESSION['currentPageAPI']['search']=false;
+            $_SESSION['currentPageAPI']['search'] = false;
             $this->populateData();            
         }
     }       
@@ -59,13 +59,13 @@ class CAPI extends MainPageSA {
         if (($offset+$limit)>$itemcount) {
             $limit=$itemcount-$offset;
         }
-        if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageAPI']['page_num']=0;}
+        if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageAPI']['page_num'] = 0;}
         $str = "$str ORDER BY username ASC LIMIT $offset, $limit";               
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'email', 'ipaddress', 'token', 'foto', 'logintime', 'active'));
         $r = $this->DB->getRecord($str, $offset+1);  
         $result = array();
         while (list($k, $v) = each($r)) {
-            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);       
+            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00' ? 'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);       
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;
@@ -120,7 +120,7 @@ class CAPI extends MainPageSA {
             $str = "INSERT INTO user SET userid=NULL,username='$username',userpassword='$password',salt='$salt',token='$password',ipaddress='$ipaddress',nama='$nama',email='$email',page='$page',active=1,theme='cube',foto='resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";
             $this->DB->insertRecord($str);           
             
-            $this->redirect('settings.API',true);
+            $this->redirect('settings.API', true);
         }
     }
     public function editRecord($sender, $param) {
@@ -160,7 +160,7 @@ class CAPI extends MainPageSA {
                 $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',ipaddress='$ipaddress',nama='$nama',email='$email',active='$status' WHERE userid = $id";
             }
             $this->DB->updateRecord($str); 
-            $this->redirect('settings.API',true);
+            $this->redirect('settings.API', true);
         }
     }
     public function resetToken($sender, $param) { 
@@ -169,12 +169,12 @@ class CAPI extends MainPageSA {
         $password=$data['password'];
         $str = "UPDATE user SET token='$password' WHERE userid = $id";
         $this->DB->updateRecord($str); 
-        $this->redirect('settings.API',true);
+        $this->redirect('settings.API', true);
     }
     public function deleteRecord($sender, $param) {        
         $id = $this->getDataKeyField($sender, $this->RepeaterS);        
         $this->DB->deleteRecord("user WHERE userid = $id");
-        $this->redirect('settings.API',true);
+        $this->redirect('settings.API', true);
     }   
     
 }

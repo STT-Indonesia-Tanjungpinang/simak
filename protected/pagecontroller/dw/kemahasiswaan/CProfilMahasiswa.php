@@ -24,7 +24,7 @@ class CProfilMahasiswa extends MainPageDW {
         $this->createObj('Nilai');
         if (!$this->IsPostBack && !$this->IsCallback) {   
             if (!isset($_SESSION['currentPageProfilMahasiswa']) || $_SESSION['currentPageProfilMahasiswa']['page_name'] != 'm.kemahasiswaan.ProfilMahasiswa') {
-                $_SESSION['currentPageProfilMahasiswa'] = array('page_name' => 'm.kemahasiswaan.ProfilMahasiswa', 'page_num'=>0,'DataMHS'=>array(), 'activeviewindex'=> 0);                                                
+                $_SESSION['currentPageProfilMahasiswa'] = array('page_name' => 'm.kemahasiswaan.ProfilMahasiswa', 'page_num' => 0,'DataMHS'=>array(), 'activeviewindex'=> 0);                                                
             }
 
             $this->MVProfilMahasiswa->ActiveViewIndex=$_SESSION['currentPageProfilMahasiswa']['activeviewindex'];             
@@ -43,7 +43,7 @@ class CProfilMahasiswa extends MainPageDW {
             $datamhs = $r[1];
             $datamhs['nama_ps'] = $this->DMaster->getNamaProgramStudiByID($datamhs['kjur']);
             $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':strtoupper($datamhs['nama_konsentrasi']);
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':strtoupper($datamhs['nama_konsentrasi']);
 
             $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);                                 
             $datamhs['nama_dosen'] = $nama_dosen;
@@ -79,7 +79,7 @@ class CProfilMahasiswa extends MainPageDW {
                 }
             }else{
                 $_SESSION['currentPageProfilMahasiswa']['activeviewindex'] = $this->MVProfilMahasiswa->ActiveViewIndex;
-                $this->redirect('kemahasiswaan.ProfilMahasiswa',true,array('id' => $datamhs['nim']));
+                $this->redirect('kemahasiswaan.ProfilMahasiswa', true,array('id' => $datamhs['nim']));
             }       
             
         }catch (Exception $ex) {
@@ -211,7 +211,7 @@ class CProfilMahasiswa extends MainPageDW {
             $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE nim='$nim'";            
             $this->DB->updateRecord($str);            
            
-            $this->redirect('kemahasiswaan.ProfilMahasiswa',true,array('id' => $nim));
+            $this->redirect('kemahasiswaan.ProfilMahasiswa', true,array('id' => $nim));
         }
     }
     public function checkNIM($sender, $param) {                 
@@ -296,7 +296,7 @@ class CProfilMahasiswa extends MainPageDW {
             $str = "UPDATE rekap_laporan_pembayaran_per_semester SET nim='$nim',nirm='$nirm' WHERE nim='$nimasal'";
             $this->DB->updateRecord($str);
             
-            $this->redirect('kemahasiswaan.ProfilMahasiswa',true,array('id' => $nim));
+            $this->redirect('kemahasiswaan.ProfilMahasiswa', true,array('id' => $nim));
         }
     }
 }

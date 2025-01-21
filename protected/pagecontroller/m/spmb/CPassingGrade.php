@@ -76,7 +76,7 @@ class CPassingGrade extends MainPageM {
             $str = "INSERT INTO passinggrade (idpassing_grade,idjadwal_ujian,kjur,tahun_masuk,nilai) SELECT NULL, $idjadwal_ujian,kjur, $tahun_masuk,0 FROM program_studi WHERE kjur!=0";
             $this->DB->insertRecord($str);
             $this->DB->query('COMMIT');
-            $this->redirect('spmb.PassingGrade',true);
+            $this->redirect('spmb.PassingGrade', true);
         }else{
             $this->DB->query('ROLLBACK');
         }

@@ -8,9 +8,9 @@ class CPiutangJangkaPendek extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePiutangJangkaPendek']) || $_SESSION['currentPagePiutangJangkaPendek']['page_name'] != 'k.report.PiutangJangkaPendek') {
-				$_SESSION['currentPagePiutangJangkaPendek'] = array('page_name' => 'k.report.PiutangJangkaPendek', 'page_num'=>0,'search'=>false,'kelas' => 'none', 'tahun_masuk' => $_SESSION['tahun_masuk']);												
+				$_SESSION['currentPagePiutangJangkaPendek'] = array('page_name' => 'k.report.PiutangJangkaPendek', 'page_num' => 0, 'search' => false,'kelas' => 'none', 'tahun_masuk' => $_SESSION['tahun_masuk']);												
 			}
-            $_SESSION['currentPagePiutangJangkaPendek']['search']=false;                       
+            $_SESSION['currentPagePiutangJangkaPendek']['search'] = false;                       
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -103,7 +103,7 @@ class CPiutangJangkaPendek extends MainPageK {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPagePiutangJangkaPendek']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPagePiutangJangkaPendek']['page_num'] = 0;}
         $str = "$str ORDER BY nim ASC,nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'idkelas', 'tahun_masuk', 'semester_masuk'));
 		$r = $this->DB->getRecord($str, $offset+1);	

@@ -39,7 +39,7 @@ class TActiveCustomDatePicker extends TCustomDatePicker  implements ICallbackEve
 	 */
 	public function getAutoPostBack()
 	{
-		return $this->getViewState('AutoPostBack',true);
+		return $this->getViewState('AutoPostBack', true);
 	}
 
 	/**

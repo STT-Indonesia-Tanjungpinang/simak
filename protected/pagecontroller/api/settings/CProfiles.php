@@ -15,7 +15,7 @@ class CProfiles extends MainPageAPI {
         $r = $this->DB->getRecord($str);  
         $result = array();
         while (list($k, $v) = each($r)) {
-            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);       
+            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00' ? 'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);       
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;
@@ -68,7 +68,7 @@ class CProfiles extends MainPageAPI {
                 $str = "UPDATE user SET userpassword='$password',salt='$salt',ipaddress='$ipaddress',nama='$nama',email='$email' WHERE userid = $id";
             }
             $this->DB->updateRecord($str); 
-            $this->redirect('Home',true);
+            $this->redirect('Home', true);
         }
     }  
     public function resetToken($sender, $param) {
@@ -77,6 +77,6 @@ class CProfiles extends MainPageAPI {
         $password=$data['password'];
         $str = "UPDATE user SET token='$password' WHERE userid = $userid";
         $this->DB->updateRecord($str); 
-    	$this->redirect('Home',true);
+    	$this->redirect('Home', true);
     }
 }

@@ -24,9 +24,9 @@ class CKRS Extends MainPageM {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {						
             if (!isset($_SESSION['currentPageKRS']) || $_SESSION['currentPageKRS']['page_name'] != 'm.perkuliahan.KRS') {					
-                $_SESSION['currentPageKRS'] = array('page_name' => 'm.perkuliahan.KRS', 'page_num'=>0,'mode_krs' => 'sudah', 'iddosen_wali' => 'none', 'tahun_masuk' => 'none', 'DataKRS'=>array(), 'DataMHS'=>array());												
+                $_SESSION['currentPageKRS'] = array('page_name' => 'm.perkuliahan.KRS', 'page_num' => 0,'mode_krs' => 'sudah', 'iddosen_wali' => 'none', 'tahun_masuk' => 'none', 'DataKRS'=>array(), 'DataMHS'=>array());												
             }
-            $_SESSION['currentPageKRS']['search']=false;
+            $_SESSION['currentPageKRS']['search'] = false;
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
             $this->tbCmbPs->dataBind();	
@@ -106,12 +106,12 @@ class CKRS Extends MainPageM {
 	}
     public function changeDW($sender, $param){
 		$_SESSION['currentPageKRS']['iddosen_wali'] = $this->cmbDosenWali->Text;
-		$_SESSION['currentPageKRS']['page_num']=0;		
+		$_SESSION['currentPageKRS']['page_num'] = 0;		
 		$this->populateData();
 	}
 	public function changeModeKRS($sender, $param) {
 		$_SESSION['currentPageKRS']['mode_krs'] = $this->cmbModeKRS->Text;
-		$_SESSION['currentPageKRS']['page_num']=0;
+		$_SESSION['currentPageKRS']['page_num'] = 0;
 		$this->populateData();
 	} 
     public function searchRecord($sender, $param) {
@@ -168,7 +168,7 @@ class CKRS Extends MainPageM {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKRS']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKRS']['page_num'] = 0;}
         $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";	
         $r = $this->DB->getRecord($str, $offset+1);	        
 
@@ -213,7 +213,7 @@ class CKRS Extends MainPageM {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
                     }
                     $datamhs = $r[1];
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
 
                     $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                     $datamhs['nama_dosen'] = $nama_dosen;
@@ -230,7 +230,7 @@ class CKRS Extends MainPageM {
                     }
                     $datamhs = $r[1];
                     
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
 
                     $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                     $datamhs['nama_dosen'] = $nama_dosen;
@@ -249,7 +249,7 @@ class CKRS Extends MainPageM {
                             if (!$data['bool'])throw new Exception ("Anda tidak bisa mengisi KRS karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
                         }
                     } 
-                    $datadulang=$this->KRS->getDataDulang($idsmt, $tahun);
+                    $datadulang = $this->KRS->getDataDulang($idsmt, $tahun);
                     $nama_tahun = $this->DMaster->getNamaTA($tahun);
                     $nama_semester = $this->setup->getSemester($idsmt);
                     if (!isset($datadulang['iddulang']))throw new Exception ("Anda belum melakukan daftar ulang pada T.A $nama_tahun Semester $nama_semester. Silahkan hubungi Prodi (Bukan Keuangan).");
@@ -272,7 +272,7 @@ class CKRS Extends MainPageM {
             $nim = $datamhs['nim'];
             $this->Nilai->setDataMHS($datamhs);
             $this->Finance->setDataMHS($datamhs);
-            if (isset($krs['idkrs']) && $krs['sah']==0) {       
+            if (isset($krs['idkrs']) && $krs['sah'] == 0) {       
                 $idsmt = $krs['idsmt'];
                 $tahun = $krs['tahun'];                
                 
@@ -281,10 +281,10 @@ class CKRS Extends MainPageM {
                                 
                 $_SESSION['currentPageKRS']['DataKRS']['krs'] = $krs;
                 
-                $this->redirect ('perkuliahan.TambahKRS',true);
+                $this->redirect ('perkuliahan.TambahKRS', true);
             }elseif(isset($krs['idkrs']) && $krs['sah']==1){
                 $idkrs = $krs['idkrs'];
-                $this->redirect ('perkuliahan.DetailKRS',true,array('id' => $idkrs));
+                $this->redirect ('perkuliahan.DetailKRS', true,array('id' => $idkrs));
             }else{
                 $idsmt = $_SESSION['semester'];
                 $tahun = $_SESSION['ta'];
@@ -308,7 +308,7 @@ class CKRS Extends MainPageM {
                 
                 $_SESSION['currentPageKRS']['DataKRS'] = $this->KRS->DataKRS;
                 
-                $this->redirect ('perkuliahan.TambahKRS',true);
+                $this->redirect ('perkuliahan.TambahKRS', true);
             }
         }
     }

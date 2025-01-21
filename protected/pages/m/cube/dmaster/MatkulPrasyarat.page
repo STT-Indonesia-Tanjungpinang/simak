@@ -4,7 +4,7 @@
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">DATA MASTER</a></li>
-    <li><a href="<%=$this->constructUrl('dmaster.Matakuliah',true)%>">MATAKULIAH</a></li>
+    <li><a href="<%=$this->constructUrl('dmaster.Matakuliah', true)%>">MATAKULIAH</a></li>
     <li class="active"><span>MATAKULIAH PRASYARAT</span></li>
 </com:TContent>
 <com:TContent ID="maincontent">
@@ -13,7 +13,7 @@
         <div class="main-box clearfix">               
             <header class="main-box-header clearfix">
                 <div class="icon-box pull-right">                                       
-                    <a class="btn btn-default pull-left" href="<%=$this->constructUrl('dmaster.Matakuliah',true)%>">
+                    <a class="btn btn-default pull-left" href="<%=$this->constructUrl('dmaster.Matakuliah', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -37,7 +37,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"><i class="fa fa-plus"></i> Tambah Matakuliah Prasyarat</h2> 
                     <div class="icon-box pull-right">                                       
-                        <a class="btn pull-right" href="<%=$this->constructUrl('dmaster.Matakuliah',true)%>">
+                        <a class="btn pull-right" href="<%=$this->constructUrl('dmaster.Matakuliah', true)%>">
                             <i class="fa fa-times"></i>
                         </a>
                     </div>

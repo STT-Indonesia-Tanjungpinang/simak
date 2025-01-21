@@ -9,9 +9,9 @@ class CJadwalUjianPMB extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageJadwalUjianPMB']) || $_SESSION['currentPageJadwalUjianPMB']['page_name'] != 'm.perkuliahan.JadwalUjianPMB') {                
-				$_SESSION['currentPageJadwalUjianPMB'] = array('page_name' => 'm.perkuliahan.JadwalUjianPMB', 'page_num'=>0,'search'=>false);												
+				$_SESSION['currentPageJadwalUjianPMB'] = array('page_name' => 'm.perkuliahan.JadwalUjianPMB', 'page_num' => 0, 'search' => false);												
 			}
-            $_SESSION['currentPageJadwalUjianPMB']['search']=false;
+            $_SESSION['currentPageJadwalUjianPMB']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
                         
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
@@ -144,7 +144,7 @@ class CJadwalUjianPMB extends MainPageM {
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("jadwal_ujian_pmb WHERE idjadwal_ujian='$id'");
-            $this->redirect('spmb.JadwalUjianPMB',true);
+            $this->redirect('spmb.JadwalUjianPMB', true);
         }
     }   
     public function printOut($sender, $param) {		

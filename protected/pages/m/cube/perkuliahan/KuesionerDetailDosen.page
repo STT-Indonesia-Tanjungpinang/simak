@@ -19,7 +19,7 @@
         <div class="main-box clearfix">               
             <header class="main-box-header clearfix">
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('perkuliahan.KuesionerDetailDosen',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('perkuliahan.KuesionerDetailDosen', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -47,7 +47,7 @@
                         <com:TRequiredFieldValidator InitialValue="none" ValidationGroup="frmDetailDosen" Display="Dynamic" ControlToValidate="cmbDosen" ErrorMessage="Pilih dosen" />	                        
                     </div>
                     <div class="filter-block pull-right"> 
-                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.Kuesioner',true)%>" title="Keluar Detail Kuesioner Dosen">                        
+                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.Kuesioner', true)%>" title="Keluar Detail Kuesioner Dosen">                        
                             <i class='fa  fa-times fa-lg'></i>
                         </a>
                         <com:TActiveLinkButton ID="btnView" CssClass="btn btn-primary pull-right" OnClick="viewRecord" ValidationGroup="frmDetailDosen">

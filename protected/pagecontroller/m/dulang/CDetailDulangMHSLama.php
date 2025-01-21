@@ -50,7 +50,7 @@ class CDetailDulangMHSLama Extends MainPageM {
 				$this->DB->insertRecord($str);				
 				$this->DB->query('COMMIT');
                 unset($_SESSION['currentPageDulangMHSLama']);
-                $this->redirect('dulang.DulangMHSLama',true);
+                $this->redirect('dulang.DulangMHSLama', true);
 			}else {
 				$this->DB->query('ROLLBACK');
 			}
@@ -58,6 +58,6 @@ class CDetailDulangMHSLama Extends MainPageM {
 	}
     public function closeDetailDulang($sender, $param) {
         unset($_SESSION['currentPageDulangMHSLama']['DataMHS']);
-        $this->redirect('dulang.DulangMHSLama',true);
+        $this->redirect('dulang.DulangMHSLama', true);
     }
 }

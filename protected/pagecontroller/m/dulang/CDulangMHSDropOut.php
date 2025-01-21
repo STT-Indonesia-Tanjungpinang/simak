@@ -8,9 +8,9 @@ class CDulangMHSDropOut Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSDropOut']) || $_SESSION['currentPageDulangMHSDropOut']['page_name'] != 'm.dulang.DulangMHSDropOut') {
-				$_SESSION['currentPageDulangMHSDropOut'] = array('page_name' => 'm.dulang.DulangMHSDropOut', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSDropOut'] = array('page_name' => 'm.dulang.DulangMHSDropOut', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
 			}
-            $_SESSION['currentPageDulangMHSDropOut']['search']=false;
+            $_SESSION['currentPageDulangMHSDropOut']['search'] = false;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -134,7 +134,7 @@ class CDulangMHSDropOut Extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSDropOut']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSDropOut']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt', 'idkelas'));
 		$result=$this->DB->getRecord($str, $offset+1);
@@ -168,7 +168,7 @@ class CDulangMHSDropOut Extends MainPageM {
                     $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
                     $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
                     $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
                     $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
                     $_SESSION['currentPageDulangMHSDropOut']['DataMHS'] = $datamhs;
                 }
@@ -181,7 +181,7 @@ class CDulangMHSDropOut Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailDulangMHSDropOut',true,array('id' => $nim));
+            $this->redirect('dulang.DetailDulangMHSDropOut', true,array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	
@@ -195,7 +195,7 @@ class CDulangMHSDropOut Extends MainPageM {
         $datamhs = $r[1];
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);        
         $this->hiddenstatussebelumnya->Value=$datamhs['status_sebelumnya'];
         $datamhs['status_sebelumnya'] = $this->DMaster->getNamaStatusMHSByID($datamhs['status_sebelumnya']);
@@ -215,7 +215,7 @@ class CDulangMHSDropOut Extends MainPageM {
                     $this->DB->updateRecord($str);
                 }                
                 $this->DB->query ('COMMIT');
-                $this->redirect('dulang.DulangMHSDropOut',true);
+                $this->redirect('dulang.DulangMHSDropOut', true);
             }else {
                 $this->DB->query ('ROLLBACK');
             }	

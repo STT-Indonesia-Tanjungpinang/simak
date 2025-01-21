@@ -14,7 +14,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Tambah Kelompok Pertanyaan</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('dmaster.KelompokPertanyaan',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('dmaster.KelompokPertanyaan', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -72,7 +72,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-edit"></i> Ubah Kelompok Pertanyaan</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('dmaster.KelompokPertanyaan',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('dmaster.KelompokPertanyaan', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>

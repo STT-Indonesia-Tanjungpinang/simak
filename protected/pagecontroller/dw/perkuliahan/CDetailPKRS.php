@@ -45,10 +45,10 @@ class CDetailPKRS extends MainPageDW {
             $datakrs = $_SESSION['currentPagePKRS']['DataKRS']['krs'];
             $this->Page->KRS->DataKRS['krs'] = $datakrs;
             if (!isset($datakrs['idkrs'])) {
-                throw new Exception ('Mohon kembali ke halaman <a href="'.$this->constructUrl('perkuliahan.PKRS',true).'">ini</a>');
+                throw new Exception ('Mohon kembali ke halaman <a href="'.$this->constructUrl('perkuliahan.PKRS', true).'">ini</a>');
             }
             if ($datakrs['idkrs'] != $idkrs) {
-                throw new Exception ('Mohon kembali ke halaman <a href="'.$this->constructUrl('perkuliahan.PKRS',true).'">ini</a>');
+                throw new Exception ('Mohon kembali ke halaman <a href="'.$this->constructUrl('perkuliahan.PKRS', true).'">ini</a>');
             }
             $this->KRS->setDataMHS($datamhs);
             $detailkrs = $this->KRS->getDetailKRS($idkrs);
@@ -108,16 +108,16 @@ class CDetailPKRS extends MainPageDW {
                 $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs = $idkrs";
 				$this->DB->updateRecord($str);
                 $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan = $idpenyelenggaraan,tambah=0,hapus=1,batal=0,sah=1,tanggal=NOW()");										
-				$this->redirect('perkuliahan.DetailPKRS',true,array('id' => $idkrs));	
+				$this->redirect('perkuliahan.DetailPKRS', true,array('id' => $idkrs));	
 			} catch (Exception $e) {
 				$this->modalMessageError->show();
                 $this->lblContentMessageError->Text = $e->getMessage();						
 			}
-		}elseif ($id[0]==0) {		
+		}elseif ($id[0] == 0) {		
 			$str = "UPDATE krsmatkul SET batal=1 WHERE idkrsmatkul = $idkrsmatkul";			
 			$this->DB->updateRecord($str);
             $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan = $idpenyelenggaraan,tambah=0,hapus=0,batal=1,sah=0,tanggal=NOW()");										
-			$this->redirect('perkuliahan.DetailPKRS',true,array('id' => $idkrs));	
+			$this->redirect('perkuliahan.DetailPKRS', true,array('id' => $idkrs));	
 		}
 		
 	}    
@@ -135,15 +135,15 @@ class CDetailPKRS extends MainPageDW {
 		}else {
 			$this->DB->query ('ROLLBACK');
 		}		
-		$this->redirect('perkuliahan.DetailPKRS',true,array('id' => $datakrs['idkrs']));
+		$this->redirect('perkuliahan.DetailPKRS', true,array('id' => $datakrs['idkrs']));
 	}
     public function tambahKRS($sender, $param) {        
-        $this->redirect ('perkuliahan.TambahPKRS',true);
+        $this->redirect ('perkuliahan.TambahPKRS', true);
     }
     
 	public function closeDetailKRS($sender, $param) { 
         unset($_SESSION['currentPagePKRS']);
-        $this->redirect ('perkuliahan.PKRS',true);
+        $this->redirect ('perkuliahan.PKRS', true);
     }
 	public function printKRS($sender, $param) {
         $this->createObj('reportkrs');

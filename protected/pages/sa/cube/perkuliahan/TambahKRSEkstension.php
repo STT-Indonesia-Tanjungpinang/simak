@@ -75,7 +75,7 @@ class TambahKRSEkstension extends MainPageSA {
 			$idkrs = $datakrs['idkrs'];
 			$str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs'";
 			$this->DB->setFieldTable(array('jumlah'));
-			$r=$this->DB->getRecord($str);
+			$r = $this->DB->getRecord($str);
 			$jumlah=$r[1]['jumlah']+$sender->CommandParameter;
 			$maxSKs = $datakrs['maxSKS'];
 			if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
@@ -83,7 +83,7 @@ class TambahKRSEkstension extends MainPageSA {
 			if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul', $idpenyelenggaraan,' AND idkrs='.$idkrs)) { 
 				$str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs', $idpenyelenggaraan,0)";
 				$this->DB->insertRecord($str);			
-				$this->redirect ('perkuliahan.TambahKRSEkstension',true);
+				$this->redirect ('perkuliahan.TambahKRSEkstension', true);
 			}
 		}catch (Exception $e) {
             $this->modalMessageError->show();
@@ -99,7 +99,7 @@ class TambahKRSEkstension extends MainPageSA {
 		}else {
 			$this->DB->query ('ROLLBACK');
 		}	
-		$this->redirect ('perkuliahan.TambahKRSEkstension',true);
+		$this->redirect ('perkuliahan.TambahKRSEkstension', true);
 	}	
 	
 	public function hitung ($sender, $param) {

@@ -86,16 +86,16 @@ class Logic_ReportNilai extends Logic_Report {
         $objNilai->setDataMHS(array('nim' => $nim));
         $dn = $objNilai->getKHS($ta, $semester);				
         $totalSks=0;
-        $totalNm=0;
+        $totalNm = 0;
         $row+=5;
         $rpt->setXY(3, $row);			
         $rpt->SetFont ('helvetica', '',8);
-        while (list($k, $v)=each($dn)) {
+        while (list($k, $v) = each($dn)) {
           $rpt->setXY(3, $row);			
           $rpt->Cell(13, 5, $v['no'], 1, 0, 'C');							
           $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
           $rpt->Cell(80, 5, $v['nmatkul'], 1, 0, 'L');				
-          $n_kual=$v['n_kual']== ''?'-':$v['n_kual'];
+          $n_kual=$v['n_kual']== '' ? '-':$v['n_kual'];
           $sks = $v['sks'];
           $m=$v['m'];										
           $rpt->Cell(10, 5, $n_kual, 1, 0, 'C');					
@@ -209,7 +209,7 @@ class Logic_ReportNilai extends Logic_Report {
             
             $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs = $idkrs";
             $this->db->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
-            $r=$this->db->getRecord($str);	           
+            $r = $this->db->getRecord($str);	           
             $dataMhs = $r[1];
             $nim = $dataMhs['nim'];
                         
@@ -275,16 +275,16 @@ class Logic_ReportNilai extends Logic_Report {
             $objNilai->setDataMHS(array('nim' => $nim));
             $dn = $objNilai->getKHS($ta, $semester);				
             $totalSks=0;
-            $totalNm=0;
+            $totalNm = 0;
             $row+=5;
             $rpt->setXY(3, $row);			
             $rpt->SetFont ('helvetica', '',8);
-            while (list($k, $v)=each($dn)) {
+            while (list($k, $v) = each($dn)) {
               $rpt->setXY(3, $row);			
               $rpt->Cell(13, 5, $v['no'], 1, 0, 'C');							
               $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
               $rpt->Cell(80, 5, $v['nmatkul'], 1, 0, 'L');				
-              $n_kual=$v['n_kual']== ''?'-':$v['n_kual'];
+              $n_kual=$v['n_kual']== '' ? '-':$v['n_kual'];
               $sks = $v['sks'];
               $m=$v['m'];										
               $rpt->Cell(10, 5, $n_kual, 1, 0, 'C');					
@@ -448,7 +448,7 @@ class Logic_ReportNilai extends Logic_Report {
         $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND vdm.tahun_masuk = $tahun_masuk";
         $str = "SELECT k.idkrs,k.tgl_krs,k.nim,nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.idkelas,vdm.tahun_masuk,vdm.semester_masuk,dk.iddata_konversi FROM krs k JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE tahun='$ta' AND idsmt='$semester' AND kjur=$kjur AND k.sah=1 $str_tahun_masuk ORDER BY vdm.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('idkrs', 'tgl_krs', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'idkelas', 'tahun_masuk', 'semester_masuk', 'iddata_konversi'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $row=11;                
         while (list($k, $v) = each($r)) {
           $nim = $v['nim'];						
@@ -659,7 +659,7 @@ class Logic_ReportNilai extends Logic_Report {
           $no_semester=1;
           if ($i%2==0) {//genap
             $tambah_genap_row=true;
-            $genap_total_m=0;
+            $genap_total_m = 0;
             $genap_total_sks=0;		
             foreach ($n as $v) {	
               if ($v['semester']==$i) {
@@ -685,10 +685,10 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_genap=@ bcdiv($totalM, $totalSks,2);
-            $ipk_genap = $ipk_genap== ''?'0.00':$ipk_genap;
+            $ipk_genap = $ipk_genap== '' ? '0.00':$ipk_genap;
           }else {//ganjil
             $tambah_ganjil_row=true;
-            $ganjil_total_m=0;
+            $ganjil_total_m = 0;
             $ganjil_total_sks=0;
             foreach ($n as $s) {
               if ($s['semester']==$i) {
@@ -714,7 +714,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil== ''?'0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil== '' ? '0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
             $tambah_ganjil_row=false;
@@ -789,7 +789,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk = $ipk== ''?'0.00':$ipk;
+        $ipk = $ipk== '' ? '0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=8;
@@ -928,7 +928,7 @@ class Logic_ReportNilai extends Logic_Report {
           $no_semester=1;
           if ($i%2==0) {//genap
             $tambah_genap_row=true;
-            $genap_total_m=0;
+            $genap_total_m = 0;
             $genap_total_sks=0;		
             foreach ($n as $v) {	
               if ($v['semester']==$i) {
@@ -954,10 +954,10 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_genap=@ bcdiv($totalM, $totalSks,2);
-            $ipk_genap = $ipk_genap== ''?'0.00':$ipk_genap;
+            $ipk_genap = $ipk_genap== '' ? '0.00':$ipk_genap;
           }else {//ganjil
             $tambah_ganjil_row=true;
-            $ganjil_total_m=0;
+            $ganjil_total_m = 0;
             $ganjil_total_sks=0;
             foreach ($n as $s) {
               if ($s['semester']==$i) {
@@ -983,7 +983,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil== ''?'0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil== '' ? '0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
             $tambah_ganjil_row=false;
@@ -1058,7 +1058,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk = $ipk== ''?'0.00':$ipk;
+        $ipk = $ipk== '' ? '0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=3;
@@ -1233,7 +1233,7 @@ class Logic_ReportNilai extends Logic_Report {
           $no_semester=1;                    
           if ($i%2==0) {//genap
             $tambah_genap_row=true;
-            $genap_total_m=0;
+            $genap_total_m = 0;
             $genap_total_sks=0;		
             $tampil_border_genap=false;
             foreach ($n as $v) {	
@@ -1262,10 +1262,10 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_genap=@ bcdiv($totalM, $totalSks,2);
-            $ipk_genap = $ipk_genap== ''?'0.00':$ipk_genap;
+            $ipk_genap = $ipk_genap== '' ? '0.00':$ipk_genap;
           }else {//ganjil
             $tambah_ganjil_row=true;
-            $ganjil_total_m=0;
+            $ganjil_total_m = 0;
             $ganjil_total_sks=0;
             $tampil_border_ganjil=false;
             foreach ($n as $s) {
@@ -1294,7 +1294,7 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil== ''?'0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil== '' ? '0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
             $tambah_ganjil_row=false;
@@ -1379,7 +1379,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(105, $row);	
         $rpt->Cell(65,4,'Indeks Prestasi Kumulatif',0,0,'L');
         $ipk=@ bcdiv($totalM, $totalSks,2);
-        $ipk = $ipk== ''?'0.00':$ipk;
+        $ipk = $ipk== '' ? '0.00':$ipk;
         $rpt->Cell(8,4, $ipk,0,0,'C');																
         if ($withsignature) {
           $row+=4;
@@ -2073,7 +2073,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->getStyle("A15:K6")->getAlignment()->setWrapText(true);
         
         $row=17;
-        $r=$this->db->getRecord($str);	
+        $r = $this->db->getRecord($str);	
         while (list($k, $v)=each ($r)){		                    				
           $sheet->setCellValue("A$row", $v['no']);				
           $sheet->mergeCells("B$row:D$row");				
@@ -2082,8 +2082,8 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->setCellValueExplicit("F$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
           $sheet->setCellValueExplicit("G$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);	                        
           $sheet->setCellValue("H$row", $v['n_kuan']);			
-          $am=$v['n_kual']== ''?'-':$objNilai->getAngkaMutu($v['n_kual']);
-          $hm=$v['n_kual']== ''?'-':$v['n_kual'];
+          $am = $v['n_kual']== '' ? '-':$objNilai->getAngkaMutu($v['n_kual']);
+          $hm=$v['n_kual']== '' ? '-':$v['n_kual'];
           $sheet->setCellValue("I$row", $am);			
           $sheet->setCellValue("J$row", $hm);			
           $sheet->setCellValue("K$row",'-');	
@@ -2288,7 +2288,7 @@ class Logic_ReportNilai extends Logic_Report {
           if ($offset+$limit>$itemcount) {
             $limit=$itemcount-$offset;
           }                                                   
-          $r=$this->db->getRecord("$str LIMIT $offset, $limit", $offset+1);	
+          $r = $this->db->getRecord("$str LIMIT $offset, $limit", $offset+1);	
           while (list($k, $v)=each ($r)){		
             $rpt->setXY(3, $row);				
             $rpt->Cell(13, 5, $v['no'], 1, 0, 'C');				
@@ -2296,8 +2296,8 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(10, 5, $v['jk'], 1, 0, 'C');							
             $rpt->Cell(20, 5, $v['nim'], 1, 0, 'C');				
             $rpt->Cell(30, 5, $v['nirm'], 1, 0, 'C');				
-            $am=$v['n_kual']== ''?'-':$objNilai->getAngkaMutu($v['n_kual']);
-            $hm=$v['n_kual']== ''?'-':$v['n_kual'];
+            $am = $v['n_kual']== '' ? '-':$objNilai->getAngkaMutu($v['n_kual']);
+            $hm=$v['n_kual']== '' ? '-':$v['n_kual'];
             $rpt->Cell(10, 5, $am, 1, 0, 'C');
             $rpt->Cell(10, 5, $hm, 1, 0, 'C');																
             $rpt->Cell(30, 5, '', 1, 0, 'C');
@@ -2444,7 +2444,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setXY(3, $row);			
         $rpt->SetFont ('helvetica', '',8);
         $i = 1;
-        while (list($k, $v)=each($nilai)) {
+        while (list($k, $v) = each($nilai)) {
           $rpt->setXY(3, $row);
           $rpt->Cell(10, 5, $v['no'], 1, 0, 'C');
           $rpt->Cell(70, 5, $v['matkul_asal'], 1, 0, 'L');		
@@ -2545,7 +2545,7 @@ class Logic_ReportNilai extends Logic_Report {
         $row=17;     
         $jumlah_sks=0;
         $jumlah_matkul=0;
-        while (list($k, $v)=each($nilai)) {
+        while (list($k, $v) = each($nilai)) {
           $sheet->setCellValue("A$row", $v['no']);                                                        
           $sheet->setCellValue("B$row", $v['kmatkul_asal']);                    
           $sheet->setCellValue("C$row", $v['matkul_asal']);                    
@@ -2648,7 +2648,7 @@ class Logic_ReportNilai extends Logic_Report {
           
         $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nama_mhs FROM kelas_mhs_detail kmd JOIN krsmatkul km ON (kmd.idkrsmatkul=km.idkrsmatkul) JOIN krs k ON (km.idkrs=k.idkrs) JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN nilai_matakuliah nm ON (km.idkrsmatkul=nm.idkrsmatkul) WHERE kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 AND nm.idkrsmatkul IS NULL ORDER BY vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs'));	
-        $r=$this->db->getRecord($str);    
+        $r = $this->db->getRecord($str);    
         $row_awal=2;
         $row=2;
         $sheet->getColumnDimension('A')->setWidth(10);
@@ -2800,7 +2800,7 @@ class Logic_ReportNilai extends Logic_Report {
         
         $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,n.persentase_quiz, n.persentase_tugas, n.persentase_uts, n.persentase_uas, n.persentase_absen, n.nilai_quiz, n.nilai_tugas, n.nilai_uts, n.nilai_uas, n.nilai_absen, n.n_kuan,n.n_kual FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0 ORDER BY vdm.nama_mhs ASC";        
         $this->db->setFieldTable(array('idkrsmatkul', 'nim', 'nirm', 'nama_mhs', 'jk', 'persentase_quiz', 'persentase_tugas', 'persentase_uts', 'persentase_uas', 'persentase_absen', 'nilai_quiz', 'nilai_tugas', 'nilai_uts', 'nilai_uas', 'nilai_absen', 'n_kuan', 'n_kual'));
-        $r=$this->db->getRecord($str);	
+        $r = $this->db->getRecord($str);	
         $row_awal=19;
         $row=19;
         while (list($k, $v) = each($r)) { 			

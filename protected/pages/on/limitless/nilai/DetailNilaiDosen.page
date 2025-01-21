@@ -3,8 +3,8 @@
   <i class="icon-blog position-left"></i> <span class="text-semibold"> Detail Nilai Dosen</span>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-  <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
-  <li><a href="<%=$this->constructUrl('nilai.StopInputNilai',true)%>">STOP DOSEN INPUT NILAI</a></li>
+  <li><a href="<%=$this->Page->constructUrl('Home', true)%>">HOME</a></li> 
+  <li><a href="<%=$this->constructUrl('nilai.StopInputNilai', true)%>">STOP DOSEN INPUT NILAI</a></li>
   <li class="active">DETAIL NILAI DOSEN</li>
 </com:TContent>
 <com:TContent ID="maincontent">
@@ -13,7 +13,7 @@
     <div class="heading-elements">
       <ul class="icons-list">                
         <li>
-          <a href="<%=$this->Page->constructUrl('nilai.StopInputNilai',true);%>" data-action="closeredirect"></a>
+          <a href="<%=$this->Page->constructUrl('nilai.StopInputNilai', true);%>" data-action="closeredirect"></a>
         </li>
       </ul>
     </div>        
@@ -35,7 +35,7 @@
           <div class="heading-elements">
             <ul class="icons-list">                
               <li>
-                <a href="<%=$this->Page->constructUrl('nilai.StopInputNilai',true);%>" data-action="closeredirect"></a>
+                <a href="<%=$this->Page->constructUrl('nilai.StopInputNilai', true);%>" data-action="closeredirect"></a>
               </li>
             </ul>
           </div>

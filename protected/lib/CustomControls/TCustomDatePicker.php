@@ -119,7 +119,7 @@ class TCustomDatePicker extends TTextBox
 	 */
 	public function getShowCalendar()
 	{
-		return $this->getViewState('ShowCalendar',true);
+		return $this->getViewState('ShowCalendar', true);
 	}
 
 	/**

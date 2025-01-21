@@ -5,7 +5,7 @@
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">AKADEMIK</a></li>
     <li><a href="#">PERKULIAHAN</a></li>
-    <li><a href="<%=$this->constructURl ('perkuliahan.JadwalPerkuliahan',true)%>">JADWAL PERKULIAHAN</a></li>
+    <li><a href="<%=$this->constructURl ('perkuliahan.JadwalPerkuliahan', true)%>">JADWAL PERKULIAHAN</a></li>
     <li class="active">PESERTA KELAS</li>
 </com:TContent>
 <com:TContent ID="configtools">    
@@ -119,7 +119,7 @@
                 <header class="main-box-header clearfix">
                      <h2 class="pull-left"><i class="fa fa-user"></i> Daftar Peserta Kelas</h2> 
                      <div class="filter-block pull-right">                        
-                        <a href="<%=$this->Page->constructUrl('perkuliahan.DetailPembagianKelas',true)%>" class="btn btn-default pull-right" title="Keluar">                                        
+                        <a href="<%=$this->Page->constructUrl('perkuliahan.DetailPembagianKelas', true)%>" class="btn btn-default pull-right" title="Keluar">                                        
                             <i class='fa  fa-times fa-lg'></i>
                         </a>                         
                      </div>
@@ -145,7 +145,7 @@
                             <prop:ItemTemplate>	
                                 <tr>
                                     <td><%# $this->DataItem['no']%></td>                                    
-                                    <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>					
+                                    <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>					
                                     <td><%# $this->DataItem['nirm']%></td> 
                                     <td><%# $this->DataItem['nama_mhs']%></td>
                                     <td><%# $this->DataItem['jk']%></td>

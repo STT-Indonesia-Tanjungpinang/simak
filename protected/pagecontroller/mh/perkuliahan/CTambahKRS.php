@@ -54,7 +54,7 @@ class CTambahKRS extends MainPageMHS {
           if (!$data['bool'])throw new Exception ("Anda tidak bisa mengisi KRS karena baru membayar(".$this->Finance->toRupiah($data['total_bayar'])."), harus minimal setengahnya sebesar (".$this->Finance->toRupiah($data['ambang_pembayaran']).") dari total (".$this->Finance->toRupiah($data['total_biaya']).")");
         }
                 
-        $datadulang=$this->KRS->getDataDulang($idsmt, $tahun);
+        $datadulang = $this->KRS->getDataDulang($idsmt, $tahun);
         $nama_tahun = $this->DMaster->getNamaTA($tahun);
         $nama_semester = $this->setup->getSemester($idsmt);
         if (!isset($datadulang['iddulang']))throw new Exception ("Anda belum melakukan daftar ulang pada T.A $nama_tahun Semester $nama_semester. Silahkan hubungi Prodi (Bukan Keuangan).");
@@ -146,7 +146,7 @@ class CTambahKRS extends MainPageMHS {
         $this->DB->insertRecord($str);			
         $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs = $idkrs";
         $this->DB->updateRecord($str);
-        $this->redirect ('perkuliahan.TambahKRS',true);
+        $this->redirect ('perkuliahan.TambahKRS', true);
       }
     }catch (Exception $e) {
       $this->modalMessageError->show();
@@ -171,7 +171,7 @@ class CTambahKRS extends MainPageMHS {
     {
       $this->DB->query ('ROLLBACK');
     }	
-    $this->redirect ('perkuliahan.TambahKRS',true);
+    $this->redirect ('perkuliahan.TambahKRS', true);
   }	
   
   public function hitung($sender, $param) {

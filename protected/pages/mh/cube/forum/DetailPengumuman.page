@@ -3,7 +3,7 @@
     <i class="fa fa-info-circle"></i> Pengumuman
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->constructUrl('forum.Pengumuman',true)%>"><span>PENGUMUMAN</span></a></li>
+    <li><a href="<%=$this->constructUrl('forum.Pengumuman', true)%>"><span>PENGUMUMAN</span></a></li>
     <li class="active"><span>DETAIL TOPIK</span></li>
 </com:TContent> 
 <com:TContent ID="maincontent">

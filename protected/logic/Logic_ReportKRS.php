@@ -313,7 +313,7 @@ class Logic_ReportKRS extends Logic_Report {
                 $rpt->setTitle('Kartu Ujian Mahasiswa');
 				$rpt->setSubject('Kartu Ujian Mahasiswa');
                 
-                while (list($idkrs, $value)=each($dataidkrs)) {                    
+                while (list($idkrs, $value) = each($dataidkrs)) {                    
                     $rpt->AddPage();
                     $this->setHeaderPT();
                     
@@ -326,7 +326,7 @@ class Logic_ReportKRS extends Logic_Report {
                     
                     $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                     $this->db->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
-                    $r=$this->db->getRecord($str);	           
+                    $r = $this->db->getRecord($str);	           
                     $dataReport=$r[1];
 
                     $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$dataReport['kjur']];                
@@ -398,7 +398,7 @@ class Logic_ReportKRS extends Logic_Report {
                     $totalSks=0;
                     $row+=6;				
                     $rpt->SetFont ('helvetica', '',8);
-                    while (list($k, $v)=each($daftar_matkul)) {
+                    while (list($k, $v) = each($daftar_matkul)) {
                         $rpt->setXY(3, $row);	
                         $rpt->Cell(8, 6, $v['no'], 1, 0, 'C');				
                         $rpt->Cell(15, 6, $v['kmatkul'], 1, 0, 'C');		
@@ -534,7 +534,7 @@ class Logic_ReportKRS extends Logic_Report {
 				$totalSks=0;
 				$row+=6;				
 				$rpt->SetFont ('helvetica', '',8);
-                while (list($k, $v)=each($daftar_matkul)) {
+                while (list($k, $v) = each($daftar_matkul)) {
                     $rpt->setXY(3, $row);	
 					$rpt->Cell(8, 6, $v['no'], 1, 0, 'C');				
 					$rpt->Cell(15, 6, $v['kmatkul'], 1, 0, 'C');		

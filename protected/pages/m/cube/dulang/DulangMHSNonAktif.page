@@ -133,7 +133,7 @@
         <div class="col-md-12">
             <div class="main-box">
                 <header class="main-box-header clearfix">
-                    <h2>Non Aktifkan status akhir per Mahasiswa atau <a href="<%=$this->constructUrl('dulang.DulangMHSNonAktifMassal',true)%>">Massal</a> :</h2>
+                    <h2>Non Aktifkan status akhir per Mahasiswa atau <a href="<%=$this->constructUrl('dulang.DulangMHSNonAktifMassal', true)%>">Massal</a> :</h2>
                 </header>
                 <div class="main-box-body clearfix">
                     <div class="form-inline">                        
@@ -207,7 +207,7 @@
                                 <tr>
                                     <td><%#$this->DataItem['no']%></td>                                    
                                     <td><%#$this->DataItem['no_formulir']%></td>
-                                    <td><a href="<%#$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
+                                    <td><a href="<%#$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
                                     <td><%#$this->DataItem['nirm']%></td>												
                                     <td><%#$this->DataItem['nama_mhs']%></td>											
                                     <td><%#$this->Page->DMaster->getNamaDosenWaliByID($this->DataItem['iddosen_wali'])%></td>                                    

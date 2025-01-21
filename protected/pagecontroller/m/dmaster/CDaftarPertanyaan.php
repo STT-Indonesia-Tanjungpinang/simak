@@ -8,9 +8,9 @@ class CDaftarPertanyaan extends MainPageM {
                 
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentDaftarPertanyaan']) || $_SESSION['currentDaftarPertanyaan']['page_name'] != 'm.dmaster.DaftarPertanyaan') {                
-				$_SESSION['currentDaftarPertanyaan'] = array('page_name' => 'm.dmaster.DaftarPertanyaan', 'page_num'=>0,'search'=>false,'idkelompok_pertanyaan' => 'none');												
+				$_SESSION['currentDaftarPertanyaan'] = array('page_name' => 'm.dmaster.DaftarPertanyaan', 'page_num' => 0, 'search' => false,'idkelompok_pertanyaan' => 'none');												
 			}
-            $_SESSION['currentDaftarPertanyaan']['search']=false; 
+            $_SESSION['currentDaftarPertanyaan']['search'] = false; 
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             $this->lblModulHeader->Text = $this->getInfoToolbar();
             
@@ -78,7 +78,7 @@ class CDaftarPertanyaan extends MainPageM {
             $kelompok_pertanyaan=array($_SESSION['currentDaftarPertanyaan']['idkelompok_pertanyaan']=>$kelompok_pertanyaan[$_SESSION['currentDaftarPertanyaan']['idkelompok_pertanyaan']]);
         }
         $result = array();
-        while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
+        while (list($idkelompok_pertanyaan, $nama_kelompok) = each($kelompok_pertanyaan)) {
             $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan = $idkelompok_pertanyaan ORDER BY (orders+0) ASC";
             $this->DB->setFieldTable(array('idkuesioner', 'idkelompok_pertanyaan', 'pertanyaan', 'orders', 'date_added'));
             $r = $this->DB->getRecord($str);
@@ -141,7 +141,7 @@ class CDaftarPertanyaan extends MainPageM {
                 $str = "INSERT INTO kuesioner_indikator (idindikator,idkuesioner,nilai_indikator,nama_indikator) VALUES (NULL, $idkuesioner,1,'$indikator1'),(NULL, $idkuesioner,2,'$indikator2'),(NULL, $idkuesioner,3,'$indikator3'),(NULL, $idkuesioner,4,'$indikator4'),(NULL, $idkuesioner,5,'$indikator5')";
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
-                $this->redirect('dmaster.DaftarPertanyaan',true);  
+                $this->redirect('dmaster.DaftarPertanyaan', true);  
             }else {
                 $this->DB->query('ROLLBACK');
             }            
@@ -191,7 +191,7 @@ class CDaftarPertanyaan extends MainPageM {
                 $str = "INSERT INTO kuesioner_indikator (idindikator,idkuesioner,nilai_indikator,nama_indikator) VALUES (NULL, $idkuesioner,1,'$indikator1'),(NULL, $idkuesioner,2,'$indikator2'),(NULL, $idkuesioner,3,'$indikator3'),(NULL, $idkuesioner,4,'$indikator4'),(NULL, $idkuesioner,5,'$indikator5')";
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
-                $this->redirect('dmaster.DaftarPertanyaan',true);  
+                $this->redirect('dmaster.DaftarPertanyaan', true);  
             }else {
                 $this->DB->query('ROLLBACK');
             }            
@@ -201,7 +201,7 @@ class CDaftarPertanyaan extends MainPageM {
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         
         $this->DB->deleteRecord("kuesioner WHERE idkuesioner='$id'");
-        $this->redirect('dmaster.DaftarPertanyaan',true);  
+        $this->redirect('dmaster.DaftarPertanyaan', true);  
         
     }    
 	public function printOut($sender, $param) {		

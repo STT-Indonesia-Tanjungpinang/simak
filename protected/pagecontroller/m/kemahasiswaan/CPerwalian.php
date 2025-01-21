@@ -9,9 +9,9 @@ class CPerwalian extends MainPageM {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePerwalian']) || $_SESSION['currentPagePerwalian']['page_name'] != 'm.kemahasiswaan.perwalian') {
-				$_SESSION['currentPagePerwalian'] = array('page_name' => 'm.kemahasiswaan.perwalian', 'page_num'=>0,'search'=>false,'iddosen_wali' => 'none', 'status' => 'none');												
+				$_SESSION['currentPagePerwalian'] = array('page_name' => 'm.kemahasiswaan.perwalian', 'page_num' => 0, 'search' => false,'iddosen_wali' => 'none', 'status' => 'none');												
 			}
-            $_SESSION['currentPagePerwalian']['search']=false;
+            $_SESSION['currentPagePerwalian']['search'] = false;
             $daftar_dw=$this->DMaster->getListDosenWali();
             $daftar_dw['none'] = 'BELUM PUNYA DOSEN WALI';
             $this->cmbDosenWali->DataSource = $daftar_dw;
@@ -87,7 +87,7 @@ class CPerwalian extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePerwalian']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePerwalian']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.k_status ASC,vdm.tahun_masuk DESC,vdm.nama_mhs ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable (array('nim', 'nirm', 'nama_mhs', 'tahun_masuk', 'idkelas', 'k_status'));
 		$r = $this->DB->getRecord($str, $offset+1);		
@@ -107,7 +107,7 @@ class CPerwalian extends MainPageM {
         
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
         $this->DataMHS = $datamhs;
         
@@ -127,7 +127,7 @@ class CPerwalian extends MainPageM {
 			$nim = $this->hiddennim->Value;
 			$str="UPDATE register_mahasiswa SET iddosen_wali='$iddosen_wali' WHERE nim='$nim'";		
 			$this->DB->updateRecord($str);
-			$this->redirect('kemahasiswaan.Perwalian',true);
+			$this->redirect('kemahasiswaan.Perwalian', true);
 		}
 	}
     public function printOut($sender, $param) {

@@ -27,7 +27,7 @@ class CKRS extends MainPageMHS {
     {	
       if (!isset($_SESSION['currentPageKRS']) || $_SESSION['currentPageKRS']['page_name'] != 'mh.perkuliahan.KRS')
       {
-        $_SESSION['currentPageKRS'] = array('page_name' => 'mh.perkuliahan.KRS', 'page_num'=>0,'DataKRS'=>array());
+        $_SESSION['currentPageKRS'] = array('page_name' => 'mh.perkuliahan.KRS', 'page_num' => 0,'DataKRS'=>array());
       } 
       $this->lblModulHeader->Text = $this->getInfoToolbar();
       
@@ -57,11 +57,11 @@ class CKRS extends MainPageMHS {
   }
   public function changeTbTA($sender, $param) {
     $_SESSION['ta'] = $this->tbCmbTA->Text;		
-    $this->redirect('perkuliahan.KRS',true);        
+    $this->redirect('perkuliahan.KRS', true);        
   }	
   public function changeTbSemester($sender, $param) {
     $_SESSION['semester'] = $this->tbCmbSemester->Text;		
-    $this->redirect('perkuliahan.KRS',true);
+    $this->redirect('perkuliahan.KRS', true);
   }	
   public function itemBound($sender, $param) {
     $item = $param->Item;
@@ -131,7 +131,7 @@ class CKRS extends MainPageMHS {
       $this->KRS->setDataMHS($datamhs);
       $datakrs = $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);           
       if (isset($datakrs['krs']['idkrs'])) {
-        $datadulang=$this->KRS->getDataDulang($datakrs['krs']['idsmt'], $datakrs['krs']['tahun']);
+        $datadulang = $this->KRS->getDataDulang($datakrs['krs']['idsmt'], $datakrs['krs']['tahun']);
         $datakrs['krs']['kelas_dulang'] = $datadulang['idkelas'];               
       }                        
       $_SESSION['currentPageKRS']['DataKRS'] = $datakrs;
@@ -328,7 +328,7 @@ class CKRS extends MainPageMHS {
         $rpt->setTitle('Kartu Ujian Mahasiswa');
         $rpt->setSubject('Kartu Ujian Mahasiswa');
         
-        while (list($idkrs, $value)=each($dataidkrs)) {                    
+        while (list($idkrs, $value) = each($dataidkrs)) {                    
           $rpt->AddPage();
           $this->setHeaderPT();
           
@@ -413,7 +413,7 @@ class CKRS extends MainPageMHS {
           $totalSks=0;
           $row+=5;				
           $rpt->SetFont ('helvetica', '',8);
-          while (list($k, $v)=each($daftar_matkul)) {
+          while (list($k, $v) = each($daftar_matkul)) {
             $rpt->setXY(3, $row);	
             $rpt->Cell(8, 5, $v['no'], 1, 0, 'C');				
             $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
@@ -549,7 +549,7 @@ class CKRS extends MainPageMHS {
         $totalSks=0;
         $row+=5;				
         $rpt->SetFont ('helvetica', '',8);
-        while (list($k, $v)=each($daftar_matkul)) {
+        while (list($k, $v) = each($daftar_matkul)) {
           $rpt->setXY(6, $row);	
           $rpt->Cell(8, 8, $v['no'], 1, 0, 'C');				
           $rpt->Cell(15, 8, $v['kmatkul'], 1, 0, 'C');		

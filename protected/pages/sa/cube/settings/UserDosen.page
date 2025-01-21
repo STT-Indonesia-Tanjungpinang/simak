@@ -17,7 +17,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-edit"></i> Ubah User</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('settings.UserDosen',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('settings.UserDosen', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>

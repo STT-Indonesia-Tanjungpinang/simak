@@ -8,9 +8,9 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru']) || $_SESSION['currentPagePembayaranMahasiswaBaru']['page_name'] != 'sa.pembayaran.PembayaranMahasiswaBaru') {
-				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'sa.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'sa.pembayaran.PembayaranMahasiswaBaru', 'page_num' => 0, 'search' => false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
-            $_SESSION['currentPagePembayaranMahasiswaBaru']['search']=false; 
+            $_SESSION['currentPagePembayaranMahasiswaBaru']['search'] = false; 
             
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
@@ -101,7 +101,7 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranMahasiswaBaru']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranMahasiswaBaru']['page_num'] = 0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'no_formulir', 'nama_mhs', 'commited', 'tasmt'));
         $str = "$str ORDER BY t.date_added DESC LIMIT $offset, $limit";	
         $r = $this->DB->getRecord($str, $offset+1);	        
@@ -131,6 +131,6 @@ class CPembayaranMahasiswaBaru Extends MainPageSA {
         $no_transaksi = $this->getDataKeyField($sender, $this->RepeaterS);		
         $str = "UPDATE transaksi SET commited=0 WHERE no_transaksi = $no_transaksi";
         $this->DB->updateRecord($str);
-        $this->redirect ('pembayaran.PembayaranMahasiswaBaru',true);        	
+        $this->redirect ('pembayaran.PembayaranMahasiswaBaru', true);        	
     }	
 }

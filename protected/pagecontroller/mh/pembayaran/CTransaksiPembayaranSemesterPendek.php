@@ -37,7 +37,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
         $k = $this->DB->getRecord($str);
         
         $transaksi=array();
-        while (list($m, $n)=each($k)) {              
+        while (list($m, $n) = each($k)) {              
             $transaksi[$n['idkombi']] = array('dibayarkan' => $n['dibayarkan'],'jumlah_sks' => $n['jumlah_sks']);
         }
         
@@ -135,7 +135,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',date_modified=NOW() WHERE no_transaksi = $no_transaksi";
             $this->DB->updateRecord($str);
             unset($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']);
-            $this->redirect('pembayaran.PembayaranSemesterPendek',true);
+            $this->redirect('pembayaran.PembayaranSemesterPendek', true);
         }
     }
     public function commitData($sender, $param) {
@@ -155,7 +155,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
             $this->DB->updateRecord($str);
             
             $this->Finance->setDataMHS($datamhs);            
-            $datadulang=$this->Finance->getDataDulang($idsmt, $ta);  
+            $datadulang = $this->Finance->getDataDulang($idsmt, $ta);  
             if (!isset($datadulang['iddulang'])) {
                 $bool = $this->Finance->getTresholdPembayaran($ta, $idsmt);						                                
                 if ($bool) {
@@ -170,14 +170,14 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
             }
             $this->DB->query('COMMIT');
             unset($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']);
-            $this->redirect('pembayaran.PembayaranSemesterPendek',true);
+            $this->redirect('pembayaran.PembayaranSemesterPendek', true);
         }
     }
     public function closeTransaction($sender, $param) {
         $datamhs = $this->Pengguna->getDataUser();       
         $nim = $datamhs['nim'];
         $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = 'none';
-        $this->redirect('pembayaran.PembayaranSemesterPendek',true);
+        $this->redirect('pembayaran.PembayaranSemesterPendek', true);
     }
     public function cancelTrx($sender, $param) {	
         $datamhs = $this->Pengguna->getDataUser();
@@ -185,10 +185,10 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
 		$no_transaksi = $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'];		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");
         $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = 'none';
-		$this->redirect('pembayaran.PembayaranSemesterPendek',true,array('id' => $nim));
+		$this->redirect('pembayaran.PembayaranSemesterPendek', true,array('id' => $nim));
 	}
     public function closeDetail($sender, $param) {
         $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = 'none';
-        $this->redirect('pembayaran.PembayaranSemesterPendek',true);
+        $this->redirect('pembayaran.PembayaranSemesterPendek', true);
     }
 }

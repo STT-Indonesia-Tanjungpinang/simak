@@ -9,9 +9,9 @@ public function onLoad($param) {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembagianKelas']) || $_SESSION['currentPagePembagianKelas']['page_name'] != 'm.perkuliahan.PembagianKelas') {                
-				$_SESSION['currentPagePembagianKelas'] = array('page_name' => 'm.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'iddosen' => 'none', 'nama_hari' => 'none');												
+				$_SESSION['currentPagePembagianKelas'] = array('page_name' => 'm.perkuliahan.PembagianKelas', 'page_num' => 0, 'search' => false,'iddosen' => 'none', 'nama_hari' => 'none');												
 			}
-            $_SESSION['currentPagePembagianKelas']['search']=false;
+            $_SESSION['currentPagePembagianKelas']['search'] = false;
             
             $ta = $_SESSION['ta'];
             $idsmt = $_SESSION['semester'];
@@ -77,7 +77,7 @@ public function onLoad($param) {
 	}
     public function changeDosenPengampu($sender, $param) {
 		$_SESSION['currentPagePembagianKelas']['iddosen'] = $this->cmbAddNamaDosen->Text;	 
-        $this->redirect ('perkuliahan.DetailPembagianKelas',true);
+        $this->redirect ('perkuliahan.DetailPembagianKelas', true);
 	}	
 
     public function getInfoToolbar() {        

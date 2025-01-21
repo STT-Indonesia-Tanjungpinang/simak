@@ -55,7 +55,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
   public function getIDKurikulum ($kjur) {
     $str = "SELECT idkur FROM program_studi WHERE kjur=$kjur";
     $this->db->setFieldTable (array('idkur'));
-    $r=$this->db->getRecord($str);
+    $r = $this->db->getRecord($str);
     if (isset($r[1])) {
       return $r[1]['idkur'];
     }else{
@@ -122,7 +122,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
       case 'penyelenggaraan':
         $this->db->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen_pengampu', 'nama_dosen_pengampu', 'nidn_dosen_pengampu', 'idjabatan_dosen_pengampu', 'nama_jabatan_dosen_pengampu', 'kjur', 'tahun', 'idsmt'));
         $str = "SELECT idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen AS iddosen_pengampu,nama_dosen AS nama_dosen_pengampu,nidn AS nidn_dosen_pengampu,idjabatan AS idjabatan_dosen_pengampu,nama_jabatan AS nama_jabatan_dosen_pengampu,kjur,tahun,idsmt FROM v_penyelenggaraan WHERE idpenyelenggaraan='$id'";
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         if (isset($r[1])) {
           $r[1]['kmatkul']=$this->getKmatkul($r[1]['kmatkul']);
           $r[1]['jumlah_peserta']=$this->getJumlahMhsInPenyelenggaraan($id);
@@ -133,7 +133,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
       case 'pengampu_penyelenggaraan':
         $this->db->setFieldTable (array('idpengampu_penyelenggaraan', 'idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nama_dosen', 'nidn', 'tahun', 'idsmt'));
         $str = "SELECT pp.idpengampu_penyelenggaraan,pp.idpenyelenggaraan,vp.kmatkul,vp.nmatkul,vp.sks,vp.semester,pp.iddosen,CONCAT(d.gelar_depan,' ',d.nama_dosen,', ',d.gelar_belakang) AS nama_dosen,d.nidn,vp.tahun,vp.idsmt FROM v_penyelenggaraan vp,pengampu_penyelenggaraan pp,dosen d WHERE d.iddosen=pp.iddosen AND pp.idpenyelenggaraan=vp.idpenyelenggaraan AND pp.idpengampu_penyelenggaraan='$id'";
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         if (isset($r[1])) {
           $idpenyelenggaraan = $r[1]['idpenyelenggaraan'];
 
@@ -143,7 +143,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
 
           $this->db->setFieldTable (array('nama_dosen', 'nidn'));
           $str = "SELECT nidn,CONCAT(gelar_depan,' ',nama_dosen,', ',gelar_belakang) AS nama_dosen FROM penyelenggaraan p,dosen d WHERE d.iddosen=p.iddosen AND p.idpenyelenggaraan = $idpenyelenggaraan";
-          $r=$this->db->getRecord($str);
+          $r = $this->db->getRecord($str);
           $this->InfoMatkul['nama_dosen_pengampu']=$r[1]['nama_dosen'];
           $this->InfoMatkul['nidn_dosen_pengampu']=$r[1]['nidn'];
 
@@ -152,7 +152,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
       case 'krsmatkul':
         $this->db->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nama_dosen', 'nidn'));
         $str = "SELECT vp.idpenyelenggaraan,vp.kmatkul,vp.nmatkul,vp.sks,vp.semester,vp.iddosen,vp.nama_dosen,vp.nidn FROM v_penyelenggaraan vp,krsmatkul k WHERE k.idpenyelenggaraan=vp.idpenyelenggaraan AND k.idkrsmatkul='$id'";
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         if (isset($r[1])) {
           $r[1]['kmatkul']=$this->getKmatkul($r[1]['kmatkul']);
           $this->InfoMatkul=$r[1];
@@ -295,7 +295,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
     $nim = $this->DataMHS['nim'];
     $str = "SELECT sah FROM krs WHERE idsmt=$idsmt AND tahun = $tahun AND nim='$nim'";
     $this->db->setFieldTable(array('sah'));
-    $r=$this->db->getRecord($str);
+    $r = $this->db->getRecord($str);
     $bool=false;
     if (isset($r[1])) {
       $bool=$r[1]['sah'];
@@ -310,7 +310,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
   public function getKetuaPRODI ($kjur) {
     $str = "SELECT d.nidn,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen,d.nipy,ja.nama_jabatan FROM program_studi k,dosen d,jabatan_akademik ja WHERE d.idjabatan=ja.idjabatan AND k.iddosen=d.iddosen AND k.kjur='$kjur'";
     $this->db->setFieldTable(array('nidn', 'nama_dosen', 'nipy', 'nama_jabatan'));
-    $r=$this->db->getRecord($str);
+    $r = $this->db->getRecord($str);
     if (isset($r[1])) {
       return $r[1];
     }else {
@@ -327,11 +327,11 @@ class Logic_Akademik extends Logic_Mahasiswa {
   public function getListDosenFromPenyelenggaraan ($idsmt, $tahun) {
     $str = "SELECT DISTINCT(pp.iddosen) AS iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM penyelenggaraan p,pengampu_penyelenggaraan pp,dosen d WHERE p.idpenyelenggaraan=pp.idpenyelenggaraan AND d.iddosen=pp.iddosen AND p.idsmt=$idsmt AND p.tahun = $tahun ORDER BY d.nama_dosen ASC";
     $this->db->setFieldTable(array('iddosen', 'nidn', 'nama_dosen'));
-    $r=$this->db->getRecord($str);
+    $r = $this->db->getRecord($str);
     $result=array('none' => ' ');
     if (isset($r[1])) {
       while (list($k, $v) = each($r)) {
-        $result[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
+        $result[$v['iddosen']] = $v['nama_dosen']. ' ['.$v['nidn'].']';
       }
     }
     return $result;
@@ -348,7 +348,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
     $this->db->setFieldTable(array('ta', 'idsmt', 'idkelas', 'jk', 'jumlah'));
     $r = $this->db->getRecord($str);
 
-    $result=array();
+    $result = array();
     if (isset($r[1])) {
       $temp_data1 =array();
       while (list($k, $v)=each ($r)) {
@@ -364,9 +364,9 @@ class Logic_Akademik extends Logic_Mahasiswa {
         while (list($a, $b)=each ($r)) {
           $index=$b['ta'].$b['idsmt'].$b['idkelas'];
           if ($b['jk']=='L') {
-            $temp_data2[$index]['p']=$b['jumlah'];
+            $temp_data2[$index]['p'] = $b['jumlah'];
           }else{
-            $temp_data2[$index]['w']=$b['jumlah'];
+            $temp_data2[$index]['w'] = $b['jumlah'];
           }
         }
         $n['no']=$i;

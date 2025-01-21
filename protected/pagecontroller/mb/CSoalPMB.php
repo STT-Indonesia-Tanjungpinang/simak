@@ -110,7 +110,7 @@ class CSoalPMB extends MainPageMB {
                 }        
                    
             }
-            $this->redirect('SoalPMB',true);
+            $this->redirect('SoalPMB', true);
         }
     }    
     public function populateSoal () {
@@ -123,7 +123,7 @@ class CSoalPMB extends MainPageMB {
             $this->RepeaterS->dataBind();
         }else{
             $this->DB->deleteRecord("kartu_ujian WHERE no_formulir = $no_formulir");
-            $this->redirect('SoalPMB',true);
+            $this->redirect('SoalPMB', true);
         }        
 	}  
     public function dataBindRepeaterJawaban($sender, $param) {
@@ -168,7 +168,7 @@ class CSoalPMB extends MainPageMB {
         if ($this->IsValid) {
             $no_formulir = $this->Pengguna->getDataUser('no_formulir');        
             $this->simpanJawaban($this->RepeaterS, $no_formulir);
-            $this->redirect('SoalPMB',true);
+            $this->redirect('SoalPMB', true);
         }
     }
     public function saveJawabanTimer($sender, $param) {
@@ -218,7 +218,7 @@ class CSoalPMB extends MainPageMB {
             $str= "REPLACE INTO nilai_ujian_masuk SET no_formulir = $no_formulir,jumlah_soal = $jumlah_soal,jawaban_benar = $jawaban_benar,jawaban_salah=$jawaban_salah,soal_tidak_terjawab=$soal_tidak_terjawab,passing_grade_1 = $passing_grade_1,passing_grade_2=$passing_grade_2,nilai = $nilai,ket_lulus=0,kjur=0";
             $this->DB->insertRecord($str);
             $this->DB->query('COMMIT');
-            $this->redirect('SoalPMB',true);
+            $this->redirect('SoalPMB', true);
         }else{
             $this->DB->query('ROLLBACK');
         }

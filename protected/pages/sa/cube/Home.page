@@ -37,7 +37,7 @@ a:hover {
                                         $('loading').hide(); 
                                     </prop:ClientSide.OnComplete>
                                 </com:TActiveCustomButton>
-                                <a class="btn btn-primary pull-right" href="<%=$this->constructUrl('forum.Diskusi',true)%>" title="Forum Diskusi">                        
+                                <a class="btn btn-primary pull-right" href="<%=$this->constructUrl('forum.Diskusi', true)%>" title="Forum Diskusi">                        
                                     <i class='fa  fa-comment'></i> Forum Diskusi
                                 </a>
                             </div>

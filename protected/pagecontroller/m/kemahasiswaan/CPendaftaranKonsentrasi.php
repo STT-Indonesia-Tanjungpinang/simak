@@ -8,9 +8,9 @@ class CPendaftaranKonsentrasi extends MainPageM {
                         
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePendaftaranKonsentrasi']) || $_SESSION['currentPagePendaftaranKonsentrasi']['page_name'] != 'm.kemahasiswaan.PendaftaranKonsentrasi') {
-				$_SESSION['currentPagePendaftaranKonsentrasi'] = array('page_name' => 'm.kemahasiswaan.PendaftaranKonsentrasi', 'page_num'=>0,'search'=>false,'idkonsentrasi' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPagePendaftaranKonsentrasi'] = array('page_name' => 'm.kemahasiswaan.PendaftaranKonsentrasi', 'page_num' => 0, 'search' => false,'idkonsentrasi' => 'none', 'DataMHS'=>array());												
 			}
-            $_SESSION['currentPagePendaftaranKonsentrasi']['search']=false;
+            $_SESSION['currentPagePendaftaranKonsentrasi']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -55,7 +55,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
         $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
         $r = array();
         $i=1;        
-        while (list($k, $v)=each($datakonsentrasi)) {                        
+        while (list($k, $v) = each($datakonsentrasi)) {                        
             if ($v['kjur']==$_SESSION['kjur']){
                 $idkonsentrasi = $v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("pendaftaran_konsentrasi WHERE idkonsentrasi = $idkonsentrasi",'nim');
@@ -69,7 +69,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
     }
     public function resetKonsentrasi($sender, $param) {
 		$_SESSION['currentPagePendaftaranKonsentrasi']['idkonsentrasi'] = 'none';
-        $this->redirect('kemahasiswaan.PendaftaranKonsentrasi',true);
+        $this->redirect('kemahasiswaan.PendaftaranKonsentrasi', true);
 	} 
     public function itemCreated($sender, $param) {
         $item = $param->Item;
@@ -120,7 +120,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranKonsentrasi']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranKonsentrasi']['page_num'] = 0;}
         $str = "$str ORDER BY status_daftar ASC,tanggal_daftar DESC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('nim', 'nama_mhs', 'jumlah_sks', 'kjur', 'idkonsentrasi', 'status_daftar'));
 		$r = $this->DB->getRecord($str, $offset+1);	        
@@ -138,7 +138,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
             $str = "UPDATE register_mahasiswa SET idkonsentrasi = $idkonsentrasi WHERE nim='$nim'";        
             $this->DB->updateRecord($str);
             $this->DB->query('COMMIT');
-            $this->redirect('kemahasiswaan.PendaftaranKonsentrasi',true);
+            $this->redirect('kemahasiswaan.PendaftaranKonsentrasi', true);
         }else{
             $this->DB->query('ROLLBACK');
         }

@@ -7,7 +7,7 @@ class CProdi extends MainPageSA {
         $this->showProdi=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageProdi']) || $_SESSION['currentPageProdi']['page_name'] != 'sa.dmaster.Prodi') {
-				$_SESSION['currentPageProdi'] = array('page_name' => 'sa.dmaster.Prodi', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPageProdi'] = array('page_name' => 'sa.dmaster.Prodi', 'page_num' => 0, 'search' => false);
 			}            
             $this->populateData();			
 		}
@@ -80,7 +80,7 @@ class CProdi extends MainPageSA {
                 $dataitem = $this->DB->getRecord($str);                
                 $this->Application->Cache->set('listprodi', $dataitem);            
             }
-            $this->Redirect('dmaster.Prodi',true);
+            $this->Redirect('dmaster.Prodi', true);
         }
     }
     public function editRecord($sender, $param) {
@@ -125,7 +125,7 @@ class CProdi extends MainPageSA {
                 $dataitem = $this->DB->getRecord($str);                
                 $this->Application->Cache->set('listprodi', $dataitem);            
             }
-            $this->Redirect('dmaster.Prodi',true);
+            $this->Redirect('dmaster.Prodi', true);
         }
     }
     public function deleteRecord($sender, $param) {        
@@ -146,7 +146,7 @@ class CProdi extends MainPageSA {
                 $this->Application->Cache->set('listprodi', $dataitem);            
             }         
             $this->DB->deleteRecord("program_studi WHERE kjur='$kjur'");
-            $this->Redirect('dmaster.Prodi',true);
+            $this->Redirect('dmaster.Prodi', true);
         }        
     }   
 }

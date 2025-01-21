@@ -68,7 +68,7 @@ class Logic_Finance extends Logic_Mahasiswa {
             break;
         }		
 		$this->db->setFieldTable(array('jumlah'));
-		$r=$this->db->getRecord($str);	
+		$r = $this->db->getRecord($str);	
         
 		return $r[1]['jumlah'];
 	}    
@@ -97,7 +97,7 @@ class Logic_Finance extends Logic_Mahasiswa {
             break;
         }		
 		$this->db->setFieldTable(array('jumlah'));
-		$r=$this->db->getRecord($str);	
+		$r = $this->db->getRecord($str);	
         
 		return $r[1]['jumlah'];
 	}
@@ -123,7 +123,7 @@ class Logic_Finance extends Logic_Mahasiswa {
         }
 
 		$this->db->setFieldTable(array('jumlah'));
-		$r=$this->db->getRecord($str);
+		$r = $this->db->getRecord($str);
 		
 		return $r[1]['jumlah'];
 	}	
@@ -140,13 +140,13 @@ class Logic_Finance extends Logic_Mahasiswa {
         
         $str = "SELECT td.dibayarkan FROM transaksi t,transaksi_detail td WHERE td.no_transaksi=t.no_transaksi AND t.no_formulir='$no_formulir' AND td.idkombi=1";
         $this->db->setFieldTable(array('dibayarkan'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $bool=isset($r[1])?$biaya_pendaftaran<=$r[1]['dibayarkan']:0;
 		if ($data) {
 			$data=array();
 			$data['total_biaya']=$$biaya_pendaftaran;
 			$data['total_bayar']=$r[1]['dibayarkan'];			
-			$data['bool']=$bool;
+			$data['bool'] = $bool;
 			return $data;
 		}else {                        
 			return $bool;
@@ -167,7 +167,7 @@ class Logic_Finance extends Logic_Mahasiswa {
             $total_bayar_mhs = $this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);
             $str = "SELECT sks FROM transaksi_sp WHERE nim='$nim' AND tahun = $tahun_sekarang AND idsmt=$semester_sekarang AND kjur='$kjur' AND nim='$nim' AND commited=1";
             $this->db->setFieldTable(array('sks'));
-            $r=$this->db->getRecord($str);                         
+            $r = $this->db->getRecord($str);                         
             $total_biaya=$this->getTotalBiayaMhs('sp') * $r[1]['sks'];		
         }else{            
             $total_biaya=$this->getTotalBiayaMhsPeriodePembayaran('lama');		
@@ -178,7 +178,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 			$data=array();
 			$data['total_biaya']=$total_biaya;
 			$data['total_bayar']=$total_bayar_mhs;			
-			$data['bool']=$bool;
+			$data['bool'] = $bool;
 			return $data;
 		}else {                        
 			return $bool;
@@ -198,7 +198,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 			$data['total_biaya']=$total_biaya;
 			$data['total_bayar']=$total_bayar_mhs;
 			$data['ambang_pembayaran']=$total_biaya_setengah;
-			$data['bool']=$bool;
+			$data['bool'] = $bool;
 			return $data;
 		}else {
 			return $bool;
@@ -214,7 +214,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 		$no_formulir=$this->DataMHS['no_formulir'];
 		$str = "SELECT idkelas FROM transaksi WHERE tahun = $tahun_sekarang AND idsmt=$semester_sekarang AND no_formulir=$no_formulir LIMIT 0,1";
 		$this->db->setFieldTable(array('idkelas'));
-		$r=$this->db->getRecord($str);		
+		$r = $this->db->getRecord($str);		
 		if (isset($r[1]))
 			return $r[1]['idkelas'];
 		else
@@ -229,7 +229,7 @@ class Logic_Finance extends Logic_Mahasiswa {
 		$nim = $this->DataMHS['nim'];
 		$str = "SELECT jumlah_sks FROM transaksi WHERE nim='$nim' AND idsmt=$semester_sekarang AND tahun = $tahun_sekarang AND kjur=$kjur AND commited=1";		
 		$this->db->setFieldTable(array('jumlah_sks'));
-		$r=$this->db->getRecord($str);	
+		$r = $this->db->getRecord($str);	
         
 		if (isset($r[1])) {
 			return $r[1]['jumlah_sks'];

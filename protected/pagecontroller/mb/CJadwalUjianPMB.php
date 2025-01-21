@@ -7,7 +7,7 @@ class CJadwalUjianPMB extends MainPageMB {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageJadwalUjianPMB']) || $_SESSION['currentPageJadwalUjianPMB']['page_name'] != 'mb.spmb.JadwalUjianPMB') {                
-				$_SESSION['currentPageJadwalUjianPMB'] = array('page_name' => 'mb.spmb.JadwalUjianPMB', 'page_num'=>0,'search'=>false);												
+				$_SESSION['currentPageJadwalUjianPMB'] = array('page_name' => 'mb.spmb.JadwalUjianPMB', 'page_num' => 0, 'search' => false);												
 			}
             $this->lblModulHeader->Text = $this->getInfoToolbar();
             try {
@@ -72,7 +72,7 @@ class CJadwalUjianPMB extends MainPageMB {
             if ($this->DB->checkRecordIsExist ('no_formulir', ' peserta_ujian_pmb', $no_formulir)){
                 throw new Exception ("No. Formulir sudah terdaftar menjadi peserta ujian PMB pada {$dataujian['nama_kegiatan']} T.A {$dataujian['tahun_masuk']}{$dataujian['idsmt']}");
             }
-            if ($dataujian['status']==0){
+            if ($dataujian['status'] == 0){
                 throw new Exception ("Tidak bisa mendaftar pada {$dataujian['nama_kegiatan']} T.A {$dataujian['tahun_masuk']}{$dataujian['idsmt']} karena statusnya sudah tutup");
             }
             $date_now=  strtotime('today');
@@ -88,7 +88,7 @@ class CJadwalUjianPMB extends MainPageMB {
             $str = "INSERT INTO peserta_ujian_pmb SET idpeserta_ujian=NULL,no_formulir = $no_formulir,idjadwal_ujian = $id,date_added=NOW()";
             $this->DB->insertRecord($str);
             
-            $this->redirect('JadwalUjianPMB',true);
+            $this->redirect('JadwalUjianPMB', true);
         } catch (Exception $ex) {
             $this->lblHeaderMessageError->Text='Memilih Jadwal Ujian PMB';
             $this->lblContentMessageError->Text = $ex->getMessage();

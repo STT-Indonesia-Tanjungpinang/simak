@@ -3,7 +3,7 @@
     <i class="fa fa-comment"></i> Forum Diskusi
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->constructUrl('forum.Diskusi',true)%>"><span>FORUM DISKUSI</span></a></li>
+    <li><a href="<%=$this->constructUrl('forum.Diskusi', true)%>"><span>FORUM DISKUSI</span></a></li>
     <li class="active"><span>DETAIL TOPIK</span></li>
 </com:TContent> 
 <com:TContent ID="maincontent">

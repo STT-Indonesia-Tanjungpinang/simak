@@ -7,9 +7,9 @@ class CPendaftaranViaWeb extends MainPageM {
         $this->createObj('Akademik');        
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePendaftaranWeb']) || $_SESSION['currentPagePendaftaranWeb']['page_name'] != 'm.spmb.PendaftaranWeb') {
-				$_SESSION['currentPagePendaftaranWeb'] = array('page_name' => 'm.spmb.PendaftaranWeb', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_dulang' => 'none');												
+				$_SESSION['currentPagePendaftaranWeb'] = array('page_name' => 'm.spmb.PendaftaranWeb', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'status_dulang' => 'none');												
 			}
-            $_SESSION['currentPagePendaftaranWeb']['search']=false;
+            $_SESSION['currentPagePendaftaranWeb']['search'] = false;
             $this->cmbDaftarUlang->Text = $_SESSION['currentPagePendaftaranWeb']['status_dulang'];
             
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -115,7 +115,7 @@ class CPendaftaranViaWeb extends MainPageM {
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranWeb']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranWeb']['page_num'] = 0;}
 		$str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset, $limit";				
         $_SESSION['currentPagePendaftaranWeb']['offset'] = $offset;
         $_SESSION['currentPagePendaftaranWeb']['limit'] = $limit;
@@ -214,7 +214,7 @@ class CPendaftaranViaWeb extends MainPageM {
             }else {
                 $this->DB->query('ROLLBACK');
             }			
-            $this->redirect('spmb.PendaftaranViaWeb',true);
+            $this->redirect('spmb.PendaftaranViaWeb', true);
         }
 	}
 	
@@ -343,7 +343,7 @@ class CPendaftaranViaWeb extends MainPageM {
             if ($this->DB->deleteRecord($str)) {
                 $this->DB->deleteRecord ("transaksi WHERE no_formulir='$no_formulir'");
                 $this->DB->query ('COMMIT');
-                $this->redirect('spmb.PendaftaranViaWeb',true);
+                $this->redirect('spmb.PendaftaranViaWeb', true);
             }else {
                 $this->DB->query ('ROLLBACK');
             }	

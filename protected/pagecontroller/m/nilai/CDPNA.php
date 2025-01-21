@@ -6,15 +6,15 @@ class CDPNA extends MainPageM {
 	public $data_kelas;
 	public function onLoad($param) {		
 		parent::onLoad($param);				
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showDPNA=true;
         
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDPNA']) || $_SESSION['currentPageDPNA']['page_name'] != 'm.nilai.DPNA') {
-                $_SESSION['currentPageDPNA'] = array('page_name' => 'm.nilai.DPNA', 'page_num'=>0,'search'=>false,'DataDPNA'=>array(), 'idkelas_mhs' => 'none');
+                $_SESSION['currentPageDPNA'] = array('page_name' => 'm.nilai.DPNA', 'page_num' => 0, 'search' => false,'DataDPNA'=>array(), 'idkelas_mhs' => 'none');
 			}  
-            $_SESSION['currentPageDPNA']['search']=false;            
+            $_SESSION['currentPageDPNA']['search'] = false;            
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -111,7 +111,7 @@ class CDPNA extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDPNA']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDPNA']['page_num'] = 0;}
         $str="$str ORDER BY nmatkul ASC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen'));			
 		$r = $this->DB->getRecord($str);	

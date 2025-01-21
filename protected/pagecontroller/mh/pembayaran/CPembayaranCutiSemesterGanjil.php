@@ -9,7 +9,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
         $this->showPembayaranCutiSemesterGanjil=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGanjil']) || $_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_name'] != 'mh.pembayaran.PembayaranCutiSemesterGanjil') {
-				$_SESSION['currentPagePembayaranCutiSemesterGanjil'] = array('page_name' => 'mh.pembayaran.PembayaranCutiSemesterGanjil', 'page_num'=>0,'search'=>false,'DataMHS'=>array(), 'ta' => $_SESSION['ta']);												
+				$_SESSION['currentPagePembayaranCutiSemesterGanjil'] = array('page_name' => 'mh.pembayaran.PembayaranCutiSemesterGanjil', 'page_num' => 0, 'search' => false,'DataMHS'=>array(), 'ta' => $_SESSION['ta']);												
             }
             $this->setInfoToolbar();
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
@@ -20,7 +20,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
                 $datamhs['idsmt']=1;
 				$datamhs['ta'] = $_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta'];  
                 $this->Finance->setDataMHS($datamhs);
-                $datadulang=$this->Finance->getDataDulang(1, $datamhs['ta']);
+                $datadulang = $this->Finance->getDataDulang(1, $datamhs['ta']);
                 
                 if (isset($datadulang['iddulang'])) {
                     if ($datadulang['k_status'] != 'C') {
@@ -56,7 +56,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
     }
     public function changeTbTA($sender, $param) {				
 		$_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta'] = $this->tbCmbTA->Text;
-		$this->redirect('pembayaran.PembayaranCutiSemesterGanjil',true); 
+		$this->redirect('pembayaran.PembayaranCutiSemesterGanjil', true); 
 	}	
     public function getDataMHS($idx) {              
         if (isset($_SESSION['currentPagePembayaranCutiSemesterGanjil']['DataMHS']['nim'])) {
@@ -119,7 +119,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
             $str = "INSERT INTO transaksi_cuti SET no_transaksi='$no_transaksi',no_faktur='$no_faktur',tahun = $tahun,idsmt=1,nim='$nim',idkombi=0,dibayarkan = $dibayarkan,commited=0,tanggal='$tanggal',date_added=NOW(),date_modified=NOW(),userid = $userid";
             $this->DB->insertRecord($str);
             
-            $this->redirect('pembayaran.PembayaranCutiSemesterGanjil',true);
+            $this->redirect('pembayaran.PembayaranCutiSemesterGanjil', true);
         }
     }    
     public function deleteRecord($sender, $param) {	
@@ -127,6 +127,6 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
         $nim = $datamhs['nim'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi_cuti WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.PembayaranCutiSemesterGanjil',true);
+		$this->redirect('pembayaran.PembayaranCutiSemesterGanjil', true);
 	}	
 }

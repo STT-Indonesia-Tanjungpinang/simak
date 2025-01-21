@@ -3,7 +3,7 @@
     <i class="icon-blog position-left"></i> <span class="text-semibold">Nilai Per Matakuliah <com:TActiveLabel ID="lblModulHeader" /></span>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
+    <li><a href="<%=$this->Page->constructUrl('Home', true)%>">HOME</a></li> 
     <li class="active">NILAI PER MATAKULIAH</li>
 </com:TContent>
 <com:TContent ID="sidebarcontent">
@@ -121,7 +121,7 @@
                                 <%# $this->Data['nama_dosen']%>
                             </td>
                             <td>
-                                <a href="<%#$this->Page->constructUrl('nilai.NilaiPerMatakuliah',true,array('id' => $this->DataItem['idpenyelenggaraan']))%>" class="table-link" title="Daftar Peserta Matakuliah">                                        
+                                <a href="<%#$this->Page->constructUrl('nilai.NilaiPerMatakuliah', true,array('id' => $this->DataItem['idpenyelenggaraan']))%>" class="table-link" title="Daftar Peserta Matakuliah">                                        
                                     <%# $this->Data['jumlah_peserta']%>
                                 </a>
                             </td>
@@ -234,7 +234,7 @@
                         <div class="heading-btn">
                             <ul class="icons-list">
                                 <li>
-                                    <a href="<%=$this->Page->constructUrl('nilai.NilaiPerMatakuliah',true);%>" data-action="closeredirect"></a>
+                                    <a href="<%=$this->Page->constructUrl('nilai.NilaiPerMatakuliah', true);%>" data-action="closeredirect"></a>
                                 </li>
                             </ul>
                         </div>   
@@ -263,7 +263,7 @@
                         <prop:ItemTemplate>	
                             <tr>
                                 <td><%# $this->DataItem['no']%></td>                                    
-                                <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>					
+                                <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>					
                                 <td><%# $this->DataItem['nama_mhs']%></td>
                                 <td><%# $this->DataItem['jk']%></td>
                                 <td><%# $this->DataItem['namakelas']%></td>

@@ -9,9 +9,9 @@ class DulangMHSEkstension Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
             if (!isset($_SESSION['currentPageDulangMHSEkstension']) || $_SESSION['currentPageDulangMHSEkstension']['page_name'] != 'm.dulang.DulangMHSEkstension') {
-				$_SESSION['currentPageDulangMHSEkstension'] = array('page_name' => 'm.dulang.DulangMHSEkstension', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSEkstension'] = array('page_name' => 'm.dulang.DulangMHSEkstension', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
 			}
-            $_SESSION['currentPageDulangMHSEkstension']['search']=false;
+            $_SESSION['currentPageDulangMHSEkstension']['search'] = false;
             
             $this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -125,7 +125,7 @@ class DulangMHSEkstension Extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSEkstension']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSEkstension']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal'));
 		$result=$this->DB->getRecord($str);
@@ -141,7 +141,7 @@ class DulangMHSEkstension Extends MainPageM {
                 if (!isset($_SESSION['currentPageDulangMHSEkstension']['DataMHS']['no_formulir'])) {                    
                     $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
                     $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas'));
-                    $r=$this->DB->getRecord($str);	           
+                    $r = $this->DB->getRecord($str);	           
                     if (!isset($r[1])) {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
                     }
@@ -150,7 +150,7 @@ class DulangMHSEkstension Extends MainPageM {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar sebagai mahasiswa ekstension.");
                     }
                     $this->Finance->setDataMHS($datamhs);                              
-                    $datadulang=$this->Finance->getDataDulang($_SESSION['semester'], $_SESSION['ta']);                    
+                    $datadulang = $this->Finance->getDataDulang($_SESSION['semester'], $_SESSION['ta']);                    
                     if (isset($datadulang['iddulang'])) {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
                     }                    
@@ -159,7 +159,7 @@ class DulangMHSEkstension Extends MainPageM {
                     $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
                     $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
                     $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
                     $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
                     $_SESSION['currentPageDulangMHSEkstension']['DataMHS']=$datamhs;
                 }
@@ -172,7 +172,7 @@ class DulangMHSEkstension Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailDulangMHSEkstension',true,array('id' => $nim));
+            $this->redirect('dulang.DetailDulangMHSEkstension', true,array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	
@@ -181,11 +181,11 @@ class DulangMHSEkstension Extends MainPageM {
         $this->hiddenid->Value=$iddulang;
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,semester_masuk,iddosen_wali,d.idkelas,d.k_status,d.idsmt,d.tahun FROM v_datamhs vdm JOIN dulang d ON (d.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE d.iddulang=$iddulang";
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun'));
-        $r=$this->DB->getRecord($str);	           
+        $r = $this->DB->getRecord($str);	           
         $datamhs = $r[1];
         $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
         $this->hiddensemester->Value=$datamhs['idsmt'];
         $this->hiddenta->Value=$_SESSION['ta'];
@@ -198,14 +198,14 @@ class DulangMHSEkstension Extends MainPageM {
 		$ta=$this->hiddenta->Value;
 		$this->DB->query ('BEGIN');
         $this->Demik->setDataMHS(array('nim' => $nim));
-        $datadulang=$this->Demik->getDataDulang($idsmt, $ta);
+        $datadulang = $this->Demik->getDataDulang($idsmt, $ta);
         $k_status = $datadulang['status_sebelumnya'];
         $str = "UPDATE register_mahasiswa SET k_status='$k_status' WHERE nim='$nim'";
 		if ($this->DB->updateRecord($str)) {            
             $this->DB->deleteRecord("dulang WHERE iddulang=$iddulang");
 			$this->DB->deleteRecord("krs WHERE nim='$nim' AND tahun='$ta' AND idsmt='$idsmt'");		
 			$this->DB->query ('COMMIT');
-            $this->redirect('dulang.DulangMHSEkstension',true);
+            $this->redirect('dulang.DulangMHSEkstension', true);
 		}else {
 			$this->DB->query ('ROLLBACK');
 		}		

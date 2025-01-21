@@ -8,9 +8,9 @@ class CCalonWisuda Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageCalonWisuda']) || $_SESSION['currentPageCalonWisuda']['page_name'] != 'm.kemahasiswaan.CalonWisuda') {
-				$_SESSION['currentPageCalonWisuda'] = array('page_name' => 'm.kemahasiswaan.CalonWisuda', 'page_num'=>0,'search'=>false);												
+				$_SESSION['currentPageCalonWisuda'] = array('page_name' => 'm.kemahasiswaan.CalonWisuda', 'page_num' => 0, 'search' => false);												
 			}
-            $_SESSION['currentPageCalonWisuda']['search']=false;
+            $_SESSION['currentPageCalonWisuda']['search'] = false;
             
             $this->populateData();
 		}	
@@ -64,7 +64,7 @@ class CCalonWisuda Extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageCalonWisuda']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageCalonWisuda']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt', 'idkelas'));
 		$result=$this->DB->getRecord($str, $offset+1);
@@ -94,7 +94,7 @@ class CCalonWisuda Extends MainPageM {
                         throw new Exception ("Untuk dinyatakan lulus Mahasiswa Dengan NIM ($nim) status akhirnya harus AKTIF.");
                     }
                     $this->Demik->setDataMHS($datamhs);
-                    $datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
+                    $datadulang = $this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
                     if (isset($datadulang['iddulang'])) {         
                         if ($datadulang['k_status'] != 'A') {
                             throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
@@ -103,7 +103,7 @@ class CCalonWisuda Extends MainPageM {
                     $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
                     $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
                     $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
                     $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
                     $_SESSION['currentPageCalonWisuda']['DataMHS'] = $datamhs;
                 }
@@ -116,7 +116,7 @@ class CCalonWisuda Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailCalonWisuda',true,array('id' => $nim));
+            $this->redirect('dulang.DetailCalonWisuda', true,array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	
@@ -130,7 +130,7 @@ class CCalonWisuda Extends MainPageM {
         $datamhs = $r[1];
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
         
         $this->Demik->setDataMHS($datamhs);
@@ -152,7 +152,7 @@ class CCalonWisuda Extends MainPageM {
             $this->DB->deleteRecord("transkrip_asli WHERE nim='$nim'");
             $this->DB->deleteRecord("transkrip_asli_detail WHERE nim='$nim'");	
 			$this->DB->query ('COMMIT');
-            $this->redirect('dulang.CalonWisuda',true);
+            $this->redirect('dulang.CalonWisuda', true);
 		}else {
 			$this->DB->query ('ROLLBACK');
 		}		

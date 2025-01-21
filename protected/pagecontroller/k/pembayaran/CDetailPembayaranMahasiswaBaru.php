@@ -10,7 +10,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru']) || $_SESSION['currentPagePembayaranMahasiswaBaru']['page_name'] != 'k.pembayaran.PembayaranMahasiswaBaru') {
-				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'k.pembayaran.PembayaranMahasiswaBaru', 'page_num'=>0,'search'=>false,'kelas' => 'none', 'tahun_masuk'=>1,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'k.pembayaran.PembayaranMahasiswaBaru', 'page_num' => 0, 'search' => false,'kelas' => 'none', 'tahun_masuk'=>1,'semester_masuk'=>1,'DataMHS'=>array());												
 			}        
             try {
                 $no_formulir = addslashes($this->request['id']);
@@ -38,7 +38,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
 
                 $datamhs['kjur'] = $spmb['kjur'];
                 $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-                $datamhs['perpanjang']=false;
+                $datamhs['perpanjang'] = false;
                 $this->Finance->setDataMHS($datamhs);                
                 $datamhs['no_transaksi']=isset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']['no_transaksi']) ? $_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']['no_transaksi'] : 'none';                
                 $_SESSION['currentPagePembayaranMahasiswaBaru']['tahun_masuk'] = $datamhs['tahun_masuk'];
@@ -112,7 +112,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                 $userid = $this->Pengguna->getDataUser('userid');
 
                 $this->DB->query ('BEGIN');
-                $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim=0,tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                
+                $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim = 0,tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                
                 if ($this->DB->insertRecord($str)) {
                     $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE no_formulir = $no_formulir AND tahun = $ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
                     $this->DB->setFieldTable(array('idkombi', 'sudah_dibayar'));
@@ -137,13 +137,13 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                     
                     $this->DB->query('COMMIT');
                     $_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']['no_transaksi'] = $no_transaksi;            
-                    $this->redirect('pembayaran.TransaksiPembayaranMahasiswaBaru',true);        
+                    $this->redirect('pembayaran.TransaksiPembayaranMahasiswaBaru', true);        
                 }else{
                     $this->DB->query('ROLLBACK');
                 }           
             }
         }else{            
-            $this->redirect('pembayaran.TransaksiPembayaranMahasiswaBaru',true); 
+            $this->redirect('pembayaran.TransaksiPembayaranMahasiswaBaru', true); 
         }
 	}
     public function editRecord($sender, $param) {	        
@@ -152,17 +152,17 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
             $no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
             $_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']['no_transaksi'] = $no_transaksi;
         }	
-		$this->redirect('pembayaran.TransaksiPembayaranMahasiswaBaru',true);
+		$this->redirect('pembayaran.TransaksiPembayaranMahasiswaBaru', true);
 	}	
 	public function deleteRecord($sender, $param) {	
         $datamhs = $_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']; 
         $no_formulir = $datamhs['no_formulir'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id' => $no_formulir));
+		$this->redirect('pembayaran.DetailPembayaranMahasiswaBaru', true,array('id' => $no_formulir));
 	}		
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']);
-        $this->redirect('pembayaran.PembayaranMahasiswaBaru',true);
+        $this->redirect('pembayaran.PembayaranMahasiswaBaru', true);
     }
 }

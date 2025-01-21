@@ -4,7 +4,7 @@
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">DATA MASTER</a></li>    
-    <li><a href="<%=$this->constructUrl('dmaster.DaftarPertanyaan',true)%>">KUESIONER</a></li>
+    <li><a href="<%=$this->constructUrl('dmaster.DaftarPertanyaan', true)%>">KUESIONER</a></li>
     <li class="active">SALIN DAFTAR PERTANYAAN</li>
 </com:TContent>
 <com:TContent ID="csscontent">
@@ -18,7 +18,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"><i class="fa fa-question-circle"></i> Menyalin Kuesioner Ke T.A dan Semester Saat ini</h2> 
                     <div class="filter-block pull-right">                       
-                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('dmaster.DaftarPertanyaan',true)%>" title="Keluar Detail Transkrip Asli">                        
+                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('dmaster.DaftarPertanyaan', true)%>" title="Keluar Detail Transkrip Asli">                        
                             <i class='fa  fa-times fa-lg'></i>
                         </a>
                     </div>

@@ -533,7 +533,7 @@ class PHPExcel_Shared_String
         }
         $len = strlen($str);
         $newstr = '';
-        for ($i=0; $i<$len; $i+=2) {
+        for ($i=0; $i < $len; $i+=2) {
             if ($bom_be) {
                 $val = ord($str{$i})   << 4;
                 $val += ord($str{$i+1});

@@ -9,9 +9,9 @@ class CDulangMHSBaru Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSBaru']) || $_SESSION['currentPageDulangMHSBaru']['page_name'] != 'm.dulang.DulangMHSBaru') {
-				$_SESSION['currentPageDulangMHSBaru'] = array('page_name' => 'm.dulang.DulangMHSBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSBaru'] = array('page_name' => 'm.dulang.DulangMHSBaru', 'page_num' => 0, 'search' => false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
-            $_SESSION['currentPageDulangMHSBaru']['search']=false;
+            $_SESSION['currentPageDulangMHSBaru']['search'] = false;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -108,7 +108,7 @@ class CDulangMHSBaru Extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSBaru']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSBaru']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal', 'idkelas'));
 		$result=$this->DB->getRecord($str, $offset+1);
@@ -145,7 +145,7 @@ class CDulangMHSBaru Extends MainPageM {
                     }
                     $datamhs['kjur'] = $spmb['kjur'];
                     $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-                    $datamhs['perpanjang']=false;
+                    $datamhs['perpanjang'] = false;
                     $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $datamhs['waktu_mendaftar']);
                     $this->Finance->setDataMHS($datamhs);                               
                     if ($this->Finance->isMhsRegistered()){
@@ -166,7 +166,7 @@ class CDulangMHSBaru Extends MainPageM {
     public function Go($sender, $param) {	
         if ($this->Page->isValid) {            
             $no_formulir = addslashes($this->txtNoFormulir->Text);
-            $this->redirect('dulang.DetailDulangMHSBaru',true,array('id' => $no_formulir));
+            $this->redirect('dulang.DetailDulangMHSBaru', true,array('id' => $no_formulir));
         }
 	}
     public function viewRecord($sender, $param) {	
@@ -178,7 +178,7 @@ class CDulangMHSBaru Extends MainPageM {
         $datamhs = $r[1];
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
         $this->hiddensemestermasuk->Value=$datamhs['semester_masuk'];
         $this->hiddentahunmasuk->Value=$datamhs['tahun_masuk'];
@@ -192,7 +192,7 @@ class CDulangMHSBaru Extends MainPageM {
 		if ($this->DB->deleteRecord("dulang WHERE nim='$nim' AND tahun='$ta' AND idsmt='$idsmt'")) {			
 			$this->DB->deleteRecord("krs WHERE nim='$nim' AND tahun='$ta' AND idsmt='$idsmt'");		
 			$this->DB->query ('COMMIT');
-            $this->redirect('dulang.DulangMHSBaru',true);
+            $this->redirect('dulang.DulangMHSBaru', true);
 		}else {
 			$this->DB->query ('ROLLBACK');
 		}		

@@ -62,7 +62,7 @@ class Logic_Report extends Logic_Global {
                 
                 require_once ('PHPExcel.php');                
 				$this->rpt=new PHPExcel();                
-                $this->exportedDir['excel_path']=$host.'exported/excel/';
+                $this->exportedDir['excel_path'] = $host.'exported/excel/';
 				$this->exportedDir['full_path']=$path.'exported/excel/';
 			break;
 			case 'excel2007':							
@@ -78,7 +78,7 @@ class Logic_Report extends Logic_Global {
                     'cacheTime' => 600
                 );
                 PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
-				$this->exportedDir['excel_path']=$host.'exported/excel/';
+				$this->exportedDir['excel_path'] = $host.'exported/excel/';
 				$this->exportedDir['full_path']=$path.'exported/excel/';
 			break;					
             case 'pdf':				
@@ -88,11 +88,11 @@ class Logic_Report extends Logic_Global {
 				$this->rpt->setAuthor ($this->setup->getSettingValue('nama_pt'));
 				$this->rpt->setPrintHeader(false);
 				$this->rpt->setPrintFooter(false);				
-				$this->exportedDir['pdf_path']=$host.'exported/pdf/';	
+				$this->exportedDir['pdf_path'] = $host.'exported/pdf/';	
 				$this->exportedDir['full_path']=$path.'exported/pdf/';
 			break;	
             case 'pdfzip':
-                $this->exportedDir['pdf_path']=$host.'exported/pdf/';	
+                $this->exportedDir['pdf_path'] = $host.'exported/pdf/';	
 				$this->exportedDir['full_path']=$path.'exported/pdf/';
             break;
 		}

@@ -115,11 +115,11 @@ class Logic_ReportFinance extends Logic_Report {
                     $result = $this->db->query($str);                    
                     $daftar_dibayarkan=array();
                     while ($baris = $result->fetch_assoc()) {                       
-                       $daftar_dibayarkan[$baris['tahun']][$baris['idsmt']]=$baris['dibayarkan'];              
+                       $daftar_dibayarkan[$baris['tahun']][$baris['idsmt']] = $baris['dibayarkan'];              
                     }        
                     $totalpembayaran=0;
                     $totalkewajiban=0;
-                    while (list($m, $n)=each($data_dulang)) {
+                    while (list($m, $n) = each($data_dulang)) {
                         $idkelas = $n['idkelas'];
                         $sheet->setCellValue("F$row", $objDMaster->getNamaKelasByID($idkelas));
                         $sheet->setCellValue("G$row", $n['tahun']);

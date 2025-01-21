@@ -107,7 +107,7 @@ class CTambahKRS extends MainPageDW {
         $str = "UPDATE krs SET synced=0,sync_msg=null WHERE idkrs = $idkrs";
         $this->DB->updateRecord($str);
 
-        $this->redirect ('perkuliahan.TambahKRS',true);
+        $this->redirect ('perkuliahan.TambahKRS', true);
       }
     }
     catch (Exception $e)
@@ -136,7 +136,7 @@ class CTambahKRS extends MainPageDW {
     {
       $this->DB->query ('ROLLBACK');
     }	
-    $this->redirect ('perkuliahan.TambahKRS',true);
+    $this->redirect ('perkuliahan.TambahKRS', true);
   }	
   
   public function hitung($sender, $param) {
@@ -160,6 +160,6 @@ class CTambahKRS extends MainPageDW {
   }	
   public function closeTambahKRS($sender, $param) {
     unset($_SESSION['currentPageKRS']);
-    $this->redirect ('perkuliahan.KRS',true);
+    $this->redirect ('perkuliahan.KRS', true);
   }
 }

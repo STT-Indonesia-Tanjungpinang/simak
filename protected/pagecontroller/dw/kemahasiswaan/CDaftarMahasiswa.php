@@ -9,9 +9,9 @@ class CDaftarMahasiswa extends MainPageDW {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDaftarMahasiswa']) || $_SESSION['currentPageDaftarMahasiswa']['page_name'] != 'dw.kemahasiswaan.DaftarMahasiswa') {
-				$_SESSION['currentPageDaftarMahasiswa'] = array('page_name' => 'dw.kemahasiswaan.DaftarMahasiswa', 'page_num'=>0,'search'=>false,'idkonsentrasi' => 'none', 'k_status' => 'none');												
+				$_SESSION['currentPageDaftarMahasiswa'] = array('page_name' => 'dw.kemahasiswaan.DaftarMahasiswa', 'page_num' => 0, 'search' => false,'idkonsentrasi' => 'none', 'k_status' => 'none');												
 			}
-            $_SESSION['currentPageDaftarMahasiswa']['search']=false;
+            $_SESSION['currentPageDaftarMahasiswa']['search'] = false;
             
             $this->lblProdi->Text = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -93,7 +93,7 @@ class CDaftarMahasiswa extends MainPageDW {
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
         $status = $_SESSION['currentPageDaftarMahasiswa']['k_status'];
         $str_status = $status == 'none'?'':" AND k_status='$status'";
-        while (list($k, $v)=each($datakonsentrasi)) {                        
+        while (list($k, $v) = each($datakonsentrasi)) {                        
             if ($v['kjur']==$_SESSION['kjur']){
                 $idkonsentrasi = $v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("register_mahasiswa WHERE idkonsentrasi = $idkonsentrasi $str_tahun_masuk $str_kelas $str_status",'nim');
@@ -107,7 +107,7 @@ class CDaftarMahasiswa extends MainPageDW {
     }
     public function resetKonsentrasi($sender, $param) {
 		$_SESSION['currentPageDaftarMahasiswa']['idkonsentrasi'] = 'none';
-        $this->redirect('kemahasiswaan.DaftarMahasiswa',true);
+        $this->redirect('kemahasiswaan.DaftarMahasiswa', true);
 	} 
 	public function populateData($search = false) {
         $iddosen_wali = $this->iddosen_wali;
@@ -153,7 +153,7 @@ class CDaftarMahasiswa extends MainPageDW {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPageDaftarMahasiswa']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPageDaftarMahasiswa']['page_num'] = 0;}
         $str = "$str ORDER BY nim DESC,nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'alamat_rumah', 'kjur', 'idkonsentrasi', 'iddosen_wali', 'tahun_masuk', 'k_status', 'idkelas', 'photo_profile'));
 		$r = $this->DB->getRecord($str, $offset+1);	

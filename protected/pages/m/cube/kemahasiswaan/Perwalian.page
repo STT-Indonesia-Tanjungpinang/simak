@@ -64,7 +64,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"><i class="fa fa-plus"></i> Ganti Dosen Wali</h2>
                     <div class="icon-box pull-right">
-                        <a class="btn pull-left" href="<%=$this->constructUrl('kemahasiswaan.Perwalian',true)%>">
+                        <a class="btn pull-left" href="<%=$this->constructUrl('kemahasiswaan.Perwalian', true)%>">
                             <i class="fa fa-times"></i>
                         </a>
                     </div>
@@ -205,7 +205,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"><i class="fa fa-arrows-h"></i> Daftar Mahasiswa</h2> 
                     <div class="filter-block pull-right"> 
-                        <a href="<%=$this->constructUrl('kemahasiswaan.RekapitulasiDPA',true)%>" class="btn btn-primary pull-left" title="Rekapitulasi DPA">
+                        <a href="<%=$this->constructUrl('kemahasiswaan.RekapitulasiDPA', true)%>" class="btn btn-primary pull-left" title="Rekapitulasi DPA">
                             <i class="fa fa-bar-chart-o fa-lg"></i>
                         </a>
                         <com:TActiveLinkButton ID="btnPrintOut" OnClick="printOut" ClientSide.PostState="false" CssClass="btn btn-primary pull-left" Attributes.Title="Print Out">
@@ -245,7 +245,7 @@
                             <prop:ItemTemplate>
                                     <tr>
                                         <td><%#$this->DataItem['no']%></td>
-                                        <td><a href="<%#$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
+                                        <td><a href="<%#$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
                                         <td><%# $this->Data['nirm']%></td>                                        						
                                         <td><%#$this->DataItem['nama_mhs']%></td>	
                                         <td><%#$this->Page->DMaster->getNamaKelasByID($this->DataItem['idkelas'])%></td>

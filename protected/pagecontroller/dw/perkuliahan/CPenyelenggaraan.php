@@ -9,9 +9,9 @@ class CPenyelenggaraan extends MainPageDW {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePenyelenggaraan']) || $_SESSION['currentPagePenyelenggaraan']['page_name'] != 'dw.perkuliahan.Penyelenggaraan') {                
-				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'dw.perkuliahan.Penyelenggaraan', 'page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
+				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'dw.perkuliahan.Penyelenggaraan', 'page_num' => 0, 'search' => false,'DaftarDosen'=>array());												
 			}
-            $_SESSION['currentPagePenyelenggaraan']['search']=false;
+            $_SESSION['currentPagePenyelenggaraan']['search'] = false;
             $_SESSION['currentPagePenyelenggaraan']['DaftarDosen'] = $this->DMaster->getDaftarDosen();
                         
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');

@@ -8,9 +8,9 @@ class CRekapPembayaranSemesterGanjil Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRekapPembayaranSemesterGanjil']) || $_SESSION['currentPageRekapPembayaranSemesterGanjil']['page_name'] != 'k.report.RekapPembayaranSemesterGanjil') {
-				$_SESSION['currentPageRekapPembayaranSemesterGanjil'] = array('page_name' => 'k.report.RekapPembayaranSemesterGanjil', 'page_num'=>0,'search'=>false,'semester'=>1,'kelas' => 'none');												
+				$_SESSION['currentPageRekapPembayaranSemesterGanjil'] = array('page_name' => 'k.report.RekapPembayaranSemesterGanjil', 'page_num' => 0, 'search' => false,'semester'=>1,'kelas' => 'none');												
 			}
-            $_SESSION['currentPageRekapPembayaranSemesterGanjil']['search']=false; 
+            $_SESSION['currentPageRekapPembayaranSemesterGanjil']['search'] = false; 
             
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
@@ -97,7 +97,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageK {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageRekapPembayaranSemesterGanjil']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageRekapPembayaranSemesterGanjil']['page_num'] = 0;}
         $str = "$str ORDER BY idkelas ASC,nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idrekap', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'n_kelas', 'dibayarkan', 'kewajiban', 'sisa'));
         $r = $this->DB->getRecord($str, $offset+1);	        

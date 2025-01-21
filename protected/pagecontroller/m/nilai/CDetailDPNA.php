@@ -3,7 +3,7 @@ prado::using ('Application.MainPageM');
 class CDetailDPNA extends MainPageM {    
    	public function onLoad($param) {
 		parent::onLoad($param);							
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showDPNA=true;    
         $this->createObj('Akademik');        
         $this->createObj('Nilai');        
@@ -67,13 +67,13 @@ class CDetailDPNA extends MainPageM {
         while (list($k, $v) = each($r)) {                
             $n_kuan='-';
             $n_kual='-';
-            $am='-';
-            $hm='-';
+            $am = '-';
+            $hm = '-';
             if ($v['n_kual']!= '') {
                 $n_kuan = $v['n_kuan'];
                 $n_kual = $v['n_kual'];
-                $am=$this->Nilai->getAngkaMutu($v['n_kual']);
-                $hm=$am*$sks;
+                $am = $this->Nilai->getAngkaMutu($v['n_kual']);
+                $hm = $am*$sks;
             }
             $v['n_kuan'] = $n_kuan;
             $v['n_kual'] = $n_kual;
@@ -89,7 +89,7 @@ class CDetailDPNA extends MainPageM {
         $dataDPNa = $_SESSION['currentPageDPNA']['DataDPNA'];
         $dataDPNA['idkelas_mhs'] = $idkelas_mhs;
         if ($idkelas_mhs == 'none') {
-            $dataDPNA['idjabatan_dosen_pengajar']=0;
+            $dataDPNA['idjabatan_dosen_pengajar'] = 0;
         }
         else
         {

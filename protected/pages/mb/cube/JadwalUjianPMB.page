@@ -57,7 +57,7 @@
                                 <tbody>		
                             </prop:HeaderTemplate>
                             <prop:ItemTemplate>	
-                                <tr<%# $this->Data['status']==0?' class="danger"':''%>>
+                                <tr<%# $this->Data['status'] == 0?' class="danger"':''%>>
                                     <td><%# $this->Data['no']%></td>
                                     <td><%# $this->Data['tahun_masuk']%><%# $this->Data['idsmt']%></td>
                                     <td><%# $this->Data['nama_kegiatan']%></td>   

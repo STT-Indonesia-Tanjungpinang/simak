@@ -5,7 +5,7 @@
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">AKADEMIK</a></li>
     <li><a href="#">NILAI</a></li>
-    <li><a href="<%=$this->constructUrl('nilai.EditNilai',true)%>">EDIT NILAI</a></li>
+    <li><a href="<%=$this->constructUrl('nilai.EditNilai', true)%>">EDIT NILAI</a></li>
     <li class="active"><span>IMPORT NILAI</span></li>
 </com:TContent>
 <com:TContent ID="csscontent">
@@ -17,7 +17,7 @@
         <div class="main-box clearfix">               
             <header class="main-box-header clearfix">
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('nilai.EditNilai',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('nilai.EditNilai', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -55,7 +55,7 @@
                                 $('loading').hide();
                             </prop:ClientSide.OnComplete>
                         </com:TActiveLinkButton> 
-                        <a class="btn btn-primary pull-left" href="<%=$this->constructUrl('nilai.DetailEditNilai',true,array('id' => $_SESSION['currentPageImportNilai']['DataNilai']['idkelas_mhs']))%>" title="Detail Edit Nilai">                        
+                        <a class="btn btn-primary pull-left" href="<%=$this->constructUrl('nilai.DetailEditNilai', true,array('id' => $_SESSION['currentPageImportNilai']['DataNilai']['idkelas_mhs']))%>" title="Detail Edit Nilai">                        
                             <i class='fa  fa-eye fa-lg'></i>
                         </a>
                         <com:TActiveLinkButton ID="btnReset" OnClick="resetData" CssClass="btn btn-danger pull-left" Attributes.Title="Reset Nilai" Attributes.OnClick="if(!confirm('Anda ingin mereset nilai Matakuliah ini ?')) return false;">
@@ -84,7 +84,7 @@
                                 $('loading').hide();
                             </prop:ClientSide.OnComplete>
                         </com:TActiveLinkButton>                        
-                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('nilai.EditNilai',true)%>" title="Keluar Detail Edit Nilai">                        
+                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('nilai.EditNilai', true)%>" title="Keluar Detail Edit Nilai">                        
                             <i class='fa  fa-times fa-lg'></i>
                         </a>
                     </div>

@@ -9,9 +9,9 @@ class CKUM extends MainPageK {
         $this->createObj('KRS');
 		if (!$this->IsPostBack && !$this->IsCallback) {   
             if (!isset($_SESSION['currentPageKUM']) || $_SESSION['currentPageKUM']['page_name'] != 'k.perkuliahan.KUM') {
-				$_SESSION['currentPageKUM'] = array('page_name' => 'k.perkuliahan.KUM', 'page_num'=>0,'search'=>false,'jenisujian' => 'uts');												
+				$_SESSION['currentPageKUM'] = array('page_name' => 'k.perkuliahan.KUM', 'page_num' => 0, 'search' => false,'jenisujian' => 'uts');												
 			}            
-            $_SESSION['currentPageKUM']['search']=false;   
+            $_SESSION['currentPageKUM']['search'] = false;   
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -122,7 +122,7 @@ class CKUM extends MainPageK {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKUM']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKUM']['page_num'] = 0;}
         $str = "$str LIMIT $offset, $limit";	
         $this->DB->setFieldTable(array('no_formulir', 'idkrs', 'nim', 'nama_mhs', 'jk', 'idkelas', 'nkelas', 'semester_masuk', 'perpanjang'));
         $r = $this->DB->getRecord($str, $offset+1);	        

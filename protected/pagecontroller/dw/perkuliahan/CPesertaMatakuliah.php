@@ -9,9 +9,9 @@ class CPesertaMatakuliah extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePesertaMatakuliah']) || $_SESSION['currentPagePesertaMatakuliah']['page_name'] != 'm.perkuliahan.PesertaMatakuliah') {
-				$_SESSION['currentPagePesertaMatakuliah'] = array('page_name' => 'm.perkuliahan.PesertaMatakuliah', 'page_num'=>0,'search'=>false,'InfoMatkul'=>array());
+				$_SESSION['currentPagePesertaMatakuliah'] = array('page_name' => 'm.perkuliahan.PesertaMatakuliah', 'page_num' => 0, 'search' => false,'InfoMatkul'=>array());
 			}  
-            $_SESSION['currentPagePesertaMatakuliah']['search']=false;            
+            $_SESSION['currentPagePesertaMatakuliah']['search'] = false;            
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();            
@@ -152,14 +152,14 @@ class CPesertaMatakuliah extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePesertaMatakuliah']['page_num']=0;}		
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePesertaMatakuliah']['page_num'] = 0;}		
         $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('nim', 'nama_mhs', 'jk', 'tahun_masuk', 'batal', 'sah'));	
 		$r = $this->DB->getRecord($str, $offset+1);
         $result = array();
         while (list($k, $v) = each($r)) {
             $status='belum disahkan';
-            if ($v['sah']==1 && $v['batal']==0) {
+            if ($v['sah']==1 && $v['batal'] == 0) {
                 $status='sah';
             }elseif($v['sah']==1 && $v['batal']==1){
                 $status='batal';

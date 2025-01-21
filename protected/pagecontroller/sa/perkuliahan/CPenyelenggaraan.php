@@ -9,9 +9,9 @@ class CPenyelenggaraan extends MainPageSA {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePenyelenggaraan']) || $_SESSION['currentPagePenyelenggaraan']['page_name'] != 'sa.perkuliahan.Penyelenggaraan') {                
-				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'sa.perkuliahan.Penyelenggaraan', 'page_num'=>0,'search'=>false,'DaftarDosen'=>array());												
+				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'sa.perkuliahan.Penyelenggaraan', 'page_num' => 0, 'search' => false,'DaftarDosen'=>array());												
 			}
-            $_SESSION['currentPagePenyelenggaraan']['search']=false;
+            $_SESSION['currentPagePenyelenggaraan']['search'] = false;
             $_SESSION['currentPagePenyelenggaraan']['DaftarDosen'] = $this->DMaster->getDaftarDosen();
                         
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -130,7 +130,7 @@ class CPenyelenggaraan extends MainPageSA {
 					}
 				}
 			}
-			$this->redirect('perkuliahan.Penyelenggaraan',true);     
+			$this->redirect('perkuliahan.Penyelenggaraan', true);     
 		}
 	}
 	
@@ -146,7 +146,7 @@ class CPenyelenggaraan extends MainPageSA {
 		}else {
 			$this->DB->query('ROLLBACK');
 		}	
-		$this->redirect('perkuliahan.Penyelenggaraan',true);            
+		$this->redirect('perkuliahan.Penyelenggaraan', true);            
 	}
 	
 	public function deleteRecord($sender, $param) {		
@@ -157,7 +157,7 @@ class CPenyelenggaraan extends MainPageSA {
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("penyelenggaraan WHERE idpenyelenggaraan = $id");
-            $this->redirect('perkuliahan.Penyelenggaraan',true);            
+            $this->redirect('perkuliahan.Penyelenggaraan', true);            
         }
 	}	
 	public function printOut($sender, $param) {		

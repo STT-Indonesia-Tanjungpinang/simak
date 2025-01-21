@@ -690,7 +690,7 @@ class QRcode {
 		$len = count($frame);
 		// the frame is square (width = height)
 		foreach ($frame as &$frameLine) {
-			for ($i=0; $i<$len; $i++) {
+			for ($i=0; $i < $len; $i++) {
 				$frameLine[$i] = (ord($frameLine[$i])&1)?'1':'0';
 			}
 		}
@@ -752,7 +752,7 @@ class QRcode {
 		}
 		// remainder bits
 		$j = $this->getRemainder($this->version);
-		for ($i=0; $i<$j; $i++) {
+		for ($i=0; $i < $j; $i++) {
 			$addr = $this->getNextPosition();
 			$this->setFrameAt($addr, 0x02);
 		}
@@ -1125,7 +1125,7 @@ class QRcode {
 	 */
 	 protected function calcN1N3($length) {
 		$demerit = 0;
-		for ($i=0; $i<$length; ++$i) {
+		for ($i=0; $i < $length; ++$i) {
 			if ($this->runLength[$i] >= 5) {
 				$demerit += (N1 + ($this->runLength[$i] - 5));
 			}
@@ -1603,7 +1603,7 @@ class QRcode {
 		$inputitem['bstream'] = array();
 		$inputitem['bstream'] = $this->appendNum($inputitem['bstream'], 4, 0x8);
 		$inputitem['bstream'] = $this->appendNum($inputitem['bstream'], $this->lengthIndicator(QR_MODE_KJ, $version), (int)($inputitem['size'] / 2));
-		for ($i=0; $i<$inputitem['size']; $i+=2) {
+		for ($i=0; $i < $inputitem['size']; $i+=2) {
 			$val = (ord($inputitem['data'][$i]) << 8) | ord($inputitem['data'][$i+1]);
 			if ($val <= 0x9ffc) {
 				$val -= 0x8140;
@@ -1745,7 +1745,7 @@ class QRcode {
 	 * @return boolean true or false
 	 */
 	 protected function checkModeNum($size, $data) {
-		for ($i=0; $i<$size; ++$i) {
+		for ($i=0; $i < $size; ++$i) {
 			if ((ord($data[$i]) < ord('0')) OR (ord($data[$i]) > ord('9'))){
 				return false;
 			}
@@ -1769,7 +1769,7 @@ class QRcode {
 	 * @return boolean true or false
 	 */
 	 protected function checkModeAn($size, $data) {
-		for ($i=0; $i<$size; ++$i) {
+		for ($i=0; $i < $size; ++$i) {
 			if ($this->lookAnTable(ord($data[$i])) == -1) {
 				return false;
 			}
@@ -1839,7 +1839,7 @@ class QRcode {
 		if ($size & 1) {
 			return false;
 		}
-		for ($i=0; $i<$size; $i+=2) {
+		for ($i=0; $i < $size; $i+=2) {
 			$val = (ord($data[$i]) << 8) | ord($data[$i+1]);
 			if (($val < 0x8140) OR (($val > 0x9ffc) AND ($val < 0xe040)) OR ($val > 0xebbf)) {
 				return false;
@@ -2071,7 +2071,7 @@ class QRcode {
 		$padlen = $maxwords - $words;
 		if ($padlen > 0) {
 			$padbuf = array();
-			for ($i=0; $i<$padlen; ++$i) {
+			for ($i=0; $i < $padlen; ++$i) {
 				$padbuf[$i] = ($i&1)?0x11:0xec;
 			}
 			$padding = $this->appendBytes($padding, $padlen, $padbuf);
@@ -2138,7 +2138,7 @@ class QRcode {
 	 protected function newFromNum($bits, $num) {
 		$bstream = $this->allocate($bits);
 		$mask = 1 << ($bits - 1);
-		for ($i=0; $i<$bits; ++$i) {
+		for ($i=0; $i < $bits; ++$i) {
 			if ($num & $mask) {
 				$bstream[$i] = 1;
 			} else {
@@ -2158,7 +2158,7 @@ class QRcode {
 	 protected function newFromBytes($size, $data) {
 		$bstream = $this->allocate($size * 8);
 		$p=0;
-		for ($i=0; $i<$size; ++$i) {
+		for ($i=0; $i < $size; ++$i) {
 			$mask = 0x80;
 			for ($j=0; $j<8; ++$j) {
 				if ($data[$i] & $mask) {
@@ -2235,7 +2235,7 @@ class QRcode {
 		$data = array_fill(0, (int)(($size + 7) / 8), 0);
 		$bytes = (int)($size / 8);
 		$p = 0;
-		for ($i=0; $i<$bytes; $i++) {
+		for ($i=0; $i < $bytes; $i++) {
 			$v = 0;
 			for ($j=0; $j<8; $j++) {
 				$v = $v << 1;
@@ -2772,7 +2772,7 @@ class QRcode {
 		$rs['index_of'][0] = $A0; // log(zero) = -inf
 		$rs['alpha_to'][$A0] = 0; // alpha**-inf = 0
 		$sr = 1;
-		for ($i=0; $i<$rs['nn']; ++$i) {
+		for ($i=0; $i < $rs['nn']; ++$i) {
 			$rs['index_of'][$sr] = $i;
 			$rs['alpha_to'][$i] = $sr;
 			$sr <<= 1;

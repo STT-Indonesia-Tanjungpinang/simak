@@ -20,7 +20,7 @@ class rollbackTransaction extends BaseWS {
 				case 10: //bayar biasa
 					$str = "SELECT t.no_transaksi,t.kjur,t.no_formulir,fp.nama_mhs,t.nim,t.tahun,t.idsmt,t.idkelas,rm.k_status,rm.perpanjang,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.commited FROM transaksi t LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (t.no_formulir=rm.no_formulir) WHERE t.no_transaksi='$no_transaksi'";
 					$this->DB->setFieldTable(array('no_transaksi', 'kjur', 'no_formulir', 'nama_mhs', 'nim', 'tahun', 'idsmt', 'idkelas', 'k_status', 'perpanjang', 'commited', 'tahun_masuk', 'semester_masuk'));		
-					$r=$this->DB->getRecord($str);
+					$r = $this->DB->getRecord($str);
 					if (!isset($r[1])) {
 						$this->payload['status'] = '04';
 						throw new Exception ("Proses Login telah berhasil, namun transaksi dengan nomor ($no_transaksi) tidak ada di database !!!");				
@@ -48,7 +48,7 @@ class rollbackTransaction extends BaseWS {
 				case 11: //bayar cuti
 					$str = "SELECT t.no_transaksi,rm.kjur,rm.no_formulir,fp.nama_mhs,t.nim,t.tahun,t.idsmt,rm.idkelas,rm.k_status,rm.perpanjang,fp.ta AS tahun_masuk,fp.idsmt AS semester_masuk,t.commited FROM transaksi_cuti t LEFT JOIN register_mahasiswa rm ON (t.nim=rm.nim) LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=rm.no_formulir) WHERE t.no_transaksi='$no_transaksi'";
 					$this->DB->setFieldTable(array('no_transaksi', 'kjur', 'no_formulir', 'nama_mhs', 'nim', 'tahun', 'idsmt', 'idkelas', 'k_status', 'perpanjang', 'commited', 'tahun_masuk', 'semester_masuk'));		
-					$r=$this->DB->getRecord($str);
+					$r = $this->DB->getRecord($str);
 					if (!isset($r[1])) {
 						$this->payload['status'] = '04';
 						throw new Exception ("Proses Login telah berhasil, namun transaksi dengan nomor ($no_transaksi) tidak ada di database !!!");				

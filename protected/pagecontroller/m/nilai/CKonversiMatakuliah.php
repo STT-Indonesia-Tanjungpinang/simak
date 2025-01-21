@@ -4,13 +4,13 @@ class CKonversiMatakuliah extends MainPageM {
 	public function onLoad($param) {
 		parent::onLoad($param);					
         $this->showKonversiMatakuliah = true;
-        $this->showSubMenuAkademikNilai=true;
+        $this->showSubMenuAkademikNilai = true;
         $this->createObj('Nilai');			
 		if (!$this->IsPostBack && !$this->IsCallBack) {
             if (!isset($_SESSION['currentPageKonversiMatakuliah']) || $_SESSION['currentPageKonversiMatakuliah']['page_name'] != 'm.spmb.KonversiMatakuliah') {
-				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'm.spmb.KonversiMatakuliah', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'daftarmatkul'=>array(), 'kjur' => $_SESSION['kjur']);												
+				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'm.spmb.KonversiMatakuliah', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'daftarmatkul'=>array(), 'kjur' => $_SESSION['kjur']);												
 			}
-            $_SESSION['currentPageKonversiMatakuliah']['search']=false;
+            $_SESSION['currentPageKonversiMatakuliah']['search'] = false;
             
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
@@ -88,7 +88,7 @@ class CKonversiMatakuliah extends MainPageM {
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKonversiMatakuliah']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKonversiMatakuliah']['page_num'] = 0;}
 		$str = $str . " ORDER BY date_added DESC,nama ASC LIMIT $offset, $limit";		
 		$this->DB->setFieldTable(array('iddata_konversi', 'nama', 'alamat', 'no_telp', 'nim', 'date_added'));
 		$r = $this->DB->getRecord($str, $offset+1);

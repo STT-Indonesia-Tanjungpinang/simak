@@ -615,7 +615,7 @@ class Logic_ReportAkademik extends Logic_Report {
             
             $row_awal=18;
             $row=18;
-            while (list($k, $v)=each($datapeserta)) {
+            while (list($k, $v) = each($datapeserta)) {
               $sheet->getRowDimension($row)->setRowHeight(17);
               $sheet->setCellValue("A$row", $v['no']);
               $sheet->mergeCells("B$row:C$row");
@@ -796,7 +796,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $this->db->setFieldTable(array('ta', 'idsmt', 'idkelas'));	
         $r = $this->db->getRecord($str);  
         
-        $result=array();
+        $result = array();
         if (isset($r[1])) {
           $data =array();
           while (list($k, $v)=each ($r)) {            
@@ -917,7 +917,7 @@ class Logic_ReportAkademik extends Logic_Report {
           $sheet->setCellValue("E$row", $objDMaster->getNamaKelasByID($v['idkelas']));
           $sheet->setCellValue("F$row", $v['tahun_masuk']);
           $status='belum disahkan';
-          if ($v['sah']==1 && $v['batal']==0) {
+          if ($v['sah']==1 && $v['batal'] == 0) {
             $status='sah';
           }elseif($v['sah']==1 && $v['batal']==1){
             $status='batal';
@@ -998,7 +998,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $str_status = $status == 'none'? '': "AND k_status='$status'";
         $str = "SELECT nim,nirm,nama_mhs,tahun_masuk,idkelas,k_status FROM v_datamhs vdm WHERE iddosen_wali = $iddosen_wali $str_status ORDER BY vdm.k_status ASC,vdm.tahun_masuk DESC,vdm.nama_mhs ASC";
         $this->db->setFieldTable (array('nim', 'nirm', 'nama_mhs', 'tahun_masuk', 'idkelas', 'k_status'));
-        $r=$this->db->getRecord($str);	
+        $r = $this->db->getRecord($str);	
         $row=11;
         while (list($k, $v)=each ($r)) {            
           $sheet->setCellValue("A$row", $v['no']);
@@ -1124,7 +1124,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $str_nama_hari = $this->dataReport['nama_hari'];
         $str = "SELECT km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.nama_dosen,vpp.nidn,rk.namaruang,rk.kapasitas FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$str_nama_hari";
         $this->db->setFieldTable(array('idkelas_mhs', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas'));	
-        $r=$this->db->getRecord($str);     
+        $r = $this->db->getRecord($str);     
         $result = array();
         $row_awal=12;
         $row=12;
@@ -1227,7 +1227,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='A' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
           $sheet->setCellValue("A$row", $v['no']);
@@ -1324,7 +1324,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='N' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
           $sheet->setCellValue("A$row", $v['no']);
@@ -1421,7 +1421,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='C' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
           $sheet->setCellValue("A$row", $v['no']);
@@ -1518,7 +1518,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='L' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
           $sheet->setCellValue("A$row", $v['no']);
@@ -1615,7 +1615,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='D' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
           $sheet->setCellValue("A$row", $v['no']);
@@ -1713,7 +1713,7 @@ class Logic_ReportAkademik extends Logic_Report {
         
         $str = "SELECT d.iddulang,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,d.idkelas,vdm.iddosen_wali,d.tanggal,d.tahun,d.idsmt FROM v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND d.tahun = $ta AND d.idsmt=$idsmt AND vdm.kjur='$kjur' AND d.k_status='K' ORDER BY d.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'idkelas', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $row=11;
         while (list($k, $v)=each ($r)) {       
           $sheet->setCellValue("A$row", $v['no']);

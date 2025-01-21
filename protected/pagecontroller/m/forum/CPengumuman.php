@@ -7,7 +7,7 @@ class CPengumuman extends MainPageM {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPagePengumuman']) || $_SESSION['currentPagePengumuman']['page_name'] != 'm.forum.Pengumuman') {                                                                                
-                $_SESSION['currentPagePengumuman'] = array('page_name' => 'm.forum.Pengumuman', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=> 0);
+                $_SESSION['currentPagePengumuman'] = array('page_name' => 'm.forum.Pengumuman', 'page_num' => 0,'page_num_unread'=>0, 'search' => false,'activeviewindex'=> 0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPagePengumuman']['activeviewindex']; 
 		}                
@@ -31,7 +31,7 @@ class CPengumuman extends MainPageM {
             }
         }else{
             $_SESSION['currentPagePengumuman']['activeviewindex'] = $this->MVMenuForum->ActiveViewIndex;
-            $this->redirect('forum.Pengumuman',true);
+            $this->redirect('forum.Pengumuman', true);
         }        
     }
     public function renderCallback($sender, $param) {
@@ -55,7 +55,7 @@ class CPengumuman extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePengumuman']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePengumuman']['page_num'] = 0;}
         $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'userid', 'nama_kategori', 'title', 'content', 'nama_user', 'tipe', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
@@ -64,7 +64,7 @@ class CPengumuman extends MainPageM {
             $idpost=$v['idpost'];
             switch($v['tipe']) {
                 case 'mh':                    
-                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $v['userid']));
+                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $v['userid']));
                 break;
                 default :
                     $urlprofiluser='#';
@@ -93,7 +93,7 @@ class CPengumuman extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePengumuman']['page_num_unread']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePengumuman']['page_num_unread'] = 0;}
         $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'nama_kategori', 'title', 'content', 'nama_user', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
@@ -148,7 +148,7 @@ class CPengumuman extends MainPageM {
 			}
             $str = "INSERT INTO pengumuman SET idpost=NULL,idkategori = $idkategori,title='$judul',content='$content',userid = $userid,tipe='m',nama_user='$nama_user',file_name='$file_name',file_type='$file_type',file_size='$file_size',file_path='$file_path',file_url='$file_url',date_added=NOW()";
             $this->DB->insertRecord($str);
-            $_SESSION['currentPagePengumuman']['activeviewindex']=0;
+            $_SESSION['currentPagePengumuman']['activeviewindex'] = 0;
             $this->redirect('forum.Pengumuman', true);
             
         }

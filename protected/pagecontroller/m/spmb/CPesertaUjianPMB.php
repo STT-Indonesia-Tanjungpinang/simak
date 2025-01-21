@@ -9,9 +9,9 @@ class CPesertaUjianPMB extends MainPageM {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePesertaUjianPMB']) || $_SESSION['currentPagePesertaUjianPMB']['page_name'] != 'm.spmb.PesertaUjianPMB') {
-				$_SESSION['currentPagePesertaUjianPMB'] = array('page_name' => 'm.spmb.PesertaUjianPMB', 'page_num'=>0,'search'=>false,'DataUjianPMB');
+				$_SESSION['currentPagePesertaUjianPMB'] = array('page_name' => 'm.spmb.PesertaUjianPMB', 'page_num' => 0, 'search' => false,'DataUjianPMB');
 			}  
-            $_SESSION['currentPagePesertaUjianPMB']['search']=false;            
+            $_SESSION['currentPagePesertaUjianPMB']['search'] = false;            
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
             $this->tbCmbOutputReport->DataBind();            
@@ -93,7 +93,7 @@ class CPesertaUjianPMB extends MainPageM {
             $str = "UPDATE peserta_ujian_pmb SET idjadwal_ujian = $idjadwal_ujian WHERE idpeserta_ujian = $id";
             $this->DB->updateRecord($str);
             
-            $this->redirect('spmb.PesertaUjianPMB',true,array('id' => $_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']['idjadwal_ujian']));
+            $this->redirect('spmb.PesertaUjianPMB', true,array('id' => $_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB']['idjadwal_ujian']));
         }
     }
     public function deleteRecord($sender, $param) {        
@@ -108,7 +108,7 @@ class CPesertaUjianPMB extends MainPageM {
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("peserta_ujian_pmb WHERE idpeserta_ujian='$id'");
-            $this->redirect('spmb.PesertaUjianPMB',true,array('id' => $r[1]['idjadwal_ujian']));
+            $this->redirect('spmb.PesertaUjianPMB', true,array('id' => $r[1]['idjadwal_ujian']));
         }
     }  
     public function printOut($sender, $param) {		

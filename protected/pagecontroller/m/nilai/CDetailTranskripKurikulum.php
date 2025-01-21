@@ -3,13 +3,13 @@ prado::using ('Application.MainPageM');
 class CDetailTranskripKurikulum extends MainPageM {		
 	public function onLoad($param) {
 		parent::onLoad($param);							
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showTranskripKurikulum=true;    
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailTranskripKurikulum']) || $_SESSION['currentPageDetailTranskripKurikulum']['page_name'] != 'm.nilai.DetailTranskripKurikulum') {
-				$_SESSION['currentPageDetailTranskripKurikulum'] = array('page_name' => 'm.nilai.DetailTranskripKurikulum', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+				$_SESSION['currentPageDetailTranskripKurikulum'] = array('page_name' => 'm.nilai.DetailTranskripKurikulum', 'page_num' => 0, 'search' => false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -34,7 +34,7 @@ class CDetailTranskripKurikulum extends MainPageM {
             $datamhs = $r[1];
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
             $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
             $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
             $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS'] = $datamhs;

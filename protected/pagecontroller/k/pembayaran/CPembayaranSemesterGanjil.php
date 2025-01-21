@@ -8,9 +8,9 @@ class CPembayaranSemesterGanjil Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGanjil']) || $_SESSION['currentPagePembayaranSemesterGanjil']['page_name'] != 'k.pembayaran.PembayaranSemesterGanjil') {
-				$_SESSION['currentPagePembayaranSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranSemesterGanjil', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester'=>1,'kelas' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranSemesterGanjil', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester'=>1,'kelas' => 'none', 'DataMHS'=>array());												
 			}
-            $_SESSION['currentPagePembayaranSemesterGanjil']['search']=false; 
+            $_SESSION['currentPagePembayaranSemesterGanjil']['search'] = false; 
             $bool=!isset($_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']['nim']);
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
@@ -38,7 +38,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
                 $this->txtNIM->Visible=false;
                 $this->btnGo->Visible=false;
                 $this->linkDetailPembayaran->Visible=true;
-                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGanjil',true,array('id' => $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']['nim']));
+                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']['nim']));
             }        
             $this->populateData();
             $this->setInfoToolbar();
@@ -122,7 +122,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranSemesterGanjil']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranSemesterGanjil']['page_num'] = 0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'nim', 'nama_mhs', 'commited'));
         $str = "$str ORDER BY t.date_added DESC LIMIT $offset, $limit";	
         $r = $this->DB->getRecord($str, $offset+1);	        
@@ -168,7 +168,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
                 $ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
 		        $semester = $_SESSION['currentPagePembayaranSemesterGanjil']['semester'];
                 $this->Finance->setDataMHS($datamhs);                              
-                $datadulang=$this->Finance->getDataDulang($semester, $ta);
+                $datadulang = $this->Finance->getDataDulang($semester, $ta);
                 if ($datadulang['k_status']=='N' || $datadulang['k_status']=='D') {
                     $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS'] = array();
                     throw new Exception ("Status NIM ($nim) NON-AKTIF atau DROP-OUT silahkan melakukan pembayaran melalui Pembayaran Piutang.");
@@ -182,7 +182,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranSemesterGanjil',true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $nim));
         }
 	}
 	

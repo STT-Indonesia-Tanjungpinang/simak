@@ -7,9 +7,9 @@ class CPembayaranFormulir extends MainPageM {
         $this->showPembayaranFormulir=true;
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePembayaranFormulir']) || $_SESSION['currentPagePembayaranFormulir']['page_name'] != 'm.spmb.PembayaranFormulir') {
-				$_SESSION['currentPagePembayaranFormulir'] = array('page_name' => 'm.spmb.PembayaranFormulir', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false);												
+				$_SESSION['currentPagePembayaranFormulir'] = array('page_name' => 'm.spmb.PembayaranFormulir', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false);												
 			}	
-            $_SESSION['currentPagePembayaranFormulir']['search']=false;
+            $_SESSION['currentPagePembayaranFormulir']['search'] = false;
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
             $this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
             $this->tbCmbTahunMasuk->Text = $_SESSION['tahun_masuk'];						
@@ -35,7 +35,7 @@ class CPembayaranFormulir extends MainPageM {
 		$this->populateData();
 	}
 	public function btnSearch_Click($sender, $param) {		
-		$_SESSION['currentPagePembayaranFormulir']['page_num']=0;
+		$_SESSION['currentPagePembayaranFormulir']['page_num'] = 0;
 		$this->populateData($this->getStrSearch());
 	}
 	
@@ -68,7 +68,7 @@ class CPembayaranFormulir extends MainPageM {
 //		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
 //			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 //		}
-//		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num']=0;}
+//		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num'] = 0;}
 //		$str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset, $limit ";			
 //		$this->DB->setFieldTable(array('no_formulir', 'nama_mhs', 'alamat_rumah', 'dibayarkan'));
 //		$r = $this->DB->getRecord($str, $offset+1);				

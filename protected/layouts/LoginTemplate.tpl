@@ -42,7 +42,7 @@
     <com:TPanel CssClass="cls-content" Visible="<%=$this->User->isGuest==false%>">
         <div class="cls-content-sm panel">
             <div class="panel-body">
-                <p class="pad-btm">Anda sudah melakukan login, silahkan klik <a href="<%=$this->Page->constructUrl('Home',true)%>" style="color:blue;">disini</a> untuk kembali.</p>               								
+                <p class="pad-btm">Anda sudah melakukan login, silahkan klik <a href="<%=$this->Page->constructUrl('Home', true)%>" style="color:blue;">disini</a> untuk kembali.</p>               								
             </div>
         </div>
     </com:TPanel>

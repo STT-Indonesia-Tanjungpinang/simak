@@ -9,7 +9,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGanjil']) || $_SESSION['currentPagePembayaranSemesterGanjil']['page_name'] != 'mh.pembayaran.PembayaranSemesterGanjil') {
-				$_SESSION['currentPagePembayaranSemesterGanjil'] = array('page_name' => 'mh.pembayaran.PembayaranSemesterGanjil', 'page_num'=>0,'ta' => $_SESSION['ta'],'no_transaksi' => 'none');												
+				$_SESSION['currentPagePembayaranSemesterGanjil'] = array('page_name' => 'mh.pembayaran.PembayaranSemesterGanjil', 'page_num' => 0,'ta' => $_SESSION['ta'],'no_transaksi' => 'none');												
 			}
 			$this->setInfoToolbar();
 			$this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');;
@@ -41,7 +41,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 	}
     public function changeTbTA($sender, $param) {				
 		$_SESSION['currentPagePembayaranSemesterGanjil']['ta'] = $this->tbCmbTA->Text;
-		$this->redirect('pembayaran.PembayaranSemesterGanjil',true); 
+		$this->redirect('pembayaran.PembayaranSemesterGanjil', true); 
 	}	
 	public function setDataBound($sender, $param) {				
 		$item = $param->Item;
@@ -124,13 +124,13 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
                     }                   
                     $this->DB->query('COMMIT');
                     $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] = $no_transaksi;            
-                    $this->redirect('pembayaran.TransaksiPembayaranSemesterGanjil',true);        
+                    $this->redirect('pembayaran.TransaksiPembayaranSemesterGanjil', true);        
                 }else{
                     $this->DB->query('ROLLBACK');
                 }           
             }
         }else{            
-            $this->redirect('pembayaran.TransaksiPembayaranSemesterGanjil',true); 
+            $this->redirect('pembayaran.TransaksiPembayaranSemesterGanjil', true); 
         }
     }
     public function editRecord($sender, $param) {	        
@@ -139,14 +139,14 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
             $no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
             $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] = $no_transaksi;
         }	
-		$this->redirect('pembayaran.TransaksiPembayaranSemesterGanjil',true);
+		$this->redirect('pembayaran.TransaksiPembayaranSemesterGanjil', true);
 	}	
     public function deleteRecord($sender, $param) {	
         $datamhs = $this->Pengguna->getDataUser();  
         $nim = $datamhs['nim'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.PembayaranSemesterGanjil',true);
+		$this->redirect('pembayaran.PembayaranSemesterGanjil', true);
 	}	
     
 }

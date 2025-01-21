@@ -85,7 +85,7 @@ class CKuesioner extends MainPageMHS {
     public function changeDosenPengampu($sender, $param) {
         $_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan'] = $this->cmbPengampuMatakuliah->Text;
         $idkrsmatkul = $_SESSION['currentPageKuesioner']['DataMatakuliah']['idkrsmatkul'];  
-        $this->redirect('perkuliahan.Kuesioner',true,array('id' => $idkrsmatkul));
+        $this->redirect('perkuliahan.Kuesioner', true,array('id' => $idkrsmatkul));
     }
 	public function populateData() {	        
         if ($_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan'] != 'none') {
@@ -96,7 +96,7 @@ class CKuesioner extends MainPageMHS {
             unset($kelompok_pertanyaan['none']);
 
             $result = array();
-            while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
+            while (list($idkelompok_pertanyaan, $nama_kelompok) = each($kelompok_pertanyaan)) {
                 $str = "SELECT idkuesioner,pertanyaan FROM kuesioner WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan = $idkelompok_pertanyaan ORDER BY idkelompok_pertanyaan ASC,(orders+0)";             		
                 $this->DB->setFieldTable(array('idkuesioner', 'pertanyaan'));
                 $r = $this->DB->getRecord($str);
@@ -146,7 +146,7 @@ class CKuesioner extends MainPageMHS {
                     }
                     $this->DB->commitTransaction();                                 
                     unset($_SESSION['currentPageKuesioner']);
-                    $this->redirect('perkuliahan.Kuesioner',true,array('id' => $idkrsmatkul));
+                    $this->redirect('perkuliahan.Kuesioner', true,array('id' => $idkrsmatkul));
                 }else{
                     $this->DB->rollbackTransaction();
                 }

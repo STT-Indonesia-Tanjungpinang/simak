@@ -18,7 +18,7 @@ class CJawabanSoalPMB extends MainPageM {
                 }    
                 $datamhs = $r[1];
                 $datamhs['nama_ps1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];
-                $datamhs['nama_ps2'] = $datamhs['kjur2']==0 ?'N.A':$_SESSION['daftar_jurusan'][$datamhs['kjur2']];
+                $datamhs['nama_ps2'] = $datamhs['kjur2'] == 0 ?'N.A':$_SESSION['daftar_jurusan'][$datamhs['kjur2']];
                 $datamhs['diterima_ps1'] = '';
                 $datamhs['diterima_ps2'] = '';
                 $datamhs['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $datamhs['waktu_mendaftar']);

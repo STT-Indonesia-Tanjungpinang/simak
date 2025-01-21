@@ -14,7 +14,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Tambah User</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('settings.UserManajemen',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('settings.UserManajemen', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -169,7 +169,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-edit"></i> Ubah User</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('settings.UserManajemen',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('settings.UserManajemen', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>

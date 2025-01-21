@@ -7,7 +7,7 @@ class CDiskusi extends MainPageD {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDiskusi']) || $_SESSION['currentPageDiskusi']['page_name'] != 'd.forum.Diskusi') {                                                                                
-                $_SESSION['currentPageDiskusi'] = array('page_name' => 'd.forum.Diskusi', 'page_num'=>0,'page_num_unread'=>0,'search'=>false,'activeviewindex'=> 0);
+                $_SESSION['currentPageDiskusi'] = array('page_name' => 'd.forum.Diskusi', 'page_num' => 0,'page_num_unread'=>0, 'search' => false,'activeviewindex'=> 0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPageDiskusi']['activeviewindex']; 
 		}                
@@ -31,7 +31,7 @@ class CDiskusi extends MainPageD {
             }
         }else{
             $_SESSION['currentPageDiskusi']['activeviewindex'] = $this->MVMenuForum->ActiveViewIndex;
-            $this->redirect('forum.Diskusi',true);
+            $this->redirect('forum.Diskusi', true);
         }        
     }
     public function renderCallback($sender, $param) {
@@ -55,7 +55,7 @@ class CDiskusi extends MainPageD {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num'] = 0;}
         $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'userid', 'nama_kategori', 'title', 'content', 'nama_user', 'tipe', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
@@ -70,7 +70,7 @@ class CDiskusi extends MainPageD {
                     $this->DB->setFieldTable (array('photo_profile'));			
                     $profile=$this->DB->getRecord($str);	
                     $photo=$profile[1]['photo_profile'];
-                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $v['userid']));
+                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $v['userid']));
                 break;
                 case 'm':
                     $str = "SELECT foto AS photo_profile FROM user WHERE userid='$userid'";
@@ -107,7 +107,7 @@ class CDiskusi extends MainPageD {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num_unread']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num_unread'] = 0;}
         $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'nama_kategori', 'title', 'content', 'nama_user', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
@@ -132,7 +132,7 @@ class CDiskusi extends MainPageD {
             $nama_user = $this->Pengguna->getDataUser('username');                        
             $str = "INSERT INTO forumposts (idpost,idkategori,title,content,userid,tipe,nama_user,date_added) VALUES (NULL, $idkategori,'$judul', '$content', $userid,'d', '$nama_user',NOW())";
             $this->DB->insertRecord($str);
-            $_SESSION['currentPageDiskusi']['activeviewindex']=0;
+            $_SESSION['currentPageDiskusi']['activeviewindex'] = 0;
             $this->redirect('forum.Diskusi', true);
             
         }

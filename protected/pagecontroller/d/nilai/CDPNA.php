@@ -3,12 +3,12 @@ prado::using ('Application.MainPageD');
 class CDPNA extends MainPageD {
 	public function onLoad($param) {		
 		parent::onLoad($param);				
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showDPNA=true;        
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {     
 			if (!isset($_SESSION['currentPageDPNA']) || $_SESSION['currentPageDPNA']['page_name'] != 'd.nilai.DPNA') {
-                $_SESSION['currentPageDPNA'] = array('page_name' => 'd.nilai.DPNA', 'page_num'=>0,'search'=>false,'DataDPNA'=>array());
+                $_SESSION['currentPageDPNA'] = array('page_name' => 'd.nilai.DPNA', 'page_num' => 0, 'search' => false,'DataDPNA'=>array());
 			}      
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			

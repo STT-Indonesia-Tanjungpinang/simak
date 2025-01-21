@@ -82,14 +82,14 @@ class UserManager extends TAuthManager {
 			case 'Mahasiswa':	                
                 $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.jk,vdm.alamat_rumah,vdm.email,vdm.kjur,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.iddosen_wali,vdm.tahun_masuk,vdm.semester_masuk,vdm.nama_ps,vdm.k_status AS k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas,perpanjang,theme,photo_profile FROM v_datamhs vdm LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN kelas ke ON (ke.idkelas=vdm.idkelas) WHERE nim='$username'";
                 $this->db->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'alamat_rumah', 'email', 'kjur', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali', 'tahun_masuk', 'semester_masuk', 'nama_ps', 'k_status', 'status', 'idkelas', 'nkelas', 'perpanjang', 'theme', 'photo_profile'));
-                $r=$this->db->getRecord($str);					
+                $r = $this->db->getRecord($str);					
                 if (isset($r[1])) {
                     $dataMhs = $r[1];	
                     $logic=$this->Application->getModule('logic');
                     $mhs = $logic->getInstanceOfClass('Mahasiswa');							
                     $mhs->setDataMHS (array('nim' => $username));									                    
-                    $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi']==0) ? '-':$dataMhs['nama_konsentrasi'];
-                    $dataMhs['iddata_konversi']=$mhs->isMhsPindahan($username,true);
+                    $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi'] == 0) ? '-':$dataMhs['nama_konsentrasi'];
+                    $dataMhs['iddata_konversi'] = $mhs->isMhsPindahan($username,true);
                     
                     $dmaster=$logic->getInstanceOfClass('DMaster');							
                     $nama_dosen = $dmaster->getNamaDosenWaliByID($dataMhs['iddosen_wali']);				                    
@@ -103,7 +103,7 @@ class UserManager extends TAuthManager {
 			case 'MahasiswaBaru':				
                 $this->db->setFieldTable(array('no_pendaftaran', 'no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'email', 'telp_hp', 'kjur1', 'kjur2', 'idkelas', 'tahun_masuk', 'semester_masuk'));
                 $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,tempat_lahir,tanggal_lahir,jk,email,telp_hp,kjur1,kjur2,idkelas,ta AS tahun_masuk,idsmt AS semester_masuk FROM formulir_pendaftaran_temp WHERE no_pendaftaran='$username' AND no_formulir > 0";						
-                $r=$this->db->getRecord($str);
+                $r = $this->db->getRecord($str);
                 
 				$r[1]['theme']='cube';
 				$r[1]['photo_profile']='resources/photomhs/no_photo.png';
@@ -115,7 +115,7 @@ class UserManager extends TAuthManager {
             case 'Alumni':	                
                 $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.jk,vdm.alamat_rumah,vdm.email,vdm.kjur,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.iddosen_wali,vdm.tahun_masuk,vdm.semester_masuk,vdm.nama_ps,vdm.k_status AS k_status,sm.n_status AS status,perpanjang,theme,photo_profile FROM v_datamhs vdm LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$username'";
                 $this->db->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'alamat_rumah', 'email', 'kjur', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali', 'tahun_masuk', 'semester_masuk', 'nama_ps', 'k_status', 'status', 'perpanjang', 'theme', 'photo_profile'));
-                $r=$this->db->getRecord($str);					
+                $r = $this->db->getRecord($str);					
                 if (isset($r[1])) {
                     $dataMhs = $r[1];	
                     $logic=$this->Application->getModule('logic');
@@ -124,8 +124,8 @@ class UserManager extends TAuthManager {
                     $kelas = $mhs->getKelasMhs();																	
                     $dataMhs['idkelas']=($kelas['idkelas']== '')?null:$kelas['idkelas'];
                     $dataMhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
-                    $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi']==0) ? '-':$dataMhs['nama_konsentrasi'];
-                    $dataMhs['iddata_konversi']=$mhs->isMhsPindahan($username,true);
+                    $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi'] == 0) ? '-':$dataMhs['nama_konsentrasi'];
+                    $dataMhs['iddata_konversi'] = $mhs->isMhsPindahan($username,true);
                     
                     $dmaster=$logic->getInstanceOfClass('DMaster');							
                     $nama_dosen = $dmaster->getNamaDosenWaliByID($dataMhs['iddosen_wali']);				                    
@@ -140,7 +140,7 @@ class UserManager extends TAuthManager {
 			case 'Dosen':				
 				$str = "SELECT u.userid,d.iddosen,d.nidn,d.nipy,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen,d.idjabatan,d.theme FROM user u,dosen d WHERE u.username=d.username AND d.username='$username'";
 				$this->db->setFieldTable(array('userid', 'iddosen', 'nidn', 'nipy', 'nama_dosen', 'idjabatan', 'theme'));
-				$r=$this->db->getRecord($str);	
+				$r = $this->db->getRecord($str);	
 				$this->dataUser['data_user']=$r[1];
 				$this->dataUser['data_user']['username']=$username;
 				$this->dataUser['data_user']['page']='d';	                
@@ -149,7 +149,7 @@ class UserManager extends TAuthManager {
 			case 'DosenWali':					
 				$str = "SELECT d.iddosen,dw.iddosen_wali,d.nidn,d.nipy,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen,d.idjabatan,d.theme FROM dosen d,dosen_wali dw WHERE d.iddosen=dw.iddosen AND d.username='$username'";
 				$this->db->setFieldTable(array('iddosen', 'iddosen_wali', 'nidn', 'nipy', 'nama_dosen', 'idjabatan', 'theme'));
-				$r=$this->db->getRecord($str);				
+				$r = $this->db->getRecord($str);				
 				$this->dataUser['data_user']=$r[1];
                 $this->dataUser['data_user']['userid']=$username;
 				$this->dataUser['data_user']['username']=$username;
@@ -159,10 +159,10 @@ class UserManager extends TAuthManager {
 			case 'OrangtuaWali':				
 				$str="SELECT idprofile AS userid,nim,email,theme FROM profiles_ortu WHERE username='$username'";
 				$this->db->setFieldTable (array('userid', 'nim', 'email'));					
-				$r=$this->db->getRecord($str);				
+				$r = $this->db->getRecord($str);				
 				$mhs = $this->Application->getModule('logic')->getInstanceOfClass('Mahasiswa');											
 				$mhs->setNim ($r[1]['nim'],true);														
-				$this->dataUser['data_user']=$mhs->dataMhs;								
+				$this->dataUser['data_user'] = $mhs->dataMhs;								
 				$this->dataUser['data_user']['userid']=$r[1]['userid'];
 				$this->dataUser['data_user']['email']=$r[1]['email'];
 				$this->dataUser['data_user']['username']=$this->username;

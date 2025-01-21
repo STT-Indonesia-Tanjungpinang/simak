@@ -38,7 +38,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"></h2> 
                     <div class="filter-block pull-right">                                                   
-                        <a href="<%=$this->Page->constructUrl('perkuliahan.TambahKRS',true)%>" class="btn btn-primary pull-left" title="Isi KRS">                                        
+                        <a href="<%=$this->Page->constructUrl('perkuliahan.TambahKRS', true)%>" class="btn btn-primary pull-left" title="Isi KRS">                                        
                             <i class="fa fa-plus-circle fa-lg"></i>
                         </a>
                         <com:TActiveLinkButton ID="btnPrintOut" OnClick="printKRS" ClientSide.PostState="false" CssClass="btn btn-primary pull-left" Attributes.Title="Print Out KRS">

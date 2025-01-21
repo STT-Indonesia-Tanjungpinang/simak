@@ -21,7 +21,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-calendar"></i> Ubah Jadwal Ujian</h2> 
                 <div class="filter-block pull-right">                        
-                    <a class="btn pull-left" href="<%=$this->constructUrl('spmb.JadwalUjianPMB',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('spmb.JadwalUjianPMB', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -126,7 +126,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-calendar"></i> Tambah Jadwal Ujian</h2> 
                 <div class="filter-block pull-right">                        
-                    <a class="btn pull-left" href="<%=$this->constructUrl('spmb.JadwalUjianPMB',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('spmb.JadwalUjianPMB', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -246,7 +246,7 @@
                                 <tbody>		
                             </prop:HeaderTemplate>
                             <prop:ItemTemplate>	
-                                <tr<%# $this->Data['status']==0?' class="danger"':''%>>
+                                <tr<%# $this->Data['status'] == 0?' class="danger"':''%>>
                                     <td><%# $this->Data['no']%></td>                                    
                                     <td><%# $this->Data['nama_kegiatan']%></td>   
                                     <td><%# $this->Page->TGL->tanggal ('l, d F Y', $this->Data['tanggal_ujian'])%> <%#$this->DataItem['jam_mulai'].'-'.$this->DataItem['jam_akhir']%></td>
@@ -254,7 +254,7 @@
                                     <td><%#$this->DataItem['namaruang'].' ['.$this->DataItem['kapasitas'].']'%></td>                                    
                                     <td><span class="label<%# $this->Data['status']==1?' label-success':' label-default'%>"><%# $this->Data['status']==1?'BUKA':'TUTUP'%></span></td>
                                     <td>
-                                        <a href="<%#$this->Page->constructUrl('spmb.PesertaUjianPMB',true,array('id' => $this->DataItem['idjadwal_ujian']))%>" class="table-link" title="Daftar Peserta Ujian PMB">                                        
+                                        <a href="<%#$this->Page->constructUrl('spmb.PesertaUjianPMB', true,array('id' => $this->DataItem['idjadwal_ujian']))%>" class="table-link" title="Daftar Peserta Ujian PMB">                                        
                                             <%#$this->DataItem['jumlah_peserta']%>
                                         </a>
                                     </td>

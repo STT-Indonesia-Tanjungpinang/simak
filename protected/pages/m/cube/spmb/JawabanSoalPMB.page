@@ -5,7 +5,7 @@
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">SPMB</a></li>
     <li><a href="#">UJIAN SPMB</a></li>
-    <li><a href="<%=$this->constructUrl('spmb.NilaiUjian',true)%>">NILAI UJIAN</a></li>
+    <li><a href="<%=$this->constructUrl('spmb.NilaiUjian', true)%>">NILAI UJIAN</a></li>
     <li class="active">JAWABAN SOAL UJIAN PMB</li>
 </com:TContent>
 <com:TContent ID="maincontent">	    
@@ -118,7 +118,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"><i class="fa fa-list-ul"></i> Soal dan Jawaban Ujian PMB Mahasiswa.</h2> 
                     <div class="filter-block pull-right">                                                   
-                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('spmb.NilaiUjianPMB',true)%>" title="Keluar Detail Jawaban Soal PMB">                        
+                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('spmb.NilaiUjianPMB', true)%>" title="Keluar Detail Jawaban Soal PMB">                        
                             <i class='fa  fa-times fa-lg'></i>
                         </a>
                     </div>

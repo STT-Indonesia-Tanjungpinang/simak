@@ -3,7 +3,7 @@ prado::using ('Application.MainPageD');
 class CDetailDPNA extends MainPageD {    
    	public function onLoad($param) {
 		parent::onLoad($param);							
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showDPNA=true;    
         $this->createObj('Akademik');        
         $this->createObj('Nilai');        
@@ -52,13 +52,13 @@ class CDetailDPNA extends MainPageD {
         while (list($k, $v) = each($r)) {
             $n_kuan='-';
             $n_kual='-';
-            $am='-';
-            $hm='-';
+            $am = '-';
+            $hm = '-';
             if ($v['n_kual']!= '') {
                 $n_kuan = $v['n_kuan'];
                 $n_kual = $v['n_kual'];
-                $am=$this->Nilai->getAngkaMutu($v['n_kual']);
-                $hm=$am*$sks;
+                $am = $this->Nilai->getAngkaMutu($v['n_kual']);
+                $hm = $am*$sks;
             }
             $v['n_kuan'] = $n_kuan;
             $v['n_kual'] = $n_kual;

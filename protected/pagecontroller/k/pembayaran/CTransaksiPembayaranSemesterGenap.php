@@ -59,7 +59,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
         $k = $this->DB->getRecord($str);
         
         $belum_komit=array();
-        while (list($m, $n)=each($k)) {              
+        while (list($m, $n) = each($k)) {              
             $belum_komit[$n['idkombi']] = $n['dibayarkan'];
         }
         
@@ -163,7 +163,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',date_modified=NOW() WHERE no_transaksi = $no_transaksi";
             $this->DB->updateRecord($str);
             unset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranSemesterGenap',true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterGenap', true,array('id' => $nim));
         }
     }
     public function commitData($sender, $param) {
@@ -183,7 +183,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
             $this->DB->updateRecord($str);
 
             $this->Finance->setDataMHS($datamhs);
-            $datadulang=$this->Finance->getDataDulang($idsmt, $ta);  
+            $datadulang = $this->Finance->getDataDulang($idsmt, $ta);  
             if (!isset($datadulang['iddulang'])) {                
                 $bool = $this->Finance->getTresholdPembayaran($ta, $idsmt);						                                
                 if ($bool) {
@@ -198,14 +198,14 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
             }
             $this->DB->query('COMMIT');
             unset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranSemesterGenap',true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterGenap', true,array('id' => $nim));
         }
     }
     public function closeTransaction($sender, $param) {
         $datamhs = $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS'];            
         $nim = $datamhs['nim'];
         unset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']);
-        $this->redirect('pembayaran.DetailPembayaranSemesterGenap',true,array('id' => $nim));
+        $this->redirect('pembayaran.DetailPembayaranSemesterGenap', true,array('id' => $nim));
     }
     public function cancelTrx($sender, $param) {	
         $datamhs = $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']; 
@@ -213,11 +213,11 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
 		$no_transaksi = $datamhs['no_transaksi'];		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");
         unset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']);
-		$this->redirect('pembayaran.DetailPembayaranSemesterGenap',true,array('id' => $nim));
+		$this->redirect('pembayaran.DetailPembayaranSemesterGenap', true,array('id' => $nim));
 	}
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']);
-        $this->redirect('pembayaran.PembayaranSemesterGenap',true);
+        $this->redirect('pembayaran.PembayaranSemesterGenap', true);
     }
 }
 class TotalPrice extends MainController

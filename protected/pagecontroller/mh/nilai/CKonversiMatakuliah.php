@@ -7,12 +7,12 @@ class CKonversiMatakuliah extends MainPageMHS {
     public $NilaiSemesterSekarang;
 	public function onLoad($param) {
 		parent::onLoad($param);							
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showKonversiMatakuliah = true;    
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKonversiMatakuliah']) || $_SESSION['currentPageKonversiMatakuliah']['page_name'] != 'mh.spmb.KonversiMatakuliah') {
-				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'mh.spmb.KonversiMatakuliah', 'page_num'=>0,'search'=>false,'DataKonversi'=>array());												                                               
+				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'mh.spmb.KonversiMatakuliah', 'page_num' => 0, 'search' => false,'DataKonversi'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

@@ -7,7 +7,7 @@ class CTA extends MainPageSA {
         $this->showTA=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageTA']) || $_SESSION['currentPageTA']['page_name'] != 'sa.dmaster.TA') {
-				$_SESSION['currentPageTA'] = array('page_name' => 'sa.dmaster.TA', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPageTA'] = array('page_name' => 'sa.dmaster.TA', 'page_num' => 0, 'search' => false);
 			}
 			$this->populateData();			
 		}
@@ -32,7 +32,7 @@ class CTA extends MainPageSA {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTA']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTA']['page_num'] = 0;}
 
 		$this->DB->setFieldTable (array('tahun', 'tahun_akademik'));
 		$str = "SELECT * FROM ta ORDER BY tahun DESC LIMIT $offset, $limit";
@@ -68,7 +68,7 @@ class CTA extends MainPageSA {
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
                 $this->Application->Cache->set('listta', $dataitem);
             }
-			$this->Redirect('dmaster.TA',true);
+			$this->Redirect('dmaster.TA', true);
 		}
 	}
     public function editRecord($sender, $param) {
@@ -89,7 +89,7 @@ class CTA extends MainPageSA {
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
                 $this->Application->Cache->set('listta', $dataitem);
             }
-            $this->Redirect('dmaster.TA',true);
+            $this->Redirect('dmaster.TA', true);
 		}
 	}
 	public function deleteRecord($sender, $param) {
@@ -105,7 +105,7 @@ class CTA extends MainPageSA {
                 $dataitem['none'] = 'Daftar Tahun Akademik';    
                 $this->Application->Cache->set('listta', $dataitem);
             }
-            $this->Redirect('dmaster.TA',true);
+            $this->Redirect('dmaster.TA', true);
         }
 	}
 	

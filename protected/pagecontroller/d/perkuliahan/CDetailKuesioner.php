@@ -14,7 +14,7 @@ class CDetailKuesioner extends MainPageD {
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailKuesioner']) || $_SESSION['currentPageDetailKuesioner']['page_name'] != 'd.perkuliahan.DetailKuesioner') {
-				$_SESSION['currentPageDetailKuesioner'] = array('page_name' => 'd.perkuliahan.DetailKuesioner', 'page_num'=>0,'DataKuesioner'=>array());
+				$_SESSION['currentPageDetailKuesioner'] = array('page_name' => 'd.perkuliahan.DetailKuesioner', 'page_num' => 0,'DataKuesioner'=>array());
 			}             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -78,7 +78,7 @@ class CDetailKuesioner extends MainPageD {
         $kelompok_pertanyaan[0] = 'UNDEFINED';
         unset($kelompok_pertanyaan['none']);        
         $result = array();
-        while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
+        while (list($idkelompok_pertanyaan, $nama_kelompok) = each($kelompok_pertanyaan)) {
             $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan = $idkelompok_pertanyaan ORDER BY (orders+0) ASC";
             $this->DB->setFieldTable(array('idkuesioner', 'idkelompok_pertanyaan', 'pertanyaan', 'orders', 'date_added'));
             $r = $this->DB->getRecord($str);

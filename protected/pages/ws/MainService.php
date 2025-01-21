@@ -65,7 +65,7 @@ class MainService extends TModule  {
 					if ($arg == "type") {
 						$arrTable = "";
 					}else if ($arg == "field") {
-						$arrTable[]=$value[$arg];
+						$arrTable[] = $value[$arg];
 					}else {
 						throw new Exception ("DBHandler::getFieldTable::arg valid are type and field");
 						break;

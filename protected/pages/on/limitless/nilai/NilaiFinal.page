@@ -3,7 +3,7 @@
     <i class="icon-blog position-left"></i> <span class="text-semibold">Nilai Final <com:TActiveLabel ID="lblModulHeader" /></span>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
+    <li><a href="<%=$this->Page->constructUrl('Home', true)%>">HOME</a></li> 
     <li class="active">NILAI FINAL</li>
 </com:TContent>
 <com:TContent ID="sidebarcontent">
@@ -137,7 +137,7 @@
                     <prop:ItemTemplate>	
                         <tr>
                             <td><%# $this->Data['no']%></td>					
-                            <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>                            
+                            <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>                            
                             <td><%# $this->Data['nama_mhs']%></td>
                             <td><%# $this->Data['nomor_ijazah']%></td>
                             <td><%# $this->Data['nomor_transkrip']%></td>

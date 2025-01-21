@@ -5,7 +5,7 @@
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">AKADEMIK</a></li>
     <li><a href="#">PERKULIAHAN</a></li>
-    <li><a href="<%=$this->constructUrl('perkuliahan.Penyelenggaraan',true)%>">PENYELENGGARAAN</a></li>
+    <li><a href="<%=$this->constructUrl('perkuliahan.Penyelenggaraan', true)%>">PENYELENGGARAAN</a></li>
     <li class="active">PENGAMPU MATAKULIAH LAIN</li>
 </com:TContent>
 <com:TContent ID="csscontent">
@@ -18,7 +18,7 @@
         <div class="main-box clearfix">               
             <header class="main-box-header clearfix">
                 <div class="icon-box pull-right">                                       
-                    <a class="btn btn-default pull-left" href="<%=$this->constructUrl('perkuliahan.Penyelenggaraan',true)%>">
+                    <a class="btn btn-default pull-left" href="<%=$this->constructUrl('perkuliahan.Penyelenggaraan', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -42,7 +42,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Tambah Pengampu Lain</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.PengampuLain',true,array('id' => $this->Demik->InfoMatkul['idpenyelenggaraan']))%>">
+                    <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.PengampuLain', true,array('id' => $this->Demik->InfoMatkul['idpenyelenggaraan']))%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -95,7 +95,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Ubah Pengampu Lain</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.PengampuLain',true,array('id' => $this->Demik->InfoMatkul['idpenyelenggaraan']))%>">
+                    <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.PengampuLain', true,array('id' => $this->Demik->InfoMatkul['idpenyelenggaraan']))%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -148,7 +148,7 @@
                 <header class="main-box-header clearfix">
                      <h2 class="pull-left"><i class="fa fa-user"></i> Daftar Pengampu Matakuliah</h2> 
                      <div class="filter-block pull-right">                        
-                        <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan',true)%>" class="btn btn-default pull-right" title="Keluar">                                        
+                        <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan', true)%>" class="btn btn-default pull-right" title="Keluar">                                        
                             <i class='fa  fa-times fa-lg'></i>
                         </a> 
                         <com:TLinkButton ID="add" CssClass="btn btn-primary pull-right" Text="<i class='fa  fa-plus-circle fa-lg'></i>" Attributes.Title="Tambah Matakuliah" OnClick="addProcess" CausesValidation="false" />                                                                        

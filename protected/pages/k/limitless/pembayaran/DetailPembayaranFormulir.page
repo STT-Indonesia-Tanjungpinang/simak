@@ -3,7 +3,7 @@
     <i class="icon-calculator3 position-left"></i> <span class="text-semibold">Pembayaran Formulir</span>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
+    <li><a href="<%=$this->Page->constructUrl('Home', true)%>">HOME</a></li> 
     <li><a href="#">PEMBAYARAN</a></li>    
     <li class="active">MAHASISWA BARU</li>     
 </com:TContent>
@@ -23,7 +23,7 @@
         <div class="heading-elements">
             <ul class="icons-list">                
                 <li>
-                    <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranFormulir',true);%>" data-action="closeredirect"></a>
+                    <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranFormulir', true);%>" data-action="closeredirect"></a>
                 </li>
             </ul>
         </div>        
@@ -65,7 +65,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->getDataMHS('no_formulir')))%>"><img src="<%=$this->setup->getAddress($this->getDataMHS('no_formulir'))%>" alt="" onerror="no_photo(this,'resources/userimages/no_photo.png')" /></a>                        
+                            <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->getDataMHS('no_formulir')))%>"><img src="<%=$this->setup->getAddress($this->getDataMHS('no_formulir'))%>" alt="" onerror="no_photo(this,'resources/userimages/no_photo.png')" /></a>                        
                         </div>                   
                         <div class="col-md-5">
                             <div class="form-horizontal">

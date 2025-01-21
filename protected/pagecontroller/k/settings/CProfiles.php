@@ -22,7 +22,7 @@ class CProfiles extends MainPageK {
                 $str = "UPDATE user SET userpassword='$password',salt='$salt',theme='limitless' WHERE userid = $id";
             }
             $this->DB->updateRecord($str);
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
     }
 }

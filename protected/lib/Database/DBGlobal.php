@@ -66,7 +66,7 @@ class DBGlobal {
           if ($arg == "type") {
             $arrTable = "";
           }else if ($arg == "field") {
-            $arrTable[]=$value[$arg];
+            $arrTable[] = $value[$arg];
           }else {
             throw new Exception ("DBHandler::getFieldTable::arg valid are type and field");
             break;
@@ -113,7 +113,7 @@ class DBGlobal {
     if ($countField <= 1) {
       $field =$fieldTable[0];
     }else {
-      for ($i=0;$i<$countField;$i++) {
+      for ($i=0;$i < $countField;$i++) {
         if ($countField > $i+1) {
           $field = $field . $fieldTable[$i] . ', ';
         }else {

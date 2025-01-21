@@ -211,7 +211,7 @@ class BaseWS extends TJsonResponse {
         $_ip = explode(', ', $data['ipaddress']);
         $jumlah_ip=count($_ip);
         $bool=-1;
-        for ($i=0;$i<$jumlah_ip;$i+=1)
+        for ($i=0;$i < $jumlah_ip;$i+=1)
         {
           if ($_ip[$i] == $alamat_ip)
           {

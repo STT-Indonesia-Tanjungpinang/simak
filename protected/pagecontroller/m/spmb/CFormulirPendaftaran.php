@@ -11,9 +11,9 @@ class CFormulirPendaftaran extends MainPageM
     if (!$this->IsPostBack && !$this->IsCallBack)
     {	
       if (!isset($_SESSION['currentPageFormulirPendaftaran']) || $_SESSION['currentPageFormulirPendaftaran']['page_name'] != 'm.spmb.FormulirPendaftaran') {
-        $_SESSION['currentPageFormulirPendaftaran'] = array('page_name' => 'm.spmb.FormulirPendaftaran', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'status_dulang' => 'none');												
+        $_SESSION['currentPageFormulirPendaftaran'] = array('page_name' => 'm.spmb.FormulirPendaftaran', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'status_dulang' => 'none');												
       }
-      $_SESSION['currentPageFormulirPendaftaran']['search']=false;
+      $_SESSION['currentPageFormulirPendaftaran']['search'] = false;
       $this->cmbDaftarUlang->Text = $_SESSION['currentPageFormulirPendaftaran']['status_dulang'];
       
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -162,7 +162,7 @@ class CFormulirPendaftaran extends MainPageM
     if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
       $limit=$this->RepeaterS->VirtualItemCount-$offset;
     }
-    if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageFormulirPendaftaran']['page_num']=0;}
+    if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageFormulirPendaftaran']['page_num'] = 0;}
     $str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset, $limit";				
     $_SESSION['currentPageFormulirPendaftaran']['offset'] = $offset;
     $_SESSION['currentPageFormulirPendaftaran']['limit'] = $limit;
@@ -433,7 +433,7 @@ class CFormulirPendaftaran extends MainPageM
       }else {
         $this->DB->query('ROLLBACK');
       }			
-      $this->redirect('spmb.FormulirPendaftaran',true);
+      $this->redirect('spmb.FormulirPendaftaran', true);
     }
   }
 
@@ -451,7 +451,7 @@ class CFormulirPendaftaran extends MainPageM
       {
         $this->DB->deleteRecord ("transaksi WHERE no_formulir='$no_formulir'");
         $this->DB->query ('COMMIT');
-        $this->redirect('spmb.FormulirPendaftaran',true);
+        $this->redirect('spmb.FormulirPendaftaran', true);
       }
       else
       {

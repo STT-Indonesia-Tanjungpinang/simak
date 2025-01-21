@@ -16,7 +16,7 @@
         <div class="main-box clearfix">               
             <header class="main-box-header clearfix">
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('nilai.KHS',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('nilai.KHS', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -41,7 +41,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"><i class="fa fa-question-circle"></i> Daftar Pertanyaan</h2> 
                     <div class="filter-block pull-right">
-                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('nilai.KHS',true)%>">
+                        <a class="btn btn-default pull-right" href="<%=$this->constructUrl('nilai.KHS', true)%>">
                             <i class="fa fa-times"></i>
                         </a>
                     </div>

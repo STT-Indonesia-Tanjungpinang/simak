@@ -35,7 +35,7 @@
     </div>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
+    <li><a href="<%=$this->Page->constructUrl('Home', true)%>">HOME</a></li> 
     <li><a href="#">PEMBAYARAN</a></li>
     <li class="active">SEMESTER GANJIL</li>     
 </com:TContent>
@@ -141,7 +141,7 @@
                             <td>
                                 <ul class="icons-list">
                                     <li class="text-primary-600">
-                                        <a href="<%#$this->Page->constructUrl('pembayaran.DetailPembayaranSemesterGanjil',true,array('id' => $this->DataItem['nim']))%>" title="Detail Transaksi">
+                                        <a href="<%#$this->Page->constructUrl('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $this->DataItem['nim']))%>" title="Detail Transaksi">
                                             <i class="icon-eye"></i>
                                         </a>
                                     </li>                                    

@@ -7,14 +7,14 @@ class CDetailKHS extends MainPageDW {
     public $NilaiSemesterSekarang;
 	public function onLoad($param) {
 		parent::onLoad($param);							
-		$this->showSubMenuAkademikNilai=true;
-        $this->showKHS=true;    
+		$this->showSubMenuAkademikNilai = true;
+        $this->showKHS = true;    
         $this->createObj('Nilai');
         $this->createObj('Finance');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailKHS']) || $_SESSION['currentPageDetailKHS']['page_name'] != 'dw.nilai.DetailKHS') {
-				$_SESSION['currentPageDetailKHS'] = array('page_name' => 'dw.nilai.DetailKHS', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+				$_SESSION['currentPageDetailKHS'] = array('page_name' => 'dw.nilai.DetailKHS', 'page_num' => 0, 'search' => false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -42,17 +42,17 @@ class CDetailKHS extends MainPageDW {
             }
             $tahun = $datamhs['tahun'];
             $idsmt = $datamhs['idsmt'];
-            if ($datamhs['sah']==0) {
+            if ($datamhs['sah'] == 0) {
                 throw new Exception("KRS dengan ID ($idkrs) belum disahkan.");
             }
             $this->Finance->setDataMHS($datamhs);                
             $lunaspembayaran = $this->Finance->getLunasPembayaran($_SESSION['ta'], $_SESSION['semester']);
-            if (($lunaspembayaran==false)&&$_SESSION['ta']>=2010) {                    					                    
+            if (($lunaspembayaran==false)&&$_SESSION['ta'] >=2010) {                    					                    
                 throw new Exception ("Pembayaran uang kuliah pada {$tahun}{$idsmt} belum lunas.");
             }
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
             $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
             $_SESSION['currentPageDetailKHS']['DataMHS'] = $datamhs;
             $this->Nilai->setDataMHS($datamhs);

@@ -7,7 +7,7 @@ class CSoalPMB extends MainPageM {
 		$this->showSoalPMB = true;
 		if (!$this->IsPostBack && !$this->IsCallBack) {					
 			if (!isset($_SESSION['currentPageSoalPMB']) || $_SESSION['currentPageSoalPMB']['page_name'] != 'm.dmaster.SoalPMB') {
-                $_SESSION['currentPageSoalPMB'] = array('page_name' => 'm.dmaster.SoalPMB', 'page_num'=>0,'search'=>false);
+                $_SESSION['currentPageSoalPMB'] = array('page_name' => 'm.dmaster.SoalPMB', 'page_num' => 0, 'search' => false);
 			}
             $result = array();
 			for ($i=1;$i<=4;$i++) {
@@ -37,7 +37,7 @@ class CSoalPMB extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageSoalPMB']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageSoalPMB']['page_num'] = 0;}
 		$str = "SELECT s.idsoal,nama_soal,date_added,date_modified FROM soal s ORDER BY date_modified DESC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('idsoal', 'nama_soal', 'date_added', 'date_modified')); 
 		$r = $this->DB->getRecord($str, $offset+1);			
@@ -94,7 +94,7 @@ class CSoalPMB extends MainPageM {
                 $str = "INSERT INTO jawaban (idjawaban,idsoal,jawaban,status) VALUES $values";
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
-                $this->redirect('dmaster.SoalPMB',true);
+                $this->redirect('dmaster.SoalPMB', true);
             }else {
                 $this->DB->query('ROLLBACK');
             } 
@@ -140,7 +140,7 @@ class CSoalPMB extends MainPageM {
                 $str = "INSERT INTO jawaban (idjawaban,idsoal,jawaban,status) VALUES $values";
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
-                $this->redirect('dmaster.SoalPMB',true);
+                $this->redirect('dmaster.SoalPMB', true);
             }else {
                 $this->DB->query('ROLLBACK');
             } 
@@ -154,7 +154,7 @@ class CSoalPMB extends MainPageM {
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("soal WHERE idsoal = $id"); 
-            $this->redirect('dmaster.SoalPMB',true);
+            $this->redirect('dmaster.SoalPMB', true);
         }        
     } 
 	

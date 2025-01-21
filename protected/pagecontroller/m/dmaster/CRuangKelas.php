@@ -7,7 +7,7 @@ class CRuangKelas Extends MainPageM {
 		$this->showRuangKelas=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRuangKelas']) || $_SESSION['currentPageRuangKelas']['page_name'] != 'sa.dmaster.RuangKelas') {
-				$_SESSION['currentPageRuangKelas'] = array('page_name' => 'sa.dmaster.RuangKelas', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPageRuangKelas'] = array('page_name' => 'sa.dmaster.RuangKelas', 'page_num' => 0, 'search' => false);
 			}
 			$this->populateData();
 		}
@@ -31,7 +31,7 @@ class CRuangKelas Extends MainPageM {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageRuangKelas']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageRuangKelas']['page_num'] = 0;}
         $str = "$str LIMIT $offset, $limit";
         $this->DB->setFieldTable (array('idruangkelas', 'namaruang', 'kapasitas'));
 		$r = $this->DB->getRecord($str, $offset+1);
@@ -68,7 +68,7 @@ class CRuangKelas Extends MainPageM {
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
                 $this->Application->Cache->set('listruangkelas', $dataitem);                
             }
-			$this->redirect('dmaster.RuangKelas',true);
+			$this->redirect('dmaster.RuangKelas', true);
 		}
 	}
 	public function editRecord($sender, $param) {
@@ -92,7 +92,7 @@ class CRuangKelas Extends MainPageM {
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
                 $this->Application->Cache->set('listruangkelas', $dataitem);                
             }
-			$this->redirect('dmaster.RuangKelas',true);
+			$this->redirect('dmaster.RuangKelas', true);
 		}
 	}
     public function deleteRecord($sender, $param) {
@@ -108,7 +108,7 @@ class CRuangKelas Extends MainPageM {
                 $dataitem['none'] = 'Daftar Ruang Kelas';    
                 $this->Application->Cache->set('listruangkelas', $dataitem);                
             }
-            $this->redirect('dmaster.RuangKelas',true);
+            $this->redirect('dmaster.RuangKelas', true);
         }
 		
 	}

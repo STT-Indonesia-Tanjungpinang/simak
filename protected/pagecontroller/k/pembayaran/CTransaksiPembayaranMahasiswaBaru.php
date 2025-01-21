@@ -57,7 +57,7 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
         $k = $this->DB->getRecord($str);
         
         $belum_komit=array();
-        while (list($m, $n)=each($k)) {              
+        while (list($m, $n) = each($k)) {              
             $belum_komit[$n['idkombi']] = $n['dibayarkan'];
         }
         
@@ -159,7 +159,7 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',date_modified=NOW() WHERE no_transaksi = $no_transaksi";
             $this->DB->updateRecord($str);
             unset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id' => $no_formulir));
+            $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru', true,array('id' => $no_formulir));
         }
     }
     public function commitData($sender, $param) {
@@ -174,18 +174,18 @@ class CTransaksiPembayaranMahasiswaBaru Extends MainPageK {
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',commited=1,date_modified=NOW() WHERE no_transaksi = $no_transaksi";
             $this->DB->updateRecord($str);
             unset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id' => $no_formulir));
+            $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru', true,array('id' => $no_formulir));
         }
     }
     public function closeTransaction($sender, $param) {
         $datamhs = $_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS'];            
         $no_formulir = $datamhs['no_formulir'];
         unset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']);
-        $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru',true,array('id' => $no_formulir));
+        $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru', true,array('id' => $no_formulir));
     }
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranMahasiswaBaru']['DataMHS']);
-        $this->redirect('pembayaran.PembayaranMahasiswaBaru',true);
+        $this->redirect('pembayaran.PembayaranMahasiswaBaru', true);
     }
 }
 class TotalPrice extends MainController

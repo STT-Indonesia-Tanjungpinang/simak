@@ -119,7 +119,7 @@ class CTambahPKRS extends MainPageDW {
         $this->DB->updateRecord($str);
         $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan = $idpenyelenggaraan,tambah=1,hapus=0,batal=0,sah=0,tanggal=NOW()");														
         $this->DB->query ('COMMIT');
-        $this->redirect ('perkuliahan.TambahPKRS',true);
+        $this->redirect ('perkuliahan.TambahPKRS', true);
       }
       else
       {
@@ -152,7 +152,7 @@ class CTambahPKRS extends MainPageDW {
     {
       $this->DB->query ('ROLLBACK');
     }	
-    $this->redirect ('perkuliahan.TambahPKRS',true);
+    $this->redirect ('perkuliahan.TambahPKRS', true);
   }	
   
   public function hitung($sender, $param) {
@@ -174,6 +174,6 @@ class CTambahPKRS extends MainPageDW {
   public function closeTambahPKRS($sender, $param)
   {
     unset($_SESSION['currentPagePKRS']);
-    $this->redirect ('perkuliahan.KRS',true);
+    $this->redirect ('perkuliahan.KRS', true);
   }
 }

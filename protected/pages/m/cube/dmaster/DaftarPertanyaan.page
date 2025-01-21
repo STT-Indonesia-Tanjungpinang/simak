@@ -21,7 +21,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-edit"></i> Ubah Kuesioner</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-right" href="<%=$this->constructUrl('dmaster.DaftarPertanyaan',true)%>">
+                    <a class="btn pull-right" href="<%=$this->constructUrl('dmaster.DaftarPertanyaan', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -132,7 +132,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Tambah Kuesioner</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-right" href="<%=$this->constructUrl('dmaster.DaftarPertanyaan',true)%>">
+                    <a class="btn pull-right" href="<%=$this->constructUrl('dmaster.DaftarPertanyaan', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -298,7 +298,7 @@
                             </prop:ClientSide.OnComplete>
                         </com:TActiveLinkButton> 
                         
-                        <a href="<%=$this->Page->constructUrl('dmaster.SalinDaftarPertanyaan',true)%>" class="btn btn-primary pull-left" title="Salin Daftar Pertanyaan">                                        
+                        <a href="<%=$this->Page->constructUrl('dmaster.SalinDaftarPertanyaan', true)%>" class="btn btn-primary pull-left" title="Salin Daftar Pertanyaan">                                        
                             <i class="fa fa-copy fa-lg"></i>
                         </a>                        
                         <com:TLinkButton ID="add" CssClass="btn btn-primary pull-right" Text="<i class='fa  fa-plus-circle fa-lg'></i>" Attributes.Title="Tambah Pertanyaan" OnClick="addProcess" CausesValidation="false" />                                                

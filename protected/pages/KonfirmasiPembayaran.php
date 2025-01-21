@@ -15,7 +15,7 @@ class KonfirmasiPembayaran extends MainPageF {
             try {
 				$str  = "SELECT no_pendaftaran FROM formulir_pendaftaran_temp WHERE no_pendaftaran='$no_pendaftaran'";				
 				$this->DB->setFieldTable(array('no_pendaftaran'));
-				$r=$this->DB->getRecord($str);
+				$r = $this->DB->getRecord($str);
 				if (!isset($r[1])) {                                
 					throw new Exception ("Nomor Pendaftaran ($no_pendaftaran) tidak terdaftar di Database, silahkan ganti dengan yang lain.");		
 				}
@@ -31,7 +31,7 @@ class KonfirmasiPembayaran extends MainPageF {
 			$no_pendaftaran=addslashes($this->txtAddNomorPendaftaran->Text);	
 			$str  = "SELECT no_pendaftaran, nama_mhs,tempat_lahir,tanggal_lahir,jk,email,telp_hp,kjur1,kjur2,idkelas,ta,idsmt,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp WHERE no_pendaftaran='$no_pendaftaran'";
 			$this->DB->setFieldTable(array('no_pendaftaran', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'email', 'telp_hp', 'kjur1', 'kjur2', 'idkelas', 'ta', 'idsmt', 'waktu_mendaftar', 'file_bukti_bayar'));
-			$r=$this->DB->getRecord($str);
+			$r = $this->DB->getRecord($str);
 			$r[1]['nama_ps_1']=$this->DMaster->getNamaProgramStudiByID($r[1]['kjur1']);
 			$r[1]['nama_ps_2']=($r[1]['kjur2']> 0)?$this->DMaster->getNamaProgramStudiByID($r[1]['kjur2']):'N.A';
 			$this->DataMHS = $r[1];

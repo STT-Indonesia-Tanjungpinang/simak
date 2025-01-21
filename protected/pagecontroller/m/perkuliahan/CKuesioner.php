@@ -8,9 +8,9 @@ class CKuesioner extends MainPageM {
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKuesioner']) || $_SESSION['currentPageKuesioner']['page_name'] != 'm.perkuliahan.Kuesioner') {
-				$_SESSION['currentPageKuesioner'] = array('page_name' => 'm.perkuliahan.Kuesioner', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPageKuesioner'] = array('page_name' => 'm.perkuliahan.Kuesioner', 'page_num' => 0, 'search' => false);
 			}  
-            $_SESSION['currentPageKuesioner']['search']=false;
+            $_SESSION['currentPageKuesioner']['search'] = false;
             $_SESSION['currentPageDetailKuesioner'] = array();
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
@@ -108,7 +108,7 @@ class CKuesioner extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKuesioner']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKuesioner']['page_num'] = 0;}
         $str="$str ORDER BY nmatkul ASC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpengampu_penyelenggaraan', 'idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen', 'jumlahmhs'));			
 		$r = $this->DB->getRecord($str);	

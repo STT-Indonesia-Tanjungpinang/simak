@@ -9,9 +9,9 @@ public function onLoad($param) {
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPagePembagianKelas']) || $_SESSION['currentPagePembagianKelas']['page_name'] != 'm.perkuliahan.PembagianKelas') {                
-        $_SESSION['currentPagePembagianKelas'] = array('page_name' => 'm.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'iddosen' => 'none', 'nama_hari' => 'none');												
+        $_SESSION['currentPagePembagianKelas'] = array('page_name' => 'm.perkuliahan.PembagianKelas', 'page_num' => 0, 'search' => false,'iddosen' => 'none', 'nama_hari' => 'none');												
       }
-      $_SESSION['currentPagePembagianKelas']['search']=false;
+      $_SESSION['currentPagePembagianKelas']['search'] = false;
       
       $ta = $_SESSION['ta'];
       $idsmt = $_SESSION['semester'];
@@ -105,7 +105,7 @@ public function onLoad($param) {
   }
   public function changeDosenPengampu($sender, $param) {
     $_SESSION['currentPagePembagianKelas']['iddosen'] = $this->cmbAddNamaDosen->Text;	 
-    $this->redirect ('perkuliahan.DetailPembagianKelas',true);
+    $this->redirect ('perkuliahan.DetailPembagianKelas', true);
   }	
 
   public function getInfoToolbar() {        
@@ -169,7 +169,7 @@ public function onLoad($param) {
     $str = "SELECT idpengampu_penyelenggaraan,nidn,nama_dosen FROM v_pengampu_penyelenggaraan WHERE idpenyelenggaraan = $idpenyelenggaraan";
     $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'nidn', 'nama_dosen'));
     $data_pengampu = $this->DB->getRecord($str);	
-    while (list($k, $v)=each($data_pengampu)) { 
+    while (list($k, $v) = each($data_pengampu)) { 
       $idpengampu_penyelenggaraan = $v['idpengampu_penyelenggaraan'];
       $daftar_dosen[$idpengampu_penyelenggaraan] = $v['nama_dosen'] . '['.$v['nidn'].']';
     }

@@ -21,7 +21,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"> &nbsp;</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('kemahasiswaan.PindahKelas',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('kemahasiswaan.PindahKelas', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -102,7 +102,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"> &nbsp;</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('kemahasiswaan.PindahKelas',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('kemahasiswaan.PindahKelas', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>

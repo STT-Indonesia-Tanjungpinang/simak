@@ -28,6 +28,6 @@ class CHome extends MainPageMHS
   }
   public function refreshPage($sender, $param) {
     unset($_SESSION['currentPageHome']);
-    $this->redirect('Home',true);
+    $this->redirect('Home', true);
   }
 }

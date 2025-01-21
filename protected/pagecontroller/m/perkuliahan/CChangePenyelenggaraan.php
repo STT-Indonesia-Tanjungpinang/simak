@@ -11,9 +11,9 @@ class CChangePenyelenggaraan extends MainPageM
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPageChangePenyelenggaraan']) || $_SESSION['currentPageChangePenyelenggaraan']['page_name'] != 'm.perkuliahan.ChangePenyelenggaraan') {                
-        $_SESSION['currentPageChangePenyelenggaraan'] = array('page_name' => 'm.perkuliahan.ChangePenyelenggaraan', 'page_num'=>0,'search'=>false,'idkur' => $this->Demik->getIDKurikulum($_SESSION['kjur']));												
+        $_SESSION['currentPageChangePenyelenggaraan'] = array('page_name' => 'm.perkuliahan.ChangePenyelenggaraan', 'page_num' => 0, 'search' => false,'idkur' => $this->Demik->getIDKurikulum($_SESSION['kjur']));												
       }
-      $_SESSION['currentPageChangePenyelenggaraan']['search']=false;            
+      $_SESSION['currentPageChangePenyelenggaraan']['search'] = false;            
             
       $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
       $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -123,7 +123,7 @@ class CChangePenyelenggaraan extends MainPageM
         $this->DB->updateRecord($str);                
       }
       $this->DB->query('COMMIT');
-      $this->redirect('perkuliahan.ChangePenyelenggaraan',true);   
+      $this->redirect('perkuliahan.ChangePenyelenggaraan', true);   
     } catch (Exception $ex) {            
       $this->DB->query('ROLLBACK');
       $this->lblContentMessageError->Text="Matakuliah $nmatkul dengan kode $old_kmatkul belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah";

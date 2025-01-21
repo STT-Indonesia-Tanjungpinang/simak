@@ -17,7 +17,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Tambah Ruang Kelas</h2>
                 <div class="icon-box pull-right">
-                    <a class="btn pull-left" href="<%=$this->constructUrl('dmaster.RuangKelas',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('dmaster.RuangKelas', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -97,7 +97,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Ubah Ruang Kelas</h2>
                 <div class="icon-box pull-right">
-                    <a class="btn pull-left" href="<%=$this->constructUrl('dmaster.RuangKelas',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('dmaster.RuangKelas', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>

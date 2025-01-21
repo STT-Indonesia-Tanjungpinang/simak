@@ -25,7 +25,7 @@ class KUM extends CKUM {
                 $messageprintout="";
                 $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                 $this->DB->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
-                $r=$this->DB->getRecord($str);	           
+                $r = $this->DB->getRecord($str);	           
                 $dataReport=$r[1];
                 
                 $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$dataReport['kjur']];                
@@ -74,7 +74,7 @@ class KUM extends CKUM {
                 $rpt->setTitle('Kartu Ujian Mahasiswa');
 				$rpt->setSubject('Kartu Ujian Mahasiswa');
                 
-                while (list($idkrs, $value)=each($dataidkrs)) {                    
+                while (list($idkrs, $value) = each($dataidkrs)) {                    
                     $rpt->AddPage();
                     $this->setHeaderPT();
                     
@@ -87,7 +87,7 @@ class KUM extends CKUM {
                     
                     $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                     $this->db->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
-                    $r=$this->db->getRecord($str);	           
+                    $r = $this->db->getRecord($str);	           
                     $dataReport=$r[1];
 
                     $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$dataReport['kjur']];                
@@ -159,7 +159,7 @@ class KUM extends CKUM {
                     $totalSks=0;
                     $row+=5;				
                     $rpt->SetFont ('helvetica', '',8);
-                    while (list($k, $v)=each($daftar_matkul)) {
+                    while (list($k, $v) = each($daftar_matkul)) {
                         $rpt->setXY(3, $row);	
                         $rpt->Cell(8, 5, $v['no'], 1, 0, 'C');				
                         $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
@@ -295,7 +295,7 @@ class KUM extends CKUM {
 				$totalSks=0;
 				$row+=5;				
 				$rpt->SetFont ('helvetica', '',8);
-                while (list($k, $v)=each($daftar_matkul)) {
+                while (list($k, $v) = each($daftar_matkul)) {
                     $rpt->setXY(6, $row);	
 					$rpt->Cell(8, 8, $v['no'], 1, 0, 'C');				
 					$rpt->Cell(15, 8, $v['kmatkul'], 1, 0, 'C');		

@@ -5,7 +5,7 @@ class MainTemplate extends TTemplateControl {
 		parent::onLoad($param);		        
 		if (!$this->Page->IsPostBack&&!$this->Page->IsCallback) {		
             $tipeuser=$this->Page->Pengguna->getTipeUser();
-            $this->linkTopTASemester->NavigateUrl=$tipeuser=='sa'?$this->Page->constructUrl('settings.Variables',true):'#';
+            $this->linkTopTASemester->NavigateUrl=$tipeuser=='sa'?$this->Page->constructUrl('settings.Variables', true):'#';
             $this->lblStatusUser->Text = $this->getStatusUser();
             $this->loggerJS->Visible=$this->Page->setup->getSettingValue('jslogger');
             
@@ -37,7 +37,7 @@ class MainTemplate extends TTemplateControl {
                 $this->Page->DB->updateRecord($str);
             break;
         }        
-        $this->Parent->Page->redirect ('Home',true);
+        $this->Parent->Page->redirect ('Home', true);
     }
     public function getStatusUser() {
         $page = $this->Page->Pengguna->getDataUser('page');

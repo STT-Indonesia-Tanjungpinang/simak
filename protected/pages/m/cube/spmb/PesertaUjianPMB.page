@@ -4,7 +4,7 @@
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">SPMB</a></li>
-    <li><a href="<%=$this->constructURl ('spmb.JadwalUjianPMB',true)%>">JADWAL UJIAN PMB</a></li>
+    <li><a href="<%=$this->constructURl ('spmb.JadwalUjianPMB', true)%>">JADWAL UJIAN PMB</a></li>
     <li class="active">PESERTA UJIAN</li>
 </com:TContent>
 <com:TContent ID="configtools">    
@@ -123,7 +123,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-calendar"></i> Ubah Jadwal Ujian</h2> 
                 <div class="filter-block pull-right"> 
-                    <a href="<%=$this->constructUrl('spmb.PesertaUjianPMB',true,array('id' => $this->DataUjianPMB['idjadwal_ujian']))%>" class="btn btn-default pull-right" title="Keluar">                                        
+                    <a href="<%=$this->constructUrl('spmb.PesertaUjianPMB', true,array('id' => $this->DataUjianPMB['idjadwal_ujian']))%>" class="btn btn-default pull-right" title="Keluar">                                        
                         <i class='fa  fa-times fa-lg'></i>
                     </a> 
                 </div>
@@ -304,7 +304,7 @@
                                 $('loading').hide();
                             </prop:ClientSide.OnComplete>
                         </com:TActiveLinkButton>  
-                        <a href="<%=$this->Page->constructUrl('spmb.JadwalUjianPMB',true)%>" class="btn btn-default pull-right" title="Keluar">                                        
+                        <a href="<%=$this->Page->constructUrl('spmb.JadwalUjianPMB', true)%>" class="btn btn-default pull-right" title="Keluar">                                        
                             <i class='fa  fa-times fa-lg'></i>
                         </a>                         
                      </div>

@@ -52,8 +52,8 @@ class Logic_Setup extends Logic_Global {
     private function populateSetting () {
         $str = 'SELECT setting_id,`key`,`value` FROM setting';
         $this->db->setFieldTable(array('setting_id', 'key', 'value'));
-        $r=$this->db->getRecord($str);
-        $result=array();
+        $r = $this->db->getRecord($str);
+        $result = array();
         while (list($k, $v) = each($r)) {
             $result[$v['key']] = array('setting_id' => $v['setting_id'],'key' => $v['key'],'value' => $v['value']);
         }

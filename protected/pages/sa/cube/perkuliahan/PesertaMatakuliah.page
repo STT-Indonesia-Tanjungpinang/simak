@@ -20,7 +20,7 @@
         <div class="main-box clearfix">               
             <header class="main-box-header clearfix">
                 <div class="icon-box pull-right">                                       
-                    <a class="btn btn-default pull-left" href="<%=$this->constructUrl('perkuliahan.Penyelenggaraan',true)%>">
+                    <a class="btn btn-default pull-left" href="<%=$this->constructUrl('perkuliahan.Penyelenggaraan', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -181,7 +181,7 @@
                 <header class="main-box-header clearfix">
                      <h2 class="pull-left"><i class="fa fa-user"></i> Daftar Peserta Matakuliah</h2> 
                      <div class="filter-block pull-right">                        
-                        <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan',true)%>" class="btn btn-default pull-right" title="Keluar">                                        
+                        <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan', true)%>" class="btn btn-default pull-right" title="Keluar">                                        
                             <i class='fa  fa-times fa-lg'></i>
                         </a> 
                         <com:TActiveLinkButton ID="btnPrintOut" OnClick="printOut" ClientSide.PostState="false" CssClass="btn btn-primary pull-left" Attributes.Title="Print Out Daftar Penyelenggaraan Matakuliah">
@@ -220,7 +220,7 @@
                             <prop:ItemTemplate>	
                                 <tr>
                                     <td><%# $this->DataItem['no']%></td>                                    
-                                    <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>					
+                                    <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>					
                                     <td><%# $this->DataItem['nirm']%></td>
                                     <td>
                                         <%# $this->DataItem['nama_mhs']%><br/>

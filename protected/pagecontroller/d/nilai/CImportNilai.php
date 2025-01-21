@@ -3,7 +3,7 @@ prado::using ('Application.MainPageD');
 class CImportNilai extends MainPageD {    
      public function onLoad($param) {
     parent::onLoad($param);							
-    $this->showSubMenuAkademikNilai=true;
+    $this->showSubMenuAkademikNilai = true;
     $this->showImportNilai=true;    
     $this->createObj('Akademik');        
     $this->createObj('Nilai');        
@@ -12,7 +12,7 @@ class CImportNilai extends MainPageD {
     {
       if (!isset($_SESSION['currentPageImportNilai']) || $_SESSION['currentPageImportNilai']['page_name'] != 'd.nilai.ImportNilai')
       {
-        $_SESSION['currentPageImportNilai'] = array('page_name' => 'd.nilai.ImportNilai', 'page_num'=>0,'search'=>false,'DataNilai'=>array());
+        $_SESSION['currentPageImportNilai'] = array('page_name' => 'd.nilai.ImportNilai', 'page_num' => 0, 'search' => false,'DataNilai'=>array());
       }  
 
       try {

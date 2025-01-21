@@ -31,7 +31,7 @@ class Logic_KRS extends Logic_Akademik {
       $iddata_konversi = $this->DataMHS['iddata_konversi'];
       $str_krs = "SELECT kmatkul FROM v_krsmhs WHERE batal=0 AND sah=1 AND nim='$nim' AND kmatkul ";
       $str_nilai = "SELECT MIN(n_kual) AS n_kual FROM v_nilai WHERE nim='$nim' AND kmatkul ";
-      while (list($k, $v)=each($matkul_syarat)) {
+      while (list($k, $v) = each($matkul_syarat)) {
         $kmatkul=$this->getKMatkul($v['kmatkul']);
         $nmatkul=$v['nmatkul'];
         $semester=$v['semester'];
@@ -40,7 +40,7 @@ class Logic_KRS extends Logic_Akademik {
         if ($minimal_nilai =='0' || $minimal_nilai == '') {
           $str = $str_krs." LIKE '%$kmatkul%'";
           $this->db->setFieldTable (array('kmatkul'));
-          $r=$this->db->getRecord($str);                    
+          $r = $this->db->getRecord($str);                    
           if (!isset($r[1])) {
             //cek di Konversian                        
             $str = "SELECT iddata_konversi FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi' AND kmatkul LIKE '%$kmatkul%'";
@@ -55,7 +55,7 @@ class Logic_KRS extends Logic_Akademik {
         }else {
           $str = $str_nilai . " LIKE '%$kmatkul%'";
           $this->db->setFieldTable (array('n_kual'));
-          $r=$this->db->getRecord($str);			                    
+          $r = $this->db->getRecord($str);			                    
           if (isset($r[1]) && $r[1]['n_kual']!= '') {
             $n_kual_=ord($r[1]['n_kual']);						
             if ($n_kual_ > ord($minimal_nilai)) {
@@ -90,7 +90,7 @@ class Logic_KRS extends Logic_Akademik {
     $nim = $this->DataMHS['nim'];        
     $str = "SELECT idkrs,nim,tgl_krs,no_krs,sah,tgl_disahkan,tahun,idsmt,tasmt FROM krs WHERE idsmt=$idsmt AND tahun = $tahun AND nim='$nim'";
     $this->db->setFieldTable(array('idkrs', 'nim', 'tgl_krs', 'no_krs', 'sah', 'tgl_disahkan', 'tahun', 'idsmt', 'tasmt'));
-    $r=$this->db->getRecord($str);		      
+    $r = $this->db->getRecord($str);		      
     if (isset($r[1])) {
       $this->DataKRS = $r[1];
     }
@@ -106,7 +106,7 @@ class Logic_KRS extends Logic_Akademik {
     $nim = $this->DataMHS['nim'];        
     $str = "SELECT idkrs,nim,tgl_krs,no_krs,sah,tgl_disahkan,tahun,idsmt,tasmt FROM krs WHERE idsmt=$idsmt AND tahun = $tahun AND nim='$nim'";
     $this->db->setFieldTable(array('idkrs', 'nim', 'tgl_krs', 'no_krs', 'sah', 'tgl_disahkan', 'tahun', 'idsmt', 'tasmt'));
-    $r=$this->db->getRecord($str);		
+    $r = $this->db->getRecord($str);		
     $data=array('krs'=>array(), 'matakuliah'=>array());
     if (isset($r[1])) {
       $jumlah_matkul=0;
@@ -115,7 +115,7 @@ class Logic_KRS extends Logic_Akademik {
       $data['krs']=$r[1];						
       $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs='".$r[1]['idkrs']."' ORDER BY semester ASC,kmatkul ASC";
       $this->db->setFieldTable(array('idpenyelenggaraan', 'idkrsmatkul', 'kmatkul', 'nmatkul', 'sks', 'semester', 'batal', 'nidn', 'nama_dosen'));
-      $r=$this->db->getRecord($str);
+      $r = $this->db->getRecord($str);
       if (isset($r[1])) {
         while (list($k, $v)=each ($r)) {
           $v['kmatkul']=$this->getKMatkul($v['kmatkul']);
@@ -125,7 +125,7 @@ class Logic_KRS extends Logic_Akademik {
           }else{
             $jumlah_batal+=1;
           }
-          $result[$k]=$v;
+          $result[$k] = $v;
         }
         $data['matakuliah']=$result;					
       }
@@ -145,12 +145,12 @@ class Logic_KRS extends Logic_Akademik {
   public function getDetailKRS ($idkrs) {	        
     $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs = $idkrs ORDER BY semester ASC,kmatkul ASC";
     $this->db->setFieldTable(array('idpenyelenggaraan', 'idkrsmatkul', 'kmatkul', 'nmatkul', 'sks', 'semester', 'batal', 'nidn', 'nama_dosen'));
-    $r=$this->db->getRecord($str);
-    $result=array();
+    $r = $this->db->getRecord($str);
+    $result = array();
     
     while (list($k, $v)=each ($r)) {
       $v['kmatkul']=$this->getKMatkul($v['kmatkul']);
-      $result[$k]=$v;
+      $result[$k] = $v;
     }           
     
     return $result;

@@ -3,15 +3,15 @@ prado::using ('Application.MainPageDW');
 class CTranskripKurikulum extends MainPageDW {	
 	public function onLoad($param) {
 		parent::onLoad($param);		
-        $this->showSubMenuAkademikNilai=true;
+        $this->showSubMenuAkademikNilai = true;
         $this->showTranskripKurikulum=true;    
 		$this->createObj('Nilai');
                 
 		if (!$this->IsPostBack && !$this->IsCallback) {			
             if (!isset($_SESSION['currentPageTranskripKurikulum']) || $_SESSION['currentPageTranskripKurikulum']['page_name'] != 'm.nilai.TranskripKurikulum') {
-				$_SESSION['currentPageTranskripKurikulum'] = array('page_name' => 'm.nilai.TranskripKurikulum', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['ta']);
+				$_SESSION['currentPageTranskripKurikulum'] = array('page_name' => 'm.nilai.TranskripKurikulum', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['ta']);
 			}          
-            $_SESSION['currentPageTranskripKurikulum']['search']=false;
+            $_SESSION['currentPageTranskripKurikulum']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -100,7 +100,7 @@ class CTranskripKurikulum extends MainPageDW {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTranskripKurikulum']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTranskripKurikulum']['page_num'] = 0;}
         $str = "$str ORDER BY nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('nim', 'nama_mhs', 'jk', 'kjur', 'idkonsentrasi', 'tahun_masuk'));
 		$r = $this->DB->getRecord($str, $offset+1);	
@@ -149,7 +149,7 @@ class CTranskripKurikulum extends MainPageDW {
                         $r = $this->DB->getRecord($str);					
 
                         $dataReport = $r[1];                    
-                        $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi']==0) ? '-':$dataReport['nama_konsentrasi'];                    
+                        $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-':$dataReport['nama_konsentrasi'];                    
                         $dataReport['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
                         $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
                         $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');

@@ -9,9 +9,9 @@ class CJadwalPerkuliahan extends MainPageMHS {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageJadwalPerkuliahan']) || $_SESSION['currentPageJadwalPerkuliahan']['page_name'] != 'm.perkuliahan.JadwalPerkuliahan') {                
-				$_SESSION['currentPageJadwalPerkuliahan'] = array('page_name' => 'm.perkuliahan.JadwalPerkuliahan', 'page_num'=>0,'search'=>false,'iddosen' => 'none');												
+				$_SESSION['currentPageJadwalPerkuliahan'] = array('page_name' => 'm.perkuliahan.JadwalPerkuliahan', 'page_num' => 0, 'search' => false,'iddosen' => 'none');												
 			}
-            $_SESSION['currentPageJadwalPerkuliahan']['search']=false;            
+            $_SESSION['currentPageJadwalPerkuliahan']['search'] = false;            
             
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTA->DataSource = $ta;					
@@ -92,6 +92,6 @@ class CJadwalPerkuliahan extends MainPageMHS {
 		$this->DB->setFieldTable(array('iddosen'));
 		$r = $this->DB->getRecord($str);	
         $_SESSION['currentPageJadwalPerkuliahan']['iddosen'] = $r[1]['iddosen'];	 
-        $this->redirect ('perkuliahan.DetailJadwalPerkuliahan',true);
+        $this->redirect ('perkuliahan.DetailJadwalPerkuliahan', true);
 	}	
 }

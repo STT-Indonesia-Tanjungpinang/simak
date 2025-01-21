@@ -8,9 +8,9 @@ class CPendaftaranOnline extends MainPageK {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePendaftaranOnline']) || $_SESSION['currentPagePendaftaranOnline']['page_name'] != 'k.spmb.PendaftaranOnline') {
-				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'k.spmb.PendaftaranOnline', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'display_record' => 'all', 'kelas' => 'A');												
+				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'k.spmb.PendaftaranOnline', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'display_record' => 'all', 'kelas' => 'A');												
 			}
-            $_SESSION['currentPagePendaftaranOnline']['search']=false;
+            $_SESSION['currentPagePendaftaranOnline']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
@@ -95,7 +95,7 @@ class CPendaftaranOnline extends MainPageK {
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranOnline']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranOnline']['page_num'] = 0;}
 		
 		$str = "$str  $str_display ORDER BY waktu_mendaftar DESC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('no_pendaftaran', 'no_formulir', 'nama_mhs', 'telp_hp', 'email', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'file_bukti_bayar'));

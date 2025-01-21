@@ -11,7 +11,7 @@ class Logic_ReportSPMB extends Logic_Report {
         $no_formulir=$this->dataReport['no_formulir'];
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,jp.nama_pekerjaan,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
         $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_agama', 'nama_ibu_kandung', 'idwarga', 'nik', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'nama_pekerjaan', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         
         $datamhs = $r[1];
         switch($this->getDriver()) {
@@ -50,7 +50,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $row+=5;				
                 $rpt->setXY(3, $row);			
                 $rpt->Cell(40,5,'Tanggal Lahir',1,0);				
-                $tgl=$datamhs['tanggal_lahir']== ''?': -':$this->tgl->tanggal('l, j F Y', $datamhs['tanggal_lahir'],1,0);
+                $tgl=$datamhs['tanggal_lahir']== '' ? ': -':$this->tgl->tanggal('l, j F Y', $datamhs['tanggal_lahir'],1,0);
                 $rpt->Cell(80,5,": $tgl",1,0);
                 $row+=5;				
                 $rpt->setXY(3, $row);			
@@ -204,7 +204,7 @@ class Logic_ReportSPMB extends Logic_Report {
             case 'excel2007': 
                 $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,fp.nama_ibu_kandung,a.nama_agama,nik,fp.idwarga,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,jp.nama_pekerjaan,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND ta='$tahun_masuk' AND idsmt='$semester'$str_kjur AND daftar_via='$daftar_via'$str_status";
                 $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_ibu_kandung', 'nama_agama', 'nik', 'idwarga', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'nama_pekerjaan', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
-                $r=$this->db->getRecord($str);
+                $r = $this->db->getRecord($str);
                 
                 $this->setHeaderPT('Z');
                 $sheet=$this->rpt->getActiveSheet();
@@ -345,7 +345,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $limit=$this->dataReport['limit'];
                 $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,fp.nama_ibu_kandung,a.nama_agama,nik,fp.idwarga,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,jp.nama_pekerjaan,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND ta='$tahun_masuk' AND idsmt='$semester'$str_kjur AND daftar_via='$daftar_via'$str_status LIMIT $offset, $limit";
                 $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_ibu_kandung', 'nama_agama', 'nik', 'idwarga', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'nama_pekerjaan', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
-                $r=$this->db->getRecord($str);
+                $r = $this->db->getRecord($str);
                 
                 while (list($k, $v) = each($r)) {
                     $datamhs = $v;								
@@ -391,7 +391,7 @@ class Logic_ReportSPMB extends Logic_Report {
                     $row+=5;				
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(40,5,'Tanggal Lahir',1,0);				
-                    $tgl=$datamhs['tanggal_lahir']== ''?': -':$this->tgl->tanggal('l, j F Y', $datamhs['tanggal_lahir'],1,0);
+                    $tgl=$datamhs['tanggal_lahir']== '' ? ': -':$this->tgl->tanggal('l, j F Y', $datamhs['tanggal_lahir'],1,0);
                     $rpt->Cell(80,5,": $tgl",1,0);
                     $row+=5;				
                     $rpt->setXY(3, $row);			
@@ -1007,7 +1007,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $idjadwal_ujian = $this->dataReport['idjadwal_ujian'];        
                 $str = "SELECT pum.no_formulir,fp.nama_mhs,fp.idkelas,fp.kjur1,fp.kjur2,fp.telp_hp FROM peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian ORDER BY fp.no_formulir ASC";
                 $this->db->setFieldTable(array('no_formulir', 'telp_hp', 'nama_mhs', 'idkelas', 'kjur1', 'kjur2'));	
-                $r=$this->db->getRecord($str);
+                $r = $this->db->getRecord($str);
                 
                 $rpt->SetFont ('helvetica', '',8);
                 $row+=6;

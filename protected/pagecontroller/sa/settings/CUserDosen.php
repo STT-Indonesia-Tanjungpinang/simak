@@ -7,9 +7,9 @@ class CUserDosen extends MainPageSA {
         $this->showUserDosen=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageUserDosen']) || $_SESSION['currentPageUserDosen']['page_name'] != 'sa.settings.UserDosen') {
-				$_SESSION['currentPageUserDosen'] = array('page_name' => 'sa.settings.UserDosen', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPageUserDosen'] = array('page_name' => 'sa.settings.UserDosen', 'page_num' => 0, 'search' => false);
 			}
-            $_SESSION['currentPageUserDosen']['search']=false;
+            $_SESSION['currentPageUserDosen']['search'] = false;
             $this->populateData();            
 		}
 	}       
@@ -59,13 +59,13 @@ class CUserDosen extends MainPageSA {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageUserDosen']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageUserDosen']['page_num'] = 0;}
         $str = "$str ORDER BY username ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'email', 'active', 'foto', 'logintime'));
 		$r = $this->DB->getRecord($str, $offset+1);	
         $result = array();
         while (list($k, $v) = each($r)) {
-            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);            
+            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00' ? 'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);            
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;
@@ -141,13 +141,13 @@ class CUserDosen extends MainPageSA {
             }
             $this->DB->updateRecord($str);
             $this->DB->updateRecord($str_dosen);
-			$this->redirect('settings.UserDosen',true);
+			$this->redirect('settings.UserDosen', true);
 		}
 	}
     public function deleteRecord($sender, $param) {        
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);        
         $this->DB->deleteRecord("user WHERE userid = $id");
-        $this->redirect('settings.UserDosen',true);
+        $this->redirect('settings.UserDosen', true);
     }   
     
 }

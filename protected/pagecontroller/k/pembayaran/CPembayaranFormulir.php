@@ -8,9 +8,9 @@ class CPembayaranFormulir Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranFormulir']) || $_SESSION['currentPagePembayaranFormulir']['page_name'] != 'k.pembayaran.PembayaranFormulir') {
-				$_SESSION['currentPagePembayaranFormulir'] = array('page_name' => 'k.pembayaran.PembayaranFormulir', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranFormulir'] = array('page_name' => 'k.pembayaran.PembayaranFormulir', 'page_num' => 0, 'search' => false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
-            $_SESSION['currentPagePembayaranFormulir']['search']=false; 
+            $_SESSION['currentPagePembayaranFormulir']['search'] = false; 
           
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					
@@ -99,7 +99,7 @@ class CPembayaranFormulir Extends MainPageK {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num'] = 0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'no_formulir', 'commited', 'tasmt', 'no_pendaftaran', 'idkelas'));
         $str = "$str ORDER BY t.date_added DESC LIMIT $offset, $limit";	
         $r = $this->DB->getRecord($str, $offset+1);
@@ -147,7 +147,7 @@ class CPembayaranFormulir Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $no_formulir = addslashes($this->txtNoFormulir->Text);
-            $this->redirect('pembayaran.DetailPembayaranFormulir',true,array('id' => $no_formulir));
+            $this->redirect('pembayaran.DetailPembayaranFormulir', true,array('id' => $no_formulir));
         }
 	}
 	

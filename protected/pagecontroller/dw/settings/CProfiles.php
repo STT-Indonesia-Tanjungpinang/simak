@@ -25,7 +25,7 @@ class CProfiles extends MainPageDW {
             $userid = $this->Pengguna->getDataUser('userid');
             $str = "UPDATE user SET theme='$theme' WHERE userid = $userid";            
             $this->DB->updateRecord($str);
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
     }
 }

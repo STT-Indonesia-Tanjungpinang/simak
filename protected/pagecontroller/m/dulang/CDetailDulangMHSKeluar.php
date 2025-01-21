@@ -15,7 +15,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
                     
                     $str = "SELECT MAX(tahun) AS tahun,MAX(idsmt) AS idsmt FROM dulang WHERE nim='$nim' GROUP BY tahun,idsmt ORDER BY tahun DESC,idsmt DESC LIMIT 1";
                     $this->DB->setFieldTable(array('tahun', 'idsmt'));
-                    $datadulang=$this->DB->getRecord($str);	                      
+                    $datadulang = $this->DB->getRecord($str);	                      
 
                     $this->cmbAddTAKeluar->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($datamhs['tahun_masuk']), 'none');
                     $this->cmbAddTAKeluar->Text = $datadulang[1]['tahun'];
@@ -75,7 +75,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
         try {            
             $nim = $datamhs['nim'];
             $this->Nilai->setDataMHS(array('nim' => $nim));
-            $datadulang=$this->Nilai->getDataDulang($semester, $ta);
+            $datadulang = $this->Nilai->getDataDulang($semester, $ta);
             
             if (isset($datadulang['iddulang'])) {
                 throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
@@ -106,7 +106,7 @@ class CDetailDulangMHSKeluar Extends MainPageM {
                 $this->DB->insertRecord($str);                
 				$this->DB->query('COMMIT');
                 unset($_SESSION['currentPageDulangMHSKeluar']['DataMHS']);
-                $this->redirect('dulang.DulangMHSKeluar',true);
+                $this->redirect('dulang.DulangMHSKeluar', true);
 			}else {
 				$this->DB->query('ROLLBACK');
 			}
@@ -114,6 +114,6 @@ class CDetailDulangMHSKeluar Extends MainPageM {
 	}
     public function closeDetailDulang($sender, $param) {
         unset($_SESSION['currentPageDulangMHSKeluar']['DataMHS']);
-        $this->redirect('dulang.DulangMHSKeluar',true);
+        $this->redirect('dulang.DulangMHSKeluar', true);
     }
 }

@@ -11,7 +11,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGenap']) || $_SESSION['currentPagePembayaranPiutangSemesterGenap']['page_name'] != 'k.pembayaran.PembayaranPiutangSemesterGenap') {
-				$_SESSION['currentPagePembayaranPiutangSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGenap', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester'=>2,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranPiutangSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGenap', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester'=>2,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
 			}        
             try {
                 $nim=addslashes($this->request['id']);                           				
@@ -34,7 +34,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
                 
                 $kelas = $this->Finance->getKelasMhs();                
                 $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
-                $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
+                $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
 
                 $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                 $datamhs['nama_dosen'] = $nama_dosen;                
@@ -134,13 +134,13 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
                     }                   
                     $this->DB->query('COMMIT');
                     $_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']['no_transaksi'] = $no_transaksi;            
-                    $this->redirect('pembayaran.TransaksiPembayaranPiutangSemesterGenap',true);        
+                    $this->redirect('pembayaran.TransaksiPembayaranPiutangSemesterGenap', true);        
                 }else{
                     $this->DB->query('ROLLBACK');
                 }           
             }
         }else{            
-            $this->redirect('pembayaran.TransaksiPembayaranPiutangSemesterGenap',true); 
+            $this->redirect('pembayaran.TransaksiPembayaranPiutangSemesterGenap', true); 
         }
 	}
     public function editRecord($sender, $param) {	        
@@ -149,17 +149,17 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
             $no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
             $_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']['no_transaksi'] = $no_transaksi;
         }	
-		$this->redirect('pembayaran.TransaksiPembayaranPiutangSemesterGenap',true);
+		$this->redirect('pembayaran.TransaksiPembayaranPiutangSemesterGenap', true);
 	}	
 	public function deleteRecord($sender, $param) {	
         $datamhs = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']; 
         $nim = $datamhs['nim'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id' => $nim));
+		$this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap', true,array('id' => $nim));
 	}		
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranPiutangSemesterGenap']['DataMHS']);
-        $this->redirect('pembayaran.PembayaranPiutangSemesterGenap',true);
+        $this->redirect('pembayaran.PembayaranPiutangSemesterGenap', true);
     }
 }

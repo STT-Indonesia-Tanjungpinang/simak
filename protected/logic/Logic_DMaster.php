@@ -73,9 +73,9 @@ class Logic_DMaster extends Logic_Global
     if ($start_tahun !== null) {
       $a=$dataitem;
       $dataitem=array();
-      while (list($k, $v)=each($a)) { 
+      while (list($k, $v) = each($a)) { 
         if ($k >= $start_tahun){
-          $dataitem[$k]=$v;
+          $dataitem[$k] = $v;
         }
       }
     }
@@ -229,21 +229,21 @@ class Logic_DMaster extends Logic_Global
       break;
       case 1 :
         $dataprodi['none'] = 'Daftar Program Studi';				
-        while (list($k, $v)=each($dataitem)) {	
+        while (list($k, $v) = each($dataitem)) {	
           if ($v['konsentrasi'] == '') {
-            $dataprodi[$v['kjur']]=$v['nama_ps'];
+            $dataprodi[$v['kjur']] = $v['nama_ps'];
           }else{
-            $dataprodi[$v['kjur']]=$v['nama_ps'] . ' KONS. '.$v['konsentrasi'];
+            $dataprodi[$v['kjur']] = $v['nama_ps'] . ' KONS. '.$v['konsentrasi'];
           }				
         }				
       break;
       case 2 :
         $dataprodi['none'] = 'Daftar Program Studi';				
-        while (list($k, $v)=each($dataitem)) {			
+        while (list($k, $v) = each($dataitem)) {			
           if ($v['konsentrasi'] == '') {
-            $dataprodi[$v['kjur']]=$v['nama_ps'] . ' ('.$v['njenjang'].')';
+            $dataprodi[$v['kjur']] = $v['nama_ps'] . ' ('.$v['njenjang'].')';
           }else{
-            $dataprodi[$v['kjur']]=$v['nama_ps'] . ' KONS. '.$v['konsentrasi'].' ('.$v['njenjang'].')';
+            $dataprodi[$v['kjur']] = $v['nama_ps'] . ' KONS. '.$v['konsentrasi'].' ('.$v['njenjang'].')';
           }					
         }				
       break;
@@ -256,7 +256,7 @@ class Logic_DMaster extends Logic_Global
   public function removeKjur ($listJur, $kjur) {
     foreach ($listJur as $k => $v) {
       if ($k != $kjur) {
-        $result[$k]=$v;
+        $result[$k] = $v;
       }
     }		
     return $result;	
@@ -275,7 +275,7 @@ class Logic_DMaster extends Logic_Global
         $r = $this->db->getRecord($str);                
         $dataitem['none'] = 'Daftar Dosen Wali';				
         while (list($k, $v) = each($r)) {			
-          $dataitem[$v['iddosen_wali']]=$v['nama_dosen'] . ' ['.$v['nidn'].']';	;					
+          $dataitem[$v['iddosen_wali']] = $v['nama_dosen'] . ' ['.$v['nidn'].']';	;					
         }	
         $this->Application->Cache->set('listdw', $dataitem);
       }
@@ -285,7 +285,7 @@ class Logic_DMaster extends Logic_Global
       $r = $this->db->getRecord($str);                
       $dataitem['none'] = 'Daftar Dosen Wali';				
       while (list($k, $v) = each($r)) {			
-        $dataitem[$v['iddosen_wali']]=$v['nama_dosen'] . ' ['.$v['nidn'].']';				
+        $dataitem[$v['iddosen_wali']] = $v['nama_dosen'] . ' ['.$v['nidn'].']';				
       }	
     }
     return $dataitem;
@@ -312,7 +312,7 @@ class Logic_DMaster extends Logic_Global
    */
   public function getListKonsentrasiProgramStudi ($kjur=null) {
     if ($this->Application->Cache) {            
-      $r=$this->Application->Cache->get('listkonsentrasi');            
+      $r = $this->Application->Cache->get('listkonsentrasi');            
       if (!isset($r[1])) {            
         $str = "SELECT idkonsentrasi,kjur,nama_konsentrasi FROM konsentrasi";
         $this->db->setFieldTable(array('idkonsentrasi', 'kjur', 'nama_konsentrasi'));			        
@@ -325,7 +325,7 @@ class Logic_DMaster extends Logic_Global
         $dataitem['none'] = 'Daftar Konsentrasi Program Studi';
         while (list($k, $v) = each($r)) {
           if ($kjur == $v['kjur']) {
-            $dataitem[$v['idkonsentrasi']]=$v['nama_konsentrasi'];
+            $dataitem[$v['idkonsentrasi']] = $v['nama_konsentrasi'];
           }
         }
       }
@@ -395,7 +395,7 @@ class Logic_DMaster extends Logic_Global
         $r= $this->db->getRecord($str);
         $dataitem['none'] = 'Daftar Dosen';   
         while (list($k, $v) = each($r)) {
-          $dataitem[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
+          $dataitem[$v['iddosen']] = $v['nama_dosen']. ' ['.$v['nidn'].']';
         }
         $this->Application->Cache->set('listdosen', $dataitem);
       }else{               
@@ -404,7 +404,7 @@ class Logic_DMaster extends Logic_Global
         $r= $this->db->getRecord($str);
         $dataitem['none'] = 'Daftar Dosen';   
         while (list($k, $v) = each($r)) {
-          $dataitem[$v['iddosen']]=$v['nama_dosen']. ' ['.$v['nidn'].']';
+          $dataitem[$v['iddosen']] = $v['nama_dosen']. ' ['.$v['nidn'].']';
         }
       }
     }
@@ -436,7 +436,7 @@ class Logic_DMaster extends Logic_Global
     $datadosen=array();
     $str = "SELECT iddosen,nipy,nidn,nama_dosen,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen,nama_jabatan,alamat_dosen,telp_hp,email,website FROM dosen d LEFT JOIN jabatan_akademik ja ON (d.idjabatan=ja.idjabatan) WHERE iddosen='$iddosen'";
     $this->db->setFieldTable(array('iddosen', 'nipy', 'nidn', 'nama_dosen', 'nama_jabatan', 'alamat_dosen', 'telp_hp', 'email', 'website')); 
-    $r=$this->db->getRecord($str);		
+    $r = $this->db->getRecord($str);		
     if (isset($r[1])) {
       $datadosen = $r[1];
     }
@@ -467,11 +467,11 @@ class Logic_DMaster extends Logic_Global
   public function getDataPassingGrade ($tahun) {        
     $str = "SELECT kjur,nilai FROM passinggrade WHERE tahun_masuk = $tahun";
     $this->db->setFieldTable(array('kjur', 'nilai')); 
-    $r=$this->db->getRecord($str);
+    $r = $this->db->getRecord($str);
     $dataitem=array();
     if (isset($r[1])) {            
       while (list($k, $v) = each($r)) {
-        $dataitem[$v['kjur']]=$v['nilai'];
+        $dataitem[$v['kjur']] = $v['nilai'];
       }                    
     }    
     return $dataitem;

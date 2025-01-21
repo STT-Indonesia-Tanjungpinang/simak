@@ -5,15 +5,15 @@ class KHSEkstension extends MainPageDW {
 	public $total_sks_nm_saat_ini;
 	public function onLoad($param) {
 		parent::onLoad($param);	 		
-        $this->showSubMenuAkademikNilai=true;
+        $this->showSubMenuAkademikNilai = true;
         $this->showKHSEkstension=true;
         
         $this->createObj('Nilai');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
             if (!isset($_SESSION['currentPageKHSEkstension']) || $_SESSION['currentPageKHSEkstension']['page_name'] != 'dw.nilai.KHSEkstension') {
-				$_SESSION['currentPageKHSEkstension'] = array('page_name' => 'dw.nilai.KHSEkstension', 'page_num'=>0,'search'=>false,'iddosen_wali' => 'none', 'tahun_masuk' => $_SESSION['tahun_masuk']);
+				$_SESSION['currentPageKHSEkstension'] = array('page_name' => 'dw.nilai.KHSEkstension', 'page_num' => 0, 'search' => false,'iddosen_wali' => 'none', 'tahun_masuk' => $_SESSION['tahun_masuk']);
 			}   
-			$_SESSION['currentPageKHSEkstension']['search']=false;
+			$_SESSION['currentPageKHSEkstension']['search'] = false;
             $this->RepeaterS->PageSize=10;
             
             $this->tbCmbPs->DataSource=$this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -136,7 +136,7 @@ class KHSEkstension extends MainPageDW {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKHSEkstension']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKHSEkstension']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('idkrs', 'tgl_krs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'tahun_masuk', 'semester_masuk', 'idkelas', 'sah', 'tgl_disahkan'));
 		$result=$this->DB->getRecord($str);
@@ -198,7 +198,7 @@ class KHSEkstension extends MainPageDW {
                         $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);	
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                         $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
-                        $r=$this->DB->getRecord($str);	           
+                        $r = $this->DB->getRecord($str);	           
                         $dataReport=$r[1];
 
                         $dataReport['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($dataReport['iddosen_wali']);

@@ -3,7 +3,7 @@ prado::using ('Application.MainPageON');
 class CDetailNilaiFinal extends MainPageON {		
   public function onLoad($param) {
     parent::onLoad($param);				
-    $this->showSubMenuAkademikNilai=true;
+    $this->showSubMenuAkademikNilai = true;
     $this->showNilaiFinal=true;    
     $this->createObj('Nilai');
     if (!$this->IsPostBack && !$this->IsCallback) {
@@ -138,7 +138,7 @@ class CDetailNilaiFinal extends MainPageON {
         $str = "INSERT transkrip_asli SET nim='$nim',nomor_ijazah='$no_ijazah',nomor_transkrip='$no_transkrip',predikat_kelulusan='$predikat',tanggal_lulus='$tanggal_lulus',judul_skripsi='$judul_skripsi',iddosen_pembimbing='$pembimbing',iddosen_pembimbing2='$pembimbing2',iddosen_ketua='$ketua',iddosen_pemket='$pemket',tahun='$ta',idsmt='$idsmt'";
         $this->DB->insertRecord($str);
       }
-      $this->redirect('nilai.DetailNilaiFinal',true);
+      $this->redirect('nilai.DetailNilaiFinal', true);
     }
   }
   public function addData($sender, $param) {
@@ -164,7 +164,7 @@ class CDetailNilaiFinal extends MainPageON {
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
               $this->DB->insertRecord($str);
             }
-            $this->redirect('nilai.DetailNilaiFinal',true);
+            $this->redirect('nilai.DetailNilaiFinal', true);
           }else{
             $this->lblHeaderMessageError->Text='Tambah Nilai';
             $this->lblContentMessageError->Text='Data nilai matakuliah kosong';
@@ -188,7 +188,7 @@ class CDetailNilaiFinal extends MainPageON {
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
               $this->DB->insertRecord($str);
             }
-            $this->redirect('nilai.DetailNilaiFinal',true);
+            $this->redirect('nilai.DetailNilaiFinal', true);
           }else{
             $this->lblHeaderMessageError->Text='Tambah Nilai';
             $this->lblContentMessageError->Text='Data nilai matakuliah kosong';
@@ -216,7 +216,7 @@ class CDetailNilaiFinal extends MainPageON {
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
               $this->DB->insertRecord($str);
             } 
-            while (list($k, $v)=each($r2)) {
+            while (list($k, $v) = each($r2)) {
               $kmatkul = $v['kmatkul'];    
               $nmatkul = $v['nmatkul']; 
               $nmatkul_en = $v['nmatkul_en']; 
@@ -227,7 +227,7 @@ class CDetailNilaiFinal extends MainPageON {
               $str = "INSERT INTO transkrip_asli_detail SET nim='$nim',kmatkul='$kmatkul',nmatkul='$nmatkul',nmatkul_en='$nmatkul_en',sks='$sks',semester='$semester',n_kual='$n_kual'";        
               $this->DB->insertRecord($str);
             }                    
-            $this->redirect('nilai.DetailNilaiFinal',true);
+            $this->redirect('nilai.DetailNilaiFinal', true);
           }else{
             $this->lblHeaderMessageError->Text='Tambah Nilai';
             $this->lblContentMessageError->Text='Data nilai matakuliah kosong';
@@ -240,13 +240,13 @@ class CDetailNilaiFinal extends MainPageON {
   public function deleteRecord($sender, $param) {	
     $idtranskrip_detail = $this->getDataKeyField($sender, $this->RepeaterS);
     $this->DB->deleteRecord("transkrip_asli_detail WHERE idtranskrip_detail = $idtranskrip_detail");
-    $this->redirect('nilai.DetailNilaiFinal',true,array('id' => $nim));
+    $this->redirect('nilai.DetailNilaiFinal', true,array('id' => $nim));
   }
   public function resetTranskrip($sender, $param) {
     $datamhs = $_SESSION['currentPageNilaiFinal']['DataMHS'];
     $nim = $datamhs['nim']; 
     $this->DB->deleteRecord("transkrip_asli_detail WHERE nim='$nim'");
-    $this->redirect('nilai.DetailNilaiFinal',true);
+    $this->redirect('nilai.DetailNilaiFinal', true);
   }
   public function printOut($sender, $param) {	
     $this->createObj('reportnilai');          
@@ -317,6 +317,6 @@ class CDetailNilaiFinal extends MainPageON {
   public function closeDetail($sender, $param) {
     unset($_SESSION['currentPageNilaiFinal']['DataMHS']);
     unset($_SESSION['currentPageNilaiFinal']['DataNilai']);
-    $this->redirect('nilai.NilaiFinal',true);
+    $this->redirect('nilai.NilaiFinal', true);
   }
 }

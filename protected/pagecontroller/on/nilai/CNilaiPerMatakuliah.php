@@ -3,7 +3,7 @@ prado::using ('Application.MainPageON');
 class CNilaiPerMatakuliah extends MainPageON {	
   public function onLoad($param) {		
     parent::onLoad($param);				
-    $this->showSubMenuAkademikNilai=true;
+    $this->showSubMenuAkademikNilai = true;
     $this->showNilaiPerMatakuliah = true;
     
     $this->createObj('Akademik');
@@ -11,9 +11,9 @@ class CNilaiPerMatakuliah extends MainPageON {
     {
       if (!isset($_SESSION['currentPageNilaiPerMatakuliah']) || $_SESSION['currentPageNilaiPerMatakuliah']['page_name'] != 'on.nilai.NilaiPerMatakuliah') 
       {
-        $_SESSION['currentPageNilaiPerMatakuliah'] = array('page_name' => 'on.nilai.NilaiPerMatakuliah', 'page_num'=>0,'search'=>false,'InfoMatkul'=>array());
+        $_SESSION['currentPageNilaiPerMatakuliah'] = array('page_name' => 'on.nilai.NilaiPerMatakuliah', 'page_num' => 0, 'search' => false,'InfoMatkul'=>array());
       }  
-      $_SESSION['currentPageNilaiPerMatakuliah']['search']=false;
+      $_SESSION['currentPageNilaiPerMatakuliah']['search'] = false;
       try 
       {                     
         $id=addslashes($this->request['id']);                               
@@ -190,7 +190,7 @@ class CNilaiPerMatakuliah extends MainPageON {
     if ($offset+$limit>$this->RepeaterP->VirtualItemCount) {
       $limit=$this->RepeaterP->VirtualItemCount-$offset;
     }
-    if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageNilaiPerMatakuliah']['page_num']=0;}		
+    if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageNilaiPerMatakuliah']['page_num'] = 0;}		
     $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
     $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'jk', 'n_kuan', 'n_kual', 'userid_input', 'tanggal_input', 'userid_modif', 'tanggal_modif', 'bydosen', 'ket', 'batal', 'sah', 'k_status'));				
     $r = $this->DB->getRecord($str, $offset+1);
@@ -198,7 +198,7 @@ class CNilaiPerMatakuliah extends MainPageON {
   
     while (list($k, $v) = each($r)) {
       $idkrsmatkul = $v['idkrsmatkul'];
-      if ($v['userid_input']==0) {
+      if ($v['userid_input'] == 0) {
         $v['tanggal_input'] = '-';
         $v['tanggal_modif'] = '-';
       }else{

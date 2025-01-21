@@ -8,9 +8,9 @@ class CDaftarMahasiswa extends MainPageK {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDaftarMahasiswa']) || $_SESSION['currentPageDaftarMahasiswa']['page_name'] != 'k.kemahasiswaan.DaftarMahasiswa') {
-				$_SESSION['currentPageDaftarMahasiswa'] = array('page_name' => 'k.kemahasiswaan.DaftarMahasiswa', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'idkonsentrasi' => 'none', 'k_status' => 'none');												
+				$_SESSION['currentPageDaftarMahasiswa'] = array('page_name' => 'k.kemahasiswaan.DaftarMahasiswa', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'idkonsentrasi' => 'none', 'k_status' => 'none');												
 			}
-            $_SESSION['currentPageDaftarMahasiswa']['search']=false;
+            $_SESSION['currentPageDaftarMahasiswa']['search'] = false;
             
             $this->lblProdi->Text = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -112,7 +112,7 @@ class CDaftarMahasiswa extends MainPageK {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPageDaftarMahasiswa']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPageDaftarMahasiswa']['page_num'] = 0;}
         $str = "$str ORDER BY nim DESC,nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'alamat_rumah', 'kjur', 'idkonsentrasi', 'iddosen_wali', 'tahun_masuk', 'k_status', 'idkelas'));
 		$r = $this->DB->getRecord($str, $offset+1);	

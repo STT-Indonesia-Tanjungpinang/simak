@@ -74,7 +74,7 @@ class CDetailKRS extends MainPageDW {
             $this->KRS->setDataMHS($datamhs);
             $kelas = $this->KRS->getKelasMhs();																	            
             $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
             
             $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
             $datamhs['nama_dosen'] = $nama_dosen;
@@ -117,17 +117,17 @@ class CDetailKRS extends MainPageDW {
         }
         $datakrs['krs']['maxSKS'] = $maxSKS; 
         $_SESSION['currentPageKRS']['DataKRS'] = $datakrs;
-        $this->redirect ('perkuliahan.TambahKRS',true);
+        $this->redirect ('perkuliahan.TambahKRS', true);
     }
     public function sahkanKRS($sender, $param) {
         $datakrs = $_SESSION['currentPageKRS']['DataKRS'];
         $idkrs = $datakrs['krs']['idkrs'];
         $this->KRS->sahkanKRS($idkrs);
-        $this->redirect ('perkuliahan.DetailKRS',true,array('id' => $idkrs));
+        $this->redirect ('perkuliahan.DetailKRS', true,array('id' => $idkrs));
     }
     public function closeDetailKRS($sender, $param) { 
         unset($_SESSION['currentPageKRS']);
-        $this->redirect ('perkuliahan.KRS',true);
+        $this->redirect ('perkuliahan.KRS', true);
     }
 	public function printKRS($sender, $param) {
         $this->createObj('reportkrs');

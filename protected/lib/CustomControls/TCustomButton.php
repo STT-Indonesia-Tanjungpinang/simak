@@ -15,7 +15,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function getEnableClientScript()
 	{
-		return $this->getViewState('EnableClientScript',true);
+		return $this->getViewState('EnableClientScript', true);
 	}
 
 	/**
@@ -219,7 +219,7 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	public function getCausesValidation()
 	{
-		return $this->getViewState('CausesValidation',true);
+		return $this->getViewState('CausesValidation', true);
 	}
 
 	/**

@@ -8,9 +8,9 @@ class CMatakuliah extends MainPageM {
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPageMatakuliah']) || $_SESSION['currentPageMatakuliah']['page_name'] != 'm.dmaster.Matakuliah') {
-        $_SESSION['currentPageMatakuliah'] = array('page_name' => 'm.dmaster.Matakuliah', 'page_num'=>0,'search'=>false,'idkonsentrasi' => 'none', 'semester' => 'none');
+        $_SESSION['currentPageMatakuliah'] = array('page_name' => 'm.dmaster.Matakuliah', 'page_num' => 0, 'search' => false,'idkonsentrasi' => 'none', 'semester' => 'none');
       }
-      $_SESSION['currentPageMatakuliah']['search']=false;
+      $_SESSION['currentPageMatakuliah']['search'] = false;
       $_SESSION['outputreport'] = 'excel2007';
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
       
@@ -48,7 +48,7 @@ class CMatakuliah extends MainPageM {
   }
   public function resetKonsentrasi($sender, $param) {
     $_SESSION['currentPageMatakuliah']['idkonsentrasi'] = 'none';
-    $this->redirect('dmaster.Matakuliah',true);
+    $this->redirect('dmaster.Matakuliah', true);
   }
   public function filterKonsentrasi($sender, $param) {
     $id = $this->getDataKeyField($sender, $this->RepeaterKonsentrasi);
@@ -60,7 +60,7 @@ class CMatakuliah extends MainPageM {
     $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
     $r = array();
     $i=1;
-    while (list($k, $v)=each($datakonsentrasi)) {                        
+    while (list($k, $v) = each($datakonsentrasi)) {                        
       if ($v['kjur']==$_SESSION['kjur']){
         $idkonsentrasi = $v['idkonsentrasi'];
         $v['jumlah_matkul'] = $this->DB->getCountRowsOfTable("matakuliah WHERE idkonsentrasi = $idkonsentrasi",'idkonsentrasi');                
@@ -114,7 +114,7 @@ class CMatakuliah extends MainPageM {
     if (($offset+$limit)>$itemcount) {
       $limit=$itemcount-$offset;
     }
-    if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageMatakuliah']['page_num']=0;}
+    if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageMatakuliah']['page_num'] = 0;}
     $str = "$str ORDER BY (semester+0),kmatkul ASC LIMIT $offset, $limit";				
     $this->DB->setFieldTable(array('kmatkul', 'nmatkul', 'nmatkul_en', 'sks', 'semester', 'idkonsentrasi', 'nama_konsentrasi', 'ispilihan', 'islintas_prodi', 'aktif'));
     $r = $this->DB->getRecord($str, $offset+1);	
@@ -141,7 +141,7 @@ class CMatakuliah extends MainPageM {
         $data3 = explode(', ', $data[1]['prasyarat']);
         $jumlah_data = count($data3);
         $data4=array();
-        for ($i=0;$i<$jumlah_data;$i++) {
+        for ($i=0;$i < $jumlah_data;$i++) {
           $kmatkul_prasyarat=  strtoupper($this->Demik->getKMatkul($data3[$i]));
           $data4[] = $kmatkul_prasyarat;
         }                
@@ -228,7 +228,7 @@ class CMatakuliah extends MainPageM {
       $str="$str ('$kode_matkul', $idkur,'$nama_matkul', '$nama_matkul_en', '$sks', '$idkonsentrasi', $ispilihan, $islindas_prodi,'$semester', '$sks_tatap_muka', '$sks_praktikum', '$sks_praktik_lapangan', '$minimal_nilai', $syarat_ta, $aktif)";						
       
       $this->DB->insertRecord($str);
-      $this->redirect('dmaster.Matakuliah',true);
+      $this->redirect('dmaster.Matakuliah', true);
     }
   }
   public function editRecord($sender, $param) {
@@ -293,7 +293,7 @@ class CMatakuliah extends MainPageM {
         $idkonsentrasi=0;
         $islindas_prodi = $this->cmbEditMatkulLintasProdi->Text;
         $ispilihan = $islindas_prodi==1?1:$this->cmbEditMatkulPilihan->Text;
-        $result['idkonsentrasi']=0;
+        $result['idkonsentrasi'] = 0;
       }else{
         $islindas_prodi=0;
         $ispilihan=0;
@@ -307,7 +307,7 @@ class CMatakuliah extends MainPageM {
       $aktif=($this->chkEditAktif->Checked)?1:0;
       $str = "UPDATE matakuliah SET kmatkul='$kode_matkul',nmatkul='$nama_matkul',nmatkul_en='$nama_matkul_en',sks='$sks',idkonsentrasi='$idkonsentrasi',ispilihan = $ispilihan,islintas_prodi = $islindas_prodi,sks_tatap_muka='$sks_tatap_muka',sks_praktikum='$sks_praktikum',semester='$semester',sks_praktik_lapangan='$sks_praktik_lapangan',minimal_nilai='$minimal_nilai',syarat_ta = $syarat_ta,aktif=$aktif WHERE kmatkul='$id'";
       $this->DB->updateRecord($str);			
-      $this->redirect('dmaster.Matakuliah',true);
+      $this->redirect('dmaster.Matakuliah', true);
     }
   }
   public function deleteRecord($sender, $param) {        
@@ -319,7 +319,7 @@ class CMatakuliah extends MainPageM {
       $this->modalMessageError->Show();
     }else{
       $this->DB->deleteRecord("matakuliah WHERE kmatkul='$id'");
-      $this->redirect('dmaster.Matakuliah',true);
+      $this->redirect('dmaster.Matakuliah', true);
     }
   }    
   public function printOut($sender, $param) {

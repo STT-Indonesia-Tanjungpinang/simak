@@ -4,7 +4,7 @@
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">DAFTAR ULANG</a></li>
-    <li><a href="<%=$this->constructUrl('dulang.DulangMHSNoAktif',true)%>">MAHASISWA NON_AKTIF</a></li>
+    <li><a href="<%=$this->constructUrl('dulang.DulangMHSNoAktif', true)%>">MAHASISWA NON_AKTIF</a></li>
     <li class="active"><span>MASSAL</span></li>
 </com:TContent>
 <com:TContent ID="configtools">    
@@ -153,7 +153,7 @@
                                 <tr>
                                     <td><%#$this->DataItem['no']%></td>                                    
                                     <td><%#$this->DataItem['no_formulir']%></td>
-                                    <td><a href="<%#$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
+                                    <td><a href="<%#$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
                                     <td><%#$this->DataItem['nirm']%></td>												
                                     <td><%#$this->DataItem['nama_mhs']%></td>											
                                     <td><%#$this->Page->DMaster->getNamaDosenWaliByID($this->DataItem['iddosen_wali'])%></td>                                    

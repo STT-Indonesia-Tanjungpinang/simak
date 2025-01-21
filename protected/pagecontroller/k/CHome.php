@@ -23,7 +23,7 @@ class CHome extends MainPageK {
     public function changeTbTA($sender, $param) {				
         $ta = $this->tbCmbTA->Text;
 		$_SESSION['ta'] = $ta;    
-		$this->redirect('Home',true);
+		$this->redirect('Home', true);
 	} 
     public function changeTbSemester($sender, $param) {		
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;        

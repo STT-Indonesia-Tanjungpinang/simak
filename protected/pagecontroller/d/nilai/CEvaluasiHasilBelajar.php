@@ -3,15 +3,15 @@ prado::using ('Application.MainPageD');
 class CEvaluasiHasilBelajar extends MainPageD {
 	public function onLoad($param) {		
 		parent::onLoad($param);				
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showEvaluasiHasilBelajar=true;
         
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageEvaluasiHasilBelajar']) || $_SESSION['currentPageEvaluasiHasilBelajar']['page_name'] != 'd.nilai.EvaluasiHasilBelajar') {
-				$_SESSION['currentPageEvaluasiHasilBelajar'] = array('page_name' => 'd.nilai.EvaluasiHasilBelajar', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPageEvaluasiHasilBelajar'] = array('page_name' => 'd.nilai.EvaluasiHasilBelajar', 'page_num' => 0, 'search' => false);
 			}  
-            $_SESSION['currentPageEvaluasiHasilBelajar']['search']=false;
+            $_SESSION['currentPageEvaluasiHasilBelajar']['search'] = false;
             $_SESSION['currentPageDetailEvaluasiHasilBelajar'] = array();
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 

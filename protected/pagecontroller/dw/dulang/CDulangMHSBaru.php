@@ -9,9 +9,9 @@ class CDulangMHSBaru Extends MainPageDW {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSBaru']) || $_SESSION['currentPageDulangMHSBaru']['page_name'] != 'dw.dulang.DulangMHSBaru') {
-				$_SESSION['currentPageDulangMHSBaru'] = array('page_name' => 'dw.dulang.DulangMHSBaru', 'page_num'=>0,'search'=>false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSBaru'] = array('page_name' => 'dw.dulang.DulangMHSBaru', 'page_num' => 0, 'search' => false,'semester_masuk'=>1,'DataMHS'=>array());												
 			}
-            $_SESSION['currentPageDulangMHSBaru']['search']=false;
+            $_SESSION['currentPageDulangMHSBaru']['search'] = false;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -100,7 +100,7 @@ class CDulangMHSBaru Extends MainPageDW {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSBaru']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSBaru']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal'));
 		$result=$this->DB->getRecord($str);

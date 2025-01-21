@@ -91,7 +91,7 @@ class CProfiles extends MainPageMHS {
             $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE nim='$userid'";            
             $this->DB->updateRecord($str);            
            
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
     }
     public function saveDataPassword($sender, $param) {
@@ -102,7 +102,7 @@ class CProfiles extends MainPageMHS {
                 $str = "UPDATE profiles_mahasiswa SET userpassword='$password' WHERE nim='$userid'";
                 $this->DB->updateRecord($str);
             }
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
     }
     
@@ -147,7 +147,7 @@ class CProfiles extends MainPageMHS {
             }else {
                 $this->DB->query('ROLLBACK');
             }			
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
 	}
     public function uploadPhotoProfile($sender, $param) {

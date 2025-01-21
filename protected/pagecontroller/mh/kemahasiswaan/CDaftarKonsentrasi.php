@@ -8,7 +8,7 @@ class CDaftarKonsentrasi extends MainPageMHS {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDaftarKonsentrasi']) || $_SESSION['currentPageDaftarKonsentrasi']['page_name'] != 'mh.akademik.DaftarKonsentrasi') {
-				$_SESSION['currentPageDaftarKonsentrasi'] = array('page_name' => 'mh.akademik.DaftarKonsentrasi', 'page_num'=>0,'search'=>false);												
+				$_SESSION['currentPageDaftarKonsentrasi'] = array('page_name' => 'mh.akademik.DaftarKonsentrasi', 'page_num' => 0, 'search' => false);												
 			}    
             $this->Nilai->setDataMHS($this->Pengguna->getDataUser()); 
             $this->Nilai->getTranskripFromKonversidanKRS();
@@ -43,7 +43,7 @@ class CDaftarKonsentrasi extends MainPageMHS {
                 $str = "INSERT INTO pendaftaran_konsentrasi (nim,kjur,idkonsentrasi,jumlah_sks,tahun,idsmt,tanggal_daftar,status_daftar) VALUES ('$nim', $kjur, $idkonsentrasi, $jumlah_sks, $ta, $semester,NOW(),0)";
                 $this->DB->insertRecord($str);
                 
-                $this->redirect('kemahasiswaan.DaftarKonsentrasi',true);
+                $this->redirect('kemahasiswaan.DaftarKonsentrasi', true);
             } catch (Exception $ex) {
                 echo $ex->getMessage();
             }

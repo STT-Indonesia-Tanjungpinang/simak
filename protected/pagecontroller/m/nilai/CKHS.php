@@ -5,16 +5,16 @@ class CKHS extends MainPageM {
 	public $total_sks_nm_saat_ini;
 	public function onLoad($param) {
 		parent::onLoad($param);	 	
-        $this->showSubMenuAkademikNilai=true;
-        $this->showKHS=true;
+        $this->showSubMenuAkademikNilai = true;
+        $this->showKHS = true;
         
         $this->createObj('Nilai');
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKHS']) || $_SESSION['currentPageKHS']['page_name'] != 'm.nilai.KHS') {
-				$_SESSION['currentPageKHS'] = array('page_name' => 'm.nilai.KHS', 'page_num'=>0,'search'=>false,'iddosen_wali' => 'none', 'tahun_masuk' => 'none');
+				$_SESSION['currentPageKHS'] = array('page_name' => 'm.nilai.KHS', 'page_num' => 0, 'search' => false,'iddosen_wali' => 'none', 'tahun_masuk' => 'none');
 			}   
-			$_SESSION['currentPageKHS']['search']=false;
+			$_SESSION['currentPageKHS']['search'] = false;
             $this->RepeaterS->PageSize=10;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -137,7 +137,7 @@ class CKHS extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKHS']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKHS']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('idkrs', 'tgl_krs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'tahun_masuk', 'semester_masuk', 'idkelas', 'sah', 'tgl_disahkan', 'boolpembayaran'));
 		$result=$this->DB->getRecord($str);
@@ -159,7 +159,7 @@ class CKHS extends MainPageM {
             $trstyle='';
             $dataipk=array('ipk' => '0.00', 'sks'=> 0);
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) { 
-                $datadulang=$this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);                
+                $datadulang = $this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);                
                 $idkelas = $datadulang['idkelas'];
                 $datamhs = array('no_formulir' => $item->DataItem['no_formulir'],'nim' => $nim,'kjur' => $item->DataItem['kjur'],'tahun_masuk' => $item->DataItem['tahun_masuk'],'semester_masuk' => $item->DataItem['semester_masuk'],'idsmt' => $_SESSION['semester'],'idkelas' => $idkelas);
                 $this->Finance->setDataMHS($datamhs);                                				
@@ -168,7 +168,7 @@ class CKHS extends MainPageM {
 				$sks = $this->Nilai->getTotalSKS ();                
                 $dataipk = $this->Nilai->getIPKSampaiTASemester($_SESSION['ta'], $_SESSION['semester'],'ipksks');	                
                 $lunaspembayaran = $this->Finance->getLunasPembayaran($_SESSION['ta'], $_SESSION['semester']);
-				if (($lunaspembayaran==false)&&($_SESSION['ta']>=2010)) {                    					                    
+				if (($lunaspembayaran==false)&&($_SESSION['ta'] >=2010)) {                    					                    
                     $status='<span class="label label-info">Belum lunas</span>';
                     $trstyle=' class="danger"';
                     $bool=false;

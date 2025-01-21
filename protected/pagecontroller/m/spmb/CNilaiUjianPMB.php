@@ -9,9 +9,9 @@ class CNilaiUjianPMB extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPageNilaiUjianPMB']) || $_SESSION['currentPageNilaiUjianPMB']['page_name'] != 'm.spmb.NilaiUjianPMB') {
-				$_SESSION['currentPageNilaiUjianPMB'] = array('page_name' => 'm.spmb.NilaiUjianPMB', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'kjur' => 'none', 'tgl_ujian_awal' => $_SESSION['tahun_pendaftaran'].'-01-01', 'tgl_ujian_akhir' => $this->TGL->tanggal('Y-m-t', $_SESSION['tahun_pendaftaran'].'-09-01'));												
+				$_SESSION['currentPageNilaiUjianPMB'] = array('page_name' => 'm.spmb.NilaiUjianPMB', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'kjur' => 'none', 'tgl_ujian_awal' => $_SESSION['tahun_pendaftaran'].'-01-01', 'tgl_ujian_akhir' => $this->TGL->tanggal('Y-m-t', $_SESSION['tahun_pendaftaran'].'-09-01'));												
 			}
-            $_SESSION['currentPageNilaiUjianPMB']['search']=false;
+            $_SESSION['currentPageNilaiUjianPMB']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $this->cmbTanggalUjianAwal->Text = $this->TGL->tanggal('d-m-Y', $_SESSION['currentPageNilaiUjianPMB']['tgl_ujian_awal']);
@@ -129,7 +129,7 @@ class CNilaiUjianPMB extends MainPageM {
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageNilaiUjianPMB']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageNilaiUjianPMB']['page_num'] = 0;}
 		$str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset, $limit";				
         $_SESSION['currentPageNilaiUjianPMB']['offset'] = $offset;
         $_SESSION['currentPageNilaiUjianPMB']['limit'] = $limit;
@@ -202,7 +202,7 @@ class CNilaiUjianPMB extends MainPageM {
         $r = $this->DB->getRecord($str);
 
         $r[1]['nama_ps1'] = $_SESSION['daftar_jurusan'][$r[1]['kjur1']];
-        $r[1]['nama_ps2'] = $r[1]['kjur2']==0 ?'N.A':$_SESSION['daftar_jurusan'][$r[1]['kjur2']];
+        $r[1]['nama_ps2'] = $r[1]['kjur2'] == 0 ?'N.A':$_SESSION['daftar_jurusan'][$r[1]['kjur2']];
         $r[1]['diterima_ps1'] = '';
         $r[1]['diterima_ps2'] = '';
         $r[1]['waktu_mendaftar'] = $this->TGL->tanggal('d F Y H:m:s', $r[1]['waktu_mendaftar']);
@@ -251,7 +251,7 @@ class CNilaiUjianPMB extends MainPageM {
             $prodi = $this->cmbAddKjur->Text;
 			$str = "UPDATE nilai_ujian_masuk SET ket_lulus=1,kjur = $prodi WHERE idnilai_ujian_masuk = $id";
 			$this->DB->updateRecord($str);
-			$this->redirect('spmb.NilaiUjianPMB',true);
+			$this->redirect('spmb.NilaiUjianPMB', true);
 		}
 	}
     public function ujianUlang($sender, $param) {
@@ -266,7 +266,7 @@ class CNilaiUjianPMB extends MainPageM {
             $this->DB->deleteRecord("nilai_ujian_masuk WHERE no_formulir='$no_formulir'");
             $this->DB->updateRecord("UPDATE kartu_ujian SET isfinish=0 WHERE no_formulir='$no_formulir'");
             $this->DB->query('COMMIT');
-            $this->redirect('spmb.NilaiUjianPMB',true);	
+            $this->redirect('spmb.NilaiUjianPMB', true);	
         }            
         	
 	}

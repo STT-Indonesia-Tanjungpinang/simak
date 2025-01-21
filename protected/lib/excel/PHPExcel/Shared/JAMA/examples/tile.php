@@ -39,7 +39,7 @@ function tile(&$X, $rowWise, $colWise){
 
   $result = array();
 
-  for($i=0 ; $i<$newRowDim; ++$i) {
+  for($i=0 ; $i < $newRowDim; ++$i) {
 
     $holder = array();
 

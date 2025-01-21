@@ -191,7 +191,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	public function getLastInsertID () {
 		$str = 'SELECT last_insert_id() AS id';
 		$this->setFieldTable(array('id'));
-		$r=$this->getRecord($str);
+		$r = $this->getRecord($str);
 		return $r[1]['id'];
 	}
 	/**

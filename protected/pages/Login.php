@@ -187,7 +187,7 @@ class Login extends MainPage {
             $_SESSION['outputreport'] = 'pdf';
             $_SESSION['outputcompress'] = 'none';
             
-            $this->redirect('Home',true);
+            $this->redirect('Home', true);
         }
     }    
 }

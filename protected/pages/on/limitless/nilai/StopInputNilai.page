@@ -3,7 +3,7 @@
     <i class="icon-blog position-left"></i> <span class="text-semibold">Stop Dosen Input Nilai </span>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
+    <li><a href="<%=$this->Page->constructUrl('Home', true)%>">HOME</a></li> 
     <li class="active">STOP DOSEN INPUT NILAI</li>
 </com:TContent>
 <com:TContent ID="sidebarcontent">
@@ -111,14 +111,14 @@
                             <td><%#$this->DataItem['jam_masuk'].'-'.$this->DataItem['jam_keluar']%></td>
                             <td><%#$this->DataItem['namaruang'].' ['.$this->DataItem['kapasitas'].']'%></td>
                             <td>
-                                <a href="<%#$this->Page->constructUrl('nilai.DetailNilaiDosen',true,array('id' => $this->DataItem['idkelas_mhs']))%>" class="table-link" title="Daftar Peserta Kelas">                                        
+                                <a href="<%#$this->Page->constructUrl('nilai.DetailNilaiDosen', true,array('id' => $this->DataItem['idkelas_mhs']))%>" class="table-link" title="Daftar Peserta Kelas">                                        
                                     <%#$this->DataItem['jumlah_peserta_kelas']%>
                                 </a>
                             </td>
                             <td>
                                 <ul class="nav nav-pills nav-pills-toolbar nav-justified">
                                     <li<%# ($this->DataItem['isi_nilai']==1)?' class="active"':''%>>
-                                        <com:TActiveLinkButton ID="btnUnVerified" CommandParameter="<%# ($this->DataItem['isi_nilai']==true)?0:1%>" OnClick="Page.doVerified" Attributes.Title="Boleh Input" ClientSide.PostState="false" Enabled="<%#$this->DataItem['isi_nilai']==0%>">
+                                        <com:TActiveLinkButton ID="btnUnVerified" CommandParameter="<%# ($this->DataItem['isi_nilai']==true)?0:1%>" OnClick="Page.doVerified" Attributes.Title="Boleh Input" ClientSide.PostState="false" Enabled="<%#$this->DataItem['isi_nilai'] == 0%>">
                                             <prop:Text>                                        
                                                 ACTIVE
                                             </prop:Text>
@@ -135,7 +135,7 @@
                                             </prop:ClientSide.OnComplete>
                                         </com:TActiveLinkButton>  
                                     </li>
-                                    <li<%# ($this->DataItem['isi_nilai']==0)?' class="active"':''%>>
+                                    <li<%# ($this->DataItem['isi_nilai'] == 0)?' class="active"':''%>>
                                          <com:TActiveLinkButton ID="btnVerified" CommandParameter="<%# ($this->DataItem['isi_nilai']==true)?0:1%>" OnClick="Page.doVerified" Attributes.Title="TIdak Boleh Input" ClientSide.PostState="false" Enabled="<%#$this->DataItem['isi_nilai']==1%>">
                                             <prop:Text>                                        
                                                 INACTIVE

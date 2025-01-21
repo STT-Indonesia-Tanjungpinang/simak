@@ -9,9 +9,9 @@ class CKelompokPertanyaan extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKelompokPertanyaan']) || $_SESSION['currentPageKelompokPertanyaan']['page_name'] != 'm.dmaster.KelompokPertanyaan') {
-				$_SESSION['currentPageKelompokPertanyaan'] = array('page_name' => 'm.dmaster.KelompokPertanyaan', 'page_num'=>0,'search'=>false,'idkonsentrasi' => 'none', 'semester' => 'none');
+				$_SESSION['currentPageKelompokPertanyaan'] = array('page_name' => 'm.dmaster.KelompokPertanyaan', 'page_num' => 0, 'search' => false,'idkonsentrasi' => 'none', 'semester' => 'none');
 			}
-            $_SESSION['currentPageKelompokPertanyaan']['search']=false;            
+            $_SESSION['currentPageKelompokPertanyaan']['search'] = false;            
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 			$this->populateData();            
 		}
@@ -39,7 +39,7 @@ class CKelompokPertanyaan extends MainPageM {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKelompokPertanyaan']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKelompokPertanyaan']['page_num'] = 0;}
         $str = "$str ORDER BY (orders+0) ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idkelompok_pertanyaan', 'idkategori', 'nama_kelompok', 'orders', 'create_at', 'update_at'));
 		$r = $this->DB->getRecord($str, $offset+1);	
@@ -57,7 +57,7 @@ class CKelompokPertanyaan extends MainPageM {
             $urutan = addslashes($this->txtAddUrutan->Text);
             $str="INSERT INTO kelompok_pertanyaan (idkelompok_pertanyaan,idkategori,nama_kelompok,orders,create_at,update_at) VALUES (NULL,1,'$nama_kelompok', '$urutan',NOW(),NOW())";									            
             $this->DB->insertRecord($str);
-			$this->redirect('dmaster.KelompokPertanyaan',true);
+			$this->redirect('dmaster.KelompokPertanyaan', true);
         }
     }
     public function editRecord($sender, $param) {
@@ -79,13 +79,13 @@ class CKelompokPertanyaan extends MainPageM {
             $urutan = addslashes($this->txtEditUrutan->Text);
 			$str = "UPDATE kelompok_pertanyaan SET nama_kelompok='$nama_kelompok',orders='$urutan',update_at=NOW() WHERE idkelompok_pertanyaan = $id";
 			$this->DB->updateRecord($str);			
-			$this->redirect('dmaster.KelompokPertanyaan',true);
+			$this->redirect('dmaster.KelompokPertanyaan', true);
 		}
 	}
     public function deleteRecord($sender, $param) {        
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);        
         $this->DB->deleteRecord("kelompok_pertanyaan WHERE idkelompok_pertanyaan = $id");
-        $this->redirect('dmaster.KelompokPertanyaan',true);
+        $this->redirect('dmaster.KelompokPertanyaan', true);
         
     }        
 }

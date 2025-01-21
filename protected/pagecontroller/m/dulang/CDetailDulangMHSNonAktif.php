@@ -75,7 +75,7 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
                 }
 				$this->DB->query('COMMIT');
                 unset($_SESSION['currentPageDulangMHSNonAktif']['DataMHS']);
-                $this->redirect('dulang.DulangMHSNonAktif',true);
+                $this->redirect('dulang.DulangMHSNonAktif', true);
 			}else {
 				$this->DB->query('ROLLBACK');
 			}
@@ -83,6 +83,6 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
 	}
     public function closeDetailDulang($sender, $param) {
         unset($_SESSION['currentPageDulangMHSNonAktif']['DataMHS']);
-        $this->redirect('dulang.DulangMHSNonAktif',true);
+        $this->redirect('dulang.DulangMHSNonAktif', true);
     }
 }

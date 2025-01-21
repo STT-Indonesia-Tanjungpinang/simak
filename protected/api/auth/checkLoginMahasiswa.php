@@ -19,7 +19,7 @@ class CheckLoginMahasiswa extends BaseWS {
             $payload="data nim ($nim) dan password ($password) udah sampai di server makasih";
             $message="username atau password salah";
             $this->payload['payload']=$payload;							
-            $this->payload['message']=$message;
+            $this->payload['message'] = $message;
 		}catch (Exception $e) {
 			$this->payload['message'] = $e->getMessage();
 		}

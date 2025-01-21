@@ -9,9 +9,9 @@ class CPembagianKelas extends MainPageDW {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembagianKelas']) || $_SESSION['currentPagePembagianKelas']['page_name'] != 'm.perkuliahan.PembagianKelas') {                
-				$_SESSION['currentPagePembagianKelas'] = array('page_name' => 'm.perkuliahan.PembagianKelas', 'page_num'=>0,'search'=>false,'iddosen' => 'none', 'nama_hari' => 'none');												
+				$_SESSION['currentPagePembagianKelas'] = array('page_name' => 'm.perkuliahan.PembagianKelas', 'page_num' => 0, 'search' => false,'iddosen' => 'none', 'nama_hari' => 'none');												
 			}
-            $_SESSION['currentPagePembagianKelas']['search']=false;
+            $_SESSION['currentPagePembagianKelas']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $kjur = $_SESSION['kjur'];	
@@ -143,7 +143,7 @@ class CPembagianKelas extends MainPageDW {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePembagianKelas']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePembagianKelas']['page_num'] = 0;}
         $str = "$str ORDER BY hari ASC,idkelas ASC,nama_dosen ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idkelas_mhs', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas'));
 		$r = $this->DB->getRecord($str, $offset+1);	
@@ -165,7 +165,7 @@ class CPembagianKelas extends MainPageDW {
 		$this->DB->setFieldTable(array('iddosen'));
 		$r = $this->DB->getRecord($str);	
         $_SESSION['currentPagePembagianKelas']['iddosen'] = $r[1]['iddosen'];	 
-        $this->redirect ('perkuliahan.DetailPembagianKelas',true);
+        $this->redirect ('perkuliahan.DetailPembagianKelas', true);
 	}	
     public function printOut($sender, $param) {		
         $this->createObj('reportakademik');

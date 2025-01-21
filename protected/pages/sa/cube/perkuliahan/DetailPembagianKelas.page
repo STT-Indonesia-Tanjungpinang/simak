@@ -33,7 +33,7 @@
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">AKADEMIK</a></li>
     <li><a href="#">PERKULIAHAN</a></li>
-    <li><a href="<%=$this->constructURl ('perkuliahan.PembagianKelas',true)%>">PEMBAGIAN KELAS</a></li>
+    <li><a href="<%=$this->constructURl ('perkuliahan.PembagianKelas', true)%>">PEMBAGIAN KELAS</a></li>
     <li class="active">DETAIL PEMBAGIAN KELAS</li>
 </com:TContent>
 <com:TContent ID="csscontent">
@@ -47,7 +47,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-edit"></i> Ubah Data Kelas</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('perkuliahan.DetailPembagianKelas',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('perkuliahan.DetailPembagianKelas', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -111,7 +111,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"><i class="fa fa-sitemap"></i> Pilih Dosen / Pengampu Matakuliah</h2> 
                     <div class="filter-block pull-right">                        
-                        <a href="<%=$this->constructURl ('perkuliahan.PembagianKelas',true)%>" class="btn btn-default pull-right">
+                        <a href="<%=$this->constructURl ('perkuliahan.PembagianKelas', true)%>" class="btn btn-default pull-right">
                             <i class="fa fa-times"></i>
                         </a>                                                           
                     </div>
@@ -278,7 +278,7 @@
                                     <td><%#$this->DataItem['jam_masuk'].'-'.$this->DataItem['jam_keluar']%></td>
                                     <td><%#$this->DataItem['namaruang'].' ['.$this->DataItem['kapasitas'].']'%></td>
                                     <td>
-                                        <a href="<%#$this->Page->constructUrl('perkuliahan.PesertaKelas',true,array('id' => $this->DataItem['idkelas_mhs']))%>" class="table-link" title="Daftar Peserta Kelas">                                        
+                                        <a href="<%#$this->Page->constructUrl('perkuliahan.PesertaKelas', true,array('id' => $this->DataItem['idkelas_mhs']))%>" class="table-link" title="Daftar Peserta Kelas">                                        
                                             <%#$this->DataItem['jumlah_peserta_kelas']%>
                                         </a>
                                     </td>

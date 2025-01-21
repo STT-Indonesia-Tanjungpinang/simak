@@ -7,9 +7,9 @@ class CDosenWali extends MainPageSA {
         $this->showDosenWali=true;   
         if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDosenWali']) || $_SESSION['currentPageDosenWali']['page_name'] != 'sa.dmaster.DosenWali') {
-                $_SESSION['currentPageDosenWali'] = array('page_name' => 'sa.dmaster.DosenWali', 'page_num'=>0,'search'=>false);
+                $_SESSION['currentPageDosenWali'] = array('page_name' => 'sa.dmaster.DosenWali', 'page_num' => 0, 'search' => false);
             }
-            $_SESSION['currentPageDosenWali']['search']=false;
+            $_SESSION['currentPageDosenWali']['search'] = false;
             $this->populateData();            
         }
     }       
@@ -59,7 +59,7 @@ class CDosenWali extends MainPageSA {
         if (($offset+$limit)>$itemcount) {
             $limit=$itemcount-$offset;
         }
-        if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDosenWali']['page_num']=0;}
+        if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDosenWali']['page_num'] = 0;}
         $str = "$str ORDER BY nama_dosen ASC LIMIT $offset, $limit";             
         $this->DB->setFieldTable(array('iddosen_wali', 'nidn', 'nipy', 'gelar_depan', 'nama_dosen', 'gelar_belakang', 'telp_hp', 'username', 'status'));
         $r = $this->DB->getRecord($str, $offset+1);  
@@ -99,7 +99,7 @@ class CDosenWali extends MainPageSA {
                 }   
                 $this->Application->Cache->set('listdw', $dataitem);                
             }
-            $this->Redirect('dmaster.DosenWali',true);            
+            $this->Redirect('dmaster.DosenWali', true);            
         }
     }
     public function deleteRecord($sender, $param) {        
@@ -120,7 +120,7 @@ class CDosenWali extends MainPageSA {
                 }   
                 $this->Application->Cache->set('listdw', $dataitem);                
             }
-            $this->redirect('dmaster.DosenWali',true);
+            $this->redirect('dmaster.DosenWali', true);
         }        
     }   
     

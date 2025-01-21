@@ -5,14 +5,14 @@ class CStopInputNilai extends MainPageON{
 	public $pnlInputPenyelenggaraan = false;
 	public function onLoad($param) {
 		parent::onLoad($param);	
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showStopInputNilai=true;    
 		$this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageStopInputNilai']) || $_SESSION['currentPageStopInputNilai']['page_name'] != 'on.nilai.StopInputNilai') {					
-                $_SESSION['currentPageStopInputNilai'] = array('page_name' => 'on.nilai.StopInputNilai', 'page_num'=>0,'search'=>false,'iddosen' => 'none', 'nama_hari' => 'none');												
+                $_SESSION['currentPageStopInputNilai'] = array('page_name' => 'on.nilai.StopInputNilai', 'page_num' => 0, 'search' => false,'iddosen' => 'none', 'nama_hari' => 'none');												
             }
-            $_SESSION['currentPageNilaiFinal']['search']=false;
+            $_SESSION['currentPageNilaiFinal']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -117,7 +117,7 @@ class CStopInputNilai extends MainPageON{
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageStopInputNilai']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageStopInputNilai']['page_num'] = 0;}
         $str = "$str ORDER BY hari ASC,idkelas ASC,nama_dosen ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idkelas_mhs', 'kmatkul', 'nmatkul', 'nama_dosen', 'idkelas', 'nidn', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas', 'isi_nilai'));
 		$r = $this->DB->getRecord($str, $offset+1);	

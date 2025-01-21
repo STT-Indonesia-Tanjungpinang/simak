@@ -8,9 +8,9 @@ class CKonversiMatakuliah extends MainPageON {
 		if (!$this->IsPostBack && !$this->IsCallBack) {
             
             if (!isset($_SESSION['currentPageKonversiMatakuliah']) || $_SESSION['currentPageKonversiMatakuliah']['page_name'] != 'on.KonversiMatakuliah') {
-				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'on.KonversiMatakuliah', 'page_num'=>0,'offset'=>0,'limit'=>0,'search'=>false,'daftarmatkul'=>array(), 'kjur' => $_SESSION['kjur']);												
+				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'on.KonversiMatakuliah', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'daftarmatkul'=>array(), 'kjur' => $_SESSION['kjur']);												
 			}
-            $_SESSION['currentPageKonversiMatakuliah']['search']=false;
+            $_SESSION['currentPageKonversiMatakuliah']['search'] = false;
             
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
@@ -80,7 +80,7 @@ class CKonversiMatakuliah extends MainPageON {
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKonversiMatakuliah']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKonversiMatakuliah']['page_num'] = 0;}
 		$str = $str . " ORDER BY nama ASC LIMIT $offset, $limit";		
 		$this->DB->setFieldTable(array('iddata_konversi', 'nama', 'alamat', 'no_telp', 'nim', 'date_added'));
 		$r = $this->DB->getRecord($str, $offset+1);
@@ -159,7 +159,7 @@ class CKonversiMatakuliah extends MainPageON {
                         $i++;
                     }
                     $this->DB->query('COMMIT');
-                    $this->redirect('KonversiMatakuliah',true);
+                    $this->redirect('KonversiMatakuliah', true);
                 }else {
                     $this->DB->query('ROLLBACK');                
                 }       
@@ -255,7 +255,7 @@ class CKonversiMatakuliah extends MainPageON {
                 }else {
                     $this->DB->query('ROLLBACK');
                 }
-    			$this->redirect('KonversiMatakuliah',true);
+    			$this->redirect('KonversiMatakuliah', true);
             } catch (Exception $ex) {
                 $nmatkul = $_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['nmatkul'];
                 $this->lblContentMessageError->Text="Matakuliah $nmatkul dengan kode $kmatkul_before belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah";
@@ -272,7 +272,7 @@ class CKonversiMatakuliah extends MainPageON {
 	public function deleteRecord($sender, $param) {			
 		$iddata_konversi = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->DB->deleteRecord("data_konversi2 WHERE iddata_konversi='$iddata_konversi'");
-		$this->redirect('KonversiMatakuliah',true);
+		$this->redirect('KonversiMatakuliah', true);
 	}	
     public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             

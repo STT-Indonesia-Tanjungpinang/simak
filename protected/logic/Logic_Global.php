@@ -68,7 +68,7 @@ class Logic_Global extends TModule
     }
     else 
     {
-      for ($i=0;$i<$countField;$i++) 
+      for ($i=0;$i < $countField;$i++) 
       {
         if ($countField > $i+1) 
         {
@@ -106,47 +106,47 @@ class Logic_Global extends TModule
         $list_['none'] = ' ';
         foreach ($result as $k => $v)
         {
-          $list_[$v[$fieldTable[0]]]=$v[$fieldTable[1]];
+          $list_[$v[$fieldTable[0]]] = $v[$fieldTable[1]];
         }
       break;
       case 2 :
         $list_['none'] = ' ';
         foreach ($result as $k => $v)
         {
-          $list_[$v[$fieldTable[0]]]=$v[$fieldTable[1]].'-'.$v[$fieldTable[2]];
+          $list_[$v[$fieldTable[0]]] = $v[$fieldTable[1]].'-'.$v[$fieldTable[2]];
         }				
       break;
       case 3 :
         $list_['none'] = ' ';
         foreach ($result as $k => $v)
         {
-          $list_[$v[$fieldTable[0]].'_'.$v[$fieldTable[1]]]=$v[$fieldTable[1]].'-'.$v[$fieldTable[2]];
+          $list_[$v[$fieldTable[0]].'_'.$v[$fieldTable[1]]] = $v[$fieldTable[1]].'-'.$v[$fieldTable[2]];
         }
       break;
       case 5 :
         foreach ($result as $k => $v)
         {					
-          $list_[$v[$fieldTable[0]]]=$v[$fieldTable[1]];
+          $list_[$v[$fieldTable[0]]] = $v[$fieldTable[1]];
         }
       break;
       case 6 :				
         foreach ($result as $k => $v)
         {									
-          $list_[$v[$fieldTable[0]]]=$v[$fieldTable[1]].'-'.$v[$fieldTable[2]];
+          $list_[$v[$fieldTable[0]]] = $v[$fieldTable[1]].'-'.$v[$fieldTable[2]];
         }
       break;
       case 7 :
         $list_['none'] = ' ';
         foreach ($result as $k => $v)
         {					
-          $list_[$v[$newFieldTable[0]]]=$v[$newFieldTable[0]].' - '.$v[$newFieldTable[1]];
+          $list_[$v[$newFieldTable[0]]] = $v[$newFieldTable[0]].' - '.$v[$newFieldTable[1]];
         }
       break;
       case 8 :
         $list_['none'] = ' ';
         foreach ($result as $k => $v)
         {
-          $list_[$v[$fieldTable[0]]]=$v[$fieldTable[1]].'-'.$v[$fieldTable[2]];
+          $list_[$v[$fieldTable[0]]] = $v[$fieldTable[1]].'-'.$v[$fieldTable[2]];
         }
       break;
     }	
@@ -174,9 +174,9 @@ class Logic_Global extends TModule
   public function removeIdFromArray ($arr = array(), $id) {
     if (isset($arr[$id])) {
       $arr2=array();
-      while (list($k, $v)=each($arr)) {
+      while (list($k, $v) = each($arr)) {
         if ($k != $id) {
-          $arr2[$k]=$v;
+          $arr2[$k] = $v;
         }
       }
       return $arr2;

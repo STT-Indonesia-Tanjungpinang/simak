@@ -11,9 +11,9 @@ class CRekapStatusMahasiswa Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRekapStatusMahasiswa']) || $_SESSION['currentPageRekapStatusMahasiswa']['page_name'] != 'm.kemahasiswaan.RekapStatusMahasiswa') {
-				$_SESSION['currentPageRekapStatusMahasiswa'] = array('page_name' => 'm.kemahasiswaan.RekapStatusMahasiswa', 'page_num'=>0,'search'=>false,'ta1' => $_SESSION['ta'],'ta2' => $_SESSION['ta'],'k_status' => 'none', 'tahun_masuk' => 'none', 'idsmt' => 'none', 'idkelas' => 'none');												
+				$_SESSION['currentPageRekapStatusMahasiswa'] = array('page_name' => 'm.kemahasiswaan.RekapStatusMahasiswa', 'page_num' => 0, 'search' => false,'ta1' => $_SESSION['ta'],'ta2' => $_SESSION['ta'],'k_status' => 'none', 'tahun_masuk' => 'none', 'idsmt' => 'none', 'idkelas' => 'none');												
 			}
-            $_SESSION['currentPageRekapStatusMahasiswa']['search']=false; 
+            $_SESSION['currentPageRekapStatusMahasiswa']['search'] = false; 
             
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
@@ -107,7 +107,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
         $_SESSION['currentPageRekapStatusMahasiswa']['tahun_masuk'] = $this->cmbFilterTahunMasuk->Text;        
         $_SESSION['currentPageRekapStatusMahasiswa']['idsmt'] = $this->cmbFilterSemester->Text;        
         $_SESSION['currentPageRekapStatusMahasiswa']['idkelas'] = $this->cmbFilterKelas->Text;        
-        $this->redirect('kemahasiswaan.RekapStatusMahasiswa',true);
+        $this->redirect('kemahasiswaan.RekapStatusMahasiswa', true);
 	} 
 	public function populateData() {		
 		$ta1 = $_SESSION['currentPageRekapStatusMahasiswa']['ta1'];

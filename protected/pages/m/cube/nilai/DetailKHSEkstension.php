@@ -7,13 +7,13 @@ class DetailKHSEkstension extends MainPageM {
     public $NilaiSemesterSekarang;
 	public function onLoad($param) {
 		parent::onLoad($param);							
-		$this->showSubMenuAkademikNilai=true;
+		$this->showSubMenuAkademikNilai = true;
         $this->showKHSEkstension=true;    
         $this->createObj('Nilai');        
         
 		if (!$this->IsPostback&&!$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailKHSEkstension']) || $_SESSION['currentPageDetailKHSEkstension']['page_name'] != 'm.nilai.DetailKHSEkstension') {
-				$_SESSION['currentPageDetailKHSEkstension'] = array('page_name' => 'm.nilai.DetailKHSEkstension', 'page_num'=>0,'search'=>false,'DataMHS'=>array());												                                               
+				$_SESSION['currentPageDetailKHSEkstension'] = array('page_name' => 'm.nilai.DetailKHSEkstension', 'page_num' => 0, 'search' => false,'DataMHS'=>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource=$this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -29,7 +29,7 @@ class DetailKHSEkstension extends MainPageM {
             $idkrs = addslashes($this->request['id']);            				
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs' AND vdm.idkelas='C'";
             $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
-            $r=$this->DB->getRecord($str);	           
+            $r = $this->DB->getRecord($str);	           
             $datamhs = $r[1];
             if (!isset($r[1])) {
                 $_SESSION['currentPageDetailKHSEkstension']['DataMHS'] = array();
@@ -37,12 +37,12 @@ class DetailKHSEkstension extends MainPageM {
             }            
             $tahun = $datamhs['tahun'];
             $idsmt=$datamhs['idsmt'];
-            if ($datamhs['sah']==0) {
+            if ($datamhs['sah'] == 0) {
                 throw new Exception("KRS dengan ID ($idkrs) belum disahkan.");
             }
             $datamhs['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
             $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
             $_SESSION['currentPageDetailKHSEkstension']['DataMHS']=$datamhs;
             $this->Nilai->setDataMHS($datamhs);

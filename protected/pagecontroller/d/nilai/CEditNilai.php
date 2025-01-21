@@ -13,9 +13,9 @@ class CEditNilai extends MainPageD
     {
       if (!isset($_SESSION['currentPageEditNilai']) || $_SESSION['currentPageEditNilai']['page_name'] != 'd.nilai.EditNilai') 
       {
-        $_SESSION['currentPageEditNilai'] = array('page_name' => 'd.nilai.EditNilai', 'page_num'=>0,'search'=>false);
+        $_SESSION['currentPageEditNilai'] = array('page_name' => 'd.nilai.EditNilai', 'page_num' => 0, 'search' => false);
       }  
-      $_SESSION['currentPageEditNilai']['search']=false;
+      $_SESSION['currentPageEditNilai']['search'] = false;
       $_SESSION['currentPageDetailEditNilai'] = array();
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 

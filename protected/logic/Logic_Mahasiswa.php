@@ -107,7 +107,7 @@ class Logic_Mahasiswa extends Logic_Global {
     $nim = $this->DataMHS['nim'];
     $str = "SELECT d.tahun,d.idsmt,k.idkelas,k.nkelas FROM kelas k,dulang d WHERE k.idkelas=d.idkelas AND d.iddulang=(SELECT MAX(iddulang) FROM dulang WHERE nim='$nim')";
     $this->db->setFieldTable(array('tahun', 'idsmt', 'idkelas', 'nkelas'));					
-    $r=$this->db->getRecord($str);					
+    $r = $this->db->getRecord($str);					
     if (isset($r[1])) {						
       $kelas['idkelas']=$r[1]['idkelas'];
       $kelas['nkelas']=$r[1]['nkelas'];
@@ -198,7 +198,7 @@ class Logic_Mahasiswa extends Logic_Global {
     $nim = $this->DataMHS['nim'];
     $str = "SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND idsmt='$idsmt' AND tahun='$tahun'";			
     $this->db->setFieldTable(array('iddulang', 'nim', 'tahun', 'idsmt', 'tanggal', 'idkelas', 'status_sebelumnya', 'k_status'));
-    $r=$this->db->getRecord($str);						        
+    $r = $this->db->getRecord($str);						        
     if (isset($r[1])) {				            
       return $r[1];
     }else {
@@ -216,7 +216,7 @@ class Logic_Mahasiswa extends Logic_Global {
     $current_tasmt=$tahun.$idsmt;
     $str = ($this->getDataMHS('tahun_masuk')==$tahun&&$this->getDataMHS('semester_masuk')==$idsmt)?"SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND tasmt <= $current_tasmt ORDER BY iddulang DESC LIMIT 1":"SELECT iddulang,nim,tahun,idsmt,tanggal,idkelas,status_sebelumnya,k_status FROM dulang WHERE nim='$nim' AND tasmt < $current_tasmt ORDER BY iddulang DESC LIMIT 1";
     $this->db->setFieldTable(array('iddulang', 'nim', 'tahun', 'idsmt', 'tanggal', 'idkelas', 'status_sebelumnya', 'k_status'));
-    $r=$this->db->getRecord($str);						        
+    $r = $this->db->getRecord($str);						        
     if (isset($r[1])) {				            
       return $r[1];
     }else {

@@ -296,7 +296,7 @@
                     <div class="main-box clearfix profile-box-contact">
                         <div class="main-box-body clearfix">
                             <div class="profile-box-header gray-bg clearfix">
-                                <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa',true,array('id' => $this->DataItem['nim']))%>">
+                                <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>">
                                     <img src="<%#$this->DataItem['photo_profile']%>" alt="" onerror="no_photo(this,'resources/userimages/no_photo.png')" width="150" height="150" class="img-rounded img-responsive" />
                                 </a>
                                 <h2><%#$this->DataItem['nama_mhs']%><small><span class="label label-info"><%#$this->Page->DMaster->getNamaStatusMHSByID($this->DataItem['k_status'])%></span><%#$this->DataItem['iddata_konversi'] == 0? '':' <span class="label label-warning">Pindahan</span>'%></small></h2>

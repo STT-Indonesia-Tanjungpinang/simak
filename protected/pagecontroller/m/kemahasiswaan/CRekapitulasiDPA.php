@@ -8,7 +8,7 @@ class CRekapitulasiDPA extends MainPageM {
         $this->showPerwalian=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRekapitulasiDPA']) || $_SESSION['currentPageRekapitulasiDPA']['page_name'] != 'm.kemahasiswaan.RekapitulasiDPA') {
-				$_SESSION['currentPageRekapitulasiDPA'] = array('page_name' => 'm.kemahasiswaan.RekapitulasiDPA', 'page_num'=>0,'kjur' => 'none', 'tahun_masuk' => 'none', 'kelas' => 'none', 'status' => 'none');												
+				$_SESSION['currentPageRekapitulasiDPA'] = array('page_name' => 'm.kemahasiswaan.RekapitulasiDPA', 'page_num' => 0,'kjur' => 'none', 'tahun_masuk' => 'none', 'kelas' => 'none', 'status' => 'none');												
 			}
             $daftar_prodi = $_SESSION['daftar_jurusan'];                        
             $daftar_prodi['none'] = 'KESELURUHAN';
@@ -86,7 +86,7 @@ class CRekapitulasiDPA extends MainPageM {
         $result = array();
         $i=1;
         $this->DB->setFieldTable(array('jk', 'jumlah_jk'));
-        while (list($iddosen_wali, $nama_dw)=each($daftar_dw)){
+        while (list($iddosen_wali, $nama_dw) = each($daftar_dw)){
             $str = "SELECT fp.jk, COUNT(rm.nim) AS jumlah_jk FROM formulir_pendaftaran fp,register_mahasiswa rm WHERE fp.no_formulir=rm.no_formulir  AND rm.iddosen_wali = $iddosen_wali $str_kjur $str_tahun_masuk $str_kelas $str_status GROUP BY fp.jk ORDER BY fp.jk ASC";
             $r = $this->DB->getRecord($str);
             $pria=0;

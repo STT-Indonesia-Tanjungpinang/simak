@@ -6,7 +6,7 @@ class CNilaiPerMahasiswa extends MainPageON {
   public function onLoad($param) {
     parent::onLoad($param);	
     $this->createObj('Nilai');
-    $this->showSubMenuAkademikNilai=true;
+    $this->showSubMenuAkademikNilai = true;
     $this->showNilaiPerMahasiswa=true;
     if (!$this->IsPostBack && !$this->IsCallback)
     {
@@ -34,7 +34,7 @@ class CNilaiPerMahasiswa extends MainPageON {
         
         $kelas = $this->Nilai->getKelasMhs();                
         $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
         $datamhs['nama_dosen'] = $nama_dosen;                
@@ -127,7 +127,7 @@ class CNilaiPerMahasiswa extends MainPageON {
     $result = array();       
     while (list($k, $v) = each($r)) {
       $v['kmatkul'] = $this->Nilai->getKMatkul($v['kmatkul']);
-      if ($v['userid_input']==0) {
+      if ($v['userid_input'] == 0) {
         $v['tanggal_input'] = '-';
         $v['tanggal_modif'] = '-';
       }else{
@@ -211,6 +211,6 @@ class CNilaiPerMahasiswa extends MainPageON {
   }	
   public function closeDetail($sender, $param) {
     unset($_SESSION['currentPageNilaiFinal']['DataMHS']);
-    $this->redirect('nilai.NilaiPerMahasiswa',true);
+    $this->redirect('nilai.NilaiPerMahasiswa', true);
   }
 }

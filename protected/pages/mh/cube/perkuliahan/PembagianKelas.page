@@ -21,7 +21,7 @@
                 <header class="main-box-header clearfix">
                     <h2 class="pull-left"><i class="fa fa-sitemap"></i> Daftar Kelas yang Terbentuk</h2> 
                     <div class="filter-block pull-right">
-                        <a href="<%=$this->constructURl ('perkuliahan.DetailPembagianKelas',true)%>" class="btn btn-primary pull-right" title="Tambah Kelas">
+                        <a href="<%=$this->constructURl ('perkuliahan.DetailPembagianKelas', true)%>" class="btn btn-primary pull-right" title="Tambah Kelas">
                             <i class='fa  fa-plus-circle fa-lg'></i>
                         </a>                                                           
                     </div>
@@ -58,7 +58,7 @@
                                     <td><%#$this->DataItem['jam_masuk'].'-'.$this->DataItem['jam_keluar']%></td>
                                     <td><%#$this->DataItem['namaruang'].' ['.$this->DataItem['kapasitas'].']'%></td>
                                     <td>
-                                        <a href="<%#$this->Page->constructUrl('perkuliahan.PesertaKelas',true,array('id' => $this->DataItem['idkelas_mhs']))%>" class="table-link" title="Daftar Peserta Kelas">                                        
+                                        <a href="<%#$this->Page->constructUrl('perkuliahan.PesertaKelas', true,array('id' => $this->DataItem['idkelas_mhs']))%>" class="table-link" title="Daftar Peserta Kelas">                                        
                                             <%#$this->DataItem['jumlah_peserta_kelas']%>
                                         </a>
                                     </td>

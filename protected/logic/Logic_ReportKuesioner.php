@@ -74,7 +74,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                 
                 $str="SELECT vpp.idpengampu_penyelenggaraan,vpp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_pengampu_penyelenggaraan vpp WHERE EXISTS (SELECT 1 FROM kuesioner_jawaban WHERE idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) AND vpp.idsmt='$idsmt' AND vpp.tahun='$ta' AND vpp.kjur='$kjur' ORDER BY nmatkul ASC";                
                 $this->db->setFieldTable (array('idpengampu_penyelenggaraan', 'idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen', 'jumlahmhs'));			
-                $r=$this->db->getRecord($str);	                
+                $r = $this->db->getRecord($str);	                
                 $row=11;  
                 while (list($k, $v) = each($r)) {
                     $sheet->setCellValue("A$row", $v['no']);				           
@@ -228,10 +228,10 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $TotalIndikator3=0;
                 $TotalIndikator4=0;
                 $TotalIndikator5=0;
-                while (list($idkelompok_pertanyaan, $nama_kelompok)=each($kelompok_pertanyaan)) {
+                while (list($idkelompok_pertanyaan, $nama_kelompok) = each($kelompok_pertanyaan)) {
                     $str = "SELECT idkuesioner,idkelompok_pertanyaan,pertanyaan,`orders`,date_added FROM kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt' AND idkelompok_pertanyaan = $idkelompok_pertanyaan ORDER BY (orders+0) ASC";
                     $this->db->setFieldTable(array('idkuesioner', 'idkelompok_pertanyaan', 'pertanyaan', 'orders', 'date_added'));
-                    $r=$this->db->getRecord($str);
+                    $r = $this->db->getRecord($str);
                     $jumlah_r=count($r);
                     if ($jumlah_r > 0) {                        
                         $sheet->mergeCells("A$row:I$row");

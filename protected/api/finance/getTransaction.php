@@ -19,7 +19,7 @@ class getTransaction extends BaseWS {
 				case 10: //bayar biasa
 					$str = "SELECT t.no_transaksi,t.no_faktur,t.kjur,t.tahun,t.idsmt,t.idkelas,k.nkelas,t.no_formulir,fp.nama_mhs,t.nim,t.disc,t.commited,t.tanggal,t.date_added FROM transaksi t LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN kelas k ON (k.idkelas=t.idkelas) WHERE t.no_transaksi='$no_transaksi'";
 					$this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'kjur', 'tahun', 'idsmt', 'idkelas', 'nkelas', 'no_formulir', 'nama_mhs', 'nim', 'disc', 'commited', 'tanggal', 'date_added'));		
-					$r=$this->DB->getRecord($str);						
+					$r = $this->DB->getRecord($str);						
 					if (isset($r[1])) {
 						$result=$r[1];
 						$payload['no_formulir']=$result['no_formulir'];
@@ -28,7 +28,7 @@ class getTransaction extends BaseWS {
 							$no_formulir=$payload['no_formulir'];
 							$str = "SELECT nama_mhs FROM formulir_pendaftaran_temp WHERE no_formulir='$no_formulir'";
 							$this->DB->setFieldTable(array('nama_mhs'));		
-							$r=$this->DB->getRecord($str);	
+							$r = $this->DB->getRecord($str);	
 							$result['nama_mhs']=isset($r[1])?$r[1]['nama_mhs']:'';		
 							$keterangan='MAHASISWA BARU';
 						}else{
@@ -60,7 +60,7 @@ class getTransaction extends BaseWS {
                         }
                         
 						$this->payload['payload']=$payload;							
-						$this->payload['message']=$message;
+						$this->payload['message'] = $message;
 					}else{
 						$this->payload['status'] = '04';
 						throw new Exception ("Proses Login telah berhasil, namun data transaksi dengan nomor ($no_transaksi) tidak ada di database !!!");
@@ -69,7 +69,7 @@ class getTransaction extends BaseWS {
 				case 11: //bayar cuti
 					$str = "SELECT t.no_transaksi,t.no_faktur,t.tahun,t.idsmt,vdm.no_formulir,t.nim,vdm.nama_mhs,vdm.kjur,vdm.nama_ps,vdm.idkelas,k.nkelas AS nama_kelas,t.dibayarkan AS totaltagihan,t.commited,t.tanggal,t.date_added FROM transaksi_cuti t JOIN v_datamhs vdm ON (vdm.nim=t.nim) JOIN kelas k ON (k.idkelas=vdm.idkelas)  WHERE t.no_transaksi='$no_transaksi'";
 					$this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tahun', 'idsmt', 'no_formulir', 'nim', 'nama_mhs', 'kjur', 'nama_ps', 'idkelas', 'nama_kelas', 'totaltagihan', 'commited', 'tanggal', 'date_added'));		
-					$r=$this->DB->getRecord($str);						
+					$r = $this->DB->getRecord($str);						
 					if (isset($r[1])) {
 						$payload=$r[1];
                         if ($payload['commited']==1) {
@@ -84,7 +84,7 @@ class getTransaction extends BaseWS {
 						$payload['semester']=$this->semester[$payload['idsmt']];		
 						$payload['keterangan'] = 'CUTI';		
 						$this->payload['payload']=$payload;							
-						$this->payload['message']=$message;
+						$this->payload['message'] = $message;
 					}else{
 						$this->payload['status'] = '04';
 						throw new Exception ("Proses Login telah berhasil, namun data transaksi cuti dengan nomor ($no_transaksi) tidak ada di database !!!");

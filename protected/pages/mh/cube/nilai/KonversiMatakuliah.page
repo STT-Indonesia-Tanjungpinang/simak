@@ -4,7 +4,7 @@
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">NILAI</a></li>
-    <li class="active"><a href="<%=$this->constructUrl('nilai.KonversiMatakuliah',true)%>">KONVERSI MATAKULIAH</a></li> 
+    <li class="active"><a href="<%=$this->constructUrl('nilai.KonversiMatakuliah', true)%>">KONVERSI MATAKULIAH</a></li> 
 </com:TContent>
 <com:TContent ID="configtools">
 <div id="config-tool" class="closed">

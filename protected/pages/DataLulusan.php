@@ -6,9 +6,9 @@ class DataLulusan extends MainPageF {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
             if (!isset($_SESSION['currentPageDataLulusan']) || $_SESSION['currentPageDataLulusan']['page_name'] != 'DataLulusan') {					
-                $_SESSION['currentPageDataLulusan'] = array('page_name' => 'DataLulusan', 'page_num'=>0,'search'=>false,'tanggal_terbit' => 'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
+                $_SESSION['currentPageDataLulusan'] = array('page_name' => 'DataLulusan', 'page_num' => 0, 'search' => false,'tanggal_terbit' => 'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
             }
-            $_SESSION['currentPageDataLulusan']['search']=false;
+            $_SESSION['currentPageDataLulusan']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
             
             $this->populateData();
@@ -57,7 +57,7 @@ class DataLulusan extends MainPageF {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDataLulusan']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDataLulusan']['page_num'] = 0;}
         $str = "$str ORDER BY ta.tahun DESC,ta.idsmt ASC,vdm.nama_mhs ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'judul_skripsi', 'tasmt'));
 		$result=$this->DB->getRecord($str, $offset+1);

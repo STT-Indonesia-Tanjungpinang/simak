@@ -8,7 +8,7 @@ class CDetailDiskusi extends MainPageMHS {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDetailDiskusi']) || $_SESSION['currentPageDetailDiskusi']['page_name'] != 'mh.forum.DetailDiskusi') {                                                                                
-                $_SESSION['currentPageDetailDiskusi'] = array('page_name' => 'mh.forum.DetailDiskusi', 'page_num'=>0,'search'=>false,'DataDiskusi'=>array());
+                $_SESSION['currentPageDetailDiskusi'] = array('page_name' => 'mh.forum.DetailDiskusi', 'page_num' => 0, 'search' => false,'DataDiskusi'=>array());
             }            
             try {
                 $id=addslashes($this->request['id']);

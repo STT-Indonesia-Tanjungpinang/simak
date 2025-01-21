@@ -16,8 +16,8 @@ class CHome extends MainPageM {
         $tahun_pendaftaran = $_SESSION['tahun_pendaftaran'];
 
         for ($i = $tahun_pendaftaran-10;$i <=$tahun_pendaftaran;$i+=1) {
-          $data_mendaftar[$i]=0;
-          $data_dulang[$i]=0;
+          $data_mendaftar[$i] = 0;
+          $data_dulang[$i] = 0;
         }
 
         $str = "SELECT ta,COUNT(no_formulir) AS jumlah FROM formulir_pendaftaran WHERE ($tahun_pendaftaran-10) <= ta GROUP BY ta ORDER BY ta ASC";
@@ -54,7 +54,7 @@ class CHome extends MainPageM {
       $data1 = $data1."[gd($ta,12,31), $jumlah],";     
       $totalpendaftaran+=$jumlah;
     }
-    $datadulang=$_SESSION['currentPageHome']['datadulang'];        
+    $datadulang = $_SESSION['currentPageHome']['datadulang'];        
     $data2='';
     foreach ($datadulang as $tahun=>$jumlah) {
       $ta = $tahun-1;
@@ -99,8 +99,8 @@ class CHome extends MainPageM {
     $tahun_pendaftaran = $_SESSION['tahun_pendaftaran'];
                 
     for ($i = $tahun_pendaftaran-10;$i <=$tahun_pendaftaran;$i+=1) {
-      $data_mendaftar[$i]=0;
-      $data_dulang[$i]=0;
+      $data_mendaftar[$i] = 0;
+      $data_dulang[$i] = 0;
     }
 
     $str = "SELECT ta,COUNT(no_formulir) AS jumlah FROM formulir_pendaftaran WHERE ($tahun_pendaftaran-10) <= ta GROUP BY ta ORDER BY ta ASC";
@@ -123,6 +123,6 @@ class CHome extends MainPageM {
                        'datamendaftar' => $data_mendaftar,
                        'datadulang' => $data_dulang
                        );        
-    $this->redirect('Home',true);
+    $this->redirect('Home', true);
   }
 }

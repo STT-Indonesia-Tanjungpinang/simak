@@ -8,9 +8,9 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGenap']) || $_SESSION['currentPagePembayaranPiutangSemesterGenap']['page_name'] != 'k.pembayaran.PembayaranPiutangSemesterGenap') {
-				$_SESSION['currentPagePembayaranPiutangSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGenap', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester'=>2,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranPiutangSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGenap', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester'=>2,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
 			}
-            $_SESSION['currentPagePembayaranPiutangSemesterGenap']['search']=false; 
+            $_SESSION['currentPagePembayaranPiutangSemesterGenap']['search'] = false; 
             
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
@@ -49,13 +49,13 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;
-        $this->redirect('pembayaran.PembayaranPiutangSemesterGenap',true);
+        $this->redirect('pembayaran.PembayaranPiutangSemesterGenap', true);
 	}	
     public function changeTbTA($sender, $param) {				
         $ta = $this->tbCmbTA->Text;
         $tahun_masuk = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'];
 		$_SESSION['currentPagePembayaranPiutangSemesterGenap']['ta'] = $ta < $tahun_masuk ? $tahun_masuk : $ta;    
-		$this->redirect('pembayaran.PembayaranPiutangSemesterGenap',true);
+		$this->redirect('pembayaran.PembayaranPiutangSemesterGenap', true);
 	}   
     
     public function changeTbTahunMasuk($sender, $param) {   
@@ -63,7 +63,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
         $ta = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'];
 		$_SESSION['currentPagePembayaranPiutangSemesterGenap']['ta'] = $ta < $tahun_masuk ? $tahun_masuk : $ta;
         $_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'] = $tahun_masuk;
-		$this->redirect('pembayaran.PembayaranPiutangSemesterGenap',true);
+		$this->redirect('pembayaran.PembayaranPiutangSemesterGenap', true);
 	} 
     
     public function changeTbKelas($sender, $param) {				
@@ -150,7 +150,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
 	public function Go($sender, $param) {	
         if ($this->IsValid) {            
             $nim = $sender->getId() == 'btnGoRepeater'?$this->getDataKeyField($sender, $this->RepeaterS):addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap',true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGenap', true,array('id' => $nim));
         }
 	}
 	

@@ -5,7 +5,7 @@
 <com:TContent ID="modulebreadcrumb">    
     <li><a href="#">AKADEMIK</a></li>
     <li><a href="#">PERKULIAHAN</a></li>
-    <li><a href="<%=$this->constructUrl('perkuliahan.PKRS',true)%>">PKRS</a></li>
+    <li><a href="<%=$this->constructUrl('perkuliahan.PKRS', true)%>">PKRS</a></li>
     <li class="active">DETAIL PERUBAHAN KRS</li>
 </com:TContent>
 <com:TContent ID="csscontent">

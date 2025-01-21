@@ -17,7 +17,7 @@ class Logic_Kuesioner extends Logic_Akademik {
         $totalnilai = $this->db->getSumRowsOfTable('nilai_indikator', $str);
         $str = "SELECT tahun,idsmt FROM v_pengampu_penyelenggaraan WHERE idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan";
         $this->db->setFieldTable(array('tahun', 'idsmt'));
-        $r=$this->db->getRecord($str);
+        $r = $this->db->getRecord($str);
         $ta=$r[1]['tahun'];
         $idsmt=$r[1]['idsmt'];
         $str="kuesioner k WHERE tahun='$ta' AND idsmt='$idsmt'";

@@ -1358,7 +1358,7 @@ class PclZip
 
         // ----- Read the options
         $i=0;
-        while ($i<$p_size) {
+        while ($i < $p_size) {
             // ----- Check if the option is supported
             if (!isset($v_requested_options[$p_options_list[$i]])) {
                 // ----- Error log
@@ -2958,7 +2958,7 @@ class PclZip
         }
 
         // ----- Read each entry
-        for ($i=0; $i<$v_central_dir['entries']; $i++) {
+        for ($i=0; $i < $v_central_dir['entries']; $i++) {
             // ----- Read the file header
             if (($v_result = $this->privReadCentralFileHeader($v_header)) != 1) {
                 $this->privSwapBackMagicQuotes();
@@ -3087,7 +3087,7 @@ class PclZip
 
         // ----- Read each entry
         $j_start = 0;
-        for ($i=0, $v_nb_extracted=0; $i<$v_central_dir['entries']; $i++) {
+        for ($i=0, $v_nb_extracted=0; $i < $v_central_dir['entries']; $i++) {
             // ----- Read next Central dir entry
             @rewind($this->zip_fd);
             if (@fseek($this->zip_fd, $v_pos_entry)) {
@@ -4300,7 +4300,7 @@ class PclZip
         // ----- Read each entry
         $v_header_list = array();
         $j_start = 0;
-        for ($i=0, $v_nb_extracted=0; $i<$v_central_dir['entries']; $i++) {
+        for ($i=0, $v_nb_extracted=0; $i < $v_central_dir['entries']; $i++) {
             // ----- Read the file header
             $v_header_list[$v_nb_extracted] = array();
             if (($v_result = $this->privReadCentralFileHeader($v_header_list[$v_nb_extracted])) != 1) {

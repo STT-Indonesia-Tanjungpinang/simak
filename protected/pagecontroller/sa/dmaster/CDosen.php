@@ -7,9 +7,9 @@ class CDosen extends MainPageSA {
         $this->showDosen=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDosen']) || $_SESSION['currentPageDosen']['page_name'] != 'sa.dmaster.Dosen') {
-				$_SESSION['currentPageDosen'] = array('page_name' => 'sa.dmaster.Dosen', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPageDosen'] = array('page_name' => 'sa.dmaster.Dosen', 'page_num' => 0, 'search' => false);
 			}
-            $_SESSION['currentPageDosen']['search']=false;
+            $_SESSION['currentPageDosen']['search'] = false;
             $this->populateData();            
 		}
 	}       
@@ -59,7 +59,7 @@ class CDosen extends MainPageSA {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDosen']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDosen']['page_num'] = 0;}
         $str = "$str ORDER BY nama_dosen ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('iddosen', 'nidn', 'nipy', 'gelar_depan', 'nama_dosen', 'gelar_belakang', 'telp_hp', 'username', 'status'));
 		$r = $this->DB->getRecord($str, $offset+1);	
@@ -162,7 +162,7 @@ class CDosen extends MainPageSA {
                 $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id=0,kjur=0,active=1,isdeleted=0,theme='cube',foto='resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
-                $this->Redirect('dmaster.Dosen',true);
+                $this->Redirect('dmaster.Dosen', true);
             }else{
                 $this->DB->query('ROLLBACK');
             }
@@ -227,11 +227,11 @@ class CDosen extends MainPageSA {
                     $this->DB->insertRecord($str);
                 }                
                 $this->DB->query('COMMIT');
-                $this->Redirect('dmaster.Dosen',true);
+                $this->Redirect('dmaster.Dosen', true);
             }else{
                 $this->DB->query('ROLLBACK');
             }
-            $this->Redirect('dmaster.Dosen',true);
+            $this->Redirect('dmaster.Dosen', true);
            
         }
 	}
@@ -256,7 +256,7 @@ class CDosen extends MainPageSA {
             $username = $r[1]['username'];
             $this->DB->deleteRecord("dosen WHERE iddosen = $iddosen");
             $this->DB->deleteRecord("user WHERE username='$username'");
-            $this->redirect('dmaster.Dosen',true);
+            $this->redirect('dmaster.Dosen', true);
         }        
     }   
     

@@ -91,7 +91,7 @@ class CTambahKRS extends MainPageM {
 			if (!$this->DB->checkRecordIsExist('idpenyelenggaraan', 'krsmatkul', $idpenyelenggaraan,' AND idkrs='.$idkrs)) { 
 				$str = "INSERT INTO krsmatkul (idkrsmatkul,idkrs,idpenyelenggaraan,batal) VALUES (NULL,'$idkrs', $idpenyelenggaraan,0)";
 				$this->DB->insertRecord($str);			
-				$this->redirect ('perkuliahan.TambahKRS',true);
+				$this->redirect ('perkuliahan.TambahKRS', true);
 			}
 		}catch (Exception $e) {
             $this->modalMessageError->show();
@@ -107,7 +107,7 @@ class CTambahKRS extends MainPageM {
 		}else {
 			$this->DB->query ('ROLLBACK');
 		}	
-		$this->redirect ('perkuliahan.TambahKRS',true);
+		$this->redirect ('perkuliahan.TambahKRS', true);
 	}	
 	
 	public function hitung($sender, $param) {
@@ -128,6 +128,6 @@ class CTambahKRS extends MainPageM {
 	}	
 	public function closeTambahKRS($sender, $param) {
         unset($_SESSION['currentPageKRS']);
-        $this->redirect ('perkuliahan.KRS',true);
+        $this->redirect ('perkuliahan.KRS', true);
     }
 }

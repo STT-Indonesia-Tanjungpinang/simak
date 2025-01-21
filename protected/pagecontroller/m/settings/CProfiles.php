@@ -26,7 +26,7 @@ class CProfiles extends MainPageM {
             $userid = $this->Pengguna->getDataUser('userid');
             $str = "UPDATE user SET theme='$theme' WHERE userid = $userid";            
             $this->DB->updateRecord($str);
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
     }
 
@@ -114,7 +114,7 @@ class CProfiles extends MainPageM {
                 $str = "UPDATE user SET userpassword='$password',salt='$salt' WHERE userid = $userid";               
             }
             $this->DB->updateRecord($str);
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
     }
 }

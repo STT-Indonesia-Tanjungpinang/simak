@@ -12,7 +12,7 @@
         <div class="main-box clearfix">               
             <header class="main-box-header clearfix">
                 <div class="icon-box pull-right">                                       
-                    <a class="btn pull-left" href="<%=$this->constructUrl('dulang.DulangMHSLama',true)%>">
+                    <a class="btn pull-left" href="<%=$this->constructUrl('dulang.DulangMHSLama', true)%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>

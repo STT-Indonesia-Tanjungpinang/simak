@@ -7,9 +7,9 @@ class CUserON extends MainPageSA {
         $this->showUserON=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageUserON']) || $_SESSION['currentPageUserON']['page_name'] != 'sa.settings.UserON') {
-				$_SESSION['currentPageUserON'] = array('page_name' => 'sa.settings.UserON', 'page_num'=>0,'search'=>false);
+				$_SESSION['currentPageUserON'] = array('page_name' => 'sa.settings.UserON', 'page_num' => 0, 'search' => false);
 			}
-            $_SESSION['currentPageUserON']['search']=false;
+            $_SESSION['currentPageUserON']['search'] = false;
             $this->populateData();            
 		}
 	}       
@@ -59,14 +59,14 @@ class CUserON extends MainPageSA {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageUserON']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageUserON']['page_num'] = 0;}
         $str = "$str ORDER BY username ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'email', 'group_name', 'active', 'foto', 'kjur', 'logintime'));
 		$r = $this->DB->getRecord($str, $offset+1);	
         $result = array();
         while (list($k, $v) = each($r)) {
-            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00'?'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);
-            $v['group_name'] = $v['kjur']==0?$v['group_name']:$v['group_name'] . ' '.$_SESSION['daftar_jurusan'][$v['kjur']];
+            $v['logintime'] = $v['logintime']=='0000-00-00 00:00:00' ? 'BELUM PERNAH':$this->Page->TGL->tanggal('d F Y', $v['logintime']);
+            $v['group_name'] = $v['kjur'] == 0?$v['group_name']:$v['group_name'] . ' '.$_SESSION['daftar_jurusan'][$v['kjur']];
             $result[$k] = $v;
         }
         $this->RepeaterS->DataSource = $result;
@@ -128,7 +128,7 @@ class CUserON extends MainPageSA {
             $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id='$group_id',kjur='$kjur',active=1,isdeleted=0,theme='limitless',foto='resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
             $this->DB->insertRecord($str);           
             
-			$this->redirect('settings.UserON',true);
+			$this->redirect('settings.UserON', true);
         }
     }
     public function editRecord($sender, $param) {
@@ -179,13 +179,13 @@ class CUserON extends MainPageSA {
                 $str = "UPDATE user SET username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',group_id='$group_id',kjur='$kjur',active='$status' WHERE userid = $id";               
             }
             $this->DB->updateRecord($str); 
-			$this->redirect('settings.UserON',true);
+			$this->redirect('settings.UserON', true);
 		}
 	}
     public function deleteRecord($sender, $param) {        
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);        
         $this->DB->deleteRecord("user WHERE userid = $id");
-        $this->redirect('settings.UserON',true);
+        $this->redirect('settings.UserON', true);
     }   
     
 }

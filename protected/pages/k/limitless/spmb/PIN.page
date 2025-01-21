@@ -157,7 +157,7 @@
                         <tr>
                             <td><%#$this->DataItem['no']%></td>
                             <td><%#$this->DataItem['no_formulir']%></td>
-							<td><%#$this->DataItem['no_pendaftaran']== ''?'N.A':$this->DataItem['no_pendaftaran']%></td>									
+							<td><%#$this->DataItem['no_pendaftaran']== '' ? 'N.A':$this->DataItem['no_pendaftaran']%></td>									
                             <td><%#$this->DataItem['no_pin']%></td>
                             <td><%#$this->Page->DMaster->getNamaKelasByID($this->DataItem['idkelas'])%></td>
                             <td><%#($this->DataItem['nama_mhs']== '') ? 'N.A':$this->DataItem['nama_mhs']%></td>

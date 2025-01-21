@@ -14,7 +14,7 @@ class DetailDulangMHSBaru Extends CDetailDulangMHSBaru {
 	public function getMaxNimAndNirm ($kjur, $ta) {        
 		$str = "SELECT MAX(NIM) AS nim FROM register_mahasiswa WHERE tahun='$ta' AND kjur='$kjur'";
 		$this->DB->setFieldTable(array('nim'));
-		$r=$this->DB->getRecord($str);
+		$r = $this->DB->getRecord($str);
 		if ($r[1]['nim']== '') {		
             $tahun = substr($ta,2,2);
             switch($kjur) {
@@ -39,7 +39,7 @@ class DetailDulangMHSBaru Extends CDetailDulangMHSBaru {
 			$data['nim']=$nim;
 			$str = "SELECT MAX(NIRM) AS nirm FROM register_mahasiswa WHERE tahun='$ta' AND kjur='$kjur'";
 			$this->DB->setFieldTable(array('nirm'));
-			$r=$this->DB->getRecord($str);            
+			$r = $this->DB->getRecord($str);            
             $old_nirm=$r[1]['nirm'];
 			$nomor_urut_nirm=substr($old_nirm,-4,  strlen($old_nirm));
             $part_nim=substr($old_nirm,0,  strlen($old_nirm)-4);

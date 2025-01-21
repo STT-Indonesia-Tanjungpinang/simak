@@ -57,7 +57,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
         $k = $this->DB->getRecord($str);
         
         $belum_komit=array();
-        while (list($m, $n)=each($k)) {              
+        while (list($m, $n) = each($k)) {              
             $belum_komit[$n['idkombi']] = $n['dibayarkan'];
         }
         
@@ -161,14 +161,14 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',date_modified=NOW() WHERE no_transaksi='$no_transaksi'";
             $this->DB->updateRecord($str);
             $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] = 'none';
-            $this->redirect('pembayaran.PembayaranSemesterGanjil',true,array('id' => $nim));
+            $this->redirect('pembayaran.PembayaranSemesterGanjil', true,array('id' => $nim));
         }
     }    
     public function closeTransaction($sender, $param) {
         $datamhs = $this->Pengguna->getDataUser(); 
         $nim = $datamhs['nim'];
         $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] = 'none';
-        $this->redirect('pembayaran.PembayaranSemesterGanjil',true);
+        $this->redirect('pembayaran.PembayaranSemesterGanjil', true);
     }
     public function cancelTrx($sender, $param) {	
         $datamhs = $this->Pengguna->getDataUser(); 
@@ -176,11 +176,11 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageMHS {
 		$no_transaksi = $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'];		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");
         $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] = 'none';
-		$this->redirect('pembayaran.PembayaranSemesterGanjil',true);
+		$this->redirect('pembayaran.PembayaranSemesterGanjil', true);
 	}
     public function closeDetail($sender, $param) {
         $_SESSION['currentPagePembayaranSemesterGanjil']['no_transaksi'] = 'none';
-        $this->redirect('pembayaran.PembayaranSemesterGanjil',true);
+        $this->redirect('pembayaran.PembayaranSemesterGanjil', true);
     }
 }
 class TotalPrice extends MainController

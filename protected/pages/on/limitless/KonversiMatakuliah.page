@@ -10,7 +10,7 @@
 </com:TPanel>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
-    <li><a href="<%=$this->Page->constructUrl('Home',true)%>">HOME</a></li> 
+    <li><a href="<%=$this->Page->constructUrl('Home', true)%>">HOME</a></li> 
     <li class="active">KONVERSI MATAKULIAH</li>
 </com:TContent>
 <com:TContent ID="csscontent">
@@ -26,7 +26,7 @@
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li>
-                        <a href="<%=$this->Page->constructUrl('KonversiMatakuliah',true);%>" data-action="closeredirect"></a>
+                        <a href="<%=$this->Page->constructUrl('KonversiMatakuliah', true);%>" data-action="closeredirect"></a>
                     </li>
                 </ul>
             </div>
@@ -279,7 +279,7 @@
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li>
-                        <a href="<%=$this->Page->constructUrl('KonversiMatakuliah',true);%>" data-action="closeredirect"></a>
+                        <a href="<%=$this->Page->constructUrl('KonversiMatakuliah', true);%>" data-action="closeredirect"></a>
                     </li>
                 </ul>
             </div>
@@ -647,7 +647,7 @@
                             <td>
                                 <ul class="icons-list">
                                     <li class="text-primary-600">
-                                        <a href="<%#$this->Page->constructUrl('DetailKonversiMatakuliah',true,array('id' => $this->DataItem['iddata_konversi']))%>" title="Detail Konversi Matakuliah">                                        
+                                        <a href="<%#$this->Page->constructUrl('DetailKonversiMatakuliah', true,array('id' => $this->DataItem['iddata_konversi']))%>" title="Detail Konversi Matakuliah">                                        
                                             <i class="icon-eye"></i>
                                         </a>
                                     </li>   

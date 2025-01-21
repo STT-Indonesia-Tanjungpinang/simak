@@ -23,9 +23,9 @@ class CPKRS extends MainPageDW {
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPagePKRS']) || $_SESSION['currentPagePKRS']['page_name'] != 'dw.perkuliahan.PKRS')
       {					
-        $_SESSION['currentPagePKRS'] = array('page_name' => 'dw.perkuliahan.PKRS', 'search'=>false,'page_num'=>0,'DataKRS'=>array(), 'DataMHS'=>array());												
+        $_SESSION['currentPagePKRS'] = array('page_name' => 'dw.perkuliahan.PKRS', 'search'=>false,'page_num' => 0,'DataKRS'=>array(), 'DataMHS'=>array());												
       }
-      $_SESSION['currentPagePKRS']['search']=false;
+      $_SESSION['currentPagePKRS']['search'] = false;
 
       $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
       $this->tbCmbTA->Text = $_SESSION['ta'];
@@ -103,7 +103,7 @@ class CPKRS extends MainPageDW {
     if (($offset+$limit)>$itemcount) {
       $limit=$itemcount-$offset;
     }
-    if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPagePKRS']['page_num']=0;}
+    if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPagePKRS']['page_num'] = 0;}
     $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";	
     $this->DB->setFieldTable(array('nim', 'nama_mhs', 'jk', 'tahun_masuk', 'nmatkul', 'sks', 'tambah', 'hapus', 'batal', 'sah', 'tanggal'));
     $r = $this->DB->getRecord($str, $offset+1);
@@ -157,7 +157,7 @@ class CPKRS extends MainPageDW {
         }
         $kelas = $this->KRS->getKelasMhs();																	            
         $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];	
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
         $datamhs['nama_dosen'] = $nama_dosen;
@@ -204,7 +204,7 @@ class CPKRS extends MainPageDW {
       }            
       $krs['maxSKS'] = $maxSKS;
       $_SESSION['currentPagePKRS']['DataKRS']['krs'] = $krs;
-      $this->redirect ('perkuliahan.DetailPKRS',true,array('id' => $idkrs));
+      $this->redirect ('perkuliahan.DetailPKRS', true,array('id' => $idkrs));
     }		
   }	
   public function printOut($sender, $param) {

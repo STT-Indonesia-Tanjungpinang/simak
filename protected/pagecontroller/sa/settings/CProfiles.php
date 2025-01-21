@@ -26,7 +26,7 @@ class CProfiles extends MainPageSA {
             $str = "UPDATE simak_user SET theme='$theme' WHERE userid = $userid";            
             $this->DB->updateRecord($str);            
            
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
     }
     public function saveDataPassword($sender, $param) {
@@ -40,7 +40,7 @@ class CProfiles extends MainPageSA {
                 $str = "UPDATE user SET userpassword='$password',salt='$salt' WHERE userid='$userid'";
                 $this->DB->updateRecord($str);
             }
-            $this->redirect('settings.Profiles',true);
+            $this->redirect('settings.Profiles', true);
         }
     }
 }

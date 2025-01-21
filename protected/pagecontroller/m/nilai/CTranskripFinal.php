@@ -3,16 +3,16 @@ prado::using ('Application.MainPageM');
 class CTranskripFinal extends MainPageM {	
   public function onLoad($param) {
     parent::onLoad($param);		
-    $this->showSubMenuAkademikNilai=true;
+    $this->showSubMenuAkademikNilai = true;
     $this->showTranskripFinal=true;    
     $this->createObj('Nilai');
     
     if (!$this->IsPostBack && !$this->IsCallback) {			
 
       if (!isset($_SESSION['currentPageTranskripFinal']) || $_SESSION['currentPageTranskripFinal']['page_name'] != 'm.nilai.TranskripFinal') {					
-        $_SESSION['currentPageTranskripFinal'] = array('page_name' => 'm.nilai.TranskripFinal', 'page_num'=>0,'search'=>false,'tanggal_terbit' => 'none');												
+        $_SESSION['currentPageTranskripFinal'] = array('page_name' => 'm.nilai.TranskripFinal', 'page_num' => 0, 'search' => false,'tanggal_terbit' => 'none');												
       }
-      $_SESSION['currentPageTranskripFinal']['search']=false;
+      $_SESSION['currentPageTranskripFinal']['search'] = false;
       $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
 
       $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
@@ -109,7 +109,7 @@ class CTranskripFinal extends MainPageM {
     if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
       $limit=$this->RepeaterS->VirtualItemCount-$offset;
     }
-    if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageTranskripFinal']['page_num']=0;}
+    if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageTranskripFinal']['page_num'] = 0;}
     $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
     $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'nomor_transkrip', 'predikat_kelulusan', 'tanggal_lulus', 'k_status'));
     $result=$this->DB->getRecord($str, $offset+1);
@@ -176,7 +176,7 @@ class CTranskripFinal extends MainPageM {
             if ($dataReport['k_status'] == 'L') 
             {
               $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
-              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi']==0) ? '-':$dataReport['nama_konsentrasi'];
+              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-':$dataReport['nama_konsentrasi'];
               $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
               $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');
               $dataReport['jabfung_penandatangan_transkrip'] = $this->setup->getSettingValue('jabfung_penandatangan_transkrip');
@@ -215,7 +215,7 @@ class CTranskripFinal extends MainPageM {
             $dataReport = $r[1];                        
             if ($dataReport['k_status'] == 'L') {
               $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
-              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi']==0) ? '-':$dataReport['nama_konsentrasi'];
+              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-':$dataReport['nama_konsentrasi'];
               $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
               $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');
               $dataReport['jabfung_penandatangan_transkrip'] = $this->setup->getSettingValue('jabfung_penandatangan_transkrip');

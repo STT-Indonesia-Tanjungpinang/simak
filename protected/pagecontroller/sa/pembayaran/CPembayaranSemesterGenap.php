@@ -8,9 +8,9 @@ class CPembayaranSemesterGenap Extends MainPageSA {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGenap']) || $_SESSION['currentPagePembayaranSemesterGenap']['page_name'] != 'sa.pembayaran.PembayaranSemesterGenap') {
-				$_SESSION['currentPagePembayaranSemesterGenap'] = array('page_name' => 'sa.pembayaran.PembayaranSemesterGenap', 'page_num'=>0,'search'=>false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester'=>2,'kelas' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranSemesterGenap'] = array('page_name' => 'sa.pembayaran.PembayaranSemesterGenap', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester'=>2,'kelas' => 'none', 'DataMHS'=>array());												
 			}
-            $_SESSION['currentPagePembayaranSemesterGenap']['search']=false; 
+            $_SESSION['currentPagePembayaranSemesterGenap']['search'] = false; 
             $bool=!isset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']);
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;
@@ -105,7 +105,7 @@ class CPembayaranSemesterGenap Extends MainPageSA {
 		if (($offset+$limit)>$itemcount) {
 			$limit=$itemcount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranSemesterGenap']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranSemesterGenap']['page_num'] = 0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'nim', 'nama_mhs', 'commited'));
         $str = "$str ORDER BY t.date_added DESC LIMIT $offset, $limit";	
         $r = $this->DB->getRecord($str, $offset+1);	        
@@ -134,6 +134,6 @@ class CPembayaranSemesterGenap Extends MainPageSA {
         $no_transaksi = $this->getDataKeyField($sender, $this->RepeaterS);		
         $str = "UPDATE transaksi SET commited=0 WHERE no_transaksi = $no_transaksi";
         $this->DB->updateRecord($str);
-        $this->redirect ('pembayaran.PembayaranSemesterGenap',true);        	
+        $this->redirect ('pembayaran.PembayaranSemesterGenap', true);        	
     }		
 }

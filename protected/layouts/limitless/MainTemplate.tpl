@@ -20,7 +20,7 @@
 <!-- Main navbar -->
 <div class="navbar navbar-inverse bg-green navbar-lg">
     <div class="navbar-header">
-        <a class="navbar-brand" href="<%=$this->Page->constructUrl('Home',true)%>">PORTAL<span> E-Kampus</span></a>
+        <a class="navbar-brand" href="<%=$this->Page->constructUrl('Home', true)%>">PORTAL<span> E-Kampus</span></a>
         <ul class="nav navbar-nav pull-right visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
             <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
@@ -42,7 +42,7 @@
                     <i class="caret"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="<%=$this->Page->constructUrl('settings.Profiles',true)%>"><i class="icon-user-plus"></i> My profile</a></li>                    
+                    <li><a href="<%=$this->Page->constructUrl('settings.Profiles', true)%>"><i class="icon-user-plus"></i> My profile</a></li>                    
                     <li class="divider"></li>                    
                     <li>                       
                         <com:TActiveLinkButton ID="btnLogout" OnClick="logoutUser" ClientSide.PostState="false">
@@ -74,7 +74,7 @@
     <div class="navbar-collapse collapse" id="navbar-second-toggle">
         <ul class="nav navbar-nav">            
             <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
-                <a href="<%=$this->Page->constructUrl('Home',true)%>">
+                <a href="<%=$this->Page->constructUrl('Home', true)%>">
                     <i class="icon-display4 position-left"></i> 
                     <span>Dashboard</span>											
                 </a>                                        
@@ -87,12 +87,12 @@
                 <ul class="dropdown-menu width-250">
                     <li class="dropdown-header">KOMPONEN BIAYA</li>
                     <li<%=$this->Page->showRekening==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('dmaster.Rekening',true)%>">
+                        <a href="<%=$this->Page->constructUrl('dmaster.Rekening', true)%>">
                             <i class="icon-calculator4"></i> Rekening
                         </a>
                     </li>                    
                     <li<%=$this->Page->showKombiPerTA==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('dmaster.KombiPerTA',true)%>">
+                        <a href="<%=$this->Page->constructUrl('dmaster.KombiPerTA', true)%>">
                             <i class="icon-calculator"></i> Biaya Per Tahun
                         </a>
                     </li>
@@ -104,12 +104,12 @@
                 </a>
                 <ul class="dropdown-menu width-250">
                 	<li<%=$this->Page->showPendaftaranOnline==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('spmb.PendaftaranOnline',true)%>">
+                        <a href="<%=$this->Page->constructUrl('spmb.PendaftaranOnline', true)%>">
                             <i class="icon-calculator3"></i> Pendaftaran Online
                         </a>
                     </li>
                     <li<%=$this->Page->showPIN==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('spmb.PIN',true)%>">
+                        <a href="<%=$this->Page->constructUrl('spmb.PIN', true)%>">
                             <i class="icon-circle"></i> PIN
                         </a>
                     </li>
@@ -126,7 +126,7 @@
                                 <span class="menu-heading underlined">Kemahasiswaan</span>
                                 <ul class="menu-list">
 									<li<%=$this->Page->showDaftarMahasiswa==true ? ' class="active" ':''%>>
-										<a href="<%=$this->Page->constructUrl('kemahasiswaan.DaftarMahasiswa',true)%>">
+										<a href="<%=$this->Page->constructUrl('kemahasiswaan.DaftarMahasiswa', true)%>">
 											Daftar Mahasiswa
 										</a>
 									</li>
@@ -136,7 +136,7 @@
                                 <span class="menu-heading underlined">Perkuliahan</span>
                                 <ul class="menu-list">
                                     <li<%=$this->Page->showKUM==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('perkuliahan.KUM',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('perkuliahan.KUM', true)%>">
                                             <i class="icon-width"></i> Kartu Ujian Mahasiswa
                                         </a>
                                     </li>
@@ -157,7 +157,7 @@
                                 <span class="menu-heading underlined">SPMB</span>
                                 <ul class="menu-list">                                	
                                     <li<%=$this->Page->showPembayaranFormulir==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranFormulir',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranFormulir', true)%>">
                                             <i class="icon-calculator3"></i> Pembayaran Formulir
                                         </a>
                                     </li> 
@@ -167,22 +167,22 @@
                                 <span class="menu-heading underlined">SEMESTER</span>
                                 <ul class="menu-list">
                                     <li<%=$this->Page->showPembayaranMahasiswaBaru==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranMahasiswaBaru',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranMahasiswaBaru', true)%>">
                                             <i class="icon-calculator3"></i> Mahasiswa Baru
                                         </a>
                                     </li> 
                                     <li<%=$this->Page->showPembayaranSemesterGanjil==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGanjil',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGanjil', true)%>">
                                             <i class="icon-calculator3"></i> Semester Ganjil
                                         </a>
                                     </li> 
                                     <li<%=$this->Page->showPembayaranSemesterGenap==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGenap',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGenap', true)%>">
                                             <i class="icon-calculator3"></i> Semester Genap
                                         </a>
                                     </li>
                                     <li<%=$this->Page->showPembayaranSemesterPendek==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterPendek',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterPendek', true)%>">
                                             <i class="icon-calculator3"></i> Semester Pendek
                                         </a>
                                     </li>
@@ -192,12 +192,12 @@
                                 <span class="menu-heading underlined">CUTI</span>
                                 <ul class="menu-list">
                                     <li<%=$this->Page->showPembayaranCutiSemesterGanjil==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranCutiSemesterGanjil',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranCutiSemesterGanjil', true)%>">
                                             <i class="icon-calculator3"></i> Cuti Semester Ganjil
                                         </a>
                                     </li> 
                                     <li<%=$this->Page->showPembayaranCutiSemesterGenap==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranCutiSemesterGenap',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranCutiSemesterGenap', true)%>">
                                             <i class="icon-calculator3"></i> Cuti Semester Genap
                                         </a>
                                     </li> 
@@ -207,12 +207,12 @@
                                 <span class="menu-heading underlined">PIUTANG</span>
                                 <ul class="menu-list">
                                     <li<%=$this->Page->showPembayaranPiutangSemesterGanjil==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranPiutangSemesterGanjil',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranPiutangSemesterGanjil', true)%>">
                                             <i class="icon-calculator3"></i> Piutang Semester Ganjil
                                         </a>
                                     </li> 
                                     <li<%=$this->Page->showPembayaranPiutangSemesterGenap==true?' class="active"':''%>>
-                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranPiutangSemesterGenap',true)%>">
+                                        <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranPiutangSemesterGenap', true)%>">
                                             <i class="icon-calculator3"></i> Piutang Semester Genap
                                         </a>
                                     </li>
@@ -229,24 +229,24 @@
                 <ul class="dropdown-menu width-250">
                     <li class="dropdown-header">REKAPITULASI</li>
                     <li<%=$this->Page->showReportRekapPembayaranGanjil==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('report.RekapPembayaranSemesterGanjil',true)%>">
+                        <a href="<%=$this->Page->constructUrl('report.RekapPembayaranSemesterGanjil', true)%>">
                             <i class="icon-file-text"></i> Rekap. Pembayaran Ganjil
                         </a>
                     </li> 
                     <li<%=$this->Page->showReportRekapPembayaranGenap==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('report.RekapPembayaranSemesterGenap',true)%>">
+                        <a href="<%=$this->Page->constructUrl('report.RekapPembayaranSemesterGenap', true)%>">
                             <i class="icon-file-text"></i> Rekap. Pembayaran Genap
                         </a>
                     </li> 
                     <li class="dropdown-header">RINCIAN</li>
                     <li<%=$this->Page->showReportRincianPembayaranGenap==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('report.RincianPembayaranSemesterGenap',true)%>">
+                        <a href="<%=$this->Page->constructUrl('report.RincianPembayaranSemesterGenap', true)%>">
                             <i class="icon-file-text"></i> Rincian Pembayaran Genap
                         </a>
                     </li>
                     <li class="dropdown-header">PIUTANG</li>
                     <li<%=$this->Page->showReportPiutangJangkaPendek==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('report.PiutangJangkaPendek',true)%>">
+                        <a href="<%=$this->Page->constructUrl('report.PiutangJangkaPendek', true)%>">
                             <i class="icon-file-text"></i> Piutang Jangka Pendek
                         </a>
                     </li>                                        
@@ -255,7 +255,7 @@
             </com:TLiteral>
             <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'on'%>">
             <li<%=$this->Page->showKonversiMatakuliah==true?' class="active"':''%>>
-                <a href="<%=$this->Page->constructUrl('KonversiMatakuliah',true)%>">
+                <a href="<%=$this->Page->constructUrl('KonversiMatakuliah', true)%>">
                     <i class="icon-share3 position-left"></i> 
                     <span>Konversi Matakuliah</span>											
                 </a>                                        
@@ -267,23 +267,23 @@
                 <ul class="dropdown-menu width-250">
                     <li class="dropdown-header">INPUT OLEH SEKRETARIS PRODI</li>
                     <li<%=$this->Page->showNilaiPerMahasiswa==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('nilai.NilaiPerMahasiswa',true)%>">
+                        <a href="<%=$this->Page->constructUrl('nilai.NilaiPerMahasiswa', true)%>">
                             <i class="icon-blog"></i> Nilai Per Mahasiswa
                         </a>
                     </li>
                     <li<%=$this->Page->showNilaiPerMatakuliah==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('nilai.NilaiPerMatakuliah',true)%>">
+                        <a href="<%=$this->Page->constructUrl('nilai.NilaiPerMatakuliah', true)%>">
                             <i class="icon-blog"></i> Nilai Per Matakuliah
                         </a>
                     </li>
                     <li<%=$this->Page->showNilaiFinal==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('nilai.NilaiFinal',true)%>">
+                        <a href="<%=$this->Page->constructUrl('nilai.NilaiFinal', true)%>">
                             <i class="icon-blog"></i> Nilai Final
                         </a>
                     </li>
                     <li class="dropdown-header">INPUT OLEH DOSEN</li>
                     <li<%=$this->Page->showStopInputNilai==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('nilai.StopInputNilai',true)%>">
+                        <a href="<%=$this->Page->constructUrl('nilai.StopInputNilai', true)%>">
                             <i class="icon-blog"></i> Stop Dosen Input Nilai
                         </a>
                     </li>
@@ -296,7 +296,7 @@
                 <ul class="dropdown-menu width-250">
                     <li class="dropdown-header">REKAPITULASI</li>
                     <li<%=$this->Page->showTranskripKurikulum==true?' class="active"':''%>>
-                        <a href="<%=$this->Page->constructUrl('nilai.TranskripKurikulum',true)%>">
+                        <a href="<%=$this->Page->constructUrl('nilai.TranskripKurikulum', true)%>">
                             <i class="icon-file-text"></i> Transkrip Kurikulum
                         </a>
                     </li>                                 

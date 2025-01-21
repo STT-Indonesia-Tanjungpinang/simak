@@ -8,9 +8,9 @@ class CDulangMHSNonAktif Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSNonAktif']) || $_SESSION['currentPageDulangMHSNonAktif']['page_name'] != 'm.dulang.DulangMHSNonAktif') {
-				$_SESSION['currentPageDulangMHSNonAktif'] = array('page_name' => 'm.dulang.DulangMHSNonAktif', 'page_num'=>0,'search'=>false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSNonAktif'] = array('page_name' => 'm.dulang.DulangMHSNonAktif', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
 			}
-            $_SESSION['currentPageDulangMHSNonAktif']['search']=false;
+            $_SESSION['currentPageDulangMHSNonAktif']['search'] = false;
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -135,7 +135,7 @@ class CDulangMHSNonAktif Extends MainPageM {
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
 			$limit=$this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSNonAktif']['page_num']=0;}
+		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSNonAktif']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        
 		$this->DB->setFieldTable(array('iddulang', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'iddosen_wali', 'tanggal', 'tahun', 'idsmt', 'idkelas'));
 		$result=$this->DB->getRecord($str, $offset+1);
@@ -162,14 +162,14 @@ class CDulangMHSNonAktif Extends MainPageM {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) telah dinyatakan Lulus atau DO atau Keluar.");
                     }
                     $this->Demik->setDataMHS($datamhs);
-                    $datadulang=$this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
+                    $datadulang = $this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
                     if (isset($datadulang['iddulang'])) { 
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) telah daftar ulang di T.A dan Semester ini.");
                     }                    
                     $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
                     $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
                     $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($datamhs['nim'],true);
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
                     $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
                     $_SESSION['currentPageDulangMHSNonAktif']['DataMHS'] = $datamhs;
                 }
@@ -182,7 +182,7 @@ class CDulangMHSNonAktif Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailDulangMHSNonAktif',true,array('id' => $nim));
+            $this->redirect('dulang.DetailDulangMHSNonAktif', true,array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	
@@ -197,7 +197,7 @@ class CDulangMHSNonAktif Extends MainPageM {
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($datamhs['nim'],true);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi']==0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);        
         $this->hiddenstatussebelumnya->Value=$datamhs['status_sebelumnya'];
         $datamhs['status_sebelumnya'] = $this->DMaster->getNamaStatusMHSByID($datamhs['status_sebelumnya']);
@@ -217,7 +217,7 @@ class CDulangMHSNonAktif Extends MainPageM {
                     $this->DB->updateRecord($str);
                 }                
                 $this->DB->query ('COMMIT');
-                $this->redirect('dulang.DulangMHSNonAktif',true);
+                $this->redirect('dulang.DulangMHSNonAktif', true);
             }else {
                 $this->DB->query ('ROLLBACK');
             }	

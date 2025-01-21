@@ -15,7 +15,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
           
           $str = "SELECT MAX(tahun) AS tahun,MAX(idsmt) AS idsmt FROM dulang WHERE nim='$nim' GROUP BY tahun,idsmt ORDER BY tahun DESC,idsmt DESC LIMIT 1";
           $this->DB->setFieldTable(array('tahun', 'idsmt'));
-          $datadulang=$this->DB->getRecord($str);	    
+          $datadulang = $this->DB->getRecord($str);	    
           
           $this->cmbAddTALulus->DataSource=array($datadulang[1]['tahun']=>$this->DMaster->getNamaTA($datadulang[1]['tahun']));
           $this->cmbAddTALulus->Text = $datadulang[1]['tahun'];
@@ -95,7 +95,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
         $status_sebelumnnya = $datamhs['k_status'];
         $tasmt=$ta.$semester;              
         $this->Nilai->setDataMHS(array('nim' => $nim));
-        $datadulang=$this->Nilai->getDataDulang($semester, $ta);
+        $datadulang = $this->Nilai->getDataDulang($semester, $ta);
         if (isset($datadulang['iddulang'])) {
           $str = "INSERT INTO dulang (iddulang,nim,tahun,idsmt,tasmt,tanggal,idkelas,status_sebelumnya,k_status) VALUES (NULL,'$nim', '$ta', '$semester', '$tasmt',NOW(), '$kelas', '$status_sebelumnnya', 'L')";
           $this->DB->insertRecord($str);
@@ -106,7 +106,7 @@ class CDetailDulangMHSLulus Extends MainPageM {
         }
         $this->DB->query('COMMIT');
         unset($_SESSION['currentPageDulangMHSLulus']['DataMHS']);
-        $this->redirect('dulang.DulangMHSLulus',true);
+        $this->redirect('dulang.DulangMHSLulus', true);
       }else {
         $this->DB->query('ROLLBACK');
       }
@@ -114,6 +114,6 @@ class CDetailDulangMHSLulus Extends MainPageM {
   }
   public function closeDetailDulang($sender, $param) {
     unset($_SESSION['currentPageDulangMHSLulus']['DataMHS']);
-    $this->redirect('dulang.DulangMHSLulus',true);
+    $this->redirect('dulang.DulangMHSLulus', true);
   }
 }
