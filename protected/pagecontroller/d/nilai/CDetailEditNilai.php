@@ -1,7 +1,9 @@
 <?php
 prado::using ('Application.MainPageD');
-class CDetailEditNilai extends MainPageD {    
-     public function onLoad($param) {
+class CDetailEditNilai extends MainPageD
+{    
+  public function onLoad($param) 
+  {
     parent::onLoad($param);							
     $this->showSubMenuAkademikNilai = true;
     $this->showEditNilai=true;    
@@ -15,13 +17,16 @@ class CDetailEditNilai extends MainPageD {
       $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
       $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
       $this->tbCmbOutputReport->DataBind();            
-      try {
+      try
+      {
         $idkelas_mhs = addslashes($this->request['id']);
         $this->Demik->getInfoKelas($idkelas_mhs);                
-        if (!isset($this->Demik->InfoKelas['idkelas_mhs'])) {                                                
+        if (!isset($this->Demik->InfoKelas['idkelas_mhs']))
+        {                                                
           throw new Exception ("Kelas Mahasiswa dengan id ($idkelas_mhs) tidak terdaftar.");		
         }     
-        if (!$this->Demik->InfoKelas['isi_nilai']) {
+        if (!$this->Demik->InfoKelas['isi_nilai'])
+        {
           throw new Exception ("Masa pengisian nilai dari sisi Dosen telah berakhir, silahkan hubungi Operator Nilai di Prodi.");
         }
         $infokelas = $this->Demik->InfoKelas;
@@ -39,25 +44,31 @@ class CDetailEditNilai extends MainPageD {
         $this->RepeaterS->PageSize=$_SESSION['currentPageDetailEditNilai']['jumlahrecord'];
         $_SESSION['currentPageDetailEditNilai']['DataNilai'] = $this->Demik->InfoKelas;
         $this->populateData();	             
-      } catch (Exception $ex) {
+      } 
+      catch (Exception $ex)
+      {
         $this->idProcess = 'view';	
         $this->errorMessage->Text = $ex->getMessage();
       }
     }
   }    
-  public function changeJumlahRecord($sender, $param) {
+  public function changeJumlahRecord($sender, $param)
+  {
     $_SESSION['currentPageDetailEditNilai']['jumlahrecord'] = $this->cmbJumlahRecord->Text;
     $this->RepeaterS->PageSize=$_SESSION['currentPageDetailEditNilai']['jumlahrecord'];
     $this->populateData();        
   }
-  public function Page_Changed($sender, $param) {
+  public function Page_Changed($sender, $param)
+  {
     $_SESSION['currentPageDetailEditNilai']['page_num'] = $param->NewPageIndex;
     $this->populateData($_SESSION['currentPageDetailEditNilai']['search']);
   }
-  public function renderCallback($sender, $param) {
+  public function renderCallback($sender, $param)
+  {
     $this->RepeaterS->render($param->NewWriter);	
   }
-  protected function populateData() {	
+  protected function populateData()
+  {	
     $datakelas = $_SESSION['currentPageDetailEditNilai']['DataNilai'];
     $idkelas_mhs = $datakelas['idkelas_mhs'];
     $str = "SELECT vkm.idkrsmatkul,vdm.nim,vdm.nama_mhs,n.persentase_quiz, n.persentase_tugas, n.persentase_uts, n.persentase_uas, n.persentase_absen, n.nilai_quiz, n.nilai_tugas, n.nilai_uts, n.nilai_uas, n.nilai_absen, n.nilai_hasil_proyek, n.n_kuan, n.n_kual, n.published FROM kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0";        
@@ -83,7 +94,8 @@ class CDetailEditNilai extends MainPageD {
     $persentase_absen = $datakelas['persen_absen'] > 0 ? number_format($datakelas['persen_absen'] / 100,2):0;
     $persentase_hasil_proyek = $datakelas['persen_hasil_proyek'] > 0 ? number_format($datakelas['persen_hasil_proyek'] / 100,2):0;
     
-    while (list($k, $v) = each($r)) {                
+    while (list($k, $v) = each($r))
+    {                
       $v['persentase_quiz'] = $persentase_quiz;
       $v['persentase_tugas'] = $persentase_tugas;
       $v['persentase_uts'] = $persentase_uts;
@@ -99,8 +111,10 @@ class CDetailEditNilai extends MainPageD {
     
     $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
   }	
-   public function updateDataPersentase($sender, $param) {
-    if ($this->IsValid) {
+   public function updateDataPersentase($sender, $param)
+   {
+    if ($this->IsValid)
+    {
       $idkelas_mhs = $_SESSION['currentPageDetailEditNilai']['DataNilai']['idkelas_mhs'];
       $persentase_quiz = $this->txtPersenQuiz->Text;
       $persentase_tugas = $this->txtPersenTugas->Text;

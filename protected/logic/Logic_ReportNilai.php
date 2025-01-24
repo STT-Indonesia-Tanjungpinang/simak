@@ -2634,8 +2634,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->setCellValue('F1', 'QUIZ');
         $sheet->setCellValue('G1', 'TUGAS');
         $sheet->setCellValue('H1', 'UTS');
-        $sheet->setCellValue('I1', 'UAS');
-        $sheet->setCellValue('J1', 'ABSEN');
+        $sheet->setCellValue('I1', 'UAS');        
         
         $styleArray=array(
                 'font' => array('bold' => true),
@@ -2643,8 +2642,8 @@ class Logic_ReportNilai extends Logic_Report {
                            'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                 'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
               );
-        $sheet->getStyle("A1:J1")->applyFromArray($styleArray);
-        $sheet->getStyle("A1:J1")->getAlignment()->setWrapText(true);
+        $sheet->getStyle("A1:I1")->applyFromArray($styleArray);
+        $sheet->getStyle("A1:I1")->getAlignment()->setWrapText(true);
           
         $str = "SELECT kmd.idkrsmatkul,vdm.nim,vdm.nama_mhs FROM kelas_mhs_detail kmd JOIN krsmatkul km ON (kmd.idkrsmatkul=km.idkrsmatkul) JOIN krs k ON (km.idkrs=k.idkrs) JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN nilai_matakuliah nm ON (km.idkrsmatkul=nm.idkrsmatkul) WHERE kmd.idkelas_mhs = $idkelas_mhs AND km.batal=0 AND nm.idkrsmatkul IS NULL ORDER BY vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs'));	
@@ -2667,8 +2666,8 @@ class Logic_ReportNilai extends Logic_Report {
                            'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                 'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
               );
-        $sheet->getStyle("A$row_awal:J$row")->applyFromArray($styleArray);
-        $sheet->getStyle("A$row_awal:J$row")->getAlignment()->setWrapText(true);
+        $sheet->getStyle("A$row_awal:I$row")->applyFromArray($styleArray);
+        $sheet->getStyle("A$row_awal:I$row")->getAlignment()->setWrapText(true);
         
         $styleArray=array(								
                   'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)

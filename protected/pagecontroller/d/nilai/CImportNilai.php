@@ -15,13 +15,16 @@ class CImportNilai extends MainPageD {
         $_SESSION['currentPageImportNilai'] = array('page_name' => 'd.nilai.ImportNilai', 'page_num' => 0, 'search' => false,'DataNilai'=>array());
       }  
 
-      try {
+      try 
+      {
         $idkelas_mhs = addslashes($this->request['id']);
         $this->Demik->getInfoKelas($idkelas_mhs);                
-        if (!isset($this->Demik->InfoKelas['idkelas_mhs'])) {                                                
+        if (!isset($this->Demik->InfoKelas['idkelas_mhs'])) 
+        {                                                
           throw new Exception ("Kelas Mahasiswa dengan id ($idkelas_mhs) tidak terdaftar.");		
         }     
-        if (!$this->Demik->InfoKelas['isi_nilai']) {
+        if (!$this->Demik->InfoKelas['isi_nilai']) 
+        {
           throw new Exception ("Masa pengisian nilai dari sisi Dosen telah berakhir, silahkan hubungi Operator Nilai di Prodi.");
         }
         $infokelas = $this->Demik->InfoKelas;
@@ -92,7 +95,8 @@ class CImportNilai extends MainPageD {
         $highestRow = $sheet->getHighestRow(); 
         $highestColumn = $sheet->getHighestColumn();
         
-        for ($row = 2; $row <= $highestRow; $row++){ 
+        for ($row = 2; $row <= $highestRow; $row++)
+        { 
           //  Read a row of data into an array
           $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,NULL,TRUE,FALSE);
           $idkrsmatkul = $rowData[0][0];
@@ -105,7 +109,41 @@ class CImportNilai extends MainPageD {
           $n_kuan = ($persentase_quiz * $nilai_quiz) + ($persentase_tugas * $nilai_tugas) + ($persentase_uts * $nilai_uts) + ($persentase_uas * $nilai_uas) + ($persentase_absen * $nilai_absen) + ($persentase_hasil_proyek * $nilai_hasil_proyek);
           $n_kual = $this->Nilai->getRentangNilaiNKuan($n_kuan);
           
-          $str = "REPLACE INTO nilai_imported (idkrsmatkul,idkelas_mhs,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, persentase_hasil_proyek, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, nilai_hasil_proyek, n_kuan, n_kual) VALUES ($idkrsmatkul, $idkelas_mhs,'$persentase_quiz', '$persentase_tugas', '$persentase_uts', '$persentase_uas', '$persentase_absen', '$persentase_hasil_proyek', '$nilai_quiz', '$nilai_tugas', '$nilai_uts', '$nilai_uas', '$nilai_absen', '$nilai_hasil_proyek', '$n_kuan', '$n_kual')";																				
+          $str = "REPLACE INTO nilai_imported (
+            idkrsmatkul,
+            idkelas_mhs,
+            persentase_quiz,
+            persentase_tugas,
+            persentase_uts,
+            persentase_uas,
+            persentase_absen,
+            persentase_hasil_proyek,
+            nilai_quiz,
+            nilai_tugas,
+            nilai_uts,
+            nilai_uas,
+            nilai_absen,
+            nilai_hasil_proyek,
+            n_kuan,
+            n_kual
+          ) VALUES (
+            $idkrsmatkul,
+            $idkelas_mhs,
+            '$persentase_quiz',
+            '$persentase_tugas',
+            '$persentase_uts',
+            '$persentase_uas',
+            '$persentase_absen',
+            '$persentase_hasil_proyek',
+            '$nilai_quiz',
+            '$nilai_tugas',
+            '$nilai_uts',
+            '$nilai_uas',
+            '$nilai_absen',
+            '$nilai_hasil_proyek',
+            '$n_kuan',
+            '$n_kual'
+          )";
           $this->DB->insertRecord($str);
         }
         
@@ -137,7 +175,59 @@ class CImportNilai extends MainPageD {
           $item=$inputan->chkProcess->getNamingContainer();
           $idkrsmatkul = $this->RepeaterS->DataKeys[$item->getItemIndex()];
           
-          $str = "REPLACE INTO nilai_matakuliah (idkrsmatkul,persentase_quiz, persentase_tugas, persentase_uts, persentase_uas, persentase_absen, persentase_hasil_proyek, nilai_quiz, nilai_tugas, nilai_uts, nilai_uas, nilai_absen, n_kuan,n_kual,userid_input,tanggal_input,userid_modif,tanggal_modif,bydosen,ket,telah_isi_kuesioner,tanggal_isi_kuesioner,published) SELECT idkrsmatkul,persentase_quiz,persentase_tugas,persentase_uts,persentase_uas,persentase_absen,persentase_hasil_proyek,nilai_quiz,nilai_tugas,nilai_uts,nilai_uas,nilai_absen,n_kuan,n_kual, $userid,NOW(), $userid,NOW(),1,'imported by dosen',1,NOW(),0 FROM nilai_imported WHERE idkrsmatkul = $idkrsmatkul";																				
+          $str = "REPLACE INTO nilai_matakuliah (
+            idkrsmatkul,
+            persentase_quiz,
+            persentase_tugas,
+            persentase_uts,
+            persentase_uas,
+            persentase_absen,
+            persentase_hasil_proyek,
+            nilai_quiz,
+            nilai_tugas,
+            nilai_uts,
+            nilai_uas,
+            nilai_absen,
+            nilai_hasil_proyek,
+            n_kuan,
+            n_kual,
+            userid_input,
+            tanggal_input,
+            userid_modif,
+            tanggal_modif,
+            bydosen,
+            ket,
+            telah_isi_kuesioner,
+            tanggal_isi_kuesioner,
+            published
+          ) SELECT 
+            idkrsmatkul,
+            persentase_quiz,
+            persentase_tugas,
+            persentase_uts,
+            persentase_uas,
+            persentase_absen,
+            persentase_hasil_proyek,
+            nilai_quiz,
+            nilai_tugas,
+            nilai_uts,
+            nilai_uas,
+            nilai_absen,
+            nilai_hasil_proyek,
+            n_kuan,
+            n_kual,
+            $userid,
+            NOW(),
+            $userid,
+            NOW(),
+            1,
+            'imported by dosen',
+            1,
+            NOW(),
+            0 
+          FROM nilai_imported 
+          WHERE idkrsmatkul = $idkrsmatkul
+          ";																				
           $this->DB->insertRecord($str);
           
           $str = "SELECT nim FROM v_krsmhs WHERE idkrsmatkul=$idkrsmatkul";
