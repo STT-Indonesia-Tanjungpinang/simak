@@ -118,7 +118,7 @@ class CEvaluasiHasilBelajar extends MainPageD {
 
 		}		
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Format Evaluasi Hasil Belajr';
+        $this->lblPrintout->Text = 'Format Evaluasi Hasil Belajr';
         $this->modalPrintOut->show();
 	}
 }

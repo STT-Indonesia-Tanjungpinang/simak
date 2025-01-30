@@ -48,7 +48,7 @@ class CProfiles extends MainPageMHS {
         $this->txtEditNoTelpRumah->Text = $dataMhs['telp_rumah'];		
         $this->txtEditNoTelpHP->Text = $dataMhs['telp_hp'];
         $this->txtEditEmail->Text = $dataMhs['email'];  
-        $this->hiddenemail->Value=$dataMhs['email'];
+        $this->hiddenemail->Value = $dataMhs['email'];
         
         if ($dataMhs['idstatus']=='PEKERJA') {
             $this->rdEditBekerja->Checked=true;						

@@ -60,7 +60,7 @@ class CDetailKuesioner extends MainPageD {
         $item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {		
             if ($item->DataItem['ada']) {
-                $item->literalNamaKelompok->Text='<tr class="success">
+                $item->literalNamaKelompok->Text = '<tr class="success">
                                                     <td colspan="9">'.$item->DataItem['nama_kelompok'].'</td></tr>';
             }
             DetailKuesioner::$TotalIndikator1+=$item->DataItem['indikator1'];
@@ -201,7 +201,7 @@ class CDetailKuesioner extends MainPageD {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Data Kuesioner Dosen';
+        $this->lblPrintout->Text = 'Data Kuesioner Dosen';
         $this->modalPrintOut->show();
 	}
 }

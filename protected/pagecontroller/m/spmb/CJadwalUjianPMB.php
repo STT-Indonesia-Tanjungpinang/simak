@@ -80,7 +80,7 @@ class CJadwalUjianPMB extends MainPageM {
 	}
     public function addProcess($sender, $param) {
         $this->idProcess = 'add';
-        $this->hiddentahunmasuk->Value=$_SESSION['tahun_pendaftaran'];
+        $this->hiddentahunmasuk->Value = $_SESSION['tahun_pendaftaran'];
          //load kelas 				
         $this->cmbAddRuang->DataSource = $this->DMaster->getRuangKelas();
         $this->cmbAddRuang->dataBind();
@@ -104,7 +104,7 @@ class CJadwalUjianPMB extends MainPageM {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
         $id = $this->getDataKeyField($sender, $this->RepeaterS);        
-		$this->hiddenid->Value=$id;        
+		$this->hiddenid->Value = $id;        
         
         $str = "SELECT nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,idruangkelas,status FROM jadwal_ujian_pmb WHERE idjadwal_ujian = $id";
         $this->DB->setFieldTable(array('nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'status'));
@@ -139,7 +139,7 @@ class CJadwalUjianPMB extends MainPageM {
     public function deleteRecord($sender, $param) {        
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idjadwal_ujian', 'peserta_ujian_pmb', $id)) {
-            $this->lblHeaderMessageError->Text='Menghapus Jadwal Ujian PMB';
+            $this->lblHeaderMessageError->Text = 'Menghapus Jadwal Ujian PMB';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus jadwal ujian dengan ID ($id) karena masih ada pesertanya.";
             $this->modalMessageError->Show();
         }else{
@@ -180,7 +180,7 @@ class CJadwalUjianPMB extends MainPageM {
             break;
         }                
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Berita Acara Ujian SPMB';
+        $this->lblPrintout->Text = 'Berita Acara Ujian SPMB';
         $this->modalPrintOut->show();
 	}
 }

@@ -20,7 +20,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageMHS {
                 $str = "SELECT no_faktur,tanggal FROM transaksi WHERE no_transaksi = $no_transaksi";
                 $this->DB->setFieldTable(array('no_faktur', 'tanggal'));
                 $d=$this->DB->getRecord($str);
-                $this->hiddennofaktur->Value=$d[1]['no_faktur'];
+                $this->hiddennofaktur->Value = $d[1]['no_faktur'];
                 $this->txtAddNomorFaktur->Text = $d[1]['no_faktur'];
                 $this->cmbAddTanggalFaktur->Text = $this->TGL->tanggal('d-m-Y', $d[1]['tanggal']);
                 $this->populateData();

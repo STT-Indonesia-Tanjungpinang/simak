@@ -144,7 +144,7 @@ class CProfilMahasiswa extends MainPageM {
         $datakrs = $this->KRS->DataKRS;
         $isikrs='belum isi';
         if (isset($datakrs['idkrs'])) {
-          $isikrs = $this->KRS->DataKRS['sah']==true ? 'sudah isi [sah]':'sudah isi [belum disahkan]';
+          $isikrs = $this->KRS->DataKRS['sah'] == true ? 'sudah isi [sah]':'sudah isi [belum disahkan]';
         }                
       }
       $v['tahun'] = $this->DMaster->getNamaTA($v['tahun']);		
@@ -203,8 +203,8 @@ class CProfilMahasiswa extends MainPageM {
     $no_formulir = $_SESSION['currentPageProfilMahasiswa']['DataMHS']['no_formulir'];
     $str = "UPDATE profiles_mahasiswa SET userpassword='$password_default' WHERE no_formulir='$no_formulir'";
     $this->DB->updateRecord($str);
-    $this->lblInfo->Text='Reset Password Mahasiswa';
-    $this->lblMessageInfo->Text='Password mahasiswa sukses direset menjadi 1234';        
+    $this->lblInfo->Text = 'Reset Password Mahasiswa';
+    $this->lblMessageInfo->Text = 'Password mahasiswa sukses direset menjadi 1234';        
     $this->modalMessage->show();
   }
   public function changeTheme($sender, $param) {

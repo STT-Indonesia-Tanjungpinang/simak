@@ -227,7 +227,7 @@ class CPiutangJangkaPendek extends MainPageK {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Piutang Jangka Pendek';
+        $this->lblPrintout->Text = 'Piutang Jangka Pendek';
         $this->modalPrintOut->show();
     }
 }

@@ -34,7 +34,7 @@ class CTranskripSementara extends MainPageMHS {
         $this->report->setMode($_SESSION['outputreport']);
 		$this->report->printTranskripSementara($this->Nilai);				
         
-        $this->lblPrintout->Text='Transkrip Sementara';
+        $this->lblPrintout->Text = 'Transkrip Sementara';
         $this->modalPrintOut->show();
 	}
 }

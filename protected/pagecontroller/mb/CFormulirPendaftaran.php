@@ -9,7 +9,7 @@ class CFormulirPendaftaran extends MainPageMB
     $this->createObj('Finance');        
     if (!$this->IsPostBack && !$this->IsCallback)
     {
-      $this->lblModulHeader->Text='T.A '.$this->DMaster->getNamaTA($this->Pengguna->getDataUser('tahun_masuk'));
+      $this->lblModulHeader->Text = 'T.A '.$this->DMaster->getNamaTA($this->Pengguna->getDataUser('tahun_masuk'));
       try 
       {                
         if (!isset($_SESSION['currentPageFormulirPendaftaran']) || $_SESSION['currentPageFormulirPendaftaran']['page_name'] != 'mb.FormulirPendaftaran') {
@@ -90,7 +90,7 @@ class CFormulirPendaftaran extends MainPageMB
     $this->txtEditNoTelpRumah->Text = $dataMhs['telp_rumah'];		
     $this->txtEditNoTelpHP->Text = $dataMhs['telp_hp'];
     $this->txtEditEmail->Text = $dataMhs['email'];  
-    $this->hiddenemail->Value=$dataMhs['email'];
+    $this->hiddenemail->Value = $dataMhs['email'];
     
     if ($dataMhs['idstatus']=='PEKERJA') {
       $this->rdEditBekerja->Checked=true;						
@@ -131,7 +131,7 @@ class CFormulirPendaftaran extends MainPageMB
     {
       $this->cmbEditKjur1->DataSource = $daftar_jurusan;
       $this->cmbEditKjur1->Text = $dataMhs['kjur1'];
-      $this->cmbEditKjur1->Enabled=$bool;
+      $this->cmbEditKjur1->Enabled = $bool;
       $this->cmbEditKjur1->dataBind();
       $this->cmbEditKjur2->Enabled=true;	            
     }
@@ -139,7 +139,7 @@ class CFormulirPendaftaran extends MainPageMB
     {					
       $this->cmbEditKjur1->DataSource = $daftar_jurusan;
       $this->cmbEditKjur1->Text = $dataMhs['kjur1'];
-      $this->cmbEditKjur1->Enabled=$bool;
+      $this->cmbEditKjur1->Enabled = $bool;
       $this->cmbEditKjur1->dataBind();
 
       $jurusan = $this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $dataMhs['kjur1']);									            
@@ -149,7 +149,7 @@ class CFormulirPendaftaran extends MainPageMB
       $this->cmbEditKjur2->Enabled=true;
     }	         
     $this->imgEditFoto->ImageUrl = $dataMhs['photo_profile']; 
-    $this->hiddenEditFoto->Value=$dataMhs['photo_profile']; 
+    $this->hiddenEditFoto->Value = $dataMhs['photo_profile']; 
   }
   private function addProcess() 
   {     
@@ -171,7 +171,7 @@ class CFormulirPendaftaran extends MainPageMB
     
     $this->txtAddNoTelpHP->Text = $r[1]['telp_hp'];
     $this->txtAddEmail->Text = $r[1]['email'];  
-    $this->hiddenemail->Value=$r[1]['email'];
+    $this->hiddenemail->Value = $r[1]['email'];
     
     $this->cmbAddAgama->DataSource = $this->DMaster->getListAgama();        
     $this->cmbAddAgama->dataBind();		
@@ -213,7 +213,7 @@ class CFormulirPendaftaran extends MainPageMB
       if ($sender->Text == 'none')
       {
         $this->cmbAddKjur2->Enabled = false;	
-        $this->cmbAddKjur2->Text='none';
+        $this->cmbAddKjur2->Text = 'none';
       }
       else
       {			            
@@ -441,7 +441,7 @@ class CFormulirPendaftaran extends MainPageMB
       $path = "resources/photomhs/$filename-$part";
       $sender->saveAs($path);            
       chmod(BASEPATH."/$path",0644); 
-      $this->hiddenAddFoto->Value=$path;
+      $this->hiddenAddFoto->Value = $path;
       $this->imgAddFoto->ImageUrl = $path;  
       $_SESSION['currentPageFormulirPendaftaran']['temp_file'] = $path;
     }
@@ -521,7 +521,7 @@ class CFormulirPendaftaran extends MainPageMB
       $path = "resources/photomhs/$filename-$part";
       $sender->saveAs($path);            
       chmod(BASEPATH."/$path",0644); 
-      $this->hiddenEditFoto->Value=$path;
+      $this->hiddenEditFoto->Value = $path;
       $this->imgEditFoto->ImageUrl = $path;  
       $_SESSION['currentPageFormulirPendaftaran']['temp_file'] = $path;
     }

@@ -32,7 +32,7 @@ class Pendaftaran extends MainPageF
     if ($sender->Text == 'none')
     {
       $this->cmbAddKjur2->Enabled = false;
-      $this->cmbAddKjur2->Text='none';
+      $this->cmbAddKjur2->Text = 'none';
     }
     else
     {

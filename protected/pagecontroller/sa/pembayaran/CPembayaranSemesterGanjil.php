@@ -19,7 +19,7 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
             
             $ta = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA (), 'none');
-            $this->tbCmbTA->Enabled=$bool;
+            $this->tbCmbTA->Enabled = $bool;
             $this->tbCmbTA->Text = $ta;
             $this->tbCmbTA->dataBind();
             
@@ -126,7 +126,7 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
     }
     public function setDataBound($sender, $param) {				
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 
 		}		
 	}	

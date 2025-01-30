@@ -36,7 +36,7 @@ class CDulangMHSLama Extends MainPageMHS {
                 $datakrs = $this->KRS->DataKRS;
                 $isikrs='belum isi';
                 if (isset($datakrs['idkrs'])) {
-                    $isikrs = $this->KRS->DataKRS['sah']==true ? 'sudah isi [sah]':'sudah isi [belum disahkan]';
+                    $isikrs = $this->KRS->DataKRS['sah'] == true ? 'sudah isi [sah]':'sudah isi [belum disahkan]';
                 }                
             }
             $v['tahun'] = $this->DMaster->getNamaTA($v['tahun']);		

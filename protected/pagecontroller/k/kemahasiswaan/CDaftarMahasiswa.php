@@ -168,7 +168,7 @@ class CDaftarMahasiswa extends MainPageK {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Daftar Mahasiswa';
+        $this->lblPrintout->Text = 'Daftar Mahasiswa';
         $this->modalPrintOut->show();
     }
 }

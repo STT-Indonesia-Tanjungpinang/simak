@@ -250,7 +250,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Rekapitulasi Status Mahasiswa Periode ';
+        $this->lblPrintout->Text = 'Rekapitulasi Status Mahasiswa Periode ';
         $this->modalPrintOut->show();
     }
 }

@@ -84,7 +84,7 @@ class CPassingGrade extends MainPageM {
 	}    
     public function onItemCreatedTargetFisik($sender, $param){
         $item = $param->Item;
-        if($item->ItemType==='EditItem') {   
+        if($item->ItemType === 'EditItem') {   
             $item->ColumnNilai->TextBox->CssClass='form-control';                                
             $item->ColumnNilai->TextBox->Width='60px'; 
             $item->ColumnNilai->TextBox->Attributes->OnKeyUp='formatangka(this,true)';

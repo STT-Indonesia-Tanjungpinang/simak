@@ -43,7 +43,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
                 
                 $this->Nilai->setDataMHS($datamhs);
                 $this->Nilai->getTranskripFromKonversidanKRS();
-                $this->hiddenJumlahSKS->Value=$this->Nilai->getTotalSKSAdaNilai();
+                $this->hiddenJumlahSKS->Value = $this->Nilai->getTotalSKSAdaNilai();
             } catch (Exception $ex) {
                 $this->idProcess = 'view';	
                 $this->errorMessage->Text = $ex->getMessage();

@@ -121,7 +121,7 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
 	}
 	public function setDataBound($sender, $param) {				
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
             
 		}		
 	}	

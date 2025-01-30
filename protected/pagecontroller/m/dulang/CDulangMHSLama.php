@@ -200,8 +200,8 @@ class CDulangMHSLama Extends MainPageM {
         $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($datamhs['nim'],true);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-        $this->hiddenidsmt->Value=$datamhs['idsmt'];
-        $this->hiddenta->Value=$datamhs['tahun'];
+        $this->hiddenidsmt->Value = $datamhs['idsmt'];
+        $this->hiddenta->Value = $datamhs['tahun'];
         $this->Demik->setDataMHS($datamhs);
 	}
     public function deleteRecord($sender, $param) {			
@@ -255,7 +255,7 @@ class CDulangMHSLama Extends MainPageM {
             break;
         } 
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Daftar Ulang Mahasiswa AKTIF';
+        $this->lblPrintout->Text = 'Daftar Ulang Mahasiswa AKTIF';
         $this->modalPrintOut->show();
     }
 }

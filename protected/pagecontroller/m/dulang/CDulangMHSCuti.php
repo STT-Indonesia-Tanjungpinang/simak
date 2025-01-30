@@ -173,7 +173,7 @@ class CDulangMHSCuti Extends MainPageM {
             break;
         } 
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Daftar Ulang Mahasiswa CUTI';
+        $this->lblPrintout->Text = 'Daftar Ulang Mahasiswa CUTI';
         $this->modalPrintOut->show();
     }
 }

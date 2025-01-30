@@ -21,7 +21,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageK {
                 $this->DB->setFieldTable(array('no_faktur', 'tanggal'));
                 $d=$this->DB->getRecord($str);
                 
-                $this->hiddennofaktur->Value=$d[1]['no_faktur'];
+                $this->hiddennofaktur->Value = $d[1]['no_faktur'];
                 $this->txtAddNomorFaktur->Text = $d[1]['no_faktur'];
                 $this->cmbAddTanggalFaktur->Text = $this->TGL->tanggal('d-m-Y', $d[1]['tanggal']);
                 $this->populateData();

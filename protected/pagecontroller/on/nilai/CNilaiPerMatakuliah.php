@@ -17,7 +17,7 @@ class CNilaiPerMatakuliah extends MainPageON {
       try 
       {                     
         $id=addslashes($this->request['id']);                               
-        $this->hiddenid->Value=$id;
+        $this->hiddenid->Value = $id;
         $infomatkul = $this->Demik->getInfoMatkul($id, 'penyelenggaraan'); 
         if (!isset($infomatkul['idpenyelenggaraan'])) {                                                
           throw new Exception ("Sebelum input nilai mohon pilih Kode penyelenggaraan.");		
@@ -55,13 +55,15 @@ class CNilaiPerMatakuliah extends MainPageON {
     }		
 
   }	
-  public function getInfoMatkul($idx) {        
+  public function getInfoMatkul($idx)
+  {        
     if (isset($_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul'][$idx])) {
       $item=$_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul'][$idx];
       return $item;
     }        
   }
-  public function getInfoToolbar() {        
+  public function getInfoToolbar()
+  {        
     $kjur = $_SESSION['kjur'];        
     $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
@@ -69,29 +71,34 @@ class CNilaiPerMatakuliah extends MainPageON {
     $text="Program Studi $ps TA $ta Semester $semester";
     return $text;
   }
-  public function changeTbTA($sender, $param) {
+  public function changeTbTA($sender, $param)
+  {
     $this->idProcess = 'view';
     $_SESSION['ta'] = $this->tbCmbTA->Text;		
     $this->lblModulHeader->Text = $this->getInfoToolbar();
     $this->populateData();
   }	
-  public function changeTbSemester($sender, $param) {
+  public function changeTbSemester($sender, $param)
+  {
     $this->idProcess = 'view';
     $_SESSION['semester'] = $this->tbCmbSemester->Text;		
     $this->lblModulHeader->Text = $this->getInfoToolbar();		
   }
-  public function changeTbPs($sender, $param) {		
+  public function changeTbPs($sender, $param)
+  {		
     $this->idProcess = 'view';
     $_SESSION['kjur'] = $this->tbCmbPs->Text;
     $this->lblModulHeader->Text = $this->getInfoToolbar();  
     $this->populateData();
   } 
-  public function searchRecord($sender, $param) {
+  public function searchRecord($sender, $param)
+  {
     $this->idProcess = 'view';
     $_SESSION['currentPageNilaiPerMatakuliah']['search']=true;
     $this->populateData($_SESSION['currentPageNilaiPerMatakuliah']['search']);
   }       
-  public function populateData($search = false) {	
+  public function populateData($search = false)
+  {	
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];
     $kjur = $_SESSION['kjur'];        
@@ -119,7 +126,8 @@ class CNilaiPerMatakuliah extends MainPageON {
     $r= $this->DB->getRecord($str);
     
     $result = array();
-    while (list($k, $v) = each($r)) {
+    while (list($k, $v) = each($r)) 
+    {
       $v['jumlah_peserta'] = $this->Demik->getJumlahMhsInPenyelenggaraan($v['idpenyelenggaraan']);
       $v['nilai_terisi'] = $this->Demik->getJumlahNilaiTerisiPenyelenggaraan($v['idpenyelenggaraan']);
       $result[$k] = $v;
@@ -127,41 +135,51 @@ class CNilaiPerMatakuliah extends MainPageON {
     $this->RepeaterS->DataSource = $result;
     $this->RepeaterS->dataBind();
   }
-  public function renderCallback($sender, $param) {
+  public function renderCallback($sender, $param)
+  {
     $this->RepeaterP->render($param->NewWriter);	
   }
-  public function Page_Changed($sender, $param) {
+  public function Page_Changed($sender, $param)
+  {
     $_SESSION['currentPageNilaiPerMatakuliah']['page_num'] = $param->NewPageIndex;
     $this->populateDataPeserta($_SESSION['currentPageNilaiPerMatakuliah']['search']);
   }    
-  public function setData($sender, $param) {
+  public function setData($sender, $param)
+  {
     $item = $param->Item;
-    if ($item->ItemType == 'Item' || $item->ItemType=='AlternatingItem') {	
-      $item->cmbNilai->Enabled=$item->DataItem['k_status'] == 'L'?false:true;
-      if ($item->DataItem['batal']) {
-        $item->literalKet->Text='Dibatalkan oleh dosen wali.';	
+    if ($item->ItemType == 'Item' || $item->ItemType == 'AlternatingItem') 
+    {	
+      $item->cmbNilai->Enabled = $item->DataItem['k_status'] == 'L' ? false : true;
+      if ($item->DataItem['batal']) 
+      {
+        $item->literalKet->Text = 'Dibatalkan oleh dosen wali.';	
         $item->txtNilaiAngka->Enabled = false;
         $item->cmbNilai->Enabled = false;		
-      }else {
-        $item->literalKet->Text='-';
+      }
+      else
+      {
+        $item->literalKet->Text = '-';
         $item->txtNilaiAngka->Text = $item->DataItem['n_kuan'];
         $item->cmbNilai->Text = $item->DataItem['n_kual'];
-        $item->nilai_sebelumnya->Value=$item->DataItem['n_kual'];
-        $bool = $item->DataItem['bydosen']==true?false:true;
-        $item->txtNilaiAngka->Enabled=$bool;
-        $item->cmbNilai->Enabled=$bool;
+        $item->nilai_sebelumnya->Value = $item->DataItem['n_kual'];
+        $bool = $item->DataItem['bydosen'] == true ? true : true;
+        $item->txtNilaiAngka->Enabled = $bool;
+        $item->cmbNilai->Enabled = $bool;
       }	
     }		
   }
-  public function searchRecord2($sender, $param) {
+  public function searchRecord2($sender, $param) 
+  {
     $_SESSION['currentPageNilaiPerMatakuliah']['search']=true;
     $this->populateDataPeserta($_SESSION['currentPageNilaiPerMatakuliah']['search']);
   }
-  public function populateDataPeserta ($search = false) {      
+  public function populateDataPeserta ($search = false) 
+  {      
     $id = $_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
     $str = "SELECT vkm.idkrsmatkul,vkm.nim,vdm.nama_mhs,vdm.jk,nm.n_kuan,nm.n_kual,nm.userid_input,nm.tanggal_input,nm.userid_modif,nm.tanggal_modif,nm.bydosen,nm.ket,vkm.batal,vkm.sah,vdm.k_status FROM v_krsmhs vkm LEFT JOIN nilai_matakuliah nm ON (nm.idkrsmatkul=vkm.idkrsmatkul) JOIN v_datamhs vdm ON (vdm.nim=vkm.nim) WHERE vkm.idpenyelenggaraan='$id' AND vkm.sah=1";	
     
-    if ($search) {            
+    if ($search) 
+    {            
       $txtsearch=$this->txtKriteria2->Text;
       switch($this->cmbKriteria2->Text) {                
         case 'nim':
@@ -217,9 +235,9 @@ class CNilaiPerMatakuliah extends MainPageON {
     $this->RepeaterP->DataSource = $result;
     $this->RepeaterP->dataBind();        
     $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterP);
-    
   }
-  public function saveData($sender, $param) {
+  public function saveData($sender, $param)
+  {
     if ($this->IsValid)
     {
       $this->createObj('Log');

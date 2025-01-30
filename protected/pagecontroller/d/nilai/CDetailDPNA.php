@@ -119,7 +119,7 @@ class CDetailDPNA extends MainPageD {
             break;
         }        
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Daftar Peserta dan Nilai Akhir';
+        $this->lblPrintout->Text = 'Daftar Peserta dan Nilai Akhir';
         $this->modalPrintOut->show();
 	}
 }

@@ -31,7 +31,7 @@ class CPesertaKelas extends MainPageM {
         $_SESSION['currentPagePembagianKelas']['iddosen'] = $infokelas['iddosen'];
         $_SESSION['currentPagePesertaKelas']['InfoKelas'] = $infokelas;    
         
-        $this->hiddenidkelasmhs->Value=$id;
+        $this->hiddenidkelasmhs->Value = $id;
         $idkelas = $infokelas['idkelas'];
         $idpenyelenggaraan = $infokelas['idpenyelenggaraan'];
         $idpengampu_penyelenggaraan = $infokelas['idpengampu_penyelenggaraan'];
@@ -84,7 +84,7 @@ class CPesertaKelas extends MainPageM {
       else
       {
         $this->modalMessageError->show();
-        $this->lblContentMessageError->Text='Tidak bisa pindah karena jumlah peserta dikelas tersebut, telah melampau kapasitas kelas.';
+        $this->lblContentMessageError->Text = 'Tidak bisa pindah karena jumlah peserta dikelas tersebut, telah melampau kapasitas kelas.';
       }
       
     }
@@ -95,7 +95,7 @@ class CPesertaKelas extends MainPageM {
   }
   public function itemCreated($sender, $param) {
     $item = $param->Item;		
-    if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {		
+    if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {		
       $item->cmbKelasTujuan->DataSource = $_SESSION['currentPagePesertaKelas']['DaftarKelasTujuan'];
       $item->cmbKelasTujuan->DataBind();
     }
@@ -125,7 +125,7 @@ class CPesertaKelas extends MainPageM {
       else
       {
         $this->modalMessageError->show();
-        $this->lblContentMessageError->Text='Tidak bisa pindah karena jumlah peserta di kelas tersebut telah melampau kapasitas kelas.';
+        $this->lblContentMessageError->Text = 'Tidak bisa pindah karena jumlah peserta di kelas tersebut telah melampau kapasitas kelas.';
       }
     }
   }
@@ -202,7 +202,7 @@ class CPesertaKelas extends MainPageM {
       break;
     }                
     $this->lblMessagePrintout->Text = $messageprintout;
-    $this->lblPrintout->Text='Daftar Hadir Mahasiswa';
+    $this->lblPrintout->Text = 'Daftar Hadir Mahasiswa';
     $this->modalPrintOut->show();
   }
   

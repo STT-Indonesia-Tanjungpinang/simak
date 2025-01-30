@@ -154,7 +154,7 @@ class CPembayaranFormulir extends MainPageM {
 			$_SESSION['pembayaran_spmb'] = $pembayaran_spmb;
 			$this->spmb->redirect('a.m.SPMB.PembayaranSPMB');
 		}else {
-			$this->erroMessage->Text='<br />Biaya pendaftaran Rp.0 Silahkan ganti di Data Master.';
+			$this->erroMessage->Text = '<br />Biaya pendaftaran Rp.0 Silahkan ganti di Data Master.';
 		}
 	}
 	
@@ -221,17 +221,17 @@ class CPembayaranFormulir extends MainPageM {
 		$r = $this->DB->getRecord($str);	
 		
 		$r = $r[1];
-		$this->txtEditFormulir->Value=$r['no_formulir'];
+		$this->txtEditFormulir->Value = $r['no_formulir'];
 		$urut=substr($r['no_formulir'],strlen($_SESSION['tahun_masuk']),4);		
 		$this->txtEditFormulir2->Text = $urut;	
 		$this->txtEditNamaMhs->Text=stripslashes($r['nama_mhs']);
 		$this->txtEditAlamatRumah->Text = $r['alamat_rumah'];
 		$this->txtEditNoTelpRumah->Text = $r['telp_rumah'];
 		$this->txtEditNoHP->Text = $r['telp_hp'];
-		$this->hidenEditEmail->Value=$r['email'];
+		$this->hidenEditEmail->Value = $r['email'];
 		$this->txtEditEmail->Text = $r['email'];
 		$this->txtEditNoFaktur->Text = $r['no_faktur'];
-		$this->hiddenEditNoFaktur->Value=$r['no_faktur'];
+		$this->hiddenEditNoFaktur->Value = $r['no_faktur'];
 		$this->txtEditTglBayar->Text = $this->TGL->tukarTanggal($r['tgl_bayar'],'entoid');
 		$this->txtEditJumlahBayar->Text = $this->spmb->Finance->toRupiah($r['dibayarkan']);
 		$this->txtEditKeterangan->Text = $r['ket'];

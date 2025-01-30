@@ -12,7 +12,7 @@ class CDaftarKonsentrasi extends MainPageMHS {
 			}    
             $this->Nilai->setDataMHS($this->Pengguna->getDataUser()); 
             $this->Nilai->getTranskripFromKonversidanKRS();
-            $this->hiddenJumlahSKS->Value=$this->Nilai->getTotalSKSAdaNilai();
+            $this->hiddenJumlahSKS->Value = $this->Nilai->getTotalSKSAdaNilai();
             $this->cmbKonsentrasiProdi->DataSource = $this->DMaster->getListKonsentrasiProgramStudi($this->Pengguna->getDataUser('kjur'));
             $this->cmbKonsentrasiProdi->DataBind();
             

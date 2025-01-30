@@ -21,14 +21,14 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
                 $str = "SELECT no_faktur,tanggal FROM transaksi WHERE no_transaksi = $no_transaksi";
                 $this->DB->setFieldTable(array('no_faktur', 'tanggal'));
                 $d=$this->DB->getRecord($str);
-                $this->hiddennofaktur->Value=$d[1]['no_faktur'];
+                $this->hiddennofaktur->Value = $d[1]['no_faktur'];
                 $this->txtAddNomorFaktur->Text = $d[1]['no_faktur'];
                 $this->cmbAddTanggalFaktur->Text = $this->TGL->tanggal('d-m-Y', $d[1]['tanggal']);
 				$str = "SELECT no_pendaftaran FROM formulir_pendaftaran_temp WHERE no_formulir = $no_formulir";
                 $this->DB->setFieldTable(array('no_pendaftaran'));
                 $d=$this->DB->getRecord($str);
                 $this->txtAddNomorPendaftaran->Text=isset($d[1])?$d[1]['no_pendaftaran']:'';
-				$this->hiddennopendaftaran->Value=$this->txtAddNomorPendaftaran->Text;
+				$this->hiddennopendaftaran->Value = $this->txtAddNomorPendaftaran->Text;
 				$this->populateData();
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	

@@ -139,7 +139,7 @@
 							<td><%#$this->DataItem['nama_kelas']%></td>
                             <td><%#$this->DataItem['tasmt']%></td>
                             <td>
-                                <span class="<%#$this->DataItem['commited']==true?'label label-flat border-success text-success-600 position-right':'label label-danger position-right'%>"><%#$this->DataItem['commited']==true?'Done':'in progress'%></span>                               
+                                <span class="<%#$this->DataItem['commited'] == true?'label label-flat border-success text-success-600 position-right':'label label-danger position-right'%>"><%#$this->DataItem['commited'] == true?'Done':'in progress'%></span>                               
                             </td>
                             <td>
                                 <ul class="icons-list">

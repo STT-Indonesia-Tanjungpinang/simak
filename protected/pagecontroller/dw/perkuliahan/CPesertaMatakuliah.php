@@ -19,7 +19,7 @@ class CPesertaMatakuliah extends MainPageM {
                 $id=addslashes($this->request['id']);
                 $iddosen_wali = $this->iddosen_wali;
                 $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');                
-                $this->hiddenid->Value=$id;
+                $this->hiddenid->Value = $id;
                 $infomatkul = $this->Demik->getInfoMatkul($id,'penyelenggaraan'); 
                 if (!isset($infomatkul['idpenyelenggaraan'])) {                                                
                     throw new Exception ("Kode penyelenggaraan dengan id ($id) tidak terdaftar.");		

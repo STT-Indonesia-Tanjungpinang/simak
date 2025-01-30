@@ -140,7 +140,7 @@ class CPendaftaranViaWeb extends MainPageM {
 				$item->btnDelete->Attributes->OnClick="alert('Tidak bisa dihapus karena sudah daftar ulang');return false;";			
 			}else{
                 $item->lblKeterangan->CssClass='label label-danger';
-                $item->lblKeterangan->Text='Belum';
+                $item->lblKeterangan->Text = 'Belum';
             }
 		}
 	}	
@@ -149,7 +149,7 @@ class CPendaftaranViaWeb extends MainPageM {
             $this->idProcess = 'add';
             if ($sender->Text == 'none') {
                 $this->cmbAddKjur2->Enabled = false;	
-                $this->cmbAddKjur2->Text='none';
+                $this->cmbAddKjur2->Text = 'none';
             }else{			            
                 $this->cmbAddKjur2->Enabled=true;
                 
@@ -261,7 +261,7 @@ class CPendaftaranViaWeb extends MainPageM {
         $this->txtEditNoTelpRumah->Text = $dataMhs['telp_rumah'];		
         $this->txtEditNoTelpHP->Text = $dataMhs['telp_hp'];
         $this->txtEditEmail->Text = $dataMhs['email'];  
-        $this->hiddenemail->Value=$dataMhs['email'];
+        $this->hiddenemail->Value = $dataMhs['email'];
         
         if ($dataMhs['idstatus']=='PEKERJA') {
             $this->rdEditBekerja->Checked=true;						
@@ -296,13 +296,13 @@ class CPendaftaranViaWeb extends MainPageM {
         if ($dataMhs['kjur1'] == '') {
             $this->cmbEditKjur1->DataSource = $daftar_jurusan;
             $this->cmbEditKjur1->Text = $dataMhs['kjur1'];
-            $this->cmbEditKjur1->Enabled=$bool;
+            $this->cmbEditKjur1->Enabled = $bool;
             $this->cmbEditKjur1->dataBind();
             $this->cmbEditKjur2->Enabled=true;	            
         }else {					
             $this->cmbEditKjur1->DataSource = $daftar_jurusan;
             $this->cmbEditKjur1->Text = $dataMhs['kjur1'];
-            $this->cmbEditKjur1->Enabled=$bool;
+            $this->cmbEditKjur1->Enabled = $bool;
             $this->cmbEditKjur1->dataBind();
 
             $jurusan = $this->DMaster->removeKjur($_SESSION['daftar_jurusan'], $dataMhs['kjur1']);									            
@@ -444,7 +444,7 @@ class CPendaftaranViaWeb extends MainPageM {
 			break;
 		}        
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Formulir Pendaftaran MHS Baru/Pindahan';
+        $this->lblPrintout->Text = 'Formulir Pendaftaran MHS Baru/Pindahan';
         $this->modalPrintOut->show();
 	}
 }

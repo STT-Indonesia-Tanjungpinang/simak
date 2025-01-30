@@ -63,7 +63,7 @@ class CPesertaUjianPMB extends MainPageM {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
         $id = $this->getDataKeyField($sender, $this->RepeaterS);        
-		$this->hiddenid->Value=$id;        
+		$this->hiddenid->Value = $id;        
         
         $this->DataUjianPMB=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
         $idsmt = $this->DataUjianPMB['idsmt'];
@@ -103,7 +103,7 @@ class CPesertaUjianPMB extends MainPageM {
 		$r = $this->DB->getRecord($str);
         
         if ($this->DB->checkRecordIsExist ('no_formulir', 'nilai_ujian_masuk', $r[1]['no_formulir'])) {
-            $this->lblHeaderMessageError->Text='Menghapus Peserta Ujian PMB';
+            $this->lblHeaderMessageError->Text = 'Menghapus Peserta Ujian PMB';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus peserta ini karena sudah melakukan Ujian PMB.";
             $this->modalMessageError->Show();
         }else{
@@ -140,7 +140,7 @@ class CPesertaUjianPMB extends MainPageM {
             break;
         }                
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Berita Acara Ujian SPMB';
+        $this->lblPrintout->Text = 'Berita Acara Ujian SPMB';
         $this->modalPrintOut->show();
 	}
 }

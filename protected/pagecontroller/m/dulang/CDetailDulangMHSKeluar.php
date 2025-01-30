@@ -34,8 +34,8 @@ class CDetailDulangMHSKeluar Extends MainPageM {
                     $ket_jumlah_sks="(saat ini baru $jumlah_sks SKS)";                    
                     $this->literalJumlahSKS->Text = $ket_jumlah_sks;
                     
-                    $this->literalBebasKeuangan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
-                    $this->literalBebasPerpustakaan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
+                    $this->literalBebasKeuangan->Text = '<span class="label label-info">NOT YET IMPLEMENTED</span>';
+                    $this->literalBebasPerpustakaan->Text = '<span class="label label-info">NOT YET IMPLEMENTED</span>';
                     
                     $this->cmbAddDosenWali->DataSource = $this->DMaster->getListDosenWali();
                     $this->cmbAddDosenWali->Text = $datamhs['iddosen_wali'];

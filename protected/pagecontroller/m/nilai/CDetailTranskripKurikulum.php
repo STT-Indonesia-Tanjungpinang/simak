@@ -81,7 +81,7 @@ class CDetailTranskripKurikulum extends MainPageM {
         }
         
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Transkrip Kurikulum';
+        $this->lblPrintout->Text = 'Transkrip Kurikulum';
         $this->modalPrintOut->show();
 	}
 }

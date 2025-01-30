@@ -190,7 +190,7 @@ class CKUM extends MainPageK {
     }
     public function setDataBound($sender, $param) {
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
             $bool=0;            
             if ($item->DataItem['sisa'] > 0 ) {
                 $half_payment=$item->DataItem['kewajiban']/2;  
@@ -206,8 +206,8 @@ class CKUM extends MainPageK {
                 $keterangan='LUNAS';
                 $btnstyle=' class="text-primary-600"';
             }
-            $item->hiddentoglelunas->Value=$bool;
-            $item->btnPrintOutR->Enabled=$bool;
+            $item->hiddentoglelunas->Value = $bool;
+            $item->btnPrintOutR->Enabled = $bool;
             $item->literalBTNStyle->Text = $btnstyle;
             $item->literalKet->Text = $keterangan;
         }
@@ -245,7 +245,7 @@ class CKUM extends MainPageK {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Kartu Ujian Mahasiswa1';
+        $this->lblPrintout->Text = 'Kartu Ujian Mahasiswa1';
         $this->modalPrintOut->show();
     }
     public function printOutR($sender, $param) {
@@ -294,7 +294,7 @@ class CKUM extends MainPageK {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Kartu Ujian Mahasiswa2';
+        $this->lblPrintout->Text = 'Kartu Ujian Mahasiswa2';
         $this->modalPrintOut->show();
     }
 }

@@ -44,10 +44,10 @@ class CDetailNilaiFinal extends MainPageON {
         $this->cmbEditDosenPembimbing->Text = $datatranskrip['iddosen_pembimbing'];
         $this->cmbEditDosenPembimbing2->Text = $datatranskrip['iddosen_pembimbing2'];	
       
-        $this->hiddennomorijazah->Value=$datatranskrip['nomor_ijazah'];
+        $this->hiddennomorijazah->Value = $datatranskrip['nomor_ijazah'];
         $this->txtEditNomorIjazah->Text = $datatranskrip['nomor_ijazah'];
 
-        $this->hiddennomortranskrip->Value=$datatranskrip['nomor_transkrip'];
+        $this->hiddennomortranskrip->Value = $datatranskrip['nomor_transkrip'];
         $this->txtEditNomorTranskrip->Text = $datatranskrip['nomor_transkrip'];
         
         $this->cmbEditPredikatKelulusan->Text = $datatranskrip['predikat_kelulusan'];
@@ -166,8 +166,8 @@ class CDetailNilaiFinal extends MainPageON {
             }
             $this->redirect('nilai.DetailNilaiFinal', true);
           }else{
-            $this->lblHeaderMessageError->Text='Tambah Nilai';
-            $this->lblContentMessageError->Text='Data nilai matakuliah kosong';
+            $this->lblHeaderMessageError->Text = 'Tambah Nilai';
+            $this->lblContentMessageError->Text = 'Data nilai matakuliah kosong';
             $this->modalMessageError->show();
           }
         break;
@@ -190,8 +190,8 @@ class CDetailNilaiFinal extends MainPageON {
             }
             $this->redirect('nilai.DetailNilaiFinal', true);
           }else{
-            $this->lblHeaderMessageError->Text='Tambah Nilai';
-            $this->lblContentMessageError->Text='Data nilai matakuliah kosong';
+            $this->lblHeaderMessageError->Text = 'Tambah Nilai';
+            $this->lblContentMessageError->Text = 'Data nilai matakuliah kosong';
             $this->modalMessageError->show();
           }
         break;
@@ -229,8 +229,8 @@ class CDetailNilaiFinal extends MainPageON {
             }                    
             $this->redirect('nilai.DetailNilaiFinal', true);
           }else{
-            $this->lblHeaderMessageError->Text='Tambah Nilai';
-            $this->lblContentMessageError->Text='Data nilai matakuliah kosong';
+            $this->lblHeaderMessageError->Text = 'Tambah Nilai';
+            $this->lblContentMessageError->Text = 'Data nilai matakuliah kosong';
             $this->modalMessageError->show();
           }                    
         break;
@@ -307,7 +307,7 @@ class CDetailNilaiFinal extends MainPageON {
         break;
       }
       $this->lblMessagePrintout->Text = $messageprintout;
-      $this->lblPrintout->Text='Nilai Final';
+      $this->lblPrintout->Text = 'Nilai Final';
       $this->modalPrintOut->show();
     }else{
       $this->lblContentMessageError->Text="Mahasiswa dengan NIM ($nim) statusnya belum lulus !!!.";

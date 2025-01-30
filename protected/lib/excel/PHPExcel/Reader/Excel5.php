@@ -1631,7 +1631,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
             $noteLength = self::getInt2d($recordData, 4);
             $noteText = trim(substr($recordData, 6));
 //            echo 'Note Length=', $noteLength,'<br />';
-//            echo 'Note Text=', $noteText,'<br />';
+//            echo 'Note Text = ', $noteText,'<br />';
 
             if ($extension) {
                 //    Concatenate this extension with the currently set comment for the cell

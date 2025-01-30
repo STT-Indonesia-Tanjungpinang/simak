@@ -180,8 +180,8 @@ class CDulangMHSBaru Extends MainPageM {
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-        $this->hiddensemestermasuk->Value=$datamhs['semester_masuk'];
-        $this->hiddentahunmasuk->Value=$datamhs['tahun_masuk'];
+        $this->hiddensemestermasuk->Value = $datamhs['semester_masuk'];
+        $this->hiddentahunmasuk->Value = $datamhs['tahun_masuk'];
         $this->Demik->setDataMHS($datamhs);
 	}
     public function deleteRecord($sender, $param) {			

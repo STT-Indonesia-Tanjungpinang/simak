@@ -103,7 +103,7 @@ class CSoalPMB extends MainPageM {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';
         $id = $this->getDataKeyField($sender, $this->RepeaterS);
-        $this->hiddenidsoal->Value=$id;        
+        $this->hiddenidsoal->Value = $id;        
         $str = "SELECT nama_soal FROM soal s WHERE idsoal = $id";
         $this->DB->setFieldTable(array('nama_soal'));
         $r = $this->DB->getRecord($str);
@@ -149,7 +149,7 @@ class CSoalPMB extends MainPageM {
 	public function deleteRecord($sender, $param) {
         $id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist('idsoal', 'jawaban_ujian', $id)) {
-            $this->lblHeaderMessageError->Text='Menghapus Soal PMB';
+            $this->lblHeaderMessageError->Text = 'Menghapus Soal PMB';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus soal dengan ID ($id) karena sedang digunakan di jawaban ujian.";
             $this->modalMessageError->Show();
         }else{

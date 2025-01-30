@@ -141,19 +141,23 @@ class CNilaiPerMahasiswa extends MainPageON {
   }
   public function setData($sender, $param) {
     $item = $param->Item;	
-    if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {					
-      if ($item->DataItem['batal']) {
-        $item->literalKet->Text='Dibatalkan oleh dosen wali.';	
+    if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') 
+    {					
+      if ($item->DataItem['batal'])
+      {
+        $item->literalKet->Text = 'Dibatalkan oleh dosen wali.';	
         $item->txtNilaiAngka->Enabled = false;
         $item->cmbNilai->Enabled = false;		
-      }else {
-        $item->literalKet->Text='-';
+      }
+      else 
+      {
+        $item->literalKet->Text = '-';
         $item->txtNilaiAngka->Text = $item->DataItem['n_kuan'];
         $item->cmbNilai->Text = $item->DataItem['n_kual'];
-        $item->nilai_sebelumnya->Value=$item->DataItem['n_kual'];
-        $bool = $item->DataItem['bydosen']==true?false:true;
-        $item->txtNilaiAngka->Enabled=$bool;
-        $item->cmbNilai->Enabled=$bool;
+        $item->nilai_sebelumnya->Value = $item->DataItem['n_kual'];
+        $bool = $item->DataItem['bydosen'] == true ? true : true;
+        $item->txtNilaiAngka->Enabled = $bool;
+        $item->cmbNilai->Enabled = $bool;
       }				
     }
   }

@@ -110,11 +110,11 @@ class CKonversiMatakuliah extends MainPageON {
         $this->lblAddKurikulum->Text = $this->Nilai->getKurikulumName($_SESSION['kjur']);
         $jenjang=$this->DMaster->getListJenjang();
         $this->cmbAddJenjang->DataSource = $jenjang;
-        $this->cmbAddJenjang->Text='E';
+        $this->cmbAddJenjang->Text = 'E';
         $this->cmbAddJenjang->dataBind();
 
         $idkur = $this->Nilai->getIDKurikulum($_SESSION['currentPageKonversiMatakuliah']['kjur']);
-        $this->hiddenidkur->Value=$idkur;
+        $this->hiddenidkur->Value = $idkur;
         $str = "SELECT kmatkul,nmatkul,sks,semester FROM matakuliah WHERE idkur = $idkur ORDER BY (semester+0),kmatkul ASC";
 		$this->DB->setFieldTable (array('kmatkul', 'nmatkul', 'sks', 'semester'));
 		$listMatkul = $this->DB->getRecord($str);				
@@ -174,7 +174,7 @@ class CKonversiMatakuliah extends MainPageON {
 	public function editRecord($sender, $param) {		
 		$this->idProcess = 'edit';        
 		$iddata_konversi = $sender->getId() == 'btnDelete' ?$this->hiddenid->Value :$this->getDataKeyField($sender, $this->RepeaterS);		
-		$this->hiddenid->Value=$iddata_konversi;		
+		$this->hiddenid->Value = $iddata_konversi;		
 		//load view
         $str = "SELECT dk.iddata_konversi,dk.nama,dk.alamat,dk.no_telp,dk.nim_asal,dk.kode_pt_asal,dk.nama_pt_asal,dk.kjenjang,dk.kode_ps_asal,dk.nama_ps_asal,dk.tahun,dk.kjur,dk.idkur FROM data_konversi2 dk WHERE dk.iddata_konversi = $iddata_konversi";
         $this->DB->setFieldTable(array('iddata_konversi', 'nama', 'alamat', 'no_telp', 'nim_asal', 'kode_pt_asal', 'nama_pt_asal', 'kjenjang', 'kode_ps_asal', 'nama_ps_asal', 'tahun', 'kjur', 'idkur'));
@@ -204,7 +204,7 @@ class CKonversiMatakuliah extends MainPageON {
         
 		$this->lblEditKurikulum->Text = $this->Nilai->getKurikulumName($dataView['kjur']);
         $idkur = $this->Nilai->getIDKurikulum($dataView['kjur']);
-		$this->hiddenidkur->Value=$idkur;
+		$this->hiddenidkur->Value = $idkur;
         
 		$nilai = $this->Nilai->getNilaiKonversi($iddata_konversi, $idkur);		
 		$_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'] = $nilai;

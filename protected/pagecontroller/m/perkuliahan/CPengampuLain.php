@@ -17,7 +17,7 @@ class CPengampuLain extends MainPageM {
 	public function populateData() {		
 		try {
             $id=addslashes($this->request['id']);
-            $this->hiddenid->Value=$id;
+            $this->hiddenid->Value = $id;
             $this->Demik->getInfoMatkul($id,'penyelenggaraan');            
             if (!isset($this->Demik->InfoMatkul['idpenyelenggaraan'])) {                                                
                 throw new Exception ("Kode penyelenggaraan dengan id ($id) tidak terdaftar.");		
@@ -41,7 +41,7 @@ class CPengampuLain extends MainPageM {
 	}
     public function itemBound($sender, $param) {
 		$item = $param->item;
-		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
+		if ($item->itemType === 'Item' || $item->itemType === 'AlternatingItem') {
 			if ($item->DataItem['iddosen_p']==$item->DataItem['iddosen_pp']) {
 				$item->btnEdit->Enabled = false;	
 				$item->btnDelete->Enabled = false;
@@ -53,7 +53,7 @@ class CPengampuLain extends MainPageM {
     public function addProcess($sender, $param) {			
 		$this->idProcess = 'add';		
         $id = $this->hiddenid->Value;
-        $this->hiddenid->Value=$id;
+        $this->hiddenid->Value = $id;
         $this->Demik->getInfoMatkul($id,'penyelenggaraan');  		
         $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM pengampu_penyelenggaraan WHERE idpenyelenggaraan = $id)";
         $this->DB->setFieldTable(array('iddosen', 'nidn', 'nama_dosen'));
@@ -80,10 +80,10 @@ class CPengampuLain extends MainPageM {
         $idpp = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
 		$id = $this->hiddenid->Value;
-        $this->hiddenid->Value=$id;
+        $this->hiddenid->Value = $id;
         $this->Demik->getInfoMatkul($id,'penyelenggaraan');  			
         
-		$this->hiddenidpp->Value=$idpp;	
+		$this->hiddenidpp->Value = $idpp;	
         $this->DB->setFieldTable(array('iddosen', 'nidn', 'nama_dosen'));
 		$r = $this->DB->getRecord("SELECT pp.iddosen,CONCAT(d.gelar_depan,' ',d.nama_dosen,d.gelar_belakang) AS nama_dosen,d.nidn FROM dosen d,pengampu_penyelenggaraan pp WHERE d.iddosen=pp.iddosen AND pp.idpengampu_penyelenggaraan = $idpp");        
 		

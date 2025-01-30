@@ -105,7 +105,7 @@ class CDosenWali extends MainPageSA {
     public function deleteRecord($sender, $param) {        
         $iddosen_wali = $this->getDataKeyField($sender, $this->RepeaterS);          
         if ($this->DB->checkRecordIsExist('iddosen_wali', 'register_mahasiswa', $iddosen_wali)) {
-            $this->lblHeaderMessageError->Text='Menghapus Dosen Wali';
+            $this->lblHeaderMessageError->Text = 'Menghapus Dosen Wali';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen wali dengan ID ($iddosen_wali) karena sedang digunakan di register mahasiswa.";
             $this->modalMessageError->Show();        
         }else{

@@ -222,7 +222,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageK {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Rekapitulasi Pembayaran Semester Ganjil';
+        $this->lblPrintout->Text = 'Rekapitulasi Pembayaran Semester Ganjil';
         $this->modalPrintOut->show();
     }
 }

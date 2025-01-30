@@ -314,7 +314,7 @@ class CNilaiFinal extends MainPageON {
     }		
     if ($bool) {
       $this->lblMessagePrintout->Text = $messageprintout;
-      $this->lblPrintout->Text='Transkrip Final';
+      $this->lblPrintout->Text = 'Transkrip Final';
       $this->modalPrintOut->show();
     }else{
       $this->lblContentMessageError->Text = $errormessage;

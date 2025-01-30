@@ -41,7 +41,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
                     $this->btnSave->Enabled = false;
                    
                 }else{
-                    $this->txtAddNomorFaktur->Text='11'.$datamhs['ta'].mt_rand(900,9999);
+                    $this->txtAddNomorFaktur->Text = '11'.$datamhs['ta'].mt_rand(900,9999);
                 }
             }catch (Exception $ex) {
                 $this->idProcess = 'view';	
@@ -78,7 +78,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
     }
     public function dataBoundListTransactionRepeater($sender, $param) {
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 			if ($item->DataItem['commited']) {
                 $item->btnDeleteFromRepeater->Enabled = false;
                 $item->btnCommitFromRepeater->Enabled = false;

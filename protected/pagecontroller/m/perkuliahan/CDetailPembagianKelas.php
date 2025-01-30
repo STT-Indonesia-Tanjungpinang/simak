@@ -159,7 +159,7 @@ public function onLoad($param) {
   public function editRecord($sender, $param) {
     $this->idProcess = 'edit';
     $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
-    $this->hiddenid->Value=$idkelas_mhs;
+    $this->hiddenid->Value = $idkelas_mhs;
     $str = "SELECT pp.idpenyelenggaraan,km.hari,km.jam_masuk,km.jam_keluar,idruangkelas FROM pengampu_penyelenggaraan pp,kelas_mhs km WHERE pp.idpengampu_penyelenggaraan=km.idpengampu_penyelenggaraan AND km.idkelas_mhs = $idkelas_mhs";
     $this->DB->setFieldTable(array('idpenyelenggaraan', 'hari', 'jam_masuk', 'jam_keluar', 'idruangkelas'));
     $r = $this->DB->getRecord($str);
@@ -280,7 +280,7 @@ public function onLoad($param) {
       break;
     }                
     $this->lblMessagePrintout->Text = $messageprintout;
-    $this->lblPrintout->Text='Daftar Hadir Mahasiswa';
+    $this->lblPrintout->Text = 'Daftar Hadir Mahasiswa';
     $this->modalPrintOut->show();
   }
 }

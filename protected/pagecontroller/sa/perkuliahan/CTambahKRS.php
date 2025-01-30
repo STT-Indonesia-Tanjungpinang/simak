@@ -111,7 +111,7 @@ class CTambahKRS extends MainPageSA {
 	
 	public function hitung($sender, $param) {
 		$item = $param->Item;		
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {					
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
 			$matkul = $item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									
 			if ($_SESSION['currentPageKRS']['DataKRS']['krs']['sah']&&!$item->DataItem['batal']) {
 				$onclick="alert('Tidak bisa menghapus Matakuliah $matkul, karena sudah disahkan oleh Dosen Wali.')";

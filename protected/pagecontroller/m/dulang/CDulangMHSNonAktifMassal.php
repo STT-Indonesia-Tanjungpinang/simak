@@ -21,18 +21,18 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
             $this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'];						
             $this->tbCmbTahunMasuk->dataBind();
             $this->labelTahunNonAktif->Text = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
-            $this->hiddentahunmasukmass->Value=$_SESSION['tahun_masuk'];
+            $this->hiddentahunmasukmass->Value = $_SESSION['tahun_masuk'];
             
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');
             $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
-            $this->hiddentamass->Value=$_SESSION['ta'];
+            $this->hiddentamass->Value = $_SESSION['ta'];
             
             $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
             $this->tbCmbSemester->DataSource = $semester;
             $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
-            $this->hiddenidsmtmass->Value=$_SESSION['semester'];
+            $this->hiddenidsmtmass->Value = $_SESSION['semester'];
 
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];
@@ -68,8 +68,8 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
 		$this->tbCmbTahunMasuk->DataSource = $this->getAngkatan();
 		$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
-        $this->hiddentamass->Value=$_SESSION['ta'];
-        $this->hiddentahunmasukmass->Value=$_SESSION['tahun_masuk'];
+        $this->hiddentamass->Value = $_SESSION['ta'];
+        $this->hiddentahunmasukmass->Value = $_SESSION['tahun_masuk'];
         $this->setInfoToolbar();
         $this->labelTahunNonAktif->Text = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
 		$this->populateData();
@@ -77,7 +77,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
 	public function changeTbTahunMasuk($sender, $param) {				
 		$_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
         $this->labelTahunNonAktif->Text = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
-        $this->hiddentahunmasukmass->Value=$_SESSION['tahun_masuk'];
+        $this->hiddentahunmasukmass->Value = $_SESSION['tahun_masuk'];
         $this->setInfoToolbar();
 		$this->populateData();
 	}
@@ -89,7 +89,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
 	public function changeTbSemester($sender, $param) {		
 		$_SESSION['semester'] = $this->tbCmbSemester->Text;        
         $this->setInfoToolbar();
-        $this->hiddenidsmtmass->Value=$_SESSION['semester'];
+        $this->hiddenidsmtmass->Value = $_SESSION['semester'];
 		$this->populateData();
 	}
     public function searchRecord($sender, $param){

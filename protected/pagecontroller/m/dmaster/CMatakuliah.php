@@ -157,7 +157,7 @@ class CMatakuliah extends MainPageM {
   public function addProcess($sender, $param) {
     $this->idProcess = 'add';
     
-    $this->hiddenaddidkur->Value=$this->Demik->getIDKurikulum($_SESSION['kjur']);
+    $this->hiddenaddidkur->Value = $this->Demik->getIDKurikulum($_SESSION['kjur']);
     $sks=Logic_Akademik::$sks;        
     $this->cmbAddSks->DataSource = $sks;		
     $this->cmbAddSks->dataBind();        
@@ -234,14 +234,14 @@ class CMatakuliah extends MainPageM {
   public function editRecord($sender, $param) {
     $this->idProcess = 'edit';        
     $id = $this->getDataKeyField($sender, $this->RepeaterS);        
-    $this->hiddenid->Value=$id;        
+    $this->hiddenid->Value = $id;        
     
     $str = "SELECT kmatkul,idkur,nmatkul,nmatkul_en,sks,idkonsentrasi,ispilihan,islintas_prodi,semester,sks_tatap_muka,sks_praktikum,sks_praktik_lapangan,minimal_nilai,syarat_ta,aktif FROM matakuliah WHERE kmatkul='$id'";
     $this->DB->setFieldTable(array('kmatkul', 'idkur', 'nmatkul', 'nmatkul_en', 'sks', 'idkonsentrasi', 'ispilihan', 'islintas_prodi', 'semester', 'sks_tatap_muka', 'sks_praktikum', 'sks_praktik_lapangan', 'minimal_nilai', 'syarat_ta', 'aktif'));
     $r = $this->DB->getRecord($str);
     
     $result=$r[1];
-    $this->hiddeneditidkur->Value=$result['idkur'];
+    $this->hiddeneditidkur->Value = $result['idkur'];
     $this->txtEditKodeMatkul->Text = $this->Demik->getKMatkul($result['kmatkul']);
     $this->txtEditNamaMatkul->Text = $result['nmatkul'];			
     $this->txtEditNamaMatkulEn->Text = $result['nmatkul_en'];			
@@ -314,7 +314,7 @@ class CMatakuliah extends MainPageM {
     $id = $this->getDataKeyField($sender, $this->RepeaterS);
     if ($this->DB->checkRecordIsExist ('kmatkul', 'penyelenggaraan', $id)) {	
       $kmatkul = $this->Demik->getKMatkul($id);
-      $this->lblHeaderMessageError->Text='Menghapus Matakuliah';
+      $this->lblHeaderMessageError->Text = 'Menghapus Matakuliah';
       $this->lblContentMessageError->Text="Anda tidak bisa menghapus matakuliah dengan kode ($kmatkul) karena sedang digunakan di penyelenggaraan.";
       $this->modalMessageError->Show();
     }else{
@@ -333,7 +333,7 @@ class CMatakuliah extends MainPageM {
     $this->report->setMode($_SESSION['outputreport']);
     $this->report->printMatakuliah($this->Demik);		
         
-    $this->lblPrintout->Text='Daftar Matakuliah';
+    $this->lblPrintout->Text = 'Daftar Matakuliah';
     $this->modalPrintOut->show();
   }
 }

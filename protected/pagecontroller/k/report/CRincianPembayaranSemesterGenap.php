@@ -222,7 +222,7 @@ class CRincianPembayaranSemesterGenap Extends MainPageK {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Rincian Pembayaran Semester Genap';
+        $this->lblPrintout->Text = 'Rincian Pembayaran Semester Genap';
         $this->modalPrintOut->show();
     }
 }

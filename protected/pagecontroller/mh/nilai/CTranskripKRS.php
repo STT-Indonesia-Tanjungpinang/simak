@@ -34,7 +34,7 @@ class CTranskripKRS extends MainPageMHS {
         $this->report->setMode($_SESSION['outputreport']);
 		$this->report->printTranskripKRS($this->Nilai);				
         
-        $this->lblPrintout->Text='Transkrip KRS';
+        $this->lblPrintout->Text = 'Transkrip KRS';
         $this->modalPrintOut->show();
 	}
 }

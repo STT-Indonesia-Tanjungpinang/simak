@@ -179,7 +179,7 @@ class KRSEkstension Extends MainPageSA {
 	}
 	public function setDataBound ($sender, $param) {
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
             $idkrs = $item->DataItem['idkrs'];
             $str = "SELECT COUNT(idkrsmatkul) AS jumlah_matkul,SUM(sks) AS jumlah_sks FROM v_krsmhs WHERE idkrs='$idkrs'";						
             $this->DB->setFieldTable (array('jumlah_matkul', 'jumlah_sks'));

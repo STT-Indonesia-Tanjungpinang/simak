@@ -42,9 +42,9 @@ class CDetailDulangMHSLulus Extends MainPageM {
           $this->literalJumlahSKS->Text = $ket_jumlah_sks;
           $bool_bebas_keuangan=true;
           
-          $this->literalBebasKeuangan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
+          $this->literalBebasKeuangan->Text = '<span class="label label-info">NOT YET IMPLEMENTED</span>';
           $bool_bebas_perpustakaan=true;
-          $this->literalBebasPerpustakaan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
+          $this->literalBebasPerpustakaan->Text = '<span class="label label-info">NOT YET IMPLEMENTED</span>';
           if ($bool_sks == false || $bool_bebas_keuangan==false || $bool_bebas_perpustakaan == false) {
             $this->btnSave->Enabled = false;
             $this->btnSave->CssClass='btn';

@@ -35,7 +35,7 @@ class KonfirmasiPembayaran extends MainPageF {
 			$r[1]['nama_ps_1']=$this->DMaster->getNamaProgramStudiByID($r[1]['kjur1']);
 			$r[1]['nama_ps_2']=($r[1]['kjur2']> 0)?$this->DMaster->getNamaProgramStudiByID($r[1]['kjur2']):'N.A';
 			$this->DataMHS = $r[1];
-			$this->hiddenid->Value=$no_pendaftaran;
+			$this->hiddenid->Value = $no_pendaftaran;
 			
 			$this->imgBuktiBayar->ImageUrl=$r[1]['file_bukti_bayar'];
 			$this->imgBuktiBayar->Width='400px';			

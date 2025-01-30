@@ -185,8 +185,8 @@ class CKHS extends MainPageM {
             $item->literalIPK->Text = $dataipk['ipk'];
             $item->literalSKS->Text = $sks;
             $item->literalSKSTotal->Text = $dataipk['sks'];
-            $item->btnPrintOutR->Enabled=$bool;
-            $item->anchorDetailKHS->Enabled=$bool;
+            $item->btnPrintOutR->Enabled = $bool;
+            $item->anchorDetailKHS->Enabled = $bool;
 		}
 	}
 	
@@ -330,7 +330,7 @@ class CKHS extends MainPageM {
             break;
 		}		
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Kartu Hasil Studi';
+        $this->lblPrintout->Text = 'Kartu Hasil Studi';
         $this->modalPrintOut->show();
 	}
     

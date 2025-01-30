@@ -61,8 +61,8 @@ class CDetailPendaftaranOnline extends MainPageM {
 
         $str = "UPDATE formulir_pendaftaran_temp SET salt='$salt',userpassword='$password' WHERE no_pendaftaran='$no_pendaftaran'";
         $this->DB->updateRecord($str);
-        $this->lblInfo->Text='Reset Password Mahasiswa';
-        $this->lblMessageInfo->Text='Password mahasiswa sukses direset menjadi 1234';        
+        $this->lblInfo->Text = 'Reset Password Mahasiswa';
+        $this->lblMessageInfo->Text = 'Password mahasiswa sukses direset menjadi 1234';        
         $this->modalMessage->show();
     }
     public function resetProfiles($sender, $param) {
@@ -70,8 +70,8 @@ class CDetailPendaftaranOnline extends MainPageM {
         $no_formulir = $_SESSION['currentPageDetailPendaftaranOnline']['DataMHS']['no_formulir'];
         $str = "REPLACE INTO profiles_mahasiswa SET no_formulir='$no_formulir',userpassword='$password_default',theme='cube',photo_profile='resources/photomhs/no_photo.png'";
         $this->DB->updateRecord($str);
-        $this->lblInfo->Text='Reset Profiles Mahasiswa';
-        $this->lblMessageInfo->Text='Profiles mahasiswa sukses direset.';
+        $this->lblInfo->Text = 'Reset Profiles Mahasiswa';
+        $this->lblMessageInfo->Text = 'Profiles mahasiswa sukses direset.';
         $this->modalMessage->show();
     }
     public function changeTheme($sender, $param) {
@@ -107,7 +107,7 @@ class CDetailPendaftaranOnline extends MainPageM {
     public function changePs($sender, $param) {        
         if ($sender->Text == 'none') {
             $this->cmbKjur2->Enabled = false;	
-            $this->cmbKjur2->Text='none';
+            $this->cmbKjur2->Text = 'none';
         }else{			            
             $this->cmbKjur2->Enabled=true;
 

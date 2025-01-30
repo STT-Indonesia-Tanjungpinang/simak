@@ -126,7 +126,7 @@ class CAPI extends MainPageSA {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
         $id = $this->getDataKeyField($sender, $this->RepeaterS);        
-        $this->hiddenid->Value=$id;     
+        $this->hiddenid->Value = $id;     
         
         $str = "SELECT userid,username,nama,email,ipaddress,active FROM user WHERE userid='$id'";
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'ipaddress', 'active'));
@@ -135,10 +135,10 @@ class CAPI extends MainPageSA {
         $result=$r[1];          
         $this->txtEditNama->Text = $result['nama'];
         $this->txtEditEmail->Text = $result['email'];
-        $this->hiddenemail->Value=$result['email'];     
+        $this->hiddenemail->Value = $result['email'];     
         $this->txtEditUsername->Text = $result['username'];
         $this->txtEditIPAddress->Text = $result['ipaddress'];         
-        $this->hiddenusername->Value=$result['username'];   
+        $this->hiddenusername->Value = $result['username'];   
         
         $this->cmbEditStatus->Text = $result['active'];
     }

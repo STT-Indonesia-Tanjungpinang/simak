@@ -53,7 +53,7 @@ class CDetailTranskripFinal extends MainPageM {
             $datatranskrip[1]['nama_pembimbing2'] = $this->DMaster->getNamaDosenPembimbing($datatranskrip[1]['iddosen_pembimbing2']);            
             $_SESSION['currentPageDetailTranskripFinal']['DataTranskrip'] = $datatranskrip[1];
             
-            $this->hiddennomortranskrip->Value=$datatranskrip[1]['nomor_transkrip'];			
+            $this->hiddennomortranskrip->Value = $datatranskrip[1]['nomor_transkrip'];			
 			$this->txtEditNomorTranskrip->Text = $datatranskrip[1]['nomor_transkrip'];			
 			$this->cmbEditPredikatKelulusan->Text = $datatranskrip[1]['predikat_kelulusan'];			
 			$this->txtEditTanggalLulus->Text = $this->TGL->tanggal('d-m-Y', $datatranskrip[1]['tanggal_lulus']);
@@ -118,7 +118,7 @@ class CDetailTranskripFinal extends MainPageM {
                 break;
             }
             $this->lblMessagePrintout->Text = $messageprintout;
-            $this->lblPrintout->Text='Transkrip Final';
+            $this->lblPrintout->Text = 'Transkrip Final';
             $this->modalPrintOut->show();
         }else{
             $this->lblContentMessageError->Text="Mahasiswa dengan NIM ($nim) statusnya belum lulus !!!.";

@@ -65,11 +65,11 @@ class CDetailPKRS extends MainPageDW {
             if ($item->DataItem['batal']) {
                 CDetailPKRS::$totalSKSBatal+=$item->DataItem['sks'];
                 CDetailPKRS::$jumlahMatkulBatal+=1;
-				$item->btnToggleStatusMatkul->Text='Sahkan';
+				$item->btnToggleStatusMatkul->Text = 'Sahkan';
 				$item->btnToggleStatusMatkul->Attributes->onclick="if(!confirm('Anda ingin mensahkan Matakuliah mahasiswa ini ?')) return false;";					
                 $item->btnToggleStatusMatkul->CssClass='table-link'; 
                 $item->btnToggleStatusMatkul->Attributes->Title='Sahkan Matakuliah';
-                $item->btnToggleStatusMatkul->Text='<span class="fa-stack">
+                $item->btnToggleStatusMatkul->Text = '<span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>
                                                         <i class="fa fa-check fa-stack-1x fa-inverse"></i>
                                                     </span>';
@@ -79,7 +79,7 @@ class CDetailPKRS extends MainPageDW {
 				$item->btnToggleStatusMatkul->Attributes->onclick="if(!confirm('Anda ingin membatalkan Matakuliah mahasiswa ini ?')) return false;";						
                 $item->btnToggleStatusMatkul->CssClass='table-link danger';
                 $item->btnToggleStatusMatkul->Attributes->Title='Batalkan Matakuliah';
-                $item->btnToggleStatusMatkul->Text='<span class="fa-stack">
+                $item->btnToggleStatusMatkul->Text = '<span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>
                                                         <i class="fa fa-times-circle-o fa-stack-1x fa-inverse"></i>
                                                     </span>';

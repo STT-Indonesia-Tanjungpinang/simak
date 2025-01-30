@@ -222,7 +222,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Rekapitulasi Pembayaran Semester Genap';
+        $this->lblPrintout->Text = 'Rekapitulasi Pembayaran Semester Genap';
         $this->modalPrintOut->show();
     }
 }

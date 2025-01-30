@@ -34,7 +34,7 @@ class CTranskripKurikulum extends MainPageMHS {
         $this->report->setMode($_SESSION['outputreport']);
 		$this->report->printTranskripKurikulum($this->Nilai);				
         
-        $this->lblPrintout->Text='Transkrip Kurikulum';
+        $this->lblPrintout->Text = 'Transkrip Kurikulum';
         $this->modalPrintOut->show();
 	}
 }

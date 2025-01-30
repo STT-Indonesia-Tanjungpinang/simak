@@ -6,7 +6,7 @@ class KombiPerTA Extends CKombiPerTA {
 	}		
     public function itemCreated($sender, $param){
         $item = $param->Item;
-        if($item->ItemType==='EditItem') {   
+        if($item->ItemType === 'EditItem') {   
             $item->ColumnBiaya->TextBox->CssClass='form-control';                                   
             $item->ColumnBiaya->TextBox->Width='150px'; 
             $item->ColumnBiaya->TextBox->Attributes->OnKeyUp="formatangka(this,false)";
@@ -16,7 +16,7 @@ class KombiPerTA Extends CKombiPerTA {
             $item->DeleteColumn->Button->ClientSide->OnPreDispatch="Pace.stop();Pace.start();";
                
         }
-        if($item->ItemType==='Item' || $item->ItemType==='AlternatingItem')  {                        
+        if($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem')  {                        
             $item->EditColumn->EditButton->ClientSide->OnPreDispatch="Pace.stop();Pace.start();";
             $item->EditColumn->EditButton->CssClass='btn btn-icon btn-xs';
             $item->EditColumn->EditButton->Attributes->Title='Ubah Biaya';

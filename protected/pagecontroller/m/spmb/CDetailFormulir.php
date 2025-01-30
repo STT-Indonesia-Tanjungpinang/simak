@@ -43,7 +43,7 @@ class CDetailFormulir extends MainPageM {
             if ($activeview == $this->MVDetailFormulir->ActiveViewIndex) {
                 switch($activeview) {
                     case 0 : 
-                        $this->hiddennoformulir->Value=$no_formulir;
+                        $this->hiddennoformulir->Value = $no_formulir;
                         $jurusan = $this->DMaster->removeKjur($_SESSION['daftar_jurusan'],'none');									            
                         $this->cmbKjur1->DataSource = $jurusan;
                         $this->cmbKjur1->dataBind();
@@ -68,8 +68,8 @@ class CDetailFormulir extends MainPageM {
         $no_formulir = $_SESSION['currentPageDetailFormulir']['DataMHS']['no_formulir'];
         $str = "UPDATE profiles_mahasiswa SET userpassword='$password_default' WHERE no_formulir='$no_formulir'";
         $this->DB->updateRecord($str);
-        $this->lblInfo->Text='Reset Password Mahasiswa';
-        $this->lblMessageInfo->Text='Password mahasiswa sukses direset menjadi 1234';        
+        $this->lblInfo->Text = 'Reset Password Mahasiswa';
+        $this->lblMessageInfo->Text = 'Password mahasiswa sukses direset menjadi 1234';        
         $this->modalMessage->show();
     }
     public function resetProfiles($sender, $param) {
@@ -77,8 +77,8 @@ class CDetailFormulir extends MainPageM {
         $no_formulir = $_SESSION['currentPageDetailFormulir']['DataMHS']['no_formulir'];
         $str = "REPLACE INTO profiles_mahasiswa SET no_formulir='$no_formulir',userpassword='$password_default',theme='cube',photo_profile='resources/photomhs/no_photo.png'";
         $this->DB->updateRecord($str);
-        $this->lblInfo->Text='Reset Profiles Mahasiswa';
-        $this->lblMessageInfo->Text='Profiles mahasiswa sukses direset.';
+        $this->lblInfo->Text = 'Reset Profiles Mahasiswa';
+        $this->lblMessageInfo->Text = 'Profiles mahasiswa sukses direset.';
         $this->modalMessage->show();
     }
     public function changeTheme($sender, $param) {
@@ -114,7 +114,7 @@ class CDetailFormulir extends MainPageM {
     public function changePs($sender, $param) {        
         if ($sender->Text == 'none') {
             $this->cmbKjur2->Enabled = false;	
-            $this->cmbKjur2->Text='none';
+            $this->cmbKjur2->Text = 'none';
         }else{			            
             $this->cmbKjur2->Enabled=true;
 

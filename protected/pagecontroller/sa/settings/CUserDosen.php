@@ -107,7 +107,7 @@ class CUserDosen extends MainPageSA {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
         $id = $this->getDataKeyField($sender, $this->RepeaterS);        
-		$this->hiddenid->Value=$id;     
+		$this->hiddenid->Value = $id;     
         
         $str = "SELECT userid,username,nama,email,group_id,kjur,active FROM user WHERE userid='$id'";
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'group_id', 'kjur', 'active'));
@@ -116,9 +116,9 @@ class CUserDosen extends MainPageSA {
         $result=$r[1];        	
         $this->txtEditNama->Text = $result['nama'];
         $this->txtEditEmail->Text = $result['email'];
-        $this->hiddenemail->Value=$result['email'];     
+        $this->hiddenemail->Value = $result['email'];     
         $this->txtEditUsername->Text = $result['username'];
-        $this->hiddenusername->Value=$result['username'];
+        $this->hiddenusername->Value = $result['username'];
         $this->cmbEditStatus->Text = $result['active'];
     }
     public function updateData($sender, $param) {

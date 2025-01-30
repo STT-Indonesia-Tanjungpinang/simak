@@ -178,7 +178,7 @@ class DulangMHSEkstension Extends MainPageM {
     public function viewRecord($sender, $param) {	
 		$this->idProcess='view';		
 		$iddulang=$this->getDataKeyField($sender, $this->RepeaterS);	
-        $this->hiddenid->Value=$iddulang;
+        $this->hiddenid->Value = $iddulang;
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,semester_masuk,iddosen_wali,d.idkelas,d.k_status,d.idsmt,d.tahun FROM v_datamhs vdm JOIN dulang d ON (d.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE d.iddulang=$iddulang";
         $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun'));
         $r = $this->DB->getRecord($str);	           
@@ -187,8 +187,8 @@ class DulangMHSEkstension Extends MainPageM {
         $datamhs['nkelas']=$this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
         $datamhs['status']=$this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-        $this->hiddensemester->Value=$datamhs['idsmt'];
-        $this->hiddenta->Value=$_SESSION['ta'];
+        $this->hiddensemester->Value = $datamhs['idsmt'];
+        $this->hiddenta->Value = $_SESSION['ta'];
         $this->Demik->setDataMHS($datamhs);
 	}
     public function deleteRecord ($sender, $param) {			

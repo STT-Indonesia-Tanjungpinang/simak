@@ -181,7 +181,7 @@ class CTranskripKRS extends MainPageM {
             break;
 		}		
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Transkrip KRS';
+        $this->lblPrintout->Text = 'Transkrip KRS';
         $this->modalPrintOut->show();
 	}
 }

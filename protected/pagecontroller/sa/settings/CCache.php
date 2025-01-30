@@ -14,7 +14,7 @@ class CCache extends MainPageSA {
     public function hapusCache($sender, $param) {
         if ($this->Application->Cache) {
             $this->Application->Cache->flush();           
-            $this->message->Text='<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Success!</strong> Cache cleared.</div>';            
+            $this->message->Text = '<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button><strong>Success!</strong> Cache cleared.</div>';            
         }
     }    
 }

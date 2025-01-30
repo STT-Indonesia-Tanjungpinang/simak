@@ -50,7 +50,7 @@ class KUM extends CKUM {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Kartu Ujian Mahasiswa';
+        $this->lblPrintout->Text = 'Kartu Ujian Mahasiswa';
         $this->modalPrintOut->show();
     }
 	/**

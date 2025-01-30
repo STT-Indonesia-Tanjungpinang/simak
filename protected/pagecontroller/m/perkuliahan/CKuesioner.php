@@ -175,7 +175,7 @@ class CKuesioner extends MainPageM {
             break;
         }        
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Hasil Kuesioner';
+        $this->lblPrintout->Text = 'Hasil Kuesioner';
         $this->modalPrintOut->show();
     }
 }

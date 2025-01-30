@@ -131,7 +131,7 @@ public function onLoad($param) {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';
         $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
-        $this->hiddenid->Value=$idkelas_mhs;
+        $this->hiddenid->Value = $idkelas_mhs;
         $str = "SELECT km.hari,km.jam_masuk,km.jam_keluar,idruangkelas FROM kelas_mhs km WHERE idkelas_mhs = $idkelas_mhs";
         $this->DB->setFieldTable(array('hari', 'jam_masuk', 'jam_keluar', 'idruangkelas'));
 		$r = $this->DB->getRecord($str);
@@ -206,7 +206,7 @@ public function onLoad($param) {
             break;
         }                
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Daftar Hadir Mahasiswa';
+        $this->lblPrintout->Text = 'Daftar Hadir Mahasiswa';
         $this->modalPrintOut->show();
 	}
 }

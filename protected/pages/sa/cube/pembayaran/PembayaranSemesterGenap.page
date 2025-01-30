@@ -106,7 +106,7 @@
                                     <td><%#$this->DataItem['nama_mhs']%></td>					
                                     <td><%#$this->DataItem['dibayarkan']%></td>
                                     <td>
-                                        <span class="<%#$this->DataItem['commited']==true?'label label-success':'label label-danger'%>"><%#$this->DataItem['commited']==true?'Done':'in progress'%></span>                               
+                                        <span class="<%#$this->DataItem['commited'] == true?'label label-success':'label label-danger'%>"><%#$this->DataItem['commited'] == true?'Done':'in progress'%></span>                               
                                     </td>
                                     <td>   
                                         <com:TActiveLinkButton ID="btnCancel" CssClass="table-link danger" OnClick="Page.batalkanTransaksi" Attributes.Title="Batalkan Transaksi" ClientSide.PostState="false" Enabled="<%#$this->DataItem['commited']==1%>">

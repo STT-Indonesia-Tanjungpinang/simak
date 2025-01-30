@@ -75,8 +75,8 @@ class CRuangKelas Extends MainPageM {
 		$idruangkelas = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
 		$result = $this->DMaster->getList("ruangkelas WHERE idruangkelas = $idruangkelas", array('namaruang', 'kapasitas'));
-		$this->hiddenid->Value=$idruangkelas;
-		$this->hiddennamaruang->Value=$result[1]['namaruang'];
+		$this->hiddenid->Value = $idruangkelas;
+		$this->hiddennamaruang->Value = $result[1]['namaruang'];
 		$this->txtEditNamaRuang->Text = $result[1]['namaruang'];
 		$this->txtEditKapasitas->Text = $result[1]['kapasitas'];
 	}
@@ -98,7 +98,7 @@ class CRuangKelas Extends MainPageM {
     public function deleteRecord($sender, $param) {
 		$idruangkelas = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idruangkelas', 'kelas_mhs', $idruangkelas)) {
-            $this->lblHeaderMessageError->Text='Menghapus Ruang Kelas';
+            $this->lblHeaderMessageError->Text = 'Menghapus Ruang Kelas';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus ruang kelas dengan ID ($idruangkelas) karena sedang digunakan di kelas mahasiswa.";
             $this->modalMessageError->Show();
         }else{

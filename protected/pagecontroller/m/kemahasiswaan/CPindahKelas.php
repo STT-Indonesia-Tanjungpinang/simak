@@ -72,7 +72,7 @@ class CPindahKelas Extends MainPageM {
 	}
 	public function processDataBound($sender, $param) {			
 		$item = $param->Item;
-		if ($item->ItemType == 'Item' || $item->ItemType=='AlternatingItem') {
+		if ($item->ItemType == 'Item' || $item->ItemType == 'AlternatingItem') {
             $this->Demik->setDataMHS(array('nim' => $item->DataItem['nim']));
 			$datadulang = $this->Demik->getDataDulang($_SESSION['semester'], $_SESSION['ta']);
             if (isset($datadulang['iddulang'])) {
@@ -128,9 +128,9 @@ class CPindahKelas Extends MainPageM {
             
             $this->Demik->setDataMHS($datamhs);
             
-            $this->hiddennim->Value=$datamhs['nim'];			
+            $this->hiddennim->Value = $datamhs['nim'];			
             $idkelas = $datamhs['idkelas'];
-            $this->hiddenkelaslama->Value=$idkelas;
+            $this->hiddenkelaslama->Value = $idkelas;
             $daftar_kelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas (), $datamhs['idkelas']);
             $this->cmbAddKelasBaru->DataSource = $daftar_kelas;
             $this->cmbAddKelasBaru->dataBind();	
@@ -193,8 +193,8 @@ class CPindahKelas Extends MainPageM {
         
 		$r = $this->Demik->getList("pindahkelas WHERE idpindahkelas='$idpindahkelas'", array('idkelas_lama', 'idkelas_baru', 'tanggal', 'no_surat', 'keterangan'));
 		$r = $r[1];				
-		$this->hiddennim->Value=$nim;
-		$this->hiddenid->Value=$idpindahkelas;		
+		$this->hiddennim->Value = $nim;
+		$this->hiddenid->Value = $idpindahkelas;		
         
         $daftar_kelas = $this->DMaster->removeIdFromArray($this->DMaster->getListKelas (), $r['idkelas_lama']);
         $this->cmbEditKelasBaru->DataSource = $daftar_kelas;
@@ -202,7 +202,7 @@ class CPindahKelas Extends MainPageM {
 		$this->cmbEditKelasBaru->Text = $r['idkelas_baru'];
         
 		$this->cmbEditTanggal->Text = $this->TGL->tanggal('d-m-Y', $r['tanggal']);
-		$this->hiddennosurat->Value=$r['no_surat'];
+		$this->hiddennosurat->Value = $r['no_surat'];
 		$this->txtEditNoSurat->Text = $r['no_surat'];
 		$this->txtEditKeterangan->Text = $r['keterangan'];
 		

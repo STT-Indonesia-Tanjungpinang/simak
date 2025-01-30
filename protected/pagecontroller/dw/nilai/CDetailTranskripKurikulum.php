@@ -66,7 +66,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
         $this->report->setMode($_SESSION['outputreport']);
 		$this->report->printTranskripKurikulum($this->Nilai,true);				
         
-        $this->lblPrintout->Text='Transkrip Kurikulum';
+        $this->lblPrintout->Text = 'Transkrip Kurikulum';
         $this->modalPrintOut->show();
 	}
 }

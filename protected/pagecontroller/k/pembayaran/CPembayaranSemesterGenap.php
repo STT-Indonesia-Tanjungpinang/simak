@@ -20,7 +20,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
             
             $ta = $_SESSION['currentPagePembayaranSemesterGenap']['ta'];
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA (), 'none');
-            $this->tbCmbTA->Enabled=$bool;
+            $this->tbCmbTA->Enabled = $bool;
             $this->tbCmbTA->Text = $ta;
             $this->tbCmbTA->dataBind();
             
@@ -83,7 +83,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
         $str_kelas = $kelas == 'none'?'':" AND t.idkelas='$kelas'";
         if ($search) {
             $str = "SELECT t.no_transaksi,no_faktur,t.tanggal,t.nim,vdm.nama_mhs,commited FROM transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.idsmt='$semester'";
-            $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
+            $this->lblModulHeader->Text = ' DARI HASI PENCARIAN';
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'no_transaksi':
@@ -141,7 +141,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
 	}
 	public function setDataBound($sender, $param) {				
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 
 		}		
 	}	

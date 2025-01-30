@@ -88,7 +88,7 @@
                                 <td class="text-right"><%#$this->Page->Finance->toRupiah($this->DataItem['total'])%></td>					
                                 <td>        
                                     <ul class="icons-list">
-                                        <li class="<%#$this->DataItem['commited']==true?'text-grey-600':'text-primary-600'%>">
+                                        <li class="<%#$this->DataItem['commited'] == true?'text-grey-600':'text-primary-600'%>">
                                             <com:TActiveLinkButton ID="btnEditFromRepeater" Text="<i class='icon-pencil7'></i>" OnClick="Page.editRecord" ClientSide.PostState="false" Attributes.Title="Ubah Transaksi">                                        
                                                  <prop:ClientSide.OnPreDispatch>                                                                                      
                                                     $('<%=$this->btnEditFromRepeater->ClientId%>').disabled='disabled';						
@@ -103,7 +103,7 @@
                                                 </prop:ClientSide.OnComplete>
                                             </com:TActiveLinkButton>                                            
                                         </li>
-                                        <li class="<%#$this->DataItem['commited']==true?'text-grey-600':'text-danger-600'%>">                                    
+                                        <li class="<%#$this->DataItem['commited'] == true?'text-grey-600':'text-danger-600'%>">                                    
                                             <com:TActiveLinkButton ID="btnDeleteFromRepeater" Text="<i class='icon-trash'></i>" OnClick="Page.deleteRecord" ClientSide.PostState="false" Attributes.Title="Hapus Transaksi">
                                                 <prop:ClientSide.OnPreDispatch>                                                                                      
                                                     $('<%=$this->btnDeleteFromRepeater->ClientId%>').disabled='disabled';						

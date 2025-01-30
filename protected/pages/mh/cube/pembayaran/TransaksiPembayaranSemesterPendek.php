@@ -6,7 +6,7 @@ class TransaksiPembayaranSemesterPendek Extends CTransaksiPembayaranSemesterPend
     }
     public function itemCreated($sender, $param){
         $item = $param->Item;
-        if($item->ItemType==='EditItem') {   
+        if($item->ItemType === 'EditItem') {   
             $item->ColumnJumlahSKS->TextBox->CssClass='form-control';                                   
             $item->ColumnJumlahSKS->TextBox->Width='70px'; 
             $item->ColumnJumlahSKS->TextBox->Attributes->OnKeyUp="formatangka(this,false)";
@@ -16,7 +16,7 @@ class TransaksiPembayaranSemesterPendek Extends CTransaksiPembayaranSemesterPend
             $item->DeleteColumn->Button->ClientSide->OnPreDispatch="Pace.stop();Pace.start();";
                
         }
-        if($item->ItemType==='Item' || $item->ItemType==='AlternatingItem')  {            
+        if($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem')  {            
             if ($item->DataItem['sudah_dibayar'] >= $item->DataItem['biaya']) {
                 $item->EditColumn->Enabled = false;
                 $item->DeleteColumn->Enabled = false;

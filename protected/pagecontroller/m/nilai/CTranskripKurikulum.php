@@ -183,7 +183,7 @@ class CTranskripKurikulum extends MainPageM {
             break;
 		}		
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Transkrip Kurikulum';
+        $this->lblPrintout->Text = 'Transkrip Kurikulum';
         $this->modalPrintOut->show();
 	}
 }

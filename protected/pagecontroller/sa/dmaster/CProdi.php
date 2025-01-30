@@ -86,14 +86,14 @@ class CProdi extends MainPageSA {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';  
         $kjur = $this->getDataKeyField($sender, $this->RepeaterS);  
-        $this->hiddenid->Value=$kjur;
+        $this->hiddenid->Value = $kjur;
         $str = "SELECT kjur,kode_epsbed,nama_ps,nama_ps_alias,kjenjang,konsentrasi,iddosen FROM program_studi WHERE kjur = $kjur";
         $this->DB->setFieldTable(array('kjur', 'kode_epsbed', 'nama_ps', 'nama_ps_alias', 'kjenjang', 'konsentrasi', 'iddosen'));
         $r = $this->DB->getRecord($str);
 
         $this->txtEditKodePS->Text = $r[1]['kjur'];
         $this->txtEditKodePSForlap->Text = $r[1]['kode_epsbed'];
-        $this->hiddenkodepsforlap->Value=$r[1]['kode_epsbed'];
+        $this->hiddenkodepsforlap->Value = $r[1]['kode_epsbed'];
         $this->txtEditNama->Text = $r[1]['nama_ps'];
         $this->txtEditNamaAkronim->Text = $r[1]['nama_ps_alias'];       
         $this->txtEditKonsentrasi->Text = $r[1]['konsentrasi'];
@@ -131,11 +131,11 @@ class CProdi extends MainPageSA {
     public function deleteRecord($sender, $param) {        
         $kjur = $this->getDataKeyField($sender, $this->RepeaterS);          
         if ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran_temp', $kjur," OR kjur2=$kjur")) {
-            $this->lblHeaderMessageError->Text='Menghapus Program Studi';
+            $this->lblHeaderMessageError->Text = 'Menghapus Program Studi';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus program studi dengan ID ($kjur) karena sedang digunakan di formulir pendaftaran.";
             $this->modalMessageError->Show();
         }elseif ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran', $kjur," OR kjur2=$kjur")) {
-            $this->lblHeaderMessageError->Text='Menghapus Program Studi';
+            $this->lblHeaderMessageError->Text = 'Menghapus Program Studi';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus program studi dengan ID ($kjur) karena sedang digunakan di formulir pendaftaran.";
             $this->modalMessageError->Show();
         }else{

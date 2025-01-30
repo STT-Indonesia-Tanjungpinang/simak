@@ -170,18 +170,18 @@ class CDosen extends MainPageM {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
         $iddosen = $this->getDataKeyField($sender, $this->RepeaterS);        
-		$this->hiddenid->Value=$iddosen;     
+		$this->hiddenid->Value = $iddosen;     
         
         $str = "SELECT nidn,nipy,nama_dosen,gelar_depan,gelar_belakang,idjabatan,alamat_dosen,telp_hp,email,username,status FROM dosen WHERE iddosen='$iddosen'";
 		$this->DB->setFieldTable(array('nidn', 'nipy', 'nama_dosen', 'gelar_depan', 'gelar_belakang', 'idjabatan', 'alamat_dosen', 'telp_hp', 'email', 'username', 'status'));
         $r = $this->DB->getRecord($str);
         $result=$r[1];   
         
-        $this->hiddenid->Value=$iddosen;
-        $this->hiddennidn->Value=$result['nidn'];
-        $this->hiddennipy->Value=$result['nipy'];
-        $this->hiddenemail->Value=$result['email'];
-        $this->hiddenusername->Value=$result['username'];
+        $this->hiddenid->Value = $iddosen;
+        $this->hiddennidn->Value = $result['nidn'];
+        $this->hiddennipy->Value = $result['nipy'];
+        $this->hiddenemail->Value = $result['email'];
+        $this->hiddenusername->Value = $result['username'];
         
         $this->txtEditNIDN->Text = $result['nidn'];
         $this->txtEditNIPY->Text = $result['nipy'];
@@ -237,15 +237,15 @@ class CDosen extends MainPageM {
     public function deleteRecord($sender, $param) {        
 		$iddosen = $this->getDataKeyField($sender, $this->RepeaterS);  		
         if ($this->DB->checkRecordIsExist('iddosen', 'pengampu_penyelenggaraan', $iddosen)) {
-            $this->lblHeaderMessageError->Text='Menghapus Dosen';
+            $this->lblHeaderMessageError->Text = 'Menghapus Dosen';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena sedang digunakan di pengampu penyelenggaraan.";
             $this->modalMessageError->Show();
         }elseif ($this->DB->checkRecordIsExist('iddosen', 'dosen_wali', $iddosen)) {
-            $this->lblHeaderMessageError->Text='Menghapus Dosen';
+            $this->lblHeaderMessageError->Text = 'Menghapus Dosen';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena telah menjadi Dosen Wali.";
             $this->modalMessageError->Show();
         }elseif ($this->DB->checkRecordIsExist('iddosen', 'kjur', $iddosen)) {
-            $this->lblHeaderMessageError->Text='Menghapus Matakuliah';
+            $this->lblHeaderMessageError->Text = 'Menghapus Matakuliah';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena sedang menjadi Ketua Jurusan.";
             $this->modalMessageError->Show();
         }else{

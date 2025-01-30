@@ -32,8 +32,8 @@ class CDetailDulangMHSDropOut Extends MainPageM {
                         $jumlah_sks+=$this->DB->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
                     }
                     $this->literalJumlahSKS->Text = $jumlah_sks;
-                    $this->literalBebasKeuangan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
-                    $this->literalBebasPerpustakaan->Text='<span class="label label-info">NOT YET IMPLEMENTED</span>';
+                    $this->literalBebasKeuangan->Text = '<span class="label label-info">NOT YET IMPLEMENTED</span>';
+                    $this->literalBebasPerpustakaan->Text = '<span class="label label-info">NOT YET IMPLEMENTED</span>';
                     
                     $_SESSION['semester'] = $datadulang[1]['idsmt'];
                     $_SESSION['ta'] = $datadulang[1]['tahun'];

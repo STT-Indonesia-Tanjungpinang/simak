@@ -73,7 +73,7 @@ class CKuesioner extends MainPageMHS {
 		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {
             if ($item->DataItem['ada']) {
-                $item->literalNamaKelompok->Text='<tr class="success">
+                $item->literalNamaKelompok->Text = '<tr class="success">
                                                     <td colspan="9">'.$item->DataItem['nama_kelompok'].'</td></tr>';
             }
             $idkuesioner = $item->DataItem['idkuesioner'];

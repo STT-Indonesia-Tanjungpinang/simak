@@ -79,7 +79,7 @@ class CPenyelenggaraan extends MainPageM {
 	}
 	public function itemBound($sender, $param) {
 		$item = $param->item;
-		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
+		if ($item->itemType === 'Item' || $item->itemType === 'AlternatingItem') {
 			$item->cmbFrontDosen->DataSource = $this->DMaster->removeIdFromArray($_SESSION['currentPagePenyelenggaraan']['DaftarDosen'],'none');			
             $item->cmbFrontDosen->Text = $item->DataItem['iddosen'];
 			$item->cmbFrontDosen->dataBind();									
@@ -99,7 +99,7 @@ class CPenyelenggaraan extends MainPageM {
 	}
 	public function setDosen($sender, $param) {
 		$item = $param->item;
-		if ($item->itemType==='Item' || $item->itemType === 'AlternatingItem') {
+		if ($item->itemType === 'Item' || $item->itemType === 'AlternatingItem') {
             $dd=$_SESSION['currentPagePenyelenggaraan']['DaftarDosen'];
             $dd['none'] = ' ';
 			$item->cmbAddDaftarDosen->DataSource = $dd;
@@ -152,7 +152,7 @@ class CPenyelenggaraan extends MainPageM {
 	public function deleteRecord($sender, $param) {		
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idpenyelenggaraan', 'krsmatkul', $id)) {	            
-            $this->lblHeaderMessageError->Text='Menghapus Penyelenggaraan Matakuliah';
+            $this->lblHeaderMessageError->Text = 'Menghapus Penyelenggaraan Matakuliah';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";
             $this->modalMessageError->Show();
         }else{
@@ -191,7 +191,7 @@ class CPenyelenggaraan extends MainPageM {
             break;
 	    }
 	    $this->lblMessagePrintout->Text = $messageprintout;
-	    $this->lblPrintout->Text='Daftar Penyelenggaraan Matakuliah';
+	    $this->lblPrintout->Text = 'Daftar Penyelenggaraan Matakuliah';
 	    $this->modalPrintOut->show();
 	}
 }

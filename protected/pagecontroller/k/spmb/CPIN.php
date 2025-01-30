@@ -164,7 +164,7 @@ class CPIN extends MainPageK {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text='Daftar PIN '.strtoupper($_SESSION['currentPagePIN']['display_record']);
+        $this->lblPrintout->Text = 'Daftar PIN '.strtoupper($_SESSION['currentPagePIN']['display_record']);
         $this->modalPrintOut->show();
      }
 }

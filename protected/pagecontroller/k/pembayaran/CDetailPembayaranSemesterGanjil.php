@@ -74,7 +74,7 @@ class CDetailPembayaranSemesterGanjil Extends MainPageK {
     }
 	public function dataBoundListTransactionRepeater($sender, $param) {
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 			if ($item->DataItem['commited']) {
                 $item->btnDeleteFromRepeater->Enabled = false;				
                 $item->btnEditFromRepeater->Enabled = false;				
@@ -94,10 +94,10 @@ class CDetailPembayaranSemesterGanjil Extends MainPageK {
             $tahun_masuk = $datamhs['tahun_masuk'];
             $idsmt = $_SESSION['currentPagePembayaranSemesterGanjil']['semester'];
             if ($this->Finance->getLunasPembayaran($ta, $idsmt)) {
-                $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena sudah lunas.';
+                $this->lblContentMessageError->Text = 'Tidak bisa menambah Transaksi baru karena sudah lunas.';
                 $this->modalMessageError->show();
             }elseif($this->DB->checkRecordIsExist('nim', 'transaksi', $nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
-                $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
+                $this->lblContentMessageError->Text = 'Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
                 $this->modalMessageError->show();
             }else{
                 $no_transaksi='10'.$ta.$idsmt.mt_rand(10000,99999);

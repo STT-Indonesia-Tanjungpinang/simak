@@ -191,7 +191,7 @@ class CNilaiUjianPMB extends MainPageM {
 	public function itemCreated($sender, $param) {
 		$item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {		            
-            $item->btnEdit->Enabled=$item->DataItem['bool'];
+            $item->btnEdit->Enabled = $item->DataItem['bool'];
 		}
 	}  
     public function setKelulusan($sender, $param) {		
@@ -212,7 +212,7 @@ class CNilaiUjianPMB extends MainPageM {
         $this->DB->setFieldTable(array('idnilai_ujian_masuk', 'tgl_ujian', 'tgl_selesai_ujian', 'isfinish', 'jumlah_soal', 'jawaban_benar', 'jawaban_salah', 'soal_tidak_terjawab', 'passing_grade_1', 'passing_grade_2', 'nilai'));
         $dataujian = $this->DB->getRecord($str);         
         $this->DataUjian = $dataujian[1];
-        $this->hiddenid->Value=$this->DataUjian['idnilai_ujian_masuk'];
+        $this->hiddenid->Value = $this->DataUjian['idnilai_ujian_masuk'];
         $ps = array('none' => ' ', $r[1]['kjur1']=>$_SESSION['daftar_jurusan'][$r[1]['kjur1']]);        
         if ($r[1]['kjur2'] != '' && $r[1]['kjur2']!=0) {
            $ps[$r[1]['kjur2']] = $_SESSION['daftar_jurusan'][$r[1]['kjur2']];            
@@ -258,7 +258,7 @@ class CNilaiUjianPMB extends MainPageM {
 		$no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);	
         if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir)) {
             $this->lblContentMessageError->Text="No. Formulir ($no_formulir) telah memiliki NIM jadi ujian PMB-nya tidak bisa diulang";
-            $this->lblHeaderMessageError->Text='Ujian Ulang PMB';
+            $this->lblHeaderMessageError->Text = 'Ujian Ulang PMB';
             $this->modalMessageError->show();
         }else{
             $this->DB->query('BEGIN');

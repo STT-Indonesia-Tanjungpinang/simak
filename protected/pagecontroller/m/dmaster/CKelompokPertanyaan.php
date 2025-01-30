@@ -63,7 +63,7 @@ class CKelompokPertanyaan extends MainPageM {
     public function editRecord($sender, $param) {
         $this->idProcess = 'edit';        
         $id = $this->getDataKeyField($sender, $this->RepeaterS);        
-		$this->hiddenid->Value=$id;        
+		$this->hiddenid->Value = $id;        
         
         $str = "SELECT nama_kelompok,orders FROM kelompok_pertanyaan WHERE idkelompok_pertanyaan = $id";
         $this->DB->setFieldTable(array('nama_kelompok', 'orders'));

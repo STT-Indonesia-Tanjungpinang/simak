@@ -15,7 +15,7 @@ class TCustomHyperLink extends TWebControl implements IDataRenderer
 	 */
 	protected function addAttributesToRender($writer)
 	{
-		$isEnabled=$this->getEnabled(true);
+		$isEnabled = $this->getEnabled(true);
 		if($this->getEnabled() && !$isEnabled)
 			$writer->addAttribute('disabled', 'disabled');
 		parent::addAttributesToRender($writer);

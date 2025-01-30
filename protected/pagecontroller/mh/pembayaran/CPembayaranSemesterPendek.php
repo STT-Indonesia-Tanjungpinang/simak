@@ -64,7 +64,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
     }
 	public function dataBoundListTransactionRepeater($sender, $param) {
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 			if ($item->DataItem['commited']) {
                 $item->btnDeleteFromRepeater->Enabled = false;				
                 $item->btnEditFromRepeater->Enabled = false;				
@@ -76,7 +76,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
 	}	
 	public function addTransaction($sender, $param) {
         if ($this->ListTransactionRepeater->Items->Count() > 0 ) {
-            $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena sudah ada transaksi (Khusus Semester Pendek Transaksi hanya sekali).';
+            $this->lblContentMessageError->Text = 'Tidak bisa menambah Transaksi baru karena sudah ada transaksi (Khusus Semester Pendek Transaksi hanya sekali).';
             $this->modalMessageError->show();
         }else{
             $datamhs = $this->Pengguna->getDataUser();
@@ -87,7 +87,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
                 $ta = $_SESSION['currentPagePembayaranSemesterPendek']['ta'];    
                 $idsmt=3;
                 if($this->DB->checkRecordIsExist('nim', 'transaksi', $nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
-                    $this->lblContentMessageError->Text='Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
+                    $this->lblContentMessageError->Text = 'Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
                     $this->modalMessageError->show();
                 }else{
                     $no_transaksi='10'.$ta.$idsmt.mt_rand(10000,99999);

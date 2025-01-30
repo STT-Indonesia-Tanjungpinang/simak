@@ -200,7 +200,7 @@ class CPembagianKelas extends MainPageM {
       break;
     }                
     $this->lblMessagePrintout->Text = $messageprintout;
-    $this->lblPrintout->Text='Daftar Hadir Mahasiswa';
+    $this->lblPrintout->Text = 'Daftar Hadir Mahasiswa';
     $this->modalPrintOut->show();
   }
 }

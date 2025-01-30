@@ -84,7 +84,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
     }
     public function dataBoundListTransactionRepeater($sender, $param) {
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 			if ($item->DataItem['commited']) {
                 $item->btnDeleteFromRepeater->Enabled = false;
                 $item->btnCommitFromRepeater->Enabled = false;

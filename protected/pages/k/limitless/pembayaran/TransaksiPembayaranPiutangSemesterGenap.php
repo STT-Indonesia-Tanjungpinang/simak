@@ -7,7 +7,7 @@ class TransaksiPembayaranPiutangSemesterGenap Extends CTransaksiPembayaranPiutan
     }
     public function itemCreated($sender, $param){
         $item = $param->Item;
-        if($item->ItemType==='EditItem') {   
+        if($item->ItemType === 'EditItem') {   
             $item->ColumnJumlahBayar->TextBox->CssClass='form-control';                                   
             $item->ColumnJumlahBayar->TextBox->Width='150px'; 
             $item->ColumnJumlahBayar->TextBox->Attributes->OnKeyUp="formatangka(this,false)";
@@ -17,7 +17,7 @@ class TransaksiPembayaranPiutangSemesterGenap Extends CTransaksiPembayaranPiutan
             $item->DeleteColumn->Button->ClientSide->OnPreDispatch="Pace.stop();Pace.start();";
                
         }
-        if($item->ItemType==='Item' || $item->ItemType==='AlternatingItem')  {            
+        if($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem')  {            
             if ($item->DataItem['sudah_dibayar'] >= $item->DataItem['biaya']) {
                 $item->EditColumn->Enabled = false;
                 $item->DeleteColumn->Enabled = false;

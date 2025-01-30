@@ -157,7 +157,7 @@ class CTambahPKRS extends MainPageDW {
   
   public function hitung($sender, $param) {
     $item = $param->Item;		
-    if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem')
+    if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem')
     {
       if ($item->DataItem['batal']) 
       {

@@ -62,7 +62,7 @@ class CPembayaranFormulir Extends MainPageK {
 		$tahun_masuk = $_SESSION['tahun_masuk'];
 		$semester_masuk = $_SESSION['currentPagePembayaranFormulir']['semester_masuk'];
         if ($search) {
-            $this->lblModulHeader->Text=' DARI HASI PENCARIAN';
+            $this->lblModulHeader->Text = ' DARI HASI PENCARIAN';
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {           
                 case 'no_transaksi':
@@ -122,7 +122,7 @@ class CPembayaranFormulir Extends MainPageK {
 	}
 	public function setDataBound($sender, $param) {				
 		$item = $param->Item;
-		if ($item->ItemType==='Item' || $item->ItemType==='AlternatingItem') {			
+		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {			
 
 		}		
 	}	

@@ -75,7 +75,7 @@ class CTA extends MainPageSA {
 		$tahun = $this->getDataKeyField($sender, $this->RepeaterS);
 		$this->idProcess = 'edit';
 		$result = $this->DMaster->getList("ta WHERE tahun = $tahun", array('tahun', 'tahun_akademik'));		
-		$this->hiddentahun->Value=$result[1]['tahun'];
+		$this->hiddentahun->Value = $result[1]['tahun'];
 		$this->txtEditTahun->Text = $result[1]['tahun'];		
 	}
 	public function updateData($sender, $param) {
@@ -95,7 +95,7 @@ class CTA extends MainPageSA {
 	public function deleteRecord($sender, $param) {
 		$tahun = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('ta', 'formulir_pendaftaran', $tahun)) {
-            $this->lblHeaderMessageError->Text='Menghapus T.A';
+            $this->lblHeaderMessageError->Text = 'Menghapus T.A';
             $this->lblContentMessageError->Text="Anda tidak bisa menghapus T.A ($tahun) karena sedang digunakan di pengampu penyelenggaraan.";
             $this->modalMessageError->Show();
         }else{

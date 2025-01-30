@@ -62,7 +62,7 @@ class CDaftarPertanyaan extends MainPageM {
         $item = $param->Item;
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {		
             if ($item->DataItem['ada']) {
-                $item->literalNamaKelompok->Text='<tr class="success">
+                $item->literalNamaKelompok->Text = '<tr class="success">
                                                     <td colspan="9">'.$item->DataItem['nama_kelompok'].'</td></tr>';
             }
         }
@@ -150,7 +150,7 @@ class CDaftarPertanyaan extends MainPageM {
     public function editRecord($sender, $param) {		
         $this->idProcess = 'edit';        
         $id = $this->getDataKeyField($sender, $this->RepeaterS);        
-		$this->hiddenid->Value=$id;    
+		$this->hiddenid->Value = $id;    
         
         $str = "SELECT idkelompok_pertanyaan,pertanyaan,orders FROM kuesioner WHERE idkuesioner = $id";
         $this->DB->setFieldTable(array('idkelompok_pertanyaan', 'pertanyaan', 'orders'));        

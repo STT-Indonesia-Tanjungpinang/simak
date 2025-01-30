@@ -118,7 +118,7 @@
                             <td>
                                 <ul class="nav nav-pills nav-pills-toolbar nav-justified">
                                     <li<%# ($this->DataItem['isi_nilai']==1)?' class="active"':''%>>
-                                        <com:TActiveLinkButton ID="btnUnVerified" CommandParameter="<%# ($this->DataItem['isi_nilai']==true)?0:1%>" OnClick="Page.doVerified" Attributes.Title="Boleh Input" ClientSide.PostState="false" Enabled="<%#$this->DataItem['isi_nilai'] == 0%>">
+                                        <com:TActiveLinkButton ID="btnUnVerified" CommandParameter="<%# ($this->DataItem['isi_nilai'] == true)?0:1%>" OnClick="Page.doVerified" Attributes.Title="Boleh Input" ClientSide.PostState="false" Enabled="<%#$this->DataItem['isi_nilai'] == 0%>">
                                             <prop:Text>                                        
                                                 ACTIVE
                                             </prop:Text>
@@ -136,7 +136,7 @@
                                         </com:TActiveLinkButton>  
                                     </li>
                                     <li<%# ($this->DataItem['isi_nilai'] == 0)?' class="active"':''%>>
-                                         <com:TActiveLinkButton ID="btnVerified" CommandParameter="<%# ($this->DataItem['isi_nilai']==true)?0:1%>" OnClick="Page.doVerified" Attributes.Title="TIdak Boleh Input" ClientSide.PostState="false" Enabled="<%#$this->DataItem['isi_nilai']==1%>">
+                                         <com:TActiveLinkButton ID="btnVerified" CommandParameter="<%# ($this->DataItem['isi_nilai'] == true)?0:1%>" OnClick="Page.doVerified" Attributes.Title="TIdak Boleh Input" ClientSide.PostState="false" Enabled="<%#$this->DataItem['isi_nilai']==1%>">
                                             <prop:Text>                                        
                                                 INACTIVE
                                             </prop:Text>

@@ -152,7 +152,7 @@ class CImportNilai extends MainPageD {
       catch (Exception $e)
       {
         $this->modalMessageError->show();
-        $this->lblContentMessageError->Text='Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage();
+        $this->lblContentMessageError->Text = 'Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage();
       }
       
     }
@@ -262,13 +262,13 @@ class CImportNilai extends MainPageD {
     $this->linkOutput->NavigateUrl='#';
     
     $dataReport=$_SESSION['currentPageImportNilai']['DataNilai'];
-    $this->lblMessagePrintout->Text='Kelas ' . $dataReport['namakelas'];
+    $this->lblMessagePrintout->Text = 'Kelas ' . $dataReport['namakelas'];
     $dataReport['linkoutput'] = $this->linkOutput; 
     $this->report->setDataReport($dataReport); 
     $this->report->setMode('excel2007');
     $this->report->printPesertaImportNilai();
      
-    $this->lblPrintout->Text='Daftar Peserta Matakuliah';
+    $this->lblPrintout->Text = 'Daftar Peserta Matakuliah';
     $this->modalPrintOut->show();
   }
 }

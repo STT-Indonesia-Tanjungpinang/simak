@@ -90,7 +90,7 @@ class CJadwalUjianPMB extends MainPageMB {
             
             $this->redirect('JadwalUjianPMB', true);
         } catch (Exception $ex) {
-            $this->lblHeaderMessageError->Text='Memilih Jadwal Ujian PMB';
+            $this->lblHeaderMessageError->Text = 'Memilih Jadwal Ujian PMB';
             $this->lblContentMessageError->Text = $ex->getMessage();
             $this->modalMessageError->Show();
         }
@@ -124,7 +124,7 @@ class CJadwalUjianPMB extends MainPageMB {
         $this->report->printKartuUjianPMB();    
         
         $this->lblMessagePrintout->Text = '';
-        $this->lblPrintout->Text='Kartu Ujian PMB';
+        $this->lblPrintout->Text = 'Kartu Ujian PMB';
         $this->modalPrintOut->show();
 	}
 }

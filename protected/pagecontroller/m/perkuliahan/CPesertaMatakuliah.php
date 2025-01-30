@@ -18,7 +18,7 @@ class CPesertaMatakuliah extends MainPageM {
       try {                     
         $id=addslashes($this->request['id']);
         $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');                
-        $this->hiddenid->Value=$id;
+        $this->hiddenid->Value = $id;
         $infomatkul = $this->Demik->getInfoMatkul($id,'penyelenggaraan'); 
         if (!isset($infomatkul['idpenyelenggaraan'])) {                                                
           throw new Exception ("Kode penyelenggaraan dengan id ($id) tidak terdaftar.");		
@@ -246,7 +246,7 @@ class CPesertaMatakuliah extends MainPageM {
     $idkelas = $_SESSION['currentPagePesertaMatakuliah']['idkelas'];
     $str_kelas=($idkelas== '' || $idkelas=='none') ? '': " AND vdm.idkelas='$idkelas'";
     $this->lblMessagePrintout->Text = $messageprintout;
-    $this->lblPrintout->Text='Daftar Peserta '. $label=($idkelas=="none") ? 'Semua Kelas': $this->DMaster->getNamaKelasByID($idkelas) ;
+    $this->lblPrintout->Text = 'Daftar Peserta '. $label=($idkelas=="none") ? 'Semua Kelas': $this->DMaster->getNamaKelasByID($idkelas) ;
     $this->modalPrintOut->show();
    }
 }

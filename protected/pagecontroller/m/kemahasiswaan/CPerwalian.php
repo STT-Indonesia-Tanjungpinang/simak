@@ -111,7 +111,7 @@ class CPerwalian extends MainPageM {
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
         $this->DataMHS = $datamhs;
         
-        $this->hiddennim->Value=$nim;
+        $this->hiddennim->Value = $nim;
         $daftar_dw=$this->DMaster->getListDosenWali();
         $this->cmbAddDW->DataSource = $daftar_dw;
         $this->cmbAddDW->Text = $datamhs['iddosen_wali'];
@@ -160,10 +160,10 @@ class CPerwalian extends MainPageM {
                 break;
             }     
             $this->lblMessagePrintout->Text = $messageprintout;
-            $this->lblPrintout->Text='Daftar Mahasiswa Perwalian';
+            $this->lblPrintout->Text = 'Daftar Mahasiswa Perwalian';
             $this->modalPrintOut->show();
         }else{
-            $this->lblHeaderMessageError->Text='Mencetak Daftar Mahasiswa Dosen Wali';
+            $this->lblHeaderMessageError->Text = 'Mencetak Daftar Mahasiswa Dosen Wali';
             $this->lblContentMessageError->Text="Anda tidak bisa mencetak karena Dosen Wali belum dipilih.";
             $this->modalMessageError->Show();
         }
