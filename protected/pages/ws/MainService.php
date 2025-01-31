@@ -12,13 +12,13 @@ class MainService extends TModule  {
      * @var array Connection
      */
     private $Conn;
-    public function __construct () {
+    public function __construct() {
         $this->Parameters = $this->Application->getParameters ();		        
     }
     /**
      * digunakan untuk koneksi ke database
      */
-    protected function connectDB () {
+    protected function connectDB() {
         $host=$this->Parameters['db_host'];
         $username = $this->Parameters['db_username'];
 		$password=$this->Parameters['db_userpassword'];
@@ -91,11 +91,11 @@ class MainService extends TModule  {
 			$countFieldTable = count ($ft);
 			$counter = 1;									
 			while ($row=$result->fetch_assoc()) {			
-				$tempRecord['no']=$offset;
+				$tempRecord['no'] = $offset;
 				for ($i=0;$i < $countFieldTable;$i++) {
 					$tempRecord[$ft[$i]]=trim($row[$ft[$i]]);
 				}
-				$data[$counter]=$tempRecord;
+				$data[$counter] = $tempRecord;
 				$counter++;			
 				$offset++;
 			} 	

@@ -6,7 +6,7 @@ class CProfiles extends MainPageM {
         $this->showProfiles=true;        
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageCache']) || $_SESSION['currentPageCache']['page_name'] != 'm.settings.Profiles') {
-				$_SESSION['currentPageCache'] = array('page_name' => 'm.settings.Profiles', 'page_num'=> 0);												
+				$_SESSION['currentPageCache'] = array('page_name' => 'm.settings.Profiles', 'page_num' => 0);												
 			}            
             $this->populateData();
 		}
@@ -68,8 +68,8 @@ class CProfiles extends MainPageM {
             chmod(BASEPATH."/$path",0644); 
             $this->imgPhotoUser->ImageUrl = $path; 
             $username = $this->Pengguna->getDataUser('username');
-            $this->DB->updateRecord("UPDATE user SET foto='$path' WHERE username='$username'");
-            $this->DB->updateRecord("UPDATE user SET foto='$path' WHERE username='$username'");
+            $this->DB->updateRecord("UPDATE user SET foto = '$path' WHERE username='$username'");
+            $this->DB->updateRecord("UPDATE user SET foto = '$path' WHERE username='$username'");
             $_SESSION['foto'] = $path;
         }else {                    
             //error handling

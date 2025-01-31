@@ -30,7 +30,7 @@ class DetailKRSEkstension extends MainPageSA {
     }
     public function getInfoToolbar() {                
 		$ta=$this->DMaster->getNamaTA($this->Page->KRS->DataKRS['krs']['tahun']);
-		$semester=$this->setup->getSemester($this->Page->KRS->DataKRS['krs']['idsmt']);
+		$semester = $this->setup->getSemester($this->Page->KRS->DataKRS['krs']['idsmt']);
 		$text = "TA $ta Semester $semester";
 		return $text;
 	}	
@@ -65,7 +65,7 @@ class DetailKRSEkstension extends MainPageSA {
                     $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkelas_mhs');
                     $kapasitas=(int)$this->DMaster->getKapasitasRuangKelas($v['idruangkelas']);
                     $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '': ' [PENUH]';
-                    $result[$idkelas_mhs]=$this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
+                    $result[$idkelas_mhs] = $this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
                 }
                 
                 $item->cmbKelas->DataSOurce=$result;            
@@ -89,7 +89,7 @@ class DetailKRSEkstension extends MainPageSA {
                 $_SESSION['currentPageKRSEkstension']['DataKRS'] = array();
                 throw new Exception("KRS dengan ID ($idkrs) tidak terdaftar.");
             }  
-            $datamhs['iddata_konversi']=$this->KRS->isMhsPindahan($datamhs['nim'],true);            
+            $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($datamhs['nim'],true);            
             $this->KRS->setDataMHS($datamhs);
             
             $kelas = $this->KRS->getKelasMhs();	
@@ -97,15 +97,15 @@ class DetailKRSEkstension extends MainPageSA {
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
             
             $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
-            $datamhs['nama_dosen']=$nama_dosen;
+            $datamhs['nama_dosen'] = $nama_dosen;
             
             $datadulang = $this->KRS->getDataDulang($datamhs['idsmt'], $datamhs['tahun']);
-            $datamhs['kelas_dulang']=$datadulang['idkelas'];
+            $datamhs['kelas_dulang'] = $datadulang['idkelas'];
             
-            $_SESSION['currentPageKRSEkstension']['DataMHS']=$datamhs;
+            $_SESSION['currentPageKRSEkstension']['DataMHS'] = $datamhs;
             $this->KRS->setDataMHS($datamhs);
             $this->KRS->getKRS($_SESSION['ta'], $_SESSION['semester']);                                                                        
-            $_SESSION['currentPageKRSEkstension']['DataKRS']=$this->KRS->DataKRS;
+            $_SESSION['currentPageKRSEkstension']['DataKRS'] = $this->KRS->DataKRS;
             
             $this->RepeaterS->DataSource=$this->KRS->DataKRS['matakuliah'];
             $this->RepeaterS->dataBind();
@@ -155,8 +155,8 @@ class DetailKRSEkstension extends MainPageSA {
         $datakrs['krs']['maxSKS'] = $maxSKS;               
         $this->Nilai->setDataMHS($_SESSION['currentPageKRSEkstension']['DataMHS']);
         $this->Nilai->getKHSBeforeCurrentSemester($datakrs['krs']['tahun'], $datakrs['krs']['idsmt']);
-        $datakrs['krs']['ipstasmtbefore']=$this->Nilai->getIPS();
-        $_SESSION['currentPageKRSEkstension']['DataKRS']=$datakrs;
+        $datakrs['krs']['ipstasmtbefore'] = $this->Nilai->getIPS();
+        $_SESSION['currentPageKRSEkstension']['DataKRS'] = $datakrs;
         $this->redirect ('perkuliahan.TambahKRSEkstension', true);
     }
     public function deleteRecord ($sender, $param) {        
@@ -186,22 +186,22 @@ class DetailKRSEkstension extends MainPageSA {
             case 'pdf':                
                 $messageprintout='';                
                 $tahun = $_SESSION['ta'];
-                $semester=$_SESSION['semester'];
+                $semester = $_SESSION['semester'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);
 
                 $dataReport=$_SESSION['currentPageKRSEkstension']['DataMHS'];
-                $dataReport['krs']=$_SESSION['currentPageKRSEkstension']['DataKRS']['krs'];        
-                $dataReport['matakuliah']=$_SESSION['currentPageKRSEkstension']['DataKRS']['matakuliah'];        
-                $dataReport['nama_tahun']=$nama_tahun;
-                $dataReport['nama_semester']=$nama_semester;        
+                $dataReport['krs'] = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs'];        
+                $dataReport['matakuliah'] = $_SESSION['currentPageKRSEkstension']['DataKRS']['matakuliah'];        
+                $dataReport['nama_tahun'] = $nama_tahun;
+                $dataReport['nama_semester'] = $nama_semester;        
                 
                 $kaprodi = $this->KRS->getKetuaPRODI($dataReport['kjur']);                  
-                $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-                $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-                $dataReport['nipy_kaprodi']=$kaprodi['nipy'];
+                $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+                $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+                $dataReport['nipy_kaprodi'] = $kaprodi['nipy'];
                 
-                $dataReport['linkoutput']=$this->linkOutput;                 
+                $dataReport['linkoutput'] = $this->linkOutput;                 
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 $this->report->printKRS();				

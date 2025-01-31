@@ -68,10 +68,10 @@ class CDosenWali extends MainPageSA {
         $this->RepeaterS->dataBind();     
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);        
     }
-    private function populateDosen () {
+    private function populateDosen() {
         $str = "SELECT iddosen,CONCAT(gelar_depan,' ',nama_dosen,gelar_belakang) AS nama_dosen,nidn FROM dosen WHERE iddosen NOT IN (SELECT iddosen FROM dosen_wali) ORDER BY nama_dosen ASC";
         $this->DB->setFieldTable (array('iddosen', 'nama_dosen', 'nidn'));            
-        $r= $this->DB->getRecord($str);
+        $r = $this->DB->getRecord($str);
         $dataitem['none'] = 'Daftar Dosen';   
         while (list($k, $v) = each($r)) {
             $dataitem[$v['iddosen']] = $v['nama_dosen']. ' ['.$v['nidn'].']';

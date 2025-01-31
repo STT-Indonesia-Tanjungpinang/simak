@@ -10,7 +10,7 @@ class Logic_ReportFinance extends Logic_Report {
      * @param type $objDMaster object
      */
     public function printPiutangJangkaPendek($objFinance, $objDMaster)  {
-        $kjur=$this->dataReport['kjur'];
+        $kjur = $this->dataReport['kjur'];
         $nama_ps = $this->dataReport['nama_ps'];
         $tahun_masuk = $this->dataReport['tahun_masuk'];
         $nama_tahun_masuk = $this->dataReport['nama_tahun_masuk'];
@@ -33,8 +33,8 @@ class Logic_ReportFinance extends Logic_Report {
                 $styleArray=array(
 								'font' => array('bold' => true,
                                                 'size' => 16),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-												   'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+												   'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
 							);
                 $sheet->getStyle("A7:L8")->applyFromArray($styleArray);
                 
@@ -64,34 +64,34 @@ class Logic_ReportFinance extends Logic_Report {
                                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A10:L10")->applyFromArray($styleArray);
                 $sheet->getStyle("A10:L10")->getAlignment()->setWrapText(true);
                 
                 $komponen_biaya=array();
-                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'A'));
-                $komponen_biaya['A']['baru'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');
-                $komponen_biaya['A']['lama'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');
-                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'A'));
-                $komponen_biaya['A']['baru'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');       
-                $komponen_biaya['A']['lama'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');  
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>1,'idkelas' => 'A'));
+                $komponen_biaya['A']['baru'][1] = $objFinance->getTotalBiayaMhsPeriodePembayaran('baru');
+                $komponen_biaya['A']['lama'][1] = $objFinance->getTotalBiayaMhsPeriodePembayaran('lama');
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>2,'idkelas' => 'A'));
+                $komponen_biaya['A']['baru'][2] = $objFinance->getTotalBiayaMhsPeriodePembayaran('baru');       
+                $komponen_biaya['A']['lama'][2] = $objFinance->getTotalBiayaMhsPeriodePembayaran('lama');  
 
-                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'B'));
-                $komponen_biaya['B']['baru'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
-                $komponen_biaya['B']['lama'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');            
-                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'B'));
-                $komponen_biaya['B']['baru'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
-                $komponen_biaya['B']['lama'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>1,'idkelas' => 'B'));
+                $komponen_biaya['B']['baru'][1] = $objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
+                $komponen_biaya['B']['lama'][1] = $objFinance->getTotalBiayaMhsPeriodePembayaran('lama');            
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>2,'idkelas' => 'B'));
+                $komponen_biaya['B']['baru'][2] = $objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
+                $komponen_biaya['B']['lama'][2] = $objFinance->getTotalBiayaMhsPeriodePembayaran('lama');
 
-                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'C'));
-                $komponen_biaya['C']['baru'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
-                $komponen_biaya['C']['lama'][1]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama'); 
-                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'C'));
-                $komponen_biaya['C']['baru'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
-                $komponen_biaya['C']['lama'][2]=$objFinance->getTotalBiayaMhsPeriodePembayaran('lama');  
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>1,'idkelas' => 'C'));
+                $komponen_biaya['C']['baru'][1] = $objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
+                $komponen_biaya['C']['lama'][1] = $objFinance->getTotalBiayaMhsPeriodePembayaran('lama'); 
+                $objFinance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>2,'idkelas' => 'C'));
+                $komponen_biaya['C']['baru'][2] = $objFinance->getTotalBiayaMhsPeriodePembayaran('baru');            
+                $komponen_biaya['C']['lama'][2] = $objFinance->getTotalBiayaMhsPeriodePembayaran('lama');  
                                 
                 $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
                 $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,idkelas,tahun_masuk,semester_masuk FROM v_datamhs WHERE kjur='$kjur'AND tahun_masuk = $tahun_masuk AND k_status!='L' $str_kelas ORDER BY nim ASC,nama_mhs ASC";			                
@@ -99,7 +99,7 @@ class Logic_ReportFinance extends Logic_Report {
                 $r = $this->db->getRecord($str);	
                 $row=11; 
                 while (list($k, $v) = each($r)) {
-                    $no_formulir=$v['no_formulir'];                                          
+                    $no_formulir = $v['no_formulir'];                                          
                     $nim = $v['nim'];                                                      
                     $sheet->setCellValue("A$row", $v['no']);
                     $sheet->setCellValueExplicit("B$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
@@ -132,10 +132,10 @@ class Logic_ReportFinance extends Logic_Report {
                         }
                         $totalkewajiban+=$kewajiban;
                         $sheet->setCellValueExplicit("J$row", $objFinance->toRupiah($kewajiban),PHPExcel_Cell_DataType::TYPE_STRING);
-                        $pembayaran_semester=$daftar_dibayarkan[$n['tahun']][$n['idsmt']];
+                        $pembayaran_semester = $daftar_dibayarkan[$n['tahun']][$n['idsmt']];
                         $totalpembayaran+=$pembayaran_semester;
                         $sheet->setCellValueExplicit("K$row", $objFinance->toRupiah($pembayaran_semester),PHPExcel_Cell_DataType::TYPE_STRING);
-                        $belumbayar=$kewajiban-$pembayaran_semester;
+                        $belumbayar = $kewajiban-$pembayaran_semester;
                         $sheet->setCellValueExplicit("L$row", $objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
                         $row+=1;
                     }    
@@ -143,7 +143,7 @@ class Logic_ReportFinance extends Logic_Report {
                     $sheet->setCellValue("I$row",'TOTAL');
                     $sheet->setCellValueExplicit("J$row", $objFinance->toRupiah($totalkewajiban),PHPExcel_Cell_DataType::TYPE_STRING);
                     $sheet->setCellValueExplicit("K$row", $objFinance->toRupiah($totalpembayaran),PHPExcel_Cell_DataType::TYPE_STRING);
-                    $belumbayar=$totalkewajiban-$totalpembayaran;
+                    $belumbayar = $totalkewajiban-$totalpembayaran;
                     $sheet->setCellValueExplicit("L$row", $objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
                     $styleArray=array(								
                                     'font' => array('bold' => true)                                    
@@ -156,19 +156,19 @@ class Logic_ReportFinance extends Logic_Report {
                 }
                 $row-=1;
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A11:L$row")->applyFromArray($styleArray);
                 $sheet->getStyle("A11:L$row")->getAlignment()->setWrapText(true);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                                 );
                 $sheet->getStyle("D11:D$row")->applyFromArray($styleArray);
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_RIGHT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_RIGHT)
                                 );
                 $sheet->getStyle("J11:L$row")->applyFromArray($styleArray);
                 $row+=2;
@@ -176,11 +176,11 @@ class Logic_ReportFinance extends Logic_Report {
                 $sheet->setCellValue("A$row",'TOTAL KESELURUAN');
                 $sheet->setCellValueExplicit("J$row", $objFinance->toRupiah($totalkewajiban_all),PHPExcel_Cell_DataType::TYPE_STRING);
                 $sheet->setCellValueExplicit("K$row", $objFinance->toRupiah($totalpembayaran_all),PHPExcel_Cell_DataType::TYPE_STRING);
-                $belumbayar=$totalkewajiban_all-$totalpembayaran_all;
+                $belumbayar = $totalkewajiban_all-$totalpembayaran_all;
                 $sheet->setCellValueExplicit("L$row", $objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);                        
                 $styleArray=array(								
                                 'font' => array('bold' => true),
-                                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_RIGHT)
+                                'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_RIGHT)
                             );																					 
                 $sheet->getStyle("A$row:L$row")->applyFromArray($styleArray);
                 
@@ -195,7 +195,7 @@ class Logic_ReportFinance extends Logic_Report {
      * @param type $objDMaster object
      */
     public function printRekapPembayaranSemester ($objFinance) {
-        $kjur=$this->dataReport['kjur'];
+        $kjur = $this->dataReport['kjur'];
         $nama_ps = $this->dataReport['nama_ps'];
         
         $tahun = $this->dataReport['ta'];
@@ -204,8 +204,8 @@ class Logic_ReportFinance extends Logic_Report {
         $tahun_masuk = $this->dataReport['tahun_masuk'];
         $nama_tahun_masuk = $this->dataReport['nama_tahun_masuk'];
         
-        $semester=$this->dataReport['semester'];
-        $nama_semester=$this->dataReport['nama_semester'];
+        $semester = $this->dataReport['semester'];
+        $nama_semester = $this->dataReport['nama_semester'];
         $kelas = $this->dataReport['kelas'];
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
         switch($this->getDriver()) {
@@ -228,8 +228,8 @@ class Logic_ReportFinance extends Logic_Report {
                 $styleArray=array(
 								'font' => array('bold' => true,
                                                 'size' => 14),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-												   'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+												   'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
 							);
                 $sheet->getStyle("A7:I8")->applyFromArray($styleArray);
                 
@@ -256,8 +256,8 @@ class Logic_ReportFinance extends Logic_Report {
                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A10:I10")->applyFromArray($styleArray);
@@ -290,8 +290,8 @@ class Logic_ReportFinance extends Logic_Report {
                 }
                 $row-=1;
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A11:I$row")->applyFromArray($styleArray);
@@ -301,15 +301,15 @@ class Logic_ReportFinance extends Logic_Report {
                 $sheet->setCellValue("A$row",'TOTAL KESELURUAN');
                 $sheet->setCellValueExplicit("G$row", $objFinance->toRupiah($totalkewajiban_all),PHPExcel_Cell_DataType::TYPE_STRING);
                 $sheet->setCellValueExplicit("H$row", $objFinance->toRupiah($totalpembayaran_all),PHPExcel_Cell_DataType::TYPE_STRING);
-                $belumbayar=$totalkewajiban_all-$totalpembayaran_all;
+                $belumbayar = $totalkewajiban_all-$totalpembayaran_all;
                 $sheet->setCellValueExplicit("I$row", $objFinance->toRupiah($belumbayar),PHPExcel_Cell_DataType::TYPE_STRING);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                                 );
                 $sheet->getStyle("D11:D$row")->applyFromArray($styleArray);
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_RIGHT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_RIGHT)
                                 );
                 $sheet->getStyle("G11:I$row")->applyFromArray($styleArray);
                 $this->printOut("rekap_pembayaran_semester");
@@ -318,11 +318,11 @@ class Logic_ReportFinance extends Logic_Report {
         $this->setLink($this->dataReport['linkoutput'],"Laporan Rekapitiulasi Pembayaran Semester");
     }
 
-    public function printFakturPembayaranMHSLama () {
+    public function printFakturPembayaranMHSLama() {
         $dataReport=$this->dataReport;
         $no_transaksi = $dataReport['no_transaksi'];
         $nama_tahun = $dataReport['nama_tahun'];
-        $nama_semester=$dataReport['nama_semester'];
+        $nama_semester = $dataReport['nama_semester'];
         switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':                

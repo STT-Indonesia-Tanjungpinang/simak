@@ -8,7 +8,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
         $this->showPembayaranCutiSemesterGanjil=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGanjil']) || $_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_name'] != 'k.pembayaran.PembayaranCutiSemesterGanjil') {
-				$_SESSION['currentPagePembayaranCutiSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranCutiSemesterGanjil', 'page_num' => 0, 'search' => false,'DataMHS'=>array(), 'ta' => $_SESSION['ta']);												
+				$_SESSION['currentPagePembayaranCutiSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranCutiSemesterGanjil', 'page_num' => 0, 'search' => false,'DataMHS' =>array(), 'ta' => $_SESSION['ta']);												
 			}
             $daftar_ps = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_ps;

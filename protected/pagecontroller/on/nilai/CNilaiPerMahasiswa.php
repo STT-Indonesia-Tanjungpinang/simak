@@ -12,7 +12,7 @@ class CNilaiPerMahasiswa extends MainPageON {
     {
       if (!isset($_SESSION['currentPageNilaiPerMahasiswa']) || $_SESSION['currentPageNilaiPerMahasiswa']['page_name'] != 'on.nilai.NilaiPerMahasiswa')
       {
-        $_SESSION['currentPageNilaiPerMahasiswa'] = array('page_name' => 'on.nilai.NilaiPerMahasiswa', 'DataMHS'=>array(), 'semester' => $_SESSION['semester'],'ta' => $_SESSION['ta']);												
+        $_SESSION['currentPageNilaiPerMahasiswa'] = array('page_name' => 'on.nilai.NilaiPerMahasiswa', 'DataMHS' =>array(), 'semester' => $_SESSION['semester'],'ta' => $_SESSION['ta']);												
       }
       $nim = addslashes($this->request['id']);       
       try 

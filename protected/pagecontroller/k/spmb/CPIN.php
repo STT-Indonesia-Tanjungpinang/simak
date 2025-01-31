@@ -8,7 +8,7 @@ class CPIN extends MainPageK {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePIN']) || $_SESSION['currentPagePIN']['page_name'] != 'k.spmb.PIN') {
-				$_SESSION['currentPagePIN'] = array('page_name' => 'k.spmb.PIN', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'display_record' => 'all', 'kelas' => 'A');												
+				$_SESSION['currentPagePIN'] = array('page_name' => 'k.spmb.PIN', 'page_num' => 0,'offset' =>0,'limit' =>0, 'search' => false,'display_record' => 'all', 'kelas' => 'A');												
 			}
             $_SESSION['currentPagePIN']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');

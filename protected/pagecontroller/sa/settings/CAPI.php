@@ -117,7 +117,7 @@ class CAPI extends MainPageSA {
             $salt=$data['salt'];
             $password=$data['password'];      
             $page='api';            
-            $str = "INSERT INTO user SET userid=NULL,username='$username',userpassword='$password',salt='$salt',token='$password',ipaddress='$ipaddress',nama='$nama',email='$email',page='$page',active=1,theme='cube',foto='resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";
+            $str = "INSERT INTO user SET userid=NULL,username='$username',userpassword='$password',salt='$salt',token='$password',ipaddress='$ipaddress',nama='$nama',email='$email',page='$page',active=1,theme='cube',foto = 'resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";
             $this->DB->insertRecord($str);           
             
             $this->redirect('settings.API', true);

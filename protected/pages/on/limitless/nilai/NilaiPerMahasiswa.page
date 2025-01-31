@@ -177,7 +177,7 @@
 </com:TContent>
 <com:TContent ID="jsinlinecontent">
 <script type="text/javascript">
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
   if (jQuery('.bil')[0])
   {
     anElement=new AutoNumeric.multiple ('.bil',{

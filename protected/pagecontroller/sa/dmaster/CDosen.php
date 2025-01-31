@@ -159,7 +159,7 @@ class CDosen extends MainPageSA {
                 $salt=$data['salt'];
                 $password=$data['password'];           
                 $page='d';
-                $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id=0,kjur=0,active=1,isdeleted=0,theme='cube',foto='resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
+                $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id=0,kjur=0,active=1,isdeleted=0,theme='cube',foto = 'resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
                 $this->Redirect('dmaster.Dosen', true);
@@ -223,7 +223,7 @@ class CDosen extends MainPageSA {
                     $salt=$data['salt'];
                     $password=$data['password'];           
                     $page='d';
-                    $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id=0,kjur=0,active=1,isdeleted=0,theme='cube',foto='resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
+                    $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id=0,kjur=0,active=1,isdeleted=0,theme='cube',foto = 'resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
                     $this->DB->insertRecord($str);
                 }                
                 $this->DB->query('COMMIT');

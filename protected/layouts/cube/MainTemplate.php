@@ -4,7 +4,7 @@ class MainTemplate extends TTemplateControl {
     public function onLoad($param) {
 		parent::onLoad($param);		        
 		if (!$this->Page->IsPostBack&&!$this->Page->IsCallback) {		
-            $tipeuser=$this->Page->Pengguna->getTipeUser();
+            $tipeuser = $this->Page->Pengguna->getTipeUser();
             $this->linkTopTASemester->NavigateUrl=$tipeuser=='sa'?$this->Page->constructUrl('settings.Variables', true):'#';
             $this->lblStatusUser->Text = $this->getStatusUser();
             $this->loggerJS->Visible=$this->Page->setup->getSettingValue('jslogger');
@@ -24,7 +24,7 @@ class MainTemplate extends TTemplateControl {
     }
     public function changeTheme ($sender, $param) {
         $theme=$sender->CommandParameter;        
-        $_SESSION['theme']=$theme;
+        $_SESSION['theme'] = $theme;
         $userid = $this->Page->Pengguna->getDataUser('userid');
         $page = $this->Page->Pengguna->getDataUser('page');
         switch($page) {

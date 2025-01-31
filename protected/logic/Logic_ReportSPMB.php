@@ -8,7 +8,7 @@ class Logic_ReportSPMB extends Logic_Report {
      * digunakan untuk memprint formulir pendaftaran
      */
     public function printFormulirPendaftaran ($daftar_ps, $objDMaster) {
-        $no_formulir=$this->dataReport['no_formulir'];
+        $no_formulir = $this->dataReport['no_formulir'];
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.tempat_lahir,fp.tanggal_lahir,fp.jk,fp.idagama,a.nama_agama,fp.nama_ibu_kandung,fp.idwarga,fp.nik,fp.idstatus,fp.alamat_kantor,fp.alamat_rumah,fp.telp_rumah,fp.telp_kantor,fp.telp_hp,pm.email,fp.idjp,jp.nama_pekerjaan,fp.pendidikan_terakhir,fp.jurusan,fp.kota,fp.provinsi,fp.tahun_pa,jp.nama_pekerjaan,fp.jenis_slta,fp.asal_slta,fp.status_slta,fp.nomor_ijazah,fp.kjur1,fp.kjur2,fp.idkelas,fp.waktu_mendaftar,fp.ta,fp.idsmt FROM formulir_pendaftaran fp,agama a,jenis_pekerjaan jp,profiles_mahasiswa pm WHERE fp.idagama=a.idagama AND fp.idjp=jp.idjp AND pm.no_formulir=fp.no_formulir AND fp.no_formulir='$no_formulir'";
         $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'tempat_lahir', 'tanggal_lahir', 'jk', 'idagama', 'nama_agama', 'nama_ibu_kandung', 'idwarga', 'nik', 'idstatus', 'alamat_kantor', 'alamat_rumah', 'telp_rumah', 'telp_kantor', 'telp_hp', 'email', 'idjp', 'nama_pekerjaan', 'pendidikan_terakhir', 'jurusan', 'kota', 'provinsi', 'tahun_pa', 'nama_pekerjaan', 'jenis_slta', 'asal_slta', 'status_slta', 'nomor_ijazah', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'ta', 'idsmt'));
         $r = $this->db->getRecord($str);
@@ -155,11 +155,11 @@ class Logic_ReportSPMB extends Logic_Report {
      * @param type $level 1 s.d 9
      */
     public function printFormulirPendaftaranAll ($outputcompress, $daftar_ps, $objDMaster) {  
-        $kjur=$this->dataReport['kjur'];        
+        $kjur = $this->dataReport['kjur'];        
         $tahun_masuk = $this->dataReport['tahun_masuk'];
-        $semester=$this->dataReport['semester'];
+        $semester = $this->dataReport['semester'];
         $nama_tahun = $this->dataReport['nama_tahun'];
-        $nama_semester=$this->dataReport['nama_semester'];
+        $nama_semester = $this->dataReport['nama_semester'];
         $daftar_via=$this->dataReport['daftar_via'];
 
         $str_status='';
@@ -218,8 +218,8 @@ class Logic_ReportSPMB extends Logic_Report {
                 $styleArray=array(
 								'font' => array('bold' => true,
                                                 'size' => 16),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-												   'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+												   'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
 							);
                 $sheet->getStyle("A7:Z8")->applyFromArray($styleArray);
                 $sheet->getRowDimension(10)->setRowHeight(25);
@@ -280,8 +280,8 @@ class Logic_ReportSPMB extends Logic_Report {
                 $sheet->setCellValue('AA10', 'KELAS');
                 $styleArray=array(								
                                     'font' => array('bold' => true),
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A10:AA10")->applyFromArray($styleArray);
@@ -320,15 +320,15 @@ class Logic_ReportSPMB extends Logic_Report {
                 }
                 $row-=1;
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A11:AA$row")->applyFromArray($styleArray);
                 $sheet->getStyle("A11:AA$row")->getAlignment()->setWrapText(true);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                                 );
                 $sheet->getStyle("C11:D$row")->applyFromArray($styleArray);
                 $sheet->getStyle("H11:H$row")->applyFromArray($styleArray);
@@ -485,9 +485,9 @@ class Logic_ReportSPMB extends Logic_Report {
                     $rpt->setXY(3, $row);			
                     $rpt->Cell(40,5,'Kelas',1,0);				
                     $rpt->Cell(80,5,': '.$objDMaster->getNamaKelasByID ($datamhs['idkelas']),1,0);
-                    $no_formulir=$datamhs['no_formulir'];                    
+                    $no_formulir = $datamhs['no_formulir'];                    
                     $this->printOut("formulirpendaftaran_$no_formulir",true);                    
-                    $filespdf["formulirpendaftaran_$no_formulir.pdf"]=$this->exportedDir['full_path']."formulirpendaftaran_$no_formulir.pdf";
+                    $filespdf["formulirpendaftaran_$no_formulir.pdf"] = $this->exportedDir['full_path']."formulirpendaftaran_$no_formulir.pdf";
                 }              
                 
                 $this->setMode("pdf$outputcompress");                  
@@ -502,10 +502,10 @@ class Logic_ReportSPMB extends Logic_Report {
      * @param type $objDMaster
      */
     public function printNilaiUjian ($daftar_jurusan, $objDMaster) {
-        $kjur=$this->dataReport['kjur'];        
+        $kjur = $this->dataReport['kjur'];        
         $tahun_masuk = $this->dataReport['tahun_masuk'];
         
-        $str_kjur=$kjur=='none'?' AND (num.kjur=0 OR num.kjur IS NULL)':" AND num.kjur=$kjur";	                
+        $str_kjur = $kjur=='none'?' AND (num.kjur=0 OR num.kjur IS NULL)':" AND num.kjur = $kjur";	                
         $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.idkelas,ku.tgl_ujian,ts.nama_tempat,num.kjur,num.jumlah_soal,num.jawaban_benar,num.jawaban_salah,num.nilai,fp.kjur1,fp.kjur2,num.passing_grade_1,num.passing_grade_2,num.kjur AS diterima_di_prodi FROM kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE fp.ta='$tahun_masuk'$str_kjur ORDER BY fp.idkelas ASC,nilai DESC,nama_mhs ASC";
         $this->db->setFieldTable(array('no_formulir', 'nama_mhs', 'idkelas', 'tgl_ujian', 'jumlah_soal', 'jawaban_benar', 'jawaban_salah', 'nilai', 'kjur1', 'kjur2', 'passing_grade_1', 'passing_grade_2', 'diterima_di_prodi'));				
         $r = $this->db->getRecord($str);        
@@ -530,8 +530,8 @@ class Logic_ReportSPMB extends Logic_Report {
                 $styleArray=array(
 								'font' => array('bold' => true,
                                                 'size' => 16),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-												   'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+												   'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
 							);
                 $sheet->getStyle("A7:M8")->applyFromArray($styleArray);
                 $sheet->getRowDimension(10)->setRowHeight(25);
@@ -565,8 +565,8 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A10:M10")->applyFromArray($styleArray);
@@ -605,7 +605,7 @@ class Logic_ReportSPMB extends Logic_Report {
                             $ket='DI TERIMA';
                             $pil1="$ket ($nama_ps)";
                         }
-                        $v['pil1']=$pil1;                
+                        $v['pil1'] = $pil1;                
                         $pil2='N.A';
                         if ($v['kjur2'] == $v['diterima_di_prodi']) {
                             $pil2=$daftar_jurusan[$v['diterima_di_prodi']];     
@@ -620,15 +620,15 @@ class Logic_ReportSPMB extends Logic_Report {
                 }
                 $row-=1;
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A11:M$row")->applyFromArray($styleArray);
                 $sheet->getStyle("A11:M$row")->getAlignment()->setWrapText(true);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                                 );
                 $sheet->getStyle("C11:C$row")->applyFromArray($styleArray);
                 $sheet->getStyle("J11:J$row")->applyFromArray($styleArray);
@@ -658,7 +658,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 
                 $styleArray=array(
 								'font' => array('bold' => true,'size' => 16),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
 							);
                 $sheet->getStyle("A7:A7")->applyFromArray($styleArray);
                 
@@ -675,8 +675,8 @@ class Logic_ReportSPMB extends Logic_Report {
                 $sheet->setCellValue('F9', 'KETERANGAN');
                 $styleArray=array(
 								'font' => array('bold' => true),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-												   'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+												   'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
 								'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
 							);
                 $sheet->getStyle("B9:F9")->applyFromArray($styleArray);
@@ -705,14 +705,14 @@ class Logic_ReportSPMB extends Logic_Report {
                 } 
                 $row-=1;
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("B10:F$row")->applyFromArray($styleArray);
                 $sheet->getStyle("B10:F$row")->getAlignment()->setWrapText(true);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                                 );																					 
                 $sheet->getStyle("E10:E$row")->applyFromArray($styleArray);
                 $this->printOut("daftarpin$tahun_masuk");

@@ -158,7 +158,7 @@ class CDosen extends MainPageM {
                 $salt=$data['salt'];
                 $password=$data['password'];           
                 $page='d';
-                $str = "INSERT INTO user SET idbank=0,username='$username',userpassword='$password',salt='$salt',page='$page',group_id=0,kjur=0,nama='$nama',email='$email',active=1,isdeleted=0,theme='cube',foto='resources/userimages/no_photo.png',token='',ipaddress='',logintime='0000-00-00 00:00:00',date_added=NOW()";
+                $str = "INSERT INTO user SET idbank=0,username='$username',userpassword='$password',salt='$salt',page='$page',group_id=0,kjur=0,nama='$nama',email='$email',active=1,isdeleted=0,theme='cube',foto = 'resources/userimages/no_photo.png',token='',ipaddress='',logintime='0000-00-00 00:00:00',date_added=NOW()";
                 $this->DB->insertRecord($str);
                 $this->DB->query('COMMIT');
                 $this->Redirect('dmaster.Dosen', true);
@@ -222,7 +222,7 @@ class CDosen extends MainPageM {
                     $salt=$data['salt'];
                     $password=$data['password'];           
                     $page='d';
-                    $str = "INSERT INTO user SET idbank=0,username='$username',userpassword='$password',salt='$salt',page='$page',group_id=0,kjur=0,nama='$nama',email='$email',active=1,isdeleted=0,theme='cube',foto='resources/userimages/no_photo.png',token='',ipaddress='',logintime='0000-00-00 00:00:00',date_added=NOW()";
+                    $str = "INSERT INTO user SET idbank=0,username='$username',userpassword='$password',salt='$salt',page='$page',group_id=0,kjur=0,nama='$nama',email='$email',active=1,isdeleted=0,theme='cube',foto = 'resources/userimages/no_photo.png',token='',ipaddress='',logintime='0000-00-00 00:00:00',date_added=NOW()";
                     $this->DB->insertRecord($str);
                 }                
                 $this->DB->query('COMMIT');

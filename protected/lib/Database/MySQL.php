@@ -62,13 +62,13 @@ class MySQL extends DBGlobal implements DBInterface {
     /**
      * digunakan untuk commit transaksi
      */
-	public function commitTransaction () {        
+	public function commitTransaction() {        
         $this->conn->commit();
     }
     /**
      * digunakan untuk rollback transaksi
      */
-	public function rollbackTransaction () {        
+	public function rollbackTransaction() {        
         $this->conn->rollback();
     }
 	/**
@@ -84,11 +84,11 @@ class MySQL extends DBGlobal implements DBInterface {
 			$countFieldTable = count ($ft);
 			$counter = 1;									
 			while ($row=$result->fetch_assoc()) {			
-				$tempRecord['no']=$offset;
+				$tempRecord['no'] = $offset;
 				for ($i=0;$i < $countFieldTable;$i++) {
 					$tempRecord[$ft[$i]]=trim($row[$ft[$i]]);
 				}
-				$ListRecord[$counter]=$tempRecord;
+				$ListRecord[$counter] = $tempRecord;
 				$counter++;			
 				$offset++;
 			} 		
@@ -188,7 +188,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	* digunakan untuk mendapatkan id terakhir
 	* @return void
 	*/
-	public function getLastInsertID () {
+	public function getLastInsertID() {
 		$str = 'SELECT last_insert_id() AS id';
 		$this->setFieldTable(array('id'));
 		$r = $this->getRecord($str);
@@ -203,7 +203,7 @@ class MySQL extends DBGlobal implements DBInterface {
 		$this->sqlString=$str;
 		return $this->query ($str);
 	}
-	public function debugSQLString () {
+	public function debugSQLString() {
 		return $this->sqlString;
 	}
 	

@@ -11,7 +11,7 @@ class CNilaiPerMatakuliah extends MainPageON {
     {
       if (!isset($_SESSION['currentPageNilaiPerMatakuliah']) || $_SESSION['currentPageNilaiPerMatakuliah']['page_name'] != 'on.nilai.NilaiPerMatakuliah') 
       {
-        $_SESSION['currentPageNilaiPerMatakuliah'] = array('page_name' => 'on.nilai.NilaiPerMatakuliah', 'page_num' => 0, 'search' => false,'InfoMatkul'=>array());
+        $_SESSION['currentPageNilaiPerMatakuliah'] = array('page_name' => 'on.nilai.NilaiPerMatakuliah', 'page_num' => 0, 'search' => false,'InfoMatkul' =>array());
       }  
       $_SESSION['currentPageNilaiPerMatakuliah']['search'] = false;
       try 
@@ -123,7 +123,7 @@ class CNilaiPerMatakuliah extends MainPageON {
     }
     $str = "SELECT idpenyelenggaraan,kmatkul,nmatkul,sks,semester,nama_dosen,iddosen FROM v_penyelenggaraan WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND idkur = $idkur $clausa ORDER BY semester ASC,kmatkul ASC";        
     $this->DB->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'nama_dosen', 'iddosen'));			
-    $r= $this->DB->getRecord($str);
+    $r = $this->DB->getRecord($str);
     
     $result = array();
     while (list($k, $v) = each($r)) 

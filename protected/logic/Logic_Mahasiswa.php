@@ -41,7 +41,7 @@ class Logic_Mahasiswa extends Logic_Global {
   * @param $with_nilai bila true return dengan nilai
   */
   public function isLulusSPMB ($with_nilai=false) {		
-    $no_formulir=$this->DataMHS['no_formulir'];
+    $no_formulir = $this->DataMHS['no_formulir'];
     $str = "SELECT nilai,ket_lulus,kjur FROM nilai_ujian_masuk WHERE no_formulir='$no_formulir' AND ket_lulus='1'";
     $this->db->setFieldTable (array('nilai', 'ket_lulus', 'kjur'));
     $result=$this->db->getRecord($str);
@@ -49,8 +49,8 @@ class Logic_Mahasiswa extends Logic_Global {
     if (isset($result[1])) {				
       if ($with_nilai) {
         $nilai['lulus']=true;
-        $nilai['nilai']=$result[1]['nilai'];
-        $nilai['kjur']=$result[1]['kjur'];
+        $nilai['nilai'] = $result[1]['nilai'];
+        $nilai['kjur'] = $result[1]['kjur'];
       }else {
         $nilai=true;
       }            
@@ -62,9 +62,9 @@ class Logic_Mahasiswa extends Logic_Global {
   *
   */
   public function isMhsRegistered ($tanpaprodi=false) {
-    $no_formulir=$this->DataMHS['no_formulir'];
+    $no_formulir = $this->DataMHS['no_formulir'];
     $kjur=isset($this->DataMHS['kjur'])?$this->DataMHS['kjur']:'';
-    $bool=$tanpaprodi==true?$this->db->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir):$this->db->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir," AND kjur=$kjur");
+    $bool=$tanpaprodi==true?$this->db->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir):$this->db->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir," AND kjur = $kjur");
     
     return $bool;
 
@@ -74,7 +74,7 @@ class Logic_Mahasiswa extends Logic_Global {
   * @return bool
   */
   public function isNoFormulirExist() {		
-    $no_formulir=$this->DataMHS['no_formulir'];        
+    $no_formulir = $this->DataMHS['no_formulir'];        
     $bool=$this->db->checkRecordIsExist('no_formulir', 'formulir_pendaftaran', $no_formulir);			
     return $bool;			
     
@@ -103,22 +103,22 @@ class Logic_Mahasiswa extends Logic_Global {
    * digunakan untuk mendapatkan status kelas mahasiswa saat ini apakah ekstens,regular,karyawan ?
    * @return array
    */
-  public function getKelasMhs () {
+  public function getKelasMhs() {
     $nim = $this->DataMHS['nim'];
     $str = "SELECT d.tahun,d.idsmt,k.idkelas,k.nkelas FROM kelas k,dulang d WHERE k.idkelas=d.idkelas AND d.iddulang=(SELECT MAX(iddulang) FROM dulang WHERE nim='$nim')";
     $this->db->setFieldTable(array('tahun', 'idsmt', 'idkelas', 'nkelas'));					
     $r = $this->db->getRecord($str);					
     if (isset($r[1])) {						
-      $kelas['idkelas']=$r[1]['idkelas'];
-      $kelas['nkelas']=$r[1]['nkelas'];
+      $kelas['idkelas'] = $r[1]['idkelas'];
+      $kelas['nkelas'] = $r[1]['nkelas'];
       $str = "SELECT k.idkelas,k.nkelas,pk.tahun,pk.idsmt FROM pindahkelas pk,kelas k WHERE pk.idkelas_baru=k.idkelas AND idpindahkelas=(SELECT MAX(idpindahkelas) FROM pindahkelas WHERE nim='$nim')";					
       $r2=$this->db->getRecord($str);						
       if (isset($r2[1])) {
         $tasmt_dulang=$r[1]['tahun'].$r[1]['idsmt'];
         $tasmt_pindahkelas = $r2[1]['tahun'].$r2[1]['idsmt'];									
         if ($tasmt_dulang<$tasmt_pindahkelas) {
-          $kelas['idkelas']=$r2[1]['idkelas'];
-          $kelas['nkelas']=$r2[1]['nkelas'];
+          $kelas['idkelas'] = $r2[1]['idkelas'];
+          $kelas['nkelas'] = $r2[1]['nkelas'];
         }				
       }
     }else {
@@ -126,8 +126,8 @@ class Logic_Mahasiswa extends Logic_Global {
       $this->db->setFieldTable(array('idkelas_fp', 'nkelas_fp', 'idkelas_rm', 'nkelas_rm'));
       $r2=$this->db->getRecord($str);
       if (isset($r2[1])) {
-        $kelas['idkelas']=$r2[1]['idkelas_rm']== ''?$r2[1]['idkelas_fp']:$r2[1]['idkelas_rm'];
-        $kelas['nkelas']=$r2[1]['idkelas_rm']== ''?$r2[1]['nkelas_fp']:$r2[1]['nkelas_rm'];;
+        $kelas['idkelas'] = $r2[1]['idkelas_rm']== ''?$r2[1]['idkelas_fp']:$r2[1]['idkelas_rm'];
+        $kelas['nkelas'] = $r2[1]['idkelas_rm']== ''?$r2[1]['nkelas_fp']:$r2[1]['nkelas_rm'];;
       }
     }
     return $kelas;

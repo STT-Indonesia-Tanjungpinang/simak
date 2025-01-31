@@ -7,10 +7,10 @@ class Logic_ReportKRS extends Logic_Report {
     /**
      * digunakan untuk printout KRS
      */
-    public function printKRS () {
+    public function printKRS() {
         $nim = $this->dataReport['nim'];
         $nama_tahun = $this->dataReport['nama_tahun'];
-        $nama_semester=$this->dataReport['nama_semester'];
+        $nama_semester = $this->dataReport['nama_semester'];
         
         switch($this->getDriver()) {
             case 'excel2003':               
@@ -148,9 +148,9 @@ class Logic_ReportKRS extends Logic_Report {
      */
     public function printKRSAll ($objDMaster, $repeater) {
         $awal=$this->dataReport['awal'];
-        $akhir=$this->dataReport['akhir'];
+        $akhir = $this->dataReport['akhir'];
         $nama_tahun = $this->dataReport['nama_tahun'];
-        $nama_semester=$this->dataReport['nama_semester'];
+        $nama_semester = $this->dataReport['nama_semester'];
         switch($this->getDriver()) {
             case 'excel2003':               
             case 'excel2007':                
@@ -329,19 +329,19 @@ class Logic_ReportKRS extends Logic_Report {
                     $r = $this->db->getRecord($str);	           
                     $dataReport=$r[1];
 
-                    $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$dataReport['kjur']];                
+                    $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];                
                     $nama_tahun = $objDMaster->getNamaTA($dataReport['tahun']);   
                     $nama_semester = $this->setup->getSemester($dataReport['idsmt']);
-                    $dataReport['nama_tahun']=$nama_tahun; 
-                    $dataReport['nama_semester']=$nama_semester;
+                    $dataReport['nama_tahun'] = $nama_tahun; 
+                    $dataReport['nama_semester'] = $nama_semester;
 
                     $nama_dosen = $objDMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
-                    $dataReport['nama_dosen']=$nama_dosen;
+                    $dataReport['nama_dosen'] = $nama_dosen;
 
                     $kaprodi = $objKRS->getKetuaPRODI($dataReport['kjur']);
-                    $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-                    $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-                    $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
+                    $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+                    $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+                    $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
                     $row+=6;
                     $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(3, $row);			
@@ -465,7 +465,7 @@ class Logic_ReportKRS extends Logic_Report {
                  
                 $nim = $this->dataReport['nim'];
                 $nama_tahun = $this->dataReport['nama_tahun'];
-                $nama_semester=$this->dataReport['nama_semester'];
+                $nama_semester = $this->dataReport['nama_semester'];
         
                 $rpt->setTitle('Kartu Ujian Mahasiswa');
 				$rpt->setSubject('Kartu Ujian Mahasiswa');

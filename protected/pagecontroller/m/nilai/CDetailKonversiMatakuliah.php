@@ -12,7 +12,7 @@ class CDetailKonversiMatakuliah extends MainPageM {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailKonversiMatakuliah']) || $_SESSION['currentPageDetailKonversiMatakuliah']['page_name'] != 'm.spmb.DetailKonversiMatakuliah') {
-				$_SESSION['currentPageDetailKonversiMatakuliah'] = array('page_name' => 'm.spmb.DetailKonversiMatakuliah', 'page_num' => 0, 'search' => false,'DataKonversi'=>array());												                                               
+				$_SESSION['currentPageDetailKonversiMatakuliah'] = array('page_name' => 'm.spmb.DetailKonversiMatakuliah', 'page_num' => 0, 'search' => false,'DataKonversi' =>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

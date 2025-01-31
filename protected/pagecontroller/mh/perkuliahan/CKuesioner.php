@@ -9,7 +9,7 @@ class CKuesioner extends MainPageMHS {
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageKuesioner']) || $_SESSION['currentPageKuesioner']['page_name'] != 'd.perkuliahan.Kuesioner') {                
-				$_SESSION['currentPageKuesioner'] = array('page_name' => 'd.perkuliahan.Kuesioner', 'DataMatakuliah'=>array(), 'ta' => $_SESSION['ta'],'semester' => $_SESSION['semester'],'idpengampu_penyelenggaraan' => 'none');												
+				$_SESSION['currentPageKuesioner'] = array('page_name' => 'd.perkuliahan.Kuesioner', 'DataMatakuliah' =>array(), 'ta' => $_SESSION['ta'],'semester' => $_SESSION['semester'],'idpengampu_penyelenggaraan' => 'none');												
 			}
             try {
                 $idkrsmatkul = addslashes($this->request['id']);   

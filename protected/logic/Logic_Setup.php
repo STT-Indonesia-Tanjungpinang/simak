@@ -36,7 +36,7 @@ class Logic_Setup extends Logic_Global {
             if ($this->Application->Cache) {                
                 $this->Application->Cache->set('settings', $this->settings);
             }else {
-                $_SESSION['settings']=$this->settings;                
+                $_SESSION['settings'] = $this->settings;                
             }
         }elseif ($this->Application->Cache) {
             $this->settings = $this->Application->Cache->get('settings');
@@ -49,7 +49,7 @@ class Logic_Setup extends Logic_Global {
     /**
      * digunakan untuk populate setting
      */
-    private function populateSetting () {
+    private function populateSetting() {
         $str = 'SELECT setting_id,`key`,`value` FROM setting';
         $this->db->setFieldTable(array('setting_id', 'key', 'value'));
         $r = $this->db->getRecord($str);
@@ -88,7 +88,7 @@ class Logic_Setup extends Logic_Global {
      * digunakan untuk mendapatkan alamat aplikasi
      * 
      */
-    public function getAddress () {       
+    public function getAddress() {       
 		$ip=explode('.', $_SERVER['REMOTE_ADDR']);		        
 		$ipaddress = $ip[0];	       	
 		if ($ipaddress == '127' || $ipaddress == '::1') {
@@ -103,7 +103,7 @@ class Logic_Setup extends Logic_Global {
     /**
      * digunakan untuk mengecek keamanan media komunikasi
      */
-    public function isSecure () {
+    public function isSecure() {
         $isSecure = false;
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
             $isSecure = true;
@@ -200,7 +200,7 @@ class Logic_Setup extends Logic_Global {
     /**
      * mengembalikan nilai durasi output cache
      */
-    public function getDurationOutputCache () {
+    public function getDurationOutputCache() {
         return 86400;
     }        
     /**
@@ -439,7 +439,7 @@ class Logic_Setup extends Logic_Global {
     /**
      * digunakan untuk mendapatkan daftar nama themes
      */
-    public function getListThemes () {
+    public function getListThemes() {
         $folder = 'themes/';
         $weeds = array('.', '..');
         $directories = array_diff(scandir($folder), $weeds);

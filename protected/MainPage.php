@@ -257,7 +257,7 @@ class MainPage extends TPage
   * default panel
   * @return boolean
   */
-  public function getDefaultProcess () {
+  public function getDefaultProcess() {
     if ($this->idProcess == 'add' || $this->idProcess == 'edit'|| $this->idProcess == 'view') {
       return false;
     }else {
@@ -294,7 +294,7 @@ class MainPage extends TPage
         }
       }			
     }        
-    $_SESSION['tahun_masuk']=$_SESSION['tahun_masuk'] < $ta ?  $_SESSION['tahun_masuk']:$ta;
+    $_SESSION['tahun_masuk'] = $_SESSION['tahun_masuk'] < $ta ?  $_SESSION['tahun_masuk']:$ta;
     return $tahun_akademik;
   }
   /**
@@ -304,7 +304,7 @@ class MainPage extends TPage
     $url=$page;
     if ($automaticpage) {
       $this->Pengguna = $this->getLogic('Users');
-      $tipeuser=$this->Pengguna->getTipeUser(); 
+      $tipeuser = $this->Pengguna->getTipeUser(); 
       $theme=$_SESSION['theme'];
       $url="$tipeuser.$theme.$url";
     }        
@@ -320,7 +320,7 @@ class MainPage extends TPage
       $currentPage=$repeater->CurrentPageIndex;
       $offset=$currentPage*$repeater->PageSize;
       $awal=$offset+1;        
-      $akhir=$repeater->Items->Count()+$offset;
+      $akhir = $repeater->Items->Count()+$offset;
       $str="Menampilkan $awal hingga $akhir dari $jumlah_baris";        
     }
     return $str;
@@ -332,7 +332,7 @@ class MainPage extends TPage
    */
   public function changeOutputReport ($sender, $param) {
     if ($this->IsValid) {
-      $_SESSION['outputreport']=$this->tbCmbOutputReport->Text;
+      $_SESSION['outputreport'] = $this->tbCmbOutputReport->Text;
     }
   }
   /**
@@ -342,7 +342,7 @@ class MainPage extends TPage
    */
   public function changeOutputCompress ($sender, $param) {
     if ($this->IsValid) {
-      $_SESSION['outputcompress']=$this->tbCmbOutputCompress->Text;
+      $_SESSION['outputcompress'] = $this->tbCmbOutputCompress->Text;
     }
   }
   /**

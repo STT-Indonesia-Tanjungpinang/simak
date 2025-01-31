@@ -30,13 +30,13 @@ class DetailDulangMHSBaru Extends CDetailDulangMHSBaru {
                 default :
                     $kode='';        
             }
-			$data['nim']=$tahun.'10'.$kjur.'001';			
-			$data['nirm']=$tahun.'103035'.$kode.'001';
+			$data['nim'] = $tahun.'10'.$kjur.'001';			
+			$data['nirm'] = $tahun.'103035'.$kode.'001';
 		}else {
 			$nim='1'.$r[1]['nim'];
 			$nim+=1;
 			$nim=substr($nim,1,strlen($nim));
-			$data['nim']=$nim;
+			$data['nim'] = $nim;
 			$str = "SELECT MAX(NIRM) AS nirm FROM register_mahasiswa WHERE tahun='$ta' AND kjur='$kjur'";
 			$this->DB->setFieldTable(array('nirm'));
 			$r = $this->DB->getRecord($str);            
@@ -45,7 +45,7 @@ class DetailDulangMHSBaru Extends CDetailDulangMHSBaru {
             $part_nim=substr($old_nirm,0,  strlen($old_nirm)-4);
             $nomor_urut_nirm+=1;
             $nirm=$part_nim.$nomor_urut_nirm;
-			$data['nirm']=$nirm;
+			$data['nirm'] = $nirm;
 		}
 		return $data;
 	}

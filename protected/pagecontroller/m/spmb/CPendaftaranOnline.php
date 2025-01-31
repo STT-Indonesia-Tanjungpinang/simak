@@ -7,7 +7,7 @@ class CPendaftaranOnline extends MainPageM {
         $this->createObj('Akademik');        
 		if (!$this->IsPostBack && !$this->IsCallBack) {	
             if (!isset($_SESSION['currentPagePendaftaranOnline']) || $_SESSION['currentPagePendaftaranOnline']['page_name'] != 'm.spmb.PendaftaranOnline') {
-				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'm.spmb.PendaftaranOnline', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'status_konfirmasi' => 'none', 'kelas' => 'A');												
+				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'm.spmb.PendaftaranOnline', 'page_num' => 0,'offset' =>0,'limit' =>0, 'search' => false,'status_konfirmasi' => 'none', 'kelas' => 'A');												
 			}
             $_SESSION['currentPagePendaftaranOnline']['search'] = false;
             $this->cmbKonfirmasi->Text = $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi'];

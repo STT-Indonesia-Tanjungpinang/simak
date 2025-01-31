@@ -32,7 +32,7 @@ class DetailDulangMHSEkstension Extends MainPageM {
 		if ($this->IsValid) {	
             $datamhs = $_SESSION['currentPageDulangMHSEkstension']['DataMHS'];						
 			$ta=$datamhs['ta'];							
-			$semester=$datamhs['idsmt'];
+			$semester = $datamhs['idsmt'];
 			$tanggal=date ('Y-m-d H:m:s');			
             $nim=  $datamhs['nim'];           
 			$kelas = $datamhs['idkelas'];

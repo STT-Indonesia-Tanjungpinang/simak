@@ -9,7 +9,7 @@ class CDulangMHSAktif Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSAktif']) || $_SESSION['currentPageDulangMHSAktif']['page_name'] != 'm.dulang.DulangMHSAktif') {
-				$_SESSION['currentPageDulangMHSAktif'] = array('page_name' => 'm.dulang.DulangMHSAktif', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSAktif'] = array('page_name' => 'm.dulang.DulangMHSAktif', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS' =>array());												
 			}
             $_SESSION['currentPageDulangMHSAktif']['search'] = false;
             

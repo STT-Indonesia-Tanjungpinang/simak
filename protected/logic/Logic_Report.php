@@ -63,7 +63,7 @@ class Logic_Report extends Logic_Global {
                 require_once ('PHPExcel.php');                
 				$this->rpt=new PHPExcel();                
                 $this->exportedDir['excel_path'] = $host.'exported/excel/';
-				$this->exportedDir['full_path']=$path.'exported/excel/';
+				$this->exportedDir['full_path'] = $path.'exported/excel/';
 			break;
 			case 'excel2007':							
                 //phpexcel
@@ -79,7 +79,7 @@ class Logic_Report extends Logic_Global {
                 );
                 PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
 				$this->exportedDir['excel_path'] = $host.'exported/excel/';
-				$this->exportedDir['full_path']=$path.'exported/excel/';
+				$this->exportedDir['full_path'] = $path.'exported/excel/';
 			break;					
             case 'pdf':				
                 require_once (BASEPATH.'protected/lib/tcpdf/tcpdf.php');
@@ -89,18 +89,18 @@ class Logic_Report extends Logic_Global {
 				$this->rpt->setPrintHeader(false);
 				$this->rpt->setPrintFooter(false);				
 				$this->exportedDir['pdf_path'] = $host.'exported/pdf/';	
-				$this->exportedDir['full_path']=$path.'exported/pdf/';
+				$this->exportedDir['full_path'] = $path.'exported/pdf/';
 			break;	
             case 'pdfzip':
                 $this->exportedDir['pdf_path'] = $host.'exported/pdf/';	
-				$this->exportedDir['full_path']=$path.'exported/pdf/';
+				$this->exportedDir['full_path'] = $path.'exported/pdf/';
             break;
 		}
 	}
     /**
      * digunakan untuk mendapatkan driver saat ini
      */
-	public function getDriver () {
+	public function getDriver() {
         return $this->driver;
     }   
     /**
@@ -179,7 +179,7 @@ class Logic_Report extends Logic_Global {
 				$sheet->duplicateStyleArray(array(
 												'font' => array('bold' => true),
 												'alignment' => array('horizontal' => $alignment,
-														'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)					   	
+														'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)					   	
 												),
 												$columnHeader.$this->currentRow.':'.$columnHeader.$row
 											);				
@@ -201,7 +201,7 @@ class Logic_Report extends Logic_Global {
                 $writer->setPreCalculateFormulas(false);
 				$filename_to_write = "$filename_to_write.xls";
 				$writer->save ($this->exportedDir['full_path'].$filename_to_write);		
-				$this->exportedDir['filename']=$filename;
+				$this->exportedDir['filename'] = $filename;
 				$this->exportedDir['excel_path'].=$filename_to_write;		
             break;
 			case 'excel2007':
@@ -210,13 +210,13 @@ class Logic_Report extends Logic_Global {
 				$filename_to_write = "$filename_to_write.xlsx";
 				
 				$writer->save ($this->exportedDir['full_path'].$filename_to_write);		
-				$this->exportedDir['filename']=$filename;
+				$this->exportedDir['filename'] = $filename;
 				$this->exportedDir['excel_path'].=$filename_to_write;		
 			break;	
             case 'pdf':
 				$filename_to_write="$filename_to_write.pdf";
 				$this->rpt->output ($this->exportedDir['full_path'].$filename_to_write,'F');
-				$this->exportedDir['filename']=$filename;
+				$this->exportedDir['filename'] = $filename;
 				$this->exportedDir['pdf_path'].=$filename_to_write;		
 			break;            
 		}

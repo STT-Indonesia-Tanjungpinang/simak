@@ -6,7 +6,7 @@ class DataLulusan extends MainPageF {
         $this->createObj('Nilai');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
             if (!isset($_SESSION['currentPageDataLulusan']) || $_SESSION['currentPageDataLulusan']['page_name'] != 'DataLulusan') {					
-                $_SESSION['currentPageDataLulusan'] = array('page_name' => 'DataLulusan', 'page_num' => 0, 'search' => false,'tanggal_terbit' => 'none', 'DataMHS'=>array(), 'DataNilai'=>array());												
+                $_SESSION['currentPageDataLulusan'] = array('page_name' => 'DataLulusan', 'page_num' => 0, 'search' => false,'tanggal_terbit' => 'none', 'DataMHS' =>array(), 'DataNilai' =>array());												
             }
             $_SESSION['currentPageDataLulusan']['search'] = false;
             $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
@@ -18,7 +18,7 @@ class DataLulusan extends MainPageF {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
 	public function Page_Changed ($sender, $param) {
-		$_SESSION['currentPageDataLulusan']['page_num']=$param->NewPageIndex;
+		$_SESSION['currentPageDataLulusan']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageDataLulusan']['search']);
 	}
     public function searchRecord ($sender, $param) {

@@ -8,7 +8,7 @@ class CPembayaranFormulir Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranFormulir']) || $_SESSION['currentPagePembayaranFormulir']['page_name'] != 'k.pembayaran.PembayaranFormulir') {
-				$_SESSION['currentPagePembayaranFormulir'] = array('page_name' => 'k.pembayaran.PembayaranFormulir', 'page_num' => 0, 'search' => false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranFormulir'] = array('page_name' => 'k.pembayaran.PembayaranFormulir', 'page_num' => 0, 'search' => false,'semester_masuk' =>1,'DataMHS' =>array());												
 			}
             $_SESSION['currentPagePembayaranFormulir']['search'] = false; 
           

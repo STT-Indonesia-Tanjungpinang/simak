@@ -9,7 +9,7 @@ class DulangMHSEkstension Extends MainPageDW {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack&&!$this->IsCallBack) {
             if (!isset($_SESSION['currentPageDulangMHSEkstension']) || $_SESSION['currentPageDulangMHSEkstension']['page_name'] != 'dw.dulang.DulangMHSEkstension') {
-				$_SESSION['currentPageDulangMHSEkstension'] = array('page_name' => 'dw.dulang.DulangMHSEkstension', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSEkstension'] = array('page_name' => 'dw.dulang.DulangMHSEkstension', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS' =>array());												
 			}
             $_SESSION['currentPageDulangMHSEkstension']['search'] = false;
             
@@ -26,7 +26,7 @@ class DulangMHSEkstension Extends MainPageDW {
             $this->tbCmbTA->Text = $_SESSION['ta'];
             $this->tbCmbTA->dataBind();			
 
-            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
             $this->tbCmbSemester->DataSource=$semester;
             $this->tbCmbSemester->Text = $_SESSION['semester'];
             $this->tbCmbSemester->dataBind();
@@ -47,7 +47,7 @@ class DulangMHSEkstension Extends MainPageDW {
         return $this->Demik->getDataMHS($idx);
     }
     public function setInfoToolbar() {        
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
@@ -55,15 +55,15 @@ class DulangMHSEkstension Extends MainPageDW {
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
     public function Page_Changed ($sender, $param) {
-		$_SESSION['currentPageDulangMHSEkstension']['page_num']=$param->NewPageIndex;
+		$_SESSION['currentPageDulangMHSEkstension']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageDulangMHSEkstension']['search']);
 	}
 	public function renderCallback ($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}
 	public function changeTbTA ($sender, $param) {				
-		$_SESSION['ta']=$this->tbCmbTA->Text;		        
-		$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk']=$_SESSION['ta'];
+		$_SESSION['ta'] = $this->tbCmbTA->Text;		        
+		$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'] = $_SESSION['ta'];
 		$this->tbCmbTahunMasuk->DataSource=$this->getAngkatan();
 		$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
@@ -71,17 +71,17 @@ class DulangMHSEkstension Extends MainPageDW {
 		$this->populateData();
 	}
 	public function changeTbTahunMasuk($sender, $param) {				
-		$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk']=$this->tbCmbTahunMasuk->Text;
+		$_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}
 	public function changeTbPs ($sender, $param) {		
-		$_SESSION['kjur']=$this->tbCmbPs->Text;
+		$_SESSION['kjur'] = $this->tbCmbPs->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}	
 	public function changeTbSemester ($sender, $param) {		
-		$_SESSION['semester']=$this->tbCmbSemester->Text;        
+		$_SESSION['semester'] = $this->tbCmbSemester->Text;        
         $this->setInfoToolbar();
 		$this->populateData();
 	}
@@ -89,7 +89,7 @@ class DulangMHSEkstension Extends MainPageDW {
         $iddosen_wali = $this->iddosen_wali;
         $ta=$_SESSION['ta'];
 		$idsmt=$_SESSION['semester'];
-		$kjur=$_SESSION['kjur'];
+		$kjur = $_SESSION['kjur'];
 		$tahun_masuk = $_SESSION['currentPageDulangMHSEkstension']['tahun_masuk'];       
         $str_tahun_masuk = $tahun_masuk=='none'?'':" AND vdm.tahun_masuk = $tahun_masuk";      
         if ($search) {

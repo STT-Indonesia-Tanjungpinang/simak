@@ -8,7 +8,7 @@ class CDulangMHSLulus Extends MainPageM {
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPageDulangMHSLulus']) || $_SESSION['currentPageDulangMHSLulus']['page_name'] != 'm.dulang.DulangMHSLulus') {
-        $_SESSION['currentPageDulangMHSLulus'] = array('page_name' => 'm.dulang.DulangMHSLulus', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
+        $_SESSION['currentPageDulangMHSLulus'] = array('page_name' => 'm.dulang.DulangMHSLulus', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS' =>array());												
       }
       $_SESSION['currentPageDulangMHSLulus']['search'] = false;
       

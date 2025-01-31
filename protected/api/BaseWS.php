@@ -87,7 +87,7 @@ class BaseWS extends TJsonResponse {
   /**
   * Object Payload JSON
   */
-  protected $payload = array('connection'=>-1,'message' => 'INVALID REQUEST');
+  protected $payload = array('connection' =>-1,'message' => 'INVALID REQUEST');
   public function init($config) {
     parent::init($config);
     //open connection to database	

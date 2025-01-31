@@ -96,7 +96,7 @@ class DBGlobal {
   * dapatkan objek dari Excel Reader
   * @param excelFile file excel beserta path-nya
   */
-  public function getObjExcelReader () {
+  public function getObjExcelReader() {
     return $this->objExcel2MySQL;
   }
   /**

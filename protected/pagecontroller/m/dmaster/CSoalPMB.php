@@ -116,7 +116,7 @@ class CSoalPMB extends MainPageM {
         $this->RepeaterEditJawaban->dataBind();        
         
     } 
-    public function updateData () {
+    public function updateData() {
 		if ($this->IsValid) {
             $id = $this->hiddenidsoal->Value;
             $nama_soal=  addslashes($this->txtEditNamaSoal->Text);

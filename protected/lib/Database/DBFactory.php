@@ -81,7 +81,7 @@ class DBFactory extends TModule {
 	* menyiapkan beberapa paramaters
 	*
 	*/
-	private function prepareParameters () {
+	private function prepareParameters() {
 		$db=$this->Application->getParameters ();		
 		$this->Host = $db['db_host'];
 		$this->UserName=$db['db_username'];
@@ -94,7 +94,7 @@ class DBFactory extends TModule {
 	* mendapatkan link dari tiap koneksi
 	*
 	*/
-	public function getLink () {
+	public function getLink() {
 		return $this->Link;
 	}
 	

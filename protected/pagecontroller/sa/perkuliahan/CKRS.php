@@ -24,7 +24,7 @@ class CKRS Extends MainPageSA {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {						
             if (!isset($_SESSION['currentPageKRS']) || $_SESSION['currentPageKRS']['page_name'] != 'sa.perkuliahan.KRS') {					
-                $_SESSION['currentPageKRS'] = array('page_name' => 'sa.perkuliahan.KRS', 'page_num' => 0,'mode_krs' => 'sudah', 'iddosen_wali' => 'none', 'tahun_masuk' => 'none', 'DataKRS'=>array(), 'DataMHS'=>array());												
+                $_SESSION['currentPageKRS'] = array('page_name' => 'sa.perkuliahan.KRS', 'page_num' => 0,'mode_krs' => 'sudah', 'iddosen_wali' => 'none', 'tahun_masuk' => 'none', 'DataKRS' =>array(), 'DataMHS' =>array());												
             }
             $_SESSION['currentPageKRS']['search'] = false;
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');

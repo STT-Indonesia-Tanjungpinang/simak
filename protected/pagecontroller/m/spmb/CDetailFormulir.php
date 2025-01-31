@@ -8,7 +8,7 @@ class CDetailFormulir extends MainPageM {
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailFormulir']) || $_SESSION['currentPageDetailFormulir']['page_name'] != 'm.spmb.DetailFormulir') {
-				$_SESSION['currentPageDetailFormulir'] = array('page_name' => 'm.spmb.DetailFormulir', 'page_num' => 0,'DataMHS'=>array(), 'activeviewindex'=> 0);												
+				$_SESSION['currentPageDetailFormulir'] = array('page_name' => 'm.spmb.DetailFormulir', 'page_num' => 0,'DataMHS' =>array(), 'activeviewindex' => 0);												
 			}
 
             $this->MVDetailFormulir->ActiveViewIndex=$_SESSION['currentPageDetailFormulir']['activeviewindex'];             

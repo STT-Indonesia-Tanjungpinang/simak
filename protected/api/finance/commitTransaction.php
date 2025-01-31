@@ -45,9 +45,9 @@ class commitTransaction extends BaseWS {
 						$this->DB->query('COMMIT'); //pembayaran mahasiswa baru
 					}else{
 						$this->createObj('Finance');
-						$no_formulir=$result['no_formulir'];
+						$no_formulir = $result['no_formulir'];
 						$nim = $result['nim'];
-						$kjur=$result['kjur'];
+						$kjur = $result['kjur'];
 						$ta=$result['tahun'];
 						$idsmt=$result['idsmt'];
 						$tahun_masuk = $result['tahun_masuk'];
@@ -97,9 +97,9 @@ class commitTransaction extends BaseWS {
 		            $this->DB->updateRecord($str);
 
 		            $this->createObj('Finance');
-		            $no_formulir=$result['no_formulir'];
+		            $no_formulir = $result['no_formulir'];
 					$nim = $result['nim'];
-					$kjur=$result['kjur'];
+					$kjur = $result['kjur'];
 					$ta=$result['tahun'];
 					$idsmt=$result['idsmt'];
 					$tahun_masuk = $result['tahun_masuk'];

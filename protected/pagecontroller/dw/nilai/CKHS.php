@@ -156,7 +156,7 @@ class CKHS extends MainPageDW {
             $sks=0;
             $status='-';
             $trstyle='';
-            $dataipk=array('ipk' => '0.00', 'sks'=> 0);
+            $dataipk=array('ipk' => '0.00', 'sks' => 0);
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) { 
                 $datadulang = $this->Nilai->getDataDulang($_SESSION['semester'], $_SESSION['ta']);                
                 $idkelas = $datadulang['idkelas'];

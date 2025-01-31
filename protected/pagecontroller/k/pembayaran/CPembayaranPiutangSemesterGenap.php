@@ -8,7 +8,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGenap']) || $_SESSION['currentPagePembayaranPiutangSemesterGenap']['page_name'] != 'k.pembayaran.PembayaranPiutangSemesterGenap') {
-				$_SESSION['currentPagePembayaranPiutangSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGenap', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester'=>2,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranPiutangSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGenap', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester' =>2,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS' =>array());												
 			}
             $_SESSION['currentPagePembayaranPiutangSemesterGenap']['search'] = false; 
             
@@ -29,7 +29,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
             $this->setInfoToolbar();
 		}	
 	}	
-    public function getTA () {
+    public function getTA() {
         $dt =$this->DMaster->getListTA();
         $ta = $_SESSION['currentPagePembayaranPiutangSemesterGenap']['tahun_masuk'];        
         while (list($k, $v)=each ($dt)) {

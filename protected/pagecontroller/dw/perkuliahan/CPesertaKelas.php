@@ -9,7 +9,7 @@ class CPesertaKelas extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePesertaKelas']) || $_SESSION['currentPagePesertaKelas']['page_name'] != 'm.perkuliahan.PesertaKelas') {
-				$_SESSION['currentPagePesertaKelas'] = array('page_name' => 'm.perkuliahan.PesertaKelas', 'page_num' => 0, 'search' => false,'InfoKelas'=>array());
+				$_SESSION['currentPagePesertaKelas'] = array('page_name' => 'm.perkuliahan.PesertaKelas', 'page_num' => 0, 'search' => false,'InfoKelas' =>array());
 			}  
             $_SESSION['currentPagePesertaKelas']['search'] = false;            
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();

@@ -9,7 +9,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
         $this->showPembayaranCutiSemesterGanjil=true;
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPagePembayaranCutiSemesterGanjil']) || $_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_name'] != 'mh.pembayaran.PembayaranCutiSemesterGanjil') {
-				$_SESSION['currentPagePembayaranCutiSemesterGanjil'] = array('page_name' => 'mh.pembayaran.PembayaranCutiSemesterGanjil', 'page_num' => 0, 'search' => false,'DataMHS'=>array(), 'ta' => $_SESSION['ta']);												
+				$_SESSION['currentPagePembayaranCutiSemesterGanjil'] = array('page_name' => 'mh.pembayaran.PembayaranCutiSemesterGanjil', 'page_num' => 0, 'search' => false,'DataMHS' =>array(), 'ta' => $_SESSION['ta']);												
             }
             $this->setInfoToolbar();
             $this->tbCmbTA->DataSource = $this->DMaster->removeIdFromArray($this->DMaster->getListTA($this->Pengguna->getDataUser('tahun_masuk')), 'none');

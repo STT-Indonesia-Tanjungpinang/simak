@@ -4,7 +4,7 @@ class Autorisasi extends TModule implements IUserManager {
 	/**
 	* @return string name for a guest user	
 	*/		
-	public function getGuestName () {
+	public function getGuestName() {
 		return 'Guest';
 	}
 	
@@ -60,7 +60,7 @@ class Autorisasi extends TModule implements IUserManager {
             break;
 			case 'mb':
 				$pass=hash('sha256', $result['salt'] . hash('sha256', $password));
-				$_SESSION['userpassword_mb']=$password;
+				$_SESSION['userpassword_mb'] = $password;
                 $message="Gagal. Silahkan masukan username dan password dengan benar.";
 			break;
             case 'dw':

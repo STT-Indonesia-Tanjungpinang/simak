@@ -23,7 +23,7 @@ class CPKRS extends MainPageDW {
     if (!$this->IsPostBack && !$this->IsCallback) {
       if (!isset($_SESSION['currentPagePKRS']) || $_SESSION['currentPagePKRS']['page_name'] != 'dw.perkuliahan.PKRS')
       {					
-        $_SESSION['currentPagePKRS'] = array('page_name' => 'dw.perkuliahan.PKRS', 'search'=>false,'page_num' => 0,'DataKRS'=>array(), 'DataMHS'=>array());												
+        $_SESSION['currentPagePKRS'] = array('page_name' => 'dw.perkuliahan.PKRS', 'search' =>false,'page_num' => 0,'DataKRS' =>array(), 'DataMHS' =>array());												
       }
       $_SESSION['currentPagePKRS']['search'] = false;
 

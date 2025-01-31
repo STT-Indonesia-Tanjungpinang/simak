@@ -8,7 +8,7 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageRekapPembayaranSemesterGenap']) || $_SESSION['currentPageRekapPembayaranSemesterGenap']['page_name'] != 'k.report.RekapPembayaranSemesterGenap') {
-				$_SESSION['currentPageRekapPembayaranSemesterGenap'] = array('page_name' => 'k.report.RekapPembayaranSemesterGenap', 'page_num' => 0, 'search' => false,'semester'=>2,'kelas' => 'none');												
+				$_SESSION['currentPageRekapPembayaranSemesterGenap'] = array('page_name' => 'k.report.RekapPembayaranSemesterGenap', 'page_num' => 0, 'search' => false,'semester' =>2,'kelas' => 'none');												
 			}
             $_SESSION['currentPageRekapPembayaranSemesterGenap']['search'] = false; 
             

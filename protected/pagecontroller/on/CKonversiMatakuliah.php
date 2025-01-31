@@ -8,7 +8,7 @@ class CKonversiMatakuliah extends MainPageON {
 		if (!$this->IsPostBack && !$this->IsCallBack) {
             
             if (!isset($_SESSION['currentPageKonversiMatakuliah']) || $_SESSION['currentPageKonversiMatakuliah']['page_name'] != 'on.KonversiMatakuliah') {
-				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'on.KonversiMatakuliah', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'daftarmatkul'=>array(), 'kjur' => $_SESSION['kjur']);												
+				$_SESSION['currentPageKonversiMatakuliah'] = array('page_name' => 'on.KonversiMatakuliah', 'page_num' => 0,'offset' =>0,'limit' =>0, 'search' => false,'daftarmatkul' =>array(), 'kjur' => $_SESSION['kjur']);												
 			}
             $_SESSION['currentPageKonversiMatakuliah']['search'] = false;
             

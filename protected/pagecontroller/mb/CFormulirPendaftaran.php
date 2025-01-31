@@ -13,7 +13,7 @@ class CFormulirPendaftaran extends MainPageMB
       try 
       {                
         if (!isset($_SESSION['currentPageFormulirPendaftaran']) || $_SESSION['currentPageFormulirPendaftaran']['page_name'] != 'mb.FormulirPendaftaran') {
-          $_SESSION['currentPageFormulirPendaftaran'] = array('page_name' => 'mb.FormulirPendaftaran', 'page_num' => 0,'reguler'=>0,'karyawan'=>0,'ekstensi'=>0,'temp_file' => '');												
+          $_SESSION['currentPageFormulirPendaftaran'] = array('page_name' => 'mb.FormulirPendaftaran', 'page_num' => 0,'reguler' =>0,'karyawan' =>0,'ekstensi' =>0,'temp_file' => '');												
         }
         $semester_default = $this->Pengguna->getDataUser('semester_masuk');
         $reguler = $this->Finance->getBiayaPendaftaran($_SESSION['tahun_masuk'], $semester_default,'A');							

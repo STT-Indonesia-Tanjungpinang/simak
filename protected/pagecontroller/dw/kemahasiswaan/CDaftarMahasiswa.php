@@ -83,7 +83,7 @@ class CDaftarMahasiswa extends MainPageDW {
 		$_SESSION['currentPageDaftarMahasiswa']['search']=true;
         $this->populateData($_SESSION['currentPageDaftarMahasiswa']['search']);
 	} 
-    public function populateKonsentrasi () {			
+    public function populateKonsentrasi() {			
         $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
         $r = array();
         $i=1;

@@ -14,7 +14,7 @@ class CDetailKHS extends MainPageDW {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailKHS']) || $_SESSION['currentPageDetailKHS']['page_name'] != 'dw.nilai.DetailKHS') {
-				$_SESSION['currentPageDetailKHS'] = array('page_name' => 'dw.nilai.DetailKHS', 'page_num' => 0, 'search' => false,'DataMHS'=>array());												                                               
+				$_SESSION['currentPageDetailKHS'] = array('page_name' => 'dw.nilai.DetailKHS', 'page_num' => 0, 'search' => false,'DataMHS' =>array());												                                               
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

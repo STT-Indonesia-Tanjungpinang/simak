@@ -7,7 +7,7 @@ class CDiskusi extends MainPageM {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDiskusi']) || $_SESSION['currentPageDiskusi']['page_name'] != 'm.forum.Diskusi') {                                                                                
-                $_SESSION['currentPageDiskusi'] = array('page_name' => 'm.forum.Diskusi', 'page_num' => 0,'page_num_unread'=>0, 'search' => false,'activeviewindex'=> 0);
+                $_SESSION['currentPageDiskusi'] = array('page_name' => 'm.forum.Diskusi', 'page_num' => 0,'page_num_unread' =>0, 'search' => false,'activeviewindex' => 0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPageDiskusi']['activeviewindex']; 
 		}                
@@ -63,7 +63,7 @@ class CDiskusi extends MainPageM {
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
             $userid = $v['userid'];
-            $photo='resources/userimages/no_photo.png';
+            $photo = 'resources/userimages/no_photo.png';
             switch($v['tipe']) {
                 case 'mh':   
                     $str = "SELECT photo_profile FROM profiles_mahasiswa WHERE nim='$userid'";
@@ -115,7 +115,7 @@ class CDiskusi extends MainPageM {
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];
             $userid = $v['userid'];
-            $photo='resources/userimages/no_photo.png';
+            $photo = 'resources/userimages/no_photo.png';
             switch($v['tipe']) {
                 case 'mh':   
                     $str = "SELECT photo_profile FROM profiles_mahasiswa WHERE nim='$userid'";

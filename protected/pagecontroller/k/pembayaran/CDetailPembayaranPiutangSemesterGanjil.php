@@ -11,7 +11,7 @@ class CDetailPembayaranPiutangSemesterGanjil Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranPiutangSemesterGanjil']) || $_SESSION['currentPagePembayaranPiutangSemesterGanjil']['page_name'] != 'k.pembayaran.PembayaranPiutangSemesterGanjil') {
-				$_SESSION['currentPagePembayaranPiutangSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGanjil', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester'=>1,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranPiutangSemesterGanjil'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGanjil', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester' =>1,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS' =>array());												
 			}        
             try {
                 $nim=addslashes($this->request['id']);                           				

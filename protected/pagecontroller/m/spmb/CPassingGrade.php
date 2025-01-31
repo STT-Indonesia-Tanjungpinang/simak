@@ -40,7 +40,7 @@ class CPassingGrade extends MainPageM {
 		$_SESSION['currentPagePassingGrade']['idjadwal_ujian'] = $this->cmbJadwalUjian->Text;
 		$this->populateData();
 	}	
-    private function populateJadwalUjian () {
+    private function populateJadwalUjian() {
         $tahun_masuk = $_SESSION['tahun_pendaftaran'];
         $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,jup.idruangkelas,rk.namaruang,rk.kapasitas,date_added,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE tahun_masuk='$tahun_masuk' ORDER BY tanggal_ujian ASC";                
         $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'idruangkelas', 'namaruang', 'kapasitas', 'status'));

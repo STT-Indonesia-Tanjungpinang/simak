@@ -9,7 +9,7 @@ class CPenyelenggaraan extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePenyelenggaraan']) || $_SESSION['currentPagePenyelenggaraan']['page_name'] != 'm.perkuliahan.Penyelenggaraan') {                
-				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'm.perkuliahan.Penyelenggaraan', 'page_num' => 0, 'search' => false,'DaftarDosen'=>array());												
+				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'm.perkuliahan.Penyelenggaraan', 'page_num' => 0, 'search' => false,'DaftarDosen' =>array());												
 			}
             $_SESSION['currentPagePenyelenggaraan']['search'] = false;
             $_SESSION['currentPagePenyelenggaraan']['DaftarDosen'] = $this->DMaster->getDaftarDosen();
@@ -68,7 +68,7 @@ class CPenyelenggaraan extends MainPageM {
         
         $str = "SELECT idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen FROM v_penyelenggaraan WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND idkur = $idkur ORDER BY semester ASC,kmatkul ASC";
         $this->DB->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen'));			
-        $r= $this->DB->getRecord($str);
+        $r = $this->DB->getRecord($str);
         $result = array();
         while (list($k, $v) = each($r)) {
             $v['jumlah_peserta'] = $this->Demik->getJumlahMhsInPenyelenggaraan($v['idpenyelenggaraan']);

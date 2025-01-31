@@ -8,7 +8,7 @@ class CMatkulPrasyarat extends MainPageM {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageMatkulPrasyarat']) || $_SESSION['currentPageMatkulPrasyarat']['page_name'] != 'm.dmaster.MatkulPrasyarat') {
-				$_SESSION['currentPageMatkulPrasyarat'] = array('page_name' => 'm.dmaster.MatkulPrasyarat', 'page_num' => 0, 'search' => false,'dataMatkul'=>array());
+				$_SESSION['currentPageMatkulPrasyarat'] = array('page_name' => 'm.dmaster.MatkulPrasyarat', 'page_num' => 0, 'search' => false,'dataMatkul' =>array());
 			}
 			$this->populateData();            
 		}

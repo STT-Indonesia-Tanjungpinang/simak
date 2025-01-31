@@ -8,7 +8,7 @@ class CDulangMHSDropOut Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSDropOut']) || $_SESSION['currentPageDulangMHSDropOut']['page_name'] != 'm.dulang.DulangMHSDropOut') {
-				$_SESSION['currentPageDulangMHSDropOut'] = array('page_name' => 'm.dulang.DulangMHSDropOut', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSDropOut'] = array('page_name' => 'm.dulang.DulangMHSDropOut', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['tahun_masuk'],'iddosen_wali' => 'none', 'DataMHS' =>array());												
 			}
             $_SESSION['currentPageDulangMHSDropOut']['search'] = false;
             

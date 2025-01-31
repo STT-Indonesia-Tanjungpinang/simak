@@ -9,7 +9,7 @@ class CDulangMHSBaru Extends MainPageM {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDulangMHSBaru']) || $_SESSION['currentPageDulangMHSBaru']['page_name'] != 'm.dulang.DulangMHSBaru') {
-				$_SESSION['currentPageDulangMHSBaru'] = array('page_name' => 'm.dulang.DulangMHSBaru', 'page_num' => 0, 'search' => false,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPageDulangMHSBaru'] = array('page_name' => 'm.dulang.DulangMHSBaru', 'page_num' => 0, 'search' => false,'semester_masuk' =>1,'DataMHS' =>array());												
 			}
             $_SESSION['currentPageDulangMHSBaru']['search'] = false;
             

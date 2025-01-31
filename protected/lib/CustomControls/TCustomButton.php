@@ -112,10 +112,10 @@ class TCustomButton extends TWebControl implements IPostBackEventHandler, IButto
 	 */
 	protected function getPostBackOptions()
 	{
-		$options['ID']=$this->getClientID();
-		$options['CausesValidation']=$this->getCausesValidation();
+		$options['ID'] = $this->getClientID();
+		$options['CausesValidation'] = $this->getCausesValidation();
 		$options['EventTarget'] = $this->getUniqueID();
-		$options['ValidationGroup']=$this->getValidationGroup();
+		$options['ValidationGroup'] = $this->getValidationGroup();
 
 		return $options;
 	}

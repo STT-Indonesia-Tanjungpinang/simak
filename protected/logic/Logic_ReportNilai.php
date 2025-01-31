@@ -12,9 +12,9 @@ class Logic_ReportNilai extends Logic_Report {
   {
     $nim = $this->dataReport['nim'];
     $ta=$this->dataReport['ta'];
-    $semester=$this->dataReport['semester'];
+    $semester = $this->dataReport['semester'];
     $nama_tahun = $this->dataReport['nama_tahun'];
-    $nama_semester=$this->dataReport['nama_semester'];
+    $nama_semester = $this->dataReport['nama_semester'];
     switch($this->getDriver()) 
     {
       case 'excel2003':               
@@ -188,11 +188,11 @@ class Logic_ReportNilai extends Logic_Report {
    */
   public function printKHSAll ($objNilai, $objDMaster, $repeater, $withsignature=false) {        
     $awal=$this->dataReport['awal'];
-    $akhir=$this->dataReport['akhir'];
+    $akhir = $this->dataReport['akhir'];
     $ta=$this->dataReport['ta'];
-    $semester=$this->dataReport['semester'];
+    $semester = $this->dataReport['semester'];
     $nama_tahun = $this->dataReport['nama_tahun'];
-    $nama_semester=$this->dataReport['nama_semester'];
+    $nama_semester = $this->dataReport['nama_semester'];
     switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
@@ -381,10 +381,10 @@ class Logic_ReportNilai extends Logic_Report {
   public function printSummaryKHS ($objNilai, $objDMaster, $withsignature=false) {
     $ta=$this->dataReport['ta'];
     $tahun_masuk = $this->dataReport['tahun_masuk'];
-    $semester=$this->dataReport['semester'];
-    $kjur=$this->dataReport['kjur'];
+    $semester = $this->dataReport['semester'];
+    $kjur = $this->dataReport['kjur'];
     $nama_tahun = $this->dataReport['nama_tahun'];
-    $nama_semester=$this->dataReport['nama_semester'];
+    $nama_semester = $this->dataReport['nama_semester'];
     $nama_ps = $this->dataReport['nama_ps'];
     switch($this->getDriver()) {
       case 'excel2003':               
@@ -404,8 +404,8 @@ class Logic_ReportNilai extends Logic_Report {
         $styleArray=array(
                 'font' => array('bold' => true,
                         'size' => 16),
-                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                           'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                           'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
               );
         $sheet->getStyle("A7:L8")->applyFromArray($styleArray);
         
@@ -438,15 +438,15 @@ class Logic_ReportNilai extends Logic_Report {
         
         $styleArray=array(								
                   'font' => array('bold' => true),
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                             'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                             'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                   'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                 );																					 
         $sheet->getStyle("A10:L10")->applyFromArray($styleArray);
         $sheet->getStyle("A10:L10")->getAlignment()->setWrapText(true);
         
         $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND vdm.tahun_masuk = $tahun_masuk";
-        $str = "SELECT k.idkrs,k.tgl_krs,k.nim,nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.idkelas,vdm.tahun_masuk,vdm.semester_masuk,dk.iddata_konversi FROM krs k JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE tahun='$ta' AND idsmt='$semester' AND kjur=$kjur AND k.sah=1 $str_tahun_masuk ORDER BY vdm.idkelas ASC,vdm.nama_mhs ASC";
+        $str = "SELECT k.idkrs,k.tgl_krs,k.nim,nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.idkelas,vdm.tahun_masuk,vdm.semester_masuk,dk.iddata_konversi FROM krs k JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE tahun='$ta' AND idsmt='$semester' AND kjur = $kjur AND k.sah=1 $str_tahun_masuk ORDER BY vdm.idkelas ASC,vdm.nama_mhs ASC";
         $this->db->setFieldTable(array('idkrs', 'tgl_krs', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'idkelas', 'tahun_masuk', 'semester_masuk', 'iddata_konversi'));
         $r = $this->db->getRecord($str);
         $row=11;                
@@ -479,15 +479,15 @@ class Logic_ReportNilai extends Logic_Report {
         }
         $row-=1;
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
-                             'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+                             'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                   'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                 );																					 
         $sheet->getStyle("A11:L$row")->applyFromArray($styleArray);
         $sheet->getStyle("A11:L$row")->getAlignment()->setWrapText(true);
         
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
                 );
         
         $sheet->getStyle("A11:C$row")->applyFromArray($styleArray);
@@ -1442,8 +1442,8 @@ class Logic_ReportNilai extends Logic_Report {
           $styleArray=array(
             'font' => array('bold' => true,
                     'size' => 16),
-            'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+            'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
           );
           $sheet->getStyle("A3:A4")->applyFromArray($styleArray);
           
@@ -1511,8 +1511,8 @@ class Logic_ReportNilai extends Logic_Report {
   
           $styleArray=array(					
             'font' => array('bold' => true),			
-            'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+            'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
             'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
           );
           $sheet->getStyle("A".($row - 1).":F$row")->applyFromArray($styleArray);
@@ -1633,8 +1633,8 @@ class Logic_ReportNilai extends Logic_Report {
           }           
           $row = $row - 1;
           $styleArray=array(								
-            'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+            'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
             'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
           );
           $sheet->getStyle("A$row_awal:F$row")->applyFromArray($styleArray);
@@ -1642,7 +1642,7 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->getStyle("A$row_awal:M$row")->getAlignment()->setWrapText(true);
           
           $styleArray=array(								
-            'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+            'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
           );
   
           $sheet->getStyle("B$row_awal:B$row")->applyFromArray($styleArray);        
@@ -1958,8 +1958,8 @@ class Logic_ReportNilai extends Logic_Report {
         $styleArray=array(
                 'font' => array('bold' => true,
                         'size' => 16),
-                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                           'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                           'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
               );
         $sheet->getStyle("A7:K8")->applyFromArray($styleArray);
 
@@ -2065,8 +2065,8 @@ class Logic_ReportNilai extends Logic_Report {
         
         $styleArray=array(								
                   'font' => array('bold' => true),
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                             'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                             'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                   'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                 );																					 
         $sheet->getStyle("A15:K16")->applyFromArray($styleArray);
@@ -2091,15 +2091,15 @@ class Logic_ReportNilai extends Logic_Report {
         }
         $row-=1;
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
-                             'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+                             'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                   'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                 );																					 
         $sheet->getStyle("A17:K$row")->applyFromArray($styleArray);
         $sheet->getStyle("A17:K$row")->getAlignment()->setWrapText(true);
         
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
                 );
         
         $sheet->getStyle("A17:A$row")->applyFromArray($styleArray);
@@ -2480,8 +2480,8 @@ class Logic_ReportNilai extends Logic_Report {
         $styleArray=array(
                 'font' => array('bold' => true,
                         'size' => 16),
-                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                           'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                           'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
               );
         $sheet->getStyle("A7:J7")->applyFromArray($styleArray);
                  
@@ -2534,8 +2534,8 @@ class Logic_ReportNilai extends Logic_Report {
         
         $styleArray=array(								
                   'font' => array('bold' => true),
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                             'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                             'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                   'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                 );																					 
         $sheet->getStyle("A15:J16")->applyFromArray($styleArray);
@@ -2565,15 +2565,15 @@ class Logic_ReportNilai extends Logic_Report {
         }
         $row-=1;
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                             'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                             'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                   'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                 );																					 
         $sheet->getStyle("A17:J$row")->applyFromArray($styleArray);
         $sheet->getStyle("A17:J$row")->getAlignment()->setWrapText(true);
         
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                 );
         
         $sheet->getStyle("C17:C$row")->applyFromArray($styleArray);
@@ -2620,7 +2620,7 @@ class Logic_ReportNilai extends Logic_Report {
    * digunakan untuk mencetak daftar peserta kelas mahasiswa untuk mengimport nilai
    * @return type void
    */
-  public function printPesertaImportNilai () {
+  public function printPesertaImportNilai() {
     switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':  
@@ -2638,8 +2638,8 @@ class Logic_ReportNilai extends Logic_Report {
         
         $styleArray=array(
                 'font' => array('bold' => true),
-                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                           'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                           'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                 'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
               );
         $sheet->getStyle("A1:I1")->applyFromArray($styleArray);
@@ -2662,15 +2662,15 @@ class Logic_ReportNilai extends Logic_Report {
         }
         $row=$row-1;
         $styleArray=array(
-                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                           'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                           'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                 'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
               );
         $sheet->getStyle("A$row_awal:I$row")->applyFromArray($styleArray);
         $sheet->getStyle("A$row_awal:I$row")->getAlignment()->setWrapText(true);
         
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                 );
         $sheet->getStyle("B$row_awal:B$row")->applyFromArray($styleArray);
         $this->printOut('daftarisiannilai_'.$this->dataReport['kmatkul'].'_'.$this->dataReport['nama_kelas']);
@@ -2698,8 +2698,8 @@ class Logic_ReportNilai extends Logic_Report {
         $styleArray=array(
                 'font' => array('bold' => true,
                         'size' => 16),
-                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                           'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                           'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
               );
         $sheet->getStyle("A7:T7")->applyFromArray($styleArray);
                  
@@ -2790,8 +2790,8 @@ class Logic_ReportNilai extends Logic_Report {
         
         $styleArray=array(								
                   'font' => array('bold' => true),
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                             'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                             'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                   'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                 );																					 
         $sheet->getStyle("A17:T18")->applyFromArray($styleArray);
@@ -2826,15 +2826,15 @@ class Logic_ReportNilai extends Logic_Report {
         }
         $row=$row-1;
         $styleArray=array(
-                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                           'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                           'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                 'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
               );
         $sheet->getStyle("A$row_awal:T$row")->applyFromArray($styleArray);
         $sheet->getStyle("A$row_awal:T$row")->getAlignment()->setWrapText(true);
         
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                 );
         $sheet->getStyle("B$row_awal:B$row")->applyFromArray($styleArray);
         
@@ -2868,7 +2868,7 @@ class Logic_ReportNilai extends Logic_Report {
         $sheet->setCellValue("N$row", $this->dataReport['nama_dosen']);
         
         $styleArray=array(								
-                  'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                  'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                 );
         $sheet->getStyle("F$row_awal:F$row")->applyFromArray($styleArray);
         

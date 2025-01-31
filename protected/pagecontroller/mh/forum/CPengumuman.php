@@ -7,7 +7,7 @@ class CPengumuman extends MainPageMHS {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPagePengumuman']) || $_SESSION['currentPagePengumuman']['page_name'] != 'mh.forum.Pengumuman') {                                                                                
-                $_SESSION['currentPagePengumuman'] = array('page_name' => 'mh.forum.Pengumuman', 'page_num' => 0,'page_num_unread'=>0, 'search' => false,'activeviewindex'=> 0);
+                $_SESSION['currentPagePengumuman'] = array('page_name' => 'mh.forum.Pengumuman', 'page_num' => 0,'page_num_unread' =>0, 'search' => false,'activeviewindex' => 0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPagePengumuman']['activeviewindex']; 
 		}                

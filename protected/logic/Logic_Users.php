@@ -22,10 +22,10 @@ class Logic_Users extends Logic_Global {
 		parent::__construct ($db);	
 		$this->U = $this->User;
 		if (method_exists($this->U,'getRoles')) {
-			$dataUser=$this->U->getName();	
+			$dataUser = $this->U->getName();	
 			if ($dataUser != 'Guest') {
 				$this->Roles = $this->U->getRoles();			                
-				$this->DataUser=$dataUser['data_user'];					
+				$this->DataUser = $dataUser['data_user'];					
 				$this->UserAcl=$dataUser['hak_akses'];
             }		
 		}				
@@ -54,13 +54,13 @@ class Logic_Users extends Logic_Global {
     /**
 	* digunakan untuk mendapatkan roles user
 	*/		
-	public function getRoles () {
+	public function getRoles() {
 		return $this->Roles[0];
 	}    
 	/**
 	* digunakan untuk mendapatkan tipe user
 	*/		
-	public function getTipeUser () {
+	public function getTipeUser() {
 		return $this->DataUser['page'];
 	}		
 	/**
@@ -79,19 +79,19 @@ class Logic_Users extends Logic_Global {
 	* untuk mendapatkan userid dari user
 	*
 	*/
-	public function getUserid () {			
+	public function getUserid() {			
 		return $this->DataUser['userid'];		
 	}		
 	/**
 	* untuk mendapatkan username dari user	
 	*/
-	public function getUsername () {		
+	public function getUsername() {		
 		return $this->DataUser['username'];
 	}   
     /**
 	* digunakan untuk mendapatkan daftar group 	
 	*/	
-	public function getListGroup () {
+	public function getListGroup() {
 		$result = $this->getList('user_group',array('group_id', 'group_name'),null,null, 1);
 		return $result;
 	}

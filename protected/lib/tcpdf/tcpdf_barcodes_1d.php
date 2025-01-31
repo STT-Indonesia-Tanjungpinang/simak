@@ -1370,7 +1370,7 @@ class TCPDFBarcode {
 		}
 		//Convert digits to bars
 		$codes = array(
-			'A'=>array( // left odd parity
+			'A' =>array( // left odd parity
 				'0' => '0001101',
 				'1' => '0011001',
 				'2' => '0010011',
@@ -1381,7 +1381,7 @@ class TCPDFBarcode {
 				'7' => '0111011',
 				'8' => '0110111',
 				'9' => '0001011'),
-			'B'=>array( // left even parity
+			'B' =>array( // left even parity
 				'0' => '0100111',
 				'1' => '0110011',
 				'2' => '0011011',
@@ -1392,7 +1392,7 @@ class TCPDFBarcode {
 				'7' => '0010001',
 				'8' => '0001001',
 				'9' => '0010111'),
-			'C'=>array( // right
+			'C' =>array( // right
 				'0' => '1110010',
 				'1' => '1100110',
 				'2' => '1101100',
@@ -1405,41 +1405,41 @@ class TCPDFBarcode {
 				'9' => '1110100')
 		);
 		$parities = array(
-			'0'=>array('A', 'A', 'A', 'A', 'A', 'A'),
-			'1'=>array('A', 'A', 'B', 'A', 'B', 'B'),
-			'2'=>array('A', 'A', 'B', 'B', 'A', 'B'),
-			'3'=>array('A', 'A', 'B', 'B', 'B', 'A'),
-			'4'=>array('A', 'B', 'A', 'A', 'B', 'B'),
-			'5'=>array('A', 'B', 'B', 'A', 'A', 'B'),
-			'6'=>array('A', 'B', 'B', 'B', 'A', 'A'),
-			'7'=>array('A', 'B', 'A', 'B', 'A', 'B'),
-			'8'=>array('A', 'B', 'A', 'B', 'B', 'A'),
-			'9'=>array('A', 'B', 'B', 'A', 'B', 'A')
+			'0' =>array('A', 'A', 'A', 'A', 'A', 'A'),
+			'1' =>array('A', 'A', 'B', 'A', 'B', 'B'),
+			'2' =>array('A', 'A', 'B', 'B', 'A', 'B'),
+			'3' =>array('A', 'A', 'B', 'B', 'B', 'A'),
+			'4' =>array('A', 'B', 'A', 'A', 'B', 'B'),
+			'5' =>array('A', 'B', 'B', 'A', 'A', 'B'),
+			'6' =>array('A', 'B', 'B', 'B', 'A', 'A'),
+			'7' =>array('A', 'B', 'A', 'B', 'A', 'B'),
+			'8' =>array('A', 'B', 'A', 'B', 'B', 'A'),
+			'9' =>array('A', 'B', 'B', 'A', 'B', 'A')
 		);
 		$upce_parities = array();
 		$upce_parities[0] = array(
-			'0'=>array('B', 'B', 'B', 'A', 'A', 'A'),
-			'1'=>array('B', 'B', 'A', 'B', 'A', 'A'),
-			'2'=>array('B', 'B', 'A', 'A', 'B', 'A'),
-			'3'=>array('B', 'B', 'A', 'A', 'A', 'B'),
-			'4'=>array('B', 'A', 'B', 'B', 'A', 'A'),
-			'5'=>array('B', 'A', 'A', 'B', 'B', 'A'),
-			'6'=>array('B', 'A', 'A', 'A', 'B', 'B'),
-			'7'=>array('B', 'A', 'B', 'A', 'B', 'A'),
-			'8'=>array('B', 'A', 'B', 'A', 'A', 'B'),
-			'9'=>array('B', 'A', 'A', 'B', 'A', 'B')
+			'0' =>array('B', 'B', 'B', 'A', 'A', 'A'),
+			'1' =>array('B', 'B', 'A', 'B', 'A', 'A'),
+			'2' =>array('B', 'B', 'A', 'A', 'B', 'A'),
+			'3' =>array('B', 'B', 'A', 'A', 'A', 'B'),
+			'4' =>array('B', 'A', 'B', 'B', 'A', 'A'),
+			'5' =>array('B', 'A', 'A', 'B', 'B', 'A'),
+			'6' =>array('B', 'A', 'A', 'A', 'B', 'B'),
+			'7' =>array('B', 'A', 'B', 'A', 'B', 'A'),
+			'8' =>array('B', 'A', 'B', 'A', 'A', 'B'),
+			'9' =>array('B', 'A', 'A', 'B', 'A', 'B')
 		);
 		$upce_parities[1] = array(
-			'0'=>array('A', 'A', 'A', 'B', 'B', 'B'),
-			'1'=>array('A', 'A', 'B', 'A', 'B', 'B'),
-			'2'=>array('A', 'A', 'B', 'B', 'A', 'B'),
-			'3'=>array('A', 'A', 'B', 'B', 'B', 'A'),
-			'4'=>array('A', 'B', 'A', 'A', 'B', 'B'),
-			'5'=>array('A', 'B', 'B', 'A', 'A', 'B'),
-			'6'=>array('A', 'B', 'B', 'B', 'A', 'A'),
-			'7'=>array('A', 'B', 'A', 'B', 'A', 'B'),
-			'8'=>array('A', 'B', 'A', 'B', 'B', 'A'),
-			'9'=>array('A', 'B', 'B', 'A', 'B', 'A')
+			'0' =>array('A', 'A', 'A', 'B', 'B', 'B'),
+			'1' =>array('A', 'A', 'B', 'A', 'B', 'B'),
+			'2' =>array('A', 'A', 'B', 'B', 'A', 'B'),
+			'3' =>array('A', 'A', 'B', 'B', 'B', 'A'),
+			'4' =>array('A', 'B', 'A', 'A', 'B', 'B'),
+			'5' =>array('A', 'B', 'B', 'A', 'A', 'B'),
+			'6' =>array('A', 'B', 'B', 'B', 'A', 'A'),
+			'7' =>array('A', 'B', 'A', 'B', 'A', 'B'),
+			'8' =>array('A', 'B', 'A', 'B', 'B', 'A'),
+			'9' =>array('A', 'B', 'B', 'A', 'B', 'A')
 		);
 		$k = 0;
 		$seq = '101'; // left guard bar
@@ -1511,7 +1511,7 @@ class TCPDFBarcode {
 		}
 		//Convert digits to bars
 		$codes = array(
-			'A'=>array( // left odd parity
+			'A' =>array( // left odd parity
 				'0' => '0001101',
 				'1' => '0011001',
 				'2' => '0010011',
@@ -1522,7 +1522,7 @@ class TCPDFBarcode {
 				'7' => '0111011',
 				'8' => '0110111',
 				'9' => '0001011'),
-			'B'=>array( // left even parity
+			'B' =>array( // left even parity
 				'0' => '0100111',
 				'1' => '0110011',
 				'2' => '0011011',
@@ -1536,22 +1536,22 @@ class TCPDFBarcode {
 		);
 		$parities = array();
 		$parities[2] = array(
-			'0'=>array('A', 'A'),
-			'1'=>array('A', 'B'),
-			'2'=>array('B', 'A'),
-			'3'=>array('B', 'B')
+			'0' =>array('A', 'A'),
+			'1' =>array('A', 'B'),
+			'2' =>array('B', 'A'),
+			'3' =>array('B', 'B')
 		);
 		$parities[5] = array(
-			'0'=>array('B', 'B', 'A', 'A', 'A'),
-			'1'=>array('B', 'A', 'B', 'A', 'A'),
-			'2'=>array('B', 'A', 'A', 'B', 'A'),
-			'3'=>array('B', 'A', 'A', 'A', 'B'),
-			'4'=>array('A', 'B', 'B', 'A', 'A'),
-			'5'=>array('A', 'A', 'B', 'B', 'A'),
-			'6'=>array('A', 'A', 'A', 'B', 'B'),
-			'7'=>array('A', 'B', 'A', 'B', 'A'),
-			'8'=>array('A', 'B', 'A', 'A', 'B'),
-			'9'=>array('A', 'A', 'B', 'A', 'B')
+			'0' =>array('B', 'B', 'A', 'A', 'A'),
+			'1' =>array('B', 'A', 'B', 'A', 'A'),
+			'2' =>array('B', 'A', 'A', 'B', 'A'),
+			'3' =>array('B', 'A', 'A', 'A', 'B'),
+			'4' =>array('A', 'B', 'B', 'A', 'A'),
+			'5' =>array('A', 'A', 'B', 'B', 'A'),
+			'6' =>array('A', 'A', 'A', 'B', 'B'),
+			'7' =>array('A', 'B', 'A', 'B', 'A'),
+			'8' =>array('A', 'B', 'A', 'A', 'B'),
+			'9' =>array('A', 'A', 'B', 'A', 'B')
 		);
 		$p = $parities[$len][$r];
 		$seq = '1011'; // left guard bar

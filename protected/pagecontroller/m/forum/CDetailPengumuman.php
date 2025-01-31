@@ -8,7 +8,7 @@ class CDetailPengumuman extends MainPageM {
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageDetailPengumuman']) || $_SESSION['currentPageDetailPengumuman']['page_name'] != 'm.forum.DetailPengumuman') {                                                                                
-                $_SESSION['currentPageDetailPengumuman'] = array('page_name' => 'm.forum.DetailPengumuman', 'page_num' => 0, 'search' => false,'DataDiskusi'=>array());
+                $_SESSION['currentPageDetailPengumuman'] = array('page_name' => 'm.forum.DetailPengumuman', 'page_num' => 0, 'search' => false,'DataDiskusi' =>array());
             }            
             try {
                 $id=addslashes($this->request['id']);

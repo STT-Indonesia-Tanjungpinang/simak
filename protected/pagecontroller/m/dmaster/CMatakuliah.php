@@ -56,7 +56,7 @@ class CMatakuliah extends MainPageM {
     $this->populateKonsentrasi();
     $this->populateData();
   }
-  public function populateKonsentrasi () {			
+  public function populateKonsentrasi() {			
     $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
     $r = array();
     $i=1;

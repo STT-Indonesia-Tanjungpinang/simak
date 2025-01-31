@@ -110,24 +110,24 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
         $result = array();      
         
         $komponen_biaya=array();
-        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'A', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>1,'idkelas' => 'A', 'perpanjang' =>false));
         $komponen_biaya['A']['baru'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');
         $komponen_biaya['A']['lama'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
-        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'A', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>2,'idkelas' => 'A', 'perpanjang' =>false));
         $komponen_biaya['A']['baru'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');       
         $komponen_biaya['A']['lama'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');  
         
-        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'B', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>1,'idkelas' => 'B', 'perpanjang' =>false));
         $komponen_biaya['B']['baru'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['B']['lama'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');            
-        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'B', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>2,'idkelas' => 'B', 'perpanjang' =>false));
         $komponen_biaya['B']['baru'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['B']['lama'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
         
-        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>1,'idkelas' => 'C', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>1,'idkelas' => 'C', 'perpanjang' =>false));
         $komponen_biaya['C']['baru'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['C']['lama'][1] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama'); 
-        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt'=>2,'idkelas' => 'C', 'perpanjang'=>false));
+        $this->Finance->setDataMHS(array('tahun_masuk' => $tahun_masuk,'idsmt' =>2,'idkelas' => 'C', 'perpanjang' =>false));
         $komponen_biaya['C']['baru'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('baru');            
         $komponen_biaya['C']['lama'][2] = $this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
         
@@ -161,7 +161,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
     }
     
     public function getTotalBayarMHS ($no_formulir, $ta, $tahun_masuk, $semester_masuk, $komponen_biaya, $idkelas) {                        
-        $sudahbayar = array(1=>array('sudahbayar'=>0,'belumbayar'=> 0),2=>array('sudahbayar'=>0,'belumbayar'=> 0));
+        $sudahbayar = array(1=>array('sudahbayar' =>0,'belumbayar' => 0),2=>array('sudahbayar' =>0,'belumbayar' => 0));
         if ($ta==$tahun_masuk && $semester_masuk == 1) {
             $kewajiban_ganjil = $komponen_biaya[$idkelas]['baru'][1];
             $pembayaran_ganjil = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=1 AND idkombi!=1");

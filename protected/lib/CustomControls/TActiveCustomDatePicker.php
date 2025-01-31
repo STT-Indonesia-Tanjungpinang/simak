@@ -60,8 +60,8 @@ class TActiveCustomDatePicker extends TCustomDatePicker  implements ICallbackEve
 	protected function getDatePickerOptions()
 	{
 		$options = parent::getDatePickerOptions();
-		$options['CausesValidation']=$this->getCausesValidation();
-		$options['ValidationGroup']=$this->getValidationGroup();
+		$options['CausesValidation'] = $this->getCausesValidation();
+		$options['ValidationGroup'] = $this->getValidationGroup();
 		$options['EventTarget'] = $this->getUniqueID();
 		$options['ShowCalendar'] = $this->getShowCalendar();
 		$options['AutoPostBack'] = $this->getAutoPostBack();

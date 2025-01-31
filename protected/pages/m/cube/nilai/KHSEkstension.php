@@ -29,7 +29,7 @@ class KHSEkstension extends MainPageM {
 			$this->tbCmbTA->Text = $_SESSION['ta'];
 			$this->tbCmbTA->dataBind();			
             
-            $semester=$this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
+            $semester = $this->DMaster->removeIdFromArray($this->setup->getSemester(), 'none');  				
 			$this->tbCmbSemester->DataSource=$semester;
 			$this->tbCmbSemester->Text = $_SESSION['semester'];
 			$this->tbCmbSemester->dataBind();
@@ -50,7 +50,7 @@ class KHSEkstension extends MainPageM {
 		
 	}
     public function setInfoToolbar() {        
-        $kjur=$_SESSION['kjur'];        
+        $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta=$this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
@@ -58,15 +58,15 @@ class KHSEkstension extends MainPageM {
 		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
     public function Page_Changed ($sender, $param) {
-		$_SESSION['currentPageKHSEkstension']['page_num']=$param->NewPageIndex;
+		$_SESSION['currentPageKHSEkstension']['page_num'] = $param->NewPageIndex;
 		$this->populateData($_SESSION['currentPageKHSEkstension']['search']);
 	}
 	public function renderCallback ($sender, $param) {
 		$this->RepeaterS->render($param->NewWriter);	
 	}	
 	public function changeTbTA ($sender, $param) {				
-		$_SESSION['ta']=$this->tbCmbTA->Text;		        
-		$_SESSION['currentPageKHSEkstension']['tahun_masuk']=$_SESSION['ta'];
+		$_SESSION['ta'] = $this->tbCmbTA->Text;		        
+		$_SESSION['currentPageKHSEkstension']['tahun_masuk'] = $_SESSION['ta'];
 		$this->tbCmbTahunMasuk->DataSource=$this->getAngkatan();
 		$this->tbCmbTahunMasuk->Text = $_SESSION['currentPageKHSEkstension']['tahun_masuk'];
 		$this->tbCmbTahunMasuk->dataBind();		
@@ -74,22 +74,22 @@ class KHSEkstension extends MainPageM {
 		$this->populateData();
 	}
 	public function changeTbTahunMasuk($sender, $param) {				
-		$_SESSION['currentPageKHSEkstension']['tahun_masuk']=$this->tbCmbTahunMasuk->Text;
+		$_SESSION['currentPageKHSEkstension']['tahun_masuk'] = $this->tbCmbTahunMasuk->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}
 	public function changeTbPs ($sender, $param) {		
-		$_SESSION['kjur']=$this->tbCmbPs->Text;
+		$_SESSION['kjur'] = $this->tbCmbPs->Text;
         $this->setInfoToolbar();
 		$this->populateData();
 	}	
 	public function changeTbSemester ($sender, $param) {		
-		$_SESSION['semester']=$this->tbCmbSemester->Text;        
+		$_SESSION['semester'] = $this->tbCmbSemester->Text;        
         $this->setInfoToolbar();
 		$this->populateData();
 	}	
 	public function changeDW($sender, $param){
-		$_SESSION['currentPageKHSEkstension']['iddosen_wali']=$this->cmbDosenWali->Text;				
+		$_SESSION['currentPageKHSEkstension']['iddosen_wali'] = $this->cmbDosenWali->Text;				
 		$this->populateData();
 	}	
     public function searchRecord ($sender, $param) {
@@ -120,14 +120,14 @@ class KHSEkstension extends MainPageM {
                 break;
             }
         }else{
-            $kjur=$_SESSION['kjur'];
+            $kjur = $_SESSION['kjur'];
             $tahun_masuk = $_SESSION['currentPageKHSEkstension']['tahun_masuk'];	
             $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND vdm.idkelas='C' AND vdm.tahun_masuk = $tahun_masuk";
             $iddosen_wali = $_SESSION['currentPageKHSEkstension']['iddosen_wali'];
             $str_dosen_wali = $iddosen_wali == 'none' ?'':"AND vdm.idkelas='C' AND vdm.iddosen_wali = $iddosen_wali";
-            $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' AND kjur=$kjur $str_tahun_masuk $str_dosen_wali";
+            $str = "SELECT k.idkrs,k.tgl_krs,vdm.no_formulir,k.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.tahun_masuk,vdm.semester_masuk,vdm.idkelas,k.sah,k.tgl_disahkan FROM krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' AND kjur = $kjur $str_tahun_masuk $str_dosen_wali";
             
-            $jumlah_baris = $this->DB->getCountRowsOfTable("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' AND kjur=$kjur $str_tahun_masuk $str_dosen_wali",'k.idkrs');
+            $jumlah_baris = $this->DB->getCountRowsOfTable("krs k,v_datamhs vdm WHERE k.nim=vdm.nim AND vdm.idkelas='C' AND tahun='$ta' AND idsmt='$idsmt' AND kjur = $kjur $str_tahun_masuk $str_dosen_wali",'k.idkrs');
         }
 		
 		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKHSEkstension']['page_num'];
@@ -157,7 +157,7 @@ class KHSEkstension extends MainPageM {
             $sks=0;
             $status='-';
             $trstyle='';
-            $dataipk=array('ipk' => '0.00', 'sks'=> 0);
+            $dataipk=array('ipk' => '0.00', 'sks' => 0);
 			if ($this->Nilai->isKrsSah($_SESSION['ta'], $_SESSION['semester'])) {                                                            
 				$this->Nilai->getKHS($_SESSION['ta'], $_SESSION['semester']);
 				$ip = $this->Nilai->getIPS ();
@@ -202,29 +202,29 @@ class KHSEkstension extends MainPageM {
                         $r = $this->DB->getRecord($str);	           
                         $dataReport=$r[1];
 
-                        $dataReport['nama_dosen']=$this->DMaster->getNamaDosenWaliByID ($dataReport['iddosen_wali']);
+                        $dataReport['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($dataReport['iddosen_wali']);
 
                         $tahun = $_SESSION['ta'];
-                        $semester=$_SESSION['semester'];
+                        $semester = $_SESSION['semester'];
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
                         $nama_semester = $this->setup->getSemester($semester);
 
-                        $dataReport['ta']=$tahun;
-                        $dataReport['semester']=$semester;
-                        $dataReport['nama_tahun']=$nama_tahun;
-                        $dataReport['nama_semester']=$nama_semester;        
+                        $dataReport['ta'] = $tahun;
+                        $dataReport['semester'] = $semester;
+                        $dataReport['nama_tahun'] = $nama_tahun;
+                        $dataReport['nama_semester'] = $nama_semester;        
 
-                        $dataReport['nama_jabatan_khs']=$this->setup->getSettingValue('nama_jabatan_khs');
-                        $dataReport['nama_penandatangan_khs']=$this->setup->getSettingValue('nama_penandatangan_khs');
-                        $dataReport['jabfung_penandatangan_khs']=$this->setup->getSettingValue('jabfung_penandatangan_khs');
-                        $dataReport['nidn_penandatangan_khs']=$this->setup->getSettingValue('nidn_penandatangan_khs');
+                        $dataReport['nama_jabatan_khs'] = $this->setup->getSettingValue('nama_jabatan_khs');
+                        $dataReport['nama_penandatangan_khs'] = $this->setup->getSettingValue('nama_penandatangan_khs');
+                        $dataReport['jabfung_penandatangan_khs'] = $this->setup->getSettingValue('jabfung_penandatangan_khs');
+                        $dataReport['nidn_penandatangan_khs'] = $this->setup->getSettingValue('nidn_penandatangan_khs');
 
                         $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
-                        $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-                        $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-                        $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
+                        $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+                        $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+                        $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
 
-                        $dataReport['linkoutput']=$this->linkOutput; 
+                        $dataReport['linkoutput'] = $this->linkOutput; 
                         $this->report->setDataReport($dataReport); 
                         $this->report->setMode($_SESSION['outputreport']);
 
@@ -240,29 +240,29 @@ class KHSEkstension extends MainPageM {
                     break;
                     case 'summaryexcel':
                         $tahun = $_SESSION['ta'];
-                        $semester=$_SESSION['semester'];
+                        $semester = $_SESSION['semester'];
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
                         $nama_semester = $this->setup->getSemester($semester);
                         
-                        $dataReport['ta']=$tahun;
-                        $dataReport['tahun_masuk']=$_SESSION['currentPageKHSEkstension']['tahun_masuk'];
-                        $dataReport['semester']=$semester;
-                        $dataReport['nama_tahun']=$nama_tahun;
-                        $dataReport['nama_semester']=$nama_semester; 
-                        $dataReport['kjur']=$_SESSION['kjur'];
-                        $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$_SESSION['kjur']];
+                        $dataReport['ta'] = $tahun;
+                        $dataReport['tahun_masuk'] = $_SESSION['currentPageKHSEkstension']['tahun_masuk'];
+                        $dataReport['semester'] = $semester;
+                        $dataReport['nama_tahun'] = $nama_tahun;
+                        $dataReport['nama_semester'] = $nama_semester; 
+                        $dataReport['kjur'] = $_SESSION['kjur'];
+                        $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
                         
-                        $dataReport['nama_jabatan_khs']=$this->setup->getSettingValue('nama_jabatan_khs');
-                        $dataReport['nama_penandatangan_khs']=$this->setup->getSettingValue('nama_penandatangan_khs');
-                        $dataReport['jabfung_penandatangan_khs']=$this->setup->getSettingValue('jabfung_penandatangan_khs');
-                        $dataReport['nidn_penandatangan_khs']=$this->setup->getSettingValue('nidn_penandatangan_khs');
+                        $dataReport['nama_jabatan_khs'] = $this->setup->getSettingValue('nama_jabatan_khs');
+                        $dataReport['nama_penandatangan_khs'] = $this->setup->getSettingValue('nama_penandatangan_khs');
+                        $dataReport['jabfung_penandatangan_khs'] = $this->setup->getSettingValue('jabfung_penandatangan_khs');
+                        $dataReport['nidn_penandatangan_khs'] = $this->setup->getSettingValue('nidn_penandatangan_khs');
                         
                         $kaprodi = $this->Nilai->getKetuaPRODI($dataReport['kjur']);
-                        $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-                        $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-                        $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
+                        $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+                        $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+                        $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
                         
-                        $dataReport['linkoutput']=$this->linkOutput; 
+                        $dataReport['linkoutput'] = $this->linkOutput; 
                         $this->report->setDataReport($dataReport); 
                         $this->report->setMode('excel2007');
                         
@@ -289,10 +289,10 @@ class KHSEkstension extends MainPageM {
     public function printSummaryKHS ($objReport, $withsignature=false) {
         $ta=$objReport->dataReport['ta'];
         $tahun_masuk = $objReport->dataReport['tahun_masuk'];
-        $semester=$objReport->dataReport['semester'];
-        $kjur=$objReport->dataReport['kjur'];
+        $semester = $objReport->dataReport['semester'];
+        $kjur = $objReport->dataReport['kjur'];
         $nama_tahun = $objReport->dataReport['nama_tahun'];
-        $nama_semester=$objReport->dataReport['nama_semester'];
+        $nama_semester = $objReport->dataReport['nama_semester'];
         $nama_ps = $objReport->dataReport['nama_ps'];
         switch($objReport->getDriver()) {
             case 'excel2003':               
@@ -312,8 +312,8 @@ class KHSEkstension extends MainPageM {
                 $styleArray=array(
 								'font' => array('bold' => true,
                                                 'size' => 16),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-												   'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+												   'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
 							);
                 $sheet->getStyle("A7:L8")->applyFromArray($styleArray);
                 
@@ -346,15 +346,15 @@ class KHSEkstension extends MainPageM {
                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A10:L10")->applyFromArray($styleArray);
                 $sheet->getStyle("A10:L10")->getAlignment()->setWrapText(true);
                 
                 $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND vdm.tahun_masuk = $tahun_masuk";
-                $str = "SELECT k.idkrs,k.tgl_krs,k.nim,nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.idkelas,vdm.tahun_masuk,vdm.semester_masuk,dk.iddata_konversi FROM krs k JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE vdm.idkelas='C' AND tahun='$ta' AND idsmt='$semester' AND kjur=$kjur AND k.sah=1 $str_tahun_masuk ORDER BY vdm.nama_mhs ASC";
+                $str = "SELECT k.idkrs,k.tgl_krs,k.nim,nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.idkelas,vdm.tahun_masuk,vdm.semester_masuk,dk.iddata_konversi FROM krs k JOIN v_datamhs vdm ON (k.nim=vdm.nim) LEFT JOIN data_konversi dk ON (dk.nim=vdm.nim) WHERE vdm.idkelas='C' AND tahun='$ta' AND idsmt='$semester' AND kjur = $kjur AND k.sah=1 $str_tahun_masuk ORDER BY vdm.nama_mhs ASC";
                 $this->DB->setFieldTable(array('idkrs', 'tgl_krs', 'nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'idkelas', 'tahun_masuk', 'semester_masuk', 'iddata_konversi'));
                 $r = $this->DB->getRecord($str);
                 $row=11;                
@@ -387,15 +387,15 @@ class KHSEkstension extends MainPageM {
                 }
                 $row-=1;
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A11:L$row")->applyFromArray($styleArray);
                 $sheet->getStyle("A11:L$row")->getAlignment()->setWrapText(true);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
                                 );
                 
                 $sheet->getStyle("A11:C$row")->applyFromArray($styleArray);

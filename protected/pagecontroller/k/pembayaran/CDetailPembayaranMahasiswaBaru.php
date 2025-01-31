@@ -10,7 +10,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranMahasiswaBaru']) || $_SESSION['currentPagePembayaranMahasiswaBaru']['page_name'] != 'k.pembayaran.PembayaranMahasiswaBaru') {
-				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'k.pembayaran.PembayaranMahasiswaBaru', 'page_num' => 0, 'search' => false,'kelas' => 'none', 'tahun_masuk'=>1,'semester_masuk'=>1,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranMahasiswaBaru'] = array('page_name' => 'k.pembayaran.PembayaranMahasiswaBaru', 'page_num' => 0, 'search' => false,'kelas' => 'none', 'tahun_masuk' =>1,'semester_masuk' =>1,'DataMHS' =>array());												
 			}        
             try {
                 $no_formulir = addslashes($this->request['id']);

@@ -9,7 +9,7 @@ class CPenyelenggaraan extends MainPageDW {
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePenyelenggaraan']) || $_SESSION['currentPagePenyelenggaraan']['page_name'] != 'dw.perkuliahan.Penyelenggaraan') {                
-				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'dw.perkuliahan.Penyelenggaraan', 'page_num' => 0, 'search' => false,'DaftarDosen'=>array());												
+				$_SESSION['currentPagePenyelenggaraan'] = array('page_name' => 'dw.perkuliahan.Penyelenggaraan', 'page_num' => 0, 'search' => false,'DaftarDosen' =>array());												
 			}
             $_SESSION['currentPagePenyelenggaraan']['search'] = false;
             $_SESSION['currentPagePenyelenggaraan']['DaftarDosen'] = $this->DMaster->getDaftarDosen();
@@ -69,7 +69,7 @@ class CPenyelenggaraan extends MainPageDW {
         
         $str = "SELECT idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nama_dosen,nidn FROM v_penyelenggaraan WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur' AND idkur = $idkur ORDER BY semester ASC,kmatkul ASC";
         $this->DB->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nama_dosen', 'nidn'));			
-        $r= $this->DB->getRecord($str);
+        $r = $this->DB->getRecord($str);
         $result = array();
         while (list($k, $v) = each($r)) {
             $idpenyelenggaraan = $v['idpenyelenggaraan'];            

@@ -9,7 +9,7 @@ class CDetailPembayaranSemesterPendek Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterPendek']) || $_SESSION['currentPagePembayaranSemesterPendek']['page_name'] != 'k.pembayaran.PembayaranSemesterPendek') {
-				$_SESSION['currentPagePembayaranSemesterPendek'] = array('page_name' => 'k.pembayaran.PembayaranSemesterPendek', 'page_num' => 0, 'search' => false,'kelas' => 'none', 'tahun_masuk' => $_SESSION['tahun_masuk'],'semester'=>3,'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranSemesterPendek'] = array('page_name' => 'k.pembayaran.PembayaranSemesterPendek', 'page_num' => 0, 'search' => false,'kelas' => 'none', 'tahun_masuk' => $_SESSION['tahun_masuk'],'semester' =>3,'DataMHS' =>array());												
 			}        
             try {
                 $nim=isset($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim'])?$_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim']:addslashes($this->request['id']);                           				

@@ -50,11 +50,11 @@ class MSSQL extends DBGlobal implements DBInterface {
       $counter = 1;									
       while ($row=mssql_fetch_array($result)) {
          //echo $row . "<br>";
-        $tempRecord['no']=$offset;
+        $tempRecord['no'] = $offset;
         for ($i=0;$i < $countFieldTable;$i++) {
           $tempRecord[$ft[$i]]=trim($row[$ft[$i]]);
         }
-        $ListRecord[$counter]=$tempRecord;
+        $ListRecord[$counter] = $tempRecord;
         $counter++;			
         $offset++;
       }		

@@ -9,7 +9,7 @@ class CDetailTranskripFinal extends MainPageM {
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageDetailTranskripFinal']) || $_SESSION['currentPageDetailTranskripFinal']['page_name'] != 'm.nilai.DetailTranskripFinal') {
-				$_SESSION['currentPageDetailTranskripFinal'] = array('page_name' => 'm.nilai.DetailTranskripFinal', 'page_num' => 0, 'search' => false,'DataMHS'=>array(), 'DataTranskrip');
+				$_SESSION['currentPageDetailTranskripFinal'] = array('page_name' => 'm.nilai.DetailTranskripFinal', 'page_num' => 0, 'search' => false,'DataMHS' =>array(), 'DataTranskrip');
 			}  
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

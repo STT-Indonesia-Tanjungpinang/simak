@@ -11,7 +11,7 @@ class CFormulirPendaftaran extends MainPageM
     if (!$this->IsPostBack && !$this->IsCallBack)
     {	
       if (!isset($_SESSION['currentPageFormulirPendaftaran']) || $_SESSION['currentPageFormulirPendaftaran']['page_name'] != 'm.spmb.FormulirPendaftaran') {
-        $_SESSION['currentPageFormulirPendaftaran'] = array('page_name' => 'm.spmb.FormulirPendaftaran', 'page_num' => 0,'offset'=>0,'limit'=>0, 'search' => false,'status_dulang' => 'none');												
+        $_SESSION['currentPageFormulirPendaftaran'] = array('page_name' => 'm.spmb.FormulirPendaftaran', 'page_num' => 0,'offset' =>0,'limit' =>0, 'search' => false,'status_dulang' => 'none');												
       }
       $_SESSION['currentPageFormulirPendaftaran']['search'] = false;
       $this->cmbDaftarUlang->Text = $_SESSION['currentPageFormulirPendaftaran']['status_dulang'];

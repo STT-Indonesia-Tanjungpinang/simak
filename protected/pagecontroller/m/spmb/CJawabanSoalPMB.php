@@ -68,7 +68,7 @@ class CJawabanSoalPMB extends MainPageM {
     public function getDataMHS($idx) {
         return $this->Demik->getDataMHS($idx);
     }
-    public function populateSoal () {
+    public function populateSoal() {
         $no_formulir = $this->DataUjian['no_formulir'];
         $str = "SELECT ju.idsoal,nama_soal,ju.idjawaban FROM jawaban_ujian ju,soal s WHERE ju.idsoal=s.idsoal AND ju.no_formulir = $no_formulir";
         $this->DB->setFieldTable(array('idsoal', 'nama_soal', 'idjawaban')); 

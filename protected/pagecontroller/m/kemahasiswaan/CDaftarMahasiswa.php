@@ -100,7 +100,7 @@ class CDaftarMahasiswa extends MainPageM {
 		$_SESSION['currentPageDaftarMahasiswa']['search']=true;
         $this->populateData($_SESSION['currentPageDaftarMahasiswa']['search']);
 	} 
-    public function populateSummary () {
+    public function populateSummary() {
         $kjur = $_SESSION['kjur'];
         $tahun_masuk = $_SESSION['tahun_masuk'];        
         $str_tahun_masuk = $tahun_masuk == 'none' ?'':"AND tahun_masuk = $tahun_masuk";
@@ -130,7 +130,7 @@ class CDaftarMahasiswa extends MainPageM {
         $this->labelJumlahMHSPria->Text = $jumlah_pria;
         $this->labelJumlahMHSWanita->Text = $jumlah_wanita;
     }
-    public function populateKonsentrasi () {			
+    public function populateKonsentrasi() {			
         $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
         $r = array();
         $i=1;

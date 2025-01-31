@@ -6,7 +6,7 @@ class CExportData extends MainPageSA {
         $this->showVariable=true;       
         if (!$this->IsPostBack && !$this->IsCallback) {              
             if (!isset($_SESSION['currentPageExportData']) || $_SESSION['currentPageExportData']['page_name'] != 'sa.settings.ExportData') {
-                $_SESSION['currentPageExportData'] = array('page_name' => 'sa.settings.ExportData', 'page_num'=> 0);                                              
+                $_SESSION['currentPageExportData'] = array('page_name' => 'sa.settings.ExportData', 'page_num' => 0);                                              
             }            
         }
     }     
@@ -385,7 +385,7 @@ class CExportData extends MainPageSA {
 // 		$this->showVariable=true;       
 // 		if (!$this->IsPostBack && !$this->IsCallback) {	           
 //             if (!isset($_SESSION['currentPageExportData']) || $_SESSION['currentPageExportData']['page_name'] != 'sa.settings.ExportData') {
-// 				$_SESSION['currentPageExportData'] = array('page_name' => 'sa.settings.ExportData', 'page_num'=> 0);												
+// 				$_SESSION['currentPageExportData'] = array('page_name' => 'sa.settings.ExportData', 'page_num' => 0);												
 // 			}            
 // 		}
 // 	}     

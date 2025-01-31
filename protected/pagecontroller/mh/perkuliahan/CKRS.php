@@ -27,7 +27,7 @@ class CKRS extends MainPageMHS {
     {	
       if (!isset($_SESSION['currentPageKRS']) || $_SESSION['currentPageKRS']['page_name'] != 'mh.perkuliahan.KRS')
       {
-        $_SESSION['currentPageKRS'] = array('page_name' => 'mh.perkuliahan.KRS', 'page_num' => 0,'DataKRS'=>array());
+        $_SESSION['currentPageKRS'] = array('page_name' => 'mh.perkuliahan.KRS', 'page_num' => 0,'DataKRS' =>array());
       } 
       $this->lblModulHeader->Text = $this->getInfoToolbar();
       

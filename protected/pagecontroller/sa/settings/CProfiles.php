@@ -6,7 +6,7 @@ class CProfiles extends MainPageSA {
         $this->showProfiles=true;        
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageCache']) || $_SESSION['currentPageCache']['page_name'] != 'sa.settings.Profiles') {
-				$_SESSION['currentPageCache'] = array('page_name' => 'sa.settings.Profiles', 'page_num'=> 0);												
+				$_SESSION['currentPageCache'] = array('page_name' => 'sa.settings.Profiles', 'page_num' => 0);												
 			}            
             $this->populateData();
 		}

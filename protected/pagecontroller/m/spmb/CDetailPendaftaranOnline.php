@@ -8,7 +8,7 @@ class CDetailPendaftaranOnline extends MainPageM {
         $this->createObj('Akademik');
         if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailPendaftaranOnline']) || $_SESSION['currentPageDetailPendaftaranOnline']['page_name'] != 'm.spmb.DetailPendaftaranOnline') {
-				$_SESSION['currentPageDetailPendaftaranOnline'] = array('page_name' => 'm.spmb.DetailPendaftaranOnline', 'page_num' => 0,'DataMHS'=>array(), 'activeviewindex'=> 0);												
+				$_SESSION['currentPageDetailPendaftaranOnline'] = array('page_name' => 'm.spmb.DetailPendaftaranOnline', 'page_num' => 0,'DataMHS' =>array(), 'activeviewindex' => 0);												
 			}
 
             $this->MVDetailPendaftaranOnline->ActiveViewIndex=$_SESSION['currentPageDetailPendaftaranOnline']['activeviewindex'];             

@@ -13,7 +13,7 @@ class Logic_Forum extends Logic_Global {
     /**
      * digunakan untuk mendapatkan kategori forum
      */
-	public function getListForumKategori () {
+	public function getListForumKategori() {
         if ($this->Application->Cache) {            
             $dataitem=$this->Application->Cache->get('listforumkategori');            
             if (!isset($dataitem['none'])) {                

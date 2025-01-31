@@ -82,7 +82,7 @@ define('STATS_USE_NULL_AS_ZERO', -3);
 * can be epxressed more compactly as:
 *
 * <pre>
-* $data2 = array('1'=>9, '2'=>8, '3'=>5, '4.1'=>2);
+* $data2 = array('1' =>9, '2' =>8, '3' =>5, '4.1' =>2);
 * </pre>
 *
 * Example of use:

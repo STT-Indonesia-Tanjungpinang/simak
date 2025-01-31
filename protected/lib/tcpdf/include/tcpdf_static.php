@@ -1627,7 +1627,7 @@ class TCPDF_STATIC {
 				case 'border.d':
 				case 'dashed': {
 					$opt['border'] = array(0, 0, $linewidth, array(3, 2));
-					$opt['bs'] = array('w' => $linewidth, 's' => 'D', 'd'=>array(3, 2));
+					$opt['bs'] = array('w' => $linewidth, 's' => 'D', 'd' =>array(3, 2));
 					break;
 				}
 				case 'border.b':

@@ -34,7 +34,7 @@ class Logic_KRS extends Logic_Akademik {
       while (list($k, $v) = each($matkul_syarat)) {
         $kmatkul=$this->getKMatkul($v['kmatkul']);
         $nmatkul=$v['nmatkul'];
-        $semester=$v['semester'];
+        $semester = $v['semester'];
         $minimal_nilai = $v['minimal_nilai'];
         //apakah mahasiswa minimal telah mengambil matakuliah syarat di krs-nya                
         if ($minimal_nilai =='0' || $minimal_nilai == '') {
@@ -107,18 +107,18 @@ class Logic_KRS extends Logic_Akademik {
     $str = "SELECT idkrs,nim,tgl_krs,no_krs,sah,tgl_disahkan,tahun,idsmt,tasmt FROM krs WHERE idsmt=$idsmt AND tahun = $tahun AND nim='$nim'";
     $this->db->setFieldTable(array('idkrs', 'nim', 'tgl_krs', 'no_krs', 'sah', 'tgl_disahkan', 'tahun', 'idsmt', 'tasmt'));
     $r = $this->db->getRecord($str);		
-    $data=array('krs'=>array(), 'matakuliah'=>array());
+    $data=array('krs' =>array(), 'matakuliah' =>array());
     if (isset($r[1])) {
       $jumlah_matkul=0;
       $jumlah_sah=0;
       $jumlah_batal=0;
-      $data['krs']=$r[1];						
+      $data['krs'] = $r[1];						
       $str = "SELECT idpenyelenggaraan,idkrsmatkul,kmatkul,nmatkul,sks,semester,batal,nidn,nama_dosen FROM v_krsmhs WHERE idkrs='".$r[1]['idkrs']."' ORDER BY semester ASC,kmatkul ASC";
       $this->db->setFieldTable(array('idpenyelenggaraan', 'idkrsmatkul', 'kmatkul', 'nmatkul', 'sks', 'semester', 'batal', 'nidn', 'nama_dosen'));
       $r = $this->db->getRecord($str);
       if (isset($r[1])) {
         while (list($k, $v)=each ($r)) {
-          $v['kmatkul']=$this->getKMatkul($v['kmatkul']);
+          $v['kmatkul'] = $this->getKMatkul($v['kmatkul']);
           $jumlah_matkul+=1;
           if ($v['batal'] == 0) {
             $jumlah_sah+=1;
@@ -127,11 +127,11 @@ class Logic_KRS extends Logic_Akademik {
           }
           $result[$k] = $v;
         }
-        $data['matakuliah']=$result;					
+        $data['matakuliah'] = $result;					
       }
-      $data['krs']['jumlah_matkul']=$jumlah_matkul;
-      $data['krs']['jumlah_sah']=$jumlah_sah;
-      $data['krs']['jumlah_batal']=$jumlah_batal;
+      $data['krs']['jumlah_matkul'] = $jumlah_matkul;
+      $data['krs']['jumlah_sah'] = $jumlah_sah;
+      $data['krs']['jumlah_batal'] = $jumlah_batal;
     }          
     $this->DataKRS = $data;
     return $data;
@@ -149,7 +149,7 @@ class Logic_KRS extends Logic_Akademik {
     $result = array();
     
     while (list($k, $v)=each ($r)) {
-      $v['kmatkul']=$this->getKMatkul($v['kmatkul']);
+      $v['kmatkul'] = $this->getKMatkul($v['kmatkul']);
       $result[$k] = $v;
     }           
     

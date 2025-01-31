@@ -93,23 +93,23 @@ class Pendaftaran extends MainPageF
       $this->DB->setFieldTable(array('no_formulir'));
       $form = $this->DB->getRecord($str);
       
-      $no_formulir=$form[1]['no_formulir'];
+      $no_formulir = $form[1]['no_formulir'];
       $no_transaksi='10'.$ta.$idsmt.mt_rand(10000,99999);
-      $no_faktur=$ta.$no_transaksi;        
+      $no_faktur = $ta.$no_transaksi;        
       $userid = $no_formulir;
 
       $this->DB->query ('BEGIN');
       $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur=0,tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim = 0,tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";
       if ($this->DB->insertRecord($str))
       {
-        $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE no_formulir=$no_formulir AND tahun = $ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
+        $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE no_formulir = $no_formulir AND tahun = $ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
         $this->DB->setFieldTable(array('idkombi', 'sudah_dibayar'));
         $d=$this->DB->getRecord($str);
 
         $sudah_dibayarkan=array();
         while (list($o, $p) = each($d))
         {            
-          $sudah_dibayarkan[$p['idkombi']]=$p['sudah_dibayar'];
+          $sudah_dibayarkan[$p['idkombi']] = $p['sudah_dibayar'];
         }
         $str = "SELECT k.idkombi,kpt.biaya FROM kombi_per_ta kpt,kombi k WHERE k.idkombi=kpt.idkombi AND tahun = $ta AND idsmt=$idsmt AND kpt.idkelas='$idkelas' AND k.idkombi=1 ORDER BY periode_pembayaran,nama_kombi ASC";
         $this->DB->setFieldTable(array('idkombi', 'biaya'));
@@ -181,7 +181,7 @@ class Pendaftaran extends MainPageF
         //input ke formulir pendaftaran temp
         $str  = "INSERT INTO formulir_pendaftaran_temp SET 
           no_pendaftaran='$no_pendaftaran',
-          no_formulir=$no_formulir,
+          no_formulir = $no_formulir,
           nama_mhs='$nama_mhs',
           tempat_lahir='$tempat_lahir',
           tanggal_lahir='$tgl_lahir',
@@ -207,7 +207,7 @@ class Pendaftaran extends MainPageF
         $this->DB->insertRecord($str);
         $idjadwal_ujian = $this->DB->getLastInsertID();
 
-        $str = "INSERT INTO peserta_ujian_pmb SET idpeserta_ujian=NULL,no_formulir=$no_formulir,idjadwal_ujian = $idjadwal_ujian,date_added=NOW()";
+        $str = "INSERT INTO peserta_ujian_pmb SET idpeserta_ujian=NULL,no_formulir = $no_formulir,idjadwal_ujian = $idjadwal_ujian,date_added=NOW()";
         $this->DB->insertRecord($str);
       
         $this->DB->query('COMMIT');

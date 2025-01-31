@@ -14,8 +14,8 @@ class Home extends MainPageF {
         $result = array();
         while (list($k, $v) = each($r)) {
             $idpost=$v['idpost'];           
-            $v['jumlahcomment']=$this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=$idpost",'idpost');
-            $v['tanggal_post']=$this->page->TGL->tanggal('l, d F Y H:i', $v['date_added']);
+            $v['jumlahcomment'] = $this->DB->getCountRowsOfTable("pengumuman WHERE parentpost=$idpost",'idpost');
+            $v['tanggal_post'] = $this->page->TGL->tanggal('l, d F Y H:i', $v['date_added']);
             $result[$k] = $v;
         }
 		$this->RepeaterS->DataSource=$result;

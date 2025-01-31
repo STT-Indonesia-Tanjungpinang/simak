@@ -22,10 +22,10 @@ class getTransaction extends BaseWS {
 					$r = $this->DB->getRecord($str);						
 					if (isset($r[1])) {
 						$result=$r[1];
-						$payload['no_formulir']=$result['no_formulir'];
-						$payload['nim']=$result['nim'];
+						$payload['no_formulir'] = $result['no_formulir'];
+						$payload['nim'] = $result['nim'];
 						if ($result['nama_mhs'] == '' || $result['nim'] == '' || $result['kjur'] == 0) {
-							$no_formulir=$payload['no_formulir'];
+							$no_formulir = $payload['no_formulir'];
 							$str = "SELECT nama_mhs FROM formulir_pendaftaran_temp WHERE no_formulir='$no_formulir'";
 							$this->DB->setFieldTable(array('nama_mhs'));		
 							$r = $this->DB->getRecord($str);	
@@ -34,23 +34,23 @@ class getTransaction extends BaseWS {
 						}else{
 							$keterangan='MAHASISWA LAMA';
 						}
-						$payload['nama_mhs']=$result['nama_mhs'];
-						$payload['no_transaksi']=$result['no_transaksi'];
-						$payload['no_faktur']=$result['no_faktur'];
-						$payload['kjur']=$result['kjur'];
-						$payload['tahun']=$result['tahun'];
-						$payload['idsmt']=$result['idsmt'];						
-						$payload['idkelas']=$result['idkelas'];		
+						$payload['nama_mhs'] = $result['nama_mhs'];
+						$payload['no_transaksi'] = $result['no_transaksi'];
+						$payload['no_faktur'] = $result['no_faktur'];
+						$payload['kjur'] = $result['kjur'];
+						$payload['tahun'] = $result['tahun'];
+						$payload['idsmt'] = $result['idsmt'];						
+						$payload['idkelas'] = $result['idkelas'];		
 						$this->createObj('dmaster');
-						$payload['nama_prodi']=$payload['kjur'] > 0 ? $this->DMaster->getNamaProgramStudiByID($payload['kjur']) : '';
-						$payload['semester']=$this->semester[$result['idsmt']];	
-						$payload['nama_kelas']=$result['nkelas'];
+						$payload['nama_prodi'] = $payload['kjur'] > 0 ? $this->DMaster->getNamaProgramStudiByID($payload['kjur']) : '';
+						$payload['semester'] = $this->semester[$result['idsmt']];	
+						$payload['nama_kelas'] = $result['nkelas'];
 						$this->createObj('Finance');	
 						$totaltagihan = $this->Finance->getTotalTagihanByNoTransaksi($no_transaksi);			
 						$jumlah = $result['disc']>0?($totaltagihan*($result['disc'] / 100)):$totaltagihan;			
-						$payload['totaltagihan']=$jumlah;
-						$payload['commited']=$result['commited'];
-                        $payload['keterangan']=$keterangan;
+						$payload['totaltagihan'] = $jumlah;
+						$payload['commited'] = $result['commited'];
+                        $payload['keterangan'] = $keterangan;
                         if ($result['commited']==1) {
                             $this->payload['status'] = '88';
                             $message="Login=1, transaksi ($no_transaksi) sudah pernah dilakukan";
@@ -59,7 +59,7 @@ class getTransaction extends BaseWS {
                             $message="Login=1, data transaksi dengan nomor ($no_transaksi) berhasil diperoleh !!!";
                         }
                         
-						$this->payload['payload']=$payload;							
+						$this->payload['payload'] = $payload;							
 						$this->payload['message'] = $message;
 					}else{
 						$this->payload['status'] = '04';
@@ -80,10 +80,10 @@ class getTransaction extends BaseWS {
                             $message="Login=1, data transaksi dengan nomor ($no_transaksi) berhasil diperoleh !!!";
 						}			
 						$this->createObj('dmaster');
-						$payload['nama_prodi']=$payload['nama_ps'];		
-						$payload['semester']=$this->semester[$payload['idsmt']];		
+						$payload['nama_prodi'] = $payload['nama_ps'];		
+						$payload['semester'] = $this->semester[$payload['idsmt']];		
 						$payload['keterangan'] = 'CUTI';		
-						$this->payload['payload']=$payload;							
+						$this->payload['payload'] = $payload;							
 						$this->payload['message'] = $message;
 					}else{
 						$this->payload['status'] = '04';

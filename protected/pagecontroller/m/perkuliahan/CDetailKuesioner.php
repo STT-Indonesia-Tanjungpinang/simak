@@ -14,7 +14,7 @@ class CDetailKuesioner extends MainPageM {
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageDetailKuesioner']) || $_SESSION['currentPageDetailKuesioner']['page_name'] != 'm.perkuliahan.DetailKuesioner') {
-				$_SESSION['currentPageDetailKuesioner'] = array('page_name' => 'm.perkuliahan.DetailKuesioner', 'page_num' => 0,'DataKuesioner'=>array());
+				$_SESSION['currentPageDetailKuesioner'] = array('page_name' => 'm.perkuliahan.DetailKuesioner', 'page_num' => 0,'DataKuesioner' =>array());
 			}             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

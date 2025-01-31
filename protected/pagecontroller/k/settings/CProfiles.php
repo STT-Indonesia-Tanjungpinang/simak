@@ -6,7 +6,7 @@ class CProfiles extends MainPageK {
         $this->showProfiles=true;        
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageCache']) || $_SESSION['currentPageCache']['page_name'] != 'k.settings.Profiles') {
-				$_SESSION['currentPageCache'] = array('page_name' => 'k.settings.Profiles', 'page_num'=> 0);												
+				$_SESSION['currentPageCache'] = array('page_name' => 'k.settings.Profiles', 'page_num' => 0);												
 			}
 		}
 	}

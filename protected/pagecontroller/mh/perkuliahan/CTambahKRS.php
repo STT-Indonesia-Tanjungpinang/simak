@@ -77,7 +77,7 @@ class CTambahKRS extends MainPageMHS {
           $this->KRS->DataKRS['krs'] = array('idkrs' => $this->DB->getLastInsertID(),
             'tgl_krs' => $tanggal,
             'no_krs' => $no_krs,
-            'sah'=>0,
+            'sah' =>0,
             'nim' => $nim,
             'idsmt' => $idsmt,
             'tahun' => $tahun,

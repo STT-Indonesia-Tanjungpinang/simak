@@ -123,7 +123,7 @@ try {
       {
         $h = md5("$sn|$salt|$nim");
       }    
-      $api_call = "$url/mhs/upd.php?h=$h&sn = $sn&nim=$nim&nama_mhs = $nama_mhs&tempat_lahir=$tempat_lahir&tanggal_lahir=$tanggal_lahir&jk = $jk&telp_hp = $telp_hp&alamat_rumah=$alamat_rumah&email=$email&kjur=$kjur&masuk_tahun = $masuk_tahun&masuk_semester=$masuk_semester&idkelas = $idkelas&k_status = $k_status";      
+      $api_call = "$url/mhs/upd.php?h=$h&sn = $sn&nim=$nim&nama_mhs = $nama_mhs&tempat_lahir = $tempat_lahir&tanggal_lahir = $tanggal_lahir&jk = $jk&telp_hp = $telp_hp&alamat_rumah=$alamat_rumah&email=$email&kjur = $kjur&masuk_tahun = $masuk_tahun&masuk_semester = $masuk_semester&idkelas = $idkelas&k_status = $k_status";      
       $result = request($api_call);      echo "$api_call <br>";
     }
     else if ($response['rc'] == '99')
@@ -137,7 +137,7 @@ try {
       {
         $h = md5("$sn|$salt|$nim");
       }    
-      $api_call = "$url/mhs/add.php?h=$h&sn = $sn&nim=$nim&nama_mhs = $nama_mhs&tempat_lahir=$tempat_lahir&tanggal_lahir=$tanggal_lahir&jk = $jk&telp_hp = $telp_hp&alamat_rumah=$alamat_rumah&email=$email&kjur=$kjur&masuk_tahun = $masuk_tahun&masuk_semester=$masuk_semester&idkelas = $idkelas&k_status = $k_status";      
+      $api_call = "$url/mhs/add.php?h=$h&sn = $sn&nim=$nim&nama_mhs = $nama_mhs&tempat_lahir = $tempat_lahir&tanggal_lahir = $tanggal_lahir&jk = $jk&telp_hp = $telp_hp&alamat_rumah=$alamat_rumah&email=$email&kjur = $kjur&masuk_tahun = $masuk_tahun&masuk_semester = $masuk_semester&idkelas = $idkelas&k_status = $k_status";      
       $result = request($api_call);      echo "$api_call <br>";
     }
     
@@ -324,7 +324,7 @@ try {
       {
         $h = md5("$sn|$salt|$idkelas_mhs");
       }    
-      $api_call = "$url/jad/upd.php?h=$h&sn = $sn&idkelas_mhs = $idkelas_mhs&tahun = $tahun&idsmt=$idsmt&kjur=$kjur&kmatkul=$kmatkul&idkelas = $idkelas&nidn = $nidn&nama_kelas = $nama_kelas&hari = $hari&jam_masuk = $jam_masuk&jam_keluar=$jam_keluar";
+      $api_call = "$url/jad/upd.php?h=$h&sn = $sn&idkelas_mhs = $idkelas_mhs&tahun = $tahun&idsmt=$idsmt&kjur = $kjur&kmatkul=$kmatkul&idkelas = $idkelas&nidn = $nidn&nama_kelas = $nama_kelas&hari = $hari&jam_masuk = $jam_masuk&jam_keluar = $jam_keluar";
       
       $result = request($api_call);      echo "$api_call <br>";
     }
@@ -339,7 +339,7 @@ try {
       {
         $h = md5("$sn|$salt|$idkelas_mhs");
       }    
-      $api_call = "$url/jad/add.php?h=$h&sn = $sn&idkelas_mhs = $idkelas_mhs&tahun = $tahun&idsmt=$idsmt&kjur=$kjur&kmatkul=$kmatkul&idkelas = $idkelas&nidn = $nidn&nama_kelas = $nama_kelas&hari = $hari&jam_masuk = $jam_masuk&jam_keluar=$jam_keluar";
+      $api_call = "$url/jad/add.php?h=$h&sn = $sn&idkelas_mhs = $idkelas_mhs&tahun = $tahun&idsmt=$idsmt&kjur = $kjur&kmatkul=$kmatkul&idkelas = $idkelas&nidn = $nidn&nama_kelas = $nama_kelas&hari = $hari&jam_masuk = $jam_masuk&jam_keluar = $jam_keluar";
       $result = request($api_call);    echo "$api_call <br>";
     }
 

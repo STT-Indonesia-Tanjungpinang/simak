@@ -37,9 +37,9 @@ class TambahKRSEkstension extends MainPageDW {
                 $nim = $datamhs['nim'];                
                 $this->KRS->setDataMHS($datamhs);   
                 
-                $kjur=$datamhs['kjur'];
-                $idkur=$this->KRS->getIDKurikulum($kjur);
-                $str = "SELECT vp.idpenyelenggaraan,vp.kmatkul,vp.nmatkul,vp.sks,vp.semester,vp.iddosen,vp.nidn,vp.nama_dosen FROM v_penyelenggaraan vp WHERE vp.idpenyelenggaraan NOT IN (SELECT km.idpenyelenggaraan FROM krsmatkul km,krs k WHERE km.idkrs=k.idkrs AND k.nim='$nim') AND vp.idsmt='$idsmt' AND vp.tahun='$tahun' AND vp.kjur='$kjur' AND vp.idkur=$idkur ORDER BY vp.semester ASC,vp.nmatkul ASC";
+                $kjur = $datamhs['kjur'];
+                $idkur = $this->KRS->getIDKurikulum($kjur);
+                $str = "SELECT vp.idpenyelenggaraan,vp.kmatkul,vp.nmatkul,vp.sks,vp.semester,vp.iddosen,vp.nidn,vp.nama_dosen FROM v_penyelenggaraan vp WHERE vp.idpenyelenggaraan NOT IN (SELECT km.idpenyelenggaraan FROM krsmatkul km,krs k WHERE km.idkrs=k.idkrs AND k.nim='$nim') AND vp.idsmt='$idsmt' AND vp.tahun='$tahun' AND vp.kjur='$kjur' AND vp.idkur = $idkur ORDER BY vp.semester ASC,vp.nmatkul ASC";
                 $this->DB->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen'));			
                 $daftar_matkul_diselenggarakan = $this->DB->getRecord($str);
 
@@ -60,7 +60,7 @@ class TambahKRSEkstension extends MainPageDW {
 	}
     public function getInfoToolbar() {                
 		$ta=$this->DMaster->getNamaTA($_SESSION['ta']);
-		$semester=$this->setup->getSemester($_SESSION['semester']);
+		$semester = $this->setup->getSemester($_SESSION['semester']);
 		$text = "TA $ta Semester $semester";
 		return $text;
 	}		
@@ -70,7 +70,7 @@ class TambahKRSEkstension extends MainPageDW {
 	public function tambahMatkul($sender, $param) {
 		try {		
             $datakrs = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs'];
-            $datakrs['iddata_konversi']=$this->Pengguna->getDataUser('iddata_konversi');
+            $datakrs['iddata_konversi'] = $this->Pengguna->getDataUser('iddata_konversi');
             $this->KRS->setDataMHS($datakrs);
 			$idkrs = $datakrs['idkrs'];
 			$str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs'";

@@ -11,9 +11,9 @@ class Logic_ReportKuesioner extends Logic_Report {
     public function printSummaryKuesioner ($objKuesioner) {
         $ta=$this->dataReport['ta'];        
         $idsmt=$this->dataReport['semester'];
-        $kjur=$this->dataReport['kjur'];
+        $kjur = $this->dataReport['kjur'];
         $nama_tahun = $this->dataReport['nama_tahun'];
-        $nama_semester=$this->dataReport['nama_semester'];
+        $nama_semester = $this->dataReport['nama_semester'];
         $nama_ps = $this->dataReport['nama_ps'];
         switch($this->getDriver()) {
             case 'excel2003':               
@@ -33,8 +33,8 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $styleArray=array(
 								'font' => array('bold' => true,
                                                 'size' => 16),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-												   'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+												   'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
 							);
                 $sheet->getStyle("A7:J8")->applyFromArray($styleArray);
                 
@@ -63,8 +63,8 @@ class Logic_ReportKuesioner extends Logic_Report {
                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A10:J10")->applyFromArray($styleArray);
@@ -101,15 +101,15 @@ class Logic_ReportKuesioner extends Logic_Report {
                 }
                 $row-=1;
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A11:J$row")->applyFromArray($styleArray);
                 $sheet->getStyle("A11:J$row")->getAlignment()->setWrapText(true);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                                 );
                 
                 $sheet->getStyle("D11:D$row")->applyFromArray($styleArray);
@@ -128,7 +128,7 @@ class Logic_ReportKuesioner extends Logic_Report {
         $ta=$this->dataReport['tahun'];        
         $idsmt=$this->dataReport['idsmt'];        
         $nama_tahun = $this->dataReport['nama_tahun'];
-        $nama_semester=$this->dataReport['nama_semester'];
+        $nama_semester = $this->dataReport['nama_semester'];
         $nmatkul = $this->dataReport['nmatkul'];
         switch($this->getDriver()) {
             case 'excel2003':               
@@ -148,8 +148,8 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $styleArray=array(
 								'font' => array('bold' => true,
                                                 'size' => 16),
-								'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-												   'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+								'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+												   'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
 							);
                 $sheet->getStyle("A7:I8")->applyFromArray($styleArray);
                 
@@ -186,7 +186,7 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $sheet->setCellValue('G16', $this->dataReport['n_kual']);	
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                                 );
                 
                 $sheet->getStyle("G10:G16")->applyFromArray($styleArray); 
@@ -213,8 +213,8 @@ class Logic_ReportKuesioner extends Logic_Report {
                 
                 $styleArray=array(								
                                     'font' => array('bold' => true),
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A18:I18")->applyFromArray($styleArray);
@@ -241,10 +241,10 @@ class Logic_ReportKuesioner extends Logic_Report {
                         $sheet->setCellValue("A$row", $nama_kelompok);
                         $row+=1;   
                         
-                        $idkuesioner=$r[1]['idkuesioner'];                
-                        $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
+                        $idkuesioner = $r[1]['idkuesioner'];                
+                        $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner = $idkuesioner GROUP BY nilai_indikator";
                         $this->db->setFieldTable(array('nilai_indikator', 'jumlah'));
-                        $hasil_indikator=$this->db->getRecord($str);
+                        $hasil_indikator = $this->db->getRecord($str);
                         $indikator1=0;
                         $indikator2=0;
                         $indikator3=0;
@@ -288,10 +288,10 @@ class Logic_ReportKuesioner extends Logic_Report {
                         next($r);         
                         $row+=1;
                         while (list($k, $v) = each($r)) {
-                            $idkuesioner=$v['idkuesioner'];
-                            $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner=$idkuesioner GROUP BY nilai_indikator";
+                            $idkuesioner = $v['idkuesioner'];
+                            $str="SELECT nilai_indikator,SUM(nilai_indikator) AS jumlah FROM kuesioner_jawaban kj,kuesioner_indikator ki WHERE ki.idindikator=kj.idindikator AND kj.idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan AND kj.idkuesioner = $idkuesioner GROUP BY nilai_indikator";
                             $this->db->setFieldTable(array('nilai_indikator', 'jumlah'));
-                            $hasil_indikator=$this->db->getRecord($str);
+                            $hasil_indikator = $this->db->getRecord($str);
                             $indikator1=0;
                             $indikator2=0;
                             $indikator3=0;
@@ -348,15 +348,15 @@ class Logic_ReportKuesioner extends Logic_Report {
                 $sheet->setCellValue("I$row", $total);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                                                       'vertical'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                                                       'vertical' =>PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
                                     'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
                                 );																					 
                 $sheet->getStyle("A19:I$row")->applyFromArray($styleArray);
                 $sheet->getStyle("A19:I$row")->getAlignment()->setWrapText(true);
                 
                 $styleArray=array(								
-                                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
+                                    'alignment' => array('horizontal' =>PHPExcel_Style_Alignment::HORIZONTAL_LEFT)
                                 );
                 
                 $sheet->getStyle("C10:C$row")->applyFromArray($styleArray);                

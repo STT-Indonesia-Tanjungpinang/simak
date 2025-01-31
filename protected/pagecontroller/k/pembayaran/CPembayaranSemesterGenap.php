@@ -8,7 +8,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPagePembayaranSemesterGenap']) || $_SESSION['currentPagePembayaranSemesterGenap']['page_name'] != 'k.pembayaran.PembayaranSemesterGenap') {
-				$_SESSION['currentPagePembayaranSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranSemesterGenap', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester'=>2,'kelas' => 'none', 'DataMHS'=>array());												
+				$_SESSION['currentPagePembayaranSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranSemesterGenap', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta'), 'semester' =>2,'kelas' => 'none', 'DataMHS' =>array());												
 			}
             $_SESSION['currentPagePembayaranSemesterGenap']['search'] = false; 
             $bool=!isset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']);

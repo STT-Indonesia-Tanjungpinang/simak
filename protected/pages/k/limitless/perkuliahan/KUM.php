@@ -6,7 +6,7 @@ class KUM extends CKUM {
     }
 	public function printOutR ($sender, $param) {
         $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);
-        $dataidkrs[$idkrs]=$idkrs;
+        $dataidkrs[$idkrs] = $idkrs;
         $this->createObj('reportkrs');
         $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
@@ -28,21 +28,21 @@ class KUM extends CKUM {
                 $r = $this->DB->getRecord($str);	           
                 $dataReport=$r[1];
                 
-                $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$dataReport['kjur']];                
+                $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];                
                 $nama_tahun = $this->DMaster->getNamaTA($dataReport['tahun']);   
                 $nama_semester = $this->setup->getSemester($dataReport['idsmt']);
-                $dataReport['nama_tahun']=$nama_tahun; 
-                $dataReport['nama_semester']=$nama_semester;
+                $dataReport['nama_tahun'] = $nama_tahun; 
+                $dataReport['nama_semester'] = $nama_semester;
                 
                 $nama_dosen = $this->DMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
-                $dataReport['nama_dosen']=$nama_dosen;
+                $dataReport['nama_dosen'] = $nama_dosen;
                 
                 $kaprodi = $this->KRS->getKetuaPRODI($dataReport['kjur']);
-                $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-                $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-                $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
+                $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+                $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+                $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
                 
-                $dataReport['linkoutput']=$this->linkOutput;
+                $dataReport['linkoutput'] = $this->linkOutput;
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 
@@ -90,19 +90,19 @@ class KUM extends CKUM {
                     $r = $this->db->getRecord($str);	           
                     $dataReport=$r[1];
 
-                    $dataReport['nama_ps']=$_SESSION['daftar_jurusan'][$dataReport['kjur']];                
+                    $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];                
                     $nama_tahun = $objDMaster->getNamaTA($dataReport['tahun']);   
                     $nama_semester = $this->setup->getSemester($dataReport['idsmt']);
-                    $dataReport['nama_tahun']=$nama_tahun; 
-                    $dataReport['nama_semester']=$nama_semester;
+                    $dataReport['nama_tahun'] = $nama_tahun; 
+                    $dataReport['nama_semester'] = $nama_semester;
 
                     $nama_dosen = $objDMaster->getNamaDosenWaliByID($dataReport['iddosen_wali']);				                    
-                    $dataReport['nama_dosen']=$nama_dosen;
+                    $dataReport['nama_dosen'] = $nama_dosen;
 
                     $kaprodi = $objKRS->getKetuaPRODI($dataReport['kjur']);
-                    $dataReport['nama_kaprodi']=$kaprodi['nama_dosen'];
-                    $dataReport['jabfung_kaprodi']=$kaprodi['nama_jabatan'];
-                    $dataReport['nidn_kaprodi']=$kaprodi['nidn'];
+                    $dataReport['nama_kaprodi'] = $kaprodi['nama_dosen'];
+                    $dataReport['jabfung_kaprodi'] = $kaprodi['nama_jabatan'];
+                    $dataReport['nidn_kaprodi'] = $kaprodi['nidn'];
                     $row+=6;
                     $rpt->SetFont ('helvetica', 'B',8);	
                     $rpt->setXY(3, $row);			
@@ -226,7 +226,7 @@ class KUM extends CKUM {
                  
                 $nim = $this->report->dataReport['nim'];
                 $nama_tahun = $this->report->dataReport['nama_tahun'];
-                $nama_semester=$this->report->dataReport['nama_semester'];
+                $nama_semester = $this->report->dataReport['nama_semester'];
         
                 $rpt->setTitle('Kartu Ujian Mahasiswa');
 				$rpt->setSubject('Kartu Ujian Mahasiswa');
