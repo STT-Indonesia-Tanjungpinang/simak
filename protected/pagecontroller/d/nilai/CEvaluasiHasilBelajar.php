@@ -76,7 +76,7 @@ class CEvaluasiHasilBelajar extends MainPageD {
 		$r = $this->DB->getRecord($str);	
         $result = array();
         while (list($k, $v) = each($r)) {            
-            $v['namakelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64);
+            $v['namakelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas'] + 64);
             $v['jumlah_peserta_kelas'] = $this->DB->getCountRowsOfTable('kelas_mhs_detail WHERE idkelas_mhs='.$v['idkelas_mhs'],'idkelas_mhs');
             $result[$k] = $v;
         }      
@@ -101,7 +101,7 @@ class CEvaluasiHasilBelajar extends MainPageD {
                 
                 $dataReport=$this->Nilai->InfoKelas;
                 print_R($dataReport);
-                $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas']+64);
+                $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas'] + 64);
                 $dataReport['hari'] = $this->TGL->getNamaHari($dataReport['hari']);
                 $dataReport['nama_semester'] = $this->setup->getSemester($dataReport['idsmt']);
                 $dataReport['linkoutput'] = $this->linkOutput; 

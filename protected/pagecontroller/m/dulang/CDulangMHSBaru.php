@@ -76,22 +76,22 @@ class CDulangMHSBaru Extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'no_formulir':
-                    $clausa="AND vdm.no_formulir='$txtsearch'";
+                    $clausa = "AND vdm.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nim':
-                    $clausa="AND d.nim='$txtsearch'";
+                    $clausa = "AND d.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm':
-                    $clausa="AND vdm.nirm='$txtsearch'";
+                    $clausa = "AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama':
-                    $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = "AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
@@ -101,12 +101,12 @@ class CDulangMHSBaru Extends MainPageM {
             $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,dulang d WHERE vdm.nim=d.nim AND vdm.tahun_masuk='$tahun_masuk' AND vdm.semester_masuk='$semester_masuk' AND d.tahun = $tahun_masuk AND d.idsmt=$semester_masuk AND vdm.kjur='$kjur' AND d.k_status='A'",'vdm.nim');
         }
 		
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDulangMHSBaru']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageDulangMHSBaru']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDulangMHSBaru']['page_num'] = 0;}
 		$str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				        

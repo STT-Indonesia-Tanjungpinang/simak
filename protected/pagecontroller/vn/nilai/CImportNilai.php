@@ -1,6 +1,6 @@
 <?php
-prado::using ('Application.MainPageD');
-class CImportNilai extends MainPageD {    
+prado::using ('Application.MainPageVN');
+class CImportNilai extends MainPageVN {    
      public function onLoad($param) {
     parent::onLoad($param);							
     $this->showSubMenuAkademikNilai = true;
@@ -28,7 +28,7 @@ class CImportNilai extends MainPageD {
           throw new Exception ("Masa pengisian nilai dari sisi Dosen telah berakhir, silahkan hubungi Operator Nilai di Prodi.");
         }
         $infokelas = $this->Demik->InfoKelas;
-        $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
+        $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas'] + 64);
         $this->Demik->InfoKelas['hari'] = $this->TGL->getNamaHari($infokelas['hari']);
          
         $_SESSION['currentPageImportNilai']['DataNilai'] = $this->Demik->InfoKelas;

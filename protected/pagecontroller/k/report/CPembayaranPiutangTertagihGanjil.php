@@ -94,14 +94,14 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
         $str_kelas = $kelas == 'none'?'':" AND idkelas='$kelas'";
         $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs WHERE kjur = $kjur AND tahun_masuk = $tahun_masuk AND (k_status='N' OR k_status='D' OR k_status='K') $str_kelas",'nim');		        
         $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,idkelas,tahun_masuk,semester_masuk FROM v_datamhs WHERE kjur='$kjur'AND tahun_masuk = $tahun_masuk AND (k_status='N' OR k_status='D' OR k_status='K') $str_kelas";			
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePiutangJangkaPendek']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePiutangJangkaPendek']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPagePiutangJangkaPendek']['page_num'] = 0;}
         $str = "$str ORDER BY nim ASC,nama_mhs ASC LIMIT $offset, $limit";				

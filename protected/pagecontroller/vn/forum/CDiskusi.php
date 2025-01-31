@@ -1,6 +1,6 @@
 <?php
-prado::using ('Application.MainPageD');
-class CDiskusi extends MainPageD {        
+prado::using ('Application.MainPageVN');
+class CDiskusi extends MainPageVN {        
 	public function onLoad($param) {		
 		parent::onLoad($param);		            
         $this->showForumDiskusi=true;                     
@@ -48,14 +48,14 @@ class CDiskusi extends MainPageD {
             $str = "SELECT fp.idpost,fp.userid,fk.nama_kategori,fp.title,fp.content,fp.userid,fp.nama_user,fp.tipe,fp.date_added FROM forumposts fp, forumkategori fk WHERE fp.idkategori=fk.idkategori AND parentpost=0";
             $jumlah_baris = $this->DB->getCountRowsOfTable("forumposts WHERE parentpost=0",'idpost');						
         }        
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDiskusi']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageDiskusi']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num'] = 0;}
         $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'userid', 'nama_kategori', 'title', 'content', 'nama_user', 'tipe', 'date_added'));			
 		$r = $this->DB->getRecord($str);	
@@ -100,14 +100,14 @@ class CDiskusi extends MainPageD {
             $str = "SELECT fp.idpost,fk.nama_kategori,fp.title,fp.content,fp.nama_user,fp.date_added FROM forumposts fp, forumkategori fk WHERE fp.idkategori=fk.idkategori AND parentpost=0 AND unread=1";
             $jumlah_baris = $this->DB->getCountRowsOfTable("forumposts WHERE parentpost=0 AND unread=1",'idpost');						
         }        
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDiskusi']['page_num_unread'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageDiskusi']['page_num_unread'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num_unread'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDiskusi']['page_num_unread'] = 0;}
         $str="$str ORDER BY date_added DESC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpost', 'nama_kategori', 'title', 'content', 'nama_user', 'date_added'));			
 		$r = $this->DB->getRecord($str);	

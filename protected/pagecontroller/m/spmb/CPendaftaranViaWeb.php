@@ -108,14 +108,14 @@ class CPendaftaranViaWeb extends MainPageM {
             $jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp JOIN bipend bp ON (fp.no_formulir=bp.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir) WHERE fp.ta = '$tahun_masuk' AND fp.idsmt='$semester' AND fp.daftar_via='WEB' AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')$str_status",'fp.no_formulir');
             $str = "SELECT fp.no_formulir,fp.nama_mhs,fp.jk,fp.alamat_rumah,fp.telp_hp,nomor_ijazah,IF(char_length(COALESCE(rm.nim,''))>0,'dulang', '-') AS ket,rm.nim FROM formulir_pendaftaran fp JOIN bipend bp ON (fp.no_formulir=bp.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=fp.no_formulir) WHERE fp.ta = '$tahun_masuk' AND fp.idsmt='$semester' AND fp.daftar_via='WEB' AND (fp.kjur1='$kjur' OR fp.kjur2='$kjur')$str_status";
         }	
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePendaftaranWeb']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePendaftaranWeb']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranWeb']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranWeb']['page_num'] = 0;}
 		$str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset, $limit";				
         $_SESSION['currentPagePendaftaranWeb']['offset'] = $offset;
         $_SESSION['currentPagePendaftaranWeb']['limit'] = $limit;

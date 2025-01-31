@@ -9,7 +9,7 @@ class CHome extends MainPageM {
   public $TooltipDulang;
   public function onLoad($param) {		
     parent::onLoad($param);		            
-    $this->showDashboard=true;       
+    $this->showDashboard = true;       
     $this->createObj('Akademik');
     if (!$this->IsPostBack && !$this->IsCallback) {              
       if (!isset($_SESSION['currentPageHome']) || $_SESSION['currentPageHome']['page_name'] != 'm.Home') {                                                                                

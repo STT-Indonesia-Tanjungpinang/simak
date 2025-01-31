@@ -22,16 +22,16 @@ class CRuangKelas Extends MainPageM {
 	protected function populateData() {
 		$jumlah_baris = $this->DB->getCountRowsOfTable('ruangkelas', 'idruangkelas');;
 		$str = "SELECT idruangkelas,namaruang,kapasitas FROM ruangkelas";
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageRuangKelas']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageRuangKelas']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageRuangKelas']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageRuangKelas']['page_num'] = 0;}
         $str = "$str LIMIT $offset, $limit";
         $this->DB->setFieldTable (array('idruangkelas', 'namaruang', 'kapasitas'));
 		$r = $this->DB->getRecord($str, $offset+1);

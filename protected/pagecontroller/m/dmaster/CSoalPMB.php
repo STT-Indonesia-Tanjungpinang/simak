@@ -31,11 +31,11 @@ class CSoalPMB extends MainPageM {
 	}
 	public function populateData() {	
 		$this->RepeaterS->VirtualItemCount=$this->DB->getCountRowsOfTable('soal');	
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageSoalPMB']['page_num'];
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageSoalPMB']['page_num'];
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageSoalPMB']['page_num'] = 0;}
 		$str = "SELECT s.idsoal,nama_soal,date_added,date_modified FROM soal s ORDER BY date_modified DESC LIMIT $offset, $limit";

@@ -153,17 +153,17 @@ class CPesertaMatakuliah extends MainPageSA {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'nim':
-                    $clausa="AND vdm.nim='$txtsearch'";
+                    $clausa = "AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm':
-                    $clausa="AND vdm.nirm='$txtsearch'";
+                    $clausa = "AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama':
-                    $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = "AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
@@ -175,14 +175,14 @@ class CPesertaMatakuliah extends MainPageSA {
             
             $jumlah_baris = $this->DB->getCountRowsOfTable("v_krsmhs vkm JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id'$str_kelas",'vdm.nim');
         }		
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePesertaMatakuliah']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePesertaMatakuliah']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePesertaMatakuliah']['page_num'] = 0;}		
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePesertaMatakuliah']['page_num'] = 0;}		
         $str = "$str ORDER BY vdm.idkelas ASC,vdm.nama_mhs ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'idkelas', 'jk', 'tahun_masuk', 'batal', 'sah', 'idkelas_mhs', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar'));	
 		$r = $this->DB->getRecord($str, $offset+1);
@@ -193,7 +193,7 @@ class CPesertaMatakuliah extends MainPageSA {
             if (empty($v['idkelas_mhs'])) {
                 $v['namakelas'] = 'BELUM PILIH KELAS';
             }else{
-                $namakelas = $kelas.'-'.chr($v['nama_kelas']+64);
+                $namakelas = $kelas.'-'.chr($v['nama_kelas'] + 64);
                 $hari = $this->TGL->getNamaHari($v['hari']);
                 $v['namakelas'] = $namakelas. ' <br/>'.$hari.' '.$v['jam_masuk'].'-'.$v['jam_keluar'];
             }            

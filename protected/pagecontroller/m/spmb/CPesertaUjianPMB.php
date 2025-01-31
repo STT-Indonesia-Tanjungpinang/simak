@@ -43,11 +43,11 @@ class CPesertaUjianPMB extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'no_formulir':
-                    $clausa="AND fp.no_formulir='$txtsearch'";
+                    $clausa = "AND fp.no_formulir='$txtsearch'";
                     $str = "$str $clausa";
                 break;
                 case 'nama':
-                    $clausa="AND fp.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = "AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $str = "$str $clausa";
                 break;
             }

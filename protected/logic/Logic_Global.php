@@ -51,7 +51,7 @@ class Logic_Global extends TModule
     if ($limit !== null) 
     {
       $offset=explode(', ', $limit);
-      $offset=$offset[0]+1;
+      $offset = $offset[0]+1;
       $limit = 'LIMIT '.$limit;			
     }
     else

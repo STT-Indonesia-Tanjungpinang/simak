@@ -4,7 +4,7 @@ class CHome extends MainPageK {
     public static $TotalPembayaranMahasiswa = 0;
 	public function onLoad($param) {
 		parent::onLoad($param);		            
-        $this->showDashboard=true;  
+        $this->showDashboard = true;  
         $this->createObj('Finance');
 		if (!$this->IsPostBack && !$this->IsCallback) {
             

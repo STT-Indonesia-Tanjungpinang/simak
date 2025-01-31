@@ -66,22 +66,22 @@ class CPembayaranFormulir Extends MainPageK {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {           
                 case 'no_transaksi':
-                    $clausa=" AND t.no_transaksi='$txtsearch'";
+                    $clausa = " AND t.no_transaksi='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran,t.idkelas FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa",'t.no_transaksi');
                 break;
                 case 'no_faktur':
-                    $clausa=" AND t.no_faktur='$txtsearch'";
+                    $clausa = " AND t.no_faktur='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran,t.idkelas FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa",'t.no_transaksi');
                 break;
                 case 'no_formulir':
-                    $clausa=" AND t.no_formulir='$txtsearch'";
+                    $clausa = " AND t.no_formulir='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa",'t.no_transaksi');
                 break;
 				case 'no_pendaftaran':
-                    $clausa=" AND fpt.no_pendaftaran='$txtsearch'";
+                    $clausa = " AND fpt.no_pendaftaran='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1$clausa",'t.no_transaksi');
                 break;
@@ -90,14 +90,14 @@ class CPembayaranFormulir Extends MainPageK {
             $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,commited,CONCAT (t.tahun,t.idsmt) AS tasmt,fpt.no_pendaftaran,t.idkelas FROM transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) LEFT JOIN formulir_pendaftaran_temp fpt ON  (pin.no_formulir=fpt.no_formulir) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1 AND pin.tahun_masuk='$tahun_masuk' AND t.idsmt='$semester_masuk' AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk";
             $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN pin ON (t.no_formulir=pin.no_formulir) JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) WHERE pin.no_formulir=t.no_formulir AND td.idkombi=1 AND pin.tahun_masuk='$tahun_masuk' AND t.idsmt='$semester_masuk' AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk",'t.no_transaksi');
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranFormulir']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;   
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePembayaranFormulir']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;   
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num'] = 0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'no_formulir', 'commited', 'tasmt', 'no_pendaftaran', 'idkelas'));

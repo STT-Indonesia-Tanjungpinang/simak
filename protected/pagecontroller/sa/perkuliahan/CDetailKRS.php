@@ -62,7 +62,7 @@ class CDetailKRS extends MainPageSA {
           $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkelas_mhs');
           $kapasitas=(int)$this->DMaster->getKapasitasRuangKelas($v['idruangkelas']);
           $keterangan=($jumlah_peserta_kelas <= $kapasitas) ? '': ' [PENUH]';
-          $result[$v['idkelas_mhs']] = $this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']'.$keterangan;   
+          $result[$v['idkelas_mhs']] = $this->DMaster->getNamaKelasByID($idkelas).'-'.chr($v['nama_kelas'] + 64) . ' ['.$v['nidn'].']'.$keterangan;   
         }
 
         $str = "SELECT idkelas_mhs  FROM kelas_mhs_detail WHERE idkrsmatkul = $idkrsmatkul";            

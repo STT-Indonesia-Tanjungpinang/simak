@@ -1,6 +1,6 @@
 <?php
-prado::using ('Application.MainPageD');
-class CDetailDiskusi extends MainPageD {
+prado::using ('Application.MainPageVN');
+class CDetailDiskusi extends MainPageVN {
     public $DataDiskusi;
 	public function onLoad($param) {		
 		parent::onLoad($param);		            

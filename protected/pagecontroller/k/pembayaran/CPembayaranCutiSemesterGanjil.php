@@ -52,13 +52,13 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
 	public function populateData() {	
 		$ta = $_SESSION['ta'];
 		$kjur = $_SESSION['kjur'];	
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_num'];
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_num'];
 		$jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs vdm,transaksi_cuti tc WHERE vdm.nim=tc.nim AND vdm.kjur='$kjur' AND tc.tahun='$ta' AND tc.idsmt='1'");
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranCutiSemesterGanjil']['page_num'] = 0;}
 		$str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.idkelas,vdm.telp_hp FROM v_datamhs vdm,transaksi_cuti tc WHERE vdm.nim=tc.nim AND vdm.kjur='$kjur' AND tc.tahun='$ta' AND tc.idsmt='1' ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";

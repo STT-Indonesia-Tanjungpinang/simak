@@ -107,15 +107,15 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {
                 case 'no_formulir':
-                    $clausa="AND vdm.no_formulir='$txtsearch'";
+                    $clausa = "AND vdm.no_formulir='$txtsearch'";
                     $str = "$str $clausa";
                 break;
                 case 'nim':
-                    $clausa="AND d.nim='$txtsearch'";
+                    $clausa = "AND d.nim='$txtsearch'";
                     $str = "$str $clausa";
                 break;
                 case 'nirm':
-                    $clausa="AND vdm.nirm='$txtsearch'";
+                    $clausa = "AND vdm.nirm='$txtsearch'";
                     $str = "$str $clausa";
                 break;
             }

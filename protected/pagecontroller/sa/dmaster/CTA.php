@@ -23,16 +23,16 @@ class CTA extends MainPageSA {
 	
 	protected function populateData() {
         $jumlah_baris = $this->DB->getCountRowsOfTable('ta', 'tahun');
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageTA']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageTA']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTA']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTA']['page_num'] = 0;}
 
 		$this->DB->setFieldTable (array('tahun', 'tahun_akademik'));
 		$str = "SELECT * FROM ta ORDER BY tahun DESC LIMIT $offset, $limit";

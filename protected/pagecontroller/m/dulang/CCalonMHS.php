@@ -76,12 +76,12 @@ class CCalonMHS Extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'no_formulir':
-                    $clausa=" AND fp.no_formulir='$txtsearch'";                    
+                    $clausa = " AND fp.no_formulir='$txtsearch'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
                     $str = "$str $clausa";
                 break;                
                 case 'nama':
-                    $clausa=" AND fp.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = " AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL$clausa",'DISTINCT(fp.no_formulir)');                    
                     $str = "$str $clausa";
                 break;
@@ -91,12 +91,12 @@ class CCalonMHS Extends MainPageM {
             $jumlah_baris = $this->DB->getCountRowsOfTable ("transaksi t JOIN formulir_pendaftaran fp ON (fp.no_formulir=t.no_formulir) LEFT JOIN register_mahasiswa rm ON (rm.no_formulir=t.no_formulir) WHERE t.kjur = $kjur AND fp.ta = $tahun_masuk AND fp.idsmt=$semester_masuk AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND rm.no_formulir IS NULL",'DISTINCT(fp.no_formulir)');
         }
 		
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageCalonMHS']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageCalonMHS']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageCalonMHS']['page_num'] = 0;}
 		$str = "$str ORDER BY t.idkelas ASC,fp.nama_mhs ASC LIMIT $offset, $limit";				        

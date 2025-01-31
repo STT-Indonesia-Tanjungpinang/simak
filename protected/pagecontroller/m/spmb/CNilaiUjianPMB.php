@@ -102,17 +102,17 @@ class CNilaiUjianPMB extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {
                 case 'no_formulir':
-                    $clausa=" AND fp.no_formulir='$txtsearch'";
+                    $clausa = " AND fp.no_formulir='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$clausa",'fp.no_formulir');                    
                     $str="$str $clausa";
                 break;
                 case 'nama_mhs':
-                    $clausa=" AND fp.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = " AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$clausa",'fp.no_formulir');
                     $str = "$str $clausa";
                 break;
                 case 'nama_ujian':
-                    $clausa=" AND fp.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = " AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir')$clausa",'fp.no_formulir');
                     $str = "$str $clausa";
                 break;
@@ -122,14 +122,14 @@ class CNilaiUjianPMB extends MainPageM {
             $str = "SELECT fp.no_formulir,fp.nama_mhs,ku.tgl_ujian,ts.nama_tempat,num.kjur,num.jumlah_soal,num.jawaban_benar,num.jawaban_salah,num.nilai,fp.kjur1,fp.kjur2,num.passing_grade_1,num.passing_grade_2,num.kjur AS diterima_di_prodi FROM kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir') AND fp.ta = '$tahun_masuk'$str_kjur";
             $jumlah_baris = $this->DB->getCountRowsOfTable("kartu_ujian ku JOIN formulir_pendaftaran fp ON (fp.no_formulir=ku.no_formulir) JOIN tempat_spmb ts ON (ku.idtempat_spmb=ts.idtempat_spmb) JOIN nilai_ujian_masuk num ON (ku.no_formulir=num.no_formulir) WHERE (ku.tgl_ujian BETWEEN '$tgl_awal' AND '$tgl_akhir') AND fp.ta = '$tahun_masuk'$str_kjur",'ku.no_formulir');			            
         }	
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageNilaiUjianPMB']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageNilaiUjianPMB']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageNilaiUjianPMB']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageNilaiUjianPMB']['page_num'] = 0;}
 		$str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset, $limit";				
         $_SESSION['currentPageNilaiUjianPMB']['offset'] = $offset;
         $_SESSION['currentPageNilaiUjianPMB']['limit'] = $limit;

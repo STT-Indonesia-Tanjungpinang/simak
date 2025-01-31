@@ -87,12 +87,12 @@ class CMatakuliah extends MainPageM {
       $txtsearch = addslashes($this->txtKriteria->Text);
       switch($this->cmbKriteria->Text) {
         case 'kode':
-          $clausa="AND kmatkul='{$idkur}_$txtsearch'";
+          $clausa = "AND kmatkul='{$idkur}_$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah WHERE idkur = $idkur $clausa",'kmatkul');		            
           $str = "$str $clausa";
         break;
         case 'nama':
-          $clausa="AND nmatkul LIKE '%$txtsearch%'";
+          $clausa = "AND nmatkul LIKE '%$txtsearch%'";
           $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah WHERE idkur = $idkur $clausa",'kmatkul');		            
           $str = "$str $clausa";
         break;
@@ -105,16 +105,16 @@ class CMatakuliah extends MainPageM {
       $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah m WHERE idkur = $idkur $str_konsentrasi $str_semester",'kmatkul');		            
       $str = "SELECT m.kmatkul,m.nmatkul,m.nmatkul_en,m.sks,m.semester,m.idkonsentrasi,k.nama_konsentrasi,m.ispilihan,m.islintas_prodi,m.aktif FROM matakuliah m LEFT JOIN konsentrasi k ON (k.idkonsentrasi=m.idkonsentrasi) WHERE idkur = $idkur $str_konsentrasi $str_semester";			
     }
-    $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageMatakuliah']['page_num'];
-    $this->RepeaterS->VirtualItemCount=$jumlah_baris;
-    $currentPage=$this->RepeaterS->CurrentPageIndex;
-    $offset=$currentPage*$this->RepeaterS->PageSize;		
-    $itemcount=$this->RepeaterS->VirtualItemCount;
-    $limit=$this->RepeaterS->PageSize;
-    if (($offset+$limit)>$itemcount) {
-      $limit=$itemcount-$offset;
+    $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageMatakuliah']['page_num'];
+    $this->RepeaterS->VirtualItemCount = $jumlah_baris;
+    $currentPage = $this->RepeaterS->CurrentPageIndex;
+    $offset = $currentPage*$this->RepeaterS->PageSize;		
+    $itemcount = $this->RepeaterS->VirtualItemCount;
+    $limit = $this->RepeaterS->PageSize;
+    if (($offset + $limit) > $itemcount) {
+      $limit = $itemcount - $offset;
     }
-    if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageMatakuliah']['page_num'] = 0;}
+    if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageMatakuliah']['page_num'] = 0;}
     $str = "$str ORDER BY (semester+0),kmatkul ASC LIMIT $offset, $limit";				
     $this->DB->setFieldTable(array('kmatkul', 'nmatkul', 'nmatkul_en', 'sks', 'semester', 'idkonsentrasi', 'nama_konsentrasi', 'ispilihan', 'islintas_prodi', 'aktif'));
     $r = $this->DB->getRecord($str, $offset+1);	

@@ -73,13 +73,13 @@ class CPendaftaranOnline extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {
                 case 'no_registrasi':
-                    $clausa=" WHERE no_pendaftaran='$txtsearch'"; 
+                    $clausa = " WHERE no_pendaftaran='$txtsearch'"; 
                 break;
                 case 'no_formulir':
-                    $clausa=" WHERE no_formulir='$txtsearch'"; 
+                    $clausa = " WHERE no_formulir='$txtsearch'"; 
                 break;
                 case 'nama_mhs':
-                    $clausa=" WHERE nama_mhs LIKE '%$txtsearch%'";                    
+                    $clausa = " WHERE nama_mhs LIKE '%$txtsearch%'";                    
                 break;
             }
             $str="$str $clausa";
@@ -105,14 +105,14 @@ class CPendaftaranOnline extends MainPageM {
             $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp WHERE ta = $tahun_masuk $str_konfirmasi";
             $jumlah_baris = $this->DB->getCountRowsOfTable ("formulir_pendaftaran_temp WHERE ta = $tahun_masuk $str_konfirmasi",'no_pendaftaran');     
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePendaftaranOnline']['page_num'];
-        $this->RepeaterS->VirtualItemCount=$jumlah_baris;
-        $offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-        $limit=$this->RepeaterS->PageSize;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePendaftaranOnline']['page_num'];
+        $this->RepeaterS->VirtualItemCount = $jumlah_baris;
+        $offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+        $limit = $this->RepeaterS->PageSize;
         if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
-            $limit=$this->RepeaterS->VirtualItemCount-$offset;
+            $limit = $this->RepeaterS->VirtualItemCount-$offset;
         }
-        if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranOnline']['page_num'] = 0;}
+        if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranOnline']['page_num'] = 0;}
         
         $str = "$str ORDER BY waktu_mendaftar DESC LIMIT $offset, $limit";
         $this->DB->setFieldTable(array('no_pendaftaran', 'no_formulir', 'nama_mhs', 'telp_hp', 'email', 'kjur1', 'kjur2', 'idkelas', 'waktu_mendaftar', 'file_bukti_bayar'));

@@ -3,7 +3,7 @@ prado::using ('Application.MainPageDW');
 class CHome extends MainPageDW {
 	public function onLoad($param) {		
 		parent::onLoad($param);		            
-        $this->showDashboard=true;               
+        $this->showDashboard = true;               
 		if (!$this->IsPostBack && !$this->IsCallback) {   
                                
 		}                

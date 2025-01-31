@@ -85,17 +85,17 @@ class CDPNA extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) { 
                 case 'kmatkul':
-                    $clausa=" AND kmatkul LIKE '%$txtsearch%'";
+                    $clausa = " AND kmatkul LIKE '%$txtsearch%'";
                     $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";				            
                     $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						
                 break;				
                 case 'nmatkul':
-                    $clausa=" AND nmatkul LIKE '%$txtsearch%'";
+                    $clausa = " AND nmatkul LIKE '%$txtsearch%'";
                     $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa";				            
                     $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						                    
                 break;
                 case 'nama_dosen':
-                    $clausa=" AND nama_dosen LIKE '%$txtsearch%'";
+                    $clausa = " AND nama_dosen LIKE '%$txtsearch%'";
                     $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen,jumlahmhs FROM v_penyelenggaraan vp, (SELECT idpenyelenggaraan,COUNT(idpenyelenggaraan) AS jumlahmhs FROM v_krsmhs  WHERE idsmt='$idsmt' AND tahun='$ta' AND sah=1 AND batal=0$clausa GROUP BY idpenyelenggaraan) AS vkm  WHERE vkm.idpenyelenggaraan=vp.idpenyelenggaraan AND idsmt='$idsmt' AND tahun='$ta'$clausa";				            
                     $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'$clausa",'vp.idpenyelenggaraan');						                                        
                 break;                
@@ -104,14 +104,14 @@ class CDPNA extends MainPageM {
             $str="SELECT vp.idpenyelenggaraan,kmatkul,nmatkul,sks,semester,iddosen,nidn,nama_dosen FROM v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'";				
             $jumlah_baris = $this->DB->getCountRowsOfTable("v_penyelenggaraan vp WHERE idsmt='$idsmt' AND tahun='$ta' AND kjur='$kjur'",'vp.idpenyelenggaraan');						
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDPNA']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageDPNA']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDPNA']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDPNA']['page_num'] = 0;}
         $str="$str ORDER BY nmatkul ASC LIMIT $offset, $limit";				
 		$this->DB->setFieldTable (array('idpenyelenggaraan', 'kmatkul', 'nmatkul', 'sks', 'semester', 'iddosen', 'nidn', 'nama_dosen'));			
 		$r = $this->DB->getRecord($str);	

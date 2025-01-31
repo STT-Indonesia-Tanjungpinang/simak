@@ -1,5 +1,5 @@
 <?php
-class MainPageD extends MainPage
+class MainPageVN extends MainPage
 {    
   /**     
    * show page import nilai [akademik nilai]

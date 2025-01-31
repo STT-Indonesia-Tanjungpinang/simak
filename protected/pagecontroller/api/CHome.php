@@ -3,7 +3,7 @@ prado::using ('Application.MainPageAPI');
 class CHome extends MainPageAPI {
     public function onLoad($param) {        
         parent::onLoad($param);                 
-        $this->showDashboard=true;               
+        $this->showDashboard = true;               
         if (!$this->IsPostBack && !$this->IsCallback) {   
              $this->populateData();                   
         }                

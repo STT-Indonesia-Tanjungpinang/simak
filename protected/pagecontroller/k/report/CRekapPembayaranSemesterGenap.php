@@ -88,14 +88,14 @@ class CRekapPembayaranSemesterGenap Extends MainPageK {
             $jumlah_baris = $this->DB->getCountRowsOfTable("rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $ta AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk",'idrekap');		        
             $str = "SELECT idrekap,no_formulir,nim,nirm,nama_mhs,jk,n_kelas,dibayarkan,kewajiban,sisa FROM rekap_laporan_pembayaran_per_semester WHERE kjur='$kjur' AND tahun = $ta AND idsmt='$semester'$str_kelas AND tahun_masuk = $tahun_masuk";			
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageRekapPembayaranSemesterGenap']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;   
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageRekapPembayaranSemesterGenap']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;   
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageRekapPembayaranSemesterGenap']['page_num'] = 0;}
         $str = "$str ORDER BY idkelas ASC,nama_mhs ASC LIMIT $offset, $limit";				

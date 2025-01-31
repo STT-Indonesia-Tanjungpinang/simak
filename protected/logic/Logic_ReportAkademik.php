@@ -595,10 +595,10 @@ class Logic_ReportAkademik extends Logic_Report {
             $sheet->getStyle("A16:X17")->applyFromArray($styleArray);
             $sheet->getStyle("A16:X17")->getAlignment()->setWrapText(true);
             
-            $offset=$currentSheet*70;		                
+            $offset = $currentSheet*70;		                
             $limit=70;
             if (($offset+$limit)>$jumlah_peserta) {
-              $limit=$jumlah_peserta-$offset;
+              $limit = $jumlah_peserta-$offset;
             }   
             
             //script asli

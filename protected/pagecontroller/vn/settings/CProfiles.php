@@ -1,6 +1,6 @@
 <?php
-prado::using ('Application.MainPageD');
-class CProfiles extends MainPageD {    
+prado::using ('Application.MainPageVN');
+class CProfiles extends MainPageVN {    
 	public function onLoad($param) {		
 		parent::onLoad($param);		
         $this->showProfiles=true;        

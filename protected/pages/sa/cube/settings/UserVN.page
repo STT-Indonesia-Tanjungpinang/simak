@@ -1,11 +1,11 @@
-<%@ Title="Sistem - User Operator Nilai" %>
+<%@ Title="Sistem - User Verifikator Nilai" %>
 <com:TContent ID="moduleheader">
-  <i class="fa fa-user"></i> User Operator Nilai</small>
+  <i class="fa fa-user"></i> User Verifikator Nilai</small>
 </com:TContent>
 <com:TContent ID="modulebreadcrumb">    
   <li><a href="#">SETTING</a></li> 
   <li><a href="#">SISTEM</a></li>
-  <li class="active"><span>USER OPERATOR NILAI</span></li>
+  <li class="active"><span>USER VERIFIKATOR NILAI</span></li>
 </com:TContent>
 <com:TContent ID="maincontent">  
 <com:TPanel Visible="<%= $this->getAddProcess(false) %>" CssClass="row">                
@@ -377,7 +377,7 @@
     <div class="col-lg-12">
       <div class="main-box clearfix">
         <header class="main-box-header clearfix">
-          <h2 class="pull-left"><i class="fa fa-user"></i> Daftar User Operator Nilai</h2> 
+          <h2 class="pull-left"><i class="fa fa-user"></i> Daftar User Verifikator Nilai</h2> 
           <div class="filter-block pull-right">   
             <com:TLinkButton ID="add" CssClass="btn btn-primary pull-right" Text="<i class='fa  fa-plus-circle fa-lg'></i>" Attributes.Title="Tambah Matakuliah" OnClick="addProcess" CausesValidation="false" />                        
           </div>

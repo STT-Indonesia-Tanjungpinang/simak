@@ -31,17 +31,17 @@ class CDosen extends MainPageSA {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {
                 case 'nidn':
-                    $clausa="WHERE nidn='$txtsearch'";
+                    $clausa = "WHERE nidn='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
                 break;
                 case 'nip':
-                    $clausa="WHERE nipy='$txtsearch'";
+                    $clausa = "WHERE nipy='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
                 break;
                 case 'nama_dosen':
-                    $clausa="WHERE nama_dosen LIKE '%$txtsearch%'";
+                    $clausa = "WHERE nama_dosen LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("dosen $clausa",'iddosen');		            
                     $str = "$str $clausa";
                 break;
@@ -50,16 +50,16 @@ class CDosen extends MainPageSA {
             $jumlah_baris = $this->DB->getCountRowsOfTable("dosen",'iddosen');		            
             $str = "SELECT iddosen,nidn,nipy,gelar_depan,nama_dosen,gelar_belakang,telp_hp,username,status FROM dosen";			
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDosen']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageDosen']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDosen']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageDosen']['page_num'] = 0;}
         $str = "$str ORDER BY nama_dosen ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('iddosen', 'nidn', 'nipy', 'gelar_depan', 'nama_dosen', 'gelar_belakang', 'telp_hp', 'username', 'status'));
 		$r = $this->DB->getRecord($str, $offset+1);	

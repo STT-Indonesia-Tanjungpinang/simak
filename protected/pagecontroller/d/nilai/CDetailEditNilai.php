@@ -30,7 +30,7 @@ class CDetailEditNilai extends MainPageD
           throw new Exception ("Masa pengisian nilai dari sisi Dosen telah berakhir, silahkan hubungi Operator Nilai di Prodi.");
         }
         $infokelas = $this->Demik->InfoKelas;
-        $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
+        $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas'] + 64);
         $this->Demik->InfoKelas['hari'] = $this->TGL->getNamaHari($infokelas['hari']);
         
         $this->txtPersenQuiz->Text = $infokelas['persen_quiz'];
@@ -75,12 +75,12 @@ class CDetailEditNilai extends MainPageD
     
     $jumlah_baris = $this->DB->getCountRowsOfTable(" kelas_mhs_detail kmd LEFT JOIN nilai_matakuliah n ON (n.idkrsmatkul=kmd.idkrsmatkul) JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul) JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE kmd.idkelas_mhs = $idkelas_mhs AND vkm.sah=1 AND vkm.batal=0",'vkm.idkrsmatkul');
     
-    $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDetailEditNilai']['page_num'];
-    $this->RepeaterS->VirtualItemCount=$jumlah_baris;
-    $offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-    $limit=$this->RepeaterS->PageSize;
+    $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageDetailEditNilai']['page_num'];
+    $this->RepeaterS->VirtualItemCount = $jumlah_baris;
+    $offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+    $limit = $this->RepeaterS->PageSize;
     if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-      $limit=$this->RepeaterS->VirtualItemCount-$offset;
+      $limit = $this->RepeaterS->VirtualItemCount-$offset;
     }
     if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageDetailEditNilai']['page_num'] = 0;}
     $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";				     

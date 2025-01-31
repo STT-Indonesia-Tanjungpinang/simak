@@ -73,22 +73,22 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {    
                 case 'no_transaksi':
-                    $clausa="AND t.no_transaksi='$txtsearch'";
+                    $clausa = "AND t.no_transaksi='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t,formulir_pendaftaran fp WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa",'no_transaksi');	
                 break;            
                 case 'no_faktur':
-                    $clausa="AND t.no_faktur='$txtsearch'";
+                    $clausa = "AND t.no_faktur='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t,formulir_pendaftaran fp WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa",'no_transaksi');	
                 break;
                 case 'no_formulir':
-                    $clausa="AND t.no_formulir='$txtsearch'";
+                    $clausa = "AND t.no_formulir='$txtsearch'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk $clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t,formulir_pendaftaran fp WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa",'no_transaksi');	
                 break;
                 case 'nama':
-                    $clausa="AND fp.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = "AND fp.nama_mhs LIKE '%$txtsearch%'";
                     $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk $clausa";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t,formulir_pendaftaran fp WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.kjur = $kjur $clausa",'no_transaksi');	
                 break;
@@ -97,14 +97,14 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
             $str = "SELECT t.no_transaksi,t.no_faktur,t.tanggal,t.no_formulir,fp.nama_mhs,commited,CONCAT (t.tahun,t.idsmt) AS tasmt FROM transaksi t JOIN formulir_pendaftaran fp ON (t.no_formulir=fp.no_formulir) WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND t.kjur = $kjur";
             $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t,formulir_pendaftaran fp WHERE fp.no_formulir=t.no_formulir AND fp.ta = '$tahun_masuk' AND fp.idsmt='$semester_masuk' AND t.tahun = $tahun_masuk AND t.idsmt=$semester_masuk AND t.kjur = $kjur",'no_transaksi');
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranMahasiswaBaru']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;   
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePembayaranMahasiswaBaru']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;   
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranMahasiswaBaru']['page_num'] = 0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'no_formulir', 'nama_mhs', 'commited', 'tasmt'));

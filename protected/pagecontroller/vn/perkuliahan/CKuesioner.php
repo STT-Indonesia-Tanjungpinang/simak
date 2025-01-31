@@ -1,6 +1,6 @@
 <?php
-prado::using ('Application.MainPageD');
-class CKuesioner extends MainPageD {
+prado::using ('Application.MainPageVN');
+class CKuesioner extends MainPageVN {
 	public function onLoad($param) {		
 		parent::onLoad($param);				
 		$this->showSubMenuAkademikPerkuliahan=true;

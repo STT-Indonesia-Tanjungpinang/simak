@@ -95,12 +95,12 @@ class CPendaftaranKonsentrasi extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'nim':
-                    $clausa=" AND vdm.nim='$txtsearch'";
+                    $clausa = " AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;                
                 case 'nama':
-                    $clausa=" AND vdm.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = " AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim $clausa",'vdm.nim');
                     $str = "$str $clausa";
                 break;
@@ -111,16 +111,16 @@ class CPendaftaranKonsentrasi extends MainPageM {
             $jumlah_baris = $this->DB->getCountRowsOfTable("pendaftaran_konsentrasi pk WHERE kjur = $kjur $str_konsentrasi",'nim');		            
             $str = "SELECT vdm.nim,vdm.nama_mhs,pk.jumlah_sks,pk.kjur,pk.idkonsentrasi,pk.status_daftar FROM v_datamhs vdm,pendaftaran_konsentrasi pk WHERE pk.nim=vdm.nim AND pk.kjur='$kjur' $str_konsentrasi";			
         }		
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePendaftaranKonsentrasi']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePendaftaranKonsentrasi']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranKonsentrasi']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePendaftaranKonsentrasi']['page_num'] = 0;}
         $str = "$str ORDER BY status_daftar ASC,tanggal_daftar DESC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('nim', 'nama_mhs', 'jumlah_sks', 'kjur', 'idkonsentrasi', 'status_daftar'));
 		$r = $this->DB->getRecord($str, $offset+1);	        

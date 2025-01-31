@@ -81,27 +81,27 @@ class CPKRS extends MainPageDW {
       $txtsearch = addslashes($this->txtKriteria->Text);
       switch($this->cmbKriteria->Text) {                
         case 'nim':
-          $clausa="AND vdm.nim='$txtsearch'";                    
+          $clausa = "AND vdm.nim='$txtsearch'";                    
         break;
         case 'nirm':
-          $clausa="AND vdm.nirm='$txtsearch'";                    
+          $clausa = "AND vdm.nirm='$txtsearch'";                    
         break;
         case 'nama':
-          $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
+          $clausa = "AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
         break;
       }
       $jumlah_baris = $this->DB->getCountRowsOfTable("pkrs p,v_datamhs vdm,penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali = $iddosen_wali $clausa");
     }else{
       $jumlah_baris = $this->DB->getCountRowsOfTable("pkrs p,v_datamhs vdm,penyelenggaraan vp WHERE p.nim=vdm.nim AND p.idpenyelenggaraan=vp.idpenyelenggaraan AND vp.idsmt='$idsmt' AND vp.tahun='$ta' AND vdm.iddosen_wali = $iddosen_wali");
     }        
-    $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePKRS']['page_num'];
-    $this->RepeaterS->VirtualItemCount=$jumlah_baris;
-    $currentPage=$this->RepeaterS->CurrentPageIndex;
-    $offset=$currentPage*$this->RepeaterS->PageSize;		
-    $itemcount=$this->RepeaterS->VirtualItemCount;
-    $limit=$this->RepeaterS->PageSize;
-    if (($offset+$limit)>$itemcount) {
-      $limit=$itemcount-$offset;
+    $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePKRS']['page_num'];
+    $this->RepeaterS->VirtualItemCount = $jumlah_baris;
+    $currentPage = $this->RepeaterS->CurrentPageIndex;
+    $offset = $currentPage*$this->RepeaterS->PageSize;		
+    $itemcount = $this->RepeaterS->VirtualItemCount;
+    $limit = $this->RepeaterS->PageSize;
+    if (($offset + $limit) > $itemcount) {
+      $limit = $itemcount - $offset;
     }
     if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPagePKRS']['page_num'] = 0;}
     $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";	

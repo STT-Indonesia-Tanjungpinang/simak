@@ -1,6 +1,6 @@
 <?php
-prado::using ('Application.MainPageD');
-class CDetailDPNA extends MainPageD {    
+prado::using ('Application.MainPageVN');
+class CDetailDPNA extends MainPageVN {    
    	public function onLoad($param) {
 		parent::onLoad($param);							
 		$this->showSubMenuAkademikNilai = true;
@@ -22,7 +22,7 @@ class CDetailDPNA extends MainPageD {
                 $this->Demik->InfoKelas['nama_ps'] = $_SESSION['daftar_jurusan'][$infokelas['kjur']];
                 $this->Demik->InfoKelas['ta'] = $this->DMaster->getNamaTA($infokelas['tahun']);
                 $this->Demik->InfoKelas['nama_semester'] = $this->setup->getSemester($infokelas['idsmt']);                
-                $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas']+64);
+                $this->Demik->InfoKelas['namakelas'] = $this->DMaster->getNamaKelasByID($infokelas['idkelas']).'-'.chr($infokelas['nama_kelas'] + 64);
                 $this->Demik->InfoKelas['hari'] = $this->TGL->getNamaHari($infokelas['hari']);
 
                 $str = "SELECT d.nidn AS nidn_dosen_pengajar,CONCAT(d.gelar_depan,' ',d.nama_dosen,' ',d.gelar_belakang) AS nama_dosen_pengajar,d.idjabatan AS idjabatan_dosen_pengajar FROM kelas_mhs km,pengampu_penyelenggaraan pp,dosen d WHERE km.idpengampu_penyelenggaraan=pp.idpengampu_penyelenggaraan AND d.iddosen=pp.iddosen AND idkelas_mhs = $idkelas_mhs";

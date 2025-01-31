@@ -3,7 +3,7 @@ prado::using ('Application.MainPageSA');
 class CCache extends MainPageSA {    
 	public function onLoad($param) {		
 		parent::onLoad($param);				
-        $this->showSubMenuSettingSistem=true;
+        $this->showSubMenuSettingSistem = true;
 		$this->showCache=true;                
 		if (!$this->IsPostBack && !$this->IsCallback) {	
             if (!isset($_SESSION['currentPageCache']) || $_SESSION['currentPageCache']['page_name'] != 'sa.settings.Cache') {

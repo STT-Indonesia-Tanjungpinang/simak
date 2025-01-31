@@ -108,16 +108,16 @@ class CNilaiPerMatakuliah extends MainPageON {
       $txtsearch=  addslashes($this->txtKriteria->Text);           
       switch($this->cmbKriteria->Text) {                                
         case 'kmatkul':
-          $clausa="AND kmatkul LIKE '%$txtsearch%'";
+          $clausa = "AND kmatkul LIKE '%$txtsearch%'";
         break;
         case 'nmatkul':
-          $clausa="AND nmatkul LIKE '%$txtsearch%'";
+          $clausa = "AND nmatkul LIKE '%$txtsearch%'";
         break;
         case 'nidn':
-          $clausa="AND nidn='$txtsearch'";
+          $clausa = "AND nidn='$txtsearch'";
         break;
         case 'nama_dosen':
-          $clausa="AND nama_dosen LIKE '%$txtsearch%'";
+          $clausa = "AND nama_dosen LIKE '%$txtsearch%'";
         break;
       }            			
     }
@@ -180,20 +180,20 @@ class CNilaiPerMatakuliah extends MainPageON {
     
     if ($search) 
     {            
-      $txtsearch=$this->txtKriteria2->Text;
+      $txtsearch = $this->txtKriteria2->Text;
       switch($this->cmbKriteria2->Text) {                
         case 'nim':
-          $clausa="AND vdm.nim='$txtsearch'";
+          $clausa = "AND vdm.nim='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";
         break;
         case 'nirm':
-          $clausa="AND vdm.nirm='$txtsearch'";
+          $clausa = "AND vdm.nirm='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";
         break;
         case 'nama':
-          $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
+          $clausa = "AND vdm.nama_mhs LIKE '%$txtsearch%'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1 $clausa",'vdm.nim');
           $str = "$str $clausa";
         break;
@@ -201,14 +201,14 @@ class CNilaiPerMatakuliah extends MainPageON {
     }else{                        
       $jumlah_baris = $this->DB->getCountRowsOfTable("v_krsmhs vkm,v_datamhs vdm WHERE vkm.nim=vdm.nim AND idpenyelenggaraan='$id' AND vkm.sah=1",'vdm.nim');
     }		
-    $this->RepeaterP->CurrentPageIndex=$_SESSION['currentPageNilaiPerMatakuliah']['page_num'];
-    $this->RepeaterP->VirtualItemCount=$jumlah_baris;
-    $offset=$this->RepeaterP->CurrentPageIndex*$this->RepeaterP->PageSize;
-    $limit=$this->RepeaterP->PageSize;
+    $this->RepeaterP->CurrentPageIndex = $_SESSION['currentPageNilaiPerMatakuliah']['page_num'];
+    $this->RepeaterP->VirtualItemCount = $jumlah_baris;
+    $offset = $this->RepeaterP->CurrentPageIndex*$this->RepeaterP->PageSize;
+    $limit = $this->RepeaterP->PageSize;
     if ($offset+$limit>$this->RepeaterP->VirtualItemCount) {
-      $limit=$this->RepeaterP->VirtualItemCount-$offset;
+      $limit = $this->RepeaterP->VirtualItemCount-$offset;
     }
-    if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageNilaiPerMatakuliah']['page_num'] = 0;}		
+    if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageNilaiPerMatakuliah']['page_num'] = 0;}		
     $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";
     $this->DB->setFieldTable(array('idkrsmatkul', 'nim', 'nama_mhs', 'jk', 'n_kuan', 'n_kual', 'userid_input', 'tanggal_input', 'userid_modif', 'tanggal_modif', 'bydosen', 'ket', 'batal', 'sah', 'k_status'));				
     $r = $this->DB->getRecord($str, $offset+1);
@@ -228,7 +228,7 @@ class CNilaiPerMatakuliah extends MainPageON {
       $datakelas = $this->DB->getRecord($str, $offset+1);
       $v['namakelas'] = 'N.A';
       if (isset($datakelas[1])) {
-        $v['namakelas'] = $this->DMaster->getNamaKelasByID($datakelas[1]['idkelas']).'-'.chr($datakelas[1]['nama_kelas']+64);
+        $v['namakelas'] = $this->DMaster->getNamaKelasByID($datakelas[1]['idkelas']).'-'.chr($datakelas[1]['nama_kelas'] + 64);
       }
       $result[$k] = $v;
     }

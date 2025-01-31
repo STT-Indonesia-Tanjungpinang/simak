@@ -130,13 +130,13 @@ class CKRS Extends MainPageM {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'nim':
-                    $clausa="AND vdm.nim='$txtsearch'";                                        
+                    $clausa = "AND vdm.nim='$txtsearch'";                                        
                 break;
                 case 'nirm':
-                    $clausa="AND vdm.nirm='$txtsearch'";                    
+                    $clausa = "AND vdm.nirm='$txtsearch'";                    
                 break;
                 case 'nama':
-                    $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
+                    $clausa = "AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
                 break;
             }
             if ($_SESSION['currentPageKRS']['mode_krs'] == 'belum') {
@@ -159,16 +159,16 @@ class CKRS Extends MainPageM {
                 $this->DB->setFieldTable(array('idkrs', 'tgl_krs', 'nim', 'nama_mhs', 'jk', 'tahun_masuk', 'sah', 'tgl_disahkan'));
             }
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKRS']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageKRS']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKRS']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKRS']['page_num'] = 0;}
         $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";	
         $r = $this->DB->getRecord($str, $offset+1);	        
 
@@ -390,7 +390,7 @@ class CKRS Extends MainPageM {
                             $dataReport['nipy_kaprodi'] = $kaprodi['nipy'];
 
                             $currentPage=$repeater->CurrentPageIndex;
-                            $offset=$currentPage*$repeater->PageSize;
+                            $offset = $currentPage*$repeater->PageSize;
                             $awal = $offset+1;        
                             $akhir = $repeater->Items->Count()+$offset;                            
                             $dataReport['awal'] = $awal;

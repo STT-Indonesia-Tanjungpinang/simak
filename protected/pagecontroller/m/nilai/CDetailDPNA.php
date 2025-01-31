@@ -30,7 +30,7 @@ class CDetailDPNA extends MainPageM {
                     $listkelas = $this->DMaster->getListKelas();
                     $daftar_kelas['none'] = ' ';
                     while (list($k, $v) = each($r)) {
-                        $nama_kelas = $listkelas[$v['idkelas']].'-'.chr($v['nama_kelas']+64);
+                        $nama_kelas = $listkelas[$v['idkelas']].'-'.chr($v['nama_kelas'] + 64);
                         $daftar_kelas[$v['idkelas_mhs']] = $nama_kelas;
                     }                
                     $this->cmbDaftarKelas->Enabled=true;
@@ -97,7 +97,7 @@ class CDetailDPNA extends MainPageM {
             $this->DB->setFieldTable(array('idkelas', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'nidn_dosen_pengajar', 'nama_dosen_pengajar', 'idjabatan_dosen_pengajar'));
             $r = $this->DB->getRecord($str);
             $datakelas = $r[1];
-            $datakelas['namakelas'] = $this->DMaster->getNamaKelasByID($datakelas['idkelas']).'-'.chr($datakelas['nama_kelas']+64);
+            $datakelas['namakelas'] = $this->DMaster->getNamaKelasByID($datakelas['idkelas']).'-'.chr($datakelas['nama_kelas'] + 64);
             $datakelas['hari'] = $this->TGL->getNamaHari($datakelas['hari']);            
             $dataDPNA['idkelas'] = $datakelas['idkelas'];
             $dataDPNA['nama_kelas'] = $datakelas['nama_kelas'];

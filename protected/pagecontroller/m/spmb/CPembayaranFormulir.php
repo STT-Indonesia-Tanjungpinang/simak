@@ -54,7 +54,7 @@ class CPembayaranFormulir extends MainPageM {
         $str = "SELECT * FROM transaksi t JOIN transaksi_detail td ON (t.no_transaksi=td.no_transaksi) JOIN pin (pin.no_formulir=t.no_formulir) WHERE td.idkombi=1 AND t.tahun_masuk = $tahun_masuk";
         
 //		$semester = $_SESSION['semester'];
-//		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranFormulir']['page_num'];
+//		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePembayaranFormulir']['page_num'];
 //		if ($str == 'none' || $str == '') {
 //			$jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND fp.ta = '$ta' AND fp.idsmt='$semester' AND fp.idkelas='".$_SESSION['kelas']."'");
 //			$str = "SELECT bp.no_formulir,fp.nama_mhs,fp.alamat_rumah,bp.dibayarkan FROM formulir_pendaftaran fp,bipend bp,profiles_mahasiswa pm WHERE fp.no_formulir=bp.no_formulir AND pm.no_formulir=fp.no_formulir AND fp.ta = '$ta' AND fp.idsmt='$semester' AND fp.idkelas='".$_SESSION['kelas']."'";	
@@ -62,11 +62,11 @@ class CPembayaranFormulir extends MainPageM {
 //			$jumlah_baris = $this->DB->getCountRowsOfTable("formulir_pendaftaran fp,bipend bp WHERE fp.no_formulir=bp.no_formulir AND fp.ta = '$ta' AND $str");
 //			$str = "SELECT bp.no_formulir,fp.nama_mhs,fp.alamat_rumah,bp.dibayarkan FROM formulir_pendaftaran fp,bipend bp,profiles_mahasiswa pm WHERE fp.no_formulir=bp.no_formulir AND pm.no_formulir=fp.no_formulir AND fp.ta = '$ta' AND fp.idsmt='$semester' AND fp.idkelas='".$_SESSION['kelas']."' AND $str";	
 //		}		
-//		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-//		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-//		$limit=$this->RepeaterS->PageSize;
+//		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+//		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+//		$limit = $this->RepeaterS->PageSize;
 //		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
-//			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+//			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 //		}
 //		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranFormulir']['page_num'] = 0;}
 //		$str = $str . " ORDER BY fp.nama_mhs ASC LIMIT $offset, $limit ";			

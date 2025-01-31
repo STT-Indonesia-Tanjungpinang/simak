@@ -65,7 +65,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
         while (list($k, $v) = each($r)) {  
             $kmatkul = $v['kmatkul'];          
             $v['kode_matkul'] = $this->Demik->getKMatkul($kmatkul); 
-            $v['namakelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']';
+            $v['namakelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas'] + 64) . ' ['.$v['nidn'].']';
             $v['jumlah_peserta_kelas'] = $this->DB->getCountRowsOfTable('kelas_mhs_detail WHERE idkelas_mhs='.$v['idkelas_mhs'],'idkelas_mhs');
             $result[$k] = $v;
         }
@@ -80,7 +80,7 @@ class CJadwalPerkuliahan extends MainPageMHS {
         while (list($k, $v) = each($r)) {  
             $kmatkul = $v['kmatkul'];          
             $v['kode_matkul'] = $this->Demik->getKMatkul($kmatkul); 
-            $v['namakelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas']+64) . ' ['.$v['nidn'].']';            
+            $v['namakelas'] = $this->DMaster->getNamaKelasByID($v['idkelas']).'-'.chr($v['nama_kelas'] + 64) . ' ['.$v['nidn'].']';            
             $result[$k] = $v;
         }
         $this->RepeaterJadwalSaya->DataSource = $result;

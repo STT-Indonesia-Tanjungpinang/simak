@@ -30,16 +30,16 @@ class CKelompokPertanyaan extends MainPageM {
 	protected function populateData($search = false) {								
         $jumlah_baris = $this->DB->getCountRowsOfTable('kelompok_pertanyaan', 'idkelompok_pertanyaan');		            
         $str = 'SELECT idkelompok_pertanyaan,orders,idkategori,nama_kelompok,orders,create_at,update_at FROM kelompok_pertanyaan';			
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKelompokPertanyaan']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageKelompokPertanyaan']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKelompokPertanyaan']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKelompokPertanyaan']['page_num'] = 0;}
         $str = "$str ORDER BY (orders+0) ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('idkelompok_pertanyaan', 'idkategori', 'nama_kelompok', 'orders', 'create_at', 'update_at'));
 		$r = $this->DB->getRecord($str, $offset+1);	

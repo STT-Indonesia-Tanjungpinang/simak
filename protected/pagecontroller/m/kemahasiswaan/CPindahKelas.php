@@ -54,12 +54,12 @@ class CPindahKelas Extends MainPageM {
 	public function populateData() {
 		$ta = $_SESSION['ta'];
 		$idsmt = $_SESSION['semester'];
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePindahKelas']['page_num'];
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePindahKelas']['page_num'];
 		$this->RepeaterS->VirtualItemCount=$this->DB->getCountRowsOfTable("v_datamhs vdm,pindahkelas pk WHERE vdm.nim=pk.nim AND pk.tahun='$ta' AND pk.idsmt='$idsmt'");	
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePindahKelas']['page_num'] = 0;}
 		$str = "SELECT pk.idpindahkelas,pk.no_surat,pk.tanggal,pk.nim,vdm.nama_mhs,vdm.tahun_masuk,pk.idkelas_lama,pk.idkelas_baru FROM v_datamhs vdm,pindahkelas pk WHERE vdm.nim=pk.nim AND pk.tahun='$ta' AND pk.idsmt='$idsmt' ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";

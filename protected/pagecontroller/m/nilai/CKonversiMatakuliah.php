@@ -72,7 +72,7 @@ class CKonversiMatakuliah extends MainPageM {
             $str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.perpanjangan=0";
             switch($this->cmbKriteria->Text) {                                
                 case 'nama':
-                    $clausa="AND nama LIKE '%$txtsearch%'";
+                    $clausa = "AND nama LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("data_konversi2 WHERE perpanjangan=0 $clausa",'iddata_konversi');
                     $str = "$str $clausa";
                 break;
@@ -81,12 +81,12 @@ class CKonversiMatakuliah extends MainPageM {
             $jumlah_baris = $this->DB->getCountRowsOfTable("data_konversi2 WHERE kjur='$kjur' AND tahun='$tahun_masuk' AND perpanjangan=0",'iddata_konversi');
 			$str = "SELECT dk2.iddata_konversi,dk2.nama,dk2.alamat,dk2.no_telp,dk.nim,dk2.date_added FROM data_konversi2 dk2 LEFT JOIN data_konversi dk ON (dk2.iddata_konversi=dk.iddata_konversi) WHERE dk2.kjur='$kjur' AND dk2.tahun='$tahun_masuk' AND dk2.perpanjangan=0";
         }			
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKonversiMatakuliah']['page_num'];
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageKonversiMatakuliah']['page_num'];
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageKonversiMatakuliah']['page_num'] = 0;}
 		$str = $str . " ORDER BY date_added DESC,nama ASC LIMIT $offset, $limit";		

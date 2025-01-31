@@ -2036,7 +2036,7 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->setCellValue("G13",': '.$this->dataReport['hari'].', '.$this->dataReport['jam_masuk'].'-'.$this->dataReport['jam_keluar']);
           
           $idkelas = $this->dataReport['idkelas_mhs'];                    
-          $itemcount=$this->db->getCountRowsOfTable("kelas_mhs_detail kmd JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
+          $itemcount = $this->db->getCountRowsOfTable("kelas_mhs_detail kmd JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
           $pagesize=40;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
@@ -2202,7 +2202,7 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->Cell(0, $row,': '.$this->dataReport['ta']);
           
           $idpenyelenggaraan = $this->dataReport['idpenyelenggaraan'];                    
-          $itemcount=$this->db->getCountRowsOfTable("v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
+          $itemcount = $this->db->getCountRowsOfTable("v_krsmhs vkm JOIN v_datamhs vdm ON(vdm.nim=vkm.nim) WHERE vkm.idpenyelenggaraan = $idpenyelenggaraan AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
           $pagesize=39;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
@@ -2257,7 +2257,7 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->Cell(0, $row,': '.$this->dataReport['hari'].', '.$this->dataReport['jam_masuk'].'-'.$this->dataReport['jam_keluar']);								
           
           $idkelas = $this->dataReport['idkelas_mhs'];                    
-          $itemcount=$this->db->getCountRowsOfTable("kelas_mhs_detail kmd JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
+          $itemcount = $this->db->getCountRowsOfTable("kelas_mhs_detail kmd JOIN v_krsmhs vkm ON (vkm.idkrsmatkul=kmd.idkrsmatkul)  JOIN v_datamhs vdm ON (vkm.nim=vdm.nim) WHERE  kmd.idkelas_mhs = $idkelas AND vkm.sah=1 AND vkm.batal=0",'vkm.nim');
           $pagesize=39;				
           $jumlahpage=ceil($itemcount/$pagesize);		
           
@@ -2283,10 +2283,10 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->setFont ('helvetica', '',8);                
         
         for ($i=0;$i < $jumlahpage;$i++) {        
-          $offset=$i*$pagesize;
-          $limit=$pagesize;
+          $offset = $i*$pagesize;
+          $limit = $pagesize;
           if ($offset+$limit>$itemcount) {
-            $limit=$itemcount-$offset;
+            $limit = $itemcount - $offset;
           }                                                   
           $r = $this->db->getRecord("$str LIMIT $offset, $limit", $offset+1);	
           while (list($k, $v)=each ($r)){		

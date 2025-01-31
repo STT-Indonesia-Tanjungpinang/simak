@@ -318,7 +318,7 @@ class MainPage extends TPage
     if ($repeater->Items->Count() > 0) {
       $jumlah_baris = $repeater->VirtualItemCount;
       $currentPage=$repeater->CurrentPageIndex;
-      $offset=$currentPage*$repeater->PageSize;
+      $offset = $currentPage*$repeater->PageSize;
       $awal=$offset+1;        
       $akhir = $repeater->Items->Count()+$offset;
       $str="Menampilkan $awal hingga $akhir dari $jumlah_baris";        

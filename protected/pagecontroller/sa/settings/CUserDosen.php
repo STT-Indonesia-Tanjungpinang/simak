@@ -3,7 +3,7 @@ prado::using ('Application.MainPageSA');
 class CUserDosen extends MainPageSA {		    	
 	public function onLoad($param) {
 		parent::onLoad($param);		     
-        $this->showSubMenuSettingSistem=true;
+        $this->showSubMenuSettingSistem = true;
         $this->showUserDosen=true;   
 		if (!$this->IsPostBack && !$this->IsCallback) {
             if (!isset($_SESSION['currentPageUserDosen']) || $_SESSION['currentPageUserDosen']['page_name'] != 'sa.settings.UserDosen') {
@@ -28,20 +28,20 @@ class CUserDosen extends MainPageSA {
 	protected function populateData($search = false) {
         if ($search) {
             $str = "SELECT u.userid,u.username,u.nama,u.email,ug.group_name,u.active,u.foto,u.logintime FROM user u LEFT JOIN user_group ug ON (ug.group_id=u.group_id) WHERE page='d'";			
-            $txtsearch=$this->txtKriteria->Text;
+            $txtsearch = $this->txtKriteria->Text;
             switch($this->cmbKriteria->Text) {
                 case 'username':
-                    $clausa="AND username='$txtsearch'";
+                    $clausa = "AND username='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
                 case 'nama':
-                    $clausa="AND nama LIKE '%$txtsearch%'";
+                    $clausa = "AND nama LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
                 case 'email':
-                    $clausa="AND email LIKE '%$txtsearch%'";
+                    $clausa = "AND email LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d' $clausa",'userid');		            
                     $str = "$str $clausa";
                 break;
@@ -50,16 +50,16 @@ class CUserDosen extends MainPageSA {
             $jumlah_baris = $this->DB->getCountRowsOfTable("user WHERE page='d'",'userid');		            
             $str = "SELECT u.userid,u.username,u.nama,u.email,u.active,u.foto,u.logintime FROM user u WHERE page='d'";			
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageUserDosen']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageUserDosen']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageUserDosen']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageUserDosen']['page_num'] = 0;}
         $str = "$str ORDER BY username ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('userid', 'username', 'nama', 'email', 'email', 'active', 'foto', 'logintime'));
 		$r = $this->DB->getRecord($str, $offset+1);	

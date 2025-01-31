@@ -80,17 +80,17 @@ class CNilaiFinal extends MainPageON {
       $txtsearch = addslashes($this->txtKriteria->Text);
       switch($this->cmbKriteria->Text) {                
         case 'nim':
-          $clausa="AND ta.nim='$txtsearch'";
+          $clausa = "AND ta.nim='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
         case 'nirm':
-          $clausa="AND vdm.nirm='$txtsearch'";
+          $clausa = "AND vdm.nirm='$txtsearch'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
         case 'nama':
-          $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
+          $clausa = "AND vdm.nama_mhs LIKE '%$txtsearch%'";
           $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim $clausa",'ta.nim');
           $str = "$str $clausa";
         break;
@@ -99,12 +99,12 @@ class CNilaiFinal extends MainPageON {
       $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,nomor_ijazah,nomor_transkrip,predikat_kelulusan,tanggal_lulus,vdm.k_status,CONCAT(ta.tahun,'',ta.idsmt) AS tasmt FROM v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun = $ta AND ta.idsmt=$idsmt";
       $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs vdm,transkrip_asli ta WHERE ta.nim=vdm.nim AND vdm.kjur = $kjur AND ta.tahun = $ta AND ta.idsmt=$idsmt",'ta.nim');				
     }        
-    $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageNilaiFinal']['page_num'];		
-    $this->RepeaterS->VirtualItemCount=$jumlah_baris;
-    $offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-    $limit=$this->RepeaterS->PageSize;
+    $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageNilaiFinal']['page_num'];		
+    $this->RepeaterS->VirtualItemCount = $jumlah_baris;
+    $offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+    $limit = $this->RepeaterS->PageSize;
     if ($offset+$limit>$this->RepeaterS->VirtualItemCount) {
-      $limit=$this->RepeaterS->VirtualItemCount-$offset;
+      $limit = $this->RepeaterS->VirtualItemCount-$offset;
     }
     if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPageNilaiFinal']['page_num'] = 0;}
     $str = "$str ORDER BY vdm.nama_mhs ASC LIMIT $offset, $limit";

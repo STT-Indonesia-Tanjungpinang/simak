@@ -1,6 +1,6 @@
 <?php
-prado::using ('Application.MainPageD');
-class CDetailKuesioner extends MainPageD {	
+prado::using ('Application.MainPageVN');
+class CDetailKuesioner extends MainPageVN {	
     public static $TotalIndikator1=0;
     public static $TotalIndikator2=0;
     public static $TotalIndikator3=0;

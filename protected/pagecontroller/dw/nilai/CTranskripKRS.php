@@ -72,17 +72,17 @@ class CTranskripKRS extends MainPageDW {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'nim':
-                    $clausa="AND nim='$txtsearch'";
+                    $clausa = "AND nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs WHERE iddosen_wali = $iddosen_wali $clausa",'nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm':
-                    $clausa="AND nirm='$txtsearch'";
+                    $clausa = "AND nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs WHERE iddosen_wali = $iddosen_wali $clausa",'nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama':
-                    $clausa="AND nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = "AND nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs WHERE iddosen_wali = $iddosen_wali $clausa",'nim');
                     $str = "$str $clausa";
                 break;
@@ -91,16 +91,16 @@ class CTranskripKRS extends MainPageDW {
             $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs  WHERE iddosen_wali = $iddosen_wali AND kjur = $kjur AND tahun_masuk = $tahun_masuk",'nim');		
             $str = "SELECT nim,nama_mhs,jk,tahun_masuk,kjur,idkonsentrasi,tahun_masuk FROM v_datamhs WHERE iddosen_wali = $iddosen_wali AND kjur = $kjur AND tahun_masuk = $tahun_masuk";			
         }		
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageTranskripKRS']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageTranskripKRS']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTranskripKRS']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageTranskripKRS']['page_num'] = 0;}
         $str = "$str ORDER BY nama_mhs ASC LIMIT $offset, $limit";				
         $this->DB->setFieldTable(array('nim', 'nama_mhs', 'jk', 'kjur', 'idkonsentrasi', 'tahun_masuk'));
 		$r = $this->DB->getRecord($str, $offset+1);	

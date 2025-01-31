@@ -93,17 +93,17 @@ class CKUM extends MainPageK {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'nim':
-                    $clausa="AND vdm.nim='$txtsearch'";
+                    $clausa = "AND vdm.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
                 break;
                 case 'nirm':
-                    $clausa="AND vdm.nirm='$txtsearch'";
+                    $clausa = "AND vdm.nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
                 break;
                 case 'nama':
-                    $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = "AND vdm.nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable(" krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester $clausa",'k.nim');		
                     $str = "$str $clausa";
                 break;
@@ -113,16 +113,16 @@ class CKUM extends MainPageK {
             $jumlah_baris = $this->DB->getCountRowsOfTable("krs k,v_datamhs vdm WHERE vdm.nim=k.nim AND k.sah=1 AND k.tahun = $ta AND k.idsmt=$semester AND vdm.kjur = $kjur $str_tahun_masuk",'k.nim');		
             
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageKUM']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageKUM']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKUM']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPageKUM']['page_num'] = 0;}
         $str = "$str LIMIT $offset, $limit";	
         $this->DB->setFieldTable(array('no_formulir', 'idkrs', 'nim', 'nama_mhs', 'jk', 'idkelas', 'nkelas', 'semester_masuk', 'perpanjang'));
         $r = $this->DB->getRecord($str, $offset+1);	        

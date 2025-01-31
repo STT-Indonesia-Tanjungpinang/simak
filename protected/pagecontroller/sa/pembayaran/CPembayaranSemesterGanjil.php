@@ -77,17 +77,17 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {                
                 case 'no_faktur':
-                    $clausa="AND t.no_faktur='$txtsearch'";                    
+                    $clausa = "AND t.no_faktur='$txtsearch'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
                 case 'nim':                    
-                    $clausa="AND t.nim='$txtsearch'";
+                    $clausa = "AND t.nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' $clausa",'no_transaksi');	                    
                     $str = "$str $clausa";
                 break;
                 case 'nama':                    
-                    $clausa="AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
+                    $clausa = "AND vdm.nama_mhs LIKE '%$txtsearch%'";                    
                     $jumlah_baris = $this->DB->getCountRowsOfTable("transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' $clausa",'no_transaksi');	
                     $str = "$str $clausa";
                 break;
@@ -96,14 +96,14 @@ class CPembayaranSemesterGanjil Extends MainPageSA {
             $str = "SELECT t.no_transaksi,no_faktur,t.tanggal,t.nim,vdm.nama_mhs,commited FROM transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' AND t.kjur = $kjur $str_kelas";
             $jumlah_baris = $this->DB->getCountRowsOfTable(" transaksi t JOIN v_datamhs vdm ON (t.nim=vdm.nim) WHERE t.tahun='$ta' AND t.idsmt='$semester' AND t.kjur = $kjur $str_kelas",'no_transaksi');
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePembayaranSemesterGanjil']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;   
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePembayaranSemesterGanjil']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;   
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=10;$_SESSION['currentPagePembayaranSemesterGanjil']['page_num'] = 0;}
         $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'tanggal', 'nim', 'nama_mhs', 'commited'));

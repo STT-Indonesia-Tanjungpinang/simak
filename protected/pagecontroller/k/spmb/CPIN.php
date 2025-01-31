@@ -71,10 +71,10 @@ class CPIN extends MainPageK {
             $txtsearch = addslashes($this->txtKriteria->Text);
             switch($this->cmbKriteria->Text) {
                 case 'no_formulir':
-                    $clausa=" WHERE pin.no_formulir='$txtsearch'"; 
+                    $clausa = " WHERE pin.no_formulir='$txtsearch'"; 
                 break;
                 case 'nama_mhs':
-                    $clausa=" WHERE fp.nama_mhs LIKE '%$txtsearch%'";                    
+                    $clausa = " WHERE fp.nama_mhs LIKE '%$txtsearch%'";                    
                 break;
             }
             $str="$str $clausa";
@@ -88,14 +88,14 @@ class CPIN extends MainPageK {
             $str = "SELECT pin.no_pin,pin.no_formulir,pin.idkelas,fp.nama_mhs,fp.no_formulir AS ket,fpt.no_pendaftaran FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) LEFT JOIN formulir_pendaftaran_temp fpt ON (fpt.no_formulir=pin.no_formulir) WHERE pin.tahun_masuk = $tahun_masuk AND pin.idkelas='$idkelas'$str_display";
             $jumlah_baris = $this->DB->getCountRowsOfTable ("pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) LEFT JOIN formulir_pendaftaran_temp fpt ON (fpt.no_formulir=pin.no_formulir) WHERE tahun_masuk = $tahun_masuk AND pin.idkelas='$idkelas'$str_display",'no_pin');		
         }
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPagePIN']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$offset=$this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
-		$limit=$this->RepeaterS->PageSize;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPagePIN']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$offset = $this->RepeaterS->CurrentPageIndex*$this->RepeaterS->PageSize;
+		$limit = $this->RepeaterS->PageSize;
 		if (($offset+$limit)>$this->RepeaterS->VirtualItemCount) {
-			$limit=$this->RepeaterS->VirtualItemCount-$offset;
+			$limit = $this->RepeaterS->VirtualItemCount-$offset;
 		}
-		if ($limit < 0) {$offset=0;$limit=$this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePIN']['page_num'] = 0;}
+		if ($limit < 0) {$offset=0;$limit = $this->setup->getSettingValue('default_pagesize');$_SESSION['currentPagePIN']['page_num'] = 0;}
 		
 		$str = "$str  $str_display ORDER BY pin.no_formulir ASC LIMIT $offset, $limit";
 		$this->DB->setFieldTable(array('no_pin', 'no_formulir', 'idkelas', 'nama_mhs', 'ket', 'no_pendaftaran'));

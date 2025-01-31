@@ -76,17 +76,17 @@ class CDaftarMahasiswa extends MainPageK {
 			$this->cmbKriteria->Text;
             switch($this->cmbKriteria->Text) {                
                 case 'nim':
-                    $clausa="WHERE nim='$txtsearch'";
+                    $clausa = "WHERE nim='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
                 case 'nirm':
-                    $clausa="WHERE nirm='$txtsearch'";
+                    $clausa = "WHERE nirm='$txtsearch'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
                 case 'nama':
-                    $clausa="WHERE nama_mhs LIKE '%$txtsearch%'";
+                    $clausa = "WHERE nama_mhs LIKE '%$txtsearch%'";
                     $jumlah_baris = $this->DB->getCountRowsOfTable ("v_datamhs $clausa",'nim');
                     $str = "$str $clausa";
                 break;
@@ -103,14 +103,14 @@ class CDaftarMahasiswa extends MainPageK {
             $jumlah_baris = $this->DB->getCountRowsOfTable("v_datamhs WHERE kjur = $kjur $str_tahun_masuk $str_konsentrasi $str_kelas $str_status",'nim');		
             $str = "SELECT no_formulir,nim,nirm,nama_mhs,jk,tempat_lahir,tanggal_lahir,alamat_rumah,kjur,idkonsentrasi,iddosen_wali,tahun_masuk,k_status,idkelas FROM v_datamhs WHERE kjur='$kjur' $str_tahun_masuk $str_konsentrasi $str_kelas $str_status";			
         }		
-        $this->RepeaterS->CurrentPageIndex=$_SESSION['currentPageDaftarMahasiswa']['page_num'];
-		$this->RepeaterS->VirtualItemCount=$jumlah_baris;
-		$currentPage=$this->RepeaterS->CurrentPageIndex;
-		$offset=$currentPage*$this->RepeaterS->PageSize;		
-		$itemcount=$this->RepeaterS->VirtualItemCount;
-		$limit=$this->RepeaterS->PageSize;
-		if (($offset+$limit)>$itemcount) {
-			$limit=$itemcount-$offset;
+        $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageDaftarMahasiswa']['page_num'];
+		$this->RepeaterS->VirtualItemCount = $jumlah_baris;
+		$currentPage = $this->RepeaterS->CurrentPageIndex;
+		$offset = $currentPage*$this->RepeaterS->PageSize;		
+		$itemcount = $this->RepeaterS->VirtualItemCount;
+		$limit = $this->RepeaterS->PageSize;
+		if (($offset + $limit) > $itemcount) {
+			$limit = $itemcount - $offset;
 		}
 		if ($limit < 0) {$offset=0;$limit=6;$_SESSION['currentPageDaftarMahasiswa']['page_num'] = 0;}
         $str = "$str ORDER BY nim DESC,nama_mhs ASC LIMIT $offset, $limit";				
