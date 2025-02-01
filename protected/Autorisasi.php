@@ -82,6 +82,7 @@ class Autorisasi extends TModule implements IUserManager
       case 'k':
       case 'on':
       case 'vn':
+      case 'cn':
       case 'api':
       case 'sa':
         $pass = hash('sha256', $result['salt'] . hash('sha256', $password));

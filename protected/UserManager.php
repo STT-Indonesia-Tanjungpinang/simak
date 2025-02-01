@@ -70,6 +70,14 @@ class UserManager extends TAuthManager
         $userid = $this->dataUser['data_user']['userid'];
         $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid = $userid");
       break;
+      case 'CheckerNilai':
+        $str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.group_id,u.kjur,u.isdeleted,u.foto,u.theme FROM user u WHERE username='$username' AND u.page='cn'";
+        $this->db->setFieldTable (array('userid', 'username', 'nama', 'email', 'page', 'group_id', 'kjur', 'isdeleted', 'foto', 'theme'));							
+        $r = $this->db->getRecord($str);	
+        $this->dataUser['data_user'] = $r[1];	
+        $userid = $this->dataUser['data_user']['userid'];
+        $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid = $userid");
+      break;
       case 'Manajemen':	
         $str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.group_id,u.kjur,u.isdeleted,u.foto AS photo_profile,u.theme FROM user u WHERE username='$username' AND u.page='m'";
         $this->db->setFieldTable (array('userid', 'username', 'nama', 'email', 'page', 'group_id', 'kjur', 'isdeleted', 'photo_profile', 'theme'));							
@@ -214,6 +222,12 @@ class UserManager extends TAuthManager
       break;
       case 'VerifikatorNilai':
         $str = "SELECT u.username,u.userpassword,u.salt,u.page,u.active FROM user u WHERE username='$username' AND active=1 AND page='vn'";
+        $this->db->setFieldTable (array('username', 'userpassword', 'salt', 'page', 'active'));							
+        $result = $this->db->getRecord($str);
+        $data_user=isset($result[1])?$result[1]:array('page' => '', 'userpassword' => '', 'active' =>1);
+      break;
+      case 'CheckerNilai':
+        $str = "SELECT u.username,u.userpassword,u.salt,u.page,u.active FROM user u WHERE username='$username' AND active=1 AND page='cn'";
         $this->db->setFieldTable (array('username', 'userpassword', 'salt', 'page', 'active'));							
         $result = $this->db->getRecord($str);
         $data_user=isset($result[1])?$result[1]:array('page' => '', 'userpassword' => '', 'active' =>1);

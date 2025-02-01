@@ -30,6 +30,9 @@ class Login extends MainPage {
       case 'vn':
         $page = 'VerifikatorNilai';
       break;
+      case 'cn':
+        $page = 'CheckerNilai';
+      break;
       case 'd':
         $page = 'Dosen';
       break;
@@ -186,6 +189,26 @@ class Login extends MainPage {
           $foto = 'resources/userimages/no_photo.png';
         break; 
         case 'vn':
+          $group_id = $pengguna->getDataUser('group_id');
+          if ($group_id == 3) {//prodi
+            $kjur = $pengguna->getDataUser('kjur');
+            $daftar_jurusan = $dmaster->getListProgramStudi(2);
+            $_SESSION['daftar_jurusan'] = array($kjur=>$daftar_jurusan[$kjur]);
+            $_SESSION['kjur'] = $kjur;
+            $_SESSION['ta'] = $setup->getSettingValue('default_ta'); 
+          }
+          else
+          {
+            $_SESSION['daftar_jurusan'] = $dmaster->getListProgramStudi(2);
+            $_SESSION['kjur'] = $setup->getSettingValue('default_kjur');
+            $_SESSION['ta'] = $setup->getSettingValue('default_ta');
+          }                                
+          $_SESSION['semester'] = $setup->getSettingValue('default_semester');
+          $_SESSION['tahun_masuk'] = $_SESSION['ta'];
+          $_SESSION['tahun_pendaftaran'] = $setup->getSettingValue('default_tahun_pendaftaran'); 
+          $foto = 'resources/userimages/no_photo.png';
+        break; 
+        case 'cn':
           $group_id = $pengguna->getDataUser('group_id');
           if ($group_id == 3) {//prodi
             $kjur = $pengguna->getDataUser('kjur');

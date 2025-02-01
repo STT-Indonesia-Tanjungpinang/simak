@@ -172,8 +172,8 @@
                   <li class="nav-header nav-header-first hidden-sm hidden-xs">
                     NAVIGASI
                   </li>
-                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'sa' && $this->Page->showSideBarMenu==true%>">
-                    <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'sa' && $this->Page->showSideBarMenu == true%>">
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('Home', true)%>">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>											
@@ -182,31 +182,31 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       DATA MASTER
                     </li>
-                    <li<%=$this->Page->showTA==true?' class="active"':''%>>
+                    <li<%=$this->Page->showTA == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('dmaster.TA', true)%>">
                         <i class="fa fa-calendar-o"></i>
                         <span>Tahun Akademik</span>											
                       </a>                                        
                     </li>                            
-                    <li<%=$this->Page->showSubMenuLembaga==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuLembaga == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-fax"></i>
                         <span>Lembaga</span>
                         <i class="fa fa-angle-right drop-icon"></i>
                       </a>
                       <ul class="submenu">                                                
-                        <li<%=$this->Page->showDosen==true ? ' class="active" ':''%>>                                            
+                        <li<%=$this->Page->showDosen == true ? ' class="active" ':''%>>                                            
                           <a href="<%=$this->Page->constructUrl('dmaster.Dosen', true)%>">                                                        
                             Dosen                                                
                           </a>
                         </li>
-                        <li<%=$this->Page->showDosenWali==true ? ' class="active" ':''%>>                                            
+                        <li<%=$this->Page->showDosenWali == true ? ' class="active" ':''%>>                                            
                           <a href="<%=$this->Page->constructUrl('dmaster.DosenWali', true)%>">                                                        
                             Dosen Wali                                                
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dmaster.Prodi', true)%>"<%=$this->Page->showProdi==true?' class="active"':''%>>                                                        
+                          <a href="<%=$this->Page->constructUrl('dmaster.Prodi', true)%>"<%=$this->Page->showProdi == true?' class="active"':''%>>                                                        
                             Program Studi                                         
                           </a>                                        
                         </li>
@@ -215,7 +215,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       KEUANGAN
                     </li>                                        
-                    <li<%=$this->Page->showSubMenuPembayaran==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuPembayaran == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-cab"></i>
                         <span>Pembayaran</span>
@@ -223,17 +223,17 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranMahasiswaBaru', true)%>"<%=$this->Page->showPembayaranMahasiswaBaru==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranMahasiswaBaru', true)%>"<%=$this->Page->showPembayaranMahasiswaBaru == true ? ' class="active" ':''%>>
                             Mahasiswa Baru
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGanjil', true)%>"<%=$this->Page->showPembayaranSemesterGanjil==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGanjil', true)%>"<%=$this->Page->showPembayaranSemesterGanjil == true ? ' class="active" ':''%>>
                             Semester Ganjil
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGenap', true)%>"<%=$this->Page->showPembayaranSemesterGenap==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGenap', true)%>"<%=$this->Page->showPembayaranSemesterGenap == true ? ' class="active" ':''%>>
                             Semester Genap
                           </a>
                         </li>
@@ -242,7 +242,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       AKADEMIK
                     </li>
-                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-truck"></i>
                         <span>Perkuliahan</span>
@@ -250,32 +250,32 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan', true)%>"<%=$this->Page->showPenyelenggaraan==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan', true)%>"<%=$this->Page->showPenyelenggaraan == true ? ' class="active" ':''%>>
                             Penyelenggaraan
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas == true ? ' class="active" ':''%>>
                             Pembagian Kelas
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRS', true)%>"<%=$this->Page->showKRS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRS', true)%>"<%=$this->Page->showKRS == true ? ' class="active" ':''%>>
                             KRS
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRSEkstension', true)%>"<%=$this->Page->showKRSEkstension==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRSEkstension', true)%>"<%=$this->Page->showKRSEkstension == true ? ' class="active" ':''%>>
                             KRS Ekstension
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.PesertaMatakuliah', true)%>"<%=$this->Page->showPesertaMatakuliah==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PesertaMatakuliah', true)%>"<%=$this->Page->showPesertaMatakuliah == true ? ' class="active" ':''%>>
                             Peserta Matakuliah
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner == true ? ' class="active" ':''%>>
                             Kuesioner
                           </a>
                         </li> 
@@ -284,13 +284,13 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       SETTING
                     </li>
-                    <li<%=$this->Page->showVariable==true?' class="active"':''%>>
+                    <li<%=$this->Page->showVariable == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('settings.Variables', true)%>">
                         <i class="fa fa-legal"></i>
                         <span>Variables</span>											
                       </a>                                        
                     </li>                                         
-                    <li<%=$this->Page->showSubMenuSettingSistem==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuSettingSistem == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-cog"></i>
                         <span>Sistem</span>
@@ -298,54 +298,59 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('settings.UserSA', true)%>"<%=$this->Page->showUserSA==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('settings.UserSA', true)%>"<%=$this->Page->showUserSA == true ? ' class="active" ':''%>>
                             User Super Admin
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('settings.UserManajemen', true)%>"<%=$this->Page->showUserManajemen==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('settings.UserManajemen', true)%>"<%=$this->Page->showUserManajemen == true ? ' class="active" ':''%>>
                             User Manajemen
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('settings.UserKeuangan', true)%>"<%=$this->Page->showUserKeuangan==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('settings.UserKeuangan', true)%>"<%=$this->Page->showUserKeuangan == true ? ' class="active" ':''%>>
                             User Keuangan
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('settings.UserDosen', true)%>"<%=$this->Page->showUserDosen==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('settings.UserDosen', true)%>"<%=$this->Page->showUserDosen == true ? ' class="active" ':''%>>
                             User Dosen
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('settings.UserON', true)%>"<%=$this->Page->showUserON==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('settings.UserON', true)%>"<%=$this->Page->showUserON == true ? ' class="active" ':''%>>
                             User Operator Nilai
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('settings.UserVN', true)%>"<%=$this->Page->showUserVN==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('settings.UserVN', true)%>"<%=$this->Page->showUserVN == true ? ' class="active" ':''%>>
                             User Verifikator Nilai
                           </a>
                         </li>
+                        <li>
+                          <a href="<%=$this->Page->constructUrl('settings.UserCN', true)%>"<%=$this->Page->showUserCN == true ? ' class="active" ':''%>>
+                            User Checker Nilai
+                          </a>
+                        </li>
                         <li>                                                
-                          <a href="<%=$this->Page->constructUrl('settings.API', true)%>"<%=$this->Page->showAPI==true?' class="active"':''%>>                                                    
+                          <a href="<%=$this->Page->constructUrl('settings.API', true)%>"<%=$this->Page->showAPI == true?' class="active"':''%>>                                                    
                             API                                           
                           </a>                                        
                         </li>
                         <li>                                                
-                          <a href="<%=$this->Page->constructUrl('settings.Cache', true)%>"<%=$this->Page->showCache==true?' class="active"':''%>>                                                    
+                          <a href="<%=$this->Page->constructUrl('settings.Cache', true)%>"<%=$this->Page->showCache == true?' class="active"':''%>>                                                    
                             Cache											
                           </a>                                        
                         </li>
                       </ul>
                     </li>
-                    <li<%=$this->Page->showExportData==true?' class="active"':''%>>
+                    <li<%=$this->Page->showExportData == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('settings.ExportData', true)%>">
                         <i class="fa fa-send"></i>
                         <span>Export Data</span>                                           
                       </a>                                        
                     </li> 
-                    <li<%=$this->Page->showProfiles==true?' class="active"':''%>>
+                    <li<%=$this->Page->showProfiles == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('settings.Profiles', true)%>">
                         <i class="fa fa-user"></i>
                         <span>Profiles</span>											
@@ -358,14 +363,14 @@
                       </a>                                        
                     </li>
                   </com:TLiteral>
-                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'api' && $this->Page->showSideBarMenu==true%>">                                        
-                    <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'api' && $this->Page->showSideBarMenu == true%>">                                        
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('Home', true)%>">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>                                          
                       </a>                                        
                     </li>                                                                                 
-                    <li<%=$this->Page->showLogAktivitasUser==true?' class="active"':''%>>
+                    <li<%=$this->Page->showLogAktivitasUser == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('LogAktivitasUser', true)%>">
                         <i class="fa fa-file"></i>
                         <span>Log Aktivitas User</span>                                          
@@ -378,20 +383,20 @@
                       </a>                                        
                     </li>
                   </com:TLiteral>
-                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'm' && $this->Page->showSideBarMenu==true%>">
-                    <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'm' && $this->Page->showSideBarMenu == true%>">
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('Home', true)%>">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>											
                       </a>                                        
                     </li>
-                    <li<%=$this->Page->showPengumuman==true?' class="active"':''%>>
+                    <li<%=$this->Page->showPengumuman == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('forum.Pengumuman', true)%>">
                         <i class="fa fa-info-circle"></i>
                         <span>Pengumuman</span>											
                       </a>                                        
                     </li>
-                    <li<%=$this->Page->showForumDiskusi==true?' class="active"':''%>>
+                    <li<%=$this->Page->showForumDiskusi == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('forum.Diskusi', true)%>">
                         <i class="fa fa-comment"></i>
                         <span>Forum Diskusi</span>											
@@ -400,7 +405,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       DATA MASTER
                     </li>
-                    <li<%=$this->Page->showSubMenuDMasterPerkuliahan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuDMasterPerkuliahan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-truck"></i>
                         <span>Perkuliahan</span>
@@ -408,25 +413,25 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dmaster.RuangKelas', true)%>"<%=$this->Page->showRuangKelas==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dmaster.RuangKelas', true)%>"<%=$this->Page->showRuangKelas == true ? ' class="active" ':''%>>
                             Ruang Kelas
                           </a>
                         </li>
                       </ul>
                     </li>
-                    <li<%=$this->Page->showDosen==true ? ' class="active" ':''%>>                                            
+                    <li<%=$this->Page->showDosen == true ? ' class="active" ':''%>>                                            
                       <a href="<%=$this->Page->constructUrl('dmaster.Dosen', true)%>">
                         <i class="fa fa-user"></i>
                         <span>Dosen</span>                                                
                       </a>
                     </li>
-                    <li<%=$this->Page->showMatakuliah==true ? ' class="active" ':''%>>                                            
+                    <li<%=$this->Page->showMatakuliah == true ? ' class="active" ':''%>>                                            
                       <a href="<%=$this->Page->constructUrl('dmaster.Matakuliah', true)%>">
                         <i class="fa fa-bars"></i>
                         <span>Matakuliah</span>                                                
                       </a>
                     </li>
-                    <li<%=$this->Page->showSubMenuKuesioner==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuKuesioner == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-sign-in"></i>
                         <span>Kuesioner</span>
@@ -434,18 +439,18 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dmaster.KelompokPertanyaan', true)%>"<%=$this->Page->showKelompokPertanyaan==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dmaster.KelompokPertanyaan', true)%>"<%=$this->Page->showKelompokPertanyaan == true ? ' class="active" ':''%>>
                             Kelompok Pertanyaan
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dmaster.DaftarPertanyaan', true)%>"<%=$this->Page->showDaftarPertanyaan==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dmaster.DaftarPertanyaan', true)%>"<%=$this->Page->showDaftarPertanyaan == true ? ' class="active" ':''%>>
                             Daftar Pertanyaan
                           </a>
                         </li>                                                
                       </ul>
                     </li> 
-                    <li<%=$this->Page->showSoalPMB==true ? ' class="active" ':''%>>                                            
+                    <li<%=$this->Page->showSoalPMB == true ? ' class="active" ':''%>>                                            
                       <a href="<%=$this->Page->constructUrl('dmaster.SoalPMB', true)%>">
                         <i class="fa fa-list-ul"></i>
                         <span>Soal PMB</span>                                                
@@ -454,25 +459,25 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       SPMB
                     </li>  
-                    <li<%=$this->Page->showPIN==true ? ' class="active" ':''%>>                                            
+                    <li<%=$this->Page->showPIN == true ? ' class="active" ':''%>>                                            
                       <a href="<%=$this->Page->constructUrl('spmb.PIN', true)%>">
                         <i class="fa fa-circle-o"></i>
                         <span>PIN</span>                                                
                       </a>
                     </li>
-                    <li<%=$this->Page->showPendaftaranOnline==true ? ' class="active" ':''%>>                                            
+                    <li<%=$this->Page->showPendaftaranOnline == true ? ' class="active" ':''%>>                                            
                       <a href="<%=$this->Page->constructUrl('spmb.PendaftaranOnline', true)%>">
                         <i class="fa fa-globe"></i>
                         <span>Pendaftaran Online</span>                                                
                       </a>
                     </li>
-                    <li<%=$this->Page->showFormulirPendaftaran==true ? ' class="active" ':''%>>                                            
+                    <li<%=$this->Page->showFormulirPendaftaran == true ? ' class="active" ':''%>>                                            
                       <a href="<%=$this->Page->constructUrl('spmb.FormulirPendaftaran', true)%>">
                         <i class="fa fa-sign-in"></i>
                         <span>Formulir Pendaftaran</span>                                                
                       </a>
                     </li>
-                    <li<%=$this->Page->showSubMenuSPMBUjianPMB==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuSPMBUjianPMB == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-flag-checkered"></i>
                         <span>Ujian PMB</span>
@@ -480,17 +485,17 @@
                       </a>
                       <ul class="submenu"> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('spmb.JadwalUjianPMB', true)%>"<%=$this->Page->showJadwalUjianPMB==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('spmb.JadwalUjianPMB', true)%>"<%=$this->Page->showJadwalUjianPMB == true ? ' class="active" ':''%>>
                             Jadwal Ujian PMB
                           </a>
                         </li>   
                         <li>
-                          <a href="<%=$this->Page->constructUrl('spmb.PassingGrade', true)%>"<%=$this->Page->showPassingGradePMB==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('spmb.PassingGrade', true)%>"<%=$this->Page->showPassingGradePMB == true ? ' class="active" ':''%>>
                             Passing Grade
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('spmb.NilaiUjianPMB', true)%>"<%=$this->Page->showNilaiUjianPMB==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('spmb.NilaiUjianPMB', true)%>"<%=$this->Page->showNilaiUjianPMB == true ? ' class="active" ':''%>>
                             Nilai Ujian
                           </a>
                         </li>                                                
@@ -499,7 +504,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       AKADEMIK
                     </li>
-                    <li<%=$this->Page->showSubMenuAkademikKemahasiswaan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikKemahasiswaan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-users"></i>
                         <span>Kemahasiswaan</span>
@@ -507,43 +512,43 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="#"<%=$this->Page->showProfilMahasiswa==true ? ' class="active" ':''%>>
+                          <a href="#"<%=$this->Page->showProfilMahasiswa == true ? ' class="active" ':''%>>
                             Profil Mahasiswa
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.DaftarMahasiswa', true)%>"<%=$this->Page->showDaftarMahasiswa==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.DaftarMahasiswa', true)%>"<%=$this->Page->showDaftarMahasiswa == true ? ' class="active" ':''%>>
                             Daftar Mahasiswa
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.PendaftaranKonsentrasi', true)%>"<%=$this->Page->showPendaftaranKonsentrasi==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.PendaftaranKonsentrasi', true)%>"<%=$this->Page->showPendaftaranKonsentrasi == true ? ' class="active" ':''%>>
                             Pend. Konsentrasi
                           </a>
                         </li>  
                         <li>
-                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.RekapStatusMahasiswa', true)%>"<%=$this->Page->showRekapStatusMahasiswa==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.RekapStatusMahasiswa', true)%>"<%=$this->Page->showRekapStatusMahasiswa == true ? ' class="active" ':''%>>
                             Rekap. Status Mahasiswa
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.CalonWisuda', true)%>"<%=$this->Page->showCalonWisuda==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.CalonWisuda', true)%>"<%=$this->Page->showCalonWisuda == true ? ' class="active" ':''%>>
                             Calon Wisuda
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.PindahKelas', true)%>"<%=$this->Page->showPindahKelas==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.PindahKelas', true)%>"<%=$this->Page->showPindahKelas == true ? ' class="active" ':''%>>
                             Pindah Kelas
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.Perwalian', true)%>"<%=$this->Page->showPerwalian==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.Perwalian', true)%>"<%=$this->Page->showPerwalian == true ? ' class="active" ':''%>>
                             Perwalian
                           </a>
                         </li>
                       </ul>
                     </li>                                                                                                                       
-                    <li<%=$this->Page->showSubMenuAkademikDulang==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikDulang == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-location-arrow"></i>
                         <span>Daftar Ulang</span>
@@ -551,58 +556,58 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.CalonMHS', true)%>"<%=$this->Page->showCalonMHS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.CalonMHS', true)%>"<%=$this->Page->showCalonMHS == true ? ' class="active" ':''%>>
                             Calon Mahasiswa
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSBaru', true)%>"<%=$this->Page->showDulangMHSBaru==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSBaru', true)%>"<%=$this->Page->showDulangMHSBaru == true ? ' class="active" ':''%>>
                             Mahasiswa Baru
                           </a>
                         </li>    
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSLama', true)%>"<%=$this->Page->showDulangMHSLama==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSLama', true)%>"<%=$this->Page->showDulangMHSLama == true ? ' class="active" ':''%>>
                             Mahasiswa Lama
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSEkstension', true)%>"<%=$this->Page->showDulangMHSEkstension==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSEkstension', true)%>"<%=$this->Page->showDulangMHSEkstension == true ? ' class="active" ':''%>>
                             Mahasiswa Ekstension
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSAktif', true)%>"<%=$this->Page->showDulangMHSAktif==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSAktif', true)%>"<%=$this->Page->showDulangMHSAktif == true ? ' class="active" ':''%>>
                             Mahasiswa Aktif
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSNonAktif', true)%>"<%=$this->Page->showDulangMHSNonAktif==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSNonAktif', true)%>"<%=$this->Page->showDulangMHSNonAktif == true ? ' class="active" ':''%>>
                             Mahasiswa Non-Aktif
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSCuti', true)%>"<%=$this->Page->showDulangMHSCuti==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSCuti', true)%>"<%=$this->Page->showDulangMHSCuti == true ? ' class="active" ':''%>>
                             Mahasiswa Cuti
                           </a>
                         </li>                                                 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSLulus', true)%>"<%=$this->Page->showDulangMHSLulus==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSLulus', true)%>"<%=$this->Page->showDulangMHSLulus == true ? ' class="active" ':''%>>
                             Mahasiswa Lulus
                           </a>
                         </li>                                                 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSDropOut', true)%>"<%=$this->Page->showDulangMHSDropOut==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSDropOut', true)%>"<%=$this->Page->showDulangMHSDropOut == true ? ' class="active" ':''%>>
                             Mahasiswa Drop Out
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSKeluar', true)%>"<%=$this->Page->showDulangMHSKeluar==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSKeluar', true)%>"<%=$this->Page->showDulangMHSKeluar == true ? ' class="active" ':''%>>
                             Mahasiswa Keluar
                           </a>
                         </li> 
                       </ul>
                     </li>                                                                                                                       
-                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-truck"></i>
                         <span>Perkuliahan</span>
@@ -610,38 +615,38 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan', true)%>"<%=$this->Page->showPenyelenggaraan==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan', true)%>"<%=$this->Page->showPenyelenggaraan == true ? ' class="active" ':''%>>
                             Penyelenggaraan
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas == true ? ' class="active" ':''%>>
                             Pembagian Kelas
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRS', true)%>"<%=$this->Page->showKRS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRS', true)%>"<%=$this->Page->showKRS == true ? ' class="active" ':''%>>
                             KRS
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRSEkstension', true)%>"<%=$this->Page->showKRSEkstension==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRSEkstension', true)%>"<%=$this->Page->showKRSEkstension == true ? ' class="active" ':''%>>
                             KRS Ekstension
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.PesertaMatakuliah', true)%>"<%=$this->Page->showPesertaMatakuliah==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PesertaMatakuliah', true)%>"<%=$this->Page->showPesertaMatakuliah == true ? ' class="active" ':''%>>
                             Peserta Matakuliah
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner == true ? ' class="active" ':''%>>
                             Kuesioner
                           </a>
                         </li> 
                       </ul>
                     </li>   
-                    <li<%=$this->Page->showSubMenuAkademikNilai==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikNilai == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-file-excel-o"></i>
                         <span>Nilai</span>
@@ -649,37 +654,37 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.KonversiMatakuliah', true)%>"<%=$this->Page->showKonversiMatakuliah==true?' class="active"':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.KonversiMatakuliah', true)%>"<%=$this->Page->showKonversiMatakuliah == true?' class="active"':''%>>
                             Konversi Matakuliah											
                           </a>                                        
                         </li>  
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.DPNA', true)%>"<%=$this->Page->showDPNA==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.DPNA', true)%>"<%=$this->Page->showDPNA == true ? ' class="active" ':''%>>
                             DPNA
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.KHS', true)%>"<%=$this->Page->showKHS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.KHS', true)%>"<%=$this->Page->showKHS == true ? ' class="active" ':''%>>
                             KHS
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.KHSEkstension', true)%>"<%=$this->Page->showKHSEkstension==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.KHSEkstension', true)%>"<%=$this->Page->showKHSEkstension == true ? ' class="active" ':''%>>
                             KHS Ekstension
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.TranskripKurikulum', true)%>"<%=$this->Page->showTranskripKurikulum==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.TranskripKurikulum', true)%>"<%=$this->Page->showTranskripKurikulum == true ? ' class="active" ':''%>>
                             Transkrip Kurikulum
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.TranskripKRS', true)%>"<%=$this->Page->showTranskripKRS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.TranskripKRS', true)%>"<%=$this->Page->showTranskripKRS == true ? ' class="active" ':''%>>
                             Transkrip KRS
                           </a>
                         </li>                                                   
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.TranskripFinal', true)%>"<%=$this->Page->showTranskripFinal==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.TranskripFinal', true)%>"<%=$this->Page->showTranskripFinal == true ? ' class="active" ':''%>>
                             Transkrip Final
                           </a>
                         </li>                                                   
@@ -688,7 +693,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       KEUANGAN
                     </li>
-                    <li<%=$this->Page->showSubMenuRekapKeuangan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuRekapKeuangan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-file-text-o"></i>
                         <span>Rekapitulasi</span>
@@ -696,7 +701,7 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('keuangan.RekapPembayaranSemesterGanjil', true)%>"<%=$this->Page->showReportRekapPembayaranGanjil==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('keuangan.RekapPembayaranSemesterGanjil', true)%>"<%=$this->Page->showReportRekapPembayaranGanjil == true ? ' class="active" ':''%>>
                             Pembayararan SMT Ganjil
                           </a>
                         </li> 
@@ -705,7 +710,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       SETTING
                     </li>
-                    <li<%=$this->Page->showProfiles==true?' class="active"':''%>>
+                    <li<%=$this->Page->showProfiles == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('settings.Profiles', true)%>">
                         <i class="fa fa-user"></i>
                         <span>Profiles</span>											
@@ -718,20 +723,20 @@
                       </a>                                        
                     </li>
                   </com:TLiteral>		
-                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'mh' && $this->Page->showSideBarMenu==true%>">
-                    <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'mh' && $this->Page->showSideBarMenu == true%>">
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('Home', true)%>">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>											
                       </a>                                        
                     </li> 
-                    <li<%=$this->Page->showPengumuman==true?' class="active"':''%>>
+                    <li<%=$this->Page->showPengumuman == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('forum.Pengumuman', true)%>">
                         <i class="fa fa-info-circle"></i>
                         <span>Pengumuman</span>											
                       </a>                                        
                     </li>
-                    <li<%=$this->Page->showForumDiskusi==true?' class="active"':''%>>
+                    <li<%=$this->Page->showForumDiskusi == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('forum.Diskusi', true)%>">
                         <i class="fa fa-comment"></i>
                         <span>Forum Diskusi</span>											
@@ -740,7 +745,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       AKADEMIK
                     </li>   
-                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-truck"></i>
                         <span>Perkuliahan</span>
@@ -748,23 +753,23 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.JadwalPerkuliahan', true)%>"<%=$this->Page->showJadwalPerkuliahan==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.JadwalPerkuliahan', true)%>"<%=$this->Page->showJadwalPerkuliahan == true ? ' class="active" ':''%>>
                             Jadwal Perkuliahan
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRS', true)%>"<%=$this->Page->showKRS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRS', true)%>"<%=$this->Page->showKRS == true ? ' class="active" ':''%>>
                             KRS
                           </a>
                         </li>                                                
                         <li>
-                          <a href="#"<%=$this->Page->showKuesioner==true ? ' class="active" ':''%>>
+                          <a href="#"<%=$this->Page->showKuesioner == true ? ' class="active" ':''%>>
                             Kuesioner
                           </a>
                         </li>
                       </ul>
                     </li>   
-                    <li<%=$this->Page->showSubMenuAkademikNilai==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikNilai == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-file-excel-o"></i>
                         <span>Nilai</span>
@@ -772,22 +777,22 @@
                       </a>
                       <ul class="submenu">    
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.KonversiMatakuliah', true)%>"<%=$this->Page->showKonversiMatakuliah==true?' class="active"':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.KonversiMatakuliah', true)%>"<%=$this->Page->showKonversiMatakuliah == true?' class="active"':''%>>
                             Konversi Matakuliah											
                           </a>                                        
                         </li>  
                         <li>
-                          <a<%=$this->Page->showKHS==true ? ' class="active" ':''%>  href="<%=$this->Page->constructUrl('nilai.KHS', true)%>">                                                        
+                          <a<%=$this->Page->showKHS == true ? ' class="active" ':''%>  href="<%=$this->Page->constructUrl('nilai.KHS', true)%>">                                                        
                             <span>Kartu Hasil Studi</span>											
                           </a> 
                         </li>                                                
                         <li>
-                          <a<%=$this->Page->showTranskripKurikulum==true ? ' class="active" ':''%>  href="<%=$this->Page->constructUrl('nilai.TranskripKurikulum', true)%>">                                                        
+                          <a<%=$this->Page->showTranskripKurikulum == true ? ' class="active" ':''%>  href="<%=$this->Page->constructUrl('nilai.TranskripKurikulum', true)%>">                                                        
                             <span>Transkrip Kurikulum</span>											
                           </a> 
                         </li> 
                         <li>
-                          <a<%=$this->Page->showTranskripKRS==true ? ' class="active" ':''%>  href="<%=$this->Page->constructUrl('nilai.TranskripKRS', true)%>">                                                        
+                          <a<%=$this->Page->showTranskripKRS == true ? ' class="active" ':''%>  href="<%=$this->Page->constructUrl('nilai.TranskripKRS', true)%>">                                                        
                             <span>Transkrip KRS</span>											
                           </a> 
                         </li> 
@@ -796,7 +801,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       KEMAHASISWAAN
                     </li>  
-                    <li<%=$this->Page->showDaftarKonsentrasi==true?' class="active"':''%>>
+                    <li<%=$this->Page->showDaftarKonsentrasi == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('kemahasiswaan.DaftarKonsentrasi', true)%>">
                         <i class="fa fa-users"></i>
                         <span>Daftar Konsentrasi</span>											
@@ -805,7 +810,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       RIWAYAT
                     </li>  
-                    <li<%=$this->Page->showDulangMHSLama==true?' class="active"':''%>>
+                    <li<%=$this->Page->showDulangMHSLama == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('riwayat.DulangMHSLama', true)%>">
                         <i class="fa fa-location-arrow"></i>
                         <span>Daftar Ulang</span>											
@@ -814,31 +819,31 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       PEMBAYARAN
                     </li>                                        
-                    <li<%=$this->Page->showPembayaranSemesterGanjil==true?' class="active"':''%>>
+                    <li<%=$this->Page->showPembayaranSemesterGanjil == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGanjil', true)%>">
                         <i class="fa fa-usd"></i>
                         <span>Semester Ganjil</span>
                       </a>
                     </li> 
-                    <li<%=$this->Page->showPembayaranSemesterGenap==true?' class="active"':''%>>
+                    <li<%=$this->Page->showPembayaranSemesterGenap == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGenap', true)%>">
                         <i class="fa fa-usd"></i> 
                         <span>Semester Genap</span>
                       </a>
                     </li>
-                    <li<%=$this->Page->showPembayaranSemesterPendek==true?' class="active"':''%>>
+                    <li<%=$this->Page->showPembayaranSemesterPendek == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterPendek', true)%>">
                         <i class="fa fa-usd"></i> 
                         <span>Semester Pendek</span>
                       </a>
                     </li>
-                    <li<%=$this->Page->showPembayaranCutiSemesterGanjil==true?' class="active"':''%>>
+                    <li<%=$this->Page->showPembayaranCutiSemesterGanjil == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranCutiSemesterGanjil', true)%>">
                         <i class="fa fa-usd"></i> 
                         <span>Cuti Semester Ganjil</span>
                       </a>
                     </li>
-                    <li<%=$this->Page->showPembayaranCutiSemesterGenap==true?' class="active"':''%>>
+                    <li<%=$this->Page->showPembayaranCutiSemesterGenap == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranCutiSemesterGenap', true)%>">
                         <i class="fa fa-usd"></i> 
                         <span>Cuti Semester Genap</span>
@@ -847,47 +852,47 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       SETTING
                     </li>                                                                             
-                    <li<%=$this->Page->showProfiles==true?' class="active"':''%>>
+                    <li<%=$this->Page->showProfiles == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('settings.Profiles', true)%>">
                         <i class="fa fa-user"></i>
                         <span>Profiles</span>											
                       </a>                                        
                     </li>                                        
                   </com:TLiteral>	
-                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'mb' && $this->Page->showSideBarMenu==true%>">
-                    <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'mb' && $this->Page->showSideBarMenu == true%>">
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('Home', true)%>">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>											
                       </a>                                        
                     </li> 
-                    <li<%=$this->Page->showFormulirPendaftaran==true?' class="active"':''%>>
+                    <li<%=$this->Page->showFormulirPendaftaran == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('FormulirPendaftaran', true)%>">
                         <i class="fa fa-file-o"></i>
                         <span>Formulir Pendaftaran</span>											
                       </a>                                        
                     </li>
-                    <li<%=$this->Page->showJadwalUjianPMB==true?' class="active"':''%>>
+                    <li<%=$this->Page->showJadwalUjianPMB == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('JadwalUjianPMB', true)%>">
                         <i class="fa fa-calendar"></i>
                         <span>Jadwal Ujian PMB</span>											
                       </a>                                        
                     </li>
-                    <li<%=$this->Page->showSoalPMB==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSoalPMB == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('SoalPMB', true)%>">
                         <i class="fa fa-list-ul"></i>
                         <span>Soal Ujian PMB</span>											
                       </a>                                        
                     </li>
                   </com:TLiteral>	
-                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'd' && $this->Page->showSideBarMenu==true%>">
-                    <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'd' && $this->Page->showSideBarMenu == true%>">
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('Home', true)%>">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>											
                       </a>                                        
                     </li>  
-                    <li<%=$this->Page->showForumDiskusi==true?' class="active"':''%>>
+                    <li<%=$this->Page->showForumDiskusi == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('forum.Diskusi', true)%>">
                         <i class="fa fa-comment"></i>
                         <span>Forum Diskusi</span>											
@@ -896,7 +901,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       AKADEMIK
                     </li>
-                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-truck"></i>
                         <span>Perkuliahan</span>
@@ -904,18 +909,18 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas == true ? ' class="active" ':''%>>
                             Pembagian Kelas
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner == true ? ' class="active" ':''%>>
                             Kuesioner
                           </a>
                         </li> 
                       </ul>
                     </li>
-                    <li<%=$this->Page->showSubMenuAkademikNilai==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikNilai == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-file-excel-o"></i>
                         <span>Nilai</span>
@@ -923,36 +928,36 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.EditNilai', true)%>"<%=$this->Page->showEditNilai==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.EditNilai', true)%>"<%=$this->Page->showEditNilai == true ? ' class="active" ':''%>>
                             Edit Nilai
                           </a>
                         </li>
                         <li>
-                          <a href="#" <%=$this->Page->showImportNilai==true ? ' class="active" ':''%>>
+                          <a href="#" <%=$this->Page->showImportNilai == true ? ' class="active" ':''%>>
                             Import Nilai
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.DPNA', true)%>"<%=$this->Page->showDPNA==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.DPNA', true)%>"<%=$this->Page->showDPNA == true ? ' class="active" ':''%>>
                             DPNA
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.EvaluasiHasilBelajar', true)%>"<%=$this->Page->showEvaluasiHasilBelajar==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.EvaluasiHasilBelajar', true)%>"<%=$this->Page->showEvaluasiHasilBelajar == true ? ' class="active" ':''%>>
                             Evaluasi Hasil Belajar
                           </a>
                         </li>
                       </ul>
                     </li> 
                   </com:TLiteral>	
-                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'vn' && $this->Page->showSideBarMenu==true%>">
-                    <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'vn' && $this->Page->showSideBarMenu == true%>">
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('Home', true)%>">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>											
                       </a>                                        
                     </li>  
-                    <li<%=$this->Page->showForumDiskusi==true?' class="active"':''%>>
+                    <li<%=$this->Page->showForumDiskusi == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('forum.Diskusi', true)%>">
                         <i class="fa fa-comment"></i>
                         <span>Forum Diskusi</span>											
@@ -961,7 +966,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       AKADEMIK
                     </li>
-                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-truck"></i>
                         <span>Perkuliahan</span>
@@ -969,18 +974,18 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas == true ? ' class="active" ':''%>>
                             Pembagian Kelas
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner == true ? ' class="active" ':''%>>
                             Kuesioner
                           </a>
                         </li> 
                       </ul>
                     </li>
-                    <li<%=$this->Page->showSubMenuAkademikNilai==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikNilai == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-file-excel-o"></i>
                         <span>Nilai</span>
@@ -988,25 +993,85 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.EditNilai', true)%>"<%=$this->Page->showEditNilai==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.EditNilai', true)%>"<%=$this->Page->showEditNilai == true ? ' class="active" ':''%>>
                             Edit Nilai
                           </a>
                         </li>                        
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.DPNA', true)%>"<%=$this->Page->showDPNA==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.DPNA', true)%>"<%=$this->Page->showDPNA == true ? ' class="active" ':''%>>
                             DPNA
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.EvaluasiHasilBelajar', true)%>"<%=$this->Page->showEvaluasiHasilBelajar==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.EvaluasiHasilBelajar', true)%>"<%=$this->Page->showEvaluasiHasilBelajar == true ? ' class="active" ':''%>>
                             Evaluasi Hasil Belajar
                           </a>
                         </li>
                       </ul>
                     </li> 
                   </com:TLiteral>	
-                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'dw' && $this->Page->showSideBarMenu==true%>">
-                    <li<%=$this->Page->showDashboard==true?' class="active"':''%>>
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'cn' && $this->Page->showSideBarMenu == true%>">
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
+                      <a href="<%=$this->Page->constructUrl('Home', true)%>">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>											
+                      </a>                                        
+                    </li>  
+                    <li<%=$this->Page->showForumDiskusi == true?' class="active"':''%>>
+                      <a href="<%=$this->Page->constructUrl('forum.Diskusi', true)%>">
+                        <i class="fa fa-comment"></i>
+                        <span>Forum Diskusi</span>											
+                      </a>                                        
+                    </li> 
+                    <li class="nav-header nav-header-first hidden-sm hidden-xs">
+                      AKADEMIK
+                    </li>
+                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan == true?' class="active"':''%>>
+                      <a href="#" class="dropdown-toggle">
+                        <i class="fa fa-truck"></i>
+                        <span>Perkuliahan</span>
+                        <i class="fa fa-angle-right drop-icon"></i>
+                      </a>
+                      <ul class="submenu">
+                        <li>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas == true ? ' class="active" ':''%>>
+                            Pembagian Kelas
+                          </a>
+                        </li>
+                        <li>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.Kuesioner', true)%>"<%=$this->Page->showKuesioner == true ? ' class="active" ':''%>>
+                            Kuesioner
+                          </a>
+                        </li> 
+                      </ul>
+                    </li>
+                    <li<%=$this->Page->showSubMenuAkademikNilai == true?' class="active"':''%>>
+                      <a href="#" class="dropdown-toggle">
+                        <i class="fa fa-file-excel-o"></i>
+                        <span>Nilai</span>
+                        <i class="fa fa-angle-right drop-icon"></i>
+                      </a>
+                      <ul class="submenu">
+                        <li>
+                          <a href="<%=$this->Page->constructUrl('nilai.EditNilai', true)%>"<%=$this->Page->showEditNilai == true ? ' class="active" ':''%>>
+                            Edit Nilai
+                          </a>
+                        </li>                        
+                        <li>
+                          <a href="<%=$this->Page->constructUrl('nilai.DPNA', true)%>"<%=$this->Page->showDPNA == true ? ' class="active" ':''%>>
+                            DPNA
+                          </a>
+                        </li>
+                        <li>
+                          <a href="<%=$this->Page->constructUrl('nilai.EvaluasiHasilBelajar', true)%>"<%=$this->Page->showEvaluasiHasilBelajar == true ? ' class="active" ':''%>>
+                            Evaluasi Hasil Belajar
+                          </a>
+                        </li>
+                      </ul>
+                    </li> 
+                  </com:TLiteral>	
+                  <com:TLiteral Visible="<%=$this->Page->Pengguna->getTipeUser() == 'dw' && $this->Page->showSideBarMenu == true%>">
+                    <li<%=$this->Page->showDashboard == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('Home', true)%>">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>											
@@ -1015,7 +1080,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       AKADEMIK
                     </li>
-                    <li<%=$this->Page->showSubMenuAkademikKemahasiswaan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikKemahasiswaan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-users"></i>
                         <span>Kemahasiswaan</span>
@@ -1023,18 +1088,18 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="#"<%=$this->Page->showProfilMahasiswa==true ? ' class="active" ':''%>>
+                          <a href="#"<%=$this->Page->showProfilMahasiswa == true ? ' class="active" ':''%>>
                             Profil Mahasiswa
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.DaftarMahasiswa', true)%>"<%=$this->Page->showDaftarMahasiswa==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('kemahasiswaan.DaftarMahasiswa', true)%>"<%=$this->Page->showDaftarMahasiswa == true ? ' class="active" ':''%>>
                             Daftar Mahasiswa
                           </a>
                         </li>                                                                                            
                       </ul>
                     </li>                                                                                                                       
-                    <li<%=$this->Page->showSubMenuAkademikDulang==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikDulang == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-location-arrow"></i>
                         <span>Daftar Ulang</span>
@@ -1042,23 +1107,23 @@
                       </a>
                       <ul class="submenu">                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSBaru', true)%>"<%=$this->Page->showDulangMHSBaru==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSBaru', true)%>"<%=$this->Page->showDulangMHSBaru == true ? ' class="active" ':''%>>
                             Mahasiswa Baru
                           </a>
                         </li>    
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSLama', true)%>"<%=$this->Page->showDulangMHSLama==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSLama', true)%>"<%=$this->Page->showDulangMHSLama == true ? ' class="active" ':''%>>
                             Mahasiswa Lama
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSEkstension', true)%>"<%=$this->Page->showDulangMHSEkstension==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('dulang.DulangMHSEkstension', true)%>"<%=$this->Page->showDulangMHSEkstension == true ? ' class="active" ':''%>>
                             Mahasiswa Ekstension
                           </a>
                         </li> 
                       </ul>
                     </li>                                                                                                                       
-                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikPerkuliahan == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-truck"></i>
                         <span>Perkuliahan</span>
@@ -1066,33 +1131,33 @@
                       </a>
                       <ul class="submenu">
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan', true)%>"<%=$this->Page->showPenyelenggaraan==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.Penyelenggaraan', true)%>"<%=$this->Page->showPenyelenggaraan == true ? ' class="active" ':''%>>
                             Penyelenggaraan
                           </a>
                         </li> 
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PembagianKelas', true)%>"<%=$this->Page->showPembagianKelas == true ? ' class="active" ':''%>>
                             Pembagian Kelas
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRS', true)%>"<%=$this->Page->showKRS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRS', true)%>"<%=$this->Page->showKRS == true ? ' class="active" ':''%>>
                             KRS
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRSEkstension', true)%>"<%=$this->Page->showKRSEkstension==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.KRSEkstension', true)%>"<%=$this->Page->showKRSEkstension == true ? ' class="active" ':''%>>
                             KRS Ekstension
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('perkuliahan.PKRS', true)%>"<%=$this->Page->showPKRS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('perkuliahan.PKRS', true)%>"<%=$this->Page->showPKRS == true ? ' class="active" ':''%>>
                             Perubahan KRS
                           </a>
                         </li>
                       </ul>
                     </li>   
-                    <li<%=$this->Page->showSubMenuAkademikNilai==true?' class="active"':''%>>
+                    <li<%=$this->Page->showSubMenuAkademikNilai == true?' class="active"':''%>>
                       <a href="#" class="dropdown-toggle">
                         <i class="fa fa-file-excel-o"></i>
                         <span>Nilai</span>
@@ -1100,22 +1165,22 @@
                       </a>
                       <ul class="submenu">                                                                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.KHS', true)%>"<%=$this->Page->showKHS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.KHS', true)%>"<%=$this->Page->showKHS == true ? ' class="active" ':''%>>
                             KHS
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.KHSEkstension', true)%>"<%=$this->Page->showKHSEkstension==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.KHSEkstension', true)%>"<%=$this->Page->showKHSEkstension == true ? ' class="active" ':''%>>
                             KHS Ekstension
                           </a>
                         </li>                                                
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.TranskripKurikulum', true)%>"<%=$this->Page->showTranskripKurikulum==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.TranskripKurikulum', true)%>"<%=$this->Page->showTranskripKurikulum == true ? ' class="active" ':''%>>
                             Transkrip Kurikulum
                           </a>
                         </li>
                         <li>
-                          <a href="<%=$this->Page->constructUrl('nilai.TranskripKRS', true)%>"<%=$this->Page->showTranskripKRS==true ? ' class="active" ':''%>>
+                          <a href="<%=$this->Page->constructUrl('nilai.TranskripKRS', true)%>"<%=$this->Page->showTranskripKRS == true ? ' class="active" ':''%>>
                             Transkrip KRS
                           </a>
                         </li>                                        
@@ -1124,7 +1189,7 @@
                     <li class="nav-header nav-header-first hidden-sm hidden-xs">
                       SETTING
                     </li>
-                    <li<%=$this->Page->showProfiles==true?' class="active"':''%>>
+                    <li<%=$this->Page->showProfiles == true?' class="active"':''%>>
                       <a href="<%=$this->Page->constructUrl('settings.Profiles', true)%>">
                         <i class="fa fa-user"></i>
                         <span>Profiles</span>											

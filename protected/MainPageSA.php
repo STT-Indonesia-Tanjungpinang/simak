@@ -95,6 +95,10 @@ class MainPageSA extends MainPage
 	 */
 	public $showUserVN = false;
 	/**     
+	 * show page user checker nilai [setting sistem]
+	 */
+	public $showUserCN = false;
+	/**     
 	 * show page user API [setting sistem]
 	 */
 	public $showAPI = false;
