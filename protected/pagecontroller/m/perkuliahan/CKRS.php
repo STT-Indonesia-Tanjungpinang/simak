@@ -282,7 +282,7 @@ class CKRS Extends MainPageM {
                 $_SESSION['currentPageKRS']['DataKRS']['krs'] = $krs;
                 
                 $this->redirect ('perkuliahan.TambahKRS', true);
-            }elseif(isset($krs['idkrs']) && $krs['sah']==1){
+            }elseif(isset($krs['idkrs']) && $krs['sah'] == 1){
                 $idkrs = $krs['idkrs'];
                 $this->redirect ('perkuliahan.DetailKRS', true,array('id' => $idkrs));
             }else{

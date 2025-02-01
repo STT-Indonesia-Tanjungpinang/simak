@@ -109,7 +109,7 @@ class Logic_Nilai extends Logic_Akademik {
       $n_kual='';
       $idnilai_konversi='';
       foreach ($result as $m=>$n) {	
-        if ($n['kmatkul']==$kmatkul) {		
+        if ($n['kmatkul'] == $kmatkul) {		
           $kmatkul_asal=$n['kmatkul_asal'];			
           $matkul_asal=$n['matkul_asal'];
           $sks_asal=$n['sks_asal'];

@@ -159,9 +159,9 @@ class CPesertaMatakuliah extends MainPageM {
         $result = array();
         while (list($k, $v) = each($r)) {
             $status='belum disahkan';
-            if ($v['sah']==1 && $v['batal'] == 0) {
+            if ($v['sah'] == 1 && $v['batal'] == 0) {
                 $status='sah';
-            }elseif($v['sah']==1 && $v['batal']==1){
+            }elseif($v['sah'] == 1 && $v['batal'] == 1){
                 $status='batal';
             }
             $v['status'] = $status;

@@ -148,7 +148,7 @@ class CDosen extends MainPageM {
 			$alamat_dosen = strtoupper(addslashes($this->txtAddAlamat->Text));
             $no_telepon = addslashes($this->txtAddTelepon->Text);
             $email = addslashes($this->txtAddEmail->Text);
-            $username=addslashes($this->txtAddUsername->Text);
+            $username = addslashes($this->txtAddUsername->Text);
 			$password=md5(txtAddPassword1);
             
 			$str = "INSERT INTO dosen SET nidn='$nidn',nipy='$nipy',nama_dosen='$nama',gelar_depan='$gelar_depan',gelar_belakang='$gelar_belakang',idjabatan='$idjabatanfungsional',alamat_dosen='$alamat_dosen',telp_hp='$no_telepon',email='$email',website='',username='$username',userpassword='$password',theme='cube',status=1";

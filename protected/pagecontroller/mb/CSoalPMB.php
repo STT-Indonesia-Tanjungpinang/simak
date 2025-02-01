@@ -144,7 +144,7 @@ class CSoalPMB extends MainPageMB {
             $idsoal = $item->DataItem['idsoal'];
 			$item->rdJawaban->setUniqueGroupName("jawaban$idsoal");
             if ($item->DataItem['jawaban_tersimpan'] > 0){                                
-                $item->rdJawaban->Checked=$item->DataItem['jawaban_tersimpan']==$item->DataItem['idjawaban'];
+                $item->rdJawaban->Checked=$item->DataItem['jawaban_tersimpan'] == $item->DataItem['idjawaban'];
             }
 		}
 	} 

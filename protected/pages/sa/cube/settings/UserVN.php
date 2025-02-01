@@ -1,6 +1,6 @@
 <?php
 prado::using ('Application.pagecontroller.sa.settings.CUserVN');
-class UserON extends CUserVN
+class UserVN extends CUserVN
 {		    	
 	public function onLoad($param)
 	{

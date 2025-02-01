@@ -26,7 +26,7 @@ class CMatkulPrasyarat extends MainPageM {
             }
             $data = $r[1];
             $this->lblMatkul->Text = $data['nmatkul'];                 
-            if ($data['semester']==1) {
+            if ($data['semester'] == 1) {
                 throw new Exception("Matakuliah yang berada di semester 1 tidak ada prasyaratnya.");
             }          
             $_SESSION['currentPageMatkulPrasyarat']['dataMatkul'] = $data;

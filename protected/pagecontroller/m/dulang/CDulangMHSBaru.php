@@ -136,7 +136,7 @@ class CDulangMHSBaru Extends MainPageM {
                     }       
                     $datamhs['nama_ps1'] = $_SESSION['daftar_jurusan'][$datamhs['kjur1']];                    
                     $datamhs['nama_ps2'] = $datamhs['kjur2'] == 0 ?'N.A': $_SESSION['daftar_jurusan'][$datamhs['kjur2']];                    
-                    if ($spmb['kjur']==$datamhs['kjur1']) {
+                    if ($spmb['kjur'] == $datamhs['kjur1']) {
                         $datamhs['diterima_ps1'] = '<span class="label label-info">DITERIMA</span>';
                         $datamhs['diterima_ps2'] = '<span class="label label-warning">TIDAK DITERIMA</span>';
                     }else{

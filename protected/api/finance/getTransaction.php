@@ -51,7 +51,7 @@ class getTransaction extends BaseWS {
 						$payload['totaltagihan'] = $jumlah;
 						$payload['commited'] = $result['commited'];
                         $payload['keterangan'] = $keterangan;
-                        if ($result['commited']==1) {
+                        if ($result['commited'] == 1) {
                             $this->payload['status'] = '88';
                             $message="Login=1, transaksi ($no_transaksi) sudah pernah dilakukan";
                         }else{
@@ -72,7 +72,7 @@ class getTransaction extends BaseWS {
 					$r = $this->DB->getRecord($str);						
 					if (isset($r[1])) {
 						$payload=$r[1];
-                        if ($payload['commited']==1) {
+                        if ($payload['commited'] == 1) {
                             $this->payload['status'] = '88';
                             $message="Login=1, transaksi ($no_transaksi) sudah pernah dilakukan";
                         }else{

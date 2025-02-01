@@ -24,7 +24,7 @@ class CDetailPembayaranSemesterGanjil Extends MainPageK {
                     $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS'] = array();
                     throw new Exception ("NIM ($nim) tidak terdaftar di Portal, silahkan ganti dengan yang lain.");
                 }      
-                if ($datamhs['tahun_masuk'] == $datamhs['ta'] && $datamhs['semester_masuk']==1) {						
+                if ($datamhs['tahun_masuk'] == $datamhs['ta'] && $datamhs['semester_masuk'] == 1) {						
                     $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS'] = array();
                     throw new Exception ("NIM ($nim) adalah seorang Mahasiswa baru, mohon diproses di Pembayaran->Mahasiswa Baru.");
                 }

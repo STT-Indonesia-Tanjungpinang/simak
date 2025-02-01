@@ -1,5 +1,5 @@
 <?php
-prado::using ('Application.pagecontroller.d.perkuliahan.CPesertaKelas');
+prado::using ('Application.pagecontroller.vn.perkuliahan.CPesertaKelas');
 class PesertaKelas extends CPesertaKelas {	
 	public function onLoad($param) {		
 		parent::onLoad($param);				        

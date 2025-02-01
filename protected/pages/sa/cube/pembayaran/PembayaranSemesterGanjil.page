@@ -109,7 +109,7 @@
                                         <span class="<%#$this->DataItem['commited'] == true?'label label-success':'label label-danger'%>"><%#$this->DataItem['commited'] == true?'Done':'in progress'%></span>                               
                                     </td>
                                     <td>   
-                                        <com:TActiveLinkButton ID="btnCancel" CssClass="table-link danger" OnClick="Page.batalkanTransaksi" Attributes.Title="Batalkan Transaksi" ClientSide.PostState="false" Enabled="<%#$this->DataItem['commited']==1%>">
+                                        <com:TActiveLinkButton ID="btnCancel" CssClass="table-link danger" OnClick="Page.batalkanTransaksi" Attributes.Title="Batalkan Transaksi" ClientSide.PostState="false" Enabled="<%#$this->DataItem['commited'] == 1%>">
                                             <prop:Text>
                                                 <span class="fa-stack">
                                                     <i class="fa fa-square fa-stack-2x"></i>

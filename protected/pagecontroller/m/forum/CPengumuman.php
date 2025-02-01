@@ -119,12 +119,12 @@ class CPengumuman extends MainPageM {
             $file_path_temp=BASEPATH."resources/tmp/$real_file_name";
             $file_url="resources/files/$real_file_name";
             
-            $this->hiddenfile_name->Value=addslashes($file_name);
-            $this->hiddenfile_type->Value=addslashes($file_type);
-            $this->hiddenfile_size->Value=addslashes($file_size);
-            $this->hiddenfile_path->Value=addslashes($file_path);
-            $this->hiddenfile_path_temp->Value=addslashes($file_path_temp);
-            $this->hiddenfile_url->Value=addslashes($file_url);
+            $this->hiddenfile_name->Value = addslashes($file_name);
+            $this->hiddenfile_type->Value = addslashes($file_type);
+            $this->hiddenfile_size->Value = addslashes($file_size);
+            $this->hiddenfile_path->Value = addslashes($file_path);
+            $this->hiddenfile_path_temp->Value = addslashes($file_path_temp);
+            $this->hiddenfile_url->Value = addslashes($file_url);
             
             $sender->saveAs($file_path_temp);
         }            

@@ -9,6 +9,7 @@
 		<allow roles="Manajemen" pages="m.*" />
 		<allow roles="Keuangan" pages="k.*" />
 		<allow roles="OperatorNilai" pages="on.*" />
+		<allow roles="VerifikatorNilai" pages="vn.*" />
 		<allow roles="Mahasiswa" pages="mh.*" />
 		<allow roles="MahasiswaBaru" pages="mb.*" />
 		<allow roles="Alumni" pages="al.*" />

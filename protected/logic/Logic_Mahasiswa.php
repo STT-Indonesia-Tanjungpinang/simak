@@ -137,7 +137,7 @@ class Logic_Mahasiswa extends Logic_Global {
   * @return boolean
   */
   public function isMhsBaru ($tahun_sekarang, $semester_sekarang) {						
-    if ($this->DataMHS['tahun_masuk']==$tahun_sekarang&&$this->DataMHS['semester_masuk']==$semester_sekarang) {
+    if ($this->DataMHS['tahun_masuk'] == $tahun_sekarang&&$this->DataMHS['semester_masuk'] == $semester_sekarang) {
       return true;
     }else{
       return false;

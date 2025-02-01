@@ -118,7 +118,7 @@ class CUserSA extends MainPageSA {
 		if ($this->Page->isValid) {
             $nama = addslashes($this->txtAddNama->Text);
             $email = addslashes($this->txtAddEmail->Text);
-            $username=addslashes($this->txtAddUsername->Text);    
+            $username = addslashes($this->txtAddUsername->Text);    
             $data = $this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
             $salt=$data['salt'];
             $password=$data['password'];           
@@ -164,7 +164,7 @@ class CUserSA extends MainPageSA {
             $id = $this->hiddenid->Value;
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
-            $username=addslashes($this->txtEditUsername->Text); 
+            $username = addslashes($this->txtEditUsername->Text); 
             $group_id = $this->cmbEditGroup->Text;  
             $kjur = $this->cmbEditProdi->Text;
             $status = $this->cmbEditStatus->Text;

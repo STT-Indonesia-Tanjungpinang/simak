@@ -1,5 +1,5 @@
 <?php
-prado::using ('Application.pagecontroller.d.perkuliahan.CKuesioner');
+prado::using ('Application.pagecontroller.vn.perkuliahan.CKuesioner');
 class Kuesioner extends CKuesioner {
 	public function onLoad($param) {		
 		parent::onLoad($param);						

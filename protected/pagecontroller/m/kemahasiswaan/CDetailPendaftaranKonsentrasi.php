@@ -29,7 +29,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
                 if (!isset($r[1])) {                                
                     throw new Exception ("Mahasiswa dengan NIM ($nim) belum memilih konsentrasi.");		
                 }
-                if ($r[1]['status_daftar']==1) {
+                if ($r[1]['status_daftar'] == 1) {
                     $this->cmbKonsentrasiProdi->Enabled = false;
                     $this->btnApproved->Enabled = false;
                     $this->btnApproved->CssClass='btn';

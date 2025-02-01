@@ -13,8 +13,8 @@ class CDetailKuesioner extends MainPageVN {
         $this->showKuesioner = true;           
         $this->createObj('Kuesioner');
 		if (!$this->IsPostBack && !$this->IsCallback) {	
-            if (!isset($_SESSION['currentPageDetailKuesioner']) || $_SESSION['currentPageDetailKuesioner']['page_name'] != 'd.perkuliahan.DetailKuesioner') {
-				$_SESSION['currentPageDetailKuesioner'] = array('page_name' => 'd.perkuliahan.DetailKuesioner', 'page_num' => 0,'DataKuesioner' =>array());
+            if (!isset($_SESSION['currentPageDetailKuesioner']) || $_SESSION['currentPageDetailKuesioner']['page_name'] != 'vn.perkuliahan.DetailKuesioner') {
+				$_SESSION['currentPageDetailKuesioner'] = array('page_name' => 'vn.perkuliahan.DetailKuesioner', 'page_num' => 0,'DataKuesioner' =>array());
 			}             
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
             $this->tbCmbOutputReport->Text= $_SESSION['outputreport'];

@@ -219,7 +219,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
         $semester = $r[1]['idsmt'];
         $ta = $r[1]['tahun'];
         $this->Finance->setDataMHS(array('tahun_masuk' => $r[1]['tahun_masuk'],'idsmt' => $r[1]['semester_masuk'],'idkelas' => $r[1]['idkelas']));
-        $kewajiban=($r[1]['tahun']==$r[1]['tahun_masuk'] && $r[1]['semester_masuk'] == $r[1]['idsmt']) ?$this->Finance->getTotalBiayaMhsPeriodePembayaran('baru'):$this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
+        $kewajiban=($r[1]['tahun'] == $r[1]['tahun_masuk'] && $r[1]['semester_masuk'] == $r[1]['idsmt']) ?$this->Finance->getTotalBiayaMhsPeriodePembayaran('baru'):$this->Finance->getTotalBiayaMhsPeriodePembayaran('lama');
         $str2 = "SELECT SUM(dibayarkan) AS dibayarkan FROM transaksi t,transaksi_detail td WHERE td.no_transaksi=t.no_transaksi AND t.nim=$nim AND t.idsmt=$semester AND t.tahun = $ta AND t.commited=1";			
         $this->DB->setFieldTable(array('dibayarkan'));
         $r2=$this->DB->getRecord($str2);

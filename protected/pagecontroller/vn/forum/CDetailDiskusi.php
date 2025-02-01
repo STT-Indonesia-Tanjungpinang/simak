@@ -7,8 +7,8 @@ class CDetailDiskusi extends MainPageVN {
         $this->showForumDiskusi=true;                     
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
-            if (!isset($_SESSION['currentPageDetailDiskusi']) || $_SESSION['currentPageDetailDiskusi']['page_name'] != 'd.forum.DetailDiskusi') {                                                                                
-                $_SESSION['currentPageDetailDiskusi'] = array('page_name' => 'd.forum.DetailDiskusi', 'page_num' => 0, 'search' => false,'DataDiskusi' =>array());
+            if (!isset($_SESSION['currentPageDetailDiskusi']) || $_SESSION['currentPageDetailDiskusi']['page_name'] != 'vn.forum.DetailDiskusi') {                                                                                
+                $_SESSION['currentPageDetailDiskusi'] = array('page_name' => 'vn.forum.DetailDiskusi', 'page_num' => 0, 'search' => false,'DataDiskusi' =>array());
             }            
             try {
                 $id=addslashes($this->request['id']);

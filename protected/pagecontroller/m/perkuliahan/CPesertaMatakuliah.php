@@ -202,9 +202,9 @@ class CPesertaMatakuliah extends MainPageM {
         $v['namakelas'] = $namakelas. ' <br/>'.$hari.' '.$v['jam_masuk'].'-'.$v['jam_keluar'];
       }            
       $status='belum disahkan';
-      if ($v['sah']==1 && $v['batal'] == 0) {
+      if ($v['sah'] == 1 && $v['batal'] == 0) {
         $status='SAH';
-      }elseif($v['sah']==1 && $v['batal']==1){
+      }elseif($v['sah'] == 1 && $v['batal'] == 1){
         $status='BATAL';
       }
       $v['status'] = $status;

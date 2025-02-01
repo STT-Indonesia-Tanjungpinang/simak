@@ -281,7 +281,7 @@ class KRSEkstension Extends MainPageDW {
                 $_SESSION['currentPageKRSEkstension']['DataKRS']['krs'] = $krs;
                 
                 $this->redirect ('perkuliahan.TambahKRSEkstension', true);
-            }elseif(isset($krs['idkrs']) && $krs['sah']==1){
+            }elseif(isset($krs['idkrs']) && $krs['sah'] == 1){
                 $idkrs = $krs['idkrs'];
                 $this->redirect ('perkuliahan.DetailKRSEkstension', true,array('id' => $idkrs));
             }else{

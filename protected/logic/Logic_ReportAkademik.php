@@ -190,7 +190,7 @@ class Logic_ReportAkademik extends Logic_Report {
             $ada_matkul=true;						
             $genap_total_sks=0;								
             foreach ($data as $k => $v) {														
-              if ($v['semester']==$i) {								
+              if ($v['semester'] == $i) {								
                 if ($v['kmatkul'] == '') {
                   $ada_matkul=false;
                 }else {							                                    
@@ -238,7 +238,7 @@ class Logic_ReportAkademik extends Logic_Report {
             $ada_matkul=true;										
             $ganjil_total_sks=0;								
             foreach ($data as $r =>$s) {												
-              if ($s['semester']==$i) {	
+              if ($s['semester'] == $i) {	
                 if ($s['kmatkul'] == '') {
                   $ada_matkul=false;
                 }else {												
@@ -917,9 +917,9 @@ class Logic_ReportAkademik extends Logic_Report {
           $sheet->setCellValue("E$row", $objDMaster->getNamaKelasByID($v['idkelas']));
           $sheet->setCellValue("F$row", $v['tahun_masuk']);
           $status='belum disahkan';
-          if ($v['sah']==1 && $v['batal'] == 0) {
+          if ($v['sah'] == 1 && $v['batal'] == 0) {
             $status='sah';
-          }elseif($v['sah']==1 && $v['batal']==1){
+          }elseif($v['sah'] == 1 && $v['batal'] == 1){
             $status='batal';
           }
           $sheet->setCellValue("G$row", $status);

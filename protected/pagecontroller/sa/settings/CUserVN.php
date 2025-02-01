@@ -123,14 +123,14 @@ class CUserVN extends MainPageSA
     if ($this->Page->isValid) {
       $nama = addslashes($this->txtAddNama->Text);
       $email = addslashes($this->txtAddEmail->Text);
-      $username=addslashes($this->txtAddUsername->Text);    
+      $username = addslashes($this->txtAddUsername->Text);    
       $data = $this->Pengguna->createHashPassword($this->txtAddPassword1->Text);
       $salt=$data['salt'];
       $password=$data['password'];           
       $page='vn';
       $group_id = $this->cmbAddGroup->Text;  
       $kjur=($this->cmbAddProdi->Text> 0)?$this->cmbAddProdi->Text : 0;
-      $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id='$group_id',kjur='$kjur',active=1,isdeleted=0,theme='limitless',foto = 'resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
+      $str = "INSERT INTO user SET userid=NULL,idbank=0,username='$username',userpassword='$password',salt='$salt',nama='$nama',email='$email',page='$page',group_id='$group_id',kjur='$kjur',active=1,isdeleted=0,theme='cube',foto = 'resources/userimages/no_photo.png',logintime=NOW(),date_added=NOW()";             
       $this->DB->insertRecord($str);           
       
       $this->redirect('settings.UserVN', true);
@@ -169,7 +169,7 @@ class CUserVN extends MainPageSA
       $id = $this->hiddenid->Value;
       $nama = addslashes($this->txtEditNama->Text);
       $email = addslashes($this->txtEditEmail->Text);
-      $username=addslashes($this->txtEditUsername->Text); 
+      $username = addslashes($this->txtEditUsername->Text); 
       $group_id = $this->cmbEditGroup->Text;  
       $kjur=($this->cmbEditProdi->Text> 0)?$this->cmbEditProdi->Text : 0;
       $status = $this->cmbEditStatus->Text;

@@ -150,7 +150,7 @@ class CDaftarMahasiswa extends MainPageM {
             
 
         while (list($k, $v) = each($datakonsentrasi)) {                        
-            if ($v['kjur']==$_SESSION['kjur']){
+            if ($v['kjur'] == $_SESSION['kjur']){
                 $idkonsentrasi = $v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("register_mahasiswa rm LEFT JOIN data_konversi dk ON (dk.nim=rm.nim) WHERE rm.idkonsentrasi = $idkonsentrasi $str_tahun_masuk $str_kelas $str_status",'rm.nim');
                 $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000': $jumlah;

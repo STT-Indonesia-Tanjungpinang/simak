@@ -8,8 +8,8 @@ class CPesertaKelas extends MainPageVN {
         
         $this->createObj('Akademik');
 		if (!$this->IsPostBack && !$this->IsCallback) {
-            if (!isset($_SESSION['currentPagePesertaKelas']) || $_SESSION['currentPagePesertaKelas']['page_name'] != 'd.perkuliahan.PesertaKelas') {
-				$_SESSION['currentPagePesertaKelas'] = array('page_name' => 'd.perkuliahan.PesertaKelas', 'page_num' => 0, 'search' => false,'InfoKelas' =>array());
+            if (!isset($_SESSION['currentPagePesertaKelas']) || $_SESSION['currentPagePesertaKelas']['page_name'] != 'vn.perkuliahan.PesertaKelas') {
+				$_SESSION['currentPagePesertaKelas'] = array('page_name' => 'vn.perkuliahan.PesertaKelas', 'page_num' => 0, 'search' => false,'InfoKelas' =>array());
 			}  
             $_SESSION['currentPagePesertaKelas']['search'] = false;            
             $this->tbCmbOutputReport->DataSource = $this->setup->getOutputFileType();
@@ -68,7 +68,7 @@ class CPesertaKelas extends MainPageVN {
         $result = array();
         while (list($k, $v) = each($r)) {
             $status='belum disahkan';
-            if ($v['sah']==1) {
+            if ($v['sah'] == 1) {
                 $status='sah';
             }
             $v['status'] = $status;

@@ -662,7 +662,7 @@ class Logic_ReportNilai extends Logic_Report {
             $genap_total_m = 0;
             $genap_total_sks=0;		
             foreach ($n as $v) {	
-              if ($v['semester']==$i) {
+              if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
                 $m=($n_kual=='-') ? '-':$v['m'];
@@ -691,7 +691,7 @@ class Logic_ReportNilai extends Logic_Report {
             $ganjil_total_m = 0;
             $ganjil_total_sks=0;
             foreach ($n as $s) {
-              if ($s['semester']==$i) {
+              if ($s['semester'] == $i) {
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
                 $m=($n_kual=='-') ? '-':$s['m']; 								
@@ -931,7 +931,7 @@ class Logic_ReportNilai extends Logic_Report {
             $genap_total_m = 0;
             $genap_total_sks=0;		
             foreach ($n as $v) {	
-              if ($v['semester']==$i) {
+              if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
                 $m=($n_kual=='-') ? '-':$v['m'];
@@ -960,7 +960,7 @@ class Logic_ReportNilai extends Logic_Report {
             $ganjil_total_m = 0;
             $ganjil_total_sks=0;
             foreach ($n as $s) {
-              if ($s['semester']==$i) {
+              if ($s['semester'] == $i) {
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
                 $m=($n_kual=='-') ? '-':$s['m']; 								
@@ -1165,14 +1165,14 @@ class Logic_ReportNilai extends Logic_Report {
           $no_semester=1;                    
           if ($i%2==0) {//genap
             foreach ($n as $v) {
-              if ($v['semester']==$i) {
+              if ($v['semester'] == $i) {
                 $tampil_column_genap=true;
                 break;
               }
             }
           }else{
             foreach ($n as $s) {
-              if ($s['semester']==$i) {
+              if ($s['semester'] == $i) {
                 $tampil_column_ganjil=true;
                 break;
               }
@@ -1237,7 +1237,7 @@ class Logic_ReportNilai extends Logic_Report {
             $genap_total_sks=0;		
             $tampil_border_genap=false;
             foreach ($n as $v) {	
-              if ($v['semester']==$i) {
+              if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
                 $m=($n_kual=='-') ? '-':$v['m'];
@@ -1269,7 +1269,7 @@ class Logic_ReportNilai extends Logic_Report {
             $ganjil_total_sks=0;
             $tampil_border_ganjil=false;
             foreach ($n as $s) {
-              if ($s['semester']==$i) {                                
+              if ($s['semester'] == $i) {                                
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
                 $m=($n_kual=='-') ? '-':$s['m']; 								
@@ -1539,7 +1539,7 @@ class Logic_ReportNilai extends Logic_Report {
               $tambah_genap_row=true;	            
               foreach ($n as $v)
               {            
-                if ($v['semester']==$i)
+                if ($v['semester'] == $i)
                 {
                   $n_kual=$v['n_kual'];
                   $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
@@ -1575,7 +1575,7 @@ class Logic_ReportNilai extends Logic_Report {
               $tambah_ganjil_row=true;	            
               foreach ($n as $v)
               {            
-                if ($v['semester']==$i)
+                if ($v['semester'] == $i)
                 {
                   $n_kual=$v['n_kual'];
                   $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
@@ -1811,7 +1811,7 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(102,4,"SEMESTER $i",'L',0,'C');
             $row_genap+=4;
             foreach ($n as $v) {	
-              if ($v['semester']==$i) {
+              if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
                 $sks = $v['sks'];
@@ -1831,7 +1831,7 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(102,4,"SEMESTER $i",'R',0,'C');
             $row_ganjil+=4;
             foreach ($n as $s) {
-              if ($s['semester']==$i) {
+              if ($s['semester'] == $i) {
                 $n_kual=$s['n_kual'];
                 $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
                 $sks = $s['sks'];

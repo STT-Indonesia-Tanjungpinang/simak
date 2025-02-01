@@ -14,7 +14,9 @@ class CHome extends MainPageVN
   }
   public function populateData()
   {
-    $str = "SELECT vpp.idpengampu_penyelenggaraan,km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.sks,rk.namaruang,rk.kapasitas,vpp.tahun,vpp.idsmt FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE tahun >= (tahun-3) ORDER BY hari ASC,idkelas ASC";
+    $ta = $this->setup->getSettingValue('default_ta');
+
+    $str = "SELECT vpp.idpengampu_penyelenggaraan,km.idkelas_mhs,km.idkelas,km.nama_kelas,km.hari,km.jam_masuk,km.jam_keluar,vpp.kmatkul,vpp.nmatkul,vpp.sks,rk.namaruang,rk.kapasitas,vpp.tahun,vpp.idsmt FROM kelas_mhs km JOIN v_pengampu_penyelenggaraan vpp ON (km.idpengampu_penyelenggaraan=vpp.idpengampu_penyelenggaraan) LEFT JOIN ruangkelas rk ON (rk.idruangkelas=km.idruangkelas) WHERE tahun='$ta' ORDER BY hari ASC,idkelas ASC";
              
     $this->DB->setFieldTable(array('idpengampu_penyelenggaraan', 'idkelas_mhs', 'kmatkul', 'nmatkul', 'sks', 'idkelas', 'nama_kelas', 'hari', 'jam_masuk', 'jam_keluar', 'namaruang', 'kapasitas', 'tahun', 'idsmt'));			
     $r = $this->DB->getRecord($str);	

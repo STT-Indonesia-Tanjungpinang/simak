@@ -61,7 +61,7 @@ class CMatakuliah extends MainPageM {
     $r = array();
     $i=1;
     while (list($k, $v) = each($datakonsentrasi)) {                        
-      if ($v['kjur']==$_SESSION['kjur']){
+      if ($v['kjur'] == $_SESSION['kjur']){
         $idkonsentrasi = $v['idkonsentrasi'];
         $v['jumlah_matkul'] = $this->DB->getCountRowsOfTable("matakuliah WHERE idkonsentrasi = $idkonsentrasi",'idkonsentrasi');                
         $r[$i] = $v;
@@ -276,8 +276,8 @@ class CMatakuliah extends MainPageM {
     $this->cmbEditSemester->dataBind();
     
     $this->cmbEditNilai->Text = $result['minimal_nilai'];
-    $this->chkEditSyaratTa->Checked=($result['syarat_ta']==1)?true:false;
-    $this->chkEditAktif->Checked=($result['aktif']==1)?true:false;		
+    $this->chkEditSyaratTa->Checked=($result['syarat_ta'] == 1)?true:false;
+    $this->chkEditAktif->Checked=($result['aktif'] == 1)?true:false;		
   }
   public function updateData($sender, $param) {
     if ($this->Page->isValid) {			

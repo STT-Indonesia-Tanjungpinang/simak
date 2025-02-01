@@ -125,7 +125,7 @@ class Logic_ReportFinance extends Logic_Report {
                         $sheet->setCellValue("G$row", $n['tahun']);
                         $sheet->setCellValue("H$row", $n['idsmt']);
                         $sheet->setCellValue("I$row", $objDMaster->getNamaStatusMHSByID ($n['k_status']));
-                        if ($n['tahun']==$v['tahun_masuk'] && $v['semester_masuk'] == $n['idsmt']) {
+                        if ($n['tahun'] == $v['tahun_masuk'] && $v['semester_masuk'] == $n['idsmt']) {
                             $kewajiban = $komponen_biaya[$idkelas]['baru'][$n['idsmt']];
                         }else{
                             $kewajiban = $komponen_biaya[$idkelas]['lama'][$n['idsmt']];

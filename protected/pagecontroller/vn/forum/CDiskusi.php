@@ -6,8 +6,8 @@ class CDiskusi extends MainPageVN {
         $this->showForumDiskusi=true;                     
         $this->createObj('forum');
 		if (!$this->IsPostBack && !$this->IsCallback) {              
-            if (!isset($_SESSION['currentPageDiskusi']) || $_SESSION['currentPageDiskusi']['page_name'] != 'd.forum.Diskusi') {                                                                                
-                $_SESSION['currentPageDiskusi'] = array('page_name' => 'd.forum.Diskusi', 'page_num' => 0,'page_num_unread' =>0, 'search' => false,'activeviewindex' => 0);
+            if (!isset($_SESSION['currentPageDiskusi']) || $_SESSION['currentPageDiskusi']['page_name'] != 'vn.forum.Diskusi') {                                                                                
+                $_SESSION['currentPageDiskusi'] = array('page_name' => 'vn.forum.Diskusi', 'page_num' => 0,'page_num_unread' =>0, 'search' => false,'activeviewindex' => 0);
             }
             $this->MVMenuForum->ActiveViewIndex=$_SESSION['currentPageDiskusi']['activeviewindex']; 
 		}                

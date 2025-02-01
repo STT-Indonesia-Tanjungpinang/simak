@@ -50,7 +50,7 @@
                   <li class="item">
                     <com:TActiveLinkButton ID="btnChangeTheme" ClientSide.PostState="false" OnClick="SourceTemplateControl.changeTheme" Enabled="<%#$_SESSION['theme']!=$this->DataItem['idtheme']%>" CommandParameter="<%#$this->DataItem['idtheme']%>">
                       <prop:Text>
-                        <%#$_SESSION['theme']==$this->DataItem['idtheme'] ? '<i class="fa fa-check-square"></i>':''%>
+                        <%#$_SESSION['theme'] == $this->DataItem['idtheme'] ? '<i class="fa fa-check-square"></i>':''%>
                         <%#$this->DataItem['namatheme']%>
                       </prop:Text>
                       <prop:ClientSide.OnPreDispatch>
@@ -991,12 +991,7 @@
                           <a href="<%=$this->Page->constructUrl('nilai.EditNilai', true)%>"<%=$this->Page->showEditNilai==true ? ' class="active" ':''%>>
                             Edit Nilai
                           </a>
-                        </li>
-                        <li>
-                          <a href="#" <%=$this->Page->showImportNilai==true ? ' class="active" ':''%>>
-                            Import Nilai
-                          </a>
-                        </li>
+                        </li>                        
                         <li>
                           <a href="<%=$this->Page->constructUrl('nilai.DPNA', true)%>"<%=$this->Page->showDPNA==true ? ' class="active" ':''%>>
                             DPNA

@@ -53,7 +53,7 @@ class Login extends MainPage {
   }
   public function checkUsernameAndPassword($sender, $param) 
   {		
-    $username=addslashes($param->Value);
+    $username = addslashes($param->Value);
     if ($username != '') 
     {
       try 
@@ -74,13 +74,18 @@ class Login extends MainPage {
     }	
   }    
   public function checkUsernameFormat($sender, $param) {		
-    $username=addslashes($param->Value);
-    if ($username != '') {
-      try {  
-        if (!preg_match('/^[a-z\d_]{1,20}$/i', $username)||filter_var($username,FILTER_VALIDATE_EMAIL)) {			                    
+    $username = addslashes($param->Value);
+    if ($username != '')
+    {
+      try 
+      {  
+        if (!preg_match('/^[a-z\d_]{1,20}$/i', $username)||filter_var($username,FILTER_VALIDATE_EMAIL))
+        {
           throw new Exception ("Gagal. Format penulisan username tidak dikenali.");
         }
-      }catch (Exception $e) {		
+      }
+      catch (Exception $e)
+      {		
         $message='<br /><div class="alert alert-danger">
           <strong>Error!</strong>
           '.$e->getMessage().'</div>';
@@ -90,12 +95,15 @@ class Login extends MainPage {
     }							
     
   }
-  public function doLogin ($sender, $param) {
-    if ($this->IsValid) {                        
+  public function doLogin ($sender, $param)
+  {
+    if ($this->IsValid)
+    {                        
       $pengguna = $this->getLogic('Users');      
       $setup = $this->getLogic('Setup');
       $dmaster = $this->getLogic('DMaster');
-      switch($pengguna->getTipeUser()) {
+      switch($pengguna->getTipeUser()) 
+      {
         case 'sa':
           //daftar prodi diload saat awal, tujuannya supaya tidak terus2an diload.
           $_SESSION['daftar_jurusan'] = $dmaster->getListProgramStudi(2);

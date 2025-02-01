@@ -160,7 +160,7 @@ class CPesertaKelas extends MainPageM {
     $result = array();
     while (list($k, $v) = each($r)) {
       $status='belum disahkan';
-      if ($v['sah']==1) {
+      if ($v['sah'] == 1) {
         $status='sah';
       }
       $v['status'] = $status;

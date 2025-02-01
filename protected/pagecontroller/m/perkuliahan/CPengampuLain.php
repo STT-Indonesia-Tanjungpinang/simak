@@ -42,7 +42,7 @@ class CPengampuLain extends MainPageM {
     public function itemBound($sender, $param) {
 		$item = $param->item;
 		if ($item->itemType === 'Item' || $item->itemType === 'AlternatingItem') {
-			if ($item->DataItem['iddosen_p']==$item->DataItem['iddosen_pp']) {
+			if ($item->DataItem['iddosen_p'] == $item->DataItem['iddosen_pp']) {
 				$item->btnEdit->Enabled = false;	
 				$item->btnDelete->Enabled = false;
                 $item->btnDelete->Attributes->OnClick='';

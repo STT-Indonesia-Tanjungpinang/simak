@@ -20,7 +20,7 @@ class CPembayaranSemesterGanjil Extends MainPageMHS {
 				$datamhs['idsmt']=1;
 				$datamhs['ta'] = $_SESSION['currentPagePembayaranSemesterGanjil']['ta'];  
 				
-				if ($datamhs['tahun_masuk'] == $datamhs['ta'] && $datamhs['semester_masuk']==1) {	
+				if ($datamhs['tahun_masuk'] == $datamhs['ta'] && $datamhs['semester_masuk'] == 1) {	
 					$nim = $datamhs['nim'];
                     throw new Exception ("NIM ($nim) adalah seorang Mahasiswa baru, mohon diproses di Pembayaran->Mahasiswa Baru.");
                 }

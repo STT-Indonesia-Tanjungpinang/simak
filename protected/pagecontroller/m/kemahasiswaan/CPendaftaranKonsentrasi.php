@@ -56,7 +56,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
         $r = array();
         $i=1;        
         while (list($k, $v) = each($datakonsentrasi)) {                        
-            if ($v['kjur']==$_SESSION['kjur']){
+            if ($v['kjur'] == $_SESSION['kjur']){
                 $idkonsentrasi = $v['idkonsentrasi'];
                 $jumlah = $this->DB->getCountRowsOfTable("pendaftaran_konsentrasi WHERE idkonsentrasi = $idkonsentrasi",'nim');
                 $v['jumlah_mhs'] = $jumlah > 10000 ? 'lebih dari 10.000': $jumlah;

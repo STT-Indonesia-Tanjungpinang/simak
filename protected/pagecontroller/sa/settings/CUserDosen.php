@@ -127,7 +127,7 @@ class CUserDosen extends MainPageSA {
             $username_old=$this->hiddenusername->Value;
             $nama = addslashes($this->txtEditNama->Text);
             $email = addslashes($this->txtEditEmail->Text);
-            $username=addslashes($this->txtEditUsername->Text);
+            $username = addslashes($this->txtEditUsername->Text);
             $status = $this->cmbEditStatus->Text;
             if ($this->txtEditPassword1->Text == '') {
                 $str = "UPDATE user SET username='$username',nama='$nama',email='$email',active='$status' WHERE userid = $id";               

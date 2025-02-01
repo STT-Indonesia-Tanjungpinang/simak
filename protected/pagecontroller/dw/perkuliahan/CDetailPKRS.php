@@ -93,7 +93,7 @@ class CDetailPKRS extends MainPageDW {
 		$idkrsmatkul = $this->getDataKeyField($sender, $this->RepeaterS);		
 		$id=explode('_', $sender->CommandParameter);
 		$idpenyelenggaraan = $id[1];	
-		if ($id[0]==1) {			
+		if ($id[0] == 1) {			
 			try {
 				$str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs' AND batal=0";
 				$this->DB->setFieldTable(array('jumlah'));

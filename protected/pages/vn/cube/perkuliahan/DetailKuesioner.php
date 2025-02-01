@@ -1,5 +1,5 @@
 <?php
-prado::using ('Application.pagecontroller.d.perkuliahan.CDetailKuesioner');
+prado::using ('Application.pagecontroller.vn.perkuliahan.CDetailKuesioner');
 class DetailKuesioner extends CDetailKuesioner {		
     public function onLoad($param) {
 		parent::onLoad($param);		        
