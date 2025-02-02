@@ -104,7 +104,7 @@ class CKHS extends MainPageMHS {
     $dataReport['linkoutput'] = $this->linkOutput; 
     $this->report->setDataReport($dataReport); 
     $this->report->setMode($_SESSION['outputreport']);
-    $this->report->printKHS($this->Nilai);				
+    $this->report->printKHS($this->Nilai, true);				
     
     $this->lblPrintout->Text="Kartu Hasil Studi T.A $nama_tahun Semester $nama_semester";
     $this->modalPrintOut->show();

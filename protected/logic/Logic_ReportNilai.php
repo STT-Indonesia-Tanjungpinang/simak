@@ -84,7 +84,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(10, 5, 'NM', 1, 0, 'C');						
         $rpt->Cell(47, 5, 'KETERANGAN', 1, 0, 'C');
         $objNilai->setDataMHS(array('nim' => $nim));
-        $dn = $objNilai->getKHS($ta, $semester);				
+        $dn = $objNilai->getKHS($ta, $semester, $withsignature);				
         $totalSks=0;
         $totalNm = 0;
         $row+=5;
