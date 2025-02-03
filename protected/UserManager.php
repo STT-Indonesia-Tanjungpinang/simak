@@ -62,6 +62,14 @@ class UserManager extends TAuthManager
         $userid = $this->dataUser['data_user']['userid'];
         $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid = $userid");
       break;
+      case 'OperatorNilai' :
+        $str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.group_id,u.kjur,u.isdeleted,u.foto,u.theme FROM user u WHERE username='$username' AND u.page='on'";
+        $this->db->setFieldTable (array('userid','username','nama','email','page','group_id','kjur','isdeleted','foto','theme'));							
+        $r= $this->db->getRecord($str);	
+        $this->dataUser['data_user']=$r[1];	
+        $userid=$this->dataUser['data_user']['userid'];
+        $this->db->updateRecord("UPDATE user SET logintime=NOW() WHERE userid=$userid");
+    break;
       case 'VerifikatorNilai':
         $str = "SELECT u.userid,u.username,u.nama,u.email,u.page,u.group_id,u.kjur,u.isdeleted,u.foto,u.theme FROM user u WHERE username='$username' AND u.page='vn'";
         $this->db->setFieldTable (array('userid', 'username', 'nama', 'email', 'page', 'group_id', 'kjur', 'isdeleted', 'foto', 'theme'));							
