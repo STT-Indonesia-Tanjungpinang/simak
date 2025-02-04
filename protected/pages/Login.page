@@ -25,8 +25,7 @@
         <com:TListItem Value="m" Text="Manajemen"/>
         <com:TListItem Value="k" Text="Keuangan"/> 
         <com:TListItem Value="on" Text="Operator Nilai"/>
-        <com:TListItem Value="vn" Text="Verifikator Nilai"/>
-        <com:TListItem Value="cn" Text="Checker Nilai"/>
+        <com:TListItem Value="vn" Text="Verifikator Nilai"/>        
         <com:TListItem Value="d" Text="Dosen"/>
         <com:TListItem Value="dw" Text="Dosen Wali"/>
         <com:TListItem Value="mh" Text="Mahasiswa"/>
