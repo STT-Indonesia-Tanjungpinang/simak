@@ -74,19 +74,27 @@ public function onLoad($param) {
         $jam_masuk_keluar['09:40'] = '09:40';
         $jam_masuk_keluar['10:30'] = '10:30';
         $jam_masuk_keluar['11:10'] = '11:10';
+        $jam_masuk_keluar['11:20'] = '11:20';
         $jam_masuk_keluar['12:00'] = '12:00';
+        $jam_masuk_keluar['12:10'] = '12:10';
         $jam_masuk_keluar['12:50'] = '12:50';
         $jam_masuk_keluar['13:00'] = '13:00';
         $jam_masuk_keluar['13:40'] = '13:40';
         $jam_masuk_keluar['13:50'] = '13:50';
-        $jam_masuk_keluar['14:40'] = '13:40';
+        $jam_masuk_keluar['14:40'] = '14:40';
         $jam_masuk_keluar['15:30'] = '15:30';
         $jam_masuk_keluar['18:15'] = '18:15';
+        $jam_masuk_keluar['18:30'] = '18:30';
+        $jam_masuk_keluar['19:10'] = '19:10';
         $jam_masuk_keluar['19:35'] = '19:35';
+        $jam_masuk_keluar['19:50'] = '19:50';
         $jam_masuk_keluar['20:15'] = '20:15';
+        $jam_masuk_keluar['20:30'] = '20:30';
         $jam_masuk_keluar['20:35'] = '20:35';
+        $jam_masuk_keluar['21:10'] = '21:10';
         $jam_masuk_keluar['21:15'] = '21:15';
         $jam_masuk_keluar['22:15'] = '22:15';
+        $jam_masuk_keluar['22:30'] = '22:30';
 
         $this->cmbAddJamMasuk->DataSource = $jam_masuk_keluar;
         $this->cmbAddJamMasuk->dataBind();        
@@ -156,7 +164,8 @@ public function onLoad($param) {
       }
     }
   }
-  public function editRecord($sender, $param) {
+  public function editRecord($sender, $param) 
+  {
     $this->idProcess = 'edit';
     $idkelas_mhs = $this->getDataKeyField($sender, $this->RepeaterS);
     $this->hiddenid->Value = $idkelas_mhs;
@@ -188,19 +197,27 @@ public function onLoad($param) {
     $jam_masuk_keluar['09:40'] = '09:40';
     $jam_masuk_keluar['10:30'] = '10:30';
     $jam_masuk_keluar['11:10'] = '11:10';
+    $jam_masuk_keluar['11:20'] = '11:20';
     $jam_masuk_keluar['12:00'] = '12:00';
+    $jam_masuk_keluar['12:10'] = '12:10';
     $jam_masuk_keluar['12:50'] = '12:50';
     $jam_masuk_keluar['13:00'] = '13:00';
     $jam_masuk_keluar['13:40'] = '13:40';
     $jam_masuk_keluar['13:50'] = '13:50';
-    $jam_masuk_keluar['14:40'] = '13:40';
+    $jam_masuk_keluar['14:40'] = '14:40';
     $jam_masuk_keluar['15:30'] = '15:30';
     $jam_masuk_keluar['18:15'] = '18:15';
+    $jam_masuk_keluar['18:30'] = '18:30';
+    $jam_masuk_keluar['19:10'] = '19:10';
     $jam_masuk_keluar['19:35'] = '19:35';
+    $jam_masuk_keluar['19:50'] = '19:50';
     $jam_masuk_keluar['20:15'] = '20:15';
+    $jam_masuk_keluar['20:30'] = '20:30';
     $jam_masuk_keluar['20:35'] = '20:35';
+    $jam_masuk_keluar['21:10'] = '21:10';
     $jam_masuk_keluar['21:15'] = '21:15';
     $jam_masuk_keluar['22:15'] = '22:15';
+    $jam_masuk_keluar['22:30'] = '22:30';
 
     $this->cmbEditJamMasuk->DataSource = $jam_masuk_keluar;
     $this->cmbEditJamMasuk->dataBind();
