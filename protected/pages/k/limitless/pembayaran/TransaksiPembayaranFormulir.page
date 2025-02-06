@@ -20,7 +20,7 @@
         <div class="heading-elements">
             <ul class="icons-list">                
                 <li>
-                    <a href="<%=$this->Page->constructUrl('pembayaran.DetailPembayaranFormulir', true,array('id' => $this->getDataMHS('no_formulir')));%>" data-action="closeredirect"></a>
+                    <a href="<%=$this->Page->constructUrl('pembayaran.DetailPembayaranFormulir', true, array('id' => $this->getDataMHS('no_formulir')));%>" data-action="closeredirect"></a>
                 </li>
             </ul>
         </div>        
@@ -44,7 +44,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->getDataMHS('no_formulir')))%>"><img src="<%=$this->setup->getAddress($this->getDataMHS('no_formulir'))%>" alt="" onerror="no_photo(this,'resources/userimages/no_photo.png')" /></a>                        
+                            <a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true, array('id' => $this->getDataMHS('no_formulir')))%>"><img src="<%=$this->setup->getAddress($this->getDataMHS('no_formulir'))%>" alt="" onerror="no_photo(this,'resources/userimages/no_photo.png')" /></a>                        
                         </div>                   
                         <div class="col-md-5">
                             <div class="form-horizontal">

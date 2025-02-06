@@ -149,7 +149,7 @@ class CPembayaranPiutangSemesterGanjil Extends MainPageK {
 	public function Go($sender, $param) {	
         if ($this->IsValid) {            
             $nim = $sender->getId() == 'btnGoRepeater'?$this->getDataKeyField($sender, $this->RepeaterS):addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGanjil', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranPiutangSemesterGanjil', true, array('id' => $nim));
         }
 	}
 	

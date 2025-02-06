@@ -89,7 +89,7 @@ class DetailKRSEkstension extends MainPageDW {
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);  
         $idkrs = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs'];
         $this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul=$id");
-        $this->redirect ('perkuliahan.DetailKRSEkstension', true,array('id' => $idkrs));        
+        $this->redirect ('perkuliahan.DetailKRSEkstension', true, array('id' => $idkrs));        
     }
     public function closeDetailKRSEkstension ($sender, $param) { 
         unset($_SESSION['currentPageKRSEkstension']);

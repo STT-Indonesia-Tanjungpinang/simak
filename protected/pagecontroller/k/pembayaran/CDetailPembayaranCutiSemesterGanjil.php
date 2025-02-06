@@ -125,7 +125,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
             $str = "INSERT INTO transaksi_cuti SET no_transaksi='$no_transaksi',no_faktur='$no_faktur',tahun = $tahun,idsmt=1,nim='$nim',idkombi=0,dibayarkan = $dibayarkan,commited=0,tanggal='$tanggal',date_added=NOW(),date_modified=NOW(),userid = $userid";
             $this->DB->insertRecord($str);
             
-            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil', true, array('id' => $nim));
         }
     }
     public function commitData($sender, $param) {
@@ -158,7 +158,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
                 $this->DB->updateRecord($str);
             }
             $this->DB->query('COMMIT');
-            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil', true, array('id' => $nim));
         }
     }
     public function deleteRecord($sender, $param) {	
@@ -166,7 +166,7 @@ class CDetailPembayaranCutiSemesterGanjil Extends MainPageK {
         $nim = $datamhs['nim'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi_cuti WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil', true,array('id' => $nim));
+		$this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil', true, array('id' => $nim));
 	}	
     public function closeTransaction($sender, $param) {
         unset($_SESSION['currentPagePembayaranCutiSemesterGanjil']['DataMHS']);

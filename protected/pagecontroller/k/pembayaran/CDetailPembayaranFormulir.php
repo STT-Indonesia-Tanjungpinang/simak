@@ -143,7 +143,7 @@ class CDetailPembayaranFormulir Extends MainPageK {
         $no_formulir = $datamhs['no_formulir'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranFormulir', true,array('id' => $no_formulir));
+		$this->redirect('pembayaran.DetailPembayaranFormulir', true, array('id' => $no_formulir));
 	}		
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranFormulir']['DataMHS']);

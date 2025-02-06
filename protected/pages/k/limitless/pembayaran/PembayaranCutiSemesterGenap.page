@@ -85,7 +85,7 @@
                             <td>
                                 <ul class="icons-list">
                                     <li class="text-primary-600">
-                                        <a href="<%#$this->Page->constructUrl('pembayaran.DetailPembayaranCutiSemesterGenap', true,array('id' => $this->DataItem['nim']))%>" title="Detail Pembayaran Cuti">
+                                        <a href="<%#$this->Page->constructUrl('pembayaran.DetailPembayaranCutiSemesterGenap', true, array('id' => $this->DataItem['nim']))%>" title="Detail Pembayaran Cuti">
                                             <i class="icon-play"></i>
                                         </a>
                                     </li>                                    

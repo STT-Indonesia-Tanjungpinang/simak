@@ -82,7 +82,7 @@ class CProfilMahasiswa extends MainPageM {
         }
       }else{
         $_SESSION['currentPageProfilMahasiswa']['activeviewindex'] = $this->MVProfilMahasiswa->ActiveViewIndex;
-        $this->redirect('kemahasiswaan.ProfilMahasiswa', true,array('id' => $datamhs['nim']));
+        $this->redirect('kemahasiswaan.ProfilMahasiswa', true, array('id' => $datamhs['nim']));
       }       
       
     }catch (Exception $ex) {
@@ -214,7 +214,7 @@ class CProfilMahasiswa extends MainPageM {
       $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE nim='$nim'";            
       $this->DB->updateRecord($str);            
        
-      $this->redirect('kemahasiswaan.ProfilMahasiswa', true,array('id' => $nim));
+      $this->redirect('kemahasiswaan.ProfilMahasiswa', true, array('id' => $nim));
     }
   }
   public function checkNIM($sender, $param) {					
@@ -299,7 +299,7 @@ class CProfilMahasiswa extends MainPageM {
       $str = "UPDATE rekap_laporan_pembayaran_per_semester SET nim='$nim',nirm='$nirm' WHERE nim='$nimasal'";
       $this->DB->updateRecord($str);
       
-      $this->redirect('kemahasiswaan.ProfilMahasiswa', true,array('id' => $nim));
+      $this->redirect('kemahasiswaan.ProfilMahasiswa', true, array('id' => $nim));
     }
   }
 }

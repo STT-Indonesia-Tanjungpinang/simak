@@ -117,7 +117,7 @@
                             <prop:ItemTemplate>	
                                 <tr>
                                     <td><%# $this->Data['no']%></td>					
-                                    <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
+                                    <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true, array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>
                                     <td><%# $this->Data['nirm']%></td>
                                     <td><%# $this->Data['nama_mhs']%></td>
                                     <td><%# $this->Data['nomor_transkrip']%></td>
@@ -126,7 +126,7 @@
                                     <td><com:TLiteral ID="lblIpk" /></td>
                                     <td><%#$this->Page->DMaster->getNamaStatusMHSByID($this->DataItem['k_status'])%></td>
                                     <td>
-                                        <a href="<%#$this->Page->constructUrl('nilai.DetailTranskripFinal', true,array('id' => $this->DataItem['nim']))%>" class="table-link" title="Detail Transkrip">                                        
+                                        <a href="<%#$this->Page->constructUrl('nilai.DetailTranskripFinal', true, array('id' => $this->DataItem['nim']))%>" class="table-link" title="Detail Transkrip">                                        
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-eye fa-stack-1x fa-inverse"></i>

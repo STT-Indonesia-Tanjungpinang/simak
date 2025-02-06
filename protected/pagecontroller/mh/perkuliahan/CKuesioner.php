@@ -85,7 +85,7 @@ class CKuesioner extends MainPageMHS {
     public function changeDosenPengampu($sender, $param) {
         $_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan'] = $this->cmbPengampuMatakuliah->Text;
         $idkrsmatkul = $_SESSION['currentPageKuesioner']['DataMatakuliah']['idkrsmatkul'];  
-        $this->redirect('perkuliahan.Kuesioner', true,array('id' => $idkrsmatkul));
+        $this->redirect('perkuliahan.Kuesioner', true, array('id' => $idkrsmatkul));
     }
 	public function populateData() {	        
         if ($_SESSION['currentPageKuesioner']['idpengampu_penyelenggaraan'] != 'none') {
@@ -146,7 +146,7 @@ class CKuesioner extends MainPageMHS {
                     }
                     $this->DB->commitTransaction();                                 
                     unset($_SESSION['currentPageKuesioner']);
-                    $this->redirect('perkuliahan.Kuesioner', true,array('id' => $idkrsmatkul));
+                    $this->redirect('perkuliahan.Kuesioner', true, array('id' => $idkrsmatkul));
                 }else{
                     $this->DB->rollbackTransaction();
                 }

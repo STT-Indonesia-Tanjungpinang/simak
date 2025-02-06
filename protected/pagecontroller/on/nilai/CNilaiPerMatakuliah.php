@@ -284,7 +284,7 @@ class CNilaiPerMatakuliah extends MainPageON {
         }
       }
       $idpenyelenggaraan = $_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul']['idpenyelenggaraan'];
-      $this->redirect('nilai.NilaiPerMatakuliah', true,array('id' => $idpenyelenggaraan));
+      $this->redirect('nilai.NilaiPerMatakuliah', true, array('id' => $idpenyelenggaraan));
     }		
   }	
   public function printOut($sender, $param) 

@@ -123,7 +123,7 @@ class CDetailKRS extends MainPageDW {
         $datakrs = $_SESSION['currentPageKRS']['DataKRS'];
         $idkrs = $datakrs['krs']['idkrs'];
         $this->KRS->sahkanKRS($idkrs);
-        $this->redirect ('perkuliahan.DetailKRS', true,array('id' => $idkrs));
+        $this->redirect ('perkuliahan.DetailKRS', true, array('id' => $idkrs));
     }
     public function closeDetailKRS($sender, $param) { 
         unset($_SESSION['currentPageKRS']);

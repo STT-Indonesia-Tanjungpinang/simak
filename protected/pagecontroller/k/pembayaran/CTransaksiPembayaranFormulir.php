@@ -200,7 +200,7 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
 			$this->DB->query("COMMIT");
             
             unset($_SESSION['currentPagePembayaranFormulir']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranFormulir', true,array('id' => $no_formulir));
+            $this->redirect('pembayaran.DetailPembayaranFormulir', true, array('id' => $no_formulir));
         }
     }
     public function commitData($sender, $param) {
@@ -222,14 +222,14 @@ class CTransaksiPembayaranFormulir Extends MainPageK {
             $this->DB->query("COMMIT");
 
             unset($_SESSION['currentPagePembayaranFormulir']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranFormulir', true,array('id' => $no_formulir));
+            $this->redirect('pembayaran.DetailPembayaranFormulir', true, array('id' => $no_formulir));
         }
     }
     public function closeTransaction($sender, $param) {
         $datamhs = $_SESSION['currentPagePembayaranFormulir']['DataMHS'];            
         $no_formulir = $datamhs['no_formulir'];
         unset($_SESSION['currentPagePembayaranFormulir']['DataMHS']);
-        $this->redirect('pembayaran.DetailPembayaranFormulir', true,array('id' => $no_formulir));
+        $this->redirect('pembayaran.DetailPembayaranFormulir', true, array('id' => $no_formulir));
     }
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranFormulir']['DataMHS']);

@@ -111,7 +111,7 @@
                             <td><%#$this->DataItem['jam_masuk'].'-'.$this->DataItem['jam_keluar']%></td>
                             <td><%#$this->DataItem['namaruang'].' ['.$this->DataItem['kapasitas'].']'%></td>
                             <td>
-                                <a href="<%#$this->Page->constructUrl('nilai.DetailNilaiDosen', true,array('id' => $this->DataItem['idkelas_mhs']))%>" class="table-link" title="Daftar Peserta Kelas">                                        
+                                <a href="<%#$this->Page->constructUrl('nilai.DetailNilaiDosen', true, array('id' => $this->DataItem['idkelas_mhs']))%>" class="table-link" title="Daftar Peserta Kelas">                                        
                                     <%#$this->DataItem['jumlah_peserta_kelas']%>
                                 </a>
                             </td>

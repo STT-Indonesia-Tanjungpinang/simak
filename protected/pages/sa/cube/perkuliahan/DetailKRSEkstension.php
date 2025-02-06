@@ -125,7 +125,7 @@ class DetailKRSEkstension extends MainPageSA {
             $this->DB->updateRecord("UPDATE nilai_matakuliah SET telah_isi_kuesioner=0,tanggal_isi_kuesioner=NULL WHERE idkrsmatkul=$idkrsmatkul");
         
             $this->DB->query('COMMIT');
-            $this->redirect('perkuliahan.DetailKRSEkstension', true,array('id' => $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs']));
+            $this->redirect('perkuliahan.DetailKRSEkstension', true, array('id' => $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs']));
         }else {
             $jumlah_peserta_kelas = $this->DB->getCountRowsOfTable ("kelas_mhs_detail WHERE idkelas_mhs = $idkelas_mhs",'idkelas_mhs');
             $str = "SELECT kapasitas FROM kelas_mhs km,ruangkelas rk WHERE rk.idruangkelas=km.idruangkelas AND idkelas_mhs = $idkelas_mhs";
@@ -141,7 +141,7 @@ class DetailKRSEkstension extends MainPageSA {
                      $this->DB->insertRecord("INSERT INTO kelas_mhs_detail SET idkelas_mhs = $idkelas_mhs,idkrsmatkul=$idkrsmatkul");
                 }
                 $this->DB->query('COMMIT');
-                $this->redirect('perkuliahan.DetailKRSEkstension', true,array('id' => $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs']));
+                $this->redirect('perkuliahan.DetailKRSEkstension', true, array('id' => $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs']));
             }else{
                 $this->modalMessageError->show();
                 $this->lblContentMessageError->Text="Tidak bisa bergabung dengan kelas ini, karena kalau ditambah dengan Anda akan melampau kapasitas kelas ($kapasitas). Silahkan Refresh Web Browser Anda.";					
@@ -163,7 +163,7 @@ class DetailKRSEkstension extends MainPageSA {
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);  
         $idkrs = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs']['idkrs'];
         $this->DB->deleteRecord("krsmatkul WHERE idkrsmatkul=$id");
-        $this->redirect ('perkuliahan.DetailKRSEkstension', true,array('id' => $idkrs));        
+        $this->redirect ('perkuliahan.DetailKRSEkstension', true, array('id' => $idkrs));        
     }
     public function closeDetailKRSEkstension ($sender, $param) { 
         unset($_SESSION['currentPageKRSEkstension']);

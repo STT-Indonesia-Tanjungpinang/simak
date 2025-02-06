@@ -153,7 +153,7 @@ class CDetailKRS extends MainPageM
       $this->DB->updateRecord($str);
 
       $this->DB->query('COMMIT');
-      $this->redirect('perkuliahan.DetailKRS', true,array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
+      $this->redirect('perkuliahan.DetailKRS', true, array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
     }
     else
     {
@@ -179,7 +179,7 @@ class CDetailKRS extends MainPageM
         $this->DB->updateRecord($str);
 
         $this->DB->query('COMMIT');
-        $this->redirect('perkuliahan.DetailKRS', true,array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
+        $this->redirect('perkuliahan.DetailKRS', true, array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
       // }
       // else
       // {

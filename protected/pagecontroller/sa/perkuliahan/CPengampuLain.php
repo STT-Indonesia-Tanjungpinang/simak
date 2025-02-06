@@ -73,7 +73,7 @@ class CPengampuLain extends MainPageSA {
 			$str = "INSERT INTO pengampu_penyelenggaraan (idpengampu_penyelenggaraan,idpenyelenggaraan,iddosen,verified) VALUES (NULL, $idpenyelenggaraan, $iddosen,0)";
 			$this->DB->insertRecord($str);
             $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
-			$this->redirect('perkuliahan.PengampuLain', true,array('id' => $idpenyelenggaraan));
+			$this->redirect('perkuliahan.PengampuLain', true, array('id' => $idpenyelenggaraan));
 		}
 	}	
 	public function editRecord($sender, $param) {		
@@ -106,13 +106,13 @@ class CPengampuLain extends MainPageSA {
 		$str = "UPDATE pengampu_penyelenggaraan SET iddosen = $iddosen WHERE idpengampu_penyelenggaraan = $id";
 		$this->DB->updateRecord($str);
         $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
-		$this->redirect('perkuliahan.PengampuLain', true,array('id' => $idpenyelenggaraan));
+		$this->redirect('perkuliahan.PengampuLain', true, array('id' => $idpenyelenggaraan));
 	}
     public function deleteRecord($sender, $param) {		
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         $idpenyelenggaraan = $this->hiddenid->Value;		
 		$this->DB->deleteRecord("pengampu_penyelenggaraan WHERE idpengampu_penyelenggaraan = $id");
         $_SESSION['currentPagePembagianKelas']['iddosen'] = 'none';
-		$this->redirect('perkuliahan.PengampuLain', true,array('id' => $idpenyelenggaraan));
+		$this->redirect('perkuliahan.PengampuLain', true, array('id' => $idpenyelenggaraan));
 	}	
 }

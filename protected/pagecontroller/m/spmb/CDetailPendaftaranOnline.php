@@ -41,7 +41,7 @@ class CDetailPendaftaranOnline extends MainPageM {
                 }
             }else{
                 $_SESSION['currentPageDetailPendaftaranOnline']['activeviewindex'] = $this->MVDetailPendaftaranOnline->ActiveViewIndex;
-                $this->redirect('spmb.DetailPendaftaranOnline', true,array('id' => $datamhs['no_formulir']));
+                $this->redirect('spmb.DetailPendaftaranOnline', true, array('id' => $datamhs['no_formulir']));
             }       
             
         }catch (Exception $ex) {
@@ -81,7 +81,7 @@ class CDetailPendaftaranOnline extends MainPageM {
             $str = "UPDATE profiles_mahasiswa SET theme='$theme' WHERE no_formulir='$no_formulir'";            
             $this->DB->updateRecord($str);            
            
-            $this->redirect('spmb.DetailPendaftaranOnline', true,array('id' => $no_formulir));
+            $this->redirect('spmb.DetailPendaftaranOnline', true, array('id' => $no_formulir));
         }
     }
     public function checkNoFormulir($sender, $param) {					
@@ -158,7 +158,7 @@ class CDetailPendaftaranOnline extends MainPageM {
                 $this->DB->query('ROLLBACK');
             }
             
-            $this->redirect('spmb.DetailPendaftaranOnline', true,array('id' => $no_formulir));
+            $this->redirect('spmb.DetailPendaftaranOnline', true, array('id' => $no_formulir));
         }
     }
 }

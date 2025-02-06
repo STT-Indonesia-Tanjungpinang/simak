@@ -151,7 +151,7 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $no_formulir = addslashes($this->txtNoFormulir->Text);
-            $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru', true,array('id' => $no_formulir));
+            $this->redirect('pembayaran.DetailPembayaranMahasiswaBaru', true, array('id' => $no_formulir));
         }
 	}
 	

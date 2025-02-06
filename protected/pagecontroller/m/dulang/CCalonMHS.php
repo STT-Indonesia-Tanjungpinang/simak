@@ -157,7 +157,7 @@ class CCalonMHS Extends MainPageM {
                 }
                 $_SESSION['currentPageDulangMHSBaru']['DataMHS'] = $datamhs;                        
             }
-            $this->redirect('dulang.DetailDulangMHSBaru', true,array('id' => $no_formulir));
+            $this->redirect('dulang.DetailDulangMHSBaru', true, array('id' => $no_formulir));
         }catch (Exception $e) {
             $this->lblContentMessageError->Text = $e->getMessage();
             $this->modalMessageError->show();

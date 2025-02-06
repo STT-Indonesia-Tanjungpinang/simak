@@ -121,7 +121,7 @@
                                 <%# $this->Data['nama_dosen']%>
                             </td>
                             <td>
-                                <a href="<%#$this->Page->constructUrl('nilai.NilaiPerMatakuliah', true,array('id' => $this->DataItem['idpenyelenggaraan']))%>" class="table-link" title="Daftar Peserta Matakuliah">                                        
+                                <a href="<%#$this->Page->constructUrl('nilai.NilaiPerMatakuliah', true, array('id' => $this->DataItem['idpenyelenggaraan']))%>" class="table-link" title="Daftar Peserta Matakuliah">                                        
                                     <%# $this->Data['jumlah_peserta']%>
                                 </a>
                             </td>
@@ -263,7 +263,7 @@
                         <prop:ItemTemplate>	
                             <tr>
                                 <td><%# $this->DataItem['no']%></td>                                    
-                                <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>					
+                                <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true, array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>					
                                 <td><%# $this->DataItem['nama_mhs']%></td>
                                 <td><%# $this->DataItem['jk']%></td>
                                 <td><%# $this->DataItem['namakelas']%></td>

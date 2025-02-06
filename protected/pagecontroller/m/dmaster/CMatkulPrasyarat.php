@@ -80,13 +80,13 @@ class CMatkulPrasyarat extends MainPageM {
 			$kmatkul_syarat=$this->Demik->getIDKurikulum($_SESSION['kjur']).'_'.$this->txtAddKodeMatkul->Text;				
 			$str = "INSERT INTO matakuliah_syarat (kmatkul,kmatkul_syarat) VALUES ('$kmatkul', '$kmatkul_syarat')";
 			$this->DB->insertRecord($str);            
-            $this->redirect('dmaster.MatkulPrasyarat', true,array('id' => $kmatkul));
+            $this->redirect('dmaster.MatkulPrasyarat', true, array('id' => $kmatkul));
         }
     }
     public function deleteRecord($sender, $param) { 		
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);		
 		$this->DB->deleteRecord("matakuliah_syarat WHERE idsyarat_kmatkul='$id'");
         $kmatkul = $_SESSION['currentPageMatkulPrasyarat']['dataMatkul']['kmatkul'];	
-		$this->redirect('dmaster.MatkulPrasyarat', true,array('id' => $kmatkul));
+		$this->redirect('dmaster.MatkulPrasyarat', true, array('id' => $kmatkul));
 	}
 }

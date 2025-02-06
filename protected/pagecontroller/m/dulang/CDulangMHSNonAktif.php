@@ -182,7 +182,7 @@ class CDulangMHSNonAktif Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailDulangMHSNonAktif', true,array('id' => $nim));
+            $this->redirect('dulang.DetailDulangMHSNonAktif', true, array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	

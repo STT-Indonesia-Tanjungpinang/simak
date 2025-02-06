@@ -129,7 +129,7 @@ class CDetailKRS extends MainPageSA {
       $this->DB->updateRecord($str);
 
       $this->DB->query('COMMIT');
-      $this->redirect('perkuliahan.DetailKRS', true,array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
+      $this->redirect('perkuliahan.DetailKRS', true, array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
     }
     else
     {
@@ -154,7 +154,7 @@ class CDetailKRS extends MainPageSA {
         $this->DB->updateRecord($str);
 
         $this->DB->query('COMMIT');
-        $this->redirect('perkuliahan.DetailKRS', true,array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
+        $this->redirect('perkuliahan.DetailKRS', true, array('id' => $_SESSION['currentPageKRS']['DataKRS']['krs']['idkrs']));
       // }else{
       //   $this->modalMessageError->show();
       //   $this->lblContentMessageError->Text="Tidak bisa bergabung dengan kelas ini, karena kalau ditambah dengan Anda akan melampau kapasitas kelas ($kapasitas). Silahkan Refresh Web Browser Anda.";					
@@ -191,13 +191,13 @@ class CDetailKRS extends MainPageSA {
     $datakrs = $_SESSION['currentPageKRS']['DataKRS'];
     $idkrs = $datakrs['krs']['idkrs'];
     $this->KRS->sahkanKRS($idkrs);
-    $this->redirect ('perkuliahan.DetailKRS', true,array('id' => $idkrs));
+    $this->redirect ('perkuliahan.DetailKRS', true, array('id' => $idkrs));
   }
   public function batalkanKRS($sender, $param) {
     $datakrs = $_SESSION['currentPageKRS']['DataKRS'];
     $idkrs = $datakrs['krs']['idkrs'];
     $this->KRS->batalkanKRS($idkrs);
-    $this->redirect ('perkuliahan.DetailKRS', true,array('id' => $idkrs));
+    $this->redirect ('perkuliahan.DetailKRS', true, array('id' => $idkrs));
   }
   public function closeDetailKRS($sender, $param) { 
     unset($_SESSION['currentPageKRS']);

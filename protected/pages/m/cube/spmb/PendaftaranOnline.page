@@ -644,7 +644,7 @@
                                 <tr>
                                     <td><%#$this->DataItem['no']%></td>
                                     <td>
-                                        <a href="<%#$this->Page->constructUrl('spmb.DetailPendaftaranOnline', true,array('id' => $this->DataItem['no_pendaftaran']))%>">
+                                        <a href="<%#$this->Page->constructUrl('spmb.DetailPendaftaranOnline', true, array('id' => $this->DataItem['no_pendaftaran']))%>">
                                             <%#$this->DataItem['no_pendaftaran']%>
                                         </a>
                                     </td>

@@ -126,7 +126,7 @@ class CDetailEditNilai extends MainPageD
       $str = "UPDATE kelas_mhs SET persen_quiz='$persentase_quiz',persen_tugas='$persentase_tugas',persen_uts='$persentase_uts',persen_uas='$persentase_uas',persen_absen='$persentase_absen',persen_hasil_proyek='$persentase_hasil_proyek' WHERE idkelas_mhs = $idkelas_mhs";
       $this->DB->updateRecord($str);
      
-      $this->redirect("nilai.DetailEditNilai", true,array('id' => $idkelas_mhs));
+      $this->redirect("nilai.DetailEditNilai", true, array('id' => $idkelas_mhs));
     }
    }
   public function saveData($sender, $param) 
@@ -210,7 +210,7 @@ class CDetailEditNilai extends MainPageD
           $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'input', $n_kual, '', $extra);
         }
       }
-      $this->redirect("nilai.DetailEditNilai", true,array('id' => $idkelas_mhs));
+      $this->redirect("nilai.DetailEditNilai", true, array('id' => $idkelas_mhs));
     }
   }
   public function publishNilai($sender, $param) 
@@ -294,7 +294,7 @@ class CDetailEditNilai extends MainPageD
           $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'input', $n_kual, '', $extra);
         }
       }
-      $this->redirect("nilai.DetailEditNilai", true,array('id' => $idkelas_mhs));
+      $this->redirect("nilai.DetailEditNilai", true, array('id' => $idkelas_mhs));
     }
   }
   public function printOut($sender, $param) {	

@@ -62,7 +62,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
             $idkonsentrasi = $this->cmbKonsentrasiProdi->Text;
             $str = "UPDATE pendaftaran_konsentrasi SET idkonsentrasi = $idkonsentrasi,jumlah_sks = $jumlah_sks WHERE nim='$nim'";
             $this->DB->updateRecord($str);            
-            $this->redirect('kemahasiswaan.DetailPendaftaranKonsentrasi', true,array('id' => $nim));
+            $this->redirect('kemahasiswaan.DetailPendaftaranKonsentrasi', true, array('id' => $nim));
         }
     }
     public function approved($sender, $param) {
@@ -89,7 +89,7 @@ class CDetailPendaftaranKonsentrasi Extends MainPageM {
             $str = "UPDATE register_mahasiswa SET idkonsentrasi=0 WHERE nim='$nim'";        
             $this->DB->updateRecord($str);
             $this->DB->query('COMMIT');
-            $this->redirect('kemahasiswaan.DetailPendaftaranKonsentrasi', true,array('id' => $nim));
+            $this->redirect('kemahasiswaan.DetailPendaftaranKonsentrasi', true, array('id' => $nim));
         }else{
             $this->DB->query('ROLLBACK');
         }

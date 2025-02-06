@@ -280,7 +280,7 @@ class KRSEkstension Extends MainPageM {
                 $this->redirect ('perkuliahan.TambahKRSEkstension', true);
             }elseif(isset($krs['idkrs']) && $krs['sah'] == 1){
                 $idkrs = $krs['idkrs'];
-                $this->redirect ('perkuliahan.DetailKRSEkstension', true,array('id' => $idkrs));
+                $this->redirect ('perkuliahan.DetailKRSEkstension', true, array('id' => $idkrs));
             }else{
                 $idsmt=$_SESSION['semester'];
                 $tahun = $_SESSION['ta'];

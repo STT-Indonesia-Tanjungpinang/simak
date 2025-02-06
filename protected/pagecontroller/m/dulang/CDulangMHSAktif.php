@@ -185,7 +185,7 @@ class CDulangMHSAktif Extends MainPageM {
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('dulang.DetailDulangMHSAktif', true,array('id' => $nim));
+            $this->redirect('dulang.DetailDulangMHSAktif', true, array('id' => $nim));
         }
 	}
     public function viewRecord($sender, $param) {	

@@ -147,7 +147,7 @@ class CPembayaranFormulir Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $no_formulir = addslashes($this->txtNoFormulir->Text);
-            $this->redirect('pembayaran.DetailPembayaranFormulir', true,array('id' => $no_formulir));
+            $this->redirect('pembayaran.DetailPembayaranFormulir', true, array('id' => $no_formulir));
         }
 	}
 	

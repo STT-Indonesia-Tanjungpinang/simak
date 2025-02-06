@@ -98,7 +98,7 @@ class CNilaiPerMahasiswa extends MainPageON {
   public function GO($sender, $param){
     if ($this->IsValid) {
       $nim=addslashes($this->txtAddNIM->Text);
-      $this->redirect('nilai.NilaiPerMahasiswa', true,array('id' => $nim));
+      $this->redirect('nilai.NilaiPerMahasiswa', true, array('id' => $nim));
     }
   }
   public function getDataMHS($idx) {		        
@@ -107,12 +107,12 @@ class CNilaiPerMahasiswa extends MainPageON {
   public function changeTbTA($sender, $param) {
     $_SESSION['currentPageNilaiPerMahasiswa']['ta'] = $this->tbCmbTA->Text;	
     $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
-    $this->redirect('nilai.NilaiPerMahasiswa', true,array('id' => $nim));        
+    $this->redirect('nilai.NilaiPerMahasiswa', true, array('id' => $nim));        
   }	
   public function changeTbSemester($sender, $param) {
     $_SESSION['currentPageNilaiPerMahasiswa']['semester'] = $this->tbCmbSemester->Text;		
     $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
-    $this->redirect('nilai.NilaiPerMahasiswa', true,array('id' => $nim));
+    $this->redirect('nilai.NilaiPerMahasiswa', true, array('id' => $nim));
   }
   
   public function populateData() {
@@ -210,7 +210,7 @@ class CNilaiPerMahasiswa extends MainPageON {
         }
       }
       $nim = $_SESSION['currentPageNilaiPerMahasiswa']['DataMHS']['nim'];
-      $this->redirect('nilai.NilaiPerMahasiswa', true,array('id' => $nim));
+      $this->redirect('nilai.NilaiPerMahasiswa', true, array('id' => $nim));
     }		
   }	
   public function closeDetail($sender, $param) {

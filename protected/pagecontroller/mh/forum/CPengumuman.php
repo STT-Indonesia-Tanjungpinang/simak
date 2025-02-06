@@ -60,7 +60,7 @@ class CPengumuman extends MainPageMHS {
             $idpost=$v['idpost'];
             switch($v['tipe']) {
                 case 'mh':                    
-                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $v['userid']));
+                    $urlprofiluser = $this->constructUrl('kemahasiswaan.ProfilMahasiswa', true, array('id' => $v['userid']));
                 break;
                 default :
                     $urlprofiluser='#';

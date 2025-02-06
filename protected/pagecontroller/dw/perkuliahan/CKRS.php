@@ -291,7 +291,7 @@ class CKRS Extends MainPageDW {
       elseif(isset($krs['idkrs']) && $krs['sah'] == 1)
       {
         $idkrs = $krs['idkrs'];
-        $this->redirect ('perkuliahan.DetailKRS', true,array('id' => $idkrs));
+        $this->redirect ('perkuliahan.DetailKRS', true, array('id' => $idkrs));
       }
       else
       {

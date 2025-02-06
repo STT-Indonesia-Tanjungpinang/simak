@@ -137,7 +137,7 @@
                     <prop:ItemTemplate>	
                         <tr>
                             <td><%# $this->Data['no']%></td>					
-                            <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>                            
+                            <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true, array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>                            
                             <td><%# $this->Data['nama_mhs']%></td>
                             <td><%# $this->Data['nomor_ijazah']%></td>
                             <td><%# $this->Data['nomor_transkrip']%></td>

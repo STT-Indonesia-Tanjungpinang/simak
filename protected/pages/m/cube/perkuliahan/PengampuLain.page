@@ -42,7 +42,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Tambah Pengampu Lain</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.PengampuLain', true,array('id' => $this->Demik->InfoMatkul['idpenyelenggaraan']))%>">
+                    <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.PengampuLain', true, array('id' => $this->Demik->InfoMatkul['idpenyelenggaraan']))%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -95,7 +95,7 @@
             <header class="main-box-header clearfix">
                 <h2 class="pull-left"><i class="fa fa-plus"></i> Ubah Pengampu Lain</h2>
                 <div class="icon-box pull-right">                                       
-                    <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.PengampuLain', true,array('id' => $this->Demik->InfoMatkul['idpenyelenggaraan']))%>">
+                    <a class="btn btn-default pull-right" href="<%=$this->constructUrl('perkuliahan.PengampuLain', true, array('id' => $this->Demik->InfoMatkul['idpenyelenggaraan']))%>">
                         <i class="fa fa-times"></i>
                     </a>
                 </div>

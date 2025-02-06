@@ -204,7 +204,7 @@ class CPKRS extends MainPageDW {
       }            
       $krs['maxSKS'] = $maxSKS;
       $_SESSION['currentPagePKRS']['DataKRS']['krs'] = $krs;
-      $this->redirect ('perkuliahan.DetailPKRS', true,array('id' => $idkrs));
+      $this->redirect ('perkuliahan.DetailPKRS', true, array('id' => $idkrs));
     }		
   }	
   public function printOut($sender, $param) {

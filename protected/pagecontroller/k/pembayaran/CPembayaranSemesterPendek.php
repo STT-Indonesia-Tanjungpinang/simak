@@ -30,7 +30,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
             
 			if (isset($_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim'])) {
 				$this->linkDetailPembayaran->Visible=true;
-				$this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterPendek', true,array('id' => $_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim']));
+				$this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterPendek', true, array('id' => $_SESSION['currentPagePembayaranSemesterPendek']['DataMHS']['nim']));
 				$this->txtNIM->Enabled = false;
 				$this->btnGo->Enabled = false;
 				$this->tbCmbTA->Enabled = false;
@@ -166,7 +166,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranSemesterPendek', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterPendek', true, array('id' => $nim));
         }
 	}
 	

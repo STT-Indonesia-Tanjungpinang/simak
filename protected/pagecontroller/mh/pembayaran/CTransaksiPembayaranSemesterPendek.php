@@ -185,7 +185,7 @@ class CTransaksiPembayaranSemesterPendek Extends MainPageMHS {
 		$no_transaksi = $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'];		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");
         $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = 'none';
-		$this->redirect('pembayaran.PembayaranSemesterPendek', true,array('id' => $nim));
+		$this->redirect('pembayaran.PembayaranSemesterPendek', true, array('id' => $nim));
 	}
     public function closeDetail($sender, $param) {
         $_SESSION['currentPagePembayaranSemesterPendek']['no_transaksi'] = 'none';

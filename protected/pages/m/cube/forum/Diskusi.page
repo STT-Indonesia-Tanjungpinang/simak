@@ -67,7 +67,7 @@
                                                         </div>
                                                     </header>
                                                     <div class="story-inner-content">
-                                                        <a href="<%#$this->Page->constructUrl('forum.DetailDiskusi', true,array('id' => $this->DataItem['idpost']))%>" class="story-author-link">
+                                                        <a href="<%#$this->Page->constructUrl('forum.DetailDiskusi', true, array('id' => $this->DataItem['idpost']))%>" class="story-author-link">
                                                             <%#$this->DataItem['title']%>
                                                         </a>                                                        
                                                     </div>

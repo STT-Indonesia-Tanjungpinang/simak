@@ -161,7 +161,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageMHS {
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',date_modified=NOW() WHERE no_transaksi='$no_transaksi'";
             $this->DB->updateRecord($str);
             $_SESSION['currentPagePembayaranSemesterGenap']['no_transaksi'] = 'none';
-            $this->redirect('pembayaran.PembayaranSemesterGenap', true,array('id' => $nim));
+            $this->redirect('pembayaran.PembayaranSemesterGenap', true, array('id' => $nim));
         }
     }    
     public function closeTransaction($sender, $param) {

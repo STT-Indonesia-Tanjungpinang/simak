@@ -330,7 +330,7 @@
                             <prop:ItemTemplate>
                                 <tr>
                                     <td><%#$this->DataItem['no']%></td>
-                                    <td><a href="<%#$this->Page->constructUrl('spmb.DetailFormulir', true,array('id' => $this->DataItem['no_formulir']))%>"><%#$this->DataItem['no_formulir']%></a></td>
+                                    <td><a href="<%#$this->Page->constructUrl('spmb.DetailFormulir', true, array('id' => $this->DataItem['no_formulir']))%>"><%#$this->DataItem['no_formulir']%></a></td>
                                     <td><%#$this->DataItem['nama_mhs']%></td>
                                     <td><%#$this->Page->TGL->tanggal ('d F Y', $this->DataItem['tgl_ujian'])%></td>		
                                     <td><%#$this->DataItem['jumlah_soal']%></td>		
@@ -340,7 +340,7 @@
                                     <td><%#$this->DataItem['pil1']%></td>		
                                     <td><%#$this->DataItem['pil2']%></td>		                                    		
                                     <td>                    
-                                        <com:THyperLink NavigateUrl="<%#$this->Page->constructUrl('spmb.JawabanSoalPMB', true,array('id' => $this->DataItem['no_formulir']))%>" CssClass="table-link" Attributes.title="Jawaban Soal PMB">                                                                                
+                                        <com:THyperLink NavigateUrl="<%#$this->Page->constructUrl('spmb.JawabanSoalPMB', true, array('id' => $this->DataItem['no_formulir']))%>" CssClass="table-link" Attributes.title="Jawaban Soal PMB">                                                                                
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-eye fa-stack-1x fa-inverse"></i>                                        

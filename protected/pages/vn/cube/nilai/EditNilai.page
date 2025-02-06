@@ -54,13 +54,13 @@
                   <td><%#$this->DataItem['namaruang'].' ['.$this->DataItem['kapasitas'].']'%></td>
                   <td><%# $this->DataItem['jumlah_peserta_kelas']%></td>        
                   <td>
-                    <com:THyperLink ID="anchorDetailEditNilai" NavigateUrl="<%#$this->Page->constructUrl('nilai.DetailEditNilai', true,array('id' => $this->DataItem['idkelas_mhs']))%>" CssClass="table-link" Attributes.title="Detail Edit Nilai">                                                                                
+                    <com:THyperLink ID="anchorDetailEditNilai" NavigateUrl="<%#$this->Page->constructUrl('nilai.DetailEditNilai', true, array('id' => $this->DataItem['idkelas_mhs']))%>" CssClass="table-link" Attributes.title="Detail Edit Nilai">                                                                                
                       <span class="fa-stack">
                         <i class="fa fa-square fa-stack-2x"></i>
                         <i class="fa fa-eye fa-stack-1x fa-inverse"></i>                                        
                       </span>                                        
                     </com:THyperLink>  
-                    <com:THyperLink ID="anchorImportNilai" NavigateUrl="<%#$this->Page->constructUrl('nilai.ImportNilai', true,array('id' => $this->DataItem['idkelas_mhs']))%>" CssClass="table-link" Attributes.title="Import Nilai">                                                                                
+                    <com:THyperLink ID="anchorImportNilai" NavigateUrl="<%#$this->Page->constructUrl('nilai.ImportNilai', true, array('id' => $this->DataItem['idkelas_mhs']))%>" CssClass="table-link" Attributes.title="Import Nilai">                                                                                
                       <span class="fa-stack">
                         <i class="fa fa-square fa-stack-2x"></i>
                         <i class="fa fa-download fa-stack-1x fa-inverse"></i>                                        

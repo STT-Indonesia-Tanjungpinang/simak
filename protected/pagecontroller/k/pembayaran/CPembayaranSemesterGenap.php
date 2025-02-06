@@ -36,7 +36,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
                 $this->txtNIM->Visible=false;
                 $this->btnGo->Visible=false;
                 $this->linkDetailPembayaran->Visible=true;
-                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGenap', true,array('id' => $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']));
+                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGenap', true, array('id' => $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']));
             }                
             $this->populateData();
             $this->setInfoToolbar();
@@ -181,7 +181,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranSemesterGenap', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterGenap', true, array('id' => $nim));
         }
 	}
 	

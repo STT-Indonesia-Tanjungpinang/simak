@@ -144,7 +144,7 @@ class CDetailEditNilai extends MainPageCN
           $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'input', $n_kual, '', $extra);
         }
       }
-      $this->redirect("nilai.DetailEditNilai", true,array('id' => $idkelas_mhs));
+      $this->redirect("nilai.DetailEditNilai", true, array('id' => $idkelas_mhs));
     }
   }
   public function printOut($sender, $param) {	

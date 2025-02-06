@@ -126,7 +126,7 @@
                             <prop:ItemTemplate>	
                                 <tr>
                                     <td><%# $this->Data['no']%></td>					
-                                    <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true,array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>                                       
+                                    <td><a href="<%=$this->Page->constructUrl('kemahasiswaan.ProfilMahasiswa', true, array('id' => $this->DataItem['nim']))%>"><%#$this->DataItem['nim']%></a></td>                                       
                                     <td><%# $this->Data['nama_mhs']%></td>
                                     <td><%# $this->Data['jk']%></td>
                                     <td><%# $this->Data['konsentrasi']%></td>
@@ -135,7 +135,7 @@
                                     <td><%# $this->Data['sks']%></td>                                
                                     <td><%# $this->Data['ips']%></td>                                
                                     <td>
-                                        <a href="<%#$this->Page->constructUrl('nilai.DetailTranskripKurikulum', true,array('id' => $this->DataItem['nim']))%>" class="table-link" title="Detail Transkrip">                                        
+                                        <a href="<%#$this->Page->constructUrl('nilai.DetailTranskripKurikulum', true, array('id' => $this->DataItem['nim']))%>" class="table-link" title="Detail Transkrip">                                        
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-eye fa-stack-1x fa-inverse"></i>

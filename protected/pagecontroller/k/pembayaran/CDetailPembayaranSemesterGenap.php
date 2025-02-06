@@ -155,7 +155,7 @@ class CDetailPembayaranSemesterGenap Extends MainPageK {
         $nim = $datamhs['nim'];
 		$no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");		
-		$this->redirect('pembayaran.DetailPembayaranSemesterGenap', true,array('id' => $nim));
+		$this->redirect('pembayaran.DetailPembayaranSemesterGenap', true, array('id' => $nim));
 	}		
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']);

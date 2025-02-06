@@ -97,7 +97,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageK {
 	public function Go($param, $sender) {
         if ($this->IsValid) {				
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranCutiSemesterGanjil', true, array('id' => $nim));
         }					
 	}
 }

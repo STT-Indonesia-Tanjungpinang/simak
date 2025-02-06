@@ -166,7 +166,7 @@ class CDulangMHSBaru Extends MainPageM {
     public function Go($sender, $param) {	
         if ($this->Page->isValid) {            
             $no_formulir = addslashes($this->txtNoFormulir->Text);
-            $this->redirect('dulang.DetailDulangMHSBaru', true,array('id' => $no_formulir));
+            $this->redirect('dulang.DetailDulangMHSBaru', true, array('id' => $no_formulir));
         }
 	}
     public function viewRecord($sender, $param) {	

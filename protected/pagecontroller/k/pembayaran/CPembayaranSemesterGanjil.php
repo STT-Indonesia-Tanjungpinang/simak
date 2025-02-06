@@ -38,7 +38,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
                 $this->txtNIM->Visible=false;
                 $this->btnGo->Visible=false;
                 $this->linkDetailPembayaran->Visible=true;
-                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']['nim']));
+                $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGanjil', true, array('id' => $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']['nim']));
             }        
             $this->populateData();
             $this->setInfoToolbar();
@@ -182,7 +182,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
             $nim=addslashes($this->txtNIM->Text);
-            $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true, array('id' => $nim));
         }
 	}
 	

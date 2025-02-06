@@ -162,7 +162,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageK {
             $str = "UPDATE transaksi SET no_faktur='$no_faktur',tanggal='$tanggal',date_modified=NOW() WHERE no_transaksi = $no_transaksi";
             $this->DB->updateRecord($str);
             unset($_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true, array('id' => $nim));
         }
     }
     public function commitData($sender, $param) {
@@ -197,14 +197,14 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageK {
             }
             $this->DB->query('COMMIT');
             unset($_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']);
-            $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $nim));
+            $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true, array('id' => $nim));
         }
     }
     public function closeTransaction($sender, $param) {
         $datamhs = $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS'];            
         $nim = $datamhs['nim'];
         unset($_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']);
-        $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $nim));
+        $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true, array('id' => $nim));
     }
     public function cancelTrx($sender, $param) {	
         $datamhs = $_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']; 
@@ -212,7 +212,7 @@ class CTransaksiPembayaranSemesterGanjil Extends MainPageK {
 		$no_transaksi = $datamhs['no_transaksi'];		
 		$this->DB->deleteRecord("transaksi WHERE no_transaksi='$no_transaksi'");
         unset($_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']);
-		$this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true,array('id' => $nim));
+		$this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true, array('id' => $nim));
 	}
     public function closeDetail($sender, $param) {
         unset($_SESSION['currentPagePembayaranSemesterGanjil']['DataMHS']);

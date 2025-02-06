@@ -93,6 +93,7 @@ public function onLoad($param) {
         $jam_masuk_keluar['20:35'] = '20:35';
         $jam_masuk_keluar['21:10'] = '21:10';
         $jam_masuk_keluar['21:15'] = '21:15';
+        $jam_masuk_keluar['21:50'] = '21:50';
         $jam_masuk_keluar['22:15'] = '22:15';
         $jam_masuk_keluar['22:30'] = '22:30';
 
@@ -216,6 +217,7 @@ public function onLoad($param) {
     $jam_masuk_keluar['20:35'] = '20:35';
     $jam_masuk_keluar['21:10'] = '21:10';
     $jam_masuk_keluar['21:15'] = '21:15';
+    $jam_masuk_keluar['21:50'] = '21:50';
     $jam_masuk_keluar['22:15'] = '22:15';
     $jam_masuk_keluar['22:30'] = '22:30';
 
