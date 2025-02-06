@@ -12,7 +12,7 @@ class CPendaftaranViaWeb extends MainPageM {
             $_SESSION['currentPagePendaftaranWeb']['search'] = false;
             $this->cmbDaftarUlang->Text = $_SESSION['currentPagePendaftaranWeb']['status_dulang'];
             
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
             $daftar_prodi = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');            
 			$this->tbCmbPs->DataSource = $daftar_prodi;

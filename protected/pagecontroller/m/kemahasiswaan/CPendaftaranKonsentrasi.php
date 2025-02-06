@@ -11,7 +11,7 @@ class CPendaftaranKonsentrasi extends MainPageM {
 				$_SESSION['currentPagePendaftaranKonsentrasi'] = array('page_name' => 'm.kemahasiswaan.PendaftaranKonsentrasi', 'page_num' => 0, 'search' => false,'idkonsentrasi' => 'none', 'DataMHS' =>array());												
 			}
             $_SESSION['currentPagePendaftaranKonsentrasi']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
 			$this->tbCmbPs->Text = $_SESSION['kjur'];

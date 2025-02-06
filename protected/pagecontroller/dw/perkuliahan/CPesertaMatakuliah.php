@@ -18,7 +18,7 @@ class CPesertaMatakuliah extends MainPageM {
             try {                     
                 $id=addslashes($this->request['id']);
                 $iddosen_wali = $this->iddosen_wali;
-                $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');                
+                $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');                
                 $this->hiddenid->Value = $id;
                 $infomatkul = $this->Demik->getInfoMatkul($id,'penyelenggaraan'); 
                 if (!isset($infomatkul['idpenyelenggaraan'])) {                                                

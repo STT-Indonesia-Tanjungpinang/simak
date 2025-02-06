@@ -13,7 +13,7 @@ class CheckLoginMahasiswa extends BaseWS {
 				$this->payload['status'] = '30';
 				throw new Exception ("Proses Login telah berhasil, namun ada error yaitu data password kosong !!!");
 			}
-			$nim=addslashes($data['nim']);
+			$nim = addslashes($data['nim']);
 			$password=addslashes($data['password']);;
             
             $payload="data nim ($nim) dan password ($password) udah sampai di server makasih";

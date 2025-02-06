@@ -30,7 +30,7 @@ class CNilaiPerMatakuliah extends MainPageON {
         
         $this->lblModulHeader->Text = $text;
         $_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul'] = $infomatkul; 
-        $this->RepeaterP->PageSize=$this->setup->getSettingValue('default_pagesize');
+        $this->RepeaterP->PageSize = $this->setup->getSettingValue('default_pagesize');
         $this->populateDataPeserta();		
       } catch (Exception $ex) {
         $this->idProcess = 'view';        

@@ -9,7 +9,7 @@ class DataLulusan extends MainPageF {
                 $_SESSION['currentPageDataLulusan'] = array('page_name' => 'DataLulusan', 'page_num' => 0, 'search' => false,'tanggal_terbit' => 'none', 'DataMHS' =>array(), 'DataNilai' =>array());												
             }
             $_SESSION['currentPageDataLulusan']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
             $this->populateData();
         }

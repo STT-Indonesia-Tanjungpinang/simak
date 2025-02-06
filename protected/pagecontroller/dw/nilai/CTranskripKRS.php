@@ -12,7 +12,7 @@ class CTranskripKRS extends MainPageDW {
 				$_SESSION['currentPageTranskripKRS'] = array('page_name' => 'dw.nilai.TranskripKRS', 'page_num' => 0, 'search' => false,'tahun_masuk' => $_SESSION['ta']);
 			}          
             $_SESSION['currentPageTranskripKRS']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
 			$this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -148,7 +148,7 @@ class CTranskripKRS extends MainPageDW {
                         $r = $this->DB->getRecord($str);					
 
                         $dataReport = $r[1];                    
-                        $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-':$dataReport['nama_konsentrasi'];                    
+                        $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-' : $dataReport['nama_konsentrasi'];                    
                         $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
                         $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
                         $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');

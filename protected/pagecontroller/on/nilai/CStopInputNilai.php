@@ -13,7 +13,7 @@ class CStopInputNilai extends MainPageON{
                 $_SESSION['currentPageStopInputNilai'] = array('page_name' => 'on.nilai.StopInputNilai', 'page_num' => 0, 'search' => false,'iddosen' => 'none', 'nama_hari' => 'none');												
             }
             $_SESSION['currentPageNilaiFinal']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
 
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			

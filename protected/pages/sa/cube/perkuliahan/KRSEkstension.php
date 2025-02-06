@@ -199,7 +199,7 @@ class KRSEkstension Extends MainPageSA {
 		}
 	}
 	public function checkNIM ($sender, $param) {
-		$nim=addslashes($param->Value);
+		$nim = addslashes($param->Value);
         try {
             if ($nim != '') {			            
                 $datamhs = array('nim' => $nim);
@@ -214,7 +214,7 @@ class KRSEkstension Extends MainPageSA {
                     }
                     $datamhs = $r[1];
 					if ($datamhs['idkelas'] != 'C') throw new Exception ("Mahasiswa Dengan NIM ($nim) Tidak Terdaftar Pada Kelas Ekstension");
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];
 
                     $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                     $datamhs['nama_dosen'] = $nama_dosen;
@@ -232,7 +232,7 @@ class KRSEkstension Extends MainPageSA {
                     $datamhs = $r[1];
                     $this->KRS->setDataMHS($datamhs);            
                     
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];
 
                     $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                     $datamhs['nama_dosen'] = $nama_dosen;

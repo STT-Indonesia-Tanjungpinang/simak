@@ -22,7 +22,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
     }
 	protected function populateData() {		
         try {
-            $nim=addslashes($this->request['id']);            				
+            $nim = addslashes($this->request['id']);            				
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,idkelas,k_status FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
             $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'iddosen_wali', 'idkelas', 'k_status'));
             $r = $this->DB->getRecord($str);				
@@ -38,7 +38,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
             }
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
             $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
             $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
             $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS'] = $datamhs;

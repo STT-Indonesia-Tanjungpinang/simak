@@ -108,7 +108,7 @@ class UserManager extends TAuthManager
           $logic=$this->Application->getModule('logic');
           $mhs = $logic->getInstanceOfClass('Mahasiswa');							
           $mhs->setDataMHS (array('nim' => $username));									                    
-          $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi'] == 0) ? '-':$dataMhs['nama_konsentrasi'];
+          $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi'] == 0) ? '-' : $dataMhs['nama_konsentrasi'];
           $dataMhs['iddata_konversi'] = $mhs->isMhsPindahan($username,true);
           
           $dmaster = $logic->getInstanceOfClass('DMaster');							
@@ -145,7 +145,7 @@ class UserManager extends TAuthManager
           $kelas = $mhs->getKelasMhs();																	
           $dataMhs['idkelas']=($kelas['idkelas']== '')?null:$kelas['idkelas'];
           $dataMhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
-          $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi'] == 0) ? '-':$dataMhs['nama_konsentrasi'];
+          $dataMhs['nama_konsentrasi']=($dataMhs['idkonsentrasi'] == 0) ? '-' : $dataMhs['nama_konsentrasi'];
           $dataMhs['iddata_konversi'] = $mhs->isMhsPindahan($username,true);
           
           $dmaster = $logic->getInstanceOfClass('DMaster');							

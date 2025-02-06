@@ -131,7 +131,7 @@ class CPKRS extends MainPageDW {
   public function checkNIM($sender, $param) {		
     $ta = $_SESSION['ta'];
     $idsmt = $_SESSION['semester'];
-    $nim=addslashes($param->Value);
+    $nim = addslashes($param->Value);
     try {
       if ($nim != '') {
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas,photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
@@ -157,7 +157,7 @@ class CPKRS extends MainPageDW {
         }
         $kelas = $this->KRS->getKelasMhs();																	            
         $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];	
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
         $datamhs['nama_dosen'] = $nama_dosen;

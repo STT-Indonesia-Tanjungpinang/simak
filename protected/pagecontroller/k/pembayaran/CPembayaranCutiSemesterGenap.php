@@ -68,7 +68,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageK {
 		$this->RepeaterS->dataBind();
 	}
     public function cekNIM($sender, $param) {		
-        $nim=addslashes($param->Value);		
+        $nim = addslashes($param->Value);		
         if ($nim != '') {
             try {
                 $str = "SELECT k_status FROM v_datamhs vdm WHERE vdm.nim='$nim'";
@@ -96,7 +96,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageK {
     }
 	public function Go($param, $sender) {
         if ($this->IsValid) {				
-            $nim=addslashes($this->txtNIM->Text);
+            $nim = addslashes($this->txtNIM->Text);
             $this->redirect('pembayaran.DetailPembayaranCutiSemesterGenap', true, array('id' => $nim));
         }					
 	}

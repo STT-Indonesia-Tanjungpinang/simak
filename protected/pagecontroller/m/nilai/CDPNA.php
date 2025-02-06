@@ -15,7 +15,7 @@ class CDPNA extends MainPageM {
                 $_SESSION['currentPageDPNA'] = array('page_name' => 'm.nilai.DPNA', 'page_num' => 0, 'search' => false,'DataDPNA' =>array(), 'idkelas_mhs' => 'none');
 			}  
             $_SESSION['currentPageDPNA']['search'] = false;            
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
 
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			

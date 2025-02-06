@@ -13,7 +13,7 @@ class CEvaluasiHasilBelajar extends MainPageVN {
 			}  
             $_SESSION['currentPageEvaluasiHasilBelajar']['search'] = false;
             $_SESSION['currentPageDetailEvaluasiHasilBelajar'] = array();
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
 
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			

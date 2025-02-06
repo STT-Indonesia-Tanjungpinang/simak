@@ -199,7 +199,7 @@ class CKRS Extends MainPageM {
 		}
 	}
 	public function checkNIM($sender, $param) {
-		$nim=addslashes($param->Value);
+		$nim = addslashes($param->Value);
         try {
             if ($nim != '') {			            
                 $datamhs = array('nim' => $nim);
@@ -213,7 +213,7 @@ class CKRS Extends MainPageM {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
                     }
                     $datamhs = $r[1];
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];
 
                     $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                     $datamhs['nama_dosen'] = $nama_dosen;
@@ -230,7 +230,7 @@ class CKRS Extends MainPageM {
                     }
                     $datamhs = $r[1];
                     
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];
 
                     $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                     $datamhs['nama_dosen'] = $nama_dosen;

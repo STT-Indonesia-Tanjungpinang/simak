@@ -11,7 +11,7 @@ class CNilaiFinal extends MainPageON {
         $_SESSION['currentPageNilaiFinal'] = array('page_name' => 'on.nilai.NilaiFinal', 'page_num' => 0, 'search' => false,'tanggal_terbit' => 'none', 'DataMHS' =>array(), 'DataNilai' =>array());												
       }
       $_SESSION['currentPageNilaiFinal']['search'] = false;
-      $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+      $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
 
       $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
       $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -125,7 +125,7 @@ class CNilaiFinal extends MainPageON {
     }	
   }
   public function cekNIM($sender, $param) {		
-    $nim=addslashes($param->Value);		
+    $nim = addslashes($param->Value);		
     if ($nim != '') {
       try {
         $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,idkelas,k_status,photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
@@ -149,7 +149,7 @@ class CNilaiFinal extends MainPageON {
         
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
         $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
         
@@ -187,7 +187,7 @@ class CNilaiFinal extends MainPageON {
       
       $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
       $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-      $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
+      $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
       $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
       $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
       
@@ -225,7 +225,7 @@ class CNilaiFinal extends MainPageON {
           
           $dataReport = $r[1];                        
           if ($dataReport['k_status'] == 'L') {
-            $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-':$dataReport['nama_konsentrasi'];
+            $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-' : $dataReport['nama_konsentrasi'];
             $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
             $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');
             $dataReport['jabfung_penandatangan_transkrip'] = $this->setup->getSettingValue('jabfung_penandatangan_transkrip');
@@ -263,7 +263,7 @@ class CNilaiFinal extends MainPageON {
             
             $dataReport = $r[1];                        
             if ($dataReport['k_status'] == 'L') {
-              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-':$dataReport['nama_konsentrasi'];
+              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-' : $dataReport['nama_konsentrasi'];
               $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
               $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');
               $dataReport['jabfung_penandatangan_transkrip'] = $this->setup->getSettingValue('jabfung_penandatangan_transkrip');

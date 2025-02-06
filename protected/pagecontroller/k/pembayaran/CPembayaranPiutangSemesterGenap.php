@@ -127,7 +127,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
 	}	
 	
     public function cekNIM($sender, $param) {		
-        $nim=addslashes($param->Value);		
+        $nim = addslashes($param->Value);		
         if ($nim != '') {
             try {
                 $str = "SELECT vdm.tahun_masuk,vdm.semester_masuk FROM v_datamhs vdm WHERE vdm.nim='$nim'";

@@ -12,7 +12,7 @@ class CKuesioner extends MainPageM {
 			}  
             $_SESSION['currentPageKuesioner']['search'] = false;
             $_SESSION['currentPageDetailKuesioner'] = array();
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
 
 			$this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
             $this->tbCmbPs->Text = $_SESSION['kjur'];			

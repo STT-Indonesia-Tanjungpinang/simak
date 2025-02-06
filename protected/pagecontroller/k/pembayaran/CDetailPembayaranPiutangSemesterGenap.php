@@ -14,7 +14,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
 				$_SESSION['currentPagePembayaranPiutangSemesterGenap'] = array('page_name' => 'k.pembayaran.PembayaranPiutangSemesterGenap', 'page_num' => 0, 'search' => false,'ta' => $this->setup->getSettingValue('default_ta')-1,'semester' =>2,'tahun_masuk' => $this->setup->getSettingValue('default_ta')-1,'DataMHS' =>array());												
 			}        
             try {
-                $nim=addslashes($this->request['id']);                           				
+                $nim = addslashes($this->request['id']);                           				
                 $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,vdm.iddosen_wali,vdm.idkelas,vdm.k_status,sm.n_status AS status,vdm.photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) WHERE vdm.nim='$nim'";
                 $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'status', 'photo_profile'));
                 $r = $this->DB->getRecord($str);	           
@@ -34,7 +34,7 @@ class CDetailPembayaranPiutangSemesterGenap Extends MainPageK {
                 
                 $kelas = $this->Finance->getKelasMhs();                
                 $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
-                $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
+                $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];
 
                 $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
                 $datamhs['nama_dosen'] = $nama_dosen;                

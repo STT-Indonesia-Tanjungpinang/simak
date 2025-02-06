@@ -12,7 +12,7 @@ class CPendaftaranOnline extends MainPageM {
             $_SESSION['currentPagePendaftaranOnline']['search'] = false;
             $this->cmbKonfirmasi->Text = $_SESSION['currentPagePendaftaranOnline']['status_konfirmasi'];
             
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					

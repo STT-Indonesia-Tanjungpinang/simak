@@ -11,7 +11,7 @@ class CExportData extends MainPageSA {
         }
     }     
     public function cekNIM($sender, $param) {     
-        $nim=addslashes($param->Value);     
+        $nim = addslashes($param->Value);     
         if ($nim != '') {
             try {
                 $str = "SELECT nim FROM v_datamhs vdm  WHERE vdm.nim='$nim'";
@@ -31,7 +31,7 @@ class CExportData extends MainPageSA {
             try {
                 switch($sender->getId()) {
                     case 'btnSaveExportPerMHS':
-                        $nim=addslashes($this->txtNIM->Text);
+                        $nim = addslashes($this->txtNIM->Text);
                         $this->exportDataMHS($nim);
                     break;
                 }   
@@ -390,7 +390,7 @@ class CExportData extends MainPageSA {
 // 		}
 // 	}     
 //     public function cekNIM($sender, $param) {     
-//         $nim=addslashes($param->Value);     
+//         $nim = addslashes($param->Value);     
 //         if ($nim != '') {
 //             try {
 //                 $str = "SELECT nim FROM v_datamhs vdm  WHERE vdm.nim='$nim'";
@@ -409,7 +409,7 @@ class CExportData extends MainPageSA {
 //         if ($this->IsValid) {
 //             switch($sender->getId()) {
 //                 case 'btnSaveExportNIM':
-//                     $nim=addslashes($this->txtNIM->Text);
+//                     $nim = addslashes($this->txtNIM->Text);
 //                     $str = "";
 //                 break;
 //             }   

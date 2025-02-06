@@ -12,7 +12,7 @@ class CJadwalUjianPMB extends MainPageM {
 				$_SESSION['currentPageJadwalUjianPMB'] = array('page_name' => 'm.perkuliahan.JadwalUjianPMB', 'page_num' => 0, 'search' => false);												
 			}
             $_SESSION['currentPageJadwalUjianPMB']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
                         
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					

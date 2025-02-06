@@ -57,7 +57,7 @@ class DetailKRSEkstension extends MainPageDW {
             
             $kelas = $this->KRS->getKelasMhs();	
             $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];
             
             $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
             $datamhs['nama_dosen'] = $nama_dosen;

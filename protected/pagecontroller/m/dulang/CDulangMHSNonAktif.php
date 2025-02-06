@@ -145,7 +145,7 @@ class CDulangMHSNonAktif Extends MainPageM {
         $this->paginationInfo->Text = $this->getInfoPaging($this->RepeaterS);
 	}
 	public function cekNIM($sender, $param) {		
-        $nim=addslashes($param->Value);		
+        $nim = addslashes($param->Value);		
         if ($nim != '') {
             try {
                 if (!isset($_SESSION['currentPageDulangMHSNonAktif']['DataMHS']['no_formulir'])) {
@@ -169,7 +169,7 @@ class CDulangMHSNonAktif Extends MainPageM {
                     $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
                     $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
                     $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($datamhs['nim'],true);
-                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
+                    $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
                     $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
                     $_SESSION['currentPageDulangMHSNonAktif']['DataMHS'] = $datamhs;
                 }
@@ -181,7 +181,7 @@ class CDulangMHSNonAktif Extends MainPageM {
     }
     public function Go($param, $sender) {	
         if ($this->Page->isValid) {            
-            $nim=addslashes($this->txtNIM->Text);
+            $nim = addslashes($this->txtNIM->Text);
             $this->redirect('dulang.DetailDulangMHSNonAktif', true, array('id' => $nim));
         }
 	}
@@ -197,7 +197,7 @@ class CDulangMHSNonAktif Extends MainPageM {
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($datamhs['nim'],true);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);        
         $this->hiddenstatussebelumnya->Value = $datamhs['status_sebelumnya'];
         $datamhs['status_sebelumnya'] = $this->DMaster->getNamaStatusMHSByID($datamhs['status_sebelumnya']);

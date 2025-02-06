@@ -11,7 +11,7 @@ class CPIN extends MainPageM {
 				$_SESSION['currentPagePIN'] = array('page_name' => 'm.spmb.PIN', 'page_num' => 0,'offset' =>0,'limit' =>0, 'search' => false,'display_record' => 'all', 'kelas' => 'A');												
 			}
             $_SESSION['currentPagePIN']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					

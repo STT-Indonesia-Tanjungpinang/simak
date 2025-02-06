@@ -12,7 +12,7 @@ class CNilaiUjianPMB extends MainPageM {
 				$_SESSION['currentPageNilaiUjianPMB'] = array('page_name' => 'm.spmb.NilaiUjianPMB', 'page_num' => 0,'offset' =>0,'limit' =>0, 'search' => false,'kjur' => 'none', 'tgl_ujian_awal' => $_SESSION['tahun_pendaftaran'].'-01-01', 'tgl_ujian_akhir' => $this->TGL->tanggal('Y-m-t', $_SESSION['tahun_pendaftaran'].'-09-01'));												
 			}
             $_SESSION['currentPageNilaiUjianPMB']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
             $this->cmbTanggalUjianAwal->Text = $this->TGL->tanggal('d-m-Y', $_SESSION['currentPageNilaiUjianPMB']['tgl_ujian_awal']);
             $this->cmbTanggalUjianAkhir->Text = $this->TGL->tanggal('t-m-Y', $_SESSION['currentPageNilaiUjianPMB']['tgl_ujian_akhir']);

@@ -11,7 +11,7 @@ class CPendaftaranOnline extends MainPageK {
 				$_SESSION['currentPagePendaftaranOnline'] = array('page_name' => 'k.spmb.PendaftaranOnline', 'page_num' => 0,'offset' =>0,'limit' =>0, 'search' => false,'display_record' => 'all', 'kelas' => 'A');												
 			}
             $_SESSION['currentPagePendaftaranOnline']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
             $tahun_masuk = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			
 			$this->tbCmbTahunMasuk->DataSource = $tahun_masuk	;					

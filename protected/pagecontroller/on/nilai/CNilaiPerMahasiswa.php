@@ -34,7 +34,7 @@ class CNilaiPerMahasiswa extends MainPageON {
         
         $kelas = $this->Nilai->getKelasMhs();                
         $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
         $datamhs['nama_dosen'] = $nama_dosen;                
@@ -71,7 +71,7 @@ class CNilaiPerMahasiswa extends MainPageON {
     $this->lblModulHeader->Text="T.A $ta Semester $semester";        
   }
   public function cekNIM($sender, $param) {		
-    $nim=addslashes($param->Value);		
+    $nim = addslashes($param->Value);		
     if ($nim != '') 
     {
       try 
@@ -97,7 +97,7 @@ class CNilaiPerMahasiswa extends MainPageON {
   }
   public function GO($sender, $param){
     if ($this->IsValid) {
-      $nim=addslashes($this->txtAddNIM->Text);
+      $nim = addslashes($this->txtAddNIM->Text);
       $this->redirect('nilai.NilaiPerMahasiswa', true, array('id' => $nim));
     }
   }

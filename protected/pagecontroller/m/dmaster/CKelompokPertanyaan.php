@@ -12,7 +12,7 @@ class CKelompokPertanyaan extends MainPageM {
 				$_SESSION['currentPageKelompokPertanyaan'] = array('page_name' => 'm.dmaster.KelompokPertanyaan', 'page_num' => 0, 'search' => false,'idkonsentrasi' => 'none', 'semester' => 'none');
 			}
             $_SESSION['currentPageKelompokPertanyaan']['search'] = false;            
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
 			$this->populateData();            
 		}
 	}     

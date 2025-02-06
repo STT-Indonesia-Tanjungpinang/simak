@@ -17,7 +17,7 @@ class CDiskusi extends MainPageCN {
         if ($activeview == $this->MVMenuForum->ActiveViewIndex) {
             switch($activeview) {
                 case 0 : //diskusi newsfeed
-                    $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+                    $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
                     $this->populateNewsFeed();
                 break;
                 case 1 :
@@ -25,7 +25,7 @@ class CDiskusi extends MainPageCN {
                     $this->cmbAddKategori->DataBind(); 
                 break;
                 case 2 : //diskusi unread
-                    $this->RepeaterUnread->PageSize=$this->setup->getSettingValue('default_pagesize');
+                    $this->RepeaterUnread->PageSize = $this->setup->getSettingValue('default_pagesize');
                     $this->populateUnread();
                 break;
             }

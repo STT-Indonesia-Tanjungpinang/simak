@@ -11,7 +11,7 @@ class CDaftarPertanyaan extends MainPageM {
 				$_SESSION['currentDaftarPertanyaan'] = array('page_name' => 'm.dmaster.DaftarPertanyaan', 'page_num' => 0, 'search' => false,'idkelompok_pertanyaan' => 'none');												
 			}
             $_SESSION['currentDaftarPertanyaan']['search'] = false; 
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             $this->lblModulHeader->Text = $this->getInfoToolbar();
             
             $ta = $this->DMaster->removeIdFromArray($this->DMaster->getListTA(), 'none');			

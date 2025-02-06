@@ -187,7 +187,7 @@ class Logic_Nilai extends Logic_Akademik {
             $m = $am * $v['sks'];	
           }			
         }	
-        $v['n_kual']=($hm== '') ? '-':$hm;
+        $v['n_kual']=($hm== '') ? '-' : $hm;
         $v['am'] = $am;
         $v['m'] = $m;	                               
         if ($v['idkonsentrasi'] == 0) {
@@ -272,7 +272,7 @@ class Logic_Nilai extends Logic_Akademik {
           $m = $am * $v['sks'];                    
         }			
       }	
-      $v['n_kual']=($hm== '') ? '-':$hm;
+      $v['n_kual']=($hm== '') ? '-' : $hm;
       $v['am'] = $am;
       $v['m'] = $m;		                        
       if ($v['idkonsentrasi'] == 0) {               
@@ -476,61 +476,34 @@ class Logic_Nilai extends Logic_Akademik {
       {
         $b['kmatkul'] = $this->getKMatkul($b['kmatkul']);
         $hm = $b['n_kual'];
-        if ($b['tahun'] >= 2015)
-        {
-          if ($b['telah_isi_kuesioner'])
-          {  
-            if ($b['published'] == 1)
-            {
-              $am = $this->AngkaMutu[$hm];
-              $m = $am * $b['sks'];
-            }
-            else 
-            {
-              $am = 0;
-              $m = 0;
-              $hm = '-';              
-            }			
-            $b['am'] = $am;
-            $b['m'] = $m;
-            $b['bool_isi_kuesioner'] = false;
-          }
-          else
-          {                    
-            $b['keterangan'] = $hm == '' ? 'BELUM ISI NILAI / BELUM PUBLISH' : 'BELUM ISI KUESIONER';
-            $b['bool_isi_kuesioner'] = $hm == '' ? false : true;
-            $b['n_kual'] = '';
-            $b['am'] = 0;
-            $b['m'] = 0;                
-          }
-          $result[$a] = $b;
-        }
-        else
-        {                                
-          if ($hm == '' || $b['published'] == '0' || $b['published'] == '')
-          {
-            $am = 0;
-            $m = 0;
-            $hm = '-';
-          }
-          else
+        
+        if ($b['telah_isi_kuesioner'])
+        {  
+          if ($b['published'] == 1)
           {
             $am = $this->AngkaMutu[$hm];
             $m = $am * $b['sks'];
-          }	                   
-          if ($b['telah_isi_kuesioner'])
-          {
-            $b['keterangan'] = '-';
           }
-          else
+          else 
           {
-            $b['keterangan'] = $hm == '-' ? 'BELUM ISI NILAI / BELUM PUBLISH' : 'BELUM ISI KUESIONER';
-          }
+            $am = 0;
+            $m = 0;
+            $hm = '-';          
+            $b['keterangan'] = 'BELUM ISI NILAI / BELUM PUBLISH';    
+          }			
           $b['am'] = $am;
           $b['m'] = $m;
-
-          $result[$a] = $b;
-        }			
+          $b['bool_isi_kuesioner'] = false;
+        }
+        else
+        {                    
+          $b['keterangan'] = $hm == '' ? 'BELUM ISI NILAI / BELUM PUBLISH' : 'BELUM ISI KUESIONER';
+          $b['bool_isi_kuesioner'] = true;
+          $b['n_kual'] = '';
+          $b['am'] = 0;
+          $b['m'] = 0;                
+        }
+        $result[$a] = $b;
       }
     }
     else

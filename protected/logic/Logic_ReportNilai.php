@@ -95,7 +95,7 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->Cell(13, 5, $v['no'], 1, 0, 'C');							
           $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
           $rpt->Cell(80, 5, $v['nmatkul'], 1, 0, 'L');				
-          $n_kual=$v['n_kual']== '' ? '-':$v['n_kual'];
+          $n_kual=$v['n_kual']== '' ? '-' : $v['n_kual'];
           $sks = $v['sks'];
           $m=$v['m'];										
           $rpt->Cell(10, 5, $n_kual, 1, 0, 'C');					
@@ -284,7 +284,7 @@ class Logic_ReportNilai extends Logic_Report {
               $rpt->Cell(13, 5, $v['no'], 1, 0, 'C');							
               $rpt->Cell(15, 5, $v['kmatkul'], 1, 0, 'C');		
               $rpt->Cell(80, 5, $v['nmatkul'], 1, 0, 'L');				
-              $n_kual=$v['n_kual']== '' ? '-':$v['n_kual'];
+              $n_kual=$v['n_kual']== '' ? '-' : $v['n_kual'];
               $sks = $v['sks'];
               $m=$v['m'];										
               $rpt->Cell(10, 5, $n_kual, 1, 0, 'C');					
@@ -545,7 +545,8 @@ class Logic_ReportNilai extends Logic_Report {
    * digunakan untuk memprint Transkrip Kurikulum
    * @param type $objNilai object
    */
-  public function printTranskripKurikulum ($objNilai, $withsignature=false) {
+  public function printTranskripKurikulum ($objNilai, $withsignature = false) 
+  {
     $biodata=$this->dataReport;          
     $nim = $biodata['nim'];
     $objNilai->setDataMHS($biodata);
@@ -665,7 +666,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-') ? '-':$v['m'];
+                $m=($n_kual=='-') ? '-' : $v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -694,7 +695,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($s['semester'] == $i) {
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-') ? '-':$s['m']; 								
+                $m=($n_kual=='-') ? '-' : $s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -934,7 +935,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-') ? '-':$v['m'];
+                $m=($n_kual=='-') ? '-' : $v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -963,7 +964,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($s['semester'] == $i) {
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-') ? '-':$s['m']; 								
+                $m=($n_kual=='-') ? '-' : $s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -1240,7 +1241,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-') ? '-':$v['m'];
+                $m=($n_kual=='-') ? '-' : $v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -1272,7 +1273,7 @@ class Logic_ReportNilai extends Logic_Report {
               if ($s['semester'] == $i) {                                
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-') ? '-':$s['m']; 								
+                $m=($n_kual=='-') ? '-' : $s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -1542,7 +1543,7 @@ class Logic_ReportNilai extends Logic_Report {
                 if ($v['semester'] == $i)
                 {
                   $n_kual=$v['n_kual'];
-                  $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
+                  $n_kual=($n_kual=='-'||$n_kual== '') ? '-' : $n_kual;
                   $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
@@ -1578,7 +1579,7 @@ class Logic_ReportNilai extends Logic_Report {
                 if ($v['semester'] == $i)
                 {
                   $n_kual=$v['n_kual'];
-                  $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
+                  $n_kual=($n_kual=='-'||$n_kual== '') ? '-' : $n_kual;
                   $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
@@ -1813,7 +1814,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $v) {	
               if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
-                $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
+                $n_kual=($n_kual=='-'||$n_kual== '') ? '-' : $n_kual;
                 $sks = $v['sks'];
                 $totalSks+=$sks;								
                 $rpt->setXY(106, $row_genap);							
@@ -1833,7 +1834,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $s) {
               if ($s['semester'] == $i) {
                 $n_kual=$s['n_kual'];
-                $n_kual=($n_kual=='-'||$n_kual== '') ? '-':$n_kual;
+                $n_kual=($n_kual=='-'||$n_kual== '') ? '-' : $n_kual;
                 $sks = $s['sks'];
                 $totalSks+=$sks;													
                 $rpt->setXY(3, $row_ganjil);						
@@ -2082,8 +2083,8 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->setCellValueExplicit("F$row", $v['nim'],PHPExcel_Cell_DataType::TYPE_STRING);
           $sheet->setCellValueExplicit("G$row", $v['nirm'],PHPExcel_Cell_DataType::TYPE_STRING);	                        
           $sheet->setCellValue("H$row", $v['n_kuan']);			
-          $am = $v['n_kual']== '' ? '-':$objNilai->getAngkaMutu($v['n_kual']);
-          $hm=$v['n_kual']== '' ? '-':$v['n_kual'];
+          $am = $v['n_kual']== '' ? '-' : $objNilai->getAngkaMutu($v['n_kual']);
+          $hm=$v['n_kual']== '' ? '-' : $v['n_kual'];
           $sheet->setCellValue("I$row", $am);			
           $sheet->setCellValue("J$row", $hm);			
           $sheet->setCellValue("K$row",'-');	
@@ -2296,8 +2297,8 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(10, 5, $v['jk'], 1, 0, 'C');							
             $rpt->Cell(20, 5, $v['nim'], 1, 0, 'C');				
             $rpt->Cell(30, 5, $v['nirm'], 1, 0, 'C');				
-            $am = $v['n_kual']== '' ? '-':$objNilai->getAngkaMutu($v['n_kual']);
-            $hm=$v['n_kual']== '' ? '-':$v['n_kual'];
+            $am = $v['n_kual']== '' ? '-' : $objNilai->getAngkaMutu($v['n_kual']);
+            $hm=$v['n_kual']== '' ? '-' : $v['n_kual'];
             $rpt->Cell(10, 5, $am, 1, 0, 'C');
             $rpt->Cell(10, 5, $hm, 1, 0, 'C');																
             $rpt->Cell(30, 5, '', 1, 0, 'C');

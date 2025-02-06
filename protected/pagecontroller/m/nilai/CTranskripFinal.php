@@ -13,7 +13,7 @@ class CTranskripFinal extends MainPageM {
         $_SESSION['currentPageTranskripFinal'] = array('page_name' => 'm.nilai.TranskripFinal', 'page_num' => 0, 'search' => false,'tanggal_terbit' => 'none');												
       }
       $_SESSION['currentPageTranskripFinal']['search'] = false;
-      $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+      $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
 
       $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');
       $this->tbCmbPs->Text = $_SESSION['kjur'];			
@@ -176,7 +176,7 @@ class CTranskripFinal extends MainPageM {
             if ($dataReport['k_status'] == 'L') 
             {
               $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
-              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-':$dataReport['nama_konsentrasi'];
+              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-' : $dataReport['nama_konsentrasi'];
               $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
               $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');
               $dataReport['jabfung_penandatangan_transkrip'] = $this->setup->getSettingValue('jabfung_penandatangan_transkrip');
@@ -215,7 +215,7 @@ class CTranskripFinal extends MainPageM {
             $dataReport = $r[1];                        
             if ($dataReport['k_status'] == 'L') {
               $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
-              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-':$dataReport['nama_konsentrasi'];
+              $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-' : $dataReport['nama_konsentrasi'];
               $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
               $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');
               $dataReport['jabfung_penandatangan_transkrip'] = $this->setup->getSettingValue('jabfung_penandatangan_transkrip');

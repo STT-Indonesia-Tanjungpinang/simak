@@ -84,7 +84,7 @@ class CPindahKelas Extends MainPageM {
 		}	
 	}
 	public function checkNIM($sender, $param) {
-        $nim=addslashes($param->Value);
+        $nim = addslashes($param->Value);
 		try {
 			$ta = $_SESSION['ta'];
 			$idsmt = $_SESSION['semester'];					
@@ -114,7 +114,7 @@ class CPindahKelas Extends MainPageM {
 	public function Go($sender, $param) {
 		if ($this->Page->IsValid) {
 			$this->idProcess = 'add';		
-            $nim=addslashes($this->txtNIM->Text);
+            $nim = addslashes($this->txtNIM->Text);
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
             $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas'));
             $r = $this->DB->getRecord($str);	
@@ -123,7 +123,7 @@ class CPindahKelas Extends MainPageM {
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
             $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
+            $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
             $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
             
             $this->Demik->setDataMHS($datamhs);
@@ -186,7 +186,7 @@ class CPindahKelas Extends MainPageM {
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($datamhs['iddosen_wali']);
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
-        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-':$datamhs['nama_konsentrasi'];                    
+        $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
 
         $this->Demik->setDataMHS($datamhs);

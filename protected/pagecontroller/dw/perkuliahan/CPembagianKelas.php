@@ -12,7 +12,7 @@ class CPembagianKelas extends MainPageDW {
 				$_SESSION['currentPagePembagianKelas'] = array('page_name' => 'm.perkuliahan.PembagianKelas', 'page_num' => 0, 'search' => false,'iddosen' => 'none', 'nama_hari' => 'none');												
 			}
             $_SESSION['currentPagePembagianKelas']['search'] = false;
-            $this->RepeaterS->PageSize=$this->setup->getSettingValue('default_pagesize');
+            $this->RepeaterS->PageSize = $this->setup->getSettingValue('default_pagesize');
             
             $kjur = $_SESSION['kjur'];	
             $this->tbCmbPs->DataSource = $this->DMaster->removeIdFromArray($_SESSION['daftar_jurusan'],'none');

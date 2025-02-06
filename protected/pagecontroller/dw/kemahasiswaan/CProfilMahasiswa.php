@@ -32,7 +32,7 @@ class CProfilMahasiswa extends MainPageDW {
     }  
     public function changeView($sender, $param) {                
         try {
-            $nim=addslashes($this->request['id']);
+            $nim = addslashes($this->request['id']);
             $str = "SELECT vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,iddosen_wali,vdm.k_status,sm.n_status AS status,vdm.idkelas,ke.nkelas,vdm.theme,vdm.photo_profile FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) LEFT JOIN status_mhs sm ON (vdm.k_status=sm.k_status) LEFT JOIN kelas ke ON (vdm.idkelas=ke.idkelas) WHERE vdm.nim='$nim'";
             $this->DB->setFieldTable(array('no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'iddosen_wali', 'k_status', 'status', 'idkelas', 'nkelas', 'theme', 'photo_profile'));
             $r = $this->DB->getRecord($str);             
@@ -134,7 +134,7 @@ class CProfilMahasiswa extends MainPageDW {
         $r = $this->DB->getRecord($str);                
         $result = array();
         while(list($k, $v) = each($r)) {
-            $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-':$this->TGL->tanggal('l, d F Y', $v['tanggal']);
+            $v['tanggal'] = $v['tanggal'] == '0000-00-00 00:00:00' ? '-' : $this->TGL->tanggal('l, d F Y', $v['tanggal']);
             $isikrs='tidak isi';
             if ($v['k_status']=='A') {
                 $this->KRS->getDataKRS($v['tahun'], $v['idsmt']);  
@@ -260,7 +260,7 @@ class CProfilMahasiswa extends MainPageDW {
     public function updateDataNIMNIRM($sender, $param) {
         if ($this->Page->isValid) { 
             $nimasal = $_SESSION['currentPageProfilMahasiswa']['DataMHS']['nim'];
-            $nim=addslashes($this->txtEditNIM->Text);
+            $nim = addslashes($this->txtEditNIM->Text);
             $nirm=addslashes($this->txtEditNIRM->Text);     
             $str = "UPDATE register_mahasiswa SET nim='$nim',nirm='$nirm' WHERE nim='$nimasal'";
             $this->DB->updateRecord($str);  

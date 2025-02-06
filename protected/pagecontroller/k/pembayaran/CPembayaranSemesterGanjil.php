@@ -149,7 +149,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
 	}	
 	
     public function cekNIM($sender, $param) {		
-        $nim=addslashes($param->Value);		
+        $nim = addslashes($param->Value);		
         if ($nim != '') {
             try {
                 $str = "SELECT vdm.nim,vdm.tahun_masuk,vdm.semester_masuk FROM v_datamhs vdm WHERE vdm.nim='$nim'";
@@ -181,7 +181,7 @@ class CPembayaranSemesterGanjil Extends MainPageK {
     }
 	public function Go($param, $sender) {	
         if ($this->IsValid) {            
-            $nim=addslashes($this->txtNIM->Text);
+            $nim = addslashes($this->txtNIM->Text);
             $this->redirect('pembayaran.DetailPembayaranSemesterGanjil', true, array('id' => $nim));
         }
 	}
