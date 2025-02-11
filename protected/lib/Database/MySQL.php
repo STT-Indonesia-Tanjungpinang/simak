@@ -161,7 +161,7 @@ class MySQL extends DBGlobal implements DBInterface {
 		$this->setFieldTable(array('sum_record'));
 		$result = $this->getRecord($str);				
 		if (isset($result[1])) {
-			$jumlah=$result[1]['sum_record']== ''?0:$result[1]['sum_record'];			
+			$jumlah = $result[1]['sum_record']== ''?0:$result[1]['sum_record'];			
 		}	
 		return $jumlah;
 	}	

@@ -16,7 +16,7 @@ class CPKRS extends MainPageDW {
   
   public function onLoad($param) {
     parent::onLoad($param);	
-    $this->showSubMenuAkademikPerkuliahan=true;
+    $this->showSubMenuAkademikPerkuliahan = true;
     $this->showPKRS = true;
     $this->createObj('KRS');
       
@@ -161,7 +161,7 @@ class CPKRS extends MainPageDW {
 
         $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
         $datamhs['nama_dosen'] = $nama_dosen;
-        $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($nim,true);
+        $datamhs['iddata_konversi'] = $this->KRS->isMhsPindahan($nim, true);
 
         $_SESSION['currentPagePKRS']['DataMHS'] = $datamhs;
 

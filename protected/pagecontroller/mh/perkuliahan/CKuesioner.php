@@ -3,7 +3,7 @@ prado::using ('Application.MainPageMHS');
 class CKuesioner extends MainPageMHS {	
 	public function onLoad($param) {
 		parent::onLoad($param);		
-        $this->showSubMenuAkademikPerkuliahan=true;
+        $this->showSubMenuAkademikPerkuliahan = true;
         $this->showKuesioner=true;        
         $this->createObj('Akademik');
         $this->createObj('Kuesioner');

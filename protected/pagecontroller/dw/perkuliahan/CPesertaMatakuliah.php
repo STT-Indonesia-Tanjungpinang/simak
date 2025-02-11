@@ -3,7 +3,7 @@ prado::using ('Application.MainPageM');
 class CPesertaMatakuliah extends MainPageM {	
 	public function onLoad($param) {		
 		parent::onLoad($param);				
-         $this->showSubMenuAkademikPerkuliahan=true;
+         $this->showSubMenuAkademikPerkuliahan = true;
         $this->showPenyelenggaraan=true;
         
         $this->createObj('Akademik');

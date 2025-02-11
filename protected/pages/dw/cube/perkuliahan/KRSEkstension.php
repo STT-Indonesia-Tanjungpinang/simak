@@ -16,7 +16,7 @@ class KRSEkstension Extends MainPageDW {
 	
 	public function onLoad($param) {		
 		parent::onLoad($param);										
-		$this->showSubMenuAkademikPerkuliahan=true;
+		$this->showSubMenuAkademikPerkuliahan = true;
         $this->showKRSEkstension = true;   
         $this->createObj('KRS');
         $this->createObj('Nilai');

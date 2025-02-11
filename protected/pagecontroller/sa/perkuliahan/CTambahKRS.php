@@ -22,7 +22,7 @@ class CTambahKRS extends MainPageSA {
 	public $ketip='IP';
 	public function onLoad($param) {
 		parent::onLoad($param);	
-        $this->showSubMenuAkademikPerkuliahan=true;
+        $this->showSubMenuAkademikPerkuliahan = true;
         $this->showKRS = true;                   
         $this->createObj('KRS');
         $this->createObj('Nilai');
@@ -82,7 +82,7 @@ class CTambahKRS extends MainPageSA {
 			$str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs'";
 			$this->DB->setFieldTable(array('jumlah'));
 			$r = $this->DB->getRecord($str);
-			$jumlah=$r[1]['jumlah']+$sender->CommandParameter;
+			$jumlah = $r[1]['jumlah']+$sender->CommandParameter;
 			$maxSKs = $datakrs['maxSKS'];
 			if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
 			$idpenyelenggaraan = $this->getDataKeyField($sender, $this->RepeaterPenyelenggaraan);
@@ -114,10 +114,10 @@ class CTambahKRS extends MainPageSA {
 		if ($item->ItemType === 'Item' || $item->ItemType === 'AlternatingItem') {					
 			$matkul = $item->DataItem['kmatkul'].'-'.$item->DataItem['nmatkul'];									
 			if ($_SESSION['currentPageKRS']['DataKRS']['krs']['sah']&&!$item->DataItem['batal']) {
-				$onclick="alert('Tidak bisa menghapus Matakuliah $matkul, karena sudah disahkan oleh Dosen Wali.')";
+				$onclick = "alert('Tidak bisa menghapus Matakuliah $matkul, karena sudah disahkan oleh Dosen Wali.')";
 				$item->btnHapus->Enabled = false;
 			}else{
-				$onclick="if(!confirm('Anda yakin mau menghapus $matkul')) return false;";			
+				$onclick = "if(!confirm('Anda yakin mau menghapus $matkul')) return false;";			
 			}
 			$item->btnHapus->Attributes->OnClick = $onclick;
             

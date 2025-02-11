@@ -19,7 +19,7 @@ class CDetailPKRS extends MainPageDW {
 	public static $jumlahMatkulBatal=0;	
 	public function onLoad($param) {
 		parent::onLoad($param);	
-        $this->showSubMenuAkademikPerkuliahan=true;
+        $this->showSubMenuAkademikPerkuliahan = true;
         $this->showPKRS = true;
 		$this->createObj('KRS');
 			
@@ -98,7 +98,7 @@ class CDetailPKRS extends MainPageDW {
 				$str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs' AND batal=0";
 				$this->DB->setFieldTable(array('jumlah'));
 				$r = $this->DB->getRecord($str);	
-				$jumlah=$r[1]['jumlah']+$id[2];				
+				$jumlah = $r[1]['jumlah']+$id[2];				
 				$maks_sks = $datakrs['maxSKS'];
 				if ($jumlah > $maks_sks) {
                     throw new Exception ('Matakuliah, tidak bisa disahkan. Karena telah melebihi batas anda');

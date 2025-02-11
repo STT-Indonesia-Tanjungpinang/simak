@@ -163,7 +163,7 @@ class CDaftarMahasiswa extends MainPageDW {
             $dataMHS['nim'] = $nim;
             $dataMHS['tahun_masuk'] = $v['tahun_masuk'];            
             $dataMHS['kjur'] = $v['kjur'];   
-            $iddata_konversi = $this->Nilai->isMhsPindahan($nim,true);
+            $iddata_konversi = $this->Nilai->isMhsPindahan($nim, true);
             $dataMHS['iddata_konversi'] = $iddata_konversi; 
             $dataMHS['idkonsentrasi'] = $v['idkonsentrasi']; 
             $v['iddata_konversi'] = $iddata_konversi;

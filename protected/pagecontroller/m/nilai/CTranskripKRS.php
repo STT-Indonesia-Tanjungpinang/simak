@@ -109,7 +109,7 @@ class CTranskripKRS extends MainPageM {
             $dataMHS['nim'] = $nim;
             $dataMHS['tahun_masuk'] = $v['tahun_masuk'];
             $dataMHS['kjur'] = $v['kjur'];
-            $dataMHS['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);         
+            $dataMHS['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true);         
             $dataMHS['idkonsentrasi'] = $v['idkonsentrasi'];
             $this->Nilai->setDataMHS($dataMHS);
             $v['konsentrasi']=strtoupper($this->DMaster->getNamaKonsentrasiByID($v['idkonsentrasi'], $v['kjur']));

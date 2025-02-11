@@ -154,7 +154,7 @@ class CDulangMHSKeluar Extends MainPageM {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
                     }
                     $datamhs = $r[1]; 
-                    $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($nim,true);
+                    $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($nim, true);
 
                     switch($datamhs['k_status']) {
                         case 'K':

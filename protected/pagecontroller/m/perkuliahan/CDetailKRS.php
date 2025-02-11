@@ -21,7 +21,7 @@ class CDetailKRS extends MainPageM
   public function onLoad($param) 
   {
     parent::onLoad($param);	
-    $this->showSubMenuAkademikPerkuliahan=true;
+    $this->showSubMenuAkademikPerkuliahan = true;
     $this->showKRS = true;           
     $this->createObj('KRS');
     if (!$this->IsPostBack && !$this->IsCallback) {	            

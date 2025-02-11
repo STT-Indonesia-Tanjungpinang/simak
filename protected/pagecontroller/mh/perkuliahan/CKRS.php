@@ -19,7 +19,7 @@ class CKRS extends MainPageMHS {
   public static $jumlahMatkulBatal=0;
   public function onLoad($param) {
     parent::onLoad($param);	
-    $this->showSubMenuAkademikPerkuliahan=true;
+    $this->showSubMenuAkademikPerkuliahan = true;
     $this->showKRS = true;   
   
     $this->createObj('KRS');

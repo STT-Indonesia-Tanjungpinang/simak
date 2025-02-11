@@ -17,7 +17,7 @@ class CKRS Extends MainPageDW {
   public function onLoad($param) 
   {		
     parent::onLoad($param);										
-    $this->showSubMenuAkademikPerkuliahan=true;
+    $this->showSubMenuAkademikPerkuliahan = true;
     $this->showKRS = true;   
     $this->createObj('KRS');
     $this->createObj('Nilai');
@@ -221,7 +221,7 @@ class CKRS Extends MainPageDW {
 
           $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
           $datamhs['nama_dosen'] = $nama_dosen;
-          $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
+          $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true);
           $_SESSION['currentPageKRS']['DataMHS'] = $datamhs;
           
           $_SESSION['currentPageKRS']['DataKRS'] = $this->KRS->DataKRS;
@@ -238,7 +238,7 @@ class CKRS Extends MainPageDW {
 
           $nama_dosen = $this->DMaster->getNamaDosenWaliByID($datamhs['iddosen_wali']);				                    
           $datamhs['nama_dosen'] = $nama_dosen;
-          $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
+          $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true);
           $_SESSION['currentPageKRS']['DataMHS'] = $datamhs;
           
           $idsmt = $_SESSION['semester'];

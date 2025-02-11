@@ -3,7 +3,7 @@ prado::using ('Application.MainPageMHS');
 class CJadwalPerkuliahan extends MainPageMHS {	
 	public function onLoad($param) {
 		parent::onLoad($param);		
-        $this->showSubMenuAkademikPerkuliahan=true;
+        $this->showSubMenuAkademikPerkuliahan = true;
         $this->showJadwalPerkuliahan=true;
         
         $this->createObj('Akademik');

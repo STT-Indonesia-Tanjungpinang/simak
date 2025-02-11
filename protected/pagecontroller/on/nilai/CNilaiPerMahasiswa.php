@@ -30,7 +30,7 @@ class CNilaiPerMahasiswa extends MainPageON {
         }
         $datamhs = $r[1];
         $this->Nilai->setDatamHS($datamhs);
-        $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
+        $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true);
         
         $kelas = $this->Nilai->getKelasMhs();                
         $datamhs['nkelas']=($kelas['nkelas']== '') ? 'Belum ada':$kelas['nkelas'];			                    

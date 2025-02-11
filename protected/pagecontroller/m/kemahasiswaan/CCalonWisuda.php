@@ -86,7 +86,7 @@ class CCalonWisuda Extends MainPageM {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) tidak terdaftar di Portal.");
                     }
                     $datamhs = $r[1]; 
-                    $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($nim,true);
+                    $datamhs['iddata_konversi'] = $this->Demik->isMhsPindahan($nim, true);
                     if ($datamhs['k_status'] == 'L') {
                         throw new Exception ("Mahasiswa Dengan NIM ($nim) telah dinyatakan lulus.");
                     }

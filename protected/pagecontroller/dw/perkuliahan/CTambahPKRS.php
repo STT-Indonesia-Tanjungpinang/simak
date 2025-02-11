@@ -32,7 +32,7 @@ class CTambahPKRS extends MainPageDW {
   public $ketip='IP';
   public function onLoad($param) {
     parent::onLoad($param);	
-    $this->showSubMenuAkademikPerkuliahan=true;
+    $this->showSubMenuAkademikPerkuliahan = true;
     $this->showPKRS = true;                   
     $this->createObj('KRS');
     $this->createObj('Nilai');
@@ -104,7 +104,7 @@ class CTambahPKRS extends MainPageDW {
       $str = "SELECT SUM(sks) AS jumlah FROM v_krsmhs WHERE idkrs='$idkrs' AND batal=0";
       $this->DB->setFieldTable(array('jumlah'));
       $r = $this->DB->getRecord($str);
-      $jumlah=$r[1]['jumlah']+$sender->CommandParameter;
+      $jumlah = $r[1]['jumlah']+$sender->CommandParameter;
       $maxSKs = $datakrs['maxSKS'];
       //if ($jumlah > $maxSKS) throw new Exception ("Tidak bisa tambah sks lagi. Karena telah melebihi batas anda ($maxSKS)");
       $idpenyelenggaraan = $this->getDataKeyField($sender, $this->RepeaterPenyelenggaraan);

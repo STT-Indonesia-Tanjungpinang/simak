@@ -151,7 +151,7 @@ class CNilaiFinal extends MainPageON {
         $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
         $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
         $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-        $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
+        $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true);
         
         $_SESSION['semester'] = $datamhs['idsmt'];
         $_SESSION['ta'] = $datamhs['ta'];
@@ -189,7 +189,7 @@ class CNilaiFinal extends MainPageON {
       $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
       $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
       $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-      $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
+      $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true);
       
       $_SESSION['semester'] = $datamhs['idsmt'];
       $_SESSION['ta'] = $datamhs['ta'];

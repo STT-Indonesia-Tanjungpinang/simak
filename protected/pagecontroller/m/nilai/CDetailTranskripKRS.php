@@ -36,7 +36,7 @@ class CDetailTranskripKRS extends MainPageM {
             $datamhs['nkelas'] = $this->DMaster->getNamaKelasByID($datamhs['idkelas']);
             $datamhs['nama_konsentrasi']=($datamhs['idkonsentrasi'] == 0) ? '-' : $datamhs['nama_konsentrasi'];                    
             $datamhs['status'] = $this->DMaster->getNamaStatusMHSByID($datamhs['k_status']);
-            $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
+            $datamhs['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true);
             $_SESSION['currentPageDetailTranskripKRS']['DataMHS'] = $datamhs;
             $this->Nilai->setDataMHS($datamhs);
             $transkrip = $this->Nilai->getTranskripFromKRS();            

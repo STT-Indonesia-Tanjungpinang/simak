@@ -110,7 +110,7 @@ class CTranskripKurikulum extends MainPageDW {
             $dataMHS['nim'] = $nim;
             $dataMHS['tahun_masuk'] = $v['tahun_masuk'];
             $dataMHS['kjur'] = $v['kjur'];
-            $dataMHS['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true); 
+            $dataMHS['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true); 
             $dataMHS['idkonsentrasi'] = $v['idkonsentrasi'];
             $this->Nilai->setDataMHS($dataMHS);
             $v['konsentrasi']=strtoupper($this->DMaster->getNamaKonsentrasiByID($v['idkonsentrasi'], $v['kjur']));
@@ -150,7 +150,7 @@ class CTranskripKurikulum extends MainPageDW {
 
                         $dataReport = $r[1];                    
                         $dataReport['nama_konsentrasi']=($dataReport['idkonsentrasi'] == 0) ? '-' : $dataReport['nama_konsentrasi'];                    
-                        $dataReport['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim,true);
+                        $dataReport['iddata_konversi'] = $this->Nilai->isMhsPindahan($nim, true);
                         $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
                         $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
                         $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');
