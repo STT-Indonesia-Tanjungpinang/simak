@@ -62,7 +62,7 @@ class Logic_KRS extends Logic_Akademik {
               throw new Exception ("Nilai Matakuliah prasyarat ($kmatkul - $nmatkul di semester $semester minimal nilai $minimal_nilai) Sedangkan Nilai Anda '".$r[1]['n_kual']."'<br />Harap di Kontrak kembali matakuliah prasyarat tsb.");
               break;
             }
-          }elseif($this->db->checkRecordIsExist('iddata_konversi', 'v_konversi2', $iddata_konversi," AND kmatkul LIKE '%$kmatkul%'")){
+          }else if($this->db->checkRecordIsExist('iddata_konversi', 'v_konversi2', $iddata_konversi," AND kmatkul LIKE '%$kmatkul%'")){
             $str = "SELECT n_kual FROM v_konversi2 WHERE iddata_konversi='$iddata_konversi' AND kmatkul LIKE '%$kmatkul%'";
             $this->db->setFieldTable(array('n_kual'));
             $re=$this->db->getRecord($str);

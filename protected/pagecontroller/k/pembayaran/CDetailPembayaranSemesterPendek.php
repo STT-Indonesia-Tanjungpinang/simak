@@ -113,9 +113,9 @@ class CDetailPembayaranSemesterPendek Extends MainPageK {
                     $userid = $this->Pengguna->getDataUser('userid');
 
                     $this->DB->query ('BEGIN');
-                    $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                                    
+                    $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',tanggal=NOW(),jumlah_sks = 0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                                    
                     if ($this->DB->insertRecord($str)) {
-                        $str = "INSERT INTO transaksi_detail SET idtransaksi_detail=NULL,no_transaksi = $no_transaksi,idkombi=14,dibayarkan=0,jumlah_sks=0";
+                        $str = "INSERT INTO transaksi_detail SET idtransaksi_detail=NULL,no_transaksi = $no_transaksi,idkombi=14,dibayarkan=0,jumlah_sks = 0";
                         $this->DB->insertRecord($str);
 
                         $this->DB->query('COMMIT');                    

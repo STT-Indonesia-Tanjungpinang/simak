@@ -1828,7 +1828,7 @@ class TCPDF {
 	 * @public
 	 * @see getPageSizeFromFormat(), setPageFormat()
 	 */
-	public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=false) {
+	public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache = false, $pdfa=false) {
 		/* Set internal character encoding to ASCII */
 		if (function_exists('mb_internal_encoding') AND mb_internal_encoding()) {
 			$this->internal_encoding = mb_internal_encoding();
@@ -2813,7 +2813,7 @@ class TCPDF {
 	 * @public
 	 * @since 5.9.121 (2011-09-28)
 	 */
-	public function setSRGBmode($mode=false) {
+	public function setSRGBmode($mode = false) {
 		$this->force_srgb = $mode ? true : false;
 	}
 
@@ -3070,7 +3070,7 @@ class TCPDF {
 	 * @since 1.0
 	 * @see startPage(), endPage(), addTOCPage(), endTOCPage(), getPageSizeFromFormat(), setPageFormat()
 	 */
-	public function AddPage($orientation='', $format='', $keepmargins=false, $tocpage=false) {
+	public function AddPage($orientation='', $format='', $keepmargins=false, $tocpage = false) {
 		if ($this->inxobj) {
 			// we are inside an XObject template
 			return;
@@ -3094,7 +3094,7 @@ class TCPDF {
 	 * @since 4.2.010 (2008-11-14)
 	 * @see AddPage(), startPage(), addTOCPage(), endTOCPage()
 	 */
-	public function endPage($tocpage=false) {
+	public function endPage($tocpage = false) {
 		// check if page is already closed
 		if (($this->page == 0) OR ($this->numpages > $this->page) OR (!$this->pageopen[$this->page])) {
 			return;
@@ -3120,7 +3120,7 @@ class TCPDF {
 	 * @see AddPage(), endPage(), addTOCPage(), endTOCPage(), getPageSizeFromFormat(), setPageFormat()
 	 * @public
 	 */
-	public function startPage($orientation='', $format='', $tocpage=false) {
+	public function startPage($orientation='', $format='', $tocpage = false) {
 		if ($tocpage) {
 			$this->tocpage = true;
 		}
@@ -4872,7 +4872,7 @@ class TCPDF {
 	 * @since 1.0
 	 * @see Cell(), Write(), MultiCell(), WriteHTML(), WriteHTMLCell()
 	 */
-	public function Text($x, $y, $txt, $fstroke=false, $fclip=false, $ffill=true, $border=0, $ln=0, $align='', $fill=false, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M', $rtloff=false) {
+	public function Text($x, $y, $txt, $fstroke = false, $fclip=false, $ffill=true, $border=0, $ln=0, $align='', $fill=false, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M', $rtloff=false) {
 		$textrendermode = $this->textrendermode;
 		$textstrokewidth = $this->textstrokewidth;
 		$this->setTextRenderingMode($fstroke, $ffill, $fclip);
@@ -6227,7 +6227,7 @@ class TCPDF {
 	 * @public
 	 * @since 1.5
 	 */
-	public function Write($h, $txt, $link='', $fill=false, $align='', $ln=false, $stretch=0, $firstline=false, $firstblock=false, $maxh=0, $wadj=0, $margin='') {
+	public function Write($h, $txt, $link='', $fill=false, $align='', $ln=false, $stretch=0, $firstline = false, $firstblock=false, $maxh=0, $wadj=0, $margin='') {
 		// check page for no-write regions and adapt page margins if necessary
 		list($this->x, $this->y) = $this->checkPageRegions($h, $this->x, $this->y);
 		if (strlen($txt) == 0) {
@@ -6669,7 +6669,7 @@ class TCPDF {
 	 * @protected
 	 * @since 5.5.009 (2010-07-05)
 	 */
-	protected function fitBlock($w, $h, $x, $y, $fitonpage=false) {
+	protected function fitBlock($w, $h, $x, $y, $fitonpage = false) {
 		if ($w <= 0) {
 			// set maximum width
 			$w = ($this->w - $this->lMargin - $this->rMargin);
@@ -6764,7 +6764,7 @@ class TCPDF {
 	 * @public
 	 * @since 1.1
 	 */
-	public function Image($file, $x='', $y='', $w=0, $h=0, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false, $alt=false, $altimgs = array()) {
+	public function Image($file, $x='', $y='', $w=0, $h=0, $type='', $link='', $align='', $resize = false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage = false, $alt=false, $altimgs = array()) {
 		if ($this->state != 2) {
 			return;
 		}
@@ -10354,7 +10354,7 @@ class TCPDF {
 	 * @return the number of cells used or the remaining text if $firstline = true;
 	 * @public
 	 */
-	public function addHtmlLink($url, $name, $fill=false, $firstline=false, $color='', $style=-1, $firstblock=false) {
+	public function addHtmlLink($url, $name, $fill=false, $firstline = false, $color='', $style=-1, $firstblock=false) {
 		if (isset($url[1]) AND ($url[0] == '#') AND is_numeric($url[1])) {
 			// convert url to internal link
 			$lnkdata = explode(', ', $url);
@@ -11678,7 +11678,7 @@ class TCPDF {
 	 * @protected
 	 * @since 4.9.019 (2010-04-26)
 	 */
-	protected function _outellipticalarc($xc, $yc, $rx, $ry, $xang=0, $angs=0, $angf=360, $pie=false, $nc=2, $startpoint=true, $ccw=true, $svg=false) {
+	protected function _outellipticalarc($xc, $yc, $rx, $ry, $xang=0, $angs=0, $angf=360, $pie = false, $nc=2, $startpoint=true, $ccw=true, $svg=false) {
 		if (($rx <= 0) OR ($ry < 0)) {
 			return;
 		}
@@ -11947,7 +11947,7 @@ class TCPDF {
 	 * @public
 	 * @since 2.1.000 (2008-01-08)
 	 */
-	public function RegularPolygon($x0, $y0, $r, $ns, $angle=0, $draw_circle=false, $style='', $line_style=array(), $fill_color = array(), $circle_style='', $circle_outLine_style=array(), $circle_fill_color = array()) {
+	public function RegularPolygon($x0, $y0, $r, $ns, $angle=0, $draw_circle = false, $style='', $line_style=array(), $fill_color = array(), $circle_style='', $circle_outLine_style=array(), $circle_fill_color = array()) {
 		if (3 > $ns) {
 			$ns = 3;
 		}
@@ -11995,7 +11995,7 @@ class TCPDF {
 	 * @public
 	 * @since 2.1.000 (2008-01-08)
 	 */
-	public function StarPolygon($x0, $y0, $r, $nv, $ng, $angle=0, $draw_circle=false, $style='', $line_style=array(), $fill_color = array(), $circle_style='', $circle_outLine_style=array(), $circle_fill_color = array()) {
+	public function StarPolygon($x0, $y0, $r, $nv, $ng, $angle=0, $draw_circle = false, $style='', $line_style=array(), $fill_color = array(), $circle_style='', $circle_outLine_style=array(), $circle_fill_color = array()) {
 		if ($nv < 2) {
 			$nv = 2;
 		}
@@ -12264,7 +12264,7 @@ class TCPDF {
 	 * @param $link (mixed) URL, or numerical link ID, or named destination (# character followed by the destination name), or embedded file (* character followed by the file name).
 	 * @public
 	 */
-	public function setBookmark($txt, $level=0, $y=-1, $page='', $style='', $color = array(0,0,0), $x=-1, $link='') {
+	public function setBookmark($txt, $level = 0, $y=-1, $page='', $style='', $color = array(0,0,0), $x=-1, $link='') {
 		$this->Bookmark($txt, $level, $y, $page, $style, $color, $x, $link);
 	}
 
@@ -12281,7 +12281,7 @@ class TCPDF {
 	 * @public
 	 * @since 2.1.002 (2008-02-12)
 	 */
-	public function Bookmark($txt, $level=0, $y=-1, $page='', $style='', $color = array(0,0,0), $x=-1, $link='') {
+	public function Bookmark($txt, $level = 0, $y=-1, $page='', $style='', $color = array(0,0,0), $x=-1, $link='') {
 		if ($level < 0) {
 			$level = 0;
 		}
@@ -14157,7 +14157,7 @@ class TCPDF {
 	 * @since 4.9.000 (2010-03-26)
 	 * @public
 	 */
-	public function registrationMark($x, $y, $r, $double=false, $cola=array(100,100,100,100,'All'), $colb=array(0,0,0,0,'None')) {
+	public function registrationMark($x, $y, $r, $double = false, $cola=array(100,100,100,100,'All'), $colb=array(0,0,0,0,'None')) {
 		$line_style = array('width' => max((0.5 / $this->k),($r / 30)), 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => $cola);
 		$this->SetFillColorArray($cola);
 		$this->PieSector($x, $y, $r, 90, 180, 'F');
@@ -14752,7 +14752,7 @@ class TCPDF {
 	 * @since 3.1.000 (2008-06-09)
 	 * @public
 	 */
-	public function ImageEps($file, $x='', $y='', $w=0, $h=0, $link='', $useBoundingBox=true, $align='', $palign='', $border=0, $fitonpage=false, $fixoutvals=false) {
+	public function ImageEps($file, $x='', $y='', $w=0, $h=0, $link='', $useBoundingBox=true, $align='', $palign='', $border=0, $fitonpage = false, $fixoutvals=false) {
 		if ($this->state != 2) {
 			 return;
 		}
@@ -22183,7 +22183,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	 * @since 5.8.017 (2010-08-24)
 	 * @see startTemplate(), endTemplate()
 	 */
-	public function printTemplate($id, $x='', $y='', $w=0, $h=0, $align='', $palign='', $fitonpage=false) {
+	public function printTemplate($id, $x='', $y='', $w=0, $h=0, $align='', $palign='', $fitonpage = false) {
 		if ($this->state != 2) {
 			 return;
 		}
@@ -22536,7 +22536,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	 * @since 5.0.000 (2010-05-02)
 	 * @public
 	 */
-	public function ImageSVG($file, $x='', $y='', $w=0, $h=0, $link='', $align='', $palign='', $border=0, $fitonpage=false) {
+	public function ImageSVG($file, $x='', $y='', $w=0, $h=0, $link='', $align='', $palign='', $border=0, $fitonpage = false) {
 		if ($this->state != 2) {
 			 return;
 		}

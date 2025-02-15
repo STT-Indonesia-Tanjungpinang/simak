@@ -51,7 +51,7 @@ class CDetailDulangMHSNonAktif Extends MainPageM {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta Semester $semester";        
 	}
     public function saveData($sender, $param) {		
 		if ($this->IsValid) {	

@@ -45,7 +45,7 @@ class CPembayaranPiutangSemesterGenap Extends MainPageK {
         $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranPiutangSemesterGenap']['ta']);        		
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;

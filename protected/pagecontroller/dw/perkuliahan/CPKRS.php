@@ -4,7 +4,7 @@ class CPKRS extends MainPageDW {
   /**
   * state totalSKS
   */
-  public $totalSks=0;	
+  public $totalSks = 0;	
   /**
   * state jumlah Matkul
   */
@@ -48,7 +48,7 @@ class CPKRS extends MainPageDW {
   public function setInfoToolbar() {   
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
     $semester = $this->setup->getSemester($_SESSION['semester']);		
-    $this->lblModulHeader->Text="T.A $ta Semester $semester";        
+    $this->lblModulHeader->Text = "T.A $ta Semester $semester";        
   }
   public function changeTbTA($sender, $param) {				
     $_SESSION['ta'] = $this->tbCmbTA->Text;

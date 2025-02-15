@@ -38,7 +38,7 @@ class CKombiPerTA Extends MainPageK {
     public function setInfoToolbar() {                
         $tahun_masuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		        		        
         $nama_kelas = $this->DMaster->getNamaKelasByID($_SESSION['currentPageKombiPerTA']['kelas']);                    
-		$this->lblModulHeader->Text="Tahun Masuk $tahun_masuk Kelas $nama_kelas";        
+		$this->lblModulHeader->Text = "Tahun Masuk $tahun_masuk Kelas $nama_kelas";        
 	}
     public function changeTbKelas($sender, $param) {				
 		$_SESSION['currentPageKombiPerTA']['kelas'] = $this->tbCmbKelas->Text;		        

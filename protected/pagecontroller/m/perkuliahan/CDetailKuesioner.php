@@ -48,7 +48,7 @@ class CDetailKuesioner extends MainPageM {
         $ta = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['tahun'];		
         $semester = $this->setup->getSemester($_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idsmt']);
 		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
-		$this->lblModulHeader->Text="Program Studi $ps $ta Semester $semester";        
+		$this->lblModulHeader->Text = "Program Studi $ps $ta Semester $semester";        
 	}	
     public function hitungKuesioner($sender, $param) {
         $idpengampu_penyelenggaraan = $_SESSION['currentPageDetailKuesioner']['DataKuesioner']['idpengampu_penyelenggaraan']; 
@@ -170,14 +170,14 @@ class CDetailKuesioner extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
                 $messageprintout='';
-                $dataReport=$_SESSION['currentPageDetailKuesioner']['DataKuesioner'];                
+                $dataReport = $_SESSION['currentPageDetailKuesioner']['DataKuesioner'];                
                 
                 $nama_tahun = $this->DMaster->getNamaTA($dataReport['tahun']);
                 $nama_semester = $this->setup->getSemester($dataReport['idsmt']);
@@ -196,7 +196,7 @@ class CDetailKuesioner extends MainPageM {
                 $objKuesioner->printKuesionerDosen($this->Kuesioner);
             break;
             case 'pdf':                
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;

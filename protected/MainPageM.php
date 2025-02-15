@@ -95,7 +95,7 @@ class MainPageM extends MainPage {
     /**
      * show page Pendaftaran Online [spmb]
      */
-    public $showPendaftaranOnline=false;
+    public $showPendaftaranOnline = false;
     /**
      * show page formulir pendaftaran [spmb pendaftaran]
      */

@@ -52,7 +52,7 @@ class CDulangMHSNonAktifMassal Extends MainPageM {
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk = $_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSNonAktifMassal']['tahun_masuk']);		        
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
     public function Page_Changed($sender, $param) {
 		$_SESSION['currentPageDulangMHSNonAktifMassal']['page_num'] = $param->NewPageIndex;

@@ -35,7 +35,7 @@ class CPendaftaranOnline extends MainPageK {
 	public function getInfoToolbar() {                
         $nama_kelas = $this->DMaster->getNamaKelasByID($_SESSION['currentPagePendaftaranOnline']['kelas']);
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
-		$text="Kelas $nama_kelas Tahun Masuk $tahunmasuk";
+		$text = "Kelas $nama_kelas Tahun Masuk $tahunmasuk";
 		return $text;
 	}
 	public function changeTbTahunMasuk($sender, $param) {					
@@ -82,7 +82,7 @@ class CPendaftaranOnline extends MainPageK {
         }else{            
             if ($_SESSION['currentPagePendaftaranOnline']['display_record']=='terdaftar'){
                 $str_display='AND no_formulir > 0';
-            }elseif ($_SESSION['currentPagePendaftaranOnline']['display_record']=='belum_terdaftar'){
+            }else if ($_SESSION['currentPagePendaftaranOnline']['display_record']=='belum_terdaftar'){
                 $str_display='AND no_formulir=0';
             }
             $str = "SELECT no_pendaftaran,no_formulir,nama_mhs,telp_hp,email,kjur1,kjur2,idkelas,waktu_mendaftar,file_bukti_bayar FROM formulir_pendaftaran_temp WHERE ta = $tahun_masuk $str_display";
@@ -111,13 +111,13 @@ class CPendaftaranOnline extends MainPageK {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="";
+                $messageprintout = "";
                 $dataReport['tahun_masuk'] = $_SESSION['tahun_masuk'];
                 $dataReport['pilihan'] = $_SESSION['currentPagePendaftaranOnline']['display_record'];
                 $dataReport['linkoutput'] = $this->linkOutput;
@@ -126,7 +126,7 @@ class CPendaftaranOnline extends MainPageK {
                 $this->report->printPIN(); 
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;

@@ -78,7 +78,7 @@ class CChangePenyelenggaraan extends MainPageM
     $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
-    $text="Program Studi $ps TA $ta Semester $semester";
+    $text = "Program Studi $ps TA $ta Semester $semester";
     return $text;
   }
   public function filterRecord($sender, $param) {
@@ -126,7 +126,7 @@ class CChangePenyelenggaraan extends MainPageM
       $this->redirect('perkuliahan.ChangePenyelenggaraan', true);   
     } catch (Exception $ex) {            
       $this->DB->query('ROLLBACK');
-      $this->lblContentMessageError->Text="Matakuliah $nmatkul dengan kode $old_kmatkul belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah";
+      $this->lblContentMessageError->Text = "Matakuliah $nmatkul dengan kode $old_kmatkul belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah";
       $this->modalMessageError->show(); 
     }
   }

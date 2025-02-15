@@ -417,7 +417,7 @@ class CExportData extends MainPageSA {
 //     }
 
 
-//     function Export_Database($host, $user, $pass, $name,  $tables=false, $backup_name=false )     {
+//     function Export_Database($host, $user, $pass, $name,  $tables=false, $backup_name = false )     {
 //         $mysqli = new mysqli($host, $user, $pass, $name); 
 //         $mysqli->select_db($name); 
 //         $mysqli->query("SET NAMES 'utf8'");

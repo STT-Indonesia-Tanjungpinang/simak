@@ -238,15 +238,15 @@ class CDosen extends MainPageM {
 		$iddosen = $this->getDataKeyField($sender, $this->RepeaterS);  		
         if ($this->DB->checkRecordIsExist('iddosen', 'pengampu_penyelenggaraan', $iddosen)) {
             $this->lblHeaderMessageError->Text = 'Menghapus Dosen';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena sedang digunakan di pengampu penyelenggaraan.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena sedang digunakan di pengampu penyelenggaraan.";
             $this->modalMessageError->Show();
-        }elseif ($this->DB->checkRecordIsExist('iddosen', 'dosen_wali', $iddosen)) {
+        }else if ($this->DB->checkRecordIsExist('iddosen', 'dosen_wali', $iddosen)) {
             $this->lblHeaderMessageError->Text = 'Menghapus Dosen';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena telah menjadi Dosen Wali.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena telah menjadi Dosen Wali.";
             $this->modalMessageError->Show();
-        }elseif ($this->DB->checkRecordIsExist('iddosen', 'kjur', $iddosen)) {
+        }else if ($this->DB->checkRecordIsExist('iddosen', 'kjur', $iddosen)) {
             $this->lblHeaderMessageError->Text = 'Menghapus Matakuliah';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena sedang menjadi Ketua Jurusan.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus dosen dengan ID ($iddosen) karena sedang menjadi Ketua Jurusan.";
             $this->modalMessageError->Show();
         }else{
             $str = "SELECT username,status FROM dosen WHERE iddosen='$iddosen'";

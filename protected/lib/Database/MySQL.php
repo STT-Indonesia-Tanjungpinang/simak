@@ -120,7 +120,7 @@ class MySQL extends DBGlobal implements DBInterface {
 	* @param idrecord nilai id record
 	* @param $opt diperlakukan seperti apa
 	*/
-	public function checkRecordIsExist ($field, $table, $idrecord, $opt=null, $returnvalue=false) {
+	public function checkRecordIsExist ($field, $table, $idrecord, $opt=null, $returnvalue = false) {
 		$bool = false;			
 		$this->setFieldTable(array($field));			
 		$str = "SELECT $field FROM $table WHERE $field='$idrecord' $opt";					

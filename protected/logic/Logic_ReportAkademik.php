@@ -175,8 +175,8 @@ class Logic_ReportAkademik extends Logic_Report {
         $row_ganjil=11;
         $row_genap=11;															
                         
-        $tambah_ganjil_row=false;		
-        $tambah_genap_row=false;		
+        $tambah_ganjil_row = false;		
+        $tambah_genap_row = false;		
         $str = "SELECT m.kmatkul,m.nmatkul,m.sks,m.semester,m.idkonsentrasi,k.nama_konsentrasi,m.ispilihan,m.islintas_prodi FROM matakuliah m LEFT JOIN konsentrasi k ON (k.idkonsentrasi=m.idkonsentrasi) WHERE idkur = $idkur ORDER BY semester,kmatkul ASC";			                
         $this->db->setFieldTable(array('kmatkul', 'nmatkul', 'sks', 'semester', 'idkonsentrasi', 'nama_konsentrasi', 'ispilihan', 'islintas_prodi', 'aktif'));
         $data = $this->db->getRecord($str);
@@ -185,10 +185,10 @@ class Logic_ReportAkademik extends Logic_Report {
         for ($i=1; $i <= 8; $i+=1) {					
           if ($i%2==0) {//genap
             $tambah_genap_row=true;
-            $no_semester=1;
+            $no_semester = 1;
             $row_smt_awal=$row_genap;												
             $ada_matkul=true;						
-            $genap_total_sks=0;								
+            $genap_total_sks = 0;								
             foreach ($data as $k => $v) {														
               if ($v['semester'] == $i) {								
                 if ($v['kmatkul'] == '') {
@@ -204,7 +204,7 @@ class Logic_ReportAkademik extends Logic_Report {
                   if ($v['idkonsentrasi'] == 0) {
                     if($v['islintas_prodi'] == 1){
                       $keterangan='Matkul Lintas Prodi';                                            
-                    }elseif($v['ispilihan'] == 1) {
+                    }else if($v['ispilihan'] == 1) {
                       $keterangan='Matkul Pilihan';                                            
                     }
                   }else{
@@ -233,10 +233,10 @@ class Logic_ReportAkademik extends Logic_Report {
             }						
           }else {//ganjil				
             $tambah_ganjil_row=true;						
-            $no_semester=1;
+            $no_semester = 1;
             $row_smt_awal=$row_ganjil;
             $ada_matkul=true;										
-            $ganjil_total_sks=0;								
+            $ganjil_total_sks = 0;								
             foreach ($data as $r =>$s) {												
               if ($s['semester'] == $i) {	
                 if ($s['kmatkul'] == '') {
@@ -252,7 +252,7 @@ class Logic_ReportAkademik extends Logic_Report {
                   if ($s['idkonsentrasi'] == 0) {
                     if($s['islintas_prodi'] == 1){
                       $keterangan='Matkul Lintas Prodi';                                            
-                    }elseif($s['ispilihan'] == 1) {
+                    }else if($s['ispilihan'] == 1) {
                       $keterangan='Matkul Pilihan';                                            
                     }
                   }else{
@@ -283,8 +283,8 @@ class Logic_ReportAkademik extends Logic_Report {
             $sheet->mergeCells("A$row_ganjil:Q$row_ganjil");						
             $row_ganjil+=1;
             $row_genap+=1;
-            $tambah_ganjil_row=false;
-            $tambah_genap_row=false;
+            $tambah_ganjil_row = false;
+            $tambah_genap_row = false;
           }
         }	
         $row_akhir = (($row_ganjil <= $row_genap)?$row_genap:$row_ganjil)-1;
@@ -919,7 +919,7 @@ class Logic_ReportAkademik extends Logic_Report {
           $status='belum disahkan';
           if ($v['sah'] == 1 && $v['batal'] == 0) {
             $status='sah';
-          }elseif($v['sah'] == 1 && $v['batal'] == 1){
+          }else if($v['sah'] == 1 && $v['batal'] == 1){
             $status='batal';
           }
           $sheet->setCellValue("G$row", $status);
@@ -1129,7 +1129,7 @@ class Logic_ReportAkademik extends Logic_Report {
         $row_awal=12;
         $row=12;
         while (list($k, $v) = each($r)) {
-          $kmatkul=$v['kmatkul'];
+          $kmatkul = $v['kmatkul'];
           $v['kode_matkul'] = $objDemik->getKMatkul($kmatkul); 
           $sheet->getRowDimension($row)->setRowHeight(17);
           $sheet->setCellValue("A$row", $v['no']);

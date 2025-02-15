@@ -96,12 +96,12 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
             $this->Finance->setDataMHS($datamhs);
             if ($this->Finance->getTotalBiayaMhsPeriodePembayaran()<=0) {
                 $nama_semester = $this->setup->getSemester($idsmt);
-                $this->lblContentMessageError->Text="Tidak bisa menambah Transaksi baru karena komponen biaya di Tahun Masuk $ta semester $nama_semester belum disetting.";
+                $this->lblContentMessageError->Text = "Tidak bisa menambah Transaksi baru karena komponen biaya di Tahun Masuk $ta semester $nama_semester belum disetting.";
                 $this->modalMessageError->show();
-            }elseif ($this->Finance->getLunasPembayaran($ta, $idsmt)) {
+            }else if ($this->Finance->getLunasPembayaran($ta, $idsmt)) {
                 $this->lblContentMessageError->Text = 'Tidak bisa menambah Transaksi baru karena sudah lunas.';
                 $this->modalMessageError->show();
-            }elseif ($this->DB->checkRecordIsExist('no_formulir', 'transaksi', $no_formulir," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
+            }else if ($this->DB->checkRecordIsExist('no_formulir', 'transaksi', $no_formulir," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
                 $this->lblContentMessageError->Text = 'Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
                 $this->modalMessageError->show();
             }else{
@@ -112,7 +112,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                 $userid = $this->Pengguna->getDataUser('userid');
 
                 $this->DB->query ('BEGIN');
-                $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim = 0,tanggal=NOW(),jumlah_sks=0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                
+                $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim = 0,tanggal=NOW(),jumlah_sks = 0,disc=0,userid='$userid',date_added=NOW(),date_modified=NOW()";                
                 if ($this->DB->insertRecord($str)) {
                     $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE no_formulir = $no_formulir AND tahun = $ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
                     $this->DB->setFieldTable(array('idkombi', 'sudah_dibayar'));
@@ -131,7 +131,7 @@ class CDetailPembayaranMahasiswaBaru Extends MainPageK {
                         $idkombi = $v['idkombi'];
                         $sudah_dibayar=isset($sudah_dibayarkan[$idkombi])?$sudah_dibayarkan[$idkombi]:0;
                         $sisa_bayar = $biaya-$sudah_dibayar;
-                        $str = "INSERT INTO transaksi_detail SET idtransaksi_detail=NULL,no_transaksi = $no_transaksi,idkombi = $idkombi,dibayarkan = $sisa_bayar,jumlah_sks=0";
+                        $str = "INSERT INTO transaksi_detail SET idtransaksi_detail=NULL,no_transaksi = $no_transaksi,idkombi = $idkombi,dibayarkan = $sisa_bayar,jumlah_sks = 0";
                         $this->DB->insertRecord($str);
                     }
                     

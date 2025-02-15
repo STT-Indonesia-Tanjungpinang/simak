@@ -36,7 +36,7 @@ class CPembayaranMahasiswaBaru Extends MainPageK {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
         $semester = $this->setup->getSemester($_SESSION['currentPagePembayaranMahasiswaBaru']['semester_masuk']);		
-		$this->lblModulHeader->Text="Program Studi $ps T.A $tahunmasuk Semester $semester ";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $tahunmasuk Semester $semester ";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;

@@ -174,13 +174,13 @@ class CPesertaKelas extends MainPageM {
     $this->createObj('reportakademik');
     $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';        
-    $dataReport=$_SESSION['currentPagePesertaKelas']['InfoKelas'];
+    $dataReport = $_SESSION['currentPagePesertaKelas']['InfoKelas'];
     switch($_SESSION['outputreport']) {
       case 'summarypdf':
-        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
       case 'summaryexcel':
-        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
       case 'excel2007':               
         // $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas'] + 64);
@@ -194,11 +194,11 @@ class CPesertaKelas extends MainPageM {
         // $this->report->setDataReport($dataReport); 
         // $this->report->setMode($_SESSION['outputreport']);  
         
-        // $messageprintout="Daftar Hadir Mahasiswa : <br/>";
+        // $messageprintout = "Daftar Hadir Mahasiswa : <br/>";
         // $this->report->printDaftarHadirMahasiswa();
       break;
       case 'pdf':
-        $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
+        $messageprintout = "Mohon maaf Print out pada mode excel pdf belum kami support.";
       break;
     }                
     $this->lblMessagePrintout->Text = $messageprintout;

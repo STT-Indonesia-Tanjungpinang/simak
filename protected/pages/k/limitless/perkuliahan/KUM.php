@@ -26,7 +26,7 @@ class KUM extends CKUM {
                 $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                 $this->DB->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
                 $r = $this->DB->getRecord($str);	           
-                $dataReport=$r[1];
+                $dataReport = $r[1];
                 
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];                
                 $nama_tahun = $this->DMaster->getNamaTA($dataReport['tahun']);   
@@ -88,7 +88,7 @@ class KUM extends CKUM {
                     $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                     $this->db->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
                     $r = $this->db->getRecord($str);	           
-                    $dataReport=$r[1];
+                    $dataReport = $r[1];
 
                     $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];                
                     $nama_tahun = $objDMaster->getNamaTA($dataReport['tahun']);   
@@ -156,7 +156,7 @@ class KUM extends CKUM {
                     $rpt->Cell(15, 5, 'TTD', 1, 0, 'C');
 
                     $daftar_matkul=$objKRS->getDetailKRS($idkrs);
-                    $totalSks=0;
+                    $totalSks = 0;
                     $row+=5;				
                     $rpt->SetFont ('helvetica', '',8);
                     while (list($k, $v) = each($daftar_matkul)) {
@@ -292,7 +292,7 @@ class KUM extends CKUM {
                 $rpt->Cell(30, 5, 'UAS', 1, 0, 'C');
 				
                 $daftar_matkul=$objKRS->getDetailKRS($this->report->dataReport['idkrs']);
-				$totalSks=0;
+				$totalSks = 0;
 				$row+=5;				
 				$rpt->SetFont ('helvetica', '',8);
                 while (list($k, $v) = each($daftar_matkul)) {

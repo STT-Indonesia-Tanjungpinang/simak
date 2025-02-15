@@ -30,7 +30,7 @@ class CFormulirPendaftaran extends MainPageMB
         {
           throw new Exception ("Anda sudah ter-register sebagai mahasiswa,maka dari itu tidak bisa mengisi atau mengubah formulir lagi");
         }
-        elseif ($this->Finance->isNoFormulirExist())
+        else if ($this->Finance->isNoFormulirExist())
         {	
           $this->editProcess();                
         }
@@ -326,7 +326,7 @@ class CFormulirPendaftaran extends MainPageMB
         $userpassword=md5($_SESSION['userpassword_mb']);
         $str = "INSERT INTO profiles_mahasiswa (idprofile,no_formulir,nim,email,userpassword,theme,photo_profile) VALUES (NULL, $no_formulir,0,'$email', '$userpassword', 'cube', '$photo_profile')";
         $this->DB->insertRecord($str);
-        $ket="Input Via WEB";
+        $ket = "Input Via WEB";
         $userid=1;
         $str = 'INSERT INTO bipend (idbipend,tahun,no_faktur,tgl_bayar,no_formulir,gelombang,dibayarkan,ket,userid) VALUES ';
         $str .= "(NULL,".$_SESSION['tahun_masuk'].",'$no_formulir', '$waktu_mendaftar', '$no_formulir', '1', '$dibayarkan', '$ket', '$userid')";				

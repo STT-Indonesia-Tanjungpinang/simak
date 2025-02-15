@@ -26,7 +26,7 @@ class Logic_Mahasiswa extends Logic_Global {
     {
       return $this->DataMHS;
     }
-    elseif(isset($this->DataMHS[$idx]))
+    else if(isset($this->DataMHS[$idx]))
     {
       return $this->DataMHS[$idx];
     }
@@ -87,7 +87,7 @@ class Logic_Mahasiswa extends Logic_Global {
     $str = "SELECT iddata_konversi FROM data_konversi WHERE nim='$nim'";
     $this->db->setFieldTable(array('iddata_konversi'));
     $result = $this->db->getRecord($str);                
-    $value=false;
+    $value = false;
     if ($getid) {
       if (isset($result[1])) {
         $value=$result[1]['iddata_konversi'];

@@ -685,7 +685,7 @@ class Logic_ReportSPMB extends Logic_Report {
                 $str_display='';
                 if ($pilihan=='terdaftar'){
                     $str_display='AND fp.no_formulir IS NOT NULL';
-                }elseif ($pilihan=='belum_terdaftar'){
+                }else if ($pilihan=='belum_terdaftar'){
                     $str_display='AND fp.no_formulir IS NULL';
                 }
                 $str = "SELECT pin.no_pin,pin.no_formulir,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE pin.tahun_masuk = $tahun_masuk $str_display";

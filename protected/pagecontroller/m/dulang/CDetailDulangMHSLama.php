@@ -19,7 +19,7 @@ class CDetailDulangMHSLama Extends MainPageM {
                     $ta = $this->DMaster->getNamaTA($datamhs['ta']);		
                     $semester = $this->setup->getSemester($datamhs['idsmt']);
                     
-                    $this->lblModulHeader->Text="T.A $ta Semester $semester";
+                    $this->lblModulHeader->Text = "T.A $ta Semester $semester";
                 }else{
                     throw new Exception("Data Mahasiswa belum ada di session.");
                 }

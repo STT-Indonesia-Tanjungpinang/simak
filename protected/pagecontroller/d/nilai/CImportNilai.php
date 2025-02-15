@@ -261,7 +261,7 @@ class CImportNilai extends MainPageD {
     $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
     
-    $dataReport=$_SESSION['currentPageImportNilai']['DataNilai'];
+    $dataReport = $_SESSION['currentPageImportNilai']['DataNilai'];
     $this->lblMessagePrintout->Text = 'Kelas ' . $dataReport['namakelas'];
     $dataReport['linkoutput'] = $this->linkOutput; 
     $this->report->setDataReport($dataReport); 

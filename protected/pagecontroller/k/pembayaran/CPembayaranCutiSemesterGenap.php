@@ -29,7 +29,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageK {
         $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);        		
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta";        
 	}
 	public function changeTbTA($sender, $param) {				
         $ta = $this->tbCmbTA->Text;

@@ -47,7 +47,7 @@ class CRekapitulasiDPA extends MainPageM {
 		$tahunmasuk = $tahun_masuk=='none'?'':' Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageRekapitulasiDPA']['tahun_masuk']);		
 		$idkelas = $_SESSION['currentPageRekapitulasiDPA']['kelas'];
 		$kelas = $idkelas=='none'?'':' Kelas '.$this->DMaster->getNamaKelasByID($_SESSION['currentPageRekapitulasiDPA']['kelas']);		
-        $text="$ps $tahunmasuk $kelas";
+        $text = "$ps $tahunmasuk $kelas";
 		return $text;
 	}
     public function changeTbPs($sender, $param) {		

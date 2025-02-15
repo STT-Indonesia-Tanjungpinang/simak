@@ -98,7 +98,7 @@ class CKHS extends MainPageMHS {
     $nama_tahun = $this->DMaster->getNamaTA($tahun);
     $nama_semester = $this->setup->getSemester($semester);
     
-    $dataReport=$this->Pengguna->getDataUser();
+    $dataReport = $this->Pengguna->getDataUser();
     $dataReport['ta'] = $tahun;
     $dataReport['semester'] = $semester;
     $dataReport['nama_tahun'] = $nama_tahun;
@@ -108,7 +108,7 @@ class CKHS extends MainPageMHS {
     $this->report->setMode($_SESSION['outputreport']);
     $this->report->printKHS($this->Nilai, true);				
     
-    $this->lblPrintout->Text="Kartu Hasil Studi T.A $nama_tahun Semester $nama_semester";
+    $this->lblPrintout->Text = "Kartu Hasil Studi T.A $nama_tahun Semester $nama_semester";
     $this->modalPrintOut->show();
   }
 }

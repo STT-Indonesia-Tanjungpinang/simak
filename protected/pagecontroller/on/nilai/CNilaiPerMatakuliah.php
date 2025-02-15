@@ -26,7 +26,7 @@ class CNilaiPerMatakuliah extends MainPageON {
         $ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($infomatkul['tahun']);
         $semester = $this->setup->getSemester($infomatkul['idsmt']);
-        $text="Program Studi $ps TA $ta Semester $semester";
+        $text = "Program Studi $ps TA $ta Semester $semester";
         
         $this->lblModulHeader->Text = $text;
         $_SESSION['currentPageNilaiPerMatakuliah']['InfoMatkul'] = $infomatkul; 
@@ -68,7 +68,7 @@ class CNilaiPerMatakuliah extends MainPageON {
     $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
-    $text="Program Studi $ps TA $ta Semester $semester";
+    $text = "Program Studi $ps TA $ta Semester $semester";
     return $text;
   }
   public function changeTbTA($sender, $param)
@@ -265,7 +265,7 @@ class CNilaiPerMatakuliah extends MainPageON {
               $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'input', $n_kual, $nilai_sebelumnya, $extra);
             }
           }
-          elseif($n_kual!='none'&&$n_kual!=$nilai_sebelumnya)
+          else if($n_kual!='none'&&$n_kual!=$nilai_sebelumnya)
           {//update										
             $str = "UPDATE nilai_matakuliah SET n_kuan='$n_kuan',n_kual='$n_kual',userid_modif='$userid',tanggal_modif=NOW(),ket='dari $nilai_sebelumnya menjadi $n_kual' WHERE idkrsmatkul='$idkrsmatkul'";				
             $this->DB->updateRecord($str);
@@ -273,7 +273,7 @@ class CNilaiPerMatakuliah extends MainPageON {
             $extra = "idkrsmatkul=$idkrsmatkul";
             $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'update', $n_kual, $nilai_sebelumnya, $extra);
           }
-          elseif($nilai_sebelumnya != ''&&$n_kual=='none')
+          else if($nilai_sebelumnya != ''&&$n_kual =='none')
           {//delete
             $str = "nilai_matakuliah WHERE idkrsmatkul='$idkrsmatkul'";	
             $this->DB->deleteRecord($str);
@@ -295,7 +295,7 @@ class CNilaiPerMatakuliah extends MainPageON {
       if($id == 'btnPrintOutR') {
         
         $idpenyelenggaraan = $sender->CommandParameter;
-        $this->txtKriteria->Text="$idpenyelenggaraan";
+        $this->txtKriteria->Text = "$idpenyelenggaraan";
       }*/  
     }
   }

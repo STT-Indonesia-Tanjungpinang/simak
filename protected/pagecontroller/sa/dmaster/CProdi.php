@@ -132,11 +132,11 @@ class CProdi extends MainPageSA {
         $kjur = $this->getDataKeyField($sender, $this->RepeaterS);          
         if ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran_temp', $kjur," OR kjur2=$kjur")) {
             $this->lblHeaderMessageError->Text = 'Menghapus Program Studi';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus program studi dengan ID ($kjur) karena sedang digunakan di formulir pendaftaran.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus program studi dengan ID ($kjur) karena sedang digunakan di formulir pendaftaran.";
             $this->modalMessageError->Show();
-        }elseif ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran', $kjur," OR kjur2=$kjur")) {
+        }else if ($this->DB->checkRecordIsExist('kjur1', 'formulir_pendaftaran', $kjur," OR kjur2=$kjur")) {
             $this->lblHeaderMessageError->Text = 'Menghapus Program Studi';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus program studi dengan ID ($kjur) karena sedang digunakan di formulir pendaftaran.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus program studi dengan ID ($kjur) karena sedang digunakan di formulir pendaftaran.";
             $this->modalMessageError->Show();
         }else{
             if ($this->Application->Cache) {                        

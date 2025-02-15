@@ -116,7 +116,7 @@ class DetailKRSEkstension extends MainPageDW {
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);
 
-                $dataReport=$_SESSION['currentPageKRSEkstension']['DataMHS'];
+                $dataReport = $_SESSION['currentPageKRSEkstension']['DataMHS'];
                 $dataReport['krs'] = $_SESSION['currentPageKRSEkstension']['DataKRS']['krs'];        
                 $dataReport['matakuliah'] = $_SESSION['currentPageKRSEkstension']['DataKRS']['matakuliah'];        
                 $dataReport['nama_tahun'] = $nama_tahun;

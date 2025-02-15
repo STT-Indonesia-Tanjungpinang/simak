@@ -49,7 +49,7 @@ class CTranskripKRS extends MainPageM {
         $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['currentPageTranskripKRS']['tahun_masuk']);		
-		$text="Program Studi $ps Tahun Masuk $tahunmasuk";
+		$text = "Program Studi $ps Tahun Masuk $tahunmasuk";
 		return $text;
 	}
     public function renderCallback($sender, $param) {
@@ -133,13 +133,13 @@ class CTranskripKRS extends MainPageM {
 				$nim = $this->getDataKeyField($sender, $this->RepeaterS);				
                 switch($_SESSION['outputreport']) {
                     case 'summarypdf':
-                        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
                     case 'summaryexcel':
-                        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
                     case 'excel2007':
-                        $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
                     case 'pdf':
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk FROM v_datamhs vdm LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE nim='$nim'";
@@ -158,7 +158,7 @@ class CTranskripKRS extends MainPageM {
                         $this->report->setDataReport($dataReport); 
                         $this->report->setMode($_SESSION['outputreport']);
 
-                        $messageprintout="Transkrip KRS $nim : <br/>";
+                        $messageprintout = "Transkrip KRS $nim : <br/>";
                         $this->report->printTranskripKRS($this->Nilai,true);				
                     break;
                 }
@@ -166,16 +166,16 @@ class CTranskripKRS extends MainPageM {
             case 'btnPrintTranskripKRSAll':                 
                 switch($_SESSION['outputreport']) {
                     case 'summarypdf':
-                        $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;
                     case 'summaryexcel':
-                        $messageprintout="Mohon maaf Print out pada mode summary excel belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary excel belum kami support.";                
                     break;
                     case 'excel2007':
-                        $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
                     break;
                     case 'pdf':
-                        $messageprintout="Mohon maaf Print out pada mode pdf tidak kami support.";                                            
+                        $messageprintout = "Mohon maaf Print out pada mode pdf tidak kami support.";                                            
                     break;
                 }
             break;

@@ -171,7 +171,7 @@
                                             <i class="icon-calculator3"></i> Mahasiswa Baru
                                         </a>
                                     </li> 
-                                    <li<%=$this->Page->showPembayaranSemesterGanjil==true?' class="active"':''%>>
+                                    <li<%=$this->Page->showPembayaranSemesterGanjil ==true?' class="active"':''%>>
                                         <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGanjil', true)%>">
                                             <i class="icon-calculator3"></i> Semester Ganjil
                                         </a>
@@ -191,7 +191,7 @@
                             <div class="col-md-3">
                                 <span class="menu-heading underlined">CUTI</span>
                                 <ul class="menu-list">
-                                    <li<%=$this->Page->showPembayaranCutiSemesterGanjil==true?' class="active"':''%>>
+                                    <li<%=$this->Page->showPembayaranCutiSemesterGanjil ==true?' class="active"':''%>>
                                         <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranCutiSemesterGanjil', true)%>">
                                             <i class="icon-calculator3"></i> Cuti Semester Ganjil
                                         </a>
@@ -206,7 +206,7 @@
                             <div class="col-md-3">
                                 <span class="menu-heading underlined">PIUTANG</span>
                                 <ul class="menu-list">
-                                    <li<%=$this->Page->showPembayaranPiutangSemesterGanjil==true?' class="active"':''%>>
+                                    <li<%=$this->Page->showPembayaranPiutangSemesterGanjil ==true?' class="active"':''%>>
                                         <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranPiutangSemesterGanjil', true)%>">
                                             <i class="icon-calculator3"></i> Piutang Semester Ganjil
                                         </a>
@@ -228,7 +228,7 @@
                 </a>
                 <ul class="dropdown-menu width-250">
                     <li class="dropdown-header">REKAPITULASI</li>
-                    <li<%=$this->Page->showReportRekapPembayaranGanjil==true?' class="active"':''%>>
+                    <li<%=$this->Page->showReportRekapPembayaranGanjil ==true?' class="active"':''%>>
                         <a href="<%=$this->Page->constructUrl('report.RekapPembayaranSemesterGanjil', true)%>">
                             <i class="icon-file-text"></i> Rekap. Pembayaran Ganjil
                         </a>
@@ -276,7 +276,7 @@
                             <i class="icon-blog"></i> Nilai Per Matakuliah
                         </a>
                     </li>
-                    <li<%=$this->Page->showNilaiFinal==true?' class="active"':''%>>
+                    <li<%=$this->Page->showNilaiFinal ==true?' class="active"':''%>>
                         <a href="<%=$this->Page->constructUrl('nilai.NilaiFinal', true)%>">
                             <i class="icon-blog"></i> Nilai Final
                         </a>

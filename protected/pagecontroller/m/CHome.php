@@ -61,8 +61,8 @@ class CHome extends MainPageM {
       $data2=$data2."[gd($ta,12,31), $jumlah],";      
       $totaldulang+=$jumlah;
     }
-    $this->datamendaftar1->Text="var data1 = [$data1];";
-    $this->datamendaftar2->Text="var data2 = [$data2];";
+    $this->datamendaftar1->Text = "var data1 = [$data1];";
+    $this->datamendaftar2->Text = "var data2 = [$data2];";
     
     $this->literalTotalPendaftaran->Text = $totalpendaftaran;
     $this->literalTotalDulang->Text = $totaldulang;

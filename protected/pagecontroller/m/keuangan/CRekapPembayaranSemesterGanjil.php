@@ -51,7 +51,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']); 
         $tahun_masuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Tahun Masuk $tahun_masuk ";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta Tahun Masuk $tahun_masuk ";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;
@@ -236,13 +236,13 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="";
+                $messageprintout = "";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
                 $tahun = $_SESSION['ta'];                
@@ -264,7 +264,7 @@ class CRekapPembayaranSemesterGanjil Extends MainPageM {
                 $this->report->printRekapPembayaranSemester($this->Finance, $this->DMaster); 
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;

@@ -161,7 +161,7 @@ class Logic_Finance extends Logic_Mahasiswa {
         if ($this->isMhsBaru($tahun_sekarang, $semester_sekarang)) {            
             $total_biaya=$this->getTotalBiayaMhsPeriodePembayaran();
             $total_bayar_mhs = $this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);				
-        }elseif($semester_sekarang==3){
+        }else if($semester_sekarang==3){
             $nim = $this->DataMHS['nim'];	            
             $kjur = $this->DataMHS['kjur']; 
             $total_bayar_mhs = $this->getTotalBayarMhs ($tahun_sekarang, $semester_sekarang);

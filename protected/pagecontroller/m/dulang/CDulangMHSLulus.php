@@ -51,7 +51,7 @@ class CDulangMHSLulus Extends MainPageM {
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
     $semester = $this->setup->getSemester($_SESSION['semester']);
     $tahunmasuk = $_SESSION['currentPageDulangMHSLulus']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageDulangMHSLulus']['tahun_masuk']);		        
-    $this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
+    $this->lblModulHeader->Text = "Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
   }
   public function Page_Changed($sender, $param) {
     $_SESSION['currentPageDulangMHSLulus']['page_num'] = $param->NewPageIndex;
@@ -233,13 +233,13 @@ class CDulangMHSLulus Extends MainPageM {
     
     switch($_SESSION['outputreport']) {
       case 'summarypdf':
-        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
       case 'summaryexcel':
-        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
       case 'excel2007':
-        $messageprintout="Daftar Mahasiswa Daftar Ulang Status NON-AKTIF: <br/>";
+        $messageprintout = "Daftar Mahasiswa Daftar Ulang Status NON-AKTIF: <br/>";
         $dataReport['ta'] = $_SESSION['ta'];
         $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['ta']);
         $dataReport['idsmt'] = $_SESSION['semester'];
@@ -253,7 +253,7 @@ class CDulangMHSLulus Extends MainPageM {
         $this->report->printDulangLULUS($this->DMaster);
       break;
       case 'pdf':
-        $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
       break;
     } 
     $this->lblMessagePrintout->Text = $messageprintout;

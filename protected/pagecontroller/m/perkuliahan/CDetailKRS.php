@@ -184,7 +184,7 @@ class CDetailKRS extends MainPageM
       // else
       // {
       //   $this->modalMessageError->show();
-      //   $this->lblContentMessageError->Text="Tidak bisa bergabung dengan kelas ini, karena kalau ditambah dengan Anda akan melampau kapasitas kelas ($kapasitas). Silahkan Refresh Web Browser Anda.";					
+      //   $this->lblContentMessageError->Text = "Tidak bisa bergabung dengan kelas ini, karena kalau ditambah dengan Anda akan melampau kapasitas kelas ($kapasitas). Silahkan Refresh Web Browser Anda.";					
       // }
     }
   }
@@ -256,13 +256,13 @@ class CDetailKRS extends MainPageM
     $this->linkOutput->NavigateUrl='#';
     switch($_SESSION['outputreport']) {
       case 'summarypdf':
-        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
       case 'summaryexcel':
-        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
       case 'excel2007':
-        $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
       break;
       case 'pdf':                
         $messageprintout='';                
@@ -271,7 +271,7 @@ class CDetailKRS extends MainPageM
         $nama_tahun = $this->DMaster->getNamaTA($tahun);
         $nama_semester = $this->setup->getSemester($semester);
 
-        $dataReport=$_SESSION['currentPageKRS']['DataMHS'];
+        $dataReport = $_SESSION['currentPageKRS']['DataMHS'];
         $dataReport['krs'] = $_SESSION['currentPageKRS']['DataKRS']['krs'];        
         $dataReport['matakuliah'] = $_SESSION['currentPageKRS']['DataKRS']['matakuliah'];        
         $dataReport['nama_tahun'] = $nama_tahun;
@@ -291,7 +291,7 @@ class CDetailKRS extends MainPageM
       break;
     }
     $this->lblMessagePrintout->Text = $messageprintout;
-    $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
+    $this->lblPrintout->Text = "Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
     $this->modalPrintOut->show();
   }
 }

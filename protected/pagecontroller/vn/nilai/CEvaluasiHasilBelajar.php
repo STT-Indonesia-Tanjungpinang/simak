@@ -46,7 +46,7 @@ class CEvaluasiHasilBelajar extends MainPageVN {
         $ta = $_SESSION['ta'];		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
-		$this->lblModulHeader->Text="Program Studi $ps $ta Semester $semester";
+		$this->lblModulHeader->Text = "Program Studi $ps $ta Semester $semester";
         
 	}
 	public function changeTbTA($sender, $param) {				
@@ -91,15 +91,15 @@ class CEvaluasiHasilBelajar extends MainPageVN {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
                 $this->Nilai->getInfoKelas($idkelas_mhs);
                 
-                $dataReport=$this->Nilai->InfoKelas;
+                $dataReport = $this->Nilai->InfoKelas;
                 print_R($dataReport);
                 $dataReport['namakelas'] = $this->DMaster->getNamaKelasByID($dataReport['idkelas']).'-'.chr($dataReport['nama_kelas'] + 64);
                 $dataReport['hari'] = $this->TGL->getNamaHari($dataReport['hari']);
@@ -109,11 +109,11 @@ class CEvaluasiHasilBelajar extends MainPageVN {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
                 
-                $messageprintout="Format Evaluasi Hasil Belajar: <br/>";  
+                $messageprintout = "Format Evaluasi Hasil Belajar: <br/>";  
                 $this->report->printFormatEvaluasiHasilBelajar($this->Nilai);              
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode PDF belum kami support.";
+                $messageprintout = "Mohon maaf Print out pada mode PDF belum kami support.";
             break;
 
 		}		

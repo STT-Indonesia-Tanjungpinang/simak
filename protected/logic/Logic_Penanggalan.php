@@ -73,7 +73,7 @@ class Logic_Penanggalan extends Logic_Global {
             case 'lastlogin':                
                 if ($interval->y > 1) {
                     $tanggal='Lebih dari 1 Tahun';
-                }elseif ($interval->i > 1) {
+                }else if ($interval->i > 1) {
                     if ($interval->m > 1) 
                         $tanggal=$this->pluralize( $interval->m, 'Bulan ');
                     if ($interval->d >= 1 ) 

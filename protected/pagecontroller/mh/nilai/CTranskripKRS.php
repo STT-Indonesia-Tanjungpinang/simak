@@ -27,7 +27,7 @@ class CTranskripKRS extends MainPageMHS {
 	}
 	public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             		
-        $dataReport=$this->Pengguna->getDataUser();  
+        $dataReport = $this->Pengguna->getDataUser();  
         $dataReport['cek_isikuesioner']=true;
         $dataReport['linkoutput'] = $this->linkOutput; 
         $this->report->setDataReport($dataReport); 

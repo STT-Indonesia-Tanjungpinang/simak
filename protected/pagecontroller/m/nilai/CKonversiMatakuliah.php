@@ -40,7 +40,7 @@ class CKonversiMatakuliah extends MainPageM {
         $kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];        		
         $ps = $_SESSION['daftar_jurusan'][$kjur];
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
-		$text="$ps Tahun Masuk $tahunmasuk";
+		$text = "$ps Tahun Masuk $tahunmasuk";
 		return $text;
 	}
 	public function changeTbTahunMasuk($sender, $param) {					

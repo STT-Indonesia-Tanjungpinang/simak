@@ -57,7 +57,7 @@ class CPenyelenggaraan extends MainPageSA {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
-		$text="Program Studi $ps TA $ta Semester $semester";
+		$text = "Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
 	public function populateData($search = false) {	
@@ -153,7 +153,7 @@ class CPenyelenggaraan extends MainPageSA {
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idpenyelenggaraan', 'krsmatkul', $id)) {	            
             $this->lblHeaderMessageError->Text = 'Menghapus Penyelenggaraan Matakuliah';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("penyelenggaraan WHERE idpenyelenggaraan = $id");

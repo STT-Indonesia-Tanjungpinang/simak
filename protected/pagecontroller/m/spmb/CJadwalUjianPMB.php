@@ -48,7 +48,7 @@ class CJadwalUjianPMB extends MainPageM {
     public function getInfoToolbar() {        
 		$ta = $this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
-		$text="Tahun Masuk $ta Semester $semester";
+		$text = "Tahun Masuk $ta Semester $semester";
 		return $text;
 	}
     public function renderCallback($sender, $param) {
@@ -88,7 +88,7 @@ class CJadwalUjianPMB extends MainPageM {
 	public function saveData($sender, $param) {
         if ($this->IsValid) {
             $tahun_masuk = $this->hiddentahunmasuk->Value;
-            $semester=1;
+            $semester = 1;
             $nama_kegiatan = addslashes($this->txtAddNamaKegiatan->Text);
             $tgl_ujian=date ('Y-m-d', $this->txtAddTanggalUjian->TimeStamp);
             $jam_masuk=addslashes($this->txtAddJamMasuk->Text);
@@ -140,7 +140,7 @@ class CJadwalUjianPMB extends MainPageM {
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idjadwal_ujian', 'peserta_ujian_pmb', $id)) {
             $this->lblHeaderMessageError->Text = 'Menghapus Jadwal Ujian PMB';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus jadwal ujian dengan ID ($id) karena masih ada pesertanya.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus jadwal ujian dengan ID ($id) karena masih ada pesertanya.";
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("jadwal_ujian_pmb WHERE idjadwal_ujian='$id'");
@@ -154,19 +154,19 @@ class CJadwalUjianPMB extends MainPageM {
         $this->linkOutput->NavigateUrl='#';                
 		switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':  
-                $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";
+                $messageprintout = "Mohon maaf Print out pada mode excel belum kami support.";
             break;
             case 'pdf':                
                 $str = "SELECT idjadwal_ujian,tahun_masuk,idsmt,nama_kegiatan,tanggal_ujian,jam_mulai,jam_akhir,tanggal_akhir_daftar,rk.namaruang,rk.kapasitas,status FROM jadwal_ujian_pmb jup LEFT JOIN ruangkelas rk ON (jup.idruangkelas=rk.idruangkelas) WHERE idjadwal_ujian = $idjadwal_ujian ORDER BY tanggal_ujian ASC";        
                 $this->DB->setFieldTable(array('idjadwal_ujian', 'tahun_masuk', 'idsmt', 'nama_kegiatan', 'tanggal_ujian', 'jam_mulai', 'jam_akhir', 'tanggal_akhir_daftar', 'namaruang', 'kapasitas', 'status'));
                 $r = $this->DB->getRecord($str);
-                $dataReport=$r[1];        
+                $dataReport = $r[1];        
                 $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian",'pum.no_formulir');
 
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['tahun_pendaftaran']);
@@ -175,7 +175,7 @@ class CJadwalUjianPMB extends MainPageM {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);  
                 
-                $messageprintout="Berita Acara Ujian SPMB : <br/>";
+                $messageprintout = "Berita Acara Ujian SPMB : <br/>";
                 $this->report->printBeritaAcaraUjianSPMB($this->DMaster);
             break;
         }                

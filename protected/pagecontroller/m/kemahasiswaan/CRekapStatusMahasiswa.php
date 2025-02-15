@@ -76,7 +76,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta1 = $this->DMaster->getNamaTA($_SESSION['currentPageRekapStatusMahasiswa']['ta1']);
         $ta2=$this->DMaster->getNamaTA($_SESSION['currentPageRekapStatusMahasiswa']['ta2']); 
-		$this->lblModulHeader->Text="Program Studi $ps PERIODE $ta1 - $ta2";        
+		$this->lblModulHeader->Text = "Program Studi $ps PERIODE $ta1 - $ta2";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;
@@ -221,13 +221,13 @@ class CRekapStatusMahasiswa Extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="";
+                $messageprintout = "";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['k_status'] = $_SESSION['currentPageRekapStatusMahasiswa']['k_status'];        
                 $dataReport['tahun_masuk'] = $_SESSION['currentPageRekapStatusMahasiswa']['tahun_masuk'];        
@@ -246,7 +246,7 @@ class CRekapStatusMahasiswa Extends MainPageM {
                 $this->report->printRekapStatusMahasiswa($this->Demik, $this->DMaster); 
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;

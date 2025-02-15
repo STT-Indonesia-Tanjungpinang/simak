@@ -38,7 +38,7 @@ class Logic_Setup extends Logic_Global {
             }else {
                 $_SESSION['settings'] = $this->settings;                
             }
-        }elseif ($this->Application->Cache) {
+        }else if ($this->Application->Cache) {
             $this->settings = $this->Application->Cache->get('settings');
             if (!$this->settings['loaded']) $this->loadSetting (true);
         }else {
@@ -93,7 +93,7 @@ class Logic_Setup extends Logic_Global {
 		$ipaddress = $ip[0];	       	
 		if ($ipaddress == '127' || $ipaddress == '::1') {
 			$url=$this->parameters['address_lokal'];
-		}elseif ($ipaddress == '192' || $ip=='10'||$ip=='172'){
+		}else if ($ipaddress == '192' || $ip=='10'||$ip=='172'){
 			$url=$this->parameters['address_lan'];
 		}else {
 			$url=$this->parameters['address_internet'];
@@ -107,7 +107,7 @@ class Logic_Setup extends Logic_Global {
         $isSecure = false;
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
             $isSecure = true;
-        }elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' || !empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on') {
+        }else if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' || !empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on') {
             $isSecure = true;
         }
         return $isSecure;
@@ -134,19 +134,19 @@ class Logic_Setup extends Logic_Global {
         {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
         }
-        elseif ($bytes >= 1048576)
+        else if ($bytes >= 1048576)
         {
             $bytes = number_format($bytes / 1048576, 2) . ' MB';
         }
-        elseif ($bytes >= 1024)
+        else if ($bytes >= 1024)
         {
             $bytes = number_format($bytes / 1024, 2) . ' KB';
         }
-        elseif ($bytes > 1)
+        else if ($bytes > 1)
         {
             $bytes = $bytes . ' bytes';
         }
-        elseif ($bytes == 1)
+        else if ($bytes == 1)
         {
             $bytes = $bytes . ' byte';
         }
@@ -230,7 +230,7 @@ class Logic_Setup extends Logic_Global {
         if ($proportional) {
             if($width  == 0)  
                 $factor = $height/$height_old;            
-            elseif  ($height == 0)  
+            else if  ($height == 0)  
                 $factor = $width/$width_old;
             else
                 $factor = min( $width / $width_old, $height / $height_old );
@@ -270,7 +270,7 @@ class Logic_Setup extends Logic_Global {
                 $transparency       = imagecolorallocate($image_resized, $transparent_color['red'], $transparent_color['green'], $transparent_color['blue']);
                 imagefill($image_resized, 0, 0, $transparency);
                 imagecolortransparent($image_resized, $transparency);
-            }elseif ($info[2] == IMAGETYPE_PNG) {
+            }else if ($info[2] == IMAGETYPE_PNG) {
                 imagealphablending($image_resized, false);
                 $color = imagecolorallocatealpha($image_resized, 0, 0, 0, 127);
                 imagefill($image_resized, 0, 0, $color);
@@ -349,11 +349,11 @@ class Logic_Setup extends Logic_Global {
 		$ip=floatval($nilai_ip);
 		if ($ip >= 3) {
 			$sks=24; 
-		}elseif ($ip >= 2.5 && $ip < 3) {
+		}else if ($ip >= 2.5 && $ip < 3) {
 			$sks=21;
-		}elseif ($ip >= 2 && $ip < 2.5) {
+		}else if ($ip >= 2 && $ip < 2.5) {
 			$sks=18;
-		}elseif ($ip >= 1.5 && $ip < 2) {
+		}else if ($ip >= 1.5 && $ip < 2) {
 				$sks=15;
 		}else {
 			$sks=12;	

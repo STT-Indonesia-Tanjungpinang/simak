@@ -32,7 +32,7 @@ class CKonversiMatakuliah extends MainPageON {
         $kjur = $_SESSION['currentPageKonversiMatakuliah']['kjur'];        		
         $ps = $_SESSION['daftar_jurusan'][$kjur];
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
-		$text="$ps Tahun Masuk $tahunmasuk";
+		$text = "$ps Tahun Masuk $tahunmasuk";
 		return $text;
 	}
 	public function changeTbTahunMasuk($sender, $param) {					
@@ -165,7 +165,7 @@ class CKonversiMatakuliah extends MainPageON {
                 }       
             } catch (Exception $ex) {
                 $nmatkul = $_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['nmatkul'];
-                $this->lblContentMessageError->Text="Matakuliah $nmatkul dengan kode $kmatkul_before belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah <em>".$ex->getMessage().'</em>';
+                $this->lblContentMessageError->Text = "Matakuliah $nmatkul dengan kode $kmatkul_before belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah <em>".$ex->getMessage().'</em>';
                 $this->modalMessageError->show(); 
             }			
 		}
@@ -258,7 +258,7 @@ class CKonversiMatakuliah extends MainPageON {
     			$this->redirect('KonversiMatakuliah', true);
             } catch (Exception $ex) {
                 $nmatkul = $_SESSION['currentPageKonversiMatakuliah']['daftarmatkul'][$i]['nmatkul'];
-                $this->lblContentMessageError->Text="Matakuliah $nmatkul dengan kode $kmatkul_before belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah";
+                $this->lblContentMessageError->Text = "Matakuliah $nmatkul dengan kode $kmatkul_before belum terdaftar di Kurikulum saat ini. Mohon untuk ditambahkan di Data Master -> Matakuliah";
                 $this->modalMessageError->show();                
             }				
 		}

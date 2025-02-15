@@ -154,7 +154,7 @@ class KHSEkstension extends MainPageM {
 			$this->Nilai->setDataMHS(array('nim' => $nim));
             $bool=true;
             $ip='0.00';            
-            $sks=0;
+            $sks = 0;
             $status='-';
             $trstyle='';
             $dataipk=array('ipk' => '0.00', 'sks' => 0);
@@ -200,7 +200,7 @@ class KHSEkstension extends MainPageM {
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                         $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
                         $r = $this->DB->getRecord($str);	           
-                        $dataReport=$r[1];
+                        $dataReport = $r[1];
 
                         $dataReport['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($dataReport['iddosen_wali']);
 
@@ -286,7 +286,7 @@ class KHSEkstension extends MainPageM {
     /**
      * digunakan untuk memprint KHS
      */
-    public function printSummaryKHS ($objReport, $withsignature=false) {
+    public function printSummaryKHS ($objReport, $withsignature = false) {
         $ta=$objReport->dataReport['ta'];
         $tahun_masuk = $objReport->dataReport['tahun_masuk'];
         $semester = $objReport->dataReport['semester'];
@@ -377,7 +377,7 @@ class KHSEkstension extends MainPageM {
                     $sheet->setCellValue("I$row", $sks);				
                     $sheet->setCellValue("J$row", $dataipk['sks']);
                     $iddata_konversi = $v['iddata_konversi'];
-                    $jumlah_sks=0;
+                    $jumlah_sks = 0;
                     if ($iddata_konversi > 0) {
                         $jumlah_sks = $this->DB->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
                     }

@@ -42,7 +42,7 @@ class CPendaftaranOnline extends MainPageM {
 	public function getInfoToolbar() {                
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);
 		 $nama_kelas = $this->DMaster->getNamaKelasByID($_SESSION['currentPagePendaftaranOnline']['kelas']);
-		$text="Kelas $nama_kelas Tahun Masuk $tahunmasuk";
+		$text = "Kelas $nama_kelas Tahun Masuk $tahunmasuk";
 		return $text;
 	}
 	public function searchRecord($sender, $param) {
@@ -321,10 +321,10 @@ class CPendaftaranOnline extends MainPageM {
 			case 'btnPrintOutPendaftaranOnline':
                 switch($_SESSION['outputreport']) {
                     case 'summarypdf':
-                        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
                     case 'summaryexcel':
-                        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
                     case 'excel2007':
                         $kjur = $_SESSION['kjur'];
@@ -343,7 +343,7 @@ class CPendaftaranOnline extends MainPageM {
                         $dataReport['offset'] = $_SESSION['currentPagePendaftaranOnline']['offset'];         
                         $dataReport['limit'] = $_SESSION['currentPagePendaftaranOnline']['limit'];         
 
-                        $messageprintout="Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
+                        $messageprintout = "Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
                         $dataReport['linkoutput'] = $this->linkOutput;         
                         $this->report->setDataReport($dataReport); 
                         $this->report->setMode($_SESSION['outputreport']);
@@ -366,7 +366,7 @@ class CPendaftaranOnline extends MainPageM {
                         $dataReport['offset'] = $_SESSION['currentPagePendaftaranOnline']['offset'];         
                         $dataReport['limit'] = $_SESSION['currentPagePendaftaranOnline']['limit'];         
 
-                        $messageprintout="Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
+                        $messageprintout = "Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
                         $dataReport['linkoutput'] = $this->linkOutput;         
                         $this->report->setDataReport($dataReport);   
                         $_SESSION['outputcompress'] = $_SESSION['outputcompress']=='none'?'zip':$_SESSION['outputcompress'];
@@ -378,13 +378,13 @@ class CPendaftaranOnline extends MainPageM {
 			case 'btnPrintOutPendaftaranOnlineR':
                 switch($_SESSION['outputreport']) {
                     case 'summarypdf':
-                        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
                     case 'summaryexcel':
-                        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
                     case 'excel2007':
-                        $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
                     case 'pdf':
                         $no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);
@@ -392,7 +392,7 @@ class CPendaftaranOnline extends MainPageM {
                         $dataReport['linkoutput'] = $this->linkOutput; 
                         $this->report->setDataReport($dataReport);      
                         $this->report->setMode($_SESSION['outputreport']);
-                        $messageprintout="Formulir Pendaftaran $no_formulir : <br/>";
+                        $messageprintout = "Formulir Pendaftaran $no_formulir : <br/>";
                         $this->report->printPendaftaranOnline($_SESSION['daftar_jurusan'], $this->DMaster);				
                     break;
                 }

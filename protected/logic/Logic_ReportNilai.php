@@ -8,7 +8,7 @@ class Logic_ReportNilai extends Logic_Report {
    * digunakan untuk memprint KHS
    * @param type $objNilai object
    */
-  public function printKHS ($objNilai, $withsignature=false) 
+  public function printKHS ($objNilai, $withsignature = false) 
   {
     $nim = $this->dataReport['nim'];
     $ta=$this->dataReport['ta'];
@@ -85,7 +85,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(47, 5, 'KETERANGAN', 1, 0, 'C');
         $objNilai->setDataMHS(array('nim' => $nim));
         $dn = $objNilai->getKHS($ta, $semester, $withsignature);				
-        $totalSks=0;
+        $totalSks = 0;
         $totalNm = 0;
         $row+=5;
         $rpt->setXY(3, $row);			
@@ -186,7 +186,7 @@ class Logic_ReportNilai extends Logic_Report {
    * digunakan untuk memprint seluruh KHS dalam Semester dan T.A
    * @param type $objNilai object
    */
-  public function printKHSAll ($objNilai, $objDMaster, $repeater, $withsignature=false) {        
+  public function printKHSAll ($objNilai, $objDMaster, $repeater, $withsignature = false) {        
     $awal=$this->dataReport['awal'];
     $akhir = $this->dataReport['akhir'];
     $ta=$this->dataReport['ta'];
@@ -274,7 +274,7 @@ class Logic_ReportNilai extends Logic_Report {
             $rpt->Cell(47, 5, 'KETERANGAN', 1, 0, 'C');
             $objNilai->setDataMHS(array('nim' => $nim));
             $dn = $objNilai->getKHS($ta, $semester);				
-            $totalSks=0;
+            $totalSks = 0;
             $totalNm = 0;
             $row+=5;
             $rpt->setXY(3, $row);			
@@ -378,7 +378,7 @@ class Logic_ReportNilai extends Logic_Report {
    * @param type $objNilai object
    * @param type $objDMaster object
    */
-  public function printSummaryKHS ($objNilai, $objDMaster, $withsignature=false) {
+  public function printSummaryKHS ($objNilai, $objDMaster, $withsignature = false) {
     $ta=$this->dataReport['ta'];
     $tahun_masuk = $this->dataReport['tahun_masuk'];
     $semester = $this->dataReport['semester'];
@@ -469,7 +469,7 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->setCellValue("I$row", $sks);				
           $sheet->setCellValue("J$row", $dataipk['sks']);
           $iddata_konversi = $v['iddata_konversi'];
-          $jumlah_sks=0;
+          $jumlah_sks = 0;
           if ($iddata_konversi > 0) {
             $jumlah_sks = $this->db->getSumRowsOfTable ('sks',"v_konversi2 WHERE iddata_konversi = $iddata_konversi");
           }
@@ -547,10 +547,11 @@ class Logic_ReportNilai extends Logic_Report {
    */
   public function printTranskripKurikulum ($objNilai, $withsignature = false) 
   {
-    $biodata=$this->dataReport;          
+    $biodata = $this->dataReport;    
     $nim = $biodata['nim'];
     $objNilai->setDataMHS($biodata);
-    $smt=Logic_Akademik::$SemesterMatakuliahRomawi;
+    $smt = Logic_Akademik::$SemesterMatakuliahRomawi;
+    
     switch($this->getDriver()) {
       case 'excel2003':               
       case 'excel2007':                
@@ -647,26 +648,26 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(11,4,'MK',1,0,'C');
         
         $n = $objNilai->getTranskripNilaiKurikulum($this->dataReport['cek_isikuesioner']);
-        $totalSks=0;
+        $totalSks = 0;
         $totalM=0;
         $row+=4;
         $row_ganjil=$row;
         $row_genap = $row;
         $rpt->setXY(3, $row);	
         $rpt->SetFont ('helvetica', '',6);
-        $tambah_ganjil_row=false;		
-        $tambah_genap_row=false;		
+        $tambah_ganjil_row = false;		
+        $tambah_genap_row = false;		
         for ($i = 1; $i <= 8; $i++) {
-          $no_semester=1;
+          $no_semester = 1;
           if ($i%2==0) {//genap
             $tambah_genap_row=true;
             $genap_total_m = 0;
-            $genap_total_sks=0;		
+            $genap_total_sks = 0;		
             foreach ($n as $v) {	
               if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-') ? '-' : $v['m'];
+                $m = ($n_kual == '-') ? '-' : $v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -690,12 +691,12 @@ class Logic_ReportNilai extends Logic_Report {
           }else {//ganjil
             $tambah_ganjil_row=true;
             $ganjil_total_m = 0;
-            $ganjil_total_sks=0;
+            $ganjil_total_sks = 0;
             foreach ($n as $s) {
               if ($s['semester'] == $i) {
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-') ? '-' : $s['m']; 								
+                $m = ($n_kual == '-') ? '-' : $s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -715,11 +716,11 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil== '' ? '0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil == '' ? '0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
-            $tambah_ganjil_row=false;
-            $tambah_genap_row=false;						
+            $tambah_ganjil_row = false;
+            $tambah_genap_row = false;						
             if ($row_ganjil < $row_genap){ // berarti tambah row yang ganjil
               $sisa=$row_ganjil + ($row_genap-$row_ganjil);
               for ($c=$row_ganjil;$c <= $row_genap;$c+=4) {
@@ -815,7 +816,7 @@ class Logic_ReportNilai extends Logic_Report {
    * digunakan untuk memprint Transkrip Kurikulum All
    * @param type $objNilai object
    */
-  public function printTranskripKurikulumAll ($objNilai, $withsignature=false, $outputcompress, $level=0) {
+  public function printTranskripKurikulumAll ($objNilai, $withsignature = false, $outputcompress, $level = 0) {
     $biodata=$this->dataReport;          
     $nim = $biodata['nim'];
     $objNilai->setDataMHS($biodata);
@@ -916,26 +917,28 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(11,4,'MK',1,0,'C');
         
         $n = $objNilai->getTranskripNilaiKurikulum();
-        $totalSks=0;
+        $totalSks = 0;
         $totalM=0;
         $row+=4;
         $row_ganjil=$row;
         $row_genap = $row;
         $rpt->setXY(3, $row);	
         $rpt->SetFont ('helvetica', '',6);
-        $tambah_ganjil_row=false;		
-        $tambah_genap_row=false;		
-        for ($i = 1; $i <= 8; $i++) {
-          $no_semester=1;
+        $tambah_ganjil_row = false;		
+        $tambah_genap_row = false;		
+        for ($i = 1; $i <= 8; $i++) 
+        {
+          $no_semester = 1;
           if ($i%2==0) {//genap
             $tambah_genap_row=true;
             $genap_total_m = 0;
-            $genap_total_sks=0;		
-            foreach ($n as $v) {	
+            $genap_total_sks = 0;		
+            foreach ($n as $v)
+            {	
               if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-') ? '-' : $v['m'];
+                $m = ($n_kual == '-') ? '-' : $v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -956,15 +959,19 @@ class Logic_ReportNilai extends Logic_Report {
             }
             $ipk_genap=@ bcdiv($totalM, $totalSks,2);
             $ipk_genap = $ipk_genap== '' ? '0.00':$ipk_genap;
-          }else {//ganjil
+          }
+          else
+          {//ganjil
             $tambah_ganjil_row=true;
             $ganjil_total_m = 0;
-            $ganjil_total_sks=0;
-            foreach ($n as $s) {
-              if ($s['semester'] == $i) {
+            $ganjil_total_sks = 0;
+            foreach ($n as $s)
+            {
+              if ($s['semester'] == $i)
+              {
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-') ? '-' : $s['m']; 								
+                $m = ($n_kual == '-') ? '-' : $s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -974,7 +981,8 @@ class Logic_ReportNilai extends Logic_Report {
                 $rpt->Cell(8,4, $n_kual,1,0,'C');
                 $rpt->Cell(8,4, $m,1,0,'C');								
                 $ganjil_total_sks += $sks;
-                if ($n_kual != '-') {									
+                if ($n_kual != '-')
+                {									
                   $ganjil_total_m += $m;									
                   $totalSks+=$sks;
                   $totalM+=$m;									
@@ -984,11 +992,11 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil== '' ? '0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil == '' ? '0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
-            $tambah_ganjil_row=false;
-            $tambah_genap_row=false;						
+            $tambah_ganjil_row = false;
+            $tambah_genap_row = false;						
             if ($row_ganjil < $row_genap){ // berarti tambah row yang ganjil
               $sisa=$row_ganjil + ($row_genap-$row_ganjil);
               for ($c=$row_ganjil;$c <= $row_genap;$c+=4) {
@@ -1084,7 +1092,7 @@ class Logic_ReportNilai extends Logic_Report {
    * digunakan untuk memprint Transkrip KRS
    * @param type $objNilai object
    */
-  public function printTranskripKRS ($objNilai, $withsignature=false) {
+  public function printTranskripKRS ($objNilai, $withsignature = false) {
     $biodata=$this->dataReport;          
     $nim = $biodata['nim'];
     $objNilai->setDataMHS($biodata);
@@ -1163,7 +1171,7 @@ class Logic_ReportNilai extends Logic_Report {
         $tampil_column_ganjil=false;
         $tampil_column_genap=false;
         for ($i = 1; $i <= 8; $i++) {
-          $no_semester=1;                    
+          $no_semester = 1;                    
           if ($i%2==0) {//genap
             foreach ($n as $v) {
               if ($v['semester'] == $i) {
@@ -1219,29 +1227,29 @@ class Logic_ReportNilai extends Logic_Report {
           $rpt->setXY(16, $row);
           $rpt->Cell(11,4,'MK',1,0,'C');
         }
-        $totalSks=0;
+        $totalSks = 0;
         $totalM=0;
         $row+=4;
         $row_ganjil=$row;
         $row_genap = $row;
         $rpt->setXY(3, $row);	
         $rpt->SetFont ('helvetica', '',6);
-        $tambah_ganjil_row=false;		
-        $tambah_genap_row=false;		
+        $tambah_ganjil_row = false;		
+        $tambah_genap_row = false;		
         $bool_khs_genap = false;
         $bool_khs_ganjil = false;
         for ($i = 1; $i <= 8; $i++) {
-          $no_semester=1;                    
+          $no_semester = 1;                    
           if ($i%2==0) {//genap
             $tambah_genap_row=true;
             $genap_total_m = 0;
-            $genap_total_sks=0;		
+            $genap_total_sks = 0;		
             $tampil_border_genap=false;
             foreach ($n as $v) {	
               if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
                 $sks = $v['sks'];
-                $m=($n_kual=='-') ? '-' : $v['m'];
+                $m = ($n_kual == '-') ? '-' : $v['m'];
                 $rpt->setXY(106, $row_genap);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -1267,13 +1275,13 @@ class Logic_ReportNilai extends Logic_Report {
           }else {//ganjil
             $tambah_ganjil_row=true;
             $ganjil_total_m = 0;
-            $ganjil_total_sks=0;
+            $ganjil_total_sks = 0;
             $tampil_border_ganjil=false;
             foreach ($n as $s) {
               if ($s['semester'] == $i) {                                
                 $n_kual=$s['n_kual'];
                 $sks = $s['sks'];
-                $m=($n_kual=='-') ? '-' : $s['m']; 								
+                $m = ($n_kual == '-') ? '-' : $s['m']; 								
                 $rpt->setXY(3, $row_ganjil);	
                 $rpt->Cell(7,4, $smt[$i],1,0,'C');	
                 $rpt->Cell(6,4, $no_semester,1,0,'C');	
@@ -1295,11 +1303,11 @@ class Logic_ReportNilai extends Logic_Report {
               }
             }
             $ipk_ganjil=@ bcdiv($totalM, $totalSks,2);
-            $ipk_ganjil=$ipk_ganjil== '' ? '0.00':$ipk_ganjil;
+            $ipk_ganjil=$ipk_ganjil == '' ? '0.00':$ipk_ganjil;
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
-            $tambah_ganjil_row=false;
-            $tambah_genap_row=false;						
+            $tambah_ganjil_row = false;
+            $tambah_genap_row = false;						
             if ($row_ganjil < $row_genap){ // berarti tambah row yang ganjil
               $sisa=$row_ganjil + ($row_genap-$row_ganjil);
               if ($tampil_border_ganjil){
@@ -1526,15 +1534,15 @@ class Logic_ReportNilai extends Logic_Report {
           $sheet->getStyle("A$row:M$row")->applyFromArray($styleArray);
   
           $row+=1;    
-          $totalSks=0;
+          $totalSks = 0;
           $totalMatkul=0;
           $totalM=0;	
           
           $row_awal = $row;
           $row_ganjil=$row;
           $row_genap = $row;
-          $tambah_ganjil_row=false;		
-          $tambah_genap_row=false;	
+          $tambah_ganjil_row = false;		
+          $tambah_genap_row = false;	
           for ($i = 1; $i <= 10; $i++) {	
             if ($i%2==0) {//genap
               $tambah_genap_row=true;	            
@@ -1543,7 +1551,7 @@ class Logic_ReportNilai extends Logic_Report {
                 if ($v['semester'] == $i)
                 {
                   $n_kual=$v['n_kual'];
-                  $n_kual=($n_kual=='-'||$n_kual== '') ? '-' : $n_kual;
+                  $n_kual=($n_kual == '-'||$n_kual == '') ? '-' : $n_kual;
                   $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
@@ -1579,7 +1587,7 @@ class Logic_ReportNilai extends Logic_Report {
                 if ($v['semester'] == $i)
                 {
                   $n_kual=$v['n_kual'];
-                  $n_kual=($n_kual=='-'||$n_kual== '') ? '-' : $n_kual;
+                  $n_kual=($n_kual == '-'||$n_kual == '') ? '-' : $n_kual;
                   $sks = $v['sks'];
                   $totalSks+=$sks;								         
                   $totalMatkul+=1;
@@ -1608,8 +1616,8 @@ class Logic_ReportNilai extends Logic_Report {
               } 
             }
             // if ($tambah_ganjil_row && $tambah_genap_row) {	
-            //   $tambah_ganjil_row=false;
-            //   $tambah_genap_row=false;						
+            //   $tambah_ganjil_row = false;
+            //   $tambah_genap_row = false;						
             //   if ($row_ganjil < $row_genap)// berarti tambah row yang ganjil
             //   { 
             //     $sisa=$row_ganjil + ($row_genap-$row_ganjil);
@@ -1796,14 +1804,14 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(9,5,'AM',1,0,'C');
         $rpt->Cell(9,5,'NM', 'TBL',0,'C');				
         $row+=5;							
-        $totalSks=0;
+        $totalSks = 0;
         $totalM=0;				
         $row_ganjil=$row;
         $row_genap = $row;
         $rpt->setXY(3, $row);	
         $rpt->SetFont ('helvetica', '',6);
-        $tambah_ganjil_row=false;		
-        $tambah_genap_row=false;						
+        $tambah_ganjil_row = false;		
+        $tambah_genap_row = false;						
         
         for ($i = 1; $i <= 8; $i++) {					
           if ($i%2==0) {//genap
@@ -1814,7 +1822,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $v) {	
               if ($v['semester'] == $i) {
                 $n_kual=$v['n_kual'];
-                $n_kual=($n_kual=='-'||$n_kual== '') ? '-' : $n_kual;
+                $n_kual=($n_kual == '-'||$n_kual == '') ? '-' : $n_kual;
                 $sks = $v['sks'];
                 $totalSks+=$sks;								
                 $rpt->setXY(106, $row_genap);							
@@ -1834,7 +1842,7 @@ class Logic_ReportNilai extends Logic_Report {
             foreach ($n as $s) {
               if ($s['semester'] == $i) {
                 $n_kual=$s['n_kual'];
-                $n_kual=($n_kual=='-'||$n_kual== '') ? '-' : $n_kual;
+                $n_kual=($n_kual == '-'||$n_kual == '') ? '-' : $n_kual;
                 $sks = $s['sks'];
                 $totalSks+=$sks;													
                 $rpt->setXY(3, $row_ganjil);						
@@ -1848,8 +1856,8 @@ class Logic_ReportNilai extends Logic_Report {
             }
           }
           if ($tambah_ganjil_row && $tambah_genap_row) {	
-            $tambah_ganjil_row=false;
-            $tambah_genap_row=false;						
+            $tambah_ganjil_row = false;
+            $tambah_genap_row = false;						
             if ($row_ganjil < $row_genap){ // berarti tambah row yang ganjil
               $sisa=$row_ganjil + ($row_genap-$row_ganjil);
               for ($c=$row_ganjil;$c <= $row_genap;$c+=4) {
@@ -2439,7 +2447,7 @@ class Logic_ReportNilai extends Logic_Report {
         $rpt->Cell(10, 5, 'NH', 1, 0, 'C');																		
 
         $nilai = $objNilai->getNilaiKonversi($this->dataReport['iddata_konversi'], $this->dataReport['idkur']);                
-        $jumlah_sks=0;
+        $jumlah_sks = 0;
         $jumlah_matkul=0;
         $row+=5;
         $rpt->setXY(3, $row);			
@@ -2544,7 +2552,7 @@ class Logic_ReportNilai extends Logic_Report {
         
         $nilai = $objNilai->getNilaiKonversi($this->dataReport['iddata_konversi'], $this->dataReport['idkur']);                
         $row=17;     
-        $jumlah_sks=0;
+        $jumlah_sks = 0;
         $jumlah_matkul=0;
         while (list($k, $v) = each($nilai)) {
           $sheet->setCellValue("A$row", $v['no']);                                                        

@@ -11,7 +11,7 @@ class MainPageK extends MainPage {
     /**
      * show page Pendaftaran Online [spmb]
      */
-    public $showPendaftaranOnline=false;
+    public $showPendaftaranOnline = false;
     /**
      * show page PIN [spmb]
      */

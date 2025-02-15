@@ -104,7 +104,7 @@ class CPesertaUjianPMB extends MainPageM {
         
         if ($this->DB->checkRecordIsExist ('no_formulir', 'nilai_ujian_masuk', $r[1]['no_formulir'])) {
             $this->lblHeaderMessageError->Text = 'Menghapus Peserta Ujian PMB';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus peserta ini karena sudah melakukan Ujian PMB.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus peserta ini karena sudah melakukan Ujian PMB.";
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("peserta_ujian_pmb WHERE idpeserta_ujian='$id'");
@@ -115,18 +115,18 @@ class CPesertaUjianPMB extends MainPageM {
         $this->createObj('reportspmb');
         $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';        
-        $dataReport=$_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
+        $dataReport = $_SESSION['currentPagePesertaUjianPMB']['DataUjianPMB'];
         $idjadwal_ujian = $dataReport['idjadwal_ujian'];
         $jumlah_peserta = $this->DB->getCountRowsOfTable ("peserta_ujian_pmb pum,formulir_pendaftaran fp,pin WHERE fp.no_formulir=pum.no_formulir AND pin.no_formulir=pum.no_formulir AND pum.idjadwal_ujian = $idjadwal_ujian",'pum.no_formulir');
 		switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':  
-                $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";
+                $messageprintout = "Mohon maaf Print out pada mode excel belum kami support.";
             break;
             case 'pdf':                
                 $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['tahun_masuk']);
@@ -135,7 +135,7 @@ class CPesertaUjianPMB extends MainPageM {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);  
                 
-                $messageprintout="Berita Acara Ujian SPMB : <br/>";
+                $messageprintout = "Berita Acara Ujian SPMB : <br/>";
                 $this->report->printBeritaAcaraUjianSPMB($this->DMaster);
             break;
         }                

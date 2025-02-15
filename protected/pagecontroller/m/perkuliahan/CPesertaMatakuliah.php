@@ -87,7 +87,7 @@ class CPesertaMatakuliah extends MainPageM {
     $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
-    $text="Program Studi $ps TA $ta Semester $semester";
+    $text = "Program Studi $ps TA $ta Semester $semester";
     return $text;
   }
   public function changeTbTA($sender, $param) {
@@ -204,7 +204,7 @@ class CPesertaMatakuliah extends MainPageM {
       $status='belum disahkan';
       if ($v['sah'] == 1 && $v['batal'] == 0) {
         $status='SAH';
-      }elseif($v['sah'] == 1 && $v['batal'] == 1){
+      }else if($v['sah'] == 1 && $v['batal'] == 1){
         $status='BATAL';
       }
       $v['status'] = $status;
@@ -222,13 +222,13 @@ class CPesertaMatakuliah extends MainPageM {
     $this->linkOutput->NavigateUrl='#';
     switch($_SESSION['outputreport']) {
       case 'summarypdf':
-        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
       break;
       case 'summaryexcel':
-        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
       break;
       case 'excel2007':
-        $dataReport=$_SESSION['currentPagePesertaMatakuliah']['InfoMatkul'];
+        $dataReport = $_SESSION['currentPagePesertaMatakuliah']['InfoMatkul'];
         $dataReport['nama_tahun'] = $this->DMaster->getNamaTA($dataReport['tahun']);
         $dataReport['nama_semester'] = $this->setup->getSemester($dataReport['idsmt']);               
         $dataReport['idkelas'] = $_SESSION['currentPagePesertaMatakuliah']['idkelas'];
@@ -236,11 +236,11 @@ class CPesertaMatakuliah extends MainPageM {
         $dataReport['linkoutput'] = $this->linkOutput; 
         $this->report->setDataReport($dataReport); 
         $this->report->setMode($_SESSION['outputreport']);
-        $messageprintout="Daftar Peserta Matakuliah : <br/>";
+        $messageprintout = "Daftar Peserta Matakuliah : <br/>";
         $this->report->printPesertaMatakuliah($this->DMaster); 
       break;
       case 'pdf':
-        $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+        $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
       break;
     }
     $idkelas = $_SESSION['currentPagePesertaMatakuliah']['idkelas'];

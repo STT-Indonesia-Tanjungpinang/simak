@@ -39,7 +39,7 @@ class CCalonMHS Extends MainPageM {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
         $semester = $this->setup->getSemester($_SESSION['currentPageCalonMHS']['semester_masuk']);		
-		$this->lblModulHeader->Text="Program Studi $ps Tahun Masuk $tahunmasuk Semester $semester ";        
+		$this->lblModulHeader->Text = "Program Studi $ps Tahun Masuk $tahunmasuk Semester $semester ";        
 	}
     public function Page_Changed($sender, $param) {
 		$_SESSION['currentPageCalonMHS']['page_num'] = $param->NewPageIndex;

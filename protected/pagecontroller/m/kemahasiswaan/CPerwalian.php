@@ -139,10 +139,10 @@ class CPerwalian extends MainPageM {
             $this->linkOutput->NavigateUrl='#';
             switch($_SESSION['outputreport']) {
                 case 'summarypdf':
-                    $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                    $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                 break;
                 case 'summaryexcel':
-                    $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                    $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
                 break;
                 case 'excel2007':
                     $dataReport['iddosen_wali'] = $iddosen_wali;
@@ -152,11 +152,11 @@ class CPerwalian extends MainPageM {
                     $this->report->setDataReport($dataReport); 
                     $this->report->setMode('excel2007');
 
-                    $messageprintout="Daftar Mahasiswa Dosen Wali: <br/>";
+                    $messageprintout = "Daftar Mahasiswa Dosen Wali: <br/>";
                     $this->report->printMahasiswaDW($this->DMaster);                
                 break;
                 case 'pdf':
-                    $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                    $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
                 break;
             }     
             $this->lblMessagePrintout->Text = $messageprintout;
@@ -164,7 +164,7 @@ class CPerwalian extends MainPageM {
             $this->modalPrintOut->show();
         }else{
             $this->lblHeaderMessageError->Text = 'Mencetak Daftar Mahasiswa Dosen Wali';
-            $this->lblContentMessageError->Text="Anda tidak bisa mencetak karena Dosen Wali belum dipilih.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa mencetak karena Dosen Wali belum dipilih.";
             $this->modalMessageError->Show();
         }
     }

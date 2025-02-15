@@ -99,7 +99,7 @@ class CRuangKelas Extends MainPageM {
 		$idruangkelas = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idruangkelas', 'kelas_mhs', $idruangkelas)) {
             $this->lblHeaderMessageError->Text = 'Menghapus Ruang Kelas';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus ruang kelas dengan ID ($idruangkelas) karena sedang digunakan di kelas mahasiswa.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus ruang kelas dengan ID ($idruangkelas) karena sedang digunakan di kelas mahasiswa.";
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("ruangkelas WHERE idruangkelas = $idruangkelas");

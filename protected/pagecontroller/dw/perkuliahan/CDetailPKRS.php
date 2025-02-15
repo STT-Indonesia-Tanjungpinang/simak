@@ -36,7 +36,7 @@ class CDetailPKRS extends MainPageDW {
 	public function setInfoToolbar() {   
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);		
-		$this->lblModulHeader->Text="T.A $ta Semester $semester";        
+		$this->lblModulHeader->Text = "T.A $ta Semester $semester";        
 	}	
 	private function populateData($search = false) {
         try {			
@@ -113,7 +113,7 @@ class CDetailPKRS extends MainPageDW {
 				$this->modalMessageError->show();
                 $this->lblContentMessageError->Text = $e->getMessage();						
 			}
-		}elseif ($id[0] == 0) {		
+		}else if ($id[0] == 0) {		
 			$str = "UPDATE krsmatkul SET batal=1 WHERE idkrsmatkul = $idkrsmatkul";			
 			$this->DB->updateRecord($str);
             $this->DB->insertRecord("INSERT INTO pkrs SET nim='$nim',idpenyelenggaraan = $idpenyelenggaraan,tambah=0,hapus=0,batal=1,sah=0,tanggal=NOW()");										
@@ -151,13 +151,13 @@ class CDetailPKRS extends MainPageDW {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
             break;
             case 'pdf':                
                 $messageprintout='';                
@@ -166,7 +166,7 @@ class CDetailPKRS extends MainPageDW {
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);
 
-                $dataReport=$_SESSION['currentPagePKRS']['DataMHS'];
+                $dataReport = $_SESSION['currentPagePKRS']['DataMHS'];
                 $dataReport['krs'] = $_SESSION['currentPagePKRS']['DataKRS']['krs'];        
                 $dataReport['matakuliah'] = $_SESSION['currentPagePKRS']['DataKRS']['matakuliah'];        
                 $dataReport['nama_tahun'] = $nama_tahun;
@@ -186,7 +186,7 @@ class CDetailPKRS extends MainPageDW {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
+        $this->lblPrintout->Text = "Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
         $this->modalPrintOut->show();
 	}
 }

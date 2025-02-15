@@ -44,7 +44,7 @@ class Logic_Report extends Logic_Global {
      * @param type $dataReport
      */
     public function setDataReport ($dataReport) {
-        $this->dataReport=$dataReport;
+        $this->dataReport = $dataReport;
     }
     /**
 	*

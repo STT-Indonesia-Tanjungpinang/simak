@@ -4,7 +4,7 @@ class CTranskripKurikulum extends MainPageDW {
 	public function onLoad($param) {
 		parent::onLoad($param);		
         $this->showSubMenuAkademikNilai = true;
-        $this->showTranskripKurikulum=true;    
+        $this->showTranskripKurikulum = true;    
 		$this->createObj('Nilai');
                 
 		if (!$this->IsPostBack && !$this->IsCallback) {			
@@ -49,7 +49,7 @@ class CTranskripKurikulum extends MainPageDW {
         $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['currentPageTranskripKurikulum']['tahun_masuk']);		
-		$text="Program Studi $ps Tahun Masuk $tahunmasuk";
+		$text = "Program Studi $ps Tahun Masuk $tahunmasuk";
 		return $text;
 	}
     public function renderCallback($sender, $param) {
@@ -134,13 +134,13 @@ class CTranskripKurikulum extends MainPageDW {
                 $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
                 switch($_SESSION['outputreport']) {
                     case 'summarypdf':
-                        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
                     case 'summaryexcel':
-                        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
                     case 'excel2007':
-                        $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
                     case 'pdf':
                     
@@ -161,7 +161,7 @@ class CTranskripKurikulum extends MainPageDW {
                         $this->report->setDataReport($dataReport); 
                         $this->report->setMode($_SESSION['outputreport']);
 
-                        $messageprintout="Transkrip Kurikulum $nim : <br/>";
+                        $messageprintout = "Transkrip Kurikulum $nim : <br/>";
                         $this->report->printTranskripKurikulum($this->Nilai,true);				
                     break;
                 }                
@@ -169,16 +169,16 @@ class CTranskripKurikulum extends MainPageDW {
             case 'btnPrintTranskripKurikulumAll':
                  switch($_SESSION['outputreport']) {
                     case 'summarypdf':
-                        $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary pdf belum kami support.";                
                     break;
                     case 'summaryexcel':
-                        $messageprintout="Mohon maaf Print out pada mode summary excel belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary excel belum kami support.";                
                     break;
                     case 'excel2007':
-                        $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
                     break;
                     case 'pdf':
-                        $messageprintout="Mohon maaf Print out pada mode pdf tidak kami support.";                                            
+                        $messageprintout = "Mohon maaf Print out pada mode pdf tidak kami support.";                                            
                     break;
                 }
             break;

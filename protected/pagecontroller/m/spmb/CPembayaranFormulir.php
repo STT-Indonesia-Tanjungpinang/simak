@@ -26,7 +26,7 @@ class CPembayaranFormulir extends MainPageM {
 	}
     public function getInfoToolbar() {                
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
-		$text="Tahun Masuk $tahunmasuk";
+		$text = "Tahun Masuk $tahunmasuk";
 		return $text;
 	}
     public function changeTbTahunMasuk($sender, $param) {					

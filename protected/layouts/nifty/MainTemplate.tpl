@@ -516,7 +516,7 @@
                                                     </a>
                                                 </li>                                                   
                                                 <li>
-                                                    <a href="<%=$this->Page->constructUrl('nilai.TranskripFinal', true)%>"<%=$this->Page->showTranskripFinal==true ? ' class="active" ':''%>>
+                                                    <a href="<%=$this->Page->constructUrl('nilai.TranskripFinal', true)%>"<%=$this->Page->showTranskripFinal ==true ? ' class="active" ':''%>>
                                                         Transkrip Final
                                                     </a>
                                                 </li>                                                   
@@ -533,7 +533,7 @@
                                             </a>
                                             <ul class="submenu">
                                                 <li>
-                                                    <a href="<%=$this->Page->constructUrl('keuangan.RekapPembayaranSemesterGanjil', true)%>"<%=$this->Page->showReportRekapPembayaranGanjil==true ? ' class="active" ':''%>>
+                                                    <a href="<%=$this->Page->constructUrl('keuangan.RekapPembayaranSemesterGanjil', true)%>"<%=$this->Page->showReportRekapPembayaranGanjil ==true ? ' class="active" ':''%>>
                                                         Pembayararan SMT Ganjil
                                                     </a>
                                                 </li> 
@@ -651,7 +651,7 @@
                                         <li class="nav-header nav-header-first hidden-sm hidden-xs">
                                             PEMBAYARAN
                                         </li>
-                                        <li<%=$this->Page->showPembayaranSemesterGanjil==true?' class="active"':''%>>
+                                        <li<%=$this->Page->showPembayaranSemesterGanjil ==true?' class="active"':''%>>
                                             <a href="<%=$this->Page->constructUrl('pembayaran.PembayaranSemesterGanjil', true)%>">
                                                 <i class="fa fa-usd"></i>
                                                 <span>Semester Ganjil</span>

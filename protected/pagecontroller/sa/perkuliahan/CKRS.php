@@ -4,7 +4,7 @@ class CKRS Extends MainPageSA {
 	/**
 	* total  sks
 	*/
-	public $totalSks=0;
+	public $totalSks = 0;
 	/**
 	* total  matakuliah
 	*/
@@ -71,7 +71,7 @@ class CKRS Extends MainPageSA {
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk = $_SESSION['currentPageKRS']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageKRS']['tahun_masuk']);		        
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
 	public function changeTbTA($sender, $param) {				
 		$_SESSION['ta'] = $this->tbCmbTA->Text;		        
@@ -189,7 +189,7 @@ class CKRS Extends MainPageSA {
             $status='';         
             if ($item->DataItem['sah']) {                 
                 $status='<span class="label label-success">sah</span>';	
-            }elseif ($_SESSION['currentPageKRS']['mode_krs'] == 'belum'){
+            }else if ($_SESSION['currentPageKRS']['mode_krs'] == 'belum'){
                 $status='-';	
             }else{
                 $trstyle=' class="danger"';
@@ -283,7 +283,7 @@ class CKRS Extends MainPageSA {
                 $_SESSION['currentPageKRS']['DataKRS']['krs'] = $krs;
                 
                 $this->redirect ('perkuliahan.TambahKRS', true);
-            }elseif(isset($krs['idkrs']) && $krs['sah'] == 1){
+            }else if(isset($krs['idkrs']) && $krs['sah'] == 1){
                 $idkrs = $krs['idkrs'];
                 $this->redirect ('perkuliahan.DetailKRS', true, array('id' => $idkrs));
             }else{
@@ -332,13 +332,13 @@ class CKRS Extends MainPageSA {
 
                 switch($_SESSION['outputreport']) {
                     case 'summarypdf':
-                        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
                     case 'summaryexcel':
-                        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
                     case 'excel2007':
-                        $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
                     case 'pdf':                
                         $messageprintout='';                
@@ -347,7 +347,7 @@ class CKRS Extends MainPageSA {
                         $nama_tahun = $this->DMaster->getNamaTA($tahun);
                         $nama_semester = $this->setup->getSemester($semester);
 
-                        $dataReport=$datamhs;
+                        $dataReport = $datamhs;
                         $dataReport['krs'] = $this->KRS->DataKRS['krs'];        
                         $dataReport['matakuliah'] = $this->KRS->DataKRS['matakuliah'];        
                         $dataReport['nama_tahun'] = $nama_tahun;
@@ -371,13 +371,13 @@ class CKRS Extends MainPageSA {
                 if ($repeater->Items->Count() > 0) {
                     switch($_SESSION['outputreport']) {
                         case 'summarypdf':
-                            $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
+                            $messageprintout = "Mohon maaf Print out pada mode summary pdf belum kami support.";                
                         break;
                         case 'summaryexcel':
-                            $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                            $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
                         break;
                         case 'excel2007':
-                            $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                            $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                         break;
                         case 'pdf':               
                             $tahun = $_SESSION['ta'];
@@ -402,17 +402,17 @@ class CKRS Extends MainPageSA {
                             $this->report->setDataReport($dataReport); 
                             $this->report->setMode($_SESSION['outputreport']);
                             
-                            $messageprintout="Data Kartu Rencana Studi dari $awal s.d $akhir: <br/>";                            
+                            $messageprintout = "Data Kartu Rencana Studi dari $awal s.d $akhir: <br/>";                            
                             $this->report->printKRSAll($this->DMaster, $repeater);
                         break;
                     }
                 }else{
-                    $messageprintout="Tidak ada data yang bisa di Cetak.";
+                    $messageprintout = "Tidak ada data yang bisa di Cetak.";
                 }
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
+        $this->lblPrintout->Text = "Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
         $this->modalPrintOut->show(); 
         
 	}    

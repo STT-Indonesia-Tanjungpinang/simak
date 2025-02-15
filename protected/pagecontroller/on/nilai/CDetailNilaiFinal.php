@@ -129,7 +129,7 @@ class CDetailNilaiFinal extends MainPageON {
           $n_kual = $inputan->cmbNilai->Text=='none'?'':$inputan->cmbNilai->Text;
           if ($n_kual == '' || $n_kual == '-') {						
             $this->DB->deleteRecord("transkrip_asli_detail WHERE idtranskrip_detail = $idtranskrip_detail");
-          }elseif ($n_kual_sebelumnya != $n_kual) {		
+          }else if ($n_kual_sebelumnya != $n_kual) {		
             $str="UPDATE transkrip_asli_detail SET n_kual='$n_kual' WHERE idtranskrip_detail = $idtranskrip_detail";						
             $this->DB->updateRecord($str);   
           }
@@ -253,15 +253,15 @@ class CDetailNilaiFinal extends MainPageON {
     $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';   
     
-    $dataReport=$_SESSION['currentPageNilaiFinal']['DataMHS']; 
+    $dataReport = $_SESSION['currentPageNilaiFinal']['DataMHS']; 
     $nim = $dataReport['nim'];
     if ($dataReport['k_status'] == 'L') {
       switch($_SESSION['outputreport']) {
         case 'summarypdf':
-          $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+          $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
         break;
         case 'summaryexcel':
-          $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+          $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
         break;
         case 'excel2007':
           $messageprintout='Nilai Final : ';                     
@@ -310,7 +310,7 @@ class CDetailNilaiFinal extends MainPageON {
       $this->lblPrintout->Text = 'Nilai Final';
       $this->modalPrintOut->show();
     }else{
-      $this->lblContentMessageError->Text="Mahasiswa dengan NIM ($nim) statusnya belum lulus !!!.";
+      $this->lblContentMessageError->Text = "Mahasiswa dengan NIM ($nim) statusnya belum lulus !!!.";
       $this->modalMessageError->show();
     }
   } 

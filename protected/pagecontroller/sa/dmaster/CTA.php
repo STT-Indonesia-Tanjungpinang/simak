@@ -96,7 +96,7 @@ class CTA extends MainPageSA {
 		$tahun = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('ta', 'formulir_pendaftaran', $tahun)) {
             $this->lblHeaderMessageError->Text = 'Menghapus T.A';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus T.A ($tahun) karena sedang digunakan di pengampu penyelenggaraan.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus T.A ($tahun) karena sedang digunakan di pengampu penyelenggaraan.";
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("ta WHERE tahun = $tahun");

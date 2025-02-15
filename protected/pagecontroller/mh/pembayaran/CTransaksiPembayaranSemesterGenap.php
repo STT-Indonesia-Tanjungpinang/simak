@@ -32,7 +32,7 @@ class CTransaksiPembayaranSemesterGenap Extends MainPageMHS {
     }
     public function setInfoToolbar() {        
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGenap']['ta']);        		
-		$this->labelModuleHeader->Text="T.A $ta";        
+		$this->labelModuleHeader->Text = "T.A $ta";        
 	}
     public function populateData() {
         $datamhs = $this->Pengguna->getDataUser();

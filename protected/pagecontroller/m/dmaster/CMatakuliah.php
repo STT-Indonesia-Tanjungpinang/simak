@@ -125,7 +125,7 @@ class CMatakuliah extends MainPageM {
       if ($v['idkonsentrasi'] == 0) {
         if($v['islintas_prodi'] == 1){
           $v['keterangan'] = 'Matkul Lintas Prodi';                    			
-        }elseif($v['ispilihan'] == 1) {
+        }else if($v['ispilihan'] == 1) {
           $v['keterangan'] = 'Matkul Pilihan';                    
         }else {
           $v['keterangan'] = '-';                    
@@ -315,7 +315,7 @@ class CMatakuliah extends MainPageM {
     if ($this->DB->checkRecordIsExist ('kmatkul', 'penyelenggaraan', $id)) {	
       $kmatkul = $this->Demik->getKMatkul($id);
       $this->lblHeaderMessageError->Text = 'Menghapus Matakuliah';
-      $this->lblContentMessageError->Text="Anda tidak bisa menghapus matakuliah dengan kode ($kmatkul) karena sedang digunakan di penyelenggaraan.";
+      $this->lblContentMessageError->Text = "Anda tidak bisa menghapus matakuliah dengan kode ($kmatkul) karena sedang digunakan di penyelenggaraan.";
       $this->modalMessageError->Show();
     }else{
       $this->DB->deleteRecord("matakuliah WHERE kmatkul='$id'");

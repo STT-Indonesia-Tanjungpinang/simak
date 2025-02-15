@@ -57,7 +57,7 @@ class CPenyelenggaraan extends MainPageM {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
-		$text="Program Studi $ps TA $ta Semester $semester";
+		$text = "Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
 	public function populateData($search = false) {	
@@ -153,7 +153,7 @@ class CPenyelenggaraan extends MainPageM {
 		$id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist ('idpenyelenggaraan', 'krsmatkul', $id)) {	            
             $this->lblHeaderMessageError->Text = 'Menghapus Penyelenggaraan Matakuliah';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus penyelenggaraan ini, karena sedang digunakan di KRS Mahasiswa.";
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("penyelenggaraan WHERE idpenyelenggaraan = $id");
@@ -166,10 +166,10 @@ class CPenyelenggaraan extends MainPageM {
 	    $this->linkOutput->NavigateUrl='#';
 	    switch($_SESSION['outputreport']) {
 	        case 'summarypdf':
-	            $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";
+	            $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";
 	            break;
 	        case 'summaryexcel':
-	            $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";
+	            $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";
 	            break;
 	        case 'excel2007':
 	            $dataReport['kjur'] = $_SESSION['kjur'];
@@ -183,11 +183,11 @@ class CPenyelenggaraan extends MainPageM {
 	            $this->report->setDataReport($dataReport);
 	            $this->report->setMode($_SESSION['outputreport']);
 	            
-	            $messageprintout="Daftar Penyelenggaraan Matakuliah : <br/>";
+	            $messageprintout = "Daftar Penyelenggaraan Matakuliah : <br/>";
 	            $this->report->printPenyelenggaraan($this->Demik);
             break;
 	        case 'pdf':
-	            $messageprintout="Mohon maaf Print out pada mode excel pdf belum kami support.";
+	            $messageprintout = "Mohon maaf Print out pada mode excel pdf belum kami support.";
             break;
 	    }
 	    $this->lblMessagePrintout->Text = $messageprintout;

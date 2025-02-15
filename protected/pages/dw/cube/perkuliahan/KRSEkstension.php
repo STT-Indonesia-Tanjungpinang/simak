@@ -4,7 +4,7 @@ class KRSEkstension Extends MainPageDW {
 	/**
 	* total  sks
 	*/
-	public $totalSks=0;
+	public $totalSks = 0;
 	/**
 	* total  matakuliah
 	*/
@@ -345,7 +345,7 @@ class KRSEkstension Extends MainPageDW {
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);
                 
-                $dataReport=$datamhs;
+                $dataReport = $datamhs;
                 $dataReport['krs'] = $this->KRS->DataKRS['krs'];        
                 $dataReport['matakuliah'] = $this->KRS->DataKRS['matakuliah'];        
                 $dataReport['nama_tahun'] = $nama_tahun;

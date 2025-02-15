@@ -186,7 +186,7 @@ class CKRS extends MainPageMHS {
         $this->redirect('perkuliahan.KRS', true);
       //}else{
       //    $this->modalMessageError->show();
-      //    $this->lblContentMessageError->Text="Tidak bisa bergabung dengan kelas ini, karena kalau ditambah dengan Anda akan melampau kapasitas kelas ($kapasitas). Silahkan Refresh Web Browser Anda.";					
+      //    $this->lblContentMessageError->Text = "Tidak bisa bergabung dengan kelas ini, karena kalau ditambah dengan Anda akan melampau kapasitas kelas ($kapasitas). Silahkan Refresh Web Browser Anda.";					
       //}
     }
   }
@@ -197,7 +197,7 @@ class CKRS extends MainPageMHS {
     $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
 
-    $dataReport=$this->Pengguna->getDataUser();
+    $dataReport = $this->Pengguna->getDataUser();
     $tahun = $_SESSION['ta'];
     $semester = $_SESSION['semester'];
     $nama_tahun = $this->DMaster->getNamaTA($tahun);
@@ -210,13 +210,13 @@ class CKRS extends MainPageMHS {
     if ($jumlah_kelas >= $jumlah_matkul) {
       switch($_SESSION['outputreport']) {
         case 'summarypdf':
-          $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+          $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
         break;
         case 'summaryexcel':
-          $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+          $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
         break;
         case 'excel2007':
-          $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+          $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
         break;
         case 'pdf':                                
           $dataReport['krs'] = $_SESSION['currentPageKRS']['DataKRS']['krs'];        
@@ -237,11 +237,11 @@ class CKRS extends MainPageMHS {
         break;
       }
       $this->lblMessagePrintout->Text = $messageprintout;
-      $this->lblPrintout->Text="Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
+      $this->lblPrintout->Text = "Kartu Rencana Studi T.A $nama_tahun Semester $nama_semester";
       $this->modalPrintOut->show();
     }else{
       $this->modalMessageError->show();
-      $this->lblContentMessageError->Text="Mohon untuk mengisi seluruh kelas terlebih dahulu.";
+      $this->lblContentMessageError->Text = "Mohon untuk mengisi seluruh kelas terlebih dahulu.";
     }       
      
   }
@@ -253,7 +253,7 @@ class CKRS extends MainPageMHS {
     $this->linkOutput->Text = '';
     $this->linkOutput->NavigateUrl='#';
 
-    $dataReport=$this->Pengguna->getDataUser();
+    $dataReport = $this->Pengguna->getDataUser();
     $tahun = $_SESSION['ta'];
     $semester = $_SESSION['semester'];
     $nama_tahun = $this->DMaster->getNamaTA($tahun);
@@ -263,25 +263,25 @@ class CKRS extends MainPageMHS {
     $dataidkrs[$idkrs] = $idkrs;
 
     if ($this->DB->checkRecordIsExist('idkrs', 'siuas_pembayaran_belum_lunas', $idkrs)==false) {
-      $messageprintout="Mohon maaf, anda tidak bisa mencetak KSM karena administrasi, Silahkan hubungi bagian keuangan.";
+      $messageprintout = "Mohon maaf, anda tidak bisa mencetak KSM karena administrasi, Silahkan hubungi bagian keuangan.";
     }else{
       switch($_SESSION['outputreport']) {
         case 'summarypdf':
-          $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+          $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
         break;
         case 'summaryexcel':
-          $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+          $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
         break;
         case 'excel2007':
-          $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+          $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
         break;
         case 'pdf':                                
               
-          $messageprintout="";
+          $messageprintout = "";
           $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
           $this->DB->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
           $r = $this->DB->getRecord($str);	           
-          $dataReport=$r[1];
+          $dataReport = $r[1];
           
           $dataReport['nama_tahun'] = $nama_tahun; 
           $dataReport['nama_semester'] = $nama_semester;
@@ -304,7 +304,7 @@ class CKRS extends MainPageMHS {
       }
     }
     $this->lblMessagePrintout->Text = $messageprintout;
-    $this->lblPrintout->Text="Kartu Studi Mahasiswa T.A $nama_tahun Semester $nama_semester";
+    $this->lblPrintout->Text = "Kartu Studi Mahasiswa T.A $nama_tahun Semester $nama_semester";
     $this->modalPrintOut->show();
   }	
   
@@ -342,7 +342,7 @@ class CKRS extends MainPageMHS {
           $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
           $this->db->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
           $r = $this->db->getRecord($str);	           
-          $dataReport=$r[1];
+          $dataReport = $r[1];
 
           $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];                
           $nama_tahun = $objDMaster->getNamaTA($dataReport['tahun']);   
@@ -410,7 +410,7 @@ class CKRS extends MainPageMHS {
           $rpt->Cell(15, 5, 'TTD', 1, 0, 'C');
 
           $daftar_matkul = $objKRS->getDetailKRS($idkrs);
-          $totalSks=0;
+          $totalSks = 0;
           $row+=5;				
           $rpt->SetFont ('helvetica', '',8);
           while (list($k, $v) = each($daftar_matkul)) {
@@ -546,7 +546,7 @@ class CKRS extends MainPageMHS {
         $rpt->Cell(30, 5, 'UAS', 1, 0, 'C');
         
         $daftar_matkul = $objKRS->getDetailKRS($this->report->dataReport['idkrs']);
-        $totalSks=0;
+        $totalSks = 0;
         $row+=5;				
         $rpt->SetFont ('helvetica', '',8);
         while (list($k, $v) = each($daftar_matkul)) {

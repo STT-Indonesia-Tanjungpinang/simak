@@ -60,7 +60,7 @@ class CTranskripFinal extends MainPageM {
     $ps = $_SESSION['daftar_jurusan'][$kjur];
     $ta = $this->DMaster->getNamaTA($_SESSION['ta']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
-    $text="Program Studi $ps TA $ta Semester $semester";
+    $text = "Program Studi $ps TA $ta Semester $semester";
     return $text;
   }
   public function renderCallback($sender, $param) {
@@ -161,10 +161,10 @@ class CTranskripFinal extends MainPageM {
         $nim = $this->getDataKeyField($sender, $this->RepeaterS);				
         switch($_SESSION['outputreport']) {
           case 'summarypdf':
-            $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
           case 'summaryexcel':
-            $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
           break;
           case 'excel2007':
             $messageprintout='Transkrip Final : ';
@@ -249,16 +249,16 @@ class CTranskripFinal extends MainPageM {
       case 'btnPrintTranskripFinalAll':                 
         switch($_SESSION['outputreport']) {
           case 'summarypdf':
-            $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode summary pdf belum kami support.";                
           break;
           case 'summaryexcel':
-            $messageprintout="Mohon maaf Print out pada mode summary excel belum kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode summary excel belum kami support.";                
           break;
           case 'excel2007':
-            $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
           break;
           case 'pdf':
-            $messageprintout="Mohon maaf Print out pada mode pdf tidak kami support.";                                            
+            $messageprintout = "Mohon maaf Print out pada mode pdf tidak kami support.";                                            
           break;
         }
       break;

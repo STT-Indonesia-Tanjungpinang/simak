@@ -152,7 +152,7 @@ class CKuesioner extends MainPageMHS {
                 }
             }else{
                 $this->modalMessageError->show();
-                $this->lblContentMessageError->Text="[nilai idkrsmatkul kosong]. Gunakan internet yang lebih cepat atau hubungi Sekretariat Prodi.";
+                $this->lblContentMessageError->Text = "[nilai idkrsmatkul kosong]. Gunakan internet yang lebih cepat atau hubungi Sekretariat Prodi.";
             }            
         }
 	}    

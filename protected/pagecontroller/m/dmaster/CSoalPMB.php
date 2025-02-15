@@ -150,7 +150,7 @@ class CSoalPMB extends MainPageM {
         $id = $this->getDataKeyField($sender, $this->RepeaterS);
         if ($this->DB->checkRecordIsExist('idsoal', 'jawaban_ujian', $id)) {
             $this->lblHeaderMessageError->Text = 'Menghapus Soal PMB';
-            $this->lblContentMessageError->Text="Anda tidak bisa menghapus soal dengan ID ($id) karena sedang digunakan di jawaban ujian.";
+            $this->lblContentMessageError->Text = "Anda tidak bisa menghapus soal dengan ID ($id) karena sedang digunakan di jawaban ujian.";
             $this->modalMessageError->Show();
         }else{
             $this->DB->deleteRecord("soal WHERE idsoal = $id"); 

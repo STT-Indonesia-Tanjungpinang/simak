@@ -68,7 +68,7 @@ class CNilaiPerMahasiswa extends MainPageON {
   public function setInfoToolbar() {                
     $ta = $this->DMaster->getNamaTA($_SESSION['currentPageNilaiPerMahasiswa']['ta']);		
     $semester = $this->setup->getSemester($_SESSION['currentPageNilaiPerMahasiswa']['semester']);		
-    $this->lblModulHeader->Text="T.A $ta Semester $semester";        
+    $this->lblModulHeader->Text = "T.A $ta Semester $semester";        
   }
   public function cekNIM($sender, $param) {		
     $nim = addslashes($param->Value);		
@@ -191,7 +191,7 @@ class CNilaiPerMahasiswa extends MainPageON {
               $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'input', $n_kual, $nilai_sebelumnya, $extra);
             }
           }
-          elseif($n_kual != 'none' && $n_kual != $nilai_sebelumnya)
+          else if($n_kual != 'none' && $n_kual != $nilai_sebelumnya)
           {//update										
             $str = "UPDATE nilai_matakuliah SET n_kuan='$n_kuan',n_kual='$n_kual',userid_modif='$userid',tanggal_modif=NOW(),ket='dari $nilai_sebelumnya menjadi $n_kual' WHERE idkrsmatkul='$idkrsmatkul'";				
             $this->DB->updateRecord($str);
@@ -199,7 +199,7 @@ class CNilaiPerMahasiswa extends MainPageON {
             $extra = "idkrsmatkul=$idkrsmatkul";
             $this->Log->insertLogIntoNilaiMatakuliah($nim, $kmatkul, $nmatkul, 'update', $n_kual, $nilai_sebelumnya, $extra);
           }
-          elseif($nilai_sebelumnya != '' && $n_kual == 'none')
+          else if($nilai_sebelumnya != '' && $n_kual == 'none')
           {//delete
             $str = "nilai_matakuliah WHERE idkrsmatkul='$idkrsmatkul'";	
             $this->DB->deleteRecord($str);

@@ -90,7 +90,7 @@ class Logic_Akademik extends Logic_Mahasiswa {
 		if ($semester_sekarang == 1) {
 			$data['semester'] = 'Genap';
 			$data['ta'] = $tahun_sekarang . '-'.($tahun_sekarang+1);
-		}elseif($semester_sekarang == 2) {
+		}else if($semester_sekarang == 2) {
 			$data['semester'] = 'Ganjil';
 			$data['ta']=($tahun_sekarang+1) . '-'.($tahun_sekarang+2);
 		}

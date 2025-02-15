@@ -52,7 +52,7 @@ class CPembayaranCutiSemesterGanjil Extends MainPageMHS {
     }
     public function setInfoToolbar() {        
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta']);        		
-		$this->labelModuleHeader->Text="T.A $ta";        
+		$this->labelModuleHeader->Text = "T.A $ta";        
     }
     public function changeTbTA($sender, $param) {				
 		$_SESSION['currentPagePembayaranCutiSemesterGanjil']['ta'] = $this->tbCmbTA->Text;

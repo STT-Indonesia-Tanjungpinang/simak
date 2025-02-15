@@ -43,7 +43,7 @@ class CKUM extends MainPageK {
         $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);        		
-		$this->lblModulHeader->Text="$jenisujian Program Studi $ps T.A $ta";        
+		$this->lblModulHeader->Text = "$jenisujian Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;
@@ -218,7 +218,7 @@ class CKUM extends MainPageK {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout=""; 
+                $messageprintout = ""; 
                 foreach($this->RepeaterS->Items as $inputan) {						
                     $item=$inputan->hiddentoglelunas->getNamingContainer();
                     $idkrs = $this->RepeaterS->DataKeys[$item->getItemIndex()];
@@ -235,13 +235,13 @@ class CKUM extends MainPageK {
                 $this->report->printKUM($_SESSION['currentPageKUM']['jenisujian'], $dataidkrs, $this->KRS, $this->DMaster);                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";                 
+                $messageprintout = "Mohon maaf Print out pada mode excel belum kami support.";                 
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
@@ -257,20 +257,20 @@ class CKUM extends MainPageK {
         
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="Mohon maaf Print out pada mode excel belum kami support.";                 
+                $messageprintout = "Mohon maaf Print out pada mode excel belum kami support.";                 
             break;
             case 'pdf':
-                $messageprintout="";
+                $messageprintout = "";
                 $str = "SELECT krs.idkrs,vdm.no_formulir,vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.tempat_lahir,vdm.tanggal_lahir,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,vdm.tahun_masuk,vdm.semester_masuk,iddosen_wali,d.idkelas,d.k_status,krs.idsmt,krs.tahun,krs.tasmt,krs.sah FROM krs JOIN dulang d ON (d.nim=krs.nim) LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                 $this->DB->setFieldTable(array('idkrs', 'no_formulir', 'nim', 'nirm', 'nama_mhs', 'jk', 'tempat_lahir', 'tanggal_lahir', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'tahun_masuk', 'semester_masuk', 'iddosen_wali', 'idkelas', 'k_status', 'idsmt', 'tahun', 'tasmt', 'sah'));
                 $r = $this->DB->getRecord($str);	           
-                $dataReport=$r[1];
+                $dataReport = $r[1];
                 
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];                
                 $nama_tahun = $this->DMaster->getNamaTA($dataReport['tahun']);   

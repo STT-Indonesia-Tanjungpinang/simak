@@ -49,7 +49,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
 	}	
     public function setInfoToolbar() {        
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGenap']['ta']);        		
-		$this->labelModuleHeader->Text="T.A $ta";        
+		$this->labelModuleHeader->Text = "T.A $ta";        
 	}
     public function changeTbTA($sender, $param) {				
 		$_SESSION['currentPagePembayaranSemesterGenap']['ta'] = $this->tbCmbTA->Text;
@@ -101,7 +101,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
             if ($this->Finance->getLunasPembayaran($ta, $idsmt)) {
                 $this->lblContentMessageError->Text = 'Tidak bisa menambah Transaksi baru karena sudah lunas.';
                 $this->modalMessageError->show();
-            }elseif($this->DB->checkRecordIsExist('nim', 'transaksi', $nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
+            }else if($this->DB->checkRecordIsExist('nim', 'transaksi', $nim," AND tahun='$ta' AND idsmt='$idsmt' AND commited=0")) {
                 $this->lblContentMessageError->Text = 'Tidak bisa menambah Transaksi baru karena ada transaksi yang belum di Commit.';
                 $this->modalMessageError->show();
             }else{
@@ -112,7 +112,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
                 $userid = $this->Pengguna->getDataUser('userid');
 
                 $this->DB->query ('BEGIN');
-                $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',jumlah_sks=0,disc=0,tanggal=NOW(),userid='$userid',date_added=NOW(),date_modified=NOW()";
+                $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',jumlah_sks = 0,disc=0,tanggal=NOW(),userid='$userid',date_added=NOW(),date_modified=NOW()";
                 if ($this->DB->insertRecord($str)) {
                     $str = "SELECT idkombi,SUM(dibayarkan) AS sudah_dibayar FROM v_transaksi WHERE nim=$nim AND tahun = $ta AND idsmt=$idsmt AND commited=1 GROUP BY idkombi ORDER BY idkombi+1 ASC";
                     $this->DB->setFieldTable(array('idkombi', 'sudah_dibayar'));
@@ -130,7 +130,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
                         $biaya = $v['biaya'];
                         $idkombi = $v['idkombi'];
                         $sisa_bayar=isset($sudah_dibayarkan[$idkombi]) ? $biaya-$sudah_dibayarkan[$idkombi]:$biaya;
-                        $str = "INSERT INTO transaksi_detail SET idtransaksi_detail=NULL,no_transaksi = $no_transaksi,idkombi = $idkombi,dibayarkan = $sisa_bayar,jumlah_sks=0";
+                        $str = "INSERT INTO transaksi_detail SET idtransaksi_detail=NULL,no_transaksi = $no_transaksi,idkombi = $idkombi,dibayarkan = $sisa_bayar,jumlah_sks = 0";
                         $this->DB->insertRecord($str);
                     }                   
                     $this->DB->query('COMMIT');
@@ -166,19 +166,19 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
         $no_transaksi = $this->getDataKeyField($sender, $this->ListTransactionRepeater);
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
             break;
             case 'pdf':
                 $str = "SELECT t.no_transaksi,t.no_faktur,t.kjur,t.tahun,t.idsmt,t.idkelas,t.no_formulir,t.nim,vdm.nama_mhs,vdm.tahun_masuk,t.tanggal,t.userid,t.date_added,t.date_modified FROM transaksi t JOIN v_datamhs vdm ON (vdm.nim=t.nim) WHERE t.no_transaksi='$no_transaksi'";
                 $this->DB->setFieldTable(array('no_transaksi', 'no_faktur', 'kjur', 'tahun', 'idsmt', 'idkelas', 'no_formulir', 'nim', 'tahun_masuk', 'nama_mhs', 'tanggal', 'userid', 'date_added', 'date_modified'));
                 $r = $this->DB->getRecord($str);
-                $dataReport=$r[1];
+                $dataReport = $r[1];
 
                 $nama_tahun = $this->DMaster->getNamaTA($dataReport['tahun']);
                 $nama_semester = $this->setup->getSemester($dataReport['idsmt']);                  
@@ -191,7 +191,7 @@ class CPembayaranSemesterGenap Extends MainPageMHS {
                 $this->report->setDataReport($dataReport); 
                 $this->report->setMode($_SESSION['outputreport']);
 
-                $messageprintout="Faktur Pembayaran T.A $nama_tahun Semester Genap No. Transaksi $no_transaksi : <br/>";
+                $messageprintout = "Faktur Pembayaran T.A $nama_tahun Semester Genap No. Transaksi $no_transaksi : <br/>";
                 $this->report->printFakturPembayaranMHSLama();	
             break;
         }

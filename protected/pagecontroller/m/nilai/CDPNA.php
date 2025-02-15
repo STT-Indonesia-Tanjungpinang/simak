@@ -48,7 +48,7 @@ class CDPNA extends MainPageM {
         $ta = $_SESSION['ta'];		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
-		$this->lblModulHeader->Text="Program Studi $ps $ta Semester $semester";
+		$this->lblModulHeader->Text = "Program Studi $ps $ta Semester $semester";
         
 	}
 	public function changeTbTA($sender, $param) {				

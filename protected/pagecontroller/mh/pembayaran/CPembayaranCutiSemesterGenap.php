@@ -52,7 +52,7 @@ class CPembayaranCutiSemesterGenap Extends MainPageMHS {
     }
     public function setInfoToolbar() {        
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranCutiSemesterGenap']['ta']);        		
-		$this->labelModuleHeader->Text="T.A $ta";        
+		$this->labelModuleHeader->Text = "T.A $ta";        
     }
     public function changeTbTA($sender, $param) {				
 		$_SESSION['currentPagePembayaranCutiSemesterGenap']['ta'] = $this->tbCmbTA->Text;

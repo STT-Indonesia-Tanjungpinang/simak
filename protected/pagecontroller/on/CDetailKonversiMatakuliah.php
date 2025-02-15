@@ -119,14 +119,14 @@ class CDetailKonversiMatakuliah extends MainPageON {
         $this->createObj('reportnilai');             
         $this->linkOutput->Text = '';
         $this->linkOutput->NavigateUrl='#';
-        $dataReport=$_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'];                
+        $dataReport = $_SESSION['currentPageDetailKonversiMatakuliah']['DataKonversi'];                
         $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$dataReport['kjur']];
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
                 $messageprintout='Hasil konversi matakuliah :';                
@@ -156,7 +156,7 @@ class CDetailKonversiMatakuliah extends MainPageON {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text="Konversi Matakuliah";
+        $this->lblPrintout->Text = "Konversi Matakuliah";
         $this->modalPrintOut->show();
 	}
 }

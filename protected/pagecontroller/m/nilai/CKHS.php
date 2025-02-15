@@ -55,7 +55,7 @@ class CKHS extends MainPageM {
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$tahunmasuk = $_SESSION['currentPageKHS']['tahun_masuk'] == 'none'?'':'Tahun Masuk '.$this->DMaster->getNamaTA($_SESSION['currentPageKHS']['tahun_masuk']);		        
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta Semester $semester $tahunmasuk";        
 	}
     public function Page_Changed($sender, $param) {
 		$_SESSION['currentPageKHS']['page_num'] = $param->NewPageIndex;
@@ -154,7 +154,7 @@ class CKHS extends MainPageM {
 			$this->Nilai->setDataMHS(array('nim' => $nim));
             $bool=true;
             $ip='0.00';            
-            $sks=0;
+            $sks = 0;
             $status='-';
             $trstyle='';
             $dataipk=array('ipk' => '0.00', 'sks' => 0);
@@ -198,20 +198,20 @@ class CKHS extends MainPageM {
 			case 'btnPrintOutR':
                 switch($_SESSION['outputreport']) {
                     case 'summarypdf':
-                        $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
                     break;
                     case 'summaryexcel':
-                        $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
                     break;
                     case 'excel2007':
-                        $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                        $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
                     break;
                     case 'pdf':
                         $idkrs = $this->getDataKeyField($sender, $this->RepeaterS);	
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                         $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
                         $r = $this->DB->getRecord($str);	           
-                        $dataReport=$r[1];
+                        $dataReport = $r[1];
 
                         $dataReport['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($dataReport['iddosen_wali']);
 
@@ -239,7 +239,7 @@ class CKHS extends MainPageM {
                         $this->report->setDataReport($dataReport); 
                         $this->report->setMode($_SESSION['outputreport']);
 
-                        $messageprintout="Kartu Hasil Studi {$dataReport['nim']} : <br/>";
+                        $messageprintout = "Kartu Hasil Studi {$dataReport['nim']} : <br/>";
                         $this->report->printKHS($this->Nilai,true);	
                     break;
                 }                
@@ -249,7 +249,7 @@ class CKHS extends MainPageM {
                 if ($repeater->Items->Count() > 0) {
                     switch($_SESSION['outputreport']) {
                         case 'summarypdf':
-                            $messageprintout="Mohon maaf Print out pada mode summary pdf belum kami support.";                
+                            $messageprintout = "Mohon maaf Print out pada mode summary pdf belum kami support.";                
                         break;
                         case 'summaryexcel':
                             $tahun = $_SESSION['ta'];
@@ -279,12 +279,12 @@ class CKHS extends MainPageM {
                             $this->report->setDataReport($dataReport); 
                             $this->report->setMode('excel2007');
 
-                            $messageprintout="Summary Kartu Hasil Studi: <br/>";
+                            $messageprintout = "Summary Kartu Hasil Studi: <br/>";
                             $this->report->printSummaryKHS($this->Nilai, $this->DMaster,true);
 
                         break;
                         case 'excel2007':
-                            $messageprintout="Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
+                            $messageprintout = "Mohon maaf Print out pada mode excel 2007 tidak kami support.";                
                         break;
                         case 'pdf':
                             $tahun = $_SESSION['ta'];
@@ -320,12 +320,12 @@ class CKHS extends MainPageM {
                             $this->report->setDataReport($dataReport); 
                             $this->report->setMode($_SESSION['outputreport']);
                             
-                            $messageprintout="Data Kartu Hasil Studi dari $awal s.d $akhir: <br/>";                            
+                            $messageprintout = "Data Kartu Hasil Studi dari $awal s.d $akhir: <br/>";                            
                             $this->report->printKHSAll($this->Nilai, $this->DMaster, $repeater,true);	
                         break;                    
                     }
                 }else{
-                    $messageprintout="Tidak ada data yang bisa di Cetak.";
+                    $messageprintout = "Tidak ada data yang bisa di Cetak.";
                 }
             break;
 		}		

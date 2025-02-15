@@ -69,7 +69,7 @@ class CFormulirPendaftaran extends MainPageM
     $ps = $_SESSION['daftar_jurusan'][$kjur];
     $tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);
     $semester = $this->setup->getSemester($_SESSION['semester']);
-    $text="Program Studi $ps Tahun Pendaftaran $tahunmasuk Semester $semester";
+    $text = "Program Studi $ps Tahun Pendaftaran $tahunmasuk Semester $semester";
     return $text;
   }
   public function searchRecord($sender, $param)
@@ -182,7 +182,7 @@ class CFormulirPendaftaran extends MainPageM
       if ($item->DataItem['ket'] == 'dulang') {
         $nim = $item->DataItem['nim'];
         $item->lblKeterangan->CssClass='label label-success';
-        $item->lblKeterangan->Text="Sudah [$nim]";
+        $item->lblKeterangan->Text = "Sudah [$nim]";
         $item->btnDelete->Enabled = false;
         $item->btnDelete->Attributes->OnClick="alert('Tidak bisa dihapus karena sudah daftar ulang');return false;";			
       }else{
@@ -480,10 +480,10 @@ class CFormulirPendaftaran extends MainPageM
       case 'btnPrintOutFormulirPendaftaran':
         switch($_SESSION['outputreport']) {
           case 'summarypdf':
-            $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
           case 'summaryexcel':
-            $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
           break;
           case 'excel2007':
             $kjur = $_SESSION['kjur'];
@@ -503,7 +503,7 @@ class CFormulirPendaftaran extends MainPageM
             $dataReport['offset'] = $_SESSION['currentPageFormulirPendaftaran']['offset'];         
             $dataReport['limit'] = $_SESSION['currentPageFormulirPendaftaran']['limit'];         
 
-            $messageprintout="Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
+            $messageprintout = "Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
             $dataReport['linkoutput'] = $this->linkOutput;         
             $this->report->setDataReport($dataReport); 
             $this->report->setMode($_SESSION['outputreport']);
@@ -527,7 +527,7 @@ class CFormulirPendaftaran extends MainPageM
             $dataReport['offset'] = $_SESSION['currentPageFormulirPendaftaran']['offset'];         
             $dataReport['limit'] = $_SESSION['currentPageFormulirPendaftaran']['limit'];         
 
-            $messageprintout="Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
+            $messageprintout = "Daftar Formulir Pendaftaran PS $nama_prodi Tahun Masuk $nama_tahun Semester $nama_semester : <br/>";
             $dataReport['linkoutput'] = $this->linkOutput;         
             $this->report->setDataReport($dataReport);   
             $_SESSION['outputcompress'] = $_SESSION['outputcompress']=='none'?'zip':$_SESSION['outputcompress'];
@@ -539,13 +539,13 @@ class CFormulirPendaftaran extends MainPageM
       case 'btnPrintOutFormulirPendaftaranR':
         switch($_SESSION['outputreport']) {
           case 'summarypdf':
-            $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
           break;
           case 'summaryexcel':
-            $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
           break;
           case 'excel2007':
-            $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+            $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
           break;
           case 'pdf':
             $no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);
@@ -553,7 +553,7 @@ class CFormulirPendaftaran extends MainPageM
             $dataReport['linkoutput'] = $this->linkOutput; 
             $this->report->setDataReport($dataReport);      
             $this->report->setMode($_SESSION['outputreport']);
-            $messageprintout="Formulir Pendaftaran $no_formulir : <br/>";
+            $messageprintout = "Formulir Pendaftaran $no_formulir : <br/>";
             $this->report->printFormulirPendaftaran($_SESSION['daftar_jurusan'], $this->DMaster);				
           break;
         }

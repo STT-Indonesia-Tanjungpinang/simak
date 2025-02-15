@@ -168,7 +168,7 @@ class MainPage extends TPage
    * untuk menampilkan forum diskusi home [forumdiskusi]
    * @var boolean
    */
-  public $showForumDiskusiHome=false;
+  public $showForumDiskusiHome = false;
   /**
    * untuk menampilkan forum diskusi baru [forumdiskusi]
    * @var boolean
@@ -275,7 +275,7 @@ class MainPage extends TPage
   /**
   * Redirect
   */
-  public function redirect ($page, $automaticpage=false, $param=array()) {
+  public function redirect ($page, $automaticpage = false, $param=array()) {
     $this->Response->Redirect($this->constructUrl($page, $automaticpage, $param));	
   }	 
   /**
@@ -300,7 +300,7 @@ class MainPage extends TPage
   /**
    * digunakan untuk membuat url
    */
-  public function constructUrl($page, $automaticpage=false, $param=array()) {              
+  public function constructUrl($page, $automaticpage = false, $param=array()) {              
     $url=$page;
     if ($automaticpage) {
       $this->Pengguna = $this->getLogic('Users');

@@ -148,16 +148,16 @@ class CDetailDPNA extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'pdf':
-                $dataReport=$_SESSION['currentPageDPNA']['DataDPNA'];        
+                $dataReport = $_SESSION['currentPageDPNA']['DataDPNA'];        
                 $nama_matakuliah=$dataReport['nmatkul'];
                 
-                $messageprintout="Matakuliah $nama_matakuliah";
+                $messageprintout = "Matakuliah $nama_matakuliah";
                 $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
                 $dataReport['nama_jabatan_dpna'] = $this->setup->getSettingValue('nama_jabatan_dpna');
                 $dataReport['nama_penandatangan_dpna'] = $this->setup->getSettingValue('nama_penandatangan_dpna');
@@ -172,10 +172,10 @@ class CDetailDPNA extends MainPageM {
                 
             break;
             case 'excel2007':
-                $dataReport=$_SESSION['currentPageDPNA']['DataDPNA'];        
+                $dataReport = $_SESSION['currentPageDPNA']['DataDPNA'];        
                 $nama_matakuliah=$dataReport['nmatkul'];
                 
-                $messageprintout="Matakuliah $nama_matakuliah";
+                $messageprintout = "Matakuliah $nama_matakuliah";
 
                 $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
                 $dataReport['nama_jabatan_dpna'] = $this->setup->getSettingValue('nama_jabatan_dpna');

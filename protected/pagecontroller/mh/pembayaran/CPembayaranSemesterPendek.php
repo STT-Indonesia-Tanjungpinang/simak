@@ -33,7 +33,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
     }
     public function setInfoToolbar() {        
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['ta']);        		
-		$this->labelModuleHeader->Text="T.A $ta";        
+		$this->labelModuleHeader->Text = "T.A $ta";        
     } 
     public function changeTbTA($sender, $param) {				
 		$_SESSION['currentPagePembayaranSemesterPendek']['ta'] = $this->tbCmbTA->Text;
@@ -97,7 +97,7 @@ class CPembayaranSemesterPendek Extends MainPageMHS {
                     $userid = $this->Pengguna->getDataUser('userid');
 
                     $this->DB->query ('BEGIN');
-                    $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',jumlah_sks=0,disc=0,tanggal=NOW(),userid='$userid',date_added=NOW(),date_modified=NOW()";					
+                    $str = "INSERT INTO transaksi SET no_transaksi = $no_transaksi,no_faktur='$no_faktur',kjur='$ps',tahun='$ta',idsmt='$idsmt',idkelas='$idkelas',no_formulir='$no_formulir',nim='$nim',jumlah_sks = 0,disc=0,tanggal=NOW(),userid='$userid',date_added=NOW(),date_modified=NOW()";					
                     if ($this->DB->insertRecord($str)) {
                         $str = "INSERT INTO transaksi_detail (idtransaksi_detail,no_transaksi,idkombi,dibayarkan,jumlah_sks) VALUES(NULL, $no_transaksi,14,0,0)";
                         $this->DB->insertRecord($str);

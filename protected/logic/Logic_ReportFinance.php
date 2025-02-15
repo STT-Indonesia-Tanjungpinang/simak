@@ -319,7 +319,7 @@ class Logic_ReportFinance extends Logic_Report {
     }
 
     public function printFakturPembayaranMHSLama() {
-        $dataReport=$this->dataReport;
+        $dataReport = $this->dataReport;
         $no_transaksi = $dataReport['no_transaksi'];
         $nama_tahun = $dataReport['nama_tahun'];
         $nama_semester = $dataReport['nama_semester'];

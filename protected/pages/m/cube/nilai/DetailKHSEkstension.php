@@ -89,7 +89,7 @@ class DetailKHSEkstension extends MainPageM {
                 $semester = $_SESSION['currentPageDetailKHSEkstension']['DataMHS']['idsmt'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);        
-                $dataReport=$_SESSION['currentPageDetailKHSEkstension']['DataMHS'];
+                $dataReport = $_SESSION['currentPageDetailKHSEkstension']['DataMHS'];
 
                 $dataReport['ta'] = $tahun;
                 $dataReport['semester'] = $semester;

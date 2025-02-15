@@ -35,7 +35,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
 				$this->btnGo->Enabled = false;
 				$this->tbCmbTA->Enabled = false;
 			}else{
-				$this->linkDetailPembayaran->Visible=false;
+				$this->linkDetailPembayaran->Visible = false;
 			}
             
             $this->populateData();
@@ -46,7 +46,7 @@ class CPembayaranSemesterPendek Extends MainPageK {
         $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterPendek']['ta']);        		
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;

@@ -20,14 +20,14 @@ class CTranskripSementara extends MainPageMHS {
 	protected function populateData() {		
         $datamhs = $this->Pengguna->getDataUser();
         $this->Nilai->setDataMHS($datamhs);
-		$transkrip = $this->Nilai->getTranskrip(true,true);		
+		$transkrip = $this->Nilai->getTranskrip(true, true);		
         
 		$this->RepeaterS->DataSource = $transkrip;
 		$this->RepeaterS->dataBind();		
 	}
 	public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             		
-        $dataReport=$this->Pengguna->getDataUser();  
+        $dataReport = $this->Pengguna->getDataUser();  
         $dataReport['cek_isikuesioner']=true;
         $dataReport['linkoutput'] = $this->linkOutput; 
         $this->report->setDataReport($dataReport); 

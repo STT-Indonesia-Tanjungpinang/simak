@@ -35,16 +35,16 @@ class Logic_Kuesioner extends Logic_Akademik {
         if ($totalnilai >= $skor_terendah && $totalnilai < $maks_sangatburuk) {
             $n_kuan=1;
             $keterangan='SANGAT BURUK';
-        }elseif ($totalnilai >= $maks_sangatburuk && $totalnilai < $maks_buruk) {
+        }else if ($totalnilai >= $maks_sangatburuk && $totalnilai < $maks_buruk) {
             $n_kuan=2;
             $keterangan='BURUK';
-        }elseif ($totalnilai >= $maks_buruk && $totalnilai < $maks_sedang) {
+        }else if ($totalnilai >= $maks_buruk && $totalnilai < $maks_sedang) {
             $n_kuan=3;
             $keterangan='SEDANG';
-        }elseif ($totalnilai >= $maks_sedang && $totalnilai < $maks_baik) {
+        }else if ($totalnilai >= $maks_sedang && $totalnilai < $maks_baik) {
             $n_kuan=4;
             $keterangan='BAIK';
-        }elseif ($totalnilai >= $maks_baik){
+        }else if ($totalnilai >= $maks_baik){
             $n_kuan=5;
             $keterangan='SANGAT BAIK';
         }else{
@@ -55,7 +55,7 @@ class Logic_Kuesioner extends Logic_Akademik {
         if ($commandparameter == 'insert') {
             $str = "INSERT INTO kuesioner_hasil (idpengampu_penyelenggaraan, jumlah_mhs, total_nilai, jumlah_soal, skor_tertinggi, skor_terendah, intervals, maks_sangatburuk, maks_buruk, maks_sedang, maks_baik, maks_sangatbaik, n_kuan, n_kual) VALUES ($idpengampu_penyelenggaraan, $jumlah_mhs, $totalnilai, $jumlahsoal, $skor_tertinggi, $skor_terendah, $interval, $maks_sangatburuk, $maks_buruk, $maks_sedang, $maks_baik, $maks_sangatbaik, $n_kuan,'$keterangan')";
             $this->db->insertRecord($str);
-        }elseif($commandparameter == 'update') {
+        }else if($commandparameter == 'update') {
             $str = "UPDATE kuesioner_hasil SET jumlah_mhs = $jumlah_mhs, total_nilai = $totalnilai, jumlah_soal=$jumlahsoal, skor_tertinggi = $skor_tertinggi, skor_terendah=$skor_terendah, intervals = $interval, maks_sangatburuk = $maks_sangatburuk, maks_buruk = $maks_buruk, maks_sedang=$maks_sedang, maks_baik = $maks_baik, maks_sangatbaik = $maks_sangatbaik, n_kuan = $n_kuan, n_kual='$keterangan' WHERE idpengampu_penyelenggaraan = $idpengampu_penyelenggaraan";            
             $this->db->updateRecord($str);
         }

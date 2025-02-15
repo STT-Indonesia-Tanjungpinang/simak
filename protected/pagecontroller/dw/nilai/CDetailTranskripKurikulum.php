@@ -4,7 +4,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
 	public function onLoad($param) {
 		parent::onLoad($param);							
 		$this->showSubMenuAkademikNilai = true;
-        $this->showTranskripKurikulum=true;    
+        $this->showTranskripKurikulum = true;    
         $this->createObj('Nilai');
         
 		if (!$this->IsPostBack && !$this->IsCallback) {
@@ -54,7 +54,7 @@ class CDetailTranskripKurikulum extends MainPageDW {
 	}
 	public function printOut($sender, $param) {	
         $this->createObj('reportnilai');             		
-        $dataReport=$_SESSION['currentPageDetailTranskripKurikulum']['DataMHS'];  
+        $dataReport = $_SESSION['currentPageDetailTranskripKurikulum']['DataMHS'];  
         $dataReport['nama_pt_alias'] = $this->setup->getSettingValue('nama_pt_alias');
         $dataReport['nama_jabatan_transkrip'] = $this->setup->getSettingValue('nama_jabatan_transkrip');
         $dataReport['nama_penandatangan_transkrip'] = $this->setup->getSettingValue('nama_penandatangan_transkrip');

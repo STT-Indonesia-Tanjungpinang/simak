@@ -85,13 +85,13 @@ class CDetailKHS extends MainPageDW {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="Mohon maaf Print out pada mode excel 2007 belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode excel 2007 belum kami support.";                
             break;
             case 'pdf':                
                 $messageprintout='';
@@ -99,7 +99,7 @@ class CDetailKHS extends MainPageDW {
                 $semester = $_SESSION['currentPageDetailKHS']['DataMHS']['idsmt'];
                 $nama_tahun = $this->DMaster->getNamaTA($tahun);
                 $nama_semester = $this->setup->getSemester($semester);        
-                $dataReport=$_SESSION['currentPageDetailKHS']['DataMHS'];
+                $dataReport = $_SESSION['currentPageDetailKHS']['DataMHS'];
 
                 $dataReport['ta'] = $tahun;
                 $dataReport['semester'] = $semester;
@@ -124,7 +124,7 @@ class CDetailKHS extends MainPageDW {
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text="Kartu Hasil Studi T.A $nama_tahun Semester $nama_semester";
+        $this->lblPrintout->Text = "Kartu Hasil Studi T.A $nama_tahun Semester $nama_semester";
         $this->modalPrintOut->show();
 	}
 }

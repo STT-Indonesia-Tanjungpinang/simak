@@ -30,11 +30,11 @@ class CPembayaranSemesterGenap Extends MainPageK {
 			$this->tbCmbKelas->Text = $_SESSION['currentPagePembayaranSemesterGenap']['kelas'];			
 			$this->tbCmbKelas->dataBind();	            
             if ($bool){
-                $this->linkDetailPembayaran->Visible=false;
+                $this->linkDetailPembayaran->Visible = false;
                 $this->linkDetailPembayaran->NavigateUrl='#';  
             } else {                
-                $this->txtNIM->Visible=false;
-                $this->btnGo->Visible=false;
+                $this->txtNIM->Visible = false;
+                $this->btnGo->Visible = false;
                 $this->linkDetailPembayaran->Visible=true;
                 $this->linkDetailPembayaran->NavigateUrl = $this->constructUrl('pembayaran.DetailPembayaranSemesterGenap', true, array('id' => $_SESSION['currentPagePembayaranSemesterGenap']['DataMHS']['nim']));
             }                
@@ -46,7 +46,7 @@ class CPembayaranSemesterGenap Extends MainPageK {
         $kjur = $_SESSION['kjur'];        
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $ta = $this->DMaster->getNamaTA($_SESSION['currentPagePembayaranSemesterGenap']['ta']);        		
-		$this->lblModulHeader->Text="Program Studi $ps T.A $ta";        
+		$this->lblModulHeader->Text = "Program Studi $ps T.A $ta";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;

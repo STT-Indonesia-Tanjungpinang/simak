@@ -45,7 +45,7 @@ class CKuesioner extends MainPageM {
         $ta = $_SESSION['ta'];		
         $semester = $this->setup->getSemester($_SESSION['semester']);
 		$ta = 'T.A '.$this->DMaster->getNamaTA($_SESSION['ta']);		        
-		$this->lblModulHeader->Text="Program Studi $ps $ta Semester $semester";
+		$this->lblModulHeader->Text = "Program Studi $ps $ta Semester $semester";
         
 	}
 	public function changeTbTA($sender, $param) {				
@@ -143,13 +143,13 @@ class CKuesioner extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
 		switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
             case 'excel2007':
                 $tahun = $_SESSION['ta'];
@@ -170,7 +170,7 @@ class CKuesioner extends MainPageM {
                 $objKuesioner->setDataReport($dataReport); 
                 $objKuesioner->setMode('excel2007');               
                 $objKuesioner->printSummaryKuesioner($this->Kuesioner);
-                $messageprintout="";
+                $messageprintout = "";
                 
             break;
         }        

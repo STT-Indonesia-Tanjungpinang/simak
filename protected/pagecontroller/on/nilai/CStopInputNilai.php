@@ -40,7 +40,7 @@ class CStopInputNilai extends MainPageON{
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
-		$text="Program Studi $ps TA $ta Semester $semester";
+		$text = "Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
     public function changeTbTA($sender, $param) {

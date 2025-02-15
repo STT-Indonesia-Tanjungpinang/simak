@@ -69,7 +69,7 @@ class CNilaiUjianPMB extends MainPageM {
         $kjur = $_SESSION['currentPageNilaiUjianPMB']['kjur'];        		
         $ps = $kjur=='none'?'Yang belum diterima di Prodi Manapun':'Program Studi '.$_SESSION['daftar_jurusan'][$kjur];
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);		
-		$text="$ps Tahun Masuk $tahunmasuk";
+		$text = "$ps Tahun Masuk $tahunmasuk";
 		return $text;
 	}
     
@@ -257,7 +257,7 @@ class CNilaiUjianPMB extends MainPageM {
     public function ujianUlang($sender, $param) {
 		$no_formulir = $this->getDataKeyField($sender, $this->RepeaterS);	
         if ($this->DB->checkRecordIsExist('no_formulir', 'register_mahasiswa', $no_formulir)) {
-            $this->lblContentMessageError->Text="No. Formulir ($no_formulir) telah memiliki NIM jadi ujian PMB-nya tidak bisa diulang";
+            $this->lblContentMessageError->Text = "No. Formulir ($no_formulir) telah memiliki NIM jadi ujian PMB-nya tidak bisa diulang";
             $this->lblHeaderMessageError->Text = 'Ujian Ulang PMB';
             $this->modalMessageError->show();
         }else{
@@ -278,13 +278,13 @@ class CNilaiUjianPMB extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
             break;        
             case 'excel2007':
                 $messageprintout='';
@@ -298,7 +298,7 @@ class CNilaiUjianPMB extends MainPageM {
             
         }
         $this->lblMessagePrintout->Text = $messageprintout;
-        $this->lblPrintout->Text="Hasil Ujian PMB Tahun Masuk $tahun_masuk";
+        $this->lblPrintout->Text = "Hasil Ujian PMB Tahun Masuk $tahun_masuk";
         $this->modalPrintOut->show();
     }
 }

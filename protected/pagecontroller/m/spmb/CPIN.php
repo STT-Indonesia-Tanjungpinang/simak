@@ -35,7 +35,7 @@ class CPIN extends MainPageM {
 	public function getInfoToolbar() {                
         $nama_kelas = $this->DMaster->getNamaKelasByID($_SESSION['currentPagePIN']['kelas']);
 		$tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_pendaftaran']);		
-		$text="Kelas $nama_kelas Tahun Masuk $tahunmasuk";
+		$text = "Kelas $nama_kelas Tahun Masuk $tahunmasuk";
 		return $text;
 	}
 	public function changeTbTahunMasuk($sender, $param) {					
@@ -82,7 +82,7 @@ class CPIN extends MainPageM {
             $str_display='';
             if ($_SESSION['currentPagePIN']['display_record']=='terdaftar'){
                 $str_display='AND fp.no_formulir IS NOT NULL';
-            }elseif ($_SESSION['currentPagePIN']['display_record']=='belum_terdaftar'){
+            }else if ($_SESSION['currentPagePIN']['display_record']=='belum_terdaftar'){
                 $str_display='AND fp.no_formulir IS NULL';
             }
             $str = "SELECT pin.no_pin,pin.no_formulir,pin.idkelas,fp.nama_mhs,fp.no_formulir AS ket FROM pin LEFT JOIN formulir_pendaftaran fp ON (fp.no_formulir=pin.no_formulir) WHERE pin.tahun_masuk = $tahun_masuk AND pin.idkelas='$idkelas' $str_display";
@@ -144,13 +144,13 @@ class CPIN extends MainPageM {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="";
+                $messageprintout = "";
                 $dataReport['tahun_masuk'] = $_SESSION['tahun_pendaftaran'];
                 $dataReport['pilihan'] = $_SESSION['currentPagePIN']['display_record'];
                 $dataReport['linkoutput'] = $this->linkOutput;
@@ -159,7 +159,7 @@ class CPIN extends MainPageM {
                 $this->report->printPIN(); 
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;

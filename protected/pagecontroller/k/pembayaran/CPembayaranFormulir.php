@@ -30,7 +30,7 @@ class CPembayaranFormulir Extends MainPageK {
         $kjur = $_SESSION['kjur'];        
         $tahunmasuk = $this->DMaster->getNamaTA($_SESSION['tahun_masuk']);		
         $semester = $this->setup->getSemester($_SESSION['currentPagePembayaranFormulir']['semester_masuk']);		
-		$this->lblModulHeader->Text="T.A $tahunmasuk Semester $semester ";        
+		$this->lblModulHeader->Text = "T.A $tahunmasuk Semester $semester ";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;

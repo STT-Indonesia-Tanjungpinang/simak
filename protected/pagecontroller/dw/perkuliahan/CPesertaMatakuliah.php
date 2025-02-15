@@ -29,7 +29,7 @@ class CPesertaMatakuliah extends MainPageM {
                 $ps = $_SESSION['daftar_jurusan'][$kjur];
                 $ta = $this->DMaster->getNamaTA($infomatkul['tahun']);
                 $semester = $this->setup->getSemester($infomatkul['idsmt']);
-                $text="Program Studi $ps TA $ta Semester $semester";
+                $text = "Program Studi $ps TA $ta Semester $semester";
                 
                 $this->lblModulHeader->Text = $text;
                 $_SESSION['currentPagePesertaMatakuliah']['InfoMatkul'] = $infomatkul;                
@@ -63,7 +63,7 @@ class CPesertaMatakuliah extends MainPageM {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
 		$ta = $this->DMaster->getNamaTA($_SESSION['ta']);
 		$semester = $this->setup->getSemester($_SESSION['semester']);
-		$text="Program Studi $ps TA $ta Semester $semester";
+		$text = "Program Studi $ps TA $ta Semester $semester";
 		return $text;
 	}
     public function changeTbTA($sender, $param) {
@@ -161,7 +161,7 @@ class CPesertaMatakuliah extends MainPageM {
             $status='belum disahkan';
             if ($v['sah'] == 1 && $v['batal'] == 0) {
                 $status='sah';
-            }elseif($v['sah'] == 1 && $v['batal'] == 1){
+            }else if($v['sah'] == 1 && $v['batal'] == 1){
                 $status='batal';
             }
             $v['status'] = $status;

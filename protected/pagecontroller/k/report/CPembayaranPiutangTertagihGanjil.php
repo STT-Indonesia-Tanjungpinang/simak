@@ -44,7 +44,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
 		$ps = $_SESSION['daftar_jurusan'][$kjur];
         $tahun_masuk = $this->DMaster->getNamaTA($_SESSION['currentPagePiutangJangkaPendek']['tahun_masuk']);	
         $ta = $this->DMaster->getNamaTA($_SESSION['ta']);		        
-		$this->lblModulHeader->Text="Program Studi $ps Tahun Masuk $tahun_masuk T.A $ta ";        
+		$this->lblModulHeader->Text = "Program Studi $ps Tahun Masuk $tahun_masuk T.A $ta ";        
 	}
     public function changeTbPs($sender, $param) {		
 		$_SESSION['kjur'] = $this->tbCmbPs->Text;
@@ -172,7 +172,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
             $pembayaran_genap = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=2 AND idkombi!=1");
             $sudahbayar[2]['sudahbayar'] = $pembayaran_genap;
             $sudahbayar[2]['belumbayar'] = $kewajiban_genap-$pembayaran_genap;
-        }elseif ($ta==$tahun_masuk && $semester_masuk == 2) {
+        }else if ($ta==$tahun_masuk && $semester_masuk == 2) {
             
             $kewajiban = $komponen_biaya[$idkelas]['baru'][2];
             $pembayaran = $this->DB->getSumRowsOfTable('dibayarkan',"v_transaksi WHERE no_formulir='$no_formulir' AND tahun = $ta AND idsmt=2 AND idkombi!=1");
@@ -197,13 +197,13 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
         $this->linkOutput->NavigateUrl='#';
         switch($_SESSION['outputreport']) {
             case 'summarypdf':
-                $messageprintout="Mohon maaf Print out pada mode summary pdf tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary pdf tidak kami support.";                
             break;
             case 'summaryexcel':
-                $messageprintout="Mohon maaf Print out pada mode summary excel tidak kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode summary excel tidak kami support.";                
             break;
             case 'excel2007':
-                $messageprintout="";
+                $messageprintout = "";
                 $dataReport['kjur'] = $_SESSION['kjur'];
                 $dataReport['nama_ps'] = $_SESSION['daftar_jurusan'][$_SESSION['kjur']];
                 $tahun = $_SESSION['ta'];                
@@ -223,7 +223,7 @@ class CPembayaranPiutangTertagihGanjil extends MainPageK {
                 $this->report->printPiutangJangkaPendek($this->Finance, $this->DMaster); 
             break;
             case 'pdf':
-                $messageprintout="Mohon maaf Print out pada mode pdf belum kami support.";                
+                $messageprintout = "Mohon maaf Print out pada mode pdf belum kami support.";                
             break;
         }
         $this->lblMessagePrintout->Text = $messageprintout;

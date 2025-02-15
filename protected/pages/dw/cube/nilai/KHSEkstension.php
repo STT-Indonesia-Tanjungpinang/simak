@@ -153,7 +153,7 @@ class KHSEkstension extends MainPageDW {
 			$this->Nilai->setDataMHS(array('nim' => $nim));
             $bool=true;
             $ip='0.00';            
-            $sks=0;
+            $sks = 0;
             $status='-';
             $trstyle='';
             $dataipk=array('ipk' => '0.00', 'sks' => 0);
@@ -199,7 +199,7 @@ class KHSEkstension extends MainPageDW {
                         $str = "SELECT vdm.nim,vdm.nirm,vdm.nama_mhs,vdm.jk,vdm.kjur,vdm.nama_ps,vdm.idkonsentrasi,k.nama_konsentrasi,iddosen_wali FROM krs LEFT JOIN v_datamhs vdm ON (krs.nim=vdm.nim) LEFT JOIN konsentrasi k ON (vdm.idkonsentrasi=k.idkonsentrasi) WHERE krs.idkrs='$idkrs'";
                         $this->DB->setFieldTable(array('nim', 'nirm', 'nama_mhs', 'jk', 'kjur', 'nama_ps', 'idkonsentrasi', 'nama_konsentrasi', 'iddosen_wali'));
                         $r = $this->DB->getRecord($str);	           
-                        $dataReport=$r[1];
+                        $dataReport = $r[1];
 
                         $dataReport['nama_dosen'] = $this->DMaster->getNamaDosenWaliByID ($dataReport['iddosen_wali']);
 
