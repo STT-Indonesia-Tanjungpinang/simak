@@ -56,14 +56,16 @@ class CMatakuliah extends MainPageM {
     $this->populateKonsentrasi();
     $this->populateData();
   }
-  public function populateKonsentrasi() {			
+  public function populateKonsentrasi()
+  {			
     $datakonsentrasi = $this->DMaster->getListKonsentrasiProgramStudi();        
     $r = array();
     $i=1;
-    while (list($k, $v) = each($datakonsentrasi)) {                        
+    while (list($k, $v) = each($datakonsentrasi))
+    {                        
       if ($v['kjur'] == $_SESSION['kjur']){
         $idkonsentrasi = $v['idkonsentrasi'];
-        $v['jumlah_matkul'] = $this->DB->getCountRowsOfTable("matakuliah WHERE idkonsentrasi = $idkonsentrasi",'idkonsentrasi');                
+        $v['jumlah_matkul'] = $this->DB->getCountRowsOfTable("matakuliah WHERE idkonsentrasi = $idkonsentrasi", 'idkonsentrasi');                
         $r[$i] = $v;
         $i+=1;
       }
@@ -79,30 +81,34 @@ class CMatakuliah extends MainPageM {
     $_SESSION['currentPageMatakuliah']['semester'] = $this->cmbFilterSemester->Text;
     $this->populateData();
   }
-  protected function populateData($search = false) {								
+  protected function populateData($search = false) 
+  {								
     $kjur = $_SESSION['kjur']; 
     $idkur = $this->Demik->getIDKurikulum($kjur);
-    if ($search) {
+    if ($search) 
+    {
       $str = "SELECT m.kmatkul,m.nmatkul,m.nmatkul_en,m.sks,m.semester,m.idkonsentrasi,k.nama_konsentrasi,m.ispilihan,m.islintas_prodi,m.aktif FROM matakuliah m LEFT JOIN konsentrasi k ON (k.idkonsentrasi=m.idkonsentrasi) WHERE idkur = $idkur";			
       $txtsearch = addslashes($this->txtKriteria->Text);
       switch($this->cmbKriteria->Text) {
         case 'kode':
           $clausa = "AND kmatkul='{$idkur}_$txtsearch'";
-          $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah WHERE idkur = $idkur $clausa",'kmatkul');		            
+          $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah WHERE idkur = $idkur $clausa", 'kmatkul');		            
           $str = "$str $clausa";
         break;
         case 'nama':
           $clausa = "AND nmatkul LIKE '%$txtsearch%'";
-          $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah WHERE idkur = $idkur $clausa",'kmatkul');		            
+          $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah WHERE idkur = $idkur $clausa", 'kmatkul');		            
           $str = "$str $clausa";
         break;
       }
-    }else{
+    }
+    else
+    {
       $idkonsentrasi = $_SESSION['currentPageMatakuliah']['idkonsentrasi'];
       $str_konsentrasi = $idkonsentrasi == 'none'?'':" AND m.idkonsentrasi = $idkonsentrasi";
       $semester = $_SESSION['currentPageMatakuliah']['semester'];
       $str_semester= $semester=='none' ?'':"AND semester = $semester";
-      $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah m WHERE idkur = $idkur $str_konsentrasi $str_semester",'kmatkul');		            
+      $jumlah_baris = $this->DB->getCountRowsOfTable("matakuliah m WHERE idkur = $idkur $str_konsentrasi $str_semester", 'kmatkul');		            
       $str = "SELECT m.kmatkul,m.nmatkul,m.nmatkul_en,m.sks,m.semester,m.idkonsentrasi,k.nama_konsentrasi,m.ispilihan,m.islintas_prodi,m.aktif FROM matakuliah m LEFT JOIN konsentrasi k ON (k.idkonsentrasi=m.idkonsentrasi) WHERE idkur = $idkur $str_konsentrasi $str_semester";			
     }
     $this->RepeaterS->CurrentPageIndex = $_SESSION['currentPageMatakuliah']['page_num'];
@@ -122,17 +128,25 @@ class CMatakuliah extends MainPageM {
     while (list($k, $v) = each($r)) {  
       $kmatkul = $v['kmatkul'];
       $v['kode_matkul'] = $this->Demik->getKMatkul($kmatkul);
-      if ($v['idkonsentrasi'] == 0) {
-        if($v['islintas_prodi'] == 1){
-          $v['keterangan'] = 'Matkul Lintas Prodi';                    			
-        }else if($v['ispilihan'] == 1) {
-          $v['keterangan'] = 'Matkul Pilihan';                    
-        }else {
-          $v['keterangan'] = '-';                    
-        }                
-      }else {
-        $v['keterangan'] = 'Kons. '.$v['nama_konsentrasi'];
+
+      if($v['islintas_prodi'] == 1)
+      {
+        $v['keterangan'] = 'Matkul Lintas Prodi';                    			
       }
+      else if($v['ispilihan'] == 1) 
+      {
+        $v['keterangan'] = 'Matkul Pilihan';                    
+      }
+      else 
+      {
+        $v['keterangan'] = '-';                    
+      }   
+
+      if ($v['idkonsentrasi'] != 0)
+      {
+        $v['keterangan'] = $v['keterangan'] . ' Kons. '.$v['nama_konsentrasi'];
+      }
+      
       $str = "SELECT GROUP_CONCAT(kmatkul_syarat) AS prasyarat FROM matakuliah_syarat WHERE kmatkul='$kmatkul' GROUP BY kmatkul";            
       $this->DB->setFieldTable(array('prasyarat'));
       $data = $this->DB->getRecord($str);	 
